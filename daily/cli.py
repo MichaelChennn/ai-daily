@@ -46,6 +46,11 @@ def main(argv: list[str] | None = None) -> int:
     md = commands.add_parser("render", help="digest.json → digest.md")
     _issue_args(md)
 
+    page = commands.add_parser("page", help="打印页面里关键词附近的原文，供编辑逐字摘录 evidence")
+    page.add_argument("url")
+    page.add_argument("--grep", action="append", required=True, metavar="TEXT", help="关键词（可重复）")
+    page.add_argument("--context", type=int, default=200, help="关键词前后各显示多少字符")
+
     args = parser.parse_args(argv)
     logging.basicConfig(
         level=logging.DEBUG if args.verbose else logging.INFO,
@@ -57,9 +62,14 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "fetch":
         return _fetch(args)
     try:
-        return {"list": _list, "validate": _validate, "degrade": _degrade, "render": _render}[args.command](
-            args
-        )
+        handlers = {
+            "list": _list,
+            "validate": _validate,
+            "degrade": _degrade,
+            "render": _render,
+            "page": _page,
+        }
+        return handlers[args.command](args)
     except FileNotFoundError as exc:
         print(f"missing {exc.filename}", file=sys.stderr)
         return 1
@@ -210,4 +220,25 @@ def _render(args: argparse.Namespace) -> int:
     path = issue_dir / "digest.md"
     path.write_text(render.to_markdown(_read(issue_dir / "digest.json"), candidates), encoding="utf-8")
     print(path)
+    return 0
+
+
+def _page(args: argparse.Namespace) -> int:
+    """Same fetch and text extraction as `validate --check-links`, so what is printed here verifies."""
+
+    async def fetch() -> digest.Page:
+        async with pipeline.make_client() as client:
+            return (await digest.check_links([args.url], client))[args.url]
+
+    page = asyncio.run(fetch())
+    if page.text is None:
+        print(f"no page text ({page.error or page.status})", file=sys.stderr)
+        return 1
+    text = " ".join(page.text.split())
+    for needle in args.grep:
+        hits = [i for i in range(len(text)) if text.startswith(needle, i)] if needle else []
+        print(f"--- {needle!r}: {len(hits)} match(es)")
+        for i in hits[:5]:
+            print(text[max(0, i - args.context) : i + len(needle) + args.context])
+            print()
     return 0

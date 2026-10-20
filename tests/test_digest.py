@@ -433,3 +433,31 @@ def test_history_counts_only_published_items(tmp_path):
     history = dedup.load_history(tmp_path, ISSUE)
     assert "openai.com/index/gpt-6" in history.published
     assert not any("example.com" in key for key in history.published)
+
+
+def test_render_labels_repeated_sources_by_candidate_title():
+    candidates = copy.deepcopy(CANDIDATES)
+    candidates["candidates"].append(
+        _candidate(
+            "c_qwen2",
+            "model",
+            "Qwen/Qwen3.5-7B",
+            "https://huggingface.co/Qwen/Qwen3.5-7B",
+            source_name="Model",
+        )
+    )
+    candidates["candidates"][2]["source_name"] = "Model"
+    data = _digest()
+    data["items"][2]["sources"].append({"candidate_id": "c_qwen2"})
+    digest.validate(data, candidates)
+    text = render.to_markdown(data, candidates)
+    assert "[Qwen/Qwen3.5-72B](https://huggingface.co/Qwen/Qwen3.5-72B) · [Qwen/Qwen3.5-7B]" in text
+
+
+def test_cli_page_prints_verbatim_context(monkeypatch, capsys):
+    routes = {"a.example/post": httpx.Response(200, html="<p>It <b>achieves</b> sub-500ms   latency.</p>")}
+    monkeypatch.setattr(cli.pipeline, "make_client", lambda: mock_client(routes))
+    assert cli.main(["page", "https://a.example/post", "--grep", "500ms", "--context", "20"]) == 0
+    out = capsys.readouterr().out
+    assert "1 match(es)" in out and "It achieves sub-500ms latency." in out
+    assert cli.main(["page", "https://a.example/gone", "--grep", "x"]) == 1

@@ -33,7 +33,7 @@ def to_markdown(digest: dict[str, Any], candidates: dict[str, Any] | None = None
             continue
         lines += [f"## {heading}", ""]
         for item in items:
-            links = " · ".join(f"[{_label(s, by_id)}]({s['url']})" for s in item["sources"])
+            links = " · ".join(f"[{label}]({s['url']})" for s, label in _labels(item["sources"], by_id))
             if section == "brief" or not item.get("summary"):
                 lines.append(f"- **{item['title']}** {item.get('summary', '')} {links}".replace("  ", " "))
                 continue
@@ -44,6 +44,22 @@ def to_markdown(digest: dict[str, Any], candidates: dict[str, Any] | None = None
         if lines[-1] != "":
             lines.append("")
     return "\n".join(lines).rstrip() + "\n"
+
+
+def _labels(
+    sources: list[dict[str, Any]], by_id: dict[str, dict[str, Any]]
+) -> list[tuple[dict[str, Any], str]]:
+    labels = [_label(s, by_id) for s in sources]
+    # Several links from one source (three weight repos, two releases) read better by their own titles.
+    return [
+        (
+            s,
+            by_id[s["candidate_id"]]["title"]
+            if labels.count(label) > 1 and s.get("candidate_id") in by_id
+            else label,
+        )
+        for s, label in zip(sources, labels, strict=True)
+    ]
 
 
 def _label(source: dict[str, Any], by_id: dict[str, dict[str, Any]]) -> str:

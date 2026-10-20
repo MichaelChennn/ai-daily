@@ -48,10 +48,18 @@ python -m daily list --date <期号> --kind blog --summary-chars 1500    # 需�
 
 ## 3. 打开原文
 
-- 除了快讯，每一条都要用 WebFetch 打开至少一个一手来源，依据原文写，不要只凭候选摘要。快讯的摘要足够时可以不打开。
+- 除了快讯和 Release，每一条都要用 WebFetch 打开至少一个一手来源，依据原文写，不要只凭候选摘要。快讯的摘要足够时可以不打开。
 - **预算**：WebFetch 最多 20 次，WebSearch 最多 5 次（超出时 validate 会警告）。
 - 每一次 WebFetch 和 WebSearch 都要记进 `research`（见下面的 schema），包括没用上的。
 - **摘录 evidence**：从原文逐字复制支撑关键事实的句子（保持原文语言，每段 ≤ 300 字符），放进条目的 `evidence`。条目里出现的每个数字、模型名、版本号，都要能在候选标题 / 摘要或 evidence 里找到。必须是原文**逐字复制**，不能意译、翻译或拼接：`validate --check-links` 会下载页面，核对引文是否真的在页面上。
+- **WebFetch 的回答不是原文**：它由一个小模型转述，连“引用”也可能改了词（例如把 achieves 写成 achieve），这样的引文会被 validate 判为找不到、整条删掉。用 WebFetch 读懂内容之后，引文用下面的命令从原始页面复制；这个命令和 validate 用的是同一份页面文本：
+
+  ```bash
+  python -m daily page <url> --grep "500ms" --grep "Apache License"    # 打印每个关键词前后的原文
+  ```
+
+  `daily page` 拿不到页面文本（403、PDF）时，引文无法核对，validate 只给警告；这时只写候选摘要里有的数字。
+- GitHub Release 候选的摘要就是 release notes 原文，可以直接依据它写，不必再打开。
 - 打不开的页面（403、需要 JS 渲染）：只能依据候选摘要写，不写摘要里没有的事实；写不出“是什么 + 为什么重要”就放进快讯或者放弃。
 - **补漏**：可以用 WebSearch 查固定信源可能漏掉的重大事件（Meta、Qwen、DeepSeek 等没有被抓取的厂商，或者失败的信源）。只有找到一手链接并用 WebFetch 打开之后才能写入，source 写成 `{"url": ..., "title": ...}`，而且这个 URL 必须出现在 `research` 里，`via` 为 `webfetch`。
 

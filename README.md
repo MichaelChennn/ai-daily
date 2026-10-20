@@ -10,7 +10,7 @@
 |---|---|
 | M0 立项 | ✅ |
 | M1 信源与数据：`daily fetch` + 去重 | 🚧 代码已完成，等待连续 7 天的覆盖率验证 |
-| M2 编辑 skill 与质量闸门（`validate`、降级） | — |
+| M2 编辑 skill 与质量闸门（`validate`、降级） | 🚧 代码与 skill 已完成，第一期见 [data/2026-10-21/digest.md](data/2026-10-21/digest.md)；等待回放 7 天数据 |
 | M3 发布（静态站点 + RSS + 定时任务） | — |
 
 ## 使用
@@ -22,8 +22,16 @@ python -m daily fetch                       # 今天这一期 → data/YYYY-MM-D
 python -m daily fetch --date 2026-10-20     # 指定期号（北京时间日期）
 python -m daily fetch --only hackernews     # 只跑某个信源，调试用（可重复）
 
+python -m daily list --date 2026-10-21      # 精简列出候选（给编辑看）
+python -m daily page <url> --grep 关键词     # 打印原始页面里关键词附近的原文，用来逐字摘录 evidence
+python -m daily validate --date 2026-10-21 --check-links --drop-invalid   # 程序闸门
+python -m daily degrade --date 2026-10-21   # digest.json 缺失或不合格时，写入“标题 + 链接”降级版
+python -m daily render --date 2026-10-21    # digest.json → digest.md
+
 pytest -q && ruff check . && ruff format --check .
 ```
+
+编辑环节在 Claude Code 里运行 skill：`/daily-editor 2026-10-21`（[.claude/skills/daily-editor/SKILL.md](.claude/skills/daily-editor/SKILL.md)）。
 
 `GITHUB_TOKEN` 环境变量可选，用于 GitHub Releases（不设置时限额 60 次/小时）。
 
@@ -33,6 +41,8 @@ pytest -q && ruff check . && ruff format --check .
 
 ```
 sources.yaml ──► fetchers（并发、相互隔离）──► 去重 ──► data/YYYY-MM-DD/candidates.json
+             ──► daily-editor skill（Claude）──► digest.json ──► validate ──► render ──► digest.md
+                                       （失败时）degrade ──► 降级版 digest.json
 ```
 
 **时间窗口**：第 D 期覆盖北京时间 D-1 04:00 到 D 06:00（截止到运行时刻）。比 24 小时多出的 2 小时用来接住上一次运行之后、06:00 之前发布的内容：只要每天在 04:00 之后运行，相邻两期之间就没有空档，Actions 的 cron 延迟也不会漏内容；重叠部分由跨天去重处理。
@@ -85,6 +95,24 @@ Meta AI、Qwen、DeepSeek 暂时没有可抓的官方列表页（JS 渲染或没
 }
 ```
 
+## digest.json 与质量闸门
+
+编辑（Claude）只负责写，能不能发布由 `daily validate`（`daily/digest.py`）决定。不合格的条目整条删掉并记录原因，不会被“修正”（立项书原则 5）：
+
+| 检查 | 不通过时 |
+|---|---|
+| 结构：schema_version、期号、mode、版块、标题 / 摘要长度、正文里不能有链接 | 条目删除；整期结构错误则整期不合格 |
+| 每个来源都是候选，或是编辑记录在 `research` 里、用 WebFetch 打开过的页面 | 条目删除 |
+| 至少有一个一手来源，不能只有 HN / Reddit 讨论帖 | 条目删除 |
+| 同一个候选只能用一次 | 后出现的条目删除 |
+| 正文里的每个数字、模型名 / 版本号（`GPT-6`、`Qwen3.5-72B`、`v2.1.305`、`128K`）都要出现在所引候选的标题 / 摘要或 evidence 引文里 | 条目删除 |
+| `--check-links`：链接不是 404 / 410；evidence 引文确实出现在页面上（403 等打不开的页面只给警告） | 条目删除 |
+| 今日要点里的数字和模型名必须来自入选条目；正式版至少 3 条有效条目 | 整期不合格 → `degrade` |
+
+编辑预算（立项书待决 2，暂定）：每期 WebFetch ≤ 20 次、WebSearch ≤ 5 次，超出时 validate 只给警告。
+
+`degrade` 不用 LLM：官方博客优先，再按热度信号挑各类候选的前几名，保留英文原标题和链接。
+
 ## 定时抓取
 
 抓取在 GitHub Actions 里跑，不在 Claude 的定时任务里：Claude cloud session 访问不了其他仓库的 GitHub API，Reddit 也会拒绝它的请求；Actions 自带 `GITHUB_TOKEN`，网络不受限制。
@@ -98,9 +126,14 @@ daily/
   cli.py            python -m daily 入口
   pipeline.py       并发抓取、信源隔离、写 candidates.json
   dedup.py          URL 合并、标题聚类、跨天去重
+  digest.py         digest.json schema 与 validate
+  fallback.py       降级版
+  render.py         digest.json → Markdown
+  throttle.py       同一主机的请求间隔、429 重试
   window.py         期号时间窗口
   text.py           文本清洗、日期解析
   fetchers/         各类信源
 sources.yaml        信源白名单
-data/YYYY-MM-DD/    每期的候选（以及之后的 digest.json）
+.claude/skills/daily-editor/   编辑 skill
+data/YYYY-MM-DD/    每期的 candidates.json、digest.json、digest.md
 ```
