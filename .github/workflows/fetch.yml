@@ -1,10 +1,14 @@
-# M1: run `daily fetch` every day and commit data/YYYY-MM-DD/candidates.json, so the 7-day
-# coverage check has real data. Scheduled runs only fire on the default branch.
+# Fetch runs here rather than in the Claude editor session: cloud sessions cannot reach the
+# GitHub API for other repos, and Actions has a GITHUB_TOKEN. Each day it commits
+# data/YYYY-MM-DD/candidates.json to main; the editor (05:30, M2/M3) reads it from there, and in
+# M1 the files feed the 7-day coverage check. Scheduled runs only fire on the default branch.
 name: fetch
 
 on:
   schedule:
-    - cron: "30 21 * * *" # 05:30 Beijing time
+    # 05:07 Beijing time: off the hour (less cron delay), done before the editor starts at 05:30.
+    # A delayed run is fine: the issue window leaves no gap for any run after 04:00.
+    - cron: "7 21 * * *"
   workflow_dispatch:
     inputs:
       date:

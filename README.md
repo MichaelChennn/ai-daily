@@ -35,7 +35,7 @@ pytest -q && ruff check . && ruff format --check .
 sources.yaml ──► fetchers（并发、相互隔离）──► 去重 ──► data/YYYY-MM-DD/candidates.json
 ```
 
-**时间窗口**：第 D 期覆盖北京时间 D-1 05:00 到 D 06:00（截止到运行时刻）。比 24 小时多出的 1 小时用来接住上一次 05:30 运行之后、06:00 之前发布的内容；重叠部分由跨天去重处理。
+**时间窗口**：第 D 期覆盖北京时间 D-1 04:00 到 D 06:00（截止到运行时刻）。比 24 小时多出的 2 小时用来接住上一次运行之后、06:00 之前发布的内容：只要每天在 04:00 之后运行，相邻两期之间就没有空档，Actions 的 cron 延迟也不会漏内容；重叠部分由跨天去重处理。
 
 **信源**（`sources.yaml`，立项书 7.1）：
 
@@ -85,9 +85,11 @@ Meta AI、Qwen、DeepSeek 暂时没有可抓的官方列表页（JS 渲染或没
 }
 ```
 
-## 定时抓取（M1 数据收集）
+## 定时抓取
 
-`.github/workflows/fetch.yml` 每天 05:30（北京时间）运行 `daily fetch`，把 `data/` 提交回仓库，用于 M1 的 7 天覆盖率抽查。没有拿到任何内容时 job 失败，GitHub 会发通知。
+抓取在 GitHub Actions 里跑，不在 Claude 的定时任务里：Claude cloud session 访问不了其他仓库的 GitHub API，Reddit 也会拒绝它的请求；Actions 自带 `GITHUB_TOKEN`，网络不受限制。
+
+`.github/workflows/fetch.yml` 每天北京时间 05:07 运行 `daily fetch`，把 `data/YYYY-MM-DD/candidates.json` 提交到 main。05:30 的 Claude 编辑任务（M2/M3）直接从仓库读取；M1 阶段这些文件用于 7 天覆盖率抽查。没有拿到任何内容时 job 失败，GitHub 会发通知。也可以在 Actions 页面手动触发，指定期号日期补抓。
 
 ## 目录
 

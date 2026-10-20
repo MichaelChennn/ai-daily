@@ -1,6 +1,6 @@
-# AI 科技日报（ai-daily）— 立项书 v0.2
+# AI 科技日报（ai-daily）— 立项书 v0.3
 
-> 状态：已确认（v0.2） · 日期：2026-10-20 · 新仓库：`ai-daily`（公开）
+> 状态：已确认（v0.3） · 日期：2026-10-20 · 新仓库：`ai-daily`（公开）
 > 前身：Verita（AI 知识社区 + 每日 Digest）
 
 ---
@@ -31,7 +31,7 @@ Verita 最初是从“AI 科技日报”这个想法出发的，后来逐渐加�
 | 目标读者 | 中文 AI 开发者 | 中文写作；信源以英文一手资料为主。“英文一手资料 → 中文精炼”本身就是核心价值。 |
 | 分发渠道 | 网站 + RSS | 静态站点存档每一期，RSS 推送全文。不需要账号、不需要登录。 |
 | 人工参与 | **全自动** | 每天直接看到成品，不需要人工纠正。所以**质量保障必须靠系统本身**（见第 6 节），这是本项目最重要的技术挑战。 |
-| 发布节奏 | 北京时间 06:00，覆盖过去 24 小时 | 生成从 05:30 开始，06:30 兜底检查 |
+| 发布节奏 | 北京时间 06:00，覆盖过去 24 小时 | 05:00 抓取，05:30 开始编辑，06:30 兜底检查 |
 | 生成方式 | 确定性抓取 + Claude 定时任务当编辑 | 见第 8 节；不需要自己管理 LLM API key |
 | 仓库 | 新建公开仓库 `ai-daily` | Verita 打 tag `verita-final` 归档，只迁移可复用代码 |
 
@@ -140,8 +140,11 @@ Verita 最初是从“AI 科技日报”这个想法出发的，后来逐渐加�
 **分工原则：** 抓取和校验写成确定性代码（可复现、可测试）；"编辑"工作交给 Claude 定时任务（能打开原文、能补漏）。
 
 ```
+北京时间 05:00  GitHub Actions
+  1. python -m daily fetch      → 抓取固定信源，把 data/YYYY-MM-DD/candidates.json 提交到 main
+                                  （Claude cloud session 访问不了其他仓库的 GitHub API，所以抓取放在 Actions）
+
 北京时间 05:30  Claude 定时任务（每次新开一个 cloud session，按 skill 执行）
-  1. python -m daily fetch      → 抓取固定信源，写入 data/YYYY-MM-DD/candidates.json
   2. Claude 当编辑（.claude/skills/daily-editor/SKILL.md）：
        打分筛选 → 对入选条目用 WebFetch 打开原文 → 合并同一事件
        → 写中文日报 data/YYYY-MM-DD/digest.json
@@ -221,6 +224,7 @@ Verita 最初是从“AI 科技日报”这个想法出发的，后来逐渐加�
 - 新建公开仓库 `ai-daily`；Verita 归档。
 - 北京时间 06:00 发布，覆盖过去 24 小时。
 - 生成方式：确定性抓取 + Claude 定时任务编辑 + Actions 兜底（第 8 节）。
+- v0.3：`fetch` 改在 GitHub Actions 里运行（05:00），Claude 定时任务只负责编辑。原因：Claude cloud session 无法访问其他仓库的 GitHub API，Reddit 也拒绝其请求。
 
 **待决**
 1. 前端技术选型与视觉风格（在新仓库中设计）。

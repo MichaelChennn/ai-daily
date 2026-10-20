@@ -47,7 +47,7 @@ async def fetch_daily_papers(
     """Options: min_upvotes (default 0).
 
     Takes the Daily Papers list of the UTC day the window ends on, which is nearly complete when
-    the 05:30 Beijing run happens (21:30 UTC).
+    the ~05:00 Beijing run happens (21:00 UTC).
     """
     min_upvotes = int(source.options.get("min_upvotes", 0))
     day = (window.end - timedelta(minutes=1)).date().isoformat()

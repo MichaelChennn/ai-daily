@@ -1,8 +1,10 @@
 """The time window an issue covers.
 
-Issue D is published at 06:00 Beijing time and covers the 24 hours before that. Fetch runs at
-05:30, so the window is extended one hour backwards to catch what the previous run could not see
-yet (published 05:30-06:00); the overlap is harmless because cross-day dedup marks repeats.
+Issue D is published at 06:00 Beijing time and covers the 24 hours before that. Fetch runs in
+GitHub Actions around 05:00, before the editor starts at 05:30, and the window ends when it runs.
+The start is pulled two hours back so that whatever the previous run could not see yet (published
+between its run and 06:00) lands in this issue; any run after 04:00 leaves no gap, which absorbs
+Actions' cron delays. The overlap is harmless because cross-day dedup marks repeats.
 """
 
 from __future__ import annotations
@@ -13,7 +15,7 @@ from datetime import date, datetime, time, timedelta, timezone
 BEIJING = timezone(timedelta(hours=8), "Asia/Shanghai")
 PUBLISH_TIME = time(6, 0)
 COVERAGE = timedelta(hours=24)
-OVERLAP = timedelta(hours=1)
+OVERLAP = timedelta(hours=2)
 
 
 @dataclass(frozen=True)
