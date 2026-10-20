@@ -1,0 +1,53 @@
+# Fetch runs here rather than in the Claude editor session: cloud sessions cannot reach the
+# GitHub API for other repos, and Actions has a GITHUB_TOKEN. Each day it commits
+# data/YYYY-MM-DD/candidates.json to main; the editor (05:30, M2/M3) reads it from there, and in
+# M1 the files feed the 7-day coverage check. Scheduled runs only fire on the default branch.
+name: fetch
+
+on:
+  schedule:
+    # 05:07 Beijing time: off the hour (less cron delay), done before the editor starts at 05:30.
+    # A delayed run is fine: the issue window leaves no gap for any run after 04:00.
+    - cron: "7 21 * * *"
+  workflow_dispatch:
+    inputs:
+      date:
+        description: "Issue date (YYYY-MM-DD, Beijing time); empty = today"
+        required: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: fetch
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install .
+      - name: Fetch sources
+        id: fetch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_DATE: ${{ inputs.date }}
+        # Prints the written path on stdout; exits 1 (failing the job, which notifies) when no
+        # source returned anything.
+        run: |
+          path=$(python -m daily fetch ${ISSUE_DATE:+--date "$ISSUE_DATE"})
+          echo "date=$(basename "$(dirname "$path")")" >> "$GITHUB_OUTPUT"
+      - name: Commit candidates
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/
+          git diff --cached --quiet && exit 0
+          git commit -m "data: candidates for ${{ steps.fetch.outputs.date }}"
+          git push
