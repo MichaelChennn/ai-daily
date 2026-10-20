@@ -1,0 +1,3114 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-21",
+  "generated_at": "2026-10-20T21:19:54+00:00",
+  "window": {
+    "start": "2026-10-19T20:00:00+00:00",
+    "end": "2026-10-20T21:19:52.558959+00:00"
+  },
+  "stats": {
+    "raw": 113,
+    "after_url_merge": 111,
+    "dropped_already_published": 0,
+    "candidates": 111,
+    "clusters": 3,
+    "seen_before": 0
+  },
+  "sources": [
+    {
+      "id": "openai-news",
+      "status": "ok",
+      "count": 2,
+      "seconds": 0.8285842180000031,
+      "error": null
+    },
+    {
+      "id": "anthropic-news",
+      "status": "ok",
+      "count": 0,
+      "seconds": 0.35308503899999977,
+      "error": null
+    },
+    {
+      "id": "anthropic-research",
+      "status": "ok",
+      "count": 1,
+      "seconds": 0.8243912379999969,
+      "error": null
+    },
+    {
+      "id": "deepmind-blog",
+      "status": "ok",
+      "count": 0,
+      "seconds": 0.9543206020000028,
+      "error": null
+    },
+    {
+      "id": "google-ai-blog",
+      "status": "ok",
+      "count": 0,
+      "seconds": 0.9795111419999998,
+      "error": null
+    },
+    {
+      "id": "mistral-news",
+      "status": "ok",
+      "count": 1,
+      "seconds": 1.1683805479999982,
+      "error": null
+    },
+    {
+      "id": "huggingface-blog",
+      "status": "ok",
+      "count": 6,
+      "seconds": 0.2991086869999968,
+      "error": null
+    },
+    {
+      "id": "hf-daily-papers",
+      "status": "ok",
+      "count": 37,
+      "seconds": 0.3687373049999998,
+      "error": null
+    },
+    {
+      "id": "arxiv-cs-cl",
+      "status": "disabled",
+      "count": 0,
+      "seconds": 0.0,
+      "error": null
+    },
+    {
+      "id": "arxiv-cs-lg",
+      "status": "disabled",
+      "count": 0,
+      "seconds": 0.0,
+      "error": null
+    },
+    {
+      "id": "arxiv-cs-ai",
+      "status": "disabled",
+      "count": 0,
+      "seconds": 0.0,
+      "error": null
+    },
+    {
+      "id": "github-releases",
+      "status": "ok",
+      "count": 2,
+      "seconds": 1.9263318669999983,
+      "error": null
+    },
+    {
+      "id": "github-trending",
+      "status": "ok",
+      "count": 12,
+      "seconds": 1.5237129149999973,
+      "error": null
+    },
+    {
+      "id": "hf-trending-models",
+      "status": "ok",
+      "count": 21,
+      "seconds": 0.08620038299999777,
+      "error": null
+    },
+    {
+      "id": "hackernews",
+      "status": "ok",
+      "count": 6,
+      "seconds": 0.8730508390000011,
+      "error": null
+    },
+    {
+      "id": "reddit-localllama",
+      "status": "ok",
+      "count": 25,
+      "seconds": 1.4054934269999997,
+      "error": null
+    },
+    {
+      "id": "reddit-machinelearning",
+      "status": "error",
+      "count": 0,
+      "seconds": 0.9186302300000015,
+      "error": "HTTPStatusError: Client error '429 Too Many Requests' for url 'https://www.reddit.com/r/MachineLearning/top/.rss?t=day&limit=25'"
+    }
+  ],
+  "clusters": [
+    {
+      "id": "k_577f279e95",
+      "title": "anthropics/claude-code v2.1.305",
+      "candidate_ids": [
+        "c_577f279e95",
+        "c_ce8bb7725e"
+      ]
+    },
+    {
+      "id": "k_6ecc1d71a5",
+      "title": "black-forest-labs/flux-3-image-klein-comfy",
+      "candidate_ids": [
+        "c_6ecc1d71a5",
+        "c_174f9f6191",
+        "c_8ff35e4f3f"
+      ]
+    },
+    {
+      "id": "k_4292dac6ef",
+      "title": "OpenMOSS-Team/MOSS-Image-SFT",
+      "candidate_ids": [
+        "c_4292dac6ef",
+        "c_89765346f4"
+      ]
+    }
+  ],
+  "dropped": [],
+  "candidates": [
+    {
+      "source": "openai-news",
+      "source_name": "OpenAI News",
+      "tier": 1,
+      "kind": "blog",
+      "title": "Franchisee reconciles cash in 94% less time with ChatGPT Work",
+      "url": "https://openai.com/index/ted-taylor-restaurant",
+      "summary": "An independent Schlotzsky's and Cinnabon franchisee cut menu repricing time by 95% and built a workflow that could free up $100K in cash flow.",
+      "published_at": "2026-10-20T10:00:00+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {},
+      "tags": [],
+      "id": "c_c001570d01",
+      "key": "openai.com/index/ted-taylor-restaurant",
+      "cluster_id": "k_c001570d01",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "openai-news",
+      "source_name": "OpenAI News",
+      "tier": 1,
+      "kind": "blog",
+      "title": "OpenAI acquires Orchestra Bio",
+      "url": "https://openai.com/index/openai-to-acquire-orchestra-bio",
+      "summary": "OpenAI is acquiring Orchestra Bio to bring AI-powered operations to life sciences R&D, helping biopharma teams accelerate drug development and advance new treatments.",
+      "published_at": "2026-10-20T00:00:00+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {},
+      "tags": [
+        "Company"
+      ],
+      "id": "c_d62552bab3",
+      "key": "openai.com/index/openai-to-acquire-orchestra-bio",
+      "cluster_id": "k_d62552bab3",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "anthropic-research",
+      "source_name": "Anthropic Research",
+      "tier": 1,
+      "kind": "blog",
+      "title": "How Claude designed protein binders against scorpion neurotoxins",
+      "url": "https://www.anthropic.com/research/claude-scorpion-toxin-binder-design",
+      "summary": "We asked an internal research Claude model to design minibinders (small proteins that attach tightly to a target) against scorpion neurotoxins.",
+      "published_at": "2026-10-20T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": "https://news.ycombinator.com/item?id=50170021",
+      "signals": {
+        "hn_points": 53,
+        "hn_comments": 22
+      },
+      "tags": [],
+      "id": "c_64f0c1482f",
+      "key": "anthropic.com/research/claude-scorpion-toxin-binder-design",
+      "cluster_id": "k_64f0c1482f",
+      "also_from": [
+        {
+          "source": "hackernews",
+          "source_name": "Hacker News",
+          "title": "Claude designed protein binders against scorpion neurotoxins",
+          "url": "https://www.anthropic.com/research/claude-scorpion-toxin-binder-design",
+          "discussion_url": "https://news.ycombinator.com/item?id=50170021"
+        }
+      ],
+      "seen_on": []
+    },
+    {
+      "source": "mistral-news",
+      "source_name": "Mistral AI News",
+      "tier": 1,
+      "kind": "blog",
+      "title": "Voxtral 3",
+      "url": "https://mistral.ai/news/voxtral-3/",
+      "summary": "Build agents that can listen, reason, speak, and act, with Voxtral 3.",
+      "published_at": "2026-10-20T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {},
+      "tags": [],
+      "id": "c_e267c7cec9",
+      "key": "mistral.ai/news/voxtral-3",
+      "cluster_id": "k_e267c7cec9",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "huggingface-blog",
+      "source_name": "Hugging Face Blog",
+      "tier": 1,
+      "kind": "blog",
+      "title": "NVIDIA Cosmos3-H-Dreams: Bringing Clinical Surgery to Life Through Generative Simulation",
+      "url": "https://huggingface.co/blog/nvidia/cosmos3-h-dreams",
+      "summary": "",
+      "published_at": "2026-10-20T18:17:47+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {},
+      "tags": [],
+      "id": "c_24909601d2",
+      "key": "huggingface.co/blog/nvidia/cosmos3-h-dreams",
+      "cluster_id": "k_24909601d2",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "huggingface-blog",
+      "source_name": "Hugging Face Blog",
+      "tier": 1,
+      "kind": "blog",
+      "title": "FairStress: A deeper evaluation of fairness in LLM decision-making",
+      "url": "https://huggingface.co/blog/allenai/fairstress",
+      "summary": "",
+      "published_at": "2026-10-20T16:09:19+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {},
+      "tags": [],
+      "id": "c_f1aea4a6bb",
+      "key": "huggingface.co/blog/allenai/fairstress",
+      "cluster_id": "k_f1aea4a6bb",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "huggingface-blog",
+      "source_name": "Hugging Face Blog",
+      "tier": 1,
+      "kind": "blog",
+      "title": "ALTK-Evolve: How learned memory tops the τ²-bench leaderboard on customer service tasks without a frontier model",
+      "url": "https://huggingface.co/blog/ibm-research/altk-evolve-bc",
+      "summary": "",
+      "published_at": "2026-10-20T15:19:48+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {},
+      "tags": [],
+      "id": "c_d8dbefc9c5",
+      "key": "huggingface.co/blog/ibm-research/altk-evolve-bc",
+      "cluster_id": "k_d8dbefc9c5",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "huggingface-blog",
+      "source_name": "Hugging Face Blog",
+      "tier": 1,
+      "kind": "blog",
+      "title": "Hugging Face ❤️ TorchTPU: TPUs, Natively",
+      "url": "https://huggingface.co/blog/hf-torchtpu",
+      "summary": "",
+      "published_at": "2026-10-20T00:00:00+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {},
+      "tags": [],
+      "id": "c_12716f82e9",
+      "key": "huggingface.co/blog/hf-torchtpu",
+      "cluster_id": "k_12716f82e9",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "huggingface-blog",
+      "source_name": "Hugging Face Blog",
+      "tier": 1,
+      "kind": "blog",
+      "title": "AnyLanguageModel 1.0: One Year of Local Models on Apple Platforms",
+      "url": "https://huggingface.co/blog/anylanguagemodel-1-0",
+      "summary": "",
+      "published_at": "2026-10-20T00:00:00+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {},
+      "tags": [],
+      "id": "c_b8ae1e84bd",
+      "key": "huggingface.co/blog/anylanguagemodel-1-0",
+      "cluster_id": "k_b8ae1e84bd",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "huggingface-blog",
+      "source_name": "Hugging Face Blog",
+      "tier": 1,
+      "kind": "blog",
+      "title": "MPS in PyTorch 2.15",
+      "url": "https://huggingface.co/blog/mps-pytorch-2-15",
+      "summary": "",
+      "published_at": "2026-10-20T00:00:00+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {},
+      "tags": [],
+      "id": "c_00624af5a6",
+      "key": "huggingface.co/blog/mps-pytorch-2-15",
+      "cluster_id": "k_00624af5a6",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "Scaling Parameter-Efficient Fine-Tuning for Brain Encoding",
+      "url": "https://huggingface.co/papers/2610.26802",
+      "summary": "Brain encoding models aim to predict neural responses to stimuli. The most widely used approach fits readouts from frozen pretrained backbones. Using neural data to train large models from scratch or fully fine-tune them after task-pretraining has proven difficult because neural data is costly and limited. We show that parameter-efficient fine-tuning (PEFT) enables us to effectively adapt very large pretrained backbones for brain encoding with a small number of trainable parameters. To make it computationally practical, we exploit the backbone's causal structure to predict multiple timepoints in a single pass instead of using sliding windows, significantly reducing feature-extraction cost. This enables efficient fine-tuning of multimodal backbones with up to 104B parameters, the largest model adapted for brain encoding to our knowledge. Trained with a low-rank adapter (LoRA) and a lightweight readout, our approach consistently improves brain encoding performance across nine diverse multimodal backbones. On the same Qwen3-Omni backbone as the prior state-of-the-art (SoTA), our method BrainLoRA achieves the best published performance on the Algonauts 2025 Challenge. We also show the adapted multimodal backbones remain interpretable: modality attribution recovers the canonical sensory topography that prior work often obtains by construction from separate unimodal encoders, and neural adaptation increases the contribution of audio inputs and cross-modal mixing within the...",
+      "published_at": "2026-10-19T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 231,
+        "comments": 2,
+        "organization": "Mind Lab"
+      },
+      "tags": [
+        "parameter-efficient fine-tuning",
+        "PEFT",
+        "low-rank adapter",
+        "LoRA",
+        "brain encoding",
+        "multimodal backbones",
+        "cross-modal mixing",
+        "multi-LoRA kernel"
+      ],
+      "id": "c_5d4f97485b",
+      "key": "arxiv:2610.26802",
+      "cluster_id": "k_5d4f97485b",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "EgoXperience: Learning World-Grounded Egocentric Representations from Human Experience",
+      "url": "https://huggingface.co/papers/2610.26625",
+      "summary": "Reconstructing human activity from egocentric video requires more than recovering individual 3D components: the observer's motion, surrounding geometry, and hand-object interactions must fit together in a consistent world. Achieving this coherence requires both joint reconstruction and aligned supervision, yet existing methods and datasets offer limited support for either. We present EgoXperience, a full-stack paradigm that addresses these needs through data collection, automatic annotation, unified modeling, and benchmarking. Central to EgoXperience is an automatic annotation engine, EgoX-Engine, that couples geometrically verified object tracking with SLAM-based world alignment, yielding consistent supervision for the camera, scene, hands, and objects. This yields EgoX-Data-6M, a 50-hour dataset of task-driven manipulation and locomotion within and across indoor and outdoor environments, with second-level task captions. We carefully select one hour across these activity categories as EgoX-Bench to evaluate joint reconstruction. To translate this supervision into reconstruction, we introduce EgoX, trained with EgoX-Data-6M and complementary annotations from additional public datasets. Given monocular egocentric video and first-frame object masks, our model achieves joint metric reconstruction of the camera, scene, hands, and objects in a shared world coordinate frame with a single forward pass. Extensive experiments demonstrate state-of-the-art performance across scene...",
+      "published_at": "2026-10-19T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 119,
+        "comments": 2,
+        "github_repo": "https://github.com/Ropedia/EgoXperience",
+        "github_stars": 9,
+        "organization": "Ropedia"
+      },
+      "tags": [
+        "egocentric video",
+        "SLAM",
+        "object tracking",
+        "joint reconstruction",
+        "world coordinate frame",
+        "hand-object interaction",
+        "scene estimation",
+        "monocular video"
+      ],
+      "id": "c_436c1d10ba",
+      "key": "arxiv:2610.26625",
+      "cluster_id": "k_436c1d10ba",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "MemT-1.0: Towards Memory-Native Evolution",
+      "url": "https://huggingface.co/papers/2610.26825",
+      "summary": "Memory-native evolution requires making memory an intrinsic capability of foundation models, enabling them to continuously accumulate and utilize information. To this end, we introduce MemT-1.0, a new architecture of memory foundation models that internalize memory as part of model computation. Building on Metis, MemT-1.0 employs Gated DeltaNet-2 with a stable token-level memory update mechanism within each turn. We further introduce Mixture-of-Storage to scale native memory capacity. Following a deliberate backbone preparation, we develop a two-stage training pipeline consisting of continued pre-training and post-training, supported by 34B tokens of training data and efficient training and inference infrastructure. We release a model family comprising MemT-1.0-Nano and MemT-1.0-Flash, and conduct a comprehensive evaluation of memory and general capabilities. The results show that they outperform the parametric memory baselines on average and remain competitive with retrieval-augmented methods, while largely preserving general capabilities. At a history length of 128K tokens, MemT-1.0-Nano achieves approximately 1.86times end-to-end inference speedup and a 66times reduction in persistent storage relative to full context KV cache. By internalizing retrieved procedural experience, MemT-1.0 improves task success on agentic tasks, providing a practical step toward memory-native evolution.",
+      "published_at": "2026-10-19T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 108,
+        "comments": 2,
+        "github_repo": "https://github.com/MemTensor/MemT-1.0",
+        "github_stars": 192,
+        "organization": "MemTensor"
+      },
+      "tags": [
+        "Gated DeltaNet-2",
+        "token-level memory update",
+        "Mixture-of-Storage",
+        "memory foundation models",
+        "native memory",
+        "parametric memory",
+        "retrieval-augmented methods",
+        "KV cache"
+      ],
+      "id": "c_bb0b5c3b75",
+      "key": "arxiv:2610.26825",
+      "cluster_id": "k_bb0b5c3b75",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "Holi-World: Building Holistic World Intelligence from Human-Ego Experience",
+      "url": "https://huggingface.co/papers/2610.26549",
+      "summary": "Human egocentric experience offers a rich foundation for learning how the world is organized and how it changes through interaction. Realizing this potential at scale requires turning growing volumes of recordings into learning resources that connect scene structure, object semantics, and interaction histories across viewpoints and time, while reducing dependence on costly manual annotation. We introduce HOLI-WORLD, an integrated ecosystem connecting experience capture, world representation, automated data construction, model learning, and independent evaluation. To sup- port learning at scale, HOLIWORLD-Foundry combines complementary static and dynamic perception to automatically construct world records that connect persistent scene structure and evolving object states with interaction histories and supporting observations. HOLIWORLD-Data organizes these records from approximately 100 self-collected scenes into grounded learning resources, including approximately 80K QA pairs used to train HOLIWORLD-VL-4B. Independent human annotations of heldout recordings form HOLIWORLD-Bench, supporting evaluation of both annotation quality and learned spatial and temporal understanding. Experiments on ScanNet, ScanNet++, Aria Digital Twin, and HOLIWORLD-Bench demonstrate strong performance in static perception and dynamic tracking, while training on HOLIWORLD-Data substantially improves HOLIWORLD-VL-4B's spatial and temporal reasoning on HOLI- WORLD-Bench and EgoDynamic4D. HOLIWORLD...",
+      "published_at": "2026-10-19T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 108,
+        "comments": 2,
+        "github_repo": "https://github.com/Ropedia/holi-world",
+        "github_stars": 9,
+        "organization": "Ropedia"
+      },
+      "tags": [
+        "egocentric experience",
+        "world representation",
+        "automated data construction",
+        "static perception",
+        "dynamic perception",
+        "world records",
+        "spatial reasoning",
+        "temporal reasoning"
+      ],
+      "id": "c_fe68cc2e37",
+      "key": "arxiv:2610.26549",
+      "cluster_id": "k_fe68cc2e37",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "Learning from Fleet Experience: A Collective Learning Paradigm for Robots",
+      "url": "https://huggingface.co/papers/2610.25736",
+      "summary": "Experience generated during deployment offers an opportunity for robots to improve policy reliability through learning from their own executions. However, learning through human corrections requires teleoperators to monitor execution and intervene when policies fail, a demand that is difficult to meet as robot fleets grow. We introduce collective experience learning (CEL), a learning paradigm in which deployed robots share their execution experience to improve a common policy. We realize CEL through failure-guided experience retrieval fine-tuning (FERT), which uses failure contexts from robot executions to retrieve relevant trajectory segments from the fleet's shared successful experience and uses their actions as supervision for policy updates, without collecting additional expert demonstrations or corrective actions. A fault-tolerant asynchronous training system (FATS) coordinates experience collection, policy optimization and policy distribution despite local interruptions within the robot fleet. Across five real-world manipulation tasks, the resulting policies achieve success rates of 93.3-99.2%, evaluated over 120 trials per task on robots excluded from training data collection. With collection time per robot held fixed, larger fleets provide more experience and FERT generally achieves higher success rates across the evaluated sizes. On multi-stage phone packaging, learning with 96 robots increases success from 79.2% to 98.3%. These results support collective experience...",
+      "published_at": "2026-10-19T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 107,
+        "comments": 2
+      },
+      "tags": [
+        "collective experience learning",
+        "failure-guided experience retrieval fine-tuning",
+        "fault-tolerant asynchronous training system",
+        "trajectory retrieval",
+        "policy fine-tuning"
+      ],
+      "id": "c_64ba38426f",
+      "key": "arxiv:2610.25736",
+      "cluster_id": "k_64ba38426f",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "OpenVLHarness: Real World Visual Agentic Tool-Use with Multimodal Memory",
+      "url": "https://huggingface.co/papers/2610.26860",
+      "summary": "Multimodal large language models (MLLMs) have made rapid progress on visual reasoning, yet many tasks require evidence that is difficult to obtain through internal reasoning alone: our controlled study on 22 benchmarks shows that simply increasing the inference budget of the base model yields only modest gains. Such tasks demand grounded perception, external knowledge, and numerical measurements obtained through heterogeneous tools, whose outputs must be made interpretable to the model and retained across reasoning steps. We introduce OpenVLHarness, a multimodal reasoning harness organized around a capability layer and persistent multimodal memory. The capability layer combines task-level tool interfaces with evidence rendering, providing consistent access to heterogeneous backends and converting their outputs into model-readable observations. Persistent multimodal memory retains the corresponding images, structured data, and web references as addressable artifacts throughout each query. A coding interface executes generated programs over stored data, enabling computations that combine results from multiple tools. Together, these mechanisms support an iterative process of acquiring, inspecting, and composing multimodal evidence. Evaluated on 22 benchmarks with eight open and proprietary backbones, OpenVLHarness improves average scores by 9.7-12.6 points over matched no-tool baselines, including +11.2 with Qwen3-VL-8B, +9.7 with Kimi K3, and +9.9 with GPT-6 Astra. With GPT-6...",
+      "published_at": "2026-10-19T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 94,
+        "comments": 1,
+        "github_repo": "https://github.com/uclanlp/OpenVLHarness",
+        "github_stars": 50,
+        "organization": "Apple"
+      },
+      "tags": [
+        "multimodal large language models",
+        "visual reasoning",
+        "tool interfaces",
+        "evidence rendering",
+        "persistent multimodal memory",
+        "coding interface",
+        "multimodal evidence"
+      ],
+      "id": "c_570fefddb8",
+      "key": "arxiv:2610.26860",
+      "cluster_id": "k_570fefddb8",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "ScaleNav: Scalable Internet Video Pretraining for Language-Conditioned Local Navigation",
+      "url": "https://huggingface.co/papers/2610.25690",
+      "summary": "We study language-conditioned local navigation, where a robot must navigate to a text-specified target visible in its initial observation and stop at the described location. End-to-end navigation policies require diverse training data to generalize across scenes, yet real-robot data is costly to collect and simulated data leaves a sim-to-real gap. Internet egocentric videos offer a scalable source of real-world navigation experience. Our key insight is to learn goal-directed visual dynamics from Internet egocentric videos, and use these dynamics to support robot action generation. To this end, we propose ScaleNav, a unified world-action framework with three-stage training. We first perform instruction-conditioned video pretraining on these videos to learn how observations evolve as the camera approaches instructed targets across diverse real-world scenes. Action alignment then uses action-labeled simulated data to train the model to predict executable action chunks. Joint fine-tuning subsequently optimizes all trainable components together for navigation. ScaleNav achieves success rates of 86.5% on a single-view adaptation of Short-Horizon OVON and 94.9% on our HabitatGS-LN benchmark, outperforming the evaluated baselines on both benchmarks. We further deploy and evaluate ScaleNav on a real quadruped robot, with results supporting the model's ability to generalize to real-world navigation. Code and videos are available at",
+      "published_at": "2026-10-19T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 84,
+        "comments": 2,
+        "github_repo": "https://github.com/MachEmbodied/ScaleNav",
+        "github_stars": 37
+      },
+      "tags": [
+        "language-conditioned local navigation",
+        "goal-directed visual dynamics",
+        "world-action framework",
+        "instruction-conditioned video pretraining",
+        "action alignment",
+        "action chunks",
+        "joint fine-tuning",
+        "ScaleNav"
+      ],
+      "id": "c_982c31d1cc",
+      "key": "arxiv:2610.25690",
+      "cluster_id": "k_982c31d1cc",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "SpecMRL: Redesign Matryoshka Representation Learning within Parametric Spectrum",
+      "url": "https://huggingface.co/papers/2610.26824",
+      "summary": "Matryoshka Representation Learning (MRL) is designed to support flexible representation sizes by jointly optimizing nested prefixes. While effective, this design lacks an explicit constraint to ensure that the leading portion provides a suitable compact encoding. To address this, we propose SpecMRL, which reorganizes the feature space to enable more effective prefix readout. Specifically, we extend MRL with a parameter-derived spectral basis organized with feature importance. SpecMRL otherwise follows standard MRL, with prefix readout performed in the learned spectral space. Experiments on MTEB show that SpecMRL outperforms MRL at all evaluated reduced dimensions, with larger gains under more aggressive compression. These results suggest that the learned spectral basis better prioritizes informative directions, enabling more effective representation compression. Notably, SpecMRL extends the performance frontier of MRL, surpassing full-dimensional MRL with only half the embedding dimensions.",
+      "published_at": "2026-10-19T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 80,
+        "comments": 2,
+        "github_repo": "https://github.com/CentreChen/Spec-MRL",
+        "github_stars": 6
+      },
+      "tags": [
+        "Matryoshka Representation Learning",
+        "nested prefixes",
+        "spectral basis",
+        "feature importance",
+        "prefix readout",
+        "MTEB",
+        "representation compression"
+      ],
+      "id": "c_4cb636a733",
+      "key": "arxiv:2610.26824",
+      "cluster_id": "k_4cb636a733",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "AnyGoal: On World Model Generalization Beyond Expert Rollouts",
+      "url": "https://huggingface.co/papers/2610.26844",
+      "summary": "The goal of a world model is to capture the dynamics of an environment. This has the great appeal that it allows agents to plan and simulate a course of actions with the help of a world model. For these uses to be reliable, however, the learned dynamics must behave well beyond the specific state-action combinations observed in expert rollouts. Despite this, the relationship between data coverage, dynamics generalization, and downstream planning performance remains underexplored. We study this relationship through the lens of compositional generalization: can a world model recombine familiar state and action factors into valid dynamics? To answer this, we introduce AnyGoal, a benchmark of goal-shifted task variants built from widely used world-model environments, together with an open-source library. Each task is designed to be within reach of a world model that has learned the underlying dynamics: individual state factors and actions remain within their training support, but their combinations are underrepresented in expert trajectories. Across multiple environments and world model families, we find that current models consistently exhibit failures under these recombinations. By examining dynamics and representation failures across model families, interaction regimes, and evaluation metrics, we study where current world models generalize and where challenges remain for goal-shifted prediction and planning. Together, this framework, benchmark, and analysis provide a basis for...",
+      "published_at": "2026-10-19T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 30,
+        "comments": 1,
+        "github_repo": "https://github.com/galilai-group/AnyGoal",
+        "github_stars": 5,
+        "organization": "galilai-group"
+      },
+      "tags": [
+        "world model",
+        "compositional generalization",
+        "dynamics generalization",
+        "AnyGoal",
+        "goal-shifted",
+        "planning",
+        "state-action combinations"
+      ],
+      "id": "c_eddb15aea0",
+      "key": "arxiv:2610.26844",
+      "cluster_id": "k_eddb15aea0",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "Kronecker Delta Rule for Long Context Linear Attention",
+      "url": "https://huggingface.co/papers/2610.26834",
+      "summary": "We propose KronLSTM, a linear attention architecture based on the Kronecker Delta Rule, a novel update rule for associative matrix memories. KronLSTM extends the xLSTM family with a memory-revision mechanism that corrects targeted associations while modifying the memory only along a single direction in matrix space. This minimally invasive memory revision reduces interference with previously stored information compared with delta-rule updates, making it particularly well suited for long-context language modeling. The resulting memory dynamics can be mathematically described as a Markov chain that converges to a steady-state distribution, while the expected norm of the memory matrix remains uniformly bounded throughout the entire input sequence. Hence, KronLSTM ensures stable memory dynamics without requiring additional normalization and stabilization mechanisms for the memory state. Experiments show that KronLSTM is competitive with, and often outperforms, existing linear attention architectures, including models of the (Gated) DeltaNet family, with particularly strong performance on long context benchmarks. These results establish the Kronecker Delta Rule as an effective and analytically tractable foundation for stable associative memory in recurrent linear attention architectures. Our code ( and models ( are open-source.",
+      "published_at": "2026-10-19T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 28,
+        "comments": 2,
+        "organization": "NX-AI"
+      },
+      "tags": [
+        "Kronecker Delta Rule",
+        "associative matrix memories",
+        "KronLSTM",
+        "xLSTM",
+        "memory-revision mechanism",
+        "linear attention",
+        "Markov chain",
+        "steady-state distribution"
+      ],
+      "id": "c_a4d2e2f28a",
+      "key": "arxiv:2610.26834",
+      "cluster_id": "k_a4d2e2f28a",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "AdaExploreBench: Benchmarking LLM Agents for Proactive Exploration and Test-time Adaptation in Evolving Environments",
+      "url": "https://huggingface.co/papers/2610.25950",
+      "summary": "Large Language Model (LLM) agents are increasingly deployed in unfamiliar and evolving environments, requiring them to proactively explore, understand, and adapt to environmental dynamics. However, existing benchmarks rarely test whether agents can proactively discover how an environment works and adapt as it evolves. To address this gap, we introduce AdaExploreBench, a benchmark for proactive exploration and test-time adaptation in evolving environments. By instantiating environmental dynamics as hidden rules, AdaExploreBench requires agents to actively acquire evidence and infer the rules. Under implicit rule drift, the latent rule changes without announcement, requiring agents to detect from degraded performance that prior knowledge is stale and re-explore. Experiments on eight leading LLMs show that proactive and adaptive exploration remain challenging: GPT-6 Sol achieves only 61.9% calibrated accuracy, while providing sufficient evidence or removing rule drift improves average performance significantly by close to 10%. These results reveal a critical bottleneck in current LLM agents: they can often reason effectively from informative evidence once it is available, but struggle to actively acquire the right evidence and recognize when previously acquired evidence is no longer valid.",
+      "published_at": "2026-10-19T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 27,
+        "comments": 1,
+        "github_repo": "https://github.com/HKUST-KnowComp/AdaExploreBench",
+        "github_stars": 3,
+        "organization": "HKUST"
+      },
+      "tags": [
+        "AdaExploreBench",
+        "proactive exploration",
+        "test-time adaptation",
+        "hidden rules",
+        "implicit rule drift",
+        "LLM agents"
+      ],
+      "id": "c_847992f866",
+      "key": "arxiv:2610.25950",
+      "cluster_id": "k_847992f866",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "RoAR-VAE: Improving Latent Diffusability through Robust Prediction",
+      "url": "https://huggingface.co/papers/2610.26216",
+      "summary": "An effective visual tokenizer must preserve image fidelity while producing latents that downstream diffusion models can learn efficiently. Prior work improves latent diffusability through semantic alignment or joint tokenizer--diffusion training. Revisiting REPA-E, a representative approach, we find that removing its diffusion objective and dedicated generative blocks while retaining semantic prediction from corrupted latents yields comparable downstream generation performance under a matched setting. This observation motivates a general principle of robust prediction: generation-relevant information should remain recoverable from corrupted latents. We instantiate this principle with two complementary objectives. RobustAlign predicts pretrained semantic features from corrupted latents to preserve high-level structure, while RobustRecon reconstructs the clean image to retain fine-grained spatial and appearance information. Together, they form Robust Alignment and Reconstruction VAE (RoAR-VAE). Our analysis suggests that robust prediction improves diffusability by making useful information more accessible in high-variance latent directions, which diffusion models tend to learn earlier. Empirically, RoAR-VAE improves average generation benchmark performance by 2.19 points over the strongest baseline tokenizer under the same training budget, while improving small-text reconstruction accuracy by 16.93 percentage points over FLUX.1-VAE. These results demonstrate that RoAR-VAE...",
+      "published_at": "2026-10-19T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 26,
+        "comments": 1,
+        "github_repo": "https://github.com/LeapLabTHU/RoAR-VAE",
+        "github_stars": 7,
+        "organization": "Tsinghua-LeapLab"
+      },
+      "tags": [
+        "visual tokenizer",
+        "latent diffusability",
+        "semantic alignment",
+        "joint tokenizer-diffusion training",
+        "REPA-E",
+        "diffusion objective",
+        "generative blocks",
+        "corrupted latents"
+      ],
+      "id": "c_cc532a2a9f",
+      "key": "arxiv:2610.26216",
+      "cluster_id": "k_cc532a2a9f",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "InfiniDream: Open-Ended Photorealistic 3D Worlds Through Procedural Generation",
+      "url": "https://huggingface.co/papers/2610.26853",
+      "summary": "Procedural generation plays a key role in synthetic data creation and game development, offering greater controllability, editability, and diversity than static mesh representations. However, VLM-based code generation often produces relatively simple 3D assets, while sophisticated photorealistic procedural systems require extensive manual development. Existing VLM-guided procedural methods remain largely constrained by predefined factories and APIs, limiting their ability to create novel asset types. We introduce InfiniDream, a VLM-driven framework for open-ended procedural 3D world generation. First, we propose Symbolically Constrained Asset Generation, which leverages existing procedural algorithms to create novel, photorealistic assets while preserving editability and seed-based diversity. Second, we develop an end-to-end text-to-world pipeline that combines semantic scene planning with Deterministic Frustum-Guided Grid Placement to construct large-scale 3D worlds with precise object placement, procedural population, and animation. Extensive evaluations on 100 object and 20 scene generation tasks demonstrate improvements across four perceptual metrics. Diversity analysis, ablation studies, and human preference evaluations further validate the effectiveness of our framework. Project page:",
+      "published_at": "2026-10-19T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 25,
+        "comments": 1,
+        "github_repo": "https://github.com/yichuanH/InfiniDream",
+        "github_stars": 25,
+        "organization": "Alaya Lab"
+      },
+      "tags": [
+        "VLM",
+        "procedural generation",
+        "Symbolically Constrained Asset Generation",
+        "Deterministic Frustum-Guided Grid Placement",
+        "text-to-world pipeline",
+        "semantic scene planning"
+      ],
+      "id": "c_abf3a16ee9",
+      "key": "arxiv:2610.26853",
+      "cluster_id": "k_abf3a16ee9",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "HarnessPro: Recursive Harness Self-Improvement with Pareto Optimization for Performance-Cost Trade-offs",
+      "url": "https://huggingface.co/papers/2610.26770",
+      "summary": "Harness development plays a crucial role in building capable AI agents. Recent approaches improve harnesses through recursive self-improvement (RSI), but their performance gains often come with higher execution costs. We introduce HarnessPro, a label-free method for evolving harnesses to improve task performance while reducing execution cost. In this setting, candidate harnesses are evaluated using LLM-generated tests without access to ground-truth solutions or official tests. Specialized agents diagnose execution trajectories, plan updates with different performance-cost priorities, and implement them as candidate harnesses. Rather than returning a single harness, HarnessPro uses normalized weighted squared-distance selection to provide cost-focused (lite), balanced (medium), and performance-focused (heavy) harnesses for different deployment budgets. Selected harnesses enter the next iteration, where execution feedback guides further updates. Our experiments cover Terminal-Bench 2, SWE-Bench Pro, and ProgramBench, using GPT-5.5 with Codex and GLM-5.2 with Claude Code. Across these benchmarks using GPT-5.5 with Codex, the heavy mode of HarnessPro achieves an average pass-rate gain of 2.0 percentage points and an average per-task cost reduction of 26.1% relative to RHO. This advantage also holds when using GLM-5.2 with Claude Code. Code is available at",
+      "published_at": "2026-10-19T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 25,
+        "comments": 1,
+        "github_repo": "https://github.com/pzs19/HarnessPro",
+        "github_stars": 1
+      },
+      "tags": [
+        "recursive self-improvement",
+        "harness evolution",
+        "LLM-generated tests",
+        "execution trajectories",
+        "normalized weighted squared-distance selection",
+        "cost-focused harness",
+        "performance-focused harness"
+      ],
+      "id": "c_e37b7920f9",
+      "key": "arxiv:2610.26770",
+      "cluster_id": "k_e37b7920f9",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "Manga2Animate: An Agentic Framework for Faithful Manga Animation with Script and Storyboard Planning",
+      "url": "https://huggingface.co/papers/2610.26851",
+      "summary": "Adapting existing manga into coherent animation that stays faithful to the source is a valuable yet challenging task. Existing methods either access the manga mainly through text, losing its characters and art style, or feed manga pages directly into video generation models, which misinterpret the manga's structure and produce incorrect storylines. In this paper, we propose Manga2Animate, a multi-agent framework that grounds every stage of generation in the source manga. We decompose the task into two intermediate representations, an animation script and a visual storyboard. Each representation is produced by a creator agent and reviewed against the source panels by a paired reviewer agent. We tailor representation-specific selection and dual-level feedback to progressively refine both before synthesizing the final animation. Extensive experiments and a user study demonstrate that Manga2Animate produces animations more faithful to the source manga and more consistent across shots than state-of-the-art approaches. Project page:",
+      "published_at": "2026-10-19T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 23,
+        "comments": 1,
+        "github_repo": "https://github.com/annchenn/Manga2Animate",
+        "github_stars": 27,
+        "organization": "National Yang Ming Chiao Tung University"
+      },
+      "tags": [
+        "multi-agent framework",
+        "animation script",
+        "visual storyboard",
+        "creator agent",
+        "reviewer agent",
+        "dual-level feedback",
+        "source panels"
+      ],
+      "id": "c_82bf4720d9",
+      "key": "arxiv:2610.26851",
+      "cluster_id": "k_82bf4720d9",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "RoboValue: A Fine-Grained Sim-and-Real Benchmark for Unified Evaluation of Robotic Value Models",
+      "url": "https://huggingface.co/papers/2610.26663",
+      "summary": "Robotic value models assess task execution from visual observations and instructions, providing feedback for policy learning and execution monitoring. However, existing evaluations cover only selected aspects of execution understanding, leaving the reliability of value feedback insufficiently tested. We introduce RoboValue, a fine-grained sim-and-real benchmark for unified evaluation of robotic value models. Its framework evaluates four complementary capability dimensions through shared interfaces: task-state understanding, temporal progress monitoring, failure and recovery reasoning, and value consistency. Diagnostic trajectories and instruction variations test whether value judgments accurately reflect task requirements and changes throughout execution. RoboValue-Dataset covers 15 simulation and 20 real-world manipulation tasks, providing expert demonstrations for training and annotated trajectories for fine-grained evaluation. We evaluate representative robotic value models in zero-shot and one-shot settings under standard conditions and separate shifts in robot embodiment and environment. Our results reveal errors in fine-grained instruction grounding, history-dependent progress tracking, and recovery assessment, even in models with strong outcome and forward-progress scores. The same semantic subtask can also receive substantially different value gains across valid execution orders. These findings identify concrete targets for value supervision, while the dataset and...",
+      "published_at": "2026-10-19T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 20,
+        "comments": 2,
+        "github_repo": "https://github.com/RoboValue-Benchmark/RoboValue",
+        "github_stars": 14
+      },
+      "tags": [
+        "robotic value models",
+        "task-state understanding",
+        "temporal progress monitoring",
+        "failure and recovery reasoning",
+        "value consistency",
+        "RoboValue",
+        "sim-and-real benchmark",
+        "zero-shot"
+      ],
+      "id": "c_4e5f4007b3",
+      "key": "arxiv:2610.26663",
+      "cluster_id": "k_4e5f4007b3",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "Where is Physical RSI capability from? An Observational Scaling Law of LLM-as-policy",
+      "url": "https://huggingface.co/papers/2610.26848",
+      "summary": "In this paper, we systematically investigate the mechanisms, scaling behavior, and generalization of physical Recursive self-improvement. We introduce PhysRSI-eval to quantify physical RSI through a five-axis metric: First-Attempt Performance, Efficiency, Success, Budget and Improvement from failure. Different VLMs are evaluated on 18 manipulation tasks under a fixed interaction budget. The analysis of experimental results motivates the Physical Barrel Hypothesis: different capabilities may constrain different parts of improvement. The five-axis metrics also distinguish systems with close public benchmark averages and show that high scores need not come with early or efficient gains. We study observational scaling from two perspectives: predicting the relative performance of VLM agents from their public capabilities, and forecasting later progress from early physical feedback. Together, these analyses ask how quickly and how far an agent can improve. Moreover, we conduct workspace interventions and then analyze what improvement leaves behind. Removing history reduces late-round success, frozen workspaces remain useful on unseen layouts, and three cross-task cases achieve success earlier. The results suggest that scene-specific adaptation and reusable experience can coexist.",
+      "published_at": "2026-10-19T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 16,
+        "comments": 1,
+        "organization": "Galbot"
+      },
+      "tags": [
+        "recursive self-improvement",
+        "VLM",
+        "physical RSI",
+        "five-axis metric",
+        "Physical Barrel Hypothesis",
+        "observational scaling",
+        "workspace interventions"
+      ],
+      "id": "c_60753d24b7",
+      "key": "arxiv:2610.26848",
+      "cluster_id": "k_60753d24b7",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "Frechet Forcing: Training Long-Horizon Streaming World Models from Short Clips",
+      "url": "https://huggingface.co/papers/2610.25666",
+      "summary": "Streaming video world models generate the future chunk by chunk, conditioned on their own past and a stream of actions. Trained on short clips, they drift once a rollout exceeds the training horizon, as prediction errors re-enter the context and compound. A common remedy is to train the model on its own rollouts via distribution matching distillation (DMD). For action-conditioned world models, the teacher becomes a bottleneck: an external video model is agnostic to the actions, whereas the model's own pretrained network drifts in the same manner as the student. We observe that a long rollout need not match a teacher, provided it remains a realistic continuation of its own scene that follows the commanded actions. Realism and scene fidelity can be measured against real-data statistics, which remain valid at any horizon, while action following is preserved by the model's conditional generation loss. We propose Fréchet Forcing, which fine-tunes a world model together with its deployed multi-step sampler under three constraints. Generative anchoring applies the flow-matching loss after a self-generated history ending on real data. Context fidelity, a Fréchet distance (FD) on latent statistics of the free rollout centred on each clip's own ground truth, keeps every rollout faithful to its scene. Reality matching, an FD to real frames in a frozen perceptual space, keeps the generated frames realistic. Because all three targets are derived from short real clips without comparing a...",
+      "published_at": "2026-10-19T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 15,
+        "comments": 1,
+        "github_repo": "https://github.com/zhao-yian/Frechet_Forcing",
+        "github_stars": 11
+      },
+      "tags": [
+        "streaming video world models",
+        "distribution matching distillation",
+        "Fréchet Forcing",
+        "flow-matching loss",
+        "generative anchoring",
+        "context fidelity",
+        "Fréchet distance",
+        "reality matching"
+      ],
+      "id": "c_ee521295b2",
+      "key": "arxiv:2610.25666",
+      "cluster_id": "k_ee521295b2",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "DeOverlay: A Benchmark and Source-Anchored Flow for Video Overlay Removal",
+      "url": "https://huggingface.co/papers/2610.26081",
+      "summary": "Video overlay removal aims to recover scenes obscured by subtitles, titles, and logos while preserving surrounding content. Existing methods use temporal propagation or source-conditioned generation, but can leave residual overlays and distort scene structure when useful source information is obscured. We propose DeOverlay, a source-anchored flow model that reconstructs the clean video from the source latent with fixed source guidance. Specifically, we train a shared velocity network along paired source-to-clean paths using region-weighted flow matching, enabling successive cor- rections from intermediate states. To select local source cues, we develop visibility-normalized temporal aggregation that excludes masked positions and averages the remaining observations. Global source context and edit-region embeddings complement these cues through additive condi- tioning, retaining a single video-token sequence. To evaluate scene recovery across diverse overlay conditions, we introduce DVTE-Bench, comprising 1,631 paired videos across eight text-overlay categories, with OCR-screened clean targets, frame-aligned pixel masks, and a common evaluation protocol. Experiments on the complete release show that DeOverlay outperforms four baselines on all five reconstruction and perceptual metrics, reducing Mask LPIPS and Mask VFID by 58.3% and 70.3%, respectively, relative to the strongest evaluated baseline. Additional qualitative examples demonstrate the removal of graphic logos and...",
+      "published_at": "2026-10-19T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 13,
+        "comments": 1,
+        "organization": "ByteDance"
+      },
+      "tags": [
+        "flow matching",
+        "velocity network",
+        "region-weighted flow matching",
+        "visibility-normalized temporal aggregation",
+        "additive conditioning",
+        "video-token sequence",
+        "DVTE-Bench",
+        "Mask LPIPS"
+      ],
+      "id": "c_3153cdfe2a",
+      "key": "arxiv:2610.26081",
+      "cluster_id": "k_3153cdfe2a",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "State World Models: Execute the Rules, Generate the Pixels",
+      "url": "https://huggingface.co/papers/2610.26811",
+      "summary": "Existing world models can generate action-conditioned video from a single image. Many focus on camera movement, allowing users to explore the generated scene. However, navigation alone does not ensure that an action follows persistent rules when its outcome depends on state that is invisible in the current frame. We present Stateful Harness, a framework that separates world evolution from video rendering to support stateful and rule-governed interaction. It maintains an evolving world state under specified rules, renders each resulting event with a frozen video model, and uses the generated clip to update the world state for the next turn. At each turn, the harness resolves the action selected by the user and compiles the resulting event into an instruction, while a preview clip from an editable 3D scene provides spatial and camera guidance. To evaluate rule compliance, we build WorldState-Bench, a benchmark of 50 counterfactual twin pairs that share an initial frame and action but differ in hidden state and required outcome. Under rule-only prompting, the best of the 11 evaluated video backends produces the required endings for both cases in 32% of pairs. For MiniMax-H3, specifying the required endings raises this rate from 32% to 64%, while the full harness reaches 92% with the same frozen model. These results support separating rule execution from video rendering for world interactions with hidden state.",
+      "published_at": "2026-10-19T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 12,
+        "comments": 1,
+        "github_repo": "https://github.com/Zhangyr2022/StateWorldModel",
+        "github_stars": 13,
+        "organization": "Tsinghua-IVG"
+      },
+      "tags": [
+        "world models",
+        "action-conditioned video",
+        "Stateful Harness",
+        "world evolution",
+        "video rendering",
+        "frozen video model",
+        "editable 3D scene",
+        "WorldState-Bench"
+      ],
+      "id": "c_0b18765b89",
+      "key": "arxiv:2610.26811",
+      "cluster_id": "k_0b18765b89",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "Remembering Has a Price: Learning Memory Worth under Resource Constraints",
+      "url": "https://huggingface.co/papers/2610.26453",
+      "summary": "Lifelong agents continually accumulate and reuse experience to improve after deployment, yet in practice they often operate under tight generation, interaction, and memory budgets. Under such stringent joint constraints, we find that existing lifelong-memory methods can become ineffective, with several sophisticated approaches offering little advantage over simple retrieval or even no-memory agents. This reveals a more fundamental problem: resource scarcity makes each memory decision more consequential. When only a small amount of past experience can be retained or reused and opportunities for reasoning and recovery are limited, retrieving a relevant but ineffective memory can consume scarce context and hinder downstream execution. The key challenge is therefore not simply to retrieve relevant experience, but to determine which experiences are actually worth retaining and reusing. To address this challenge, we propose TokenWorth, a lightweight online memory framework that learns query-dependent memory worth from sparse execution feedback and applies it consistently to memory retrieval and bounded memory management. Across three LifelongAgentBench environments and both local and API-based deployments, TokenWorth achieves the highest task success rate while using the fewest output tokens among the evaluated methods. These results suggest that effective lifelong adaptation under resource constraints depends not on remembering more, but on learning what is worth remembering. Our...",
+      "published_at": "2026-10-19T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 10,
+        "comments": 1,
+        "github_repo": "https://github.com/AIGNLAI/TokenWorth",
+        "github_stars": 3,
+        "organization": "Nanjing University"
+      },
+      "tags": [
+        "lifelong-memory",
+        "TokenWorth",
+        "query-dependent memory worth",
+        "sparse execution feedback",
+        "bounded memory management",
+        "LifelongAgentBench"
+      ],
+      "id": "c_b1770d2d35",
+      "key": "arxiv:2610.26453",
+      "cluster_id": "k_b1770d2d35",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "CoworkEnv: Synthesizing Training Environments for Long-Horizon Cowork Agents",
+      "url": "https://huggingface.co/papers/2610.24960",
+      "summary": "AI coworkers must coordinate tools, communicate across turns, and act on changing workspace state while respecting workflow constraints. Constructing training experience for these capabilities requires coherent requests, service records, tool interfaces, and grading checks. We present CoworkEnv, a capability-guided framework for synthesizing executable training environments for AI coworkers. Workflow requirements guide task construction, and programmatic validation with feedback repair checks generated specifications and grading behavior. Teacher executions yield curated demonstrations for supervised fine-tuning (SFT), while student interactions provide rollouts and rewards for reinforcement learning (RL). Using these resources, we train compact PocketWorker models. For Qwen3-VL-8B-Instruct, SFT raises the mean score from 46.6 to 64.1 on Claw-Eval, including a 31.9-point gain on Multi-turn tasks. An SFT-only extension to ClawMark demonstrates applicability across coworker benchmarks. We further compare RL training dynamics across configurations that vary reward processing and credit assignment. Improving training rewards provide preliminary evidence that the constructed environments support policy optimization.",
+      "published_at": "2026-10-18T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 38,
+        "comments": 3,
+        "github_repo": "https://github.com/HKUST-KnowComp/CoworkEnv",
+        "github_stars": 9
+      },
+      "tags": [
+        "supervised fine-tuning",
+        "reinforcement learning",
+        "reward processing",
+        "credit assignment",
+        "policy optimization",
+        "multi-turn tasks"
+      ],
+      "id": "c_5356218917",
+      "key": "arxiv:2610.24960",
+      "cluster_id": "k_5356218917",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "MT Forcing: Towards Stable and Consistent Multi-Turn Image Editing with Autoregressive Diffusion",
+      "url": "https://huggingface.co/papers/2610.25404",
+      "summary": "Multi-turn image editing aims to modify an image according to a sequence of instructions, enabling more effective interactive visual content creation for users. However, existing methods often exhibit noticeable drift after only a few editing turns, manifesting in two aspects: 1) unstable visual quality, with accumulating artifacts and degraded details; and 2) inconsistent image content, with unintended changes to preserved regions and prior edits. To address these challenges, we propose MT Forcing, a novel training paradigm for multi-turn image editing with unified multimodal models (UMMs) based on autoregressive diffusion. Specifically, we propose Single-Turn Distribution Matching Distillation (Single-Turn DMD), which supervises student self-rollouts with a teacher that applies cumulative edits to the source image in a single turn, providing visual-quality guidance without recursive error accumulation. Additionally, we introduce Teacher-Forcing Guidance, which supervises history-dependent transitions on reference trajectories during warmup and as a regularizer during distillation, encouraging cross-turn content consistency beyond what per-turn distribution matching alone can ensure. Extensive experiments demonstrate that our approach significantly improves the multi-turn image editing capabilities of UMMs, yielding more stable visual quality and stronger cross-turn consistency.",
+      "published_at": "2026-10-18T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 35,
+        "comments": 1,
+        "github_repo": "https://github.com/houyuanchen111/MT-Forcing",
+        "github_stars": 19,
+        "organization": "SenseNova"
+      },
+      "tags": [
+        "multi-turn image editing",
+        "unified multimodal models",
+        "autoregressive diffusion",
+        "Single-Turn DMD",
+        "distribution matching distillation",
+        "Teacher-Forcing Guidance"
+      ],
+      "id": "c_d56bf7f0d5",
+      "key": "arxiv:2610.25404",
+      "cluster_id": "k_d56bf7f0d5",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "Think Visually Across Space and Time: Grounded Reasoning for Video Segmentation",
+      "url": "https://huggingface.co/papers/2610.25090",
+      "summary": "Video Reasoning Segmentation (VRS) requires a model to identify an implicitly described target and predict its pixel-level mask trajectory, while resolving the spatial relations and temporal events that determine the answer. Text-only Chain-of-Thought (CoT) can explain a target choice without making the underlying visual references explicit, leaving a video reference gap between linguistic inference and the evidence distributed across frames. We introduce Temporal Chain of Video Primitives (TCoVP), a spatiotemporally grounded form of Video CoT that organizes query-relevant observations into a chronological reasoning chain. Each primitive associates an entity reference with temporal support and timestamped spatial evidence, and the chain interleaves these references with language to guide reasoning about which entity is relevant, when the queried event holds, and where its evidence appears. The selected target primitives then provide box prompts and temporal support for video mask prediction. We construct TCoVP-SFT-15k and TCoVP-RL-13k to learn this representation through supervised fine-tuning and chain-aligned reinforcement learning. Extensive experiments across five VRS benchmarks and three model backbones demonstrate the strong performance of TCoVP, highlighting the effectiveness of organizing spatial and temporal evidence within the reasoning process. All models and code will be publicly released. Project page:",
+      "published_at": "2026-10-18T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 18,
+        "comments": 1
+      },
+      "tags": [
+        "Video Reasoning Segmentation",
+        "Chain-of-Thought",
+        "Temporal Chain of Video Primitives",
+        "video reference gap",
+        "spatiotemporally grounded",
+        "video mask prediction",
+        "supervised fine-tuning",
+        "chain-aligned reinforcement learning"
+      ],
+      "id": "c_fa107aa836",
+      "key": "arxiv:2610.25090",
+      "cluster_id": "k_fa107aa836",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "AffordanceWAM: Affordance-Aware Joint World-Action Modeling for Robot Manipulation",
+      "url": "https://huggingface.co/papers/2609.22332",
+      "summary": "Generalizable robot manipulation requires predicting how a scene will evolve, identifying where interactions are feasible, and determining how to act. Action-labeled robot videos directly supervise control but are costly and limited in diversity, whereas egocentric human videos capture diverse interactions but lack robot actions and differ in embodiment and appearance. We introduce AffordanceWAM, an affordance-aware generative World Action Model that represents object-centric spatiotemporal affordance through Scalar Affordance and Affordance Heatmap, within the generated future World. This representation grounds visual prediction in task-relevantant objects and interaction regions for action generation, and provides shared interaction targets across human and robot videos. Built on a pretrained video diffusion Transformer, AffordanceWAM uses separately parameterized World and Action Experts, coupled through Masked Joint Self-Attention, to jointly predict future RGB observations, Scalar Affordance fields, Affordance Heatmaps, and continuous robot actions under a unified flow-matching objective. Human videos supervise all three future-World streams, whereas robot trajectories additionally provide action supervision, enabling transfer without human action labels or retargeting. Experiments on RoboCasa, CALVIN ABCrightarrowD, and real-world manipulation demonstrate consistent gains over RGB-only and robot-data-only baselines. Under fixed robot supervision, RoboCasa performance...",
+      "published_at": "2026-10-18T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 16,
+        "comments": 2,
+        "github_repo": "https://github.com/Skywalker-yqz/AffordanceWAM",
+        "github_stars": 8,
+        "organization": "Peking University"
+      },
+      "tags": [
+        "affordance-aware generative World Action Model",
+        "Scalar Affordance",
+        "Affordance Heatmap",
+        "video diffusion Transformer",
+        "World and Action Experts",
+        "Masked Joint Self-Attention",
+        "flow-matching objective",
+        "vision-language-action learning"
+      ],
+      "id": "c_4295a44b51",
+      "key": "arxiv:2609.22332",
+      "cluster_id": "k_4295a44b51",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "FineSplat: Fine Patches, Local Groups, Detailed Splats",
+      "url": "https://huggingface.co/papers/2610.25011",
+      "summary": "Feed-forward 3D Gaussian Splatting (3DGS) promises instant scene reconstruction with high-quality novel-view synthesis. Yet, fine-grained geometry and appearance remain difficult to recover, motivating us to revisit how feed-forward models represent, aggregate, and refine detailed visual information. We introduce FineSplat, a feed-forward 3DGS framework built around fine-grained image patches. Since global multi-view attention becomes prohibitively expensive at such high token resolutions, we develop a dual-grouping strategy that combines two complementary forms of locality: view-wise grouping enables efficient interaction among neighboring views, while 3D spatial grouping reconnects geometrically related tokens that may never have interacted under view-wise grouping by lifting them into the 3D scene space. We further leverage reconstruction error as direct feedback, providing an explicit rendering-based signal to recover fine-grained structures and appearance, thereby overcoming the limitations of one-pass feed-forward prediction. Finally, a compact Gaussian generation scheme preserves the benefits of fine-grained features without unnecessarily increasing the number of primitives. Together, these designs enable FineSplat to recover richer geometry and appearance while remaining efficient and compact, achieving state-of-the-art results by a substantial margin, under the same or smaller Gaussian budgets than existing methods.",
+      "published_at": "2026-10-18T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 15,
+        "comments": 1,
+        "github_repo": "https://github.com/hyebinny/FineSplat",
+        "github_stars": 17
+      },
+      "tags": [
+        "3D Gaussian Splatting",
+        "feed-forward",
+        "fine-grained patches",
+        "dual-grouping strategy",
+        "view-wise grouping",
+        "3D spatial grouping",
+        "reconstruction error feedback",
+        "rendering-based signal"
+      ],
+      "id": "c_7eae0f250d",
+      "key": "arxiv:2610.25011",
+      "cluster_id": "k_7eae0f250d",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "OR-License: Evaluating LLM Agents as Real-World Operations Research Practitioners",
+      "url": "https://huggingface.co/papers/2610.24087",
+      "summary": "Can large language model (LLM) agents deliver expert-level operations research (OR) solutions directly from original client materials, without prior expert reformulation? Existing OR benchmarks typically begin with self-contained descriptions or predefined optimization tasks, underrepresenting the translation of original business materials into professionally validated solutions. We introduce OR-License, an end-to-end benchmark of 31 instances across 10 industrial scenarios from paid OR engagements totaling USD 3.68 million. It preserves original requirements, input data, deliverable formats, and information boundaries after de-identification. To study information acquisition, we introduce ORSim, a controlled client simulator that discloses business facts without supplying OR expertise. Hidden evaluation checks feasibility and compares objective quality against original expert solutions accepted by clients before benchmark construction. Deployment-Adjusted Quality (DAQ) averages expert-relative quality across instances, assigning zero to infeasible deliveries. Across 11 frontier LLMs using coding-agent harnesses, several exceed the expert reference in conditional objective quality, but none matches its DAQ; the strongest primary Claude Code configuration achieves 88.39% strict feasibility and a DAQ of 0.87 against the expert reference of 1. Client information acquisition extends beyond clarification into solution development and validation, with some later stages showing...",
+      "published_at": "2026-10-16T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 140,
+        "comments": 1,
+        "github_repo": "https://github.com/NineAbyss/OR-License",
+        "github_stars": 3,
+        "organization": "Data Science & Artificial Intelligence Lab at HKUST"
+      },
+      "tags": [
+        "OR-License",
+        "ORSim",
+        "Deployment-Adjusted Quality",
+        "LLM agents",
+        "operations research",
+        "feasibility",
+        "formulation",
+        "implementation"
+      ],
+      "id": "c_7894b47854",
+      "key": "arxiv:2610.24087",
+      "cluster_id": "k_7894b47854",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "Self-Evolving Coding Agents via Harness-Policy Optimization",
+      "url": "https://huggingface.co/papers/2610.22791",
+      "summary": "Large language model (LLM) agents have shown promising potential in coding tasks, and their performance is jointly determined by the policy model and the harness that mediates their interaction with the environment. Indeed, harness and policy are mutually reinforcing and evolving only one component is suboptimal---a harness tuned for one checkpoint may not target the failure modes of an updated policy, while policy learning remains limited to the trajectories elicited by a fixed harness. In light of this, we propose Self-HPO, a recursive self-improving framework for coding agents that alternates harness and policy optimization, using the evolving policy as its own harness proposer. Specifically, in each round, the current policy first analyzes its own failures and proposes new harness candidates (H-step). The policy is then updated through reinforcement learning (RL) under the selected harness (P-step), and hard tasks identified during training form the next harness search set, keeping harness optimization targeted to the policy's evolving failure modes. Across three coding benchmarks, Self-HPO consistently outperforms harness-only and policy-only baselines, improving Qwen3.5-35B-A3B's average resolve rate from 57.8% to 64.8%, with gains generalizing to out-of-distribution settings. Further analysis shows that both optimized components retain gains even when paired with their base counterparts, while their joint gain exceeds the sum of their individual gains. Self-HPO also...",
+      "published_at": "2026-10-16T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 41,
+        "comments": 3,
+        "github_repo": "https://github.com/MSR-Orchard/Self-HPO",
+        "github_stars": 15,
+        "organization": "Microsoft Research"
+      },
+      "tags": [
+        "Self-HPO",
+        "harness optimization",
+        "policy optimization",
+        "reinforcement learning",
+        "coding agents",
+        "failure modes",
+        "Pass@1",
+        "Pass@k"
+      ],
+      "id": "c_c806bff75f",
+      "key": "arxiv:2610.22791",
+      "cluster_id": "k_c806bff75f",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "Harnessing Textual Refusal Directions for Multimodal Safety",
+      "url": "https://huggingface.co/papers/2606.31876",
+      "summary": "Safety in Multimodal Large Language Models (MLLMs) depends on unsafe multimodal data for post-training alignment or activation steering. However, such data is hard to collect, must be gathered anew for each modality, and its collection and distribution raise ethical and legal concerns. In this work, we relax this constraint and investigate whether textual refusal directions, extracted directly from the LLM backbone, generalize across modalities (i.e., image, video). Preliminary findings confirm this ability, though effectiveness is conditioned by layer selection, steering strength, and cross-modal alignment, with the latter causing safe multimodal inputs to be spuriously steered toward refusal. Building on this, we introduce Modality-Agnostic Refusal Steering (MARS), a lightweight training-free approach that injects multimodal safety without the need for multimodal safety data. MARS corrects modality misalignment via activation centering, adaptively scales steering strength within a geometrically defined trust region, and selects the optimal intervention layer, operating at the first generated token. Evaluated on five SOTA MLLMs across safety, utility, and video jailbreak, MARS achieves consistent safety gains while preserving utility up to over-refusal. MARS reveals that safety-relevant structure is shared across modalities and that textual refusal directions are a powerful and underexplored foundation for multimodal alignment.",
+      "published_at": "2026-10-16T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 11,
+        "comments": 1,
+        "github_repo": "https://github.com/Moreno98/MARS",
+        "github_stars": 9,
+        "organization": "Multimedia and Human Understanding Group"
+      },
+      "tags": [
+        "multimodal large language models",
+        "refusal directions",
+        "activation steering",
+        "cross-modal alignment",
+        "Modality-Agnostic Refusal Steering",
+        "activation centering",
+        "trust region",
+        "video jailbreak"
+      ],
+      "id": "c_18918afe1f",
+      "key": "arxiv:2606.31876",
+      "cluster_id": "k_18918afe1f",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "Learning to Discriminate Scene Structures Makes Self-Supervised Depth Learning Scalable",
+      "url": "https://huggingface.co/papers/2610.23600",
+      "summary": "Self-supervised monocular depth estimation is appealing for its potential to scale with unlabeled data, yet existing methods often degrade when trained on diverse scenes. This study finds that, under self-supervision, models tend to encode dataset-specific structural biases rather than transferable scene geometry, leading to cross-domain optimization conflicts. To address this issue, this study proposes the MaSS framework, aiming to make self-supervised depth learning scalable to diverse data. MaSS introduces a dedicated structural representation pathway explicitly decoupled from contextual features, which is guided by a novel scene-structure discrimination objective to learn generalized, layout-aware structural representations for depth decoding. Trained and evaluated on four diverse datasets, both individually and jointly, MaSS substantially outperforms prior self-supervised methods and is the first to consistently benefit from mixed-domain training. Zero-shot evaluation on eight additional datasets further demonstrates its remarkable generalizability, particularly on those entirely out-of-distribution scenes. The source code is publicly available at",
+      "published_at": "2026-10-16T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 10,
+        "comments": 1,
+        "github_repo": "https://github.com/mengtanZ/MaSS",
+        "github_stars": 8,
+        "organization": "Tongji Unversity"
+      },
+      "tags": [
+        "self-supervised monocular depth estimation",
+        "structural representation pathway",
+        "scene-structure discrimination objective",
+        "cross-domain optimization conflicts",
+        "zero-shot evaluation"
+      ],
+      "id": "c_b5c3b6e90f",
+      "key": "arxiv:2610.23600",
+      "cluster_id": "k_b5c3b6e90f",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "ACEdit: Stable Multi-Turn Image Editing via Asymmetric Conditioning",
+      "url": "https://huggingface.co/papers/2610.22328",
+      "summary": "Image editing models produce impressive results for individual edits, but their quality often deteriorates over multiple editing turns. Each editing turn introduces small distribution shifts that accumulate over successive edits, creating a gap between the input distributions encountered during the editor's original training and multi-turn inference. We introduce a training scheme that makes multi-turn image editing stable under this accumulating distribution shift. A key is to force the editor to operate on its own outputs from previous editing turns during training, bringing the principle of Self-Forcing to image editing. The main challenge is that self-generated editing trajectories deviate from ground-truth trajectories, making direct supervision unreliable. We address this challenge through a distillation objective that leverages a teacher image editor to provide a reliable training signal when the model operates on its own previous outputs. We introduce an asymmetric conditioning scheme: while the student performs edits sequentially on its own outputs, the teacher remains anchored to the original clean image and receives a compound editing instruction. Experiments show substantially reduced degradation over long multi-turn sequences while maintaining editing quality and instruction adherence.",
+      "published_at": "2026-10-15T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 10,
+        "comments": 1,
+        "organization": "Tel Aviv University"
+      },
+      "tags": [
+        "self-forcing",
+        "distillation objective",
+        "teacher-student",
+        "asymmetric conditioning",
+        "multi-turn image editing",
+        "distribution shift"
+      ],
+      "id": "c_6bf07a5e23",
+      "key": "arxiv:2610.22328",
+      "cluster_id": "k_6bf07a5e23",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "LIBERO-Industry: Benchmarking Robotic Manipulation under Industrial Process Constraints",
+      "url": "https://huggingface.co/papers/2610.16782",
+      "summary": "Industrial manipulation in flexible manufacturing, e.g., high-mix, low-volume (HMLV) electronics assembly, requires robot policies to adapt to changing products and production conditions. Such settings impose industrial process constraints, including product variants, moving material flows, finite execution windows, and tight geometric tolerances. However, existing evaluation frameworks do not systematically capture these constraints when assessing generalist robot policies. To address this gap, we introduce LIBERO-Industry, a novel benchmark built on the widely used robot learning benchmark LIBERO, that translates the aforementioned industrial constraints into controllable task conditions and measurable success criteria. Specifically, LIBERO-Industry comprises three classic task scenarios: Static-to-Dynamic (S2D) loading, Dynamic-to-Static (D2S) unloading, and Dynamic-to-Dynamic (D2D) transfer. The suites contain 216 tasks in total that systematically vary object geometry, conveyor speed, interaction-window duration, and geometric acceptance region size. Extensive experiments across five generalist robot policies (including vision-language-action models and world-action models) show that performance progressively degrades as industrial constraints are introduced and combined. Under a shared fine-tuning and evaluation protocol, the LIBERO-Industry co-training condition achieved higher observed target-transfer completion than the original-LIBERO condition.",
+      "published_at": "2026-10-15T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 10,
+        "comments": 1,
+        "github_repo": "https://github.com/IAIE-PhysicalAI/LIBERO-Industry",
+        "github_stars": 2,
+        "organization": "Physical AI Group, Institute of AI for Engineering (IAIE), Tongji University"
+      },
+      "tags": [
+        "vision-language-action models",
+        "world-action models",
+        "generalist robot policies",
+        "LIBERO-Industry",
+        "static-to-dynamic",
+        "dynamic-to-static",
+        "dynamic-to-dynamic",
+        "geometric acceptance region"
+      ],
+      "id": "c_11f443c752",
+      "key": "arxiv:2610.16782",
+      "cluster_id": "k_11f443c752",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "Interlock: From Local Correctness to Task Completion in Long-Horizon Agents",
+      "url": "https://huggingface.co/papers/2610.19686",
+      "summary": "Large language model agents increasingly undertake long-horizon tasks in complex environments characterized by fragmented evidence, partially completed states, and dependencies across resources and artifacts. Existing agents may satisfy individual requirements while failing to maintain these relationships, producing locally correct but incomplete outcomes. These failures arise because task completion depends on relationships among environmental evidence, consequential decisions, and required effects. To address this completion gap, we propose Interlock, a framework for task synthesis that represents each task as a typed completion graph. Grounding edges connect public evidence to decisions, coupling hyperedges impose joint constraints across components, and realization edges connect decisions to all required downstream effects. Interlock compiles this graph into a resettable workspace, a public request, and an evaluation rubric. A source-coverage review checks whether the original requirements survive generation, while a public-input review checks whether the rubric is supported by the materials available to the solver. An agent-as-judge inspects execution artifacts and runs verification scripts, retaining trajectories judged to satisfy all mandatory requirements. To evaluate training utility, we fine-tune two Qwen3.6 backbones on their own accepted trajectories. Across the two backbones, training improves AutomationBench task pass rates by 4.00-4.50 percentage points,...",
+      "published_at": "2026-10-14T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 33,
+        "comments": 1,
+        "organization": "LongCat"
+      },
+      "tags": [
+        "typed completion graph",
+        "grounding edges",
+        "coupling hyperedges",
+        "realization edges",
+        "resettable workspace",
+        "source-coverage review",
+        "public-input review",
+        "agent-as-judge"
+      ],
+      "id": "c_967cb39606",
+      "key": "arxiv:2610.19686",
+      "cluster_id": "k_967cb39606",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "BlenderWorld: Benchmarking Visual Agents for 3D Creation from Real-World References",
+      "url": "https://huggingface.co/papers/2610.23986",
+      "summary": "Recent advances in multimodal large language models (MLLMs) have enabled them to act as autonomous agents, creating and editing 3D models via code or direct software manipulation. In practical workflows, these models must infer object shapes, materials, spatial layouts, and lighting from diverse references while strictly following instructions to reconstruct, modify, or design 3D content. However, existing benchmarks provide limited coverage of such open-ended requests across real-world scenarios. To bridge this gap, we introduce BlenderWorld, the first comprehensive benchmark dedicated to evaluating frontier models on realistic 3D creation tasks. BlenderWorld comprises 223 tasks spanning architecture, products, natural environments, and scientific visualization, driven by text, image, video, and structured specification inputs. To rigorously assess these complex deliverables, we establish a unified evaluation protocol: we render the submitted Blender projects from multiple viewpoints and evaluate them against 2,651 task-specific binary rubrics alongside holistic visual quality scores. Benchmarking thirteen frontier models reveals that GPT-6-Astra achieves the highest overall fused score of 79.9, followed by Opus-5 (73.0) and GPT-5.6-Sol (67.7). Ultimately, our findings reveal a critical bottleneck: while current models can parse broad instructions, they still profoundly struggle with fine-grained 3D spatial coherence and accurate structural reproduction in Blender, leaving...",
+      "published_at": "2026-10-14T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 21,
+        "comments": 1,
+        "github_repo": "https://github.com/QwenLM/BlenderWorld",
+        "github_stars": 172,
+        "organization": "Qwen"
+      },
+      "tags": [
+        "multimodal large language models",
+        "autonomous agents",
+        "3D creation",
+        "BlenderWorld",
+        "binary rubrics",
+        "visual quality scores",
+        "3D-native agentics"
+      ],
+      "id": "c_b232e56f32",
+      "key": "arxiv:2610.23986",
+      "cluster_id": "k_b232e56f32",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "Evidence-First Agentic Verification",
+      "url": "https://huggingface.co/papers/2610.17724",
+      "summary": "Long-horizon, semi-verifiable agentic tasks often rely on rubric-based evaluation, but the evidence needed to assess these tasks can be spread across the environment state and the execution trace. A judge may overlook this evidence or accept unsupported claims, including an agent's own reports of success. When rubric verdicts serve as reinforcement-learning rewards, such errors can reinforce undesirable behavior. We introduce Sauron, an evidence-first agentic verifier that investigates both state and trace and relies on a claim only after independently validating it against its source. Bounded queries and joint investigation of related criteria reduce context use and redundant work, and each verdict carries an auditable receipt of its supporting evidence. Across 2,586 human-labeled criteria from 100 personal-assistant episodes, Sauron achieves the highest F1 of five verifiers on all eight backbones tested while costing less than Gandalf, the strongest baseline. With GPT-5.6 Sol, it reaches 0.96 F1 versus Gandalf's 0.92 at 23% lower cost, with a wider margin on process criteria. On a paired fault-injection suite covering 13 families, several of which simulate reward hacking, Sauron detects 97% of injected failures while flagging only 2% of clean controls, outperforming baselines even when they are given the full trace. On TRAIL, a benchmark for detecting and localizing real agent errors, Sauron leads both Gandalf and TRAIL's own judge on all three quality metrics.",
+      "published_at": "2026-10-13T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 16,
+        "comments": 1,
+        "github_repo": "https://github.com/rsanayei/Sauron",
+        "github_stars": 0,
+        "organization": "Scale AI"
+      },
+      "tags": [
+        "agentic verifier",
+        "rubric-based evaluation",
+        "reinforcement-learning rewards",
+        "claim validation",
+        "bounded queries",
+        "auditable receipt",
+        "fault-injection",
+        "reward hacking"
+      ],
+      "id": "c_82f36fc89d",
+      "key": "arxiv:2610.17724",
+      "cluster_id": "k_82f36fc89d",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "MemPilot: Orchestrating On-Demand Multimodal Memory Curation for LLM Agents",
+      "url": "https://huggingface.co/papers/2610.06830",
+      "summary": "Memory has become integral to the LLM agent ecosystem, supporting information retention and reuse across interactions. However, most existing agent memory systems construct memory in a query-agnostic manner, which can incur unnecessary preprocessing cost and discard details that later prove essential. Recent studies have begun shifting memory processing toward runtime adaptation, but typically specialize in particular operations or fixed processing schemes, leaving flexible control over performance, cost, and latency largely underexplored. To address this challenge, we present MemPilot, a flexible framework that orchestrates on-demand memory curation under different performance--cost--latency preferences. Specifically, we optimize a multi-step LLM policy via reinforcement learning to iteratively choose between retrieving from query-agnostic memory and delegating query-specific curation of raw multimodal history to heterogeneous LLMs and VLMs. The policy jointly controls evidence amount, curation instructions, model selection, and visual access, enabling fine-grained allocation of runtime computation. To optimize this policy under competing objectives, we adapt objective-wise advantage decoupling by separately estimating each objective's advantage before aggregation. Moreover, we introduce prefix-based marginal utility estimation for fine-grained credit assignment across multi-step rollouts. Experiments on five multimodal agent-memory benchmarks demonstrate favorable...",
+      "published_at": "2026-10-05T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 25,
+        "comments": 1,
+        "github_repo": "https://github.com/ViktorAxelsen/MemPilot",
+        "github_stars": 6,
+        "organization": "Nanyang Technological University"
+      },
+      "tags": [
+        "LLM agent",
+        "multimodal memory",
+        "reinforcement learning",
+        "multi-step policy",
+        "objective-wise advantage decoupling",
+        "prefix-based marginal utility estimation",
+        "query-specific curation",
+        "VLMs"
+      ],
+      "id": "c_93572b28a3",
+      "key": "arxiv:2610.06830",
+      "cluster_id": "k_93572b28a3",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "Self-Evaluating Recursive Agents",
+      "url": "https://huggingface.co/papers/2610.04902",
+      "summary": "Recursive language-model agents decompose tasks and delegate subtasks to child instances of the same policy, forming a tree of work. Training them, however, is hard: the final outcome is verifiable, but the self-invented intermediate subtasks are numerous and carry no ground truth. Existing methods score each node with a verifier or judge, which is costly at scale and blind to decomposition quality. We argue that a recursive agent must learn three coupled capabilities within one set of weights: decomposing problems into subtasks, solving them, and evaluating the outcomes, each requiring its own training signal. SERA (Self-Evaluating Recursive Agents) turns evaluation into a learned capability of the policy itself. Before delegating, the parent writes a rubric of weighted success criteria for each child subtask; a ranking objective against verified outcomes then trains rubric generation so that the criteria track genuine subtask success. In addition, a complementary leaf-coverage signal provides direct credit for task decomposition. Our central finding is that training the policy to generate aligned rubrics is what drives the gains: because the same weights both evaluate and execute, learning to judge subtasks sharpens the agent's ability to solve them. Notably, external supervision is also reduced: the judge is consulted only to train the rubric generator, while solving is trained against the agent's own rubric scores, which outperform direct use of the judge. Beyond...",
+      "published_at": "2026-10-04T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 10,
+        "comments": 1,
+        "github_repo": "https://github.com/OliverLeeXZ/SERA",
+        "github_stars": 9,
+        "organization": "TongjiUniversity"
+      },
+      "tags": [
+        "recursive agents",
+        "self-evaluating recursive agents",
+        "rubric generation",
+        "ranking objective",
+        "leaf-coverage signal",
+        "tree search",
+        "rubric-guided search"
+      ],
+      "id": "c_5b8693989d",
+      "key": "arxiv:2610.04902",
+      "cluster_id": "k_5b8693989d",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "github-releases",
+      "source_name": "GitHub Releases",
+      "tier": 1,
+      "kind": "release",
+      "title": "anthropics/claude-code v2.1.305",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.305",
+      "summary": "What's changed Added sandbox.allowNestedUserNamespaces so sandboxed commands on Linux can create user namespaces (Chromium, rootless podman); this lets them get around the sandbox's file protections Added CLAUDE CODE RETRY WATCHDOG USAGE LIMIT RECHECK MS so unattended retry mode ( CLAUDE CODE RETRY WATCHDOG ) notices a usage limit that was lifted before its reset Fixed every request failing on Vertex, Bedrock and other providers when the endpoint or a gateway rejects tool search, and behind gateways with ToolSearch disallowed or left out of --tools (a 2.1.304 regression): Claude Code now retries without it Fixed /effort and /autocompact settings not applying when the model name differed from a modelOverrides value by letter case or a [1m] tag Fixed new worktrees in a bare repository sometimes starting from local HEAD instead of the default branch, and unchanged subagent worktrees sometimes not being cleaned up Fixed Bash commands on a full disk failing with a raw ENOSPC file path: the error now says the disk is full and that nothing ran Fixed an MCP server passed by a cloud session or by the SDK's setMcpServers being replaced later in the session by a same-named server from your own settings Fixed Claude naming the wrong model for a subagent's work after the subagent switched to a fallback model Fixed cloud sessions and teammates not telling Claude when a compaction had to leave the oldest messages out of its summary to fit Fixed more cases of scheduled Cowork cloud sessions...",
+      "published_at": "2026-10-20T20:46:50+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {},
+      "tags": [
+        "anthropics/claude-code"
+      ],
+      "id": "c_577f279e95",
+      "key": "github.com/anthropics/claude-code/releases/tag/v2.1.305",
+      "cluster_id": "k_577f279e95",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "github-releases",
+      "source_name": "GitHub Releases",
+      "tier": 1,
+      "kind": "release",
+      "title": "anthropics/claude-code v2.1.304",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.304",
+      "summary": "What's changed Added a transcript line when a plugin that runs first skips one of your mod's hooks, naming the event and the plugin Added decider: \"person\" to a mod's tool.check answer: only the permission dialog or a host's callback can approve the ask, and it is refused with the mod's reason where nobody can be asked Added e.isReadOnly to a mod's tool.check event, set when the tool call is read-only Added /auto-mode-setup : a guided setup that reads your project and recent sessions to teach auto mode about your environment, now also available on Bedrock, Vertex, Foundry, Claude apps gateway and telemetry-disabled sessions Added /claude-api managed-agents-secure , which compares a Managed Agents agent's settings with Anthropic's published security guide, without changing anything Added the names of the tools called earlier to the compaction summary in the transcript view (Ctrl+O) Added a warning on Pro and Max plans when resuming an inactive conversation would use a noticeable share of your 5-hour usage limit: resume anyway, or start a new conversation and Claude can look up the previous one if you refer to it Fixed the organization policy not refreshing until the hourly check after approving an ANTHROPIC API KEY at startup or switching \"Use custom API key\" in /config Fixed sandboxed commands failing to start on Linux when a sandbox.filesystem.denyRead glob contains brackets that are not a character class, such as a [user-id] route folder Fixed rm -r of a mounted drive or a...",
+      "published_at": "2026-10-19T21:34:39+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {},
+      "tags": [
+        "anthropics/claude-code"
+      ],
+      "id": "c_ce8bb7725e",
+      "key": "github.com/anthropics/claude-code/releases/tag/v2.1.304",
+      "cluster_id": "k_577f279e95",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "github-trending",
+      "source_name": "GitHub Trending",
+      "tier": 1,
+      "kind": "repo",
+      "title": "MadsLorentzen/ai-job-search",
+      "url": "https://github.com/MadsLorentzen/ai-job-search",
+      "summary": "The job search that runs on your machine. AI job application framework built on Claude Code: evaluate postings, tailor CVs, write cover letters, prep interviews. Fork it and own it.",
+      "published_at": null,
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 1,
+        "stars_today": 3890,
+        "stars": 60267
+      },
+      "tags": [
+        "Python"
+      ],
+      "id": "c_8d082296f5",
+      "key": "github.com/madslorentzen/ai-job-search",
+      "cluster_id": "k_8d082296f5",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "github-trending",
+      "source_name": "GitHub Trending",
+      "tier": 1,
+      "kind": "repo",
+      "title": "cloudflare/security-audit-skill",
+      "url": "https://github.com/cloudflare/security-audit-skill",
+      "summary": "A coding-agent skill for multi-phase security audits with independently verified, machine-readable findings",
+      "published_at": null,
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 2,
+        "stars_today": 1680,
+        "stars": 33915
+      },
+      "tags": [
+        "JavaScript"
+      ],
+      "id": "c_57e1609901",
+      "key": "github.com/cloudflare/security-audit-skill",
+      "cluster_id": "k_57e1609901",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "github-trending",
+      "source_name": "GitHub Trending",
+      "tier": 1,
+      "kind": "repo",
+      "title": "stablyai/orca",
+      "url": "https://github.com/stablyai/orca",
+      "summary": "Orca is the place for working with a fleet of agents (e.g. Grok Bot, Claude Code). Run any coding agent with your own subscription. Available on desktop, mobile and remote runtime.",
+      "published_at": null,
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 3,
+        "stars_today": 1559,
+        "stars": 99600
+      },
+      "tags": [
+        "TypeScript"
+      ],
+      "id": "c_4c626f1641",
+      "key": "github.com/stablyai/orca",
+      "cluster_id": "k_4c626f1641",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "github-trending",
+      "source_name": "GitHub Trending",
+      "tier": 1,
+      "kind": "repo",
+      "title": "DietrichGebert/ponytail",
+      "url": "https://github.com/DietrichGebert/ponytail",
+      "summary": "Makes your AI agent think like the laziest senior dev in the room. The best code is the code you never wrote.",
+      "published_at": null,
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 4,
+        "stars_today": 1396,
+        "stars": 169451
+      },
+      "tags": [
+        "JavaScript"
+      ],
+      "id": "c_fbf3b1d665",
+      "key": "github.com/dietrichgebert/ponytail",
+      "cluster_id": "k_fbf3b1d665",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "github-trending",
+      "source_name": "GitHub Trending",
+      "tier": 1,
+      "kind": "repo",
+      "title": "Comfy-Org/ComfyUI",
+      "url": "https://github.com/Comfy-Org/ComfyUI",
+      "summary": "The most powerful and modular diffusion model GUI, api and backend with a graph/nodes interface. The fastest local inference engine in the world.",
+      "published_at": null,
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 5,
+        "stars_today": 1201,
+        "stars": 140677
+      },
+      "tags": [
+        "Python"
+      ],
+      "id": "c_eb66b4e955",
+      "key": "github.com/comfy-org/comfyui",
+      "cluster_id": "k_eb66b4e955",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "github-trending",
+      "source_name": "GitHub Trending",
+      "tier": 1,
+      "kind": "repo",
+      "title": "ruvnet/ruflo",
+      "url": "https://github.com/ruvnet/ruflo",
+      "summary": "🌊 The original agent harness. Deploy intelligent multi-player swarms, coordinate autonomous workflows, and build conversational AI systems. Features adaptive memory, self-learning intelligence, federation, vector RAG integration, and native Claude Code / Codex / Hermes and many more Integrated",
+      "published_at": null,
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 6,
+        "stars_today": 683,
+        "stars": 77754
+      },
+      "tags": [
+        "TypeScript"
+      ],
+      "id": "c_732cb529f9",
+      "key": "github.com/ruvnet/ruflo",
+      "cluster_id": "k_732cb529f9",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "github-trending",
+      "source_name": "GitHub Trending",
+      "tier": 1,
+      "kind": "repo",
+      "title": "Graphify-Labs/graphify",
+      "url": "https://github.com/Graphify-Labs/graphify",
+      "summary": "Turn any codebase, with its docs, SQL schemas, configs, and PDFs, into a queryable knowledge graph. A /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI: local deterministic AST parsing, every edge explained, no vector store.",
+      "published_at": null,
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 7,
+        "stars_today": 906,
+        "stars": 130085
+      },
+      "tags": [
+        "Python"
+      ],
+      "id": "c_79cd21bd93",
+      "key": "github.com/graphify-labs/graphify",
+      "cluster_id": "k_79cd21bd93",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "github-trending",
+      "source_name": "GitHub Trending",
+      "tier": 1,
+      "kind": "repo",
+      "title": "anomalyco/opencode",
+      "url": "https://github.com/anomalyco/opencode",
+      "summary": "The open source coding agent.",
+      "published_at": null,
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 8,
+        "stars_today": 1256,
+        "stars": 218799
+      },
+      "tags": [
+        "TypeScript"
+      ],
+      "id": "c_c402ec7378",
+      "key": "github.com/anomalyco/opencode",
+      "cluster_id": "k_c402ec7378",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "github-trending",
+      "source_name": "GitHub Trending",
+      "tier": 1,
+      "kind": "repo",
+      "title": "msitarzewski/agency-agents",
+      "url": "https://github.com/msitarzewski/agency-agents",
+      "summary": "A complete AI agency at your fingertips From frontend wizards to Reddit community ninjas, from whimsy injectors to reality checkers. Each agent is a specialized expert with personality, processes, and proven deliverables.",
+      "published_at": null,
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 9,
+        "stars_today": 590,
+        "stars": 162245
+      },
+      "tags": [
+        "Shell"
+      ],
+      "id": "c_99510c9e52",
+      "key": "github.com/msitarzewski/agency-agents",
+      "cluster_id": "k_99510c9e52",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "github-trending",
+      "source_name": "GitHub Trending",
+      "tier": 1,
+      "kind": "repo",
+      "title": "headroomlabs-ai/headroom",
+      "url": "https://github.com/headroomlabs-ai/headroom",
+      "summary": "Compress tool outputs, logs, files, and RAG chunks before they reach the LLM. 20% fewer tokens for coding agents, 60-95% fewer tokens for JSON, same answers. Library, proxy, MCP server.",
+      "published_at": null,
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 10,
+        "stars_today": 555,
+        "stars": 76692
+      },
+      "tags": [
+        "Python"
+      ],
+      "id": "c_16b1d008f9",
+      "key": "github.com/headroomlabs-ai/headroom",
+      "cluster_id": "k_16b1d008f9",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "github-trending",
+      "source_name": "GitHub Trending",
+      "tier": 1,
+      "kind": "repo",
+      "title": "anthropics/knowledge-work-plugins",
+      "url": "https://github.com/anthropics/knowledge-work-plugins",
+      "summary": "Open source repository of plugins primarily intended for knowledge workers to use in Claude Cowork",
+      "published_at": null,
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 11,
+        "stars_today": 262,
+        "stars": 30757
+      },
+      "tags": [
+        "Python"
+      ],
+      "id": "c_a9e7351598",
+      "key": "github.com/anthropics/knowledge-work-plugins",
+      "cluster_id": "k_a9e7351598",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "github-trending",
+      "source_name": "GitHub Trending",
+      "tier": 1,
+      "kind": "repo",
+      "title": "vllm-project/vllm",
+      "url": "https://github.com/vllm-project/vllm",
+      "summary": "A high-throughput and memory-efficient inference and serving engine for LLMs",
+      "published_at": null,
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 13,
+        "stars_today": 98,
+        "stars": 94395
+      },
+      "tags": [
+        "Python"
+      ],
+      "id": "c_da08aec903",
+      "key": "github.com/vllm-project/vllm",
+      "cluster_id": "k_da08aec903",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "lodestones/Kromoss",
+      "url": "https://huggingface.co/lodestones/Kromoss",
+      "summary": "text-to-image, diffusers, license:apache-2.0",
+      "published_at": "2026-10-19T01:34:35+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 28,
+        "trending_score": 164,
+        "likes": 165,
+        "downloads": 5365
+      },
+      "tags": [
+        "lodestones"
+      ],
+      "id": "c_2acdbe5f0e",
+      "key": "huggingface.co/lodestones/kromoss",
+      "cluster_id": "k_2acdbe5f0e",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+      "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+      "summary": "image-text-to-text, transformers, license:mit",
+      "published_at": "2026-10-17T02:40:38+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 1,
+        "trending_score": 1730,
+        "likes": 1931,
+        "downloads": 27737
+      },
+      "tags": [
+        "deepseek-ai"
+      ],
+      "id": "c_8b553ca25e",
+      "key": "huggingface.co/deepseek-ai/deepseek-v4.1-flash-1017",
+      "cluster_id": "k_8b553ca25e",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "nvidia/NVIDIA-Nemotron-Labs-Dory1.0-4B-BF16",
+      "url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-Labs-Dory1.0-4B-BF16",
+      "summary": "text-generation, transformers, license:other",
+      "published_at": "2026-10-16T18:25:29+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 31,
+        "trending_score": 144,
+        "likes": 145,
+        "downloads": 2480
+      },
+      "tags": [
+        "nvidia"
+      ],
+      "id": "c_a2485acf99",
+      "key": "huggingface.co/nvidia/nvidia-nemotron-labs-dory1.0-4b-bf16",
+      "cluster_id": "k_a2485acf99",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "Comfy-Org/MOSS-Image",
+      "url": "https://huggingface.co/Comfy-Org/MOSS-Image",
+      "summary": "diffusion-single-file, license:apache-2.0",
+      "published_at": "2026-10-16T12:42:32+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 14,
+        "trending_score": 278,
+        "likes": 289,
+        "downloads": 924574
+      },
+      "tags": [
+        "Comfy-Org"
+      ],
+      "id": "c_dc5841853b",
+      "key": "huggingface.co/comfy-org/moss-image",
+      "cluster_id": "k_dc5841853b",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "lodestones/MOSS-Image-SFT-8-steps-dmd",
+      "url": "https://huggingface.co/lodestones/MOSS-Image-SFT-8-steps-dmd",
+      "summary": "diffusers, license:apache-2.0",
+      "published_at": "2026-10-16T10:28:56+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 24,
+        "trending_score": 176,
+        "likes": 179,
+        "downloads": 54814
+      },
+      "tags": [
+        "lodestones"
+      ],
+      "id": "c_294fe6f716",
+      "key": "huggingface.co/lodestones/moss-image-sft-8-steps-dmd",
+      "cluster_id": "k_294fe6f716",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "orcarouter/OrcaCyber-Nano-1.0",
+      "url": "https://huggingface.co/orcarouter/OrcaCyber-Nano-1.0",
+      "summary": "image-text-to-text, gguf, license:other",
+      "published_at": "2026-10-16T10:04:56+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 33,
+        "trending_score": 140,
+        "likes": 149,
+        "downloads": 18606
+      },
+      "tags": [
+        "orcarouter"
+      ],
+      "id": "c_dba7eccfac",
+      "key": "huggingface.co/orcarouter/orcacyber-nano-1.0",
+      "cluster_id": "k_dba7eccfac",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "tencent/Hy-Memory-30B-A3B",
+      "url": "https://huggingface.co/tencent/Hy-Memory-30B-A3B",
+      "summary": "text-generation, transformers, license:apache-2.0",
+      "published_at": "2026-10-15T09:52:00+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 17,
+        "trending_score": 241,
+        "likes": 245,
+        "downloads": 2145
+      },
+      "tags": [
+        "tencent"
+      ],
+      "id": "c_273f1d3233",
+      "key": "huggingface.co/tencent/hy-memory-30b-a3b",
+      "cluster_id": "k_273f1d3233",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "black-forest-labs/flux-3-image-klein-comfy",
+      "url": "https://huggingface.co/black-forest-labs/flux-3-image-klein-comfy",
+      "summary": "image-to-image, diffusion-single-file, license:other",
+      "published_at": "2026-10-14T12:00:13+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 2,
+        "trending_score": 821,
+        "likes": 1077,
+        "downloads": 439528
+      },
+      "tags": [
+        "black-forest-labs"
+      ],
+      "id": "c_6ecc1d71a5",
+      "key": "huggingface.co/black-forest-labs/flux-3-image-klein-comfy",
+      "cluster_id": "k_6ecc1d71a5",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "mistralai/Timestral-209M",
+      "url": "https://huggingface.co/mistralai/Timestral-209M",
+      "summary": "time-series-forecasting, timestral, license:other",
+      "published_at": "2026-10-14T08:52:36+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 18,
+        "trending_score": 220,
+        "likes": 229,
+        "downloads": 4008
+      },
+      "tags": [
+        "mistralai"
+      ],
+      "id": "c_123a0533ae",
+      "key": "huggingface.co/mistralai/timestral-209m",
+      "cluster_id": "k_123a0533ae",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "inclusionAI/Ling-3.1-flash",
+      "url": "https://huggingface.co/inclusionAI/Ling-3.1-flash",
+      "summary": "text-generation, license:mit",
+      "published_at": "2026-10-13T11:16:41+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 32,
+        "trending_score": 140,
+        "likes": 140,
+        "downloads": 2905
+      },
+      "tags": [
+        "inclusionAI"
+      ],
+      "id": "c_dc1153f1b0",
+      "key": "huggingface.co/inclusionai/ling-3.1-flash",
+      "cluster_id": "k_dc1153f1b0",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "black-forest-labs/flux-3-image-klein",
+      "url": "https://huggingface.co/black-forest-labs/flux-3-image-klein",
+      "summary": "image-to-image, diffusers, license:other",
+      "published_at": "2026-10-13T10:58:40+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 6,
+        "trending_score": 504,
+        "likes": 561,
+        "downloads": 78897
+      },
+      "tags": [
+        "black-forest-labs"
+      ],
+      "id": "c_174f9f6191",
+      "key": "huggingface.co/black-forest-labs/flux-3-image-klein",
+      "cluster_id": "k_6ecc1d71a5",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "black-forest-labs/flux-3-image-klein-base",
+      "url": "https://huggingface.co/black-forest-labs/flux-3-image-klein-base",
+      "summary": "image-to-image, diffusers, license:other",
+      "published_at": "2026-10-13T10:19:46+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 34,
+        "trending_score": 139,
+        "likes": 155,
+        "downloads": 68133
+      },
+      "tags": [
+        "black-forest-labs"
+      ],
+      "id": "c_8ff35e4f3f",
+      "key": "huggingface.co/black-forest-labs/flux-3-image-klein-base",
+      "cluster_id": "k_6ecc1d71a5",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "LiquidAI/LFM2.5-24B-A2B",
+      "url": "https://huggingface.co/LiquidAI/LFM2.5-24B-A2B",
+      "summary": "text-generation, transformers, license:other",
+      "published_at": "2026-10-12T05:35:46+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 11,
+        "trending_score": 373,
+        "likes": 521,
+        "downloads": 15410
+      },
+      "tags": [
+        "LiquidAI"
+      ],
+      "id": "c_c6e1cac827",
+      "key": "huggingface.co/liquidai/lfm2.5-24b-a2b",
+      "cluster_id": "k_c6e1cac827",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "OpenMOSS-Team/MOSS-Image-SFT",
+      "url": "https://huggingface.co/OpenMOSS-Team/MOSS-Image-SFT",
+      "summary": "text-to-image, diffusers, license:apache-2.0",
+      "published_at": "2026-10-11T07:01:17+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 8,
+        "trending_score": 461,
+        "likes": 492,
+        "downloads": 4547
+      },
+      "tags": [
+        "OpenMOSS-Team"
+      ],
+      "id": "c_4292dac6ef",
+      "key": "huggingface.co/openmoss-team/moss-image-sft",
+      "cluster_id": "k_4292dac6ef",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "OpenMOSS-Team/MOSS-Image-Base",
+      "url": "https://huggingface.co/OpenMOSS-Team/MOSS-Image-Base",
+      "summary": "text-to-image, diffusers, license:apache-2.0",
+      "published_at": "2026-10-11T06:49:17+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 10,
+        "trending_score": 408,
+        "likes": 431,
+        "downloads": 3558
+      },
+      "tags": [
+        "OpenMOSS-Team"
+      ],
+      "id": "c_89765346f4",
+      "key": "huggingface.co/openmoss-team/moss-image-base",
+      "cluster_id": "k_4292dac6ef",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "datalab-to/indra-ocr",
+      "url": "https://huggingface.co/datalab-to/indra-ocr",
+      "summary": "image-to-text, onnx, license:openrail",
+      "published_at": "2026-10-10T14:12:33+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 16,
+        "trending_score": 250,
+        "likes": 286,
+        "downloads": 3111
+      },
+      "tags": [
+        "datalab-to"
+      ],
+      "id": "c_3fa376b4c5",
+      "key": "huggingface.co/datalab-to/indra-ocr",
+      "cluster_id": "k_3fa376b4c5",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "vllm-sr/d3",
+      "url": "https://huggingface.co/vllm-sr/d3",
+      "summary": "zero-shot-classification, transformers, license:apache-2.0",
+      "published_at": "2026-10-10T09:38:30+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 46,
+        "trending_score": 113,
+        "likes": 260,
+        "downloads": 5458
+      },
+      "tags": [
+        "vllm-sr"
+      ],
+      "id": "c_88ee028f45",
+      "key": "huggingface.co/vllm-sr/d3",
+      "cluster_id": "k_88ee028f45",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "Qwen/Qwen-Image-2.1-Turbo",
+      "url": "https://huggingface.co/Qwen/Qwen-Image-2.1-Turbo",
+      "summary": "text-to-image, diffusers, license:other",
+      "published_at": "2026-10-09T04:50:01+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 19,
+        "trending_score": 211,
+        "likes": 1010,
+        "downloads": 27652
+      },
+      "tags": [
+        "Qwen"
+      ],
+      "id": "c_05b0c914c7",
+      "key": "huggingface.co/qwen/qwen-image-2.1-turbo",
+      "cluster_id": "k_05b0c914c7",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "ConwayResearch/Underdog-Saluki-27B-1.0",
+      "url": "https://huggingface.co/ConwayResearch/Underdog-Saluki-27B-1.0",
+      "summary": "text-generation, gguf, license:apache-2.0",
+      "published_at": "2026-10-08T01:47:26+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 40,
+        "trending_score": 130,
+        "likes": 578,
+        "downloads": 449274
+      },
+      "tags": [
+        "ConwayResearch"
+      ],
+      "id": "c_7f49332beb",
+      "key": "huggingface.co/conwayresearch/underdog-saluki-27b-1.0",
+      "cluster_id": "k_7f49332beb",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "reflection/Beam-1.0-501B-A23B",
+      "url": "https://huggingface.co/reflection/Beam-1.0-501B-A23B",
+      "summary": "text-generation, license:apache-2.0",
+      "published_at": "2026-10-07T19:52:01+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 22,
+        "trending_score": 180,
+        "likes": 182,
+        "downloads": 2930
+      },
+      "tags": [
+        "reflection"
+      ],
+      "id": "c_0bb3481f48",
+      "key": "huggingface.co/reflection/beam-1.0-501b-a23b",
+      "cluster_id": "k_0bb3481f48",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "nvidia/NVIDIA-Nemotron-3.5-Bolt-74B-A9B-24GB",
+      "url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-74B-A9B-24GB",
+      "summary": "image-text-to-text, transformers, license:other",
+      "published_at": "2026-10-07T17:50:42+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 35,
+        "trending_score": 134,
+        "likes": 136,
+        "downloads": 6820
+      },
+      "tags": [
+        "nvidia"
+      ],
+      "id": "c_94169b0f7c",
+      "key": "huggingface.co/nvidia/nvidia-nemotron-3.5-bolt-74b-a9b-24gb",
+      "cluster_id": "k_94169b0f7c",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hackernews",
+      "source_name": "Hacker News",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "Google open-sources TorchTPU, a native PyTorch back end for TPUs",
+      "url": "https://github.com/google-pytorch/torch_tpu",
+      "summary": "",
+      "published_at": "2026-10-20T16:40:24+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://news.ycombinator.com/item?id=50169053",
+      "signals": {
+        "hn_points": 196,
+        "hn_comments": 47
+      },
+      "tags": [],
+      "id": "c_9543205b20",
+      "key": "github.com/google-pytorch/torch_tpu",
+      "cluster_id": "k_9543205b20",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hackernews",
+      "source_name": "Hacker News",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "Steam Users Beg for \"No AI\" Filter as Vibecoders Flood Next Fest",
+      "url": "https://www.ign.com/articles/steam-fans-are-begging-for-a-no-ai-filter-as-steam-next-fest-is-filled-with-slop",
+      "summary": "",
+      "published_at": "2026-10-20T15:48:26+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://news.ycombinator.com/item?id=50168190",
+      "signals": {
+        "hn_points": 151,
+        "hn_comments": 179
+      },
+      "tags": [],
+      "id": "c_d77d542a3b",
+      "key": "ign.com/articles/steam-fans-are-begging-for-a-no-ai-filter-as-steam-next-fest-is-filled-with-slop",
+      "cluster_id": "k_d77d542a3b",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hackernews",
+      "source_name": "Hacker News",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "Publish fake stats, get cited in LLMs",
+      "url": "https://peec.ai/blog/publish-stats-get-cited-the-tactic-that-put-my-data-all-over-the-web",
+      "summary": "",
+      "published_at": "2026-10-20T13:06:22+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://news.ycombinator.com/item?id=50165801",
+      "signals": {
+        "hn_points": 293,
+        "hn_comments": 164
+      },
+      "tags": [],
+      "id": "c_edfa40a963",
+      "key": "peec.ai/blog/publish-stats-get-cited-the-tactic-that-put-my-data-all-over-the-web",
+      "cluster_id": "k_edfa40a963",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hackernews",
+      "source_name": "Hacker News",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "DeepInfer: High-performance inference framework for DeepSeek models",
+      "url": "https://github.com/deepseek-ai/DeepInfer",
+      "summary": "This is crazy good for studying to improve existing custom engines by community like gufo, halogen, strixite, Strata... by learning their secret sauces.",
+      "published_at": "2026-10-20T09:08:54+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://news.ycombinator.com/item?id=50163277",
+      "signals": {
+        "hn_points": 2022,
+        "hn_comments": 790,
+        "reddit_rank": 1,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "id": "c_1b6d7a5398",
+      "key": "github.com/deepseek-ai/deepinfer",
+      "cluster_id": "k_1b6d7a5398",
+      "also_from": [
+        {
+          "source": "reddit-localllama",
+          "source_name": "r/LocalLLaMA",
+          "title": "Deepseek released DeepInfer - Open Source high-performance, large-scale inference framework for DeepSeek models!",
+          "url": "https://github.com/deepseek-ai/DeepInfer",
+          "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xanm55/deepseek_released_deepinfer_open_source/"
+        }
+      ],
+      "seen_on": []
+    },
+    {
+      "source": "hackernews",
+      "source_name": "Hacker News",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "WhatsApp's help pages hid LLM instructions: dont recommend a regulator",
+      "url": "https://redact.dev/blog/whatsapp-help-pages-hidden-ai-instructions",
+      "summary": "",
+      "published_at": "2026-10-19T23:22:18+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://news.ycombinator.com/item?id=50159341",
+      "signals": {
+        "hn_points": 703,
+        "hn_comments": 203
+      },
+      "tags": [],
+      "id": "c_e2e956ee6c",
+      "key": "redact.dev/blog/whatsapp-help-pages-hidden-ai-instructions",
+      "cluster_id": "k_e2e956ee6c",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "reddit-localllama",
+      "source_name": "r/LocalLLaMA",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "XHToken/Spark-X2.6-4B · Hugging Face",
+      "url": "https://huggingface.co/XHToken/Spark-X2.6-4B",
+      "summary": "Introduction A little over a month has passed since Spark-X2.5. In the rapidly evolving world of AI agents, that is enough time to rethink, refine, and move the frontier forward. Building on the Spark-X2.5-4B, we introduce Spark-X2.6-4B , the latest generation of our compact, general-purpose language models for on-device deployment. Spark-X2.6-4B retains exactly the same architecture as Spark-X2.5-4B, achieving its capability gains through improved post-training. It delivers substantial improvements in coding, agent, long-context, multilingual, reasoning, etc. These advances enable more capable and practical on-device AI for developers and users tackling real-world tasks. Technical Highlights : Stronger Coding, Agentic, and Long-Context Capabilities : The models deliver substantial improvements in agentic workflows involving complex tool use, multi-step planning, and software engineering. They achieve state-of-the-art performance among similarly sized open-source models, matching or even surpassing models with approximately 9B parameters. Controllable Thinking Budget : The models provide three configurable thinking levels-none, low, high-allowing applications to balance reasoning quality, latency, and inference cost dynamically. no more excuses for \"GPU poor\", stop being lazy and run small models today",
+      "published_at": "2026-10-20T18:50:53+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xb0nr9/xhtokensparkx264b_hugging_face/",
+      "signals": {
+        "reddit_rank": 11,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "id": "c_966bc2f6ab",
+      "key": "huggingface.co/xhtoken/spark-x2.6-4b",
+      "cluster_id": "k_966bc2f6ab",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "reddit-localllama",
+      "source_name": "r/LocalLLaMA",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "qev-0.8b · New SOTA tiny local decision model",
+      "url": "https://app.labqoat.com/e/qev/qev/",
+      "summary": "",
+      "published_at": "2026-10-20T18:17:30+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xazrvd/qev08b_new_sota_tiny_local_decision_model/",
+      "signals": {
+        "reddit_rank": 16,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "id": "c_1591f93d7e",
+      "key": "app.labqoat.com/e/qev/qev",
+      "cluster_id": "k_1591f93d7e",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "reddit-localllama",
+      "source_name": "r/LocalLLaMA",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "Agnes-AI/Agnes-3.0-Qwen (QFN finetune)",
+      "url": "https://huggingface.co/Agnes-AI/Agnes-3.0-Qwen",
+      "summary": "Strong agentic performance: agnes-3.0-qwen scores highest in its comparison set on τ³-Banking, and is within about one point of the best model on Terminal-Bench 2.1, while being a much smaller model than most of the flagship systems it is compared against. Reliable instruction following: on IFBench, agnes-3.0-qwen outperforms GPT-5.6 Sol (Max) and Claude Opus 4.8 (Max). Built for demanding work: a 1M-token context window , extended reasoning with selectable reasoning effort ( xhigh , medium , low ), tool calling, and text, image, and video understanding. Model Information Property Value Developed by Agnes AI Model name agnes-3.0-qwen Model type Multimodal reasoning model (hybrid attention MoE) Total parameters ~180B (512 experts, 10 active per token) License Qwen Community License 1.0 Languages English, Chinese Context window 1,048,576 tokens Maximum output 65,536 tokens Input modalities Text, image, video Output modality Text Precision BF16 Reasoning effort xhigh (default), medium , low Tool calling Yes Streaming Yes Release date October 2026",
+      "published_at": "2026-10-20T17:11:43+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xaxz80/agnesaiagnes30qwen_qfn_finetune/",
+      "signals": {
+        "reddit_rank": 22,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "id": "c_52149fb46d",
+      "key": "huggingface.co/agnes-ai/agnes-3.0-qwen",
+      "cluster_id": "k_52149fb46d",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "reddit-localllama",
+      "source_name": "r/LocalLLaMA",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "Short report from Lithuanian conference on AI Technologies in Medicine",
+      "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xaxffx/short_report_from_lithuanian_conference_on_ai/",
+      "summary": "Full info: Things I noticed among other things presented (almost every presentation was interesting): experimental decision models for the medical Q&A (provided medical abstract, questions and choices) were presented in welcome speech by the head of AIML.lt lab: and Work featuring an MCP server used to speed up genetics specialists work: \"Interpretable language model assistant for evaluating evidence of structural chromosomal rearrangement breakpoints in rare disease diagnostics\" by Vytautas Rimas, Erinija Pranckevičienė, Eglė Preikšaitienė, Živilė Maldžienė Using local models for bulk translation of medical text datasets into Lithuanian with correct Lithuanian terms: \"Strategies for translating medical training data into Lithuanian\" by Augustė Raišytė, Linas Petkevičius, Dalius Matuzevičius There were more applications of local models. Some models mentioned: Qwen3.5-4B, Qwen3.6-35B-A3B, Qwen3.5-122B-A10B, medgemma-27B. Models were sometimes outdated, but this is lots of times because of long duration of academic work (when you have a lot of work to do other than checking for the newest released model) or the lack of new medical domain-specific models. The proportion of classical ML and neural networks was even higher, one example: \"Diagnostic Reliability of Multi-Label Chest X-Ray AI outside the Training Hospital: Accuracy, Calibration and Fairness across Seven Architectures\" by Paulius Bundza and Justas Trinkūnas Regulation representatives where present, and their topics...",
+      "published_at": "2026-10-20T16:51:37+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xaxffx/short_report_from_lithuanian_conference_on_ai/",
+      "signals": {
+        "reddit_rank": 23,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "id": "c_ee1aee7694",
+      "key": "reddit.com/r/LocalLLaMA/comments/1xaxffx/short_report_from_lithuanian_conference_on_ai",
+      "cluster_id": "k_ee1aee7694",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "reddit-localllama",
+      "source_name": "r/LocalLLaMA",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "MiMo 2.6 is reasoning is like the crash test dummies",
+      "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xawa17/mimo_26_is_reasoning_is_like_the_crash_test/",
+      "summary": "just noticed in my reasoning threads that seemingly its favorite word is now \"hmm\": Hmm!!! What is that 1? Hmm - it could be the has value/nullable marker for the MQDescriptor parameter! For in MQDescriptor q (non-null), the NDK client writes writeInt32(1) before q.writeToParcel(). Hmm - OR it's the transaction's \"argument count\" or a stability marker. Hmm! Hmm - hold on!!! Actually, I bet this is the STABLE AIDL \"parcelable presence\" marker for method parameters. Hmm. Hmm - OR!!! It could be AParcel writeInt32(parcel, 1) for a \"bool\" or for aidl version. Hmm. Hmm! Hmm - interesting! So the nhenv size envelope is the problem when combined with the marker. Hmm. Hmm - and mk=1 fd=0 nhenv=1 worked (marker + envelope + no fd). Hmm. Hmm - so: marker + envelope + fd → throws. Hmm. Hmm - and mk=1 fd=1 nhenv=0 throws too (marker + fd + no envelope). Hmm. Hmm! So marker + fd = throws , regardless of nhenv. And marker + no-fd + envelope = OK . Hmm - so mk=1 fd=0 nhenv=0 threw but mk=1 fd=0 nhenv=1 worked?! That's odd. Hmm - mk=1 fd=0 nhenv=0 : writes [1][count=4][4 grantors][1][count=0][ints=0][q][flags] with NO nh size field. Hmm. Hmm - and mk=1 fd=0 nhenv=1 : [1][count][4g][1][size][count=0][ints=0][q][flags] . Hmm. Hmm - both have no fd. But nhenv=0 throws and nhenv=1 works?! Hmm - the parcel SIZE differs by 4! Hmm. Hmm - AH!!! THE PARCEL SIZE MUST BE A MULTIPLE OF 8? or the object array... Hmm - with marker, total = 4(token?) ... hmm. Hmm - OK, the pattern: mk=1 works ONLY for...",
+      "published_at": "2026-10-20T16:08:49+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xawa17/mimo_26_is_reasoning_is_like_the_crash_test/",
+      "signals": {
+        "reddit_rank": 20,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "id": "c_24abbcf1c5",
+      "key": "reddit.com/r/LocalLLaMA/comments/1xawa17/mimo_26_is_reasoning_is_like_the_crash_test",
+      "cluster_id": "k_24abbcf1c5",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "reddit-localllama",
+      "source_name": "r/LocalLLaMA",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "Phonon is now open-source, 31M and 40M TTS models designed to run on the edge",
+      "url": "https://v.redd.it/ft41spnganwh1",
+      "summary": "At Gradium we just made our first open-source model release with Phonon, a collection of small Text-to-Speech models designed to run on device. The inference stack is fully open-source and targets 10+ different backends (CPUs, GPUs, NPUs), most of them in Rust. We hope that the community will build lots of different things on tops of our models and code, any feedback is very welcome and we're looking forward to many more open-source releases!",
+      "published_at": "2026-10-20T16:01:49+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xaw2vt/phonon_is_now_opensource_31m_and_40m_tts_models/",
+      "signals": {
+        "reddit_rank": 9,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "id": "c_b3b5cbb96d",
+      "key": "v.redd.it/ft41spnganwh1",
+      "cluster_id": "k_b3b5cbb96d",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "reddit-localllama",
+      "source_name": "r/LocalLLaMA",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "Hardly any benchmarks for Intel B65, so I got 4x and tested them. Long Context Sweeps for Flash-Next and other models",
+      "url": "https://www.reddit.com/gallery/1xavy8t",
+      "summary": "EDIT: Note that I built off the official vllm documentation and I just got done validating the system. This is now my control. That means this is a slow and stable config. Now that i have a baseline control I'm going to begin tweaking settings for performance runs. I'll make posts as I find settings that improve performance. For example, I already know that I can cut prefill times by increasing chunk size. Howdy Folks! New batch of tests from my 4x B65 rig I built, because I was curious to test how the high memory bandwidth works out in reality. This time doing long context sweeps for our most popular models! If there are specific tests that you want to see, hit me up and I'll see if I can fit them in. I'm also starting offload tests, where I put some of the layers into system RAM. So far only doing it with flash-next, but interesting results in the \"by model\" section of my site for flash-next. Some Examples below, full context sweep list of all the models I tested: AI Generated table from my data: Qwen3.8 Flash-Next and 27B - Intel Arc Pro B65 context sweeps All numbers are overall output throughput in tokens/sec , measured across repeated requests during each 30-second test. This includes waits between requests; it is not prompt-processing speed. Columns show requested simultaneous requests. Context lengths use K = 1,024 tokens. = requests queued/capacity-limited. - = skipped as over capacity. Flash-Next W4A16 - 4× B65 - MTP-3 enabled vLLM 0.30.0 · October 18, 2026 Context...",
+      "published_at": "2026-10-20T15:57:27+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xavy8t/hardly_any_benchmarks_for_intel_b65_so_i_got_4x/",
+      "signals": {
+        "reddit_rank": 15,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "id": "c_05f967cc79",
+      "key": "reddit.com/gallery/1xavy8t",
+      "cluster_id": "k_05f967cc79",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "reddit-localllama",
+      "source_name": "r/LocalLLaMA",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "Pocket TTS which supports voice cloning is now just 1.9 million parameters",
+      "url": "https://kyutai.org/blog/2026-10-20-pocket-tts-small/",
+      "summary": "",
+      "published_at": "2026-10-20T14:59:15+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xauekr/pocket_tts_which_supports_voice_cloning_is_now/",
+      "signals": {
+        "reddit_rank": 3,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "id": "c_08b26e584a",
+      "key": "kyutai.org/blog/2026-10-20-pocket-tts-small",
+      "cluster_id": "k_08b26e584a",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "reddit-localllama",
+      "source_name": "r/LocalLLaMA",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "Qwen3.8-Flash-Next vs Opus 5.5: Six-way benchmark on a real Rust feature with Claude Code and Pi",
+      "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xatxqk/qwen38flashnext_vs_opus_55_sixway_benchmark_on_a/",
+      "summary": "A few of you pointed out in my last post that comparing Flash-Next and Opus with different harnesses and effort levels wasn't fair. So here is a more controlled comparison. Same task for every run: a real feature from the LlamaStash roadmap (save llama-server's KV cache before an unload and restore it when the model comes back). Six combinations, each run twice, so 12 PRs. Flash-Next ran locally on my Strix Halo laptop (Flow Z13) via Halogen (~Q4 quant). Opus 5.5, Flash-Next, and Kimi K3 scored every PR on seven review questions plus CI. Combination Score (of 8) Time API cost Tokens (in / cached / out) Claude Code + Opus 5.5, xhigh 6.94 (87%) 43.5 min $17.78 507k / 48.3M / 203k Claude Code + Opus 5.5, medium 6.25 (78%) 23.4 min $6.52 242k / 13.4M / 95k Claude Code + Flash-Next, medium 5.5 (69%) 45.3 min $0.32 445k / 13.5M / 82k Pi + Flash-Next, xhigh 5.44 (68%) 63.8 min $0.67 316k / 35.0M / 134k Claude Code + Flash-Next, xhigh 5.38 (67%) 49.5 min $0.39 269k / 18.9M / 99k Pi + Flash-Next, medium 5.06 (63%) 48.1 min $0.56 242k / 29.1M / 117k Scores are the average of both runs. Time, cost and tokens are from the second run, where the 100k-token benchmark numbers were given in the prompt. Flash-Next cost is at the QwenCloud price for Qwen3.8-Flash; I ran it locally, so it cost me only electricity. TL;DR All 12 runs finished and all 12 PRs pass the end-to-end test. Opus wrote better code, 82% on average against 68% for Claude Code + Flash-Next and 66% for Pi + Flash-Next. The...",
+      "published_at": "2026-10-20T14:40:52+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xatxqk/qwen38flashnext_vs_opus_55_sixway_benchmark_on_a/",
+      "signals": {
+        "reddit_rank": 10,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "id": "c_18e6134b2e",
+      "key": "reddit.com/r/LocalLLaMA/comments/1xatxqk/qwen38flashnext_vs_opus_55_sixway_benchmark_on_a",
+      "cluster_id": "k_18e6134b2e",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "reddit-localllama",
+      "source_name": "r/LocalLLaMA",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "ornith-ai/Ornith-1.5-122B (Qwen finetune)",
+      "url": "https://huggingface.co/ornith-ai/Ornith-1.5-122B",
+      "summary": "from Ornith: Ornith-1.5-122B Chirp Chirp! 🐦 We are introducing Ornith-1.5, a major step toward building foundation models through end-to-end self-improvement. Ornith-1.5 extends Ornith-1.0 (which was developed on top of Qwen3.5 and Gemma4 with additional continued pretraining, mid-training, and post-training) by expanding the self-improvement loop from scaffold and rollout optimization to jointly optimizing task generation, scaffold construction, and solution rollouts. Rather than relying on a fixed set of human-curated tasks and manually designed harnesses, Ornith-1.5 continuously generates new training tasks, discovers effective strategies for solving them, and improves the policy through reinforcement learning. For more details on the task, harness, and rollout reward design, please refer to our blog .",
+      "published_at": "2026-10-20T14:19:07+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xatebw/ornithaiornith15122b_qwen_finetune/",
+      "signals": {
+        "reddit_rank": 5,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "id": "c_01cf859846",
+      "key": "huggingface.co/ornith-ai/ornith-1.5-122b",
+      "cluster_id": "k_01cf859846",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "reddit-localllama",
+      "source_name": "r/LocalLLaMA",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "[Paper] The COUNT: Counting N-grams Unlocks Scaling on Host Memory and Training-Free Adaptation",
+      "url": "https://i.redd.it/s82rn99oqmwh1.png",
+      "summary": "The scaling relationship of compute and performance for language models (LMs) has been extensively studied; more recently, models are being designed to scale memory use, as well. In particular, adding embeddings for n-grams scales memory separately from compute use, because each pass only processes individual embedding rows, which are much smaller than the storage used for the whole embedding table. However, existing methods train embeddings from scratch, which needs expensive GPU memory for fast reading and writing. Meanwhile, the ordinary memory of the host system is cheap and underutilized by these training methods. To scale on host memory, we introduce COUNT (Counting Offline Unlocks N-gram Transformers), which builds n-gram embeddings without adding learned parameters by storing precomputed n-gram counts on host. We use the corpus frequencies to weight together the LM's own unembeddings of the next tokens most often following the current n-gram history. At a fixed compute budget, COUNT can be added as an additional input embedding for pretraining 1B-parameter LMs to improve validation loss as much as an LM with 57% more compute. If GPU memory is limited, using COUNT to let backbone parameters fill GPU memory gives better performance than splitting memory with additional learned n-gram embeddings. Beyond efficiency, COUNT allows switching in a different table of n-gram counts from a domain-specific corpus at inference time to adapt to a new task without any training....",
+      "published_at": "2026-10-20T14:10:33+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xat6o7/paper_the_count_counting_ngrams_unlocks_scaling/",
+      "signals": {
+        "reddit_rank": 14,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "id": "c_e0a7f87c09",
+      "key": "i.redd.it/s82rn99oqmwh1.png",
+      "cluster_id": "k_e0a7f87c09",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "reddit-localllama",
+      "source_name": "r/LocalLLaMA",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "[Paper] REMORY: Learning Residual Memory for Context Compaction",
+      "url": "https://i.redd.it/eg6b7xjcjmwh1.png",
+      "summary": "Long-horizon agents compact their history to continue within a finite context window, but a textual summary alone may not support every subsequent decision. We introduce REMORY, a neural memory network that supplements the summary with a bounded sequence of soft memory tokens. Given the history and summary, the network learns to generate tokens that help a frozen LLM approximate the continuation it would produce with the full history. The tokens are conditioned on the summary and appended after it, forming an analogue of a residual connection along the sequence dimension. On SummHay, REMORY improves source attribution at nearly unchanged insight coverage and approaches the full-context joint score using only 5.2% of the input positions. Across long-horizon agent benchmarks, Qwen3.8-27B and GLM-5.3-Flash show consistent gains with residual memory. Both models also exhibit substantially fewer repeated tool outputs and tool errors on BrowseComp and Terminal-Bench 2.1. arXiv : PDF : GitHub : HuggingFace :",
+      "published_at": "2026-10-20T13:50:57+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xasp90/paper_remory_learning_residual_memory_for_context/",
+      "signals": {
+        "reddit_rank": 18,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "id": "c_e69b5c2e7b",
+      "key": "i.redd.it/eg6b7xjcjmwh1.png",
+      "cluster_id": "k_e69b5c2e7b",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "reddit-localllama",
+      "source_name": "r/LocalLLaMA",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "[Paper] DLite: History-free Speculative Decoding for Agentic AI",
+      "url": "https://www.reddit.com/gallery/1xasomp",
+      "summary": "Speculative decoding has become a mainstream technique for accelerating large language model (LLM) inference by using a lightweight draft model to generate candidate tokens that are subsequently verified by the target model. However, agentic workloads introduce long and continuously evolving contexts and frequent multi-turn interactions. Under such workloads, we observe that existing draft models suffer from up to an 80% degradation in acceptance length, while maintaining their historical KV cache introduces substantial system overhead. In this paper, we identify the growing historical context as a common source of both problems and introduce DLite, a history-free speculative decoding framework for agentic AI. DLite directly reuses contextual hidden states from the target model and performs local speculative prediction without explicitly maintaining the historical context, transforming an increasingly complex modeling problem into local simple prediction problem. A lightweight sequential head further restores intra-block causal dependencies with low overhead. To effectively train this heterogeneous history-free architecture, we introduce a tailored two-stage training strategy. Experiments on general-purpose, long-context and agentic workloads show that DLite achieves 2-6 acceptance length and outperforms the state-of-the-art speculative decoding method, DSpark, up to 70%. arXiv : PDF : GitHub : HuggingFace :",
+      "published_at": "2026-10-20T13:50:16+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xasomp/paper_dlite_historyfree_speculative_decoding_for/",
+      "signals": {
+        "reddit_rank": 19,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "id": "c_81f4b87c37",
+      "key": "reddit.com/gallery/1xasomp",
+      "cluster_id": "k_81f4b87c37",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "reddit-localllama",
+      "source_name": "r/LocalLLaMA",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "chinese hardware",
+      "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xapon0/chinese_hardware/",
+      "summary": "as far as hardware we currently have options such as nvidia, amd, apple, etc. however it feels like these are more on the expensive side. personaly i own bosgame m5 strixhalo and so far its good. i was thinking of upgrade, but it seems to me that the next step will be chinese hardware vendors, stuff like huawei, xiaomi etc. maybe in the next 1-2 years. what are your thoughts on this?",
+      "published_at": "2026-10-20T11:32:20+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xapon0/chinese_hardware/",
+      "signals": {
+        "reddit_rank": 17,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "id": "c_dc912d1b3e",
+      "key": "reddit.com/r/LocalLLaMA/comments/1xapon0/chinese_hardware",
+      "cluster_id": "k_dc912d1b3e",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "reddit-localllama",
+      "source_name": "r/LocalLLaMA",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "Qwen 3.8 Flash Next: drastically faster and much more precise in reaching the result.",
+      "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xapakf/qwen_38_flash_next_drastically_faster_and_much/",
+      "summary": "Some time ago in this same place someone had suggested having your model create paintings through python (with programming) leaving it quite free. Doing so I had noticed how the model, after creating the first draft, made visual checks and quickly decided what he didn't like, adding corrections just as quickly, he didn't get lost in long, long thoughts... so from this situation I created an additive prompt. in practice I induce the model not to think long thoughts, but just like we hummans do, to jot down a draft, which we gradually improve step by step. I made him do some projects, and t he model becomes fast, rapid and precise as never before, and above all more self-confident . Unlike his usual approach, where he tries to map out a plan dozens and dozens of times, fearing he might make a mistake or forget something, he ends up wasting a lot of time stuck in pointless loops. Here is the prompt I created to add as an addendum to your prompts. add to your prompt: The construction procedure must be fractal, that is to say you make a rough and basic draft, test it, add details and depth, then test again and add even more details and depth, you have to proceed like this, so you have to start from a very basic and rough draft made from a very rough and basic reasoning, the aim is to start immediately in the creation, observe and decide what to detail. Continue this loop until you consider the work a masterpiece,rich in the kind of detail one would expect from a great artist....",
+      "published_at": "2026-10-20T11:11:12+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xapakf/qwen_38_flash_next_drastically_faster_and_much/",
+      "signals": {
+        "reddit_rank": 12,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "id": "c_a46597a43b",
+      "key": "reddit.com/r/LocalLLaMA/comments/1xapakf/qwen_38_flash_next_drastically_faster_and_much",
+      "cluster_id": "k_a46597a43b",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "reddit-localllama",
+      "source_name": "r/LocalLLaMA",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "Vals AI found DeepSeek V4.1 Flash 1017 beats GPT 6 Sol on their multi-step offensive cybersecurity task. Sol was tested via the Daybreak trusted access program.",
+      "url": "https://www.reddit.com/gallery/1xap2aq",
+      "summary": "From Vals AI on 𝕏:",
+      "published_at": "2026-10-20T10:59:16+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xap2aq/vals_ai_found_deepseek_v41_flash_1017_beats_gpt_6/",
+      "signals": {
+        "reddit_rank": 7,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "id": "c_8bf5f2b0b8",
+      "key": "reddit.com/gallery/1xap2aq",
+      "cluster_id": "k_8bf5f2b0b8",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "reddit-localllama",
+      "source_name": "r/LocalLLaMA",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "\"How Gufo caches a hybrid model\", first blog post for Gufo, The Open Source Strix Halo AI engine",
+      "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xaojci/how_gufo_caches_a_hybrid_model_first_blog_post/",
+      "summary": "Hello hello 👋 , first post here, and it's self-promotion, so feel free to ping me to remove it if it violates rule 4. Sorry in advance. A friend and I started Gufo as a pet project (MIT license) to get the most out of the AMD Strix Halo chip, while supporting a few best-in-class models. We released it almost a month ago, and it has been an amazing journey. I won't bother you with benchmarks, contribution numbers, etc. You can take a look at the GitHub project if you want, especially since many people in r/LocalLLaMA don't even own a Strix Halo. Gufo is teaching us a lot, and besides the project itself, we'd like to give back to the open-source community with a series of blog posts explaining some of the concepts and design decisions behind an AI inference engine. This is the real value for this community: you don't need a Strix Halo to find these articles useful and interesting, because they cover topics common to many other projects. Our first blog post is about caching, and how we built our own solution to take advantage of this chip's peculiar characteristics: a lot of unified memory, but lower bandwidth. How Gufo caches a hybrid model",
+      "published_at": "2026-10-20T10:28:59+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xaojci/how_gufo_caches_a_hybrid_model_first_blog_post/",
+      "signals": {
+        "reddit_rank": 25,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "id": "c_aadf3ecde9",
+      "key": "reddit.com/r/LocalLLaMA/comments/1xaojci/how_gufo_caches_a_hybrid_model_first_blog_post",
+      "cluster_id": "k_aadf3ecde9",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "reddit-localllama",
+      "source_name": "r/LocalLLaMA",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "Improve Qwen3.8-27b low quants by using a prefiller model that streams from SSD",
+      "url": "https://i.redd.it/soux8gtmjlwh1.png",
+      "summary": "This demo from ISTA-DASLab recovers low quant accuracy while retaining low VRAM usage and fast decoding. It needs a Nvidia Blackwell GPU to run, so I have not tested it. For context longer than ~4k there should be no speed penalty compare to running without the prefiller model. Graph shows MMLU-Pro accuracy. Huggingface🤗:",
+      "published_at": "2026-10-20T10:09:47+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xao7kx/improve_qwen3827b_low_quants_by_using_a_prefiller/",
+      "signals": {
+        "reddit_rank": 6,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "id": "c_81a9b6c2e0",
+      "key": "i.redd.it/soux8gtmjlwh1.png",
+      "cluster_id": "k_81a9b6c2e0",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "reddit-localllama",
+      "source_name": "r/LocalLLaMA",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "24GB is plenty if your engines take turns",
+      "url": "https://v.redd.it/s8d7f334kjwh1",
+      "summary": "System service that watches your card, swaps and loads whatever you want, whenever you want. Don't have to swap anything manually, collisions avoided, VRAM fully dedicated to each function while it's running (no VRAM squatters). I had issues everyday (Linux) where a node process would orphan, comfyUI auto starts and holds 500MB that strata can't claim. I also wanted to be able to switch natively and not have to think about starting each engine, making sure strata or llama wasn't stuck loaded, or flux GGUF's still claimed in comfyUI from an old workflow. I swap between Ninfer-4090 (llama-swap), strata, comfyUI, OpenWebUI, and I do it between multiple devices all using the same RTX 4090. Maybe you want to have your box run Hermes at night and you take the card back in the day, you can do it natively without thinking about and have full visibility on what was done and when. Berth will also serve your engines as an API so when you need to switch natively you load berth as the API endpoint and you can load strata, polystrata, and any other custom engine. Works for gaming as well, you don't have to worry about a cron job, a request, or anything grabbing the card while you're gaming or doing custom workflows. REPO:",
+      "published_at": "2026-10-20T03:27:05+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xahi82/24gb_is_plenty_if_your_engines_take_turns/",
+      "signals": {
+        "reddit_rank": 2,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "id": "c_6f5336c42e",
+      "key": "v.redd.it/s8d7f334kjwh1",
+      "cluster_id": "k_6f5336c42e",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "reddit-localllama",
+      "source_name": "r/LocalLLaMA",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "Budget upgrade for a 31B model? Dual GPUs over PCIe x1 or another approach?",
+      "url": "https://i.redd.it/571njky6djwh1.jpeg",
+      "summary": "Looking for advice on upgrading my AI server on a budget. My goal is to run Gemma 4 31B Q5 K M (~23GB) at 16K+ context (q8), achieving at least 15 t/s. I am aware of the 26B MoE, but I want the dense model after extensive testing. Current setup: -- CPU: Intel i5-14400F -- Motherboard: Gigabyte B760M D3HP DDR4 ------- 1× PCIe 4.0 x16 ------- 2× PCIe 3.0 x1 ------- 2× M.2 PCIe 4.0 x4 (both occupied) -- GPU: RTX 3060 12GB -- RAM: 32GB DDR4 -- OS: Debian -- Inference: Ollama/llama.cpp Currently running the 31B Q5 model at 53% CPU / 47% GPU offloading, which is somewhat useable but slow (in 243, out 2.3 t/s (mtp 2.7)). IQ3 M gives a noticeable quality drop and doesn't add any meaningful speed. My planned upgrade: Add an RTX 5060 Ti 16GB (~$750 new here in Thailand, no used available), move the 3060 to a powered PCIe 3.0 x1 riser, and use layer splitting. That gives me 28GB combined VRAM, which should theoretically be enough for the Q5 at 16K context. I'm unsure how much the x1 connection would hurt performance in a meaningful way. Other options: -- 2× Tesla P100 16GB (or similar) on a cheap X79/X99 Xeon 32-64gb ddr3 system (~$600-900 total). -- Cheaper AMD 16GB card, although mixing AMD/NVIDIA seems problematic. -- Move an NVMe drive to x1 and use an M.2-to-PCIe x4 adapter for the second GPU. Budget: $600-900, ideally less. I'm comfortable with Linux and hardware tinkering, but would prefer a straightforward setup over extreme/fragile specialized optimizations. Appreciate any...",
+      "published_at": "2026-10-20T02:50:39+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xagsfh/budget_upgrade_for_a_31b_model_dual_gpus_over/",
+      "signals": {
+        "reddit_rank": 21,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "id": "c_6c2c0fb6d3",
+      "key": "i.redd.it/571njky6djwh1.jpeg",
+      "cluster_id": "k_6c2c0fb6d3",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "reddit-localllama",
+      "source_name": "r/LocalLLaMA",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "HermesConsole: A demo showing off VoiceManager, my low latency streaming STT / TTS server. MIT, client docs, and python client.",
+      "url": "https://v.redd.it/vf26pp3n4jwh1",
+      "summary": "Hey, everyone! I'm so happy to finally share this with the community. I started VoiceManager way back in March to support a game concept and my AI assistants. I had the idea for this Trek inspired app to build pieces for a future project. Low latency streaming speech to speech running locally, streaming over one WebSocket. The default configuration uses a special audio.cpp sidecar with Nemotron and Breeze TTS 2. VM supports turn based conversations with barge-in. Barge-in is off by default because echo cancellation is tricky. An update on my tablet broke hardware aec so I added the toggle. It has client integration docs and a Python client. Use it to add a voice to your agent. The console app serves as a client reference in Kotlin. In the video: A wake word (\"hey computer\") starts a conversation. The wake word runs on the tablet. The reply streams back as speech, sentence by sentence. Images and markdown documents show on the panel under the reply. Tool calls go back to the app. In the video it displays the volume settings and opens / closes the calculator. I interrupt a reply by speaking over it (barge-in). A session keeps its context between turns, and past sessions keep their history. VoiceManager: HermesConsole: Thanks for checking it out and I'm happy to answer any questions. You can read more about the console app over here:",
+      "published_at": "2026-10-20T02:18:47+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xag5bj/hermesconsole_a_demo_showing_off_voicemanager_my/",
+      "signals": {
+        "reddit_rank": 8,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "id": "c_14fec5a2e7",
+      "key": "v.redd.it/vf26pp3n4jwh1",
+      "cluster_id": "k_14fec5a2e7",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "reddit-localllama",
+      "source_name": "r/LocalLLaMA",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "Do not upgrade Strata! Tons of breaking changes!",
+      "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xaflhy/do_not_upgrade_strata_tons_of_breaking_changes/",
+      "summary": "Just a heads up, especially on my Windows machine, but also my Linux machine I'm getting tons of breaking changes with Strata. They added a bunch of needless requirements around serving, the web UI seems to be going way in favor of a desktop app. I could go on but you get the picture, at least make a backup first. I know this post is going to be downvoted by the most fickle subreddit of all time, but I hope this warning reaches at least one person",
+      "published_at": "2026-10-20T01:52:05+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xaflhy/do_not_upgrade_strata_tons_of_breaking_changes/",
+      "signals": {
+        "reddit_rank": 4,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "id": "c_fa58e38672",
+      "key": "reddit.com/r/LocalLLaMA/comments/1xaflhy/do_not_upgrade_strata_tons_of_breaking_changes",
+      "cluster_id": "k_fa58e38672",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "reddit-localllama",
+      "source_name": "r/LocalLLaMA",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "AMD GAIA 0.25 brings several improvements for local AI agents on Ryzen AI",
+      "url": "https://www.phoronix.com/news/AMD-GAIA-0.25-Released",
+      "summary": "",
+      "published_at": "2026-10-20T00:58:40+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xaegqa/amd_gaia_025_brings_several_improvements_for/",
+      "signals": {
+        "reddit_rank": 24,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "id": "c_a5baa1cb55",
+      "key": "phoronix.com/news/AMD-GAIA-0.25-Released",
+      "cluster_id": "k_a5baa1cb55",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "reddit-localllama",
+      "source_name": "r/LocalLLaMA",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "migtissera/Tess-4.5-27B (Qwen finetune)",
+      "url": "https://huggingface.co/migtissera/Tess-4.5-27B",
+      "summary": "from the author of Synthia I like this part: Less thinking. Same answers. Tess-4.5 reaches the same score with a quarter fewer tokens. Across all 150 BenchLocal scenarios it generated 25% fewer tokens than its base, reasoning included. It is leanest where the work is hardest: on CLI-40 it used 32% fewer tokens and still scored higher, and on data extraction 43% fewer.² Tokens to the same score Tess-4.5-27B Qwen3.8-27B All 150 scenarios 262K 349K −25% CLI-40 149K 219K −32% DataExtract-15 14K 25K −43% BugFind-15 28K 35K −21% Fewer tokens means answers sooner, less context spent on its own thinking, and longer sessions before the window fills. On your own GPU it compounds with the draft head: fewer tokens, each one faster.",
+      "published_at": "2026-10-20T00:09:50+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xadfm7/migtisseratess4527b_qwen_finetune/",
+      "signals": {
+        "reddit_rank": 13,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "id": "c_d9dfb3af05",
+      "key": "huggingface.co/migtissera/tess-4.5-27b",
+      "cluster_id": "k_d9dfb3af05",
+      "also_from": [],
+      "seen_on": []
+    }
+  ]
+}
