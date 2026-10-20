@@ -1,0 +1,35 @@
+[project]
+name = "ai-daily"
+version = "0.1.0"
+description = "每天自动生成的中文 AI 技术日报：确定性抓取 + Claude 编辑"
+requires-python = ">=3.11"
+dependencies = [
+    "httpx>=0.27",
+    "feedparser>=6.0",
+    "PyYAML>=6.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.6"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["daily", "daily.fetchers"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.ruff]
+line-length = 110
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+ignore = ["UP017"] # timezone.utc reads clearer next to the BEIJING timezone
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["E501"] # canned HTTP fixtures

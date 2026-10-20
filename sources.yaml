@@ -1,0 +1,165 @@
+# 信源白名单（立项书 7.1）。
+#
+# 顺序有意义：同一 URL 被多个信源抓到时，tier 小的优先，同 tier 按这里的先后顺序选主记录。
+# 每个信源相互隔离，单个失败只记录在 candidates.json 的 sources 里，不影响其他信源。
+#
+# 字段：id / name / type / tier（1 一手，2 社区信号）/ kind（blog|paper|release|model|repo|discussion）
+#       enabled（默认 true），其余字段是该 type 的选项，见 daily/fetchers/ 各函数的 docstring。
+
+sources:
+  # ---------------------------------------------------------------- 官方博客（Tier 1）
+  - id: openai-news
+    name: OpenAI News
+    type: rss
+    tier: 1
+    kind: blog
+    url: https://openai.com/news/rss.xml
+
+  - id: anthropic-news
+    name: Anthropic News
+    type: html_listing # 没有官方 RSS
+    tier: 1
+    kind: blog
+    url: https://www.anthropic.com/news
+    link_pattern: ^/news/[a-z0-9-]+$
+
+  - id: anthropic-research
+    name: Anthropic Research
+    type: html_listing
+    tier: 1
+    kind: blog
+    url: https://www.anthropic.com/research
+    link_pattern: ^/research/[a-z0-9-]+$
+
+  - id: deepmind-blog
+    name: Google DeepMind Blog
+    type: rss
+    tier: 1
+    kind: blog
+    url: https://deepmind.google/blog/rss.xml
+
+  - id: google-ai-blog
+    name: Google AI Blog
+    type: rss
+    tier: 1
+    kind: blog
+    url: https://blog.google/innovation-and-ai/technology/ai/rss/
+
+  - id: mistral-news
+    name: Mistral AI News
+    type: html_listing # 没有官方 RSS
+    tier: 1
+    kind: blog
+    url: https://mistral.ai/news
+    link_pattern: ^/news/[a-z0-9-]+/?$
+
+  - id: huggingface-blog
+    name: Hugging Face Blog
+    type: rss
+    tier: 1
+    kind: blog
+    url: https://huggingface.co/blog/feed.xml
+
+  # Meta AI（ai.meta.com/blog 是纯 JS 渲染）、Qwen（qwenlm.github.io 已停更，qwen.ai 是 JS 渲染）、
+  # DeepSeek（没有博客）暂无可抓的官方列表页；它们的发布靠 HF Trending、GitHub、HN 覆盖。
+
+  # ---------------------------------------------------------------- 论文（Tier 1）
+  - id: hf-daily-papers
+    name: Hugging Face Daily Papers
+    type: hf_daily_papers
+    tier: 1
+    kind: paper
+    min_upvotes: 10 # 5 时每天约 50 篇，太多
+
+  # arXiv 全量每天数百篇，直接给编辑会淹没其他内容；HF Daily Papers 已经过社区筛选。
+  # 保留实现，M1 观察覆盖率时可以临时打开：python -m daily fetch --only arxiv-cs-cl
+  - id: arxiv-cs-cl
+    name: arXiv cs.CL
+    type: rss
+    tier: 1
+    kind: paper
+    enabled: false
+    url: https://rss.arxiv.org/rss/cs.CL
+    arxiv_announce_types: [new]
+
+  - id: arxiv-cs-lg
+    name: arXiv cs.LG
+    type: rss
+    tier: 1
+    kind: paper
+    enabled: false
+    url: https://rss.arxiv.org/rss/cs.LG
+    arxiv_announce_types: [new]
+
+  - id: arxiv-cs-ai
+    name: arXiv cs.AI
+    type: rss
+    tier: 1
+    kind: paper
+    enabled: false
+    url: https://rss.arxiv.org/rss/cs.AI
+    arxiv_announce_types: [new]
+
+  # ---------------------------------------------------------------- 开源（Tier 1）
+  - id: github-releases
+    name: GitHub Releases
+    type: github_releases # 设置 GITHUB_TOKEN 可把限额从 60 次/小时提到 5000 次/小时
+    tier: 1
+    kind: release
+    include_prereleases: false
+    repos:
+      - vllm-project/vllm
+      - ollama/ollama
+      - ggml-org/llama.cpp
+      - huggingface/transformers
+      - langchain-ai/langchain
+      - langchain-ai/langgraph
+      - run-llama/llama_index
+      - openai/openai-agents-python
+      - openai/codex
+      - anthropics/claude-code
+      - modelcontextprotocol/modelcontextprotocol
+      - sgl-project/sglang
+      - pytorch/pytorch
+      - microsoft/autogen
+
+  - id: github-trending
+    name: GitHub Trending
+    type: github_trending
+    tier: 1
+    kind: repo
+    since: daily
+    min_stars_today: 50
+
+  # ---------------------------------------------------------------- 模型（Tier 1）
+  - id: hf-trending-models
+    name: Hugging Face Trending Models
+    type: hf_trending_models
+    tier: 1
+    kind: model
+    limit: 50
+    max_age_days: 14
+
+  # ---------------------------------------------------------------- 社区信号（Tier 2）
+  - id: hackernews
+    name: Hacker News
+    type: hackernews
+    tier: 2
+    kind: discussion
+    min_points: 50
+
+  - id: reddit-localllama
+    name: r/LocalLLaMA
+    type: reddit
+    tier: 2
+    kind: discussion
+    subreddit: LocalLLaMA
+    limit: 25
+
+  - id: reddit-machinelearning
+    name: r/MachineLearning
+    type: reddit
+    tier: 2
+    kind: discussion
+    subreddit: MachineLearning
+    limit: 25
