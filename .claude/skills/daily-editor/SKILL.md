@@ -12,7 +12,7 @@ description: 担任 AI 科技日报的编辑：读取 data/YYYY-MM-DD/candidates
 
 ```bash
 pip install -e . -q
-python -c "from daily.window import beijing_today; print(beijing_today())"   # 没有给日期时，期号 = 北京时间今天
+python -c "from daily.window import local_today; print(local_today())"   # 没有给日期时，期号 = 柏林时间今天
 ```
 
 - `data/<期号>/candidates.json` 不存在：先 `git pull origin main` 再看一次（05:07 的抓取可能被 Actions 推迟）。

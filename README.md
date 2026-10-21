@@ -1,6 +1,6 @@
 # ai-daily · AI 科技日报
 
-每天早上 6 点（北京时间）自动生成的中文 AI 技术日报：5 分钟读完，每一条都能追溯到一手来源。
+每天早上 6 点（柏林时间）自动生成的中文 AI 技术日报：5 分钟读完，每一条都能追溯到一手来源。
 
 网站：<https://michaelchennn.github.io/ai-daily/> · RSS（全文）：<https://michaelchennn.github.io/ai-daily/feed.xml>
 
@@ -21,7 +21,7 @@
 pip install -e ".[dev]"
 
 python -m daily fetch                       # 今天这一期 → data/YYYY-MM-DD/candidates.json
-python -m daily fetch --date 2026-10-20     # 指定期号（北京时间日期）
+python -m daily fetch --date 2026-10-20     # 指定期号（柏林时间日期）
 python -m daily fetch --only hackernews     # 只跑某个信源，调试用（可重复）
 
 python -m daily list --date 2026-10-21      # 精简列出候选（给编辑看）
@@ -50,7 +50,7 @@ sources.yaml ──► fetchers（并发、相互隔离）──► 去重 ─�
                                        （失败时）degrade ──► 降级版 digest.json
 ```
 
-**时间窗口**：第 D 期覆盖北京时间 D-1 04:00 到 D 06:00（截止到运行时刻）。比 24 小时多出的 2 小时用来接住上一次运行之后、06:00 之前发布的内容：只要每天在 04:00 之后运行，相邻两期之间就没有空档，Actions 的 cron 延迟也不会漏内容；重叠部分由跨天去重处理。
+**时间窗口**：第 D 期覆盖柏林时间 D-1 04:00 到 D 06:00（截止到运行时刻；跟随夏令时，UTC 时刻冬夏相差 1 小时）。比 24 小时多出的 2 小时用来接住上一次运行之后、06:00 之前发布的内容：只要每天在 04:00 之后运行，相邻两期之间就没有空档，Actions 的 cron 延迟也不会漏内容；重叠部分由跨天去重处理。
 
 **信源**（`sources.yaml`，立项书 7.1）：
 
@@ -78,7 +78,7 @@ Meta AI、Qwen、DeepSeek 暂时没有可抓的官方列表页（JS 渲染或没
 ```jsonc
 {
   "schema_version": 1,
-  "date": "2026-10-21",                     // 期号（北京时间）
+  "date": "2026-10-21",                     // 期号（柏林时间）
   "generated_at": "...",
   "window": {"start": "...", "end": "..."}, // UTC
   "stats": {"raw": 102, "after_url_merge": 101, "dropped_already_published": 0,
@@ -122,11 +122,11 @@ Meta AI、Qwen、DeepSeek 暂时没有可抓的官方列表页（JS 渲染或没
 
 抓取在 GitHub Actions 里跑，不在 Claude 的定时任务里：Claude cloud session 访问不了其他仓库的 GitHub API，Reddit 也会拒绝它的请求；Actions 自带 `GITHUB_TOKEN`，网络不受限制。
 
-`.github/workflows/fetch.yml` 每天北京时间 05:07 运行 `daily fetch`，把 `data/YYYY-MM-DD/candidates.json` 提交到 main。05:30 的 Claude 编辑任务直接从仓库读取。没有拿到任何内容时 job 失败，GitHub 会发通知。也可以在 Actions 页面手动触发，指定期号日期补抓。
+`.github/workflows/fetch.yml` 每天柏林时间 05:07 运行 `daily fetch`，把 `data/YYYY-MM-DD/candidates.json` 提交到 main。05:30 的 Claude 编辑任务直接从仓库读取。没有拿到任何内容时 job 失败，GitHub 会发通知。也可以在 Actions 页面手动触发，指定期号日期补抓。
 
 ## 发布（M3）
 
-| 北京时间 | 谁 | 做什么 |
+| 柏林时间 | 谁 | 做什么 |
 |---|---|---|
 | 05:07 | Actions `fetch.yml` | 抓取，把 `candidates.json` 提交到 main |
 | 05:30 | Claude 定时任务（每次新开一个 cloud session） | 运行 daily-editor skill，把 `digest.json` 推到本会话的 `claude/` 分支 |
@@ -138,7 +138,8 @@ Meta AI、Qwen、DeepSeek 暂时没有可抓的官方列表页（JS 渲染或没
 - **为什么用 workflow_dispatch 串起来**：用 `GITHUB_TOKEN` 推送的提交不会触发其他 workflow（workflow_dispatch 除外），所以 ingest 和兜底提交之后用 `gh workflow run pages.yml --ref main` 启动构建。人推到 main（合并 PR）会直接触发 `pages.yml`。
 - **并入规则**（`daily/publish.py`）：正式版替换降级版（编辑在 06:30 之后才完成），降级版不会覆盖正式版，正式版只会被更新的正式版替换（重做）。
 - **告警**（Actions 失败 → GitHub 发通知）：`fetch` 没有拿到任何内容；06:30 时连 `candidates.json` 都没有；连续两天都是降级版。
-- **一次性设置**：仓库 Settings → Pages → Source 选 **GitHub Actions**。
+- **时区**：Actions 的 cron 只认 UTC，柏林有夏令时（CEST UTC+2 / CET UTC+1），所以 `fetch.yml` 和 `fallback.yml` 各写了冬夏两条 cron，每天都会触发两次，由第一个 job（`due`）按当天的 UTC 偏移只放行一次。Claude 定时任务的 cron 直接写 `CRON_TZ=Europe/Berlin`。
+- **一次性设置**：仓库 Settings → Pages → Source 选 **GitHub Actions**（下面推荐的 “GitHub Pages Jekyll” / “Static HTML” 都不用点，仓库里已经有 `pages.yml`）。
 
 网站（`daily/site.py`，样式在 `daily/static/style.css`）：首页是最新一期全文和最近 30 天的列表，每期一页，存档页按月列出全部历史，信息源页用卡片列出白名单和最近 30 期的抓取成功次数、平均候选数、入选条目数。降级版在标题旁、正文顶部和 RSS 标题里都有标注。只发布能通过 `validate`（离线部分）的 digest。RSS 的 guid 带上 mode，降级版被正式版替换后，阅读器会把正式版当作新条目收到。
 

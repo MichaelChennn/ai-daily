@@ -31,12 +31,12 @@ from daily import digest as digest_mod
 from daily.config import SourceConfig
 from daily.digest import SECTIONS
 from daily.render import source_labels
-from daily.window import BEIJING, PUBLISH_TIME
+from daily.window import PUBLISH_TIME, TIMEZONE, TIMEZONE_LABEL
 
 log = logging.getLogger(__name__)
 
 SITE_TITLE = "AI 科技日报"
-SITE_DESCRIPTION = "每天北京时间 06:00 更新的中文 AI 技术日报：5 分钟读完，每一条都附一手来源。"
+SITE_DESCRIPTION = f"每天{TIMEZONE_LABEL} 06:00 更新的中文 AI 技术日报：5 分钟读完，每一条都附一手来源。"
 DEFAULT_BASE_URL = "https://michaelchennn.github.io/ai-daily/"
 REPO_URL = "https://github.com/MichaelChennn/ai-daily"
 RECENT_DAYS = 30
@@ -105,7 +105,7 @@ class Issue:
             value = datetime.fromisoformat(self.digest["generated_at"])
             return value if value.tzinfo else value.replace(tzinfo=timezone.utc)
         except (KeyError, TypeError, ValueError):
-            return datetime.combine(self.date, PUBLISH_TIME, BEIJING)
+            return datetime.combine(self.date, PUBLISH_TIME, TIMEZONE)
 
 
 @dataclass
@@ -378,11 +378,12 @@ def _links(item: dict[str, Any], by_id: dict[str, dict[str, Any]]) -> str:
 
 
 def _issue_header(issue: Issue, prefix: str, link: bool = False) -> str:
-    when = issue.published_at.astimezone(BEIJING).strftime("%H:%M")
+    when = issue.published_at.astimezone(TIMEZONE).strftime("%H:%M")
     title = f"{issue.slug} · 周{WEEKDAYS[issue.date.weekday()]}"
     if link:
         title = f'<a href="{prefix}{issue.slug}/">{title}</a>'
-    meta = f"{len(issue.digest['items'])} 条 · 北京时间 {when} " + ("生成" if issue.fallback else "编辑完成")
+    done = "生成" if issue.fallback else "编辑完成"
+    meta = f"{len(issue.digest['items'])} 条 · {TIMEZONE_LABEL} {when} {done}"
     badge = ' <span class="badge">降级版</span>' if issue.fallback else ""
     return f'<header class="issue-header"><h1>{title}{badge}</h1><p class="issue-meta">{meta}</p></header>'
 
@@ -429,7 +430,7 @@ def _layout(title: str, body: str, prefix: str, description: str = "", wide: boo
 {body}
 </main>
 <footer class="site-footer">
-<p>每天北京时间 06:00 更新 · 抓取与校验是确定性代码，编辑由 Claude 完成，没有人工校对。
+<p>每天{TIMEZONE_LABEL} 06:00 更新 · 抓取与校验是确定性代码，编辑由 Claude 完成，没有人工校对。
 <a href="{REPO_URL}">源代码</a></p>
 </footer>
 </body>

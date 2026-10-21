@@ -14,7 +14,7 @@ from typing import Any
 
 from daily import dedup, digest, fallback, pipeline, publish, render, site
 from daily.config import DEFAULT_DATA_DIR, DEFAULT_SOURCES_FILE, load_sources
-from daily.window import beijing_today, issue_window
+from daily.window import issue_window, local_today
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -23,7 +23,7 @@ def main(argv: list[str] | None = None) -> int:
     commands = parser.add_subparsers(dest="command", required=True)
 
     fetch = commands.add_parser("fetch", help="抓取信源，去重后写入 data/YYYY-MM-DD/candidates.json")
-    fetch.add_argument("--date", type=date.fromisoformat, help="期号日期（北京时间），默认今天")
+    fetch.add_argument("--date", type=date.fromisoformat, help="期号日期（柏林时间），默认今天")
     fetch.add_argument("--sources", type=Path, default=DEFAULT_SOURCES_FILE, help="信源配置文件")
     fetch.add_argument("--data-dir", type=Path, default=DEFAULT_DATA_DIR, help="数据目录")
     fetch.add_argument("--only", action="append", metavar="SOURCE_ID", help="只跑指定信源（可重复）")
@@ -88,12 +88,12 @@ def main(argv: list[str] | None = None) -> int:
 
 
 def _issue_args(parser: argparse.ArgumentParser) -> None:
-    parser.add_argument("--date", type=date.fromisoformat, help="期号日期（北京时间），默认今天")
+    parser.add_argument("--date", type=date.fromisoformat, help="期号日期（柏林时间），默认今天")
     parser.add_argument("--data-dir", type=Path, default=DEFAULT_DATA_DIR, help="数据目录")
 
 
 def _issue_dir(args: argparse.Namespace) -> Path:
-    return args.data_dir / (args.date or beijing_today()).isoformat()
+    return args.data_dir / (args.date or local_today()).isoformat()
 
 
 def _read(path: Path) -> Any:
@@ -114,7 +114,7 @@ def _fetch(args: argparse.Namespace) -> int:
         for source in sources:
             source.enabled = source.id in args.only
 
-    window = issue_window(args.date or beijing_today())
+    window = issue_window(args.date or local_today())
     raw, reports = asyncio.run(pipeline.fetch_all(sources, window))
     history = dedup.load_history(args.data_dir, window.issue_date, args.history_days)
     data = pipeline.build_candidates(raw, sources, window, reports, history)

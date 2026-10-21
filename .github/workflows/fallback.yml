@@ -1,4 +1,4 @@
-# 06:30 Beijing time safety net (charter section 8): if today's issue has no valid digest.json,
+# 06:30 Berlin time safety net (charter section 8): if today's issue has no valid digest.json,
 # publish the title + link fallback built from candidates.json, then rebuild the site.
 #
 # The job fails, so GitHub sends a notification, when
@@ -10,11 +10,12 @@ name: fallback
 
 on:
   schedule:
-    - cron: "30 22 * * *" # 06:30 Beijing time
+    - cron: "30 4 * * *" # 06:30 CEST (summer)
+    - cron: "30 5 * * *" # 06:30 CET (winter)
   workflow_dispatch:
     inputs:
       date:
-        description: "Issue date (YYYY-MM-DD, Beijing time); empty = today"
+        description: "Issue date (YYYY-MM-DD, Berlin time); empty = today"
         required: false
 
 permissions:
@@ -27,7 +28,26 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # Actions cron is UTC only and Berlin moves between UTC+2 (CEST) and UTC+1 (CET): both
+  # schedules fire every day, and only the one matching today's offset goes on.
+  due:
+    runs-on: ubuntu-latest
+    outputs:
+      run: ${{ steps.check.outputs.run }}
+    steps:
+      - id: check
+        env:
+          SCHEDULE: ${{ github.event.schedule }}
+          CEST: "30 4 * * *"
+          CET: "30 5 * * *"
+        run: |
+          expected=$([ "$(TZ=Europe/Berlin date +%z)" = "+0200" ] && echo "$CEST" || echo "$CET")
+          if [ -z "$SCHEDULE" ] || [ "$SCHEDULE" = "$expected" ]; then run=true; else run=false; fi
+          echo "run=$run" >> "$GITHUB_OUTPUT"
+
   fallback:
+    needs: due
+    if: needs.due.outputs.run == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -44,7 +64,7 @@ jobs:
         env:
           ISSUE_DATE: ${{ inputs.date }}
         run: |
-          date=${ISSUE_DATE:-$(python -c "from daily.window import beijing_today; print(beijing_today())")}
+          date=${ISSUE_DATE:-$(python -c "from daily.window import local_today; print(local_today())")}
           echo "date=$date" >> "$GITHUB_OUTPUT"
           if [ ! -f "data/$date/candidates.json" ]; then
             echo "::error::data/$date/candidates.json is missing: fetch failed, nothing to publish for $date"

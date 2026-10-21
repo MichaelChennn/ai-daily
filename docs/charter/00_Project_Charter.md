@@ -1,6 +1,6 @@
-# AI 科技日报（ai-daily）— 立项书 v0.4
+# AI 科技日报（ai-daily）— 立项书 v0.5
 
-> 状态：已确认（v0.4） · 日期：2026-10-21 · 新仓库：`ai-daily`（公开）
+> 状态：已确认（v0.5） · 日期：2026-10-21 · 新仓库：`ai-daily`（公开）
 > 前身：Verita（AI 知识社区 + 每日 Digest）
 
 ---
@@ -31,7 +31,7 @@ Verita 最初是从“AI 科技日报”这个想法出发的，后来逐渐加�
 | 目标读者 | 中文 AI 开发者 | 中文写作；信源以英文一手资料为主。“英文一手资料 → 中文精炼”本身就是核心价值。 |
 | 分发渠道 | 网站 + RSS | 静态站点存档每一期，RSS 推送全文。不需要账号、不需要登录。 |
 | 人工参与 | **全自动** | 每天直接看到成品，不需要人工纠正。所以**质量保障必须靠系统本身**（见第 6 节），这是本项目最重要的技术挑战。 |
-| 发布节奏 | 北京时间 06:00，覆盖过去 24 小时 | 05:00 抓取，05:30 开始编辑，06:30 兜底检查 |
+| 发布节奏 | 柏林时间 06:00，覆盖过去 24 小时 | 05:00 抓取，05:30 开始编辑，06:30 兜底检查 |
 | 生成方式 | 确定性抓取 + Claude 定时任务当编辑 | 见第 8 节；不需要自己管理 LLM API key |
 | 仓库 | 新建公开仓库 `ai-daily` | Verita 打 tag `verita-final` 归档，只迁移可复用代码 |
 
@@ -140,11 +140,11 @@ Verita 最初是从“AI 科技日报”这个想法出发的，后来逐渐加�
 **分工原则：** 抓取和校验写成确定性代码（可复现、可测试）；"编辑"工作交给 Claude 定时任务（能打开原文、能补漏）。
 
 ```
-北京时间 05:00  GitHub Actions
+柏林时间 05:00  GitHub Actions
   1. python -m daily fetch      → 抓取固定信源，把 data/YYYY-MM-DD/candidates.json 提交到 main
                                   （Claude cloud session 访问不了其他仓库的 GitHub API，所以抓取放在 Actions）
 
-北京时间 05:30  Claude 定时任务（每次新开一个 cloud session，按 skill 执行）
+柏林时间 05:30  Claude 定时任务（每次新开一个 cloud session，按 skill 执行）
   2. Claude 当编辑（.claude/skills/daily-editor/SKILL.md）：
        打分筛选 → 对入选条目用 WebFetch 打开原文 → 合并同一事件
        → 写中文日报 data/YYYY-MM-DD/digest.json
@@ -154,7 +154,7 @@ Verita 最初是从“AI 科技日报”这个想法出发的，后来逐渐加�
                                   → Actions ingest：重新校验后把 digest.json 并入 main
                                   → Actions pages：python -m daily build 生成静态站点 + RSS → GitHub Pages
 
-北京时间 06:30  GitHub Actions 兜底
+柏林时间 06:30  GitHub Actions 兜底
   当天没有 digest.json → 用 candidates.json 发布"标题 + 链接"降级版；如果连候选都没有 → Actions 失败通知
   连续两天都是降级版 → Actions 失败通知（编辑任务坏了，不只是晚了）
   编辑在 06:30 之后才完成 → ingest 用正式版替换降级版，网站重新构建
@@ -226,7 +226,7 @@ Verita 最初是从“AI 科技日报”这个想法出发的，后来逐渐加�
 
 **已决（2026-10-20）**
 - 新建公开仓库 `ai-daily`；Verita 归档。
-- 北京时间 06:00 发布，覆盖过去 24 小时。
+- 北京时间 06:00 发布，覆盖过去 24 小时（v0.5 改为柏林时间，见下）。
 - 生成方式：确定性抓取 + Claude 定时任务编辑 + Actions 兜底（第 8 节）。
 - v0.3：`fetch` 改在 GitHub Actions 里运行（05:00），Claude 定时任务只负责编辑。原因：Claude cloud session 无法访问其他仓库的 GitHub API，Reddit 也拒绝其请求。
 
@@ -234,6 +234,9 @@ Verita 最初是从“AI 科技日报”这个想法出发的，后来逐渐加�
 - 前端（原待决 1）：Python 生成的静态网站（`python -m daily build`），不引入 Node 工具链；Newsletter 式单栏阅读风格，自动深浅色；页面包括首页（最新一期 + 最近 30 天）、每期一页、存档、信息源卡片页、全文 RSS。
 - 编辑预算（原待决 2）：每期 WebFetch ≤ 20 次、WebSearch ≤ 5 次，超出只警告。
 - 发布路径：Claude 定时任务的 cloud session 只能推送到自己的 `claude/` 分支，由 Actions（ingest）校验后并入 main；用 `GITHUB_TOKEN` 的提交不会触发其他 workflow，所以 ingest 和兜底提交后用 workflow_dispatch 启动 Pages 构建。
+
+**已决（2026-10-21，v0.5）**
+- 发布时间改为**柏林时间** 06:00（期号 = 柏林日期），05:07 抓取、05:30 编辑、06:30 兜底都跟着改，并随夏令时调整。原因：读者（我）在柏林，早上起床就能看到当天这一期。
 
 **待决**
 - 无。
