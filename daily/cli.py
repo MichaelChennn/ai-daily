@@ -12,9 +12,9 @@ from datetime import date
 from pathlib import Path
 from typing import Any
 
-from daily import dedup, digest, fallback, pipeline, render
+from daily import dedup, digest, fallback, pipeline, publish, render, site
 from daily.config import DEFAULT_DATA_DIR, DEFAULT_SOURCES_FILE, load_sources
-from daily.window import beijing_today, issue_window
+from daily.window import issue_window, local_today
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -23,7 +23,7 @@ def main(argv: list[str] | None = None) -> int:
     commands = parser.add_subparsers(dest="command", required=True)
 
     fetch = commands.add_parser("fetch", help="抓取信源，去重后写入 data/YYYY-MM-DD/candidates.json")
-    fetch.add_argument("--date", type=date.fromisoformat, help="期号日期（北京时间），默认今天")
+    fetch.add_argument("--date", type=date.fromisoformat, help="期号日期（柏林时间），默认今天")
     fetch.add_argument("--sources", type=Path, default=DEFAULT_SOURCES_FILE, help="信源配置文件")
     fetch.add_argument("--data-dir", type=Path, default=DEFAULT_DATA_DIR, help="数据目录")
     fetch.add_argument("--only", action="append", metavar="SOURCE_ID", help="只跑指定信源（可重复）")
@@ -46,6 +46,16 @@ def main(argv: list[str] | None = None) -> int:
     md = commands.add_parser("render", help="digest.json → digest.md")
     _issue_args(md)
 
+    adopt = commands.add_parser("adopt", help="按规则并入编辑分支推来的 digest.json（ingest 用）")
+    _issue_args(adopt)
+    adopt.add_argument("--from", dest="source", type=Path, required=True, help="推来的 digest.json")
+
+    build = commands.add_parser("build", help="生成静态网站和 RSS")
+    build.add_argument("--data-dir", type=Path, default=DEFAULT_DATA_DIR, help="数据目录")
+    build.add_argument("--sources", type=Path, default=DEFAULT_SOURCES_FILE, help="信源配置文件")
+    build.add_argument("--out", type=Path, default=Path("_site"), help="输出目录（每次重建）")
+    build.add_argument("--base-url", default=site.DEFAULT_BASE_URL, help="网站地址，用于 RSS 里的绝对链接")
+
     page = commands.add_parser("page", help="打印页面里关键词附近的原文，供编辑逐字摘录 evidence")
     page.add_argument("url")
     page.add_argument("--grep", action="append", required=True, metavar="TEXT", help="关键词（可重复）")
@@ -67,6 +77,8 @@ def main(argv: list[str] | None = None) -> int:
             "validate": _validate,
             "degrade": _degrade,
             "render": _render,
+            "adopt": _adopt,
+            "build": _build,
             "page": _page,
         }
         return handlers[args.command](args)
@@ -76,12 +88,12 @@ def main(argv: list[str] | None = None) -> int:
 
 
 def _issue_args(parser: argparse.ArgumentParser) -> None:
-    parser.add_argument("--date", type=date.fromisoformat, help="期号日期（北京时间），默认今天")
+    parser.add_argument("--date", type=date.fromisoformat, help="期号日期（柏林时间），默认今天")
     parser.add_argument("--data-dir", type=Path, default=DEFAULT_DATA_DIR, help="数据目录")
 
 
 def _issue_dir(args: argparse.Namespace) -> Path:
-    return args.data_dir / (args.date or beijing_today()).isoformat()
+    return args.data_dir / (args.date or local_today()).isoformat()
 
 
 def _read(path: Path) -> Any:
@@ -102,7 +114,7 @@ def _fetch(args: argparse.Namespace) -> int:
         for source in sources:
             source.enabled = source.id in args.only
 
-    window = issue_window(args.date or beijing_today())
+    window = issue_window(args.date or local_today())
     raw, reports = asyncio.run(pipeline.fetch_all(sources, window))
     history = dedup.load_history(args.data_dir, window.issue_date, args.history_days)
     data = pipeline.build_candidates(raw, sources, window, reports, history)
@@ -220,6 +232,33 @@ def _render(args: argparse.Namespace) -> int:
     path = issue_dir / "digest.md"
     path.write_text(render.to_markdown(_read(issue_dir / "digest.json"), candidates), encoding="utf-8")
     print(path)
+    return 0
+
+
+def _adopt(args: argparse.Namespace) -> int:
+    issue_dir = _issue_dir(args)
+    candidates = _read(issue_dir / "candidates.json")
+    path = issue_dir / "digest.json"
+    try:
+        incoming = _read(args.source)
+    except json.JSONDecodeError as exc:
+        incoming = f"invalid JSON: {exc}"
+    try:
+        current = _read(path) if path.exists() else None
+    except json.JSONDecodeError:
+        current = None
+    data, reason = publish.decide(current, incoming, candidates)
+    print(f"{issue_dir.name}: {'adopted' if data else 'kept'} ({reason})", file=sys.stderr)
+    if data is not None:
+        _write(path, data)
+        (issue_dir / "digest.md").write_text(render.to_markdown(data, candidates), encoding="utf-8")
+        print(path)
+    return 0
+
+
+def _build(args: argparse.Namespace) -> int:
+    issues = site.build(args.out, args.data_dir, load_sources(args.sources), args.base_url)
+    print(f"{len(issues)} issues -> {args.out}", file=sys.stderr)
     return 0
 
 

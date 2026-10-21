@@ -6,13 +6,14 @@ name: fetch
 
 on:
   schedule:
-    # 05:07 Beijing time: off the hour (less cron delay), done before the editor starts at 05:30.
+    # 05:07 Berlin time: off the hour (less cron delay), done before the editor starts at 05:30.
     # A delayed run is fine: the issue window leaves no gap for any run after 04:00.
-    - cron: "7 21 * * *"
+    - cron: "7 3 * * *" # 05:07 CEST (summer)
+    - cron: "7 4 * * *" # 05:07 CET (winter)
   workflow_dispatch:
     inputs:
       date:
-        description: "Issue date (YYYY-MM-DD, Beijing time); empty = today"
+        description: "Issue date (YYYY-MM-DD, Berlin time); empty = today"
         required: false
 
 permissions:
@@ -23,7 +24,26 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # Actions cron is UTC only and Berlin moves between UTC+2 (CEST) and UTC+1 (CET): both
+  # schedules fire every day, and only the one matching today's offset goes on.
+  due:
+    runs-on: ubuntu-latest
+    outputs:
+      run: ${{ steps.check.outputs.run }}
+    steps:
+      - id: check
+        env:
+          SCHEDULE: ${{ github.event.schedule }}
+          CEST: "7 3 * * *"
+          CET: "7 4 * * *"
+        run: |
+          expected=$([ "$(TZ=Europe/Berlin date +%z)" = "+0200" ] && echo "$CEST" || echo "$CET")
+          if [ -z "$SCHEDULE" ] || [ "$SCHEDULE" = "$expected" ]; then run=true; else run=false; fi
+          echo "run=$run" >> "$GITHUB_OUTPUT"
+
   fetch:
+    needs: due
+    if: needs.due.outputs.run == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:

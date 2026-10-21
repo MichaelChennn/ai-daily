@@ -46,11 +46,12 @@ async def fetch_daily_papers(
 ) -> list[Candidate]:
     """Options: min_upvotes (default 0).
 
-    Takes the Daily Papers list of the UTC day the window ends on, which is nearly complete when
-    the ~05:00 Beijing run happens (21:00 UTC).
+    Takes the Daily Papers list of the last UTC day that is complete, or nearly so, when the
+    window ends: the 05:07 Berlin run happens at 03:07 / 04:07 UTC, so that is the day before.
+    Papers listed later on the same UTC day are picked up by the next issue.
     """
     min_upvotes = int(source.options.get("min_upvotes", 0))
-    day = (window.end - timedelta(minutes=1)).date().isoformat()
+    day = (window.end - timedelta(hours=12)).date().isoformat()
     response = await get(
         client, "https://huggingface.co/api/daily_papers", params={"date": day, "limit": 100}
     )

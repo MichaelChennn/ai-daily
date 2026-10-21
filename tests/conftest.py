@@ -11,7 +11,7 @@ import pytest
 from daily.config import SourceConfig
 from daily.window import issue_window
 
-# Issue 2026-10-20 covers 2026-10-18T20:00Z .. 2026-10-19T22:00Z (04:00 .. 06:00 Beijing time).
+# Issue 2026-10-20 covers 2026-10-19T02:00Z .. 2026-10-20T04:00Z (04:00 .. 06:00 Berlin time, CEST).
 ISSUE = date(2026, 10, 20)
 IN_WINDOW = datetime(2026, 10, 19, 12, 0, tzinfo=timezone.utc)
 BEFORE_WINDOW = datetime(2026, 10, 17, 12, 0, tzinfo=timezone.utc)

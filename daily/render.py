@@ -1,4 +1,4 @@
-"""`daily render`: digest.json -> digest.md, readable on GitHub until the site exists (M3)."""
+"""`daily render`: digest.json -> digest.md, the issue as it reads on GitHub (the site is daily/site.py)."""
 
 from __future__ import annotations
 
@@ -33,7 +33,7 @@ def to_markdown(digest: dict[str, Any], candidates: dict[str, Any] | None = None
             continue
         lines += [f"## {heading}", ""]
         for item in items:
-            links = " · ".join(f"[{label}]({s['url']})" for s, label in _labels(item["sources"], by_id))
+            links = " · ".join(f"[{label}]({s['url']})" for s, label in source_labels(item["sources"], by_id))
             if section == "brief" or not item.get("summary"):
                 lines.append(f"- **{item['title']}** {item.get('summary', '')} {links}".replace("  ", " "))
                 continue
@@ -46,7 +46,7 @@ def to_markdown(digest: dict[str, Any], candidates: dict[str, Any] | None = None
     return "\n".join(lines).rstrip() + "\n"
 
 
-def _labels(
+def source_labels(
     sources: list[dict[str, Any]], by_id: dict[str, dict[str, Any]]
 ) -> list[tuple[dict[str, Any], str]]:
     labels = [_label(s, by_id) for s in sources]

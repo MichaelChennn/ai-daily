@@ -4,7 +4,8 @@
 # 每个信源相互隔离，单个失败只记录在 candidates.json 的 sources 里，不影响其他信源。
 #
 # 字段：id / name / type / tier（1 一手，2 社区信号）/ kind（blog|paper|release|model|repo|discussion）
-#       enabled（默认 true），其余字段是该 type 的选项，见 daily/fetchers/ 各函数的 docstring。
+#       enabled（默认 true），homepage（网站信息源卡片的链接，url 是 feed 时填写），
+#       其余字段是该 type 的选项，见 daily/fetchers/ 各函数的 docstring。
 
 sources:
   # ---------------------------------------------------------------- 官方博客（Tier 1）
@@ -14,6 +15,7 @@ sources:
     tier: 1
     kind: blog
     url: https://openai.com/news/rss.xml
+    homepage: https://openai.com/news/
 
   - id: anthropic-news
     name: Anthropic News
@@ -37,6 +39,7 @@ sources:
     tier: 1
     kind: blog
     url: https://deepmind.google/blog/rss.xml
+    homepage: https://deepmind.google/discover/blog/
 
   - id: google-ai-blog
     name: Google AI Blog
@@ -44,6 +47,7 @@ sources:
     tier: 1
     kind: blog
     url: https://blog.google/innovation-and-ai/technology/ai/rss/
+    homepage: https://blog.google/technology/ai/
 
   - id: mistral-news
     name: Mistral AI News
@@ -59,6 +63,7 @@ sources:
     tier: 1
     kind: blog
     url: https://huggingface.co/blog/feed.xml
+    homepage: https://huggingface.co/blog
 
   # Meta AI（ai.meta.com/blog 是纯 JS 渲染）、Qwen（qwenlm.github.io 已停更，qwen.ai 是 JS 渲染）、
   # DeepSeek（没有博客）暂无可抓的官方列表页；它们的发布靠 HF Trending、GitHub、HN 覆盖。
@@ -80,6 +85,7 @@ sources:
     kind: paper
     enabled: false
     url: https://rss.arxiv.org/rss/cs.CL
+    homepage: https://arxiv.org/list/cs.CL/new
     arxiv_announce_types: [new]
 
   - id: arxiv-cs-lg
@@ -89,6 +95,7 @@ sources:
     kind: paper
     enabled: false
     url: https://rss.arxiv.org/rss/cs.LG
+    homepage: https://arxiv.org/list/cs.LG/new
     arxiv_announce_types: [new]
 
   - id: arxiv-cs-ai
@@ -98,6 +105,7 @@ sources:
     kind: paper
     enabled: false
     url: https://rss.arxiv.org/rss/cs.AI
+    homepage: https://arxiv.org/list/cs.AI/new
     arxiv_announce_types: [new]
 
   # ---------------------------------------------------------------- 开源（Tier 1）
