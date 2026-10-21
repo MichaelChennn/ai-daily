@@ -1,0 +1,428 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-21",
+  "mode": "full",
+  "generated_at": "2026-10-20T21:40:26+00:00",
+  "highlights": [
+    "DeepSeek 开源生产级推理框架 DeepInfer，并更新 DeepSeek-V4.1-Flash-1017 权重。",
+    "Google 开源 TorchTPU，PyTorch 可以把 TPU 当作普通设备使用；PyTorch 2.15 也大幅提升了 Mac 上的推理速度。"
+  ],
+  "items": [
+    {
+      "section": "headline",
+      "title": "DeepSeek 开源生产级推理框架 DeepInfer",
+      "summary": "DeepSeek 开源了支撑其线上大规模服务的推理框架 DeepInfer。此次开源版本提供离线推理，支持 DeepSeek-V4.1-Flash，硬件覆盖 NVIDIA SM100 GPU 和华为 Ascend 950 NPU，采用 Apache License 2.0。对自建推理服务的团队，这是一份难得的生产级一手参考实现；HN 上获得 2022 分。",
+      "sources": [
+        {
+          "candidate_id": "c_1b6d7a5398",
+          "url": "https://github.com/deepseek-ai/DeepInfer"
+        },
+        {
+          "candidate_id": "c_1b6d7a5398",
+          "url": "https://news.ycombinator.com/item?id=50163277"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/deepseek-ai/DeepInfer",
+          "quote": "DeepInfer is the high-performance inference framework that powers DeepSeek's large-scale production services."
+        },
+        {
+          "url": "https://github.com/deepseek-ai/DeepInfer",
+          "quote": "This open-source release provides offline inference with the core features needed for serving at scale."
+        },
+        {
+          "url": "https://github.com/deepseek-ai/DeepInfer",
+          "quote": "DeepSeek-V4.1-Flash"
+        },
+        {
+          "url": "https://github.com/deepseek-ai/DeepInfer",
+          "quote": "NVIDIA SM100 GPUs"
+        },
+        {
+          "url": "https://github.com/deepseek-ai/DeepInfer",
+          "quote": "Huawei Ascend 950 NPUs"
+        },
+        {
+          "url": "https://github.com/deepseek-ai/DeepInfer",
+          "quote": "DeepInfer is released under the Apache License 2.0."
+        }
+      ],
+      "tags": [
+        "开源",
+        "推理"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Google 开源 TorchTPU：TPU 成为 PyTorch 原生设备",
+      "summary": "TorchTPU 是新的 PyTorch 后端，让 TPU 像普通设备一样使用，自带针对 TPU 调优的 Pallas 内核、分布式训练支持和 torch.compile 集成。Hugging Face 同步支持，在 TPU VM 上安装后，加载模型时传入 device_map=\"tpu\" 即可。对已有 PyTorch 代码的团队，迁移到 TPU 的成本明显降低。",
+      "sources": [
+        {
+          "candidate_id": "c_12716f82e9",
+          "url": "https://huggingface.co/blog/hf-torchtpu"
+        },
+        {
+          "candidate_id": "c_9543205b20",
+          "url": "https://github.com/google-pytorch/torch_tpu"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/blog/hf-torchtpu",
+          "quote": "With TorchTPU, a native PyTorch backend, TPU is now just another device."
+        },
+        {
+          "url": "https://huggingface.co/blog/hf-torchtpu",
+          "quote": "It comes with Pallas kernels tuned for TPUs, support for distributed training, and a torch.compile integration"
+        },
+        {
+          "url": "https://huggingface.co/blog/hf-torchtpu",
+          "quote": "To load a model on a TPU, pass device_map=\"tpu\". That's it."
+        }
+      ],
+      "tags": [
+        "开源",
+        "硬件",
+        "训练"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Anthropic：Claude 主导设计出可结合蝎毒素的蛋白",
+      "summary": "Anthropic 让内部研究版 Claude 针对蝎子神经毒素设计微型结合蛋白，Claude 生成了 318,484 个设计并选出 180 个送测；在评估的 211 个设计中，有 17 个达到结合标准。作者强调尚未确认它们能在细胞环境中中和蝎毒，也不声称做出了抗毒血清。这是模型较为自主地承担科研设计工作的一个具体案例。",
+      "sources": [
+        {
+          "candidate_id": "c_64f0c1482f",
+          "url": "https://www.anthropic.com/research/claude-scorpion-toxin-binder-design"
+        },
+        {
+          "candidate_id": "c_64f0c1482f",
+          "url": "https://news.ycombinator.com/item?id=50170021"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://www.anthropic.com/research/claude-scorpion-toxin-binder-design",
+          "quote": "generated 318,484 protein designs and selected 180 of them for testing"
+        },
+        {
+          "url": "https://www.anthropic.com/research/claude-scorpion-toxin-binder-design",
+          "quote": "Of the 211 designs our teams assessed, 17 met our criteria for a binder, each against a single toxin."
+        },
+        {
+          "url": "https://www.anthropic.com/research/claude-scorpion-toxin-binder-design",
+          "quote": "We have not confirmed whether these binders neutralize scorpion venom in a cellular environment"
+        }
+      ],
+      "tags": [
+        "研究",
+        "Agent"
+      ]
+    },
+    {
+      "section": "model",
+      "title": "DeepSeek-V4.1-Flash-1017 更新权重",
+      "summary": "DeepSeek-V4.1-Flash 的小版本更新，763B 参数，支持图文输入，推荐上下文 1M tokens，MIT 许可开放权重。官方称推理、编程、Agent 和视觉基准都有明显提升（厂商自测）。目前位列 HF 趋势榜第 1。",
+      "sources": [
+        {
+          "candidate_id": "c_8b553ca25e",
+          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+          "quote": "763B params"
+        },
+        {
+          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+          "quote": "1M tokens"
+        },
+        {
+          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+          "quote": "delivering substantial improvements across reasoning, coding, agentic tasks, and visual benchmarks"
+        },
+        {
+          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+          "quote": "This repository and the model weights are licensed under the MIT License."
+        }
+      ],
+      "tags": [
+        "模型",
+        "开源"
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Black Forest Labs 开放 FLUX 3 Image Klein 权重",
+      "summary": "FLUX 3 Image Klein 是 5.6B 参数的开放权重模型，支持文生图和图像编辑，另有 Base 版和 ComfyUI 版本。官方要求必须配合 prompt upsampler 使用。许可为 FLUX Kommunity License，只允许非商业使用以及符合条件用户的商业出图，商用前要看清条款。",
+      "sources": [
+        {
+          "candidate_id": "c_174f9f6191",
+          "url": "https://huggingface.co/black-forest-labs/flux-3-image-klein"
+        },
+        {
+          "candidate_id": "c_8ff35e4f3f",
+          "url": "https://huggingface.co/black-forest-labs/flux-3-image-klein-base"
+        },
+        {
+          "candidate_id": "c_6ecc1d71a5",
+          "url": "https://huggingface.co/black-forest-labs/flux-3-image-klein-comfy"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/black-forest-labs/flux-3-image-klein",
+          "quote": "FLUX 3 Image Klein is a 5.6B open weights model for text-to-image generation and image editing."
+        },
+        {
+          "url": "https://huggingface.co/black-forest-labs/flux-3-image-klein",
+          "quote": "Do not use the model without a prompt upsampler."
+        },
+        {
+          "url": "https://huggingface.co/black-forest-labs/flux-3-image-klein",
+          "quote": "non-commercial use, plus commercial output generation by Qualifying Users"
+        }
+      ],
+      "tags": [
+        "模型",
+        "图像"
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Liquid AI 发布端侧推理模型 LFM2.5-24B-A2B",
+      "summary": "面向本地 Agent 的 MoE 推理模型，总参数 24.0B、激活 2.45B，上下文 131,072 tokens。官方称在 Apple M5 Max 上可达 184 tok/s，Agent 任务上与 Qwen3.6-35B-A3B 相当，但部分基准仍落后（厂商自测）。许可为 lfm1.0，需要在端侧跑 Agent 时值得一试。",
+      "sources": [
+        {
+          "candidate_id": "c_c6e1cac827",
+          "url": "https://huggingface.co/LiquidAI/LFM2.5-24B-A2B"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/LiquidAI/LFM2.5-24B-A2B",
+          "quote": "Total parameters: 24.0B"
+        },
+        {
+          "url": "https://huggingface.co/LiquidAI/LFM2.5-24B-A2B",
+          "quote": "Active parameters: 2.45B"
+        },
+        {
+          "url": "https://huggingface.co/LiquidAI/LFM2.5-24B-A2B",
+          "quote": "Context length: 131,072 tokens"
+        },
+        {
+          "url": "https://huggingface.co/LiquidAI/LFM2.5-24B-A2B",
+          "quote": "184 tok/s on an Apple M5 Max"
+        },
+        {
+          "url": "https://huggingface.co/LiquidAI/LFM2.5-24B-A2B",
+          "quote": "Competitive with Qwen3.6-35B-A3B"
+        },
+        {
+          "url": "https://huggingface.co/LiquidAI/LFM2.5-24B-A2B",
+          "quote": "License: lfm1.0"
+        }
+      ],
+      "tags": [
+        "模型",
+        "Agent",
+        "推理"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Self-HPO：让编程 Agent 交替优化 harness 和模型",
+      "summary": "论文提出 Self-HPO，交替进行 harness（Agent 脚手架）优化和强化学习策略训练，由模型根据自己的失败案例提出新的 harness。在编程基准上，Qwen3.5-35B-A3B 的平均解决率从 57.8% 提升到 64.8%，并能泛化到分布外场景。启示是调 Agent 时 harness 和模型应一起迭代。",
+      "sources": [
+        {
+          "candidate_id": "c_c806bff75f",
+          "url": "https://huggingface.co/papers/2610.22791"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2610.22791",
+          "quote": "we propose Self-HPO, a recursive self-improving framework for coding agents that alternates harness and policy optimization"
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.22791",
+          "quote": "improving Qwen3.5-35B-A3B’s average resolve rate from 57.8% to 64.8%, with gains generalizing to out-of-distribution settings."
+        }
+      ],
+      "tags": [
+        "论文",
+        "代码",
+        "Agent"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "OR-License：用真实咨询项目评测 Agent 的运筹优化能力",
+      "summary": "OR-License 基于付费工业咨询项目构建，包含 10 个工业场景中的 31 个实例，要求 Agent 从客户的原始材料出发交付可执行的运筹优化方案。表现最好的 Claude Code 配置达到 88.39% 的严格可行率，但没有模型在整体得分上追上专家。它比自包含题目更接近真实交付场景。",
+      "sources": [
+        {
+          "candidate_id": "c_7894b47854",
+          "url": "https://huggingface.co/papers/2610.24087"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2610.24087",
+          "quote": "an end-to-end benchmark of 31 instances across 10 industrial scenarios"
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.24087",
+          "quote": "achieves 88.39% strict feasibility and a DAQ of 0.87"
+        }
+      ],
+      "tags": [
+        "论文",
+        "Agent"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "PyTorch 2.15 大幅提速 Apple Silicon 上的模型推理",
+      "summary": "PyTorch 2.15 的 MPS 后端加入 FP8，MoE 模型解码比 2.14 快 5–6.5 倍，Qwen3.6-35B-A3B 在 M3 Ultra 上从 9.4 提升到 61.3 tokens/s，词表 softmax 约快 8 倍。在 Mac 上本地跑模型的开发者升级即可受益。",
+      "sources": [
+        {
+          "candidate_id": "c_00624af5a6",
+          "url": "https://huggingface.co/blog/mps-pytorch-2-15"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/blog/mps-pytorch-2-15",
+          "quote": "FP8 arrives on MPS, language-model decoding gets faster paths through linear layers and softmax."
+        },
+        {
+          "url": "https://huggingface.co/blog/mps-pytorch-2-15",
+          "quote": "MoE models decode 5–6.5× faster than in 2.14: Qwen3.6-35B-A3B goes from 9.4 to 61.3 tokens/s on an M3 Ultra."
+        },
+        {
+          "url": "https://huggingface.co/blog/mps-pytorch-2-15",
+          "quote": "softmax over the vocabulary is about 8× faster"
+        }
+      ],
+      "tags": [
+        "工具",
+        "推理",
+        "硬件"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Claude Code v2.1.304 / v2.1.305 发布",
+      "summary": "v2.1.305 新增 sandbox.allowNestedUserNamespaces，让 Linux 沙箱内的命令可以创建 user namespace（如 Chromium、rootless podman），官方提示这会让它们绕过沙箱的文件保护；同时修复了 Vertex、Bedrock 等提供方在网关拒绝 tool search 时所有请求失败的问题。v2.1.304 新增引导式配置命令 /auto-mode-setup。",
+      "sources": [
+        {
+          "candidate_id": "c_577f279e95",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.305"
+        },
+        {
+          "candidate_id": "c_ce8bb7725e",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.304"
+        }
+      ],
+      "tags": [
+        "工具",
+        "代码"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "OpenAI 宣布收购 Orchestra Bio",
+      "summary": "OpenAI 将收购 Orchestra Bio，把 AI 驱动的运营能力带入生命科学研发，帮助药企加速药物开发。",
+      "sources": [
+        {
+          "candidate_id": "c_d62552bab3",
+          "url": "https://openai.com/index/openai-to-acquire-orchestra-bio"
+        }
+      ],
+      "tags": [
+        "行业"
+      ]
+    }
+  ],
+  "research": [
+    {
+      "via": "webfetch",
+      "url": "https://github.com/deepseek-ai/DeepInfer"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://mistral.ai/news/voxtral-3/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/blog/hf-torchtpu"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://www.anthropic.com/research/claude-scorpion-toxin-binder-design"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://openai.com/index/openai-to-acquire-orchestra-bio"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/black-forest-labs/flux-3-image-klein"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/Qwen/Qwen-Image-2.1-Turbo"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/LiquidAI/LFM2.5-24B-A2B"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.22791"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/blog/mps-pytorch-2-15"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://redact.dev/blog/whatsapp-help-pages-hidden-ai-instructions"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.24087"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://peec.ai/blog/publish-stats-get-cited-the-tactic-that-put-my-data-all-over-the-web"
+    },
+    {
+      "via": "websearch",
+      "query": "Qwen3.8 Flash Next release Qwen blog"
+    }
+  ],
+  "validation": {
+    "validated_at": "2026-10-20T21:41:56+00:00",
+    "checked_links": true,
+    "dropped": [
+      {
+        "title": "Mistral 发布 Voxtral 3 语音模型与语音 Agent SDK",
+        "section": "headline",
+        "reasons": [
+          "evidence quote not found on https://mistral.ai/news/voxtral-3/: 'achieve high-quality transcriptions at sub-500ms latency in '"
+        ]
+      }
+    ],
+    "warnings": [
+      "OpenAI 宣布收购 Orchestra Bio: could not check https://openai.com/index/openai-to-acquire-orchestra-bio (403)"
+    ]
+  }
+}

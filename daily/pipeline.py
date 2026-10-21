@@ -17,6 +17,7 @@ from daily import __version__, dedup
 from daily.config import SourceConfig
 from daily.fetchers import FETCHERS
 from daily.models import Candidate
+from daily.throttle import PoliteTransport
 from daily.window import Window
 
 logger = logging.getLogger(__name__)
@@ -39,7 +40,7 @@ def make_client() -> httpx.AsyncClient:
         timeout=httpx.Timeout(20.0),
         follow_redirects=True,
         headers={"User-Agent": USER_AGENT},
-        transport=httpx.AsyncHTTPTransport(retries=2),
+        transport=PoliteTransport(httpx.AsyncHTTPTransport(retries=2)),
     )
 
 

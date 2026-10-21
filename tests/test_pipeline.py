@@ -78,7 +78,9 @@ sources:
     data_dir = tmp_path / "data"
     yesterday = data_dir / (ISSUE - timedelta(days=1)).isoformat()
     yesterday.mkdir(parents=True)
-    (yesterday / "digest.json").write_text(json.dumps({"items": [{"url": "https://openai.com/index/gpt-6"}]}))
+    (yesterday / "digest.json").write_text(
+        json.dumps({"items": [{"sources": [{"url": "https://openai.com/index/gpt-6"}]}]})
+    )
 
     routes = {"openai.com/news/rss.xml": RSS, "hn.algolia.com/api/v1/search_by_date": HN}
     monkeypatch.setattr(pipeline, "make_client", lambda: mock_client(routes))

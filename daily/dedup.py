@@ -284,21 +284,11 @@ def load_history(data_dir: Path, issue_date: date, days: int = 7) -> History:
                         seen.setdefault(url_key(url), []).append(day)
         digest_file = day_dir / "digest.json"
         if digest_file.exists():
-            # digest.json's schema is defined in M2; any URL in it counts as published.
-            for url in _urls_in(json.loads(digest_file.read_text(encoding="utf-8"))):
+            from daily.digest import published_urls  # deferred: digest imports dedup
+
+            for url in published_urls(json.loads(digest_file.read_text(encoding="utf-8"))):
                 published.setdefault(url_key(url), day)
     return History(seen={k: sorted(set(v)) for k, v in seen.items()}, published=published)
-
-
-def _urls_in(value: Any) -> Iterable[str]:
-    if isinstance(value, dict):
-        for v in value.values():
-            yield from _urls_in(v)
-    elif isinstance(value, list):
-        for v in value:
-            yield from _urls_in(v)
-    elif isinstance(value, str) and value.startswith(("http://", "https://")):
-        yield value
 
 
 def apply_history(items: list[Candidate], history: History) -> tuple[list[Candidate], list[dict[str, str]]]:
