@@ -15,8 +15,10 @@ pip install -e . -q
 python -c "from daily.window import beijing_today; print(beijing_today())"   # 没有给日期时，期号 = 北京时间今天
 ```
 
-- `data/<期号>/candidates.json` 不存在：停止并报告。06:30 的兜底会处理。
+- `data/<期号>/candidates.json` 不存在：先 `git pull origin main` 再看一次（05:07 的抓取可能被 Actions 推迟）。
+  还是没有就停止并报告，06:30 的兜底会处理（并发出告警）。
 - `data/<期号>/digest.json` 已经存在且 `mode` 是 `full`：不要覆盖，除非被明确要求重做。
+  `mode` 是 `fallback`（06:30 的兜底已经发布了降级版）：照常编辑，正式版会替换它。
 
 ## 1. 浏览候选
 
@@ -103,8 +105,14 @@ python -m daily validate --date <期号> --check-links --drop-invalid
 python -m daily render --date <期号>      # → data/<期号>/digest.md
 git add data/<期号>/digest.json data/<期号>/digest.md
 git commit -m "digest: <期号>"
-git push
+git push -u origin HEAD                  # 推到当前分支，不要开 PR
 ```
+
+- **定时任务（cloud session）**：只能推到本会话指定的 `claude/` 分支，照常推送即可。推送会触发
+  `.github/workflows/ingest.yml`：它用 main 上的 candidates.json 重新校验 digest.json，按上面第 0 步的规则
+  并入 main（降级版会被正式版替换，正式版不会被降级版覆盖），再重建网站。分支上的其他改动不会进入 main。
+- **本地在 main 上运行**：推到 main 会直接触发 `.github/workflows/pages.yml` 重建网站。
+- push 被拒绝（远端有新提交）：`git pull --rebase` 之后再推一次。
 
 最后用几行话报告：入选几条、被 validate 删掉几条（原因）、用了几次 WebFetch / WebSearch、有没有失败的信源。
 

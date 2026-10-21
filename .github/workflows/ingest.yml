@@ -1,0 +1,79 @@
+# Brings digests the Claude editor pushes into main, then rebuilds the site.
+#
+# The scheduled editor runs in a Claude cloud session, which can only push to its own claude/
+# branch. For every data/*/digest.json that branch changed, `daily adopt` validates it against
+# main's candidates.json and applies the skill's rules: an edited issue replaces a fallback
+# (the editor finished after 06:30), a fallback never replaces an edited issue, and an edited
+# issue is only replaced by a newer edit. Only digest.json is taken from the branch; digest.md
+# is re-rendered here. Nothing else on the branch reaches main.
+# Run it by hand with a branch name to pick up a branch whose push did not run this workflow
+# (e.g. one created before this file existed on main).
+name: ingest
+
+on:
+  push:
+    branches: ["claude/**"]
+    paths: ["data/*/digest.json"]
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: "Branch to take digests from (e.g. claude/xyz)"
+        required: true
+
+permissions:
+  contents: write
+  actions: write
+
+# Shared with fallback.yml: both commit data/ to main.
+concurrency:
+  group: publish
+  cancel-in-progress: false
+
+jobs:
+  ingest:
+    if: ${{ !github.event.deleted }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install .
+      - name: Adopt the branch's digests
+        env:
+          BRANCH: ${{ inputs.branch || github.ref_name }}
+        run: |
+          git fetch --no-tags origin "refs/heads/$BRANCH"
+          sha=$(git rev-parse FETCH_HEAD)
+          base=$(git merge-base origin/main "$sha")
+          for path in $(git diff --name-only --diff-filter=AM "$base" "$sha" -- 'data/*/digest.json'); do
+            date=$(basename "$(dirname "$path")")
+            if [ ! -f "data/$date/candidates.json" ]; then
+              echo "::warning::$path: main has no data/$date/candidates.json, skipped"
+              continue
+            fi
+            git show "$sha:$path" > "$RUNNER_TEMP/incoming.json"
+            python -m daily adopt --date "$date" --from "$RUNNER_TEMP/incoming.json"
+          done
+      - name: Commit and rebuild the site
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BRANCH: ${{ inputs.branch || github.ref_name }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/
+          git diff --cached --quiet && exit 0
+          dates=$(git diff --cached --name-only | xargs -n1 dirname | xargs -n1 basename | sort -u | xargs)
+          git commit -m "digest: $dates (from $BRANCH)"
+          for attempt in 1 2 3; do
+            if git pull --rebase && git push; then break; fi
+            [ "$attempt" = 3 ] && exit 1
+            sleep 5
+          done
+          gh workflow run pages.yml --ref main

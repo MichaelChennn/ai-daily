@@ -2,6 +2,8 @@
 
 每天早上 6 点（北京时间）自动生成的中文 AI 技术日报：5 分钟读完，每一条都能追溯到一手来源。
 
+网站：<https://michaelchennn.github.io/ai-daily/> · RSS（全文）：<https://michaelchennn.github.io/ai-daily/feed.xml>
+
 立项书：[docs/charter/00_Project_Charter.md](docs/charter/00_Project_Charter.md)
 
 ## 当前进度
@@ -11,7 +13,7 @@
 | M0 立项 | ✅ |
 | M1 信源与数据：`daily fetch` + 去重 | 🚧 代码已完成，等待连续 7 天的覆盖率验证 |
 | M2 编辑 skill 与质量闸门（`validate`、降级） | 🚧 代码与 skill 已完成，第一期见 [data/2026-10-21/digest.md](data/2026-10-21/digest.md)；等待回放 7 天数据 |
-| M3 发布（静态站点 + RSS + 定时任务） | — |
+| M3 发布（静态站点 + RSS + 定时任务） | 🚧 代码、workflow 和定时任务已完成，等待无人干预连续发布 3 天 |
 
 ## 使用
 
@@ -27,6 +29,9 @@ python -m daily page <url> --grep 关键词     # 打印原始页面里关键词
 python -m daily validate --date 2026-10-21 --check-links --drop-invalid   # 程序闸门
 python -m daily degrade --date 2026-10-21   # digest.json 缺失或不合格时，写入“标题 + 链接”降级版
 python -m daily render --date 2026-10-21    # digest.json → digest.md
+python -m daily adopt --date 2026-10-21 --from x.json   # 按规则并入编辑分支推来的 digest.json（ingest 用）
+python -m daily build                       # 静态网站 + RSS → _site/（不提交）
+python -m http.server -d _site              # 本地预览：http://localhost:8000/
 
 pytest -q && ruff check . && ruff format --check .
 ```
@@ -117,7 +122,25 @@ Meta AI、Qwen、DeepSeek 暂时没有可抓的官方列表页（JS 渲染或没
 
 抓取在 GitHub Actions 里跑，不在 Claude 的定时任务里：Claude cloud session 访问不了其他仓库的 GitHub API，Reddit 也会拒绝它的请求；Actions 自带 `GITHUB_TOKEN`，网络不受限制。
 
-`.github/workflows/fetch.yml` 每天北京时间 05:07 运行 `daily fetch`，把 `data/YYYY-MM-DD/candidates.json` 提交到 main。05:30 的 Claude 编辑任务（M2/M3）直接从仓库读取；M1 阶段这些文件用于 7 天覆盖率抽查。没有拿到任何内容时 job 失败，GitHub 会发通知。也可以在 Actions 页面手动触发，指定期号日期补抓。
+`.github/workflows/fetch.yml` 每天北京时间 05:07 运行 `daily fetch`，把 `data/YYYY-MM-DD/candidates.json` 提交到 main。05:30 的 Claude 编辑任务直接从仓库读取。没有拿到任何内容时 job 失败，GitHub 会发通知。也可以在 Actions 页面手动触发，指定期号日期补抓。
+
+## 发布（M3）
+
+| 北京时间 | 谁 | 做什么 |
+|---|---|---|
+| 05:07 | Actions `fetch.yml` | 抓取，把 `candidates.json` 提交到 main |
+| 05:30 | Claude 定时任务（每次新开一个 cloud session） | 运行 daily-editor skill，把 `digest.json` 推到本会话的 `claude/` 分支 |
+| 推送后 | Actions `ingest.yml` | 用 main 上的候选重新校验，按规则并入 main，启动 `pages.yml` |
+| 06:30 | Actions `fallback.yml` | 当天没有合格的 digest 就发布降级版，提交并启动 `pages.yml` |
+| 之后 | Actions `pages.yml` | `daily build` → GitHub Pages |
+
+- **为什么要 ingest**：cloud session 只能推送到它自己的 `claude/` 分支。ingest 只从分支拿 `data/*/digest.json`，其他改动不会进入 main。也可以在 Actions 页面手动运行 ingest，指定分支名，补收没有触发它的分支。
+- **为什么用 workflow_dispatch 串起来**：用 `GITHUB_TOKEN` 推送的提交不会触发其他 workflow（workflow_dispatch 除外），所以 ingest 和兜底提交之后用 `gh workflow run pages.yml --ref main` 启动构建。人推到 main（合并 PR）会直接触发 `pages.yml`。
+- **并入规则**（`daily/publish.py`）：正式版替换降级版（编辑在 06:30 之后才完成），降级版不会覆盖正式版，正式版只会被更新的正式版替换（重做）。
+- **告警**（Actions 失败 → GitHub 发通知）：`fetch` 没有拿到任何内容；06:30 时连 `candidates.json` 都没有；连续两天都是降级版。
+- **一次性设置**：仓库 Settings → Pages → Source 选 **GitHub Actions**。
+
+网站（`daily/site.py`，样式在 `daily/static/style.css`）：首页是最新一期全文和最近 30 天的列表，每期一页，存档页按月列出全部历史，信息源页用卡片列出白名单和最近 30 期的抓取成功次数、平均候选数、入选条目数。降级版在标题旁、正文顶部和 RSS 标题里都有标注。只发布能通过 `validate`（离线部分）的 digest。RSS 的 guid 带上 mode，降级版被正式版替换后，阅读器会把正式版当作新条目收到。
 
 ## 目录
 
@@ -129,6 +152,9 @@ daily/
   digest.py         digest.json schema 与 validate
   fallback.py       降级版
   render.py         digest.json → Markdown
+  site.py           静态网站和 RSS（daily build）
+  publish.py        编辑分支的 digest 能不能并入 main（daily adopt）
+  static/           网站样式
   throttle.py       同一主机的请求间隔、429 重试
   window.py         期号时间窗口
   text.py           文本清洗、日期解析

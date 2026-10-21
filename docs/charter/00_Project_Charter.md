@@ -1,6 +1,6 @@
-# AI 科技日报（ai-daily）— 立项书 v0.3
+# AI 科技日报（ai-daily）— 立项书 v0.4
 
-> 状态：已确认（v0.3） · 日期：2026-10-20 · 新仓库：`ai-daily`（公开）
+> 状态：已确认（v0.4） · 日期：2026-10-21 · 新仓库：`ai-daily`（公开）
 > 前身：Verita（AI 知识社区 + 每日 Digest）
 
 ---
@@ -150,10 +150,14 @@ Verita 最初是从“AI 科技日报”这个想法出发的，后来逐渐加�
        → 写中文日报 data/YYYY-MM-DD/digest.json
        （可用 WebSearch 补充固定信源漏掉的重大事件，但必须拿到一手链接）
   3. python -m daily validate   → 程序校验：结构合法；每个链接都来自候选集或 WebFetch 打开过的页面
-  4. git commit & push          → GitHub Actions 构建静态站点 + RSS → GitHub Pages
+  4. git commit & push          → 推到本会话的 claude/ 分支（cloud session 只能推这里）
+                                  → Actions ingest：重新校验后把 digest.json 并入 main
+                                  → Actions pages：python -m daily build 生成静态站点 + RSS → GitHub Pages
 
 北京时间 06:30  GitHub Actions 兜底
   当天没有 digest.json → 用 candidates.json 发布"标题 + 链接"降级版；如果连候选都没有 → Actions 失败通知
+  连续两天都是降级版 → Actions 失败通知（编辑任务坏了，不只是晚了）
+  编辑在 06:30 之后才完成 → ingest 用正式版替换降级版，网站重新构建
 ```
 
 ### LLM 的职责（以及不需要它做的事）
@@ -169,7 +173,7 @@ Verita 最初是从“AI 科技日报”这个想法出发的，后来逐渐加�
 - **无服务器、无数据库**：Git 仓库本身就是存储，`data/` 下按日期保存候选和成品，用于跨天去重和回顾。
 - **本地可完整运行**：`fetch` / `validate` / `build` 都能在本地单独执行；编辑环节也可以在本地 Claude Code 里手动调用 skill。
 - **成本**：消耗 Claude 订阅用量，不需要单独的 API key；抓取类 API（GitHub token 等）放在 Actions secrets / 环境变量里。
-- **前端**：纯静态，外观完全自由（手写或 Astro 等均可），保留全部历史存档，首页默认展示最近 30 天。
+- **前端**：纯静态，Python 生成（`daily/site.py`，无模板引擎、无 JS），保留全部历史存档，首页默认展示最近 30 天；另有信息源卡片页。
 - **可复用的 Verita 资产**：
   - `genai-service/app/services/external_sources.py`：GitHub / HF 抓取逻辑、HF 噪音过滤规则
   - `genai-service/app/services/digest_generator.py`：结构化输出 schema、source ID 引用校验思路
@@ -226,6 +230,10 @@ Verita 最初是从“AI 科技日报”这个想法出发的，后来逐渐加�
 - 生成方式：确定性抓取 + Claude 定时任务编辑 + Actions 兜底（第 8 节）。
 - v0.3：`fetch` 改在 GitHub Actions 里运行（05:00），Claude 定时任务只负责编辑。原因：Claude cloud session 无法访问其他仓库的 GitHub API，Reddit 也拒绝其请求。
 
+**已决（2026-10-21，v0.4）**
+- 前端（原待决 1）：Python 生成的静态网站（`python -m daily build`），不引入 Node 工具链；Newsletter 式单栏阅读风格，自动深浅色；页面包括首页（最新一期 + 最近 30 天）、每期一页、存档、信息源卡片页、全文 RSS。
+- 编辑预算（原待决 2）：每期 WebFetch ≤ 20 次、WebSearch ≤ 5 次，超出只警告。
+- 发布路径：Claude 定时任务的 cloud session 只能推送到自己的 `claude/` 分支，由 Actions（ingest）校验后并入 main；用 `GITHUB_TOKEN` 的提交不会触发其他 workflow，所以 ingest 和兜底提交后用 workflow_dispatch 启动 Pages 构建。
+
 **待决**
-1. 前端技术选型与视觉风格（在新仓库中设计）。
-2. 每日用量上限：编辑环节最多打开多少篇原文、最多用多少次 WebSearch。
+- 无。
