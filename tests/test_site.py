@@ -4,7 +4,7 @@ import xml.etree.ElementTree as ET
 
 import pytest
 
-from daily import cli, fallback, publish, site
+from daily import cli, export, fallback, publish, site
 from tests.conftest import source
 from tests.test_digest import CANDIDATES, DATE, _digest
 
@@ -109,6 +109,79 @@ def test_sources_page_cards(data_dir):
     assert 'class="card disabled"' in html and "已停用" in html
     stats = site.source_stats(SOURCES, data_dir, site.load_issues(data_dir))
     assert stats["openai-news"].picked == 0  # candidates' source is "blog", not a configured id
+
+
+def test_export_writes_publishable_issues(tmp_path, data_dir):
+    out = tmp_path / "web-data"
+    (out / "issues").mkdir(parents=True)
+    (out / "issues" / "2026-01-01.json").write_text("{}")  # left over from an issue since removed
+    export.export(out, data_dir)
+    files = sorted(p.name for p in (out / "issues").iterdir())
+    assert files == [f"{OLD}.json", f"{DATE}.json", f"{NEXT}.json"]  # not the invalid issue
+
+    issue = json.loads((out / "issues" / f"{DATE}.json").read_text())
+    assert not issue["fallback"] and issue["notice"] is None
+    assert issue["description"] == "OpenAI 发布 GPT-6，上下文达到 1M token。"
+    sections = {s["id"]: s for s in issue["sections"]}
+    assert list(sections) == ["headline", "model", "paper", "tool"]
+    assert sections["headline"]["label"] == "头条"
+
+    gpt = sections["headline"]["items"][0]
+    assert gpt["title"] == "OpenAI 发布 GPT-6" and not gpt["compact"]
+    assert gpt["publisher"] == {
+        "name": "OpenAI News",
+        "icon": "https://www.google.com/s2/favicons?domain=openai.com&sz=64",
+        "host": "openai.com",
+    }
+    assert gpt["published"] == {"iso": "2026-10-19T12:00:00+00:00", "label": "10月19日 14:00"}  # CEST
+    assert gpt["sources"] == [
+        {"label": "OpenAI News", "url": "https://openai.com/index/gpt-6/", "discussion": False}
+    ]
+    assert sections["tool"]["items"][0]["publisher"]["icon"] == "https://github.com/vllm-project.png?size=64"
+    qwen = sections["model"]["items"][0]["publisher"]
+    assert qwen["name"] == "Qwen" and qwen["icon"].startswith(
+        "https://huggingface.co/api/organizations/Qwen/"
+    )
+    assert sections["paper"]["items"][0]["publisher"]["name"] == "Paper"  # huggingface.co/papers: the source
+
+    fallback_issue = json.loads((out / "issues" / f"{NEXT}.json").read_text())
+    assert fallback_issue["fallback"] and fallback_issue["notice"] == site.FALLBACK_NOTICE
+    assert all(item["compact"] for s in fallback_issue["sections"] for item in s["items"])
+
+
+def test_export_publisher_skips_discussions():
+    item = {
+        "section": "headline",
+        "title": "x",
+        "summary": "y",
+        "sources": [
+            {"candidate_id": "c_hn", "url": "https://news.ycombinator.com/item?id=2"},
+            {"url": "https://github.com/owner/repo"},
+        ],
+    }
+    by_id = {c["id"]: c for c in CANDIDATES["candidates"]}
+    data = export._item(item, "headline", by_id)
+    assert data["publisher"]["name"] == "owner" and data["published"] is None
+    assert [s["discussion"] for s in data["sources"]] == [True, False]
+
+
+@pytest.mark.parametrize(
+    ("candidate", "expected"),
+    [
+        (None, None),
+        ({"kind": "blog", "published_at": None}, None),
+        ({"kind": "discussion", "published_at": "2026-10-19T12:00:00+00:00"}, None),  # when it was posted
+        ({"kind": "blog", "published_at": "2026-10-19T00:00:00+00:00"}, "10月19日"),  # a date, not midnight
+        (
+            {"kind": "paper", "published_at": "2026-10-19T00:00:00+00:00", "published_precision": "day"},
+            "10月19日",
+        ),
+        ({"kind": "release", "published_at": "2026-12-01T23:30:00+00:00"}, "12月2日 00:30"),  # CET
+    ],
+)
+def test_export_published(candidate, expected):
+    result = export.published(candidate)
+    assert (result and result["label"]) == expected
 
 
 def test_decide():

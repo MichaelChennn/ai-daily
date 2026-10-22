@@ -31,6 +31,7 @@ python -m daily degrade --date 2026-10-21   # digest.json 缺失或不合格时�
 python -m daily render --date 2026-10-21    # digest.json → digest.md
 python -m daily adopt --date 2026-10-21 --from x.json   # 按规则并入编辑分支推来的 digest.json（ingest 用）
 python -m daily build                       # 静态网站 + RSS → _site/（不提交）
+python -m daily export                      # 已发布各期 → web/data/issues/*.json（给前端用，不提交）
 python -m http.server -d _site              # 本地预览：http://localhost:8000/
 
 pytest -q && ruff check . && ruff format --check .
@@ -132,7 +133,7 @@ Meta AI、Qwen、DeepSeek 暂时没有可抓的官方列表页（JS 渲染或没
 | 05:30 | Claude 定时任务（每次新开一个 cloud session） | 运行 daily-editor skill，把 `digest.json` 推到本会话的 `claude/` 分支 |
 | 推送后 | Actions `ingest.yml` | 用 main 上的候选重新校验，按规则并入 main，启动 `pages.yml` |
 | 06:30 | Actions `fallback.yml` | 当天没有合格的 digest 就发布降级版，提交并启动 `pages.yml` |
-| 之后 | Actions `pages.yml` | `daily build` → GitHub Pages |
+| 之后 | Actions `pages.yml` | `daily build` + `web/` 构建 → GitHub Pages |
 
 - **为什么要 ingest**：cloud session 只能推送到它自己的 `claude/` 分支。ingest 只从分支拿 `data/*/digest.json`，其他改动不会进入 main。也可以在 Actions 页面手动运行 ingest，指定分支名，补收没有触发它的分支。
 - **为什么用 workflow_dispatch 串起来**：用 `GITHUB_TOKEN` 推送的提交不会触发其他 workflow（workflow_dispatch 除外），所以 ingest 和兜底提交之后用 `gh workflow run pages.yml --ref main` 启动构建。人推到 main（合并 PR）会直接触发 `pages.yml`。
@@ -142,6 +143,24 @@ Meta AI、Qwen、DeepSeek 暂时没有可抓的官方列表页（JS 渲染或没
 - **一次性设置**：仓库 Settings → Pages → Source 选 **GitHub Actions**（下面推荐的 “GitHub Pages Jekyll” / “Static HTML” 都不用点，仓库里已经有 `pages.yml`）。
 
 网站（`daily/site.py`，样式在 `daily/static/style.css`）：首页是最新一期全文和最近 30 天的列表，每期一页，存档页按月列出全部历史，信息源页用卡片列出白名单和最近 30 期的抓取成功次数、平均候选数、入选条目数。降级版在标题旁、正文顶部和 RSS 标题里都有标注。只发布能通过 `validate`（离线部分）的 digest。RSS 的 guid 带上 mode，降级版被正式版替换后，阅读器会把正式版当作新条目收到。
+
+### 前端（`web/`，进行中）
+
+每期页面（`YYYY-MM-DD/`）正在换成 Astro + React + Tailwind + [shadcn/ui](https://ui.shadcn.com/)，黑白配色。首页、存档、信息源和 RSS 暂时还由 `daily/site.py` 生成。`pages.yml` 先跑 `daily build`，再构建 `web/`，用它的输出覆盖 `_site/` 里的每期页面。
+
+- **数据**：`daily export` 把能通过 `validate` 的各期写成 `web/data/issues/*.json`，内容是分区、条目、来源链接、发布方（GitHub / Hugging Face 的 owner 头像，其他站点用 favicon）和发布时间。前端只负责排版，发布规则都留在 Python。只有一手来源的时间才算发布时间（HN、Reddit 的时间是发帖时间，不显示），只精确到天的来源只显示日期。
+- **交互**：页面是预渲染的静态 HTML。只有两个小部件需要 JS：分类筛选（shadcn ToggleGroup）和日夜模式切换（按钮，选择存在 localStorage）。
+
+```bash
+cd web && npm ci
+npm run dev                  # 先自动跑 daily export（需要能 import daily 的 python），然后打开 http://localhost:4321/ai-daily/2026-10-21/
+npm run check                # 类型检查
+
+# 预览合并后的完整站点
+python -m daily build --base-url http://localhost:8000/
+SITE_URL=http://localhost:8000/ npm run build --prefix web && cp -r web/dist/. _site/
+python -m http.server -d _site
+```
 
 ## 目录
 
@@ -154,12 +173,14 @@ daily/
   fallback.py       降级版
   render.py         digest.json → Markdown
   site.py           静态网站和 RSS（daily build）
+  export.py         各期 → JSON，给 web/ 用（daily export）
   publish.py        编辑分支的 digest 能不能并入 main（daily adopt）
   static/           网站样式
   throttle.py       同一主机的请求间隔、429 重试
   window.py         期号时间窗口
   text.py           文本清洗、日期解析
   fetchers/         各类信源
+web/                Astro 前端（每期页面）
 sources.yaml        信源白名单
 .claude/skills/daily-editor/   编辑 skill
 data/YYYY-MM-DD/    每期的 candidates.json、digest.json、digest.md
