@@ -12,7 +12,7 @@ from datetime import date
 from pathlib import Path
 from typing import Any
 
-from daily import dedup, digest, fallback, pipeline, publish, render, site
+from daily import dedup, digest, export, fallback, pipeline, publish, render, site
 from daily.config import DEFAULT_DATA_DIR, DEFAULT_SOURCES_FILE, load_sources
 from daily.window import issue_window, local_today
 
@@ -56,6 +56,10 @@ def main(argv: list[str] | None = None) -> int:
     build.add_argument("--out", type=Path, default=Path("_site"), help="输出目录（每次重建）")
     build.add_argument("--base-url", default=site.DEFAULT_BASE_URL, help="网站地址，用于 RSS 里的绝对链接")
 
+    data = commands.add_parser("export", help="已发布各期 → JSON，给网页前端（web/）用")
+    data.add_argument("--data-dir", type=Path, default=DEFAULT_DATA_DIR, help="数据目录")
+    data.add_argument("--out", type=Path, default=Path("web/data"), help="输出目录")
+
     page = commands.add_parser("page", help="打印页面里关键词附近的原文，供编辑逐字摘录 evidence")
     page.add_argument("url")
     page.add_argument("--grep", action="append", required=True, metavar="TEXT", help="关键词（可重复）")
@@ -79,6 +83,7 @@ def main(argv: list[str] | None = None) -> int:
             "render": _render,
             "adopt": _adopt,
             "build": _build,
+            "export": _export,
             "page": _page,
         }
         return handlers[args.command](args)
@@ -259,6 +264,12 @@ def _adopt(args: argparse.Namespace) -> int:
 def _build(args: argparse.Namespace) -> int:
     issues = site.build(args.out, args.data_dir, load_sources(args.sources), args.base_url)
     print(f"{len(issues)} issues -> {args.out}", file=sys.stderr)
+    return 0
+
+
+def _export(args: argparse.Namespace) -> int:
+    issues = export.export(args.out, args.data_dir)
+    print(f"{len(issues)} issues -> {args.out / 'issues'}", file=sys.stderr)
     return 0
 
 
