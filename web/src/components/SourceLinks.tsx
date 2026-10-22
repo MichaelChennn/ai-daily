@@ -1,0 +1,35 @@
+import { ArrowUpRight, MessageSquare } from "lucide-react"
+import { cn } from "cn"
+
+import { Badge, badgeVariants } from "@/components/ui/badge"
+import type { Source } from "@/lib/issues"
+
+// The item's sources as compact links: first-hand pages outlined, discussions (HN, Reddit) filled.
+// scripts/source-overflow.ts keeps the list to one row and fills in the "+n 更多来源" button.
+export default function SourceLinks({ sources, className }: { sources: Source[]; className?: string }) {
+  return (
+    <ul data-sources className={cn("flex flex-wrap gap-1.5 data-squeezed:flex-nowrap", className)}>
+      {sources.map((source) => (
+        <li key={source.url} className="max-w-full min-w-0">
+          <Badge
+            asChild
+            variant={source.discussion ? "secondary" : "outline"}
+            className="h-6 max-w-full rounded-md px-2 font-normal"
+          >
+            <a href={source.url} target="_blank" rel="noopener noreferrer">
+              {source.discussion && <MessageSquare aria-hidden="true" />}
+              <span className="truncate">{source.label}</span>
+              {!source.discussion && <ArrowUpRight aria-hidden="true" className="text-muted-foreground" />}
+            </a>
+          </Badge>
+        </li>
+      ))}
+      <li data-more hidden className="shrink-0">
+        <button
+          type="button"
+          className={cn(badgeVariants({ variant: "ghost" }), "h-6 cursor-pointer rounded-md px-2 font-normal text-muted-foreground")}
+        />
+      </li>
+    </ul>
+  )
+}

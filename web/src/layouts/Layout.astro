@@ -1,0 +1,88 @@
+---
+import "@/styles/global.css"
+import SiteFooter from "@/components/SiteFooter.astro"
+import SiteHeader from "@/components/SiteHeader.astro"
+import { href, SITE_TITLE } from "@/lib/issues"
+
+interface Props {
+  title: string
+  description: string
+  /** The newest issue's date, where the brand and 今日日报 link to. */
+  latest: string
+}
+
+const { title, description, latest } = Astro.props
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Opt into cross-document view transitions here, not in the stylesheet: when the new page
+         is revealed its stylesheet may still be loading (not cached yet), and Chrome then skips
+         the transition. Hold the first paint until the content is parsed, so the transition
+         animates the whole issue rather than its first part. -->
+    <style is:inline>
+      @view-transition {
+        navigation: auto;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        @view-transition {
+          navigation: none;
+        }
+      }
+    </style>
+    <link rel="expect" href="#content-end" blocking="render" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <link rel="alternate" type="application/rss+xml" title={SITE_TITLE} href={href("feed.xml")} />
+    <meta name="generator" content={Astro.generator} />
+    <script is:inline>
+      // Set the theme before the first paint (shadcn's Astro dark mode setup): the saved
+      // choice, else the system preference.
+      ;(() => {
+        let saved = null
+        try {
+          saved = localStorage.getItem("theme")
+        } catch {}
+        const dark = saved ? saved === "dark" : matchMedia("(prefers-color-scheme: dark)").matches
+        document.documentElement.classList.toggle("dark", dark)
+      })()
+      // A publisher logo that fails to load leaves its monogram showing. Error events do not
+      // bubble, so listen in the capture phase; this runs before any <img> exists.
+      document.addEventListener(
+        "error",
+        (event) => {
+          const target = event.target
+          if (target instanceof HTMLImageElement && target.dataset.logo !== undefined) target.remove()
+        },
+        true,
+      )
+      // Going to a newer issue slides it in from the right, an older one from the left (the
+      // animations are in global.css). Registered here so it runs before the new page's first paint.
+      addEventListener("pagereveal", (event) => {
+        const transition = event.viewTransition
+        const day = (url) => url.match(/\d{4}-\d{2}-\d{2}/)?.[0]
+        const from = day(document.referrer)
+        const to = day(location.pathname)
+        if (!transition || !from || !to || from === to) return
+        const root = document.documentElement
+        root.dataset.slide = to > from ? "newer" : "older"
+        transition.finished.finally(() => delete root.dataset.slide)
+      })
+    </script>
+  </head>
+  <body class="flex min-h-svh flex-col antialiased">
+    <SiteHeader latest={latest} />
+    <main class="mx-auto w-full max-w-3xl flex-1 px-4 sm:px-6">
+      <slot />
+      <div id="content-end" hidden></div>
+    </main>
+    <SiteFooter />
+    <script>
+      import "@/scripts/source-overflow"
+    </script>
+  </body>
+</html>
