@@ -130,8 +130,11 @@
   button:not(:disabled), [role="button"]:not(:disabled) {
     cursor: pointer;
     }
+  /* Room for the scrollbar on every page, so that a page too short to scroll does not shift the
+     centered header and content sideways (where scrollbars take up space, as on Windows). */
   html {
     @apply font-sans;
+    scrollbar-gutter: stable;
     }
 }
 /* View transitions: between issues (cross-document, opted into and given a direction in
@@ -143,9 +146,18 @@
   animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* The sticky header stays above the content sliding under it. */
+/* The sticky header stays above the content sliding under it. The current page's pill in the
+   header glides to the next page's link, under the link labels (SiteHeader.astro). */
 ::view-transition-group(site-header) {
   z-index: 1;
+}
+::view-transition-group(nav-pill) {
+  z-index: 2;
+}
+::view-transition-group(nav-today),
+::view-transition-group(nav-archive),
+::view-transition-group(nav-sources) {
+  z-index: 3;
 }
 
 /* The old issue leaves before the new one arrives, so the two are hardly ever on screen together.

@@ -1,0 +1,82 @@
+---
+import { TriangleAlert } from "lucide-react"
+
+import { Alert, AlertDescription } from "@/components/ui/alert"
+import BriefList from "@/components/BriefList"
+import DateWheel from "@/components/DateWheel"
+import ItemCard from "@/components/ItemCard"
+import Pager from "@/components/Pager"
+import SectionFilter from "@/components/SectionFilter"
+import Layout from "@/layouts/Layout.astro"
+import { type Issue, issueHref, issues, SITE_TITLE } from "@/lib/issues"
+
+interface Props {
+  issue: Issue
+  /** The home page shows the newest issue too; its canonical URL is the issue's own. */
+  home?: boolean
+}
+
+// One issue, at YYYY-MM-DD/ and (the newest) at the home page.
+const { issue, home = false } = Astro.props
+const at = issues.findIndex((i) => i.date === issue.date)
+const newer = issues[at - 1]?.date ?? null
+const older = issues[at + 1]?.date ?? null
+const published = new Set(issues.map((i) => i.date))
+const title = `${issue.date} · ${SITE_TITLE}` + (issue.fallback ? "（降级版）" : "")
+const description = issue.description || `${issue.date} 的 AI 科技日报。`
+const filters = issue.sections.map(({ id, label }) => ({ id, label }))
+---
+
+
+<Layout
+  title={title}
+  description={description}
+ 
+  current={newer ? "archive" : "today"}
+  canonical={home ? issueHref(issue.date) : undefined}
+>
+  <h1 class="sr-only">{title}</h1>
+  <DateWheel date={issue.date} published={published} older={older} newer={newer} />
+  <SectionFilter client:load sections={filters} />
+
+  <div data-issue class="[view-transition-name:issue]">
+    {
+      issue.notice && (
+        <Alert className="mt-8 rounded-lg">
+          <TriangleAlert />
+          <AlertDescription>{issue.notice}</AlertDescription>
+        </Alert>
+      )
+    }
+
+    <div class="mt-10 flex flex-col gap-16">
+      {
+        issue.sections.map((section, i) => {
+          const full = section.items.filter((item) => !item.compact)
+          const compact = section.items.filter((item) => item.compact)
+          return (
+            <section data-section={section.id} id={section.id} class="scroll-mt-20">
+              <header class="mb-5 flex items-baseline justify-between gap-4">
+                <h2 class="flex items-baseline gap-3 text-xl font-semibold tracking-tight">
+                  <span class="text-sm font-medium text-muted-foreground tabular-nums">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span>{section.label}</span>
+                </h2>
+                <span class="text-xs text-muted-foreground tabular-nums">{section.items.length} 条</span>
+              </header>
+              <div class="flex flex-col gap-4">
+                {full.map((item) => (
+                  <ItemCard item={item} />
+                ))}
+                {compact.length > 0 && <BriefList items={compact} />}
+              </div>
+            </section>
+          )
+        })
+      }
+    </div>
+
+    <Pager older={older} newer={newer} />
+  </div>
+</Layout>

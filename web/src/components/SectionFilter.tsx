@@ -2,6 +2,7 @@ import { useState } from "react"
 import { flushSync } from "react-dom"
 
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
+import { filterTransition } from "@/lib/filter-transition"
 
 type Props = { sections: { id: string; label: string }[] }
 
@@ -20,23 +21,21 @@ export default function SectionFilter({ sections }: Props) {
       flushSync(() => setValue(next))
       for (const el of sectionEls) el.hidden = next !== ALL && el.dataset.section !== next
     }
-    if (!document.startViewTransition || matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      update()
-      return
-    }
     // Each section and the pager move on their own for this transition; the issue body (which
     // slides as one between issues) does not.
     const issue = document.querySelector<HTMLElement>("[data-issue]")
     const moving = [...sectionEls, ...(issue?.querySelectorAll<HTMLElement>("[data-pager]") ?? [])]
-    const root = document.documentElement
-    issue?.style.setProperty("view-transition-name", "none")
-    for (const el of moving) el.style.viewTransitionName = `filter-${el.dataset.section ?? "pager"}`
-    root.dataset.filtering = ""
-    document.startViewTransition(update).finished.finally(() => {
-      delete root.dataset.filtering
-      issue?.style.removeProperty("view-transition-name")
-      for (const el of moving) el.style.viewTransitionName = ""
-    })
+    filterTransition(
+      update,
+      () => {
+        issue?.style.setProperty("view-transition-name", "none")
+        for (const el of moving) el.style.viewTransitionName = `filter-${el.dataset.section ?? "pager"}`
+      },
+      () => {
+        issue?.style.removeProperty("view-transition-name")
+        for (const el of moving) el.style.viewTransitionName = ""
+      },
+    )
   }
 
   const options = [{ id: ALL, label: "全部" }, ...sections]

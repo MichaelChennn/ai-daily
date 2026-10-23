@@ -1,0 +1,18 @@
+---
+import IssuePage from "@/components/IssuePage.astro"
+import Layout from "@/layouts/Layout.astro"
+import { issues, SITE_TITLE } from "@/lib/issues"
+
+// The newest issue, the same page as at its date.
+const [latest] = issues
+---
+
+{
+  latest ? (
+    <IssuePage issue={latest} home />
+  ) : (
+    <Layout title={SITE_TITLE} description={`${SITE_TITLE}。`} current="today">
+      <p class="py-24 text-center text-sm text-muted-foreground">还没有发布任何一期</p>
+    </Layout>
+  )
+}

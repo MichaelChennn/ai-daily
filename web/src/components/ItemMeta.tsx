@@ -16,7 +16,7 @@ export default function ItemMeta({ item }: { item: Item }) {
           height={16}
           loading="lazy"
           referrerPolicy="no-referrer"
-          className="absolute inset-0 size-full bg-background object-cover grayscale transition group-hover/card:grayscale-0"
+          className="absolute inset-0 size-full bg-background object-cover"
         />
       </span>
       <span className="truncate font-medium text-foreground">{publisher.name}</span>
