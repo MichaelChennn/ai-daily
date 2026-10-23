@@ -1,160 +1,459 @@
 {
   "schema_version": 1,
   "date": "2026-10-22",
-  "mode": "fallback",
-  "generated_at": "2026-10-22T04:39:49+00:00",
-  "highlights": [],
+  "mode": "full",
+  "generated_at": "2026-10-23T01:05:06+00:00",
+  "highlights": [
+    "Wiz 用 AI 发现 PHP 核心引擎远程代码执行漏洞 PHP2Shell，PHP 官方已发布补丁；LiteLLM 1.107.0 遭投毒，最新安全版本是 1.106.2，请尽快检查依赖。",
+    "Anthropic 推出研究预览版 Claude Duet；Recursive 开源编程模型 Flint，Ollama 已支持。"
+  ],
   "items": [
     {
       "section": "headline",
-      "title": "OpenAI models are coming to Google Cloud",
-      "summary": "",
+      "title": "Wiz 用 AI 挖出 PHP 核心引擎远程代码执行漏洞 PHP2Shell",
+      "summary": "Wiz Research 披露了 PHP 核心引擎里的一组内存安全漏洞（CVE-2026-109618、CVE-2026-109619），可用于未授权远程代码执行和读取进程内存，过去十年发布的 PHP 版本都受至少一个漏洞影响，最早到 5.4；PHP 官方已发布补丁。研究全程使用了 Gemini 4 Argon 和 GPT-5.6 Sol 等前沿模型。漏洞在 PHP 本身，不依赖应用代码，跑 PHP 的服务都应尽快升级。",
+      "sources": [
+        {
+          "candidate_id": "c_468a238af5",
+          "url": "https://www.wiz.io/blog/php2shell-php-rce"
+        },
+        {
+          "candidate_id": "c_468a238af5",
+          "url": "https://news.ycombinator.com/item?id=50180836"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://www.wiz.io/blog/php2shell-php-rce",
+          "quote": "decade is affected by at least one of these vulnerabilities, going back to version 5.4. Attackers can exploit them remotely, in some cases fairly easily. Immediate patching is strongly advised."
+        },
+        {
+          "url": "https://www.wiz.io/blog/php2shell-php-rce",
+          "quote": "Exploitation does not depend on a flaw in the application’s code: even a simple “Hello World” application running on an affected PHP version can be vulnerable."
+        },
+        {
+          "url": "https://www.wiz.io/blog/php2shell-php-rce",
+          "quote": "We used Wiz Atlas , Gemini 4 Argon and GPT-5.6 Sol throughout this research."
+        },
+        {
+          "url": "https://www.wiz.io/blog/php2shell-php-rce",
+          "quote": "Tracking ID Bug What an attacker can achieve What we demonstrated CVE-2026-109618 Upload-progress unserializer use-after-free"
+        },
+        {
+          "url": "https://www.wiz.io/blog/php2shell-php-rce",
+          "quote": "CVE-2026-109619 Fatal-error backtrace use-after-free OPcache type confusion"
+        },
+        {
+          "url": "https://www.wiz.io/blog/php2shell-php-rce",
+          "quote": "PHP released the patch fixing multiple memory-safety vulnerabilities in the core engine."
+        }
+      ],
+      "tags": [
+        "安全"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "LiteLLM 1.107.0 遭投毒，窃取云和 AI 密钥",
+      "summary": "Wiz 报告，PyPI 和 GHCR / Docker Hub 上的 LiteLLM 1.107.0 被植入凭据窃取程序，目标是浏览器、云和 AI 服务的密钥，PyPI 上约 49,000 次下载，最新安全版本是 1.106.2。据 BerriAI 说明，攻击者通过被盗的 GitHub CLI OAuth 令牌控制了三名工程师的账号来触发发布流程。装过这个版本或拉过相关镜像标签的环境，应锁定旧版本并轮换机器上的凭据。",
+      "sources": [
+        {
+          "url": "https://www.wiz.io/blog/litellm-compromised-steals-credentials",
+          "title": "Wiz Blog"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://www.wiz.io/blog/litellm-compromised-steals-credentials",
+          "quote": "The malicious version includes a credential stealer targeting browser, cloud and AI secrets as well as a dormant C2 capability."
+        },
+        {
+          "url": "https://www.wiz.io/blog/litellm-compromised-steals-credentials",
+          "quote": "According to ClickPy data , the malicious version received approximately 49,000 downloads. LiteLLM Docker containers on GHCR and Docker hub also included the trojanized version of LiteLLM."
+        },
+        {
+          "url": "https://www.wiz.io/blog/litellm-compromised-steals-credentials",
+          "quote": "The most recent safe version is v1.106.2."
+        },
+        {
+          "url": "https://www.wiz.io/blog/litellm-compromised-steals-credentials",
+          "quote": "malicious actions were taken through three engineers' GitHub accounts, appearing to be by way of stolen GitHub CLI OAuth tokens."
+        },
+        {
+          "url": "https://www.wiz.io/blog/litellm-compromised-steals-credentials",
+          "quote": "a malicious version (1.107.0) of the LiteLLM package was uploaded to PyPI"
+        }
+      ],
+      "tags": [
+        "安全",
+        "工具"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Anthropic 推出主动型 Agent 应用 Claude Duet",
+      "summary": "Claude Duet 是一个独立应用，Claude 在自己的虚拟机和浏览器里后台干活，每天早上发简报，需要你决定时才发消息，可接入 6,000 多个连接器和插件。发消息、付款、签署或删除之前，它会先展示要做的操作并等待批准。目前是研究预览，面向美国的 Pro 和 Max 订阅用户排队开放，用量计入现有套餐。",
+      "sources": [
+        {
+          "candidate_id": "c_b6b7083a4e",
+          "url": "https://claude.com/product/claude-duet"
+        },
+        {
+          "candidate_id": "c_657a451ff3",
+          "url": "https://claude.com/resources/articles/claude-duet"
+        },
+        {
+          "candidate_id": "c_b6b7083a4e",
+          "url": "https://news.ycombinator.com/item?id=50186037"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://claude.com/product/claude-duet",
+          "quote": "Claude Duet is a research preview on a waitlist for Claude Pro and Max subscribers in the US."
+        },
+        {
+          "url": "https://claude.com/product/claude-duet",
+          "quote": "Works with more than 6,000 connectors and plugins"
+        },
+        {
+          "url": "https://claude.com/resources/articles/claude-duet",
+          "quote": "Claude Duet has a virtual machine with its own browser, so it doesn’t require your laptop or phone to be on."
+        },
+        {
+          "url": "https://claude.com/resources/articles/claude-duet",
+          "quote": "before it sends a message, makes a payment, signs a document, or deletes anything, it shows you exactly what it’s about to do and waits for your approval."
+        }
+      ],
+      "tags": [
+        "Agent",
+        "产品"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Anthropic：用 Claude 缩减代码攻击面，在 25 个项目中发现 493 个问题",
+      "summary": "Anthropic 让 Claude 从三个角度检查代码：默认配置下多余的可达代码、认证前就会执行的代码、悄悄削弱安全控制的配置组合，在 25 个项目中发现 493 个问题。其中 OpenSSH 默认配置下未认证客户端可触达约 4,500 行实验性 ML-DSA-44 代码，约占 sshd 认证前代码的 16%，已经在后续版本中修复。这套方法已打包成可复用的 Claude skill，即使不用这个 skill，开发者也可以照这套思路审查自己的项目。",
+      "sources": [
+        {
+          "candidate_id": "c_867ca17230",
+          "url": "https://www.anthropic.com/research/attack-surface-reduction"
+        },
+        {
+          "candidate_id": "c_867ca17230",
+          "url": "https://news.ycombinator.com/item?id=50175779"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://www.anthropic.com/research/attack-surface-reduction",
+          "quote": "we ran Claude over 25 projects (in a variety of languages), and it discovered 493 issues."
+        },
+        {
+          "url": "https://www.anthropic.com/research/attack-surface-reduction",
+          "quote": "Those 4,500 lines of code in ML-DSA-44 are about 16% of OpenSSH’s own pre-authentication code in a default sshd."
+        },
+        {
+          "url": "https://www.anthropic.com/research/attack-surface-reduction",
+          "quote": "We have combined the attack surface reduction techniques we described above into one reusable Claude skill, which we are working to integrate into OSS-Scanner ."
+        }
+      ],
+      "tags": [
+        "安全",
+        "Agent"
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Recursive 开源编程模型 Flint，40B 总参数、2.5B 激活",
+      "summary": "Flint 是 Recursive 从头训练的 MoE 模型，面向在代码仓库里工作的编程 Agent，上下文 262K，Apache 2.0 许可；官方评测 Terminal-Bench 2.1 为 54.9%、SWE-bench Verified 为 74.2%。Ollama v0.40.8 已支持 ollama run flint，目前仅限 MacOS。每个 token 只激活约 2.5B 参数，适合拿来测试本地编程 Agent。",
+      "sources": [
+        {
+          "candidate_id": "c_cefcbe1a01",
+          "url": "https://huggingface.co/RecursiveSI/flint"
+        },
+        {
+          "candidate_id": "c_1085586bae",
+          "url": "https://github.com/ollama/ollama/releases/tag/v0.40.8"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/RecursiveSI/flint",
+          "quote": "Flint was trained from scratch through pretraining, mid-training, supervised fine-tuning, and reinforcement learning."
+        },
+        {
+          "url": "https://huggingface.co/RecursiveSI/flint",
+          "quote": "In our release evaluations, it scores 54.9% on Terminal-Bench 2.1, 89.7% on SWE-bench Pro v2, and 74.2% on SWE-bench Verified."
+        },
+        {
+          "url": "https://huggingface.co/RecursiveSI/flint",
+          "quote": "Flint is released under the Apache 2.0 license ."
+        }
+      ],
+      "tags": [
+        "模型",
+        "开源",
+        "代码"
+      ]
+    },
+    {
+      "section": "model",
+      "title": "KRAFTON 开源 Raon-1 mini 预览版 30B-A4B",
+      "summary": "Raon-1 mini 是 KRAFTON AI 从头训练的 30B-A4B MoE 模型，擅长韩语对话和 Agent 任务，原生支持 262,144 token 上下文，Apache 2.0 许可。官方提供 NVFP4 量化版，单张 RTX 5090 就能推理，还附带用于推测解码的 DFlash2 草稿模型。适合需要韩语能力或在单卡上跑 Agent 的开发者试一试。",
+      "sources": [
+        {
+          "candidate_id": "c_4a613951b2",
+          "url": "https://huggingface.co/KRAFTON/Raon-1-mini-preview"
+        },
+        {
+          "candidate_id": "c_4a613951b2",
+          "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xbh0ev/kraftonraon1minipreview_hugging_face/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/KRAFTON/Raon-1-mini-preview",
+          "quote": "Raon-1 mini is a 30B-A4B Mixture-of-Experts (MoE) language model, designed and trained from scratch by KRAFTON AI ."
+        },
+        {
+          "url": "https://huggingface.co/KRAFTON/Raon-1-mini-preview",
+          "quote": "Long context: Natively supports up to 262,144 tokens of context."
+        },
+        {
+          "url": "https://huggingface.co/KRAFTON/Raon-1-mini-preview",
+          "quote": "Quantization options : Available in MXFP8 and NVFP4 formats, with NVFP4 enabling inference on a single NVIDIA RTX 5090 gpu (32 GB VRAM)."
+        }
+      ],
+      "tags": [
+        "模型",
+        "开源"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Agent S4：让电脑操作 Agent 从经验中进化出自己的接口",
+      "summary": "Agent S4 用元 Agent 分析任务轨迹，自动构建和修订 Agent 使用的接口与用法知识，再用种群进化挑选泛化好的版本。在 OSWorld V2 上，Qwen3.8-27B 配合进化出的接口达到 21.3%，是固定接口的 3.8 倍，高于 Claude Opus 4.8 的 20.6%。代码已开源，说明给 Agent 设计接口这件事本身也可以交给 Agent。",
+      "sources": [
+        {
+          "candidate_id": "c_3e1e18aff6",
+          "url": "https://huggingface.co/papers/2610.28601"
+        },
+        {
+          "url": "https://arxiv.org/abs/2610.28601",
+          "title": "arXiv"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.28601",
+          "quote": "We open-source our code at this https URL ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.28601",
+          "quote": "On OSWorld V2, Agent S4, with Qwen3.8-27B and the evolved repository of interfaces, sets a new state of the art in open-source computer-use agents, reaching 21.3% binary score, 3.8 times the same model with fixed interfaces."
+        }
+      ],
+      "tags": [
+        "论文",
+        "Agent"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Matrix-Game 4.0：游戏引擎加视频模型，实时生成可玩世界",
+      "summary": "Matrix-Game 4.0 把游戏执行和画面生成分开：轻量游戏引擎维护世界状态和规则，编程 Agent 把玩家想法转成游戏代码，基于自回归视频模型的渲染器把低多边形画面变成精细画面。单张 RTX5090 上可以 480p、60 FPS 运行，按键到显示延迟 112ms。代码、模型权重和资产都已开源，可用于研究可交互的世界模型。",
+      "sources": [
+        {
+          "candidate_id": "c_9b9f1f77e6",
+          "url": "https://huggingface.co/papers/2610.27999"
+        },
+        {
+          "url": "https://arxiv.org/abs/2610.27999",
+          "title": "arXiv"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2610.27999",
+          "quote": "Matrix-Game 4.0 enables 480p, 60 FPS gameplay on a single NVIDIA RTX5090 with a key-press-to-display latency of 112ms."
+        },
+        {
+          "url": "https://arxiv.org/abs/2610.27999",
+          "quote": "release code, model weights, and low-poly game assets to support research and creation of playable game worlds."
+        }
+      ],
+      "tags": [
+        "论文",
+        "视频",
+        "开源"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "PAR：让循环语言模型在更长的问题上也有效",
+      "summary": "PAR 训练循环模型在第 k 次迭代时对齐前 k 步操作后的状态，并把循环状态缩放回第一次迭代的范数。在 swap-S5 上，用最多 32 步训练的 Qwen2.5-0.5B 在 512 步时达到 95.5% 准确率，是训练长度的 16 倍，同一模型用显式思维链只有 0.8%。对研究测试时扩展计算的人来说，这说明监督中间步骤是长度外推的关键。",
+      "sources": [
+        {
+          "candidate_id": "c_0f2ff6073e",
+          "url": "https://huggingface.co/papers/2610.27628"
+        },
+        {
+          "url": "https://arxiv.org/abs/2610.27628",
+          "title": "arXiv"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2610.27628",
+          "quote": "On swap-S5, a 0.5B model trained on sequences of at most 32 steps achieves 95.5% full-state accuracy at 512 steps—a 16× length extrapolation."
+        }
+      ],
+      "tags": [
+        "论文",
+        "推理",
+        "训练"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Claude Code v2.1.306 / v2.1.307 发布",
+      "summary": "v2.1.307 新增 /claude-api api-version 命令，可把 Claude API 代码迁移到 API version 2026-10-21；还新增 claude_code.safety OpenTelemetry 事件，每当权限规则、auto mode、hook 或沙箱拦截工具调用时都会记录。另外修复了 HTTP MCP 工具调用在连接中断时被重复发送等问题，现在只重试只读或幂等的工具。",
+      "sources": [
+        {
+          "candidate_id": "c_aad95f706b",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.307"
+        },
+        {
+          "candidate_id": "c_0e9435056f",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.306"
+        }
+      ],
+      "evidence": [],
+      "tags": [
+        "工具",
+        "代码",
+        "Agent"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "OpenAI 模型登陆 Google Cloud",
+      "summary": "OpenAI 与 Google Cloud 宣布把前沿模型和 Codex 工作流带到 Model Garden，通过 Google Cloud Marketplace 提供。",
       "sources": [
         {
           "candidate_id": "c_4846377e2d",
           "url": "https://openai.com/index/openai-models-google-cloud"
+        },
+        {
+          "candidate_id": "c_4846377e2d",
+          "url": "https://news.ycombinator.com/item?id=50180079"
         }
       ],
-      "tags": []
+      "evidence": [],
+      "tags": [
+        "行业",
+        "产品"
+      ]
     },
     {
-      "section": "headline",
-      "title": "Patch the Planet: global response coordination as agents uncover critical vulnerabilities",
-      "summary": "",
+      "section": "brief",
+      "title": "OpenAI 发起 Patch the Planet 漏洞协同响应计划",
+      "summary": "随着 Agent 发现越来越多严重漏洞，OpenAI 发起 Patch the Planet，把安全研究者、维护者和应急响应人员连接起来，协同修复开源项目中的严重漏洞。",
       "sources": [
         {
           "candidate_id": "c_10ac5adb18",
           "url": "https://openai.com/index/coordinated-disclosure-of-critical-vulnerabilities"
         }
       ],
-      "tags": []
-    },
-    {
-      "section": "headline",
-      "title": "Using thousands of AI agents to uncover new leads in biological data",
-      "summary": "",
-      "sources": [
-        {
-          "candidate_id": "c_393ba4e96c",
-          "url": "https://openai.com/index/scaling-ai-research-for-complex-biological-data"
-        }
-      ],
-      "tags": []
-    },
-    {
-      "section": "headline",
-      "title": "Broad access through consistent standards",
-      "summary": "",
-      "sources": [
-        {
-          "candidate_id": "c_0fbafbf407",
-          "url": "https://openai.com/index/broad-access-through-consistent-standards"
-        }
-      ],
-      "tags": []
-    },
-    {
-      "section": "model",
-      "title": "RecursiveSI/flint",
-      "summary": "",
-      "sources": [
-        {
-          "candidate_id": "c_cefcbe1a01",
-          "url": "https://huggingface.co/RecursiveSI/flint"
-        }
-      ],
-      "tags": []
-    },
-    {
-      "section": "model",
-      "title": "InternScience/Sage-A1.5",
-      "summary": "",
-      "sources": [
-        {
-          "candidate_id": "c_8592ef0363",
-          "url": "https://huggingface.co/InternScience/Sage-A1.5"
-        }
-      ],
-      "tags": []
-    },
-    {
-      "section": "paper",
-      "title": "Focused Omni-Modal GUI Agents",
-      "summary": "",
-      "sources": [
-        {
-          "candidate_id": "c_1f2f25669b",
-          "url": "https://huggingface.co/papers/2610.26203"
-        }
-      ],
-      "tags": []
-    },
-    {
-      "section": "paper",
-      "title": "Matrix-Game 4.0: Harnessing Video Models for Real-Time Playable Game Worlds",
-      "summary": "",
-      "sources": [
-        {
-          "candidate_id": "c_9b9f1f77e6",
-          "url": "https://huggingface.co/papers/2610.27999"
-        }
-      ],
-      "tags": []
-    },
-    {
-      "section": "tool",
-      "title": "supabase/supabase",
-      "summary": "",
-      "sources": [
-        {
-          "candidate_id": "c_00b34280df",
-          "url": "https://github.com/supabase/supabase"
-        }
-      ],
-      "tags": []
-    },
-    {
-      "section": "tool",
-      "title": "akitaonrails/ai-memory",
-      "summary": "",
-      "sources": [
-        {
-          "candidate_id": "c_662d54180e",
-          "url": "https://github.com/akitaonrails/ai-memory"
-        }
-      ],
-      "tags": []
-    },
-    {
-      "section": "brief",
-      "title": "Be prepared, GPU price increase incoming --> Samsung sells out 100% of all 2027 HBM capacity - HBM prices expected to jump 200% next year, DRAM prices expected to see a double-digit price increase",
-      "summary": "",
-      "sources": [
-        {
-          "candidate_id": "c_d178e0b2e3",
-          "url": "https://m.gsmarena.com/samsung_signs_huge_dram_and_hbm_contracts-news-75124.php"
-        }
-      ],
-      "tags": []
-    },
-    {
-      "section": "brief",
-      "title": "When will we see these changes? --> China Is Doubling RAM Production to Keep Everyday Gadget Prices from Skyrocketing",
-      "summary": "",
-      "sources": [
-        {
-          "candidate_id": "c_239b9fde5b",
-          "url": "https://www.androidheadlines.com/2026/10/china-cxmt-expands-dram-production-capacity.html"
-        }
-      ],
-      "tags": []
+      "evidence": [],
+      "tags": [
+        "安全",
+        "行业"
+      ]
     }
   ],
-  "research": [],
+  "research": [
+    {
+      "via": "webfetch",
+      "url": "https://mistral.ai/news/mistral-large-4/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://claude.com/product/claude-duet"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://openai.com/index/openai-models-google-cloud"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://openai.com/index/coordinated-disclosure-of-critical-vulnerabilities"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://www.wiz.io/blog/php2shell-php-rce"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/RecursiveSI/flint"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/blog/ibm-granite/granite-speech-5"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://www.anthropic.com/research/attack-surface-reduction"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/KRAFTON/Raon-1-mini-preview"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://claude.com/resources/articles/claude-duet"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://arxiv.org/abs/2610.27999"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://arxiv.org/abs/2610.28601"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://arxiv.org/abs/2610.27628"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://www.wiz.io/blog/litellm-compromised-steals-credentials"
+    },
+    {
+      "via": "websearch",
+      "query": "Kitten-TTS 2 KittenML github 1.58-bit"
+    },
+    {
+      "via": "websearch",
+      "query": "Google Cloud blog OpenAI models Vertex AI Model Garden October 2026"
+    }
+  ],
   "validation": {
-    "validated_at": "2026-10-22T04:39:49+00:00",
-    "checked_links": false,
-    "dropped": [],
-    "warnings": []
+    "validated_at": "2026-10-23T01:05:08+00:00",
+    "checked_links": true,
+    "dropped": [
+      {
+        "title": "IBM 发布 Granite Speech 5.0 语音识别模型",
+        "section": "model",
+        "reasons": [
+          "number 4.1 does not appear in the cited material"
+        ]
+      }
+    ],
+    "warnings": [
+      "OpenAI 模型登陆 Google Cloud: could not check https://openai.com/index/openai-models-google-cloud (403)",
+      "OpenAI 发起 Patch the Planet 漏洞协同响应计划: could not check https://openai.com/index/coordinated-disclosure-of-critical-vulnerabilities (403)"
+    ]
   }
 }
