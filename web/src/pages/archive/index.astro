@@ -1,0 +1,18 @@
+---
+import Archive from "@/components/Archive"
+import Layout from "@/layouts/Layout.astro"
+import { issues, SITE_TITLE } from "@/lib/issues"
+
+// Only what a row shows goes into the page, not every issue's full text. A fallback issue has no
+// description; its first headline stands in.
+const entries = issues.map((issue) => ({
+  date: issue.date,
+  fallback: issue.fallback,
+  description: issue.description || (issue.sections[0]?.items[0]?.title ?? ""),
+  items: issue.sections.reduce((n, section) => n + section.items.length, 0),
+}))
+---
+
+<Layout title={`往期归档 · ${SITE_TITLE}`} description={`${SITE_TITLE}的全部往期，按月份浏览。`} latest={issues[0].date}>
+  <Archive client:load entries={entries} />
+</Layout>
