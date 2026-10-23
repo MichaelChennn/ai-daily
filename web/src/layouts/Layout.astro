@@ -1,7 +1,7 @@
 ---
 import "@/styles/global.css"
 import SiteFooter from "@/components/SiteFooter.astro"
-import SiteHeader from "@/components/SiteHeader.astro"
+import SiteHeader, { type NavPage } from "@/components/SiteHeader.astro"
 import { href, SITE_TITLE } from "@/lib/issues"
 
 interface Props {
@@ -9,9 +9,13 @@ interface Props {
   description: string
   /** The newest issue's date, where the brand and 今日日报 link to. */
   latest: string
+  /** The header's width instead of the issue column, for a grid of cards. */
+  wide?: boolean
+  /** The header link for this page. */
+  current?: NavPage
 }
 
-const { title, description, latest } = Astro.props
+const { title, description, latest, wide = false, current } = Astro.props
 ---
 
 <!doctype html>
@@ -75,8 +79,8 @@ const { title, description, latest } = Astro.props
     </script>
   </head>
   <body class="flex min-h-svh flex-col antialiased">
-    <SiteHeader latest={latest} />
-    <main class="mx-auto w-full max-w-3xl flex-1 px-4 sm:px-6">
+    <SiteHeader latest={latest} current={current} />
+    <main class:list={["mx-auto w-full flex-1 px-4 sm:px-6", wide ? "max-w-5xl" : "max-w-3xl"]}>
       <slot />
       <div id="content-end" hidden></div>
     </main>

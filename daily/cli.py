@@ -58,6 +58,7 @@ def main(argv: list[str] | None = None) -> int:
 
     data = commands.add_parser("export", help="已发布各期 → JSON，给网页前端（web/）用")
     data.add_argument("--data-dir", type=Path, default=DEFAULT_DATA_DIR, help="数据目录")
+    data.add_argument("--sources", type=Path, default=DEFAULT_SOURCES_FILE, help="信源配置文件")
     data.add_argument("--out", type=Path, default=Path("web/data"), help="输出目录")
 
     page = commands.add_parser("page", help="打印页面里关键词附近的原文，供编辑逐字摘录 evidence")
@@ -268,7 +269,7 @@ def _build(args: argparse.Namespace) -> int:
 
 
 def _export(args: argparse.Namespace) -> int:
-    issues = export.export(args.out, args.data_dir)
+    issues = export.export(args.out, args.data_dir, load_sources(args.sources))
     print(f"{len(issues)} issues -> {args.out / 'issues'}", file=sys.stderr)
     return 0
 

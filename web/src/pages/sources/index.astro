@@ -1,0 +1,10 @@
+---
+import Sources from "@/components/Sources"
+import Layout from "@/layouts/Layout.astro"
+import { issues, SITE_TITLE } from "@/lib/issues"
+import sources from "../../../data/sources.json"
+---
+
+<Layout title={`信息源 · ${SITE_TITLE}`} description={`${SITE_TITLE}抓取的信息源白名单，和每个源的抓取与入选统计。`} latest={issues[0].date} wide current="sources">
+  <Sources client:load data={sources} />
+</Layout>

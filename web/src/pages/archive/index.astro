@@ -13,6 +13,6 @@ const entries = issues.map((issue) => ({
 }))
 ---
 
-<Layout title={`往期归档 · ${SITE_TITLE}`} description={`${SITE_TITLE}的全部往期，按月份浏览。`} latest={issues[0].date}>
+<Layout title={`往期归档 · ${SITE_TITLE}`} description={`${SITE_TITLE}的全部往期，按月份浏览。`} latest={issues[0].date} current="archive">
   <Archive client:load entries={entries} />
 </Layout>

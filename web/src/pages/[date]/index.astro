@@ -30,7 +30,12 @@ const description = issue.description || `${issue.date} 的 AI 科技日报。`
 const filters = issue.sections.map(({ id, label }) => ({ id, label }))
 ---
 
-<Layout title={title} description={description} latest={issues[0].date}>
+<Layout
+  title={title}
+  description={description}
+  latest={issues[0].date}
+  current={newer ? "archive" : "today"}
+>
   <h1 class="sr-only">{title}</h1>
   <DateWheel date={issue.date} published={published} older={older} newer={newer} />
   <SectionFilter client:load sections={filters} />

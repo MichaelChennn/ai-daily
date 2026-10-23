@@ -11,6 +11,14 @@ One file per issue, out/issues/YYYY-MM-DD.json:
     items[]    title, summary, compact (rendered as a one-line brief),
                publisher {name, icon, host}, published {iso, label} or null,
                sources[] {label, url, discussion}
+
+And out/sources.json, the whitelist for the sources page, in sources.yaml order:
+
+  runs         how many of the latest issues the stats cover
+  groups[]     label, sources[]
+    sources[]  id, name, kind ("官方博客 · RSS"), homepage or null, icon (the site's favicon) or null,
+               enabled, repos[] ("owner/name"),
+               stats {ok, runs, candidates (average per run), picked} or null (disabled, never fetched)
 """
 
 from __future__ import annotations
@@ -21,10 +29,21 @@ from pathlib import Path
 from typing import Any
 from urllib.parse import quote, urlsplit
 
+from daily.config import SourceConfig
 from daily.dedup import url_key
 from daily.digest import SECTIONS
 from daily.render import HOST_LABELS, source_labels
-from daily.site import FALLBACK_NOTICE, Issue, load_issues
+from daily.site import (
+    FALLBACK_NOTICE,
+    KIND_LABELS,
+    RECENT_DAYS,
+    SOURCE_GROUPS,
+    TYPE_LABELS,
+    Issue,
+    load_issues,
+    source_homepage,
+    source_stats,
+)
 from daily.window import TIMEZONE
 
 DISCUSSION_HOSTS = {"news.ycombinator.com", "reddit.com", "old.reddit.com"}
@@ -41,10 +60,13 @@ HF_SECTIONS = {
     "spaces",
     "datasets",
 }
+# Whose icon a source with neither a homepage nor a page url gets.
+ICON_HOSTS = {"github_releases": "github.com"}
 
 
-def export(out: Path, data_dir: Path) -> list[Issue]:
-    """Write out/issues/*.json for every publishable issue (replacing what an earlier export left)."""
+def export(out: Path, data_dir: Path, sources: list[SourceConfig]) -> list[Issue]:
+    """Write out/issues/*.json for every publishable issue (replacing what an earlier export left),
+    and out/sources.json."""
     folder = out / "issues"
     folder.mkdir(parents=True, exist_ok=True)
     for stale in folder.glob("*.json"):
@@ -53,7 +75,45 @@ def export(out: Path, data_dir: Path) -> list[Issue]:
     for issue in issues:
         text = json.dumps(issue_data(issue), ensure_ascii=False, indent=1)
         (folder / f"{issue.slug}.json").write_text(text + "\n", encoding="utf-8")
+    text = json.dumps(sources_data(sources, data_dir, issues), ensure_ascii=False, indent=1)
+    (out / "sources.json").write_text(text + "\n", encoding="utf-8")
     return issues
+
+
+def sources_data(sources: list[SourceConfig], data_dir: Path, issues: list[Issue]) -> dict[str, Any]:
+    stats = source_stats(sources, data_dir, issues)
+    groups: dict[str, list[dict[str, Any]]] = {group: [] for group in dict.fromkeys(SOURCE_GROUPS.values())}
+    for source in sources:
+        s = stats[source.id]
+        homepage = source_homepage(source)
+        page = homepage or str(source.options.get("url") or "")
+        host = (urlsplit(page).hostname or ICON_HOSTS.get(source.type, "")).removeprefix("www.")
+        kind = KIND_LABELS.get(source.kind, source.kind)
+        groups.setdefault(SOURCE_GROUPS.get(source.kind, "其他"), []).append(
+            {
+                "id": source.id,
+                "name": source.name,
+                "kind": f"{kind} · {TYPE_LABELS.get(source.type, source.type)}",
+                "homepage": homepage,
+                "icon": f"https://www.google.com/s2/favicons?domain={quote(host)}&sz=64" if host else None,
+                "enabled": source.enabled,
+                "repos": list(source.options.get("repos") or []) if source.type == "github_releases" else [],
+                "stats": (
+                    {
+                        "ok": s.ok,
+                        "runs": s.runs,
+                        "picked": s.picked,
+                        "candidates": round(s.candidates / s.runs, 1),
+                    }
+                    if source.enabled and s.runs
+                    else None
+                ),
+            }
+        )
+    return {
+        "runs": RECENT_DAYS,
+        "groups": [{"label": label, "sources": members} for label, members in groups.items() if members],
+    }
 
 
 def issue_data(issue: Issue) -> dict[str, Any]:

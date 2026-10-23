@@ -5,17 +5,23 @@ import { buttonVariants } from "@/components/ui/button"
 import ThemeToggle from "@/components/ThemeToggle"
 import { href, issueHref, REPO_URL, SITE_TITLE } from "@/lib/issues"
 
+export type NavPage = "today" | "archive" | "sources"
+
 interface Props {
   latest: string
+  /** Which link is the current page, marked with a pill. */
+  current?: NavPage
 }
 
 // Links styled with buttonVariants, not <Button asChild>: Slot cannot merge into children passed
 // from .astro. cn() so that `hidden` overrides the variant's inline-flex.
-const { latest } = Astro.props
-const nav = [
-  { label: "今日日报", href: issueHref(latest), wide: true },
-  { label: "往期归档", href: href("archive/") },
-  { label: "信息源", href: href("sources/") },
+// The pill and each label have their own view-transition-name, so going to another page the pill
+// glides from one link to the other (z-order in global.css) while the labels stay put.
+const { latest, current } = Astro.props
+const nav: { page: NavPage; label: string; href: string; wide?: boolean }[] = [
+  { page: "today", label: "今日日报", href: issueHref(latest), wide: true },
+  { page: "archive", label: "往期归档", href: href("archive/") },
+  { page: "sources", label: "信息源", href: href("sources/") },
 ]
 ---
 
@@ -23,18 +29,22 @@ const nav = [
   <div class="mx-auto flex h-14 max-w-5xl items-center justify-between gap-4 px-4 sm:px-6">
     <a href={issueHref(latest)} class="text-[15px] font-semibold tracking-tight whitespace-nowrap">{SITE_TITLE}</a>
     <div class="flex items-center gap-1">
-      <nav class="flex items-center">
+      <nav class="flex items-center gap-0.5">
         {
           nav.map((link) => (
             <a
               href={link.href}
+              aria-current={link.page === current ? "page" : undefined}
               class={cn(
                 buttonVariants({ variant: "ghost", size: "sm" }),
-                "font-normal",
+                "relative isolate rounded-full px-3 font-normal text-muted-foreground hover:bg-transparent hover:text-foreground aria-[current=page]:text-foreground",
                 link.wide && "hidden sm:inline-flex",
               )}
             >
-              {link.label}
+              {link.page === current && (
+                <span class="absolute inset-0 -z-10 [view-transition-name:nav-pill] rounded-full bg-muted" />
+              )}
+              <span style={{ viewTransitionName: `nav-${link.page}` }}>{link.label}</span>
             </a>
           ))
         }

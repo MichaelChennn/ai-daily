@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
 import { Separator } from "@/components/ui/separator"
+import { filterTransition } from "@/lib/filter-transition"
 import { formatDay, issueHref } from "@/lib/issues"
 
 export type Entry = { date: string; fallback: boolean; description: string; items: number }
@@ -40,19 +41,13 @@ export default function Archive({ entries }: Props) {
   const months = Map.groupBy(shown, (e) => e.date.slice(0, 7))
 
   function apply(update: () => void) {
-    if (!document.startViewTransition || matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      update()
-      return
-    }
     // The month groups get their view-transition-name only for this transition, so that leaving
     // the page cross-fades it as a whole.
-    flushSync(() => setAnimating(true))
-    const root = document.documentElement
-    root.dataset.filtering = ""
-    document.startViewTransition(() => flushSync(update)).finished.finally(() => {
-      delete root.dataset.filtering
-      setAnimating(false)
-    })
+    filterTransition(
+      () => flushSync(update),
+      () => flushSync(() => setAnimating(true)),
+      () => setAnimating(false),
+    )
   }
 
   function selectYear(next: number) {

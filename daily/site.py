@@ -282,7 +282,7 @@ def source_stats(sources: list[SourceConfig], data_dir: Path, issues: list[Issue
 
 def _source_card(source: SourceConfig, s: SourceStats) -> str:
     classes = "card" + ("" if source.enabled else " disabled")
-    homepage = _source_homepage(source)
+    homepage = source_homepage(source)
     name = escape(source.name)
     name_html = f'<a href="{escape(homepage)}">{name}</a>' if homepage else name
     tier = TIER_BADGES[source.tier]
@@ -314,7 +314,7 @@ def _source_card(source: SourceConfig, s: SourceStats) -> str:
     return "".join(parts)
 
 
-def _source_homepage(source: SourceConfig) -> str | None:
+def source_homepage(source: SourceConfig) -> str | None:
     options = source.options
     if options.get("homepage"):
         return str(options["homepage"])

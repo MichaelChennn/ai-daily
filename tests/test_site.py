@@ -115,7 +115,7 @@ def test_export_writes_publishable_issues(tmp_path, data_dir):
     out = tmp_path / "web-data"
     (out / "issues").mkdir(parents=True)
     (out / "issues" / "2026-01-01.json").write_text("{}")  # left over from an issue since removed
-    export.export(out, data_dir)
+    export.export(out, data_dir, SOURCES)
     files = sorted(p.name for p in (out / "issues").iterdir())
     assert files == [f"{OLD}.json", f"{DATE}.json", f"{NEXT}.json"]  # not the invalid issue
 
@@ -147,6 +147,26 @@ def test_export_writes_publishable_issues(tmp_path, data_dir):
     fallback_issue = json.loads((out / "issues" / f"{NEXT}.json").read_text())
     assert fallback_issue["fallback"] and fallback_issue["notice"] == site.FALLBACK_NOTICE
     assert all(item["compact"] for s in fallback_issue["sections"] for item in s["items"])
+
+
+def test_export_sources(tmp_path, data_dir):
+    sources = [*SOURCES, source("github_releases", kind="release", id_="gh", repos=["vllm-project/vllm"])]
+    export.export(tmp_path, data_dir, sources)
+    data = json.loads((tmp_path / "sources.json").read_text())
+    assert data["runs"] == 30
+    groups = {g["label"]: g["sources"] for g in data["groups"]}
+    assert list(groups) == ["官方博客", "论文", "开源", "社区信号"]  # in display order, empty ones left out
+    openai = groups["官方博客"][0]
+    assert openai["homepage"] == "https://openai.com/news/" and openai["kind"] == "官方博客 · RSS"
+    assert openai["stats"] == {"ok": 4, "runs": 4, "candidates": 1.0, "picked": 0}
+    assert openai["repos"] == [] and openai["icon"].endswith("domain=openai.com&sz=64")
+    assert groups["社区信号"][0]["homepage"] == "https://www.reddit.com/r/LocalLLaMA/"
+    assert groups["社区信号"][0]["stats"]["ok"] == 0
+    arxiv = groups["论文"][0]
+    assert not arxiv["enabled"] and arxiv["stats"] is None
+    gh = groups["开源"][0]
+    assert gh["repos"] == ["vllm-project/vllm"] and gh["stats"] is None  # never fetched
+    assert gh["homepage"] is None and "domain=github.com" in gh["icon"]
 
 
 def test_export_publisher_skips_discussions():
