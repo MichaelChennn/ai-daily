@@ -3,12 +3,11 @@ import { cn } from "cn"
 
 import { buttonVariants } from "@/components/ui/button"
 import ThemeToggle from "@/components/ThemeToggle"
-import { href, issueHref, REPO_URL, SITE_TITLE } from "@/lib/issues"
+import { href, REPO_URL, SITE_TITLE } from "@/lib/issues"
 
 export type NavPage = "today" | "archive" | "sources"
 
 interface Props {
-  latest: string
   /** Which link is the current page, marked with a pill. */
   current?: NavPage
 }
@@ -17,9 +16,9 @@ interface Props {
 // from .astro. cn() so that `hidden` overrides the variant's inline-flex.
 // The pill and each label have their own view-transition-name, so going to another page the pill
 // glides from one link to the other (z-order in global.css) while the labels stay put.
-const { latest, current } = Astro.props
+const { current } = Astro.props
 const nav: { page: NavPage; label: string; href: string; wide?: boolean }[] = [
-  { page: "today", label: "今日日报", href: issueHref(latest), wide: true },
+  { page: "today", label: "今日日报", href: href(""), wide: true },
   { page: "archive", label: "往期归档", href: href("archive/") },
   { page: "sources", label: "信息源", href: href("sources/") },
 ]
@@ -27,7 +26,7 @@ const nav: { page: NavPage; label: string; href: string; wide?: boolean }[] = [
 
 <header class="sticky top-0 z-40 [view-transition-name:site-header] border-b bg-background/90 backdrop-blur supports-backdrop-filter:bg-background/75">
   <div class="mx-auto flex h-14 max-w-5xl items-center justify-between gap-4 px-4 sm:px-6">
-    <a href={issueHref(latest)} class="text-[15px] font-semibold tracking-tight whitespace-nowrap">{SITE_TITLE}</a>
+    <a href={href("")} class="text-[15px] font-semibold tracking-tight whitespace-nowrap">{SITE_TITLE}</a>
     <div class="flex items-center gap-1">
       <nav class="flex items-center gap-0.5">
         {

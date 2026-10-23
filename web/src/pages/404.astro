@@ -1,0 +1,21 @@
+---
+import { cn } from "cn"
+
+import { buttonVariants } from "@/components/ui/button"
+import Layout from "@/layouts/Layout.astro"
+import { href, SITE_TITLE } from "@/lib/issues"
+
+// Served for any missing path, at any depth: href() gives absolute paths under the base.
+---
+
+<Layout title={`页面不存在 · ${SITE_TITLE}`} description="页面不存在。" canonical={null}>
+  <div class="flex flex-col items-center gap-6 py-24 text-center">
+    <h1 class="text-xl font-semibold tracking-tight">页面不存在</h1>
+    <div class="flex items-center gap-2">
+      <a href={href("")} class={cn(buttonVariants({ size: "sm" }), "rounded-full px-4")}>今日日报</a>
+      <a href={href("archive/")} class={cn(buttonVariants({ variant: "outline", size: "sm" }), "rounded-full px-4")}>
+        往期归档
+      </a>
+    </div>
+  </div>
+</Layout>

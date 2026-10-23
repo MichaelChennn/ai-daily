@@ -2,24 +2,28 @@
 import "@/styles/global.css"
 import SiteFooter from "@/components/SiteFooter.astro"
 import SiteHeader, { type NavPage } from "@/components/SiteHeader.astro"
-import { href, SITE_TITLE } from "@/lib/issues"
+import { href, issues, SITE_TITLE } from "@/lib/issues"
 
 interface Props {
   title: string
   description: string
-  /** The newest issue's date, where the brand and 今日日报 link to. */
-  latest: string
   /** The header's width instead of the issue column, for a grid of cards. */
   wide?: boolean
   /** The header link for this page. */
   current?: NavPage
+  /** This page's canonical path, if not its own; null for none (the 404 page). */
+  canonical?: string | null
 }
 
-const { title, description, latest, wide = false, current } = Astro.props
+const { title, description, wide = false, current, canonical = Astro.url.pathname } = Astro.props
+// The home page shows the newest issue: going between it and an issue slides by date, as if it
+// were at that issue's date (the script below).
+const home = href("")
+const latest = issues[0]?.date ?? ""
 ---
 
 <!doctype html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-home={home} data-latest={latest}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -40,7 +44,7 @@ const { title, description, latest, wide = false, current } = Astro.props
     <link rel="expect" href="#content-end" blocking="render" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    {canonical !== null && <link rel="canonical" href={new URL(canonical, Astro.site)} />}
     <link rel="alternate" type="application/rss+xml" title={SITE_TITLE} href={href("feed.xml")} />
     <meta name="generator" content={Astro.generator} />
     <script is:inline>
@@ -65,21 +69,26 @@ const { title, description, latest, wide = false, current } = Astro.props
         true,
       )
       // Going to a newer issue slides it in from the right, an older one from the left (the
-      // animations are in global.css). Registered here so it runs before the new page's first paint.
+      // animations are in global.css); the home page counts as the newest issue, so between the
+      // two it only cross-fades. Registered here so it runs before the new page's first paint.
       addEventListener("pagereveal", (event) => {
         const transition = event.viewTransition
-        const day = (url) => url.match(/\d{4}-\d{2}-\d{2}/)?.[0]
-        const from = day(document.referrer)
-        const to = day(location.pathname)
-        if (!transition || !from || !to || from === to) return
         const root = document.documentElement
+        const day = (url) => {
+          if (!url) return undefined
+          const path = new URL(url, location.href).pathname
+          return path.match(/\d{4}-\d{2}-\d{2}/)?.[0] ?? (path === root.dataset.home ? root.dataset.latest : undefined)
+        }
+        const from = day(document.referrer)
+        const to = day(location.href)
+        if (!transition || !from || !to || from === to) return
         root.dataset.slide = to > from ? "newer" : "older"
         transition.finished.finally(() => delete root.dataset.slide)
       })
     </script>
   </head>
   <body class="flex min-h-svh flex-col antialiased">
-    <SiteHeader latest={latest} current={current} />
+    <SiteHeader current={current} />
     <main class:list={["mx-auto w-full flex-1 px-4 sm:px-6", wide ? "max-w-5xl" : "max-w-3xl"]}>
       <slot />
       <div id="content-end" hidden></div>
