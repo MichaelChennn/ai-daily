@@ -4,7 +4,6 @@
 
 - Anthropic 用 Claude 为 123 个开源库的 239 个入口点写出形式化证明，过程中发现数百个 bug。
 - Agent Skills 标准捐给 Agentic AI Foundation，NVIDIA 开源 Agent 安全运行时 OpenShell。
-- OpenAI 推出官方命令行工具 OpenAI CLI。
 
 ## 🔥 头条
 
