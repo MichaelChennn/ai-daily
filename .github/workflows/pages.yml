@@ -1,6 +1,6 @@
-# Builds the site from main and deploys it to GitHub Pages: python -m daily build writes the whole
-# site and the RSS feed, then the Astro front end (web/) replaces the issue pages YYYY-MM-DD/.
-# Its data comes from python -m daily export (npm's prebuild), so the publish gate stays in Python.
+# Builds the site from main and deploys it to GitHub Pages. The Astro front end (web/) builds every
+# page; its data and the RSS feed come from python -m daily export (npm's prebuild), so the
+# publish gate stays in Python.
 #
 # Pushes made with GITHUB_TOKEN do not trigger other workflows, so fallback.yml and ingest.yml
 # start this one with `gh workflow run pages.yml --ref main` after they commit (workflow_dispatch
@@ -53,13 +53,10 @@ jobs:
       - name: Build site
         env:
           SITE_URL: ${{ steps.pages.outputs.base_url }}/
-        run: |
-          python -m daily build --out _site --base-url "$SITE_URL"
-          npm run build --prefix web
-          cp -r web/dist/. _site/
+        run: npm run build --prefix web
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: _site
+          path: web/dist
 
   deploy:
     needs: build

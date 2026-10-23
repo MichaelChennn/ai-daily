@@ -53,61 +53,37 @@ SOURCES = [
 SOURCES[2].enabled = False
 
 
-def test_build_writes_the_whole_site(tmp_path, data_dir):
-    out = tmp_path / "site"
-    issues = site.build(out, data_dir, SOURCES, "https://example.github.io/ai-daily")
+def test_export_writes_the_feed(tmp_path, data_dir):
+    public = tmp_path / "public"
+    issues = export.export(tmp_path / "data", public, data_dir, SOURCES, "https://example.github.io/ai-daily")
     assert [i.slug for i in issues] == [NEXT, DATE, OLD]  # the invalid issue is left out
-    for page in ["index.html", f"{DATE}/index.html", f"{NEXT}/index.html", "archive/index.html"]:
-        assert (out / page).exists(), page
-    assert (out / "sources/index.html").exists() and (out / "style.css").read_text()
-
-    index = (out / "index.html").read_text()
-    assert "降级版" in index and site.FALLBACK_NOTICE in index  # latest issue, in full
-    assert f'href="{DATE}/"' in index and OLD not in index  # last 30 days only
-    assert f'href="../{OLD}/"' in (out / "archive/index.html").read_text()
-
-    page = (out / DATE / "index.html").read_text()
-    assert "OpenAI 发布 GPT-6" in page and 'href="https://openai.com/index/gpt-6/"' in page
-    assert f'href="../{NEXT}/"' in page and f'href="../{OLD}/"' in page  # newer / older
-    assert "降级版" not in page and "#模型" in page
-
-    with pytest.raises(ValueError):
-        site.build(data_dir, data_dir, SOURCES)  # never wipes a directory that is not a site build
-    site.build(out, data_dir, SOURCES)  # rebuilding over the previous build is fine
-
-
-def test_feed_has_full_text_and_mode_in_guid(tmp_path, data_dir):
-    out = tmp_path / "site"
-    site.build(out, data_dir, SOURCES, "https://example.github.io/ai-daily/")
-    channel = ET.parse(out / "feed.xml").getroot().find("channel")
+    assert (public / ".nojekyll").exists()
+    channel = ET.parse(public / "feed.xml").getroot().find("channel")
     items = channel.findall("item")
-    assert [i.findtext("link") for i in items] == [
+    assert [i.findtext("link") for i in items] == [  # the last 30 days only
         f"https://example.github.io/ai-daily/{NEXT}/",
         f"https://example.github.io/ai-daily/{DATE}/",
     ]
     assert items[0].findtext("guid").endswith("#fallback") and "降级版" in items[0].findtext("title")
     content = items[1].findtext("{http://purl.org/rss/1.0/modules/content/}encoded")
     assert "<h3>OpenAI 发布 GPT-6</h3>" in content and "GPT-6 支持 1M token 上下文" in content
+    assert 'href="https://openai.com/index/gpt-6/"' in content and "#模型" in content
     assert items[1].findtext("pubDate") == "Mon, 19 Oct 2026 21:40:00 +0000"
 
 
-def test_text_is_escaped(tmp_path, data_dir):
+def test_feed_text_is_escaped(data_dir):
     path = data_dir / DATE / "digest.json"
     data = json.loads(path.read_text())
     data["items"][2]["title"] = "Qwen3.5-72B <script>alert(1)</script>"
     path.write_text(json.dumps(data))
-    html = site.issue_page(site.load_issues(data_dir)[1], None, None)
+    html = site.issue_body(site.load_issues(data_dir)[1])
     assert "<script>" not in html and "&lt;script&gt;" in html
 
 
-def test_sources_page_cards(data_dir):
-    html = site.sources_page(SOURCES, data_dir, site.load_issues(data_dir))
-    assert '<a href="https://openai.com/news/">openai-news</a>' in html
-    assert 'href="https://www.reddit.com/r/LocalLLaMA/"' in html
-    assert "<dd>4/4</dd>" in html  # openai-news ran in the 4 issues with candidates
-    assert "最近一次抓取失败：HTTPStatusError: 429" in html
-    assert 'class="card disabled"' in html and "已停用" in html
-    stats = site.source_stats(SOURCES, data_dir, site.load_issues(data_dir))
+def test_source_stats(data_dir):
+    stats = export.source_stats(SOURCES, data_dir, site.load_issues(data_dir))
+    assert (stats["openai-news"].ok, stats["openai-news"].runs) == (4, 4)  # the 4 issues with candidates
+    assert stats["reddit"].ok == 0 and stats["arxiv"].runs == 0  # failed / disabled
     assert stats["openai-news"].picked == 0  # candidates' source is "blog", not a configured id
 
 
@@ -115,7 +91,7 @@ def test_export_writes_publishable_issues(tmp_path, data_dir):
     out = tmp_path / "web-data"
     (out / "issues").mkdir(parents=True)
     (out / "issues" / "2026-01-01.json").write_text("{}")  # left over from an issue since removed
-    export.export(out, data_dir, SOURCES)
+    export.export(out, tmp_path / "public", data_dir, SOURCES)
     files = sorted(p.name for p in (out / "issues").iterdir())
     assert files == [f"{OLD}.json", f"{DATE}.json", f"{NEXT}.json"]  # not the invalid issue
 
@@ -151,7 +127,7 @@ def test_export_writes_publishable_issues(tmp_path, data_dir):
 
 def test_export_sources(tmp_path, data_dir):
     sources = [*SOURCES, source("github_releases", kind="release", id_="gh", repos=["vllm-project/vllm"])]
-    export.export(tmp_path, data_dir, sources)
+    export.export(tmp_path, tmp_path / "public", data_dir, sources)
     data = json.loads((tmp_path / "sources.json").read_text())
     assert data["runs"] == 30
     groups = {g["label"]: g["sources"] for g in data["groups"]}
@@ -246,7 +222,11 @@ def test_cli_adopt(tmp_path):
     assert json.loads((data_dir / DATE / "digest.json").read_text())["mode"] == "full"
 
 
-def test_cli_build(tmp_path, data_dir):
-    out = tmp_path / "out"
-    assert cli.main(["build", "--data-dir", str(data_dir), "--out", str(out)]) == 0
-    assert site.DEFAULT_BASE_URL in (out / "feed.xml").read_text()
+def test_cli_export(tmp_path, data_dir, monkeypatch):
+    out, public = tmp_path / "data", tmp_path / "public"
+    args = ["export", "--data-dir", str(data_dir), "--out", str(out), "--public", str(public)]
+    assert cli.main(args) == 0
+    assert site.DEFAULT_BASE_URL in (public / "feed.xml").read_text()
+    monkeypatch.setenv("SITE_URL", "http://localhost:8000/")
+    assert cli.main(args) == 0
+    assert f"http://localhost:8000/{NEXT}/" in (public / "feed.xml").read_text()

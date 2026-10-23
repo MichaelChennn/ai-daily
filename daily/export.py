@@ -1,7 +1,7 @@
 """`daily export`: the published issues as JSON for the web front end (web/, Astro).
 
 The front end only lays the data out. Everything that decides what gets published stays here:
-the same `validate` gate as `daily build` (via site.load_issues), source labels, which link is a
+the same `validate` gate as the feed (site.load_issues), source labels, which link is a
 discussion, the item's publisher and whether its publication time is real.
 
 One file per issue, out/issues/YYYY-MM-DD.json:
@@ -19,11 +19,15 @@ And out/sources.json, the whitelist for the sources page, in sources.yaml order:
     sources[]  id, name, kind ("官方博客 · RSS"), homepage or null, icon (the site's favicon) or null,
                enabled, repos[] ("owner/name"),
                stats {ok, runs, candidates (average per run), picked} or null (disabled, never fetched)
+
+And into public/ (web/public, copied as is into the site): feed.xml, the RSS feed with absolute
+links under base_url, and .nojekyll.
 """
 
 from __future__ import annotations
 
 import json
+from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -33,17 +37,7 @@ from daily.config import SourceConfig
 from daily.dedup import url_key
 from daily.digest import SECTIONS
 from daily.render import HOST_LABELS, source_labels
-from daily.site import (
-    FALLBACK_NOTICE,
-    KIND_LABELS,
-    RECENT_DAYS,
-    SOURCE_GROUPS,
-    TYPE_LABELS,
-    Issue,
-    load_issues,
-    source_homepage,
-    source_stats,
-)
+from daily.site import DEFAULT_BASE_URL, FALLBACK_NOTICE, RECENT_DAYS, Issue, feed, load_issues
 from daily.window import TIMEZONE
 
 DISCUSSION_HOSTS = {"news.ycombinator.com", "reddit.com", "old.reddit.com"}
@@ -63,10 +57,55 @@ HF_SECTIONS = {
 # Whose icon a source with neither a homepage nor a page url gets.
 ICON_HOSTS = {"github_releases": "github.com"}
 
+# sources.yaml kind -> card group on the sources page, in display order.
+SOURCE_GROUPS = {
+    "blog": "官方博客",
+    "paper": "论文",
+    "release": "开源",
+    "repo": "开源",
+    "model": "模型",
+    "discussion": "社区信号",
+}
+KIND_LABELS = {
+    "blog": "官方博客",
+    "paper": "论文",
+    "release": "版本发布",
+    "repo": "开源项目",
+    "model": "模型",
+    "discussion": "社区讨论",
+}
+TYPE_LABELS = {
+    "rss": "RSS",
+    "html_listing": "列表页",
+    "hf_daily_papers": "API",
+    "hf_trending_models": "API",
+    "github_releases": "GitHub API",
+    "github_trending": "Trending 页",
+    "hackernews": "Algolia API",
+    "reddit": "RSS",
+}
+# Where a source's card links to, when sources.yaml has no `homepage` (its `url` is a feed).
+TYPE_HOMEPAGES = {
+    "hf_daily_papers": "https://huggingface.co/papers",
+    "hf_trending_models": "https://huggingface.co/models?sort=trending",
+    "github_trending": "https://github.com/trending",
+    "hackernews": "https://news.ycombinator.com/",
+}
 
-def export(out: Path, data_dir: Path, sources: list[SourceConfig]) -> list[Issue]:
+
+@dataclass
+class SourceStats:
+    runs: int = 0  # issues in which the source was enabled
+    ok: int = 0
+    candidates: int = 0
+    picked: int = 0  # items of full issues citing one of its candidates
+
+
+def export(
+    out: Path, public: Path, data_dir: Path, sources: list[SourceConfig], base_url: str = DEFAULT_BASE_URL
+) -> list[Issue]:
     """Write out/issues/*.json for every publishable issue (replacing what an earlier export left),
-    and out/sources.json."""
+    out/sources.json, and public/feed.xml and public/.nojekyll."""
     folder = out / "issues"
     folder.mkdir(parents=True, exist_ok=True)
     for stale in folder.glob("*.json"):
@@ -77,6 +116,9 @@ def export(out: Path, data_dir: Path, sources: list[SourceConfig]) -> list[Issue
         (folder / f"{issue.slug}.json").write_text(text + "\n", encoding="utf-8")
     text = json.dumps(sources_data(sources, data_dir, issues), ensure_ascii=False, indent=1)
     (out / "sources.json").write_text(text + "\n", encoding="utf-8")
+    public.mkdir(parents=True, exist_ok=True)
+    (public / "feed.xml").write_text(feed(issues, base_url.rstrip("/") + "/"), encoding="utf-8")
+    (public / ".nojekyll").write_text("", encoding="utf-8")
     return issues
 
 
@@ -114,6 +156,49 @@ def sources_data(sources: list[SourceConfig], data_dir: Path, issues: list[Issue
         "runs": RECENT_DAYS,
         "groups": [{"label": label, "sources": members} for label, members in groups.items() if members],
     }
+
+
+def source_stats(sources: list[SourceConfig], data_dir: Path, issues: list[Issue]) -> dict[str, SourceStats]:
+    stats = {source.id: SourceStats() for source in sources}
+    runs = sorted(data_dir.glob("*/candidates.json"))[-RECENT_DAYS:]
+    for path in runs:
+        try:
+            reports = json.loads(path.read_text(encoding="utf-8")).get("sources", [])
+        except json.JSONDecodeError:
+            continue
+        for report in reports:
+            s = stats.get(report.get("id"))
+            if s is None or report.get("status") == "disabled":
+                continue
+            s.runs += 1
+            s.ok += report.get("status") == "ok"
+            s.candidates += int(report.get("count") or 0)
+    run_dates = {path.parent.name for path in runs}
+    for issue in issues:
+        if issue.fallback or issue.slug not in run_dates:
+            continue
+        by_id = issue.by_id
+        for item in issue.digest["items"]:
+            cited = {
+                name
+                for s in item["sources"]
+                if (c := by_id.get(s.get("candidate_id") or ""))
+                for name in [c["source"]] + [a.get("source") for a in c.get("also_from") or []]
+            }
+            for source_id in cited & stats.keys():
+                stats[source_id].picked += 1
+    return stats
+
+
+def source_homepage(source: SourceConfig) -> str | None:
+    options = source.options
+    if options.get("homepage"):
+        return str(options["homepage"])
+    if source.type == "reddit":
+        return f"https://www.reddit.com/r/{options['subreddit']}/"
+    if source.type in TYPE_HOMEPAGES:
+        return TYPE_HOMEPAGES[source.type]
+    return str(options["url"]) if source.type == "html_listing" else None
 
 
 def issue_data(issue: Issue) -> dict[str, Any]:

@@ -19,9 +19,6 @@ build-backend = "setuptools.build_meta"
 [tool.setuptools]
 packages = ["daily", "daily.fetchers"]
 
-[tool.setuptools.package-data]
-daily = ["static/*"]
-
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["."]

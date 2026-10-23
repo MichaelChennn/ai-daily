@@ -6,7 +6,7 @@
     "node": ">=22.23.4"
   },
   "scripts": {
-    "data": "cd .. && python -m daily export --out web/data",
+    "data": "cd .. && python -m daily export --out web/data --public web/public",
     "predev": "npm run data",
     "dev": "astro dev",
     "prebuild": "npm run data",

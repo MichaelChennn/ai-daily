@@ -1,4 +1,4 @@
-"""`daily render`: digest.json -> digest.md, the issue as it reads on GitHub (the site is daily/site.py)."""
+"""`daily render`: digest.json -> digest.md, the issue as it reads on GitHub (the site is web/)."""
 
 from __future__ import annotations
 
