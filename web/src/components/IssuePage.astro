@@ -49,7 +49,7 @@ const filters = issue.sections.map(({ id, label }) => ({ id, label }))
       )
     }
 
-    <div class="mt-10 flex flex-col gap-16">
+    <div class="mt-10 flex flex-col gap-12">
       {
         issue.sections.map((section, i) => {
           const full = section.items.filter((item) => !item.compact)
@@ -65,7 +65,7 @@ const filters = issue.sections.map(({ id, label }) => ({ id, label }))
                 </h2>
                 <span class="text-xs text-muted-foreground tabular-nums">{section.items.length} 条</span>
               </header>
-              <div class="flex flex-col gap-4">
+              <div class="flex flex-col gap-6">
                 {full.map((item) => (
                   <ItemCard item={item} />
                 ))}

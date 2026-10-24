@@ -24,7 +24,9 @@ const nav: { page: NavPage; label: string; href: string; wide?: boolean }[] = [
 ]
 ---
 
-<header class="sticky top-0 z-40 [view-transition-name:site-header] border-b bg-background/90 backdrop-blur supports-backdrop-filter:bg-background/75">
+<header
+  data-site-header
+  class="sticky top-0 z-40 [view-transition-name:site-header] border-b border-transparent transition-[border-color] duration-200 data-scrolled:border-border bg-background/90 backdrop-blur supports-backdrop-filter:bg-background/75">
   <div class="mx-auto flex h-14 max-w-5xl items-center justify-between gap-4 px-4 sm:px-6">
     <a href={href("")} class="text-[15px] font-semibold tracking-tight whitespace-nowrap">{SITE_TITLE}</a>
     <div class="flex items-center gap-1">
@@ -63,3 +65,14 @@ const nav: { page: NavPage; label: string; href: string; wide?: boolean }[] = [
     </div>
   </div>
 </header>
+
+<script>
+  // The divider under the header shows only once the page has scrolled, so at the top the header
+  // and the page read as one surface.
+  const header = document.querySelector<HTMLElement>("[data-site-header]")
+  if (header) {
+    const update = () => header.toggleAttribute("data-scrolled", scrollY > 0)
+    update()
+    addEventListener("scroll", update, { passive: true })
+  }
+</script>
