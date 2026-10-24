@@ -4,7 +4,7 @@ import { cn } from "cn"
 import { Badge, badgeVariants } from "@/components/ui/badge"
 import type { Source } from "@/lib/issues"
 
-// The item's sources as compact links: first-hand pages outlined, discussions (HN, Reddit) filled.
+// The item's sources as compact filled links: first-hand pages carry an arrow, discussions (HN, Reddit) a speech bubble.
 // scripts/source-overflow.ts keeps the list to one row and fills in the "+n 更多来源" button.
 export default function SourceLinks({ sources, className }: { sources: Source[]; className?: string }) {
   return (
@@ -13,7 +13,7 @@ export default function SourceLinks({ sources, className }: { sources: Source[];
         <li key={source.url} className="max-w-full min-w-0">
           <Badge
             asChild
-            variant={source.discussion ? "secondary" : "outline"}
+            variant="secondary"
             className="h-6 max-w-full rounded-md px-2 font-normal"
           >
             <a href={source.url} target="_blank" rel="noopener noreferrer">

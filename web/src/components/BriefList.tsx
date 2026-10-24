@@ -9,7 +9,7 @@ import type { Item } from "@/lib/issues"
 // Items without a summary (快讯, and every item of a fallback issue) as rows of one card.
 export default function BriefList({ items }: { items: Item[] }) {
   return (
-    <Card className="gap-0 rounded-lg py-0 shadow-none">
+    <Card className="gap-0 rounded-lg py-0 shadow-[0_1px_3px_0_rgb(0_0_0/0.04)] ring-foreground/6 dark:shadow-none dark:ring-foreground/8">
       {items.map((item, i) => (
         <Fragment key={item.title}>
           {i > 0 && <Separator />}
