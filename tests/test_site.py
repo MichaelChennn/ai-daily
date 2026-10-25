@@ -18,7 +18,7 @@ def _candidates(day):
     data["sources"] = [
         {"id": "openai-news", "status": "ok", "count": 1, "seconds": 0.1, "error": None},
         {"id": "reddit", "status": "error", "count": 0, "seconds": 0.1, "error": "HTTPStatusError: 429"},
-        {"id": "arxiv", "status": "disabled", "count": 0, "seconds": 0.0, "error": None},
+        {"id": "hf-papers", "status": "disabled", "count": 0, "seconds": 0.0, "error": None},
     ]
     return data
 
@@ -48,7 +48,7 @@ SOURCES = [
         "rss", id_="openai-news", url="https://openai.com/news/rss.xml", homepage="https://openai.com/news/"
     ),
     source("reddit", kind="discussion", tier=2, id_="reddit", subreddit="LocalLLaMA"),
-    source("rss", kind="paper", id_="arxiv", url="https://rss.arxiv.org/rss/cs.CL"),
+    source("hf_daily_papers", kind="paper", id_="hf-papers"),
 ]
 SOURCES[2].enabled = False
 
@@ -83,7 +83,7 @@ def test_feed_text_is_escaped(data_dir):
 def test_source_stats(data_dir):
     stats = export.source_stats(SOURCES, data_dir, site.load_issues(data_dir))
     assert (stats["openai-news"].ok, stats["openai-news"].runs) == (4, 4)  # the 4 issues with candidates
-    assert stats["reddit"].ok == 0 and stats["arxiv"].runs == 0  # failed / disabled
+    assert stats["reddit"].ok == 0 and stats["hf-papers"].runs == 0  # failed / disabled
     assert stats["openai-news"].picked == 0  # candidates' source is "blog", not a configured id
 
 
@@ -138,8 +138,8 @@ def test_export_sources(tmp_path, data_dir):
     assert openai["repos"] == [] and openai["icon"].endswith("domain=openai.com&sz=64")
     assert groups["社区信号"][0]["homepage"] == "https://www.reddit.com/r/LocalLLaMA/"
     assert groups["社区信号"][0]["stats"]["ok"] == 0
-    arxiv = groups["论文"][0]
-    assert not arxiv["enabled"] and arxiv["stats"] is None
+    papers = groups["论文"][0]
+    assert not papers["enabled"] and papers["stats"] is None
     gh = groups["开源"][0]
     assert gh["repos"] == ["vllm-project/vllm"] and gh["stats"] is None  # never fetched
     assert gh["homepage"] is None and "domain=github.com" in gh["icon"]

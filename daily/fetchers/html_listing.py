@@ -4,9 +4,11 @@ Layout-agnostic on purpose, because every site arranges its cards differently (d
 link, after it, inside it; <article>, table rows, carousels):
 
 1. Every <a> whose href matches `link_pattern` is a link to a post. Links whose text is short and
-   holds no heading are category chips or "Read more" and do not define a post.
-2. A post's card is the largest element around its first link that contains no other post
-   (nor any other link wrapping a heading).
+   holds no heading are category chips or "Read more" and do not define a post; an empty link
+   with an aria-label is a card overlay and does.
+2. A post's card is the largest element around one of its links that contains no other post
+   (nor any other link wrapping a heading): the first such card that holds a date, else the
+   first link's card (nav menus and hero images often link to a post before its dated card).
 3. The title is a heading in the post's links (else in the card, else the longest link text);
    the date is the first <time> / written date in the card; the summary is its longest <p>.
 """
@@ -117,8 +119,7 @@ async def fetch_html_listing(
     owner.update({id(a): href for href, anchors in posts.items() for a in anchors})
     items: list[Candidate] = []
     for href, anchors in posts.items():
-        card = _card(anchors[0], href, owner)
-        published, precision = _date(card)
+        card, published, precision = _dated_card(anchors, href, owner)
         if not window.contains(published, precision):
             continue
         title = _title(anchors, card)
@@ -138,7 +139,22 @@ async def fetch_html_listing(
 
 
 def _defines_post(anchors: list[Node]) -> bool:
-    return any(a.find_all(HEADINGS) or len(clean_title(a.text())) >= MIN_TITLE_CHARS for a in anchors)
+    return any(
+        a.find_all(HEADINGS)
+        or len(clean_title(a.text())) >= MIN_TITLE_CHARS
+        or (not clean_title(a.text()) and a.attrs.get("aria-label"))
+        for a in anchors
+    )
+
+
+def _dated_card(anchors: list[Node], href: str, owner: dict[int, str]) -> tuple[Node, datetime | None, str]:
+    for anchor in anchors:
+        card = _card(anchor, href, owner)
+        published, precision = _date(card)
+        if published is not None:
+            return card, published, precision
+    card = _card(anchors[0], href, owner)
+    return card, *_date(card)
 
 
 def _card(anchor: Node, href: str, owner: dict[int, str]) -> Node:
@@ -156,7 +172,7 @@ def _title(anchors: list[Node], card: Node) -> str:
         for heading in scope.find_all(HEADINGS):
             if title := clean_title(heading.text()):
                 return title
-    return max((clean_title(a.text()) for a in anchors), key=len)
+    return max((clean_title(a.text() or a.attrs.get("aria-label")) for a in anchors), key=len)
 
 
 def _date(card: Node) -> tuple[datetime | None, str]:

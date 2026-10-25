@@ -65,8 +65,41 @@ sources:
     url: https://huggingface.co/blog/feed.xml
     homepage: https://huggingface.co/blog
 
-  # Meta AI（ai.meta.com/blog 是纯 JS 渲染）、Qwen（qwenlm.github.io 已停更，qwen.ai 是 JS 渲染）、
-  # DeepSeek（没有博客）暂无可抓的官方列表页；它们的发布靠 HF Trending、GitHub、HN 覆盖。
+  - id: meta-ai-news
+    name: Meta Newsroom · AI
+    type: rss # ai.meta.com 对非浏览器客户端返回 400；新闻室的 AI 标签 feed 可用
+    tier: 1
+    kind: blog
+    url: https://about.fb.com/news/tag/ai/feed/
+    homepage: https://about.fb.com/news/tag/ai/
+
+  - id: minimax-blog
+    name: MiniMax Blog
+    type: html_listing # /news 是 JS 渲染，/blog 是服务端渲染
+    tier: 1
+    kind: blog
+    url: https://www.minimax.io/blog
+    link_pattern: ^/blog/[a-z0-9-]+$
+
+  - id: kimi-blog
+    name: Kimi Blog
+    type: html_listing
+    tier: 1
+    kind: blog
+    url: https://www.kimi.com/en/blog/
+    link_pattern: ^/en/blog/[a-z0-9-]+/?$
+
+  - id: deepseek-news
+    name: DeepSeek News
+    type: html_listing # 没有博客；API 文档每页都带完整的新闻侧栏，选一篇老页面当列表
+    tier: 1
+    kind: release
+    url: https://api-docs.deepseek.com/news/news250120
+    link_pattern: ^/news/news[0-9]+/?$
+    homepage: https://api-docs.deepseek.com/
+
+  # Qwen（qwenlm.github.io 停更于 2025-09，qwen.ai 是 JS 渲染）、xAI（x.ai 对非浏览器 UA 返回 403）
+  # 暂无可抓的官方列表页；它们的发布靠 HF Trending、HN、Reddit 覆盖。
 
   # ---------------------------------------------------------------- 论文（Tier 1）
   - id: hf-daily-papers
@@ -75,38 +108,6 @@ sources:
     tier: 1
     kind: paper
     min_upvotes: 10 # 5 时每天约 50 篇，太多
-
-  # arXiv 全量每天数百篇，直接给编辑会淹没其他内容；HF Daily Papers 已经过社区筛选。
-  # 保留实现，M1 观察覆盖率时可以临时打开：python -m daily fetch --only arxiv-cs-cl
-  - id: arxiv-cs-cl
-    name: arXiv cs.CL
-    type: rss
-    tier: 1
-    kind: paper
-    enabled: false
-    url: https://rss.arxiv.org/rss/cs.CL
-    homepage: https://arxiv.org/list/cs.CL/new
-    arxiv_announce_types: [new]
-
-  - id: arxiv-cs-lg
-    name: arXiv cs.LG
-    type: rss
-    tier: 1
-    kind: paper
-    enabled: false
-    url: https://rss.arxiv.org/rss/cs.LG
-    homepage: https://arxiv.org/list/cs.LG/new
-    arxiv_announce_types: [new]
-
-  - id: arxiv-cs-ai
-    name: arXiv cs.AI
-    type: rss
-    tier: 1
-    kind: paper
-    enabled: false
-    url: https://rss.arxiv.org/rss/cs.AI
-    homepage: https://arxiv.org/list/cs.AI/new
-    arxiv_announce_types: [new]
 
   # ---------------------------------------------------------------- 开源（Tier 1）
   - id: github-releases
@@ -146,7 +147,7 @@ sources:
     tier: 1
     kind: model
     limit: 50
-    max_age_days: 14
+    max_age_days: 45 # 按 HF 的 createdAt 算，那是建仓时间：大厂会提前几周建私有仓库，14 天会漏掉大发布
 
   # ---------------------------------------------------------------- 社区信号（Tier 2）
   - id: hackernews
@@ -156,18 +157,10 @@ sources:
     kind: discussion
     min_points: 50
 
-  - id: reddit-localllama
-    name: r/LocalLLaMA
-    type: reddit
+  - id: reddit-ai
+    name: r/LocalLLaMA + r/MachineLearning
+    type: reddit # 匿名 RSS 每个 IP 每分钟只给 1 次，两个版必须合成一个请求
     tier: 2
     kind: discussion
-    subreddit: LocalLLaMA
-    limit: 25
-
-  - id: reddit-machinelearning
-    name: r/MachineLearning
-    type: reddit
-    tier: 2
-    kind: discussion
-    subreddit: MachineLearning
-    limit: 25
+    subreddit: LocalLLaMA+MachineLearning
+    limit: 50
