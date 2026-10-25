@@ -39,11 +39,11 @@ jobs:
         with:
           ref: main
           fetch-depth: 0
-      - uses: actions/setup-python@v5
+      - uses: astral-sh/setup-uv@v10.3.2
         with:
           python-version: "3.12"
-          cache: pip
-      - run: pip install .
+          enable-cache: true
+      - run: uv sync --locked
       - name: Adopt the branch's digests
         env:
           BRANCH: ${{ inputs.branch || github.ref_name }}
@@ -58,7 +58,7 @@ jobs:
               continue
             fi
             git show "$sha:$path" > "$RUNNER_TEMP/incoming.json"
-            python -m daily adopt --date "$date" --from "$RUNNER_TEMP/incoming.json"
+            uv run python -m daily adopt --date "$date" --from "$RUNNER_TEMP/incoming.json"
           done
       - name: Commit and rebuild the site
         env:
