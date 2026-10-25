@@ -1,0 +1,1472 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-25",
+  "generated_at": "2026-10-25T04:24:03+00:00",
+  "window": {
+    "start": "2026-10-24T03:00:00+00:00",
+    "end": "2026-10-25T04:23:55.534151+00:00"
+  },
+  "stats": {
+    "raw": 61,
+    "after_url_merge": 61,
+    "dropped_already_published": 10,
+    "candidates": 51,
+    "clusters": 2,
+    "seen_before": 15
+  },
+  "sources": [
+    {
+      "id": "openai-news",
+      "status": "ok",
+      "count": 0,
+      "seconds": 0.39250446699998065,
+      "error": null
+    },
+    {
+      "id": "anthropic-news",
+      "status": "ok",
+      "count": 0,
+      "seconds": 0.5004640330000711,
+      "error": null
+    },
+    {
+      "id": "anthropic-research",
+      "status": "ok",
+      "count": 0,
+      "seconds": 0.5117530109999961,
+      "error": null
+    },
+    {
+      "id": "deepmind-blog",
+      "status": "ok",
+      "count": 0,
+      "seconds": 0.5860883489999651,
+      "error": null
+    },
+    {
+      "id": "google-ai-blog",
+      "status": "ok",
+      "count": 0,
+      "seconds": 0.558424106000075,
+      "error": null
+    },
+    {
+      "id": "mistral-news",
+      "status": "ok",
+      "count": 0,
+      "seconds": 0.7729352630000221,
+      "error": null
+    },
+    {
+      "id": "huggingface-blog",
+      "status": "ok",
+      "count": 0,
+      "seconds": 0.4846609740000076,
+      "error": null
+    },
+    {
+      "id": "hf-daily-papers",
+      "status": "ok",
+      "count": 0,
+      "seconds": 0.3882472789999838,
+      "error": null
+    },
+    {
+      "id": "arxiv-cs-cl",
+      "status": "disabled",
+      "count": 0,
+      "seconds": 0.0,
+      "error": null
+    },
+    {
+      "id": "arxiv-cs-lg",
+      "status": "disabled",
+      "count": 0,
+      "seconds": 0.0,
+      "error": null
+    },
+    {
+      "id": "arxiv-cs-ai",
+      "status": "disabled",
+      "count": 0,
+      "seconds": 0.0,
+      "error": null
+    },
+    {
+      "id": "github-releases",
+      "status": "ok",
+      "count": 0,
+      "seconds": 1.753218916000037,
+      "error": null
+    },
+    {
+      "id": "github-trending",
+      "status": "ok",
+      "count": 6,
+      "seconds": 0.40110191799999484,
+      "error": null
+    },
+    {
+      "id": "hf-trending-models",
+      "status": "ok",
+      "count": 22,
+      "seconds": 0.3967949350000026,
+      "error": null
+    },
+    {
+      "id": "hackernews",
+      "status": "ok",
+      "count": 5,
+      "seconds": 0.5110732139999072,
+      "error": null
+    },
+    {
+      "id": "reddit-localllama",
+      "status": "ok",
+      "count": 25,
+      "seconds": 0.8862017669999886,
+      "error": null
+    },
+    {
+      "id": "reddit-machinelearning",
+      "status": "ok",
+      "count": 3,
+      "seconds": 8.19355025799996,
+      "error": null
+    }
+  ],
+  "clusters": [
+    {
+      "id": "k_966bc2f6ab",
+      "title": "XHToken/Spark-X2.6-4B",
+      "candidate_ids": [
+        "c_966bc2f6ab",
+        "c_4c6842c316"
+      ]
+    },
+    {
+      "id": "k_4292dac6ef",
+      "title": "OpenMOSS-Team/MOSS-Image-SFT",
+      "candidate_ids": [
+        "c_4292dac6ef",
+        "c_89765346f4"
+      ]
+    }
+  ],
+  "dropped": [
+    {
+      "id": "c_59d1be1fc8",
+      "title": "NVIDIA/OpenShell",
+      "url": "https://github.com/NVIDIA/OpenShell",
+      "published_on": "2026-10-23"
+    },
+    {
+      "id": "c_8b553ca25e",
+      "title": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+      "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+      "published_on": "2026-10-21"
+    },
+    {
+      "id": "c_cefcbe1a01",
+      "title": "RecursiveSI/flint",
+      "url": "https://huggingface.co/RecursiveSI/flint",
+      "published_on": "2026-10-22"
+    },
+    {
+      "id": "c_6ecc1d71a5",
+      "title": "black-forest-labs/flux-3-image-klein-comfy",
+      "url": "https://huggingface.co/black-forest-labs/flux-3-image-klein-comfy",
+      "published_on": "2026-10-21"
+    },
+    {
+      "id": "c_e848a88eb5",
+      "title": "MiniMaxAI/MiniMax-M3.1-Flash",
+      "url": "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash",
+      "published_on": "2026-10-24"
+    },
+    {
+      "id": "c_37905dbf15",
+      "title": "Comfy-Org/Fibo-2.0",
+      "url": "https://huggingface.co/Comfy-Org/Fibo-2.0",
+      "published_on": "2026-10-23"
+    },
+    {
+      "id": "c_174f9f6191",
+      "title": "black-forest-labs/flux-3-image-klein",
+      "url": "https://huggingface.co/black-forest-labs/flux-3-image-klein",
+      "published_on": "2026-10-21"
+    },
+    {
+      "id": "c_4a613951b2",
+      "title": "KRAFTON/Raon-1-mini-preview",
+      "url": "https://huggingface.co/KRAFTON/Raon-1-mini-preview",
+      "published_on": "2026-10-22"
+    },
+    {
+      "id": "c_d11ef8aa5e",
+      "title": "briaai/Fibo-2.0-dev",
+      "url": "https://huggingface.co/briaai/Fibo-2.0-dev",
+      "published_on": "2026-10-23"
+    },
+    {
+      "id": "c_c6e1cac827",
+      "title": "LiquidAI/LFM2.5-24B-A2B",
+      "url": "https://huggingface.co/LiquidAI/LFM2.5-24B-A2B",
+      "published_on": "2026-10-21"
+    }
+  ],
+  "candidates": [
+    {
+      "source": "github-trending",
+      "source_name": "GitHub Trending",
+      "tier": 1,
+      "kind": "repo",
+      "title": "cloudflare/security-audit-skill",
+      "url": "https://github.com/cloudflare/security-audit-skill",
+      "summary": "A coding-agent skill for multi-phase security audits with independently verified, machine-readable findings",
+      "published_at": null,
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 1,
+        "stars_today": 2264,
+        "stars": 44921
+      },
+      "tags": [
+        "JavaScript"
+      ],
+      "id": "c_57e1609901",
+      "key": "github.com/cloudflare/security-audit-skill",
+      "cluster_id": "k_57e1609901",
+      "also_from": [],
+      "seen_on": [
+        "2026-10-21",
+        "2026-10-22",
+        "2026-10-23",
+        "2026-10-24"
+      ]
+    },
+    {
+      "source": "github-trending",
+      "source_name": "GitHub Trending",
+      "tier": 1,
+      "kind": "repo",
+      "title": "Nutlope/hallmark",
+      "url": "https://github.com/Nutlope/hallmark",
+      "summary": "Anti-AI-slop design skill for Claude Code, Cursor, and Codex.",
+      "published_at": null,
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 4,
+        "stars_today": 455,
+        "stars": 32306
+      },
+      "tags": [
+        "CSS"
+      ],
+      "id": "c_004684cfd4",
+      "key": "github.com/nutlope/hallmark",
+      "cluster_id": "k_004684cfd4",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "github-trending",
+      "source_name": "GitHub Trending",
+      "tier": 1,
+      "kind": "repo",
+      "title": "luongnv89/claude-howto",
+      "url": "https://github.com/luongnv89/claude-howto",
+      "summary": "A visual, example-driven guide to Claude Code - from basic concepts to advanced agents, with copy-paste templates that bring immediate value.",
+      "published_at": null,
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 5,
+        "stars_today": 392,
+        "stars": 44658
+      },
+      "tags": [
+        "Python"
+      ],
+      "id": "c_3316bb5b61",
+      "key": "github.com/luongnv89/claude-howto",
+      "cluster_id": "k_3316bb5b61",
+      "also_from": [],
+      "seen_on": [
+        "2026-10-23"
+      ]
+    },
+    {
+      "source": "github-trending",
+      "source_name": "GitHub Trending",
+      "tier": 1,
+      "kind": "repo",
+      "title": "pbakaus/impeccable",
+      "url": "https://github.com/pbakaus/impeccable",
+      "summary": "The design language that makes your AI harness better at design.",
+      "published_at": null,
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 6,
+        "stars_today": 619,
+        "stars": 86557
+      },
+      "tags": [
+        "Rust"
+      ],
+      "id": "c_fa50ebc2e9",
+      "key": "github.com/pbakaus/impeccable",
+      "cluster_id": "k_fa50ebc2e9",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "github-trending",
+      "source_name": "GitHub Trending",
+      "tier": 1,
+      "kind": "repo",
+      "title": "makecindy/cindy",
+      "url": "https://github.com/makecindy/cindy",
+      "summary": "Consider it done. The open-source AI agent that works out of the box · 想到，就能做到。开源、开箱即用的 AI Agent。",
+      "published_at": null,
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 10,
+        "stars_today": 477,
+        "stars": 4187
+      },
+      "tags": [
+        "TypeScript"
+      ],
+      "id": "c_8c71293d91",
+      "key": "github.com/makecindy/cindy",
+      "cluster_id": "k_8c71293d91",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "HuggingFaceBio/Carbon-X",
+      "url": "https://huggingface.co/HuggingFaceBio/Carbon-X",
+      "summary": "text-generation, transformers, license:apache-2.0",
+      "published_at": "2026-10-21T10:21:04+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 31,
+        "trending_score": 142,
+        "likes": 147,
+        "downloads": 570
+      },
+      "tags": [
+        "HuggingFaceBio"
+      ],
+      "id": "c_fa50901d53",
+      "key": "huggingface.co/huggingfacebio/carbon-x",
+      "cluster_id": "k_fa50901d53",
+      "also_from": [],
+      "seen_on": [
+        "2026-10-24"
+      ]
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "FastVideo/FastH3-Omni-Comfy",
+      "url": "https://huggingface.co/FastVideo/FastH3-Omni-Comfy",
+      "summary": "diffusion-single-file, license:other",
+      "published_at": "2026-10-20T04:58:26+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 38,
+        "trending_score": 132,
+        "likes": 133,
+        "downloads": 154490
+      },
+      "tags": [
+        "FastVideo"
+      ],
+      "id": "c_c612d023da",
+      "key": "huggingface.co/fastvideo/fasth3-omni-comfy",
+      "cluster_id": "k_c612d023da",
+      "also_from": [],
+      "seen_on": [
+        "2026-10-23",
+        "2026-10-24"
+      ]
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "briaai/Fibo-2.0-edit-turbo",
+      "url": "https://huggingface.co/briaai/Fibo-2.0-edit-turbo",
+      "summary": "image-to-image, diffusers, license:other",
+      "published_at": "2026-10-19T13:11:51+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 49,
+        "trending_score": 111,
+        "likes": 112,
+        "downloads": 886
+      },
+      "tags": [
+        "briaai"
+      ],
+      "id": "c_bc2fa38c86",
+      "key": "huggingface.co/briaai/fibo-2.0-edit-turbo",
+      "cluster_id": "k_bc2fa38c86",
+      "also_from": [],
+      "seen_on": [
+        "2026-10-24"
+      ]
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "XHToken/Spark-X2.6-4B",
+      "url": "https://huggingface.co/XHToken/Spark-X2.6-4B",
+      "summary": "text-generation, transformers, license:apache-2.0",
+      "published_at": "2026-10-19T03:19:51+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 4,
+        "trending_score": 417,
+        "likes": 456,
+        "downloads": 2537
+      },
+      "tags": [
+        "XHToken"
+      ],
+      "id": "c_966bc2f6ab",
+      "key": "huggingface.co/xhtoken/spark-x2.6-4b",
+      "cluster_id": "k_966bc2f6ab",
+      "also_from": [],
+      "seen_on": [
+        "2026-10-21",
+        "2026-10-22",
+        "2026-10-23",
+        "2026-10-24"
+      ]
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "lodestones/Kromoss",
+      "url": "https://huggingface.co/lodestones/Kromoss",
+      "summary": "text-to-image, diffusers, license:apache-2.0",
+      "published_at": "2026-10-19T01:34:35+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 15,
+        "trending_score": 250,
+        "likes": 255,
+        "downloads": 21143
+      },
+      "tags": [
+        "lodestones"
+      ],
+      "id": "c_2acdbe5f0e",
+      "key": "huggingface.co/lodestones/kromoss",
+      "cluster_id": "k_2acdbe5f0e",
+      "also_from": [],
+      "seen_on": [
+        "2026-10-21",
+        "2026-10-22",
+        "2026-10-23",
+        "2026-10-24"
+      ]
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "Comfy-Org/MOSS-Image",
+      "url": "https://huggingface.co/Comfy-Org/MOSS-Image",
+      "summary": "diffusion-single-file, license:apache-2.0",
+      "published_at": "2026-10-16T12:42:32+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 13,
+        "trending_score": 273,
+        "likes": 439,
+        "downloads": 1944278
+      },
+      "tags": [
+        "Comfy-Org"
+      ],
+      "id": "c_dc5841853b",
+      "key": "huggingface.co/comfy-org/moss-image",
+      "cluster_id": "k_dc5841853b",
+      "also_from": [],
+      "seen_on": [
+        "2026-10-21",
+        "2026-10-22",
+        "2026-10-23",
+        "2026-10-24"
+      ]
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "orcarouter/OrcaCyber-Nano-1.0",
+      "url": "https://huggingface.co/orcarouter/OrcaCyber-Nano-1.0",
+      "summary": "image-text-to-text, gguf, license:other",
+      "published_at": "2026-10-16T10:04:56+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 20,
+        "trending_score": 220,
+        "likes": 237,
+        "downloads": 27054
+      },
+      "tags": [
+        "orcarouter"
+      ],
+      "id": "c_dba7eccfac",
+      "key": "huggingface.co/orcarouter/orcacyber-nano-1.0",
+      "cluster_id": "k_dba7eccfac",
+      "also_from": [],
+      "seen_on": [
+        "2026-10-21",
+        "2026-10-22",
+        "2026-10-23",
+        "2026-10-24"
+      ]
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "ornith-ai/Ornith-1.5-122B",
+      "url": "https://huggingface.co/ornith-ai/Ornith-1.5-122B",
+      "summary": "text-generation, transformers, license:mit",
+      "published_at": "2026-10-16T07:14:27+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 28,
+        "trending_score": 162,
+        "likes": 167,
+        "downloads": 30407
+      },
+      "tags": [
+        "ornith-ai"
+      ],
+      "id": "c_01cf859846",
+      "key": "huggingface.co/ornith-ai/ornith-1.5-122b",
+      "cluster_id": "k_01cf859846",
+      "also_from": [],
+      "seen_on": [
+        "2026-10-21",
+        "2026-10-22",
+        "2026-10-23",
+        "2026-10-24"
+      ]
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "tencent/Hy-Memory-30B-A3B",
+      "url": "https://huggingface.co/tencent/Hy-Memory-30B-A3B",
+      "summary": "text-generation, transformers, license:apache-2.0",
+      "published_at": "2026-10-15T09:52:00+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 35,
+        "trending_score": 139,
+        "likes": 311,
+        "downloads": 3923
+      },
+      "tags": [
+        "tencent"
+      ],
+      "id": "c_273f1d3233",
+      "key": "huggingface.co/tencent/hy-memory-30b-a3b",
+      "cluster_id": "k_273f1d3233",
+      "also_from": [],
+      "seen_on": [
+        "2026-10-21",
+        "2026-10-22",
+        "2026-10-23",
+        "2026-10-24"
+      ]
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "InternScience/Sage-A1.5",
+      "url": "https://huggingface.co/InternScience/Sage-A1.5",
+      "summary": "text-generation, transformers, license:apache-2.0",
+      "published_at": "2026-10-15T08:34:39+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 14,
+        "trending_score": 272,
+        "likes": 277,
+        "downloads": 2033
+      },
+      "tags": [
+        "InternScience"
+      ],
+      "id": "c_8592ef0363",
+      "key": "huggingface.co/internscience/sage-a1.5",
+      "cluster_id": "k_8592ef0363",
+      "also_from": [],
+      "seen_on": [
+        "2026-10-22",
+        "2026-10-23",
+        "2026-10-24"
+      ]
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "mistralai/Timestral-209M",
+      "url": "https://huggingface.co/mistralai/Timestral-209M",
+      "summary": "time-series-forecasting, timestral, license:other",
+      "published_at": "2026-10-14T08:52:36+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 16,
+        "trending_score": 247,
+        "likes": 348,
+        "downloads": 8731
+      },
+      "tags": [
+        "mistralai"
+      ],
+      "id": "c_123a0533ae",
+      "key": "huggingface.co/mistralai/timestral-209m",
+      "cluster_id": "k_123a0533ae",
+      "also_from": [],
+      "seen_on": [
+        "2026-10-21",
+        "2026-10-22",
+        "2026-10-23",
+        "2026-10-24"
+      ]
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "OpenMOSS-Team/MOSS-Image-SFT",
+      "url": "https://huggingface.co/OpenMOSS-Team/MOSS-Image-SFT",
+      "summary": "text-to-image, diffusers, license:apache-2.0",
+      "published_at": "2026-10-11T07:01:17+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 6,
+        "trending_score": 399,
+        "likes": 701,
+        "downloads": 9717
+      },
+      "tags": [
+        "OpenMOSS-Team"
+      ],
+      "id": "c_4292dac6ef",
+      "key": "huggingface.co/openmoss-team/moss-image-sft",
+      "cluster_id": "k_4292dac6ef",
+      "also_from": [],
+      "seen_on": [
+        "2026-10-21",
+        "2026-10-22",
+        "2026-10-23",
+        "2026-10-24"
+      ]
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "OpenMOSS-Team/MOSS-Image-Base",
+      "url": "https://huggingface.co/OpenMOSS-Team/MOSS-Image-Base",
+      "summary": "text-to-image, diffusers, license:apache-2.0",
+      "published_at": "2026-10-11T06:49:17+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 12,
+        "trending_score": 283,
+        "likes": 542,
+        "downloads": 6943
+      },
+      "tags": [
+        "OpenMOSS-Team"
+      ],
+      "id": "c_89765346f4",
+      "key": "huggingface.co/openmoss-team/moss-image-base",
+      "cluster_id": "k_4292dac6ef",
+      "also_from": [],
+      "seen_on": [
+        "2026-10-21",
+        "2026-10-22",
+        "2026-10-23",
+        "2026-10-24"
+      ]
+    },
+    {
+      "source": "hackernews",
+      "source_name": "Hacker News",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "America has lost 200k of jobs in media, film and the arts. How much is AI?",
+      "url": "https://www.apricitas.io/p/ai-and-the-fall-of-the-creative-class",
+      "summary": "",
+      "published_at": "2026-10-24T23:11:54+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://news.ycombinator.com/item?id=50226419",
+      "signals": {
+        "hn_points": 240,
+        "hn_comments": 247
+      },
+      "tags": [],
+      "id": "c_5e8f2dd1ee",
+      "key": "apricitas.io/p/ai-and-the-fall-of-the-creative-class",
+      "cluster_id": "k_5e8f2dd1ee",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hackernews",
+      "source_name": "Hacker News",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "No signs of AI payoff outside the tech sector",
+      "url": "https://www.apollo.com/wealth/insights-news/insights/daily-spark/no-signs-of-ai-payoff-outside-the-tech-sector",
+      "summary": "",
+      "published_at": "2026-10-24T19:47:19+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://news.ycombinator.com/item?id=50224463",
+      "signals": {
+        "hn_points": 512,
+        "hn_comments": 529
+      },
+      "tags": [],
+      "id": "c_d49afc9870",
+      "key": "apollo.com/wealth/insights-news/insights/daily-spark/no-signs-of-ai-payoff-outside-the-tech-sector",
+      "cluster_id": "k_d49afc9870",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hackernews",
+      "source_name": "Hacker News",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "Why is AI generated language so hard to understand?",
+      "url": "https://arxiv.org/abs/2610.29162",
+      "summary": "",
+      "published_at": "2026-10-24T18:04:57+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://news.ycombinator.com/item?id=50223647",
+      "signals": {
+        "hn_points": 169,
+        "hn_comments": 153
+      },
+      "tags": [],
+      "id": "c_00e140d7af",
+      "key": "arxiv:2610.29162",
+      "cluster_id": "k_00e140d7af",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hackernews",
+      "source_name": "Hacker News",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "Neural chip decodes interactions between brain regions",
+      "url": "https://actu.epfl.ch/news/neural-chip-decodes-interactions-between-brain-r-2/",
+      "summary": "",
+      "published_at": "2026-10-24T15:57:17+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://news.ycombinator.com/item?id=50222525",
+      "signals": {
+        "hn_points": 97,
+        "hn_comments": 34
+      },
+      "tags": [],
+      "id": "c_fdd60d8f2c",
+      "key": "actu.epfl.ch/news/neural-chip-decodes-interactions-between-brain-r-2",
+      "cluster_id": "k_fdd60d8f2c",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "hackernews",
+      "source_name": "Hacker News",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "AI-Assisted Paper on Z-Library Cites a TorrentFreak Article That Doesn't Exist",
+      "url": "https://torrentfreak.com/ai-assisted-paper-on-z-library-cites-a-torrentfreak-article-that-doesnt-exist/",
+      "summary": "",
+      "published_at": "2026-10-24T11:18:54+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://news.ycombinator.com/item?id=50220204",
+      "signals": {
+        "hn_points": 94,
+        "hn_comments": 49
+      },
+      "tags": [],
+      "id": "c_cc376ee7de",
+      "key": "torrentfreak.com/ai-assisted-paper-on-z-library-cites-a-torrentfreak-article-that-doesnt-exist",
+      "cluster_id": "k_cc376ee7de",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "reddit-localllama",
+      "source_name": "r/LocalLLaMA",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "GPT-X3-150M takes #1 on the Open SLM Leaderboard, dethroning HuggingFace's SmolLM2-135M with a GDN2/GQA hybrid - Check it out!",
+      "url": "https://huggingface.co/AxiomicLabs/GPT-X3-150M",
+      "summary": "",
+      "published_at": "2026-10-25T03:36:15+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xerxtr/gptx3150m_takes_1_on_the_open_slm_leaderboard/",
+      "signals": {
+        "reddit_rank": 24,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "id": "c_e64b2d15ed",
+      "key": "huggingface.co/axiomiclabs/gpt-x3-150m",
+      "cluster_id": "k_e64b2d15ed",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "reddit-localllama",
+      "source_name": "r/LocalLLaMA",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "Artificial Analysis Index is non-representative of real-world performance. Tested Kimi 3.1 Pro through OpenRouter, the number 4 model in AAI, it's not even close to MiMo 2.6 or DeepSeek 4.1 Flash",
+      "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xercio/artificial_analysis_index_is_nonrepresentative_of/",
+      "summary": "It seems Artificial Analysis Index is very easy to game, Kimi 3.1 Pro 4 on AAI is super bad in real world use cases, not even close to DeepSeek 4.1 Flash.",
+      "published_at": "2026-10-25T03:04:55+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xercio/artificial_analysis_index_is_nonrepresentative_of/",
+      "signals": {
+        "reddit_rank": 20,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "id": "c_48cbbc74f6",
+      "key": "reddit.com/r/LocalLLaMA/comments/1xercio/artificial_analysis_index_is_nonrepresentative_of",
+      "cluster_id": "k_48cbbc74f6",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "reddit-localllama",
+      "source_name": "r/LocalLLaMA",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "OpenAI and Anthropic blocked the reverse engineering of smart TVs spying on us",
+      "url": "https://x.com/yacineMTB/status/2113965724435697732",
+      "summary": "REA (Reserve Engineer Anything) was blocked by Claude one day later... Time for the pebbles to own the weights",
+      "published_at": "2026-10-25T02:51:18+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xer30z/openai_and_anthropic_blocked_the_reverse/",
+      "signals": {
+        "reddit_rank": 3,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "id": "c_71057ae0ca",
+      "key": "x.com/yacineMTB/status/2113965724435697732",
+      "cluster_id": "k_71057ae0ca",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "reddit-localllama",
+      "source_name": "r/LocalLLaMA",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "model: DSV4.1 flash by am17an · Pull Request #31086 · ggml-org/llama.cpp",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31086",
+      "summary": "only 763B params! :)",
+      "published_at": "2026-10-25T02:16:43+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xeqf7k/model_dsv41_flash_by_am17an_pull_request_31086/",
+      "signals": {
+        "reddit_rank": 25,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "id": "c_3831583fb8",
+      "key": "github.com/ggml-org/llama.cpp/pull/31086",
+      "cluster_id": "k_3831583fb8",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "reddit-localllama",
+      "source_name": "r/LocalLLaMA",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "Is it just me or Kimi K3.1 Pro don't look much better than DeepSeek 4.1 Flash?",
+      "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xemxoq/is_it_just_me_or_kimi_k31_pro_dont_look_much/",
+      "summary": "Personally I am quite fond of the Kimi models, especially them taking a gamble pushing the 2.8b parameter models. But that's just it, you'd figure that the results would be representative of its size. However, the recent release of DeepSeek 1017 has put things in perspective for me. kimi k3 is a great model but realistically very hard to run locally, even when quantized, and even if managing to run it it is slow, due to the 104 active layers it need to go through to make a single token. on the other hand, DeepSeek 4.1 flash 1017 results are quite close at a much smaller footprint and while also much faster. I have seen plenty coverage of the results of kimi k3 pro and to be frank, they don't look like substantial improvement over DeepSeek 1017. So thinking about it, maybe just stick to 4.1 flash 1017 and ignore kimi k3 pro open weigh that will be released in nov 4th. Running it quantized will deteriorate its output compared to a high quant version of DeepSeek. Just some thoughts I am having",
+      "published_at": "2026-10-24T23:24:59+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xemxoq/is_it_just_me_or_kimi_k31_pro_dont_look_much/",
+      "signals": {
+        "reddit_rank": 16,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "id": "c_eab71f7de6",
+      "key": "reddit.com/r/LocalLLaMA/comments/1xemxoq/is_it_just_me_or_kimi_k31_pro_dont_look_much",
+      "cluster_id": "k_eab71f7de6",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "reddit-localllama",
+      "source_name": "r/LocalLLaMA",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "UK to invest £100m in 'world first' AI Biosecurity Lab",
+      "url": "https://www.bbc.co.uk/news/articles/cqdjv8xllvyyo",
+      "summary": "",
+      "published_at": "2026-10-24T22:45:29+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xem3kc/uk_to_invest_100m_in_world_first_ai_biosecurity/",
+      "signals": {
+        "reddit_rank": 23,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "id": "c_dfbff54c3b",
+      "key": "bbc.co.uk/news/articles/cqdjv8xllvyyo",
+      "cluster_id": "k_dfbff54c3b",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "reddit-localllama",
+      "source_name": "r/LocalLLaMA",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "CMP170HX inspiration unlocks 30x/40x also, up to 2X Prefill speedup --> NVIDIA RTX 30 & RTX 40 GPUs Get Impressively Fast In AI LLMs As Compute Doubles With New Unlock Tool But Prices Surge Too",
+      "url": "https://wccftech.com/nvidia-rtx-30-40-gpus-get-faster-in-ai-llms-with-new-unlock-tool-but-prices-surge-too/",
+      "summary": "Your move everyone, buy, sell, but hurry...",
+      "published_at": "2026-10-24T22:16:55+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xelhpj/cmp170hx_inspiration_unlocks_30x40x_also_up_to_2x/",
+      "signals": {
+        "reddit_rank": 8,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "id": "c_468942aeb4",
+      "key": "wccftech.com/nvidia-rtx-30-40-gpus-get-faster-in-ai-llms-with-new-unlock-tool-but-prices-surge-too",
+      "cluster_id": "k_468942aeb4",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "reddit-localllama",
+      "source_name": "r/LocalLLaMA",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "M6 Mac Mini owners (32GB): now you can run Qwen3.8-27B in high quality on the Apple Neural Engine",
+      "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xejv61/m6_mac_mini_owners_32gb_now_you_can_run_qwen3827b/",
+      "summary": "ANEMLL Forge 0.2.1: Qwen3.8-27B on the M6 Neural Engine now runs up to 192K context (M6 32GB). New: INT8 K/V cache (half of FP16) and a smaller drafter sharing the target's output head - 0.86 GB less ANE memory, same speed. Decode depends on content: JSON 35-62 tok/s, code 18-32, prose 10-17. Prefill 260 tok/s at short context, 62 at 192K. 128K-192K use a smaller prefill batch (32 vs 64 rows) to stay within memory budget. Heads up: full 192K first compile takes ~2h on M6 (one time, cached). --ctx exports only the entries you need, so compile is much faster: 16K is ~10 min from download to running server. IMO 96K is the sweet spot for size/speed on 32GB: 123 tok/s prefill, ~27 tok/s decode, ~21.4 GB total memory. Release notes: Video (Tetris generated over ~150K tokens, no compaction): Paper: Three Bit MLP Vector Quantization in Apple Neural Engine - Cheers, Anemll 🤖",
+      "published_at": "2026-10-24T21:05:21+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xejv61/m6_mac_mini_owners_32gb_now_you_can_run_qwen3827b/",
+      "signals": {
+        "reddit_rank": 14,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "id": "c_c44976b025",
+      "key": "reddit.com/r/LocalLLaMA/comments/1xejv61/m6_mac_mini_owners_32gb_now_you_can_run_qwen3827b",
+      "cluster_id": "k_c44976b025",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "reddit-localllama",
+      "source_name": "r/LocalLLaMA",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "Small model good for reverse engineering that can run on a 3090 and 32GB RAM.",
+      "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xeipmm/small_model_good_for_reverse_engineering_that_can/",
+      "summary": "Anyone knows of a good model that does not say no to reverse engineering? Cloud models will even terminate your account by snitching on you and GLM 5.3 is too big to run on my potato. Help would be greatly appreciated. Thanks.",
+      "published_at": "2026-10-24T20:16:36+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xeipmm/small_model_good_for_reverse_engineering_that_can/",
+      "signals": {
+        "reddit_rank": 15,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "id": "c_a704cc7fdc",
+      "key": "reddit.com/r/LocalLLaMA/comments/1xeipmm/small_model_good_for_reverse_engineering_that_can",
+      "cluster_id": "k_a704cc7fdc",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "reddit-localllama",
+      "source_name": "r/LocalLLaMA",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "KLD is misunderstood",
+      "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xeim3m/kld_is_misunderstood/",
+      "summary": "I see a lot of people here on Reddit treating the KLD number as some holy metric that can distinguish every quantized model out there and rank them by quality. TL;DR: It can't. So what does KLD actually measure? If you feed the same text to both the base model and the quantized model, you can compare the probability distributions obtained from their logits at each token. KLD basically measures how different these distributions are, and then we take the average across all tokens. The first thing that can go very wrong here is that people just throw some random text at the model, like a bunch of Wikipedia articles, and calculate KLD on that dataset. But that's not necessarily representative of what the model actually sees during inference. During generation, a growing part of the context consists of tokens generated by the model itself, and you can't replicate that by just feeding it random text. If you want a more reasonable number, you should generate your own dataset using the base model and then calculate KLD on those generated tokens, giving zero weight to the prompt tokens. The second thing that can go very wrong with KLD is how ridiculously easy it is to manipulate, especially when the numbers come from the model creators themselves. Quantization methods often rely on calibration data. If you calculate KLD on the same data you used for calibration, your numbers can look miles better than everyone else's. And even if someone claims they're using a held-out dataset, that...",
+      "published_at": "2026-10-24T20:12:28+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xeim3m/kld_is_misunderstood/",
+      "signals": {
+        "reddit_rank": 7,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "id": "c_dfcf5cbfd3",
+      "key": "reddit.com/r/LocalLLaMA/comments/1xeim3m/kld_is_misunderstood",
+      "cluster_id": "k_dfcf5cbfd3",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "reddit-localllama",
+      "source_name": "r/LocalLLaMA",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "High-Performance llama.cpp fork for Legacy GPUs: Kepler Support, CUDA Graphs & Windows NCCL!",
+      "url": "https://github.com/theIvanR/llama-on-legacy-gpu/blob/main/README.md",
+      "summary": "I've been working on improving llama.cpp support and performance on older NVIDIA GPUs, particularly Kepler and other pre-Ampere architectures. The goal is simple: get more life out of older CUDA hardware instead of treating it as e-waste. Achieved Performance On MTP Qwen3.6-35B-A3B with Q8 0 quantization , I've observed the following (generation) speeds using 4x Tesla K40c GPUs (Kepler, compute capability 3.5): Previously unable to start → 35 tps Fixes to cuBLAS compute-type selection for legacy gpu in mainline llama cpp to run on hardware that previously failed during initialization (cc35-50). Approximately 35 → 55 tps after enabling CUDA graphs on my four-K40c setup, under the same reported clock configuration. ~5-10% end-to-end improvement: testing with Windows NCCL integration compared with the previous configuration. Throughput reaching above 60 tps while P.P. speeds are variable between 70-100 tps in my testing. These are preliminary results from my own system, not universal benchmarks. More systematic testing across architectures and workloads is still needed. I'm especially interested in hearing from people running Kepler, Maxwell, Pascal, Volta, and other older NVIDIA GPUs. If you have legacy hardware, I'd love to compare results and test compatibility across different configurations! Project / source: Llama.cpp pull request : Windows NCCL fork: Feedback, reproducible benchmarks, and contributions are very welcome!",
+      "published_at": "2026-10-24T20:01:46+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xeicw2/highperformance_llamacpp_fork_for_legacy_gpus/",
+      "signals": {
+        "reddit_rank": 19,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "id": "c_56caca128a",
+      "key": "github.com/theivanr/llama-on-legacy-gpu/blob/main/readme.md",
+      "cluster_id": "k_56caca128a",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "reddit-localllama",
+      "source_name": "r/LocalLLaMA",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "Made a rhythm game where 4 small neural nets listen to your song right in the browser tab (open source)",
+      "url": "https://v.redd.it/brmv2tim0hxh1",
+      "summary": "not an llm post exactly, but it's all local inference so i figured people here might like it i made a browser rhythm runner where the song builds the world you run through. you can throw in your own mp3s and the whole \"listening\" happens on your device, inside the tab. nothing gets uploaded the models, all running locally on onnxruntime-web (wasm, each in its own web worker), and what the game does with each: BeatNet (beat + downbeat tracking, ~1.6 mb) finds every beat and where each bar starts. this is the grid the whole level sits on: every obstacle, every jump and kick is placed on one of its beats, and the drops land on its bar lines Basic Pitch by spotify (note transcription, ~0.2 mb) figures out which notes are playing. a long held note becomes a bar or a line you swing on, and a solo turns into a string of rings you fly through, each one at the pitch of its note Spleeter vocals net (source separation, ~20 mb) pulls the voice out of the mix so the rest of the song doesn't confuse the next model SwiftF0 (pitch tracking, ~0.1 mb) how high the voice sings and when each syllable starts, every 16 ms. in a sung verse you fly through rings on the singer's syllables, going up and down with the melody of the voice all four are about 22 mb together and get cached after the first load. if a device can't run them in time, the game falls back to plain dsp and still works on top of the models it's regular dsp: onsets, loudness of every bar, where the drops hit. that picks the world...",
+      "published_at": "2026-10-24T19:59:11+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xeia9o/made_a_rhythm_game_where_4_small_neural_nets/",
+      "signals": {
+        "reddit_rank": 11,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "id": "c_9baaa4d57f",
+      "key": "v.redd.it/brmv2tim0hxh1",
+      "cluster_id": "k_9baaa4d57f",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "reddit-localllama",
+      "source_name": "r/LocalLLaMA",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "Raon is better than Flint.",
+      "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xehs52/raon_is_better_than_flint/",
+      "summary": "Idk why everyone keeps posting about Flint! Raon is hundreds of times better, and it's not even the best, which is really saying something about Flint lmao",
+      "published_at": "2026-10-24T19:38:27+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xehs52/raon_is_better_than_flint/",
+      "signals": {
+        "reddit_rank": 21,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "id": "c_e379570afb",
+      "key": "reddit.com/r/LocalLLaMA/comments/1xehs52/raon_is_better_than_flint",
+      "cluster_id": "k_e379570afb",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "reddit-localllama",
+      "source_name": "r/LocalLLaMA",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "Are there any good finetunes for Blender and/or 3D modeling?",
+      "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xeeorp/are_there_any_good_finetunes_for_blender_andor_3d/",
+      "summary": "Is there any good finetunes based on modern models, in the size range of Qwen 3.8 27B or Qwen 3.8 Flash Next that substantially improve it's 3D modeling capabilities for creating .glb / gltf assets (mainly for say making video games)? Mainly thinking about two use cases: Making a 3D model from a set of descriptive requirements (like a spec in an markdown file) plus a bunch of reference images that align with those descriptions for additional context (so: vision support). Editing existing 3D models that I may have purchased or licensed legally to make them more usable for me (e.g. carving out swing-down doors on an airship). Or rigging them / custom animations (more of a plus for that second point). Another Plus: Be able to convert them between formats (partially a coding task, but being able to verify may be useful with real understanding of 3D modeling if something got dropped or needs to be tweaked as part of converting e.g. from FBX to gLTF). I know this sort of a huge ask, and it feels like this is the final frontier of LLMs, and where they need to improve the most. But I'm wondering if anyone is actively working on or trying to improve LLMs for 3D modeling / asset creation, or if I'm really the only few people that are interested in this? Qwen 3.8 27B is good enough for coding, but I'm not sure if it's good enough for modeling. Frontier models consume wayy too much token budget to make anything meaningful at scale.",
+      "published_at": "2026-10-24T17:34:26+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xeeorp/are_there_any_good_finetunes_for_blender_andor_3d/",
+      "signals": {
+        "reddit_rank": 22,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "id": "c_b036ff5364",
+      "key": "reddit.com/r/LocalLLaMA/comments/1xeeorp/are_there_any_good_finetunes_for_blender_andor_3d",
+      "cluster_id": "k_b036ff5364",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "reddit-localllama",
+      "source_name": "r/LocalLLaMA",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "Silero VAD v6 being used by Chatgpt voice mode",
+      "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xedp2t/silero_vad_v6_being_used_by_chatgpt_voice_mode/",
+      "summary": "Interesting they chose an opensource model instead of building their own",
+      "published_at": "2026-10-24T16:54:54+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xedp2t/silero_vad_v6_being_used_by_chatgpt_voice_mode/",
+      "signals": {
+        "reddit_rank": 18,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "id": "c_f396fcc1e5",
+      "key": "reddit.com/r/LocalLLaMA/comments/1xedp2t/silero_vad_v6_being_used_by_chatgpt_voice_mode",
+      "cluster_id": "k_f396fcc1e5",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "reddit-localllama",
+      "source_name": "r/LocalLLaMA",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "10 tok/s Deepseek V4.1 Flash 8K with Strata on a 5090 with 64GB DDR5 Ram",
+      "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xed2xx/10_toks_deepseek_v41_flash_8k_with_strata_on_a/",
+      "summary": "Ran it on my RTX 5090 with Lexar 4TB NVMe and 64 GB of DDR5 Ram. At this speed it is cheaper to use the API than to pay the electricity for this, unfortunately. So if anyone is wondering what the speed is for a similar setup, there you have it. But anyway, i am excited that it runs at all on my PC at all. Edit: I am on Windows 10",
+      "published_at": "2026-10-24T16:29:59+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xed2xx/10_toks_deepseek_v41_flash_8k_with_strata_on_a/",
+      "signals": {
+        "reddit_rank": 17,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "id": "c_4655f03117",
+      "key": "reddit.com/r/LocalLLaMA/comments/1xed2xx/10_toks_deepseek_v41_flash_8k_with_strata_on_a",
+      "cluster_id": "k_4655f03117",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "reddit-localllama",
+      "source_name": "r/LocalLLaMA",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "Kimi K3.1 removes cyberattack training data from open weight release",
+      "url": "https://www.reuters.com/technology/moonshot-curbs-hacking-ability-new-kimi-model-fears-grow-over-ai-powered-2026-10-24/",
+      "summary": "This is due to China's new export restrictions primarily but also the growing caution around cybersecurity exploits popping up.",
+      "published_at": "2026-10-24T16:05:18+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xecgrf/kimi_k31_removes_cyberattack_training_data_from/",
+      "signals": {
+        "reddit_rank": 1,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "id": "c_96cc2d5790",
+      "key": "reuters.com/technology/moonshot-curbs-hacking-ability-new-kimi-model-fears-grow-over-ai-powered-2026-10-24",
+      "cluster_id": "k_96cc2d5790",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "reddit-localllama",
+      "source_name": "r/LocalLLaMA",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "big cloud models like opus 5.5 get all the motion graphics praise, but i made this with local qwen3.8 flash next. it's very possible!",
+      "url": "https://v.redd.it/pnlnbbncofxh1",
+      "summary": "i'll admit it took more than one prompt, a bunch of refinement and steering, but local can get close! this is done using remotion, same animation framework as all the viral clips about opus 5.5's motion graphics capabilities the entire conversation history that produced this video: EDIT: oh, and this is unsloth's Qwen3.8 Flash Next at UD-Q4 K XL running on a strix halo",
+      "published_at": "2026-10-24T15:29:30+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xebkti/big_cloud_models_like_opus_55_get_all_the_motion/",
+      "signals": {
+        "reddit_rank": 13,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "id": "c_1c849e205c",
+      "key": "v.redd.it/pnlnbbncofxh1",
+      "cluster_id": "k_1c849e205c",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "reddit-localllama",
+      "source_name": "r/LocalLLaMA",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "8 GB GPU, 262K context 3.5 BPW Qwen-Flash-Next Coder 70 T/s using llama.cpp",
+      "url": "https://www.reddit.com/gallery/1xebdzl",
+      "summary": "The methodology Qwen-Flash-Next has n-gram, MOE packing above its weight but it's still 6B active params. We exploit this by keeping most MOEs in RAM (Smallest MOEs go in VRAM for speedup) and n-gram on disk ensure you put the model on your fastest SSD. 8 GB VRAM, 24 GB RAM cost. You can run this fine if you've ~32 GB total memory too, but you'd have to turn down context size . Customize the launch params to best suit your hardware. EDIT Note : Apparently CUDA struggles to run this with 8 GB VRAM, so please use Vulkan backend if it fails to run for you. You can also use the second launch params below in the same comment chain. Ontop of that reduce context size and ensure no background app is wasting your VRAM. You can disable your browsers HW acceleration for this purpose. The model & quant Many people mistake this model for a 1 bit quant so let's get that out of the way. This model here is a 3.5 Bits Per Weight \"Coder\" variant by ISTA DASLab , featuring GSQ RCO quantization. Half of its experts are removed, so relatively to original param size it has the size of a 1.9 bit quant but the actual weights use 3.5 BPW. see from model page: Averaged over the transformer, this corresponds to 1.89 bits per parameter of the original model. The figure is an effective rate: it amortises the removed experts over the original parameter count , and so expresses the combined effect of pruning and quantization. No individual weight is stored at 1.89 bits . The retained weights are stored at...",
+      "published_at": "2026-10-24T15:21:50+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xebdzl/8_gb_gpu_262k_context_35_bpw_qwenflashnext_coder/",
+      "signals": {
+        "reddit_rank": 5,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "id": "c_563b639e34",
+      "key": "reddit.com/gallery/1xebdzl",
+      "cluster_id": "k_563b639e34",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "reddit-localllama",
+      "source_name": "r/LocalLLaMA",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "AbliteratedOutTheBox Strata Announcement",
+      "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xe8x9c/abliteratedoutthebox_strata_announcement/",
+      "summary": "I've been working on an inference-time abliteration engine as a fork of llama.cpp, and I've now ported the hook to Strata. It acts as an easy way to use abliterated models without huge amounts of vram or finetuning. For the Strata Branch For the llama.cpp branch A star or upvote would help this project a lot. The Strata port is experimental, full-model behavior and response quality still need validation. If anyone running Strata wants to try it, I'd appreciate feedback",
+      "published_at": "2026-10-24T13:38:58+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xe8x9c/abliteratedoutthebox_strata_announcement/",
+      "signals": {
+        "reddit_rank": 10,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "id": "c_9d07d44cd6",
+      "key": "reddit.com/r/LocalLLaMA/comments/1xe8x9c/abliteratedoutthebox_strata_announcement",
+      "cluster_id": "k_9d07d44cd6",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "reddit-localllama",
+      "source_name": "r/LocalLLaMA",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "Meta trained small AI models to read raw bytes instead of tokens. They start out worse, but the paper predicts they end up better",
+      "url": "https://i.redd.it/5hqehcnkyexh1.jpeg",
+      "summary": "this paper suggests a model that skips models reading tokens that and has the model read raw bytes, basically one letter at a time. what they did: trained small models (~1B params), some on tokens and some on bytes trained them partly by copying a bigger model (llama 3 8b), aka distillation the tricky part is that the teacher thinks in tokens and the student reads bytes, so they had to work out a clean way to translate between the two what they found: with a little training the token models win, not even close with more training the token models kind of flatline while the byte ones keep improving if you extend the trend lines, the byte model ends up beating llama 3.2 1b and gemma 3 1b by a few points the byte models also needed about 6x less text to hit the same level the catch (and there's a few): the \"beats llama and gemma\" part is a prediction. they extended the curves past what they actually trained. in their real runs the token model was still ahead reading letter by letter is slower. a token is ~4-5 letters, so it's roughly 5x more steps for the same text. less data but more compute tokens aren't really dead, since the teacher model still uses them only tested on small models, no idea yet if it holds at scale still pretty cool imo. for small models on phones/laptops, squeezing more quality out of the same size matters a lot. and getting rid of the giant word list might fix the dumb stuff like miscounting letters in a word anyone know if there's work on making byte...",
+      "published_at": "2026-10-24T13:08:49+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xe88ja/meta_trained_small_ai_models_to_read_raw_bytes/",
+      "signals": {
+        "reddit_rank": 2,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "id": "c_f42a149f97",
+      "key": "i.redd.it/5hqehcnkyexh1.jpeg",
+      "cluster_id": "k_f42a149f97",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "reddit-localllama",
+      "source_name": "r/LocalLLaMA",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "Gyro quants looks like EXL3 but kinda closed source. please explain why we need this.",
+      "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xe41qe/gyro_quants_looks_like_exl3_but_kinda_closed/",
+      "summary": "Recently this new quant has popped up called Gyro. It is gaining popularity because it's being inserted into many different engines, especially the recently popular Strata. So i took a dive into the code to see the differences between Gyro and EXL3, to me it looks like simply a different flavor of EXL3 quantization, but it's not interoperable and the recipe to make it is closed source for now. Property Gyro-S / Gyro-M EXL3 Quantization family QTIP / Trellis-coded quantization QTIP / Trellis-coded quantization Hadamard rotations Yes Yes Trellis state size 15 bits 16 bits Encoding unit 128-weight blocks 256-weight tiles (standard path) Codebook Explicit LUT with 2,048 2D points Procedural codebook Weight reconstruction State hashing + lookup table Procedural value generation Bit packing format TQ2 T , TQK6 , TQK7 EXL3-specific packing Direct interoperability Not demonstrated Not demonstrated I did not find any published evidence that it's better than EXL3 on either decode speed, or perplexity/KLD/top 1%. I'm not dunking on Agentionai but I kinda hate how this only makes the community more fragmented without providing any benefit. EXL3 is not very publicized while this Gyro is gaining popularity with aggressive brading (socials and stuff). \" Agention Precision Rotor \"... please, proof....",
+      "published_at": "2026-10-24T09:17:15+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xe41qe/gyro_quants_looks_like_exl3_but_kinda_closed/",
+      "signals": {
+        "reddit_rank": 9,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "id": "c_e602652bd8",
+      "key": "reddit.com/r/LocalLLaMA/comments/1xe41qe/gyro_quants_looks_like_exl3_but_kinda_closed",
+      "cluster_id": "k_e602652bd8",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "reddit-localllama",
+      "source_name": "r/LocalLLaMA",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "[Release] ISTA GSQ-RCO GGUFs for DeepSeek-V4.1-Flash-1017",
+      "url": "https://www.reddit.com/gallery/1xe2wg8",
+      "summary": "We have released DeepSeek-V4.1-Flash-1017 quantized with GSQ and RCO, at 1.75 to 2.25 bits per weight. DeepSeek-V4.1-Flash-1017 is a sparse mixture-of-experts model: 384 routed experts per layer, of which 6 are active per token, 763.2B parameters and a 1M-token context window. It is released with FP8 dense weights and FP4 routed experts. What's inside Three quantized GGUFs: IQ1 M (1.75 bpw), IQ2 XXS (2.00 bpw) and IQ2 XS (2.25 bpw), with backbones of 120.7 to 155.2 GB. The bit-width is the average over the 551.9B backbone parameters, which is what the search controls. One shared Engram file (110.6 GB): the model's two Engram lookup tables (196.6B parameters) at IQ4 NL. It is identical for every build and needs to be downloaded only once. The tables are read one row per token, so they can stay memory-mapped on disk. Every build runs on a single 12 GB GPU with Strata (see model card, ). GSQ (Gumbel-Softmax Quantization): post-training scalar quantization that jointly learns grid assignments and group scales, closing most of the gap between scalar and vector quantization at low bit-widths while remaining deployable in standard GGUF types. RCO (Riemannian Constrained Optimization): enforces exact budgets by gradient descent on the task loss, without per-constraint tuning. Here it assigns a quantization type to every backbone tensor under the target bit-width, with separate ladders for the dense path (Q5 K to Q8 0) and the routed experts (IQ1 S to IQ3 S). An embedded chat...",
+      "published_at": "2026-10-24T08:05:17+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xe2wg8/release_ista_gsqrco_ggufs_for_deepseekv41flash1017/",
+      "signals": {
+        "reddit_rank": 6,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "id": "c_b596bd8a6b",
+      "key": "reddit.com/gallery/1xe2wg8",
+      "cluster_id": "k_b596bd8a6b",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "reddit-localllama",
+      "source_name": "r/LocalLLaMA",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "The RTX 5090 Isn't Gone, It's In Chinese Labs, Where Technicians Rip Off Its Die And 32GB VRAM For AI Servers",
+      "url": "https://wccftech.com/the-discontinued-rtx-5090s-are-entering-chinese-labs-where-they-are-turned-into-ai-gpus/",
+      "summary": "",
+      "published_at": "2026-10-24T07:09:11+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xe1zsr/the_rtx_5090_isnt_gone_its_in_chinese_labs_where/",
+      "signals": {
+        "reddit_rank": 4,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "id": "c_04556e3230",
+      "key": "wccftech.com/the-discontinued-rtx-5090s-are-entering-chinese-labs-where-they-are-turned-into-ai-gpus",
+      "cluster_id": "k_04556e3230",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "reddit-localllama",
+      "source_name": "r/LocalLLaMA",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "Spark X2.6 4B is the best of it's size",
+      "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xe1kkh/spark_x26_4b_is_the_best_of_its_size/",
+      "summary": "I tested it last night and it is amazingly good at tool calling. Tests in pi cli: Can write a python script for blender to create a red cube, rotate it and render it. It understood a rather complex rust codebase and explained details about things that work one way in one part of the app and slightly different in another part. 12 tool calls, straight to the point. I ran pi cli without skills and extensions and it still found the global agents.md , understood it and wrote a list of changed files after every turn. I have a global skill in ~/.agents that asks for this I's small, fast and the kv cache is small, too. It's thinking is measured and on point. MTP should follow soon. It lacks vision. temp: 1.0, I didn't set any other params. What are your experiences with it?",
+      "published_at": "2026-10-24T06:44:17+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xe1kkh/spark_x26_4b_is_the_best_of_its_size/",
+      "signals": {
+        "reddit_rank": 12,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "id": "c_4c6842c316",
+      "key": "reddit.com/r/LocalLLaMA/comments/1xe1kkh/spark_x26_4b_is_the_best_of_its_size",
+      "cluster_id": "k_966bc2f6ab",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "reddit-machinelearning",
+      "source_name": "r/MachineLearning",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "ASRN: Linear-memory long-range copying with learned proper-time clock [p]",
+      "url": "https://www.reddit.com/gallery/1xer72h",
+      "summary": "ASRN (Adaptive Sparse Recurrence Network, red de recurrencia dispersa adaptativa) es una capa de modelo de lenguaje que recupera apariciones anteriores exactas con trabajo acotado por pieza: cada pieza atiende solo a sus C compañeros más recientes en casilleros de hash de signo aprendidos y copia la pieza que vino después de cada coincidencia; un reloj de tiempo propio aprendido, Bt = P u≤t βu, fija el olvido αse −κ(Bt−Bs) tanto de los puntajes de recuperación como de una intensidad autoexcitada (de Hawkes) sobre grupos de n piezas repetidos; y una puerta lee esas intensidades y una racha de repetición mediante una respuesta no monótona aprendida para decidir cuándo copiar. 10.5281/zenodo.23607506",
+      "published_at": "2026-10-25T02:57:16+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/MachineLearning/comments/1xer72h/asrn_linearmemory_longrange_copying_with_learned/",
+      "signals": {
+        "reddit_rank": 3,
+        "subreddit": "MachineLearning"
+      },
+      "tags": [],
+      "id": "c_6e6f013a1d",
+      "key": "reddit.com/gallery/1xer72h",
+      "cluster_id": "k_6e6f013a1d",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "reddit-machinelearning",
+      "source_name": "r/MachineLearning",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "Increasing number of UG authors in A* conferences with no supervisor [D]",
+      "url": "https://www.reddit.com/r/MachineLearning/comments/1xe9uoh/increasing_number_of_ug_authors_in_a_conferences/",
+      "summary": "What do you all think about this? It seems increasingly common for undergraduate students to conduct research and publish at A conferences without a supervisor. As a graduate student, I find it both impressive and intimidating, and it sometimes makes me question my own progress.",
+      "published_at": "2026-10-24T14:18:07+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/MachineLearning/comments/1xe9uoh/increasing_number_of_ug_authors_in_a_conferences/",
+      "signals": {
+        "reddit_rank": 1,
+        "subreddit": "MachineLearning"
+      },
+      "tags": [],
+      "id": "c_de8a53937a",
+      "key": "reddit.com/r/MachineLearning/comments/1xe9uoh/increasing_number_of_ug_authors_in_a_conferences",
+      "cluster_id": "k_de8a53937a",
+      "also_from": [],
+      "seen_on": []
+    },
+    {
+      "source": "reddit-machinelearning",
+      "source_name": "r/MachineLearning",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "Got a pretrained music transformer to jam with me live, no fine-tuning, just steering the sampling [P]",
+      "url": "https://www.reddit.com/r/MachineLearning/comments/1xe4pex/got_a_pretrained_music_transformer_to_jam_with_me/",
+      "summary": "I wanted to see how far you can get making a pretrained symbolic music model \"listen\" to a live player without training it. Turns out pretty far. Setup: I play a MIDI keyboard, the Anticipatory Music Transformer (Thickstun et al., music-medium-800k) plays a second piano. While I play I track my key, the chord I'm holding and my tempo, and add biases to the logits before sampling. Out-of-key notes get pushed down, chord tones and tensions get pushed up, the keys right around my hands get pushed down so it doesn't step on me, and when I stop it gets pulled up to where a melody would be. There's also a small boost for continuing the intervals of my last phrase, which makes it sound like it's answering. It samples about a second ahead, and when I change chord I throw away what it had planned and resample. Runs on a Jetson Orin Nano. Video + code: The offsets are all hand-tuned by ear, which feels a bit dumb. Has anyone tried something more principled for this, like a small learned conditioning head or guidance-style tricks on a symbolic model?",
+      "published_at": "2026-10-24T09:58:29+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/MachineLearning/comments/1xe4pex/got_a_pretrained_music_transformer_to_jam_with_me/",
+      "signals": {
+        "reddit_rank": 2,
+        "subreddit": "MachineLearning"
+      },
+      "tags": [],
+      "id": "c_e1fc52a6a0",
+      "key": "reddit.com/r/MachineLearning/comments/1xe4pex/got_a_pretrained_music_transformer_to_jam_with_me",
+      "cluster_id": "k_e1fc52a6a0",
+      "also_from": [],
+      "seen_on": []
+    }
+  ]
+}
