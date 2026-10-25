@@ -125,6 +125,44 @@ def test_export_writes_publishable_issues(tmp_path, data_dir):
     assert all(item["compact"] for s in fallback_issue["sections"] for item in s["items"])
 
 
+def test_export_beta_issues(tmp_path, data_dir):
+    def api(model, title):
+        data = _digest(channel="api", model=model)
+        data["items"][0]["title"] = title
+        return data
+
+    folder = data_dir / DATE
+    (folder / "digest.api.deepseek.json").write_text(
+        json.dumps(api("nvidia:deepseek-ai/deepseek-v4.1-flash", "DeepSeek 写的 GPT-6"))
+    )
+    (folder / "digest.api.gemini.json").write_text(
+        json.dumps(api("gemini:gemini-3.5-flash-lite", "Gemini 写的"))
+    )
+    (folder / "digest.api.broken.json").write_text(json.dumps({"mode": "full"}))  # fails validate
+    # The fallback issue was replaced by the DeepSeek edit: it is the main issue, not a beta.
+    deepseek_main = api("nvidia:deepseek-ai/deepseek-v4.1-flash", "DeepSeek 主版")
+    (data_dir / NEXT / "digest.json").write_text(json.dumps({**deepseek_main, "date": NEXT}))
+    (data_dir / NEXT / "digest.api.deepseek.json").write_text(json.dumps({**deepseek_main, "date": NEXT}))
+
+    out, public = tmp_path / "web-data", tmp_path / "public"
+    export.export(out, public, data_dir, SOURCES)
+
+    main = json.loads((out / "issues" / f"{DATE}.json").read_text())
+    assert main["editor"] == "Claude" and main["beta"] is None
+    assert main["betas"] == [{"slug": "deepseek", "label": "DeepSeek"}, {"slug": "gemini", "label": "Gemini"}]
+    beta = json.loads((out / "beta" / DATE / "deepseek.json").read_text())
+    assert beta["editor"] == "deepseek-ai/deepseek-v4.1-flash"
+    assert beta["beta"] == {"slug": "deepseek", "label": "DeepSeek"} and beta["betas"] == main["betas"]
+    assert beta["sections"][0]["items"][0]["title"] == "DeepSeek 写的 GPT-6"
+    assert sorted(p.name for p in (out / "beta" / DATE).iterdir()) == ["deepseek.json", "gemini.json"]
+
+    api_main = json.loads((out / "issues" / f"{NEXT}.json").read_text())
+    assert api_main["editor"] == "deepseek-ai/deepseek-v4.1-flash" and api_main["betas"] == []
+    assert not (out / "beta" / NEXT).exists()
+    assert json.loads((out / "issues" / f"{OLD}.json").read_text())["betas"] == []
+    assert "写的" not in (public / "feed.xml").read_text()  # the feed only carries main issues
+
+
 def test_export_sources(tmp_path, data_dir):
     sources = [*SOURCES, source("github_releases", kind="release", id_="gh", repos=["vllm-project/vllm"])]
     export.export(tmp_path, tmp_path / "public", data_dir, sources)
@@ -198,6 +236,22 @@ def test_decide():
     assert decide(full, full) == (None, "unchanged")
     assert decide(full, {**newer, "date": "2026-10-01"})[0] is None
     assert decide(fb, "invalid JSON: ...")[1].startswith("incoming digest is not valid")
+
+
+def test_decide_ranks_claude_over_the_api_route():
+    api = _digest(generated_at="2026-10-19T23:00:00+00:00", channel="api", model="nvidia:deepseek-v4.1")
+    other_api = _digest(generated_at="2026-10-19T23:30:00+00:00", channel="api", model="gemini:g-lite")
+    claude = _digest(generated_at="2026-10-19T21:40:00+00:00")  # finished before the API edit
+    fb = fallback.build_fallback(CANDIDATES)
+
+    def decide(current, incoming):
+        data, reason = publish.decide(copy.deepcopy(current), copy.deepcopy(incoming), CANDIDATES)
+        return (data or {}).get("model"), reason
+
+    assert decide(fb, api) == ("nvidia:deepseek-v4.1", "replaces the fallback")
+    assert decide(api, claude) == (None, "a Claude edit replaces the API edit")
+    assert decide(claude, api) == (None, "keeping the edited issue over an API edit")
+    assert decide(api, other_api) == (None, "keeping the edited issue over an API edit")
 
 
 def test_decide_drops_invalid_items():

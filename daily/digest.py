@@ -293,6 +293,11 @@ def _check_item(
     return errors
 
 
+def is_api(digest: dict[str, Any]) -> bool:
+    """Written by the API route; digests without a channel come from the Claude route."""
+    return digest.get("channel") == "api"
+
+
 def is_discussion(url: str, c: dict[str, Any] | None) -> bool:
     if c is not None and c.get("discussion_url") and url_key(url) == url_key(c["discussion_url"]):
         return True
@@ -397,6 +402,18 @@ async def check_links(urls: list[str], client: httpx.AsyncClient, concurrency: i
 
 def page_text(markup: str) -> str:
     return html.unescape(_TAG.sub(" ", _SCRIPT.sub(" ", markup)))
+
+
+def grep_page(text: str, needles: list[str], context: int = 200) -> str:
+    """`daily page`: the page text around each needle, verbatim as validate will match it."""
+    text = " ".join(text.split())
+    lines = []
+    for needle in needles:
+        hits = [i for i in range(len(text)) if text.startswith(needle, i)] if needle else []
+        lines.append(f"--- {needle!r}: {len(hits)} match(es)")
+        for i in hits[:5]:
+            lines += [text[max(0, i - context) : i + len(needle) + context], ""]
+    return "\n".join(lines)
 
 
 # --- applying the verdict --------------------------------------------------------------------

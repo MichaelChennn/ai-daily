@@ -1,6 +1,13 @@
 ---
 import { Rss } from "lucide-react"
 import { href, SITE_TITLE } from "@/lib/issues"
+
+interface Props {
+  /** On an issue page, who edited it: "由 Claude 编辑". */
+  editor?: string
+}
+
+const { editor } = Astro.props
 ---
 
 <footer class="mt-20 border-t">
@@ -9,7 +16,9 @@ import { href, SITE_TITLE } from "@/lib/issues"
   >
     <div class="flex flex-col gap-1">
       <span class="font-semibold tracking-tight">{SITE_TITLE}</span>
-      <span class="text-xs text-muted-foreground">每天柏林时间 06:00 更新 · 编辑由 Claude 完成</span>
+      <span class="text-xs text-muted-foreground">
+        {editor && <>本期{editor} · </>}每天柏林时间 06:00 更新
+      </span>
     </div>
     <a
       href={href("feed.xml")}

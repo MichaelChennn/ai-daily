@@ -1,10 +1,14 @@
-"""`daily adopt`: decide whether a digest pushed from an editor branch replaces the one on main.
+"""`daily adopt`: decide whether a digest from an editor route replaces the one on main.
 
 The Claude editor runs in a cloud session that can only push to its own claude/ branch;
 .github/workflows/ingest.yml hands each digest.json it pushes to `adopt`. The rules match the
 skill's: an edited issue is never replaced by a fallback, a fallback is replaced by any valid
 digest (the editor finishing after the 06:30 fallback), and an edited issue is only replaced by
 a newer edit (an explicit redo).
+
+The API route (.github/workflows/editor-api.yml, daily.api_editor) hands its digests here too,
+so the main issue goes Claude route > API route > fallback: a Claude edit always replaces an API
+edit, and an API edit never replaces any edit, whichever was written first.
 """
 
 from __future__ import annotations
@@ -32,6 +36,10 @@ def decide(current: Any, incoming: Any, candidates: dict[str, Any]) -> tuple[dic
         return incoming, "replaces the fallback"
     if incoming.get("mode") == "fallback":
         return None, "keeping the edited issue over a fallback"
+    if digest.is_api(current) and not digest.is_api(incoming):
+        return incoming, "a Claude edit replaces the API edit"
+    if digest.is_api(incoming):
+        return None, "keeping the edited issue over an API edit"
     if _time(incoming) > _time(current):
         return incoming, "newer edit"
     return None, "the current edit is newer"

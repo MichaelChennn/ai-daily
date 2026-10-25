@@ -2,6 +2,7 @@
 import { TriangleAlert } from "lucide-react"
 
 import { Alert, AlertDescription } from "@/components/ui/alert"
+import BetaNav from "@/components/BetaNav.astro"
 import BriefList from "@/components/BriefList"
 import DateWheel from "@/components/DateWheel"
 import ItemCard from "@/components/ItemCard"
@@ -16,13 +17,18 @@ interface Props {
   home?: boolean
 }
 
-// One issue, at YYYY-MM-DD/ and (the newest) at the home page.
+// One issue, at YYYY-MM-DD/ and (the newest) at the home page, or one of its betas at
+// YYYY-MM-DD/beta/<slug>/ (the date wheel and pager still go between main issues).
 const { issue, home = false } = Astro.props
 const at = issues.findIndex((i) => i.date === issue.date)
 const newer = issues[at - 1]?.date ?? null
 const older = issues[at + 1]?.date ?? null
 const published = new Set(issues.map((i) => i.date))
-const title = `${issue.date} · ${SITE_TITLE}` + (issue.fallback ? "（降级版）" : "")
+const title =
+  `${issue.date} · ` +
+  (issue.beta ? `Beta · ${issue.beta.label} · ` : "") +
+  SITE_TITLE +
+  (issue.fallback ? "（降级版）" : "")
 const description = issue.description || `${issue.date} 的 AI 科技日报。`
 const filters = issue.sections.map(({ id, label }) => ({ id, label }))
 ---
@@ -31,12 +37,13 @@ const filters = issue.sections.map(({ id, label }) => ({ id, label }))
 <Layout
   title={title}
   description={description}
- 
   current={newer ? "archive" : "today"}
   canonical={home ? issueHref(issue.date) : undefined}
+  editor={issue.fallback ? "降级版，未经编辑" : `由 ${issue.editor} 编辑`}
 >
   <h1 class="sr-only">{title}</h1>
   <DateWheel date={issue.date} published={published} older={older} newer={newer} />
+  <BetaNav issue={issue} />
   <SectionFilter client:load sections={filters} />
 
   <div data-issue class="[view-transition-name:issue]">

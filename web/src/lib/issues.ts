@@ -14,18 +14,30 @@ export type Item = {
 
 export type Section = { id: string; label: string; items: Item[] }
 
+/** An API route edition shown beside the main issue, at YYYY-MM-DD/beta/<slug>/. */
+export type Beta = { slug: string; label: string }
+
 export type Issue = {
   date: string
   fallback: boolean
   notice: string | null
   description: string
+  /** Who edited it: "Claude" or the API route's model; null for a fallback. */
+  editor: string | null
+  betas: Beta[]
+  /** Set on a beta's own page. */
+  beta: Beta | null
   sections: Section[]
 }
 
 const files = import.meta.glob<Issue>("../../data/issues/*.json", { eager: true, import: "default" })
+const betaFiles = import.meta.glob<Issue>("../../data/beta/*/*.json", { eager: true, import: "default" })
 
 /** Every published issue, newest first. */
 export const issues: Issue[] = Object.values(files).sort((a, b) => b.date.localeCompare(a.date))
+
+/** Every beta page. */
+export const betas: Issue[] = Object.values(betaFiles)
 
 const WEEKDAYS = "日一二三四五六"
 
@@ -57,6 +69,8 @@ export function href(path: string): string {
 }
 
 export const issueHref = (day: string) => href(`${day}/`)
+
+export const betaHref = (day: string, slug: string) => href(`${day}/beta/${slug}/`)
 
 export const SITE_TITLE = "AI 科技日报"
 export const REPO_URL = "https://github.com/MichaelChennn/ai-daily"

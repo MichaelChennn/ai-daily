@@ -117,6 +117,29 @@ def build_candidates(
     }
 
 
+def candidate_listing(data: dict[str, Any], kinds: list[str] | None = None, summary_chars: int = 160) -> str:
+    """`daily list`: one line per candidate for the editor to browse, its summary below."""
+    clusters = {c["id"]: len(c["candidate_ids"]) for c in data["clusters"]}
+    failed = [r["id"] for r in data["sources"] if r["status"] == "error"]
+    count = len(data["candidates"])
+    lines = [f"issue {data['date']}: {count} candidates; failed sources: {failed or 'none'}"]
+    for c in data["candidates"]:
+        if kinds and c["kind"] not in kinds:
+            continue
+        notes = [f"{k}={v}" for k, v in c["signals"].items() if k not in ("subreddit", "organization")]
+        notes += [f"+{a['source']}" for a in c["also_from"]]
+        if c["cluster_id"] in clusters:
+            notes.append(f"cluster {c['cluster_id']}({clusters[c['cluster_id']]})")
+        if c["seen_on"]:
+            notes.append(f"seen {','.join(c['seen_on'])}")
+        head = f"{c['id']} {c['kind']:<10} T{c['tier']} [{c['source']}] {c['title']}"
+        lines.append(f"{head}  | {' '.join(notes)}")
+        if summary_chars and c["summary"]:
+            summary = " ".join(c["summary"].split())
+            lines.append(f"    {summary[:summary_chars]}{'…' if len(summary) > summary_chars else ''}")
+    return "\n".join(lines)
+
+
 def write_candidates(data: dict[str, Any], data_dir: Path) -> Path:
     out_dir = data_dir / data["date"]
     out_dir.mkdir(parents=True, exist_ok=True)

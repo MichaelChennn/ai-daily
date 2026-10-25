@@ -1,0 +1,151 @@
+# The API route (docs/adr/0001-two-editor-routes.md): edits today's issue with cloud model APIs,
+# next to the Claude route, and commits each model's digest as data/YYYY-MM-DD/digest.api.<slug>.json
+# (a beta on the site). `daily adopt` then makes the first one that passed the main issue if the
+# Claude route has not delivered: Claude route > API route > fallback, and a Claude edit that
+# arrives later through ingest.yml still replaces it.
+#
+# Configuration (Settings -> Secrets and variables -> Actions):
+#   secrets    GEMINI_API_KEY, NVIDIA_API_KEY
+#   variable   EDITOR_API_MODEL: provider:model, comma separated, in order of priority for the main
+#              issue, e.g. nvidia:deepseek-ai/deepseek-v4.1-flash,gemini:gemini-3.5-flash-lite
+name: editor-api
+
+on:
+  schedule:
+    - cron: "30 3 * * *" # 05:30 CEST (summer)
+    - cron: "30 4 * * *" # 05:30 CET (winter)
+  workflow_dispatch:
+    inputs:
+      date:
+        description: "Issue date (YYYY-MM-DD, Berlin time); empty = today"
+        required: false
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  # Actions cron is UTC only and Berlin moves between UTC+2 (CEST) and UTC+1 (CET): both
+  # schedules fire every day, and only the one matching today's offset goes on.
+  due:
+    runs-on: ubuntu-latest
+    outputs:
+      run: ${{ steps.check.outputs.run }}
+    steps:
+      - id: check
+        env:
+          SCHEDULE: ${{ github.event.schedule }}
+          CEST: "30 3 * * *"
+          CET: "30 4 * * *"
+        run: |
+          expected=$([ "$(TZ=Europe/Berlin date +%z)" = "+0200" ] && echo "$CEST" || echo "$CET")
+          if [ -z "$SCHEDULE" ] || [ "$SCHEDULE" = "$expected" ]; then run=true; else run=false; fi
+          echo "run=$run" >> "$GITHUB_OUTPUT"
+
+  edit:
+    needs: due
+    if: needs.due.outputs.run == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: astral-sh/setup-uv@v10.3.2
+        with:
+          python-version: "3.12"
+          enable-cache: true
+      - run: uv sync --locked
+      # One model failing does not stop the others; the job fails afterwards so GitHub notifies.
+      - name: Edit with each model
+        id: edit
+        env:
+          ISSUE_DATE: ${{ inputs.date }}
+          EDITOR_API_MODEL: ${{ vars.EDITOR_API_MODEL }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          NVIDIA_API_KEY: ${{ secrets.NVIDIA_API_KEY }}
+        run: |
+          date=${ISSUE_DATE:-$(uv run python -c "from daily.window import local_today; print(local_today())")}
+          echo "date=$date" >> "$GITHUB_OUTPUT"
+          if [ ! -f "data/$date/candidates.json" ]; then
+            echo "::warning::data/$date/candidates.json is missing: nothing to edit (fallback.yml alerts)"
+            exit 0
+          fi
+          if [ -z "$EDITOR_API_MODEL" ]; then
+            echo "::error::the EDITOR_API_MODEL variable is not set"
+            exit 1
+          fi
+          failed=0
+          mkdir -p "$RUNNER_TEMP/api"
+          n=0
+          for model in ${EDITOR_API_MODEL//,/ }; do
+            if path=$(uv run python -m daily edit --date "$date" --model "$model"); then
+              n=$((n + 1))
+              cp "$path" "$RUNNER_TEMP/api/$n-$(basename "$path")" # numbered: the priority order
+            else
+              echo "::error::$model did not produce a valid digest for $date"
+              failed=1
+            fi
+          done
+          echo "failed=$failed" >> "$GITHUB_OUTPUT"
+      - uses: actions/upload-artifact@v4
+        if: steps.edit.outputs.date != ''
+        with:
+          name: api-digests
+          path: ${{ runner.temp }}/api/
+          if-no-files-found: ignore
+    outputs:
+      date: ${{ steps.edit.outputs.date }}
+      failed: ${{ steps.edit.outputs.failed }}
+
+  # Editing takes a while and runs unlocked; committing shares the publish lock with ingest.yml and
+  # fallback.yml. adopt runs on the latest main each attempt: the Claude route may have been
+  # ingested meanwhile, and adopt in priority order makes the first valid digest the main issue.
+  publish:
+    needs: edit
+    if: needs.edit.outputs.date != ''
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    concurrency:
+      group: publish
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: astral-sh/setup-uv@v10.3.2
+        with:
+          python-version: "3.12"
+          enable-cache: true
+      - run: uv sync --locked
+      - uses: actions/download-artifact@v4
+        continue-on-error: true # no artifact when every model failed
+        with:
+          name: api-digests
+          path: ${{ runner.temp }}/api
+      - name: Commit and rebuild the site
+        env:
+          GH_TOKEN: ${{ github.token }}
+          DATE: ${{ needs.edit.outputs.date }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          files=$(ls "$RUNNER_TEMP/api" 2>/dev/null | sort -n)
+          [ -z "$files" ] && exit 0
+          for attempt in 1 2 3; do
+            git fetch --no-tags origin main && git reset --hard origin/main
+            for file in $files; do
+              cp "$RUNNER_TEMP/api/$file" "data/$DATE/${file#*-}"
+              uv run python -m daily adopt --date "$DATE" --from "data/$DATE/${file#*-}"
+            done
+            git add "data/$DATE"
+            git diff --cached --quiet && exit 0
+            git commit -m "digest: $DATE (from the API route)"
+            if git push origin HEAD:main; then break; fi
+            [ "$attempt" = 3 ] && exit 1
+            sleep 5
+          done
+          gh workflow run pages.yml --ref main
+      - name: Fail if a model failed
+        if: needs.edit.outputs.failed == '1'
+        run: exit 1

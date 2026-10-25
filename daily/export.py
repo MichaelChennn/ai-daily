@@ -4,9 +4,13 @@ The front end only lays the data out. Everything that decides what gets publishe
 the same `validate` gate as the feed (site.load_issues), source labels, which link is a
 discussion, the item's publisher and whether its publication time is real.
 
-One file per issue, out/issues/YYYY-MM-DD.json:
+One file per issue, out/issues/YYYY-MM-DD.json, and one per beta (an API route edition beside
+the main issue), out/beta/YYYY-MM-DD/<slug>.json:
 
   date, fallback, notice (the fallback notice, or null), description (highlights, for <meta>)
+  editor       who edited it ("Claude", the API route's model), null for a fallback
+  betas[]      slug, label: the issue's betas
+  beta         {slug, label} on a beta's own page, else null
   sections[]   id, label, items[]
     items[]    title, summary, compact (rendered as a one-line brief),
                publisher {name, icon, host}, published {iso, label} or null,
@@ -27,6 +31,7 @@ links under base_url, and .nojekyll.
 from __future__ import annotations
 
 import json
+import shutil
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
@@ -35,7 +40,7 @@ from urllib.parse import quote, urlsplit
 
 from daily.config import SourceConfig
 from daily.dedup import url_key
-from daily.digest import SECTIONS
+from daily.digest import SECTIONS, is_api
 from daily.render import HOST_LABELS, source_labels
 from daily.site import DEFAULT_BASE_URL, FALLBACK_NOTICE, RECENT_DAYS, Issue, feed, load_issues
 from daily.window import TIMEZONE
@@ -54,6 +59,8 @@ HF_SECTIONS = {
     "spaces",
     "datasets",
 }
+# Beta slug (digest.api.<slug>.json) -> its label on the page.
+BETA_LABELS = {"deepseek": "DeepSeek", "gemini": "Gemini"}
 # Whose icon a source with neither a homepage nor a page url gets.
 ICON_HOSTS = {"github_releases": "github.com"}
 
@@ -104,22 +111,29 @@ class SourceStats:
 def export(
     out: Path, public: Path, data_dir: Path, sources: list[SourceConfig], base_url: str = DEFAULT_BASE_URL
 ) -> list[Issue]:
-    """Write out/issues/*.json for every publishable issue (replacing what an earlier export left),
-    out/sources.json, and public/feed.xml and public/.nojekyll."""
-    folder = out / "issues"
+    """Write out/issues/*.json and out/beta/*/*.json for every publishable issue and beta
+    (replacing what an earlier export left), out/sources.json, and public/feed.xml and
+    public/.nojekyll."""
+    folder, beta_folder = out / "issues", out / "beta"
     folder.mkdir(parents=True, exist_ok=True)
     for stale in folder.glob("*.json"):
         stale.unlink()
+    shutil.rmtree(beta_folder, ignore_errors=True)
     issues = load_issues(data_dir)
     for issue in issues:
-        text = json.dumps(issue_data(issue), ensure_ascii=False, indent=1)
-        (folder / f"{issue.slug}.json").write_text(text + "\n", encoding="utf-8")
-    text = json.dumps(sources_data(sources, data_dir, issues), ensure_ascii=False, indent=1)
-    (out / "sources.json").write_text(text + "\n", encoding="utf-8")
+        _write_json(folder / f"{issue.slug}.json", issue_data(issue))
+        for slug in issue.betas:
+            (beta_folder / issue.slug).mkdir(parents=True, exist_ok=True)
+            _write_json(beta_folder / issue.slug / f"{slug}.json", issue_data(issue, slug))
+    _write_json(out / "sources.json", sources_data(sources, data_dir, issues))
     public.mkdir(parents=True, exist_ok=True)
     (public / "feed.xml").write_text(feed(issues, base_url.rstrip("/") + "/"), encoding="utf-8")
     (public / ".nojekyll").write_text("", encoding="utf-8")
     return issues
+
+
+def _write_json(path: Path, data: Any) -> None:
+    path.write_text(json.dumps(data, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
 
 
 def sources_data(sources: list[SourceConfig], data_dir: Path, issues: list[Issue]) -> dict[str, Any]:
@@ -201,11 +215,14 @@ def source_homepage(source: SourceConfig) -> str | None:
     return str(options["url"]) if source.type == "html_listing" else None
 
 
-def issue_data(issue: Issue) -> dict[str, Any]:
+def issue_data(issue: Issue, beta: str | None = None) -> dict[str, Any]:
+    """The main issue's page, or with beta, the page of that beta."""
+    digest = issue.betas[beta] if beta else issue.digest
+    fallback = digest.get("mode") == "fallback"
     by_id = issue.by_id
     sections = []
     for section, heading in SECTIONS.items():
-        items = [item for item in issue.digest["items"] if item["section"] == section]
+        items = [item for item in digest["items"] if item["section"] == section]
         if not items:
             continue
         sections.append(
@@ -217,11 +234,26 @@ def issue_data(issue: Issue) -> dict[str, Any]:
         )
     return {
         "date": issue.slug,
-        "fallback": issue.fallback,
-        "notice": FALLBACK_NOTICE if issue.fallback else None,
-        "description": " ".join(issue.digest.get("highlights") or []),
+        "fallback": fallback,
+        "notice": FALLBACK_NOTICE if fallback else None,
+        "description": " ".join(digest.get("highlights") or []),
+        "editor": None if fallback else editor(digest),
+        "betas": [_beta(slug) for slug in issue.betas],
+        "beta": _beta(beta) if beta else None,
         "sections": sections,
     }
+
+
+def editor(digest: dict[str, Any]) -> str:
+    """The API route's model without its provider prefix; a Claude route digest may name its model."""
+    model = str(digest.get("model") or "")
+    if is_api(digest):
+        return model.split(":", 1)[-1]
+    return model or "Claude"
+
+
+def _beta(slug: str) -> dict[str, str]:
+    return {"slug": slug, "label": BETA_LABELS.get(slug, slug)}
 
 
 def _item(item: dict[str, Any], section: str, by_id: dict[str, dict[str, Any]]) -> dict[str, Any]:
