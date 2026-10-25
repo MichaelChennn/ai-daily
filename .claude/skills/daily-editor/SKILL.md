@@ -65,7 +65,7 @@ uv run python -m daily list --date <期号> --kind blog --summary-chars 1500    
   `daily page` 拿不到页面文本（403、PDF）时，引文无法核对，validate 只给警告；这时只写候选摘要里有的数字。
 - GitHub Release 候选的摘要就是 release notes 原文，可以直接依据它写，不必再打开。
 - 打不开的页面（403、需要 JS 渲染）：只能依据候选摘要写，不写摘要里没有的事实；写不出“是什么 + 为什么重要”就放进快讯或者放弃。
-- **补漏**：可以用 WebSearch 查固定信源可能漏掉的重大事件（Meta、Qwen、DeepSeek 等没有被抓取的厂商，或者失败的信源）。只有找到一手链接并用 WebFetch 打开之后才能写入，source 写成 `{"url": ..., "title": ...}`，而且这个 URL 必须出现在 `research` 里，`via` 为 `webfetch`。
+- **补漏**：可以用 WebSearch 查固定信源可能漏掉的重大事件（Qwen、xAI 等没有被抓取的厂商，或者失败的信源）。只有找到一手链接并用 WebFetch 打开之后才能写入，source 写成 `{"url": ..., "title": ...}`，而且这个 URL 必须出现在 `research` 里，`via` 为 `webfetch`。
 
 ## 4. 写作规范
 

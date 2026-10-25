@@ -55,16 +55,16 @@ sources.yaml ──► fetchers（并发、相互隔离）──► 去重 ─�
 
 | type | 信源 | 说明 |
 |---|---|---|
-| `rss` | OpenAI、Google DeepMind、Google AI、Hugging Face Blog、arXiv | arXiv 每天数百篇，默认关闭 |
-| `html_listing` | Anthropic News / Research、Mistral | 没有 RSS，按链接定位卡片，日期只精确到天 |
+| `rss` | OpenAI、Google DeepMind、Google AI、Hugging Face Blog、Meta 新闻室（AI 标签） | Meta 用新闻室的 AI 标签 feed（ai.meta.com 拒绝非浏览器请求） |
+| `html_listing` | Anthropic News / Research、Mistral、MiniMax、Kimi、DeepSeek（API 文档的新闻侧栏） | 没有 RSS，按链接定位卡片，日期只精确到天 |
 | `hf_daily_papers` | Hugging Face Daily Papers | 带 upvotes、代码仓库 |
 | `github_releases` | vLLM、Ollama、llama.cpp、transformers 等 | 跳过 draft 和 pre-release |
 | `github_trending` | GitHub Trending | 只保留 AI 相关、当日 star 达到阈值的 |
-| `hf_trending_models` | Hugging Face Trending Models | 过滤量化 / 合并 / 适配器，以及创建超过 14 天的 |
+| `hf_trending_models` | Hugging Face Trending Models | 过滤量化 / 合并 / 适配器，以及创建超过 45 天的（`createdAt` 是建仓时间，大厂会提前建私有仓库） |
 | `hackernews` | Hacker News（Algolia API） | Tier 2，AI 相关且分数达到阈值 |
-| `reddit` | r/LocalLLaMA、r/MachineLearning | Tier 2，RSS（JSON API 拒绝匿名的云端请求） |
+| `reddit` | r/LocalLLaMA + r/MachineLearning | Tier 2，RSS（JSON API 拒绝匿名的云端请求）；匿名 RSS 每分钟只给 1 次，两个版合成一个请求 |
 
-Meta AI、Qwen、DeepSeek 暂时没有可抓的官方列表页（JS 渲染或没有博客），由 HF Trending、GitHub 和 HN 覆盖。
+Qwen（官方列表页是 JS 渲染）、xAI（对非浏览器 UA 返回 403）暂时没有可抓的官方列表页，由 HF Trending、HN 和 Reddit 覆盖。
 
 **去重**（`daily/dedup.py`）分三层：
 

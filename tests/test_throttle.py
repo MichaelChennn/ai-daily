@@ -36,6 +36,17 @@ async def test_429_is_retried_after_retry_after():
     assert sleeps == [7.0]
 
 
+async def test_429_without_retry_after_waits_for_the_rate_limit_reset():
+    sleeps: list[float] = []
+    transport = _transport(
+        [httpx.Response(429, headers={"x-ratelimit-reset": "42"})], sleeps, min_interval={}
+    )
+    async with httpx.AsyncClient(transport=transport) as client:
+        response = await client.get("https://www.reddit.com/r/LocalLLaMA+MachineLearning/top/.rss")
+    assert response.status_code == 200
+    assert sleeps == [43.0]
+
+
 async def test_persistent_429_gives_up_with_backoff_and_a_cap():
     sleeps: list[float] = []
     transport = _transport(
@@ -56,4 +67,4 @@ async def test_long_retry_after_is_capped():
     transport = _transport([httpx.Response(503, headers={"Retry-After": "600"})], sleeps, min_interval={})
     async with httpx.AsyncClient(transport=transport) as client:
         assert (await client.get("https://example.com/")).status_code == 200
-    assert sleeps == [20.0]
+    assert sleeps == [65.0]
