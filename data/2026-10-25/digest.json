@@ -1,0 +1,261 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-25",
+  "mode": "full",
+  "generated_at": "2026-10-25T04:55:00+00:00",
+  "highlights": [
+    "Block 发布纯语音训练的全双工语音模型 Dessa，号称可在 MacBook Pro M4 Max 上本地运行。",
+    "llama.cpp 合入 DeepSeek-V4.1-Flash 支持，本地可用 GGUF 运行。"
+  ],
+  "items": [
+    {
+      "section": "headline",
+      "title": "Block 发布全双工语音模型 Dessa，只用语音从零训练",
+      "summary": "Block 的 AI 研究实验室发布 Dessa：一个全双工的语音到语音模型，能边听边说，不使用任何文本或预训练模型、只用人类对话录音从零训练，训练只用了一台 NVIDIA GB200 NVL72，并可在 MacBook Pro M4 Max 或更高配置上本地运行。目前只公开了演示录音和候补名单，并向少量 AI 安全研究者提供早期访问；对做语音 Agent 的开发者来说，这是“绕开 ASR→LLM→TTS 级联”路线的一个新样本，值得关注后续开放情况。",
+      "sources": [
+        {
+          "url": "https://block.xyz/dessa",
+          "title": "Block: Dessa"
+        },
+        {
+          "url": "https://unite.ai/block-unveils-dessa-a-full-duplex-speech-model-trained-on-conversation",
+          "title": "Unite.AI"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://block.xyz/dessa",
+          "quote": "We trained Dessa from scratch on nothing but human conversation. Sounds! No text, no pretrained models."
+        },
+        {
+          "url": "https://block.xyz/dessa",
+          "quote": "It’s full-duplex, so it listens and talks at the same time, like you do."
+        },
+        {
+          "url": "https://block.xyz/dessa",
+          "quote": "And it runs locally on a MacBook Pro M4 Max or better."
+        },
+        {
+          "url": "https://block.xyz/dessa",
+          "quote": "And we figured out how to train Dessa on only one NVIDIA GB200 NVL72."
+        },
+        {
+          "url": "https://block.xyz/dessa",
+          "quote": "We’re giving a small group of AI safety researchers early access to find the risks we haven’t anticipated."
+        }
+      ],
+      "tags": [
+        "语音",
+        "模型"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "llama.cpp 合入 DeepSeek-V4.1-Flash 支持",
+      "summary": "llama.cpp 合并了 PR #31086，新增 DeepSeek-V4.1-Flash（deepseek41 架构）的模型转换与推理支持，其中 Engram 表转为 BF16。想在本地用 GGUF 跑 DeepSeek-V4.1-Flash 的开发者，可以更新到包含该提交的版本试用。",
+      "sources": [
+        {
+          "candidate_id": "c_3831583fb8",
+          "url": "https://github.com/ggml-org/llama.cpp/pull/31086"
+        },
+        {
+          "candidate_id": "c_3831583fb8",
+          "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xeqf7k/model_dsv41_flash_by_am17an_pull_request_31086/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/pull/31086",
+          "quote": "model : add DeepSeek-V4.1-Flash (deepseek41)"
+        },
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/pull/31086",
+          "quote": "deepseek41 : remove MXFP8, convert the Engram table to BF16"
+        },
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/pull/31086",
+          "quote": "am17an merged commit 74bca39 into master Oct 25, 2026"
+        }
+      ],
+      "tags": [
+        "开源",
+        "推理",
+        "工具"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Together AI 开源反“AI 味”设计技能 Hallmark",
+      "summary": "Together AI 开源 Hallmark，一个适用于 Claude Code、Codex、Cursor 和 OpenCode 的网页设计 skill：从主题库中挑选三个主题，围绕访客要完成的任务搭页面，并在真实浏览器里检查“每个标题上方都有 eyebrow 标签”之类的机器生成痕迹。和 Impeccable 定位相近，想让 Agent 生成的页面少点模板感可以对比试用。",
+      "sources": [
+        {
+          "candidate_id": "c_004684cfd4",
+          "url": "https://github.com/Nutlope/hallmark"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/Nutlope/hallmark",
+          "quote": "A design skill for Claude Code, Codex, Cursor and OpenCode that refuses to look AI-generated."
+        },
+        {
+          "url": "https://github.com/Nutlope/hallmark",
+          "quote": "Made by Together AI."
+        },
+        {
+          "url": "https://github.com/Nutlope/hallmark",
+          "quote": "It deals three themes from a catalog of forty-eight materials, builds the page around what the visitor came to do, and lints the result in a real browser against the tells that read as machine-made: the eyebrow above every heading"
+        }
+      ],
+      "tags": [
+        "工具",
+        "开源",
+        "代码"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "开源桌面 Agent Cindy：在本地组合 Claude Code 与 Codex",
+      "summary": "makecindy/cindy 是一个在本机运行、使用真实文件和已登录应用的开源 AI Agent 客户端，首批支持的 harness 是 Claude Code 和 Codex，任务中途可切换模型和 harness，工作区、记忆、skills 和工具保持不变。注意开源的是客户端，后端服务在另一个未包含在此仓库中的代码库里。",
+      "sources": [
+        {
+          "candidate_id": "c_8c71293d91",
+          "url": "https://github.com/makecindy/cindy"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/makecindy/cindy",
+          "quote": "Cindy runs locally on your own machine, using your real files and logged-in apps. The first supported harnesses are Claude Code and Codex"
+        },
+        {
+          "url": "https://github.com/makecindy/cindy",
+          "quote": "Models and harnesses mix freely and can switch mid-task while your workspace, memory, skills and tools stay continuous"
+        },
+        {
+          "url": "https://github.com/makecindy/cindy",
+          "quote": "Not in this repo: the backend service lives in a separate repository and is not part of this monorepo."
+        }
+      ],
+      "tags": [
+        "Agent",
+        "开源",
+        "工具"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "Apollo 首席经济学家：科技行业之外尚无 AI 回报迹象",
+      "summary": "Apollo 的 Torsten Slok 指出，Mag 7 的人均收入和利润率在上升，S&P 493 却持平，生产率增长也未见 AI 带动。",
+      "sources": [
+        {
+          "candidate_id": "c_d49afc9870",
+          "url": "https://www.apollo.com/wealth/insights-news/insights/daily-spark/no-signs-of-ai-payoff-outside-the-tech-sector"
+        },
+        {
+          "candidate_id": "c_d49afc9870",
+          "url": "https://news.ycombinator.com/item?id=50224463"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://www.apollo.com/wealth/insights-news/insights/daily-spark/no-signs-of-ai-payoff-outside-the-tech-sector",
+          "quote": "Revenue per worker is rising for the Mag 7 but is flat for the S&P 493, see the first chart below. Profit margins are rising for the Mag 7 but are flat for the S&P 493"
+        },
+        {
+          "url": "https://www.apollo.com/wealth/insights-news/insights/daily-spark/no-signs-of-ai-payoff-outside-the-tech-sector",
+          "quote": "And there are still no signs of AI boosting productivity growth"
+        }
+      ],
+      "tags": [
+        "行业"
+      ]
+    }
+  ],
+  "research": [
+    {
+      "via": "webfetch",
+      "url": "https://www.reuters.com/technology/moonshot-curbs-hacking-ability-new-kimi-model-fears-grow-over-ai-powered-2026-10-24/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31086"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/Nutlope/hallmark"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/pbakaus/impeccable"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/HuggingFaceBio/Carbon-X"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://www.bbc.co.uk/news/articles/cqdjv8xllvyyo"
+    },
+    {
+      "via": "websearch",
+      "query": "Moonshot Kimi K3.1 open weights cyberattack training data removed"
+    },
+    {
+      "via": "websearch",
+      "query": "Meta byte-level language model distillation from Llama 3 8B paper arXiv October 2026"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/makecindy/cindy"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://www.apollo.com/wealth/insights-news/insights/daily-spark/no-signs-of-ai-payoff-outside-the-tech-sector"
+    },
+    {
+      "via": "websearch",
+      "query": "AI model release announcement October 24 2026"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/moonshotai"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://unite.ai/block-unveils-dessa-a-full-duplex-speech-model-trained-on-conversation"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://block.xyz/dessa"
+    }
+  ],
+  "validation": {
+    "validated_at": "2026-10-25T04:41:59+00:00",
+    "checked_links": true,
+    "dropped": [
+      {
+        "title": "Hugging Face 开源 DNA 语言模型 Carbon-X",
+        "section": "headline",
+        "reasons": [
+          "'Qwen3-14B' does not appear in the cited material",
+          "number 3 does not appear in the cited material",
+          "number 14 does not appear in the cited material"
+        ]
+      },
+      {
+        "title": "Impeccable：给编程 Agent 用的前端设计技能",
+        "section": "tool",
+        "reasons": [
+          "number 2.0 does not appear in the cited material"
+        ]
+      }
+    ],
+    "warnings": [
+      "llama.cpp 合入 DeepSeek-V4.1-Flash 支持: could not check https://www.reddit.com/r/LocalLLaMA/comments/1xeqf7k/model_dsv41_flash_by_am17an_pull_request_31086/ (403)",
+      "5 items (target 8-12)",
+      "1 headline items (target 3-5)",
+      "0 paper items (target 2-3)"
+    ]
+  }
+}
