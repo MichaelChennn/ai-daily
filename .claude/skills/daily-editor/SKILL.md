@@ -1,6 +1,6 @@
 ---
 name: daily-editor
-description: 担任 AI 科技日报的编辑：读取 data/YYYY-MM-DD/candidates.json，打分筛选、打开原文、写中文日报 digest.json，通过 python -m daily validate 后渲染并提交。每天的定时任务调用它；也可以手动运行 /daily-editor [YYYY-MM-DD]。
+description: 担任 AI 科技日报的编辑：读取 data/YYYY-MM-DD/candidates.json，打分筛选、打开原文、写中文日报 digest.json，通过 uv run python -m daily validate 后渲染并提交。每天的定时任务调用它；也可以手动运行 /daily-editor [YYYY-MM-DD]。
 ---
 
 # daily-editor：AI 科技日报编辑
@@ -11,8 +11,10 @@ description: 担任 AI 科技日报的编辑：读取 data/YYYY-MM-DD/candidates
 ## 0. 准备
 
 ```bash
-pip install -e . -q
-python -c "from daily.window import local_today; print(local_today())"   # 没有给日期时，期号 = 柏林时间今天
+command -v uv >/dev/null || python -m pip install -q uv   # 云端默认环境已预装 uv，这一行只是兜底
+uv --version                                             # 版本打到日志里，出问题时好查
+uv sync -q
+uv run python -c "from daily.window import local_today; print(local_today())"   # 没有给日期时，期号 = 柏林时间今天
 ```
 
 - `data/<期号>/candidates.json` 不存在：先 `git pull origin main` 再看一次（05:07 的抓取可能被 Actions 推迟）。
@@ -23,12 +25,12 @@ python -c "from daily.window import local_today; print(local_today())"   # 没�
 ## 1. 浏览候选
 
 ```bash
-python -m daily list --date <期号>              # 每条一行：id、类型、信源、标题、热度信号，下面是摘要前 160 字
-python -m daily list --date <期号> --kind blog --summary-chars 1500    # 需要时看某类的完整摘要
+uv run python -m daily list --date <期号>              # 每条一行：id、类型、信源、标题、热度信号，下面是摘要前 160 字
+uv run python -m daily list --date <期号> --kind blog --summary-chars 1500    # 需要时看某类的完整摘要
 ```
 
 不要把整个 candidates.json 读进来（太大）。要看某一条的全部字段，用
-`python -c "import json; print(json.dumps([c for c in json.load(open('data/<期号>/candidates.json'))['candidates'] if c['id']=='c_xxx'], ensure_ascii=False, indent=1))"`。
+`uv run python -c "import json; print(json.dumps([c for c in json.load(open('data/<期号>/candidates.json'))['candidates'] if c['id']=='c_xxx'], ensure_ascii=False, indent=1))"`。
 
 留意第一行的失败信源：它覆盖的内容今天可能缺失，第 3 步可以用 WebSearch 补。
 
@@ -57,7 +59,7 @@ python -m daily list --date <期号> --kind blog --summary-chars 1500    # 需�
 - **WebFetch 的回答不是原文**：它由一个小模型转述，连“引用”也可能改了词（例如把 achieves 写成 achieve），这样的引文会被 validate 判为找不到、整条删掉。用 WebFetch 读懂内容之后，引文用下面的命令从原始页面复制；这个命令和 validate 用的是同一份页面文本：
 
   ```bash
-  python -m daily page <url> --grep "500ms" --grep "Apache License"    # 打印每个关键词前后的原文
+  uv run python -m daily page <url> --grep "500ms" --grep "Apache License"    # 打印每个关键词前后的原文
   ```
 
   `daily page` 拿不到页面文本（403、PDF）时，引文无法核对，validate 只给警告；这时只写候选摘要里有的数字。
@@ -89,20 +91,20 @@ python -m daily list --date <期号> --kind blog --summary-chars 1500    # 需�
 ## 6. 校验
 
 ```bash
-python -m daily validate --date <期号> --check-links --drop-invalid
+uv run python -m daily validate --date <期号> --check-links --drop-invalid
 ```
 
 - **退出码 0**：通过。stderr 里的 `DROP` 行是被删掉的条目和原因，已经记录在 digest.json 的 `validation` 里。不要把它们改写后重新加回来。
 - **退出码 1**：整期不合格（`ERROR` 行）。
   - 如果是 highlights 提到了被删掉的条目：只改 highlights，删去相关内容，然后再跑一次。
   - 如果是 JSON 或字段结构的错误：修一次，然后再跑一次。
-  - 剩下的条目少于 3 条，或者修过之后仍然失败：运行 `python -m daily degrade --date <期号> --force`，发布降级版。
+  - 剩下的条目少于 3 条，或者修过之后仍然失败：运行 `uv run python -m daily degrade --date <期号> --force`，发布降级版。
 - `WARN` 行（条数不在目标范围、链接无法检查等）不阻止发布，看一眼即可。
 
 ## 7. 渲染与提交
 
 ```bash
-python -m daily render --date <期号>      # → data/<期号>/digest.md
+uv run python -m daily render --date <期号>      # → data/<期号>/digest.md
 git add data/<期号>/digest.json data/<期号>/digest.md
 git commit -m "digest: <期号>"
 git push -u origin HEAD                  # 推到当前分支，不要开 PR
