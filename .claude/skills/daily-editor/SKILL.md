@@ -53,7 +53,7 @@ uv run python -m daily list --date <期号> --kind blog --summary-chars 1500    
 ## 3. 打开原文
 
 - 除了快讯和 Release，每一条都要用 WebFetch 打开至少一个一手来源，依据原文写，不要只凭候选摘要。快讯的摘要足够时可以不打开。
-- **预算**：WebFetch 最多 20 次，WebSearch 最多 5 次（超出时 validate 会警告）。
+- **预算**：WebFetch 最多 20 次，WebSearch 最多 5 次（超出时 validate 会警告）。第 6 步预检之后补开的页面也算在内。
 - 每一次 WebFetch 和 WebSearch 都要记进 `research`（见下面的 schema），包括没用上的。
 - **摘录 evidence**：从原文逐字复制支撑关键事实的句子（保持原文语言，每段 ≤ 300 字符），放进条目的 `evidence`。条目里出现的每个数字、模型名、版本号，都要能在候选标题 / 摘要或 evidence 里找到。必须是原文**逐字复制**，不能意译、翻译或拼接：`validate --check-links` 会下载页面，核对引文是否真的在页面上。
 - **WebFetch 的回答不是原文**：它由一个小模型转述，连“引用”也可能改了词（例如把 achieves 写成 achieve），这样的引文会被 validate 判为找不到、整条删掉。用 WebFetch 读懂内容之后，引文用下面的命令从原始页面复制；这个命令和 validate 用的是同一份页面文本：
@@ -72,7 +72,7 @@ uv run python -m daily list --date <期号> --kind blog --summary-chars 1500    
 - **标题**：中文，最好不超过 30 字（硬上限 60），说清“谁做了什么”。不用“重磅”“炸裂”“颠覆”“王炸”之类的词。
 - **summary**：2–3 句，先说是什么（事实），再说对开发者意味着什么（为什么重要 / 能拿来做什么）。快讯 1 句，不超过 120 字。
 - 只写材料里有的事实。“对开发者意味着什么”是评述，但不能引入新的事实或数字。不要推测发布日期、价格、性能，也不要自己数出“N 个”这类数字。
-- **数字、模型名、版本号保持原文写法**：`1.5B` 不要改成“15 亿”，`128K` 不要改成“12.8 万”，`Qwen3.5-72B` 不要改写。validate 会逐个核对它们是否出现在材料里，不在就删掉整条。
+- **数字、模型名、版本号保持原文写法**：`1.5B` 不要改成“15 亿”，`128K` 不要改成“12.8 万”，`Qwen3.5-72B` 不要改写；原文是 "OpenMDW … version 1.1" 就照写，不要合并成 `OpenMDW-1.1`。validate 会逐个核对它们是否出现在材料里，不在就删掉整条。
 - 正文里不放链接，链接只放在 `sources`。
 - **tags**：1–3 个，从这些词里选：模型、开源、论文、工具、Agent、推理、训练、多模态、语音、图像、视频、代码、安全、硬件、产品、行业。
 - **highlights（今日要点）**：1–3 句，说清今天最重要的事。只能复述已入选条目里的事实，validate 会核对其中的数字和模型名。
@@ -85,10 +85,31 @@ uv run python -m daily list --date <期号> --kind blog --summary-chars 1500    
 2. 有没有夸大？“最强”“首个”“开源”“免费”这类说法是原文说的吗？
 3. 数字的单位、比较的对象和原文一致吗？
 4. “对开发者的意义”有没有暗含原文里没有的事实？
+5. 正文里每个数字、模型名、版本号，都能在候选标题 / 摘要或 evidence 里原样找到吗？引文截短时最容易漏掉（例如引文从 "Terminal-Bench" 之后才开始，`4.0` 就不在材料里）。
 
-任何一条不过关：**整条删掉**（同时检查 highlights 有没有提到它），不要改写成差不多对的版本。
+第 1–4 条不过关：**整条删掉**（同时检查 highlights 有没有提到它），不要改写成差不多对的版本。第 5 条不过关：先按下一步补 evidence，补不上再整条删掉。
 
-## 6. 校验
+## 6. 预检与校验
+
+流程：写完 → 自检 → 预检 → 补 evidence → 正式校验。
+
+### 预检（只跑一轮）
+
+```bash
+uv run python -m daily validate --date <期号> --check-links    # 不带 --drop-invalid：只报告，不写文件
+```
+
+有不合格条目时退出码是 1，这是预期的；看 `DROP` 行逐条处理。如果出现 `ERROR` 行（例如 highlights 提到了不合格的条目），这一轮没有联网核对链接和引文，正式校验时还可能删掉别的条目。
+
+预检之后，**只允许下面三种修改**：
+
+- **补充或延长 evidence 引文**：用 `uv run python -m daily page <url> --grep "<关键词>"` 从原文逐字复制，把缺的数字、模型名、版本号包含进去。evidence 的 url 必须是本条的某个 source。
+- **打开还没打开的一手来源**：用 WebFetch 打开，记进 `research`（`via` 为 `webfetch`），再从中摘 evidence。这里的 WebFetch 算进每天 20 次的预算。
+- **整条删掉**：同时检查 highlights 有没有提到它，提到了就一起删去相关内容。
+
+**不允许改写正文**（标题、summary）去迁就材料：原文里找不到某个写法（例如正文写 `OpenMDW-1.1`，原文是 "version 1.1"），就整条删掉。预检不重跑，改完直接进入正式校验。
+
+### 正式校验
 
 ```bash
 uv run python -m daily validate --date <期号> --check-links --drop-invalid
@@ -96,7 +117,7 @@ uv run python -m daily validate --date <期号> --check-links --drop-invalid
 
 - **退出码 0**：通过。stderr 里的 `DROP` 行是被删掉的条目和原因，已经记录在 digest.json 的 `validation` 里。不要把它们改写后重新加回来。
 - **退出码 1**：整期不合格（`ERROR` 行）。
-  - 如果是 highlights 提到了被删掉的条目：只改 highlights，删去相关内容，然后再跑一次。
+  - 如果是 highlights 提到了被删掉的条目：只改 highlights，删去相关内容，然后再跑一次。**不要手动删条目**：这次运行什么都没写，重跑时让 validate 删掉它们，原因才会记进 `validation.dropped`。
   - 如果是 JSON 或字段结构的错误：修一次，然后再跑一次。
   - 剩下的条目少于 3 条，或者修过之后仍然失败：运行 `uv run python -m daily degrade --date <期号> --force`，发布降级版。
 - `WARN` 行（条数不在目标范围、链接无法检查等）不阻止发布，看一眼即可。
