@@ -99,11 +99,11 @@ _MONTHS = {
     for m in names
 }
 _TEXT_DATE = re.compile(r"\b([A-Z][a-z]{2,8})\.?\s+(\d{1,2}),\s+(\d{4})\b")
-_ISO_DATE = re.compile(r"\b(\d{4})-(\d{2})-(\d{2})\b")
+_ISO_DATE = re.compile(r"\b(\d{4})[-/](\d{2})[-/](\d{2})\b")
 
 
 def find_date(text: str) -> datetime | None:
-    """Find the first human-written date like 'Oct 6, 2026' or '2026-10-06' (day precision, UTC)."""
+    """Find the first human-written date like 'Oct 6, 2026', '2026-10-06' or '2026/10/06' (day, UTC)."""
     for match in _TEXT_DATE.finditer(text):
         month = _MONTHS.get(match.group(1).lower())
         if month:

@@ -1,7 +1,8 @@
 """Polite HTTP: space out requests to rate-limited hosts and retry 429 / 503 after a pause.
 
-Sources run concurrently, so two sources on the same host (r/LocalLLaMA and r/MachineLearning)
-would otherwise hit it in the same instant; Reddit answers the second one with 429.
+Sources run concurrently, so two sources on the same host would otherwise hit it in the same
+instant. Anonymous Reddit RSS allows one request per IP per minute and answers 429 without
+Retry-After, only x-ratelimit-reset (seconds until the window resets).
 """
 
 from __future__ import annotations
@@ -27,7 +28,7 @@ class PoliteTransport(httpx.AsyncBaseTransport):
         min_interval: dict[str, float] | None = None,
         max_retries: int = 2,
         backoff: float = 5.0,
-        max_wait: float = 20.0,
+        max_wait: float = 65.0,
         sleep: Callable[[float], Awaitable[None]] = asyncio.sleep,
     ) -> None:
         self.inner = inner
@@ -71,5 +72,8 @@ class PoliteTransport(httpx.AsyncBaseTransport):
         try:
             delay = float(response.headers.get("retry-after", ""))
         except ValueError:  # missing, or an HTTP date
-            delay = self.backoff * 2**attempt
+            try:
+                delay = float(response.headers.get("x-ratelimit-reset", "")) + 1
+            except ValueError:
+                delay = self.backoff * 2**attempt
         return min(max(delay, 0.0), self.max_wait)

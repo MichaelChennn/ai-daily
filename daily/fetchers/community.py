@@ -64,7 +64,7 @@ _SUBMITTED_BY = re.compile(r"submitted by .*", re.S)
 
 
 async def fetch_reddit(client: httpx.AsyncClient, source: SourceConfig, window: Window) -> list[Candidate]:
-    """Options: subreddit; limit (default 25). Uses the 'top of the day' RSS feed.
+    """Options: subreddit (several joined with '+'); limit (default 25). Uses the 'top of the day' RSS feed.
 
     The JSON API rejects anonymous cloud clients; RSS works but carries no score, so the rank in
     today's top list is the signal.
@@ -93,6 +93,7 @@ async def fetch_reddit(client: httpx.AsyncClient, source: SourceConfig, window: 
         link = _LINK.search(html)
         url = urljoin(comments, link.group(1)) if link else comments
         body = _SUBMITTED_BY.sub("", clean_text(html)).strip()
+        tags = entry.get("tags") or []  # a multi-subreddit feed tags each entry with its own
         items.append(
             candidate(
                 source,
@@ -101,7 +102,7 @@ async def fetch_reddit(client: httpx.AsyncClient, source: SourceConfig, window: 
                 summary=truncate(body, SUMMARY_MAX_CHARS),
                 published_at=published,
                 discussion_url=comments,
-                signals={"reddit_rank": rank, "subreddit": subreddit},
+                signals={"reddit_rank": rank, "subreddit": tags[0].get("term") if tags else subreddit},
             )
         )
     return items

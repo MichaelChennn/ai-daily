@@ -28,22 +28,6 @@ async def test_rss_keeps_only_window_items(window):
     assert items[0].published_at == IN_WINDOW
 
 
-ARXIV = """<?xml version="1.0"?>
-<rss xmlns:arxiv="http://arxiv.org/schemas/atom" version="2.0"><channel><title>cs.CL</title>
-<item><title>New paper</title><link>https://arxiv.org/abs/2610.00001</link>
-  <pubDate>Mon, 19 Oct 2026 04:00:00 -0400</pubDate><arxiv:announce_type>new</arxiv:announce_type></item>
-<item><title>Revised paper</title><link>https://arxiv.org/abs/2601.00001</link>
-  <pubDate>Mon, 19 Oct 2026 04:00:00 -0400</pubDate><arxiv:announce_type>replace</arxiv:announce_type></item>
-</channel></rss>"""
-
-
-async def test_rss_arxiv_announce_type_filter(window):
-    async with mock_client({"rss.arxiv.org/rss/cs.CL": ARXIV}) as client:
-        src = source("rss", "paper", url="https://rss.arxiv.org/rss/cs.CL", arxiv_announce_types=["new"])
-        items = await fetch_rss(client, src, window)
-    assert [i.title for i in items] == ["New paper"]
-
-
 # Mixes the layouts seen in the wild: cards with the date before the link next to a featured
 # card that points outside the pattern (Anthropic), table rows with the date after the link,
 # and category chips that match the link pattern.
@@ -77,6 +61,70 @@ async def test_html_listing_fails_loudly_when_layout_changes(window):
         src = source("html_listing", url="https://example.com/blog", link_pattern="^/blog/")
         with pytest.raises(ValueError, match="layout"):
             await fetch_html_listing(client, src, window)
+
+
+# MiniMax: the nav menu links to the newest posts before their dated cards do.
+NAV_FIRST = """<html><body><nav><ul>
+  <li><a href="/blog/minimax-m3-1-flash">MiniMax M3.1 Flash is here</a></li>
+  <li><a href="/blog/minimax-h3">MiniMax H3 is here now</a></li></ul></nav>
+<main><div class="grid">
+  <div><a href="/blog/minimax-m3-1-flash"><h3>MiniMax M3.1 Flash</h3></a><p>2026-10-19</p>
+    <p>A faster model for everyday agents.</p></div>
+  <div><a href="/blog/minimax-h3"><h3>MiniMax H3</h3></a><p>2026-07-31</p></div>
+</div></main></body></html>"""
+
+
+async def test_html_listing_takes_the_first_dated_card(window):
+    async with mock_client({"www.minimax.io/blog": NAV_FIRST}) as client:
+        src = source("html_listing", url="https://www.minimax.io/blog", link_pattern=r"^/blog/[a-z0-9-]+$")
+        items = await fetch_html_listing(client, src, window)
+    assert [(i.title, i.url, i.summary) for i in items] == [
+        (
+            "MiniMax M3.1 Flash",
+            "https://www.minimax.io/blog/minimax-m3-1-flash",
+            "A faster model for everyday agents.",
+        )
+    ]
+
+
+# Kimi: each card is an empty overlay link with an aria-label next to the heading and date.
+OVERLAY_CARDS = """<html><body><div class="grid">
+  <div><a href="/en/blog/kimi-k3-1-pro" aria-label="Kimi K3.1 Pro"></a>
+    <div><img src="/cover.png"></div><div><h4>Kimi K3.1 Pro</h4><p>2026-10-19</p></div></div>
+  <div><a href="/en/blog/kimi-k3" aria-label="Kimi K3"></a>
+    <div><img src="/cover.png"></div><div><h4>Kimi K3</h4><p>2026-07-16</p></div></div>
+</div></body></html>"""
+
+
+async def test_html_listing_accepts_empty_links_with_aria_label(window):
+    async with mock_client({"www.kimi.com/en/blog/": OVERLAY_CARDS}) as client:
+        src = source(
+            "html_listing", url="https://www.kimi.com/en/blog/", link_pattern=r"^/en/blog/[a-z0-9-]+/?$"
+        )
+        items = await fetch_html_listing(client, src, window)
+    assert [(i.title, i.url) for i in items] == [
+        ("Kimi K3.1 Pro", "https://www.kimi.com/en/blog/kimi-k3-1-pro")
+    ]
+
+
+# DeepSeek: a docs sidebar whose link texts end in a slash-separated date.
+SLASH_DATES = """<html><body><nav class="menu"><ul>
+  <li><a href="/news/news261019">DeepSeek-V4.1-Flash-1019 Release 2026/10/19</a></li>
+  <li><a href="/news/news250120">DeepSeek-R1 Release 2025/01/20</a></li>
+</ul></nav></body></html>"""
+
+
+async def test_html_listing_reads_slash_dates(window):
+    async with mock_client({"api-docs.deepseek.com/news/news250120": SLASH_DATES}) as client:
+        src = source(
+            "html_listing",
+            url="https://api-docs.deepseek.com/news/news250120",
+            link_pattern=r"^/news/news[0-9]+/?$",
+        )
+        items = await fetch_html_listing(client, src, window)
+    assert [(i.url, i.published_at.day) for i in items] == [
+        ("https://api-docs.deepseek.com/news/news261019", 19)
+    ]
 
 
 def _release(tag, when, **kw):
@@ -262,3 +310,16 @@ async def test_reddit_extracts_external_link(window):
         )
     ]
     assert items[0].signals == {"reddit_rank": 1, "subreddit": "LocalLLaMA"}
+
+
+REDDIT_MULTI = REDDIT.replace(
+    "<updated>", '<category term="MachineLearning" label="r/MachineLearning"/><updated>'
+)
+
+
+async def test_reddit_multi_subreddit_feed_keeps_each_entrys_subreddit(window):
+    async with mock_client({"www.reddit.com/r/LocalLLaMA+MachineLearning/top/.rss": REDDIT_MULTI}) as client:
+        items = await fetch_reddit(
+            client, source("reddit", "discussion", tier=2, subreddit="LocalLLaMA+MachineLearning"), window
+        )
+    assert [i.signals["subreddit"] for i in items] == ["MachineLearning"]

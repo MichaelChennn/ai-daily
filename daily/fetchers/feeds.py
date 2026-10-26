@@ -16,17 +16,14 @@ from daily.window import Window
 
 
 async def fetch_rss(client: httpx.AsyncClient, source: SourceConfig, window: Window) -> list[Candidate]:
-    """Options: url; arxiv_announce_types (arXiv feeds only, e.g. [new])."""
+    """Options: url."""
     response = await get(client, source.options["url"])
     feed = feedparser.parse(response.content)
     if feed.bozo and not feed.entries:
         raise ValueError(f"unparseable feed: {feed.bozo_exception}")
 
-    announce_types = source.options.get("arxiv_announce_types")
     items: list[Candidate] = []
     for entry in feed.entries:
-        if announce_types and entry.get("arxiv_announce_type") not in announce_types:
-            continue
         published = entry_datetime(entry)
         if not window.contains(published):
             continue
