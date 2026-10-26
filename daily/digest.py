@@ -56,8 +56,10 @@ _NUMBER_WORDS = (
     "zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen "
     "sixteen seventeen eighteen nineteen twenty"
 ).split()
-_SCRIPT = re.compile(r"<(script|style|noscript)\b.*?</\1>", re.S | re.I)
-_TAG = re.compile(r"<[^>]+>")
+_SCRIPT = re.compile(r"<(script|style|noscript)\b.*?</\1>|<!--.*?-->", re.S | re.I)
+# A quoted attribute may hold a ">" (Hugging Face puts the model's config, chat template and all, in one).
+_TAG = re.compile(r"""<[a-zA-Z/!][^>"']*(?:(?:"[^"]*"|'[^']*')[^>"']*)*>""")
+_BODY = re.compile(r"<(article|main)\b.*?</\1>", re.S | re.I)
 
 
 @dataclass
@@ -65,6 +67,7 @@ class Page:
     status: int | None
     text: str | None = None  # page text, when it is HTML / plain text
     error: str | None = None
+    body: str | None = None  # its longest <article> or <main>: the page without the navigation
 
 
 @dataclass
@@ -141,7 +144,7 @@ class _Context:
         self.by_id = {c["id"]: c for c in candidates.get("candidates", [])}
         self.by_key: dict[str, str] = {}
         for c in self.by_id.values():
-            for url in _candidate_urls(c):
+            for url in candidate_urls(c):
                 self.by_key.setdefault(url_key(url), c["id"])
         self.opened: set[str] = set()
         if research is None:
@@ -162,7 +165,7 @@ class _Context:
                 report.warnings.append(f"{via} used {used[via]} times (budget {limit})")
 
 
-def _candidate_urls(c: dict[str, Any]) -> list[str]:
+def candidate_urls(c: dict[str, Any]) -> list[str]:
     urls = [c["url"], c.get("discussion_url")]
     for other in c.get("also_from") or []:
         urls += [other.get("url"), other.get("discussion_url")]
@@ -247,7 +250,7 @@ def _check_item(
                 continue
             if url is None:
                 url = s["url"] = c["url"]  # filled in so the stored digest always carries links
-            elif url_key(url) not in {url_key(u) for u in _candidate_urls(c)}:
+            elif url_key(url) not in {url_key(u) for u in candidate_urls(c)}:
                 errors.append(f"{url} is not a link of candidate {cid}")
                 continue
         elif url is None:
@@ -291,6 +294,11 @@ def _check_item(
     if pages is not None:
         errors += _check_online(urls, quotes, material, pages, report, title)
     return errors
+
+
+def is_api(digest: dict[str, Any]) -> bool:
+    """Written by the API route; digests without a channel come from the Claude route."""
+    return digest.get("channel") == "api"
 
 
 def is_discussion(url: str, c: dict[str, Any] | None) -> bool:
@@ -387,16 +395,29 @@ async def check_links(urls: list[str], client: httpx.AsyncClient, concurrency: i
             except httpx.HTTPError as exc:
                 return url, Page(None, error=f"{type(exc).__name__}: {exc}"[:200])
         content_type = response.headers.get("content-type", "")
-        text = None
+        text = body = None
         if response.status_code < 400 and ("html" in content_type or content_type.startswith("text/")):
             text = page_text(response.text)
-        return url, Page(response.status_code, text=text)
+            body = max((page_text(m.group(0)) for m in _BODY.finditer(response.text)), key=len, default=None)
+        return url, Page(response.status_code, text=text, body=body)
 
     return dict(await asyncio.gather(*(one(u) for u in urls)))
 
 
 def page_text(markup: str) -> str:
     return html.unescape(_TAG.sub(" ", _SCRIPT.sub(" ", markup)))
+
+
+def grep_page(text: str, needles: list[str], context: int = 200) -> str:
+    """`daily page`: the page text around each needle, verbatim as validate will match it."""
+    text = " ".join(text.split())
+    lines = []
+    for needle in needles:
+        hits = [i for i in range(len(text)) if text.startswith(needle, i)] if needle else []
+        lines.append(f"--- {needle!r}: {len(hits)} match(es)")
+        for i in hits[:5]:
+            lines += [text[max(0, i - context) : i + len(needle) + context], ""]
+    return "\n".join(lines)
 
 
 # --- applying the verdict --------------------------------------------------------------------

@@ -30,6 +30,7 @@ uv run python -m daily validate --date 2026-10-21 --check-links --drop-invalid  
 uv run python -m daily degrade --date 2026-10-21   # digest.json 缺失或不合格时，写入“标题 + 链接”降级版
 uv run python -m daily render --date 2026-10-21    # digest.json → digest.md
 uv run python -m daily adopt --date 2026-10-21 --from x.json   # 按规则并入编辑分支推来的 digest.json（ingest 用）
+uv run python -m daily edit --model nvidia:deepseek-ai/deepseek-v4.1-flash   # API 通道：云端模型编辑，写 digest.api.<slug>.json（需要对应的 API key）
 uv run python -m daily export                      # 已发布各期 → web/data/（JSON）和 web/public/feed.xml，给前端用，不提交
 
 uv run pytest -q && uv run ruff check . && uv run ruff format --check .
@@ -129,13 +130,15 @@ Qwen（官方列表页是 JS 渲染）、xAI（对非浏览器 UA 返回 403）�
 |---|---|---|
 | 05:07 | Actions `fetch.yml` | 抓取，把 `candidates.json` 提交到 main |
 | 05:30 | Claude 定时任务（每次新开一个 cloud session） | 运行 daily-editor skill，把 `digest.json` 推到本会话的 `claude/` 分支 |
+| 05:30 | Actions `editor-api.yml` | API 通道：`EDITOR_API_MODEL` 里的每个模型各编一份 `digest.api.<slug>.json`（Beta 版）；Claude 还没出结果时，第一份合格的成为主版 |
 | 推送后 | Actions `ingest.yml` | 用 main 上的候选重新校验，按规则并入 main，启动 `pages.yml` |
 | 06:30 | Actions `fallback.yml` | 当天没有合格的 digest 就发布降级版，提交并启动 `pages.yml` |
 | 之后 | Actions `pages.yml` | `web/` 构建（含 `daily export`）→ GitHub Pages |
 
 - **为什么要 ingest**：cloud session 只能推送到它自己的 `claude/` 分支。ingest 只从分支拿 `data/*/digest.json`，其他改动不会进入 main。也可以在 Actions 页面手动运行 ingest，指定分支名，补收没有触发它的分支。
 - **为什么用 workflow_dispatch 串起来**：用 `GITHUB_TOKEN` 推送的提交不会触发其他 workflow（workflow_dispatch 除外），所以 ingest 和兜底提交之后用 `gh workflow run pages.yml --ref main` 启动构建。人推到 main（合并 PR）会直接触发 `pages.yml`。
-- **并入规则**（`daily/publish.py`）：正式版替换降级版（编辑在 06:30 之后才完成），降级版不会覆盖正式版，正式版只会被更新的正式版替换（重做）。
+- **并入规则**（`daily/publish.py`）：正式版替换降级版（编辑在 06:30 之后才完成），降级版不会覆盖正式版，正式版只会被更新的正式版替换（重做）。主版的优先级是 Claude 通道 > API 通道 > 降级版：Claude 的版本总会替换 API 通道的版本，API 通道的版本不替换任何正式版。
+- **API 通道配置**：secrets `GEMINI_API_KEY`、`NVIDIA_API_KEY`；variable `EDITOR_API_MODEL` 写 `厂商:模型`，逗号分隔，顺序就是成为主版的优先级（同一个模型家族只放一个，文件名按家族取，如 `deepseek`、`gemini`）。本地运行时把 key 写进 `.env`（已忽略），`set -a; . ./.env; set +a` 后再跑 `daily edit`。
 - **告警**（Actions 失败 → GitHub 发通知）：`fetch` 没有拿到任何内容；06:30 时连 `candidates.json` 都没有；连续两天都是降级版。
 - **时区**：Actions 的 cron 只认 UTC，柏林有夏令时（CEST UTC+2 / CET UTC+1），所以 `fetch.yml` 和 `fallback.yml` 各写了冬夏两条 cron，每天都会触发两次，由第一个 job（`due`）按当天的 UTC 偏移只放行一次。Claude 定时任务的 cron 直接写 `CRON_TZ=Europe/Berlin`。
 - **一次性设置**：仓库 Settings → Pages → Source 选 **GitHub Actions**（下面推荐的 “GitHub Pages Jekyll” / “Static HTML” 都不用点，仓库里已经有 `pages.yml`）。
@@ -168,7 +171,8 @@ daily/
   render.py         digest.json → Markdown
   site.py           可发布的各期和 RSS
   export.py         各期、信息源 → JSON，RSS → web/public（daily export）
-  publish.py        编辑分支的 digest 能不能并入 main（daily adopt）
+  publish.py        编辑分支或 API 通道的 digest 能不能成为主版（daily adopt）
+  api_editor.py     API 通道：挑选、写作、修改三次请求，SKILL.md 的编辑规则当 system prompt（daily edit）
   throttle.py       同一主机的请求间隔、429 重试
   window.py         期号时间窗口
   text.py           文本清洗、日期解析

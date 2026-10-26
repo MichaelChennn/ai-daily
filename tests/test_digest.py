@@ -269,7 +269,12 @@ def test_online_checks():
 async def test_check_links_reads_page_text():
     routes = {
         "a.example/post": httpx.Response(
-            200, html="<script>var x = 'hidden';</script><p>Hello &amp; welcome</p>"
+            200,
+            html=(
+                "<script>var x = 'hidden';</script><!-- it's a comment -->"
+                '<nav>Menu</nav><div data-props="{&quot;t&quot;:&quot;<|im_start|>secret&quot;}"></div>'
+                "<main><p>Hello &amp; welcome</p></main><article>Card</article>"
+            ),
         ),
         "a.example/paper.pdf": httpx.Response(
             200, content=b"%PDF", headers={"content-type": "application/pdf"}
@@ -280,7 +285,9 @@ async def test_check_links_reads_page_text():
             ["https://a.example/post", "https://a.example/paper.pdf", "https://a.example/gone"], client
         )
     assert "Hello & welcome" in pages["https://a.example/post"].text
-    assert "hidden" not in pages["https://a.example/post"].text
+    for hidden in ("hidden", "comment", "secret"):  # script, comment, an attribute holding a ">"
+        assert hidden not in pages["https://a.example/post"].text
+    assert pages["https://a.example/post"].body.strip() == "Hello & welcome"  # the longest main / article
     assert (
         pages["https://a.example/paper.pdf"].status == 200
         and pages["https://a.example/paper.pdf"].text is None

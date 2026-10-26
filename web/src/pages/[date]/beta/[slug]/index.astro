@@ -1,0 +1,14 @@
+---
+import IssuePage from "@/components/IssuePage.astro"
+import { betas, type Issue } from "@/lib/issues"
+
+export function getStaticPaths() {
+  return betas.map((issue) => ({ params: { date: issue.date, slug: issue.beta!.slug }, props: { issue } }))
+}
+
+interface Props {
+  issue: Issue
+}
+---
+
+<IssuePage issue={Astro.props.issue} />

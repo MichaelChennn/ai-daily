@@ -13,9 +13,21 @@ interface Props {
   current?: NavPage
   /** This page's canonical path, if not its own; null for none (the 404 page). */
   canonical?: string | null
+  /** An issue page's editing credit for the footer: "由 Claude 编辑". */
+  editor?: string
+  /** The header's Beta link, on an issue that has betas. */
+  beta?: string
 }
 
-const { title, description, wide = false, current, canonical = Astro.url.pathname } = Astro.props
+const {
+  title,
+  description,
+  wide = false,
+  current,
+  canonical = Astro.url.pathname,
+  editor,
+  beta,
+} = Astro.props
 // The home page shows the newest issue: going between it and an issue slides by date, as if it
 // were at that issue's date (the script below).
 const home = href("")
@@ -89,12 +101,12 @@ const latest = issues[0]?.date ?? ""
     </script>
   </head>
   <body class="flex min-h-svh flex-col antialiased">
-    <SiteHeader current={current} />
+    <SiteHeader current={current} beta={beta} />
     <main class:list={["mx-auto w-full flex-1 px-4 sm:px-6", wide ? "max-w-5xl" : "max-w-3xl"]}>
       <slot />
       <div id="content-end" hidden></div>
     </main>
-    <SiteFooter />
+    <SiteFooter editor={editor} />
     <script>
       import "@/scripts/source-overflow"
     </script>

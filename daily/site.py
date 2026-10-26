@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import json
 import logging
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import date, datetime, timedelta, timezone
 from email.utils import format_datetime
 from html import escape
@@ -18,7 +18,7 @@ from typing import Any
 from urllib.parse import urlsplit
 
 from daily import digest as digest_mod
-from daily.digest import SECTIONS
+from daily.digest import SECTIONS, is_api
 from daily.render import source_labels
 from daily.window import PUBLISH_TIME, TIMEZONE, TIMEZONE_LABEL
 
@@ -36,6 +36,8 @@ class Issue:
     date: date
     digest: dict[str, Any]
     candidates: dict[str, Any]
+    # API route editions shown beside the main issue: slug (from digest.api.<slug>.json) -> digest.
+    betas: dict[str, dict[str, Any]] = field(default_factory=dict)
 
     @property
     def slug(self) -> str:
@@ -60,7 +62,7 @@ class Issue:
 
 
 def load_issues(data_dir: Path) -> list[Issue]:
-    """Every publishable issue under data_dir, newest first."""
+    """Every publishable issue under data_dir, newest first, with its publishable betas."""
     issues = []
     for path in sorted(data_dir.glob("*/digest.json"), reverse=True):
         try:
@@ -72,21 +74,40 @@ def load_issues(data_dir: Path) -> list[Issue]:
             log.warning("skip %s: no candidates.json to validate against", path.parent.name)
             continue
         try:
-            data = json.loads(path.read_text(encoding="utf-8"))
             candidates = json.loads(candidates_file.read_text(encoding="utf-8"))
         except json.JSONDecodeError as exc:
             log.warning("skip %s: %s", path.parent.name, exc)
             continue
-        report = digest_mod.validate(data, candidates)
-        if report.errors:
-            log.warning("skip %s: %s", path.parent.name, report.errors[0])
+        data = _publishable(path, candidates)
+        if data is None:
             continue
-        if report.item_errors:
-            log.warning("%s: leaving out %d invalid items", path.parent.name, len(report.item_errors))
-            kept = [item for i, item in enumerate(data["items"]) if i not in report.item_errors]
-            data = {**data, "items": kept}
-        issues.append(Issue(issue_date, data, candidates))
+        issue = Issue(issue_date, data, candidates)
+        for beta_path in sorted(path.parent.glob("digest.api.*.json")):
+            beta = _publishable(beta_path, candidates)
+            # The API edit that became the main issue is not shown again as a beta.
+            if beta is not None and not (is_api(data) and beta.get("model") == data.get("model")):
+                issue.betas[beta_path.name.removeprefix("digest.api.").removesuffix(".json")] = beta
+        issues.append(issue)
     return issues
+
+
+def _publishable(path: Path, candidates: dict[str, Any]) -> dict[str, Any] | None:
+    """The digest at path without the items validate would drop; None if it does not pass."""
+    name = f"{path.parent.name}/{path.name}"
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as exc:
+        log.warning("skip %s: %s", name, exc)
+        return None
+    report = digest_mod.validate(data, candidates)
+    if report.errors:
+        log.warning("skip %s: %s", name, report.errors[0])
+        return None
+    if report.item_errors:
+        log.warning("%s: leaving out %d invalid items", name, len(report.item_errors))
+        kept = [item for i, item in enumerate(data["items"]) if i not in report.item_errors]
+        data = {**data, "items": kept}
+    return data
 
 
 def recent(issues: list[Issue]) -> list[Issue]:

@@ -1,0 +1,15 @@
+---
+import { betaHref, type Issue, issues } from "@/lib/issues"
+
+// YYYY-MM-DD/beta/ goes to the issue's first beta.
+export function getStaticPaths() {
+  return issues.filter((issue) => issue.betas.length).map((issue) => ({ params: { date: issue.date }, props: { issue } }))
+}
+
+interface Props {
+  issue: Issue
+}
+
+const { issue } = Astro.props
+return Astro.redirect(betaHref(issue.date, issue.betas[0].slug))
+---

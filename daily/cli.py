@@ -13,7 +13,7 @@ from datetime import date
 from pathlib import Path
 from typing import Any
 
-from daily import dedup, digest, export, fallback, pipeline, publish, render, site
+from daily import api_editor, dedup, digest, export, fallback, pipeline, publish, render, site
 from daily.config import DEFAULT_DATA_DIR, DEFAULT_SOURCES_FILE, load_sources
 from daily.window import issue_window, local_today
 
@@ -51,6 +51,14 @@ def main(argv: list[str] | None = None) -> int:
     _issue_args(adopt)
     adopt.add_argument("--from", dest="source", type=Path, required=True, help="推来的 digest.json")
 
+    api = commands.add_parser("edit", help="API 通道：用云端模型编辑，写入 digest.api.<slug>.json")
+    _issue_args(api)
+    api.add_argument(
+        "--model",
+        default=os.environ.get("EDITOR_API_MODEL"),
+        help="厂商:模型，如 nvidia:deepseek-ai/deepseek-v4.1-flash（默认取 EDITOR_API_MODEL）",
+    )
+
     data = commands.add_parser("export", help="已发布各期 → JSON 和 RSS，给网页前端（web/）用")
     data.add_argument("--data-dir", type=Path, default=DEFAULT_DATA_DIR, help="数据目录")
     data.add_argument("--sources", type=Path, default=DEFAULT_SOURCES_FILE, help="信源配置文件")
@@ -84,6 +92,7 @@ def main(argv: list[str] | None = None) -> int:
             "degrade": _degrade,
             "render": _render,
             "adopt": _adopt,
+            "edit": _edit,
             "export": _export,
             "page": _page,
         }
@@ -154,22 +163,7 @@ def _print_report(data: dict, path: Path) -> None:
 
 def _list(args: argparse.Namespace) -> int:
     data = _read(_issue_dir(args) / "candidates.json")
-    clusters = {c["id"]: len(c["candidate_ids"]) for c in data["clusters"]}
-    failed = [r["id"] for r in data["sources"] if r["status"] == "error"]
-    print(f"issue {data['date']}: {len(data['candidates'])} candidates; failed sources: {failed or 'none'}")
-    for c in data["candidates"]:
-        if args.kind and c["kind"] not in args.kind:
-            continue
-        notes = [f"{k}={v}" for k, v in c["signals"].items() if k not in ("subreddit", "organization")]
-        notes += [f"+{a['source']}" for a in c["also_from"]]
-        if c["cluster_id"] in clusters:
-            notes.append(f"cluster {c['cluster_id']}({clusters[c['cluster_id']]})")
-        if c["seen_on"]:
-            notes.append(f"seen {','.join(c['seen_on'])}")
-        print(f"{c['id']} {c['kind']:<10} T{c['tier']} [{c['source']}] {c['title']}  | {' '.join(notes)}")
-        if args.summary_chars and c["summary"]:
-            summary = " ".join(c["summary"].split())
-            print(f"    {summary[: args.summary_chars]}{'…' if len(summary) > args.summary_chars else ''}")
+    print(pipeline.candidate_listing(data, args.kind, args.summary_chars))
     return 0
 
 
@@ -262,6 +256,31 @@ def _adopt(args: argparse.Namespace) -> int:
     return 0
 
 
+def _edit(args: argparse.Namespace) -> int:
+    issue_dir = _issue_dir(args)
+    candidates = _read(issue_dir / "candidates.json")
+    try:
+        api_editor.resolve(args.model or "")
+    except api_editor.EditorError as exc:
+        print(exc, file=sys.stderr)
+        return 2
+
+    async def run() -> dict[str, Any]:
+        async with pipeline.make_client() as client:
+            return await api_editor.edit(candidates, args.model, client)
+
+    try:
+        data = asyncio.run(run())
+    except api_editor.EditorError as exc:
+        print(f"{args.model}: {exc}", file=sys.stderr)
+        return 1
+    path = issue_dir / f"digest.api.{api_editor.slug(args.model)}.json"
+    _write(path, data)
+    print(f"{args.model}: {len(data['items'])} items", file=sys.stderr)
+    print(path)
+    return 0
+
+
 def _export(args: argparse.Namespace) -> int:
     issues = export.export(args.out, args.public, args.data_dir, load_sources(args.sources), args.base_url)
     print(f"{len(issues)} issues -> {args.out / 'issues'}", file=sys.stderr)
@@ -279,11 +298,5 @@ def _page(args: argparse.Namespace) -> int:
     if page.text is None:
         print(f"no page text ({page.error or page.status})", file=sys.stderr)
         return 1
-    text = " ".join(page.text.split())
-    for needle in args.grep:
-        hits = [i for i in range(len(text)) if text.startswith(needle, i)] if needle else []
-        print(f"--- {needle!r}: {len(hits)} match(es)")
-        for i in hits[:5]:
-            print(text[max(0, i - args.context) : i + len(needle) + args.context])
-            print()
+    print(digest.grep_page(page.text, args.grep, args.context))
     return 0
