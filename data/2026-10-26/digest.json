@@ -1,0 +1,377 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-26",
+  "mode": "full",
+  "generated_at": "2026-10-26T04:55:00+00:00",
+  "highlights": [
+    "Nanbeige 开源 33B 教师模型 Nanbeige4.3-33B，Apache 2.0 许可，自测 Terminal-Bench 2.1 得分 80.9。",
+    "皮肤科医生实测：微调的 Inception v3 在 200 个活检病灶上首选诊断正确率 62%，GPT-6 Astra 和 Claude Fable 5.1 均为 42%。",
+    "llama.cpp 合入两项性能优化：CUDA 后端的 prompt 处理和 Qwen 模型推理都有提速。"
+  ],
+  "items": [
+    {
+      "section": "headline",
+      "title": "Nanbeige 开源 33B 教师模型 Nanbeige4.3-33B",
+      "summary": "Nanbeige 发布 Nanbeige4.3-33B，定位为 Nanbeige4.3 系列的旗舰教师模型，后续用它把 Agent 能力蒸馏到更小的模型；权重采用 Apache 2.0 许可，上下文最长 512K。团队自测 Terminal-Bench 2.1 得分 80.9（Qwen3.8-27B 为 73.0），但 SWE-Bench Pro 上 60.3 略低于后者的 61.7。模型卡建议多轮工具调用和代码 Agent 场景开启 preserve_thinking、普通对话关闭，想在本地跑编程 Agent 的开发者可以一试。",
+      "sources": [
+        {
+          "candidate_id": "c_0c3cc6bf0a",
+          "url": "https://huggingface.co/Nanbeige/Nanbeige4.3-33B"
+        },
+        {
+          "candidate_id": "c_11942c4bea",
+          "url": "https://www.reddit.com/r/MachineLearning/comments/1xf6x35/nanbeige_releases_nanbeige4333b_an_apache_20/"
+        },
+        {
+          "candidate_id": "c_cfc57c45bc",
+          "url": "https://huggingface.co/AtomicChat/Nanbeige4.3-33B-GGUF"
+        },
+        {
+          "candidate_id": "c_0c3cc6bf0a",
+          "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xf0kz4/nanbeigenanbeige4333b_hugging_face/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/Nanbeige/Nanbeige4.3-33B",
+          "quote": "Our strategy centers on building a high-capacity teacher agent first, which will subsequently anchor the distillation of advanced agentic capabilities into smaller models. To this end, we first introduce Nanbeige4.3-33B, designed as the flagship teacher model for the Nanbeige4.3 series."
+        },
+        {
+          "url": "https://huggingface.co/Nanbeige/Nanbeige4.3-33B",
+          "quote": "The model supports a context length of up to 524,288 tokens (512K)."
+        },
+        {
+          "url": "https://huggingface.co/Nanbeige/Nanbeige4.3-33B",
+          "quote": "Category Benchmark Nanbeige4.3-33B 1 Qwen3.8-27B Muse-Glimmer-30B Gemma4-31B Agentic Coding Terminal-Bench 2.1 2 80.9 73.0 61.8 47.2"
+        },
+        {
+          "url": "https://huggingface.co/Nanbeige/Nanbeige4.3-33B",
+          "quote": "SWE-Bench Pro 3 60.3 61.7 36.9 51.2"
+        },
+        {
+          "url": "https://huggingface.co/Nanbeige/Nanbeige4.3-33B",
+          "quote": "preserve_thinking controls whether reasoning from previous assistant turns is retained in a multi-turn conversation. We recommend False for general chat and question answering, and True for multi-turn tool use"
+        }
+      ],
+      "tags": [
+        "模型",
+        "开源",
+        "Agent"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "皮肤科医生实测：十年前的 CNN 识别皮肤癌胜过前沿大模型",
+      "summary": "Guy's Hospital 皮肤科医生 Magnus Lynch 用 MILK10k 中 200 个经活检确诊的病灶做测试，微调后的 Inception v3 首选诊断正确 125 例（62%），GPT-6 Astra 和 Claude Fable 5.1 分别为 84 和 85 例（42%）。作者也指出样本量小、每个 LLM 病例只跑了一次、数据集公开可能已被模型训练见过。对做医疗 AI 的开发者来说，这提醒在窄领域视觉任务上专用小模型仍可能胜过通用大模型，选型前值得先做针对性评测。",
+      "sources": [
+        {
+          "candidate_id": "c_373122b569",
+          "url": "https://lynchlab.net/llm-skin-cancer"
+        },
+        {
+          "candidate_id": "c_373122b569",
+          "url": "https://news.ycombinator.com/item?id=50233779"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://lynchlab.net/llm-skin-cancer",
+          "quote": "It was one of 200 biopsy-proven lesions I gave to all three. The CNN named the right diagnosis (out of 6 possiblities) for 125 of them (62%). The two frontier LLMs named it for 84 and 85 (42%)."
+        },
+        {
+          "url": "https://lynchlab.net/llm-skin-cancer",
+          "quote": "I showed these two images - a clinical photograph and a dermoscopic (skin microscope) image - to GPT-6 Astra and Claude Fable 5.1"
+        },
+        {
+          "url": "https://lynchlab.net/llm-skin-cancer",
+          "quote": "I used Inception v3 pretrained on everyday photographs and then fine-tuned all layers on 68,011 dermoscopic and clinical images from the ISIC Archive on a single H100 GPU."
+        },
+        {
+          "url": "https://lynchlab.net/llm-skin-cancer",
+          "quote": "The lesions come from MILK10k , a public dataset released through the International Skin Imaging Collaboration in 2025"
+        },
+        {
+          "url": "https://lynchlab.net/llm-skin-cancer",
+          "quote": "Each LLM case was run once; answers vary between runs."
+        },
+        {
+          "url": "https://lynchlab.net/llm-skin-cancer",
+          "quote": "Contamination. MILK10k has been public since 2025, so the LLMs could have seen it in training"
+        },
+        {
+          "url": "https://lynchlab.net/llm-skin-cancer",
+          "quote": "Dr Magnus Lynch is a Consultant Dermatologist and Mohs Surgeon at Guy's Hospital"
+        }
+      ],
+      "tags": [
+        "多模态",
+        "图像",
+        "行业"
+      ]
+    },
+    {
+      "section": "model",
+      "title": "MemTensor 开源记忆原生模型 MemT-1.0-Nano",
+      "summary": "MemT-1.0-Nano 基于 Qwen3.6-35B-A3B，把动态局部记忆和可训练的超记忆融入模型计算，推理时无需访问原始上下文就能利用历史信息；在 128K 历史长度下，存储比全上下文 KV cache 减少约 66 倍。权重采用 Apache License 2.0，模型卡提供了保存和恢复记忆状态的 Transformers 示例，适合想给 Agent 加长期记忆、又不想一直堆上下文的开发者研究。",
+      "sources": [
+        {
+          "candidate_id": "c_03bccfcdf5",
+          "url": "https://huggingface.co/MemTensor/MemT-1.0-Nano"
+        },
+        {
+          "candidate_id": "c_0725a021d2",
+          "url": "https://www.reddit.com/r/MachineLearning/comments/1xeu0ht/memt10_architecture_breakdown_gated_deltanet2/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/MemTensor/MemT-1.0-Nano",
+          "quote": "MemT-1.0 integrates dynamic local memory and trainable hyper memory to retain and leverage historical information without accessing original context at inference. Its persistent state remains constant in size, reducing storage by approximately 66× versus full-context KV cache at 128K history length."
+        },
+        {
+          "url": "https://huggingface.co/MemTensor/MemT-1.0-Nano",
+          "quote": "base_model:Qwen/Qwen3.6-35B-A3B"
+        },
+        {
+          "url": "https://huggingface.co/MemTensor/MemT-1.0-Nano",
+          "quote": "The MemT-1.0-Nano model weights are released under the Apache License, Version 2.0 ."
+        },
+        {
+          "url": "https://huggingface.co/MemTensor/MemT-1.0-Nano",
+          "quote": "Apache License 2.0."
+        },
+        {
+          "url": "https://huggingface.co/MemTensor/MemT-1.0-Nano",
+          "quote": "The examples below use MemT-1.0 with Hugging Face Transformers."
+        }
+      ],
+      "tags": [
+        "模型",
+        "开源",
+        "Agent"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Gandalf：按注意力类型筛选 KV cache 写入，延长 SSD 寿命",
+      "summary": "论文指出，在多轮对话和 Agent 等生产负载中，卸载到 SSD 的 KV cache 写入量远超 SSD 容量，会把 SSD 寿命从数年缩短到数月。Gandalf 优先把全注意力（full attention）产生的 KV cache 写入 SSD，评测显示 SSD 寿命平均延长 7.3 倍，对缓存命中率的影响可以忽略。对用 SSD 扩展 KV cache 的推理服务和本地部署来说，这是控制硬件损耗的一个思路。",
+      "sources": [
+        {
+          "candidate_id": "c_6e564e5161",
+          "url": "https://arxiv.org/html/2610.30791v1"
+        },
+        {
+          "url": "https://arxiv.org/abs/2610.30791",
+          "title": "arXiv"
+        },
+        {
+          "candidate_id": "c_6e564e5161",
+          "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xfiu75/gandalf_flash_shall_not_die_increasing_flash/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.30791v1",
+          "quote": "in production LLM workload, such as multi-round conversation and LLM agents, the total amount of KV cache writes significantly exceeds SSD capacity, shortening SSD lifetime from years to months."
+        },
+        {
+          "url": "https://arxiv.org/abs/2610.30791",
+          "quote": "Gandalf prioritize the admission of full-attention KV cache into SSD over the cache generated by other types of attention, which significantly increases SSD lifetime without sacrificing cache hit rate."
+        },
+        {
+          "url": "https://arxiv.org/abs/2610.30791",
+          "quote": "Our evaluation shows that Gandalf extends the SSD lifetime by 7.3X on average, while having negligible impact on cache hit rate across multiple workload traces and wide range of hardware capacity."
+        }
+      ],
+      "tags": [
+        "论文",
+        "推理",
+        "硬件"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "llama.cpp CUDA 后端把 gate/up 与 GLU 融合扩展到 prompt 处理",
+      "summary": "llama.cpp 合入 PR #29948，把原本只覆盖小批量的 FFN gate/up 矩阵乘与 GLU 融合扩展到 MMQ 路径的 prompt 处理批量，支持 NVIDIA Turing 及更新架构上的 Q4_K、Q5_K、Q6_K、Q8_0、IQ4_XS。作者在 DGX Spark (GB10) 上测得 Qwen3.8-27B Q4_K_M 的 prompt 处理速度 +7.1%，困惑度与关闭融合时逐位一致。用 CUDA 跑量化模型、经常处理长 prompt 的用户更新后即可受益。",
+      "sources": [
+        {
+          "candidate_id": "c_f2db84cf21",
+          "url": "https://github.com/ggml-org/llama.cpp/pull/29948"
+        },
+        {
+          "candidate_id": "c_f2db84cf21",
+          "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xey0uw/cuda_fuse_ffn_gateup_matmuls_and_glu_in_mmq_with/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/pull/29948",
+          "quote": "Extends the gate/up + GLU fusion, which today only covers small batches (MMVQ/MMVF), to prompt-processing batch sizes on the MMQ path."
+        },
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/pull/29948",
+          "quote": "Q4_K, Q5_K, Q6_K, Q8_0, IQ4_XS on NVIDIA Turing+; SWIGLU, GEGLU, SWIGLU_OAI, SWIGLU_CLAMP."
+        },
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/pull/29948",
+          "quote": "Performance DGX Spark (GB10), llama-bench -ngl 999 -fa on -p 16384 -n 0 -b 2048 -ub 2048 -ctk f16 -ctv f16 -r 5 , tok/s: model type master PR Qwen3.8-27B Q4_K_M 840.1 899.9 +7.1%"
+        },
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/pull/29948",
+          "quote": "Perplexity (wiki.test, 8 chunks) is bit-identical with GGML_CUDA_DISABLE_FUSION=1 for all five types"
+        },
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/pull/29948",
+          "quote": "ggerganov merged commit c49edf0 into ggml-org : master Oct 25, 2026"
+        }
+      ],
+      "tags": [
+        "开源",
+        "推理",
+        "工具"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "llama.cpp 转换 Qwen 模型时合并共享激活的小张量",
+      "summary": "llama.cpp 合入 PR #31028，转换时把 Qwen 计算图中共享同一激活的权重合并，作者实测新 GGUF 生成速度 +7%、预填充 +5%。",
+      "sources": [
+        {
+          "candidate_id": "c_5f43453eda",
+          "url": "https://github.com/ggml-org/llama.cpp/pull/31028"
+        },
+        {
+          "candidate_id": "c_5f43453eda",
+          "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xf716t/qwen_merge_tensors_on_convert_by_am17an_pull/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/pull/31028",
+          "quote": "There are a few tensors in the qwen graph which share the same activations, this PR merges their weight on convert (similar to --fuse-gate-up-exps ) but for these smaller tensors. Using the new GGUF is +7% TG and +5% prefill for me on my setup."
+        },
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/pull/31028",
+          "quote": "ggerganov merged 3 commits into master"
+        }
+      ],
+      "tags": [
+        "开源",
+        "推理",
+        "工具"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "llama.cpp 披露 CVE-2026-116096：恶意 mmproj 可致越界写",
+      "summary": "漏洞位于 Pocket-TTS 组件，恶意 mmproj 会触发越界写，需本地访问；披露建议升级到 b11796，从设计上防止越界的 PR 29360 仍未合入。",
+      "sources": [
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/pull/29360",
+          "title": "llama.cpp PR #29360"
+        },
+        {
+          "candidate_id": "c_9e0ef98a1f",
+          "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xfizft/psa_llamacpp_cve2026116096/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/pull/29360",
+          "quote": "[Security]: prevent out-of-bounds accesses from malformed mmproj files"
+        }
+      ],
+      "tags": [
+        "安全",
+        "开源"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "minimaxir 分析 OpenAI 与 Anthropic 为何连续降价",
+      "summary": "文章梳理两家数月内最高 80% 的降价，认为模型切换成本低、缺乏护城河，开源权重模型等替代品带来了价格压力。",
+      "sources": [
+        {
+          "candidate_id": "c_4a62295acd",
+          "url": "https://minimaxir.com/2026/10/cheap-llms/"
+        },
+        {
+          "candidate_id": "c_4a62295acd",
+          "url": "https://news.ycombinator.com/item?id=50236102"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://minimaxir.com/2026/10/cheap-llms/",
+          "quote": "However, no one cuts prices by 80% unless there is some externality in play."
+        },
+        {
+          "url": "https://minimaxir.com/2026/10/cheap-llms/",
+          "quote": "and as a result there is little moat. Additionally, there are many competitors—not just large companies like Google and Meta —who can provide models which are sufficient substitutes and therefore allow pricing pressure."
+        }
+      ],
+      "tags": [
+        "行业",
+        "产品"
+      ]
+    }
+  ],
+  "research": [
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/Nanbeige/Nanbeige4.3-33B"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://lynchlab.net/llm-skin-cancer"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://arxiv.org/abs/2610.30791"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://minimaxir.com/2026/10/cheap-llms/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/29948"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31028"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://www.techpowerup.com/354113/nvidia-eyes-software-revenue-with-a-usd-2-000-per-gpu-yearly-figure-from-huang"
+    },
+    {
+      "via": "websearch",
+      "query": "Hugging Face taken over acquisition October 2026"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/MemTensor/MemT-1.0-Nano"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/29360"
+    }
+  ],
+  "validation": {
+    "validated_at": "2026-10-26T04:44:02+00:00",
+    "checked_links": true,
+    "dropped": [],
+    "warnings": [
+      "Nanbeige 开源 33B 教师模型 Nanbeige4.3-33B: could not check https://www.reddit.com/r/MachineLearning/comments/1xf6x35/nanbeige_releases_nanbeige4333b_an_apache_20/ (403)",
+      "Nanbeige 开源 33B 教师模型 Nanbeige4.3-33B: could not check https://www.reddit.com/r/LocalLLaMA/comments/1xf0kz4/nanbeigenanbeige4333b_hugging_face/ (403)",
+      "MemTensor 开源记忆原生模型 MemT-1.0-Nano: could not check https://www.reddit.com/r/MachineLearning/comments/1xeu0ht/memt10_architecture_breakdown_gated_deltanet2/ (403)",
+      "Gandalf：按注意力类型筛选 KV cache 写入，延长 SSD 寿命: could not check https://www.reddit.com/r/LocalLLaMA/comments/1xfiu75/gandalf_flash_shall_not_die_increasing_flash/ (403)",
+      "llama.cpp CUDA 后端把 gate/up 与 GLU 融合扩展到 prompt 处理: could not check https://www.reddit.com/r/LocalLLaMA/comments/1xey0uw/cuda_fuse_ffn_gateup_matmuls_and_glu_in_mmq_with/ (403)",
+      "llama.cpp 转换 Qwen 模型时合并共享激活的小张量: could not check https://www.reddit.com/r/LocalLLaMA/comments/1xf716t/qwen_merge_tensors_on_convert_by_am17an_pull/ (403)",
+      "llama.cpp 披露 CVE-2026-116096：恶意 mmproj 可致越界写: could not check https://www.reddit.com/r/LocalLLaMA/comments/1xfizft/psa_llamacpp_cve2026116096/ (403)",
+      "2 headline items (target 3-5)",
+      "1 paper items (target 2-3)"
+    ]
+  }
+}
