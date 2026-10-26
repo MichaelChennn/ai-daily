@@ -58,7 +58,6 @@ def main(argv: list[str] | None = None) -> int:
         default=os.environ.get("EDITOR_API_MODEL"),
         help="厂商:模型，如 nvidia:deepseek-ai/deepseek-v4.1-flash（默认取 EDITOR_API_MODEL）",
     )
-    api.add_argument("--max-turns", type=int, default=api_editor.MAX_TURNS, help="最多请求几轮")
 
     data = commands.add_parser("export", help="已发布各期 → JSON 和 RSS，给网页前端（web/）用")
     data.add_argument("--data-dir", type=Path, default=DEFAULT_DATA_DIR, help="数据目录")
@@ -268,7 +267,7 @@ def _edit(args: argparse.Namespace) -> int:
 
     async def run() -> dict[str, Any]:
         async with pipeline.make_client() as client:
-            return await api_editor.edit(candidates, args.model, client, args.max_turns)
+            return await api_editor.edit(candidates, args.model, client)
 
     try:
         data = asyncio.run(run())

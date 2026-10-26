@@ -5,18 +5,20 @@ import { buttonVariants } from "@/components/ui/button"
 import ThemeToggle from "@/components/ThemeToggle"
 import { href, REPO_URL, SITE_TITLE } from "@/lib/issues"
 
-export type NavPage = "today" | "archive" | "sources"
+export type NavPage = "today" | "archive" | "sources" | "beta"
 
 interface Props {
   /** Which link is the current page, marked with a pill. */
   current?: NavPage
+  /** Where the Beta link at the far right goes; no link without one. */
+  beta?: string
 }
 
 // Links styled with buttonVariants, not <Button asChild>: Slot cannot merge into children passed
 // from .astro. cn() so that `hidden` overrides the variant's inline-flex.
 // The pill and each label have their own view-transition-name, so going to another page the pill
 // glides from one link to the other (z-order in global.css) while the labels stay put.
-const { current } = Astro.props
+const { current, beta } = Astro.props
 const nav: { page: NavPage; label: string; href: string; wide?: boolean }[] = [
   { page: "today", label: "今日日报", href: href(""), wide: true },
   { page: "archive", label: "往期归档", href: href("archive/") },
@@ -62,6 +64,23 @@ const nav: { page: NavPage; label: string; href: string; wide?: boolean }[] = [
           ></path>
         </svg>
       </a>
+      {
+        beta && (
+          <a
+            href={beta}
+            aria-current={current === "beta" ? "page" : undefined}
+            class={cn(
+              buttonVariants({ variant: "ghost", size: "sm" }),
+              "relative isolate rounded-full px-3 font-normal text-muted-foreground hover:bg-transparent hover:text-foreground aria-[current=page]:text-foreground",
+            )}
+          >
+            {current === "beta" && (
+              <span class="absolute inset-0 -z-10 [view-transition-name:nav-pill] rounded-full bg-muted" />
+            )}
+            <span class="[view-transition-name:nav-beta]">Beta</span>
+          </a>
+        )
+      }
     </div>
   </div>
 </header>

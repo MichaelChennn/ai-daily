@@ -172,7 +172,7 @@ daily/
   site.py           可发布的各期和 RSS
   export.py         各期、信息源 → JSON，RSS → web/public（daily export）
   publish.py        编辑分支或 API 通道的 digest 能不能成为主版（daily adopt）
-  api_editor.py     API 通道：OpenAI 兼容接口的工具调用循环，SKILL.md 当 system prompt（daily edit）
+  api_editor.py     API 通道：挑选、写作、修改三次请求，SKILL.md 的编辑规则当 system prompt（daily edit）
   throttle.py       同一主机的请求间隔、429 重试
   window.py         期号时间窗口
   text.py           文本清洗、日期解析

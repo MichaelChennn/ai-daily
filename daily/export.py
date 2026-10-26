@@ -60,7 +60,7 @@ HF_SECTIONS = {
     "datasets",
 }
 # Beta slug (digest.api.<slug>.json) -> its label on the page.
-BETA_LABELS = {"deepseek": "DeepSeek", "gemini": "Gemini"}
+BETA_LABELS = {"deepseek": "DeepSeek", "gemini": "Gemini", "minimax": "MiniMax"}
 # Whose icon a source with neither a homepage nor a page url gets.
 ICON_HOSTS = {"github_releases": "github.com"}
 
