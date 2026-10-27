@@ -2,6 +2,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react"
 import { cn } from "cn"
 
 import { Button } from "@/components/ui/button"
+import { type Lang, strings } from "@/lib/i18n"
 import { addDays, formatDay, issueHref } from "@/lib/issues"
 
 type Props = {
@@ -10,15 +11,17 @@ type Props = {
   published: Set<string>
   older: string | null
   newer: string | null
+  lang?: Lang
 }
 
 // Five calendar days centred on this issue. Days with an issue link to it; days without one
 // (gaps, the future) stay as faded labels. The arrows skip to the nearest issue either way.
-export default function DateWheel({ date, published, older, newer }: Props) {
-  const current = formatDay(date)
+export default function DateWheel({ date, published, older, newer, lang = "zh" }: Props) {
+  const t = strings[lang]
+  const current = formatDay(date, lang)
   return (
-    <nav aria-label="切换期数" className="flex items-center justify-between gap-2 pt-10 pb-8">
-      <StepButton target={older} label="上一期">
+    <nav aria-label={t.issues} className="flex items-center justify-between gap-2 pt-10 pb-8">
+      <StepButton target={older} label={t.older} lang={lang}>
         <ChevronLeft />
       </StepButton>
       <ol className="flex items-center justify-center gap-3 font-rounded [view-transition-name:date-wheel] sm:gap-6">
@@ -38,7 +41,7 @@ export default function DateWheel({ date, published, older, newer }: Props) {
             )
           }
           const day = addDays(date, offset)
-          const { monthDay, weekday } = formatDay(day)
+          const { monthDay, weekday } = formatDay(day, lang)
           const far = Math.abs(offset) === 2
           const label = (
             <>
@@ -54,7 +57,7 @@ export default function DateWheel({ date, published, older, newer }: Props) {
             <li key={offset} className={className}>
               {published.has(day) ? (
                 <a
-                  href={issueHref(day)}
+                  href={issueHref(day, lang)}
                   className={cn(
                     "flex flex-col items-center transition-opacity hover:text-foreground hover:opacity-100",
                     far ? "opacity-50" : "opacity-80",
@@ -63,7 +66,7 @@ export default function DateWheel({ date, published, older, newer }: Props) {
                   {label}
                 </a>
               ) : (
-                <span className="flex flex-col items-center opacity-25" title="这一天没有日报">
+                <span className="flex flex-col items-center opacity-25" title={t.noIssue}>
                   {label}
                 </span>
               )}
@@ -71,14 +74,24 @@ export default function DateWheel({ date, published, older, newer }: Props) {
           )
         })}
       </ol>
-      <StepButton target={newer} label="下一期">
+      <StepButton target={newer} label={t.newer} lang={lang}>
         <ChevronRight />
       </StepButton>
     </nav>
   )
 }
 
-function StepButton({ target, label, children }: { target: string | null; label: string; children: React.ReactNode }) {
+function StepButton({
+  target,
+  label,
+  lang,
+  children,
+}: {
+  target: string | null
+  label: string
+  lang: Lang
+  children: React.ReactNode
+}) {
   if (!target) {
     return (
       <Button size="icon" className="rounded-full" disabled aria-label={label}>
@@ -88,7 +101,10 @@ function StepButton({ target, label, children }: { target: string | null; label:
   }
   return (
     <Button asChild size="icon" className="rounded-full">
-      <a href={issueHref(target)} aria-label={`${label}：${formatDay(target).monthDay}`}>
+      <a
+        href={issueHref(target, lang)}
+        aria-label={`${label}${lang === "en" ? ": " : "："}${formatDay(target, lang).monthDay}`}
+      >
         {children}
       </a>
     </Button>

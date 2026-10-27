@@ -18,7 +18,7 @@ function fit(list: HTMLElement) {
   // Hide sources from the end until the last shown one and the button share the first row.
   more.hidden = false
   let shown = items.length
-  const count = () => (button.textContent = `+${items.length - shown} 更多来源`)
+  const count = () => (button.textContent = button.dataset.label!.replace("{n}", String(items.length - shown)))
   count()
   while (shown > 1 && (items[shown - 1].offsetTop !== top || more.offsetTop !== top)) {
     items[--shown].hidden = true

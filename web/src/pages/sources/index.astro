@@ -1,10 +1,15 @@
 ---
 import Sources from "@/components/Sources"
 import Layout from "@/layouts/Layout.astro"
-import { SITE_TITLE } from "@/lib/issues"
-import sources from "../../../data/sources.json"
+import { langOf, strings } from "@/lib/i18n"
+import sourcesEn from "../../../data/en/sources.json"
+import sourcesZh from "../../../data/sources.json"
+
+// Also the English site's sources page (en/sources/), in the language of the URL.
+const lang = langOf(Astro.currentLocale)
+const t = strings[lang]
 ---
 
-<Layout title={`信息源 · ${SITE_TITLE}`} description={`${SITE_TITLE}抓取的信息源白名单，和每个源的抓取与入选统计。`} wide current="sources">
-  <Sources client:load data={sources} />
+<Layout title={`${t.nav.sources} · ${t.siteTitle}`} description={t.sources.description(t.siteTitle)} wide current="sources">
+  <Sources client:load data={lang === "en" ? sourcesEn : sourcesZh} lang={lang} />
 </Layout>

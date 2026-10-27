@@ -1,11 +1,15 @@
 ---
 import Archive from "@/components/Archive"
 import Layout from "@/layouts/Layout.astro"
-import { issues, SITE_TITLE } from "@/lib/issues"
+import { langOf, strings } from "@/lib/i18n"
+import { issuesIn } from "@/lib/issues"
 
+// Also the English site's archive (en/archive/), in the language of the URL.
+const lang = langOf(Astro.currentLocale)
+const t = strings[lang]
 // Only what a row shows goes into the page, not every issue's full text. A fallback issue has no
-// description; its first headline stands in.
-const entries = issues.map((issue) => ({
+// description, nor does an English one not written yet; its first headline stands in.
+const entries = issuesIn(lang).map((issue) => ({
   date: issue.date,
   fallback: issue.fallback,
   description: issue.description || (issue.sections[0]?.items[0]?.title ?? ""),
@@ -13,6 +17,6 @@ const entries = issues.map((issue) => ({
 }))
 ---
 
-<Layout title={`往期归档 · ${SITE_TITLE}`} description={`${SITE_TITLE}的全部往期，按月份浏览。`} current="archive">
-  <Archive client:load entries={entries} />
+<Layout title={`${t.nav.archive} · ${t.siteTitle}`} description={t.archive.description(t.siteTitle)} current="archive">
+  <Archive client:load entries={entries} lang={lang} />
 </Layout>

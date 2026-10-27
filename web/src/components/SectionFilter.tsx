@@ -4,14 +4,18 @@ import { flushSync } from "react-dom"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import { filterTransition } from "@/lib/filter-transition"
 
-type Props = { sections: { id: string; label: string }[] }
+type Props = {
+  sections: { id: string; label: string }[]
+  /** The "all sections" option and the group's accessible name. */
+  labels: { all: string; filter: string }
+}
 
 const ALL = "all"
 
 // Shows one section of the issue, or all of them. The sections are server-rendered elements
 // with data-section; this hides the others, animated with a view transition where the browser
 // has them (the animations are in global.css).
-export default function SectionFilter({ sections }: Props) {
+export default function SectionFilter({ sections, labels }: Props) {
   const [value, setValue] = useState(ALL)
 
   function select(next: string) {
@@ -38,7 +42,7 @@ export default function SectionFilter({ sections }: Props) {
     )
   }
 
-  const options = [{ id: ALL, label: "全部" }, ...sections]
+  const options = [{ id: ALL, label: labels.all }, ...sections]
   return (
     <div className="-mx-4 overflow-x-auto px-4 [scrollbar-width:none] sm:mx-0 sm:px-0">
       <ToggleGroup
@@ -48,7 +52,7 @@ export default function SectionFilter({ sections }: Props) {
         variant="outline"
         size="sm"
         spacing={1}
-        aria-label="按分类筛选"
+        aria-label={labels.filter}
         className="mx-auto"
       >
         {options.map((option) => (

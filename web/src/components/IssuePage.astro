@@ -10,7 +10,8 @@ import ItemCard from "@/components/ItemCard"
 import Pager from "@/components/Pager"
 import SectionFilter from "@/components/SectionFilter"
 import Layout from "@/layouts/Layout.astro"
-import { betaHref, type Issue, issueHref, issues, SITE_TITLE } from "@/lib/issues"
+import { langOf, strings } from "@/lib/i18n"
+import { betaHref, type Issue, issueHref, issuesIn } from "@/lib/issues"
 
 interface Props {
   issue: Issue
@@ -21,6 +22,9 @@ interface Props {
 // One issue, at YYYY-MM-DD/ and (the newest) at the home page, or one of its betas at
 // YYYY-MM-DD/beta/<slug>/ (the date wheel and pager still go between main issues).
 const { issue, home = false } = Astro.props
+const lang = langOf(Astro.currentLocale)
+const t = strings[lang]
+const issues = issuesIn(lang)
 const at = issues.findIndex((i) => i.date === issue.date)
 const newer = issues[at - 1]?.date ?? null
 const older = issues[at + 1]?.date ?? null
@@ -28,9 +32,9 @@ const published = new Set(issues.map((i) => i.date))
 const title =
   `${issue.date} · ` +
   (issue.beta ? `Beta · ${issue.beta.label} · ` : "") +
-  SITE_TITLE +
-  (issue.fallback ? "（降级版）" : "")
-const description = issue.description || `${issue.date} 的 AI 科技日报。`
+  t.siteTitle +
+  (issue.fallback ? t.fallbackTitle : "")
+const description = issue.description || t.description(issue.date)
 const filters = issue.sections.map(({ id, label }) => ({ id, label }))
 // A beta page switches between the issue's betas in a row above the filter; the header's Beta link
 // goes into this issue's betas, and on a beta page back to the main issue.
@@ -54,14 +58,14 @@ const beta = issue.beta
   description={description}
   current={issue.beta ? "beta" : newer ? "archive" : "today"}
   beta={beta}
-  canonical={home ? issueHref(issue.date) : undefined}
-  editor={issue.fallback ? "降级版，未经编辑" : `由 ${issue.editor} 编辑`}
+  canonical={home ? issueHref(issue.date, lang) : undefined}
+  editor={t.credit(issue.editor, issue.fallback)}
 >
   <h1 class="sr-only">{title}</h1>
-  <DateWheel date={issue.date} published={published} older={older} newer={newer} />
+  <DateWheel date={issue.date} published={published} older={older} newer={newer} lang={lang} />
   {
     models.length > 0 && (
-      <nav aria-label="切换 Beta 版本" class="mb-3 flex flex-wrap justify-center gap-1">
+      <nav aria-label={t.betaModels} class="mb-3 flex flex-wrap justify-center gap-1">
         {models.map((model) => (
           <a
             href={model.href}
@@ -77,7 +81,7 @@ const beta = issue.beta
       </nav>
     )
   }
-  <SectionFilter client:load sections={filters} />
+  <SectionFilter client:load sections={filters} labels={{ all: t.all, filter: t.filter }} />
 
   <div data-issue class="[view-transition-name:issue]">
     {
@@ -103,13 +107,13 @@ const beta = issue.beta
                   </span>
                   <span>{section.label}</span>
                 </h2>
-                <span class="text-xs text-muted-foreground tabular-nums">{section.items.length} 条</span>
+                <span class="text-xs text-muted-foreground tabular-nums">{t.count(section.items.length)}</span>
               </header>
               <div class="flex flex-col gap-6">
                 {full.map((item) => (
-                  <ItemCard item={item} />
+                  <ItemCard item={item} lang={lang} />
                 ))}
-                {compact.length > 0 && <BriefList items={compact} />}
+                {compact.length > 0 && <BriefList items={compact} lang={lang} />}
               </div>
             </section>
           )
@@ -117,6 +121,6 @@ const beta = issue.beta
       }
     </div>
 
-    <Pager older={older} newer={newer} />
+    <Pager older={older} newer={newer} lang={lang} />
   </div>
 </Layout>

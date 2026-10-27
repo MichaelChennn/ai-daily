@@ -1,0 +1,20 @@
+---
+import IssuePage from "@/components/IssuePage.astro"
+import Layout from "@/layouts/Layout.astro"
+import { strings } from "@/lib/i18n"
+import { enIssues } from "@/lib/issues"
+
+// The English site's home page: the newest issue, the same page as at en/<date>/.
+const [latest] = enIssues
+const t = strings.en
+---
+
+{
+  latest ? (
+    <IssuePage issue={latest} home />
+  ) : (
+    <Layout title={t.siteTitle} description={`${t.siteTitle}.`} current="today">
+      <p class="py-24 text-center text-sm text-muted-foreground">{t.empty}</p>
+    </Layout>
+  )
+}

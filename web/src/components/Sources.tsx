@@ -11,8 +11,9 @@ import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import { filterTransition } from "@/lib/filter-transition"
+import { type Lang, strings } from "@/lib/i18n"
 
-// web/data/sources.json, written by `python -m daily export`.
+// web/data/sources.json (the English site's in web/data/en/), written by `python -m daily export`.
 export type Source = {
   id: string
   name: string
@@ -31,7 +32,8 @@ const ALL = "all"
 // The whitelist as a grid of cards per group: pick a group with the capsules, narrow it down with
 // the search. Changing the group animates the cards like the archive's months (global.css); the
 // search filters as you type, without a transition, so the input never freezes mid-word.
-export default function Sources({ data }: { data: SourcesData }) {
+export default function Sources({ data, lang }: { data: SourcesData; lang: Lang }) {
+  const t = strings[lang]
   const [group, setGroup] = useState(ALL)
   const [query, setQuery] = useState("")
   const [animating, setAnimating] = useState(false)
@@ -60,13 +62,13 @@ export default function Sources({ data }: { data: SourcesData }) {
     )
   }
 
-  const options = [{ label: ALL, title: "全部", count: total }].concat(
+  const options = [{ label: ALL, title: t.all, count: total }].concat(
     data.groups.map((g) => ({ label: g.label, title: g.label, count: g.sources.length })),
   )
 
   return (
     <>
-      <h1 className="sr-only">信息源</h1>
+      <h1 className="sr-only">{t.nav.sources}</h1>
       <div className="flex flex-col gap-3 pt-10 sm:flex-row-reverse sm:items-center sm:justify-between">
         <div className="relative sm:w-56">
           <Search className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground" />
@@ -74,8 +76,8 @@ export default function Sources({ data }: { data: SourcesData }) {
             type="search"
             value={query}
             onChange={(event) => setQuery(event.target.value)}
-            placeholder="搜索信息源或仓库"
-            aria-label="搜索信息源或仓库"
+            placeholder={t.sources.search}
+            aria-label={t.sources.search}
             className="rounded-full px-9 shadow-none [&::-webkit-search-cancel-button]:appearance-none"
           />
           {query && (
@@ -83,7 +85,7 @@ export default function Sources({ data }: { data: SourcesData }) {
               variant="ghost"
               size="icon-xs"
               onClick={() => setQuery("")}
-              aria-label="清空搜索"
+              aria-label={t.sources.clear}
               className="absolute top-1/2 right-1.5 -translate-y-1/2 rounded-full text-muted-foreground"
             >
               <X />
@@ -97,7 +99,7 @@ export default function Sources({ data }: { data: SourcesData }) {
           variant="outline"
           size="sm"
           spacing={1}
-          aria-label="按分组筛选"
+          aria-label={t.sources.groups}
           className="flex-wrap justify-start"
         >
           {options.map((option) => (
@@ -114,7 +116,7 @@ export default function Sources({ data }: { data: SourcesData }) {
           ))}
         </ToggleGroup>
       </div>
-      <p className="mt-3 text-xs text-muted-foreground">统计最近 {data.runs} 期</p>
+      <p className="mt-3 text-xs text-muted-foreground">{t.sources.runs(data.runs)}</p>
 
       <div className="mt-8 flex flex-col gap-12">
         {shown.map((g) => (
@@ -124,7 +126,7 @@ export default function Sources({ data }: { data: SourcesData }) {
               style={{ viewTransitionName: animating ? `sources-${groupIndex(data, g.label)}` : undefined }}
             >
               <span className="text-xl font-semibold tracking-tight">{g.label}</span>
-              <span className="text-xs text-muted-foreground tabular-nums">{g.sources.length} 个</span>
+              <span className="text-xs text-muted-foreground tabular-nums">{t.sources.count(g.sources.length)}</span>
             </h2>
             <div className="grid items-start gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {g.sources.map((source) => (
@@ -132,6 +134,7 @@ export default function Sources({ data }: { data: SourcesData }) {
                   key={source.id}
                   source={source}
                   needle={needle}
+                  lang={lang}
                   transitionName={animating ? `source-${source.id}` : undefined}
                 />
               ))}
@@ -139,7 +142,7 @@ export default function Sources({ data }: { data: SourcesData }) {
           </section>
         ))}
         {shown.length === 0 && (
-          <p className="py-16 text-center text-sm text-muted-foreground">没有匹配的信息源</p>
+          <p className="py-16 text-center text-sm text-muted-foreground">{t.sources.none}</p>
         )}
       </div>
     </>
@@ -155,11 +158,12 @@ function groupIndex(data: SourcesData, label: string) {
   return data.groups.findIndex((g) => g.label === label)
 }
 
-type SourceCardProps = { source: Source; needle: string; transitionName?: string }
+type SourceCardProps = { source: Source; needle: string; lang: Lang; transitionName?: string }
 
 // Logo, name (to the source's homepage) and what it is, then its stats. A source with repos lists
 // them behind a toggle; a search that hits one of them opens it.
-function SourceCard({ source, needle, transitionName }: SourceCardProps) {
+function SourceCard({ source, needle, lang, transitionName }: SourceCardProps) {
+  const t = strings[lang].sources
   const [open, setOpen] = useState(false)
   const repoHit = needle !== "" && source.repos.some((r) => r.toLowerCase().includes(needle))
   const { stats } = source
@@ -196,26 +200,26 @@ function SourceCard({ source, needle, transitionName }: SourceCardProps) {
           <div className="min-w-0 flex-1">
             <h3 className="flex items-center gap-2 text-[15px] font-semibold">
               {name}
-              {!source.enabled && <Badge variant="outline">已停用</Badge>}
+              {!source.enabled && <Badge variant="outline">{t.disabled}</Badge>}
             </h3>
             <p className="mt-0.5 text-xs text-muted-foreground">{source.kind}</p>
           </div>
         </div>
         {stats ? (
           <dl className="grid grid-cols-3 gap-2">
-            <Stat label="抓取成功" value={`${stats.ok}/${stats.runs}`} />
-            <Stat label="平均候选" value={stats.candidates.toFixed(1)} />
-            <Stat label="入选条目" value={stats.picked} />
+            <Stat label={t.ok} value={`${stats.ok}/${stats.runs}`} />
+            <Stat label={t.candidates} value={stats.candidates.toFixed(1)} />
+            <Stat label={t.picked} value={stats.picked} />
           </dl>
         ) : (
-          <p className="text-xs text-muted-foreground">{source.enabled ? "还没有抓取记录" : "暂不抓取"}</p>
+          <p className="text-xs text-muted-foreground">{source.enabled ? t.neverFetched : t.notFetched}</p>
         )}
       </div>
       {source.repos.length > 0 && (
         <Collapsible open={open || repoHit} onOpenChange={setOpen}>
           <Separator />
           <CollapsibleTrigger className="group flex w-full items-center justify-between px-5 py-3 text-xs text-muted-foreground transition-colors hover:text-foreground">
-            <span className="tabular-nums">{source.repos.length} 个仓库</span>
+            <span className="tabular-nums">{t.repos(source.repos.length)}</span>
             <ChevronDown className="size-4 transition-transform duration-200 group-data-[state=open]:rotate-180" />
           </CollapsibleTrigger>
           <CollapsibleContent className="overflow-hidden data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down">

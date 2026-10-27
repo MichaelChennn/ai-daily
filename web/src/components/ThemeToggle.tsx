@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 // The class on <html> is set before the first paint by the script in Layout.astro; this only
 // flips it and remembers the choice. Both icons are rendered and CSS shows the right one, so the
 // server-rendered markup never has to know the theme.
-export default function ThemeToggle() {
+export default function ThemeToggle({ label }: { label: string }) {
   function toggle() {
     // Switch without animating every transition-colors element through the change.
     const freeze = document.createElement("style")
@@ -22,7 +22,7 @@ export default function ThemeToggle() {
   }
 
   return (
-    <Button variant="ghost" size="icon-sm" onClick={toggle} aria-label="切换日间 / 夜间模式">
+    <Button variant="ghost" size="icon-sm" onClick={toggle} aria-label={label}>
       <Sun className="dark:hidden" />
       <Moon className="hidden dark:block" />
     </Button>

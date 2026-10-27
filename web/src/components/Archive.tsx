@@ -9,11 +9,12 @@ import { Card } from "@/components/ui/card"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
 import { Separator } from "@/components/ui/separator"
 import { filterTransition } from "@/lib/filter-transition"
+import { type Lang, strings } from "@/lib/i18n"
 import { formatDay, issueHref } from "@/lib/issues"
 
 export type Entry = { date: string; fallback: boolean; description: string; items: number }
 
-type Props = { entries: Entry[] }
+type Props = { entries: Entry[]; lang: Lang }
 
 /** A span of months, both ends included. */
 type Range = [number, number]
@@ -27,7 +28,8 @@ const monthOf = (day: string) => Number(day.slice(5, 7))
 // Every issue, newest first, grouped by month: pick one year and a span of its months. The top
 // mirrors an issue page (a year wheel like the date wheel, then the months like the section
 // filter), and changing the selection animates the month groups the same way (global.css).
-export default function Archive({ entries }: Props) {
+export default function Archive({ entries, lang }: Props) {
+  const t = strings[lang]
   // Years with issues, oldest first.
   const years = [...new Set(entries.map((e) => yearOf(e.date)))].reverse()
   const latestYear = years[years.length - 1]
@@ -66,9 +68,10 @@ export default function Archive({ entries }: Props) {
 
   return (
     <>
-      <h1 className="sr-only">往期归档</h1>
-      <YearWheel years={years} counts={counts} year={year} shown={shown.length} onYear={selectYear} />
+      <h1 className="sr-only">{t.nav.archive}</h1>
+      <YearWheel years={years} counts={counts} year={year} shown={shown.length} onYear={selectYear} lang={lang} />
       <MonthRange
+        lang={lang}
         key={year} // a span left open does not carry over to another year
         available={new Set(inYear.map((e) => monthOf(e.date)))}
         range={range}
@@ -80,10 +83,10 @@ export default function Archive({ entries }: Props) {
             variant="outline"
             size="xs"
             onClick={() => apply(() => setRange(ALL_MONTHS))}
-            aria-label="显示全年"
+            aria-label={t.archive.wholeYear}
             className="rounded-full px-3 font-rounded text-xs font-semibold tabular-nums"
           >
-            {range[0] === range[1] ? `${range[0]}月` : `${range[0]}月–${range[1]}月`}
+            {t.archive.range(range[0], range[1])}
             <X />
           </Button>
         )}
@@ -96,6 +99,7 @@ export default function Archive({ entries }: Props) {
             month={month}
             entries={monthEntries}
             transitionName={animating ? `archive-${month}` : undefined}
+            lang={lang}
           />
         ))}
         {shown.length === 0 && (
@@ -103,7 +107,7 @@ export default function Archive({ entries }: Props) {
             className="py-16 text-center text-sm text-muted-foreground"
             style={{ viewTransitionName: animating ? "archive-empty" : undefined }}
           >
-            这个区间没有日报
+            {t.archive.noIssuesRange}
           </p>
         )}
       </div>
@@ -119,15 +123,17 @@ type YearWheelProps = {
   /** Issues shown for the selected year and months. */
   shown: number
   onYear: (year: number) => void
+  lang: Lang
 }
 
 // The selected year between its neighbours, like the date wheel on an issue page: years with
 // issues can be picked, the others stay as faded labels.
-function YearWheel({ years, counts, year, shown, onYear }: YearWheelProps) {
+function YearWheel({ years, counts, year, shown, onYear, lang }: YearWheelProps) {
+  const t = strings[lang].archive
   const at = years.indexOf(year)
   return (
-    <nav aria-label="切换年份" className="flex items-center justify-between gap-2 pt-10 pb-8">
-      <StepButton target={years[at - 1]} label="上一年" onYear={onYear}>
+    <nav aria-label={t.years} className="flex items-center justify-between gap-2 pt-10 pb-8">
+      <StepButton target={years[at - 1]} label={t.olderYear} onYear={onYear} lang={lang}>
         <ChevronLeft />
       </StepButton>
       <ol className="flex items-center justify-center gap-3 font-rounded sm:gap-6">
@@ -139,7 +145,7 @@ function YearWheel({ years, counts, year, shown, onYear }: YearWheelProps) {
                 aria-current="true"
                 className="flex flex-col items-center rounded-2xl bg-muted px-5 py-2.5 ring-1 ring-foreground/5"
               >
-                <span className="text-xs font-medium text-muted-foreground tabular-nums">共 {shown} 期</span>
+                <span className="text-xs font-medium text-muted-foreground tabular-nums">{t.shown(shown)}</span>
                 <span className="text-base leading-6 font-bold tabular-nums">{year}</span>
               </li>
             )
@@ -149,7 +155,7 @@ function YearWheel({ years, counts, year, shown, onYear }: YearWheelProps) {
           const far = Math.abs(offset) === 2
           const label = (
             <>
-              <span className="text-[11px] tabular-nums">{count ? `${count} 期` : "无"}</span>
+              <span className="text-[11px] tabular-nums">{count ? t.yearCount(count) : t.noYear}</span>
               <span className="text-xs font-semibold tabular-nums">{y}</span>
             </>
           )
@@ -167,7 +173,7 @@ function YearWheel({ years, counts, year, shown, onYear }: YearWheelProps) {
                   {label}
                 </button>
               ) : (
-                <span className="flex flex-col items-center opacity-25" title="这一年没有日报">
+                <span className="flex flex-col items-center opacity-25" title={t.noIssuesYear}>
                   {label}
                 </span>
               )}
@@ -175,23 +181,29 @@ function YearWheel({ years, counts, year, shown, onYear }: YearWheelProps) {
           )
         })}
       </ol>
-      <StepButton target={years[at + 1]} label="下一年" onYear={onYear}>
+      <StepButton target={years[at + 1]} label={t.newerYear} onYear={onYear} lang={lang}>
         <ChevronRight />
       </StepButton>
     </nav>
   )
 }
 
-type StepButtonProps = { target?: number; label: string; onYear: (year: number) => void; children: React.ReactNode }
+type StepButtonProps = {
+  target?: number
+  label: string
+  onYear: (year: number) => void
+  lang: Lang
+  children: React.ReactNode
+}
 
-function StepButton({ target, label, onYear, children }: StepButtonProps) {
+function StepButton({ target, label, onYear, lang, children }: StepButtonProps) {
   return (
     <Button
       size="icon"
       className="rounded-full"
       disabled={target === undefined}
       onClick={() => target !== undefined && onYear(target)}
-      aria-label={target === undefined ? label : `${label}：${target}`}
+      aria-label={target === undefined ? label : strings[lang].archive.step(label, target)}
     >
       {children}
     </Button>
@@ -203,12 +215,14 @@ type MonthRangeProps = {
   available: Set<number>
   range: Range
   onChange: (range: Range) => void
+  lang: Lang
 }
 
 // The months in one row, picked as a range after gr3enk/shadcn-ui-monthpicker. The first click
 // shows that month alone and starts a span; the second click closes it, and hovering in between
 // previews it. Escape or a click elsewhere leaves the single month.
-function MonthRange({ available, range, onChange }: MonthRangeProps) {
+function MonthRange({ available, range, onChange, lang }: MonthRangeProps) {
+  const t = strings[lang].archive
   const [start, setStart] = useState<number | null>(null)
   const [hovered, setHovered] = useState<number | null>(null)
   const row = useRef<HTMLDivElement>(null)
@@ -249,7 +263,7 @@ function MonthRange({ available, range, onChange }: MonthRangeProps) {
     <div
       ref={row}
       role="group"
-      aria-label="选择月份：先点起始月，再点结束月"
+      aria-label={t.months}
       onPointerLeave={() => setHovered(null)}
       className="mx-auto grid max-w-2xl grid-cols-12"
     >
@@ -271,7 +285,7 @@ function MonthRange({ available, range, onChange }: MonthRangeProps) {
               variant={end ? "default" : "ghost"}
               disabled={!available.has(m)}
               aria-pressed={inside && available.has(m)}
-              aria-label={`${m} 月`}
+              aria-label={t.month(m)}
               onClick={() => pick(m)}
               onFocus={() => start !== null && setHovered(m)}
               className={cn(
@@ -279,8 +293,18 @@ function MonthRange({ available, range, onChange }: MonthRangeProps) {
                 inside && !end && "hover:bg-background/60",
               )}
             >
-              {m}
-              <span className="-ml-1 hidden sm:inline">月</span>
+              {/* From sm up the month's name: "10月", "Oct" */}
+              {lang === "en" ? (
+                <>
+                  <span className="sm:hidden">{m}</span>
+                  <span className="hidden sm:inline">{t.range(m, m)}</span>
+                </>
+              ) : (
+                <>
+                  {m}
+                  <span className="-ml-1 hidden sm:inline">月</span>
+                </>
+              )}
             </Button>
           </div>
         )
@@ -291,7 +315,10 @@ function MonthRange({ available, range, onChange }: MonthRangeProps) {
 
 // Headed like a section of an issue: the year small and muted, then the month, the count on the
 // right. Its issues are rows of one card, like the brief list.
-function MonthGroup({ month, entries, transitionName }: { month: string; entries: Entry[]; transitionName?: string }) {
+type MonthGroupProps = { month: string; entries: Entry[]; transitionName?: string; lang: Lang }
+
+function MonthGroup({ month, entries, transitionName, lang }: MonthGroupProps) {
+  const t = strings[lang].archive
   const [y, m] = month.split("-").map(Number)
   return (
     <Collapsible defaultOpen asChild>
@@ -300,10 +327,10 @@ function MonthGroup({ month, entries, transitionName }: { month: string; entries
           <CollapsibleTrigger className="group mb-5 flex w-full items-baseline justify-between gap-4 text-left">
             <span className="flex items-baseline gap-3 text-xl font-semibold tracking-tight">
               <span className="font-rounded text-sm font-medium text-muted-foreground tabular-nums">{y}</span>
-              <span>{m} 月</span>
+              <span>{t.month(m)}</span>
             </span>
             <span className="flex items-center gap-1.5 text-xs text-muted-foreground tabular-nums">
-              {entries.length} 期
+              {t.issues(entries.length)}
               <ChevronDown className="size-4 transition-transform duration-200 group-data-[state=open]:rotate-180" />
             </span>
           </CollapsibleTrigger>
@@ -313,7 +340,7 @@ function MonthGroup({ month, entries, transitionName }: { month: string; entries
             {entries.map((entry, i) => (
               <Fragment key={entry.date}>
                 {i > 0 && <Separator />}
-                <ArchiveRow entry={entry} />
+                <ArchiveRow entry={entry} lang={lang} />
               </Fragment>
             ))}
           </Card>
@@ -324,11 +351,12 @@ function MonthGroup({ month, entries, transitionName }: { month: string; entries
 }
 
 // On a phone the description goes under the date; from sm up it sits between date and count.
-function ArchiveRow({ entry }: { entry: Entry }) {
-  const { monthDay, weekday } = formatDay(entry.date)
+function ArchiveRow({ entry, lang }: { entry: Entry; lang: Lang }) {
+  const t = strings[lang]
+  const { monthDay, weekday } = formatDay(entry.date, lang)
   return (
     <a
-      href={issueHref(entry.date)}
+      href={issueHref(entry.date, lang)}
       className="grid grid-cols-[1fr_auto] items-baseline gap-x-4 gap-y-1 px-4 py-4 transition-colors hover:bg-muted/50 sm:grid-cols-[7.5rem_1fr_auto] sm:px-6"
     >
       <span className="col-start-1 row-start-1 flex items-baseline gap-2 font-rounded whitespace-nowrap">
@@ -339,8 +367,8 @@ function ArchiveRow({ entry }: { entry: Entry }) {
         {entry.description}
       </span>
       <span className="col-start-2 row-start-1 flex items-center gap-2 sm:col-start-3">
-        {entry.fallback && <Badge variant="outline">降级版</Badge>}
-        <span className="text-xs text-muted-foreground tabular-nums">{entry.items} 条</span>
+        {entry.fallback && <Badge variant="outline">{t.archive.fallback}</Badge>}
+        <span className="text-xs text-muted-foreground tabular-nums">{t.count(entry.items)}</span>
       </span>
     </a>
   )
