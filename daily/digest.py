@@ -5,8 +5,8 @@ published. Item-level failures drop the item and are never "fixed" (charter, pri
 
 - every source is a candidate from candidates.json, or a page the editor recorded as opened;
 - every item has at least one first-hand source, not just a HN / Reddit thread;
-- numbers and model names / versions in the Chinese text appear in the cited material
-  (candidate title and summary, or a verbatim evidence quote);
+- numbers and model names / versions in the text (Chinese, or English in digest.en.json) appear
+  in the cited material (candidate title and summary, or a verbatim evidence quote);
 - with --check-links: links are not 404, and evidence quotes really are on the cited page.
 """
 
@@ -37,9 +37,13 @@ ITEMS_TARGET = (8, 12)
 MIN_ITEMS = 3  # fewer surviving items in a full digest means the edit failed: publish the fallback
 SECTION_TARGETS = {"headline": (3, 5), "paper": (2, 3)}
 HIGHLIGHTS_MAX = 3
+# The main issue is Chinese; the English edition (digest.en.json, "lang": "en") has the same
+# schema, and English takes about twice the characters.
+LANGS = ("zh", "en")
 TITLE_MAX = {"full": 60, "fallback": 200}  # fallback keeps the original English titles
-SUMMARY_MAX = {"brief": 120}
-SUMMARY_MAX_DEFAULT = 400
+TITLE_MAX_EN = 120
+SUMMARY_MAX = {"zh": {"brief": 120}, "en": {"brief": 250}}
+SUMMARY_MAX_DEFAULT = {"zh": 400, "en": 800}
 QUOTE_MAX = 300  # evidence, not reprints
 TAGS_MAX = 5
 # Daily budget for the editor (charter open item 2); exceeding it is a warning, not a failure.
@@ -109,6 +113,10 @@ def validate(digest: Any, candidates: dict[str, Any], pages: dict[str, Page] | N
     mode = digest.get("mode")
     if mode not in MODES:
         report.errors.append(f"mode must be one of {MODES}")
+    lang = digest.get("lang", "zh")
+    if lang not in LANGS:
+        report.errors.append(f"lang must be one of {LANGS}")
+        return report
     _check_highlights(digest.get("highlights"), mode, report)
     items = digest.get("items")
     if not isinstance(items, list) or not items:
@@ -118,7 +126,7 @@ def validate(digest: Any, candidates: dict[str, Any], pages: dict[str, Page] | N
     context = _Context(candidates, digest.get("research"), report)
     cited: dict[str, int] = {}
     for index, item in enumerate(items):
-        errors = _check_item(item, mode, context, pages, report)
+        errors = _check_item(item, mode, lang, context, pages, report)
         for cid in _cited_ids(item, context) if not errors else []:
             if cid in cited:
                 errors.append(f"candidate {cid} is already used by item {cited[cid] + 1}")
@@ -204,7 +212,7 @@ def _cited_ids(item: dict[str, Any], context: _Context) -> list[str]:
 
 
 def _check_item(
-    item: Any, mode: Any, context: _Context, pages: dict[str, Page] | None, report: Report
+    item: Any, mode: Any, lang: str, context: _Context, pages: dict[str, Page] | None, report: Report
 ) -> list[str]:
     if not isinstance(item, dict):
         return ["item is not an object"]
@@ -215,12 +223,12 @@ def _check_item(
     title, summary = item.get("title"), item.get("summary")
     if not isinstance(title, str) or not title.strip():
         errors.append("title is empty")
-    elif len(title) > TITLE_MAX.get(mode, TITLE_MAX["full"]):
-        errors.append(f"title longer than {TITLE_MAX.get(mode, TITLE_MAX['full'])} characters")
+    elif len(title) > (title_max := _title_max(mode, lang)):
+        errors.append(f"title longer than {title_max} characters")
     if not isinstance(summary, str) or (mode == "full" and not summary.strip()):
         errors.append("summary is empty")
-    elif len(summary) > SUMMARY_MAX.get(section, SUMMARY_MAX_DEFAULT):
-        errors.append(f"summary longer than {SUMMARY_MAX.get(section, SUMMARY_MAX_DEFAULT)} characters")
+    elif len(summary) > (summary_max := SUMMARY_MAX[lang].get(section, SUMMARY_MAX_DEFAULT[lang])):
+        errors.append(f"summary longer than {summary_max} characters")
     if any(isinstance(t, str) and _URL_IN_TEXT.search(t) for t in (title, summary)):
         errors.append("title / summary must not contain URLs (links go in sources)")
     tags = item.get("tags", [])
@@ -294,6 +302,12 @@ def _check_item(
     if pages is not None:
         errors += _check_online(urls, quotes, material, pages, report, title)
     return errors
+
+
+def _title_max(mode: Any, lang: str) -> int:
+    if mode == "full" and lang == "en":
+        return TITLE_MAX_EN
+    return TITLE_MAX.get(mode, TITLE_MAX["full"])
 
 
 def is_api(digest: dict[str, Any]) -> bool:

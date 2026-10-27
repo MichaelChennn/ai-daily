@@ -3,18 +3,35 @@ import { cn } from "cn"
 
 import { buttonVariants } from "@/components/ui/button"
 import Layout from "@/layouts/Layout.astro"
-import { href, SITE_TITLE } from "@/lib/issues"
+import { langOf, strings } from "@/lib/i18n"
+import { pageHref } from "@/lib/issues"
 
-// Served for any missing path, at any depth: href() gives absolute paths under the base.
+// Served for any missing path, at any depth: pageHref() gives absolute paths under the base.
+// Also the English site's (en/404/, below).
+const lang = langOf(Astro.currentLocale)
+const t = strings[lang]
+// GitHub Pages serves only this one 404 page: a missing page of the English site goes on to the
+// English one before anything is shown.
+const en404 = pageHref("404/", "en")
 ---
 
-<Layout title={`页面不存在 · ${SITE_TITLE}`} description="页面不存在。" canonical={null}>
+<Layout title={`${t.notFound} · ${t.siteTitle}`} description={`${t.notFound}.`} canonical={null}>
+  {
+    lang === "zh" && (
+      <script is:inline define:vars={{ en: pageHref("", "en"), en404 }}>
+        if (location.pathname.startsWith(en)) location.replace(en404)
+      </script>
+    )
+  }
   <div class="flex flex-col items-center gap-6 py-24 text-center">
-    <h1 class="text-xl font-semibold tracking-tight">页面不存在</h1>
+    <h1 class="text-xl font-semibold tracking-tight">{t.notFound}</h1>
     <div class="flex items-center gap-2">
-      <a href={href("")} class={cn(buttonVariants({ size: "sm" }), "rounded-full px-4")}>今日日报</a>
-      <a href={href("archive/")} class={cn(buttonVariants({ variant: "outline", size: "sm" }), "rounded-full px-4")}>
-        往期归档
+      <a href={pageHref("", lang)} class={cn(buttonVariants({ size: "sm" }), "rounded-full px-4")}>{t.nav.today}</a>
+      <a
+        href={pageHref("archive/", lang)}
+        class={cn(buttonVariants({ variant: "outline", size: "sm" }), "rounded-full px-4")}
+      >
+        {t.nav.archive}
       </a>
     </div>
   </div>

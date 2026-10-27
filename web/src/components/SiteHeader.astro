@@ -1,9 +1,12 @@
 ---
 import { cn } from "cn"
+import { FlaskConical } from "lucide-react"
 
 import { buttonVariants } from "@/components/ui/button"
+import LanguageMenu from "@/components/LanguageMenu"
 import ThemeToggle from "@/components/ThemeToggle"
-import { href, REPO_URL, SITE_TITLE } from "@/lib/issues"
+import { langOf, strings } from "@/lib/i18n"
+import { pageHref, pagePath, REPO_URL } from "@/lib/issues"
 
 export type NavPage = "today" | "archive" | "sources" | "beta"
 
@@ -19,10 +22,18 @@ interface Props {
 // The pill and each label have their own view-transition-name, so going to another page the pill
 // glides from one link to the other (z-order in global.css) while the labels stay put.
 const { current, beta } = Astro.props
+// This page in the other language: the English site mirrors the Chinese one under en/, and has
+// no betas, so a beta page's English counterpart is its main issue.
+const lang = langOf(Astro.currentLocale)
+const home = pageHref("", lang)
+const page = pagePath(Astro.url.pathname, lang)
+const zhHref = pageHref(page)
+const enHref = pageHref(page.replace(/beta\/.*$/, ""), "en")
+const t = strings[lang]
 const nav: { page: NavPage; label: string; href: string; wide?: boolean }[] = [
-  { page: "today", label: "今日日报", href: href(""), wide: true },
-  { page: "archive", label: "往期归档", href: href("archive/") },
-  { page: "sources", label: "信息源", href: href("sources/") },
+  { page: "today", label: t.nav.today, href: home, wide: true },
+  { page: "archive", label: t.nav.archive, href: pageHref("archive/", lang) },
+  { page: "sources", label: t.nav.sources, href: pageHref("sources/", lang) },
 ]
 ---
 
@@ -30,7 +41,7 @@ const nav: { page: NavPage; label: string; href: string; wide?: boolean }[] = [
   data-site-header
   class="sticky top-0 z-40 [view-transition-name:site-header] border-b border-transparent transition-[border-color] duration-200 data-scrolled:border-border bg-background/90 backdrop-blur supports-backdrop-filter:bg-background/75">
   <div class="mx-auto flex h-14 max-w-5xl items-center justify-between gap-4 px-4 sm:px-6">
-    <a href={href("")} class="text-[15px] font-semibold tracking-tight whitespace-nowrap">{SITE_TITLE}</a>
+    <a href={home} class="text-[15px] font-semibold tracking-tight whitespace-nowrap">{t.siteTitle}</a>
     <div class="flex items-center gap-1">
       <nav class="flex items-center gap-0.5">
         {
@@ -45,17 +56,18 @@ const nav: { page: NavPage; label: string; href: string; wide?: boolean }[] = [
               )}
             >
               {link.page === current && (
-                <span class="absolute inset-0 -z-10 [view-transition-name:nav-pill] rounded-full bg-muted" />
+                <span class="absolute inset-0 -z-10 [view-transition-name:nav-pill] rounded-full bg-foreground/8 dark:bg-muted" />
               )}
               <span style={{ viewTransitionName: `nav-${link.page}` }}>{link.label}</span>
             </a>
           ))
         }
       </nav>
-      <ThemeToggle client:load />
+      <LanguageMenu client:load lang={lang} label={t.language} zh={zhHref} en={enHref} />
+      <ThemeToggle client:load label={t.theme} />
       <a
         href={REPO_URL}
-        aria-label="GitHub 上的源代码"
+        aria-label={t.github}
         class={cn(buttonVariants({ variant: "ghost", size: "icon-sm" }), "hidden sm:inline-flex")}
       >
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -64,21 +76,27 @@ const nav: { page: NavPage; label: string; href: string; wide?: boolean }[] = [
           ></path>
         </svg>
       </a>
+      {/* The Beta icon has a slot of its own at the far right, kept empty on issues without
+          betas, so the icons beside it stay put from page to page. */}
       {
-        beta && (
+        beta ? (
           <a
             href={beta}
+            aria-label={current === "beta" ? t.backToMain : t.beta}
+            title={current === "beta" ? t.backToMain : t.beta}
             aria-current={current === "beta" ? "page" : undefined}
             class={cn(
-              buttonVariants({ variant: "ghost", size: "sm" }),
-              "relative isolate rounded-full px-3 font-normal text-muted-foreground hover:bg-transparent hover:text-foreground aria-[current=page]:text-foreground",
+              buttonVariants({ variant: "ghost", size: "icon-sm" }),
+              "relative isolate rounded-full hover:bg-transparent",
             )}
           >
             {current === "beta" && (
-              <span class="absolute inset-0 -z-10 [view-transition-name:nav-pill] rounded-full bg-muted" />
+              <span class="absolute inset-0 -z-10 [view-transition-name:nav-pill] rounded-full bg-foreground/8 dark:bg-muted" />
             )}
-            <span class="[view-transition-name:nav-beta]">Beta</span>
+            <FlaskConical className="[view-transition-name:nav-beta]" />
           </a>
+        ) : (
+          <span aria-hidden="true" class="size-8 shrink-0" />
         )
       }
     </div>

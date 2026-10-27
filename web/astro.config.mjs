@@ -14,6 +14,12 @@ export default defineConfig({
   site: siteUrl.origin,
   base: siteUrl.pathname,
   trailingSlash: "always",
+  // The Chinese site at the root, the English one under en/ with the same pages.
+  i18n: {
+    locales: ["zh", "en"],
+    defaultLocale: "zh",
+    routing: { prefixDefaultLocale: false },
+  },
   integrations: [react()],
 
   vite: {

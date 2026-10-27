@@ -1,13 +1,16 @@
 ---
 import { Rss } from "lucide-react"
-import { href, SITE_TITLE } from "@/lib/issues"
+import { langOf, strings } from "@/lib/i18n"
+import { href } from "@/lib/issues"
 
 interface Props {
-  /** On an issue page, who edited it: "由 Claude 编辑". */
+  /** On an issue page, who edited it: "本期由 Claude 编辑". */
   editor?: string
 }
 
 const { editor } = Astro.props
+const lang = langOf(Astro.currentLocale)
+const t = strings[lang]
 ---
 
 <footer class="mt-20 border-t">
@@ -15,17 +18,17 @@ const { editor } = Astro.props
     class="mx-auto flex max-w-5xl flex-col gap-3 px-4 py-8 text-sm sm:flex-row sm:items-center sm:justify-between sm:px-6"
   >
     <div class="flex flex-col gap-1">
-      <span class="font-semibold tracking-tight">{SITE_TITLE}</span>
+      <span class="font-semibold tracking-tight">{t.siteTitle}</span>
       <span class="text-xs text-muted-foreground">
-        {editor && <>本期{editor} · </>}每天柏林时间 06:00 更新
+        {editor && <>{editor} · </>}{t.schedule}
       </span>
     </div>
     <a
-      href={href("feed.xml")}
+      href={href(t.feed)}
       class="inline-flex items-center gap-1.5 text-muted-foreground transition-colors hover:text-foreground"
     >
       <Rss className="size-4" aria-hidden="true" />
-      RSS 订阅
+      {t.rss}
     </a>
   </div>
 </footer>
