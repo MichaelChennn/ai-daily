@@ -1,0 +1,325 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-27",
+  "mode": "full",
+  "generated_at": "2026-10-27T04:58:15+00:00",
+  "channel": "api",
+  "model": "gemini:gemini-3.5-flash-lite",
+  "highlights": [
+    "Anthropic 提交 Form S-1 招股书，计划在纳斯达克全球精选市场上市，股票代码拟定为 \"ANT\"。",
+    "腾讯混元发布 Hy-SimulMT-30B-A3B，支持中英双向实时同传与声音克隆，在 RealSI 长音频评测中 StreamLAAL 约 3 秒。",
+    "NVIDIA 开源 SkillSpector，用于在安装前检测 AI 智能体技能中的漏洞与恶意模式。"
+  ],
+  "items": [
+    {
+      "section": "headline",
+      "title": "Anthropic 提交 Form S-1 招股书，计划在纳斯达克上市",
+      "summary": "Anthropic 已向美国证监会（SEC）提交 Form S-1 注册声明，计划在纳斯达克全球精选市场进行首次公开募股，股票代码拟定为 \"ANT\"。",
+      "tags": [
+        "产品",
+        "行业"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_648c2826ed",
+          "url": "https://www.anthropic.com/news/s1-sec"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://www.anthropic.com/news/s1-sec",
+          "quote": "Anthropic files S-1 with the SEC for proposed initial public offering Published Oct 26, 2026 Category Announcements Today, Anthropic, PBC filed a registration statement on Form S-1 with the U.S."
+        },
+        {
+          "url": "https://www.anthropic.com/news/s1-sec",
+          "quote": "Securities and Exchange Commission relating to its proposed initial public offering of its Class A common stock."
+        },
+        {
+          "url": "https://www.anthropic.com/news/s1-sec",
+          "quote": "Anthropic intends to list its Class A common stock on the Nasdaq Global Select Market under the symbol “ANT.” The number of shares of Class A common stock to be offered and the price range for the proposed offering have not yet been determined."
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "腾讯混元开源 Hy-SimulMT-30B-A3B，支持中英双向实时同传与声音克隆",
+      "summary": "Tencent Hunyuan 推出的 Hy-SimulMT-30B-A3B 是一款实时同传模型，支持中英双向语音到语音翻译与实时声音克隆。在 RealSI 长音频评测中，其 StreamLAAL 约为 3 秒，在同类对比系统中表现领先。",
+      "tags": [
+        "模型",
+        "开源",
+        "语音"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_a2cacdebc4",
+          "url": "https://huggingface.co/tencent/Hy-SimulMT-30B-A3B"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/tencent/Hy-SimulMT-30B-A3B",
+          "quote": "Hy-SimulMT is a real-time simultaneous translation model developed by Tencent Hunyuan, supporting bidirectional speech-to-speech translation between Chinese and English ."
+        },
+        {
+          "url": "https://huggingface.co/tencent/Hy-SimulMT-30B-A3B",
+          "quote": "It continuously receives incoming audio and translates as the speaker talks, producing both translated text and speech."
+        },
+        {
+          "url": "https://huggingface.co/tencent/Hy-SimulMT-30B-A3B",
+          "quote": "With real-time voice cloning , it preserves the speaker's vocal characteristics while conveying the message accurately."
+        },
+        {
+          "url": "https://huggingface.co/tencent/Hy-SimulMT-30B-A3B",
+          "quote": "In our RealSI long-form audio evaluation , Hy-SimulMT achieved a StreamLAAL of approximately 3 seconds , the lowest among the systems shown in the comparison."
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "NVIDIA 开源 SkillSpector：用于扫描 AI 智能体技能的安全工具",
+      "summary": "NVIDIA 推出的 SkillSpector 是一个针对 AI 智能体技能的安全扫描工具，可在安装前检测 Claude Code、Codex 和 MCP 等技能中的漏洞、提示词注入及供应链风险。",
+      "tags": [
+        "开源",
+        "工具",
+        "Agent",
+        "安全"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_ba121356e9",
+          "url": "https://github.com/NVIDIA/SkillSpector"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/NVIDIA/SkillSpector",
+          "quote": "SkillSpector Public Notifications You must be signed in to change notification settings Fork 2k ( 2k ) Star 22.4k ( 22.4k ) You must be signed in to star a repository About Security scanner for AI agent skills."
+        },
+        {
+          "url": "https://github.com/NVIDIA/SkillSpector",
+          "quote": "Detect vulnerabilities, malicious patterns, security risks, prompt injection, data exfiltration, and supply-chain risks in Claude Code, Codex, and MCP skills before you install them."
+        },
+        {
+          "url": "https://github.com/NVIDIA/SkillSpector",
+          "quote": "71 vulnerability patterns across 17 categories: prompt injection, data exfiltration, privilege escalation, supply chain, excessive agency, output handling, system prompt leakage, memory poisoning, tool misuse, rogue agent, anti-refusal, trigger abuse, dangerous code (AST), taint tracking, YARA signa"
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Hob：开源的本地端 Claude 与 ChatGPT 桌面替代方案",
+      "summary": "Hob 是一个开源且支持离线运行的桌面应用，可在 Mac、Windows 和 Linux 上本地运行开源权重模型，并提供文件读写、沙箱 Python 代码执行及内置网页搜索等功能。",
+      "tags": [
+        "开源",
+        "工具",
+        "模型"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_e0efe84c8c",
+          "url": "https://github.com/FrigadeHQ/hob"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/FrigadeHQ/hob",
+          "quote": "A free, open-source alternative to Claude and ChatGPT that runs open-weight models like Gemma and gpt-oss locally on Mac, Windows and Linux."
+        },
+        {
+          "url": "https://github.com/FrigadeHQ/hob",
+          "quote": "Private, and works offline."
+        },
+        {
+          "url": "https://github.com/FrigadeHQ/hob",
+          "quote": "Fill out PDFs, work through documents, and much more."
+        },
+        {
+          "url": "https://github.com/FrigadeHQ/hob",
+          "quote": "Hob picks the best frontier open-weight model that fits your computer and sets everything up for you."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "RynnUnify：面向具身智能的 16B 统一具身大脑模型",
+      "summary": "来自达摩院等机构的研究团队推出了 RynnUnify，这是一个 16B 的统一具身模型，通过交错的视频-语言推理将具身理解、长远视觉规划和机器人控制结合在一起。",
+      "tags": [
+        "模型",
+        "多模态",
+        "论文"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_0ede02c966",
+          "url": "https://huggingface.co/papers/2610.32965"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2610.32965",
+          "quote": "hao , Siteng Huang , Leigang Qu , Sicong Leng , Dongchi Huang , Mingxiu Chen , Shijian Lu , Yue Wang , Xiaodan Liang , Zhenyu Zeng , Deli Zhao , Chengju Liu , Jianfei Yang + 1 authors Abstract RynnUnify is a 16B unified embodied model that integrates visual planning, physical reasoning, and robot co"
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.32965",
+          "quote": "Generated by thinkingmachines/Inkling-Small We introduce RynnUnify, a 16B unified embodied model that combines strong embodied understanding with long-horizon visual planning through interleaved video--language reasoning."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.32965",
+          "quote": "We also develop a world-action extension of the full RynnUnify model, translating its understanding and prediction capabilities into robot control ."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "RSIHub：用于智能体进化方法的开源可组合框架",
+      "summary": "字节跳动等机构的研究人员推出了 RSIHub，这是一个用于构建、比较和扩展智能体进化方法的开源框架。该框架通过共享基础设施和可复用算子，支持在固定模型和评测配置下对不同进化策略进行评估。",
+      "tags": [
+        "开源",
+        "Agent",
+        "论文"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_fecdc70526",
+          "url": "https://huggingface.co/papers/2610.32253"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2610.32253",
+          "quote": "Wang , Kai Wu , Mengnan Qi , Kai Cai , Xiaodong Gu , Zilong Zheng Abstract RSIHub is an open-source framework that standardizes agent-evolution research by providing shared infrastructure for building, comparing, and extending methods with reusable components and consistent evaluation."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.32253",
+          "quote": "We present RSIHub , an open-source framework for building, comparing, and extending these methods on shared infrastructure."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.32253",
+          "quote": "Recipes compose reusable operators and declare mutable resources ; RSIHub supplies execution, evaluation, recovery, and lineage ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.32253",
+          "quote": "We evaluate them with MiniSWE and Codex on Terminal Bench 2 and τ^3 Banking under fixed model and evaluator configurations."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "TWIG：将神经网络权重统一表示为共享离散决策路径的新方法",
+      "summary": "ITMO 大学生研究团队提出了 TWIG 权重表示法，将神经网络的每个权重视为离散决策路径的终点，从而统一了剪枝、量化和低秩分解等多种模型压缩方法，并在大语言模型上实现了更高效的推理与存储。",
+      "tags": [
+        "模型",
+        "开源",
+        "论文"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_0a0e2ef6f1",
+          "url": "https://huggingface.co/papers/2610.31931"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2610.31931",
+          "quote": "Papers arxiv:2610.31931 Copy markdown Every Weight Is a Path of Shared Discrete Decisions Published on Oct 22 · Submitted by Ammar Ali on Oct 26 · ITMO University Upvote 20 +12 Authors: Ammar Ali , Stamatis Lefkimmiatis Abstract TWIG represents neural network weights as shared discrete decision path"
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.31931",
+          "quote": "Generated by thinkingmachines/Inkling-Small We introduce TWIG ( Tree-structured Weights with Inherited Gates ), a representation in which every weight of a neural network is the end of a path of small discrete decisions : a sign, a shift by a power of two, a zero gate , an index into a shared table."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.31931",
+          "quote": "Pruning , quantization , low-rank factorization , codebooks and weight sharing become edits of one object, so a single optimizer can choose among all of them for a whole network."
+        }
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "Hugging Face transformers v5.21.0 发布，新增 MiniCPM-OCR 等多个模型支持",
+      "summary": "Hugging Face transformers 发布 v5.21.0 版本，新增了 MiniCPM-OCR、Flint、UltraVBert 等模型支持，并改进了缓存处理与张量并行配置。",
+      "tags": [
+        "开源",
+        "工具",
+        "模型"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_a4fb15773c",
+          "url": "https://github.com/huggingface/transformers/releases/tag/v5.21"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/huggingface/transformers/releases/tag/v5.21",
+          "quote": "Release: v5.21.0"
+        },
+        {
+          "url": "https://github.com/huggingface/transformers/releases/tag/v5.21",
+          "quote": "MiniCPM-OCR is a document-understanding model from OpenBMB's MiniCPM-V family."
+        },
+        {
+          "url": "https://github.com/huggingface/transformers/releases/tag/v5.21",
+          "quote": "Flint is Recursive's mixture-of-experts language model."
+        },
+        {
+          "url": "https://github.com/huggingface/transformers/releases/tag/v5.21",
+          "quote": "UltraVBert extends ModernVBert by pairing the UltraBERT text encoder with a SigLIP vision encoder for visual document understanding and retrieval."
+        }
+      ]
+    }
+  ],
+  "research": [
+    {
+      "via": "webfetch",
+      "url": "https://www.anthropic.com/news/s1-sec"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://openai.com/index/introducing-gpt-6-1-terra/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/huggingface/transformers/releases/tag/v5.21"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/FrigadeHQ/hob"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/NVIDIA/SkillSpector"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.32253"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.32965"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.31668"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.31931"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://www.marktechpost.com/2026/10/25/stanford-berkeley-tokengate-learned-token-pruning-llm-prefill/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/tencent/Hy-SimulMT-30B-A3B"
+    }
+  ],
+  "validation": {
+    "validated_at": "2026-10-27T04:58:15+00:00",
+    "checked_links": true,
+    "dropped": [],
+    "warnings": [
+      "1 headline items (target 3-5)"
+    ]
+  }
+}
