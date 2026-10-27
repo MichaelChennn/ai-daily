@@ -4,7 +4,7 @@ import xml.etree.ElementTree as ET
 
 import pytest
 
-from daily import cli, export, fallback, publish, site
+from daily import cli, digest, export, fallback, publish, site
 from tests.conftest import source
 from tests.test_digest import CANDIDATES, DATE, _digest
 
@@ -163,6 +163,48 @@ def test_export_beta_issues(tmp_path, data_dir):
     assert "写的" not in (public / "feed.xml").read_text()  # the feed only carries main issues
 
 
+def test_export_english_issues(tmp_path, data_dir):
+    en = _digest(lang="en")
+    en["items"][0]["title"] = "OpenAI releases GPT-6"
+    en["highlights"] = ["OpenAI releases GPT-6 with a 1M-token context."]
+    (data_dir / DATE / "digest.en.json").write_text(json.dumps(en))
+    (data_dir / DATE / "digest.api.gemini.json").write_text(
+        json.dumps(_digest(channel="api", model="gemini:x"))
+    )
+    out = tmp_path / "web-data"
+    export.export(out, tmp_path / "public", data_dir, SOURCES)
+    assert sorted(p.name for p in (out / "en" / "issues").iterdir()) == [
+        f"{OLD}.json",
+        f"{DATE}.json",
+        f"{NEXT}.json",
+    ]
+
+    issue = json.loads((out / "en" / "issues" / f"{DATE}.json").read_text())
+    assert issue["editor"] == "Claude" and issue["notice"] is None and issue["betas"] == []
+    assert issue["description"] == "OpenAI releases GPT-6 with a 1M-token context."
+    headline = issue["sections"][0]
+    assert headline["label"] == "Headlines"
+    assert headline["items"][0]["title"] == "OpenAI releases GPT-6"
+    assert headline["items"][0]["published"]["label"] == "Oct 19 14:00"
+    assert (
+        export._item(
+            {"title": "t", "sources": [{"url": "https://news.ycombinator.com/item?id=1"}]}, "brief", {}, "en"
+        )["sources"][0]["label"]
+        == "HN"
+    )
+
+    # Not written yet: the main issue's stories under their original titles, no summaries.
+    unwritten = json.loads((out / "en" / "issues" / f"{OLD}.json").read_text())
+    assert unwritten["editor"] is None and unwritten["notice"] == export.UNWRITTEN_NOTICE_EN
+    items = [item for s in unwritten["sections"] for item in s["items"]]
+    by_id = {c["id"]: c for c in CANDIDATES["candidates"]}
+    assert items[0]["title"] == by_id[_digest()["items"][0]["sources"][0]["candidate_id"]]["title"]
+    assert all(item["compact"] and not item["summary"] for item in items)
+
+    fallback_issue = json.loads((out / "en" / "issues" / f"{NEXT}.json").read_text())
+    assert fallback_issue["fallback"] and fallback_issue["notice"] == site.FALLBACK_NOTICE_EN
+
+
 def test_export_sources(tmp_path, data_dir):
     sources = [*SOURCES, source("github_releases", kind="release", id_="gh", repos=["vllm-project/vllm"])]
     export.export(tmp_path, tmp_path / "public", data_dir, sources)
@@ -181,6 +223,33 @@ def test_export_sources(tmp_path, data_dir):
     gh = groups["开源"][0]
     assert gh["repos"] == ["vllm-project/vllm"] and gh["stats"] is None  # never fetched
     assert gh["homepage"] is None and "domain=github.com" in gh["icon"]
+
+    en = json.loads((tmp_path / "en" / "sources.json").read_text())
+    assert [g["label"] for g in en["groups"]] == ["Official blogs", "Papers", "Open source", "Community"]
+    assert en["groups"][0]["sources"][0]["kind"] == "Official blog · RSS"
+    assert en["groups"][0]["sources"][0]["stats"] == openai["stats"]
+
+
+def test_export_writes_the_english_feed(tmp_path, data_dir):
+    en = _en(generated_at="2026-10-19T22:00:00+00:00")
+    en["highlights"] = ["OpenAI releases GPT-6 with a 1M-token context."]
+    (data_dir / DATE / "digest.en.json").write_text(json.dumps(en))
+    _write_issue(data_dir, "2026-10-10", {**_digest(), "date": "2026-10-10"})  # no English edition yet
+    public = tmp_path / "public"
+    export.export(tmp_path / "data", public, data_dir, SOURCES, "https://example.github.io/ai-daily")
+    channel = ET.parse(public / "feed.en.xml").getroot().find("channel")
+    assert channel.findtext("language") == "en" and channel.findtext("title") == "AI Daily"
+    items = channel.findall("item")
+    assert [i.findtext("link") for i in items] == [  # only written editions and fallbacks
+        f"https://example.github.io/ai-daily/en/{NEXT}/",
+        f"https://example.github.io/ai-daily/en/{DATE}/",
+    ]
+    assert items[0].findtext("title").endswith("(fallback)")
+    assert items[1].findtext("description") == "OpenAI releases GPT-6 with a 1M-token context."
+    assert items[1].findtext("pubDate") == "Mon, 19 Oct 2026 22:00:00 +0000"  # the English edition's
+    content = items[1].findtext("{http://purl.org/rss/1.0/modules/content/}encoded")
+    assert "<h3>OpenAI releases GPT-6</h3>" in content and "<h2>Headlines</h2>" in content
+    assert "#" not in content.replace("&#", "")  # no Chinese tags
 
 
 def test_export_publisher_skips_discussions():
@@ -274,6 +343,66 @@ def test_cli_adopt(tmp_path):
     incoming.write_text(json.dumps(fallback.build_fallback(CANDIDATES)))
     assert cli.main(args) == 0
     assert json.loads((data_dir / DATE / "digest.json").read_text())["mode"] == "full"
+
+
+def _en(**overrides):
+    en = _digest(lang="en", **overrides)
+    en["items"][0]["title"] = "OpenAI releases GPT-6"
+    return en
+
+
+def test_decide_en_goes_with_the_main_issue():
+    claude, api = _digest(), _digest(channel="api", model="gemini:x")
+    fb = fallback.build_fallback(CANDIDATES)
+
+    def decide(main, current, incoming):
+        data, reason = publish.decide_en(main, current, copy.deepcopy(incoming), CANDIDATES)
+        return data is not None, reason
+
+    assert decide(claude, None, _en()) == (True, "English edition of the main issue")
+    assert decide(claude, None, _digest()) == (False, "incoming digest is not an English edition")
+    assert decide(None, None, _en()) == (False, "no main issue to go with")
+    assert decide(fb, None, _en()) == (False, "the main issue is a fallback")
+    assert decide(api, None, _en()) == (False, "the main issue comes from the other route")
+    assert decide(api, None, _en(channel="api", model="gemini:x"))[0]
+
+    older = _en(generated_at="2026-10-19T21:40:00+00:00")
+    newer = _en(generated_at="2026-10-19T22:00:00+00:00")
+    assert decide(claude, newer, older) == (False, "the current English edition is newer")
+    assert decide(claude, older, newer)[0]
+    # The API route's English edition, left after a Claude edit replaced its main issue.
+    assert decide(claude, _en(channel="api", model="gemini:x"), older)[0]
+
+
+def test_english_limits():
+    en = _en()
+    en["items"][0]["title"] = "OpenAI releases GPT-6, " + "x" * 80  # too long in Chinese, fine in English
+    assert digest.validate(en, CANDIDATES).ok
+    assert 0 in digest.validate({**en, "lang": "zh"}, CANDIDATES).item_errors
+    assert digest.validate({**en, "lang": "fr"}, CANDIDATES).errors == ["lang must be one of ('zh', 'en')"]
+
+
+def test_cli_adopt_en(tmp_path):
+    data_dir = tmp_path / "data"
+    _write_issue(data_dir, DATE, _digest())
+    incoming = tmp_path / "incoming.json"
+    incoming.write_text(json.dumps(_en()))
+    args = ["adopt", "--date", DATE, "--data-dir", str(data_dir), "--from", str(incoming), "--en"]
+    assert cli.main(args) == 0
+    assert json.loads((data_dir / DATE / "digest.en.json").read_text())["lang"] == "en"
+    assert (
+        json.loads((data_dir / DATE / "digest.json").read_text())["items"][0]["title"] == "OpenAI 发布 GPT-6"
+    )
+
+    assert cli.main(["validate", "--date", DATE, "--data-dir", str(data_dir), "--en"]) == 0
+    (data_dir / DATE / "digest.en.json").write_text(json.dumps(_digest()))
+    assert cli.main(["validate", "--date", DATE, "--data-dir", str(data_dir), "--en"]) == 1
+
+
+def test_english_edition_of_the_other_route_is_not_shown(data_dir):
+    (data_dir / DATE / "digest.en.json").write_text(json.dumps(_en(channel="api", model="gemini:x")))
+    issue = next(i for i in site.load_issues(data_dir) if i.slug == DATE)
+    assert issue.en is None
 
 
 def test_cli_export(tmp_path, data_dir, monkeypatch):

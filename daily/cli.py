@@ -39,6 +39,7 @@ def main(argv: list[str] | None = None) -> int:
     _issue_args(check)
     check.add_argument("--drop-invalid", action="store_true", help="删掉不合格条目并写回 digest.json")
     check.add_argument("--check-links", action="store_true", help="联网检查链接和 evidence 引文")
+    check.add_argument("--en", action="store_true", help="校验英文版 digest.en.json")
 
     degrade = commands.add_parser("degrade", help="digest.json 缺失或不合格时，写入“标题 + 链接”降级版")
     _issue_args(degrade)
@@ -50,6 +51,7 @@ def main(argv: list[str] | None = None) -> int:
     adopt = commands.add_parser("adopt", help="按规则并入编辑分支推来的 digest.json（ingest 用）")
     _issue_args(adopt)
     adopt.add_argument("--from", dest="source", type=Path, required=True, help="推来的 digest.json")
+    adopt.add_argument("--en", action="store_true", help="推来的是英文版，并入 digest.en.json")
 
     api = commands.add_parser("edit", help="API 通道：用云端模型编辑，写入 digest.api.<slug>.json")
     _issue_args(api)
@@ -170,7 +172,11 @@ def _list(args: argparse.Namespace) -> int:
 def _validate(args: argparse.Namespace) -> int:
     issue_dir = _issue_dir(args)
     candidates = _read(issue_dir / "candidates.json")
-    data = _read(issue_dir / "digest.json")
+    path = issue_dir / ("digest.en.json" if args.en else "digest.json")
+    data = _read(path)
+    if args.en and data.get("lang") != "en":
+        print('ERROR digest.en.json needs "lang": "en"', file=sys.stderr)
+        return 1
     report = digest.validate(data, candidates)  # also fills in candidate urls the editor left out
     if args.check_links and not report.errors:
         client = pipeline.make_client()
@@ -191,7 +197,7 @@ def _validate(args: argparse.Namespace) -> int:
     if report.errors:
         return 1
     if args.drop_invalid:
-        _write(issue_dir / "digest.json", digest.apply_report(data, report, args.check_links))
+        _write(path, digest.apply_report(data, report, args.check_links))
         kept = len(data["items"]) - len(report.item_errors)
         print(f"ok: {kept} items kept, {len(report.item_errors)} dropped", file=sys.stderr)
         return 0
@@ -238,7 +244,7 @@ def _render(args: argparse.Namespace) -> int:
 def _adopt(args: argparse.Namespace) -> int:
     issue_dir = _issue_dir(args)
     candidates = _read(issue_dir / "candidates.json")
-    path = issue_dir / "digest.json"
+    path = issue_dir / ("digest.en.json" if args.en else "digest.json")
     try:
         incoming = _read(args.source)
     except json.JSONDecodeError as exc:
@@ -247,11 +253,17 @@ def _adopt(args: argparse.Namespace) -> int:
         current = _read(path) if path.exists() else None
     except json.JSONDecodeError:
         current = None
-    data, reason = publish.decide(current, incoming, candidates)
+    if args.en:
+        main_path = issue_dir / "digest.json"
+        main = _read(main_path) if main_path.exists() else None
+        data, reason = publish.decide_en(main, current, incoming, candidates)
+    else:
+        data, reason = publish.decide(current, incoming, candidates)
     print(f"{issue_dir.name}: {'adopted' if data else 'kept'} ({reason})", file=sys.stderr)
     if data is not None:
         _write(path, data)
-        (issue_dir / "digest.md").write_text(render.to_markdown(data, candidates), encoding="utf-8")
+        if not args.en:
+            (issue_dir / "digest.md").write_text(render.to_markdown(data, candidates), encoding="utf-8")
         print(path)
     return 0
 

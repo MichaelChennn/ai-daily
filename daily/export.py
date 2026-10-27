@@ -16,7 +16,12 @@ the main issue), out/beta/YYYY-MM-DD/<slug>.json:
                publisher {name, icon, host}, published {iso, label} or null,
                sources[] {label, url, discussion}
 
-And out/sources.json, the whitelist for the sources page, in sources.yaml order:
+The English site gets one file per issue too, out/en/issues/YYYY-MM-DD.json, in the same shape
+(betas always empty). It is the issue's English edition (digest.en.json); without one, the main
+issue's stories under their original titles and links, as compact items with editor null.
+
+And out/sources.json, the whitelist for the sources page, in sources.yaml order (out/en/sources.json
+the same in English):
 
   runs         how many of the latest issues the stats cover
   groups[]     label, sources[]
@@ -24,8 +29,8 @@ And out/sources.json, the whitelist for the sources page, in sources.yaml order:
                enabled, repos[] ("owner/name"),
                stats {ok, runs, candidates (average per run), picked} or null (disabled, never fetched)
 
-And into public/ (web/public, copied as is into the site): feed.xml, the RSS feed with absolute
-links under base_url, and .nojekyll.
+And into public/ (web/public, copied as is into the site): feed.xml and feed.en.xml, the RSS
+feeds with absolute links under base_url, and .nojekyll.
 """
 
 from __future__ import annotations
@@ -42,7 +47,16 @@ from daily.config import SourceConfig
 from daily.dedup import url_key
 from daily.digest import SECTIONS, is_api
 from daily.render import HOST_LABELS, source_labels
-from daily.site import DEFAULT_BASE_URL, FALLBACK_NOTICE, RECENT_DAYS, Issue, feed, load_issues
+from daily.site import (
+    DEFAULT_BASE_URL,
+    FALLBACK_NOTICE,
+    FALLBACK_NOTICE_EN,
+    RECENT_DAYS,
+    SECTIONS_EN,
+    Issue,
+    feed,
+    load_issues,
+)
 from daily.window import TIMEZONE
 
 DISCUSSION_HOSTS = {"news.ycombinator.com", "reddit.com", "old.reddit.com"}
@@ -59,6 +73,11 @@ HF_SECTIONS = {
     "spaces",
     "datasets",
 }
+UNWRITTEN_NOTICE_EN = (
+    "The English edition of this issue has not been written yet. These are the stories picked "
+    "for it, with their original titles and links."
+)
+MONTHS_EN = "Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec".split()
 # Beta slug (digest.api.<slug>.json) -> its label on the page.
 BETA_LABELS = {"deepseek": "DeepSeek", "gemini": "Gemini", "minimax": "MiniMax"}
 # Whose icon a source with neither a homepage nor a page url gets.
@@ -81,6 +100,22 @@ KIND_LABELS = {
     "model": "模型",
     "discussion": "社区讨论",
 }
+SOURCE_GROUPS_EN = {
+    "blog": "Official blogs",
+    "paper": "Papers",
+    "release": "Open source",
+    "repo": "Open source",
+    "model": "Models",
+    "discussion": "Community",
+}
+KIND_LABELS_EN = {
+    "blog": "Official blog",
+    "paper": "Paper",
+    "release": "Release",
+    "repo": "Open-source project",
+    "model": "Model",
+    "discussion": "Discussion",
+}
 TYPE_LABELS = {
     "rss": "RSS",
     "html_listing": "列表页",
@@ -91,6 +126,7 @@ TYPE_LABELS = {
     "hackernews": "Algolia API",
     "reddit": "RSS",
 }
+TYPE_LABELS_EN = {"html_listing": "Listing page", "github_trending": "Trending page"}
 # Where a source's card links to, when sources.yaml has no `homepage` (its `url` is a feed).
 TYPE_HOMEPAGES = {
     "hf_daily_papers": "https://huggingface.co/papers",
@@ -111,23 +147,29 @@ class SourceStats:
 def export(
     out: Path, public: Path, data_dir: Path, sources: list[SourceConfig], base_url: str = DEFAULT_BASE_URL
 ) -> list[Issue]:
-    """Write out/issues/*.json and out/beta/*/*.json for every publishable issue and beta
-    (replacing what an earlier export left), out/sources.json, and public/feed.xml and
-    public/.nojekyll."""
-    folder, beta_folder = out / "issues", out / "beta"
-    folder.mkdir(parents=True, exist_ok=True)
-    for stale in folder.glob("*.json"):
-        stale.unlink()
+    """Write out/issues/*.json, out/en/issues/*.json and out/beta/*/*.json for every publishable
+    issue and beta (replacing what an earlier export left), out/sources.json and
+    out/en/sources.json, and public/feed.xml, public/feed.en.xml and public/.nojekyll."""
+    folder, beta_folder, en_folder = out / "issues", out / "beta", out / "en" / "issues"
+    for each in (folder, en_folder):
+        each.mkdir(parents=True, exist_ok=True)
+        for stale in each.glob("*.json"):
+            stale.unlink()
     shutil.rmtree(beta_folder, ignore_errors=True)
     issues = load_issues(data_dir)
     for issue in issues:
         _write_json(folder / f"{issue.slug}.json", issue_data(issue))
+        _write_json(en_folder / f"{issue.slug}.json", issue_data_en(issue))
         for slug in issue.betas:
             (beta_folder / issue.slug).mkdir(parents=True, exist_ok=True)
             _write_json(beta_folder / issue.slug / f"{slug}.json", issue_data(issue, slug))
-    _write_json(out / "sources.json", sources_data(sources, data_dir, issues))
+    stats = source_stats(sources, data_dir, issues)
+    _write_json(out / "sources.json", sources_data(sources, stats))
+    _write_json(out / "en" / "sources.json", sources_data(sources, stats, "en"))
     public.mkdir(parents=True, exist_ok=True)
-    (public / "feed.xml").write_text(feed(issues, base_url.rstrip("/") + "/"), encoding="utf-8")
+    base_url = base_url.rstrip("/") + "/"
+    (public / "feed.xml").write_text(feed(issues, base_url), encoding="utf-8")
+    (public / "feed.en.xml").write_text(feed(issues, base_url, "en"), encoding="utf-8")
     (public / ".nojekyll").write_text("", encoding="utf-8")
     return issues
 
@@ -136,20 +178,24 @@ def _write_json(path: Path, data: Any) -> None:
     path.write_text(json.dumps(data, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
 
 
-def sources_data(sources: list[SourceConfig], data_dir: Path, issues: list[Issue]) -> dict[str, Any]:
-    stats = source_stats(sources, data_dir, issues)
-    groups: dict[str, list[dict[str, Any]]] = {group: [] for group in dict.fromkeys(SOURCE_GROUPS.values())}
+def sources_data(
+    sources: list[SourceConfig], stats: dict[str, SourceStats], lang: str = "zh"
+) -> dict[str, Any]:
+    en = lang == "en"
+    group_labels, kind_labels = (SOURCE_GROUPS_EN, KIND_LABELS_EN) if en else (SOURCE_GROUPS, KIND_LABELS)
+    type_labels = {**TYPE_LABELS, **TYPE_LABELS_EN} if en else TYPE_LABELS
+    groups: dict[str, list[dict[str, Any]]] = {group: [] for group in dict.fromkeys(group_labels.values())}
     for source in sources:
         s = stats[source.id]
         homepage = source_homepage(source)
         page = homepage or str(source.options.get("url") or "")
         host = (urlsplit(page).hostname or ICON_HOSTS.get(source.type, "")).removeprefix("www.")
-        kind = KIND_LABELS.get(source.kind, source.kind)
-        groups.setdefault(SOURCE_GROUPS.get(source.kind, "其他"), []).append(
+        kind = kind_labels.get(source.kind, source.kind)
+        groups.setdefault(group_labels.get(source.kind, "Other" if en else "其他"), []).append(
             {
                 "id": source.id,
                 "name": source.name,
-                "kind": f"{kind} · {TYPE_LABELS.get(source.type, source.type)}",
+                "kind": f"{kind} · {type_labels.get(source.type, source.type)}",
                 "homepage": homepage,
                 "icon": f"https://www.google.com/s2/favicons?domain={quote(host)}&sz=64" if host else None,
                 "enabled": source.enabled,
@@ -219,19 +265,6 @@ def issue_data(issue: Issue, beta: str | None = None) -> dict[str, Any]:
     """The main issue's page, or with beta, the page of that beta."""
     digest = issue.betas[beta] if beta else issue.digest
     fallback = digest.get("mode") == "fallback"
-    by_id = issue.by_id
-    sections = []
-    for section, heading in SECTIONS.items():
-        items = [item for item in digest["items"] if item["section"] == section]
-        if not items:
-            continue
-        sections.append(
-            {
-                "id": section,
-                "label": heading.split(" ", 1)[-1],  # without the emoji
-                "items": [_item(item, section, by_id) for item in items],
-            }
-        )
     return {
         "date": issue.slug,
         "fallback": fallback,
@@ -240,8 +273,57 @@ def issue_data(issue: Issue, beta: str | None = None) -> dict[str, Any]:
         "editor": None if fallback else editor(digest),
         "betas": [_beta(slug) for slug in issue.betas],
         "beta": _beta(beta) if beta else None,
-        "sections": sections,
+        "sections": _sections(digest["items"], issue.by_id, "zh"),
     }
+
+
+def issue_data_en(issue: Issue) -> dict[str, Any]:
+    """The issue's page on the English site: its English edition, or until there is one, the main
+    issue's stories under their original titles. A fallback issue already has those."""
+    fallback = issue.fallback
+    digest = issue.edition("en")
+    items = digest["items"]
+    if issue.en is None and not fallback:
+        by_id = issue.by_id
+        items = [{**item, "title": original_title(item, by_id), "summary": ""} for item in items]
+    return {
+        "date": issue.slug,
+        "fallback": fallback,
+        "notice": FALLBACK_NOTICE_EN if fallback else None if issue.en else UNWRITTEN_NOTICE_EN,
+        "description": " ".join(digest.get("highlights") or []) if issue.en else "",
+        "editor": editor(digest) if issue.en and not fallback else None,
+        "betas": [],
+        "beta": None,
+        "sections": _sections(items, issue.by_id, "en"),
+    }
+
+
+def original_title(item: dict[str, Any], by_id: dict[str, dict[str, Any]]) -> str:
+    """The title of the item's first-hand page, as its source gave it; its host without one."""
+    primary = next((s for s in item["sources"] if not _is_discussion(s["url"])), item["sources"][0])
+    for s in [primary, *item["sources"]]:
+        if c := by_id.get(s.get("candidate_id") or ""):
+            return c["title"]
+    return source_labels([primary], by_id)[0][1]
+
+
+def _sections(
+    items: list[dict[str, Any]], by_id: dict[str, dict[str, Any]], lang: str
+) -> list[dict[str, Any]]:
+    sections = []
+    for section, heading in SECTIONS.items():
+        members = [item for item in items if item["section"] == section]
+        if not members:
+            continue
+        sections.append(
+            {
+                "id": section,
+                # without the emoji
+                "label": SECTIONS_EN[section] if lang == "en" else heading.split(" ", 1)[-1],
+                "items": [_item(item, section, by_id, lang) for item in members],
+            }
+        )
+    return sections
 
 
 def editor(digest: dict[str, Any]) -> str:
@@ -256,9 +338,16 @@ def _beta(slug: str) -> dict[str, str]:
     return {"slug": slug, "label": BETA_LABELS.get(slug, slug)}
 
 
-def _item(item: dict[str, Any], section: str, by_id: dict[str, dict[str, Any]]) -> dict[str, Any]:
+def _item(
+    item: dict[str, Any], section: str, by_id: dict[str, dict[str, Any]], lang: str = "zh"
+) -> dict[str, Any]:
+    # "HN 讨论" is just "HN" on the English site: the page marks discussions with an icon.
     sources = [
-        {"label": label, "url": s["url"], "discussion": _is_discussion(s["url"])}
+        {
+            "label": label.removesuffix(" 讨论") if lang == "en" else label,
+            "url": s["url"],
+            "discussion": _is_discussion(s["url"]),
+        }
         for s, label in source_labels(item["sources"], by_id)
         if urlsplit(s["url"]).scheme in ("http", "https")
     ]
@@ -269,7 +358,7 @@ def _item(item: dict[str, Any], section: str, by_id: dict[str, dict[str, Any]]) 
         "summary": item.get("summary") or "",
         "compact": section == "brief" or not item.get("summary"),
         "publisher": publisher(primary["url"], candidate),
-        "published": published(candidate),
+        "published": published(candidate, lang),
         "sources": sources,
     }
 
@@ -296,7 +385,7 @@ def publisher(url: str, candidate: dict[str, Any] | None) -> dict[str, str]:
     return {"name": name, "icon": icon, "host": host}
 
 
-def published(candidate: dict[str, Any] | None) -> dict[str, str] | None:
+def published(candidate: dict[str, Any] | None, lang: str = "zh") -> dict[str, str] | None:
     """The candidate's publication time, or None when there is no real one.
 
     A discussion's time is when it was posted, not when the thing it links to was published.
@@ -312,9 +401,13 @@ def published(candidate: dict[str, Any] | None) -> dict[str, str] | None:
         value = value.replace(tzinfo=timezone.utc)
     utc = value.astimezone(timezone.utc)
     if candidate.get("published_precision") == "day" or (utc.hour, utc.minute, utc.second) == (0, 0, 0):
-        return {"iso": utc.date().isoformat(), "label": f"{utc.month}月{utc.day}日"}
+        return {"iso": utc.date().isoformat(), "label": _day_label(utc, lang)}
     local = value.astimezone(TIMEZONE)
-    return {"iso": utc.isoformat(), "label": f"{local.month}月{local.day}日 {local:%H:%M}"}
+    return {"iso": utc.isoformat(), "label": f"{_day_label(local, lang)} {local:%H:%M}"}
+
+
+def _day_label(day: datetime, lang: str) -> str:
+    return f"{MONTHS_EN[day.month - 1]} {day.day}" if lang == "en" else f"{day.month}月{day.day}日"
 
 
 def _is_discussion(url: str) -> bool:

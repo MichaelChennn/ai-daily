@@ -4,8 +4,10 @@
 # branch. For every data/*/digest.json that branch changed, `daily adopt` validates it against
 # main's candidates.json and applies the skill's rules: an edited issue replaces a fallback
 # (the editor finished after 06:30), a fallback never replaces an edited issue, and an edited
-# issue is only replaced by a newer edit. Only digest.json is taken from the branch; digest.md
-# is re-rendered here. Nothing else on the branch reaches main.
+# issue is only replaced by a newer edit. The English edition (digest.en.json) comes after its
+# date's digest.json and is taken only to go with a main issue from the Claude route. Only these
+# two files are taken from the branch; digest.md is re-rendered here. Nothing else on the branch
+# reaches main.
 # Run it by hand with a branch name to pick up a branch whose push did not run this workflow
 # (e.g. one created before this file existed on main).
 name: ingest
@@ -13,7 +15,7 @@ name: ingest
 on:
   push:
     branches: ["claude/**"]
-    paths: ["data/*/digest.json"]
+    paths: ["data/*/digest.json", "data/*/digest.en.json"]
   workflow_dispatch:
     inputs:
       branch:
@@ -51,14 +53,17 @@ jobs:
           git fetch --no-tags origin "refs/heads/$BRANCH"
           sha=$(git rev-parse FETCH_HEAD)
           base=$(git merge-base origin/main "$sha")
-          for path in $(git diff --name-only --diff-filter=AM "$base" "$sha" -- 'data/*/digest.json'); do
+          # The main issues first: an English edition is adopted only to go with one.
+          for path in $(git diff --name-only --diff-filter=AM "$base" "$sha" -- 'data/*/digest.json') \
+                      $(git diff --name-only --diff-filter=AM "$base" "$sha" -- 'data/*/digest.en.json'); do
             date=$(basename "$(dirname "$path")")
             if [ ! -f "data/$date/candidates.json" ]; then
               echo "::warning::$path: main has no data/$date/candidates.json, skipped"
               continue
             fi
             git show "$sha:$path" > "$RUNNER_TEMP/incoming.json"
-            uv run python -m daily adopt --date "$date" --from "$RUNNER_TEMP/incoming.json"
+            en=$([ "$(basename "$path")" = digest.en.json ] && echo --en || true)
+            uv run python -m daily adopt --date "$date" --from "$RUNNER_TEMP/incoming.json" $en
           done
       - name: Commit and rebuild the site
         env:

@@ -1,11 +1,11 @@
 ---
 name: daily-editor
-description: 担任 AI 科技日报的编辑：读取 data/YYYY-MM-DD/candidates.json，打分筛选、打开原文、写中文日报 digest.json，通过 uv run python -m daily validate 后渲染并提交。每天的定时任务调用它；也可以手动运行 /daily-editor [YYYY-MM-DD]。
+description: 担任 AI 科技日报的编辑：读取 data/YYYY-MM-DD/candidates.json，打分筛选、打开原文、写中文日报 digest.json，再依据同一份材料写英文版 digest.en.json，通过 uv run python -m daily validate 后渲染并提交。每天的定时任务调用它；也可以手动运行 /daily-editor [YYYY-MM-DD]。
 ---
 
 # daily-editor：AI 科技日报编辑
 
-你是这份日报唯一的编辑，没有人会在发布前校对。读者是中文 AI 开发者，5 分钟读完。
+你是这份日报唯一的编辑，没有人会在发布前校对。读者是中文 AI 开发者，5 分钟读完；英文版（第 7 步）的读者是英文 AI 开发者。
 **宁缺毋滥**：拿不准的条目直接不写；被校验或自检判为不合格的条目直接删掉，不要改写到“勉强能过”。
 
 ## 0. 准备
@@ -22,6 +22,7 @@ uv run python -c "from daily.window import local_today; print(local_today())"   
 - `data/<期号>/digest.json` 已经存在且 `mode` 是 `full`：不要覆盖，除非被明确要求重做。
   例外是 `"channel": "api"`（API 通道的结果先顶上了主版）：照常编辑，你的版本会替换它。
   `mode` 是 `fallback`（06:30 的兜底已经发布了降级版）：照常编辑，正式版会替换它。
+- `digest.en.json`（英文版）跟着主版走：你重做或替换了主版，就照常写英文版，覆盖原来的文件。
 - `digest.api.*.json` 是 API 通道各模型的版本（网站上的 Beta 版），不要读也不要改。
 
 ## 1. 浏览候选
@@ -124,11 +125,33 @@ uv run python -m daily validate --date <期号> --check-links --drop-invalid
   - 剩下的条目少于 3 条，或者修过之后仍然失败：运行 `uv run python -m daily degrade --date <期号> --force`，发布降级版。
 - `WARN` 行（条数不在目标范围、链接无法检查等）不阻止发布，看一眼即可。
 
-## 7. 渲染与提交
+## 7. 英文版
+
+中文版通过正式校验后，接着写英文版 `data/<期号>/digest.en.json`。中文版最后发布的是降级版时，不写英文版（英文页直接用原文标题）。
+
+- **从校验后的 digest.json 开始**：复制一份，加上 `"lang": "en"`，`generated_at` 改成现在，删掉 `validation` 字段。版块、顺序、`sources`、`evidence`、`research`、`tags`（仍用中文词表）都不动。
+- **只重写 `title`、`summary`、`highlights`**：依据原文和 evidence 直接用英文写，**不要翻译中文版**。两版各自报道同一批原文，中文里的意译、换算不要带过来。
+- 不打开新页面，不加条目，也不改 evidence。某条写不好就整条删掉，同时检查 highlights。
+- 写作规范同第 4 步，英文对应的写法：
+  - **标题**：说清 who did what，最好不超过 70 个字符（硬上限 120），sentence case。不用 groundbreaking、game-changing、revolutionary 之类的词。
+  - **summary**：2–3 句，先说是什么，再说对开发者意味着什么。快讯 1 句，不超过 250 个字符。
+  - 数字、模型名、版本号照原文写法，validate 同样会逐个核对。
+  - 正文里不放链接。
+- 自检同第 5 步。
+- 校验只跑一轮（引文已经在中文版的校验里核对过）：
+
+  ```bash
+  uv run python -m daily validate --date <期号> --en --drop-invalid
+  ```
+
+  - **退出码 0**：通过，`DROP` 行的条目已删掉，不要改写后加回来。
+  - **退出码 1**：如果是 highlights 提到了被删掉的条目，只改 highlights，再跑一次。别的情况，或者再跑仍然失败：删掉 `digest.en.json`，照常提交中文版。英文版失败不影响中文版发布，英文页会只显示原文标题。
+
+## 8. 渲染与提交
 
 ```bash
 uv run python -m daily render --date <期号>      # → data/<期号>/digest.md
-git add data/<期号>/digest.json data/<期号>/digest.md
+git add data/<期号>/digest.json data/<期号>/digest.md data/<期号>/digest.en.json   # 没有英文版就去掉最后一个
 git commit -m "digest: <期号>"
 git push -u origin HEAD                  # 推到当前分支，不要开 PR
 ```
@@ -139,7 +162,7 @@ git push -u origin HEAD                  # 推到当前分支，不要开 PR
 - **本地在 main 上运行**：推到 main 会直接触发 `.github/workflows/pages.yml` 重建网站。
 - push 被拒绝（远端有新提交）：`git pull --rebase` 之后再推一次。
 
-最后用几行话报告：入选几条、被 validate 删掉几条（原因）、用了几次 WebFetch / WebSearch、有没有失败的信源。
+最后用几行话报告：入选几条、被 validate 删掉几条（原因）、英文版写了几条（或者为什么没写）、用了几次 WebFetch / WebSearch、有没有失败的信源。
 
 ## digest.json schema
 
@@ -173,5 +196,7 @@ git push -u origin HEAD                  # 推到当前分支，不要开 PR
   ]
 }
 ```
+
+英文版 `digest.en.json` 用同一个 schema，多一个 `"lang": "en"`，标题和 summary 的长度上限按英文放宽（见第 7 步）。
 
 同一个候选只能被一条使用。`validate --drop-invalid` 会补全省略的 url，并追加 `validation` 字段，不要手写这个字段。
