@@ -31,6 +31,7 @@ uv run python -m daily degrade --date 2026-10-21   # digest.json 缺失或不合
 uv run python -m daily render --date 2026-10-21    # digest.json → digest.md
 uv run python -m daily adopt --date 2026-10-21 --from x.json   # 按规则并入编辑分支推来的 digest.json（ingest 用）
 uv run python -m daily edit --model nvidia:deepseek-ai/deepseek-v4.1-flash   # API 通道：云端模型编辑，写 digest.api.<slug>.json（需要对应的 API key）
+uv run python -m daily edit --en data/2026-10-21/digest.api.deepseek.json   # 它会成为主版时，用同一个模型写英文版 digest.en.<slug>.json（再用 adopt --en 采用）
 uv run python -m daily export                      # 已发布各期 → web/data/（JSON）和 web/public/feed.xml，给前端用，不提交
 
 uv run pytest -q && uv run ruff check . && uv run ruff format --check .
@@ -130,7 +131,7 @@ Qwen（官方列表页是 JS 渲染）、xAI（对非浏览器 UA 返回 403）�
 |---|---|---|
 | 05:07 | Actions `fetch.yml` | 抓取，把 `candidates.json` 提交到 main |
 | 05:30 | Claude 定时任务（每次新开一个 cloud session） | 运行 daily-editor skill，把 `digest.json` 推到本会话的 `claude/` 分支 |
-| 05:30 | Actions `editor-api.yml` | API 通道：`EDITOR_API_MODEL` 里的每个模型各编一份 `digest.api.<slug>.json`（Beta 版）；Claude 还没出结果时，第一份合格的成为主版 |
+| 05:30 | Actions `editor-api.yml` | API 通道：`EDITOR_API_MODEL` 里的每个模型各编一份 `digest.api.<slug>.json`（Beta 版）；Claude 还没出结果时，第一份合格的成为主版，同一个模型再写一份英文版 |
 | 推送后 | Actions `ingest.yml` | 用 main 上的候选重新校验，按规则并入 main，启动 `pages.yml` |
 | 06:30 | Actions `fallback.yml` | 当天没有合格的 digest 就发布降级版，提交并启动 `pages.yml` |
 | 之后 | Actions `pages.yml` | `web/` 构建（含 `daily export`）→ GitHub Pages |
@@ -172,7 +173,7 @@ daily/
   site.py           可发布的各期和 RSS
   export.py         各期、信息源 → JSON，RSS → web/public（daily export）
   publish.py        编辑分支或 API 通道的 digest 能不能成为主版（daily adopt）
-  api_editor.py     API 通道：挑选、写作、修改三次请求，SKILL.md 的编辑规则当 system prompt（daily edit）
+  api_editor.py     API 通道：挑选、写作、修改三次请求，SKILL.md 的编辑规则当 system prompt（daily edit）；成为主版时再用一次请求写英文版（daily edit --en）
   throttle.py       同一主机的请求间隔、429 重试
   window.py         期号时间窗口
   text.py           文本清洗、日期解析

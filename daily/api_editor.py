@@ -54,6 +54,7 @@ PASSAGE_MIN = 15  # shorter pieces are menus and buttons
 CODE_SHARE = 0.08  # pieces with more of {}[]<>"=|\\ than this are inlined JSON and templates, not prose
 SKILL_FILE = Path(__file__).resolve().parent.parent / ".claude/skills/daily-editor/SKILL.md"
 RULES = ("## 2.", "## 4.", "## 5.")  # the skill's editorial sections; this module does the other steps
+EN_RULES = ("## 4.", "## 5.", "## 7.")  # and those for the English edition
 
 ROUTE_NOTES = """
 
@@ -79,6 +80,23 @@ WRITE_FORMAT = """\
 - candidates：这一条依据的候选 id，第一个是主来源。一个候选只能用在一条里。
 - evidence：支撑关键事实的片段编号，只能用这一条候选的原文片段。标题和 summary 里的每个数字、模型名、
   版本号，都要原样出现在这一条候选的标题 / 摘要或所引的片段里，否则整条会被删掉。"""
+
+EN_ROUTE_NOTES = """
+
+## 在 API 通道写英文版（这一节优先于上文）
+
+你通过云端模型 API 运行：没有 shell、工具和网络。中文版已经通过校验，程序给出它的每一条：版块、
+候选的标题和摘要、evidence 原文。你按第 7 步为每一条写英文的 title 和 summary，再写英文 highlights；
+复制 digest.json、校验和提交由程序完成。只回答一个 JSON 对象，不要别的文字。
+"""
+
+EN_FORMAT = """\
+只回答 JSON：
+{"highlights": ["……"], "items": [{"n": 1, "title": "……", "summary": "……"}]}
+
+- n：条目编号。写不好的条目不要放进 items，程序会删掉它。
+- 标题和 summary 里的每个数字、模型名、版本号，都要原样出现在这一条的候选标题 / 摘要或 evidence 里，
+  否则整条会被删掉。"""
 
 FIX_RULES = """\
 不合格的条目只能这样改：删掉材料里没有的数字和名称，换用或补充片段编号，或者整条删掉。
@@ -111,11 +129,11 @@ def slug(model: str) -> str:
     return model.partition(":")[2].rsplit("/", 1)[-1].split("-", 1)[0].lower()
 
 
-def system_prompt() -> str:
+def system_prompt(rules: tuple[str, ...] = RULES, notes: str = ROUTE_NOTES) -> str:
     text = SKILL_FILE.read_text(encoding="utf-8").split("---", 2)[2]  # without the frontmatter
     parts = re.split(r"(?m)^(?=## )", text)
-    rules = [p.strip() for p in parts if not p.startswith("## ") or p.startswith(RULES)]
-    return "\n\n".join(rules) + ROUTE_NOTES
+    kept = [p.strip() for p in parts if not p.startswith("## ") or p.startswith(rules)]
+    return "\n\n".join(kept) + notes
 
 
 def first_hand_url(c: dict[str, Any]) -> str | None:
@@ -242,6 +260,31 @@ class Passage:
     text: str
 
 
+async def _ask(chat: Chat, messages: list[dict[str, Any]]) -> dict[str, Any]:
+    """One request, its answer as JSON; a reply that is not JSON is asked again once."""
+    for attempt in (1, 2):
+        content = (await chat.send(messages)).get("content") or ""
+        messages.append({"role": "assistant", "content": content})
+        try:
+            return json_object(content)
+        except ValueError as exc:
+            if attempt == 2:
+                raise EditorError(f"no JSON in the reply: {exc}") from exc
+            messages.append({"role": "user", "content": f"回答不是一个 JSON 对象（{exc}）。只回答 JSON。"})
+    raise AssertionError("unreachable")
+
+
+def _titles_as_highlights(data: dict[str, Any], report: digest.Report) -> bool:
+    """Titles are published text, so they always pass as highlights: use the first ones when the
+    highlights are what failed. False when something else failed too."""
+    if not report.errors or not all(e.startswith("highlight") for e in report.errors):
+        return False
+    log.warning("highlights rejected (%s): using the first titles", "; ".join(report.errors))
+    surviving = [item for i, item in enumerate(data["items"]) if i not in report.item_errors]
+    data["highlights"] = [item["title"] for item in surviving[: digest.HIGHLIGHTS_MAX]]
+    return True
+
+
 class Editor:
     """One edit in at most three requests: pick, write, fix. Each request is a full turn on a free
     tier (Gemini's flash allows 20 a day), so the reading is done here and not by the model."""
@@ -272,30 +315,14 @@ class Editor:
             data = self._draft(await self._ask(messages))
             report = await self._validate(data)
             log.info("fix: %d items, %d rejected", len(data["items"]), len(report.item_errors))
-        if report.errors and all(e.startswith("highlight") for e in report.errors):
-            # Titles are published text, so they always pass as highlights.
-            log.warning("highlights rejected (%s): using the first titles", "; ".join(report.errors))
-            surviving = [item for i, item in enumerate(data["items"]) if i not in report.item_errors]
-            data["highlights"] = [item["title"] for item in surviving[: digest.HIGHLIGHTS_MAX]]
+        if _titles_as_highlights(data, report):
             report = await self._validate(data)
         if report.errors:
             raise EditorError("; ".join(report.errors))
         return digest.apply_report(data, report, checked_links=True)
 
     async def _ask(self, messages: list[dict[str, Any]]) -> dict[str, Any]:
-        """One request, its answer as JSON; a reply that is not JSON is asked again once."""
-        for attempt in (1, 2):
-            content = (await self.chat.send(messages)).get("content") or ""
-            messages.append({"role": "assistant", "content": content})
-            try:
-                return json_object(content)
-            except ValueError as exc:
-                if attempt == 2:
-                    raise EditorError(f"no JSON in the reply: {exc}") from exc
-                messages.append(
-                    {"role": "user", "content": f"回答不是一个 JSON 对象（{exc}）。只回答 JSON。"}
-                )
-        raise AssertionError("unreachable")
+        return await _ask(self.chat, messages)
 
     async def _pick(self) -> list[list[str]]:
         usable = [c for c in self.candidates["candidates"] if first_hand_url(c)]
@@ -430,3 +457,67 @@ class Editor:
 async def edit(candidates: dict[str, Any], model: str, client: httpx.AsyncClient) -> dict[str, Any]:
     """Edit the issue with the model; EditorError if no digest passes validate."""
     return await Editor(candidates, model, client).run()
+
+
+async def write_en(
+    main: dict[str, Any], candidates: dict[str, Any], model: str, client: httpx.AsyncClient
+) -> dict[str, Any]:
+    """The English edition of the validated API digest `main`, in one request: the model writes the
+    titles, summaries and highlights from the same material, the rest is copied (SKILL.md step 7).
+    EditorError if it does not pass validate --en."""
+    by_id = {c["id"]: c for c in candidates["candidates"]}
+    blocks = []
+    for number, item in enumerate(main["items"], 1):
+        lines = [f"## 第 {number} 条（{item['section']}）"]
+        shown: set[str] = set()
+        for source in item["sources"]:
+            c = by_id.get(source.get("candidate_id") or "")
+            if c is None:
+                lines.append(f"{source.get('title') or ''} {source['url']}".strip())
+            elif c["id"] not in shown:
+                shown.add(c["id"])
+                lines += [
+                    f"{c['id']} {c['kind']} [{c.get('source_name') or c['source']}] {c['title']}",
+                    "摘要：" + " ".join((c["summary"] or "").split())[:1500],
+                ]
+        lines += ["evidence："] + [f"- {e['quote']}" for e in item.get("evidence") or []]
+        blocks.append("\n".join(lines))
+    prompt = (
+        f"期号 {main['date']}，写英文版。下面是中文版的 {len(blocks)} 条，"
+        "每条给出候选的标题、摘要和 evidence 原文，不给中文正文：依据原文写，不要翻译。\n\n"
+        + EN_FORMAT
+        + "\n\n"
+        + "\n\n".join(blocks)
+    )
+    messages = [
+        {"role": "system", "content": system_prompt(EN_RULES, EN_ROUTE_NOTES)},
+        {"role": "user", "content": prompt},
+    ]
+    answer = await _ask(Chat(model, client), messages)
+
+    written: dict[int, dict[str, Any]] = {}
+    for raw in answer.get("items") or []:
+        n = raw.get("n") if isinstance(raw, dict) else None
+        n = int(n) if isinstance(n, str) and n.isdigit() else n
+        if isinstance(n, int) and n not in written:
+            written[n] = raw
+    data = {key: value for key, value in main.items() if key != "validation"}
+    data.update(
+        lang="en",
+        generated_at=datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        highlights=answer.get("highlights"),
+        items=[
+            {**item, "title": written[n].get("title"), "summary": written[n].get("summary")}
+            for n, item in enumerate(main["items"], 1)
+            if n in written
+        ],
+    )
+    # Evidence was checked against the pages with the main issue (step 7: one offline round).
+    report = digest.validate(data, candidates)
+    written_count, rejected = len(data["items"]), len(report.item_errors)
+    log.info("english: %d of %d items written, %d rejected", written_count, len(blocks), rejected)
+    if _titles_as_highlights(data, report):
+        report = digest.validate(data, candidates)
+    if report.errors:
+        raise EditorError("; ".join(report.errors))
+    return digest.apply_report(data, report, checked_links=False)
