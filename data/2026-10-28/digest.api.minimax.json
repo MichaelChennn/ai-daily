@@ -1,0 +1,637 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-28",
+  "mode": "full",
+  "generated_at": "2026-10-28T04:58:53+00:00",
+  "channel": "api",
+  "model": "nvidia:minimaxai/minimax-m3.1-flash",
+  "highlights": [
+    "Google DeepMind 发布 Genie 4 原生多模态世界模型，LiquidAI 则推出把文本、视觉、音频、omni 与 decision 模型收在同一骨干上的 LFM3 系列。",
+    "inclusionAI 开放 Ling-3.1-flash-1019 权重，560B 总参数、每 token 激活 25B、1M-token 上下文，并同步发布 base 检查点供继续训练。",
+    "Agent 的训练与评测成为今日主线：Trajectory2Gym 在 Tau1、Tau2 与 BFCL 上把三基准等权平均分提升 16.9-29.8 个百分点，TraceTrial-Bench 则发现 31.1% 的运行任务成功却未通过 harness 可靠性标准。"
+  ],
+  "items": [
+    {
+      "section": "headline",
+      "title": "Google DeepMind 发布 Genie 4 世界模型",
+      "summary": "Google DeepMind 推出 Genie 4，这是一个原生多模态的世界模型，能在实时交互模拟中同时生成环境声与对话，并模拟真实物理场景与人物动作。团队正以 research preview 形式向 trusted testers 推送，计划先向 Google AI Ultra 订阅者（Project Genie）以及 Gemini API 和 Google AI Studio 的早期合作伙伴开放；开发者可用自然语言实时修改场景，Gemini 会据此调整并维持模拟的连贯性。",
+      "tags": [
+        "模型",
+        "多模态"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_21ec57e4e0",
+          "url": "https://deepmind.google/blog/genie-4-a-new-generation-of-world-simulation/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://deepmind.google/blog/genie-4-a-new-generation-of-world-simulation/",
+          "quote": "Today, we are announcing Genie 4, our new world model, which unlocks unprecedented realism and improves real-time interactive simulation."
+        },
+        {
+          "url": "https://deepmind.google/blog/genie-4-a-new-generation-of-world-simulation/",
+          "quote": "Genie 4 is natively multimodal, enabling audio-like music, ambient noises, and interactive dialogue to be simultaneously generated with the world."
+        },
+        {
+          "url": "https://deepmind.google/blog/genie-4-a-new-generation-of-world-simulation/",
+          "quote": "We have started rolling Genie 4 out as a research preview for trusted testers — gathering feedback before we release it to consumers and developers, starting with Google AI Ultra subscribers in Project Genie and early access partners of the Gemini API and Google AI Studio."
+        },
+        {
+          "url": "https://deepmind.google/blog/genie-4-a-new-generation-of-world-simulation/",
+          "quote": "Shaping world simulation in real-time With Genie 4, you can use natural language to modify a simulation in real-time — like changing the weather, moving the camera, or introducing a new person or object — and Gemini will contextually adapt your prompt to match the surrounding scene."
+        },
+        {
+          "url": "https://deepmind.google/blog/genie-4-a-new-generation-of-world-simulation/",
+          "quote": "Between your inputs, Gemini also monitors and steers the scene to keep the world progressing cohesively."
+        },
+        {
+          "url": "https://deepmind.google/blog/genie-4-a-new-generation-of-world-simulation/",
+          "quote": "Built on an advanced physical understanding of the world, Genie 4 simulates real-world physics scenarios, such as aerodynamics, collisions, and more."
+        },
+        {
+          "url": "https://deepmind.google/blog/genie-4-a-new-generation-of-world-simulation/",
+          "quote": "The most dramatic leap is how Genie 4 simulates people, creating characters that move naturally, respond organically to their environments, and can be interactively steered in real-time."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "LiquidAI 发布 LFM3，多模态模型统一到一个骨干",
+      "summary": "LiquidAI 发布新一代 Liquid Foundation Models（LFM3），把文本、视觉、音频、omni 与 decision 模型放在同一个骨干上，全部处于 2B 参数级别。文本模型 LFM3-1.7B 在 4-bit 精度下约 1 GB，上下文窗口 256K，每个模型都能在单张 GPU 上微调；LFM3-VL-2B 则是首个支持视频输入的 LFM 视觉模型。",
+      "tags": [
+        "模型",
+        "多模态"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_5decb87306",
+          "url": "https://huggingface.co/blog/LiquidAI/lfm3"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/blog/LiquidAI/lfm3",
+          "quote": "October 27, 2026 Upvote 41 +35 Leonie Monigatti iamleonie Follow LiquidAI Jimmy T.H."
+        },
+        {
+          "url": "https://huggingface.co/blog/LiquidAI/lfm3",
+          "quote": "LFM3 is our new generation of Liquid Foundation Models (LFMs), built to be the starting point for specialized intelligence."
+        },
+        {
+          "url": "https://huggingface.co/blog/LiquidAI/lfm3",
+          "quote": "It brings text, vision, audio, omni, and decision models onto one shared backbone, all in the 2B parameter range."
+        },
+        {
+          "url": "https://huggingface.co/blog/LiquidAI/lfm3",
+          "quote": "This means you can pick the model for your modality, fine-tune it on your own data on a single GPU, and deploy it where your application runs."
+        },
+        {
+          "url": "https://huggingface.co/blog/LiquidAI/lfm3",
+          "quote": "Every modality on one backbone: six 2B-class models (text, vision, audio, omni, and decision) trained from LFM3-1.7B-Base, including our first omni model and video input for our vision model."
+        },
+        {
+          "url": "https://huggingface.co/blog/LiquidAI/lfm3",
+          "quote": "Built for the edge: the text model fits in about 1 GB at 4-bit precision, new in-house vision and audio encoders speed up processing, and the text model’s 256K context window lets agents run on-device."
+        },
+        {
+          "url": "https://huggingface.co/blog/LiquidAI/lfm3",
+          "quote": "Made to be specialized: every model fine-tunes on a single GPU, so you can adapt it to your data, terminology, and deployment environment."
+        },
+        {
+          "url": "https://huggingface.co/blog/LiquidAI/lfm3",
+          "quote": "Reach for LFM3-VL-2B when you need on-device visual understanding."
+        },
+        {
+          "url": "https://huggingface.co/blog/LiquidAI/lfm3",
+          "quote": "It is the first LFM vision model that takes video as input; it reasons step by step before it answers, and it finds objects and reasons about how they are placed, a strong foundation for robotics."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "inclusionAI 发布 Ling-3.1-flash-1019 权重并放出 base 检查点",
+      "summary": "inclusionAI 发布 Ling-3.1-flash-1019，总参数 560B、每 token 激活 25B，上下文窗口 1M-token。后训练优化后，AA-Briefcase 分数从约 1400 提升到 1524 Elo，AutomationBench-AA 从 62% 提升到 68%。团队同时发布基础检查点 Ling-3.1-flash-base 供继续预训练与后训练研究，模型页标注 mit 许可，SGLang 也已提供 day-0 镜像支持。",
+      "tags": [
+        "模型",
+        "开源",
+        "Agent"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_99bb8a4525",
+          "url": "https://huggingface.co/inclusionAI/Ling-3.1-flash-1019"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/inclusionAI/Ling-3.1-flash-1019",
+          "quote": "inclusionAI / Ling-3.1-flash-1019 Like 65 Follow inclusionAI 3.39k Text Generation Safetensors bailing_hybrid conversational custom_code fp8 License: mit Model card Files Files and versions xet Community 2 Copy to bucket Introduction Model Overview Quickstart SGLang (Recommended) Run Inference vLLM"
+        },
+        {
+          "url": "https://huggingface.co/inclusionAI/Ling-3.1-flash-1019",
+          "quote": "We introduce Ling-3.1-flash-1019 , an upgraded version of Ling-3.1-flash , with 560B total parameters, 25B active parameters per token, and a 1M-token context window ."
+        },
+        {
+          "url": "https://huggingface.co/inclusionAI/Ling-3.1-flash-1019",
+          "quote": "Its AA-Briefcase score rises from approximately 1400 to 1524 Elo , while performance on AutomationBench-AA increases from 62% to 68% ."
+        },
+        {
+          "url": "https://huggingface.co/inclusionAI/Ling-3.1-flash-1019",
+          "quote": "Total 560B, Activated 25B"
+        },
+        {
+          "url": "https://huggingface.co/inclusionAI/Ling-3.1-flash-1019",
+          "quote": "The day-0 SGLang image includes Ling-3.1-flash support, MTP (NEXTN) speculative decoding, and Hopper decode optimizations:"
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Anthropic 与六家药企合作推进 Claude 药物研发",
+      "summary": "Anthropic 介绍过去数月与六家开发新药机构的深度研究合作，包括 BigHat Biosciences、Bristol Myers Squibb、Divergence Labs、Enveda、Generate Biomedicines 与 The Column Group，团队也已启动自有药物发现项目。案例显示 Claude 承担分子设计、hit generation、lead optimization 与申报文件起草等环节，例如 Divergence Labs 用 Claude 在约一个月内生成约 35,000 个抗体设计，Enveda 在 1,061 页文档测试中抓到人工发现的全部 11 个问题并额外发现 7 个。",
+      "tags": [
+        "行业",
+        "产品"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_352ed90f95",
+          "url": "https://www.anthropic.com/research/early-progress-drug-development"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://www.anthropic.com/research/early-progress-drug-development",
+          "quote": "Over the past several months, our scientists have engaged in deep research partnerships with six organizations developing new medicines: BigHat Biosciences , Bristol Myers Squibb , Divergence Labs , Enveda , Generate Biomedicines , and The Column Group ."
+        },
+        {
+          "url": "https://www.anthropic.com/research/early-progress-drug-development",
+          "quote": "We've also begun drug discovery efforts of our own."
+        },
+        {
+          "url": "https://www.anthropic.com/research/early-progress-drug-development",
+          "quote": "So, over the past several months, we’ve partnered with six organizations to do so."
+        },
+        {
+          "url": "https://www.anthropic.com/research/early-progress-drug-development",
+          "quote": "Claude converted Divergence Labs’ goals into a detailed design plan, and then, largely autonomously, generated roughly 35,000 antibody designs in about a month to be narrowed down and tested."
+        },
+        {
+          "url": "https://www.anthropic.com/research/early-progress-drug-development",
+          "quote": "Over tests on 1,061 pages of documentation, Claude caught all 11 issues that human reviewers had spotted—and flagged seven they’d missed."
+        },
+        {
+          "url": "https://www.anthropic.com/research/early-progress-drug-development",
+          "quote": "Separately, Claude wrote the first drafts of two important regulatory documents."
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "百度发布 Unlimited-OCR-2，支持无限长文档解析",
+      "summary": "百度发布 Unlimited-OCR-2，主打 unlimited-horizon 解析：新的 SR-SWA 注意力把超长序列的图文交互压缩为固定大小的工作引用（例如 512 tokens），使单步解码延迟与显存占用基本不随文档长度增长。模型在 MPDocBench 等几十页基准和 MarathonDocBench 等百页级基准上取得 SOTA，支持 Transformers 原生推理与 SGLang 服务，infer_multi 可在一次请求中解析整份文档并利用跨页上下文。",
+      "tags": [
+        "模型",
+        "多模态",
+        "图像"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_4239039208",
+          "url": "https://huggingface.co/baidu/Unlimited-OCR-2"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/baidu/Unlimited-OCR-2",
+          "quote": "Pioneering the OCR-3.0 Era: From Long- to Unlimited-Horizon Parsing."
+        },
+        {
+          "url": "https://huggingface.co/baidu/Unlimited-OCR-2",
+          "quote": "[2026/10/27] 🚀 We release Unlimited OCR 2 , achieving unlimited-horizon parsing with SR-SWA."
+        },
+        {
+          "url": "https://huggingface.co/baidu/Unlimited-OCR-2",
+          "quote": "Sparse Reference Sliding Window Attention (SR-SWA): Compresses text-visual attention interactions from ultra-long sequences down to a fixed-size set of working references (e.g., 512 tokens)."
+        },
+        {
+          "url": "https://huggingface.co/baidu/Unlimited-OCR-2",
+          "quote": "This bounds computational complexity, keeping per-step decoding latency and memory footprint nearly constant regardless of document length."
+        },
+        {
+          "url": "https://huggingface.co/baidu/Unlimited-OCR-2",
+          "quote": "From Long- to Unlimited-Horizon Parsing: Powered by SR-SWA, Unlimited-OCR 2 achieves true, unbounded document parsing within a finite context window—effectively eliminating quadratic attention scaling and memory bottlenecks as documents grow."
+        },
+        {
+          "url": "https://huggingface.co/baidu/Unlimited-OCR-2",
+          "quote": "Ultra-Long Document Parsing SOTA: Achieves state-of-the-art performance across both dozens-of-pages benchmarks (e.g., MPDocBench) and extreme hundred-page benchmarks (e.g., MarathonDocBench)."
+        },
+        {
+          "url": "https://huggingface.co/baidu/Unlimited-OCR-2",
+          "quote": "Unlimited OCR 2 supports Transformers (native, for quick tests) and SGLang (recommended for serving)."
+        },
+        {
+          "url": "https://huggingface.co/baidu/Unlimited-OCR-2",
+          "quote": "Multi-page inference ( infer_multi )."
+        },
+        {
+          "url": "https://huggingface.co/baidu/Unlimited-OCR-2",
+          "quote": "All pages of a document are parsed in one request, so the model can use cross-page context."
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "OpenBMB 发布 MiniCPM-OCR Jev，给 OCR 结果打质量分",
+      "summary": "OpenBMB 发布 MiniCPM-OCR Jev，一个 2B 的 OCR 质量评估模型，针对文本、公式和表格区域，接收区域图像与候选 OCR 文本后返回 0 到 1 的分数，分数越高表示结果越可能正确。它在 JevOCRBench 上的 decision AUROC（×100）为 93.6，高于 JEV-35B-A3B 的 90.1，接近 Qwen3.5-397B-A17B 的 93.8；在 MiniCPM-OCR 1.0、GLM-OCR、PaddleOCR-VL-1.6 与 Xiaomi-OCR-0 的解析结果上 AUROC（×100）保持在 91.9–93.4，可用于自动放行、人工复核分流或多个 OCR 模型择优，模型权重、代码与文档以 Apache License 发布。",
+      "tags": [
+        "模型",
+        "图像",
+        "多模态"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_6d6537402a",
+          "url": "https://huggingface.co/openbmb/MiniCPM-OCR-Jev"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/openbmb/MiniCPM-OCR-Jev",
+          "quote": "MiniCPM-OCR Jev (2B) is an OCR quality-assessment model for text, formula, and table"
+        },
+        {
+          "url": "https://huggingface.co/openbmb/MiniCPM-OCR-Jev",
+          "quote": "Given a region image and a candidate OCR result, it returns a score from 0 to 1 —"
+        },
+        {
+          "url": "https://huggingface.co/openbmb/MiniCPM-OCR-Jev",
+          "quote": "MiniCPM-OCR Jev is a 2B OCR quality-assessment model for text, formula, and table"
+        },
+        {
+          "url": "https://huggingface.co/openbmb/MiniCPM-OCR-Jev",
+          "quote": "Use it to auto-accept reliable regions,"
+        },
+        {
+          "url": "https://huggingface.co/openbmb/MiniCPM-OCR-Jev",
+          "quote": "route the rest to human review, or pick the best result among several OCR models."
+        },
+        {
+          "url": "https://huggingface.co/openbmb/MiniCPM-OCR-Jev",
+          "quote": "🛡️ A small model that beats larger ones : at only 2B parameters, decision AUROC (×100) on"
+        },
+        {
+          "url": "https://huggingface.co/openbmb/MiniCPM-OCR-Jev",
+          "quote": "JevOCRBench is 93.6 , above"
+        },
+        {
+          "url": "https://huggingface.co/openbmb/MiniCPM-OCR-Jev",
+          "quote": "JEV-35B-A3B (90.1) and close to Qwen3.5-397B-A17B (93.8)."
+        },
+        {
+          "url": "https://huggingface.co/openbmb/MiniCPM-OCR-Jev",
+          "quote": "🧩 Stable generalization : on parses from MiniCPM-OCR 1.0, GLM-OCR, PaddleOCR-VL-1.6, and"
+        },
+        {
+          "url": "https://huggingface.co/openbmb/MiniCPM-OCR-Jev",
+          "quote": "Xiaomi-OCR-0, AUROC (×100) stays in 91.9–93.4 ."
+        },
+        {
+          "url": "https://huggingface.co/openbmb/MiniCPM-OCR-Jev",
+          "quote": "Model weights, code, and documentation are released under the"
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Trajectory2Gym：为工具调用 Agent 合成可执行训练交互",
+      "summary": "Trajectory2Gym 提出两个耦合要求来衡量轨迹监督质量：compositional coverage 与 decision grounding，并围绕覆盖不足的组合结构构造可执行交互，只从真实执行中被证据支撑的决策里提取监督。在五个 Qwen3 规模上，它在 Tau1、Tau2 与 BFCL 上均有提升，三基准等权平均分提升 16.9-29.8 个百分点，增益在有状态、多轮交互中最为明显。",
+      "tags": [
+        "论文",
+        "Agent",
+        "训练"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_386e60631e",
+          "url": "https://huggingface.co/papers/2610.33568"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2610.33568",
+          "quote": "We identify two coupled requirements for effective trajectory supervision: compositional coverage , so that important observation-action dependencies are represented, and decision grounding , so that each supervised action is supported by the learner-visible interaction history."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.33568",
+          "quote": "We introduce Trajectory2Gym , which constructs executable interactions around under-supported compositional structures and derives supervision only from grounded decisions in their realized executions."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.33568",
+          "quote": "Structural-support selection allocates the resulting experience, while parent-normalized supervised fine-tuning preserves the semantic interaction as the unit of training weight."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.33568",
+          "quote": "Across five Qwen3 scales, Trajectory2Gym improves Tau1, Tau2, and BFCL at every tested scale, increasing the equal-weight three-benchmark mean by 16.9-29.8 percentage points."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.33568",
+          "quote": "The gains are strongest in stateful and multi-turn interaction , where later decisions depend on earlier observations and feedback."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "TraceTrial-Bench：把 Agent harness 可靠性与任务成功分开评估",
+      "summary": "TraceTrial-Bench 把 Agent harness 的可靠性拆成 context、execution、governance、lifecycle、observability、tools 与 verification 七个组成部分，并用 95 个专家级的机制导向任务配合可执行或状态化的 ground truth 来比较不同 harness。评测覆盖 4 个 harness、9 个模型与 95 个任务共 3,420 次运行，宏观平均的 harness 分数在 59.8% 到 72.0% 之间；其中 31.1% 的运行在任务成功的同时至少违反了一项 harness 标准。",
+      "tags": [
+        "论文",
+        "Agent",
+        "工具"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_9cc807fd65",
+          "url": "https://huggingface.co/papers/2610.32285"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2610.32285",
+          "quote": "To address this gap, we introduce TraceTrial-Bench , which organizes harness reliability into seven components covering context, execution, governance, lifecycle, observability, tools, and verification."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.32285",
+          "quote": "We construct 95 expert-level, mechanism-oriented tasks with executable or state-based ground truth to support semantically equivalent comparisons while preserving the native behavior of each harness."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.32285",
+          "quote": "We design a Trajectory Tracing (TT) module to capture agent execution traces and introduce a two-layer evaluation framework that separately assesses agent performance and harness reliability."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.32285",
+          "quote": "In addition, we design a Multi-source Evidence Acquisition (MEA) module to provide evidence from the agent context, harness, and execution environment for LLM-based evaluation, and develop a Failure Attribution (FA) module that uses explicit mechanism chains to support attribution at the run level."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.32285",
+          "quote": "Across 4 harnesses, 9 models, and 95 tasks, our evaluation of 3,420 runs yields macro-averaged harness scores ranging from 59.8% to 72.0%, while 31.1% of runs achieve task success despite failing at least one harness criterion."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Anthropic 研究：专家在多数分析决策上跟随 Claude Code 的倾向",
+      "summary": "Anthropic 让 50 位专业分析师用 Claude Code 完成一项因果推断分析，并随机设定 Agent 在每个关键决策上偏向两个合理选项之一。四个分析决策上，分析师有 86% 的时间选择与 Agent 的倾向一致；事后 77% 的分析师复用了 Agent 的论证，却只有 15% 把它归因于 Agent。研究者提醒，当 Agent 没有被赋予明确偏好时，这种影响可能更小。",
+      "tags": [
+        "论文",
+        "Agent"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_71bc47a32b",
+          "url": "https://www.anthropic.com/research/agents-judgment-calls"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://www.anthropic.com/research/agents-judgment-calls",
+          "quote": "In a study we report in a new paper , we asked 50 professional analysts to do a realistic statistical analysis with Claude Code."
+        },
+        {
+          "url": "https://www.anthropic.com/research/agents-judgment-calls",
+          "quote": "To see whether they were making these calls themselves, we set up each analyst’s agent to favor one option on each decision, which the analysts weren’t told about."
+        },
+        {
+          "url": "https://www.anthropic.com/research/agents-judgment-calls",
+          "quote": "Across the four analytical choices, analysts went with their agent’s lean 86% of the time."
+        },
+        {
+          "url": "https://www.anthropic.com/research/agents-judgment-calls",
+          "quote": "When analysts had already expressed their own preference before the agent weighed in, they switched away from it 60% of the time if the agent disagreed, compared to 6% if it agreed."
+        },
+        {
+          "url": "https://www.anthropic.com/research/agents-judgment-calls",
+          "quote": "Afterward, when asked to explain their choices, 77% of analysts used the agents’ own arguments—sometimes word for word—but only 15% credited the agent as the source of those arguments."
+        },
+        {
+          "url": "https://www.anthropic.com/research/agents-judgment-calls",
+          "quote": "When agents aren’t given clear preferences and instructions to voice them, the effect might be smaller."
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Codex 0.165.0 增加内置 Vertex AI provider 与 GPT-6.1 Terra",
+      "summary": "Codex 0.165.0 新增内置的 Google Cloud Vertex AI provider，配置为 model_provider = \"gcp\"，并在模型目录中加入 GPT-6.1 Terra。TUI 侧新增仓库筛选与按目录分组，便于在跨 worktree 的会话中定位目标；app-server API 增加实验性的 attached thread forks，支持的模型默认允许对话中调整 reasoning effort，新 profile 默认启用 memory v2，并修复了 marketplace URL 校验缺口——该缺口可能让 Git 连到与允许规则不符的主机。",
+      "tags": [
+        "工具",
+        "代码",
+        "安全"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_75a4054a20",
+          "url": "https://github.com/openai/codex/releases/tag/rust-v0.165.0"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/openai/codex/releases/tag/rust-v0.165.0",
+          "quote": "Added a built-in Google Cloud Vertex AI provider, configured with model_provider = \"gcp\" ."
+        },
+        {
+          "url": "https://github.com/openai/codex/releases/tag/rust-v0.165.0",
+          "quote": "Added GPT-6.1 Terra to the model catalogs."
+        },
+        {
+          "url": "https://github.com/openai/codex/releases/tag/rust-v0.165.0",
+          "quote": "Added a repository filter to the session picker and directory grouping to the agent command center, making it easier to navigate sessions across linked worktrees."
+        },
+        {
+          "url": "https://github.com/openai/codex/releases/tag/rust-v0.165.0",
+          "quote": "Added experimental attached thread forks to the app-server API."
+        },
+        {
+          "url": "https://github.com/openai/codex/releases/tag/rust-v0.165.0",
+          "quote": "Enabled reasoning effort changes during a conversation by default for supported models."
+        },
+        {
+          "url": "https://github.com/openai/codex/releases/tag/rust-v0.165.0",
+          "quote": "Enabled memory v2 by default for fresh profiles and added support for importing external-agent memories into it."
+        },
+        {
+          "url": "https://github.com/openai/codex/releases/tag/rust-v0.165.0",
+          "quote": "Closed a marketplace URL validation gap that could allow Git to connect to a different host than the one checked against allowed patterns."
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Ai2 发布新颖性评判基准与自动化流水线",
+      "summary": "Ai2 发布论文 Old Ideas, Novel Problems，配套基准、数据、代码以及可用来构建新评测集的自动化流水线，流水线围绕 ICLR 2026 的同行评审挖掘出高新颖度的 154 个人写想法与低新颖度的 145 个想法。结果显示新颖性评判很不稳定：六个评判模型 GPT-5.1、GPT-5.2、GPT-5.4、Claude Sonnet 4.5、Claude Opus 4.5 与 Claude Opus 4.6 之间，仅改动提示词就能让同一批想法的准确率波动超过 50 个百分点，检索与更多推理也未带来一致提升。",
+      "tags": [
+        "工具",
+        "论文"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_f7c8ff3e0f",
+          "url": "https://huggingface.co/blog/allenai/novelty-bench"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/blog/allenai/novelty-bench",
+          "quote": "Today we’re releasing Old Ideas, Novel Problems , a new study of how reliably large language models can evaluate the novelty of scientific research ideas."
+        },
+        {
+          "url": "https://huggingface.co/blog/allenai/novelty-bench",
+          "quote": "Alongside the paper, we’re publishing a benchmark, data, and code for testing novelty judges, plus an automated pipeline researchers can use to build new evaluation sets."
+        },
+        {
+          "url": "https://huggingface.co/blog/allenai/novelty-bench",
+          "quote": "At Ai2, we’ve been developing AI systems that support different parts of scientific discovery."
+        },
+        {
+          "url": "https://huggingface.co/blog/allenai/novelty-bench",
+          "quote": "Across six LLM judges – GPT-5.1, GPT-5.2, GPT-5.4, Claude Sonnet 4.5, Claude Opus 4.5, and Claude Opus 4.6 – seemingly small changes to the evaluation setup produce dramatically different judgments of the same ideas."
+        },
+        {
+          "url": "https://huggingface.co/blog/allenai/novelty-bench",
+          "quote": "In one experiment, changing just a few words in a prompt shifts a model’s accuracy in identifying which of two ideas is more novel by more than 50 percentage points."
+        },
+        {
+          "url": "https://huggingface.co/blog/allenai/novelty-bench",
+          "quote": "Retrieval and additional reasoning do not consistently improve judgments, and two purpose-built novelty evaluation systems perform worse than a simple prompted Claude Opus 4.6 baseline."
+        },
+        {
+          "url": "https://huggingface.co/blog/allenai/novelty-bench",
+          "quote": "So we built an automated pipeline around ICLR 2026 peer reviews."
+        },
+        {
+          "url": "https://huggingface.co/blog/allenai/novelty-bench",
+          "quote": "We created a high-novelty pool of 154 human-authored research ideas by selecting accepted papers in the top-rated 10% of their ICLR research area whose reviewers positively identified novelty and where no reviewer disputed it."
+        },
+        {
+          "url": "https://huggingface.co/blog/allenai/novelty-bench",
+          "quote": "We applied the reverse criteria to build a lower-novelty pool : 145 ideas from rejected papers in the bottom 10% whose reviewers raised originality concerns without any reviewer positively identifying novelty."
+        }
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "Claude Code v2.1.312 发布",
+      "summary": "Claude Code v2.1.312 新增 oidc.user_id_claim 与 click to send，修复大文件 CLAUDE.md 被覆盖、skills 在深层目录找不到等问题。",
+      "tags": [
+        "工具",
+        "代码"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_d8153c13f8",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.312"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.312",
+          "quote": "Added oidc.user_id_claim to the Claude apps gateway, to identify people by an id_token claim other than sub , such as Microsoft Entra ID's oid"
+        },
+        {
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.312",
+          "quote": "Added click to send: in fullscreen, clicking the \"to send now\" hint under a queued message sends it right away, as its key does"
+        },
+        {
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.312",
+          "quote": "Fixed Claude overwriting a very large CLAUDE.md, rules file or @-included file in a subdirectory after seeing only its start; Write now asks Claude to read it all or edit in place"
+        },
+        {
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.312",
+          "quote": "Fixed per-directory and paths: skills not being found after a Bash cd deeper into a git repository"
+        }
+      ]
+    }
+  ],
+  "research": [
+    {
+      "via": "webfetch",
+      "url": "https://deepmind.google/blog/genie-4-a-new-generation-of-world-simulation/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://openai.com/index/oracle-apps-in-chatgpt"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.165.0"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/blog/LiquidAI/lfm3"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/inclusionAI/Ling-3.1-flash-1019"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://www.anthropic.com/research/early-progress-drug-development"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://www.anthropic.com/research/agents-judgment-calls"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://www.anthropic.com/news/expanding-partnership-gsa"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/blog/allenai/novelty-bench"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/baidu/Unlimited-OCR-2"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/openbmb/MiniCPM-OCR-Jev"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.34662"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.33568"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.32285"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.34467"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.35518"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.312"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/obra/superpowers"
+    }
+  ],
+  "validation": {
+    "validated_at": "2026-10-28T04:58:53+00:00",
+    "checked_links": true,
+    "dropped": [],
+    "warnings": []
+  }
+}

@@ -1,0 +1,337 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-28",
+  "mode": "full",
+  "generated_at": "2026-10-28T04:59:11+00:00",
+  "channel": "api",
+  "model": "gemini:gemini-3.5-flash-lite",
+  "highlights": [
+    "Liquid AI 发布了面向边缘端与本地部署的 LFM3 系列多模态模型，包含文本、视觉、音频、全双工等 6 款 2B 参数量级模型。",
+    "Google DeepMind 发布 Genie 4 实时世界模型，支持原生多模态交互、物理仿真和对话。",
+    "Anthropic 扩大与美国 GSA 的合作，为公共部门提供 40% 的 Claude 订阅与 API 折扣。"
+  ],
+  "items": [
+    {
+      "section": "headline",
+      "title": "Liquid AI 发布 LFM3 系列多模态模型：6 款 2B 级模型覆盖文本、视觉、音频与全双工",
+      "summary": "Liquid AI 推出了全新一代 Liquid 基础模型 LFM3，基于共享的 2B 参数主干网络派生出文本、视觉、音频、全双工和决策等 6 款模型。其中 LFM3-1.7B 采用三混合架构与 256K 上下文窗口，在保持极低部署开销的同时大幅提升了边缘端智能体与工具调用能力。",
+      "tags": [
+        "模型",
+        "开源",
+        "多模态"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_5decb87306",
+          "url": "https://huggingface.co/blog/LiquidAI/lfm3"
+        },
+        {
+          "candidate_id": "c_d0558e1230",
+          "url": "https://huggingface.co/LiquidAI/LFM3-1.7B"
+        },
+        {
+          "candidate_id": "c_bc77794a31",
+          "url": "https://huggingface.co/LiquidAI/LFM3-Omni-2B-GGUF"
+        },
+        {
+          "candidate_id": "c_0ab7f95d51",
+          "url": "https://huggingface.co/LiquidAI/LFM3-Audio-2B"
+        },
+        {
+          "candidate_id": "c_5cf03abdcf",
+          "url": "https://v.redd.it/wgr3e9wqz1yh1"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/blog/LiquidAI/lfm3",
+          "quote": "It brings text, vision, audio, omni, and decision models onto one shared backbone, all in the 2B parameter range."
+        },
+        {
+          "url": "https://huggingface.co/blog/LiquidAI/lfm3",
+          "quote": "Every modality on one backbone: six 2B-class models (text, vision, audio, omni, and decision) trained from LFM3-1.7B-Base, including our first omni model and video input for our vision model."
+        },
+        {
+          "url": "https://huggingface.co/blog/LiquidAI/lfm3",
+          "quote": "Built for the edge: the text model fits in about 1 GB at 4-bit precision, new in-house vision and audio encoders speed up processing, and the text model’s 256K context window lets agents run on-device."
+        },
+        {
+          "url": "https://huggingface.co/blog/LiquidAI/lfm3",
+          "quote": "It outperforms its predecessor, LFM2.5-2.6B, with 35% fewer parameters, and the biggest gains are on agentic tasks: on WebArena-Verified, it scores 38.42 against 3.02, and it even beats Qwen3.5-9B on long tasks in browsers and business apps."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Google DeepMind 发布新一代世界模型 Genie 4",
+      "summary": "Google DeepMind 推出了全新世界模型 Genie 4，旨在实现前所未有的实时交互仿真真实感。该模型具备原生多模态能力，可同时生成世界场景、环境音效与互动对话，目前已面向受信任测试者和谷歌开发者平台推出研究预览。",
+      "tags": [
+        "模型",
+        "多模态"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_21ec57e4e0",
+          "url": "https://deepmind.google/blog/genie-4-a-new-generation-of-world-simulation/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://deepmind.google/blog/genie-4-a-new-generation-of-world-simulation/",
+          "quote": "Genie 4 is natively multimodal, enabling audio-like music, ambient noises, and interactive dialogue to be simultaneously generated with the world."
+        },
+        {
+          "url": "https://deepmind.google/blog/genie-4-a-new-generation-of-world-simulation/",
+          "quote": "We have started rolling Genie 4 out as a research preview for trusted testers — gathering feedback before we release it to consumers and developers, starting with Google AI Ultra subscribers in Project Genie and early access partners of the Gemini API and Google AI Studio."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Anthropic 扩大与美国 GSA 合作，为各级政府提供 40% 的 Claude 折扣",
+      "summary": "Anthropic 与美国总务管理局（GSA）达成新协议，为政府机构使用 Claude Enterprise、Claude for Government 及 Claude API 提供 40% 的折扣。该优惠覆盖联邦、州及地方各级政府机构，旨在推动公共部门无缝应用大模型能力。",
+      "tags": [
+        "产品",
+        "行业"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_3e55ee7687",
+          "url": "https://www.anthropic.com/news/expanding-partnership-gsa"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://www.anthropic.com/news/expanding-partnership-gsa",
+          "quote": "Expanding our partnership with GSA to bring Claude to all levels of government Published Oct 27, 2026 Category Partnerships We are expanding our partnership with the General Services Administration (GSA) through a new agreement that gives government partners a 40% discount on Claude Enterprise, Clau"
+        },
+        {
+          "url": "https://www.anthropic.com/news/expanding-partnership-gsa",
+          "quote": "The discount also extends to state, local, tribal and territorial governments."
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "OpenBMB 开源 MiniCPM-OCR 1.0 与 OCR 质量裁判模型 Jev",
+      "summary": "OpenBMB 发布了 1.3B 的文档解析模型 MiniCPM-OCR 1.0 以及 2B 的 OCR 质量裁判模型 MiniCPM-OCR Jev。Jev 能够对各类 OCR 结果进行 0 到 1 的质量打分，有效识别公式、表格及文本中的识别错误，适用于本地 RAG 流水线构建。",
+      "tags": [
+        "模型",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_594c460c3a",
+          "url": "https://i.redd.it/lew2c4wfn1yh1.jpeg"
+        },
+        {
+          "candidate_id": "c_6d6537402a",
+          "url": "https://huggingface.co/openbmb/MiniCPM-OCR-Jev"
+        }
+      ],
+      "evidence": []
+    },
+    {
+      "section": "paper",
+      "title": "S3AC：面向 LLM 长链条推理的稳定、选择性与可扩展演员-评论家方法",
+      "summary": "上海人工智能实验室等机构提出 S3AC，通过实用的评论家训练配方解决了长 CoT 推理中评论家训练困难的问题。该方法结合了难度感知提示词采样（DAPS），在多个参数规模的模型上取得了优于现有 GRPO 变体的表现。",
+      "tags": [
+        "论文",
+        "推理",
+        "训练"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_881df59e02",
+          "url": "https://huggingface.co/papers/2610.35518"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2610.35518",
+          "quote": "g Abstract S3AC introduces a stabilized actor-critic training method with difficulty-aware prompt sampling to improve long reasoning in large language models without relying on grouped rollouts."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.35518",
+          "quote": "We introduce S3AC (Stabilized, Selective, and Scalable Actor-Critic ) for LLM reasoning, built around a practical critic-training recipe."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.35518",
+          "quote": "Using the prompt-level baseline to estimate difficulty, we propose Difficulty-Aware Prompt Sampling (DAPS)."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.35518",
+          "quote": "S3AC improves group-rollout performance across dense and mixture-of-experts models from 1.5B to 397B parameters, outperforming a modern GRPO variant ( GRPO -X)."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "StreamVibe：面向演化用户意图的主动式视频智能体基准与模型",
+      "summary": "Google 研究团队推出了 StreamVibe，旨在将视觉语言模型从被动理解转向在线主动交互。研究引入了包含 4.1K 评估样本的 StreamVibe-Bench，以及能够根据持续观察动态调整交互的流式主动模型 StreamVibe-VL。",
+      "tags": [
+        "论文",
+        "多模态",
+        "Agent"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_cb95bbba38",
+          "url": "https://huggingface.co/papers/2610.34662"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2610.34662",
+          "quote": "Papers arxiv:2610.34662 StreamVibe: Proactive Video Agents for Evolving User Intent Published on Oct 26 · Submitted by Chengzhi Liu on Oct 27 #3 Paper of the day · Google Upvote 246 +238 Authors: Chengzhi Liu , Yuxiang Lai , Yuzhe Yang , Yanqing Liu , Jiheng Hou , Yue Cao , Haonan Wang , Ruixi Fan ,"
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.34662",
+          "quote": "To address these challenges, we introduce StreamVibe-Bench , a new benchmark serving as testbed for user intent interaction, with 4.1K evaluation samples and 85K training samples spanning explicit, implicit, and dynamic intent s."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.34662",
+          "quote": "Building on this benchmark, we develop StreamVibe-VL , a streaming proactive model that infers implicit user intent s from continuous observations and dynamically tailors its interactions as these intents evolve."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Trajectory2Gym：面向工具调用智能体的决策基础组合交互合成框架",
+      "summary": "蚂蚁国际研究团队提出 Trajectory2Gym，通过围绕具备多步依赖的组合结构主动构建可执行交互，并仅从可见历史中受支持的决策中提取监督，有效提升了大模型在复杂工具调用和多轮交互任务中的表现。",
+      "tags": [
+        "论文",
+        "Agent",
+        "代码"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_386e60631e",
+          "url": "https://huggingface.co/papers/2610.33568"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2610.33568",
+          "quote": "Wang , Wei Wu , Jiang-Ming Yang , Tao Lin Abstract Trajectory2Gym improves tool-use training by constructing interactions with compositional coverage and decision grounding rather than collecting successful trajectories."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.33568",
+          "quote": "We introduce Trajectory2Gym , which constructs executable interactions around under-supported compositional structures and derives supervision only from grounded decisions in their realized executions."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.33568",
+          "quote": "The gains are strongest in stateful and multi-turn interaction , where later decisions depend on earlier observations and feedback."
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "OpenBot：面向持久化 AI 队友的本地优先桌面工作区",
+      "summary": "开源项目 OpenBot 是一个本地优先的桌面工作区，支持在独立隔离环境中运行 Codex、Claude 和 Grok 等主流 AI 编码助手。它内置了任务队列、文件共享、嵌入式浏览器及智能体间通信功能，方便开发者在统一界面中管理复杂任务。",
+      "tags": [
+        "开源",
+        "工具",
+        "Agent"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_7532e04a87",
+          "url": "https://github.com/nightly-labs/openbot"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/nightly-labs/openbot",
+          "quote": "openbot Public Notifications You must be signed in to change notification settings Fork 264 ( 264 ) Star 2.6k ( 2.6k ) You must be signed in to star a repository About A local-first desktop workspace for persistent AI teammates."
+        },
+        {
+          "url": "https://github.com/nightly-labs/openbot",
+          "quote": "Run Codex, Claude, and Grok with dedicated workspaces, task queues, file sharing, browser control, and agent-to-agent collaboration."
+        },
+        {
+          "url": "https://github.com/nightly-labs/openbot",
+          "quote": "conversation, and provides local queues, file transfers, an embedded browser, and agent-to-agent"
+        }
+      ]
+    }
+  ],
+  "research": [
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/blog/LiquidAI/lfm3"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://i.redd.it/9pgeqvalb0yh1.jpeg"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://www.anthropic.com/news/expanding-partnership-gsa"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://www.anthropic.com/research/early-progress-drug-development"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://deepmind.google/blog/genie-4-a-new-generation-of-world-simulation/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.35518"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.34662"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.35845"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.34467"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.33966"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.33956"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.34415"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.33568"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://i.redd.it/lew2c4wfn1yh1.jpeg"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.165.0"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.312"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/nightly-labs/openbot"
+    }
+  ],
+  "validation": {
+    "validated_at": "2026-10-28T04:59:12+00:00",
+    "checked_links": true,
+    "dropped": [],
+    "warnings": [
+      "Liquid AI 发布 LFM3 系列多模态模型：6 款 2B 级模型覆盖文本、视觉、音频与全双工: could not check https://v.redd.it/wgr3e9wqz1yh1 (403)"
+    ]
+  }
+}
