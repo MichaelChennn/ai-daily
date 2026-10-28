@@ -1,10 +1,15 @@
-# Deletes claude/ branches whose last commit is more than two days old.
+# Deletes branches whose work has reached main, once their last commit is two days old.
 #
 # Each scheduled editor run pushes to a new claude/ branch, and ingest.yml takes the digests from
-# it without a PR, so GitHub's "delete head branches" setting never removes it. The two-day margin
-# keeps the branch of a session that is still running (it pushes digest.json, then
-# digest.en.json) and leaves a day to re-run ingest by hand on a branch whose push it missed.
-# Other branches (research/, feature branches) are left alone.
+# it without a PR, so GitHub's "delete head branches" setting never removes it. A branch goes when
+#   - it is merged: its last commit is in main's history (any branch);
+#   - its digests were ingested: a successful ingest run covers its last commit that changed a
+#     digest (claude/ branches);
+#   - it has no digest at all and is seven days old: the session failed, nothing on it would ever
+#     reach main (claude/ branches).
+# The two-day margin keeps the branch of a session that is still running (it pushes digest.json,
+# then digest.en.json) and leaves time to re-run ingest by hand. A branch with an open PR is kept.
+# A branch only ingested by hand (workflow_dispatch runs on main) is kept: delete it yourself.
 name: prune-branches
 
 on:
@@ -14,6 +19,8 @@ on:
 
 permissions:
   contents: write
+  actions: read
+  pull-requests: read
 
 jobs:
   prune:
@@ -21,14 +28,47 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
-      - name: Delete stale claude/ branches
+        with:
+          fetch-depth: 0
+      - name: Delete stale branches
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          git fetch --no-tags origin '+refs/heads/claude/*:refs/remotes/origin/claude/*'
-          cutoff=$(date -d '2 days ago' +%s)
-          git for-each-ref --format='%(refname:lstrip=3) %(committerdate:unix)' refs/remotes/origin/claude/ |
+          git fetch --no-tags --prune origin '+refs/heads/*:refs/remotes/origin/*'
+          open=$(gh pr list --state open --limit 200 --json headRefName --jq '.[].headRefName')
+          now=$(date +%s)
+          git for-each-ref --format='%(refname:lstrip=3) %(committerdate:unix)' refs/remotes/origin/ |
             while read -r branch committed; do
-              if [ "$committed" -lt "$cutoff" ]; then
-                echo "deleting $branch"
+              case "$branch" in main | HEAD) continue ;; esac
+              age=$(( (now - committed) / 86400 ))
+              [ "$age" -ge 2 ] || continue
+              if grep -qxF "$branch" <<< "$open"; then
+                echo "keep $branch: open PR"
+                continue
+              fi
+              ref="origin/$branch"
+              reason=
+              if git merge-base --is-ancestor "$ref" origin/main; then
+                reason="merged into main"
+              elif [[ "$branch" == claude/* ]]; then
+                last=$(git log -1 --format=%H "$(git merge-base origin/main "$ref")..$ref" -- \
+                  'data/*/digest.json' 'data/*/digest.en.json')
+                if [ -z "$last" ]; then
+                  [ "$age" -ge 7 ] && reason="no digest, $age days old"
+                else
+                  for sha in $(gh run list --workflow ingest.yml --branch "$branch" --status success \
+                                 --json headSha --jq '.[].headSha'); do
+                    if git merge-base --is-ancestor "$last" "$sha" 2>/dev/null; then
+                      reason="ingested"
+                      break
+                    fi
+                  done
+                fi
+              fi
+              if [ -n "$reason" ]; then
+                echo "delete $branch: $reason"
                 git push origin --delete "$branch"
+              else
+                echo "keep $branch"
               fi
             done
