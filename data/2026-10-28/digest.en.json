@@ -1,0 +1,421 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-28",
+  "mode": "full",
+  "generated_at": "2026-10-28T04:43:34+00:00",
+  "model": "claude-opus-5-5",
+  "highlights": [
+    "Google DeepMind released Genie 4 as a research preview: a real-time world model you can steer with natural language, and its first to generate audio natively.",
+    "Liquid AI shipped LFM3, six open-weight 2B-class models on one backbone; inclusionAI released Ling-3.1-flash-1019 along with its base model.",
+    "In an Anthropic study, analysts went with their agent's randomly assigned lean 86% of the time."
+  ],
+  "items": [
+    {
+      "section": "headline",
+      "title": "Google DeepMind unveils Genie 4 real-time world model",
+      "summary": "Genie 4 is Google DeepMind's new world model: you can use natural language to modify a running simulation in real time, such as changing the weather, moving the camera, or introducing a new person or object, and it is DeepMind's first real-time world model to generate audio natively. It is out as a research preview for trusted testers and coming soon to Google AI Ultra subscribers in Project Genie and early access partners in the Gemini API and Google AI Studio. For developers, it points to going from an idea to an explorable prototype before writing engine code, and to building training environments for robots and agents.",
+      "sources": [
+        {
+          "candidate_id": "c_21ec57e4e0",
+          "url": "https://deepmind.google/blog/genie-4-a-new-generation-of-world-simulation/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://deepmind.google/blog/genie-4-a-new-generation-of-world-simulation/",
+          "quote": "With Genie 4, you can use natural language to modify a simulation in real-time — like changing the weather, moving the camera, or introducing a new person or object"
+        },
+        {
+          "url": "https://deepmind.google/blog/genie-4-a-new-generation-of-world-simulation/",
+          "quote": "Genie 4 is our first real-time world model to generate audio natively."
+        },
+        {
+          "url": "https://deepmind.google/blog/genie-4-a-new-generation-of-world-simulation/",
+          "quote": "Genie 4 has been released as a research preview to trusted testers, and is coming soon to Google AI Ultra subscribers in Project Genie and early access partners in the Gemini API and Google AI Studio."
+        },
+        {
+          "url": "https://deepmind.google/blog/genie-4-a-new-generation-of-world-simulation/",
+          "quote": "Game developers and creative technologists are testing Genie 4 to go from an initial idea to an explorable prototype in seconds, testing visual styles, material aesthetics, and interactive mechanics through natural language prompts before writing a single line of engine code."
+        },
+        {
+          "url": "https://deepmind.google/blog/genie-4-a-new-generation-of-world-simulation/",
+          "quote": "Genie 4 advances our ability to create safe, infinitely variable simulations that can help with everything from developing training environments for robots and agents to unlocking the creation of new interactive experiences."
+        }
+      ],
+      "tags": [
+        "模型",
+        "视频",
+        "多模态"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Anthropic reports early progress using Claude in drug development",
+      "summary": "Anthropic's life sciences team has partnered with six organizations developing new medicines: BigHat Biosciences, Bristol Myers Squibb, Divergence Labs, Enveda, Generate Biomedicines and The Column Group. Claude largely autonomously generated roughly 35,000 antibody designs in about a month, and in tests on 1,061 pages of manufacturing documentation it caught all 11 issues human reviewers had spotted, flagged more they had missed, and cut human review time by 89%; Anthropic has also acquired Mithril Medicine to run research programs of its own. Agents like Claude Code are now being put into real scientific design and compliance workflows, not just coding.",
+      "sources": [
+        {
+          "candidate_id": "c_352ed90f95",
+          "url": "https://www.anthropic.com/research/early-progress-drug-development"
+        },
+        {
+          "candidate_id": "c_352ed90f95",
+          "url": "https://news.ycombinator.com/item?id=50265609"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://www.anthropic.com/research/early-progress-drug-development",
+          "quote": "Over the past several months, our scientists have engaged in deep research partnerships with six organizations developing new medicines: BigHat Biosciences , Bristol Myers Squibb , Divergence Labs , Enveda , Generate Biomedicines , and The Column Group ."
+        },
+        {
+          "url": "https://www.anthropic.com/research/early-progress-drug-development",
+          "quote": "Claude converted Divergence Labs’ goals into a detailed design plan, and then, largely autonomously, generated roughly 35,000 antibody designs in about a month to be narrowed down and tested."
+        },
+        {
+          "url": "https://www.anthropic.com/research/early-progress-drug-development",
+          "quote": "Over tests on 1,061 pages of documentation, Claude caught all 11 issues that human reviewers had spotted—and flagged seven they’d missed. In the process, this method reduced human review time by 89%"
+        },
+        {
+          "url": "https://www.anthropic.com/research/early-progress-drug-development",
+          "quote": "We’ve acquired Mithril Medicine, a one-person company that has been developing treatments for two rare forms of muscular dystrophy."
+        },
+        {
+          "url": "https://www.anthropic.com/research/early-progress-drug-development",
+          "quote": "Six Generate scientists used Claude Code to propose new designs for this part."
+        }
+      ],
+      "tags": [
+        "Agent",
+        "行业"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Liquid AI releases LFM3, open-weight 2B-class models for the edge",
+      "summary": "Liquid AI's LFM3 is six 2B-class models (text, vision, audio, omni and decision) trained from one LFM3-1.7B-Base backbone, including its first omni model, LFM3-Omni-2B, and all are open-weight on Hugging Face. Liquid AI says LFM3-1.7B outperforms LFM2.5-2.6B with 35% fewer parameters, scoring 38.42 against 3.02 on WebArena-Verified, and the text model fits in about 1 GB at 4-bit precision. Every model can be fine-tuned on a single GPU, which makes the family a practical base for on-device voice, vision and agent tasks.",
+      "sources": [
+        {
+          "candidate_id": "c_5decb87306",
+          "url": "https://huggingface.co/blog/LiquidAI/lfm3"
+        },
+        {
+          "candidate_id": "c_d0558e1230",
+          "url": "https://huggingface.co/LiquidAI/LFM3-1.7B"
+        },
+        {
+          "candidate_id": "c_bc77794a31",
+          "url": "https://huggingface.co/LiquidAI/LFM3-Omni-2B-GGUF"
+        },
+        {
+          "candidate_id": "c_0ab7f95d51",
+          "url": "https://huggingface.co/LiquidAI/LFM3-Audio-2B"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/blog/LiquidAI/lfm3",
+          "quote": "a new tri-hybrid architecture and training recipe allow LFM3-1.7B to outperform LFM2.5-2.6B while using 35% fewer parameters."
+        },
+        {
+          "url": "https://huggingface.co/blog/LiquidAI/lfm3",
+          "quote": "six 2B-class models (text, vision, audio, omni, and decision) trained from LFM3-1.7B-Base, including our first omni model and video input for our vision model."
+        },
+        {
+          "url": "https://huggingface.co/blog/LiquidAI/lfm3",
+          "quote": "on WebArena-Verified, it scores 38.42 against 3.02"
+        },
+        {
+          "url": "https://huggingface.co/blog/LiquidAI/lfm3",
+          "quote": "the text model fits in about 1 GB at 4-bit precision"
+        },
+        {
+          "url": "https://huggingface.co/blog/LiquidAI/lfm3",
+          "quote": "All LFM3 models are open-weight and available on Hugging Face today"
+        },
+        {
+          "url": "https://huggingface.co/blog/LiquidAI/lfm3",
+          "quote": "Reach for LFM3-Omni-2B when you need one on-device model that sees, listens, and talks back"
+        },
+        {
+          "url": "https://huggingface.co/blog/LiquidAI/lfm3",
+          "quote": "Every model can be fine-tuned on a single GPU"
+        }
+      ],
+      "tags": [
+        "模型",
+        "开源",
+        "多模态"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Anthropic study: experts quietly defer to their AI agents' judgment",
+      "summary": "Anthropic asked 50 professional analysts with causal-inference experience to do a statistical analysis with Claude Code, randomly assigning which of two defensible options the agent would favor on each key decision. Across the four analytical choices, analysts went with the agent's lean 86% of the time versus the roughly 50% expected if it made no difference, and while 77% reused the agent's arguments, only 15% credited the agent. For teams relying on a human in the loop as a safeguard, the human sign-off may not be the independent check it is assumed to be.",
+      "sources": [
+        {
+          "candidate_id": "c_71bc47a32b",
+          "url": "https://www.anthropic.com/research/agents-judgment-calls"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://www.anthropic.com/research/agents-judgment-calls",
+          "quote": "we asked 50 professional analysts to do a realistic statistical analysis with Claude Code. They all had experience in causal inference"
+        },
+        {
+          "url": "https://www.anthropic.com/research/agents-judgment-calls",
+          "quote": "Across the four analytical choices, analysts went with their agent’s lean 86% of the time. If the agent’s input made no difference, we’d expect about 50%."
+        },
+        {
+          "url": "https://www.anthropic.com/research/agents-judgment-calls",
+          "quote": "77% of analysts used the agents’ own arguments—sometimes word for word—but only 15% credited the agent as the source of those arguments."
+        },
+        {
+          "url": "https://www.anthropic.com/research/agents-judgment-calls",
+          "quote": "Keeping a human in the loop assumes that the human’s judgment provides an independent check."
+        }
+      ],
+      "tags": [
+        "Agent",
+        "安全"
+      ]
+    },
+    {
+      "section": "model",
+      "title": "inclusionAI releases Ling-3.1-flash-1019 plus a base checkpoint",
+      "summary": "inclusionAI's Ling-3.1-flash-1019 is an upgraded Ling-3.1-flash with 560B total parameters, 25B active per token and a 1M-token context window, released alongside Ling-3.1-flash-base for continued pretraining and post-training research. The team reports AutomationBench-AA rising from 62% to 68% and a score of 44 on the Artificial Analysis Intelligence Index v4.3.2, up from 41. A day-0 SGLang image is available, and teams doing domain adaptation can start from the base model instead of the chat model.",
+      "sources": [
+        {
+          "candidate_id": "c_99bb8a4525",
+          "url": "https://huggingface.co/inclusionAI/Ling-3.1-flash-1019"
+        },
+        {
+          "candidate_id": "c_99bb8a4525",
+          "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xgpo4q/inclusionailing31flash1019_hugging_face/"
+        },
+        {
+          "candidate_id": "c_3072862142",
+          "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xgrr8n/ling31flash1019_weights_are_out_and_they_released/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/inclusionAI/Ling-3.1-flash-1019",
+          "quote": "We introduce Ling-3.1-flash-1019 , an upgraded version of Ling-3.1-flash , with 560B total parameters, 25B active parameters per token, and a 1M-token context window ."
+        },
+        {
+          "url": "https://huggingface.co/inclusionAI/Ling-3.1-flash-1019",
+          "quote": "The day-0 SGLang image includes Ling-3.1-flash support, MTP (NEXTN) speculative decoding, and Hopper decode optimizations"
+        }
+      ],
+      "tags": [
+        "模型",
+        "开源"
+      ]
+    },
+    {
+      "section": "model",
+      "title": "OpenBMB open-sources MiniCPM-OCR Jev, a model that grades OCR output",
+      "summary": "OpenBMB released MiniCPM-OCR 1.0, a 1.3B document parser, and MiniCPM-OCR Jev, a 2B model that takes a region image and a candidate OCR result for text, formulas or tables and returns a score from 0 to 1. Jev reaches a decision AUROC (×100) of 93.6 on JevOCRBench, close to Qwen3.5-397B-A17B at 93.8, can score output from other OCR parsers, and is released under the Apache License 2.0. RAG builders can use it to auto-accept reliable regions and route doubtful ones to human review before indexing.",
+      "sources": [
+        {
+          "candidate_id": "c_6d6537402a",
+          "url": "https://huggingface.co/openbmb/MiniCPM-OCR-Jev"
+        },
+        {
+          "candidate_id": "c_594c460c3a",
+          "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xgyqbb/openbmb_released_a_13b_ocr_model_and_a_separate/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/openbmb/MiniCPM-OCR-Jev",
+          "quote": "MiniCPM-OCR Jev is a 2B OCR quality-assessment model for text, formula, and table regions. Given a region image and a candidate OCR result, it returns a score from 0 to 1 — higher means the candidate is more likely correct."
+        },
+        {
+          "url": "https://huggingface.co/openbmb/MiniCPM-OCR-Jev",
+          "quote": "decision AUROC (×100) on JevOCRBench is 93.6 , above JEV-35B-A3B (90.1) and close to Qwen3.5-397B-A17B (93.8)."
+        },
+        {
+          "url": "https://huggingface.co/openbmb/MiniCPM-OCR-Jev",
+          "quote": "Model weights, code, and documentation are released under the Apache License 2.0 ."
+        }
+      ],
+      "tags": [
+        "模型",
+        "开源",
+        "多模态"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "TraceTrial-Bench measures agent harness reliability separately",
+      "summary": "TraceTrial-Bench splits harness reliability into seven components (context, execution, governance, lifecycle, observability, tools and verification) and scores agent task performance and harness reliability separately over 95 expert-level tasks. Across 4 harnesses, 9 models and 3,420 runs, macro-averaged harness scores range from 59.8% to 72.0%, and 31.1% of runs succeed at the task while failing at least one harness criterion. If you pick or build agent harnesses on success rate alone, you may miss real reliability problems.",
+      "sources": [
+        {
+          "candidate_id": "c_9cc807fd65",
+          "url": "https://huggingface.co/papers/2610.32285"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2610.32285",
+          "quote": "Across 4 harnesses, 9 models, and 95 tasks, our evaluation of 3,420 runs yields macro-averaged harness scores ranging from 59.8% to 72.0%, while 31.1% of runs achieve task success despite failing at least one harness criterion."
+        }
+      ],
+      "tags": [
+        "论文",
+        "Agent"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Trajectory2Gym trains tool-use agents only on grounded decisions",
+      "summary": "Trajectory2Gym argues that successful tool-use trajectories are not necessarily useful supervision: it builds executable interactions around under-supported multi-step dependencies and supervises only actions grounded in the history the agent could see. Across five Qwen3 scales it improves Tau1, Tau2 and BFCL at every scale, lifting the equal-weight three-benchmark mean by 16.9-29.8 percentage points, with the largest gains in stateful and multi-turn interaction. For teams curating agent fine-tuning data, constructing learnable interactions matters, not just collecting more successful runs.",
+      "sources": [
+        {
+          "candidate_id": "c_386e60631e",
+          "url": "https://huggingface.co/papers/2610.33568"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2610.33568",
+          "quote": "Across five Qwen3 scales, Trajectory2Gym improves Tau1, Tau2, and BFCL at every tested scale, increasing the equal-weight three-benchmark mean by 16.9-29.8 percentage points."
+        }
+      ],
+      "tags": [
+        "论文",
+        "Agent",
+        "训练"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "DynaFlow lets a main agent write its own multi-agent workflows",
+      "summary": "DynaFlow puts executable workflow synthesis into the main agent's action space: the agent decides when collaboration is needed and generates task-specific programs that coordinate fixed sub-agents in sequence or parallel, with information exchange and verification, and only the main agent is trained. Across six benchmarks in math reasoning, scientific QA and multi-hop retrieval, it reaches 88.08% overall accuracy in Forced mode, 10.90 points above the strongest baseline with the same Qwen3.5-27B backbone. It offers a learned alternative to hand-designed collaboration structures in multi-agent systems.",
+      "sources": [
+        {
+          "candidate_id": "c_a249187395",
+          "url": "https://huggingface.co/papers/2610.34467"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2610.34467",
+          "quote": "DynaFlow achieves 88.08% overall accuracy in Forced mode, outperforming the strongest evaluated baseline by 10.90 percentage points with the same Qwen3.5-27B backbone."
+        }
+      ],
+      "tags": [
+        "论文",
+        "Agent"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Codex 0.165.0 adds a built-in Vertex AI provider and GPT-6.1 Terra",
+      "summary": "OpenAI Codex 0.165.0 adds a built-in Google Cloud Vertex AI provider (model provider = \"gcp\") and puts GPT-6.1 Terra in the model catalogs; reasoning effort can now be changed mid-conversation by default on supported models, and memory v2 is on by default for fresh profiles, with import of external-agent memories. It also closes a marketplace URL validation gap that could let Git connect to a different host than the one checked against allowed patterns. Teams that route model access through GCP can now point Codex at Vertex AI directly.",
+      "sources": [
+        {
+          "candidate_id": "c_75a4054a20",
+          "url": "https://github.com/openai/codex/releases/tag/rust-v0.165.0"
+        }
+      ],
+      "evidence": [],
+      "tags": [
+        "工具",
+        "代码",
+        "Agent"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "Claude Code v2.1.312 stops overwriting very large CLAUDE.md files",
+      "summary": "Claude Code v2.1.312 fixes Claude overwriting a very large CLAUDE.md, rules file or @-included file after seeing only its start; Write now asks Claude to read it all or edit in place.",
+      "sources": [
+        {
+          "candidate_id": "c_d8153c13f8",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.312"
+        }
+      ],
+      "evidence": [],
+      "tags": [
+        "工具",
+        "代码"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "Anthropic offers US government partners a 40% discount on Claude",
+      "summary": "Anthropic expanded its partnership with the General Services Administration (GSA), giving government partners a 40% discount on Claude Enterprise, Claude for Government and the Claude API.",
+      "sources": [
+        {
+          "candidate_id": "c_3e55ee7687",
+          "url": "https://www.anthropic.com/news/expanding-partnership-gsa"
+        }
+      ],
+      "evidence": [],
+      "tags": [
+        "行业",
+        "产品"
+      ]
+    }
+  ],
+  "research": [
+    {
+      "via": "webfetch",
+      "url": "https://deepmind.google/blog/genie-4-a-new-generation-of-world-simulation/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://www.anthropic.com/research/early-progress-drug-development"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://www.anthropic.com/research/agents-judgment-calls"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://openai.com/index/oracle-apps-in-chatgpt"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/blog/LiquidAI/lfm3"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/inclusionAI/Ling-3.1-flash-1019"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/openbmb/MiniCPM-OCR-Jev"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.32285"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.33568"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.34467"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://stanforddaily.com/2026/10/27/professors-books-pirated-to-train-claude/"
+    },
+    {
+      "via": "websearch",
+      "query": "DeepSeek announcement October 27 2026"
+    }
+  ],
+  "lang": "en",
+  "validation": {
+    "validated_at": "2026-10-28T04:43:34+00:00",
+    "checked_links": false,
+    "dropped": [],
+    "warnings": []
+  }
+}
