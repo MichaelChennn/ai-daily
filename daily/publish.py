@@ -12,7 +12,7 @@ edit, and an API edit never replaces any edit, whichever was written first.
 
 The English edition (digest.en.json, `daily adopt --en`) goes with the main issue: it is written
 by the route that wrote the main issue (docs/adr/0001-two-editor-routes.md), so one from the other
-route, or for a fallback, is not taken.
+route (for the API route, the same model), or for a fallback, is not taken.
 """
 
 from __future__ import annotations
@@ -83,6 +83,8 @@ def goes_with(main: Any, en: dict[str, Any], candidates: dict[str, Any]) -> str 
         return "the main issue is a fallback"
     if digest.is_api(main) != digest.is_api(en):
         return "the main issue comes from the other route"
+    if digest.is_api(main) and main.get("model") != en.get("model"):
+        return "the main issue comes from another model"
     return None
 
 

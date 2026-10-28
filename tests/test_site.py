@@ -365,6 +365,10 @@ def test_decide_en_goes_with_the_main_issue():
     assert decide(fb, None, _en()) == (False, "the main issue is a fallback")
     assert decide(api, None, _en()) == (False, "the main issue comes from the other route")
     assert decide(api, None, _en(channel="api", model="gemini:x"))[0]
+    assert decide(api, None, _en(channel="api", model="nvidia:y")) == (
+        False,
+        "the main issue comes from another model",
+    )
 
     older = _en(generated_at="2026-10-19T21:40:00+00:00")
     newer = _en(generated_at="2026-10-19T22:00:00+00:00")

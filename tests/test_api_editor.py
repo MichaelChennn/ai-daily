@@ -3,7 +3,7 @@ import json
 import httpx
 import pytest
 
-from daily import api_editor, cli
+from daily import api_editor, cli, digest, publish
 from tests.test_digest import CANDIDATES, DATE, _digest
 
 CHAT = "integrate.api.nvidia.com/v1/chat/completions"
@@ -215,3 +215,81 @@ def test_edit_needs_a_known_provider_and_its_key(issue_dir, monkeypatch):
     monkeypatch.delenv("NVIDIA_API_KEY")
     assert cli.main([*base, MODEL]) == 2
     assert web.chats == []
+
+
+def _api_digest(issue_dir):
+    """The API digest that `edit` wrote, validated as it would be."""
+    data = _digest(channel="api", model=MODEL, generated_at="2026-10-20T03:40:00+00:00")
+    report = digest.validate(data, CANDIDATES)
+    path = issue_dir / "digest.api.deepseek.json"
+    path.write_text(json.dumps(digest.apply_report(data, report, checked_links=True), ensure_ascii=False))
+    return path
+
+
+ENGLISH = {
+    "highlights": ["OpenAI releases GPT-6 with a 1M token context."],
+    "items": [
+        {"n": 1, "title": "OpenAI releases GPT-6", "summary": "GPT-6 has a 1M token context window."},
+        {"n": "2", "title": "vLLM v0.12.0 supports GPT-6", "summary": "The release adds GPT-6 support."},
+        {"n": 3, "title": "Qwen3.5-72B goes open source", "summary": "Released under Apache-2.0."},
+        # GPT-7 is not in the material
+        {"n": 4, "title": "Scaling laws for agents", "summary": "Agents scale like GPT-7."},
+    ],
+}
+
+
+def _edit_en(issue_dir, web, monkeypatch, path):
+    monkeypatch.setattr(cli.pipeline, "make_client", web.client)
+    return cli.main(["edit", "--date", DATE, "--data-dir", str(issue_dir.parent), "--en", str(path)])
+
+
+def test_edit_en_writes_the_english_edition_in_one_request(issue_dir, slept, monkeypatch, capsys):
+    path = _api_digest(issue_dir)
+    web = FakeWeb([_reply(json.dumps(ENGLISH))])
+    assert _edit_en(issue_dir, web, monkeypatch, path) == 0
+
+    out = issue_dir / "digest.en.deepseek.json"
+    assert capsys.readouterr().out.strip() == str(out)
+    en, zh = json.loads(out.read_text()), json.loads(path.read_text())
+    assert (en["lang"], en["channel"], en["model"]) == ("en", "api", MODEL)
+    assert en["generated_at"] > zh["generated_at"]
+    assert [item["title"] for item in en["items"]] == [i["title"] for i in ENGLISH["items"][:3]]
+    assert en["items"][0]["sources"] == zh["items"][0]["sources"]  # only the writing changes
+    assert en["items"][0]["tags"] == zh["items"][0]["tags"]
+    assert en["highlights"] == ENGLISH["highlights"]
+    assert en["validation"]["checked_links"] is False
+    assert [d["title"] for d in en["validation"]["dropped"]] == ["Scaling laws for agents"]
+    assert publish.goes_with(zh, en, CANDIDATES) is None
+
+    assert len(web.chats) == 1
+    request = json.loads(web.chats[0].content)
+    assert request["model"] == "deepseek-ai/deepseek-v4.1-flash"
+    assert "英文版" in request["messages"][0]["content"] and "打分" not in request["messages"][0]["content"]
+    prompt = web.prompt(0)
+    assert "OpenAI 发布 GPT-6" not in prompt  # written from the material, not translated
+    assert "c_gpt" in prompt and "第 4 条（paper）" in prompt
+
+
+def test_edit_en_skips_a_digest_that_would_not_be_the_main_issue(issue_dir, slept, monkeypatch, capsys):
+    path = _api_digest(issue_dir)
+    (issue_dir / "digest.json").write_text(json.dumps(_digest(), ensure_ascii=False))  # a Claude edit
+    web = FakeWeb([])
+    assert _edit_en(issue_dir, web, monkeypatch, path) == 0
+    assert "would not be the main issue" in capsys.readouterr().err
+    assert web.chats == [] and not (issue_dir / "digest.en.deepseek.json").exists()
+
+
+def test_edit_en_fails_without_writing_when_validate_rejects_it(issue_dir, slept, monkeypatch):
+    path = _api_digest(issue_dir)
+    english = {**ENGLISH, "items": ENGLISH["items"][3:]}  # too few items left
+    web = FakeWeb([_reply(json.dumps(english))])
+    assert _edit_en(issue_dir, web, monkeypatch, path) == 1
+    assert not (issue_dir / "digest.en.deepseek.json").exists()
+
+
+def test_edit_en_highlights_that_fail_become_the_first_titles(issue_dir, slept, monkeypatch):
+    path = _api_digest(issue_dir)
+    web = FakeWeb([_reply(json.dumps({**ENGLISH, "highlights": ["OpenAI ships GPT-7."]}))])
+    assert _edit_en(issue_dir, web, monkeypatch, path) == 0
+    en = json.loads((issue_dir / "digest.en.deepseek.json").read_text())
+    assert en["highlights"] == [i["title"] for i in ENGLISH["items"][:3]]

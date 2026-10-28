@@ -60,6 +60,12 @@ def main(argv: list[str] | None = None) -> int:
         default=os.environ.get("EDITOR_API_MODEL"),
         help="厂商:模型，如 nvidia:deepseek-ai/deepseek-v4.1-flash（默认取 EDITOR_API_MODEL）",
     )
+    api.add_argument(
+        "--en",
+        type=Path,
+        metavar="API_DIGEST",
+        help="为这份 API digest 写英文版 digest.en.<slug>.json（模型取它的 model）；它不会成为主版时跳过",
+    )
 
     data = commands.add_parser("export", help="已发布各期 → JSON 和 RSS，给网页前端（web/）用")
     data.add_argument("--data-dir", type=Path, default=DEFAULT_DATA_DIR, help="数据目录")
@@ -271,6 +277,8 @@ def _adopt(args: argparse.Namespace) -> int:
 def _edit(args: argparse.Namespace) -> int:
     issue_dir = _issue_dir(args)
     candidates = _read(issue_dir / "candidates.json")
+    if args.en:
+        return _edit_en(args, issue_dir, candidates)
     try:
         api_editor.resolve(args.model or "")
     except api_editor.EditorError as exc:
@@ -289,6 +297,39 @@ def _edit(args: argparse.Namespace) -> int:
     path = issue_dir / f"digest.api.{api_editor.slug(args.model)}.json"
     _write(path, data)
     print(f"{args.model}: {len(data['items'])} items", file=sys.stderr)
+    print(path)
+    return 0
+
+
+def _edit_en(args: argparse.Namespace, issue_dir: Path, candidates: dict[str, Any]) -> int:
+    """The English edition goes with the main issue, so it is only written for the API digest that
+    adopt would make the main issue now; a Claude edit ingested later replaces both."""
+    main = _read(args.en)
+    current_path = issue_dir / "digest.json"
+    current = _read(current_path) if current_path.exists() else None
+    adopted, reason = publish.decide(current, main, candidates)
+    if adopted is None:
+        print(f"{args.en.name} would not be the main issue ({reason}): no English edition", file=sys.stderr)
+        return 0
+    model = main.get("model") or ""
+    try:
+        api_editor.resolve(model)
+    except api_editor.EditorError as exc:
+        print(exc, file=sys.stderr)
+        return 2
+
+    async def run() -> dict[str, Any]:
+        async with pipeline.make_client() as client:
+            return await api_editor.write_en(adopted, candidates, model, client)
+
+    try:
+        data = asyncio.run(run())
+    except api_editor.EditorError as exc:
+        print(f"{model}: no English edition: {exc}", file=sys.stderr)
+        return 1
+    path = issue_dir / f"digest.en.{api_editor.slug(model)}.json"
+    _write(path, data)
+    print(f"{model}: {len(data['items'])} items in English", file=sys.stderr)
     print(path)
     return 0
 

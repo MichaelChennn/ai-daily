@@ -3,6 +3,8 @@
 # (a beta on the site). `daily adopt` then makes the first one that passed the main issue if the
 # Claude route has not delivered: Claude route > API route > fallback, and a Claude edit that
 # arrives later through ingest.yml still replaces it.
+# The English edition goes with the main issue: the first model that passes also writes
+# digest.en.json, one more request, when its digest would become the main issue (`daily edit --en`).
 #
 # Configuration (Settings -> Secrets and variables -> Actions):
 #   secrets    GEMINI_API_KEY, NVIDIA_API_KEY
@@ -82,6 +84,15 @@ jobs:
             if path=$(uv run python -m daily edit --date "$date" --model "$model"); then
               n=$((n + 1))
               cp "$path" "$RUNNER_TEMP/api/$n-$(basename "$path")" # numbered: the priority order
+              # Only the first one can become the main issue. A failed English edition does not fail
+              # the job: the English page then shows the original titles.
+              if [ "$n" = 1 ]; then
+                if en=$(uv run python -m daily edit --date "$date" --en "$path"); then
+                  if [ -n "$en" ]; then cp "$en" "$RUNNER_TEMP/api/en.json"; fi
+                else
+                  echo "::warning::$model did not produce a valid English edition for $date"
+                fi
+              fi
             else
               echo "::error::$model did not produce a valid digest for $date"
               failed=1
@@ -130,7 +141,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          files=$(ls "$RUNNER_TEMP/api" 2>/dev/null | sort -n)
+          files=$(cd "$RUNNER_TEMP/api" 2>/dev/null && ls [0-9]*-*.json 2>/dev/null | sort -n || true)
           [ -z "$files" ] && exit 0
           for attempt in 1 2 3; do
             git fetch --no-tags origin main && git reset --hard origin/main
@@ -138,6 +149,10 @@ jobs:
               cp "$RUNNER_TEMP/api/$file" "data/$DATE/${file#*-}"
               uv run python -m daily adopt --date "$DATE" --from "data/$DATE/${file#*-}"
             done
+            # Taken only when its digest did become the main issue (publish.goes_with).
+            if [ -f "$RUNNER_TEMP/api/en.json" ]; then
+              uv run python -m daily adopt --date "$DATE" --en --from "$RUNNER_TEMP/api/en.json"
+            fi
             git add "data/$DATE"
             git diff --cached --quiet && exit 0
             git commit -m "digest: $DATE (from the API route)"
