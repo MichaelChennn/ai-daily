@@ -224,6 +224,8 @@ class Chat:
             "messages": messages,
             "max_tokens": MAX_TOKENS,
             "stream": True,
+            # Every reply is a JSON object: JSON mode has the provider hold the model to valid JSON.
+            "response_format": {"type": "json_object"},
         }
         for attempt in range(1, RETRIES + 2):
             wait = self.last_request + self.provider.min_interval - time.monotonic()

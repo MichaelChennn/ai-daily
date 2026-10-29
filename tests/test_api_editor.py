@@ -150,6 +150,7 @@ def test_edit_picks_writes_and_fixes_in_three_requests(issue_dir, slept, monkeyp
     assert len(web.chats) == 3
     request = json.loads(web.chats[0].content)
     assert request["model"] == "deepseek-ai/deepseek-v4.1-flash" and request["stream"] is True
+    assert request["response_format"] == {"type": "json_object"}
     assert "tools" not in request
     assert web.chats[0].headers["authorization"] == "Bearer nvapi-test"
     system = request["messages"][0]["content"]
