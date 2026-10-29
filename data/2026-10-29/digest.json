@@ -1,0 +1,417 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-29",
+  "mode": "full",
+  "generated_at": "2026-10-29T04:41:07+00:00",
+  "model": "claude-opus-5-5",
+  "highlights": [
+    "Google DeepMind 发布前沿模型 Gemini 4 Carbon，主打网络安全和长时程任务，本周先向部分网络安全防御者开放。",
+    "NVIDIA 放出开放权重语音模型 Nemotron 3.5 Transcribe，一个模型覆盖 40 种语言的转写、翻译和说话人标注。",
+    "Cursor 开放内部用来构建 Bugbot 等 Agent 的 Agent SDK，今天起正式可用。"
+  ],
+  "items": [
+    {
+      "section": "headline",
+      "title": "Google DeepMind 发布 Gemini 4 Carbon，先向网络安全防御者开放",
+      "summary": "Gemini 4 Carbon 是 Google 继两周前的 Gemini 4 Argon 之后的新前沿模型，在 Artificial Analysis Intelligence Index v5.0 上以 59 分排第一，SEC-bench Pro、ExploitGym、CWE-bench 分别为 88.2%、54.8%、71.0%。本周只向部分网络安全防御者开放，再通过 Fairwind Program 逐步扩大，面向开发者的上线时间未定；介绍期价格与 Argon 相同，为每百万 token 输入 $2、输出 $10。",
+      "sources": [
+        {
+          "candidate_id": "c_66698da7b3",
+          "url": "https://deepmind.google/blog/gemini-4-carbon-our-next-frontier-model/"
+        },
+        {
+          "candidate_id": "c_8cd3da5390",
+          "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-carbon/"
+        },
+        {
+          "candidate_id": "c_8cd3da5390",
+          "url": "https://news.ycombinator.com/item?id=50276792"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-carbon/",
+          "quote": "Carbon ranks #1 on the recently updated v5.0 of Artificial Analysis Intelligence Index at 59."
+        },
+        {
+          "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-carbon/",
+          "quote": "landing a firm lead in SEC-bench Pro (88.2%) for finding vulnerabilities, ExploitGym (54.8%) for exploitation, and CWE-bench (71.0%) for patching."
+        },
+        {
+          "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-carbon/",
+          "quote": "Building on Gemini 4 Argon , which was launched two weeks ago"
+        },
+        {
+          "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-carbon/",
+          "quote": "Starting this week, we will make Carbon available to a subset of cyber defenders and will gradually phase access to additional trusted partners through our Fairwind Program ."
+        },
+        {
+          "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-carbon/",
+          "quote": "Gemini 4 Carbon will launch at the same introductory price 1 as Argon at $2 per million input tokens and $10 per million output tokens"
+        }
+      ],
+      "tags": [
+        "模型",
+        "安全",
+        "产品"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "NVIDIA 发布开放权重语音模型 Nemotron 3.5 Transcribe",
+      "summary": "Nemotron 3.5 Transcribe 用一个模型完成转写、翻译、说话人标注和音频问答：支持 40 种语言转写，可处理最长一小时、最多八名说话人的录音，30B 参数中每个 token 只激活约 4B；在 Open ASR 英文榜上以 5.33% 平均 WER 位列开放权重模型第一。它面向录音而非实时流，可以用自然语言提示控制输出；同时发布的 Granary v2 数据集覆盖 463,062 小时、48 种语言，可用于做领域适配。",
+      "sources": [
+        {
+          "candidate_id": "c_9bb2f7ad59",
+          "url": "https://huggingface.co/blog/nvidia/nemotron-transcribe-granary"
+        },
+        {
+          "candidate_id": "c_dc872be8d3",
+          "url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Transcribe-30B-A4B"
+        },
+        {
+          "candidate_id": "c_9bb2f7ad59",
+          "url": "https://news.ycombinator.com/item?id=50275128"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/blog/nvidia/nemotron-transcribe-granary",
+          "quote": "it transcribes 40 languages, translates 31 of them to or from English, and attributes speakers in 13. It handles recordings up to an hour long and labels up to eight speakers."
+        },
+        {
+          "url": "https://huggingface.co/blog/nvidia/nemotron-transcribe-granary",
+          "quote": "so only about 4B of its 30B parameters are active per token."
+        },
+        {
+          "url": "https://huggingface.co/blog/nvidia/nemotron-transcribe-granary",
+          "quote": "Hugging Face Open ASR Leaderboard. The leaderboard measures transcription accuracy as word error rate (WER) on public test sets, in three tracks: English: first among open-weight models at 5.33% average WER"
+        },
+        {
+          "url": "https://huggingface.co/blog/nvidia/nemotron-transcribe-granary",
+          "quote": "Transcribe is built for recorded audio, not live streaming."
+        },
+        {
+          "url": "https://huggingface.co/blog/nvidia/nemotron-transcribe-granary",
+          "quote": "The public manifest covers 463,062 hours across 48 languages and 16 source corpora, up from 25 languages in Granary v1 ."
+        }
+      ],
+      "tags": [
+        "语音",
+        "模型",
+        "开源"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Cursor 开放 Agent SDK：用代码定义和部署 Agent",
+      "summary": "Cursor 发布 Agent SDK，也就是它自己构建 Bugbot、Security Reviewer、Rollouts 等托管 Agent 的框架，今天起正式可用。Agent 用代码定义，自带 evals 和事件回放，可以一条命令部署到 Cursor 的基础设施，也可以作为单个 Node 进程打包进容器自托管。想把代码评审、发布流程交给 Agent 的团队，可以像普通软件项目一样对 Agent 做版本控制和评审。",
+      "sources": [
+        {
+          "candidate_id": "c_53c358b038",
+          "url": "https://cursor.com/blog/agent-sdk"
+        },
+        {
+          "candidate_id": "c_53c358b038",
+          "url": "https://news.ycombinator.com/item?id=50273731"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://cursor.com/blog/agent-sdk",
+          "quote": "Today, we're releasing the Agent SDK, the framework we use to build our own managed agents like Bugbot, Security Reviewer, and Rollouts. Agent SDK allows you to define agents in code and manage them like any other software project."
+        },
+        {
+          "url": "https://cursor.com/blog/agent-sdk",
+          "quote": "The Agent SDK also supports evals and event replay out of the box"
+        },
+        {
+          "url": "https://cursor.com/blog/agent-sdk",
+          "quote": "Each agent runs as a single Node process that can be packaged in a container."
+        },
+        {
+          "url": "https://cursor.com/blog/agent-sdk",
+          "quote": "The Agent SDK is generally available today."
+        }
+      ],
+      "tags": [
+        "Agent",
+        "工具",
+        "代码"
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Google 发布统一多模态嵌入模型 EmbeddingGemma 2",
+      "summary": "EmbeddingGemma 2 是开放的多模态嵌入模型，把文本、图像、音频、视频及其组合映射到同一个向量空间；论文称它在各模态的嵌入基准上胜过专用模型和更大的模型。它支持按需加载模态编码器、调整视觉 token 预算、截断嵌入维度和量化权重，适合在资源受限的环境里做跨模态检索。",
+      "sources": [
+        {
+          "candidate_id": "c_ce91740bf8",
+          "url": "https://huggingface.co/google/embeddinggemma-2"
+        },
+        {
+          "candidate_id": "c_7239a61f04",
+          "url": "https://huggingface.co/papers/2610.37364"
+        },
+        {
+          "url": "https://arxiv.org/abs/2610.37364",
+          "title": "arXiv"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.37364",
+          "quote": "We present EmbeddingGemma 2, an open multimodal embedding model which natively represents text, images, audio, video, and combinations thereof in a unified spac"
+        },
+        {
+          "url": "https://arxiv.org/abs/2610.37364",
+          "quote": "supporting selective modality encoder loading, adjustable vision token budgets, truncatable embedding dimensions, and quantized weights."
+        }
+      ],
+      "tags": [
+        "模型",
+        "多模态",
+        "开源"
+      ]
+    },
+    {
+      "section": "model",
+      "title": "DiffuSpace 发布扩散语言模型 Clover-35B-A3B-Preview",
+      "summary": "Clover-35B-A3B-Preview 由 Qwen3.6-35B-A3B 改造而来，用块扩散方式生成文本，35B 参数的 MoE 每个 token 激活约 3B，上下文 128K，许可证沿用 Apache-2.0。官方推荐用其 SGLang 实现部署和评测，想试扩散语言模型的开发者可以直接拿来跑。",
+      "sources": [
+        {
+          "candidate_id": "c_a51aa314b9",
+          "url": "https://huggingface.co/Diffuspace/Clover-35B-A3B-Preview"
+        },
+        {
+          "candidate_id": "c_a51aa314b9",
+          "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xhinyj/diffuspaceclover35ba3bpreview_hugging_face/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/Diffuspace/Clover-35B-A3B-Preview",
+          "quote": "Clover is a text-only model derived from Qwen3.6-35B-A3B"
+        },
+        {
+          "url": "https://huggingface.co/Diffuspace/Clover-35B-A3B-Preview",
+          "quote": "Upstream model assets are Copyright 2026 Alibaba Cloud and distributed under Apache-2.0"
+        },
+        {
+          "url": "https://huggingface.co/Diffuspace/Clover-35B-A3B-Preview",
+          "quote": "We recommend our official SGLang implementation for serving and evaluation."
+        }
+      ],
+      "tags": [
+        "模型",
+        "开源"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Memory Tax：很多 Agent 记忆系统不如朴素 RAG",
+      "summary": "一项研究在多个基准和模型上评测 Agent 记忆系统，发现很多专门的记忆系统在不少情况下不如直接对原始历史做朴素 RAG。作者把记忆相对直接检索的得失拆成“记忆收益”和“记忆税”，指出整理事实、提炼偏好时可能删掉或掩盖证据。给 Agent 加记忆模块前，值得先拿 RAG 做基线比一比。",
+      "sources": [
+        {
+          "candidate_id": "c_4c73f59739",
+          "url": "https://huggingface.co/papers/2610.34073"
+        },
+        {
+          "url": "https://arxiv.org/abs/2610.34073",
+          "title": "arXiv"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.34073",
+          "quote": "Through a large-scale evaluation across multiple benchmarks and model backbones, we find many dedicated memory systems underperform naive RAG in many cases, indicating a negative net value."
+        }
+      ],
+      "tags": [
+        "论文",
+        "Agent"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "腾讯混元开源交互式世界模型 Hy-Nomas",
+      "summary": "Hy-Nomas 是基于 8B 扩散主干的视频世界模型，支持多轮自由文本指令和连续相机控制，按当前输入和缓存的历史生成变长片段。团队放出了权重、代码、评测基准和轻量适配流程，做交互式视频生成的开发者可以直接复现和微调。",
+      "sources": [
+        {
+          "candidate_id": "c_d350ced903",
+          "url": "https://huggingface.co/papers/2610.36729"
+        },
+        {
+          "candidate_id": "c_cb6d643d1c",
+          "url": "https://huggingface.co/tencent/Hy-Nomas"
+        },
+        {
+          "url": "https://arxiv.org/abs/2610.36729",
+          "title": "arXiv"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.36729",
+          "quote": "We present Hy-Nomas, a video world model with an 8B diffusion backbone that supports free-form text instructions and continuous camera control across multiple i"
+        },
+        {
+          "url": "https://arxiv.org/abs/2610.36729",
+          "quote": "We release model weights, code and benchmarks, together with a lightweight adaptation workflow"
+        }
+      ],
+      "tags": [
+        "论文",
+        "视频",
+        "开源"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "MPO：在“轮”的粒度上做长程 Agent 强化学习",
+      "summary": "作者观察到长程 Agent 训练中 critic 值主要在轮与轮之间变化，于是提出 Multiscale Policy Optimization（MPO），结合多尺度优势估计和轮级重要性采样，把信用分配和策略更新对齐到轮的粒度。在搜索、工具调用和自动化任务上，用 4B 和 30B-A3B 模型都稳定超过强 RL 基线，对训练多轮工具调用 Agent 有参考价值。",
+      "sources": [
+        {
+          "candidate_id": "c_90efaf9260",
+          "url": "https://huggingface.co/papers/2610.35013"
+        },
+        {
+          "url": "https://arxiv.org/abs/2610.35013",
+          "title": "arXiv"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.35013",
+          "quote": "We propose Multiscale Policy Optimization (MPO), combining Multiscale Advantage Estimation (MAE) and turn-level importance sampling to align credit assignment a"
+        },
+        {
+          "url": "https://arxiv.org/abs/2610.35013",
+          "quote": "Extensive experiments across search, tool-use, and automation tasks with 4B and 30B-A3B models demonstrate consistent gains over strong RL baselines."
+        }
+      ],
+      "tags": [
+        "论文",
+        "Agent",
+        "训练"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "PyTorch 2.15.0 正式发布，重写的 NCCL 后端成为默认",
+      "summary": "PyTorch 2.15.0 默认启用重写的 NCCL 后端，挂起时由 flight recorder 转储，并保留回退路径；torch.distributed 新增单边传输和 NIXL 后端，NVIDIA Blackwell 上的 NVFP4 解码更快。默认 wheel 改为 CUDA 13.2，做分布式训练的团队升级前要留意 NCCL 行为变化。",
+      "sources": [
+        {
+          "candidate_id": "c_50ef8bf830",
+          "url": "https://github.com/pytorch/pytorch/releases/tag/v2.15.0"
+        }
+      ],
+      "evidence": [],
+      "tags": [
+        "工具",
+        "训练",
+        "硬件"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "llama.cpp v0.8.0 支持 LFM3 全系并加入实时语音接口",
+      "summary": "llama.cpp v0.8.0 加入 LiquidAI LFM3 系列（文本、视觉、音频和全模态），server 新增 /v1/realtime 和 /tts 端点，可以直接做实时语音输入输出；同时 ggml 升级到 v0.28.0，UI 也能直接从 HF Hub 浏览和下载模型。在本地做语音应用的开发者可以直接接入 llama.cpp server。",
+      "sources": [
+        {
+          "candidate_id": "c_8c03f8a134",
+          "url": "https://github.com/ggml-org/llama.cpp/releases/tag/v0.8.0"
+        }
+      ],
+      "evidence": [],
+      "tags": [
+        "工具",
+        "语音",
+        "推理"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "Surge AI 发布税务 Agent 基准 DAYJOB: Tax",
+      "summary": "50 个专业税务任务中，排名第一的 Claude Sonnet 5.5 通过率仅 10.8%（pass@1，95% 评分阈值）。",
+      "sources": [
+        {
+          "candidate_id": "c_4ff53c83a5",
+          "url": "https://surgehq.ai/blog/dayjob-tax"
+        },
+        {
+          "candidate_id": "c_4ff53c83a5",
+          "url": "https://news.ycombinator.com/item?id=50275626"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://surgehq.ai/blog/dayjob-tax",
+          "quote": "The benchmark contains 50 environments across eight areas of tax practice."
+        },
+        {
+          "url": "https://surgehq.ai/blog/dayjob-tax",
+          "quote": "Claude Sonnet 5.5 leads with a 10.8% pass rate on the DAYJOB: Tax leaderboard , followed by Claude Fable 5.1 at 9.6% and Claude Opus 5.5 at 9.2%. We report pass@1 at a 95% rubric threshold."
+        }
+      ],
+      "tags": [
+        "Agent",
+        "行业"
+      ]
+    }
+  ],
+  "research": [
+    {
+      "via": "webfetch",
+      "url": "https://deepmind.google/blog/gemini-4-carbon-our-next-frontier-model/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/blog/nvidia/nemotron-transcribe-granary"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://cursor.com/blog/agent-sdk"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-carbon/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/Diffuspace/Clover-35B-A3B-Preview"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://surgehq.ai/blog/dayjob-tax"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://arxiv.org/abs/2610.37364"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://arxiv.org/abs/2610.34073"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://arxiv.org/abs/2610.36729"
+    },
+    {
+      "via": "websearch",
+      "query": "DeepSeek announcement October 2026"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://arxiv.org/abs/2610.35013"
+    }
+  ],
+  "validation": {
+    "validated_at": "2026-10-29T04:42:25+00:00",
+    "checked_links": true,
+    "dropped": [],
+    "warnings": [
+      "DiffuSpace 发布扩散语言模型 Clover-35B-A3B-Preview: could not check https://www.reddit.com/r/LocalLLaMA/comments/1xhinyj/diffuspaceclover35ba3bpreview_hugging_face/ (403)"
+    ]
+  }
+}

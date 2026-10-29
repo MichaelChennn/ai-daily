@@ -1,0 +1,416 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-29",
+  "mode": "full",
+  "generated_at": "2026-10-29T04:42:43+00:00",
+  "model": "claude-opus-5-5",
+  "highlights": [
+    "Google DeepMind announced Gemini 4 Carbon, a frontier model focused on cybersecurity and long-horizon tasks, available first to a subset of cyber defenders.",
+    "NVIDIA released Nemotron 3.5 Transcribe, one open-weight model for transcription in 40 languages, translation and speaker attribution.",
+    "Cursor made its Agent SDK, the framework behind Bugbot, generally available."
+  ],
+  "items": [
+    {
+      "section": "headline",
+      "title": "Google DeepMind announces Gemini 4 Carbon, starting with cyber defenders",
+      "summary": "Gemini 4 Carbon follows Gemini 4 Argon, launched two weeks ago, and ranks #1 on v5.0 of the Artificial Analysis Intelligence Index at 59, with 88.2% on SEC-bench Pro, 54.8% on ExploitGym and 71.0% on CWE-bench. Access starts this week with a subset of cyber defenders and expands through the Fairwind Program; there is no date yet for developers, and the introductory price matches Argon at $2 per million input tokens and $10 per million output tokens.",
+      "sources": [
+        {
+          "candidate_id": "c_66698da7b3",
+          "url": "https://deepmind.google/blog/gemini-4-carbon-our-next-frontier-model/"
+        },
+        {
+          "candidate_id": "c_8cd3da5390",
+          "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-carbon/"
+        },
+        {
+          "candidate_id": "c_8cd3da5390",
+          "url": "https://news.ycombinator.com/item?id=50276792"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-carbon/",
+          "quote": "Carbon ranks #1 on the recently updated v5.0 of Artificial Analysis Intelligence Index at 59."
+        },
+        {
+          "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-carbon/",
+          "quote": "landing a firm lead in SEC-bench Pro (88.2%) for finding vulnerabilities, ExploitGym (54.8%) for exploitation, and CWE-bench (71.0%) for patching."
+        },
+        {
+          "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-carbon/",
+          "quote": "Building on Gemini 4 Argon , which was launched two weeks ago"
+        },
+        {
+          "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-carbon/",
+          "quote": "Starting this week, we will make Carbon available to a subset of cyber defenders and will gradually phase access to additional trusted partners through our Fairwind Program ."
+        },
+        {
+          "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-carbon/",
+          "quote": "Gemini 4 Carbon will launch at the same introductory price 1 as Argon at $2 per million input tokens and $10 per million output tokens"
+        }
+      ],
+      "tags": [
+        "模型",
+        "安全",
+        "产品"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "NVIDIA releases open-weight ASR model Nemotron 3.5 Transcribe",
+      "summary": "Nemotron 3.5 Transcribe handles transcription, translation, speaker attribution and audio question answering in one checkpoint: it transcribes 40 languages, handles recordings up to an hour long with up to eight speakers, and activates about 4B of its 30B parameters per token. It is first among open-weight models on the Open ASR English leaderboard at 5.33% average WER; it targets recorded audio rather than live streaming, and the accompanying Granary v2 dataset (463,062 hours, 48 languages) supports domain adaptation.",
+      "sources": [
+        {
+          "candidate_id": "c_9bb2f7ad59",
+          "url": "https://huggingface.co/blog/nvidia/nemotron-transcribe-granary"
+        },
+        {
+          "candidate_id": "c_dc872be8d3",
+          "url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Transcribe-30B-A4B"
+        },
+        {
+          "candidate_id": "c_9bb2f7ad59",
+          "url": "https://news.ycombinator.com/item?id=50275128"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/blog/nvidia/nemotron-transcribe-granary",
+          "quote": "it transcribes 40 languages, translates 31 of them to or from English, and attributes speakers in 13. It handles recordings up to an hour long and labels up to eight speakers."
+        },
+        {
+          "url": "https://huggingface.co/blog/nvidia/nemotron-transcribe-granary",
+          "quote": "so only about 4B of its 30B parameters are active per token."
+        },
+        {
+          "url": "https://huggingface.co/blog/nvidia/nemotron-transcribe-granary",
+          "quote": "Hugging Face Open ASR Leaderboard. The leaderboard measures transcription accuracy as word error rate (WER) on public test sets, in three tracks: English: first among open-weight models at 5.33% average WER"
+        },
+        {
+          "url": "https://huggingface.co/blog/nvidia/nemotron-transcribe-granary",
+          "quote": "Transcribe is built for recorded audio, not live streaming."
+        },
+        {
+          "url": "https://huggingface.co/blog/nvidia/nemotron-transcribe-granary",
+          "quote": "The public manifest covers 463,062 hours across 48 languages and 16 source corpora, up from 25 languages in Granary v1 ."
+        }
+      ],
+      "tags": [
+        "语音",
+        "模型",
+        "开源"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Cursor makes its Agent SDK generally available",
+      "summary": "The Agent SDK is the framework Cursor uses to build its own managed agents such as Bugbot, Security Reviewer and Rollouts. Agents are defined in code with evals and event replay built in, and can be deployed to Cursor's infrastructure or self-hosted as a single Node process in a container. Teams can put review and release agents under version control and code review like any other software project.",
+      "sources": [
+        {
+          "candidate_id": "c_53c358b038",
+          "url": "https://cursor.com/blog/agent-sdk"
+        },
+        {
+          "candidate_id": "c_53c358b038",
+          "url": "https://news.ycombinator.com/item?id=50273731"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://cursor.com/blog/agent-sdk",
+          "quote": "Today, we're releasing the Agent SDK, the framework we use to build our own managed agents like Bugbot, Security Reviewer, and Rollouts. Agent SDK allows you to define agents in code and manage them like any other software project."
+        },
+        {
+          "url": "https://cursor.com/blog/agent-sdk",
+          "quote": "The Agent SDK also supports evals and event replay out of the box"
+        },
+        {
+          "url": "https://cursor.com/blog/agent-sdk",
+          "quote": "Each agent runs as a single Node process that can be packaged in a container."
+        },
+        {
+          "url": "https://cursor.com/blog/agent-sdk",
+          "quote": "The Agent SDK is generally available today."
+        }
+      ],
+      "tags": [
+        "Agent",
+        "工具",
+        "代码"
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Google releases EmbeddingGemma 2, a unified multimodal embedding model",
+      "summary": "EmbeddingGemma 2 is an open embedding model that represents text, images, audio, video and their combinations in one space, and the paper reports it outperforms specialist models and larger models across modalities. Selective encoder loading, adjustable vision token budgets, truncatable dimensions and quantized weights make it practical for cross-modal retrieval on constrained hardware.",
+      "sources": [
+        {
+          "candidate_id": "c_ce91740bf8",
+          "url": "https://huggingface.co/google/embeddinggemma-2"
+        },
+        {
+          "candidate_id": "c_7239a61f04",
+          "url": "https://huggingface.co/papers/2610.37364"
+        },
+        {
+          "url": "https://arxiv.org/abs/2610.37364",
+          "title": "arXiv"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.37364",
+          "quote": "We present EmbeddingGemma 2, an open multimodal embedding model which natively represents text, images, audio, video, and combinations thereof in a unified spac"
+        },
+        {
+          "url": "https://arxiv.org/abs/2610.37364",
+          "quote": "supporting selective modality encoder loading, adjustable vision token budgets, truncatable embedding dimensions, and quantized weights."
+        }
+      ],
+      "tags": [
+        "模型",
+        "多模态",
+        "开源"
+      ]
+    },
+    {
+      "section": "model",
+      "title": "DiffuSpace releases diffusion language model Clover-35B-A3B-Preview",
+      "summary": "Clover-35B-A3B-Preview is derived from Qwen3.6-35B-A3B and generates text with block diffusion, using a 35B mixture-of-experts backbone with about 3B active parameters per token and a 128K context, under Apache-2.0. The team recommends its official SGLang implementation for serving, giving developers an easy way to try a diffusion LLM.",
+      "sources": [
+        {
+          "candidate_id": "c_a51aa314b9",
+          "url": "https://huggingface.co/Diffuspace/Clover-35B-A3B-Preview"
+        },
+        {
+          "candidate_id": "c_a51aa314b9",
+          "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xhinyj/diffuspaceclover35ba3bpreview_hugging_face/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/Diffuspace/Clover-35B-A3B-Preview",
+          "quote": "Clover is a text-only model derived from Qwen3.6-35B-A3B"
+        },
+        {
+          "url": "https://huggingface.co/Diffuspace/Clover-35B-A3B-Preview",
+          "quote": "Upstream model assets are Copyright 2026 Alibaba Cloud and distributed under Apache-2.0"
+        },
+        {
+          "url": "https://huggingface.co/Diffuspace/Clover-35B-A3B-Preview",
+          "quote": "We recommend our official SGLang implementation for serving and evaluation."
+        }
+      ],
+      "tags": [
+        "模型",
+        "开源"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Memory Tax: many agent memory systems underperform naive RAG",
+      "summary": "A large-scale evaluation across benchmarks and model backbones finds that many dedicated agent memory systems underperform naive RAG over raw history in many cases. The authors split memory's net value into memory benefit and memory tax, the evidence lost when memory reorganizes facts or distills preferences; anyone adding a memory module should benchmark it against plain RAG first.",
+      "sources": [
+        {
+          "candidate_id": "c_4c73f59739",
+          "url": "https://huggingface.co/papers/2610.34073"
+        },
+        {
+          "url": "https://arxiv.org/abs/2610.34073",
+          "title": "arXiv"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.34073",
+          "quote": "Through a large-scale evaluation across multiple benchmarks and model backbones, we find many dedicated memory systems underperform naive RAG in many cases, indicating a negative net value."
+        }
+      ],
+      "tags": [
+        "论文",
+        "Agent"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Tencent Hunyuan open-sources interactive world model Hy-Nomas",
+      "summary": "Hy-Nomas is a video world model with an 8B diffusion backbone that follows free-form text instructions and continuous camera control across multiple turns, generating variable-length segments from current inputs and cached history. Weights, code, benchmarks and a lightweight adaptation workflow are released, so interactive video work can be reproduced and adapted.",
+      "sources": [
+        {
+          "candidate_id": "c_d350ced903",
+          "url": "https://huggingface.co/papers/2610.36729"
+        },
+        {
+          "candidate_id": "c_cb6d643d1c",
+          "url": "https://huggingface.co/tencent/Hy-Nomas"
+        },
+        {
+          "url": "https://arxiv.org/abs/2610.36729",
+          "title": "arXiv"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.36729",
+          "quote": "We present Hy-Nomas, a video world model with an 8B diffusion backbone that supports free-form text instructions and continuous camera control across multiple i"
+        },
+        {
+          "url": "https://arxiv.org/abs/2610.36729",
+          "quote": "We release model weights, code and benchmarks, together with a lightweight adaptation workflow"
+        }
+      ],
+      "tags": [
+        "论文",
+        "视频",
+        "开源"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "MPO aligns RL for long-horizon agents at the turn level",
+      "summary": "Observing that critic values vary mainly across turns, the authors propose Multiscale Policy Optimization (MPO), combining Multiscale Advantage Estimation with turn-level importance sampling. It shows consistent gains over strong RL baselines on search, tool-use and automation tasks with 4B and 30B-A3B models, which is relevant for training multi-turn tool-calling agents.",
+      "sources": [
+        {
+          "candidate_id": "c_90efaf9260",
+          "url": "https://huggingface.co/papers/2610.35013"
+        },
+        {
+          "url": "https://arxiv.org/abs/2610.35013",
+          "title": "arXiv"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.35013",
+          "quote": "We propose Multiscale Policy Optimization (MPO), combining Multiscale Advantage Estimation (MAE) and turn-level importance sampling to align credit assignment a"
+        },
+        {
+          "url": "https://arxiv.org/abs/2610.35013",
+          "quote": "Extensive experiments across search, tool-use, and automation tasks with 4B and 30B-A3B models demonstrate consistent gains over strong RL baselines."
+        }
+      ],
+      "tags": [
+        "论文",
+        "Agent",
+        "训练"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "PyTorch 2.15.0 makes the rewritten NCCL backend the default",
+      "summary": "PyTorch 2.15.0 switches to a rewritten NCCL backend with a flight recorder that dumps on hangs and keeps rollback paths, adds one-sided transports with a NIXL backend to torch.distributed, and speeds up NVFP4 decoding on NVIDIA Blackwell. CUDA 13.2 is now the default wheel, so distributed training teams should check NCCL behavior when upgrading.",
+      "sources": [
+        {
+          "candidate_id": "c_50ef8bf830",
+          "url": "https://github.com/pytorch/pytorch/releases/tag/v2.15.0"
+        }
+      ],
+      "evidence": [],
+      "tags": [
+        "工具",
+        "训练",
+        "硬件"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "llama.cpp v0.8.0 adds LFM3 and realtime audio endpoints",
+      "summary": "llama.cpp v0.8.0 adds the LiquidAI LFM3 family (text, vision, audio and omni) and wires realtime audio in and out of the server via new /v1/realtime and /tts endpoints; ggml moves to v0.28.0 and the UI can browse and download models from HF Hub. Local voice apps can now talk straight to llama.cpp server.",
+      "sources": [
+        {
+          "candidate_id": "c_8c03f8a134",
+          "url": "https://github.com/ggml-org/llama.cpp/releases/tag/v0.8.0"
+        }
+      ],
+      "evidence": [],
+      "tags": [
+        "工具",
+        "语音",
+        "推理"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "Surge AI launches DAYJOB: Tax, an agent benchmark for tax work",
+      "summary": "On 50 professional tax environments, leader Claude Sonnet 5.5 passes only 10.8% (pass@1 at a 95% rubric threshold).",
+      "sources": [
+        {
+          "candidate_id": "c_4ff53c83a5",
+          "url": "https://surgehq.ai/blog/dayjob-tax"
+        },
+        {
+          "candidate_id": "c_4ff53c83a5",
+          "url": "https://news.ycombinator.com/item?id=50275626"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://surgehq.ai/blog/dayjob-tax",
+          "quote": "The benchmark contains 50 environments across eight areas of tax practice."
+        },
+        {
+          "url": "https://surgehq.ai/blog/dayjob-tax",
+          "quote": "Claude Sonnet 5.5 leads with a 10.8% pass rate on the DAYJOB: Tax leaderboard , followed by Claude Fable 5.1 at 9.6% and Claude Opus 5.5 at 9.2%. We report pass@1 at a 95% rubric threshold."
+        }
+      ],
+      "tags": [
+        "Agent",
+        "行业"
+      ]
+    }
+  ],
+  "research": [
+    {
+      "via": "webfetch",
+      "url": "https://deepmind.google/blog/gemini-4-carbon-our-next-frontier-model/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/blog/nvidia/nemotron-transcribe-granary"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://cursor.com/blog/agent-sdk"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-carbon/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/Diffuspace/Clover-35B-A3B-Preview"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://surgehq.ai/blog/dayjob-tax"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://arxiv.org/abs/2610.37364"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://arxiv.org/abs/2610.34073"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://arxiv.org/abs/2610.36729"
+    },
+    {
+      "via": "websearch",
+      "query": "DeepSeek announcement October 2026"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://arxiv.org/abs/2610.35013"
+    }
+  ],
+  "lang": "en",
+  "validation": {
+    "validated_at": "2026-10-29T04:42:44+00:00",
+    "checked_links": false,
+    "dropped": [],
+    "warnings": []
+  }
+}
