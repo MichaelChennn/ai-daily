@@ -1,0 +1,457 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-29",
+  "mode": "full",
+  "generated_at": "2026-10-29T05:05:29+00:00",
+  "channel": "api",
+  "model": "gemini:gemini-3.5-flash-lite",
+  "highlights": [
+    "Google DeepMind 发布了新一代前沿模型 Gemini 4 Carbon，在代码编写、长时规划及网络安全防御生命周期中表现卓越。",
+    "NVIDIA 推出开源多语言转写模型 NVIDIA Nemotron 3.5 Transcribe，支持 40 种语言转写并在多个基准测试中领先。",
+    "腾讯混元团队开源交互式世界模型 Hy-Nomas，支持自由文本指令与连续相机控制。"
+  ],
+  "items": [
+    {
+      "section": "headline",
+      "title": "Google DeepMind 发布前沿模型 Gemini 4 Carbon",
+      "summary": "Gemini 4 Carbon 是 Google DeepMind 的新一代前沿模型，具备出色的长时规划与网络安全防御能力，在多个安全及代码基准测试中表现亮眼。该模型将以与 Argon 相同的 introductory price 推出，首发定价为每百万输入 Token 2 美元、每百万输出 Token 10 美元。",
+      "tags": [
+        "模型",
+        "多模态"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_66698da7b3",
+          "url": "https://deepmind.google/blog/gemini-4-carbon-our-next-frontier-model/"
+        },
+        {
+          "candidate_id": "c_8cd3da5390",
+          "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-carbon/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://deepmind.google/blog/gemini-4-carbon-our-next-frontier-model/",
+          "quote": "Gemini 4 Carbon: our next frontier model"
+        },
+        {
+          "url": "https://deepmind.google/blog/gemini-4-carbon-our-next-frontier-model/",
+          "quote": "Gemini 4 Carbon is our strongest model with state-of-the-art cybersecurity and long horizon capabilities."
+        },
+        {
+          "url": "https://deepmind.google/blog/gemini-4-carbon-our-next-frontier-model/",
+          "quote": "It shows significant gains across coding and agentic tasks as well as across key capabilities critical for cybersecurity defense, landing a firm lead in SEC-bench Pro (88.2%) for finding vulnerabilities, ExploitGym (54.8%) for exploitation, and CWE-bench (71.0%) for patching."
+        },
+        {
+          "url": "https://deepmind.google/blog/gemini-4-carbon-our-next-frontier-model/",
+          "quote": "as Argon at $2 per million input tokens and $10 per million output tokens, with cached input tokens priced at 95% off input token price."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "NVIDIA 发布开源多语言转写模型 NVIDIA Nemotron 3.5 Transcribe",
+      "summary": "NVIDIA 推出了 Nemotron 3.5 Transcribe，这是一个开源、支持提示词控制的语音转写模型，支持 40 种语言的转写。该模型采用混合 Mamba-Transformer 架构，在 Hugging Face Open ASR 英文排行榜上开源模型中排名第一。",
+      "tags": [
+        "模型",
+        "开源",
+        "语音"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_9bb2f7ad59",
+          "url": "https://huggingface.co/blog/nvidia/nemotron-transcribe-granary"
+        },
+        {
+          "candidate_id": "c_dc872be8d3",
+          "url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Transcribe-30B-A4B"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/blog/nvidia/nemotron-transcribe-granary",
+          "quote": "NVIDIA Nemotron 3.5 Transcribe and Granary v2: Intelligent Multilingual Transcription You Can Prompt and Adapt"
+        },
+        {
+          "url": "https://huggingface.co/blog/nvidia/nemotron-transcribe-granary",
+          "quote": "NVIDIA Nemotron 3.5 Transcribe is an open-weight, promptable model that turns recorded speech into useful text, now available on Hugging Face and ModelScope ."
+        },
+        {
+          "url": "https://huggingface.co/blog/nvidia/nemotron-transcribe-granary",
+          "quote": "It brings transcription, speaker attribution (diarization), translation, and audio question answering into one checkpoint: it transcribes 40 languages, translates 31 of them to or from English, and attributes speakers in 13."
+        },
+        {
+          "url": "https://huggingface.co/blog/nvidia/nemotron-transcribe-granary",
+          "quote": "Nemotron 3.5 Transcribe ranks first among open-weight models on the Hugging Face Open ASR Leaderboard (English) at 5.33% average WER, with API models excluded."
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "DeepSeek-V4.1-Flash-1017 发布",
+      "summary": "DeepSeek-V4.1-Flash-1017 是一次小幅更新，在推理、编程、智能体任务及视觉基准测试上带来了显著提升，同时降低了任务执行时间和输出长度。",
+      "tags": [
+        "模型",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_8b553ca25e",
+          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017"
+        },
+        {
+          "candidate_id": "c_8c03f8a134",
+          "url": "https://github.com/ggml-org/llama.cpp/releases/tag/v0.8.0"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+          "quote": "DeepSeek-V4.1-Flash-1017 is a minor update to DeepSeek-V4.1-Flash , delivering substantial improvements across reasoning, coding, agentic tasks, and visual benchmarks."
+        },
+        {
+          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+          "quote": "Alongside these gains, the model reduces task execution time and output length, enabling users to complete tasks faster and at lower cost and advancing the performance–cost Pareto frontier across multiple agent harnesses."
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Liquid AI 推出 LFM3 家族多模态模型",
+      "summary": "Liquid AI 推出了 LFM3 模型家族，包括 LFM3-Omni-2B 和 LFM3-VL-2B 等端到端多模态模型，支持文本、图像、视频和音频输入，并在边缘设备上具备高效运行能力。",
+      "tags": [
+        "模型",
+        "多模态"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_73262d098d",
+          "url": "https://huggingface.co/LiquidAI/LFM3-Omni-2B"
+        },
+        {
+          "candidate_id": "c_3caeffbb15",
+          "url": "https://huggingface.co/LiquidAI/LFM3-VL-2B"
+        },
+        {
+          "candidate_id": "c_8145d87d9c",
+          "url": "https://github.com/ollama/ollama/releases/tag/v0.40.13"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/LiquidAI/LFM3-Omni-2B",
+          "quote": "LFM3-Omni-2B is Liquid AI 's first omni-modal model in the LFM3 family: a single end-to-end model that understands text, images, video and audio , and answers in text and speech ."
+        },
+        {
+          "url": "https://huggingface.co/LiquidAI/LFM3-Omni-2B",
+          "quote": "Small enough for devices: at 2.2B parameters, it is designed to run efficiently on phones, laptops and other edge hardware."
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "DiffuSpace 开源扩散语言模型 Clover-35B-A3B-Preview",
+      "summary": "DiffuSpace 发布了首个开源扩散语言模型 Clover-35B-A3B-Preview，结合了 35B 参数的混合专家（MoE）主干网络与 block diffusion 生成机制，支持 128K 上下文窗口。",
+      "tags": [
+        "模型",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_a51aa314b9",
+          "url": "https://huggingface.co/Diffuspace/Clover-35B-A3B-Preview"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/Diffuspace/Clover-35B-A3B-Preview",
+          "quote": "Diffuspace / Clover-35B-A3B-Preview Like 107 Follow Diffuspace 75 Text Generation Transformers Safetensors clover_moe clover mixture-of-experts diffusion custom-code conversational custom_code License: apache-2.0 Model card Files Files and versions xet Community 5 Deploy Copy to bucket Use this mode"
+        },
+        {
+          "url": "https://huggingface.co/Diffuspace/Clover-35B-A3B-Preview",
+          "quote": "Clover-35B-A3B-Preview is the first model released by DiffuSpace , delivering state-of-the-art performance among open-source diffusion language models at release on the benchmarks reported in our launch blog ."
+        },
+        {
+          "url": "https://huggingface.co/Diffuspace/Clover-35B-A3B-Preview",
+          "quote": "Clover combines a 35B-parameter mixture-of-experts backbone with approximately 3B active parameters per token, block diffusion generation, and a 128K context window ."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Hy-Nomas：面向自由形式的交互式世界模型",
+      "summary": "腾讯混元团队介绍了 Hy-Nomas，这是一个采用 8B 扩散主干网络的视频世界模型，支持跨多轮交互的自由形式文本指令与连续相机控制。研究团队已开源模型权重、代码及相关基准。",
+      "tags": [
+        "论文",
+        "开源",
+        "视频"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_d350ced903",
+          "url": "https://huggingface.co/papers/2610.36729"
+        },
+        {
+          "candidate_id": "c_cb6d643d1c",
+          "url": "https://huggingface.co/tencent/Hy-Nomas"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2610.36729",
+          "quote": "Papers arxiv:2610.36729 Copy markdown Hy-Nomas: Towards Free-form Interactive World Generation Published on Oct 27 · Submitted by Weizhi Wang on Oct 28 · Tencent Hunyuan Upvote 108 +100 Authors: Qiaoling Chen , Jiaxiang Cheng , Xueqing Deng , Tiankai Hang , Ji Hou , Jiaqi Li , Yifan Liu , Tao Lu , J"
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.36729",
+          "quote": "We present Hy-Nomas, a video world model with an 8B diffusion backbone that supports free-form text instructions and continuous camera control across multiple interaction turns."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.36729",
+          "quote": "We release model weights, code and benchmarks, together with a lightweight adaptation workflow, to support reproducible research on interactive world generation ."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "ChronoReplay 缓解空间视觉语言模型的接口锁定问题",
+      "summary": "ChronoReplay 框架通过将异构空间监督按时间顺序重放，保留源生目标并平衡监督分布，从而提升空间视觉语言模型的跨任务泛化能力。该方法在多个基准测试中取得了显著的性能提升。",
+      "tags": [
+        "论文",
+        "多模态"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_28d5719e05",
+          "url": "https://huggingface.co/papers/2610.34283"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2610.34283",
+          "quote": "ao , Deyuan Liu , Yutong Li , Mingda Wan , Yuchen Mao , Tao Lin Abstract ChronoReplay mitigates interface lock-in in spatial vision-language models by replaying heterogeneous spatial supervision chronologically, improving cross-task transfer and enabling efficient inference-time evidence selection."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.34283",
+          "quote": "Under the same observation access, a single ChronoReplay checkpoint improves OVO-S-Bench , OST-Bench , and UCS-Bench together, including a 13.41-point gain on OST-Bench , and achieves the highest three-benchmark mean among the supervision settings compared here."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Memory Tax：剖析智能体长期记忆的净价值",
+      "summary": "该论文对智能体记忆系统进行了大规模评估，发现许多专用的记忆系统在多数情况下表现不及朴素 RAG。研究引入了记忆收益（memory benefit）和记忆税（memory tax）的概念来评估记忆的净价值。",
+      "tags": [
+        "论文",
+        "Agent"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_4c73f59739",
+          "url": "https://huggingface.co/papers/2610.34073"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2610.34073",
+          "quote": "ang , Yuyu Zhang , Ping Nie , Jiawei Han , ChengXiang Zhai Abstract Large-scale evaluation reveals that dedicated memory systems often underperform naive retrieval-augmented generation, introducing a framework of memory benefit and memory tax to assess net value."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.34073",
+          "quote": "Taking RAG as a reference, we dissect the net value of memory into the gains and losses over direct retrieval, termed memory benefit and memory tax ."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "The Trinity：面向多模态智能体的能力驱动递归自我提升",
+      "summary": "The Trinity 框架通过将任务组织为能力树、生成仿真训练世界以及路由专用 harness 模块，实现了多模态智能体的递归自我提升，在多项未公开基准上展现了强大的迁移能力。",
+      "tags": [
+        "论文",
+        "Agent"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_f47e61aa04",
+          "url": "https://huggingface.co/papers/2610.36077"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2610.36077",
+          "quote": "roves multimodal agents by organizing tasks into a capability tree, generating simulated training worlds, and routing specialized harness modules to boost performance on diverse benchmarks."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.36077",
+          "quote": "Drawing on verified execution trajectories, Evolver shifts the basis of task organization from surface categories to shared requirements, reorganizing the original task tree into a hierarchical capability tree ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.36077",
+          "quote": "We introduce Capability-Driven Real2Sim2Real : for heterogeneous tasks at the same node, Creator abstracts their common requirements into simplified, verifiable simulated worlds for capability learning, while evaluation on original tasks measures transfer."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.36077",
+          "quote": "Our evolved Harnesses improve mean performance by 34 points across 28 training benchmarks and 26 points across 18 unseen benchmarks, including two real-world embodied tasks."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Multiscale Policy Optimization 提升长时 LLM 智能体训练",
+      "summary": "MPO 框架通过在轮次（turn）尺度上对齐信用分配和策略更新，结合多尺度优势估计与轮次级重要性采样，显著提升了长时 LLM 智能体在搜索、工具调用等任务上的表现。",
+      "tags": [
+        "论文",
+        "推理"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_90efaf9260",
+          "url": "https://huggingface.co/papers/2610.35013"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2610.35013",
+          "quote": "nghao Li , Huatong Song , Yining Li , Yifan Luo , Kunbao Ding , Feng Chang , Chuan Hao , Ran Tao , Bryan Dai , Jiafeng Liang , Jinyang Jiang Abstract Multiscale Policy Optimization improves long-horizon agent training by aligning credit assignment and policy updates at the turn scale."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.35013",
+          "quote": "We propose Multiscale Policy Optimization (MPO), combining Multiscale Advantage Estimation (MAE) and turn-level importance sampling to align credit assignment and policy updates at the turn scale."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.35013",
+          "quote": "Extensive experiments across search, tool-use, and automation tasks with 4B and 30B-A3B models demonstrate consistent gains over strong RL baselines."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "EmbeddingGemma 2：统一高效的多模态嵌入模型",
+      "summary": "Google 推出了 EmbeddingGemma 2，这是一个参数量仅为 740M 的开源多模态嵌入模型，在统一空间中原生表示文本、图像、音频和视频，并在多模态嵌入基准测试中树立了新的 Pareto 边界。",
+      "tags": [
+        "论文",
+        "多模态"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_7239a61f04",
+          "url": "https://huggingface.co/papers/2610.37364"
+        },
+        {
+          "candidate_id": "c_ce91740bf8",
+          "url": "https://huggingface.co/google/embeddinggemma-2"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2610.37364",
+          "quote": "is an open multimodal embedding model that unifies text, images, audio, and video representations with efficient resource-flexible design and state-of-the-art benchmark performance."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.37364",
+          "quote": "Generated by thinkingmachines/Inkling-Small We present EmbeddingGemma 2, an open multimodal embedding model which natively represents text, images, audio, video, and combinations thereof in a unified space."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.37364",
+          "quote": "Notably, in comprehensive embedding benchmarks across all modalities, EmbeddingGemma 2 establishes a new Pareto frontier , outperforming both specialist models and models two to twelve times larger."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.37364",
+          "quote": "View arXiv page View PDF Add to collection Community tomaarsen Paper submitter about 14 hours ago The technical report behind the excellent https://huggingface.co/google/embeddinggemma-2 model, one of the smallest omni-modal models I've seen, at just 740M parameters."
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "llama.cpp 合并 CUDA MoE 算子融合 PR",
+      "summary": "llama.cpp 合并了关于 CUDA 后端的新拉取请求，实现了对 MoE 模型的门控/上升矩阵乘法（gate/up matmuls）及 GLU 的 MMQ 算子融合，显著提升了提示词处理速度。",
+      "tags": [
+        "开源",
+        "推理",
+        "硬件"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_55e1b1c43b",
+          "url": "https://github.com/ggml-org/llama.cpp/pull/31188"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/pull/31188",
+          "quote": "CUDA: fuse MoE gate/up matmuls and GLU in MMQ - # 31188 # 31188 Merged gaugarg-nv merged 1 commit into ggml-org:master ggml-org/llama.cpp:master from anujj:cuda-mmq-fused-gate-up-moe anujj/llama.cpp:cuda-mmq-fused-gate-up-moe Copy head branch name to clipboard Oct 28, 2026 Conversation Commits 1 ( 1"
+        },
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/pull/31188",
+          "quote": "Extension of #29948 to MoE models: the same fused gate/up + GLU MMQ kernel now also runs for the expert FFNs ( MUL_MAT_ID )."
+        },
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/pull/31188",
+          "quote": "For prompt processing, the gate and up expert matmuls and the following GLU run as one mul_mat_q launch, exactly as for dense FFNs in #29948 ."
+        }
+      ]
+    }
+  ],
+  "research": [
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://deepmind.google/blog/gemini-4-carbon-our-next-frontier-model/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/blog/nvidia/nemotron-transcribe-granary"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/LiquidAI/LFM3-Omni-2B"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.36729"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.34283"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.34073"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.36077"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.35013"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.37364"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/Diffuspace/Clover-35B-A3B-Preview"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://v.redd.it/jc57agepb7yh1"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31188"
+    }
+  ],
+  "validation": {
+    "validated_at": "2026-10-29T05:05:30+00:00",
+    "checked_links": true,
+    "dropped": [],
+    "warnings": [
+      "2 headline items (target 3-5)",
+      "6 paper items (target 2-3)"
+    ]
+  }
+}
