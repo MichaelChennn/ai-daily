@@ -2,109 +2,73 @@
 
 ## 今日要点
 
-- Mistral 开放 Mistral Large 4 权重，这是 1 万亿参数原生多模态 MoE 模型，面向编码与防御性安全场景。
-- Liquid AI 发布 LFM3-Omni-2B，用单个 2.2B 模型端到端处理文本、图像、视频与音频，并支持语音输出。
-- Recursive 开放 Flint 权重，这是一款面向编码 Agent 的 MoE 模型，总参数 39.8B、每 token 激活约 2.5B。
+- Mistral 以修改版 MIT 许可开放 Mistral Large 4（Le Chonk）权重：约 1T 总参数、52B 激活，transformers v5.22.0 已支持。
+- Recursive 以 Apache 2.0 开源编码 Agent 模型 Flint，ServiceNow 以 MIT 许可开源语音 + 工具调用模型 Apriel Voice 27B Preview。
+- PersonaCUABench 和 RealCLI 两个新基准都显示：换成真实用户的说法和协作方式后，Agent 的表现明显下滑。
 
 ## 🔥 头条
 
-### Mistral 开放 Mistral Large 4 权重，主打编码与防御性安全
+### Mistral 开放旗舰模型 Mistral Large 4（Le Chonk）权重
 
-Mistral 发布了 Mistral Large 4（Le Chonk）的权重，这是其 1 万亿参数、原生多模态的 MoE 模型。官方称它在编码和防御性安全基准上领先开源权重模型，并提供 low、medium、high 三档推理强度，开发者可自行托管和定制部署。
+Mistral Large 4 是约 1T 总参数、52B 激活参数的原生多模态 MoE 模型，支持 1M 上下文和三档推理强度；权重以 Mistral Ecosystem Open-Weight license（修改版 MIT）发布，只有提供 Model-as-a-Service 的企业需要另购商业许可。官方称它在 Terminal-Bench 4.0 上比预览版提升 13 个百分点至 41%，API 价格为每百万 token 输入 $0.70、输出 $2.10。transformers v5.22.0 已加入支持，也可以用 vLLM 或 SGLang 自行部署。
 
-来源：[Mistral AI News](https://mistral.ai/news/mistral-large-4-oss/) · [GitHub Releases](https://github.com/huggingface/transformers/releases/tag/v5.22.0) · [Hugging Face Trending Models](https://huggingface.co/mistralai/Mistral-Large-4-1T-A52B)　`模型` `开源` `推理`
+来源：[Mistral AI News](https://mistral.ai/news/mistral-large-4-oss/) · [GitHub Releases](https://github.com/huggingface/transformers/releases/tag/v5.22.0) · [Hugging Face Trending Models](https://huggingface.co/mistralai/Mistral-Large-4-1T-A52B) · [HN 讨论](https://news.ycombinator.com/item?id=50289418)　`模型` `开源` `代码`
 
-### Liquid AI 发布 LFM3-Omni-2B，统一文本图像视频音频
+### Recursive 开源编码 Agent 模型 Flint
 
-Liquid AI 推出 LFM3 家族的首个全模态模型 LFM3-Omni-2B，单个端到端模型可理解文本、图像、视频和音频，并以文本或语音作答。参数量为 2.2B，定位手机、笔记本等端侧设备，一个模型即可替代 ASR、视觉语言、LLM 与 TTS 模型。
+Flint 是 Recursive 面向编码 Agent 的 MoE 模型，39.8B 总参数、约 2.5B 激活，文档给出的上下文为 262,144 tokens，以 Apache 2.0 许可发布，仓库附带 BF16 权重和 SGLang 部署套件。官方自测 Terminal-Bench 2.1 为 54.9%、SWE-bench Verified 为 74.2%。激活参数小、许可宽松，适合想自托管编码 Agent 的团队拿来评估。
 
-来源：[LiquidAI/LFM3-Omni-2B](https://huggingface.co/LiquidAI/LFM3-Omni-2B) · [LiquidAI/LFM3-VL-2B](https://huggingface.co/LiquidAI/LFM3-VL-2B)　`模型` `多模态` `语音`
+来源：[Hugging Face Trending Models](https://huggingface.co/RecursiveSI/flint)　`模型` `开源` `代码`
 
-### Recursive 开放 Flint 权重，专注编码 Agent
+### ServiceNow 开源语音理解与工具调用模型 Apriel Voice 27B Preview
 
-Recursive 发布了 Flint 的 BF16 权重、配置、tokenizer、chat template 与 SGLang 服务套件。Flint 是面向编码 Agent 的 MoE 模型，总参数 39.8B、每 token 激活约 2.5B，支持文本输入输出、推理和多轮工具调用，官方公布的 Terminal-Bench 2.1 得分为 54.9%。
+Apriel Voice 27B Preview 用 Whisper large-v3-turbo 语音编码器接上 Gemma 4 26B-A4B 主干，能做转写、语音翻译、语音问答和结构化工具调用，同时保留文本和图像输入，以 MIT 许可发布。它只输出文本和工具调用，不是原生全双工语音模型，做语音助手时需要外接语音合成。
 
-来源：[Hugging Face Trending Models](https://huggingface.co/RecursiveSI/flint)　`模型` `开源` `Agent`
-
-### OpenAI 更新 Model Spec，并公开前沿模型失配检测方法
-
-OpenAI 发布新版 Model Spec，用五个核心价值引导能力更强的模型做出更可靠的判断、保持人类自主权并忠实于用户意图。同日 OpenAI 还说明了检测前沿模型失配与 Agent 未经授权行为的方法：通过分层监控发现风险，以便在事态升级前介入。
-
-来源：[An updated Model Spec for more capable and beneficial AI](https://openai.com/index/updated-model-spec) · [How we detect frontier model misalignment](https://openai.com/index/how-we-detect-frontier-model-misalignment)　`安全` `Agent` `行业`
-
-### Falcon 用更少参数实现流式音视频目标说话人提取
-
-清华大学机器学习团队提出因果式音视频目标说话人提取方法 Falcon，用单次 encoder-decoder 过程完成多尺度时频分离，并以编码器空间的说话人对比损失抑制近场泄漏。作者同时发布 RealSSA 基准，包含模拟与真实录音场景；相比因果 AV-TFGridNet，Falcon 参数量减少 91.9%，计算量降低 20.2 倍，GPU 推理延迟降低 11.1 倍。
-
-来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2610.32749)　`论文` `多模态` `语音`
+来源：[Hugging Face](https://huggingface.co/ServiceNow-AI/Apriel-Voice-27B-preview) · [Reddit 讨论](https://www.reddit.com/r/LocalLLaMA/comments/1xipftk/servicenowaiaprielvoice27bpreview_hugging_face/)　`模型` `开源` `语音`
 
 ## 🧠 模型
 
-### 百度发布 Unlimited-OCR-2，主打无限长文档解析
+### IBM 发布 Granite Switch 4.1.1：只换适配器，不动基座
 
-百度发布 Unlimited-OCR-2，称其通过 SR-SWA 注意力把超长序列的文本-视觉交互压缩为固定大小的参考集合，从而在有限上下文窗口内实现无界文档解析。模型同时发布 ultra-long 文档解析基准 MarathonDocBench，支持 Transformers 与 SGLang 部署。
+Granite Switch 4.1.1 是 4.1 的补丁版，完全向后兼容：这次只新训练了覆盖 10 种语言的 Granite Speech ASR 模型和 granitelib-core 里的 Decision adapter，基座模型没有重算，用户组合最新的适配器即可部署。IBM 还在做 Adapter SDK，让第三方也能像发布软件一样迭代自己的适配器，这种“基座 + 可替换适配器”的更新方式值得做模型运维的团队关注。
 
-来源：[Hugging Face Trending Models](https://huggingface.co/baidu/Unlimited-OCR-2)　`模型` `多模态` `工具`
-
-### IBM 发布 Granite Switch 4.1.1 补丁版
-
-IBM 的 Granite Switch 4.1.1 是与 4.1 完全向后兼容的补丁版本，无需迁移即可获得增量改进。本次更新包含多语言语音识别模型（覆盖 10 种语言、带标点和大小写）和改进后的 Decision 适配器，基础模型未重新训练。
-
-来源：[Hugging Face Blog](https://huggingface.co/blog/ibm-granite/granite-switch-4-1-1)　`模型` `语音`
+来源：[Hugging Face Blog](https://huggingface.co/blog/ibm-granite/granite-switch-4-1-1)　`模型` `语音` `工具`
 
 ## 📄 论文
 
-### TAO：面向 Agent 服务的工具感知联合调度
+### PersonaCUABench：换成真实用户的说法，电脑操作 Agent 完成率大跌
 
-论文提出工具感知的联合调度框架 TAO，把工具就绪时间、带时间衰减的节点级缓存信用和 token 占用纳入统一的会话价值评估，再用动态规划联合完成会话选择与放置。在 12 组模型-负载-并发设置中，相比各项指标上最优的已有基线，TAO 最多降低 26.8% 延迟、降低 36.3% 平均首 token 时间，并提升 29.5% 解码吞吐。
+PersonaCUABench 固定 74 个任务、11 个领域，只改变“谁在提问”：由扮演 44 种 persona 的 Agent 用自己的话重述需求并回答追问。在九个 backbone 的 3,330 次运行里，任务完成率相对原始指令平均下降 36%。对做电脑操作 Agent 的团队来说，只看固定指令下的完成率会高估真实可用性。
 
-来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2610.37230)　`论文` `推理` `Agent`
+来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2610.22990)　`论文` `Agent`
 
-### Sensorimotor Alignment 用离线指标预测机器人策略表现
+### RealCLI：评测 CLI Agent 与人协作的能力
 
-Rice University 团队提出 Sensorimotor Alignment（S²），一个免训练的离线指标，用于衡量模型的感知表征与物理运动几何结构的对齐程度。研究发现 S² 与下游机器人任务成功率正相关，可作为闭环评测前的低成本筛选手段，还能在昂贵的 VLA 微调之前挑出有潜力的视觉语言模型骨干。
+RealCLI 把同一批 CLI 任务分成两种模式：一次给全需求，或由脚本化用户逐步补充信息、纠错、改约束和做授权决定，并用 5 个维度、22 个子维度评估协作质量。最好的配置平均得分只有 49.2%，联合协作分最高 37.6%，模型在可引导性、信任校准和安全边界上最弱。做编码 Agent 的团队可以用它衡量“中途被打断、被改需求”时的表现。
 
-来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2610.31670)　`论文` `多模态` `工具`
+来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2610.22507)　`论文` `Agent` `代码`
 
-### PersonaCUABench 揭示 Agent 难以满足真实用户约束
+### Falcon：面向端侧的流式音视频目标说话人提取
 
-PersonaCUABench 固定 74 个任务和 11 个领域，只改变提出请求的人，由扮演 44 种人设的 persona agent 改写指令并回答提问。在 9 个骨干模型共 3,330 次运行中，平均任务完成率相对原始请求下降 36%；即使完全完成，人设请求获得最高满意度评分的比例也只有 62.7%，原始请求为 84.1%。
+论文发布了更贴近真实场景的 RealSSA 基准（含 1–5 个动态近场干扰说话人的模拟场景和真实录制评测集），并提出因果模型 Falcon。相比因果 AV-TFGridNet，Falcon 参数减少 91.9%、计算量降低 20.2 倍、GPU 推理延迟降低 11.1 倍，代码和 demo 已公开，适合做低延迟语音前端的开发者参考。
 
-来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2610.22990)　`论文` `Agent` `工具`
-
-### RealCLI：统一评估 CLI Agent 的任务执行与协作质量
-
-REALCLI 是一套成对评测基准，同时衡量 CLI Agent 的任务执行与运行时人机协作质量，包含五维框架、22 个子维度和 51 个交互场景模板，并提供 REALCLI-EXEC 与 REALCLI-COLLAB 两种模式。评测显示前沿 Agent 差距明显：最佳配置平均分仅 49.2%，联合协作分最高只到 37.6%，在可控性、可信度校准和安全边界管理上普遍吃力。
-
-来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2610.22507)　`论文` `Agent` `工具`
+来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2610.32749)　`论文` `语音` `多模态`
 
 ## 🛠 开源与工具
 
-### Claude Code v2.1.314 新增工作目录写入拦截与空闲压缩
+### Claude Code v2.1.314 新增禁止写出工作目录的权限开关
 
-Claude Code v2.1.314 新增 permissions.blockWritesOutsideWorkingDirectories，Write、Edit 和 NotebookEdit 在所有权限模式下都会拒绝工作目录之外的路径。版本还为 VS Code 和 Claude Desktop 的 Code tab 加入空闲压缩：200K+ token 的会话闲置后会被总结，并在 prompt 缓存过期时用于下一条消息，同时修复了多个 Bedrock、Foundry 与 TLS 相关问题。
+新版加入 permissions.blockWritesOutsideWorkingDirectories：开启后 Write、Edit 和 NotebookEdit 在任何权限模式下都拒绝写工作目录以外的路径；VS Code 和 Claude Desktop 的 Code 标签页加入空闲压缩，闲置的 200K+ token 对话会被自动摘要。另外修复了 claude -p 启动失败时以退出码 0 静默结束的问题，现在会打印错误并返回 1，对脚本化调用更友好。
 
-来源：[GitHub Releases](https://github.com/anthropics/claude-code/releases/tag/v2.1.314)　`工具` `Agent` `安全`
+来源：[GitHub Releases](https://github.com/anthropics/claude-code/releases/tag/v2.1.314)　`工具` `代码` `Agent`
 
-### OpenAI Codex 0.166.0 增加 transcript 选择与网络诊断
+### Codex 0.166.0 加入 GPT-6.1 Terra 与网络诊断命令
 
-openai/codex 0.166.0 为 transcript 加入基于键盘的按词、按行、按页选择、集成搜索和可配置快捷键，并统一异步问答与 transcript 回复中的 Markdown 渲染。新版本还提供 codex doctor --network-only 用于配置、连通性和 WebSocket 诊断，并加入 codex queue --resume 以恢复排队后卸载的线程。
+OpenAI Codex 0.166.0 把 GPT-6.1 Terra 加入内置、Vertex AI 和 Amazon Bedrock 的模型目录，新增 codex doctor --network-only 用于排查配置、连通性和 WebSocket 问题，以及 codex queue --resume。TUI 支持用键盘按词、行、页选择对话记录并内置搜索，恢复或分叉线程时也会保留已确认的审批和权限设置。
 
-来源：[GitHub Releases](https://github.com/openai/codex/releases/tag/rust-v0.166.0)　`工具` `代码`
-
-### OpenMausBot：把 Claude、Codex 变成聊天里的本地 Agent
-
-OpenMausBot 是一个 Apache-2.0 许可的开源项目，把 Claude 或 Codex 等 CLI 以聊天应用的形式组织成多个 Agent，每个 Bot 可拥有独立人格、模型、云端或本地虚拟机以及连接的应用。它在本地运行 Agent 进程，transcript、密钥和事件存放在 ~/.openmausbot，危险操作会弹出 Allow / Deny 审批卡片。
-
-来源：[GitHub Trending](https://github.com/milind-soni/OpenMausBot)　`开源` `Agent` `工具`
-
-### claude-mem 为各类 Agent 提供跨会话记忆
-
-claude-mem 自动捕获 Agent 会话中的工具使用记录，生成语义摘要并在后续会话中注入，让项目上下文在会话结束后依然延续。它以插件形式支持 Claude Code、OpenClaw、Codex、Gemini、OpenCode 等多种 IDE 与 harness，并提供分层记忆检索、token 成本可见的渐进式披露以及用 <private> 标签排除敏感内容的机制。
-
-来源：[GitHub Trending](https://github.com/thedotmack/claude-mem)　`开源` `Agent` `工具`
+来源：[GitHub Releases](https://github.com/openai/codex/releases/tag/rust-v0.166.0)　`工具` `代码` `Agent`
 
 ## ⚡ 快讯
 
-- **transformers 补丁版修复 vLLM 远程代码加载** huggingface/transformers 发布补丁版，修复了在初始化期间赋值 rope_scaling 的配置问题，并修复了破坏 vLLM 远程代码加载的问题。 [GitHub Releases](https://github.com/huggingface/transformers/releases/tag/v5.21.1)
-- **langchain-core 1.7.3 发布** langchain-core 1.7.3 是 1.7.2 之后的更新版本，对应上游 PR #41564。 [GitHub Releases](https://github.com/langchain-ai/langchain/releases/tag/langchain-core%3D%3D1.7.3)
+- **OpenAI 更新 Model Spec** OpenAI 发布新版 Model Spec，用 5 项核心价值引导更强的模型做出合理判断、尊重人的能动性并忠实于人的意图。 [OpenAI News](https://openai.com/index/updated-model-spec)
+- **OpenAI 介绍如何检测前沿模型失准** OpenAI 介绍了用分层监控检测前沿模型失准和未经授权的 Agent 行为，以便在事件升级前让响应人员介入。 [OpenAI News](https://openai.com/index/how-we-detect-frontier-model-misalignment)
