@@ -1,0 +1,342 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-30",
+  "mode": "full",
+  "generated_at": "2026-10-30T04:45:00+00:00",
+  "model": "claude-opus-5-5",
+  "highlights": [
+    "Mistral 以修改版 MIT 许可开放 Mistral Large 4（Le Chonk）权重：约 1T 总参数、52B 激活，transformers v5.22.0 已支持。",
+    "Recursive 以 Apache 2.0 开源编码 Agent 模型 Flint，ServiceNow 以 MIT 许可开源语音 + 工具调用模型 Apriel Voice 27B Preview。",
+    "PersonaCUABench 和 RealCLI 两个新基准都显示：换成真实用户的说法和协作方式后，Agent 的表现明显下滑。"
+  ],
+  "items": [
+    {
+      "section": "headline",
+      "title": "Mistral 开放旗舰模型 Mistral Large 4（Le Chonk）权重",
+      "summary": "Mistral Large 4 是约 1T 总参数、52B 激活参数的原生多模态 MoE 模型，支持 1M 上下文和三档推理强度；权重以 Mistral Ecosystem Open-Weight license（修改版 MIT）发布，只有提供 Model-as-a-Service 的企业需要另购商业许可。官方称它在 Terminal-Bench 4.0 上比预览版提升 13 个百分点至 41%，API 价格为每百万 token 输入 $0.70、输出 $2.10。transformers v5.22.0 已加入支持，也可以用 vLLM 或 SGLang 自行部署。",
+      "sources": [
+        {
+          "candidate_id": "c_32c270bdcf",
+          "url": "https://mistral.ai/news/mistral-large-4-oss/"
+        },
+        {
+          "candidate_id": "c_8fd5085be9",
+          "url": "https://github.com/huggingface/transformers/releases/tag/v5.22.0"
+        },
+        {
+          "candidate_id": "c_a153f6ebbc",
+          "url": "https://huggingface.co/mistralai/Mistral-Large-4-1T-A52B"
+        },
+        {
+          "candidate_id": "c_32c270bdcf",
+          "url": "https://news.ycombinator.com/item?id=50289418"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://mistral.ai/news/mistral-large-4-oss/",
+          "quote": "The model is available to use under the Mistral Ecosystem Open-Weight license , a modified MIT license. The model is free to use, modify, fine-tune, and commercialize, with a single condition: businesses that operate a Model-as-a-Service offering must obtain a separate"
+        },
+        {
+          "url": "https://mistral.ai/news/mistral-large-4-oss/",
+          "quote": "On Terminal-Bench 4.0, Mistral Large 4 improved by 13 percentage points to 41% compared to its public preview, taking the lead among open-weight models while reducing output tokens by 30%."
+        },
+        {
+          "url": "https://mistral.ai/news/mistral-large-4-oss/",
+          "quote": "Starting today, Mistral Large 4 is priced at $0.70 input / M, $0.07 cached input / M, and $2.10 output / M tokens."
+        },
+        {
+          "url": "https://mistral.ai/news/mistral-large-4-oss/",
+          "quote": "For full control, download the open weights from Hugging Face and deploy on your own infrastructure with vLLM or SGLang."
+        }
+      ],
+      "tags": [
+        "模型",
+        "开源",
+        "代码"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Recursive 开源编码 Agent 模型 Flint",
+      "summary": "Flint 是 Recursive 面向编码 Agent 的 MoE 模型，39.8B 总参数、约 2.5B 激活，文档给出的上下文为 262,144 tokens，以 Apache 2.0 许可发布，仓库附带 BF16 权重和 SGLang 部署套件。官方自测 Terminal-Bench 2.1 为 54.9%、SWE-bench Verified 为 74.2%。激活参数小、许可宽松，适合想自托管编码 Agent 的团队拿来评估。",
+      "sources": [
+        {
+          "candidate_id": "c_cefcbe1a01",
+          "url": "https://huggingface.co/RecursiveSI/flint"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/RecursiveSI/flint",
+          "quote": "Flint is Recursive’s mixture-of-experts language model for coding agents, with 39.8 billion total parameters and approximately 2.5 billion active per token."
+        },
+        {
+          "url": "https://huggingface.co/RecursiveSI/flint",
+          "quote": "In our release evaluations, it scores 54.9% on Terminal-Bench 2.1, 89.7% on SWE-bench Pro v2, and 74.2% on SWE-bench Verified. This repository contains the BF16 checkpoint, model configuration, tokenizer, chat template, and an SGLang serving kit."
+        },
+        {
+          "url": "https://huggingface.co/RecursiveSI/flint",
+          "quote": "Documented context configuration 262,144 tokens, including prompt and generated output"
+        },
+        {
+          "url": "https://huggingface.co/RecursiveSI/flint",
+          "quote": "Flint is released under the Apache 2.0 license"
+        }
+      ],
+      "tags": [
+        "模型",
+        "开源",
+        "代码"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "ServiceNow 开源语音理解与工具调用模型 Apriel Voice 27B Preview",
+      "summary": "Apriel Voice 27B Preview 用 Whisper large-v3-turbo 语音编码器接上 Gemma 4 26B-A4B 主干，能做转写、语音翻译、语音问答和结构化工具调用，同时保留文本和图像输入，以 MIT 许可发布。它只输出文本和工具调用，不是原生全双工语音模型，做语音助手时需要外接语音合成。",
+      "sources": [
+        {
+          "candidate_id": "c_170ce920bd",
+          "url": "https://huggingface.co/ServiceNow-AI/Apriel-Voice-27B-preview"
+        },
+        {
+          "candidate_id": "c_170ce920bd",
+          "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xipftk/servicenowaiaprielvoice27bpreview_hugging_face/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/ServiceNow-AI/Apriel-Voice-27B-preview",
+          "quote": "Real-time voice interaction is supported by the application and serving stack; the checkpoint itself generates text and tool calls rather than native full-duplex speech. A Whisper large-v3-turbo speech encoder connects to the Gemma 4 26B-A4B backbone through a learned projector."
+        },
+        {
+          "url": "https://huggingface.co/ServiceNow-AI/Apriel-Voice-27B-preview",
+          "quote": "License MIT."
+        }
+      ],
+      "tags": [
+        "模型",
+        "开源",
+        "语音"
+      ]
+    },
+    {
+      "section": "model",
+      "title": "IBM 发布 Granite Switch 4.1.1：只换适配器，不动基座",
+      "summary": "Granite Switch 4.1.1 是 4.1 的补丁版，完全向后兼容：这次只新训练了覆盖 10 种语言的 Granite Speech ASR 模型和 granitelib-core 里的 Decision adapter，基座模型没有重算，用户组合最新的适配器即可部署。IBM 还在做 Adapter SDK，让第三方也能像发布软件一样迭代自己的适配器，这种“基座 + 可替换适配器”的更新方式值得做模型运维的团队关注。",
+      "sources": [
+        {
+          "candidate_id": "c_13a4facb28",
+          "url": "https://huggingface.co/blog/ibm-granite/granite-switch-4-1-1"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/blog/ibm-granite/granite-switch-4-1-1",
+          "quote": "Granite Switch 4.1.1 is a patch release. The version number means what it means in software: fully backwards compatible with 4.1, no migration, incremental improvements under the hood. Updated Granite Speech ASR model — multilingual speech-to-text across 10 languages"
+        },
+        {
+          "url": "https://huggingface.co/blog/ibm-granite/granite-switch-4-1-1",
+          "quote": "Apart from training the new ASR model and Decision adapter, nothing was recomputed: the base model is untouched. You compose the latest adapters you want and deploy. This pattern can power far more than patch releases to an IBM-provided model."
+        },
+        {
+          "url": "https://huggingface.co/blog/ibm-granite/granite-switch-4-1-1",
+          "quote": "We're working on tutorials and an Adapter SDK so developers and third-party providers can build their own adapters — iterate on versions, test features, and ship updates the way you ship software."
+        }
+      ],
+      "tags": [
+        "模型",
+        "语音",
+        "工具"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "PersonaCUABench：换成真实用户的说法，电脑操作 Agent 完成率大跌",
+      "summary": "PersonaCUABench 固定 74 个任务、11 个领域，只改变“谁在提问”：由扮演 44 种 persona 的 Agent 用自己的话重述需求并回答追问。在九个 backbone 的 3,330 次运行里，任务完成率相对原始指令平均下降 36%。对做电脑操作 Agent 的团队来说，只看固定指令下的完成率会高估真实可用性。",
+      "sources": [
+        {
+          "candidate_id": "c_b665a5e7b0",
+          "url": "https://huggingface.co/papers/2610.22990"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2610.22990",
+          "quote": "Across nine backbones (3,330 runs), mean task completion falls by 36% relative to the original requests. The losses have two sources: in 59.9% of cells that lose points, the agent engages with what the user asked for and still gets it wrong"
+        }
+      ],
+      "tags": [
+        "论文",
+        "Agent"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "RealCLI：评测 CLI Agent 与人协作的能力",
+      "summary": "RealCLI 把同一批 CLI 任务分成两种模式：一次给全需求，或由脚本化用户逐步补充信息、纠错、改约束和做授权决定，并用 5 个维度、22 个子维度评估协作质量。最好的配置平均得分只有 49.2%，联合协作分最高 37.6%，模型在可引导性、信任校准和安全边界上最弱。做编码 Agent 的团队可以用它衡量“中途被打断、被改需求”时的表现。",
+      "sources": [
+        {
+          "candidate_id": "c_deeb84caf4",
+          "url": "https://huggingface.co/papers/2610.22507"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2610.22507",
+          "quote": "Evaluations reveal profound capability gaps in frontier agents: the best configuration attains an average score of only 49.2%, and when evaluated by the joint collaboration score (J_{collab}), the peak performance reaches merely 37.6%."
+        }
+      ],
+      "tags": [
+        "论文",
+        "Agent",
+        "代码"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Falcon：面向端侧的流式音视频目标说话人提取",
+      "summary": "论文发布了更贴近真实场景的 RealSSA 基准（含 1–5 个动态近场干扰说话人的模拟场景和真实录制评测集），并提出因果模型 Falcon。相比因果 AV-TFGridNet，Falcon 参数减少 91.9%、计算量降低 20.2 倍、GPU 推理延迟降低 11.1 倍，代码和 demo 已公开，适合做低延迟语音前端的开发者参考。",
+      "sources": [
+        {
+          "candidate_id": "c_0b7e877ad2",
+          "url": "https://huggingface.co/papers/2610.32749"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2610.32749",
+          "quote": "Compared with the causal AV-TFGridNet baseline, it cuts parameters by 91.9%, computation by 20.2 times, and GPU inference latency by 11.1 times."
+        }
+      ],
+      "tags": [
+        "论文",
+        "语音",
+        "多模态"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Claude Code v2.1.314 新增禁止写出工作目录的权限开关",
+      "summary": "新版加入 permissions.blockWritesOutsideWorkingDirectories：开启后 Write、Edit 和 NotebookEdit 在任何权限模式下都拒绝写工作目录以外的路径；VS Code 和 Claude Desktop 的 Code 标签页加入空闲压缩，闲置的 200K+ token 对话会被自动摘要。另外修复了 claude -p 启动失败时以退出码 0 静默结束的问题，现在会打印错误并返回 1，对脚本化调用更友好。",
+      "sources": [
+        {
+          "candidate_id": "c_aed6c19d83",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.314"
+        }
+      ],
+      "evidence": [],
+      "tags": [
+        "工具",
+        "代码",
+        "Agent"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Codex 0.166.0 加入 GPT-6.1 Terra 与网络诊断命令",
+      "summary": "OpenAI Codex 0.166.0 把 GPT-6.1 Terra 加入内置、Vertex AI 和 Amazon Bedrock 的模型目录，新增 codex doctor --network-only 用于排查配置、连通性和 WebSocket 问题，以及 codex queue --resume。TUI 支持用键盘按词、行、页选择对话记录并内置搜索，恢复或分叉线程时也会保留已确认的审批和权限设置。",
+      "sources": [
+        {
+          "candidate_id": "c_4ed2371cdc",
+          "url": "https://github.com/openai/codex/releases/tag/rust-v0.166.0"
+        }
+      ],
+      "evidence": [],
+      "tags": [
+        "工具",
+        "代码",
+        "Agent"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "OpenAI 更新 Model Spec",
+      "summary": "OpenAI 发布新版 Model Spec，用 5 项核心价值引导更强的模型做出合理判断、尊重人的能动性并忠实于人的意图。",
+      "sources": [
+        {
+          "candidate_id": "c_65fd81c1d3",
+          "url": "https://openai.com/index/updated-model-spec"
+        }
+      ],
+      "evidence": [],
+      "tags": [
+        "安全"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "OpenAI 介绍如何检测前沿模型失准",
+      "summary": "OpenAI 介绍了用分层监控检测前沿模型失准和未经授权的 Agent 行为，以便在事件升级前让响应人员介入。",
+      "sources": [
+        {
+          "candidate_id": "c_fca73080d4",
+          "url": "https://openai.com/index/how-we-detect-frontier-model-misalignment"
+        }
+      ],
+      "evidence": [],
+      "tags": [
+        "安全",
+        "Agent"
+      ]
+    }
+  ],
+  "research": [
+    {
+      "via": "webfetch",
+      "url": "https://mistral.ai/news/mistral-large-4-oss/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://artificialanalysis.ai/articles/gemini-4-carbon-new-number-1"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://openai.com/index/updated-model-spec"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://openai.com/index/how-we-detect-frontier-model-misalignment"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/blog/ibm-granite/granite-switch-4-1-1"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/ServiceNow-AI/Apriel-Voice-27B-preview"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/RecursiveSI/flint"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://www.phoronix.com/news/AMD-ROCm-HRX-Loom-0.1"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.32749"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.22990"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.22507"
+    },
+    {
+      "via": "websearch",
+      "query": "DeepSeek announcement October 29 2026"
+    }
+  ],
+  "validation": {
+    "validated_at": "2026-10-30T04:42:39+00:00",
+    "checked_links": true,
+    "dropped": [],
+    "warnings": [
+      "ServiceNow 开源语音理解与工具调用模型 Apriel Voice 27B Preview: could not check https://www.reddit.com/r/LocalLLaMA/comments/1xipftk/servicenowaiaprielvoice27bpreview_hugging_face/ (403)"
+    ]
+  }
+}

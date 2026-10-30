@@ -1,0 +1,341 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-30",
+  "mode": "full",
+  "generated_at": "2026-10-30T04:43:00+00:00",
+  "model": "claude-opus-5-5",
+  "highlights": [
+    "Mistral released the weights of Mistral Large 4 (Le Chonk), a ~1T total / ~52B active parameter MoE model under a modified MIT license; transformers v5.22.0 already supports it.",
+    "Recursive released Flint, an Apache 2.0 coding-agent model, and ServiceNow released Apriel Voice 27B Preview, an MIT-licensed speech and tool-use model.",
+    "Two new benchmarks, PersonaCUABench and RealCLI, show agents doing markedly worse when they have to work with how real users ask and collaborate."
+  ],
+  "items": [
+    {
+      "section": "headline",
+      "title": "Mistral releases the weights of Mistral Large 4 (Le Chonk)",
+      "summary": "Mistral Large 4 is a natively multimodal MoE model with ~1T total / ~52B active parameters, 1M context length and three reasoning efforts; the weights ship under the Mistral Ecosystem Open-Weight license, a modified MIT license, and only businesses running a Model-as-a-Service offering need a separate commercial license. Mistral says it improved by 13 percentage points to 41% on Terminal-Bench 4.0 over its public preview, and API pricing is $0.70 input / $2.10 output per M tokens. It is supported in transformers v5.22.0 and can be self-hosted with vLLM or SGLang.",
+      "sources": [
+        {
+          "candidate_id": "c_32c270bdcf",
+          "url": "https://mistral.ai/news/mistral-large-4-oss/"
+        },
+        {
+          "candidate_id": "c_8fd5085be9",
+          "url": "https://github.com/huggingface/transformers/releases/tag/v5.22.0"
+        },
+        {
+          "candidate_id": "c_a153f6ebbc",
+          "url": "https://huggingface.co/mistralai/Mistral-Large-4-1T-A52B"
+        },
+        {
+          "candidate_id": "c_32c270bdcf",
+          "url": "https://news.ycombinator.com/item?id=50289418"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://mistral.ai/news/mistral-large-4-oss/",
+          "quote": "The model is available to use under the Mistral Ecosystem Open-Weight license , a modified MIT license. The model is free to use, modify, fine-tune, and commercialize, with a single condition: businesses that operate a Model-as-a-Service offering must obtain a separate"
+        },
+        {
+          "url": "https://mistral.ai/news/mistral-large-4-oss/",
+          "quote": "On Terminal-Bench 4.0, Mistral Large 4 improved by 13 percentage points to 41% compared to its public preview, taking the lead among open-weight models while reducing output tokens by 30%."
+        },
+        {
+          "url": "https://mistral.ai/news/mistral-large-4-oss/",
+          "quote": "Starting today, Mistral Large 4 is priced at $0.70 input / M, $0.07 cached input / M, and $2.10 output / M tokens."
+        },
+        {
+          "url": "https://mistral.ai/news/mistral-large-4-oss/",
+          "quote": "For full control, download the open weights from Hugging Face and deploy on your own infrastructure with vLLM or SGLang."
+        }
+      ],
+      "tags": [
+        "模型",
+        "开源",
+        "代码"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Recursive releases Flint, an open MoE model for coding agents",
+      "summary": "Flint is Recursive's mixture-of-experts model for coding agents, with 39.8B total parameters and about 2.5B active per token, a documented 262,144-token context and an Apache 2.0 license; the repo includes the BF16 checkpoint and an SGLang serving kit. Recursive's own evaluations put it at 54.9% on Terminal-Bench 2.1 and 74.2% on SWE-bench Verified. The small active parameter count and permissive license make it worth evaluating for teams that want to self-host a coding agent.",
+      "sources": [
+        {
+          "candidate_id": "c_cefcbe1a01",
+          "url": "https://huggingface.co/RecursiveSI/flint"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/RecursiveSI/flint",
+          "quote": "Flint is Recursive’s mixture-of-experts language model for coding agents, with 39.8 billion total parameters and approximately 2.5 billion active per token."
+        },
+        {
+          "url": "https://huggingface.co/RecursiveSI/flint",
+          "quote": "In our release evaluations, it scores 54.9% on Terminal-Bench 2.1, 89.7% on SWE-bench Pro v2, and 74.2% on SWE-bench Verified. This repository contains the BF16 checkpoint, model configuration, tokenizer, chat template, and an SGLang serving kit."
+        },
+        {
+          "url": "https://huggingface.co/RecursiveSI/flint",
+          "quote": "Documented context configuration 262,144 tokens, including prompt and generated output"
+        },
+        {
+          "url": "https://huggingface.co/RecursiveSI/flint",
+          "quote": "Flint is released under the Apache 2.0 license"
+        }
+      ],
+      "tags": [
+        "模型",
+        "开源",
+        "代码"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "ServiceNow releases Apriel Voice 27B Preview for speech and tool use",
+      "summary": "Apriel Voice 27B Preview connects a Whisper large-v3-turbo speech encoder to a Gemma 4 26B-A4B backbone, handling transcription, speech translation, spoken question answering and structured tool calls while keeping text and image input; it is released under the MIT license. The checkpoint generates text and tool calls rather than native full-duplex speech, so voice assistants built on it need an external speech synthesizer.",
+      "sources": [
+        {
+          "candidate_id": "c_170ce920bd",
+          "url": "https://huggingface.co/ServiceNow-AI/Apriel-Voice-27B-preview"
+        },
+        {
+          "candidate_id": "c_170ce920bd",
+          "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xipftk/servicenowaiaprielvoice27bpreview_hugging_face/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/ServiceNow-AI/Apriel-Voice-27B-preview",
+          "quote": "Real-time voice interaction is supported by the application and serving stack; the checkpoint itself generates text and tool calls rather than native full-duplex speech. A Whisper large-v3-turbo speech encoder connects to the Gemma 4 26B-A4B backbone through a learned projector."
+        },
+        {
+          "url": "https://huggingface.co/ServiceNow-AI/Apriel-Voice-27B-preview",
+          "quote": "License MIT."
+        }
+      ],
+      "tags": [
+        "模型",
+        "开源",
+        "语音"
+      ]
+    },
+    {
+      "section": "model",
+      "title": "IBM ships Granite Switch 4.1.1 by swapping adapters, not the base model",
+      "summary": "Granite Switch 4.1.1 is a patch release, fully backwards compatible with 4.1: only a new Granite Speech ASR model covering 10 languages and an updated Decision adapter in granitelib-core were trained, and the base model is untouched, so users compose the latest adapters and deploy. IBM is also working on an Adapter SDK so third parties can version and ship their own adapters, a pattern worth watching for teams that maintain models in production.",
+      "sources": [
+        {
+          "candidate_id": "c_13a4facb28",
+          "url": "https://huggingface.co/blog/ibm-granite/granite-switch-4-1-1"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/blog/ibm-granite/granite-switch-4-1-1",
+          "quote": "Granite Switch 4.1.1 is a patch release. The version number means what it means in software: fully backwards compatible with 4.1, no migration, incremental improvements under the hood. Updated Granite Speech ASR model — multilingual speech-to-text across 10 languages"
+        },
+        {
+          "url": "https://huggingface.co/blog/ibm-granite/granite-switch-4-1-1",
+          "quote": "Apart from training the new ASR model and Decision adapter, nothing was recomputed: the base model is untouched. You compose the latest adapters you want and deploy. This pattern can power far more than patch releases to an IBM-provided model."
+        },
+        {
+          "url": "https://huggingface.co/blog/ibm-granite/granite-switch-4-1-1",
+          "quote": "We're working on tutorials and an Adapter SDK so developers and third-party providers can build their own adapters — iterate on versions, test features, and ship updates the way you ship software."
+        }
+      ],
+      "tags": [
+        "模型",
+        "语音",
+        "工具"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "PersonaCUABench: computer-use agents drop sharply when real personas ask",
+      "summary": "PersonaCUABench keeps 74 tasks across 11 domains fixed and varies only who asks: a persona agent playing one of 44 personas rewrites each instruction in its own words and answers the agent's questions. Across nine backbones (3,330 runs), mean task completion falls by 36% relative to the original requests. Completion rates on fixed instructions therefore overstate how well computer-use agents serve actual users.",
+      "sources": [
+        {
+          "candidate_id": "c_b665a5e7b0",
+          "url": "https://huggingface.co/papers/2610.22990"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2610.22990",
+          "quote": "Across nine backbones (3,330 runs), mean task completion falls by 36% relative to the original requests. The losses have two sources: in 59.9% of cells that lose points, the agent engages with what the user asked for and still gets it wrong"
+        }
+      ],
+      "tags": [
+        "论文",
+        "Agent"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "RealCLI benchmarks how well CLI agents collaborate with humans",
+      "summary": "RealCLI pairs each CLI task with two modes, full specification upfront or a scripted user who delivers information, corrections, constraint revisions and authorization decisions over time, and scores collaboration on a five-dimensional framework with 22 sub-dimensions. The best configuration averages only 49.2% and the peak joint collaboration score is 37.6%, with models weakest on steerability, trust calibration and safety boundary management. It gives coding-agent teams a way to measure behavior when requirements change mid-task.",
+      "sources": [
+        {
+          "candidate_id": "c_deeb84caf4",
+          "url": "https://huggingface.co/papers/2610.22507"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2610.22507",
+          "quote": "Evaluations reveal profound capability gaps in frontier agents: the best configuration attains an average score of only 49.2%, and when evaluated by the joint collaboration score (J_{collab}), the peak performance reaches merely 37.6%."
+        }
+      ],
+      "tags": [
+        "论文",
+        "Agent",
+        "代码"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Falcon: lightweight streaming audio-visual target speaker extraction",
+      "summary": "The paper releases RealSSA, a more realistic benchmark with 1-5 dynamic near-field interfering speakers plus a held-out real-recorded set, and proposes Falcon, a causal extraction model. Compared with causal AV-TFGridNet, Falcon cuts parameters by 91.9%, computation by 20.2 times and GPU inference latency by 11.1 times, and code and demo are available, making it a useful reference for low-latency speech front ends.",
+      "sources": [
+        {
+          "candidate_id": "c_0b7e877ad2",
+          "url": "https://huggingface.co/papers/2610.32749"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2610.32749",
+          "quote": "Compared with the causal AV-TFGridNet baseline, it cuts parameters by 91.9%, computation by 20.2 times, and GPU inference latency by 11.1 times."
+        }
+      ],
+      "tags": [
+        "论文",
+        "语音",
+        "多模态"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Claude Code v2.1.314 adds a switch to block writes outside working directories",
+      "summary": "The new permissions.blockWritesOutsideWorkingDirectories setting makes Write, Edit and NotebookEdit refuse paths outside the working directories in every permission mode, and VS Code and Claude Desktop's Code tab gain idle compaction, which summarizes a 200K+ token conversation left idle. The release also fixes claude -p exiting with code 0 and no output when startup fails; it now prints the error and exits 1, which matters for scripted use.",
+      "sources": [
+        {
+          "candidate_id": "c_aed6c19d83",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.314"
+        }
+      ],
+      "evidence": [],
+      "tags": [
+        "工具",
+        "代码",
+        "Agent"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Codex 0.166.0 adds GPT-6.1 Terra and a network diagnostics command",
+      "summary": "OpenAI Codex 0.166.0 adds GPT-6.1 Terra to the bundled, Vertex AI and Amazon Bedrock model catalogs, introduces codex doctor --network-only for configuration, connectivity and WebSocket diagnostics, and adds codex queue --resume. The TUI gets keyboard-driven transcript selection with integrated search, and resuming or forking threads now preserves acknowledged approval and permission settings.",
+      "sources": [
+        {
+          "candidate_id": "c_4ed2371cdc",
+          "url": "https://github.com/openai/codex/releases/tag/rust-v0.166.0"
+        }
+      ],
+      "evidence": [],
+      "tags": [
+        "工具",
+        "代码",
+        "Agent"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "OpenAI publishes an updated Model Spec",
+      "summary": "OpenAI's updated Model Spec outlines five core values meant to guide more capable AI toward sound judgment, human agency and faithfulness to human intent.",
+      "sources": [
+        {
+          "candidate_id": "c_65fd81c1d3",
+          "url": "https://openai.com/index/updated-model-spec"
+        }
+      ],
+      "evidence": [],
+      "tags": [
+        "安全"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "OpenAI explains how it detects frontier model misalignment",
+      "summary": "OpenAI describes layered monitoring for frontier model misalignment and unauthorized agent behavior so responders can intervene before incidents escalate.",
+      "sources": [
+        {
+          "candidate_id": "c_fca73080d4",
+          "url": "https://openai.com/index/how-we-detect-frontier-model-misalignment"
+        }
+      ],
+      "evidence": [],
+      "tags": [
+        "安全",
+        "Agent"
+      ]
+    }
+  ],
+  "research": [
+    {
+      "via": "webfetch",
+      "url": "https://mistral.ai/news/mistral-large-4-oss/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://artificialanalysis.ai/articles/gemini-4-carbon-new-number-1"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://openai.com/index/updated-model-spec"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://openai.com/index/how-we-detect-frontier-model-misalignment"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/blog/ibm-granite/granite-switch-4-1-1"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/ServiceNow-AI/Apriel-Voice-27B-preview"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/RecursiveSI/flint"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://www.phoronix.com/news/AMD-ROCm-HRX-Loom-0.1"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.32749"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.22990"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.22507"
+    },
+    {
+      "via": "websearch",
+      "query": "DeepSeek announcement October 29 2026"
+    }
+  ],
+  "lang": "en",
+  "validation": {
+    "validated_at": "2026-10-30T04:43:00+00:00",
+    "checked_links": false,
+    "dropped": [],
+    "warnings": []
+  }
+}
