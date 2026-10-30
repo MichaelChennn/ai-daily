@@ -1,0 +1,889 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-30",
+  "mode": "full",
+  "generated_at": "2026-10-30T04:40:39+00:00",
+  "channel": "api",
+  "model": "nvidia:minimaxai/minimax-m3.1-flash",
+  "highlights": [
+    "Mistral 开放 Mistral Large 4 权重，这是 1 万亿参数原生多模态 MoE 模型，面向编码与防御性安全场景。",
+    "Liquid AI 发布 LFM3-Omni-2B，用单个 2.2B 模型端到端处理文本、图像、视频与音频，并支持语音输出。",
+    "Recursive 开放 Flint 权重，这是一款面向编码 Agent 的 MoE 模型，总参数 39.8B、每 token 激活约 2.5B。"
+  ],
+  "items": [
+    {
+      "section": "headline",
+      "title": "Mistral 开放 Mistral Large 4 权重，主打编码与防御性安全",
+      "summary": "Mistral 发布了 Mistral Large 4（Le Chonk）的权重，这是其 1 万亿参数、原生多模态的 MoE 模型。官方称它在编码和防御性安全基准上领先开源权重模型，并提供 low、medium、high 三档推理强度，开发者可自行托管和定制部署。",
+      "tags": [
+        "模型",
+        "开源",
+        "推理"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_32c270bdcf",
+          "url": "https://mistral.ai/news/mistral-large-4-oss/"
+        },
+        {
+          "candidate_id": "c_8fd5085be9",
+          "url": "https://github.com/huggingface/transformers/releases/tag/v5.22.0"
+        },
+        {
+          "candidate_id": "c_a153f6ebbc",
+          "url": "https://huggingface.co/mistralai/Mistral-Large-4-1T-A52B"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://mistral.ai/news/mistral-large-4-oss/",
+          "quote": "We release the weights of Le Chonk, advancing the frontier of open models in agentic coding and cybersecurity."
+        },
+        {
+          "url": "https://mistral.ai/news/mistral-large-4-oss/",
+          "quote": "Earlier this month, we released Mistral Large 4 (Le Chonk), our flagship 1-trillion-parameter, natively multimodal model, in public preview."
+        },
+        {
+          "url": "https://mistral.ai/news/mistral-large-4-oss/",
+          "quote": "Today, we're releasing the weights of this improved Mistral Large 4."
+        },
+        {
+          "url": "https://mistral.ai/news/mistral-large-4-oss/",
+          "quote": "The new model also features substantial gains in reasoning efficiency that give developers greater performance while lowering inference costs."
+        },
+        {
+          "url": "https://mistral.ai/news/mistral-large-4-oss/",
+          "quote": "Mistral Large 4 ranks as the best open-weight model for coding and among the world's most capable open models overall."
+        },
+        {
+          "url": "https://mistral.ai/news/mistral-large-4-oss/",
+          "quote": "Trained from scratch on European infrastructure with clear lineage from inception to release, it gives organizations a trusted foundation for Sovereign AI Mistral is defining the sovereign AI category and leading the open frontier."
+        },
+        {
+          "url": "https://mistral.ai/news/mistral-large-4-oss/",
+          "quote": "We're committed to building the world's most capable models and releasing them openly, giving developers, enterprises, and institutions the power to own, customize, and control their AI."
+        },
+        {
+          "url": "https://mistral.ai/news/mistral-large-4-oss/",
+          "quote": "On Terminal-Bench 4.0, Mistral Large 4 improved by 13 percentage points to 41% compared to its public preview, taking the lead among open-weight models while reducing output tokens by 30%."
+        },
+        {
+          "url": "https://mistral.ai/news/mistral-large-4-oss/",
+          "quote": "ree reasoning modes: Mode Recommended Use Low Simple tasks; replaces ‘None’ reasoning mode Medium Everyday tasks High (default) Hardest use cases requiring high precision and thorough reasoning Beyond benchmarks, Mistral Large 4's coding capabilities are validated by human preference."
+        },
+        {
+          "url": "https://mistral.ai/news/mistral-large-4-oss/",
+          "quote": "Mistral Large 4 scores 51% on the Artificial Analysis Cyber Index, which measures a model’s ability to discover vulnerabilities in a codebase, reproduce and validate them, and patch them without breaking existing functionality."
+        },
+        {
+          "url": "https://mistral.ai/news/mistral-large-4-oss/",
+          "quote": "Our model’s built-in guardrails distinguishes between defensive and malicious, offensive cybersecurity tasks."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Liquid AI 发布 LFM3-Omni-2B，统一文本图像视频音频",
+      "summary": "Liquid AI 推出 LFM3 家族的首个全模态模型 LFM3-Omni-2B，单个端到端模型可理解文本、图像、视频和音频，并以文本或语音作答。参数量为 2.2B，定位手机、笔记本等端侧设备，一个模型即可替代 ASR、视觉语言、LLM 与 TTS 模型。",
+      "tags": [
+        "模型",
+        "多模态",
+        "语音"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_73262d098d",
+          "url": "https://huggingface.co/LiquidAI/LFM3-Omni-2B"
+        },
+        {
+          "candidate_id": "c_3caeffbb15",
+          "url": "https://huggingface.co/LiquidAI/LFM3-VL-2B"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/LiquidAI/LFM3-Omni-2B",
+          "quote": "LFM3-Omni-2B is Liquid AI 's first omni-modal model in the LFM3 family: a single end-to-end model that understands text, images, video and audio , and answers in text and speech ."
+        },
+        {
+          "url": "https://huggingface.co/LiquidAI/LFM3-Omni-2B",
+          "quote": "It is built for on-device use: one model replaces a separate ASR model, vision-language model, LLM and TTS model."
+        },
+        {
+          "url": "https://huggingface.co/LiquidAI/LFM3-Omni-2B",
+          "quote": "Any input, text or speech output: ask about a photo by voice, transcribe or translate speech, chat out loud, or ask questions about a video and its soundtrack together."
+        },
+        {
+          "url": "https://huggingface.co/LiquidAI/LFM3-Omni-2B",
+          "quote": "Watches and listens together: for videos with sound, the model sees and hears them at the same time, so it can answer questions that need both."
+        },
+        {
+          "url": "https://huggingface.co/LiquidAI/LFM3-Omni-2B",
+          "quote": "Small enough for devices: at 2.2B parameters, it is designed to run efficiently on phones, laptops and other edge hardware."
+        },
+        {
+          "url": "https://huggingface.co/LiquidAI/LFM3-Omni-2B",
+          "quote": "Find more information about the LFM3 family in our release blog post ."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Recursive 开放 Flint 权重，专注编码 Agent",
+      "summary": "Recursive 发布了 Flint 的 BF16 权重、配置、tokenizer、chat template 与 SGLang 服务套件。Flint 是面向编码 Agent 的 MoE 模型，总参数 39.8B、每 token 激活约 2.5B，支持文本输入输出、推理和多轮工具调用，官方公布的 Terminal-Bench 2.1 得分为 54.9%。",
+      "tags": [
+        "模型",
+        "开源",
+        "Agent"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_cefcbe1a01",
+          "url": "https://huggingface.co/RecursiveSI/flint"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/RecursiveSI/flint",
+          "quote": "Flint is Recursive’s mixture-of-experts language model for coding agents, with 39.8 billion total parameters and approximately 2.5 billion active per token."
+        },
+        {
+          "url": "https://huggingface.co/RecursiveSI/flint",
+          "quote": "It is designed to investigate codebases, fix bugs, implement features, and write tests."
+        },
+        {
+          "url": "https://huggingface.co/RecursiveSI/flint",
+          "quote": "Flint supports text input and output, reasoning, and multi-turn tool use."
+        },
+        {
+          "url": "https://huggingface.co/RecursiveSI/flint",
+          "quote": "In our release evaluations, it scores 54.9% on Terminal-Bench 2.1, 89.7% on SWE-bench Pro v2, and 74.2% on SWE-bench Verified."
+        },
+        {
+          "url": "https://huggingface.co/RecursiveSI/flint",
+          "quote": "This repository contains the BF16 checkpoint, model configuration, tokenizer, chat template, and an SGLang serving kit."
+        },
+        {
+          "url": "https://huggingface.co/RecursiveSI/flint",
+          "quote": "Quantized variants are prepared separately for NVIDIA and Apple Silicon runtimes."
+        },
+        {
+          "url": "https://huggingface.co/RecursiveSI/flint",
+          "quote": "Flint runs on one B300 or H200 GPU per replica with the SGLang kit in sglang/ ."
+        },
+        {
+          "url": "https://huggingface.co/RecursiveSI/flint",
+          "quote": "Flint is released under the Apache 2.0 license ."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "OpenAI 更新 Model Spec，并公开前沿模型失配检测方法",
+      "summary": "OpenAI 发布新版 Model Spec，用五个核心价值引导能力更强的模型做出更可靠的判断、保持人类自主权并忠实于用户意图。同日 OpenAI 还说明了检测前沿模型失配与 Agent 未经授权行为的方法：通过分层监控发现风险，以便在事态升级前介入。",
+      "tags": [
+        "安全",
+        "Agent",
+        "行业"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_65fd81c1d3",
+          "url": "https://openai.com/index/updated-model-spec"
+        },
+        {
+          "candidate_id": "c_fca73080d4",
+          "url": "https://openai.com/index/how-we-detect-frontier-model-misalignment"
+        }
+      ],
+      "evidence": []
+    },
+    {
+      "section": "headline",
+      "title": "Falcon 用更少参数实现流式音视频目标说话人提取",
+      "summary": "清华大学机器学习团队提出因果式音视频目标说话人提取方法 Falcon，用单次 encoder-decoder 过程完成多尺度时频分离，并以编码器空间的说话人对比损失抑制近场泄漏。作者同时发布 RealSSA 基准，包含模拟与真实录音场景；相比因果 AV-TFGridNet，Falcon 参数量减少 91.9%，计算量降低 20.2 倍，GPU 推理延迟降低 11.1 倍。",
+      "tags": [
+        "论文",
+        "多模态",
+        "语音"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_0b7e877ad2",
+          "url": "https://huggingface.co/papers/2610.32749"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2610.32749",
+          "quote": "g Huang , Xiaolin Hu Abstract Falcon is a lightweight causal audio-visual target speaker extraction method that achieves high quality with drastically reduced parameters and latency, supported by the realistic RealSSA benchmark."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.32749",
+          "quote": "To address the first gap, we release RealSSA , a realistic AVTSE benchmark consisting of RealSSA -Sim and RealSSA -Real."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.32749",
+          "quote": "RealSSA -Sim provides controllable simulated scenes with 1--5 dynamic near-field interfering speakers; scenes with far-field interference additionally include 10--15 far-field interfering speakers."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.32749",
+          "quote": "RealSSA -Real provides a held-out real-recorded evaluation set."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.32749",
+          "quote": "To address the second gap, we propose Falcon , a causal AVTSE method."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.32749",
+          "quote": "Its Separator performs multi-scale time-frequency separation in a single encoder--decoder pass."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.32749",
+          "quote": "We train Falcon with an encoder-space speaker contrastive loss ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.32749",
+          "quote": "This loss suppresses near-field leakage at zero inference cost and transfers across backbones."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.32749",
+          "quote": "Falcon achieves state-of-the-art extraction quality on RealSSA -Sim, LRS2-2Mix, LRS3-2Mix, and VoxCeleb2-2Mix."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.32749",
+          "quote": "Compared with the causal AV-TFGridNet baseline, it cuts parameters by 91.9%, computation by 20.2 times, and GPU inference latency by 11.1 times."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.32749",
+          "quote": "Code and demo are available at https://cslikai.cn/ Falcon /."
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "百度发布 Unlimited-OCR-2，主打无限长文档解析",
+      "summary": "百度发布 Unlimited-OCR-2，称其通过 SR-SWA 注意力把超长序列的文本-视觉交互压缩为固定大小的参考集合，从而在有限上下文窗口内实现无界文档解析。模型同时发布 ultra-long 文档解析基准 MarathonDocBench，支持 Transformers 与 SGLang 部署。",
+      "tags": [
+        "模型",
+        "多模态",
+        "工具"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_4239039208",
+          "url": "https://huggingface.co/baidu/Unlimited-OCR-2"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/baidu/Unlimited-OCR-2",
+          "quote": "[2026/10/27] 📊 We release MarathonDocBench , a new benchmark for ultra-long document parsing."
+        },
+        {
+          "url": "https://huggingface.co/baidu/Unlimited-OCR-2",
+          "quote": "[2026/10/27] 🚀 We release Unlimited OCR 2 , achieving unlimited-horizon parsing with SR-SWA."
+        },
+        {
+          "url": "https://huggingface.co/baidu/Unlimited-OCR-2",
+          "quote": "What's New in 2"
+        },
+        {
+          "url": "https://huggingface.co/baidu/Unlimited-OCR-2",
+          "quote": "Sparse Reference Sliding Window Attention (SR-SWA): Compresses text-visual attention interactions from ultra-long sequences down to a fixed-size set of working references (e.g., 512 tokens)."
+        },
+        {
+          "url": "https://huggingface.co/baidu/Unlimited-OCR-2",
+          "quote": "This bounds computational complexity, keeping per-step decoding latency and memory footprint nearly constant regardless of document length."
+        },
+        {
+          "url": "https://huggingface.co/baidu/Unlimited-OCR-2",
+          "quote": "From Long- to Unlimited-Horizon Parsing: Powered by SR-SWA, Unlimited-OCR 2 achieves true, unbounded document parsing within a finite context window—effectively eliminating quadratic attention scaling and memory bottlenecks as documents grow."
+        },
+        {
+          "url": "https://huggingface.co/baidu/Unlimited-OCR-2",
+          "quote": "Ultra-Long Document Parsing SOTA: Achieves state-of-the-art performance across both dozens-of-pages benchmarks (e.g., MPDocBench) and extreme hundred-page benchmarks (e.g., MarathonDocBench)."
+        },
+        {
+          "url": "https://huggingface.co/baidu/Unlimited-OCR-2",
+          "quote": "Unlimited OCR 2 supports Transformers (native, for quick tests) and SGLang (recommended for serving)."
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "IBM 发布 Granite Switch 4.1.1 补丁版",
+      "summary": "IBM 的 Granite Switch 4.1.1 是与 4.1 完全向后兼容的补丁版本，无需迁移即可获得增量改进。本次更新包含多语言语音识别模型（覆盖 10 种语言、带标点和大小写）和改进后的 Decision 适配器，基础模型未重新训练。",
+      "tags": [
+        "模型",
+        "语音"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_13a4facb28",
+          "url": "https://huggingface.co/blog/ibm-granite/granite-switch-4-1-1"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/blog/ibm-granite/granite-switch-4-1-1",
+          "quote": "Just over a week ago, we released Granite Switch 4.1 , showing that our modular Switch architecture lets you configure a language model with specialized, cache-efficient adapters — adding new expertise on a single endpoint."
+        },
+        {
+          "url": "https://huggingface.co/blog/ibm-granite/granite-switch-4-1-1",
+          "quote": "Granite Switch 4.1.1 is a patch release."
+        },
+        {
+          "url": "https://huggingface.co/blog/ibm-granite/granite-switch-4-1-1",
+          "quote": "The version number means what it means in software: fully backwards compatible with 4.1, no migration, incremental improvements under the hood."
+        },
+        {
+          "url": "https://huggingface.co/blog/ibm-granite/granite-switch-4-1-1",
+          "quote": "Updated Granite Speech ASR model — multilingual speech-to-text across 10 languages with native punctuation and capitalization, so transcripts are ready for downstream models without a formatting pass."
+        },
+        {
+          "url": "https://huggingface.co/blog/ibm-granite/granite-switch-4-1-1",
+          "quote": "Updated Decision adapter in granitelib-core — featuring improved overall performance on the Jev Decision Index test set."
+        },
+        {
+          "url": "https://huggingface.co/blog/ibm-granite/granite-switch-4-1-1",
+          "quote": "Apart from training the new ASR model and Decision adapter, nothing was recomputed: the base model is untouched."
+        },
+        {
+          "url": "https://huggingface.co/blog/ibm-granite/granite-switch-4-1-1",
+          "quote": "You compose the latest adapters you want and deploy."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "TAO：面向 Agent 服务的工具感知联合调度",
+      "summary": "论文提出工具感知的联合调度框架 TAO，把工具就绪时间、带时间衰减的节点级缓存信用和 token 占用纳入统一的会话价值评估，再用动态规划联合完成会话选择与放置。在 12 组模型-负载-并发设置中，相比各项指标上最优的已有基线，TAO 最多降低 26.8% 延迟、降低 36.3% 平均首 token 时间，并提升 29.5% 解码吞吐。",
+      "tags": [
+        "论文",
+        "推理",
+        "Agent"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_bb3c7f2c1e",
+          "url": "https://huggingface.co/papers/2610.37230"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2610.37230",
+          "quote": "Papers arxiv:2610.37230 TAO: Tool-Aware Joint Scheduling for LLM-Based Agentic Serving Published on Oct 27 · Submitted by Li shuhuai on Oct 29 · AIOR Upvote 18 +10 Authors: Shuhuai Li , Shengdong Ye , Dongdong Ge , Yinyu Ye , Jianghao Lin Abstract TAO improves scheduling for LLM agent services by co"
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.37230",
+          "quote": "To bridge this gap, we present TAO, a tool-aware joint scheduling framework for LLM-based agentic serving ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.37230",
+          "quote": "Its value interface combines near-term tool readiness, node-specific cache credit with time-aware decay , and token footprint ; a dynamic program jointly selects and places waiting sessions under capacity constraints."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.37230",
+          "quote": "Across the 12 reported model-workload-concurrency settings, TAO reduces latency by up to 26.8%, reduces mean time to first token (TTFT) by up to 36.3%, and increases decode throughput by up to 29.5% relative to the best evaluated state-of-the-art baseline for each metric."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.37230",
+          "quote": "Joint DP Placement: Replaces greedy per-session routing with an asynchronous dynamic program (under 0.12% runtime overhead) that jointly selects and places waiting sessions under GPU capacity limits."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.37230",
+          "quote": "Tested on DeepSeek-V4 Flash, Qwen3-32B, and GLM-4.7, TAO cuts latency by up to 26.8%, lowers mean TTFT by up to 36.3%, and boosts decode throughput by up to 29.5% over leading baselines."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Sensorimotor Alignment 用离线指标预测机器人策略表现",
+      "summary": "Rice University 团队提出 Sensorimotor Alignment（S²），一个免训练的离线指标，用于衡量模型的感知表征与物理运动几何结构的对齐程度。研究发现 S² 与下游机器人任务成功率正相关，可作为闭环评测前的低成本筛选手段，还能在昂贵的 VLA 微调之前挑出有潜力的视觉语言模型骨干。",
+      "tags": [
+        "论文",
+        "多模态",
+        "工具"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_881f1bc73e",
+          "url": "https://huggingface.co/papers/2610.31670"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2610.31670",
+          "quote": "Papers arxiv:2610.31670 Copy markdown Sensorimotor Alignment: A Platonic Proxy for Embodied Policy Success Published on Oct 23 · Submitted by Yunfei Xie on Oct 29 #3 Paper of the day · Rice University Upvote 21 +13 Authors: Yunfei Xie , Howard H."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.31670",
+          "quote": "Qian , Shiyi Lan , Kaiyu Hang , Chen Wei Abstract Sensorimotor alignment measures how sensory representations match physical motion geometry, serving as a low-cost offline predictor of robot model performance."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.31670",
+          "quote": "To test this, we propose Sensorimotor Alignment (S^2), a training-free offline metric that measures how well a model's sensory representation aligns with the geometry of physical motion ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.31670",
+          "quote": "We find that S^2 correlates positively with downstream robot task success across model families, making it a low-cost offline proxy for prioritizing models before closed-loop evaluation."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.31670",
+          "quote": "S^2 can also identify promising vision-language model (VLM) backbones before costly fine-tuning into vision-language-action models (VLAs)."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.31670",
+          "quote": "Beyond this correlation, S^2 offers representation-level explanations for phenomena observed in VLAs and world action models (WAMs)."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.31670",
+          "quote": "With S^2, we extend PRH to robotics and make sensorimotor alignment measurable, offering a low-cost, representation-level view of robot foundation models that closed-loop success rates alone cannot reveal."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "PersonaCUABench 揭示 Agent 难以满足真实用户约束",
+      "summary": "PersonaCUABench 固定 74 个任务和 11 个领域，只改变提出请求的人，由扮演 44 种人设的 persona agent 改写指令并回答提问。在 9 个骨干模型共 3,330 次运行中，平均任务完成率相对原始请求下降 36%；即使完全完成，人设请求获得最高满意度评分的比例也只有 62.7%，原始请求为 84.1%。",
+      "tags": [
+        "论文",
+        "Agent",
+        "工具"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_b665a5e7b0",
+          "url": "https://huggingface.co/papers/2610.22990"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2610.22990",
+          "quote": "We introduce PersonaCUABench , which holds 74 tasks across 11 domains fixed and varies only who asks."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.22990",
+          "quote": "A persona agent , playing one of 44 personas in four groups, rewrites each instruction in that user's own words and answers the CUA's questions, while the CUA sees only the dialogue, never the profile or the original instruction."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.22990",
+          "quote": "Across nine backbones (3,330 runs), mean task completion falls by 36% relative to the original requests."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.22990",
+          "quote": "The losses have two sources: in 59.9% of cells that lose points, the agent engages with what the user asked for and still gets it wrong, and 11.2% are stops the user requested that the checker scores as failures."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.22990",
+          "quote": "Even when a persona request is fully completed, the user gives the top satisfaction rating in only 62.7% of cells, against 84.1% for the original requests."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.22990",
+          "quote": "CUAs should therefore be evaluated not only on task completion but also on whether they meet the requirements and constraints users express."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "RealCLI：统一评估 CLI Agent 的任务执行与协作质量",
+      "summary": "REALCLI 是一套成对评测基准，同时衡量 CLI Agent 的任务执行与运行时人机协作质量，包含五维框架、22 个子维度和 51 个交互场景模板，并提供 REALCLI-EXEC 与 REALCLI-COLLAB 两种模式。评测显示前沿 Agent 差距明显：最佳配置平均分仅 49.2%，联合协作分最高只到 37.6%，在可控性、可信度校准和安全边界管理上普遍吃力。",
+      "tags": [
+        "论文",
+        "Agent",
+        "工具"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_deeb84caf4",
+          "url": "https://huggingface.co/papers/2610.22507"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2610.22507",
+          "quote": "In this paper, we present REALCLI , a paired benchmark that unifies the evaluation of task execution and human-agent collaboration quality on realistic CLI tasks."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.22507",
+          "quote": "To comprehensively measure collaboration, REALCLI builds a five-dimensional framework, operationalized into 22 sub-dimensions and 51 interaction scenario templates."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.22507",
+          "quote": "REALCLI provides two modes for paired comparison: REALCLI -EXEC supplies complete specifications upfront, whereas REALCLI -COLLAB introduces a scripted user that delivers progressive information , corrections, constraint revisions, and authorization decisions."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.22507",
+          "quote": "Evaluations reveal profound capability gaps in frontier agents: the best configuration attains an average score of only 49.2%, and when evaluated by the joint collaboration score (J_{collab}), the peak performance reaches merely 37.6%."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.22507",
+          "quote": "These results show that task effectiveness diverges sharply from collaboration quality, with models consistently struggling in steerability , trust calibration , and safety boundary management ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.22507",
+          "quote": "REALCLI provides a rigorous, reproducible foundation for measuring and advancing collaborative CLI agents ."
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Claude Code v2.1.314 新增工作目录写入拦截与空闲压缩",
+      "summary": "Claude Code v2.1.314 新增 permissions.blockWritesOutsideWorkingDirectories，Write、Edit 和 NotebookEdit 在所有权限模式下都会拒绝工作目录之外的路径。版本还为 VS Code 和 Claude Desktop 的 Code tab 加入空闲压缩：200K+ token 的会话闲置后会被总结，并在 prompt 缓存过期时用于下一条消息，同时修复了多个 Bedrock、Foundry 与 TLS 相关问题。",
+      "tags": [
+        "工具",
+        "Agent",
+        "安全"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_aed6c19d83",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.314"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.314",
+          "quote": "Added permissions.blockWritesOutsideWorkingDirectories : Write, Edit and NotebookEdit refuse paths outside the working directories in every permission mode"
+        },
+        {
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.314",
+          "quote": "Added idle compaction to VS Code and Claude Desktop's Code tab: a 200K+ token conversation left idle is summarized, and the summary is used on your next message if the prompt cache has expired"
+        },
+        {
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.314",
+          "quote": "Fixed Bedrock sessions with many images failing every turn and /compact with \"400 Input is too long.\" instead of removing older images and compacting"
+        },
+        {
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.314",
+          "quote": "Fixed Microsoft Foundry sessions failing when the resource has no deployment for the default Sonnet, Opus or Haiku model: Claude Code now falls back to an older model of that family"
+        },
+        {
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.314",
+          "quote": "Fixed TLS connections failing with UNABLE_TO_GET_ISSUER_CERT when the system certificate store holds a renewed root certificate that is cross-signed with its predecessor"
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "OpenAI Codex 0.166.0 增加 transcript 选择与网络诊断",
+      "summary": "openai/codex 0.166.0 为 transcript 加入基于键盘的按词、按行、按页选择、集成搜索和可配置快捷键，并统一异步问答与 transcript 回复中的 Markdown 渲染。新版本还提供 codex doctor --network-only 用于配置、连通性和 WebSocket 诊断，并加入 codex queue --resume 以恢复排队后卸载的线程。",
+      "tags": [
+        "工具",
+        "代码"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_4ed2371cdc",
+          "url": "https://github.com/openai/codex/releases/tag/rust-v0.166.0"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/openai/codex/releases/tag/rust-v0.166.0",
+          "quote": "Added keyboard-driven transcript selection with word, line, and page motions, integrated search, and configurable shortcuts."
+        },
+        {
+          "url": "https://github.com/openai/codex/releases/tag/rust-v0.166.0",
+          "quote": "Rendered Markdown consistently in async questions, choices, answers, and transcript replies."
+        },
+        {
+          "url": "https://github.com/openai/codex/releases/tag/rust-v0.166.0",
+          "quote": "Added GPT-6.1 Terra to the bundled, Vertex AI, and Amazon Bedrock model catalogs."
+        },
+        {
+          "url": "https://github.com/openai/codex/releases/tag/rust-v0.166.0",
+          "quote": "Added codex queue --resume to resume unloaded threads after queueing a message."
+        },
+        {
+          "url": "https://github.com/openai/codex/releases/tag/rust-v0.166.0",
+          "quote": "Added codex doctor --network-only for focused configuration, connectivity, and WebSocket diagnostics."
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "OpenMausBot：把 Claude、Codex 变成聊天里的本地 Agent",
+      "summary": "OpenMausBot 是一个 Apache-2.0 许可的开源项目，把 Claude 或 Codex 等 CLI 以聊天应用的形式组织成多个 Agent，每个 Bot 可拥有独立人格、模型、云端或本地虚拟机以及连接的应用。它在本地运行 Agent 进程，transcript、密钥和事件存放在 ~/.openmausbot，危险操作会弹出 Allow / Deny 审批卡片。",
+      "tags": [
+        "开源",
+        "Agent",
+        "工具"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_2a2ed58c0d",
+          "url": "https://github.com/milind-soni/OpenMausBot"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/milind-soni/OpenMausBot",
+          "quote": "OpenMausBot Public Notifications You must be signed in to change notification settings Fork 1.1k ( 1.1k ) Star 7.6k ( 7.6k ) You must be signed in to star a repository About Open-source Grok Bot alternative with a virtual machine that bots can use www.openmausbot.com/ Topics ai-agents claude-code co"
+        },
+        {
+          "url": "https://github.com/milind-soni/OpenMausBot",
+          "quote": "OpenMausBot is an open-source Grok Bot alternative: an independent project inspired by Grok Bot , and the open-source alternative to Meta Muse , OpenAI dots and Cue by Manus — bring-your-own-agent, local-first, on the models you already have."
+        },
+        {
+          "url": "https://github.com/milind-soni/OpenMausBot",
+          "quote": "Every bot in the sidebar is a real agent — Claude or Codex running locally under the hood — with its own"
+        },
+        {
+          "url": "https://github.com/milind-soni/OpenMausBot",
+          "quote": "personality, its own model, its own cloud computer, and its own connected apps."
+        },
+        {
+          "url": "https://github.com/milind-soni/OpenMausBot",
+          "quote": "Bots run on the claude , codex , and grok CLIs installed on your own machine"
+        },
+        {
+          "url": "https://github.com/milind-soni/OpenMausBot",
+          "quote": "— your existing logins and subscriptions, no new accounts, no proxy in the middle."
+        },
+        {
+          "url": "https://github.com/milind-soni/OpenMausBot",
+          "quote": "One small harness server on 127.0.0.1 owns every agent process."
+        },
+        {
+          "url": "https://github.com/milind-soni/OpenMausBot",
+          "quote": "Transcripts, keys, and"
+        },
+        {
+          "url": "https://github.com/milind-soni/OpenMausBot",
+          "quote": "events live in ~/.openmausbot , not a cloud."
+        },
+        {
+          "url": "https://github.com/milind-soni/OpenMausBot",
+          "quote": "Each bot can use a cloud Linux desktop, an isolated Local VM, or—where the platform"
+        },
+        {
+          "url": "https://github.com/milind-soni/OpenMausBot",
+          "quote": "safety boundary is currently certified—your own computer, plus 500+ apps through Composio."
+        },
+        {
+          "url": "https://github.com/milind-soni/OpenMausBot",
+          "quote": "apps, running on your machine under Apache 2.0."
+        },
+        {
+          "url": "https://github.com/milind-soni/OpenMausBot",
+          "quote": "🙋 Bots ask before they act"
+        },
+        {
+          "url": "https://github.com/milind-soni/OpenMausBot",
+          "quote": "Shell commands, file edits, and questions surface as inline cards — Allow / Deny / answer in chat."
+        },
+        {
+          "url": "https://github.com/milind-soni/OpenMausBot",
+          "quote": "permission broker turns every risky action into a decision you make, for cloud and local computers alike."
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "claude-mem 为各类 Agent 提供跨会话记忆",
+      "summary": "claude-mem 自动捕获 Agent 会话中的工具使用记录，生成语义摘要并在后续会话中注入，让项目上下文在会话结束后依然延续。它以插件形式支持 Claude Code、OpenClaw、Codex、Gemini、OpenCode 等多种 IDE 与 harness，并提供分层记忆检索、token 成本可见的渐进式披露以及用 <private> 标签排除敏感内容的机制。",
+      "tags": [
+        "开源",
+        "Agent",
+        "工具"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_5005c3abb8",
+          "url": "https://github.com/thedotmack/claude-mem"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/thedotmack/claude-mem",
+          "quote": "claude-mem Public Sponsor Notifications You must be signed in to change notification settings Fork 9.3k ( 9.3k ) Star 105k ( 105k ) You must be signed in to star a repository About Persistent Context Across Sessions for Every Agent – Captures everything your agent does during sessions, compresses it"
+        },
+        {
+          "url": "https://github.com/thedotmack/claude-mem",
+          "quote": "with AI, and injects relevant context back into future sessions."
+        },
+        {
+          "url": "https://github.com/thedotmack/claude-mem",
+          "quote": "Works with Claude Code, OpenClaw, Codex, Gemini, Hermes, Copilot, OpenCode + More claude-mem.ai Topics ai ai-agents ai-memory anthropic artificial-intelligence chromadb claude claude-agent-sdk claude-agents claude-code claude-code-plugin claude-skills embeddings long-term-memory mem0 memory-engine o"
+        },
+        {
+          "url": "https://github.com/thedotmack/claude-mem",
+          "quote": "penmemory rag sqlite supermemory Resources Readme Apache-2.0 license Security policy Security policy Activity Stars 105.0k stars Watchers 320 watching Forks 9.3k forks Report repository main Branches Tags Go to file Code Open more actions menu Latest commit History 3,767 Commits 3,767 Commits Folder"
+        },
+        {
+          "url": "https://github.com/thedotmack/claude-mem",
+          "quote": "Persistent memory compression system built for Claude Code ."
+        },
+        {
+          "url": "https://github.com/thedotmack/claude-mem",
+          "quote": "Claude-Mem seamlessly preserves context across sessions by automatically capturing tool usage observations, generating semantic summaries, and making them available to future sessions."
+        },
+        {
+          "url": "https://github.com/thedotmack/claude-mem",
+          "quote": "This enables Claude to maintain continuity of knowledge about projects even after sessions end or reconnect."
+        },
+        {
+          "url": "https://github.com/thedotmack/claude-mem",
+          "quote": "🧠 Persistent Memory - Context survives across sessions"
+        },
+        {
+          "url": "https://github.com/thedotmack/claude-mem",
+          "quote": "📊 Progressive Disclosure - Layered memory retrieval with token cost visibility"
+        },
+        {
+          "url": "https://github.com/thedotmack/claude-mem",
+          "quote": "🔒 Privacy Control - Use <private> tags to exclude sensitive content from storage"
+        },
+        {
+          "url": "https://github.com/thedotmack/claude-mem",
+          "quote": "⚙️ Context Configuration - Fine-grained control over what context gets injected"
+        }
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "transformers 补丁版修复 vLLM 远程代码加载",
+      "summary": "huggingface/transformers 发布补丁版，修复了在初始化期间赋值 rope_scaling 的配置问题，并修复了破坏 vLLM 远程代码加载的问题。",
+      "tags": [
+        "工具",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_c2572b9ff1",
+          "url": "https://github.com/huggingface/transformers/releases/tag/v5.21.1"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/huggingface/transformers/releases/tag/v5.21.1",
+          "quote": "Patch release v5.21.1"
+        },
+        {
+          "url": "https://github.com/huggingface/transformers/releases/tag/v5.21.1",
+          "quote": "Patch release v5.21.1"
+        },
+        {
+          "url": "https://github.com/huggingface/transformers/releases/tag/v5.21.1",
+          "quote": "** Fix rope_scaling setter for configs that assign it during init ( #50080 )"
+        },
+        {
+          "url": "https://github.com/huggingface/transformers/releases/tag/v5.21.1",
+          "quote": "We broke remote code loading in vllm, this fixes it sorry everyone!"
+        }
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "langchain-core 1.7.3 发布",
+      "summary": "langchain-core 1.7.3 是 1.7.2 之后的更新版本，对应上游 PR #41564。",
+      "tags": [
+        "工具",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_ceec473692",
+          "url": "https://github.com/langchain-ai/langchain/releases/tag/langchain-core%3D%3D1.7.3"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/langchain-ai/langchain/releases/tag/langchain-core%3D%3D1.7.3",
+          "quote": "Changes since langchain-core==1.7.2"
+        },
+        {
+          "url": "https://github.com/langchain-ai/langchain/releases/tag/langchain-core%3D%3D1.7.3",
+          "quote": "release(core): 1.7.3 ( #41564 )"
+        }
+      ]
+    }
+  ],
+  "research": [
+    {
+      "via": "webfetch",
+      "url": "https://mistral.ai/news/mistral-large-4-oss/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://openai.com/index/updated-model-spec"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://openai.com/index/how-we-detect-frontier-model-misalignment"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.166.0"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.314"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/huggingface/transformers/releases/tag/v5.21.1"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/blog/ibm-granite/granite-switch-4-1-1"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/langchain-ai/langchain/releases/tag/langchain-core%3D%3D1.7.3"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.37230"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.32749"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.31670"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.22990"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.22507"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/RecursiveSI/flint"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/baidu/Unlimited-OCR-2"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/LiquidAI/LFM3-Omni-2B"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/milind-soni/OpenMausBot"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/thedotmack/claude-mem"
+    }
+  ],
+  "validation": {
+    "validated_at": "2026-10-30T04:40:39+00:00",
+    "checked_links": true,
+    "dropped": [],
+    "warnings": [
+      "OpenAI 更新 Model Spec，并公开前沿模型失配检测方法: could not check https://openai.com/index/updated-model-spec (403)",
+      "OpenAI 更新 Model Spec，并公开前沿模型失配检测方法: could not check https://openai.com/index/how-we-detect-frontier-model-misalignment (403)",
+      "17 items (target 8-12)",
+      "4 paper items (target 2-3)"
+    ]
+  }
+}

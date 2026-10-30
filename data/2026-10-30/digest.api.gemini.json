@@ -1,0 +1,254 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-30",
+  "mode": "full",
+  "generated_at": "2026-10-30T04:42:28+00:00",
+  "channel": "api",
+  "model": "gemini:gemini-3.5-flash-lite",
+  "highlights": [
+    "Mistral AI released the open weights of Mistral Large 4 (Le Chonk), a multimodal Mixture-of-Experts model trained from scratch on European infrastructure.",
+    "ServiceNow AI introduced Apriel Voice 27B Preview, an open model built on a Gemma 4 backbone that brings speech understanding, reasoning, and tool use to multimodal workflows.",
+    "The TAO framework optimizes agentic serving by combining near-term tool readiness and KV-cache credit in a tool-aware joint scheduling dynamic program."
+  ],
+  "items": [
+    {
+      "section": "headline",
+      "title": "Mistral AI 发布开源多模态模型 Mistral Large 4 (Le Chonk)",
+      "summary": "Mistral AI 发布了 Mistral Large 4 (Le Chonk) 的开源权重，这是一个包含约 1 万亿总参数的原生多模态 MoE 模型。该模型支持长上下文、内置代码与防御性网络安全优化，并提供三种可配置的推理档位。",
+      "tags": [
+        "模型",
+        "开源",
+        "多模态"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_32c270bdcf",
+          "url": "https://mistral.ai/news/mistral-large-4-oss/"
+        },
+        {
+          "candidate_id": "c_8fd5085be9",
+          "url": "https://github.com/huggingface/transformers/releases/tag/v5.22.0"
+        },
+        {
+          "candidate_id": "c_a153f6ebbc",
+          "url": "https://huggingface.co/mistralai/Mistral-Large-4-1T-A52B"
+        }
+      ],
+      "evidence": []
+    },
+    {
+      "section": "model",
+      "title": "ServiceNow AI 发布语音、推理与工具调用开源模型 Apriel Voice 27B Preview",
+      "summary": "ServiceNow AI 推出了 Apriel Voice 27B Preview，这是一个基于 Gemma 4 骨干网络的开源模型。它在保持文本和图像输入能力的同时引入了语音接口，支持语音理解、推理和结构化工具调用。",
+      "tags": [
+        "模型",
+        "开源",
+        "语音",
+        "多模态"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_170ce920bd",
+          "url": "https://huggingface.co/ServiceNow-AI/Apriel-Voice-27B-preview"
+        }
+      ],
+      "evidence": []
+    },
+    {
+      "section": "paper",
+      "title": "TAO：面向大模型智能体服务的工具感知联合调度框架",
+      "summary": "研究团队提出了 TAO，一个专为基于大模型的智能体服务设计的工具感知联合调度框架。该框架结合了近期工具就绪状态、带时间衰减的 KV 缓存信用与 token 占用来进行联合动态规划调度，显著降低了延迟并提升了解码吞吐量。",
+      "tags": [
+        "论文",
+        "推理",
+        "Agent"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_bb3c7f2c1e",
+          "url": "https://huggingface.co/papers/2610.37230"
+        }
+      ],
+      "evidence": []
+    },
+    {
+      "section": "paper",
+      "title": "OmniShowcase：从多视角图像进行全方位主体一致的视频生成",
+      "summary": "OmniShowcase 提出了一种全自动数据流水线与几何感知条件方法，仅通过几张参考图像就能在长达 360 度的相机轨迹变化中保持主体身份与 3D 一致性。",
+      "tags": [
+        "论文",
+        "视频"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_2b73ee66c8",
+          "url": "https://huggingface.co/papers/2610.35684"
+        }
+      ],
+      "evidence": []
+    },
+    {
+      "section": "paper",
+      "title": "Falcon：面向真实世界声学场景的高效流式音视频目标说话人提取",
+      "summary": "论文介绍了 Falcon，一种轻量级因果音视频目标说话人提取方法。结合单通道多尺度时频分离器与编码器空间说话人对比损失，Falcon 在大幅削减参数量和计算开销的同时实现了最先进的提取质量。",
+      "tags": [
+        "论文",
+        "语音"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_0b7e877ad2",
+          "url": "https://huggingface.co/papers/2610.32749"
+        }
+      ],
+      "evidence": []
+    },
+    {
+      "section": "paper",
+      "title": "Sensorimotor Alignment：具身策略成功的柏拉图式代理指标",
+      "summary": "研究人员提出了 Sensorimotor Alignment（S²）这一无训练的离线指标，用于衡量模型的感官表示与物理运动几何结构的一致性。研究发现 S² 与下游机器人任务成功率呈正相关，可作为闭环评估前低成本的代理指标。",
+      "tags": [
+        "论文",
+        "Agent"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_881f1bc73e",
+          "url": "https://huggingface.co/papers/2610.31670"
+        }
+      ],
+      "evidence": []
+    },
+    {
+      "section": "paper",
+      "title": "PersonaCUABench：评估服务于多样化用户画像的计算机使用智能体",
+      "summary": "PersonaCUABench 评估了计算机使用智能体（CUAs）在引入不同用户画像和表达习惯时的表现。实验表明，相较于固定的基准指令，面对多样化用户需求时任务完成率显著下降。",
+      "tags": [
+        "论文",
+        "Agent"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_b665a5e7b0",
+          "url": "https://huggingface.co/papers/2610.22990"
+        }
+      ],
+      "evidence": []
+    },
+    {
+      "section": "paper",
+      "title": "RealCLI：面向命令行智能体人机协作的统一评估",
+      "summary": "REALCLI 是一个将任务执行与人机协作质量统一评估的命令行智能体（CLI）成对基准。评估揭示了前沿智能体在可控性、信任校准和安全边界管理方面的深度能力差距。",
+      "tags": [
+        "论文",
+        "Agent"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_deeb84caf4",
+          "url": "https://huggingface.co/papers/2610.22507"
+        }
+      ],
+      "evidence": []
+    },
+    {
+      "section": "tool",
+      "title": "OpenAI Codex CLI 发布 v0.166.0 版本",
+      "summary": "Codex CLI 发布 v0.166.0 版本，新增了带单词、行和页面运动的键盘驱动文本流选择、集成搜索、可配置快捷键以及在模型目录中加入 GPT-6.1 Terra。",
+      "tags": [
+        "工具",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_4ed2371cdc",
+          "url": "https://github.com/openai/codex/releases/tag/rust-v0.166.0"
+        }
+      ],
+      "evidence": []
+    },
+    {
+      "section": "tool",
+      "title": "Claude Code 发布 v2.1.314 版本",
+      "summary": "Claude Code 发布 v2.1.314 版本，新增了对工作目录外写入路径的拒绝保护、Claude 网关上游的组过滤、亚马逊 Bedrock 上游的护栏追踪，以及 VS Code 和 Claude Desktop Code 标签页中的空闲压缩功能。",
+      "tags": [
+        "工具",
+        "Agent"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_aed6c19d83",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.314"
+        }
+      ],
+      "evidence": []
+    }
+  ],
+  "research": [
+    {
+      "via": "webfetch",
+      "url": "https://mistral.ai/news/mistral-large-4-oss/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://openai.com/index/updated-model-spec"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://openai.com/index/how-we-detect-frontier-model-misalignment"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.166.0"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.314"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.37230"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.35684"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.32749"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.31670"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.22990"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.22507"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://i.redd.it/kmj5h3j8ceyh1.gif"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://i.redd.it/ltfcbicqnhyh1.jpeg"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/ServiceNow-AI/Apriel-Voice-27B-preview"
+    }
+  ],
+  "validation": {
+    "validated_at": "2026-10-30T04:42:28+00:00",
+    "checked_links": true,
+    "dropped": [],
+    "warnings": [
+      "1 headline items (target 3-5)",
+      "6 paper items (target 2-3)"
+    ]
+  }
+}
