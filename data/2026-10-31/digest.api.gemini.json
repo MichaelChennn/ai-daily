@@ -1,0 +1,332 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-31",
+  "mode": "full",
+  "generated_at": "2026-10-31T04:42:01+00:00",
+  "channel": "api",
+  "model": "gemini:gemini-3.5-flash-lite",
+  "highlights": [
+    "NVIDIA 发布了针对人形机器人和自动驾驶推理评估的全新学习型判断模型 Metatron v1 与 AlpaJudge。",
+    "MIT 团队提出 Soft-MTP，通过 KL 梯度恢复技巧消除了多token预测中的噪声残差。",
+    "Liquid AI 推出了 LFM3-Omni-2B，支持完全本地运行的端到端全模态交互。"
+  ],
+  "items": [
+    {
+      "section": "model",
+      "title": "DeepSeek 发布 DeepSeek-V4.1-Flash-1017 更新",
+      "summary": "DeepSeek-V4.1-Flash-1017 是 DeepSeek-V4.1-Flash 的一个小幅更新版本，在推理、编程、智能体任务及视觉基准测试上带来了显著提升，同时缩短了任务执行时间和输出长度。",
+      "tags": [
+        "模型",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_8b553ca25e",
+          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+          "quote": "DeepSeek-V4.1-Flash-1017 is a minor update to DeepSeek-V4.1-Flash , delivering substantial improvements across reasoning, coding, agentic tasks, and visual benchmarks."
+        },
+        {
+          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+          "quote": "Alongside these gains, the model reduces task execution time and output length, enabling users to complete tasks faster and at lower cost and advancing the performance–cost Pareto frontier across multiple agent harnesses."
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Liquid AI 发布端到端全模态模型 LFM3-Omni-2B",
+      "summary": "Liquid AI 推出了首款全模态模型 LFM3-Omni-2B，参数量为 2.2B，能够同时理解文本、图像、视频和音频，并以文本和语音进行响应，适合在手机和边缘设备上运行。",
+      "tags": [
+        "模型",
+        "多模态",
+        "语音"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_73262d098d",
+          "url": "https://huggingface.co/LiquidAI/LFM3-Omni-2B"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/LiquidAI/LFM3-Omni-2B",
+          "quote": "LFM3-Omni-2B is Liquid AI 's first omni-modal model in the LFM3 family: a single end-to-end model that understands text, images, video and audio , and answers in text and speech ."
+        },
+        {
+          "url": "https://huggingface.co/LiquidAI/LFM3-Omni-2B",
+          "quote": "Small enough for devices: at 2.2B parameters, it is designed to run efficiently on phones, laptops and other edge hardware."
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "NVIDIA 发布面向 Unitree G1 的统一控制策略模型 Metatron v1",
+      "summary": "NVIDIA 推出了 Metatron v1，这是一个专为 29 关节 Unitree G1 人形机器人设计的统一学习控制策略，支持行走、场景交互和跌倒恢复，提供原生 PyTorch 检查点和浏览器 ONNX 导出。",
+      "tags": [
+        "模型",
+        "开源",
+        "硬件"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_3b69abe573",
+          "url": "https://huggingface.co/nvidia/Metatron-v1"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/nvidia/Metatron-v1",
+          "quote": "Metatron browser demo and G1 Racer."
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "NVIDIA 发布自动驾驶推理评估判断模型 AlpaJudge",
+      "summary": "NVIDIA 推出了 AlpaJudge 自动驾驶推理评估学习型判断模型系列，包含基于参考答案的 AlpaJudge-RB 和基于前置相机的 AlpaJudge-RF 两个变体。",
+      "tags": [
+        "模型",
+        "多模态",
+        "行业"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_557c5acf4a",
+          "url": "https://huggingface.co/nvidia/alpajudge"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/nvidia/alpajudge",
+          "quote": "nvidia / alpajudge Like 8 Follow NVIDIA 73.7k Text Classification Safetensors alpajudge_rf autonomous-driving reward-model vision-language Model card Files Files and versions xet Copy to bucket AlpaJudge Checkpoints Download Support"
+        },
+        {
+          "url": "https://huggingface.co/nvidia/alpajudge",
+          "quote": "AlpaJudge is a family of learned judges for evaluating autonomous-driving reasoning."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Soft-MTP：通过 KL 梯度恢复技巧改进多 Token 预测",
+      "summary": "研究人员发现标准多token预测（MTP）训练中的残差会干扰学习，并引入了 KL 梯度恢复技巧，推出了 Soft-MTP，通过一行代码改动移除了噪声残差并提升了下游性能与推理速度。",
+      "tags": [
+        "论文",
+        "训练",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_dbd1cc0e1a",
+          "url": "https://huggingface.co/papers/2610.38331"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2610.38331",
+          "quote": "We identify a flaw in standard MTP training, in which a residual component of the MTP gradient interferes with both next-token and multi-token learning, increasingly so with scale."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.38331",
+          "quote": "This enables Soft Multi-Token Prediction ( Soft-MTP ), a one-line code change to MTP that removes the noisy residual and backpropagates only the KL self-distillation signal by reusing the existing NTP and MTP cross-entropy computations."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Intrinsic Distribution Matching：将显式矩约束引入少步文本生图",
+      "summary": "论文介绍了内在分布匹配（IDM），在分布匹配蒸馏中加入显式矩约束，在少步文本生成中实现了优异的中文和英文 LongText-Bench 表现，无需外部特征编码器。",
+      "tags": [
+        "论文",
+        "图像",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_1b161b32bd",
+          "url": "https://huggingface.co/papers/2610.39633"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2610.39633",
+          "quote": "o Li , Tao Lin Abstract Intrinsic Distribution Matching improves few-step text-to-image generation by adding explicit moment constraints to distribution matching distillation, achieving state-of-the-art long-text rendering with minimal network evaluations."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.39633",
+          "quote": "We introduce Intrinsic Distribution Matching (IDM), which retains the full DMD correction and matches feature means and per-coordinate standard deviations using the generator's exponential-moving-average (EMA) copy, requiring no external feature encoder."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Youtu-Parsing-Omni：统一的多模态解析器",
+      "summary": "腾讯团队推出了 Youtu-Parsing-Omni，这是一个 5B 参数的统一多模态解析模型，通过统一编码器和模式，在文档、图像、音频和视频解析任务上取得了出色的性能。",
+      "tags": [
+        "论文",
+        "多模态",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_8cab64b136",
+          "url": "https://huggingface.co/papers/2610.39301"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2610.39301",
+          "quote": "u , Haihan Gao , Heting Gao , Xin Li , Yinsong Liu , Deqian Jiang , Di Yin , Haoyu Cao , Xing Sun , Bing Liu , Yanqiu Qu , Yunfei Wu , Kun Yin , Zhixiang Wei + 8 authors Abstract Youtu-Parsing-Omni is a unified multi-modal parser that encodes documents, images, audio, and video into structured spati"
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.39301",
+          "quote": "With a single 5 B-parameter checkpoint, Youtu-Parsing-Omni achieves state-of-the-art performance on OmniDocBench v1.6 (96.96 Overall) and leads all open-weight models on OmniParsingBench (75.08 Avg.), with its advantage concentrated on audio and video."
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Claude Code 发布 v2.1.316 版本更新",
+      "summary": "Claude Code 发布 v2.1.316 版本，新增了禁用 ultrathink 关键词、Claude 应用网关池化群组预算、分层 managed.policy 模式等多项功能并修复了多个问题。",
+      "tags": [
+        "工具",
+        "代码",
+        "产品"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_40dbf4b699",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.316"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.316",
+          "quote": "Added CLAUDE_CODE_DISABLE_ULTRATHINK , which turns the ultrathink keyword off"
+        },
+        {
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.316",
+          "quote": "Added managed.policy_mode: layered to the Claude apps gateway: every policy that matches a developer applies, each merged over the ones listed below it, not only the first"
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "claude-mem：为 AI 代理提供跨会话的持久上下文记忆系统",
+      "summary": "开源项目 claude-mem 能够在会话期间自动捕获代理的工具使用观察结果、进行 AI 压缩，并将相关上下文注入未来会话中，支持 Claude Code、OpenClaw 等多个平台。",
+      "tags": [
+        "开源",
+        "工具",
+        "Agent"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_5005c3abb8",
+          "url": "https://github.com/thedotmack/claude-mem"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/thedotmack/claude-mem",
+          "quote": "with AI, and injects relevant context back into future sessions."
+        },
+        {
+          "url": "https://github.com/thedotmack/claude-mem",
+          "quote": "Works with Claude Code, OpenClaw, Codex, Gemini, Hermes, Copilot, OpenCode + More claude-mem.ai Topics ai ai-agents ai-memory anthropic artificial-intelligence chromadb claude claude-agent-sdk claude-agents claude-code claude-code-plugin claude-skills embeddings long-term-memory mem0 memory-engine o"
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Surya OCR 2.5：面向文档智能的开源 OCR 模型",
+      "summary": "Datalab 发布了 Surya OCR 2.5，这是一个 689M 参数的专用文档 OCR 模型，在 OmniParseBench 上取得了开源 1B 以下模型中最高的准确率。",
+      "tags": [
+        "开源",
+        "模型",
+        "多模态"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_0c0742e51c",
+          "url": "https://huggingface.co/datalab-to/surya-ocr-2.5"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/datalab-to/surya-ocr-2.5",
+          "quote": "Surya is a 689M param OCR model with these features:"
+        },
+        {
+          "url": "https://huggingface.co/datalab-to/surya-ocr-2.5",
+          "quote": "Accuracy - scores 85.9 on OmniParseBench , the highest of the open models under 1B parameters we have scored, and 83.7% on olmOCR-bench"
+        }
+      ]
+    }
+  ],
+  "research": [
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.38331"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/LiquidAI/LFM3-Omni-2B"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.39633"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.39301"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.39302"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.40647"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.36671"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.316"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/thedotmack/claude-mem"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/datalab-to/surya-ocr-2.5"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/nvidia/Metatron-v1"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/nvidia/alpajudge"
+    }
+  ],
+  "validation": {
+    "validated_at": "2026-10-31T04:42:01+00:00",
+    "checked_links": true,
+    "dropped": [],
+    "warnings": [
+      "0 headline items (target 3-5)"
+    ]
+  }
+}
