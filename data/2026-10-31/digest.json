@@ -1,0 +1,408 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-31",
+  "mode": "full",
+  "generated_at": "2026-10-31T05:10:00+00:00",
+  "model": "claude-opus-5-5",
+  "highlights": [
+    "Cursor Marketplace 上的官方 Claude Code for VS Code 扩展 2.1.312 和 2.1.313 被植入 SSH 后门，仅卸载扩展无法清除，用过的开发者需要排查清理。",
+    "开源模型方面，SenseNova-Loop-9B-Preview 以 Apache License 2.0 开放，腾讯公开了 5B 全模态解析模型 Youtu-Parsing-Omni 的代码和权重。",
+    "Claude Code v2.1.316 弃用 Opus 4.8 的 fast mode，官方建议迁移到 Opus 5.5。"
+  ],
+  "items": [
+    {
+      "section": "headline",
+      "title": "Cursor 市场上的 Claude Code 扩展被植入 SSH 后门",
+      "summary": "安全公司 Phorion 发现，Cursor Marketplace 分发的官方 Claude Code for VS Code 扩展 2.1.312 和 2.1.313 被植入后门：它会向 ~/.ssh/authorized_keys 追加攻击者的 Ed25519 公钥（注释为 svc-telemetry）并建立持久化，Cursor 已下架这两个版本。Phorion 提醒仅卸载扩展无法清除后门，用过这两个版本的开发者应按通报删除公钥和持久化项，并在有入侵迹象时轮换凭据。",
+      "sources": [
+        {
+          "candidate_id": "c_d4f691c037",
+          "url": "https://phorion.io/blog/offical-claude-code-vsx-compromise/"
+        },
+        {
+          "candidate_id": "c_d4f691c037",
+          "url": "https://news.ycombinator.com/item?id=50300683"
+        },
+        {
+          "candidate_id": "c_bc611d5d40",
+          "url": "https://doublepulsar.com/anthropic-hacked-to-deliver-remote-access-trojan-to-claude-developer-laptops-worldwide-1148a92baae2"
+        },
+        {
+          "candidate_id": "c_68db500dd2",
+          "url": "https://cyberplace.social/@GossiTheDog/117528831681803563"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://phorion.io/blog/offical-claude-code-vsx-compromise/",
+          "quote": "Phorion has discovered a compromise of the official Claude Code for VS Code extension on the Cursor Marketplace, where the backdoored extension bundle contains a persistent Secure Shell (SSH) backdoor. Cursor has removed the affected versions, 2.1.312 and 2.1.313 , from its marketplace."
+        },
+        {
+          "url": "https://phorion.io/blog/offical-claude-code-vsx-compromise/",
+          "quote": "appends an attacker-controlled Ed25519 public key to ~/.ssh/authorized_keys , setting permissions to 0700 on the directory and 0600 on the file. The key uses the comment svc-telemetry ."
+        },
+        {
+          "url": "https://phorion.io/blog/offical-claude-code-vsx-compromise/",
+          "quote": "If you identify an affected machine, uninstalling the extension alone won’t remove the backdoor ."
+        },
+        {
+          "url": "https://phorion.io/blog/offical-claude-code-vsx-compromise/",
+          "quote": "Rotate credentials: If SSH was enabled on the host, or if there’s any evidence of an inbound login, rotate any credentials or tokens that were accessible to that user account"
+        }
+      ],
+      "tags": [
+        "安全",
+        "代码",
+        "工具"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "SenseNova 开源循环解码多模态模型 SenseNova-Loop-9B-Preview",
+      "summary": "SenseNova-Loop-9B-Preview 是面向长上下文和 Agent 工作流的多模态模型，接受文本和图像、输出文本：24 层解码器共享权重执行两次，用 32 个不同的层得到 56 次层执行，并配合双流 mHC，训练最大序列长度 262,144 tokens，采用 Apache License 2.0。它展示了不复制参数也能加深计算路径的做法，做文档理解、代码和工具调用的开发者可以拿来对比同尺寸模型。",
+      "sources": [
+        {
+          "candidate_id": "c_0872c5ce4f",
+          "url": "https://huggingface.co/sensenova/SenseNova-Loop-9B-Preview"
+        },
+        {
+          "candidate_id": "c_0872c5ce4f",
+          "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xje5oo/sensenovasensenovaloop9bpreview_hugging_face/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/sensenova/SenseNova-Loop-9B-Preview",
+          "quote": "Shared looped block: 24 decoder layers are applied twice in sequence, producing 56 decoder-layer executions from 32 distinct layers."
+        },
+        {
+          "url": "https://huggingface.co/sensenova/SenseNova-Loop-9B-Preview",
+          "quote": "License: Apache License 2.0"
+        }
+      ],
+      "tags": [
+        "模型",
+        "开源",
+        "多模态"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "腾讯开源 5B 全模态解析模型 Youtu-Parsing-Omni",
+      "summary": "Youtu-Parsing-Omni 把文档、图像、音频和视频统一解析成带时空定位的结构化记录，所有模态共用一个编码器，OmniSchema 统一了十项解析任务的输出。单个 5B 检查点在 OmniDocBench v1.6 上达到 96.96 Overall，在 OmniParsingBench 上以 75.08 领先所有开放权重模型，代码和权重均已公开，可以给需要跨模态定位和引用证据的 Agent 当感知层。",
+      "sources": [
+        {
+          "candidate_id": "c_8cab64b136",
+          "url": "https://huggingface.co/papers/2610.39301"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2610.39301",
+          "quote": "With a single 5 B-parameter checkpoint, Youtu-Parsing-Omni achieves state-of-the-art performance on OmniDocBench v1.6 (96.96 Overall) and leads all open-weight models on OmniParsingBench (75.08 Avg.)"
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.39301",
+          "quote": "Code and model weights are publicly available."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.39301",
+          "quote": "Youtu-Parsing-Omni is a compact (5B) omni-modal parsing model."
+        }
+      ],
+      "tags": [
+        "多模态",
+        "开源",
+        "论文"
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Datalab 发布 689M 参数的 Surya OCR 2.5",
+      "summary": "Surya OCR 2.5 支持版面分析和阅读顺序、把表格输出为 HTML，OmniParseBench 得分 85.9、olmOCR-bench 83.7%，单张 H100 在 192 DPI 下吞吐 4.5 pages/s。代码采用 Apache 2.0，权重是修改版 AI Pubs Open Rail-M 许可，对研究、个人和融资/收入低于 $5M 的初创免费，更大规模商用前要先看许可。",
+      "sources": [
+        {
+          "candidate_id": "c_0c0742e51c",
+          "url": "https://huggingface.co/datalab-to/surya-ocr-2.5"
+        },
+        {
+          "candidate_id": "c_0c0742e51c",
+          "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xjmfxb/datalabtosuryaocr25_hugging_face/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/datalab-to/surya-ocr-2.5",
+          "quote": "Surya is a 689M param OCR model with these features: Accuracy - scores 85.9 on OmniParseBench , the highest of the open models under 1B parameters we have scored, and 83.7% on olmOCR-bench"
+        }
+      ],
+      "tags": [
+        "模型",
+        "多模态",
+        "工具"
+      ]
+    },
+    {
+      "section": "model",
+      "title": "speridlabs 开源单图生成 3D 高斯模型 Idol",
+      "summary": "Idol 输入一张物体图片（渲染图、生成图或照片），自动去背景、取景，生成最多 1,048,576 个 Gaussian 并写成标准 3DGS .ply，图片里看不到的侧面也会补全。它在消费级 GPU 上占用 7.2 GB 显存、采用 apache-2.0 许可，适合直接接进 3D 资产生成流程。",
+      "sources": [
+        {
+          "candidate_id": "c_0028b46e25",
+          "url": "https://huggingface.co/speridlabs/idol"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/speridlabs/idol",
+          "quote": "Give it a render, a generated image or a photo: it removes the background, frames the object and generates up to 1,048,576 Gaussians, written as a standard 3DGS .ply . It runs on consumer GPUs, using 7.2 GB of VRAM and can run in under 2 seconds."
+        },
+        {
+          "url": "https://huggingface.co/speridlabs/idol",
+          "quote": "One picture of an object in, up to a million 3D Gaussians out, including the sides the picture never showed."
+        }
+      ],
+      "tags": [
+        "模型",
+        "开源",
+        "图像"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Soft-MTP：一行代码改进多 Token 预测训练",
+      "summary": "麻省理工学院的研究指出，标准 MTP 的交叉熵梯度可以精确分解为 KL 自蒸馏项和一个低信噪比的残差项，后者会干扰学习；Soft-MTP 只回传 KL 信号，是一行代码改动，不增加参数，兼容 DeepSeek 和 Meta 两种 MTP。在 167M 到 1.2B 参数的各个规模上，它的 NTP 困惑度、投机解码速度和零样本准确率都优于标准 MTP，预训练里用 MTP 的团队可以低成本试一试。",
+      "sources": [
+        {
+          "candidate_id": "c_dbd1cc0e1a",
+          "url": "https://huggingface.co/papers/2610.38331"
+        },
+        {
+          "candidate_id": "c_1497048da7",
+          "url": "https://i.redd.it/pdz8voy3inyh1.png"
+        },
+        {
+          "candidate_id": "c_a763f256d8",
+          "url": "https://i.redd.it/28dgjexv5lyh1.png"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2610.38331",
+          "quote": "Soft-MTP supports both DeepSeek- and Meta-style MTP, adds no parameters, and incurs no measurable overhead. From 167M to 1.2B parameters, Soft-MTP improves over standard MTP with lower NTP perplexity, faster speculative decoding and higher zero-shot accuracy at every scale"
+        }
+      ],
+      "tags": [
+        "论文",
+        "训练"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "基准的难度分布会误导排行榜结论",
+      "summary": "伊利诺伊大学香槟分校等团队把基准看作难度上的经验测度，形式化了“测度失配”和“覆盖缺口”两种失效模式并给出诊断指标；分析 7 个领域的 25 个常用基准后发现，很多基准偏重某些难度区间，另一些留下大片难度空白，难以反映训练进展。作者还提出按难度定向改写题目的 BenchFill 来补缺口，用基准追踪模型进展前值得先看看它的难度覆盖。",
+      "sources": [
+        {
+          "candidate_id": "c_861f2a7e26",
+          "url": "https://huggingface.co/papers/2610.29927"
+        },
+        {
+          "candidate_id": "c_39c3357be6",
+          "url": "https://i.redd.it/0tb53de34oyh1.jpeg"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2610.29927",
+          "quote": "Empirically, we analyze 25 popular benchmarks spanning 7 domains using carefully estimated item difficulties. Our results show that many benchmarks implicitly overweight certain difficulty regions, so their leaderboard conclusions should be interpreted with caution"
+        }
+      ],
+      "tags": [
+        "论文"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Claude Code v2.1.316 弃用 Opus 4.8 的 fast mode",
+      "summary": "新版宣布 Opus 4.8 的 fast mode 自 October 30, 2026 起弃用、November 30, 2026 移除，移除后这类请求会直接报错，不会回落到标准 Opus 4.8，官方建议迁移到 Opus 5.5 以保留加速。同时新增了关闭 ultrathink 关键词、为子 Agent 设定默认 effort 级别的环境变量；依赖 Opus 4.8 fast mode 的脚本和工作流需要尽快迁移。",
+      "sources": [
+        {
+          "candidate_id": "c_40dbf4b699",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.316"
+        }
+      ],
+      "tags": [
+        "工具",
+        "代码",
+        "Agent"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "vLLM 合入 Qwen4Exp 的 PLE 磁盘卸载",
+      "summary": "vLLM 已合并的 PR 为 Qwen4Exp 新增 disk_offload 选项：PLE n-gram 表留在 checkpoint 文件里，每步只在主机端读取需要的行。在 DGX Spark (GB10) 上，Qwen3.8-Flash-Next NVFP4 加载内存少 27.0 GiB，解码速度与常驻表相差在 3.5% 以内，代价是 TTFT 升高约 11%，内存紧张的本地部署可以在 nightly 版本里试用。",
+      "sources": [
+        {
+          "candidate_id": "c_df1136c22d",
+          "url": "https://github.com/vllm-project/vllm/pull/59958"
+        },
+        {
+          "candidate_id": "c_df1136c22d",
+          "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xjpbcg/vllm_now_has_ple_disk_offload_support_on_nightly/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/vllm-project/vllm/pull/59958",
+          "quote": "Adds --engram-config '{\"disk_offload\": true}' for Qwen4Exp. The PLE n-gram table stays in the checkpoint files, and each step reads only its rows on the host. On DGX Spark (GB10), Qwen3.8-Flash-Next NVFP4 loads with 27.0 GiB less memory."
+        },
+        {
+          "url": "https://github.com/vllm-project/vllm/pull/59958",
+          "quote": "Cost: decode within 3.5% at c=1/4/8, and about 11% higher TTFT."
+        },
+        {
+          "url": "https://github.com/vllm-project/vllm/pull/59958",
+          "quote": "arpera merged commit b44a48c into vllm-project : main Oct 30, 2026"
+        }
+      ],
+      "tags": [
+        "工具",
+        "推理",
+        "开源"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "Blackstone 预计 Anthropic IPO 后获“高垃圾级”评级",
+      "summary": "据 FT 报道，Blackstone 预计 Anthropic IPO 后获双 B 区间评级（投机级最高档），此前它曾预计 2027 年前获投资级评级。",
+      "sources": [
+        {
+          "candidate_id": "c_4d40dd3eb7",
+          "url": "https://techcrunch.com/2026/10/30/anthropic-expected-to-receive-high-junk-rating-from-credit-agencies-following-ipo-report-says/"
+        },
+        {
+          "candidate_id": "c_e36d866593",
+          "url": "https://www.ft.com/content/59383c7f-8d82-493f-bf01-d2e862a1018f"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://techcrunch.com/2026/10/30/anthropic-expected-to-receive-high-junk-rating-from-credit-agencies-following-ipo-report-says/",
+          "quote": "Previously, the FT notes, Blackstone had said the opposite: that the Claude maker would receive an investment-grade rating (indicating low risk for lenders) before 2027 rolls around. Now Blackstone expects double B range rating, the top tier of speculative “junk” grade"
+        }
+      ],
+      "tags": [
+        "行业"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "OpenAI 将遵循共享的 robots.txt 训练偏好信号",
+      "summary": "OpenAI 表示将遵循一个共享的 robots.txt 信号，方便网站运营者向参与的 AI 提供商表达训练偏好。",
+      "sources": [
+        {
+          "candidate_id": "c_e4822c713d",
+          "url": "https://openai.com/index/helping-websites-express-ai-training-preferences"
+        }
+      ],
+      "tags": [
+        "行业",
+        "训练"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "NVIDIA 发布实时动作生成模型 MotionBricks",
+      "summary": "MotionBricks 根据角色近期姿态和目标姿态实时生成过渡动作，提供 SOMA 和 Unitree G1 两套权重，只生成动作、不是机器人控制器。",
+      "sources": [
+        {
+          "candidate_id": "c_f1a7dcf6d4",
+          "url": "https://huggingface.co/nvidia/MotionBricks"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/nvidia/MotionBricks",
+          "quote": "MotionBricks generates motion in real time for humanoid robots and human characters. Give it the character's recent poses and the poses it should reach next, and it generates the movement connecting them."
+        },
+        {
+          "url": "https://huggingface.co/nvidia/MotionBricks",
+          "quote": "SOMA Generate human motion on the SOMA skeleton. Model card Unitree G1 Generate motion for the Unitree G1 humanoid."
+        },
+        {
+          "url": "https://huggingface.co/nvidia/MotionBricks",
+          "quote": "MotionBricks generates motion, not a controller for a physical robot."
+        }
+      ],
+      "tags": [
+        "模型",
+        "多模态"
+      ]
+    }
+  ],
+  "research": [
+    {
+      "via": "webfetch",
+      "url": "https://phorion.io/blog/offical-claude-code-vsx-compromise/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://openai.com/index/helping-websites-express-ai-training-preferences"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.38331"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.29927"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.39301"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/sensenova/SenseNova-Loop-9B-Preview"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/datalab-to/surya-ocr-2.5"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/speridlabs/idol"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/nvidia/MotionBricks"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://techcrunch.com/2026/10/30/anthropic-expected-to-receive-high-junk-rating-from-credit-agencies-following-ipo-report-says/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/vllm-project/vllm/pull/59958"
+    },
+    {
+      "via": "websearch",
+      "query": "Google Project Suncatcher satellite Gemma 4 TPU first response"
+    }
+  ],
+  "validation": {
+    "validated_at": "2026-10-31T04:43:02+00:00",
+    "checked_links": true,
+    "dropped": [],
+    "warnings": [
+      "Cursor 市场上的 Claude Code 扩展被植入 SSH 后门: could not check https://doublepulsar.com/anthropic-hacked-to-deliver-remote-access-trojan-to-claude-developer-laptops-worldwide-1148a92baae2 (403)",
+      "SenseNova 开源循环解码多模态模型 SenseNova-Loop-9B-Preview: could not check https://www.reddit.com/r/LocalLLaMA/comments/1xje5oo/sensenovasensenovaloop9bpreview_hugging_face/ (403)",
+      "Datalab 发布 689M 参数的 Surya OCR 2.5: could not check https://www.reddit.com/r/LocalLLaMA/comments/1xjmfxb/datalabtosuryaocr25_hugging_face/ (403)",
+      "Soft-MTP：一行代码改进多 Token 预测训练: could not check https://i.redd.it/pdz8voy3inyh1.png (403)",
+      "Soft-MTP：一行代码改进多 Token 预测训练: could not check https://i.redd.it/28dgjexv5lyh1.png (403)",
+      "基准的难度分布会误导排行榜结论: could not check https://i.redd.it/0tb53de34oyh1.jpeg (403)",
+      "vLLM 合入 Qwen4Exp 的 PLE 磁盘卸载: could not check https://www.reddit.com/r/LocalLLaMA/comments/1xjpbcg/vllm_now_has_ple_disk_offload_support_on_nightly/ (403)",
+      "Blackstone 预计 Anthropic IPO 后获“高垃圾级”评级: could not check https://www.ft.com/content/59383c7f-8d82-493f-bf01-d2e862a1018f (403)"
+    ]
+  }
+}

@@ -1,0 +1,382 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-31",
+  "mode": "full",
+  "generated_at": "2026-10-31T04:43:25+00:00",
+  "model": "claude-opus-5-5",
+  "highlights": [
+    "The official Claude Code for VS Code extension on the Cursor Marketplace, versions 2.1.312 and 2.1.313, shipped a persistent SSH backdoor; uninstalling the extension alone won't remove it.",
+    "SenseNova-Loop-9B-Preview is out under the Apache License 2.0, and Tencent published code and weights for the 5B omni-modal parser Youtu-Parsing-Omni.",
+    "Claude Code v2.1.316 deprecates fast mode for Opus 4.8 and points users to Opus 5.5."
+  ],
+  "items": [
+    {
+      "section": "headline",
+      "title": "Claude Code extension on the Cursor Marketplace carried an SSH backdoor",
+      "summary": "Phorion found that versions 2.1.312 and 2.1.313 of the official Claude Code for VS Code extension distributed through the Cursor Marketplace append an attacker-controlled Ed25519 public key (comment svc-telemetry) to ~/.ssh/authorized_keys and set up persistence; Cursor has removed both versions. Uninstalling the extension alone won't remove the backdoor, so anyone who used these versions should follow the advisory's cleanup steps and rotate credentials if there are signs of an inbound login.",
+      "sources": [
+        {
+          "candidate_id": "c_d4f691c037",
+          "url": "https://phorion.io/blog/offical-claude-code-vsx-compromise/"
+        },
+        {
+          "candidate_id": "c_d4f691c037",
+          "url": "https://news.ycombinator.com/item?id=50300683"
+        },
+        {
+          "candidate_id": "c_bc611d5d40",
+          "url": "https://doublepulsar.com/anthropic-hacked-to-deliver-remote-access-trojan-to-claude-developer-laptops-worldwide-1148a92baae2"
+        },
+        {
+          "candidate_id": "c_68db500dd2",
+          "url": "https://cyberplace.social/@GossiTheDog/117528831681803563"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://phorion.io/blog/offical-claude-code-vsx-compromise/",
+          "quote": "Phorion has discovered a compromise of the official Claude Code for VS Code extension on the Cursor Marketplace, where the backdoored extension bundle contains a persistent Secure Shell (SSH) backdoor. Cursor has removed the affected versions, 2.1.312 and 2.1.313 , from its marketplace."
+        },
+        {
+          "url": "https://phorion.io/blog/offical-claude-code-vsx-compromise/",
+          "quote": "appends an attacker-controlled Ed25519 public key to ~/.ssh/authorized_keys , setting permissions to 0700 on the directory and 0600 on the file. The key uses the comment svc-telemetry ."
+        },
+        {
+          "url": "https://phorion.io/blog/offical-claude-code-vsx-compromise/",
+          "quote": "If you identify an affected machine, uninstalling the extension alone won’t remove the backdoor ."
+        },
+        {
+          "url": "https://phorion.io/blog/offical-claude-code-vsx-compromise/",
+          "quote": "Rotate credentials: If SSH was enabled on the host, or if there’s any evidence of an inbound login, rotate any credentials or tokens that were accessible to that user account"
+        }
+      ],
+      "tags": [
+        "安全",
+        "代码",
+        "工具"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "SenseNova releases looped multimodal model SenseNova-Loop-9B-Preview",
+      "summary": "SenseNova-Loop-9B-Preview takes text and images and targets long-context and agentic workflows: 24 decoder layers are applied twice with shared weights, giving 56 decoder-layer executions from 32 distinct layers, combined with two-stream mHC and a maximum training sequence length of 262,144 tokens. It ships under the Apache License 2.0 and is a concrete way to try a deeper execution path without duplicating parameters for document understanding, coding and tool use.",
+      "sources": [
+        {
+          "candidate_id": "c_0872c5ce4f",
+          "url": "https://huggingface.co/sensenova/SenseNova-Loop-9B-Preview"
+        },
+        {
+          "candidate_id": "c_0872c5ce4f",
+          "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xje5oo/sensenovasensenovaloop9bpreview_hugging_face/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/sensenova/SenseNova-Loop-9B-Preview",
+          "quote": "Shared looped block: 24 decoder layers are applied twice in sequence, producing 56 decoder-layer executions from 32 distinct layers."
+        },
+        {
+          "url": "https://huggingface.co/sensenova/SenseNova-Loop-9B-Preview",
+          "quote": "License: Apache License 2.0"
+        }
+      ],
+      "tags": [
+        "模型",
+        "开源",
+        "多模态"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Tencent opens 5B omni-modal parser Youtu-Parsing-Omni",
+      "summary": "Youtu-Parsing-Omni turns documents, images, audio and video into structured records grounded in space and time, using one encoder for every modality and OmniSchema to unify ten parsing tasks. A single 5B checkpoint reaches 96.96 Overall on OmniDocBench v1.6 and leads open-weight models on OmniParsingBench at 75.08; with code and weights public, it can serve as a perception layer for agents that need to locate and cite evidence across modalities.",
+      "sources": [
+        {
+          "candidate_id": "c_8cab64b136",
+          "url": "https://huggingface.co/papers/2610.39301"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2610.39301",
+          "quote": "With a single 5 B-parameter checkpoint, Youtu-Parsing-Omni achieves state-of-the-art performance on OmniDocBench v1.6 (96.96 Overall) and leads all open-weight models on OmniParsingBench (75.08 Avg.)"
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.39301",
+          "quote": "Code and model weights are publicly available."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.39301",
+          "quote": "Youtu-Parsing-Omni is a compact (5B) omni-modal parsing model."
+        }
+      ],
+      "tags": [
+        "多模态",
+        "开源",
+        "论文"
+      ]
+    },
+    {
+      "section": "model",
+      "title": "speridlabs releases Idol, single-image to 3D Gaussian splat",
+      "summary": "Idol takes one picture of an object (a render, a generated image or a photo), removes the background and generates up to 1,048,576 Gaussians as a standard 3DGS .ply, including the sides the picture never showed. It runs on consumer GPUs using 7.2 GB of VRAM under an apache-2.0 license, which makes it easy to drop into a 3D asset pipeline.",
+      "sources": [
+        {
+          "candidate_id": "c_0028b46e25",
+          "url": "https://huggingface.co/speridlabs/idol"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/speridlabs/idol",
+          "quote": "Give it a render, a generated image or a photo: it removes the background, frames the object and generates up to 1,048,576 Gaussians, written as a standard 3DGS .ply . It runs on consumer GPUs, using 7.2 GB of VRAM and can run in under 2 seconds."
+        },
+        {
+          "url": "https://huggingface.co/speridlabs/idol",
+          "quote": "One picture of an object in, up to a million 3D Gaussians out, including the sides the picture never showed."
+        }
+      ],
+      "tags": [
+        "模型",
+        "开源",
+        "图像"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Soft-MTP: a one-line change that improves multi-token prediction",
+      "summary": "The paper shows the standard MTP cross-entropy gradient splits exactly into a KL self-distillation term and a low signal-to-noise residual that interferes with learning; Soft-MTP backpropagates only the KL signal, adds no parameters and supports both DeepSeek- and Meta-style MTP. From 167M to 1.2B parameters it beats standard MTP on NTP perplexity, speculative decoding speed and zero-shot accuracy at every scale, so teams pre-training with MTP can try it cheaply.",
+      "sources": [
+        {
+          "candidate_id": "c_dbd1cc0e1a",
+          "url": "https://huggingface.co/papers/2610.38331"
+        },
+        {
+          "candidate_id": "c_1497048da7",
+          "url": "https://i.redd.it/pdz8voy3inyh1.png"
+        },
+        {
+          "candidate_id": "c_a763f256d8",
+          "url": "https://i.redd.it/28dgjexv5lyh1.png"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2610.38331",
+          "quote": "Soft-MTP supports both DeepSeek- and Meta-style MTP, adds no parameters, and incurs no measurable overhead. From 167M to 1.2B parameters, Soft-MTP improves over standard MTP with lower NTP perplexity, faster speculative decoding and higher zero-shot accuracy at every scale"
+        }
+      ],
+      "tags": [
+        "论文",
+        "训练"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Benchmark difficulty distributions can skew leaderboard conclusions",
+      "summary": "Researchers from the University of Illinois at Urbana-Champaign and others treat a benchmark as an empirical measure over difficulty and formalize two failure modes, measure mismatch and coverage gaps. Across 25 popular benchmarks spanning 7 domains, many overweight certain difficulty regions while others leave gaps that hide training progress; the authors' BenchFill rewrites items to fill those gaps, and it's worth checking a benchmark's difficulty coverage before using it to track progress.",
+      "sources": [
+        {
+          "candidate_id": "c_861f2a7e26",
+          "url": "https://huggingface.co/papers/2610.29927"
+        },
+        {
+          "candidate_id": "c_39c3357be6",
+          "url": "https://i.redd.it/0tb53de34oyh1.jpeg"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2610.29927",
+          "quote": "Empirically, we analyze 25 popular benchmarks spanning 7 domains using carefully estimated item difficulties. Our results show that many benchmarks implicitly overweight certain difficulty regions, so their leaderboard conclusions should be interpreted with caution"
+        }
+      ],
+      "tags": [
+        "论文"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Claude Code v2.1.316 deprecates fast mode for Opus 4.8",
+      "summary": "Fast mode for Opus 4.8 is deprecated as of October 30, 2026 and will be removed on November 30, 2026, after which such requests return an error instead of falling back to standard Opus 4.8; the release recommends migrating to Opus 5.5 to keep the speedup. It also adds environment variables to turn off the ultrathink keyword and to set the default effort level for subagents, and scripts relying on Opus 4.8 fast mode should migrate soon.",
+      "sources": [
+        {
+          "candidate_id": "c_40dbf4b699",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.316"
+        }
+      ],
+      "tags": [
+        "工具",
+        "代码",
+        "Agent"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "vLLM merges PLE disk offload for Qwen4Exp",
+      "summary": "A merged vLLM PR adds a disk_offload option for Qwen4Exp that keeps the PLE n-gram table in the checkpoint files and reads only the rows each step needs on the host. On DGX Spark (GB10), Qwen3.8-Flash-Next NVFP4 loads with 27.0 GiB less memory and decode stays within 3.5% of the resident table, at the cost of about 11% higher TTFT, which is a useful trade for memory-constrained local setups on nightly.",
+      "sources": [
+        {
+          "candidate_id": "c_df1136c22d",
+          "url": "https://github.com/vllm-project/vllm/pull/59958"
+        },
+        {
+          "candidate_id": "c_df1136c22d",
+          "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xjpbcg/vllm_now_has_ple_disk_offload_support_on_nightly/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/vllm-project/vllm/pull/59958",
+          "quote": "Adds --engram-config '{\"disk_offload\": true}' for Qwen4Exp. The PLE n-gram table stays in the checkpoint files, and each step reads only its rows on the host. On DGX Spark (GB10), Qwen3.8-Flash-Next NVFP4 loads with 27.0 GiB less memory."
+        },
+        {
+          "url": "https://github.com/vllm-project/vllm/pull/59958",
+          "quote": "Cost: decode within 3.5% at c=1/4/8, and about 11% higher TTFT."
+        },
+        {
+          "url": "https://github.com/vllm-project/vllm/pull/59958",
+          "quote": "arpera merged commit b44a48c into vllm-project : main Oct 30, 2026"
+        }
+      ],
+      "tags": [
+        "工具",
+        "推理",
+        "开源"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "Blackstone expects Anthropic to get a high junk rating after its IPO",
+      "summary": "According to the FT, Blackstone now expects Anthropic to receive a double B range rating, the top tier of speculative grade, after previously predicting investment grade before 2027.",
+      "sources": [
+        {
+          "candidate_id": "c_4d40dd3eb7",
+          "url": "https://techcrunch.com/2026/10/30/anthropic-expected-to-receive-high-junk-rating-from-credit-agencies-following-ipo-report-says/"
+        },
+        {
+          "candidate_id": "c_e36d866593",
+          "url": "https://www.ft.com/content/59383c7f-8d82-493f-bf01-d2e862a1018f"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://techcrunch.com/2026/10/30/anthropic-expected-to-receive-high-junk-rating-from-credit-agencies-following-ipo-report-says/",
+          "quote": "Previously, the FT notes, Blackstone had said the opposite: that the Claude maker would receive an investment-grade rating (indicating low risk for lenders) before 2027 rolls around. Now Blackstone expects double B range rating, the top tier of speculative “junk” grade"
+        }
+      ],
+      "tags": [
+        "行业"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "OpenAI will honor a shared robots.txt signal for AI training preferences",
+      "summary": "OpenAI says it will honor a shared robots.txt signal that lets website operators communicate AI training preferences to participating providers.",
+      "sources": [
+        {
+          "candidate_id": "c_e4822c713d",
+          "url": "https://openai.com/index/helping-websites-express-ai-training-preferences"
+        }
+      ],
+      "tags": [
+        "行业",
+        "训练"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "NVIDIA releases MotionBricks for real-time motion generation",
+      "summary": "MotionBricks generates motion in real time between a character's recent poses and target poses, with SOMA and Unitree G1 model families; it generates motion and is not a robot controller.",
+      "sources": [
+        {
+          "candidate_id": "c_f1a7dcf6d4",
+          "url": "https://huggingface.co/nvidia/MotionBricks"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/nvidia/MotionBricks",
+          "quote": "MotionBricks generates motion in real time for humanoid robots and human characters. Give it the character's recent poses and the poses it should reach next, and it generates the movement connecting them."
+        },
+        {
+          "url": "https://huggingface.co/nvidia/MotionBricks",
+          "quote": "SOMA Generate human motion on the SOMA skeleton. Model card Unitree G1 Generate motion for the Unitree G1 humanoid."
+        },
+        {
+          "url": "https://huggingface.co/nvidia/MotionBricks",
+          "quote": "MotionBricks generates motion, not a controller for a physical robot."
+        }
+      ],
+      "tags": [
+        "模型",
+        "多模态"
+      ]
+    }
+  ],
+  "research": [
+    {
+      "via": "webfetch",
+      "url": "https://phorion.io/blog/offical-claude-code-vsx-compromise/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://openai.com/index/helping-websites-express-ai-training-preferences"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.38331"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.29927"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.39301"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/sensenova/SenseNova-Loop-9B-Preview"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/datalab-to/surya-ocr-2.5"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/speridlabs/idol"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/nvidia/MotionBricks"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://techcrunch.com/2026/10/30/anthropic-expected-to-receive-high-junk-rating-from-credit-agencies-following-ipo-report-says/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/vllm-project/vllm/pull/59958"
+    },
+    {
+      "via": "websearch",
+      "query": "Google Project Suncatcher satellite Gemma 4 TPU first response"
+    }
+  ],
+  "lang": "en",
+  "validation": {
+    "validated_at": "2026-10-31T04:43:25+00:00",
+    "checked_links": false,
+    "dropped": [
+      {
+        "title": "Datalab ships Surya OCR 2.5, a 689M-parameter OCR model",
+        "section": "model",
+        "reasons": [
+          "'689M-parameter' does not appear in the cited material"
+        ]
+      }
+    ],
+    "warnings": []
+  }
+}
