@@ -2,79 +2,74 @@
 
 ## 今日要点
 
-- DeepSeek-V4.1-Flash-1017 权重以 MIT License 发布，主打推理、编码与 Agent 任务，并提供 Transformers、vLLM、SGLang 的调用示例。
-- 腾讯发布 Youtu-Parsing-Omni，用一套编码器与一套 Schema 统一解析文档、图像、音频和视频；LiquidAI 的 LFM3-Omni-2B 把视觉、音频与语音输出放进同一个端到端模型。
-- 多篇论文聚焦推理与训练的效率：LOWN 通过按需处理图像降低扩散式视觉语言模型的解码开销，Soft-MTP 用一行代码改动去掉多 token 预测梯度中的噪声残差。
+- Cursor Marketplace 上的官方 Claude Code for VS Code 扩展 2.1.312 和 2.1.313 被植入 SSH 后门，仅卸载扩展无法清除，用过的开发者需要排查清理。
+- 开源模型方面，SenseNova-Loop-9B-Preview 以 Apache License 2.0 开放，腾讯公开了 5B 全模态解析模型 Youtu-Parsing-Omni 的代码和权重。
+- Claude Code v2.1.316 弃用 Opus 4.8 的 fast mode，官方建议迁移到 Opus 5.5。
 
 ## 🔥 头条
 
-### DeepSeek-V4.1-Flash-1017 权重以 MIT License 发布
+### Cursor 市场上的 Claude Code 扩展被植入 SSH 后门
 
-DeepSeek 发布 DeepSeek-V4.1-Flash-1017，这是 DeepSeek-V4.1-Flash 的小版本更新，官方称在推理、编码、Agent 任务和视觉基准上均有提升，同时降低任务执行时间与输出长度。仓库支持 Transformers、vLLM、SGLang 和 Docker，权重以 MIT License 发布，但本次发布不含 Jinja 格式的 chat template，官方另附了参考实现和 deepseek-recipe。
+安全公司 Phorion 发现，Cursor Marketplace 分发的官方 Claude Code for VS Code 扩展 2.1.312 和 2.1.313 被植入后门：它会向 ~/.ssh/authorized_keys 追加攻击者的 Ed25519 公钥（注释为 svc-telemetry）并建立持久化，Cursor 已下架这两个版本。Phorion 提醒仅卸载扩展无法清除后门，用过这两个版本的开发者应按通报删除公钥和持久化项，并在有入侵迹象时轮换凭据。
 
-来源：[Hugging Face Trending Models](https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017)　`模型` `开源`
+来源：[phorion.io](https://phorion.io/blog/offical-claude-code-vsx-compromise/) · [HN 讨论](https://news.ycombinator.com/item?id=50300683) · [doublepulsar.com](https://doublepulsar.com/anthropic-hacked-to-deliver-remote-access-trojan-to-claude-developer-laptops-worldwide-1148a92baae2) · [cyberplace.social](https://cyberplace.social/@GossiTheDog/117528831681803563)　`安全` `代码` `工具`
 
-### 腾讯发布 Youtu-Parsing-Omni 多模态解析模型
+### SenseNova 开源循环解码多模态模型 SenseNova-Loop-9B-Preview
 
-腾讯提出 Youtu-Parsing-Omni，用共享权重的 Youtu-Omni-Encoder 把文档、图像、音频和视频编码到统一的时空坐标系，并用 OmniSchema 统一十类解析任务的输出。单个 5 B 参数检查点在 OmniDocBench v1.6 达到 96.96 Overall，在 OmniParsingBench 以 75.08 Avg. 领先所有开放权重模型；代码与模型权重已公开，并提供 vLLM 插件。
+SenseNova-Loop-9B-Preview 是面向长上下文和 Agent 工作流的多模态模型，接受文本和图像、输出文本：24 层解码器共享权重执行两次，用 32 个不同的层得到 56 次层执行，并配合双流 mHC，训练最大序列长度 262,144 tokens，采用 Apache License 2.0。它展示了不复制参数也能加深计算路径的做法，做文档理解、代码和工具调用的开发者可以拿来对比同尺寸模型。
 
-来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2610.39301)　`多模态` `模型` `开源`
+来源：[Hugging Face](https://huggingface.co/sensenova/SenseNova-Loop-9B-Preview) · [Reddit 讨论](https://www.reddit.com/r/LocalLLaMA/comments/1xje5oo/sensenovasensenovaloop9bpreview_hugging_face/)　`模型` `开源` `多模态`
 
-### LiquidAI 发布端到端全模态模型 LFM3-Omni-2B
+### 腾讯开源 5B 全模态解析模型 Youtu-Parsing-Omni
 
-LiquidAI 发布 LFM3 家族首个全模态模型 LFM3-Omni-2B，单个模型即可理解文本、图像、视频和音频，并以文本和语音作答，不再需要单独的 ASR、视觉语言模型、LLM 和 TTS 模型。该模型参数量为 2.2B，面向手机、笔记本等端侧硬件设计，支持 16 kHz 音频输入、24 kHz 语音输出，并可输出交错的文本与语音。
+Youtu-Parsing-Omni 把文档、图像、音频和视频统一解析成带时空定位的结构化记录，所有模态共用一个编码器，OmniSchema 统一了十项解析任务的输出。单个 5B 检查点在 OmniDocBench v1.6 上达到 96.96 Overall，在 OmniParsingBench 上以 75.08 领先所有开放权重模型，代码和权重均已公开，可以给需要跨模态定位和引用证据的 Agent 当感知层。
 
-来源：[Hugging Face Trending Models](https://huggingface.co/LiquidAI/LFM3-Omni-2B)　`多模态` `语音` `模型`
-
-### Claude Code v2.1.316 新增子代理努力级别与网关预算池
-
-anthropics/claude-code 发布 v2.1.316，新增 CLAUDE_CODE_SUBAGENT_EFFORT 环境变量，可为未指定努力级别的子代理设定运行档位；同时为 Claude apps gateway 加入共享月度预算池和 layered 策略模式。版本还修复了 Claude Code 自行退出后残留 shell 命令、bash 别名丢失、以及 Vertex AI 与 Amazon Bedrock 上新模型不可用时未回退到旧模型等问题。
-
-来源：[GitHub Releases](https://github.com/anthropics/claude-code/releases/tag/v2.1.316)　`工具` `Agent`
-
-### OpenAI 支持通过 robots.txt 表达 AI 训练偏好
-
-OpenAI 宣布将遵循一个共享的 robots.txt 信号，帮助网站运营者向参与该机制的提供商表达 AI 训练偏好。对开发者而言，网站爬取与数据使用的边界有了新的通用约定信号。
-
-来源：[OpenAI News](https://openai.com/index/helping-websites-express-ai-training-preferences)　`行业` `安全`
+来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2610.39301)　`多模态` `开源` `论文`
 
 ## 🧠 模型
 
-### NVIDIA 用 Nemotron 开源模型搭出语音交互万圣节装置
+### Datalab 发布 689M 参数的 Surya OCR 2.5
 
-NVIDIA 工程师用开源 Nemotron 系列模型搭建了 MonsterHouse 互动投影：Nemotron 3 ASB 负责听、Bolt E4B 负责思考、Nemotron Magpie TTS Zeroshot 负责说，Audio2Face-3D 驱动表情动画，整套系统跑在一台工作站上。文中给出 Bolt E4B 与 Nemotron Voice Agent 的组合方式、LoRA 角色训练和端到端延迟数据，可作为语音 Agent 与数字人落地参考。
+Surya OCR 2.5 支持版面分析和阅读顺序、把表格输出为 HTML，OmniParseBench 得分 85.9、olmOCR-bench 83.7%，单张 H100 在 192 DPI 下吞吐 4.5 pages/s。代码采用 Apache 2.0，权重是修改版 AI Pubs Open Rail-M 许可，对研究、个人和融资/收入低于 $5M 的初创免费，更大规模商用前要先看许可。
 
-来源：[Hugging Face Blog](https://huggingface.co/blog/nvidia/nemotron-halloween)　`开源` `语音` `Agent`
+来源：[Hugging Face](https://huggingface.co/datalab-to/surya-ocr-2.5) · [Reddit 讨论](https://www.reddit.com/r/LocalLLaMA/comments/1xjmfxb/datalabtosuryaocr25_hugging_face/)　`模型` `多模态` `工具`
+
+### speridlabs 开源单图生成 3D 高斯模型 Idol
+
+Idol 输入一张物体图片（渲染图、生成图或照片），自动去背景、取景，生成最多 1,048,576 个 Gaussian 并写成标准 3DGS .ply，图片里看不到的侧面也会补全。它在消费级 GPU 上占用 7.2 GB 显存、采用 apache-2.0 许可，适合直接接进 3D 资产生成流程。
+
+来源：[Hugging Face Trending Models](https://huggingface.co/speridlabs/idol)　`模型` `开源` `图像`
 
 ## 📄 论文
 
-### LOWN：扩散式视觉语言模型按需处理图像
+### Soft-MTP：一行代码改进多 Token 预测训练
 
-KAIST AI 提出 LOWN，一种无需训练、无需调阈值的解码方法：先在无图像条件下预测 token，仅当预测与上一次带图像预测不一致时才处理图像。论文报告 LOWN 在十个基准上平均保留 LLaDA-V 99.6% 的分数，同时把解码 FLOPs 降到平均 35.3%，生成时间平均减少 57.4%。
+麻省理工学院的研究指出，标准 MTP 的交叉熵梯度可以精确分解为 KL 自蒸馏项和一个低信噪比的残差项，后者会干扰学习；Soft-MTP 只回传 KL 信号，是一行代码改动，不增加参数，兼容 DeepSeek 和 Meta 两种 MTP。在 167M 到 1.2B 参数的各个规模上，它的 NTP 困惑度、投机解码速度和零样本准确率都优于标准 MTP，预训练里用 MTP 的团队可以低成本试一试。
 
-来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2610.36671)　`论文` `多模态` `推理`
+来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2610.38331) · [Multi-Token Prediction Done Right [R]](https://i.redd.it/pdz8voy3inyh1.png) · [[Paper] Multi-Token Prediction Done Right - Soft-MTP](https://i.redd.it/28dgjexv5lyh1.png)　`论文` `训练`
 
-### IDM：在分布匹配蒸馏中加入显式矩约束
+### 基准的难度分布会误导排行榜结论
 
-inclusionAI 提出 Intrinsic Distribution Matching（IDM），在保留完整 DMD 校正的同时，用生成器的 EMA 副本匹配特征均值与逐坐标标准差，无需外部特征编码器。实验在 Z-Image-Turbo 6B 和 Qwen-Image 20B 上进行，在两次网络评估下于 LongText-Bench 中文与英文分别达到 94.25% 和 90.20%，为该预算下对比方法中的最高分。
+伊利诺伊大学香槟分校等团队把基准看作难度上的经验测度，形式化了“测度失配”和“覆盖缺口”两种失效模式并给出诊断指标；分析 7 个领域的 25 个常用基准后发现，很多基准偏重某些难度区间，另一些留下大片难度空白，难以反映训练进展。作者还提出按难度定向改写题目的 BenchFill 来补缺口，用基准追踪模型进展前值得先看看它的难度覆盖。
 
-来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2610.39633)　`论文` `图像` `训练`
-
-### Soft-MTP：一行代码去掉多 token 预测的梯度噪声
-
-论文指出标准多 token 预测（MTP）训练的交叉熵梯度可精确分解为一个 KL 自蒸馏项和一个低信噪比残差，后者会干扰 next-token 与多 token 学习。作者提出 KL 梯度恢复技巧，实现为 Soft-MTP：复用已有的 NTP 与 MTP 交叉熵计算，只回传 KL 自蒸馏信号，不增加参数也无可测开销，并兼容 DeepSeek 与 Meta 风格 MTP。
-
-来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2610.38331)　`论文` `训练` `推理`
+来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2610.29927) · [i.redd.it](https://i.redd.it/0tb53de34oyh1.jpeg)　`论文`
 
 ## 🛠 开源与工具
 
-### LangGraph 发布 1.2.19 与 SDK 0.4.11
+### Claude Code v2.1.316 弃用 Opus 4.8 的 fast mode
 
-langchain-ai/langgraph 发布 langgraph 1.2.19 与 langgraph-sdk 0.4.11，SDK 版本重点改进流式断线重连：失败重连带 backoff 重试、保留 SSE 数据与游标状态、缺少 Last-Event-ID 时告警。langgraph 1.2.19 修复了流式节点输出消息命名空间、RemoteGraph.stream 的子图行为，以及暂停工具被误报为失败等问题。
+新版宣布 Opus 4.8 的 fast mode 自 October 30, 2026 起弃用、November 30, 2026 移除，移除后这类请求会直接报错，不会回落到标准 Opus 4.8，官方建议迁移到 Opus 5.5 以保留加速。同时新增了关闭 ultrathink 关键词、为子 Agent 设定默认 effort 级别的环境变量；依赖 Opus 4.8 fast mode 的脚本和工作流需要尽快迁移。
 
-来源：[langchain-ai/langgraph langgraph-sdk==0.4.11](https://github.com/langchain-ai/langgraph/releases/tag/sdk%3D%3D0.4.11) · [langchain-ai/langgraph langgraph==1.2.19](https://github.com/langchain-ai/langgraph/releases/tag/1.2.19)　`工具` `Agent`
+来源：[GitHub Releases](https://github.com/anthropics/claude-code/releases/tag/v2.1.316)　`工具` `代码` `Agent`
+
+### vLLM 合入 Qwen4Exp 的 PLE 磁盘卸载
+
+vLLM 已合并的 PR 为 Qwen4Exp 新增 disk_offload 选项：PLE n-gram 表留在 checkpoint 文件里，每步只在主机端读取需要的行。在 DGX Spark (GB10) 上，Qwen3.8-Flash-Next NVFP4 加载内存少 27.0 GiB，解码速度与常驻表相差在 3.5% 以内，代价是 TTFT 升高约 11%，内存紧张的本地部署可以在 nightly 版本里试用。
+
+来源：[GitHub](https://github.com/vllm-project/vllm/pull/59958) · [Reddit 讨论](https://www.reddit.com/r/LocalLLaMA/comments/1xjpbcg/vllm_now_has_ple_disk_offload_support_on_nightly/)　`工具` `推理` `开源`
 
 ## ⚡ 快讯
 
-- **A-RSI：按学习信号变化刷新多模态自改进任务池** 小米研究提出 A-RSI：监测训练日志中的奖励波动与准确率，在学习信号下降时刷新任务池，任务答案由程序生成并独立校验。加入 800 个新任务后，十一个基准的性能均值从 57.77 提升到 61.05。 [Hugging Face Daily Papers](https://huggingface.co/papers/2610.38568)
-- **VibeGame：用对抗式 Agent 团队从提示生成 2D 游戏** VibeGame 用 AI 原生引擎把项目状态表示为 schema 校验的结构化文本，Agent 可自行检查状态、执行动作并验证行为。框架由八个专职 Agent 组成的对抗式团队分离实现与评审，并沉淀可复用的骨架、模块与协作契约。 [Hugging Face Daily Papers](https://huggingface.co/papers/2610.33106)
+- **Blackstone 预计 Anthropic IPO 后获“高垃圾级”评级** 据 FT 报道，Blackstone 预计 Anthropic IPO 后获双 B 区间评级（投机级最高档），此前它曾预计 2027 年前获投资级评级。 [techcrunch.com](https://techcrunch.com/2026/10/30/anthropic-expected-to-receive-high-junk-rating-from-credit-agencies-following-ipo-report-says/) · [ft.com](https://www.ft.com/content/59383c7f-8d82-493f-bf01-d2e862a1018f)
+- **OpenAI 将遵循共享的 robots.txt 训练偏好信号** OpenAI 表示将遵循一个共享的 robots.txt 信号，方便网站运营者向参与的 AI 提供商表达训练偏好。 [OpenAI News](https://openai.com/index/helping-websites-express-ai-training-preferences)
+- **NVIDIA 发布实时动作生成模型 MotionBricks** MotionBricks 根据角色近期姿态和目标姿态实时生成过渡动作，提供 SOMA 和 Unitree G1 两套权重，只生成动作、不是机器人控制器。 [Hugging Face Trending Models](https://huggingface.co/nvidia/MotionBricks)

@@ -2,68 +2,94 @@
   "schema_version": 1,
   "date": "2026-10-31",
   "mode": "full",
-  "generated_at": "2026-10-31T04:41:43+00:00",
-  "channel": "api",
-  "model": "nvidia:minimaxai/minimax-m3.1-flash",
+  "generated_at": "2026-10-31T04:43:25+00:00",
+  "model": "claude-opus-5-5",
   "highlights": [
-    "DeepSeek released DeepSeek-V4.1-Flash-1017, a minor update to DeepSeek-V4.1-Flash with gains across reasoning, coding, agentic tasks, and visual benchmarks. The Youtu-Parsing-Omni paper reports state-of-the-art results on OmniDocBench v1.6 with a single 5 B-parameter checkpoint, and the LOWN paper reports retaining 99.6% of LLaDA-V's score at 35.3% of the decoding FLOPs.",
-    "LangChain shipped langgraph==1.2.19 and langgraph-sdk==0.4.11, both focused on stream and reconnection handling fixes, and the Soft-MTP paper proposes a one-line MTP change that removes the noisy residual gradient without adding parameters."
+    "The official Claude Code for VS Code extension on the Cursor Marketplace, versions 2.1.312 and 2.1.313, shipped a persistent SSH backdoor; uninstalling the extension alone won't remove it.",
+    "SenseNova-Loop-9B-Preview is out under the Apache License 2.0, and Tencent published code and weights for the 5B omni-modal parser Youtu-Parsing-Omni.",
+    "Claude Code v2.1.316 deprecates fast mode for Opus 4.8 and points users to Opus 5.5."
   ],
   "items": [
     {
       "section": "headline",
-      "title": "DeepSeek updates DeepSeek-V4.1-Flash with DeepSeek-V4.1-Flash-1017",
-      "summary": "DeepSeek-V4.1-Flash-1017 is a minor update to DeepSeek-V4.1-Flash with improvements across reasoning, coding, agentic tasks, and visual benchmarks, while reducing task execution time and output length. The release has no Jinja-format chat template, so DeepSeek also released deepseek-recipe, a set of Rust libraries with Python bindings providing the same prompt format as a maintained, protocol-aware toolkit.",
-      "tags": [
-        "模型",
-        "开源"
-      ],
+      "title": "Claude Code extension on the Cursor Marketplace carried an SSH backdoor",
+      "summary": "Phorion found that versions 2.1.312 and 2.1.313 of the official Claude Code for VS Code extension distributed through the Cursor Marketplace append an attacker-controlled Ed25519 public key (comment svc-telemetry) to ~/.ssh/authorized_keys and set up persistence; Cursor has removed both versions. Uninstalling the extension alone won't remove the backdoor, so anyone who used these versions should follow the advisory's cleanup steps and rotate credentials if there are signs of an inbound login.",
       "sources": [
         {
-          "candidate_id": "c_8b553ca25e",
-          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017"
+          "candidate_id": "c_d4f691c037",
+          "url": "https://phorion.io/blog/offical-claude-code-vsx-compromise/"
+        },
+        {
+          "candidate_id": "c_d4f691c037",
+          "url": "https://news.ycombinator.com/item?id=50300683"
+        },
+        {
+          "candidate_id": "c_bc611d5d40",
+          "url": "https://doublepulsar.com/anthropic-hacked-to-deliver-remote-access-trojan-to-claude-developer-laptops-worldwide-1148a92baae2"
+        },
+        {
+          "candidate_id": "c_68db500dd2",
+          "url": "https://cyberplace.social/@GossiTheDog/117528831681803563"
         }
       ],
       "evidence": [
         {
-          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017",
-          "quote": "DeepSeek-V4.1-Flash-1017 Introduction Prompt Encoding Minimal Inference License Citation Contact"
+          "url": "https://phorion.io/blog/offical-claude-code-vsx-compromise/",
+          "quote": "Phorion has discovered a compromise of the official Claude Code for VS Code extension on the Cursor Marketplace, where the backdoored extension bundle contains a persistent Secure Shell (SSH) backdoor. Cursor has removed the affected versions, 2.1.312 and 2.1.313 , from its marketplace."
         },
         {
-          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017",
-          "quote": "DeepSeek-V4.1-Flash-1017"
+          "url": "https://phorion.io/blog/offical-claude-code-vsx-compromise/",
+          "quote": "appends an attacker-controlled Ed25519 public key to ~/.ssh/authorized_keys , setting permissions to 0700 on the directory and 0600 on the file. The key uses the comment svc-telemetry ."
         },
         {
-          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017",
-          "quote": "DeepSeek-V4.1-Flash-1017 is a minor update to DeepSeek-V4.1-Flash , delivering substantial improvements across reasoning, coding, agentic tasks, and visual benchmarks."
+          "url": "https://phorion.io/blog/offical-claude-code-vsx-compromise/",
+          "quote": "If you identify an affected machine, uninstalling the extension alone won’t remove the backdoor ."
         },
         {
-          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017",
-          "quote": "Alongside these gains, the model reduces task execution time and output length, enabling users to complete tasks faster and at lower cost and advancing the performance–cost Pareto frontier across multiple agent harnesses."
-        },
-        {
-          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017",
-          "quote": "This release does not include a Jinja-format chat template."
-        },
-        {
-          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017",
-          "quote": "For production use, we additionally release deepseek-recipe , a set of Rust libraries with Python bindings that provides the same prompt format as a maintained, protocol-aware toolkit."
-        },
-        {
-          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017",
-          "quote": "This repository and the model weights are licensed under the MIT License ."
+          "url": "https://phorion.io/blog/offical-claude-code-vsx-compromise/",
+          "quote": "Rotate credentials: If SSH was enabled on the host, or if there’s any evidence of an inbound login, rotate any credentials or tokens that were accessible to that user account"
         }
+      ],
+      "tags": [
+        "安全",
+        "代码",
+        "工具"
       ]
     },
     {
       "section": "headline",
-      "title": "Youtu-Parsing-Omni parses documents, images, audio, and video with one encoder",
-      "summary": "Youtu-Parsing-Omni converts documents, images, audio, and video into structured records grounded in space and time, using one encoder for every modality and one schema for every task. With a single 5 B-parameter checkpoint it reaches state-of-the-art performance on OmniDocBench v1.6 (96.96 Overall) and leads open-weight models on OmniParsingBench (75.08 Avg.), and code and model weights are publicly available.",
-      "tags": [
-        "多模态",
-        "模型",
-        "开源"
+      "title": "SenseNova releases looped multimodal model SenseNova-Loop-9B-Preview",
+      "summary": "SenseNova-Loop-9B-Preview takes text and images and targets long-context and agentic workflows: 24 decoder layers are applied twice with shared weights, giving 56 decoder-layer executions from 32 distinct layers, combined with two-stream mHC and a maximum training sequence length of 262,144 tokens. It ships under the Apache License 2.0 and is a concrete way to try a deeper execution path without duplicating parameters for document understanding, coding and tool use.",
+      "sources": [
+        {
+          "candidate_id": "c_0872c5ce4f",
+          "url": "https://huggingface.co/sensenova/SenseNova-Loop-9B-Preview"
+        },
+        {
+          "candidate_id": "c_0872c5ce4f",
+          "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xje5oo/sensenovasensenovaloop9bpreview_hugging_face/"
+        }
       ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/sensenova/SenseNova-Loop-9B-Preview",
+          "quote": "Shared looped block: 24 decoder layers are applied twice in sequence, producing 56 decoder-layer executions from 32 distinct layers."
+        },
+        {
+          "url": "https://huggingface.co/sensenova/SenseNova-Loop-9B-Preview",
+          "quote": "License: Apache License 2.0"
+        }
+      ],
+      "tags": [
+        "模型",
+        "开源",
+        "多模态"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Tencent opens 5B omni-modal parser Youtu-Parsing-Omni",
+      "summary": "Youtu-Parsing-Omni turns documents, images, audio and video into structured records grounded in space and time, using one encoder for every modality and OmniSchema to unify ten parsing tasks. A single 5B checkpoint reaches 96.96 Overall on OmniDocBench v1.6 and leads open-weight models on OmniParsingBench at 75.08; with code and weights public, it can serve as a perception layer for agents that need to locate and cite evidence across modalities.",
       "sources": [
         {
           "candidate_id": "c_8cab64b136",
@@ -73,19 +99,7 @@
       "evidence": [
         {
           "url": "https://huggingface.co/papers/2610.39301",
-          "quote": "Generated by thinkingmachines/Inkling-Small We present Youtu-Parsing-Omni, an omni-modal parser that converts documents, images, audio, and video into structured records grounded in space and time, providing a perception layer for agents that read, locate, and cite evidence across modalities."
-        },
-        {
-          "url": "https://huggingface.co/papers/2610.39301",
-          "quote": "Youtu-Omni-Encoder, initialized from a pre-trained language model to strengthen text reading, encodes all modalities with shared weights in a unified space-time coordinate system, and a few fusion layers let video frames attend to concurrent audio, bringing cross-modal fusion and temporal alignment"
-        },
-        {
-          "url": "https://huggingface.co/papers/2610.39301",
-          "quote": "OmniSchema unifies the outputs of all ten parsing tasks, allowing a single self-evolving post-training procedure, OmniSchema-Aware On-Policy Distillation (OSAD), to provide a shared token-role-based objective across tasks."
-        },
-        {
-          "url": "https://huggingface.co/papers/2610.39301",
-          "quote": "With a single 5 B-parameter checkpoint, Youtu-Parsing-Omni achieves state-of-the-art performance on OmniDocBench v1.6 (96.96 Overall) and leads all open-weight models on OmniParsingBench (75.08 Avg.), with its advantage concentrated on audio and video."
+          "quote": "With a single 5 B-parameter checkpoint, Youtu-Parsing-Omni achieves state-of-the-art performance on OmniDocBench v1.6 (96.96 Overall) and leads all open-weight models on OmniParsingBench (75.08 Avg.)"
         },
         {
           "url": "https://huggingface.co/papers/2610.39301",
@@ -93,363 +107,221 @@
         },
         {
           "url": "https://huggingface.co/papers/2610.39301",
-          "quote": "Strong results at a small size – state-of-the-art on OmniDocBench v1.6 (96.96 Overall), best open-weight model on OmniParsingBench (75.08 Avg., second only to Gemini-3-Pro), and competitive with specialized models on chemical-structure (ChemOCR) and music-score (PDMX-Synth) recognition ( results )."
-        },
-        {
-          "url": "https://huggingface.co/papers/2610.39301",
-          "quote": "Easy to serve – a vLLM plugin, pinned serving settings, task prompts and inference examples are included."
+          "quote": "Youtu-Parsing-Omni is a compact (5B) omni-modal parsing model."
         }
+      ],
+      "tags": [
+        "多模态",
+        "开源",
+        "论文"
       ]
     },
     {
-      "section": "headline",
-      "title": "Liquid AI releases LFM3-Omni-2B for on-device multimodal use",
-      "summary": "LFM3-Omni-2B is Liquid AI's first omni-modal model in the LFM3 family: a single end-to-end model that understands text, images, video and audio, and answers in text and speech. At 2.2B parameters it is designed to run efficiently on phones, laptops and other edge hardware, replacing separate ASR, vision-language, LLM and TTS models with one.",
-      "tags": [
-        "多模态",
-        "语音",
-        "模型"
-      ],
+      "section": "model",
+      "title": "speridlabs releases Idol, single-image to 3D Gaussian splat",
+      "summary": "Idol takes one picture of an object (a render, a generated image or a photo), removes the background and generates up to 1,048,576 Gaussians as a standard 3DGS .ply, including the sides the picture never showed. It runs on consumer GPUs using 7.2 GB of VRAM under an apache-2.0 license, which makes it easy to drop into a 3D asset pipeline.",
       "sources": [
         {
-          "candidate_id": "c_73262d098d",
-          "url": "https://huggingface.co/LiquidAI/LFM3-Omni-2B"
+          "candidate_id": "c_0028b46e25",
+          "url": "https://huggingface.co/speridlabs/idol"
         }
       ],
       "evidence": [
         {
-          "url": "https://huggingface.co/LiquidAI/LFM3-Omni-2B",
-          "quote": "LFM3-Omni-2B is Liquid AI 's first omni-modal model in the LFM3 family: a single end-to-end model that understands text, images, video and audio , and answers in text and speech ."
+          "url": "https://huggingface.co/speridlabs/idol",
+          "quote": "Give it a render, a generated image or a photo: it removes the background, frames the object and generates up to 1,048,576 Gaussians, written as a standard 3DGS .ply . It runs on consumer GPUs, using 7.2 GB of VRAM and can run in under 2 seconds."
         },
         {
-          "url": "https://huggingface.co/LiquidAI/LFM3-Omni-2B",
-          "quote": "It is built for on-device use: one model replaces a separate ASR model, vision-language model, LLM and TTS model."
-        },
-        {
-          "url": "https://huggingface.co/LiquidAI/LFM3-Omni-2B",
-          "quote": "Small enough for devices: at 2.2B parameters, it is designed to run efficiently on phones, laptops and other edge hardware."
-        },
-        {
-          "url": "https://huggingface.co/LiquidAI/LFM3-Omni-2B",
-          "quote": "LFM3 backbone, LFM3 vision encoder, LFM3 causal audio encoder, LiquidCodec audio tokenizer."
-        },
-        {
-          "url": "https://huggingface.co/LiquidAI/LFM3-Omni-2B",
-          "quote": "Text, images, video with or without its soundtrack, and 16 kHz audio."
-        },
-        {
-          "url": "https://huggingface.co/LiquidAI/LFM3-Omni-2B",
-          "quote": "Text, 24 kHz speech, or interleaved text and speech"
+          "url": "https://huggingface.co/speridlabs/idol",
+          "quote": "One picture of an object in, up to a million 3D Gaussians out, including the sides the picture never showed."
         }
+      ],
+      "tags": [
+        "模型",
+        "开源",
+        "图像"
       ]
     },
     {
-      "section": "headline",
-      "title": "Claude Code v2.1.316 adds subagent effort controls and pooled gateway budgets",
-      "summary": "The v2.1.316 release adds CLAUDE_CODE_SUBAGENT_EFFORT to set the effort level subagents run at, pooled group budgets for the Claude apps gateway, and a layered managed.policy_mode. It also fixes shell commands left running on macOS and Linux when Claude Code exits by itself, and fixes models on Vertex AI and Amazon Bedrock showing an error instead of switching to an older model.",
-      "tags": [
-        "工具",
-        "Agent"
+      "section": "paper",
+      "title": "Soft-MTP: a one-line change that improves multi-token prediction",
+      "summary": "The paper shows the standard MTP cross-entropy gradient splits exactly into a KL self-distillation term and a low signal-to-noise residual that interferes with learning; Soft-MTP backpropagates only the KL signal, adds no parameters and supports both DeepSeek- and Meta-style MTP. From 167M to 1.2B parameters it beats standard MTP on NTP perplexity, speculative decoding speed and zero-shot accuracy at every scale, so teams pre-training with MTP can try it cheaply.",
+      "sources": [
+        {
+          "candidate_id": "c_dbd1cc0e1a",
+          "url": "https://huggingface.co/papers/2610.38331"
+        },
+        {
+          "candidate_id": "c_1497048da7",
+          "url": "https://i.redd.it/pdz8voy3inyh1.png"
+        },
+        {
+          "candidate_id": "c_a763f256d8",
+          "url": "https://i.redd.it/28dgjexv5lyh1.png"
+        }
       ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2610.38331",
+          "quote": "Soft-MTP supports both DeepSeek- and Meta-style MTP, adds no parameters, and incurs no measurable overhead. From 167M to 1.2B parameters, Soft-MTP improves over standard MTP with lower NTP perplexity, faster speculative decoding and higher zero-shot accuracy at every scale"
+        }
+      ],
+      "tags": [
+        "论文",
+        "训练"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Benchmark difficulty distributions can skew leaderboard conclusions",
+      "summary": "Researchers from the University of Illinois at Urbana-Champaign and others treat a benchmark as an empirical measure over difficulty and formalize two failure modes, measure mismatch and coverage gaps. Across 25 popular benchmarks spanning 7 domains, many overweight certain difficulty regions while others leave gaps that hide training progress; the authors' BenchFill rewrites items to fill those gaps, and it's worth checking a benchmark's difficulty coverage before using it to track progress.",
+      "sources": [
+        {
+          "candidate_id": "c_861f2a7e26",
+          "url": "https://huggingface.co/papers/2610.29927"
+        },
+        {
+          "candidate_id": "c_39c3357be6",
+          "url": "https://i.redd.it/0tb53de34oyh1.jpeg"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2610.29927",
+          "quote": "Empirically, we analyze 25 popular benchmarks spanning 7 domains using carefully estimated item difficulties. Our results show that many benchmarks implicitly overweight certain difficulty regions, so their leaderboard conclusions should be interpreted with caution"
+        }
+      ],
+      "tags": [
+        "论文"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Claude Code v2.1.316 deprecates fast mode for Opus 4.8",
+      "summary": "Fast mode for Opus 4.8 is deprecated as of October 30, 2026 and will be removed on November 30, 2026, after which such requests return an error instead of falling back to standard Opus 4.8; the release recommends migrating to Opus 5.5 to keep the speedup. It also adds environment variables to turn off the ultrathink keyword and to set the default effort level for subagents, and scripts relying on Opus 4.8 fast mode should migrate soon.",
       "sources": [
         {
           "candidate_id": "c_40dbf4b699",
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.316"
         }
       ],
-      "evidence": [
-        {
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.316",
-          "quote": "Added CLAUDE_CODE_DISABLE_ULTRATHINK , which turns the ultrathink keyword off"
-        },
-        {
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.316",
-          "quote": "Added pooled group budgets to the Claude apps gateway: one monthly budget that a group's members share, on top of each member's own limit, set with pooled_budget on the spend limits admin API"
-        },
-        {
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.316",
-          "quote": "Added CLAUDE_CODE_SUBAGENT_EFFORT to set the effort level subagents run at when nothing else names one, instead of inheriting the session's"
-        },
-        {
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.316",
-          "quote": "Added managed.policy_mode: layered to the Claude apps gateway: every policy that matches a developer applies, each merged over the ones listed below it, not only the first"
-        },
-        {
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.316",
-          "quote": "Fixed shell commands being left running on macOS and Linux when Claude Code exits by itself, for example when credentials are refused or a cloud session is archived"
-        },
-        {
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.316",
-          "quote": "Fixed bash aliases with line breaks in their value (except in Git Bash), and functions whose names start with a dash, being garbled or lost in the Bash tool's shell"
-        },
-        {
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.316",
-          "quote": "Fixed sonnet , opus and haiku on Vertex AI and Amazon Bedrock showing an error mid-session instead of switching to an older model when the newest is not yet available to the account or region"
-        }
+      "tags": [
+        "工具",
+        "代码",
+        "Agent"
       ]
     },
     {
-      "section": "headline",
-      "title": "OpenAI to honor a shared robots.txt AI training signal",
-      "summary": "OpenAI will honor a shared robots.txt signal so website operators can communicate their AI training preferences to participating providers.",
-      "tags": [
-        "行业",
-        "安全"
+      "section": "tool",
+      "title": "vLLM merges PLE disk offload for Qwen4Exp",
+      "summary": "A merged vLLM PR adds a disk_offload option for Qwen4Exp that keeps the PLE n-gram table in the checkpoint files and reads only the rows each step needs on the host. On DGX Spark (GB10), Qwen3.8-Flash-Next NVFP4 loads with 27.0 GiB less memory and decode stays within 3.5% of the resident table, at the cost of about 11% higher TTFT, which is a useful trade for memory-constrained local setups on nightly.",
+      "sources": [
+        {
+          "candidate_id": "c_df1136c22d",
+          "url": "https://github.com/vllm-project/vllm/pull/59958"
+        },
+        {
+          "candidate_id": "c_df1136c22d",
+          "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xjpbcg/vllm_now_has_ple_disk_offload_support_on_nightly/"
+        }
       ],
+      "evidence": [
+        {
+          "url": "https://github.com/vllm-project/vllm/pull/59958",
+          "quote": "Adds --engram-config '{\"disk_offload\": true}' for Qwen4Exp. The PLE n-gram table stays in the checkpoint files, and each step reads only its rows on the host. On DGX Spark (GB10), Qwen3.8-Flash-Next NVFP4 loads with 27.0 GiB less memory."
+        },
+        {
+          "url": "https://github.com/vllm-project/vllm/pull/59958",
+          "quote": "Cost: decode within 3.5% at c=1/4/8, and about 11% higher TTFT."
+        },
+        {
+          "url": "https://github.com/vllm-project/vllm/pull/59958",
+          "quote": "arpera merged commit b44a48c into vllm-project : main Oct 30, 2026"
+        }
+      ],
+      "tags": [
+        "工具",
+        "推理",
+        "开源"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "Blackstone expects Anthropic to get a high junk rating after its IPO",
+      "summary": "According to the FT, Blackstone now expects Anthropic to receive a double B range rating, the top tier of speculative grade, after previously predicting investment grade before 2027.",
+      "sources": [
+        {
+          "candidate_id": "c_4d40dd3eb7",
+          "url": "https://techcrunch.com/2026/10/30/anthropic-expected-to-receive-high-junk-rating-from-credit-agencies-following-ipo-report-says/"
+        },
+        {
+          "candidate_id": "c_e36d866593",
+          "url": "https://www.ft.com/content/59383c7f-8d82-493f-bf01-d2e862a1018f"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://techcrunch.com/2026/10/30/anthropic-expected-to-receive-high-junk-rating-from-credit-agencies-following-ipo-report-says/",
+          "quote": "Previously, the FT notes, Blackstone had said the opposite: that the Claude maker would receive an investment-grade rating (indicating low risk for lenders) before 2027 rolls around. Now Blackstone expects double B range rating, the top tier of speculative “junk” grade"
+        }
+      ],
+      "tags": [
+        "行业"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "OpenAI will honor a shared robots.txt signal for AI training preferences",
+      "summary": "OpenAI says it will honor a shared robots.txt signal that lets website operators communicate AI training preferences to participating providers.",
       "sources": [
         {
           "candidate_id": "c_e4822c713d",
           "url": "https://openai.com/index/helping-websites-express-ai-training-preferences"
         }
       ],
-      "evidence": []
-    },
-    {
-      "section": "paper",
-      "title": "LOWN routes image processing only when diffusion VLMs need it",
-      "summary": "LOWN decides at every decoding step whether to process the image and how many tokens to unmask, predicting masked tokens without the image and processing it only when that prediction disagrees with the last image-conditioned prediction. Without training or a tuned threshold, it retains 99.6% of LLaDA-V's score on ten benchmarks at 35.3% of the decoding FLOPs and cuts generation time by 57.4% on average.",
       "tags": [
-        "论文",
-        "多模态",
-        "推理"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_d196dc8b4e",
-          "url": "https://huggingface.co/papers/2610.36671"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2610.36671",
-          "quote": "To measure how often the image is actually needed, we compare LLaDA-V 's predictions with and without the image at every decoding step and find that removing the image changes a token being unmasked at only 22.8% of steps on average and at as few as 7.9%."
-        },
-        {
-          "url": "https://huggingface.co/papers/2610.36671",
-          "quote": "We therefore propose LOWN , a decoding method that decides at every step whether to process the image and how many tokens to unmask."
-        },
-        {
-          "url": "https://huggingface.co/papers/2610.36671",
-          "quote": "LOWN predicts the masked tokens without the image and processes the image only when this prediction disagrees with the last image-conditioned prediction."
-        },
-        {
-          "url": "https://huggingface.co/papers/2610.36671",
-          "quote": "Without training or a tuned threshold, LOWN retains 99.6% of LLaDA-V 's score on ten benchmarks at 35.3% of the decoding FLOPs on average."
-        },
-        {
-          "url": "https://huggingface.co/papers/2610.36671",
-          "quote": "Without training or a tuned threshold, LOWN retains 99.6% of LLaDA-V's score on ten benchmarks at 35.3% of the decoding FLOPs and cuts generation time by 57.4% on average."
-        }
-      ]
-    },
-    {
-      "section": "paper",
-      "title": "IDM adds moment matching to distribution matching distillation",
-      "summary": "Intrinsic Distribution Matching (IDM) retains the full DMD correction and matches feature means and per-coordinate standard deviations using the generator's exponential-moving-average (EMA) copy, requiring no external feature encoder. At two network evaluations it reaches 94.25% and 90.20% on Chinese and English LongText-Bench with full-parameter and LoRA tuning on Z-Image-Turbo 6B and Qwen-Image 20B.",
-      "tags": [
-        "论文",
-        "图像",
+        "行业",
         "训练"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_1b161b32bd",
-          "url": "https://huggingface.co/papers/2610.39633"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2610.39633",
-          "quote": "We introduce Intrinsic Distribution Matching (IDM), which retains the full DMD correction and matches feature means and per-coordinate standard deviations using the generator's exponential-moving-average (EMA) copy, requiring no external feature encoder."
-        },
-        {
-          "url": "https://huggingface.co/papers/2610.39633",
-          "quote": "Experiments use full-parameter and low-rank adaptation ( LoRA ) tuning on Z-Image-Turbo 6B and Qwen-Image 20B."
-        },
-        {
-          "url": "https://huggingface.co/papers/2610.39633",
-          "quote": "At two network evaluations, IDM reaches 94.25% and 90.20% on Chinese and English LongText-Bench , the highest scores among the compared methods at this budget."
-        },
-        {
-          "url": "https://huggingface.co/papers/2610.39633",
-          "quote": "Controlled ablations show gains from the added moment loss, while generator EMA features perform competitively with an external DINOv2 encoder across the five reported metrics."
-        }
       ]
     },
     {
-      "section": "paper",
-      "title": "Soft-MTP removes the noisy residual in multi-token prediction training",
-      "summary": "Soft-MTP is a one-line code change to MTP that removes the noisy residual from the MTP gradient and backpropagates only the KL self-distillation signal by reusing existing NTP and MTP cross-entropy computations. It supports both DeepSeek- and Meta-style MTP, adds no parameters, and incurs no measurable overhead.",
-      "tags": [
-        "论文",
-        "训练",
-        "推理"
-      ],
+      "section": "brief",
+      "title": "NVIDIA releases MotionBricks for real-time motion generation",
+      "summary": "MotionBricks generates motion in real time between a character's recent poses and target poses, with SOMA and Unitree G1 model families; it generates motion and is not a robot controller.",
       "sources": [
         {
-          "candidate_id": "c_dbd1cc0e1a",
-          "url": "https://huggingface.co/papers/2610.38331"
+          "candidate_id": "c_f1a7dcf6d4",
+          "url": "https://huggingface.co/nvidia/MotionBricks"
         }
       ],
       "evidence": [
         {
-          "url": "https://huggingface.co/papers/2610.38331",
-          "quote": "We identify a flaw in standard MTP training, in which a residual component of the MTP gradient interferes with both next-token and multi-token learning, increasingly so with scale."
+          "url": "https://huggingface.co/nvidia/MotionBricks",
+          "quote": "MotionBricks generates motion in real time for humanoid robots and human characters. Give it the character's recent poses and the poses it should reach next, and it generates the movement connecting them."
         },
         {
-          "url": "https://huggingface.co/papers/2610.38331",
-          "quote": "Specifically, the MTP cross-entropy gradient can be decomposed exactly into a KL self-distillation term that pulls each MTP head toward the model's own next-token prediction (NTP) distribution and improves speculative decoding , and a residual that has a low signal-to-noise ratio and buries the usef"
+          "url": "https://huggingface.co/nvidia/MotionBricks",
+          "quote": "SOMA Generate human motion on the SOMA skeleton. Model card Unitree G1 Generate motion for the Unitree G1 humanoid."
         },
         {
-          "url": "https://huggingface.co/papers/2610.38331",
-          "quote": "We introduce the KL gradient-recovery trick: when two distributions share a linear output head, the gradient of their KL divergence can be recovered exactly by combining their cross-entropy gradient s through straight-through gradient routing ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2610.38331",
-          "quote": "This enables Soft Multi-Token Prediction ( Soft-MTP ), a one-line code change to MTP that removes the noisy residual and backpropagates only the KL self-distillation signal by reusing the existing NTP and MTP cross-entropy computations."
-        },
-        {
-          "url": "https://huggingface.co/papers/2610.38331",
-          "quote": "Soft-MTP supports both DeepSeek- and Meta-style MTP, adds no parameters, and incurs no measurable overhead."
+          "url": "https://huggingface.co/nvidia/MotionBricks",
+          "quote": "MotionBricks generates motion, not a controller for a physical robot."
         }
-      ]
-    },
-    {
-      "section": "model",
-      "title": "A Nemotron-based voice character runs on a single workstation",
-      "summary": "The character is built on the NVIDIA Nemotron Voice Agent with NVIDIA Nemotron ASR, Nemotron 3.5 Bolt E4B 4GB, Magpie TTS Zeroshot and Audio2Face-3D, and runs on a single workstation. Its median end-of-speech-to-audio latency is 1.70 seconds with Bolt Q4 & TTS, and 0.72 seconds for cached responses.",
+      ],
       "tags": [
-        "开源",
-        "语音",
-        "Agent"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_b62497b2b1",
-          "url": "https://huggingface.co/blog/nvidia/nemotron-halloween"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/blog/nvidia/nemotron-halloween",
-          "quote": "He is built on the NVIDIA Nemotron Voice Agent with NVIDIA Nemotron ASR , Nemotron 3.5 Bolt E4B 4GB , Magpie TTS Zeroshot and Audio2Face-3D , and he runs on a single workstation."
-        },
-        {
-          "url": "https://huggingface.co/blog/nvidia/nemotron-halloween",
-          "quote": "Listening: NVIDIA Nemotron 3 ASR turns visitor speech into text."
-        },
-        {
-          "url": "https://huggingface.co/blog/nvidia/nemotron-halloween",
-          "quote": "Thinking: NVIDIA Nemotron 3.5 Bolt E4B 4GB , an open small language model for conversational agents, writes each reply."
-        },
-        {
-          "url": "https://huggingface.co/blog/nvidia/nemotron-halloween",
-          "quote": "Speaking: NVIDIA Magpie TTS Zeroshot voices each reply from a short reference sample of the character."
-        },
-        {
-          "url": "https://huggingface.co/blog/nvidia/nemotron-halloween",
-          "quote": "Animating: NVIDIA Audio2Face-3D turns clean speech into mouth animation in Unreal Engine 5."
-        },
-        {
-          "url": "https://huggingface.co/blog/nvidia/nemotron-halloween",
-          "quote": "It is an open small language model purpose-built for local conversational agents and interactive characters, which is a fair description of a talking garage door."
-        },
-        {
-          "url": "https://huggingface.co/blog/nvidia/nemotron-halloween",
-          "quote": "I use the 4-bit quantized release (the “4GB” in its name) as the default response model, with the BF16 checkpoint available for comparison."
-        },
-        {
-          "url": "https://huggingface.co/blog/nvidia/nemotron-halloween",
-          "quote": "median end-of-speech-to-audio with Bolt Q4 & TTS = 1.70 seconds"
-        },
-        {
-          "url": "https://huggingface.co/blog/nvidia/nemotron-halloween",
-          "quote": "median end-of-speech-to-audio cached responses = 0.72 seconds"
-        }
-      ]
-    },
-    {
-      "section": "tool",
-      "title": "LangGraph releases langgraph==1.2.19 and langgraph-sdk==0.4.11",
-      "summary": "The langgraph==1.2.19 and langgraph-sdk==0.4.11 releases focus on streaming and reconnection fixes. The SDK now retries runs.wait, join and cancel(wait=True) reconnects with backoff, preserves SSE data and cursor state across chunks, and retries failed stream reconnects with backoff.",
-      "tags": [
-        "工具",
-        "Agent"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_c332286720",
-          "url": "https://github.com/langchain-ai/langgraph/releases/tag/sdk%3D%3D0.4.11"
-        },
-        {
-          "candidate_id": "c_196153f3f5",
-          "url": "https://github.com/langchain-ai/langgraph/releases/tag/1.2.19"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://github.com/langchain-ai/langgraph/releases/tag/sdk%3D%3D0.4.11",
-          "quote": "release(langgraph): 1.2.19 ( #9504 )"
-        },
-        {
-          "url": "https://github.com/langchain-ai/langgraph/releases/tag/sdk%3D%3D0.4.11",
-          "quote": "release(sdk-py): 0.4.11 ( #9503 )"
-        },
-        {
-          "url": "https://github.com/langchain-ai/langgraph/releases/tag/sdk%3D%3D0.4.11",
-          "quote": "fix(sdk-py): retry runs.wait, join and cancel(wait=True) reconnects with backoff ( #9481 )"
-        },
-        {
-          "url": "https://github.com/langchain-ai/langgraph/releases/tag/sdk%3D%3D0.4.11",
-          "quote": "fix(sdk-py): preserve SSE data and cursor state across chunks ( #9477 )"
-        },
-        {
-          "url": "https://github.com/langchain-ai/langgraph/releases/tag/sdk%3D%3D0.4.11",
-          "quote": "fix(sdk-py): retry failed stream reconnects with backoff ( #9462 )"
-        }
+        "模型",
+        "多模态"
       ]
     }
   ],
   "research": [
     {
       "via": "webfetch",
+      "url": "https://phorion.io/blog/offical-claude-code-vsx-compromise/"
+    },
+    {
+      "via": "webfetch",
       "url": "https://openai.com/index/helping-websites-express-ai-training-preferences"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://github.com/langchain-ai/langgraph/releases/tag/sdk%3D%3D0.4.11"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.316"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/blog/nvidia/nemotron-halloween"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2610.36671"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2610.39633"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2610.39301"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2610.38568"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2610.29927"
     },
     {
       "via": "webfetch",
@@ -457,50 +329,51 @@
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/papers/2610.33106"
+      "url": "https://huggingface.co/papers/2610.29927"
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/papers/2610.35138"
+      "url": "https://huggingface.co/papers/2610.39301"
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/papers/2610.37161"
+      "url": "https://huggingface.co/sensenova/SenseNova-Loop-9B-Preview"
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/papers/2610.39302"
+      "url": "https://huggingface.co/datalab-to/surya-ocr-2.5"
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/papers/2610.40614"
+      "url": "https://huggingface.co/speridlabs/idol"
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/LiquidAI/LFM3-Omni-2B"
+      "url": "https://huggingface.co/nvidia/MotionBricks"
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/papers/2610.37786"
+      "url": "https://techcrunch.com/2026/10/30/anthropic-expected-to-receive-high-junk-rating-from-credit-agencies-following-ipo-report-says/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/vllm-project/vllm/pull/59958"
+    },
+    {
+      "via": "websearch",
+      "query": "Google Project Suncatcher satellite Gemma 4 TPU first response"
     }
   ],
   "lang": "en",
   "validation": {
-    "validated_at": "2026-10-31T04:41:43+00:00",
+    "validated_at": "2026-10-31T04:43:25+00:00",
     "checked_links": false,
     "dropped": [
       {
-        "title": "A-RSI refreshes multimodal training tasks without external labels",
-        "section": "brief",
+        "title": "Datalab ships Surya OCR 2.5, a 689M-parameter OCR model",
+        "section": "model",
         "reasons": [
-          "summary longer than 250 characters"
-        ]
-      },
-      {
-        "title": "VibeGame builds 2D games from prompts with an adversarial agent team",
-        "section": "brief",
-        "reasons": [
-          "summary longer than 250 characters"
+          "'689M-parameter' does not appear in the cited material"
         ]
       }
     ],
