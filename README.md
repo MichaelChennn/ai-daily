@@ -5,7 +5,6 @@
   <img src="docs/assets/readme/hero-zh-light.svg" width="100%" alt="AI 科技日报：每天 06:00 一期 AI 技术日报，每个数字都能追到一手来源的原文">
 </picture>
 
-[![pages](https://img.shields.io/github/actions/workflow/status/MichaelChennn/ai-daily/pages.yml?branch=main&style=flat&label=pages&labelColor=0a0a0a&logo=github&logoColor=white)](https://github.com/MichaelChennn/ai-daily/actions/workflows/pages.yml)
 [![网站](https://img.shields.io/badge/%E7%BD%91%E7%AB%99-0a0a0a?style=flat&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIi8%2BPHBhdGggZD0iTTEyIDJhMTQuNSAxNC41IDAgMCAwIDAgMjAgMTQuNSAxNC41IDAgMCAwIDAtMjAiLz48cGF0aCBkPSJNMiAxMmgyMCIvPjwvc3ZnPg%3D%3D)](https://michaelchennn.github.io/ai-daily/)
 [![RSS](https://img.shields.io/badge/RSS-0a0a0a?style=flat&logo=rss&logoColor=white)](https://michaelchennn.github.io/ai-daily/feed.xml)
 [![English](https://img.shields.io/badge/English-0a0a0a?style=flat&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Im01IDggNiA2Ii8%2BPHBhdGggZD0ibTQgMTQgNi02IDItMyIvPjxwYXRoIGQ9Ik0yIDVoMTIiLz48cGF0aCBkPSJNNyAyaDEiLz48cGF0aCBkPSJtMjIgMjItNS0xMC01IDEwIi8%2BPHBhdGggZD0iTTE0IDE4aDYiLz48L3N2Zz4%3D)](README.en.md)
