@@ -3,13 +3,15 @@
 from __future__ import annotations
 
 import re
-from collections.abc import Awaitable, Callable
+from collections.abc import Awaitable, Callable, Iterator
+from contextlib import contextmanager
+from contextvars import ContextVar
 from typing import Any
 
 import httpx
 
 from daily.config import SourceConfig
-from daily.models import Candidate
+from daily.models import Candidate, Filtered
 from daily.window import Window
 
 SUMMARY_MAX_CHARS = 1500
@@ -101,3 +103,25 @@ async def get(client: httpx.AsyncClient, url: str, **kwargs: Any) -> httpx.Respo
     response = await client.get(url, **kwargs)
     response.raise_for_status()
     return response
+
+
+# What the running fetcher filtered out; set by pipeline.run_source through collect_filtered().
+_filtered: ContextVar[list[Filtered] | None] = ContextVar("filtered", default=None)
+
+
+@contextmanager
+def collect_filtered() -> Iterator[list[Filtered]]:
+    found: list[Filtered] = []
+    token = _filtered.set(found)
+    try:
+        yield found
+    finally:
+        _filtered.reset(token)
+
+
+def filtered(source: SourceConfig, reason: str, title: str, url: str, value: str | None = None) -> None:
+    """Record an item skipped by a content filter, for the process page. Items outside the time
+    window or without a title or link are not recorded: they were never candidates."""
+    found = _filtered.get()
+    if found is not None:
+        found.append(Filtered(source.id, title, url, reason, value))

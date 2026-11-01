@@ -9,7 +9,7 @@ import re
 import httpx
 
 from daily.config import SourceConfig
-from daily.fetchers.base import SUMMARY_MAX_CHARS, candidate, get, is_ai_related
+from daily.fetchers.base import SUMMARY_MAX_CHARS, candidate, filtered, get, is_ai_related
 from daily.models import Candidate
 from daily.text import clean_text, clean_title, parse_datetime, truncate
 from daily.window import Window
@@ -92,10 +92,13 @@ async def fetch_trending(client: httpx.AsyncClient, source: SourceConfig, window
         repo = link.group(1)
         desc_match = _DESCRIPTION.search(row)
         description = clean_text(desc_match.group(1)) if desc_match else ""
+        url = f"https://github.com/{repo}"
         if not is_ai_related(repo.replace("/", " ").replace("-", " "), description, extra_keywords=extra):
+            filtered(source, "not_ai", repo, url)
             continue
         stars_today = _int(_STARS_TODAY.search(row))
         if stars_today < min_stars:
+            filtered(source, "min_stars_today", repo, url, f"stars_today {stars_today} < {min_stars}")
             continue
         signals = {"trending_rank": rank, "stars_today": stars_today}
         if total := _TOTAL_STARS.search(row):
@@ -105,7 +108,7 @@ async def fetch_trending(client: httpx.AsyncClient, source: SourceConfig, window
             candidate(
                 source,
                 title=repo,
-                url=f"https://github.com/{repo}",
+                url=url,
                 summary=description,
                 signals=signals,
                 tags=[language.group(1).strip()] if language else [],

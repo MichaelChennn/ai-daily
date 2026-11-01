@@ -315,6 +315,12 @@ def is_api(digest: dict[str, Any]) -> bool:
     return digest.get("channel") == "api"
 
 
+def slug(model: str) -> str:
+    """An API digest's slug, from the model's family: nvidia:deepseek-ai/deepseek-v4.1-flash -> deepseek,
+    for digest.api.<slug>.json. So EDITOR_API_MODEL holds at most one model per family."""
+    return model.partition(":")[2].rsplit("/", 1)[-1].split("-", 1)[0].lower()
+
+
 def is_discussion(url: str, c: dict[str, Any] | None) -> bool:
     if c is not None and c.get("discussion_url") and url_key(url) == url_key(c["discussion_url"]):
         return True
@@ -447,11 +453,24 @@ def apply_report(digest: dict[str, Any], report: Report, checked_links: bool) ->
         "checked_links": checked_links or previous.get("checked_links", False),
         "dropped": (previous.get("dropped") or [])
         + [
-            {"title": items[i].get("title"), "section": items[i].get("section"), "reasons": errors}
+            {
+                "title": items[i].get("title"),
+                "section": items[i].get("section"),
+                "candidates": source_ids(items[i]),
+                "reasons": errors,
+            }
             if isinstance(items[i], dict)
-            else {"title": None, "section": None, "reasons": errors}
+            else {"title": None, "section": None, "candidates": [], "reasons": errors}
             for i, errors in sorted(report.item_errors.items())
         ],
         "warnings": report.warnings,
     }
     return result
+
+
+def source_ids(item: Any) -> list[str]:
+    """The candidate ids an item cites, main source first."""
+    if not isinstance(item, dict):
+        return []
+    ids = [s.get("candidate_id") for s in item.get("sources") or [] if isinstance(s, dict)]
+    return list(dict.fromkeys(i for i in ids if isinstance(i, str)))

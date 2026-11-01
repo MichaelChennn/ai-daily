@@ -23,7 +23,8 @@ uv run python -c "from daily.window import local_today; print(local_today())"   
   例外是 `"channel": "api"`（API 通道的结果先顶上了主版）：照常编辑，你的版本会替换它。
   `mode` 是 `fallback`（06:30 的兜底已经发布了降级版）：照常编辑，正式版会替换它。
 - `digest.en.json`（英文版）跟着主版走：你重做或替换了主版，就照常写英文版，覆盖原来的文件。
-- `digest.api.*.json` 是 API 通道各模型的版本（网站上的 Beta 版），不要读也不要改。
+- `digest.api.*.json` 是 API 通道各模型的版本（网站上的 Beta 版），`trace.api.*.json` 是它们的生成记录，都不要读也不要改。
+- `trace.claude.json` 是你这一次运行的生成记录：打分、自检删掉的条目和每一轮 validate 的结果，网站的「生成过程」页依据它来显示。打分和自检由你记（第 2、5 步），validate 会自动追加，不要手改这个文件。
 
 ## 1. 浏览候选
 
@@ -39,7 +40,7 @@ uv run python -m daily list --date <期号> --kind blog --summary-chars 1500    
 
 ## 2. 打分与筛选
 
-逐条按下面的 rubric 打分（心里打，不用写出来）：
+逐条按下面的 rubric 给**每一个候选**打分，包括不入选的：
 
 | 维度 | 分值 | 标准 |
 |---|---|---|
@@ -48,6 +49,15 @@ uv run python -m daily list --date <期号> --kind blog --summary-chars 1500    
 | 新颖性 | 0–2 | 2：首次出现；1：已知事物的明显进展；0：老内容、小修小补，或者 `seen_on` 不为空（昨天已经在候选里）而且没有新进展 |
 
 - 热度信号（`hn_points`、`upvotes`、`stars_today`、`trending_rank`、`also_from` 多源报道）可以给同分条目排先后，但不能代替一手来源，也不能让 0 分的营销稿入选。
+- 打完分，把全部候选的分数记进生成记录，格式是 `候选 id: [重要性, 实用性, 新颖性]`。这条命令开始一次新的记录，所以要在写稿和 validate 之前运行：
+
+  ```bash
+  uv run python -m daily trace scores --date <期号> <<'EOF'
+  {"c_1b6d7a5398": [3, 2, 2], "c_9f0e2c4411": [1, 0, 1]}
+  EOF
+  ```
+
+  输出会说有几个候选没有分数；漏了就补全后重跑这条命令（它会重新开始记录）。
 - 总分大致 ≥ 5 才入选。每期目标 **8–12 条**：🔥 头条 3–5 条，📄 论文 2–3 篇，🧠 模型和 🛠 开源与工具看当天情况，⚡ 快讯放其余值得一句话提一下的。某天平淡就少写，不要凑数。
 - 直接排除：客户案例和营销稿（如 “X uses ChatGPT to …”）、量化 / 合并 / 微调的衍生权重、和 AI 开发无关的社区帖、只是提问或吐槽的讨论帖。
 - **同一事件合并成一条**：`cluster_id` 相同的候选通常是同一件事（例如同一个模型的多个权重仓库、相邻两个版本的 Release）。不同类型的候选也可能是同一件事（官方博客 + HF 模型页 + 社区讨论），把它们都放进这一条的 `sources`。
@@ -91,6 +101,14 @@ uv run python -m daily list --date <期号> --kind blog --summary-chars 1500    
 5. 正文里每个数字、模型名、版本号，都能在候选标题 / 摘要或 evidence 里原样找到吗？引文截短时最容易漏掉（例如引文从 "Terminal-Bench" 之后才开始，`4.0` 就不在材料里）。
 
 第 1–4 条不过关：**整条删掉**（同时检查 highlights 有没有提到它），不要改写成差不多对的版本。第 5 条不过关：先按下一步补 evidence，补不上再整条删掉。
+
+自检删掉的条目 validate 看不到，要你自己记进生成记录：每条写它用的候选 id、标题和一句原因。没有删掉任何条目就跳过这一步。
+
+```bash
+uv run python -m daily trace self-check --date <期号> <<'EOF'
+[{"candidates": ["c_1b6d7a5398"], "title": "DeepSeek 开源推理框架 DeepInfer", "reason": "原文没说开源，摘要写成了开源"}]
+EOF
+```
 
 ## 6. 预检与校验
 
@@ -151,7 +169,7 @@ uv run python -m daily validate --date <期号> --check-links --drop-invalid
 
 ```bash
 uv run python -m daily render --date <期号>      # → data/<期号>/digest.md
-git add data/<期号>/digest.json data/<期号>/digest.md data/<期号>/digest.en.json   # 没有英文版就去掉最后一个
+git add data/<期号>/digest.json data/<期号>/digest.md data/<期号>/trace.claude.json data/<期号>/digest.en.json   # 没有英文版就去掉最后一个
 git commit -m "digest: <期号>"
 git push -u origin HEAD                  # 推到当前分支，不要开 PR
 ```

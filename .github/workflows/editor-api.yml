@@ -5,6 +5,8 @@
 # arrives later through ingest.yml still replaces it.
 # The English edition goes with the main issue: the first model that passes also writes
 # digest.en.json, one more request, when its digest would become the main issue (`daily edit --en`).
+# Each model's trace (trace.api.<slug>.json: what it picked, what validate dropped, where it failed)
+# is committed too, also for a model that failed.
 #
 # Configuration (Settings -> Secrets and variables -> Actions):
 #   secrets    GEMINI_API_KEY, NVIDIA_API_KEY
@@ -98,6 +100,7 @@ jobs:
               failed=1
             fi
           done
+          cp "data/$date"/trace.api.*.json "$RUNNER_TEMP/api/" 2>/dev/null || true
           echo "failed=$failed" >> "$GITHUB_OUTPUT"
       - uses: actions/upload-artifact@v4
         if: steps.edit.outputs.date != ''
@@ -142,9 +145,14 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           files=$(cd "$RUNNER_TEMP/api" 2>/dev/null && ls [0-9]*-*.json 2>/dev/null | sort -n || true)
-          [ -z "$files" ] && exit 0
+          traces=$(cd "$RUNNER_TEMP/api" 2>/dev/null && ls trace.api.*.json 2>/dev/null || true)
+          [ -z "$files$traces" ] && exit 0
           for attempt in 1 2 3; do
             git fetch --no-tags origin main && git reset --hard origin/main
+            # Before adopt, which notes in each model's trace whether it became the main issue.
+            for file in $traces; do
+              cp "$RUNNER_TEMP/api/$file" "data/$DATE/$file"
+            done
             for file in $files; do
               cp "$RUNNER_TEMP/api/$file" "data/$DATE/${file#*-}"
               uv run python -m daily adopt --date "$DATE" --from "data/$DATE/${file#*-}"

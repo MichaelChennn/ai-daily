@@ -122,3 +122,20 @@ def test_source_ids_must_be_strings(tmp_path):
 
 def test_cli_rejects_unknown_only(tmp_path):
     assert cli.main(["fetch", "--only", "nope", "--data-dir", str(tmp_path)]) == 2
+
+
+async def test_filtered_items_are_counted_per_source_and_listed(window):
+    sources = [source("hackernews", "discussion", tier=2, id_="hackernews")]
+    async with mock_client({"hn.algolia.com/api/v1/search_by_date": HN}) as client:
+        raw, reports = await pipeline.fetch_all(sources, window, client)
+    data = pipeline.build_candidates(raw, sources, window, reports, dedup.History({}, {}))
+    assert data["stats"]["filtered"] == 2
+    assert data["sources"][0]["filtered"] == {"not_ai": 2} and data["sources"][0]["count"] == 2
+    assert data["filtered"][0] == {
+        "source": "hackernews",
+        "title": "SimCity, but with permits",
+        "url": "https://x.com",
+        "reason": "not_ai",
+        "value": None,
+    }
+    json.dumps(data)

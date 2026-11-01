@@ -42,6 +42,17 @@ class Candidate:
 
 
 @dataclass
+class Filtered:
+    """An item a fetcher skipped on purpose (过滤): below a threshold, not about AI, noise."""
+
+    source: str
+    title: str
+    url: str
+    reason: str  # not_ai | min_stars_today | min_upvotes | max_age_days | noisy_model
+    value: str | None = None  # what triggered it, e.g. "stars_today 12 < 20"
+
+
+@dataclass
 class FetchError:
     source: str
     message: str

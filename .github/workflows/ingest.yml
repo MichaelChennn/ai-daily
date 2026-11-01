@@ -5,9 +5,10 @@
 # main's candidates.json and applies the skill's rules: an edited issue replaces a fallback
 # (the editor finished after 06:30), a fallback never replaces an edited issue, and an edited
 # issue is only replaced by a newer edit. The English edition (digest.en.json) comes after its
-# date's digest.json and is taken only to go with a main issue from the Claude route. Only these
-# two files are taken from the branch; digest.md is re-rendered here. Nothing else on the branch
-# reaches main.
+# date's digest.json and is taken only to go with a main issue from the Claude route. The run's
+# trace (trace.claude.json, what the editor picked and validate dropped) goes along: it replaces
+# main's when the digest is adopted, and a rejected run is only noted in main's. Only these files
+# are taken from the branch; digest.md is re-rendered here. Nothing else on the branch reaches main.
 # Run it by hand with a branch name to pick up a branch whose push did not run this workflow
 # (e.g. one created before this file existed on main).
 name: ingest
@@ -63,7 +64,11 @@ jobs:
             fi
             git show "$sha:$path" > "$RUNNER_TEMP/incoming.json"
             en=$([ "$(basename "$path")" = digest.en.json ] && echo --en || true)
-            uv run python -m daily adopt --date "$date" --from "$RUNNER_TEMP/incoming.json" $en
+            trace=""
+            if [ -z "$en" ] && git show "$sha:data/$date/trace.claude.json" > "$RUNNER_TEMP/trace.json" 2>/dev/null; then
+              trace="--trace $RUNNER_TEMP/trace.json"
+            fi
+            uv run python -m daily adopt --date "$date" --from "$RUNNER_TEMP/incoming.json" $en $trace
           done
       - name: Commit and rebuild the site
         env:

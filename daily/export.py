@@ -29,6 +29,8 @@ the same in English):
                enabled, repos[] ("owner/name"),
                stats {ok, runs, candidates (average per run), picked} or null (disabled, never fetched)
 
+And out/process/YYYY-MM-DD.json, how each issue was made, for its 生成过程 page: see daily/process.py.
+
 And into public/ (web/public, copied as is into the site): feed.xml and feed.en.xml, the RSS
 feeds with absolute links under base_url, and .nojekyll.
 """
@@ -43,6 +45,7 @@ from pathlib import Path
 from typing import Any
 from urllib.parse import quote, urlsplit
 
+from daily import process
 from daily.config import SourceConfig
 from daily.dedup import url_key
 from daily.digest import SECTIONS, is_api
@@ -147,18 +150,22 @@ class SourceStats:
 def export(
     out: Path, public: Path, data_dir: Path, sources: list[SourceConfig], base_url: str = DEFAULT_BASE_URL
 ) -> list[Issue]:
-    """Write out/issues/*.json, out/en/issues/*.json and out/beta/*/*.json for every publishable
-    issue and beta (replacing what an earlier export left), out/sources.json and
+    """Write out/issues/*.json, out/en/issues/*.json, out/beta/*/*.json and out/process/*.json for
+    every publishable issue and beta (replacing what an earlier export left), out/sources.json and
     out/en/sources.json, and public/feed.xml, public/feed.en.xml and public/.nojekyll."""
     folder, beta_folder, en_folder = out / "issues", out / "beta", out / "en" / "issues"
-    for each in (folder, en_folder):
+    process_folder = out / "process"
+    for each in (folder, en_folder, process_folder):
         each.mkdir(parents=True, exist_ok=True)
         for stale in each.glob("*.json"):
             stale.unlink()
     shutil.rmtree(beta_folder, ignore_errors=True)
     issues = load_issues(data_dir)
+    names = {source.id: source.name for source in sources}
     for issue in issues:
         _write_json(folder / f"{issue.slug}.json", issue_data(issue))
+        steps = process.issue_process(data_dir / issue.slug, issue.candidates, names, BETA_LABELS)
+        _write_json(process_folder / f"{issue.slug}.json", steps)
         _write_json(en_folder / f"{issue.slug}.json", issue_data_en(issue))
         for slug in issue.betas:
             (beta_folder / issue.slug).mkdir(parents=True, exist_ok=True)
