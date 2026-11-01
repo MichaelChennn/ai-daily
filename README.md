@@ -1,185 +1,93 @@
-# ai-daily · AI 科技日报
+<div align="center">
 
-每天早上 6 点（柏林时间）自动生成的中文 AI 技术日报：5 分钟读完，每一条都能追溯到一手来源。
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/readme/hero-zh-dark.svg">
+  <img src="docs/assets/readme/hero-zh-light.svg" width="100%" alt="AI 科技日报：每天 06:00 一期 AI 技术日报，每个数字都能追到一手来源的原文">
+</picture>
 
-网站：<https://michaelchennn.github.io/ai-daily/> · RSS（全文）：<https://michaelchennn.github.io/ai-daily/feed.xml>
+[![pages](https://img.shields.io/github/actions/workflow/status/MichaelChennn/ai-daily/pages.yml?branch=main&style=flat&label=pages&labelColor=0a0a0a&logo=github&logoColor=white)](https://github.com/MichaelChennn/ai-daily/actions/workflows/pages.yml)
+[![网站](https://img.shields.io/badge/%E7%BD%91%E7%AB%99-0a0a0a?style=flat&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIi8%2BPHBhdGggZD0iTTEyIDJhMTQuNSAxNC41IDAgMCAwIDAgMjAgMTQuNSAxNC41IDAgMCAwIDAtMjAiLz48cGF0aCBkPSJNMiAxMmgyMCIvPjwvc3ZnPg%3D%3D)](https://michaelchennn.github.io/ai-daily/)
+[![RSS](https://img.shields.io/badge/RSS-0a0a0a?style=flat&logo=rss&logoColor=white)](https://michaelchennn.github.io/ai-daily/feed.xml)
+[![English](https://img.shields.io/badge/English-0a0a0a?style=flat&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Im01IDggNiA2Ii8%2BPHBhdGggZD0ibTQgMTQgNi02IDItMyIvPjxwYXRoIGQ9Ik0yIDVoMTIiLz48cGF0aCBkPSJNNyAyaDEiLz48cGF0aCBkPSJtMjIgMjItNS0xMC01IDEwIi8%2BPHBhdGggZD0iTTE0IDE4aDYiLz48L3N2Zz4%3D)](README.en.md)
 
-立项书：[docs/charter/00_Project_Charter.md](docs/charter/00_Project_Charter.md)
+</div>
 
-## 当前进度
+## 01 功能
 
-| 里程碑 | 状态 |
-|---|---|
-| M0 立项 | ✅ |
-| M1 信源与数据：`daily fetch` + 去重 | 🚧 代码已完成，等待连续 7 天的覆盖率验证 |
-| M2 编辑 skill 与质量闸门（`validate`、降级） | 🚧 代码与 skill 已完成，第一期见 [data/2026-10-21/digest.md](data/2026-10-21/digest.md)；等待回放 7 天数据 |
-| M3 发布（静态站点 + RSS + 定时任务） | 🚧 代码、workflow 和定时任务已完成，等待无人干预连续发布 3 天 |
+- **每个数字都有出处**：从 17 个一手信源抓取。正文里的每个数字、模型名和版本号都要能在来源和逐字摘录的 evidence 里找到，找不到就整条删掉，不做“修正”。
+- **两条编辑通道**：Claude 和云端模型 API 每天各编一份。Claude 那份优先成为主版，API 那份作为 Beta 版并排展示；两条都失败时，发布只有标题和链接的降级版。
+- **中英双语**：英文版沿用主版的条目和 evidence，依据英文原文直接写成，不是翻译。
+- **全文 RSS 与归档**：[中文 RSS](https://michaelchennn.github.io/ai-daily/feed.xml)、[English RSS](https://michaelchennn.github.io/ai-daily/feed.en.xml)；网站上有往期归档和每个信源的抓取统计。
 
-## 使用
+## 02 流水线
 
-```bash
-uv sync                                           # 建 .venv，装好依赖、dev 工具和本项目（按 uv.lock）
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/readme/pipeline-zh-dark.svg">
+  <img src="docs/assets/readme/pipeline-zh-light.svg" width="100%" alt="流水线：17 个信源抓取去重后交给 Claude 通道和 API 通道编辑，validate 逐条核对引文，通过后按 Claude 通道、API 通道、降级版的顺序选出今日日报，发布中文、英文和 RSS">
+</picture>
 
-uv run python -m daily fetch                       # 今天这一期 → data/YYYY-MM-DD/candidates.json
-uv run python -m daily fetch --date 2026-10-20     # 指定期号（柏林时间日期）
-uv run python -m daily fetch --only hackernews     # 只跑某个信源，调试用（可重复）
+每天柏林时间 05:07 抓取并去重，05:30 两条通道开始编辑，`daily validate` 逐条核对后在 06:00 发布；06:30 还没有合格的日报就发布降级版。
 
-uv run python -m daily list --date 2026-10-21      # 精简列出候选（给编辑看）
-uv run python -m daily page <url> --grep 关键词     # 打印原始页面里关键词附近的原文，用来逐字摘录 evidence
-uv run python -m daily validate --date 2026-10-21 --check-links --drop-invalid   # 程序闸门
-uv run python -m daily degrade --date 2026-10-21   # digest.json 缺失或不合格时，写入“标题 + 链接”降级版
-uv run python -m daily render --date 2026-10-21    # digest.json → digest.md
-uv run python -m daily adopt --date 2026-10-21 --from x.json   # 按规则并入编辑分支推来的 digest.json（ingest 用）
-uv run python -m daily edit --model nvidia:deepseek-ai/deepseek-v4.1-flash   # API 通道：云端模型编辑，写 digest.api.<slug>.json（需要对应的 API key）
-uv run python -m daily edit --en data/2026-10-21/digest.api.deepseek.json   # 它会成为主版时，用同一个模型写英文版 digest.en.<slug>.json（再用 adopt --en 采用）
-uv run python -m daily export                      # 已发布各期 → web/data/（JSON）和 web/public/feed.xml，给前端用，不提交
+细节见 [docs/pipeline.md](docs/pipeline.md)（抓取、去重、质量闸门）和 [docs/operations.md](docs/operations.md)（定时任务、发布、网站）。两条通道的取舍见 [ADR 0001](docs/adr/0001-two-editor-routes.md)。
 
-uv run pytest -q && uv run ruff check . && uv run ruff format --check .
-```
+## 03 快速开始
 
-编辑环节在 Claude Code 里运行 skill：`/daily-editor 2026-10-21`（[.claude/skills/daily-editor/SKILL.md](.claude/skills/daily-editor/SKILL.md)）。
-
-`GITHUB_TOKEN` 环境变量可选，用于 GitHub Releases（不设置时限额 60 次/小时）。
-
-退出码：`0` 成功（个别信源失败只记录在输出里）；`1` 所有信源都没有拿到内容；`2` 参数错误。
-
-## 流水线
-
-```
-sources.yaml ──► fetchers（并发、相互隔离）──► 去重 ──► data/YYYY-MM-DD/candidates.json
-             ──► daily-editor skill（Claude）──► digest.json ──► validate ──► render ──► digest.md
-                                       （失败时）degrade ──► 降级版 digest.json
-```
-
-**时间窗口**：第 D 期覆盖柏林时间 D-1 04:00 到 D 06:00（截止到运行时刻；跟随夏令时，UTC 时刻冬夏相差 1 小时）。比 24 小时多出的 2 小时用来接住上一次运行之后、06:00 之前发布的内容：只要每天在 04:00 之后运行，相邻两期之间就没有空档，Actions 的 cron 延迟也不会漏内容；重叠部分由跨天去重处理。
-
-**信源**（`sources.yaml`，立项书 7.1）：
-
-| type | 信源 | 说明 |
-|---|---|---|
-| `rss` | OpenAI、Google DeepMind、Google AI、Hugging Face Blog、Meta 新闻室（AI 标签） | Meta 用新闻室的 AI 标签 feed（ai.meta.com 拒绝非浏览器请求） |
-| `html_listing` | Anthropic News / Research、Mistral、MiniMax、Kimi、DeepSeek（API 文档的新闻侧栏） | 没有 RSS，按链接定位卡片，日期只精确到天 |
-| `hf_daily_papers` | Hugging Face Daily Papers | 带 upvotes、代码仓库 |
-| `github_releases` | vLLM、Ollama、llama.cpp、transformers 等 | 跳过 draft 和 pre-release |
-| `github_trending` | GitHub Trending | 只保留 AI 相关、当日 star 达到阈值的 |
-| `hf_trending_models` | Hugging Face Trending Models | 过滤量化 / 合并 / 适配器，以及创建超过 45 天的（`createdAt` 是建仓时间，大厂会提前建私有仓库） |
-| `hackernews` | Hacker News（Algolia API） | Tier 2，AI 相关且分数达到阈值 |
-| `reddit` | r/LocalLLaMA + r/MachineLearning | Tier 2，RSS（JSON API 拒绝匿名的云端请求）；匿名 RSS 每分钟只给 1 次，两个版合成一个请求 |
-
-Qwen（官方列表页是 JS 渲染）、xAI（对非浏览器 UA 返回 403）暂时没有可抓的官方列表页，由 HF Trending、HN 和 Reddit 覆盖。
-
-**去重**（`daily/dedup.py`）分三层：
-
-1. **同一页面**：URL 归一化（去 tracking 参数、`www.`、结尾斜杠；arXiv abs/pdf/版本号和 HF Papers 页面统一成 `arxiv:ID`）。同一个 key 的记录合并成一条：tier 小的当主记录，同 tier 按 `sources.yaml` 中的顺序；其他记录放进 `also_from`，HN 分数等热度信号并入 `signals`。
-2. **同一事件**：标题词重合度 + 共同的模型名（`gpt-6`、`qwen3.5`、`deepseek-v4.1`……）。相似的候选会拿到同一个 `cluster_id`。聚类只是给编辑的提示，不会合并条目。
-3. **跨天**：过去 7 天的 `candidates.json` 里出现过的，在 `seen_on` 里记下日期；过去 7 天 `digest.json` 里已经发布过的，直接丢弃（记录在 `dropped`）。
-
-## candidates.json
-
-```jsonc
-{
-  "schema_version": 1,
-  "date": "2026-10-21",                     // 期号（柏林时间）
-  "generated_at": "...",
-  "window": {"start": "...", "end": "..."}, // UTC
-  "stats": {"raw": 102, "after_url_merge": 101, "dropped_already_published": 0,
-            "candidates": 101, "clusters": 3, "seen_before": 0},
-  "sources": [{"id": "openai-news", "status": "ok|error|disabled", "count": 2, "seconds": 1.0, "error": null}],
-  "clusters": [{"id": "k_...", "title": "...", "candidate_ids": ["c_...", "c_..."]}],
-  "dropped": [{"id": "c_...", "title": "...", "url": "...", "published_on": "2026-10-20"}],
-  "candidates": [{
-    "id": "c_6ecc1d71a5",                   // 由 URL key 生成，跨天稳定
-    "source": "openai-news", "source_name": "OpenAI News", "tier": 1,
-    "kind": "blog|paper|release|model|repo|discussion",
-    "title": "...", "url": "...", "summary": "...",
-    "published_at": "...", "published_precision": "second|day",
-    "discussion_url": null, "signals": {"hn_points": 812}, "tags": [],
-    "key": "openai.com/index/...", "cluster_id": "k_...",
-    "also_from": [{"source": "hackernews", "url": "...", "title": "...", "discussion_url": "..."}],
-    "seen_on": ["2026-10-20"]
-  }]
-}
-```
-
-## digest.json 与质量闸门
-
-编辑（Claude）只负责写，能不能发布由 `daily validate`（`daily/digest.py`）决定。不合格的条目整条删掉并记录原因，不会被“修正”（立项书原则 5）：
-
-| 检查 | 不通过时 |
-|---|---|
-| 结构：schema_version、期号、mode、版块、标题 / 摘要长度、正文里不能有链接 | 条目删除；整期结构错误则整期不合格 |
-| 每个来源都是候选，或是编辑记录在 `research` 里、用 WebFetch 打开过的页面 | 条目删除 |
-| 至少有一个一手来源，不能只有 HN / Reddit 讨论帖 | 条目删除 |
-| 同一个候选只能用一次 | 后出现的条目删除 |
-| 正文里的每个数字、模型名 / 版本号（`GPT-6`、`Qwen3.5-72B`、`v2.1.305`、`128K`）都要出现在所引候选的标题 / 摘要或 evidence 引文里 | 条目删除 |
-| `--check-links`：链接不是 404 / 410；evidence 引文确实出现在页面上（403 等打不开的页面只给警告） | 条目删除 |
-| 今日要点里的数字和模型名必须来自入选条目；正式版至少 3 条有效条目 | 整期不合格 → `degrade` |
-
-编辑预算（立项书待决 2，暂定）：每期 WebFetch ≤ 20 次、WebSearch ≤ 5 次，超出时 validate 只给警告。
-
-`degrade` 不用 LLM：官方博客优先，再按热度信号挑各类候选的前几名，保留英文原标题和链接。
-
-## 定时抓取
-
-抓取在 GitHub Actions 里跑，不在 Claude 的定时任务里：Claude cloud session 访问不了其他仓库的 GitHub API，Reddit 也会拒绝它的请求；Actions 自带 `GITHUB_TOKEN`，网络不受限制。
-
-`.github/workflows/fetch.yml` 每天柏林时间 05:07 运行 `daily fetch`，把 `data/YYYY-MM-DD/candidates.json` 提交到 main。05:30 的 Claude 编辑任务直接从仓库读取。没有拿到任何内容时 job 失败，GitHub 会发通知。也可以在 Actions 页面手动触发，指定期号日期补抓。
-
-## 发布（M3）
-
-| 柏林时间 | 谁 | 做什么 |
-|---|---|---|
-| 05:07 | Actions `fetch.yml` | 抓取，把 `candidates.json` 提交到 main |
-| 05:30 | Claude 定时任务（每次新开一个 cloud session） | 运行 daily-editor skill，把 `digest.json` 推到本会话的 `claude/` 分支 |
-| 05:30 | Actions `editor-api.yml` | API 通道：`EDITOR_API_MODEL` 里的每个模型各编一份 `digest.api.<slug>.json`（Beta 版）；Claude 还没出结果时，第一份合格的成为主版，同一个模型再写一份英文版 |
-| 推送后 | Actions `ingest.yml` | 用 main 上的候选重新校验，按规则并入 main，启动 `pages.yml` |
-| 06:30 | Actions `fallback.yml` | 当天没有合格的 digest 就发布降级版，提交并启动 `pages.yml` |
-| 之后 | Actions `pages.yml` | `web/` 构建（含 `daily export`）→ GitHub Pages |
-
-- **为什么要 ingest**：cloud session 只能推送到它自己的 `claude/` 分支。ingest 只从分支拿 `data/*/digest.json`，其他改动不会进入 main。也可以在 Actions 页面手动运行 ingest，指定分支名，补收没有触发它的分支。
-- **为什么用 workflow_dispatch 串起来**：用 `GITHUB_TOKEN` 推送的提交不会触发其他 workflow（workflow_dispatch 除外），所以 ingest 和兜底提交之后用 `gh workflow run pages.yml --ref main` 启动构建。人推到 main（合并 PR）会直接触发 `pages.yml`。
-- **并入规则**（`daily/publish.py`）：正式版替换降级版（编辑在 06:30 之后才完成），降级版不会覆盖正式版，正式版只会被更新的正式版替换（重做）。主版的优先级是 Claude 通道 > API 通道 > 降级版：Claude 的版本总会替换 API 通道的版本，API 通道的版本不替换任何正式版。
-- **API 通道配置**：secrets `GEMINI_API_KEY`、`NVIDIA_API_KEY`；variable `EDITOR_API_MODEL` 写 `厂商:模型`，逗号分隔，顺序就是成为主版的优先级（同一个模型家族只放一个，文件名按家族取，如 `deepseek`、`gemini`）。本地运行时把 key 写进 `.env`（已忽略），`set -a; . ./.env; set +a` 后再跑 `daily edit`。
-- **告警**（Actions 失败 → GitHub 发通知）：`fetch` 没有拿到任何内容；06:30 时连 `candidates.json` 都没有；连续两天都是降级版。
-- **时区**：Actions 的 cron 只认 UTC，柏林有夏令时（CEST UTC+2 / CET UTC+1），所以 `fetch.yml` 和 `fallback.yml` 各写了冬夏两条 cron，每天都会触发两次，由第一个 job（`due`）按当天的 UTC 偏移只放行一次。Claude 定时任务的 cron 直接写 `CRON_TZ=Europe/Berlin`。
-- **一次性设置**：仓库 Settings → Pages → Source 选 **GitHub Actions**（下面推荐的 “GitHub Pages Jekyll” / “Static HTML” 都不用点，仓库里已经有 `pages.yml`）。
-
-网站（`web/`）：Astro + React + Tailwind + [shadcn/ui](https://ui.shadcn.com/)，黑白配色，页面都是预渲染的静态 HTML。首页就是最新一期（canonical 指向它的日期页），每期一页（`YYYY-MM-DD/`），往期归档按年份和月份筛选，信息源页用卡片列出白名单和最近 30 期的抓取成功次数、平均候选数、入选条目数。降级版在正文顶部和 RSS 标题里都有标注。
-
-- **数据**：`daily export` 把能通过 `validate`（离线部分）的各期写成 `web/data/issues/*.json`，内容是分区、条目、来源链接、发布方（GitHub / Hugging Face 的 owner 头像，其他站点用 favicon）和发布时间；信息源写成 `web/data/sources.json`；全文 RSS 写成 `web/public/feed.xml`，链接用 `SITE_URL`（默认线上地址）。这些都在构建时重新生成，不提交。前端只负责排版，发布规则都留在 Python。只有一手来源的时间才算发布时间（HN、Reddit 的时间是发帖时间，不显示），只精确到天的来源只显示日期。
-- **RSS**：最近 30 天，全文。guid 带上 mode，降级版被正式版替换后，阅读器会把正式版当作新条目收到。
-- **交互**：分类、年月和信息源分组筛选、日夜模式切换（选择存在 localStorage）；换页和筛选用 View Transitions 过渡。
+需要 Python 3.11+ 和 [uv](https://docs.astral.sh/uv/)；网站另需 Node 24。
 
 ```bash
-cd web && npm ci
-npm run dev                  # 先自动跑 daily export（需要能 import daily 的 python），然后打开 http://localhost:4321/ai-daily/
-npm run check                # 类型检查
+uv sync                                            # 按 uv.lock 建好 .venv
+uv run python -m daily fetch                       # 抓取今天这一期 → data/YYYY-MM-DD/candidates.json
+uv run python -m daily list                        # 浏览候选
+uv run python -m daily validate --check-links      # 校验 digest.json
+uv run python -m daily render                      # digest.json → digest.md
 
-# 预览构建结果
-SITE_URL=http://localhost:8000/ npm run build
-python -m http.server -d dist
+cd web && npm ci && npm run dev                    # 本地网站：http://localhost:4321/ai-daily/
 ```
 
-## 目录
+Claude 通道在 Claude Code 里运行 `/daily-editor 2026-10-30`。全部命令、环境变量和 API 通道的用法见 [docs/cli.md](docs/cli.md)。
+
+## 04 项目结构
+
+<details>
+<summary>展开目录</summary>
 
 ```
-daily/
-  cli.py            python -m daily 入口
-  pipeline.py       并发抓取、信源隔离、写 candidates.json
-  dedup.py          URL 合并、标题聚类、跨天去重
-  digest.py         digest.json schema 与 validate
-  fallback.py       降级版
-  render.py         digest.json → Markdown
-  site.py           可发布的各期和 RSS
-  export.py         各期、信息源 → JSON，RSS → web/public（daily export）
-  publish.py        编辑分支或 API 通道的 digest 能不能成为主版（daily adopt）
-  api_editor.py     API 通道：挑选、写作、修改三次请求，SKILL.md 的编辑规则当 system prompt（daily edit）；成为主版时再用一次请求写英文版（daily edit --en）
-  throttle.py       同一主机的请求间隔、429 重试
-  window.py         期号时间窗口
-  text.py           文本清洗、日期解析
-  fetchers/         各类信源
-web/                Astro 前端（整个网站）
+daily/              Python 流水线（python -m daily）
+  fetchers/         各类信源的抓取器
+  dedup.py          三层去重
+  digest.py         digest.json 的 schema 与 validate
+  api_editor.py     API 通道
+  publish.py        选主版的规则
+  export.py         各期、信息源和 RSS → 网站数据
+web/                Astro 网站
+data/YYYY-MM-DD/    每期的候选、日报（中文、英文、Beta 版）
 sources.yaml        信源白名单
-.claude/skills/daily-editor/   编辑 skill
-data/YYYY-MM-DD/    每期的 candidates.json、digest.json、digest.md
+.claude/skills/daily-editor/   编辑规则（两条通道共用）
+.github/workflows/  抓取、编辑、并入、兜底、部署
+docs/               开发文档、ADR、调研
 ```
+
+</details>
+
+术语表见 [GLOSSARY.md](GLOSSARY.md)，立项书见 [docs/charter/00_Project_Charter.md](docs/charter/00_Project_Charter.md)。
+
+## 05 信源
+
+在 [`sources.yaml`](sources.yaml) 里登记，网站的[信息源页](https://michaelchennn.github.io/ai-daily/sources/)有每个信源最近 30 期的抓取统计。
+
+<details>
+<summary>展开信源列表</summary>
+
+| 类别 | 信源 |
+|---|---|
+| 官方博客 | OpenAI、Anthropic News / Research、Google DeepMind、Google AI、Mistral、Hugging Face、Meta AI、MiniMax、Kimi、DeepSeek |
+| 论文 | Hugging Face Daily Papers |
+| 开源 | GitHub Releases（vLLM、Ollama、llama.cpp、transformers 等 14 个仓库）、GitHub Trending、Hugging Face Trending Models |
+| 社区 | Hacker News、Reddit（r/LocalLLaMA + r/MachineLearning） |
+
+</details>
+
+## 06 许可
+
+- 代码：[MIT](LICENSE)
+- 日报内容（`data/` 下的各期日报和网站上的文字）：[CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/deed.zh-hans)。转载请署名并链接原文，不得用于商业用途。
