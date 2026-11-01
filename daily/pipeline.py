@@ -6,7 +6,8 @@ import asyncio
 import json
 import logging
 import time
-from dataclasses import dataclass
+from collections import Counter
+from dataclasses import asdict, dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -16,7 +17,8 @@ import httpx
 from daily import __version__, dedup
 from daily.config import SourceConfig
 from daily.fetchers import FETCHERS
-from daily.models import Candidate
+from daily.fetchers.base import collect_filtered
+from daily.models import Candidate, Filtered
 from daily.throttle import PoliteTransport
 from daily.window import Window
 
@@ -33,6 +35,7 @@ class SourceReport:
     count: int = 0
     seconds: float = 0.0
     error: str | None = None
+    filtered: list[Filtered] = field(default_factory=list)  # in candidates.json: counts by reason
 
 
 def make_client() -> httpx.AsyncClient:
@@ -51,14 +54,16 @@ async def run_source(
     started = time.monotonic()
     try:
         fetcher = FETCHERS[source.type]
-        items = await asyncio.wait_for(fetcher(client, source, window), SOURCE_TIMEOUT_SECONDS)
+        with collect_filtered() as skipped:
+            items = await asyncio.wait_for(fetcher(client, source, window), SOURCE_TIMEOUT_SECONDS)
     except Exception as exc:  # noqa: BLE001 - isolation is the point
         detail = str(exc).splitlines()[0] if str(exc) else ""
         message = f"{type(exc).__name__}: {detail}" if detail else type(exc).__name__
         logger.warning("source %s failed: %s", source.id, message)
         return [], SourceReport(source.id, "error", seconds=time.monotonic() - started, error=message[:500])
     logger.info("source %s: %d items", source.id, len(items))
-    return items, SourceReport(source.id, "ok", count=len(items), seconds=time.monotonic() - started)
+    seconds = time.monotonic() - started
+    return items, SourceReport(source.id, "ok", count=len(items), seconds=seconds, filtered=skipped)
 
 
 async def fetch_all(
@@ -96,6 +101,8 @@ def build_candidates(
         )
     )
     clusters = dedup.assign_clusters(kept)
+    reports = sorted(reports, key=lambda r: source_order.get(r.id, 999))
+    filtered = [item for report in reports for item in report.filtered]
 
     return {
         "schema_version": 1,
@@ -103,6 +110,7 @@ def build_candidates(
         "generated_at": (now or datetime.now(timezone.utc)).replace(microsecond=0).isoformat(),
         "window": {"start": window.start.isoformat(), "end": window.end.isoformat()},
         "stats": {
+            "filtered": len(filtered),
             "raw": len(raw),
             "after_url_merge": len(merged),
             "dropped_already_published": len(dropped),
@@ -110,8 +118,12 @@ def build_candidates(
             "clusters": len(clusters),
             "seen_before": sum(1 for c in kept if c.seen_on),
         },
-        "sources": [report.__dict__ for report in sorted(reports, key=lambda r: source_order.get(r.id, 999))],
+        "sources": [
+            {**report.__dict__, "filtered": dict(Counter(f.reason for f in report.filtered))}
+            for report in reports
+        ],
         "clusters": clusters,
+        "filtered": [asdict(f) for f in filtered],
         "dropped": dropped,
         "candidates": [c.to_json() for c in kept],
     }

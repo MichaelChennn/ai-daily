@@ -26,7 +26,7 @@ from typing import Any
 
 import httpx
 
-from daily import digest, pipeline
+from daily import digest, pipeline, trace
 
 log = logging.getLogger(__name__)
 
@@ -63,12 +63,13 @@ ROUTE_NOTES = """
 你通过云端模型 API 运行：没有 shell、工具和网络。准备、浏览候选、打开原文、校验和提交由程序完成。
 程序分几步问你，每一步只回答一个 JSON 对象，不要别的文字：
 
-1. 挑选：程序给出候选列表，你按第 2 节挑出值得写的。
+1. 挑选：程序给出候选列表，你按第 2 节给每个候选打分，挑出值得写的。
 2. 写作：程序打开你挑的原文，切成编号的片段；你按第 4、5 节写日报。evidence 只填片段编号，
    程序把原文逐字放进去，你不用复制引文，也不用写 research。
 3. 修改：程序按 validate 的规则检查，把不合格的条目和原因发回给你，只有这一次机会；稿子没问题就没有这一步。
 
-没有 WebSearch：不做补漏，只用候选。
+没有 WebSearch：不做补漏，只用候选。生成记录也由程序记：第 2、5 节里的 `daily trace` 命令不用管，
+分数写在挑选那一步的回答里。
 """
 
 WRITE_FORMAT = """\
@@ -87,7 +88,8 @@ EN_ROUTE_NOTES = """
 
 你通过云端模型 API 运行：没有 shell、工具和网络。中文版已经通过校验，程序给出它的每一条：版块、
 候选的标题和摘要、evidence 原文。你按第 7 步为每一条写英文的 title 和 summary，再写英文 highlights；
-复制 digest.json、校验和提交由程序完成。只回答一个 JSON 对象，不要别的文字。
+复制 digest.json、校验和提交由程序完成，第 5 节里的 `daily trace` 命令也不用管。只回答一个 JSON 对象，
+不要别的文字。
 """
 
 EN_FORMAT = """\
@@ -121,12 +123,6 @@ def resolve(model: str) -> tuple[Provider, str, str]:
     if not key:
         raise EditorError(f"{provider.key_env} is not set")
     return provider, model_name, key
-
-
-def slug(model: str) -> str:
-    """The beta's slug, from the model's family: nvidia:deepseek-ai/deepseek-v4.1-flash -> deepseek.
-    So EDITOR_API_MODEL holds at most one model per family."""
-    return model.partition(":")[2].rsplit("/", 1)[-1].split("-", 1)[0].lower()
 
 
 def system_prompt(rules: tuple[str, ...] = RULES, notes: str = ROUTE_NOTES) -> str:
@@ -289,10 +285,13 @@ def _titles_as_highlights(data: dict[str, Any], report: digest.Report) -> bool:
 
 class Editor:
     """One edit in at most three requests: pick, write, fix. Each request is a full turn on a free
-    tier (Gemini's flash allows 20 a day), so the reading is done here and not by the model."""
+    tier (Gemini's flash allows 20 a day), so the reading is done here and not by the model.
+    What each step kept and dropped goes into self.trace, whether or not the edit succeeds."""
 
     def __init__(self, candidates: dict[str, Any], model: str, client: httpx.AsyncClient) -> None:
         self.candidates = candidates
+        self.trace = trace.new(candidates["date"], "api", model)
+        self.step = "pick"
         self.by_id = {c["id"]: c for c in candidates["candidates"]}
         self.model = model
         self.client = client
@@ -302,22 +301,33 @@ class Editor:
         self.research: list[dict[str, str]] = []
 
     async def run(self) -> dict[str, Any]:
+        try:
+            return await self._run()
+        except EditorError as exc:
+            self.trace["failure"] = {"step": self.step, "error": str(exc)}
+            raise
+
+    async def _run(self) -> dict[str, Any]:
         groups = await self._pick()
+        self.step = "read"
         await self._read(groups)
         messages = [
             {"role": "system", "content": system_prompt()},
             {"role": "user", "content": self._write_prompt(groups)},
         ]
+        self.step = "draft"
         data = self._draft(await self._ask(messages))
         report = await self._validate(data)
         log.info("write: %d items, %d rejected", len(data["items"]), len(report.item_errors))
         feedback = self._feedback(data, report, groups)
         if feedback:
+            self.step = "fix"
             messages.append({"role": "user", "content": feedback})
             data = self._draft(await self._ask(messages))
             report = await self._validate(data)
             log.info("fix: %d items, %d rejected", len(data["items"]), len(report.item_errors))
         if _titles_as_highlights(data, report):
+            self.step = "highlights"
             report = await self._validate(data)
         if report.errors:
             raise EditorError("; ".join(report.errors))
@@ -328,18 +338,23 @@ class Editor:
 
     async def _pick(self) -> list[list[str]]:
         usable = [c for c in self.candidates["candidates"] if first_hand_url(c)]
+        unusable = [c["id"] for c in self.candidates["candidates"] if not first_hand_url(c)]
+        self._record({"step": "no_first_hand", "candidates": unusable})
         listing = pipeline.candidate_listing({**self.candidates, "candidates": usable}, summary_chars=300)
         prompt = (
             f"期号 {self.candidates['date']}。第一步：挑选。下面是候选，只有讨论帖、没有一手来源的已经去掉。"
-            f"按第 2 节打分，挑出最多 {PICKS} 组值得写的，重要的在前；同一事件的几个候选放进同一组，"
+            "按第 2 节给下面每一个候选打分，scores 里写 [重要性, 实用性, 新颖性]，一个都不要漏；"
+            f"再挑出最多 {PICKS} 组值得写的，重要的在前；同一事件的几个候选放进同一组，"
             f"第一个是主来源，程序会打开它的原文。"
             f"目标是最后写 {digest.ITEMS_TARGET[0]}–{digest.ITEMS_TARGET[1]} 条，可以多挑几组留余量。"
-            '只回答 JSON：{"picks": [["c_xxx", "c_yyy"], ["c_zzz"]]}\n\n' + listing
+            '只回答 JSON：{"scores": {"c_xxx": [3, 2, 2], "c_yyy": [1, 0, 1]}, '
+            '"picks": [["c_xxx", "c_yyy"], ["c_zzz"]]}\n\n' + listing
         )
         answer = await self._ask(
             [{"role": "system", "content": system_prompt()}, {"role": "user", "content": prompt}]
         )
         known = {c["id"] for c in usable}
+        self.trace["scores"] = trace.scores(answer.get("scores"), known)
         groups: list[list[str]] = []
         seen: set[str] = set()
         for group in answer.get("picks") or []:
@@ -350,7 +365,13 @@ class Editor:
         if not groups:
             raise EditorError("the model picked no known candidate")
         log.info("pick: %d groups, %d candidates", len(groups[:PICKS]), len(seen))
+        self._record({"step": "pick", "groups": groups[:PICKS]})
+        if groups[PICKS:]:
+            self._record({"step": "over_picks", "groups": groups[PICKS:]})
         return groups[:PICKS]
+
+    def _record(self, step: dict[str, Any]) -> None:
+        self.trace["steps"].append({"step": step.pop("step"), "at": trace.now(), **step})
 
     async def _read(self, groups: list[list[str]]) -> None:
         """Open each group's first candidate, as research, and number its passages."""
@@ -431,7 +452,9 @@ class Editor:
         """validate with the links checked."""
         missing = [url for url in digest.digest_urls(data) if url not in self.pages]
         self.pages.update(await digest.check_links(missing, self.client))
-        return digest.validate(data, self.candidates, self.pages)
+        report = digest.validate(data, self.candidates, self.pages)
+        self.trace["steps"].append(trace.validate_step(self.step, data, report, checked_links=True))
+        return report
 
     def _feedback(self, data: dict[str, Any], report: digest.Report, groups: list[list[str]]) -> str | None:
         """What to fix and how many more items to look for; None when the draft is done."""
@@ -456,17 +479,34 @@ class Editor:
         return text + "回答修改后的完整 JSON，格式同上，包括没有问题的条目和 highlights。"
 
 
-async def edit(candidates: dict[str, Any], model: str, client: httpx.AsyncClient) -> dict[str, Any]:
-    """Edit the issue with the model; EditorError if no digest passes validate."""
-    return await Editor(candidates, model, client).run()
-
-
 async def write_en(
-    main: dict[str, Any], candidates: dict[str, Any], model: str, client: httpx.AsyncClient
+    main: dict[str, Any],
+    candidates: dict[str, Any],
+    model: str,
+    client: httpx.AsyncClient,
+    steps: list[dict[str, Any]] | None = None,
 ) -> dict[str, Any]:
     """The English edition of the validated API digest `main`, in one request: the model writes the
     titles, summaries and highlights from the same material, the rest is copied (SKILL.md step 7).
-    EditorError if it does not pass validate --en."""
+    EditorError if it does not pass validate --en. Its validate rounds are appended to steps, the
+    trace's, and so is the error of a request that fails."""
+    steps = [] if steps is None else steps
+    recorded = len(steps)
+    try:
+        return await _write_en(main, candidates, model, client, steps)
+    except EditorError as exc:
+        if len(steps) == recorded:  # the request failed: no validate round says why
+            steps.append({"step": "en", "at": trace.now(), "error": str(exc)})
+        raise
+
+
+async def _write_en(
+    main: dict[str, Any],
+    candidates: dict[str, Any],
+    model: str,
+    client: httpx.AsyncClient,
+    steps: list[dict[str, Any]],
+) -> dict[str, Any]:
     by_id = {c["id"]: c for c in candidates["candidates"]}
     blocks = []
     for number, item in enumerate(main["items"], 1):
@@ -516,10 +556,12 @@ async def write_en(
     )
     # Evidence was checked against the pages with the main issue (step 7: one offline round).
     report = digest.validate(data, candidates)
+    steps.append(trace.validate_step("en", data, report, checked_links=False))
     written_count, rejected = len(data["items"]), len(report.item_errors)
     log.info("english: %d of %d items written, %d rejected", written_count, len(blocks), rejected)
     if _titles_as_highlights(data, report):
         report = digest.validate(data, candidates)
+        steps.append(trace.validate_step("en_highlights", data, report, checked_links=False))
     if report.errors:
         raise EditorError("; ".join(report.errors))
     return digest.apply_report(data, report, checked_links=False)

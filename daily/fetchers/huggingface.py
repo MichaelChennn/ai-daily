@@ -7,7 +7,7 @@ from datetime import timedelta
 import httpx
 
 from daily.config import SourceConfig
-from daily.fetchers.base import SUMMARY_MAX_CHARS, candidate, get
+from daily.fetchers.base import SUMMARY_MAX_CHARS, candidate, filtered, get
 from daily.models import Candidate
 from daily.text import clean_text, clean_title, parse_datetime, truncate
 from daily.window import Window
@@ -36,9 +36,14 @@ HF_NOISY_PATTERNS = [
 ]
 
 
-def is_noisy_model(repo_id: str) -> bool:
+def noisy_pattern(repo_id: str) -> str | None:
+    """The first noise pattern in the repo id, if any."""
     normalized = repo_id.lower()
-    return any(pattern in normalized for pattern in HF_NOISY_PATTERNS)
+    return next((pattern for pattern in HF_NOISY_PATTERNS if pattern in normalized), None)
+
+
+def is_noisy_model(repo_id: str) -> bool:
+    return noisy_pattern(repo_id) is not None
 
 
 async def fetch_daily_papers(
@@ -62,7 +67,11 @@ async def fetch_daily_papers(
         paper_id = paper.get("id")
         title = clean_title(paper.get("title") or entry.get("title"))
         upvotes = int(paper.get("upvotes") or 0)
-        if not paper_id or not title or upvotes < min_upvotes:
+        if not paper_id or not title:
+            continue
+        url = f"https://huggingface.co/papers/{paper_id}"
+        if upvotes < min_upvotes:
+            filtered(source, "min_upvotes", title, url, f"upvotes {upvotes} < {min_upvotes}")
             continue
         signals = {"upvotes": upvotes, "comments": int(entry.get("numComments") or 0)}
         if paper.get("githubRepo"):
@@ -75,7 +84,7 @@ async def fetch_daily_papers(
             candidate(
                 source,
                 title=title,
-                url=f"https://huggingface.co/papers/{paper_id}",
+                url=url,
                 summary=truncate(clean_text(paper.get("summary") or entry.get("summary")), SUMMARY_MAX_CHARS),
                 published_at=parse_datetime(paper.get("publishedAt")),
                 published_precision="day",
@@ -99,10 +108,16 @@ async def fetch_trending_models(
     items: list[Candidate] = []
     for rank, model in enumerate(response.json(), start=1):
         repo_id = model.get("id") or model.get("modelId")
-        if not repo_id or is_noisy_model(repo_id):
+        if not repo_id:
+            continue
+        url = f"https://huggingface.co/{repo_id}"
+        if noise := noisy_pattern(repo_id):
+            filtered(source, "noisy_model", repo_id, url, f"repo id contains {noise}")
             continue
         created = parse_datetime(model.get("createdAt"))
         if created and window.end - created > max_age:
+            age = (window.end - created).days
+            filtered(source, "max_age_days", repo_id, url, f"{age} days old > {max_age.days}")
             continue
         tags = model.get("tags") or []
         details = [model.get("pipeline_tag"), model.get("library_name")]
@@ -111,7 +126,7 @@ async def fetch_trending_models(
             candidate(
                 source,
                 title=clean_title(repo_id),
-                url=f"https://huggingface.co/{repo_id}",
+                url=url,
                 summary=", ".join(d for d in details if d),
                 published_at=created,
                 signals={

@@ -101,17 +101,17 @@ def load_issues(data_dir: Path) -> list[Issue]:
         except json.JSONDecodeError as exc:
             log.warning("skip %s: %s", path.parent.name, exc)
             continue
-        data = _publishable(path, candidates)
+        data = publishable(path, candidates)
         if data is None:
             continue
         issue = Issue(issue_date, data, candidates)
         en_path = path.parent / "digest.en.json"
-        en = _publishable(en_path, candidates) if en_path.exists() else None
+        en = publishable(en_path, candidates) if en_path.exists() else None
         # Left from the other route, or the main issue fell back: the English site shows titles only.
         if en is not None and en.get("lang") == "en" and goes_with(data, en, candidates) is None:
             issue.en = en
         for beta_path in sorted(path.parent.glob("digest.api.*.json")):
-            beta = _publishable(beta_path, candidates)
+            beta = publishable(beta_path, candidates)
             # The API edit that became the main issue is not shown again as a beta.
             if beta is not None and not (is_api(data) and beta.get("model") == data.get("model")):
                 issue.betas[beta_path.name.removeprefix("digest.api.").removesuffix(".json")] = beta
@@ -119,7 +119,7 @@ def load_issues(data_dir: Path) -> list[Issue]:
     return issues
 
 
-def _publishable(path: Path, candidates: dict[str, Any]) -> dict[str, Any] | None:
+def publishable(path: Path, candidates: dict[str, Any]) -> dict[str, Any] | None:
     """The digest at path without the items validate would drop; None if it does not pass."""
     name = f"{path.parent.name}/{path.name}"
     try:

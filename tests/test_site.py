@@ -94,6 +94,9 @@ def test_export_writes_publishable_issues(tmp_path, data_dir):
     export.export(out, tmp_path / "public", data_dir, SOURCES)
     files = sorted(p.name for p in (out / "issues").iterdir())
     assert files == [f"{OLD}.json", f"{DATE}.json", f"{NEXT}.json"]  # not the invalid issue
+    assert sorted(p.name for p in (out / "process").iterdir()) == files
+    steps = json.loads((out / "process" / f"{NEXT}.json").read_text())
+    assert (steps["main"], steps["channels"]) == ("fallback", [])
 
     issue = json.loads((out / "issues" / f"{DATE}.json").read_text())
     assert not issue["fallback"] and issue["notice"] is None

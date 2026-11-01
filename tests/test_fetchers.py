@@ -2,6 +2,7 @@
 
 import pytest
 
+from daily.fetchers.base import collect_filtered
 from daily.fetchers.community import fetch_hackernews, fetch_reddit
 from daily.fetchers.feeds import fetch_rss
 from daily.fetchers.github import fetch_releases, fetch_trending
@@ -323,3 +324,29 @@ async def test_reddit_multi_subreddit_feed_keeps_each_entrys_subreddit(window):
             client, source("reddit", "discussion", tier=2, subreddit="LocalLLaMA+MachineLearning"), window
         )
     assert [i.signals["subreddit"] for i in items] == ["MachineLearning"]
+
+
+async def test_content_filters_record_what_they_skip(window):
+    """过滤 is recorded with its reason and trigger value, for the process page; the window is not."""
+    routes = {
+        "github.com/trending": TRENDING,
+        "huggingface.co/api/daily_papers": PAPERS,
+        "huggingface.co/api/models": MODELS,
+        "hn.algolia.com/api/v1/search_by_date": HN,
+    }
+    async with mock_client(routes) as client:
+        with collect_filtered() as skipped:
+            await fetch_trending(client, source("github_trending", "repo", min_stars_today=50), window)
+            await fetch_daily_papers(client, source("hf_daily_papers", "paper", min_upvotes=5), window)
+            await fetch_trending_models(client, source("hf_trending_models", "model"), window)
+            await fetch_hackernews(client, source("hackernews", "discussion", tier=2), window)
+    assert [(f.source, f.title, f.reason, f.value) for f in skipped] == [
+        ("github_trending", "acme/css-grid", "not_ai", None),
+        ("github_trending", "acme/agent-kit", "min_stars_today", "stars_today 12 < 50"),
+        ("hf_daily_papers", "Low interest", "min_upvotes", "upvotes 1 < 5"),
+        ("hf_trending_models", "someone/DeepSeek-V4.1-Flash-GGUF", "noisy_model", "repo id contains gguf"),
+        ("hf_trending_models", "meta-llama/Llama-3-8B", "max_age_days", "915 days old > 14"),
+        ("hackernews", "SimCity, but with permits", "not_ai", None),
+        ("hackernews", "Maintaining a legacy codebase", "not_ai", None),
+    ]
+    assert skipped[0].url == "https://github.com/acme/css-grid"

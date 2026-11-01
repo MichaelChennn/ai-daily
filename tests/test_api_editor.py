@@ -294,3 +294,60 @@ def test_edit_en_highlights_that_fail_become_the_first_titles(issue_dir, slept, 
     assert _edit_en(issue_dir, web, monkeypatch, path) == 0
     en = json.loads((issue_dir / "digest.en.deepseek.json").read_text())
     assert en["highlights"] == [i["title"] for i in ENGLISH["items"][:3]]
+
+
+def _trace(issue_dir):
+    return json.loads((issue_dir / "trace.api.deepseek.json").read_text())
+
+
+def test_edit_records_its_steps_and_scores_in_the_trace(issue_dir, slept, monkeypatch):
+    scores = {"c_gpt": [3, 2, 2], "c_vllm": [2, 3, 1], "c_qwen": [9, 0, 0], "c_nope": [1, 1, 1]}
+    picks = _reply(json.dumps({"scores": scores, "picks": GROUPS}))
+    web = FakeWeb([picks, _written(**FASTER), _written({0: [GPT], 1: [VLLM]}, **FASTER)])
+    assert _edit(issue_dir, web, monkeypatch) == 0
+    assert "scores" in web.prompt(0)
+
+    trace = _trace(issue_dir)
+    assert (trace["channel"], trace["model"], trace["date"], trace["failure"]) == ("api", MODEL, DATE, None)
+    assert trace["scores"] == {"c_gpt": [3, 2, 2], "c_vllm": [2, 3, 1]}  # out of range or unknown: left out
+    steps = trace["steps"]
+    assert [s["step"] for s in steps] == ["no_first_hand", "pick", "draft", "fix"]
+    assert steps[0]["candidates"] == ["c_hn"] and steps[1]["groups"] == GROUPS
+    draft, fix = steps[2], steps[3]
+    assert draft["checked_links"] is True
+    assert [i["candidates"] for i in draft["items"]] == [["c_gpt"], ["c_vllm"], ["c_qwen"], ["c_paper"]]
+    assert draft["items"][1]["reasons"] and not draft["items"][0]["reasons"]  # 40% unsupported
+    assert not any(i["reasons"] for i in fix["items"])
+
+
+def test_picks_over_the_limit_are_recorded(issue_dir, slept, monkeypatch):
+    monkeypatch.setattr(api_editor, "PICKS", 3)
+    web = FakeWeb([_picks(), _written(count=3)])
+    assert _edit(issue_dir, web, monkeypatch) == 0
+    over = next(s for s in _trace(issue_dir)["steps"] if s["step"] == "over_picks")
+    assert over["groups"] == [["c_paper"]]
+
+
+def test_a_failed_edit_still_writes_its_trace(issue_dir, slept, monkeypatch):
+    web = FakeWeb([_picks(), _reply("写好了。"), _reply("还是没有。")])
+    assert _edit(issue_dir, web, monkeypatch) == 1
+    trace = _trace(issue_dir)
+    assert trace["failure"]["step"] == "draft" and "JSON" in trace["failure"]["error"]
+    assert [s["step"] for s in trace["steps"]] == ["no_first_hand", "pick"]
+
+    monkeypatch.delenv("NVIDIA_API_KEY")
+    assert _edit(issue_dir, FakeWeb([]), monkeypatch) == 2
+    assert _trace(issue_dir)["failure"] == {"step": "setup", "error": "NVIDIA_API_KEY is not set"}
+
+
+def test_edit_en_adds_its_round_to_the_trace(issue_dir, slept, monkeypatch):
+    path = _api_digest(issue_dir)
+    web = FakeWeb([_reply(json.dumps(ENGLISH))])
+    assert _edit_en(issue_dir, web, monkeypatch, path) == 0
+    (step,) = _trace(issue_dir)["steps"]
+    assert step["step"] == "en" and step["checked_links"] is False
+    assert [bool(i["reasons"]) for i in step["items"]] == [False, False, False, True]  # GPT-7
+
+    web = FakeWeb([_reply("no JSON"), _reply("still none")])
+    assert _edit_en(issue_dir, web, monkeypatch, path) == 1
+    assert "JSON" in _trace(issue_dir)["steps"][-1]["error"]

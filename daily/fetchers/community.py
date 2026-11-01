@@ -14,7 +14,7 @@ import feedparser
 import httpx
 
 from daily.config import SourceConfig
-from daily.fetchers.base import SUMMARY_MAX_CHARS, candidate, get, is_ai_related
+from daily.fetchers.base import SUMMARY_MAX_CHARS, candidate, filtered, get, is_ai_related
 from daily.fetchers.feeds import entry_datetime
 from daily.models import Candidate
 from daily.text import clean_text, clean_title, truncate
@@ -26,7 +26,10 @@ HN_ITEM_URL = "https://news.ycombinator.com/item?id={}"
 async def fetch_hackernews(
     client: httpx.AsyncClient, source: SourceConfig, window: Window
 ) -> list[Candidate]:
-    """Options: min_points (default 50), extra_keywords."""
+    """Options: min_points (default 50), extra_keywords.
+
+    min_points is applied by Algolia, so stories below it are never seen and not recorded as filtered.
+    """
     min_points = int(source.options.get("min_points", 50))
     extra = source.options.get("extra_keywords", [])
     filters = (
@@ -42,9 +45,12 @@ async def fetch_hackernews(
     items: list[Candidate] = []
     for hit in response.json().get("hits", []):
         title = clean_title(hit.get("title"))
-        if not title or not is_ai_related(title, extra_keywords=extra):
+        if not title:
             continue
         discussion = HN_ITEM_URL.format(hit["objectID"])
+        if not is_ai_related(title, extra_keywords=extra):
+            filtered(source, "not_ai", title, hit.get("url") or discussion)
+            continue
         items.append(
             candidate(
                 source,

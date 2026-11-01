@@ -13,7 +13,7 @@ from datetime import date
 from pathlib import Path
 from typing import Any
 
-from daily import api_editor, dedup, digest, export, fallback, pipeline, publish, render, site
+from daily import api_editor, dedup, digest, export, fallback, pipeline, publish, render, site, trace
 from daily.config import DEFAULT_DATA_DIR, DEFAULT_SOURCES_FILE, load_sources
 from daily.window import issue_window, local_today
 
@@ -52,6 +52,7 @@ def main(argv: list[str] | None = None) -> int:
     _issue_args(adopt)
     adopt.add_argument("--from", dest="source", type=Path, required=True, help="推来的 digest.json")
     adopt.add_argument("--en", action="store_true", help="推来的是英文版，并入 digest.en.json")
+    adopt.add_argument("--trace", type=Path, help="推来的那次运行的 trace；采用时替换本期这个通道的 trace")
 
     api = commands.add_parser("edit", help="API 通道：用云端模型编辑，写入 digest.api.<slug>.json")
     _issue_args(api)
@@ -78,6 +79,10 @@ def main(argv: list[str] | None = None) -> int:
         help="网站地址，用于 RSS 里的绝对链接（默认取 SITE_URL）",
     )
 
+    record = commands.add_parser("trace", help="Claude 通道：把打分或自检删掉的条目记进 trace.claude.json")
+    record.add_argument("what", choices=["scores", "self-check"], help="scores 开始一次新的记录")
+    _issue_args(record)
+
     page = commands.add_parser("page", help="打印页面里关键词附近的原文，供编辑逐字摘录 evidence")
     page.add_argument("url")
     page.add_argument("--grep", action="append", required=True, metavar="TEXT", help="关键词（可重复）")
@@ -103,6 +108,7 @@ def main(argv: list[str] | None = None) -> int:
             "edit": _edit,
             "export": _export,
             "page": _page,
+            "trace": _trace,
         }
         return handlers[args.command](args)
     except FileNotFoundError as exc:
@@ -161,7 +167,8 @@ def _print_report(data: dict, path: Path) -> None:
         print(f"  {report['id']:<24} {detail}  ({report['seconds']:.1f}s)", file=sys.stderr)
     stats = data["stats"]
     print(
-        f"raw {stats['raw']} -> url-merged {stats['after_url_merge']} -> candidates {stats['candidates']} "
+        f"{stats['filtered']} filtered by the fetchers; raw {stats['raw']} "
+        f"-> url-merged {stats['after_url_merge']} -> candidates {stats['candidates']} "
         f"({stats['dropped_already_published']} already published, {stats['seen_before']} seen before, "
         f"{stats['clusters']} clusters)",
         file=sys.stderr,
@@ -184,7 +191,8 @@ def _validate(args: argparse.Namespace) -> int:
         print('ERROR digest.en.json needs "lang": "en"', file=sys.stderr)
         return 1
     report = digest.validate(data, candidates)  # also fills in candidate urls the editor left out
-    if args.check_links and not report.errors:
+    checked_links = args.check_links and not report.errors
+    if checked_links:
         client = pipeline.make_client()
 
         async def check() -> dict[str, digest.Page]:
@@ -192,6 +200,8 @@ def _validate(args: argparse.Namespace) -> int:
                 return await digest.check_links(digest.digest_urls(data), client)
 
         report = digest.validate(data, candidates, asyncio.run(check()))
+    step = "en" if args.en else "final" if args.drop_invalid else "precheck" if args.check_links else "check"
+    _trace_claude(issue_dir, data, trace.validate_step(step, data, report, checked_links))
 
     for error in report.errors:
         print(f"ERROR {error}", file=sys.stderr)
@@ -211,6 +221,54 @@ def _validate(args: argparse.Namespace) -> int:
     return 0 if report.ok else 1
 
 
+def _trace_claude(issue_dir: Path, data: Any, step: dict[str, Any]) -> None:
+    """Add a validate round of the Claude route's edit to its trace; other digests have none."""
+    if not isinstance(data, dict) or digest.is_api(data) or data.get("mode") != "full":
+        return
+    path = issue_dir / "trace.claude.json"
+    record = trace.load(path) or trace.new(issue_dir.name, "claude")
+    record["model"] = data.get("model") or record.get("model")
+    record["steps"].append(step)
+    trace.save(path, record)
+
+
+def _trace(args: argparse.Namespace) -> int:
+    """What the Claude editor records itself: its scores (which start the trace of a new run) and
+    the items its self-check dropped. The JSON comes on stdin."""
+    issue_dir = _issue_dir(args)
+    candidates = _read(issue_dir / "candidates.json")
+    path = issue_dir / "trace.claude.json"
+    try:
+        value = json.loads(sys.stdin.read())
+    except json.JSONDecodeError as exc:
+        print(f"ERROR stdin is not JSON: {exc}", file=sys.stderr)
+        return 1
+    known = {c["id"] for c in candidates["candidates"]}
+    if args.what == "scores":
+        record = trace.new(candidates["date"], "claude")
+        record["scores"] = trace.scores(value, known)
+        missing = len(known - record["scores"].keys())
+        trace.save(path, record)
+        print(f"{len(record['scores'])} candidates scored, {missing} without a score", file=sys.stderr)
+        return 0
+    if not isinstance(value, list) or not all(isinstance(v, dict) for v in value):
+        print('ERROR self-check takes [{"candidates": [...], "title": ..., "reason": ...}]', file=sys.stderr)
+        return 1
+    record = trace.load(path) or trace.new(candidates["date"], "claude")
+    items = [
+        {
+            "title": v.get("title"),
+            "candidates": [c for c in v.get("candidates") or [] if c in known],
+            "reason": v.get("reason"),
+        }
+        for v in value
+    ]
+    record["steps"].append({"step": "self_check", "at": trace.now(), "items": items})
+    trace.save(path, record)
+    print(f"{len(items)} items dropped in the self-check recorded", file=sys.stderr)
+    return 0
+
+
 def _degrade(args: argparse.Namespace) -> int:
     issue_dir = _issue_dir(args)
     candidates = _read(issue_dir / "candidates.json")
@@ -228,6 +286,12 @@ def _degrade(args: argparse.Namespace) -> int:
         )
     if path.exists():
         shutil.copy(path, issue_dir / "digest.rejected.json")
+    trace_path = issue_dir / "trace.claude.json"
+    if args.force and (record := trace.load(trace_path)):  # the Claude editor gave up (SKILL.md step 6)
+        last = record["steps"][-1] if record["steps"] else {}
+        error = "; ".join(last.get("errors") or []) or "the editor published the fallback"
+        record["failure"] = {"step": last.get("step"), "error": error}
+        trace.save(trace_path, record)
     data = fallback.build_fallback(candidates)
     if not data["items"]:
         print("no candidates to publish", file=sys.stderr)
@@ -266,6 +330,7 @@ def _adopt(args: argparse.Namespace) -> int:
     else:
         data, reason = publish.decide(current, incoming, candidates)
     print(f"{issue_dir.name}: {'adopted' if data else 'kept'} ({reason})", file=sys.stderr)
+    _trace_adopt(issue_dir, incoming, args.trace, data is not None, reason, "en" if args.en else "zh")
     if data is not None:
         _write(path, data)
         if not args.en:
@@ -274,27 +339,52 @@ def _adopt(args: argparse.Namespace) -> int:
     return 0
 
 
+def _trace_adopt(
+    issue_dir: Path, incoming: Any, source: Path | None, adopted: bool, reason: str, edition: str
+) -> None:
+    """The trace follows the digest: the trace of an adopted run (source) replaces the route's, and
+    a rejected run is noted in the trace already there. Either way the verdict is appended."""
+    if not isinstance(incoming, dict) or reason == "unchanged":
+        return
+    path = issue_dir / trace.file_name(incoming)
+    record = trace.load(path)
+    run = trace.load(source) if source is not None else None
+    if run is not None and edition == "zh" and (adopted or record is None):
+        record = run
+    if record is None:
+        return
+    record.setdefault("adopt", []).append(trace.adopt_record(edition, incoming, adopted, reason))
+    trace.save(path, record)
+
+
 def _edit(args: argparse.Namespace) -> int:
     issue_dir = _issue_dir(args)
     candidates = _read(issue_dir / "candidates.json")
     if args.en:
         return _edit_en(args, issue_dir, candidates)
+    trace_path = issue_dir / f"trace.api.{digest.slug(args.model or '')}.json"
     try:
         api_editor.resolve(args.model or "")
     except api_editor.EditorError as exc:
         print(exc, file=sys.stderr)
+        if args.model:
+            failed = trace.new(candidates["date"], "api", args.model)
+            trace.save(trace_path, {**failed, "failure": {"step": "setup", "error": str(exc)}})
         return 2
 
-    async def run() -> dict[str, Any]:
-        async with pipeline.make_client() as client:
-            return await api_editor.edit(candidates, args.model, client)
+    async def run(editor: api_editor.Editor) -> dict[str, Any]:
+        async with editor.client:
+            return await editor.run()
 
+    editor = api_editor.Editor(candidates, args.model, pipeline.make_client())
     try:
-        data = asyncio.run(run())
+        data = asyncio.run(run(editor))
     except api_editor.EditorError as exc:
         print(f"{args.model}: {exc}", file=sys.stderr)
         return 1
-    path = issue_dir / f"digest.api.{api_editor.slug(args.model)}.json"
+    finally:
+        trace.save(trace_path, editor.trace)  # also when it failed: the trace says where
+    path = issue_dir / f"digest.api.{digest.slug(args.model)}.json"
     _write(path, data)
     print(f"{args.model}: {len(data['items'])} items", file=sys.stderr)
     print(path)
@@ -318,16 +408,21 @@ def _edit_en(args: argparse.Namespace, issue_dir: Path, candidates: dict[str, An
         print(exc, file=sys.stderr)
         return 2
 
+    trace_path = issue_dir / trace.file_name(main)
+    record = trace.load(trace_path) or trace.new(candidates["date"], "api", model)
+
     async def run() -> dict[str, Any]:
         async with pipeline.make_client() as client:
-            return await api_editor.write_en(adopted, candidates, model, client)
+            return await api_editor.write_en(adopted, candidates, model, client, record["steps"])
 
     try:
         data = asyncio.run(run())
     except api_editor.EditorError as exc:
         print(f"{model}: no English edition: {exc}", file=sys.stderr)
         return 1
-    path = issue_dir / f"digest.en.{api_editor.slug(model)}.json"
+    finally:
+        trace.save(trace_path, record)
+    path = issue_dir / f"digest.en.{digest.slug(model)}.json"
     _write(path, data)
     print(f"{model}: {len(data['items'])} items in English", file=sys.stderr)
     print(path)
