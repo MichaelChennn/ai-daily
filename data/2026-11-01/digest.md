@@ -2,83 +2,58 @@
 
 ## 今日要点
 
-- DeepSeek-V4.1-Flash-1017 与 MiniMax-M3.1-Flash 都在 Agent 与代码任务上给出新的成绩，MiniMax-M3.1-Flash 支持最高 1M tokens 上下文。
-- OCR 模型密集更新：百度 Unlimited-OCR-2 面向超长文档解析，OpenBMB MiniCPM-OCR 1.0 主打速度与部署，LiquidAI d1-2B 用一次前向传播做决策。
-- 开发者工具方面，Lightpanda 用 Zig 从头写的无头浏览器面向 AI Agent 与自动化，Microsoft 的 Mage-VL-Cowork 用 4B 模型做混合计算机操作。
+- Cisco Talos 披露信息窃取木马 VOLTA：窃取数据后通过 OpenRouter 调用大模型给受害者“估价”，默认模型是 anthropic/claude-opus-4.6。
+- 微软开源 4B 电脑操作模型 Mage-VL-Cowork，在 OSWorld-Verified 上达到 66.0%；Opera 推出本地 AI 网页标准提案 WebAI 的早期预览。
 
 ## 🔥 头条
 
-### DeepSeek 发布 DeepSeek-V4.1-Flash-1017 小版本更新
+### Talos：信息窃取木马 VOLTA 用大模型给受害者“估价”
 
-DeepSeek-V4.1-Flash-1017 是 DeepSeek-V4.1-Flash 的小版本更新，官方称其在推理、编码、Agent 任务和视觉基准上均有提升，同时缩短任务执行时间与输出长度。该模型权重以 MIT License 发布，开发者可通过 Transformers、vLLM 或 SGLang 直接使用。
+Cisco Talos 分析了名为 VOLTA-AUTODOXER 的信息窃取木马：它把窃取并补全的身份信息打包，通过 OpenRouter 发给大模型，让模型扮演“法证情报分析师”，输出按变现价值分高中低档排序的“WHAT THEY'RE WORTH”和受害者安全习惯评估；默认模型为 anthropic/claude-opus-4.6，被拒绝时依次换用 moonshotai/kimi-k2 和 google/gemini-2.5-flash。对开发者而言，这说明攻击者已把通用大模型 API 当成分拣赃数据的工具，提供模型网关或 Agent 服务的团队需要关注这类滥用模式。
 
-来源：[Hugging Face Trending Models](https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017)　`模型` `开源` `Agent`
+来源：[blog.talosintelligence.com](https://blog.talosintelligence.com/appraisal-by-ai-model-driven-victim-prioritization-in-the-volta-infostealer/) · [HN 讨论](https://news.ycombinator.com/item?id=50316531)　`安全` `行业`
 
-### MiniMax 发布 MiniMax-M3.1-Flash 原生多模态 MoE 模型
+### 微软开源 4B 电脑操作模型 Mage-VL-Cowork
 
-MiniMax-M3.1-Flash 是面向编码、Agent 工作流、电脑操作与网络安全的原生多模态 MoE 模型，支持文本、图像、视频输入，上下文窗口最高 1M tokens。它用稀疏注意力、量化感知训练和 DSpark 推测解码改进推理效率，官方推荐 SGLang、vLLM 和 TokenSpeed 进行部署。
+微软在 Hugging Face 发布 Mage-VL-Cowork，这是一个 4B 的视觉语言模型，在单一策略里同时使用截图驱动的 GUI 操作（computer_use）和持久化终端（bash），不依赖外部编排器；在 50 步预算下 OSWorld-Verified 达到 66.0%，模型卡称这是 4B 模型中的最好成绩，采用 Apache-2.0 许可。对开发者来说，这是一个可以本地部署、研究电脑操作 Agent 的小模型基线，模型卡附带了 SGLang 部署和 OSWorld 评测流程。
 
-来源：[Hugging Face Trending Models](https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash)　`模型` `多模态` `Agent`
+来源：[Hugging Face](https://huggingface.co/microsoft/Mage-VL-Cowork) · [Reddit 讨论](https://www.reddit.com/r/LocalLLaMA/comments/1xk6blw/microsoftmagevlcowork_hugging_face/)　`模型` `Agent` `开源`
 
-### 百度 Unlimited-OCR-2 主打无限长文档解析
+### Opera 推出本地 AI 网页标准提案 WebAI 预览
 
-百度发布 Unlimited-OCR-2，用 Sparse Reference Sliding Window Attention（SR-SWA）把超长序列的文本与视觉注意力压缩为固定大小的参考集合，让每步解码延迟和显存占用基本不随文档长度变化。官方称其在 MPDocBench 与 MarathonDocBench 等几十页到上百页基准上达到领先水平，并同时发布超长文档解析基准 MarathonDocBench。
+Opera 在 Opera One、Opera GX 和 Opera Neon 中推出 WebAI 早期预览，让网站和浏览器扩展直接调用在用户设备上运行的模型；WebAI 是 Google、Microsoft 等公司支持的网页标准提案，提供 Prompt、Decision 和 Semantic Embeddings 三类 API，默认关闭、需在设置中开启。对前端和扩展开发者来说，这意味着无需自建推理服务、也不按请求付云端费用就能给页面加上生成、分类和语义检索能力，目前支持 64 位 Intel/AMD 的 Windows PC 和 Apple silicon Mac。
 
-来源：[Hugging Face Trending Models](https://huggingface.co/baidu/Unlimited-OCR-2)　`模型` `多模态` `开源`
-
-### Lightpanda 用 Zig 从头写无头浏览器面向 AI Agent
-
-Lightpanda 不是 Chromium 分支也不是 WebKit 补丁，而是用 Zig 从头编写的无头浏览器，官方称其比 Chromium 轻 16x、快 9x，并提供 CDP 与 webdriver BiDi 服务。它内置 agent 模式，会把操作记录导出为确定性的 PandaScript 脚本，可直接用 lightpanda run 回放。
-
-来源：[GitHub Trending](https://github.com/lightpanda-io/browser)　`工具` `Agent` `开源`
-
-### 微软发布 4B 混合计算机操作模型 Mage-VL-Cowork
-
-Mage-VL-Cowork 是一个 4B 的视觉语言策略模型，把截图驱动的 GUI 交互（computer_use）与持久化的代码/终端执行（bash）放进同一个策略里，可在两种通道之间自行切换。官方称它在 OSWorld-Verified 上达到 66.0%，在线强化学习相对 Hybrid SFT 提升 +10.16 个百分点，同时减少 13.0% 的模型调用和 25.4% 的输出 token。
-
-来源：[Hugging Face](https://huggingface.co/microsoft/Mage-VL-Cowork)　`模型` `Agent` `多模态`
+来源：[Opera](https://blogs.opera.com/news/2026/10/webai-local-ai-for-the-web-now-in-opera/) · [alternativeto.net](https://alternativeto.net/news/2026/10/opera-introduces-webai-a-proposed-web-standard-to-run-ai-models-locally-in-the-browser/) · [Reddit 讨论](https://www.reddit.com/r/LocalLLaMA/comments/1xk70qu/standard_for_websites_extensions_to_use_local/)　`产品` `工具`
 
 ## 🧠 模型
 
-### LiquidAI d1-2B 用一次前向传播完成决策
+### Liquid AI 发布决策模型 d1-2B
 
-LiquidAI d1-2B 是基于 LFM3-VL-2B 的决策模型，面向文本、图片和视频一次性输出带概率的答案，不生成 token，也不提供采样参数。官方称其在 NVIDIA H100 上每次决策 5.7 ms，并可作为路由分流、内容审核、意图分类和结构化抽取等流水线的判断环节。
+Liquid AI 发布基于 LFM3-VL-2B 的 d1-2B，它不是聊天模型，而是一次前向计算就返回带概率的结构化答案，面向路由分流、内容审核、意图分类、信息抽取、重排序和视觉检测等决策环节；官方给出的速度是 NVIDIA H100 上每次决策 5.7 ms，许可为 LFM Open License v1.0。对需要在流水线里做大量判断的开发者来说，它可以替代用生成式大模型做分类，省去采样参数和输出解析。
 
-来源：[Hugging Face Trending Models](https://huggingface.co/LiquidAI/d1-2B)　`模型` `多模态` `工具`
+来源：[Hugging Face Trending Models](https://huggingface.co/LiquidAI/d1-2B)　`模型` `多模态`
 
-### OpenBMB 发布 MiniCPM-OCR 1.0 文档解析模型
+### 小米开源 0.8B OCR 模型 Xiaomi-OCR-0
 
-MiniCPM-OCR 1.0 是 MiniCPM-V/o 家族中首个 OCR 专用模型，参数规模 1.3B，基于 MiniCPM-V 4.6 训练，支持中英文文档的文本、表格、公式、图表、印章与关键信息抽取。官方称配合 DSpark 解码加速后端到端处理效率提升 55%，并可通过 vLLM、SGLang、llama.cpp 和 Ollama 部署。
+小米研究团队开源 Xiaomi-OCR-0，这是基于 Qwen3.5-0.8B-Base、用约 170M 条 OCR 样本训练的 0.8B 视觉语言模型，同时覆盖文档解析和 OCR 问答，在 OmniDocBench v1.6 上得到 96.83，采用 Apache-2.0 许可。对做文档解析和信息抽取的开发者来说，这是一个体积很小、可以用 vLLM 或 SGLang 部署的候选模型。
 
-来源：[Hugging Face Trending Models](https://huggingface.co/openbmb/MiniCPM-OCR-1.0)　`模型` `多模态` `开源`
-
-### 小米开源 0.8B 的 Xiaomi-OCR-0 文档解析模型
-
-Xiaomi-OCR-0 是从 Qwen3.5-0.8B-Base 出发训练的 0.8B 统一 OCR 视觉语言模型，同时覆盖文档解析、OCR 导向的视觉问答和关键信息抽取。它使用约 170M 样本的 OCR 语料与渐进式训练配方，官方称在 Real5-OmniDocBench 上取得 95.24 的成绩。
-
-来源：[Hugging Face Trending Models](https://huggingface.co/xiaomi-research/Xiaomi-OCR-0)　`模型` `多模态` `开源`
-
-### Pika 发布 Pika-H3-Flex 视频生成 LoRA
-
-Pika-H3-Flex 是后训练过的 H3 模型，通过 LoRA 方式加载，可在六个采样步内生成带同步音频的视频，并支持最多 12 个参考输入来控制镜头走向。本地开源权重推理支持原生 480p / 768p 视频与混合立体声音轨，Pika 托管 API 则提供 1080p、2K 与 4K 生成。
-
-来源：[Hugging Face Trending Models](https://huggingface.co/Pika-Labs/Pika-H3-Flex)　`模型` `视频` `开源`
-
-### Maya Research 开源 Maya 2 Native 流式语音模型
-
-Maya 2 Native 支持 12 种语言、20 个内置声音和零样本声音克隆，可把 3–10 秒参考音频克隆成跨语言语音，输出 24 kHz 音频并按 80 ms 帧流式返回。发布内容包含开放权重与推理代码，提供 Python API、OpenAI 兼容的语音接口和 WebSocket 流式服务。
-
-来源：[Hugging Face Trending Models](https://huggingface.co/maya-research/maya2-native)　`模型` `语音` `开源`
+来源：[Hugging Face Trending Models](https://huggingface.co/xiaomi-research/Xiaomi-OCR-0)　`模型` `开源` `多模态`
 
 ## 🛠 开源与工具
 
-### Orkas 开源本地优先的多 Agent 桌面应用
+### KoboldCpp v1.124 集成 audio.cpp 音乐与 TTS 模型
 
-Orkas 是一个 MIT 许可的本地优先桌面多 Agent 应用，由 Commander 把目标拆成待办并协调 16 个内置专职 Agent，同时可接入 Claude Code、Codex、OpenCode 等外部编码 Agent。项目会保存目标、规则、记忆与文件，支持待办自动推进和按小时、天、周、月运行的定时自动化，数据留在本机。
+本地推理工具 KoboldCpp 发布 v1.124，集成了 audio.cpp 中的一部分模型，新增 YuE2 音乐生成和 Qwen3-TTS、VoxCPM2 等 TTS 模型；AI Horde 开始支持 Chat Completions workers，还新增 --paralleltotalcontext 参数让并发请求共享 KV 上下文池。对本地部署用户来说，一个程序里可用的文本、图像、语音和音乐生成能力又多了一批。
 
-来源：[GitHub Trending](https://github.com/Orkas-AI/Orkas)　`工具` `Agent` `开源`
+来源：[GitHub](https://github.com/LostRuins/koboldcpp/releases/tag/v1.124) · [Reddit 讨论](https://www.reddit.com/r/LocalLLaMA/comments/1xk1vyk/koboldcpp_v1124_released/)　`工具` `开源` `语音`
+
+### Orkas：开源本地多 Agent 桌面应用
+
+Orkas 是 MIT 许可、本地优先的多 Agent 桌面应用：由 Commander 把目标拆成待办，协调 16 个内置专业 Agent，并可调度 Claude Code、Codex、OpenCode 等外部 Agent，支持项目记忆、定时自动化和各类连接器，可用内置模型或自带 API Key。对想把多个编码 / 办公 Agent 放在同一个界面里管理的开发者，它值得一试，也可以参考其编排设计。
+
+来源：[GitHub Trending](https://github.com/Orkas-AI/Orkas)　`Agent` `开源` `工具`
 
 ## ⚡ 快讯
 
-- **Open-H3-Regenerate-2K 开源 MiniMax-H3 的 2K 重绘方案** Open-H3-Regenerate-2K 提供三步 MiniMax-H3 精修流程，可把 768P 草稿重绘为 2560×1440 视频，官方称其是对闭源 H3-Regenerate-2K API 的开源替代。 [Hugging Face Trending Models](https://huggingface.co/Efficient-Large-Model/Open-H3-Regenerate-2K)
-- **VOLTA 信息窃取木马用 LLM 给受害者排序资产** Talos 披露的 VOLTA 在窃取凭据后，把结构化证据包发给 LLM，要求模型按变现价值给受害者资产分级并评估其安全习惯。模型拒绝时，它会回退到另外两个模型继续请求。 [blog.talosintelligence.com](https://blog.talosintelligence.com/appraisal-by-ai-model-driven-victim-prioritization-in-the-volta-infostealer/)
+- **GPT-5.6 Sol 在 Codex 中自主通关 Factorio 和平模式** Ryan Madden 让 GPT-5.6 Sol 在 Codex 中以低思考档位通过 Python 库操控游戏，用 13.5 小时游戏时间完成了无敌人的 Factorio 通关。 [ryanmadden.net](https://ryanmadden.net/gpt-56-beats-factorio/) · [HN 讨论](https://news.ycombinator.com/item?id=50318871)
+- **bootgpt：装进引导扇区的语言模型** 开源项目 bootgpt 把一个字符级神经网络的推理引擎塞进 510 bytes 的 MBR，开机后会不停生成 Linux 启动日志。 [GitHub](https://github.com/kerlenton/bootgpt) · [HN 讨论](https://news.ycombinator.com/item?id=50315782)
