@@ -1,0 +1,386 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-01",
+  "mode": "full",
+  "generated_at": "2026-11-01T04:41:19+00:00",
+  "channel": "api",
+  "model": "gemini:gemini-3.5-flash-lite",
+  "highlights": [
+    "Anthropic 引入了针对视频游戏逆向工程和克隆的限制措施，在开发者社区引发广泛讨论。",
+    "微软开源 Mage-VL-Cowork 模型，在 OSWorld-Verified 上以 4B 规模取得 66.0% 的最佳成绩。",
+    "Black Forest Labs 发布 FLUX 3 Image Klein，支持文本生成、图像编辑及多图参考组合。"
+  ],
+  "items": [
+    {
+      "section": "headline",
+      "title": "Anthropic 限制 Claude 用于视频游戏逆向工程与克隆",
+      "summary": "Anthropic 的 Claude 模型开始限制涉及视频游戏代码反编译、模组制作和逆向工程的任务。由于限制范围较宽，部分合法开发者的基础排查任务也受到了影响。",
+      "tags": [
+        "产品",
+        "安全"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_51251afaad",
+          "url": "https://mashable.com/tech/anthropic-takes-steps-to-block-video-game-cloning-and-reverse-engineering"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://mashable.com/tech/anthropic-takes-steps-to-block-video-game-cloning-and-reverse-engineering",
+          "quote": "Anthropic takes steps to block Claude from reverse-engineering video games"
+        },
+        {
+          "url": "https://mashable.com/tech/anthropic-takes-steps-to-block-video-game-cloning-and-reverse-engineering",
+          "quote": "The restrictions are so broad that they're even hurting legitimate game developers and preventing basic troubleshooting tasks."
+        },
+        {
+          "url": "https://mashable.com/tech/anthropic-takes-steps-to-block-video-game-cloning-and-reverse-engineering",
+          "quote": "According to reporting from Tom's Hardware , Anthropic's Claude AI has quietly started restricting the kinds of work it will do, including modding, decompiling, or reverse-engineering video game code."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Opera 推出 WebAI 提案，支持在浏览器中直接运行本地 AI 模型",
+      "summary": "Opera 推出了 WebAI 提案，允许网站和浏览器扩展在浏览器中直接运行本地 AI 模型，无需依赖云端服务器，目前已在 Opera One、Opera GX 和 Opera Neon 的早期预览版中上线。",
+      "tags": [
+        "产品",
+        "推理"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_d6003268f8",
+          "url": "https://alternativeto.net/news/2026/10/opera-introduces-webai-a-proposed-web-standard-to-run-ai-models-locally-in-the-browser/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://alternativeto.net/news/2026/10/opera-introduces-webai-a-proposed-web-standard-to-run-ai-models-locally-in-the-browser/",
+          "quote": "Official Partner Official Partner Visit site Home News Opera introduces WebAI, a proposed web standard to run AI models locally in the browser Oct 29, 2026 at 1:00 PM by Paul Opera introduces WebAI, a proposed web standard to run AI models locally in the browser Opera has announced the rollout of We"
+        },
+        {
+          "url": "https://alternativeto.net/news/2026/10/opera-introduces-webai-a-proposed-web-standard-to-run-ai-models-locally-in-the-browser/",
+          "quote": "bAI, a feature that allows websites and browser extensions to run AI models directly within the browser , without relying on cloud servers."
+        },
+        {
+          "url": "https://alternativeto.net/news/2026/10/opera-introduces-webai-a-proposed-web-standard-to-run-ai-models-locally-in-the-browser/",
+          "quote": "The early preview is now live across Opera One , Opera GX , and Opera Neon , supporting Windows PCs (64-bit, Intel/AMD) and Apple Silicon Macs, though Intel-based Macs, Linux, and Windows on ARM remain unsupported for now."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "新型 VOLTA 信息窃取木马利用 LLM 对受害者资产进行价值排序",
+      "summary": "研究发现 VOLTA 木马在窃取凭证和会话后，会调用 LLM 对受害者的资产和数据进行分析并按货币化价值排序，作为操作员的智能分析师。",
+      "tags": [
+        "安全",
+        "模型"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_63bd5a5bb2",
+          "url": "https://blog.talosintelligence.com/appraisal-by-ai-model-driven-victim-prioritization-in-the-volta-infostealer/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://blog.talosintelligence.com/appraisal-by-ai-model-driven-victim-prioritization-in-the-volta-infostealer/",
+          "quote": "Appraisal by AI: Model-driven victim prioritization in the VOLTA infostealer"
+        },
+        {
+          "url": "https://blog.talosintelligence.com/appraisal-by-ai-model-driven-victim-prioritization-in-the-volta-infostealer/",
+          "quote": "VOLTA is a mature stealer implant with an optional AI-integration layer."
+        },
+        {
+          "url": "https://blog.talosintelligence.com/appraisal-by-ai-model-driven-victim-prioritization-in-the-volta-infostealer/",
+          "quote": "After stealing credentials, sessions, and cryptocurrency wallets, VOLTA sends a structured evidence bundle to an LLM to rank the victim’s assets by monetization value."
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "微软开源 Mage-VL-Cowork：4B 混合计算机视觉代理模型",
+      "summary": "微软开源了 Mage-VL-Cowork，这是一个 4B 视觉语言模型，专为混合计算机使用设计。该模型在 OSWorld-Verified 评测中达到 66.0% 的准确率，并通过端到端训练和在线强化学习降低了模型调用次数和输出 token 量。",
+      "tags": [
+        "模型",
+        "开源",
+        "多模态",
+        "Agent"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_15dad6304d",
+          "url": "https://huggingface.co/microsoft/Mage-VL-Cowork"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/microsoft/Mage-VL-Cowork",
+          "quote": "microsoft / Mage-VL-Cowork Like 96 Follow Microsoft 22.8k Image-Text-to-Text Transformers Safetensors English llava_onevision2 multimodal vision-language-model computer-use cua hybrid-agent gui-agent coding-agent terminal-agent reinforcement-learning osworld webvoyager mage-vl mage-vl-cowork convers"
+        },
+        {
+          "url": "https://huggingface.co/microsoft/Mage-VL-Cowork",
+          "quote": "At 4B parameters , Mage-VL-Cowork reaches 66.0% on OSWorld-Verified under a 50-step budget — achieving the best performance among 4B models and demonstrating that an efficient small VLM can excel at complex computer use , pushing the frontier of on-device intelligence ."
+        },
+        {
+          "url": "https://huggingface.co/microsoft/Mage-VL-Cowork",
+          "quote": "Across training stages, online reinforcement learning adds +10.16 percentage points over Hybrid SFT while simultaneously cutting mean model calls by 13.0% and output tokens by 25.4% ."
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Black Forest Labs 发布 FLUX 3 Image Klein 图像生成与编辑模型",
+      "summary": "Black Forest Labs 推出了 FLUX 3 Image Klein，这是一个 5.6B 参数的开源视觉模型，支持文本生成图像、单图编辑以及多图参考组合，并使用 Qwen3-VL-4B-Instruct 作为文本编码器。",
+      "tags": [
+        "模型",
+        "开源",
+        "图像",
+        "多模态"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_6ecc1d71a5",
+          "url": "https://huggingface.co/black-forest-labs/flux-3-image-klein-comfy"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/black-forest-labs/flux-3-image-klein-comfy",
+          "quote": "black-forest-labs / flux-3-image-klein-comfy Like 2.21k Follow Black Forest Labs 43.7k Image-to-Image Diffusion Single File English comfyui image-generation image-editing flux flux-3 black-forest-labs License: flux-kommunity-license Model card Files Files and versions xet Community 39 Deploy Copy to"
+        },
+        {
+          "url": "https://huggingface.co/black-forest-labs/flux-3-image-klein-comfy",
+          "quote": "FLUX 3 Image Klein for ComfyUI"
+        },
+        {
+          "url": "https://huggingface.co/black-forest-labs/flux-3-image-klein-comfy",
+          "quote": "FLUX 3 Image Klein is a 5.6B open weights model for text-to-image generation and image editing."
+        },
+        {
+          "url": "https://huggingface.co/black-forest-labs/flux-3-image-klein-comfy",
+          "quote": "Text-to-image, single-reference edits and multi-reference compositions run through the same model, with Qwen3-VL-4B-Instruct as the text encoder."
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Fish Audio 发布新一代语音模型 Drama 3",
+      "summary": "Fish Audio 发布了新一代文本转语音模型 Drama 3，拥有 35B 参数（每 token 激活 3B），专为多角色场景和长文本内容设计，支持多说话人生成、语音克隆及自然语言控制。",
+      "tags": [
+        "模型",
+        "开源",
+        "语音"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_77f1ef8ceb",
+          "url": "https://huggingface.co/fishaudio/drama-3"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/fishaudio/drama-3",
+          "quote": "fishaudio / drama-3 Like 1.13k Follow Fish Audio 2.1k Text-to-Speech Safetensors 83 languages fish_omni fish-audio multi-speaker audio-editing emotional-speech-generation bsgemm-moe arxiv: 2610.18010 License: fish-audio-research-license Model card Files Files and versions xet Community 10 Copy to bu"
+        },
+        {
+          "url": "https://huggingface.co/fishaudio/drama-3",
+          "quote": "Fish Audio Drama 3"
+        },
+        {
+          "url": "https://huggingface.co/fishaudio/drama-3",
+          "quote": "Fish Audio Drama 3 is Fish Audio's new-generation text-to-speech model, built for multi-character"
+        },
+        {
+          "url": "https://huggingface.co/fishaudio/drama-3",
+          "quote": "35B parameters, 3B active per token : MoE text backbone with hybrid (full + linear) attention"
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "百度开源 Unlimited-OCR-2，实现无限视野文档解析",
+      "summary": "百度开源了 Unlimited-OCR-2 模型，引入稀疏参考滑动窗口注意力（SR-SWA）机制，将超长序列的注意力交互压缩至固定大小的工作引用，从而消除了二次方注意力缩放瓶颈，支持长达上百页的超长文档解析。",
+      "tags": [
+        "模型",
+        "开源",
+        "多模态"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_4239039208",
+          "url": "https://huggingface.co/baidu/Unlimited-OCR-2"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/baidu/Unlimited-OCR-2",
+          "quote": "baidu / Unlimited-OCR-2 Like 479 Follow BAIDU 4.18k Image-Text-to-Text Transformers Safetensors multilingual unlimited-ocr feature-extraction baidu vision-language ocr custom_code arxiv: 2606.23050 License: mit Model card Files Files and versions xet Community 4 Deploy Copy to bucket Use this model"
+        },
+        {
+          "url": "https://huggingface.co/baidu/Unlimited-OCR-2",
+          "quote": "[2026/10/27] 🚀 We release Unlimited OCR 2 , achieving unlimited-horizon parsing with SR-SWA."
+        },
+        {
+          "url": "https://huggingface.co/baidu/Unlimited-OCR-2",
+          "quote": "Sparse Reference Sliding Window Attention (SR-SWA): Compresses text-visual attention interactions from ultra-long sequences down to a fixed-size set of working references (e.g., 512 tokens)."
+        },
+        {
+          "url": "https://huggingface.co/baidu/Unlimited-OCR-2",
+          "quote": "From Long- to Unlimited-Horizon Parsing: Powered by SR-SWA, Unlimited-OCR 2 achieves true, unbounded document parsing within a finite context window—effectively eliminating quadratic attention scaling and memory bottlenecks as documents grow."
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "NVIDIA 发布 NVIDIA-Nemotron-3.5-Bolt-E4B-4GB 小型语言模型",
+      "summary": "NVIDIA 推出了 NVIDIA-Nemotron-3.5-Bolt-E4B-4GB 小型语言模型，该模型基于 Gemma-4-E4B-it 进一步后训练，提升了多轮工具使用和指令遵循能力，适用于低内存和低首字延迟的本地设备助手。",
+      "tags": [
+        "模型",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_3db2e91a96",
+          "url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-E4B-4GB"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-E4B-4GB",
+          "quote": "nvidia / NVIDIA-Nemotron-3.5-Bolt-E4B-4GB Like 308 Follow NVIDIA 73.8k Text Generation Transformers GGUF PyTorch nvidia/nemotron-post-training-v3 nvidia/nemotron-pre-training-datasets 34 languages nvidia nemotron-3.5 imatrix conversational arxiv: 2509.04292 License: openmdw-1.1 Model card Files File"
+        },
+        {
+          "url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-E4B-4GB",
+          "quote": "NVIDIA-Nemotron-3.5-Bolt-E4B-4GB"
+        },
+        {
+          "url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-E4B-4GB",
+          "quote": "NVIDIA-Nemotron-3.5-Bolt-E4B-4GB is a small language model (SLM) further post-trained from Gemma-4-E4B-it by NVIDIA."
+        },
+        {
+          "url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-E4B-4GB",
+          "quote": "Designed for low-memory, low-TTFT operation, the model allows agents to respond quickly while preserving headroom for applications or adjacent model pipelines."
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "claude-mem：为 AI 代理提供跨会话持久化上下文管理工具",
+      "summary": "GitHub 热门项目 claude-mem 能够捕获 AI 代理在会话期间的操作，利用 AI 压缩并将其注入后续会话中，支持 Claude Code、OpenClaw、Codex 等多种工具。",
+      "tags": [
+        "开源",
+        "工具",
+        "Agent"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_5005c3abb8",
+          "url": "https://github.com/thedotmack/claude-mem"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/thedotmack/claude-mem",
+          "quote": "claude-mem Public Sponsor Notifications You must be signed in to change notification settings Fork 9.5k ( 9.5k ) Star 108k ( 108k ) You must be signed in to star a repository About Persistent Context Across Sessions for Every Agent – Captures everything your agent does during sessions, compresses it"
+        },
+        {
+          "url": "https://github.com/thedotmack/claude-mem",
+          "quote": "with AI, and injects relevant context back into future sessions."
+        },
+        {
+          "url": "https://github.com/thedotmack/claude-mem",
+          "quote": "Works with Claude Code, OpenClaw, Codex, Gemini, Hermes, Copilot, OpenCode + More claude-mem.ai Topics ai ai-agents ai-memory anthropic artificial-intelligence chromadb claude claude-agent-sdk claude-agents claude-code claude-code-plugin claude-skills embeddings long-term-memory mem0 memory-engine o"
+        },
+        {
+          "url": "https://github.com/thedotmack/claude-mem",
+          "quote": "Persistent memory compression system built for Claude Code ."
+        }
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "DeepSeek 发布 DeepSeek-V4.1-Flash-1017 模型更新",
+      "summary": "DeepSeek 发布了 DeepSeek-V4.1-Flash-1017，在推理、代码、代理任务及视觉基准测试上带来了显著提升。",
+      "tags": [
+        "模型",
+        "多模态"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_8b553ca25e",
+          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+          "quote": "deepseek-ai / DeepSeek-V4.1-Flash-1017 Like 4.12k Follow DeepSeek 153k Image-Text-to-Text Transformers Safetensors deepseek_v41 text-generation Eval Results 8-bit precision fp8 License: mit Model card Files Files and versions xet Community 71 Deploy Copy to bucket Use this model Instructions to use"
+        },
+        {
+          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+          "quote": "DeepSeek-V4.1-Flash-1017 is a minor update to DeepSeek-V4.1-Flash , delivering substantial improvements across reasoning, coding, agentic tasks, and visual benchmarks."
+        }
+      ]
+    }
+  ],
+  "research": [
+    {
+      "via": "webfetch",
+      "url": "https://github.com/thedotmack/claude-mem"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://v.redd.it/0886eezaruyh1"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://alternativeto.net/news/2026/10/opera-introduces-webai-a-proposed-web-standard-to-run-ai-models-locally-in-the-browser/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://blog.talosintelligence.com/appraisal-by-ai-model-driven-victim-prioritization-in-the-volta-infostealer/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://mashable.com/tech/anthropic-takes-steps-to-block-video-game-cloning-and-reverse-engineering"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://ryanmadden.net/gpt-56-beats-factorio/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/microsoft/Mage-VL-Cowork"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/baidu/Unlimited-OCR-2"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/black-forest-labs/flux-3-image-klein-comfy"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/fishaudio/drama-3"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-E4B-4GB"
+    }
+  ],
+  "validation": {
+    "validated_at": "2026-11-01T04:41:19+00:00",
+    "checked_links": true,
+    "dropped": [],
+    "warnings": [
+      "0 paper items (target 2-3)"
+    ]
+  }
+}

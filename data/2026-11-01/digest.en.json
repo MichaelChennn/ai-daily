@@ -1,0 +1,655 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-01",
+  "mode": "full",
+  "generated_at": "2026-11-01T04:41:00+00:00",
+  "channel": "api",
+  "model": "nvidia:minimaxai/minimax-m3.1-flash",
+  "highlights": [
+    "DeepSeek released DeepSeek-V4.1-Flash-1017 under the MIT License, while MiniMax released MiniMax-M3.1-Flash, a native multimodal mixture-of-experts model supporting up to 1M tokens of context.",
+    "Baidu released Unlimited-OCR-2 with SR-SWA for unlimited-horizon document parsing, and Xiaomi released the 0.8B Xiaomi-OCR-0 for document parsing and OCR-related understanding.",
+    "Orkas is an open-source local-first desktop AI team that coordinates 16 built-in specialist agents plus tools such as Claude Code, Codex, OpenCode, OpenClaw and Hermes."
+  ],
+  "items": [
+    {
+      "section": "headline",
+      "title": "DeepSeek releases DeepSeek-V4.1-Flash-1017 under the MIT License",
+      "summary": "DeepSeek-V4.1-Flash-1017 is a minor update to DeepSeek-V4.1-Flash with improvements across reasoning, coding, agentic tasks, and visual benchmarks. It reduces task execution time and output length, and ships with deepseek-recipe, a set of Rust libraries with Python bindings providing the same prompt format as a maintained, protocol-aware toolkit.",
+      "tags": [
+        "模型",
+        "开源",
+        "Agent"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_8b553ca25e",
+          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+          "quote": "DeepSeek-V4.1-Flash-1017 is a minor update to DeepSeek-V4.1-Flash , delivering substantial improvements across reasoning, coding, agentic tasks, and visual benchmarks."
+        },
+        {
+          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+          "quote": "Alongside these gains, the model reduces task execution time and output length, enabling users to complete tasks faster and at lower cost and advancing the performance–cost Pareto frontier across multiple agent harnesses."
+        },
+        {
+          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+          "quote": "This release does not include a Jinja-format chat template."
+        },
+        {
+          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+          "quote": "For production use, we additionally release deepseek-recipe , a set of Rust libraries with Python bindings that provides the same prompt format as a maintained, protocol-aware toolkit."
+        },
+        {
+          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+          "quote": "This repository and the model weights are licensed under the MIT License ."
+        },
+        {
+          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+          "quote": "vllm serve \"deepseek-ai/DeepSeek-V4.1-Flash-1017\""
+        },
+        {
+          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+          "quote": "pip install sglang"
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "MiniMax releases MiniMax-M3.1-Flash, a native multimodal MoE model",
+      "summary": "MiniMax-M3.1-Flash is a native multimodal mixture-of-experts model for coding, agentic workflows, computer use, and cybersecurity, with approximately 428B total parameters and 23B activated per token. It supports text, image, and video inputs with a context window of up to 1M tokens, and includes a DSpark draft head for compatible serving implementations.",
+      "tags": [
+        "模型",
+        "多模态",
+        "Agent"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_e848a88eb5",
+          "url": "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash",
+          "quote": "MiniMax-M3.1-Flash is a native multimodal mixture-of-experts model for coding, agentic workflows, computer use, and cybersecurity."
+        },
+        {
+          "url": "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash",
+          "quote": "It supports text, image, and video inputs with a context window of up to 1M tokens ."
+        },
+        {
+          "url": "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash",
+          "quote": "Building on MiniMax-M3, M3.1-Flash improves task performance and inference efficiency with sparse attention throughout the model, quantization-aware training, and DSpark speculative decoding."
+        },
+        {
+          "url": "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash",
+          "quote": "Efficient by design: Sparse attention throughout, quantization-aware training, and DSpark speculative decoding improve inference efficiency."
+        },
+        {
+          "url": "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash",
+          "quote": "Parameters: Approximately 428B total; 23B activated per token"
+        },
+        {
+          "url": "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash",
+          "quote": "Context window: Up to 1,000,000 tokens"
+        },
+        {
+          "url": "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash",
+          "quote": "Speculative decoding: DSpark draft head included"
+        },
+        {
+          "url": "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash",
+          "quote": "The release includes the draft head for use with compatible serving implementations."
+        },
+        {
+          "url": "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash",
+          "quote": "SGLang — see SGLang cookbook ."
+        },
+        {
+          "url": "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash",
+          "quote": "vLLM — see vLLM recipe ."
+        },
+        {
+          "url": "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash",
+          "quote": "TokenSpeed — see TokenSpeed recipe ."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Baidu releases Unlimited-OCR-2 with SR-SWA for long document parsing",
+      "summary": "Unlimited OCR 2 achieves unlimited-horizon parsing with Sparse Reference Sliding Window Attention (SR-SWA), which compresses text-visual attention into a fixed-size set of working references so per-step decoding latency and memory footprint stay nearly constant. The model supports Transformers and SGLang, and Baidu also released the MarathonDocBench benchmark for ultra-long document parsing.",
+      "tags": [
+        "模型",
+        "多模态",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_4239039208",
+          "url": "https://huggingface.co/baidu/Unlimited-OCR-2"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/baidu/Unlimited-OCR-2",
+          "quote": "[2026/10/27] 📊 We release MarathonDocBench , a new benchmark for ultra-long document parsing."
+        },
+        {
+          "url": "https://huggingface.co/baidu/Unlimited-OCR-2",
+          "quote": "[2026/10/27] 🚀 We release Unlimited OCR 2 , achieving unlimited-horizon parsing with SR-SWA."
+        },
+        {
+          "url": "https://huggingface.co/baidu/Unlimited-OCR-2",
+          "quote": "Sparse Reference Sliding Window Attention (SR-SWA): Compresses text-visual attention interactions from ultra-long sequences down to a fixed-size set of working references (e.g., 512 tokens)."
+        },
+        {
+          "url": "https://huggingface.co/baidu/Unlimited-OCR-2",
+          "quote": "This bounds computational complexity, keeping per-step decoding latency and memory footprint nearly constant regardless of document length."
+        },
+        {
+          "url": "https://huggingface.co/baidu/Unlimited-OCR-2",
+          "quote": "From Long- to Unlimited-Horizon Parsing: Powered by SR-SWA, Unlimited-OCR 2 achieves true, unbounded document parsing within a finite context window—effectively eliminating quadratic attention scaling and memory bottlenecks as documents grow."
+        },
+        {
+          "url": "https://huggingface.co/baidu/Unlimited-OCR-2",
+          "quote": "Ultra-Long Document Parsing SOTA: Achieves state-of-the-art performance across both dozens-of-pages benchmarks (e.g., MPDocBench) and extreme hundred-page benchmarks (e.g., MarathonDocBench)."
+        },
+        {
+          "url": "https://huggingface.co/baidu/Unlimited-OCR-2",
+          "quote": "Unlimited OCR 2 supports Transformers (native, for quick tests) and SGLang (recommended for serving)."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Lightpanda releases a headless browser written in Zig for AI agents",
+      "summary": "Lightpanda is a headless browser built from scratch for AI agents and automation, written in Zig and not based on a Chromium fork. It is 16x lighter and 9x faster than Chromium, supports WebDriver Bidi, and can export agent sessions as deterministic, token-free scripts for production use.",
+      "tags": [
+        "工具",
+        "Agent",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_532374c453",
+          "url": "https://github.com/lightpanda-io/browser"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/lightpanda-io/browser",
+          "quote": "The headless browser built from scratch for AI agents and automation."
+        },
+        {
+          "url": "https://github.com/lightpanda-io/browser",
+          "quote": "Not a Chromium fork."
+        },
+        {
+          "url": "https://github.com/lightpanda-io/browser",
+          "quote": "A new browser, written in Zig."
+        },
+        {
+          "url": "https://github.com/lightpanda-io/browser",
+          "quote": "16x lighter and 9x faster than Chromium."
+        },
+        {
+          "url": "https://github.com/lightpanda-io/browser",
+          "quote": "Use --protocol webdriver to enable Bidi support."
+        },
+        {
+          "url": "https://github.com/lightpanda-io/browser",
+          "quote": "./lightpanda serve --obey-robots --log-format pretty --log-level info --host 127.0.0.1 --port 9222 --protocol webdriver"
+        },
+        {
+          "url": "https://github.com/lightpanda-io/browser",
+          "quote": "The output of an agent session is a"
+        },
+        {
+          "url": "https://github.com/lightpanda-io/browser",
+          "quote": "with a small set of native browser primitives built directly into Lightpanda."
+        },
+        {
+          "url": "https://github.com/lightpanda-io/browser",
+          "quote": "Run /save to export one from your current session, then replay it with"
+        },
+        {
+          "url": "https://github.com/lightpanda-io/browser",
+          "quote": "Scripts are deterministic and token-free, so"
+        },
+        {
+          "url": "https://github.com/lightpanda-io/browser",
+          "quote": "you can prototype with the LLM and ship the output to production without a"
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Mage-VL-Cowork trains a 4B vision-language policy for hybrid computer use",
+      "summary": "Mage-VL-Cowork combines screenshot-grounded GUI interaction and persistent code/terminal execution in a single 4B vision-language policy, trained through a progressive five-stage specialize-then-unify curriculum. It reaches 66.0% on OSWorld-Verified under a 50-step budget, while online reinforcement learning adds +10.16 percentage points over Hybrid SFT and cuts mean model calls by 13.0% and output tokens by 25.4%.",
+      "tags": [
+        "模型",
+        "Agent",
+        "多模态"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_15dad6304d",
+          "url": "https://huggingface.co/microsoft/Mage-VL-Cowork"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/microsoft/Mage-VL-Cowork",
+          "quote": "One compact 4B policy that knows when to click — and when to code."
+        },
+        {
+          "url": "https://huggingface.co/microsoft/Mage-VL-Cowork",
+          "quote": "Trained end-to-end from an intermediate 4B Mage-VL checkpoint through a progressive five-stage specialize-then-unify curriculum , it combines screenshot-grounded GUI interaction ( computer_use ) and persistent code/terminal execution ( bash ) inside a single vision-language policy — with no external"
+        },
+        {
+          "url": "https://huggingface.co/microsoft/Mage-VL-Cowork",
+          "quote": "At 4B parameters , Mage-VL-Cowork reaches 66.0% on OSWorld-Verified under a 50-step budget — achieving the best performance among 4B models and demonstrating that an efficient small VLM can excel at complex computer use , pushing the frontier of on-device intelligence ."
+        },
+        {
+          "url": "https://huggingface.co/microsoft/Mage-VL-Cowork",
+          "quote": "Across training stages, online reinforcement learning adds +10.16 percentage points over Hybrid SFT while simultaneously cutting mean model calls by 13.0% and output tokens by 25.4% ."
+        },
+        {
+          "url": "https://huggingface.co/microsoft/Mage-VL-Cowork",
+          "quote": "Without an external multi-agent router, the policy dynamically selects computer_use for visual layouts, canvas editing, and live in-memory application state, and switches to bash for structured programmatic edits (spreadsheets, documents, presentations) and deterministic ground-truth verification."
+        },
+        {
+          "url": "https://huggingface.co/microsoft/Mage-VL-Cowork",
+          "quote": "Online GRPO with verifiable task rewards improves task accuracy by +10.16 pp over Hybrid SFT while compressing interaction length from 21.57 to 18.77 model calls (−13.0%) and output tokens from 7,374 to 5,499 per task (−25.4%)."
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "LiquidAI releases d1-2B for calibrated decisions without generated tokens",
+      "summary": "d1-2B is a decision model for text, pictures, and video built on LFM3-VL-2B, returning calibrated answers with probabilities in a single forward pass. It takes 5.7 ms per decision on an NVIDIA H100 and 3.8 ms on an AMD MI325X, and is aimed at routing, moderation, classification, extraction, reranking, and visual inspection.",
+      "tags": [
+        "模型",
+        "多模态",
+        "工具"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_2e0f51f7f4",
+          "url": "https://huggingface.co/LiquidAI/d1-2B"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/LiquidAI/d1-2B",
+          "quote": "d1-2B Model details Inference Performance Benchmarks Speed Citation"
+        },
+        {
+          "url": "https://huggingface.co/LiquidAI/d1-2B",
+          "quote": "d1-2B is a decision model for text, pictures, and video , built on LFM3-VL-2B ."
+        },
+        {
+          "url": "https://huggingface.co/LiquidAI/d1-2B",
+          "quote": "It returns calibrated answers in one forward pass, without generating tokens."
+        },
+        {
+          "url": "https://huggingface.co/LiquidAI/d1-2B",
+          "quote": "Millisecond decisions: 5.7 ms per decision on an NVIDIA H100 and 3.8 ms on an AMD MI325X, with any number of questions about one state in one call."
+        },
+        {
+          "url": "https://huggingface.co/LiquidAI/d1-2B",
+          "quote": "Typed answers with their probabilities, with no generated tokens"
+        },
+        {
+          "url": "https://huggingface.co/LiquidAI/d1-2B",
+          "quote": "d1-2B is designed for any pipeline step that needs a decision: routing and triage, moderation and guardrails, intent and topic classification, extraction from documents and forms, judging and reranking, and visual inspection."
+        },
+        {
+          "url": "https://huggingface.co/LiquidAI/d1-2B",
+          "quote": "It reads its answers from a single forward pass, so there are no sampling parameters to set."
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "OpenBMB releases MiniCPM-OCR 1.0, a 1.3B OCR-specific model",
+      "summary": "MiniCPM-OCR 1.0 (1.3B) is an OCR-specific model in the MiniCPM-V/o family, trained for OCR on top of MiniCPM-V 4.6 and handling text, tables, formulas, charts, seals, and structured information extraction. DSpark decoding acceleration improves processing efficiency by 55%, and the SDK supports vLLM, SGLang, llama.cpp, Ollama, and FlagOS.",
+      "tags": [
+        "模型",
+        "多模态",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_a3c7f95eb6",
+          "url": "https://huggingface.co/openbmb/MiniCPM-OCR-1.0"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/openbmb/MiniCPM-OCR-1.0",
+          "quote": "MiniCPM-OCR 1.0 (1.3B) is the first OCR-specific model in the"
+        },
+        {
+          "url": "https://huggingface.co/openbmb/MiniCPM-OCR-1.0",
+          "quote": "MiniCPM-V/o family."
+        },
+        {
+          "url": "https://huggingface.co/openbmb/MiniCPM-OCR-1.0",
+          "quote": "understanding — text, tables, formulas, charts, seals, and structured information extraction —"
+        },
+        {
+          "url": "https://huggingface.co/openbmb/MiniCPM-OCR-1.0",
+          "quote": "With DSpark decoding acceleration"
+        },
+        {
+          "url": "https://huggingface.co/openbmb/MiniCPM-OCR-1.0",
+          "quote": "processing efficiency improves by 55% ."
+        },
+        {
+          "url": "https://huggingface.co/openbmb/MiniCPM-OCR-1.0",
+          "quote": "🛠️ Easy to deploy and develop : vLLM, SGLang, llama.cpp, and Ollama from day one , with"
+        },
+        {
+          "url": "https://huggingface.co/openbmb/MiniCPM-OCR-1.0",
+          "quote": "Trained for OCR on top of MiniCPM-V 4.6"
+        },
+        {
+          "url": "https://huggingface.co/openbmb/MiniCPM-OCR-1.0",
+          "quote": "Our SDK supports different inference backends, including vLLM , SGLang , llama.cpp , Ollama , and FlagOS ."
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Xiaomi releases Xiaomi-OCR-0, a 0.8B OCR-specialized model",
+      "summary": "Xiaomi-OCR-0 is a unified 0.8B OCR-specialized vision-language model covering document parsing, OCR-oriented VQA, and key information extraction. It scores 95.24 on Real5-OmniDocBench and averages 83.2 across five OCR-centric VQA benchmarks, exceeding Qwen3.5-2B (80.9), and was trained on an approximately 170M-sample OCR-centric corpus.",
+      "tags": [
+        "模型",
+        "多模态",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_1ce27c46fc",
+          "url": "https://huggingface.co/xiaomi-research/Xiaomi-OCR-0"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/xiaomi-research/Xiaomi-OCR-0",
+          "quote": "A unified 0.8B model for document parsing and OCR-related understanding."
+        },
+        {
+          "url": "https://huggingface.co/xiaomi-research/Xiaomi-OCR-0",
+          "quote": "Xiaomi-OCR-0 is a unified 0.8B OCR-specialized vision-language model for both document parsing and OCR-centric understanding ."
+        },
+        {
+          "url": "https://huggingface.co/xiaomi-research/Xiaomi-OCR-0",
+          "quote": "🥇 95.24 on Real5-OmniDocBench, ranked #1 ."
+        },
+        {
+          "url": "https://huggingface.co/xiaomi-research/Xiaomi-OCR-0",
+          "quote": "🧠 An average of 83.2 across five OCR-centric VQA benchmarks, exceeding Qwen3.5-2B ( 80.9 ) with only 0.8B parameters."
+        },
+        {
+          "url": "https://huggingface.co/xiaomi-research/Xiaomi-OCR-0",
+          "quote": "Starting from Qwen3.5-0.8B-Base, Xiaomi-OCR-0 is trained on an approximately 170M-sample OCR-centric corpus with a progressive training recipe:"
+        },
+        {
+          "url": "https://huggingface.co/xiaomi-research/Xiaomi-OCR-0",
+          "quote": "🧩 Compact and unified : one 0.8B model covering document parsing, OCR-oriented VQA, and key information extraction (KIE)."
+        },
+        {
+          "url": "https://huggingface.co/xiaomi-research/Xiaomi-OCR-0",
+          "quote": "Xiaomi-OCR-0 is trained on an approximately 170M-sample corpus covering document parsing and OCR-centric understanding."
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Pika Labs releases Pika H3 Flex for video generation with synchronized audio",
+      "summary": "Pika H3 Flex is a post-trained H3 model that generates video with synchronized audio in six sampling steps and supports up to 12 reference inputs for shot direction. Local open-weight inference supports native 480p / 768p video with mixed stereo audio, while Pika's hosted API adds 1080p, 2K and 4K generation, audio stems, and prompt enhancement.",
+      "tags": [
+        "模型",
+        "视频",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_36d92c2293",
+          "url": "https://huggingface.co/Pika-Labs/Pika-H3-Flex"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/Pika-Labs/Pika-H3-Flex",
+          "quote": "pipe.load_lora_weights(\"Pika-Labs/Pika-H3-Flex\")"
+        },
+        {
+          "url": "https://huggingface.co/Pika-Labs/Pika-H3-Flex",
+          "quote": "Six-step generation · Omni-reference · Native 480p / 768p · Up to 4K via Pika API"
+        },
+        {
+          "url": "https://huggingface.co/Pika-Labs/Pika-H3-Flex",
+          "quote": "Pika H3 Flex is a post-trained H3 model, designed to give professional creators the flexibility and speed to explore with precision."
+        },
+        {
+          "url": "https://huggingface.co/Pika-Labs/Pika-H3-Flex",
+          "quote": "Optimized for greater control, it generates video with synchronized audio in six sampling steps and supports up to 12 reference inputs, with shot direction through references and prompts."
+        },
+        {
+          "url": "https://huggingface.co/Pika-Labs/Pika-H3-Flex",
+          "quote": "Pika’s hosted API extends this workflow with 1080p, 2K and 4K video generation , audio stems and prompt enhancement ."
+        },
+        {
+          "url": "https://huggingface.co/Pika-Labs/Pika-H3-Flex",
+          "quote": "Local open-weight inference supports native 480p / 768p video with mixed stereo audio."
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Maya Research releases Maya 2 Native with streaming speech in 12 languages",
+      "summary": "Maya 2 Native generates 24 kHz speech in 12 languages with 20 built-in voices and zero-shot voice cloning from 3–10 seconds of reference audio, including cross-lingual cloning. The release includes open weights and inference code with a Python API, an OpenAI-compatible speech endpoint, and WebSocket streaming.",
+      "tags": [
+        "模型",
+        "语音",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_d0287189b3",
+          "url": "https://huggingface.co/maya-research/maya2-native"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/maya-research/maya2-native",
+          "quote": "Streaming text-to-speech for 11 Indian languages and English ."
+        },
+        {
+          "url": "https://huggingface.co/maya-research/maya2-native",
+          "quote": "Maya 2 Native brings streaming speech generation to the languages people use every day."
+        },
+        {
+          "url": "https://huggingface.co/maya-research/maya2-native",
+          "quote": "Built by Maya Research , it generates 24 kHz speech in 12 languages, with 20 built-in voices and zero-shot voice cloning from 3–10 seconds of reference audio ."
+        },
+        {
+          "url": "https://huggingface.co/maya-research/maya2-native",
+          "quote": "A voice can speak across languages: a Hindi reference can become Tamil speech."
+        },
+        {
+          "url": "https://huggingface.co/maya-research/maya2-native",
+          "quote": "The release includes open weights and inference code , with a Python API, an OpenAI-compatible speech endpoint, and WebSocket streaming."
+        },
+        {
+          "url": "https://huggingface.co/maya-research/maya2-native",
+          "quote": "2.50B unique parameters; approximately 5.0 GB of BF16 weights"
+        },
+        {
+          "url": "https://huggingface.co/maya-research/maya2-native",
+          "quote": "24 kHz, mono; streaming in 80 ms audio frames"
+        },
+        {
+          "url": "https://huggingface.co/maya-research/maya2-native",
+          "quote": "20 built-in voices; zero-shot and cross-lingual voice cloning"
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Orkas releases an open-source desktop AI team with 16 specialist agents",
+      "summary": "Orkas is an open-source (MIT), local-first multi-agent desktop app whose Commander turns a goal into to-dos and coordinates 16 built-in specialist agents plus Claude Code, Codex, OpenCode, OpenClaw and Hermes. Projects hold goals, rules, memory, and files, while scheduled automations can repeat routine work hourly, daily, weekly, or monthly.",
+      "tags": [
+        "工具",
+        "Agent",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_9dd592cb49",
+          "url": "https://github.com/Orkas-AI/Orkas"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/Orkas-AI/Orkas",
+          "quote": "Orkas Public Notifications You must be signed in to change notification settings Fork 404 ( 404 ) Star 6.6k ( 6.6k ) You must be signed in to star a repository About Orkas is an open-source (MIT), local-first AI team for your desktop: a Commander turns your goal into to-dos and coordinates 16 built-"
+        },
+        {
+          "url": "https://github.com/Orkas-AI/Orkas",
+          "quote": "in specialist agents plus Claude Code, Codex, OpenCode, OpenClaw and Hermes, with projects, scheduled automations and connectors."
+        },
+        {
+          "url": "https://github.com/Orkas-AI/Orkas",
+          "quote": "Orkas is an open-source (MIT), local-first multi-agent desktop app — an AI assistant that works as a team."
+        },
+        {
+          "url": "https://github.com/Orkas-AI/Orkas",
+          "quote": "Tell the Commander what you need: it finishes many tasks on its own, and for bigger work it plans the steps and brings in specialist agents along with the coding and personal agents you already use — Claude Code, Codex, OpenCode, OpenClaw and Hermes-Agent — to work on it together."
+        },
+        {
+          "url": "https://github.com/Orkas-AI/Orkas",
+          "quote": "A project holds the goal, rules, memory and files, so every new conversation picks up where the last one left off."
+        },
+        {
+          "url": "https://github.com/Orkas-AI/Orkas",
+          "quote": "To-dos split the work between people and agents, Auto-advance lets the team take on the next to-do by itself, and scheduled automations repeat routine work hourly, daily, weekly or monthly."
+        },
+        {
+          "url": "https://github.com/Orkas-AI/Orkas",
+          "quote": "All your data stays on your computer, and finished work comes back for your review — so you can trust Orkas with the ongoing work of your business."
+        },
+        {
+          "url": "https://github.com/Orkas-AI/Orkas",
+          "quote": "16 specialists ship with the app, each with its own skills, memory and tools."
+        }
+      ]
+    }
+  ],
+  "research": [
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/LiquidAI/d1-2B"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/baidu/Unlimited-OCR-2"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/xiaomi-research/Xiaomi-OCR-0"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/openbmb/MiniCPM-OCR-1.0"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/lightpanda-io/browser"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/Orkas-AI/Orkas"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/mattpocock/skills"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/OliviaRossi/Minimax-h3_Singularity-x-10Eros-Max_PRISM"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/Pika-Labs/Pika-H3-Flex"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/Efficient-Large-Model/Open-H3-Regenerate-2K"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/maya-research/maya2-native"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/obra/superpowers"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/microsoft/Mage-VL-Cowork"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://ryanmadden.net/gpt-56-beats-factorio/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://blog.talosintelligence.com/appraisal-by-ai-model-driven-victim-prioritization-in-the-volta-infostealer/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://v.redd.it/0886eezaruyh1"
+    }
+  ],
+  "lang": "en",
+  "validation": {
+    "validated_at": "2026-11-01T04:41:00+00:00",
+    "checked_links": false,
+    "dropped": [
+      {
+        "title": "Open-H3-Regenerate-2K offers an open alternative to the H3-Regenerate-2K API",
+        "section": "brief",
+        "reasons": [
+          "summary longer than 250 characters"
+        ]
+      },
+      {
+        "title": "VOLTA malware uses an LLM to rank victims by monetization value",
+        "section": "brief",
+        "reasons": [
+          "summary longer than 250 characters"
+        ]
+      }
+    ],
+    "warnings": [
+      "0 paper items (target 2-3)"
+    ]
+  }
+}

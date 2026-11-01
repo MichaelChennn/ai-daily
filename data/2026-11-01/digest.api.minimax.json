@@ -1,0 +1,711 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-01",
+  "mode": "full",
+  "generated_at": "2026-11-01T04:39:59+00:00",
+  "channel": "api",
+  "model": "nvidia:minimaxai/minimax-m3.1-flash",
+  "highlights": [
+    "DeepSeek-V4.1-Flash-1017 与 MiniMax-M3.1-Flash 都在 Agent 与代码任务上给出新的成绩，MiniMax-M3.1-Flash 支持最高 1M tokens 上下文。",
+    "OCR 模型密集更新：百度 Unlimited-OCR-2 面向超长文档解析，OpenBMB MiniCPM-OCR 1.0 主打速度与部署，LiquidAI d1-2B 用一次前向传播做决策。",
+    "开发者工具方面，Lightpanda 用 Zig 从头写的无头浏览器面向 AI Agent 与自动化，Microsoft 的 Mage-VL-Cowork 用 4B 模型做混合计算机操作。"
+  ],
+  "items": [
+    {
+      "section": "headline",
+      "title": "DeepSeek 发布 DeepSeek-V4.1-Flash-1017 小版本更新",
+      "summary": "DeepSeek-V4.1-Flash-1017 是 DeepSeek-V4.1-Flash 的小版本更新，官方称其在推理、编码、Agent 任务和视觉基准上均有提升，同时缩短任务执行时间与输出长度。该模型权重以 MIT License 发布，开发者可通过 Transformers、vLLM 或 SGLang 直接使用。",
+      "tags": [
+        "模型",
+        "开源",
+        "Agent"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_8b553ca25e",
+          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+          "quote": "DeepSeek-V4.1-Flash-1017 is a minor update to DeepSeek-V4.1-Flash , delivering substantial improvements across reasoning, coding, agentic tasks, and visual benchmarks."
+        },
+        {
+          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+          "quote": "Alongside these gains, the model reduces task execution time and output length, enabling users to complete tasks faster and at lower cost and advancing the performance–cost Pareto frontier across multiple agent harnesses."
+        },
+        {
+          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+          "quote": "This release does not include a Jinja-format chat template."
+        },
+        {
+          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+          "quote": "For production use, we additionally release deepseek-recipe , a set of Rust libraries with Python bindings that provides the same prompt format as a maintained, protocol-aware toolkit."
+        },
+        {
+          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+          "quote": "This repository and the model weights are licensed under the MIT License ."
+        },
+        {
+          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+          "quote": "vllm serve \"deepseek-ai/DeepSeek-V4.1-Flash-1017\""
+        },
+        {
+          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+          "quote": "pip install sglang"
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "MiniMax 发布 MiniMax-M3.1-Flash 原生多模态 MoE 模型",
+      "summary": "MiniMax-M3.1-Flash 是面向编码、Agent 工作流、电脑操作与网络安全的原生多模态 MoE 模型，支持文本、图像、视频输入，上下文窗口最高 1M tokens。它用稀疏注意力、量化感知训练和 DSpark 推测解码改进推理效率，官方推荐 SGLang、vLLM 和 TokenSpeed 进行部署。",
+      "tags": [
+        "模型",
+        "多模态",
+        "Agent"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_e848a88eb5",
+          "url": "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash",
+          "quote": "MiniMax-M3.1-Flash is a native multimodal mixture-of-experts model for coding, agentic workflows, computer use, and cybersecurity."
+        },
+        {
+          "url": "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash",
+          "quote": "It supports text, image, and video inputs with a context window of up to 1M tokens ."
+        },
+        {
+          "url": "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash",
+          "quote": "Building on MiniMax-M3, M3.1-Flash improves task performance and inference efficiency with sparse attention throughout the model, quantization-aware training, and DSpark speculative decoding."
+        },
+        {
+          "url": "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash",
+          "quote": "Efficient by design: Sparse attention throughout, quantization-aware training, and DSpark speculative decoding improve inference efficiency."
+        },
+        {
+          "url": "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash",
+          "quote": "Parameters: Approximately 428B total; 23B activated per token"
+        },
+        {
+          "url": "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash",
+          "quote": "Context window: Up to 1,000,000 tokens"
+        },
+        {
+          "url": "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash",
+          "quote": "Speculative decoding: DSpark draft head included"
+        },
+        {
+          "url": "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash",
+          "quote": "The release includes the draft head for use with compatible serving implementations."
+        },
+        {
+          "url": "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash",
+          "quote": "SGLang — see SGLang cookbook ."
+        },
+        {
+          "url": "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash",
+          "quote": "vLLM — see vLLM recipe ."
+        },
+        {
+          "url": "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash",
+          "quote": "TokenSpeed — see TokenSpeed recipe ."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "百度 Unlimited-OCR-2 主打无限长文档解析",
+      "summary": "百度发布 Unlimited-OCR-2，用 Sparse Reference Sliding Window Attention（SR-SWA）把超长序列的文本与视觉注意力压缩为固定大小的参考集合，让每步解码延迟和显存占用基本不随文档长度变化。官方称其在 MPDocBench 与 MarathonDocBench 等几十页到上百页基准上达到领先水平，并同时发布超长文档解析基准 MarathonDocBench。",
+      "tags": [
+        "模型",
+        "多模态",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_4239039208",
+          "url": "https://huggingface.co/baidu/Unlimited-OCR-2"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/baidu/Unlimited-OCR-2",
+          "quote": "[2026/10/27] 📊 We release MarathonDocBench , a new benchmark for ultra-long document parsing."
+        },
+        {
+          "url": "https://huggingface.co/baidu/Unlimited-OCR-2",
+          "quote": "[2026/10/27] 🚀 We release Unlimited OCR 2 , achieving unlimited-horizon parsing with SR-SWA."
+        },
+        {
+          "url": "https://huggingface.co/baidu/Unlimited-OCR-2",
+          "quote": "Sparse Reference Sliding Window Attention (SR-SWA): Compresses text-visual attention interactions from ultra-long sequences down to a fixed-size set of working references (e.g., 512 tokens)."
+        },
+        {
+          "url": "https://huggingface.co/baidu/Unlimited-OCR-2",
+          "quote": "This bounds computational complexity, keeping per-step decoding latency and memory footprint nearly constant regardless of document length."
+        },
+        {
+          "url": "https://huggingface.co/baidu/Unlimited-OCR-2",
+          "quote": "From Long- to Unlimited-Horizon Parsing: Powered by SR-SWA, Unlimited-OCR 2 achieves true, unbounded document parsing within a finite context window—effectively eliminating quadratic attention scaling and memory bottlenecks as documents grow."
+        },
+        {
+          "url": "https://huggingface.co/baidu/Unlimited-OCR-2",
+          "quote": "Ultra-Long Document Parsing SOTA: Achieves state-of-the-art performance across both dozens-of-pages benchmarks (e.g., MPDocBench) and extreme hundred-page benchmarks (e.g., MarathonDocBench)."
+        },
+        {
+          "url": "https://huggingface.co/baidu/Unlimited-OCR-2",
+          "quote": "Unlimited OCR 2 supports Transformers (native, for quick tests) and SGLang (recommended for serving)."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Lightpanda 用 Zig 从头写无头浏览器面向 AI Agent",
+      "summary": "Lightpanda 不是 Chromium 分支也不是 WebKit 补丁，而是用 Zig 从头编写的无头浏览器，官方称其比 Chromium 轻 16x、快 9x，并提供 CDP 与 webdriver BiDi 服务。它内置 agent 模式，会把操作记录导出为确定性的 PandaScript 脚本，可直接用 lightpanda run 回放。",
+      "tags": [
+        "工具",
+        "Agent",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_532374c453",
+          "url": "https://github.com/lightpanda-io/browser"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/lightpanda-io/browser",
+          "quote": "The headless browser built from scratch for AI agents and automation."
+        },
+        {
+          "url": "https://github.com/lightpanda-io/browser",
+          "quote": "Not a Chromium fork."
+        },
+        {
+          "url": "https://github.com/lightpanda-io/browser",
+          "quote": "A new browser, written in Zig."
+        },
+        {
+          "url": "https://github.com/lightpanda-io/browser",
+          "quote": "16x lighter and 9x faster than Chromium."
+        },
+        {
+          "url": "https://github.com/lightpanda-io/browser",
+          "quote": "Use --protocol webdriver to enable Bidi support."
+        },
+        {
+          "url": "https://github.com/lightpanda-io/browser",
+          "quote": "./lightpanda serve --obey-robots --log-format pretty --log-level info --host 127.0.0.1 --port 9222 --protocol webdriver"
+        },
+        {
+          "url": "https://github.com/lightpanda-io/browser",
+          "quote": "The output of an agent session is a"
+        },
+        {
+          "url": "https://github.com/lightpanda-io/browser",
+          "quote": "with a small set of native browser primitives built directly into Lightpanda."
+        },
+        {
+          "url": "https://github.com/lightpanda-io/browser",
+          "quote": "Run /save to export one from your current session, then replay it with"
+        },
+        {
+          "url": "https://github.com/lightpanda-io/browser",
+          "quote": "Scripts are deterministic and token-free, so"
+        },
+        {
+          "url": "https://github.com/lightpanda-io/browser",
+          "quote": "you can prototype with the LLM and ship the output to production without a"
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "微软发布 4B 混合计算机操作模型 Mage-VL-Cowork",
+      "summary": "Mage-VL-Cowork 是一个 4B 的视觉语言策略模型，把截图驱动的 GUI 交互（computer_use）与持久化的代码/终端执行（bash）放进同一个策略里，可在两种通道之间自行切换。官方称它在 OSWorld-Verified 上达到 66.0%，在线强化学习相对 Hybrid SFT 提升 +10.16 个百分点，同时减少 13.0% 的模型调用和 25.4% 的输出 token。",
+      "tags": [
+        "模型",
+        "Agent",
+        "多模态"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_15dad6304d",
+          "url": "https://huggingface.co/microsoft/Mage-VL-Cowork"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/microsoft/Mage-VL-Cowork",
+          "quote": "One compact 4B policy that knows when to click — and when to code."
+        },
+        {
+          "url": "https://huggingface.co/microsoft/Mage-VL-Cowork",
+          "quote": "Trained end-to-end from an intermediate 4B Mage-VL checkpoint through a progressive five-stage specialize-then-unify curriculum , it combines screenshot-grounded GUI interaction ( computer_use ) and persistent code/terminal execution ( bash ) inside a single vision-language policy — with no external"
+        },
+        {
+          "url": "https://huggingface.co/microsoft/Mage-VL-Cowork",
+          "quote": "At 4B parameters , Mage-VL-Cowork reaches 66.0% on OSWorld-Verified under a 50-step budget — achieving the best performance among 4B models and demonstrating that an efficient small VLM can excel at complex computer use , pushing the frontier of on-device intelligence ."
+        },
+        {
+          "url": "https://huggingface.co/microsoft/Mage-VL-Cowork",
+          "quote": "Across training stages, online reinforcement learning adds +10.16 percentage points over Hybrid SFT while simultaneously cutting mean model calls by 13.0% and output tokens by 25.4% ."
+        },
+        {
+          "url": "https://huggingface.co/microsoft/Mage-VL-Cowork",
+          "quote": "Without an external multi-agent router, the policy dynamically selects computer_use for visual layouts, canvas editing, and live in-memory application state, and switches to bash for structured programmatic edits (spreadsheets, documents, presentations) and deterministic ground-truth verification."
+        },
+        {
+          "url": "https://huggingface.co/microsoft/Mage-VL-Cowork",
+          "quote": "Online GRPO with verifiable task rewards improves task accuracy by +10.16 pp over Hybrid SFT while compressing interaction length from 21.57 to 18.77 model calls (−13.0%) and output tokens from 7,374 to 5,499 per task (−25.4%)."
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "LiquidAI d1-2B 用一次前向传播完成决策",
+      "summary": "LiquidAI d1-2B 是基于 LFM3-VL-2B 的决策模型，面向文本、图片和视频一次性输出带概率的答案，不生成 token，也不提供采样参数。官方称其在 NVIDIA H100 上每次决策 5.7 ms，并可作为路由分流、内容审核、意图分类和结构化抽取等流水线的判断环节。",
+      "tags": [
+        "模型",
+        "多模态",
+        "工具"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_2e0f51f7f4",
+          "url": "https://huggingface.co/LiquidAI/d1-2B"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/LiquidAI/d1-2B",
+          "quote": "d1-2B Model details Inference Performance Benchmarks Speed Citation"
+        },
+        {
+          "url": "https://huggingface.co/LiquidAI/d1-2B",
+          "quote": "d1-2B is a decision model for text, pictures, and video , built on LFM3-VL-2B ."
+        },
+        {
+          "url": "https://huggingface.co/LiquidAI/d1-2B",
+          "quote": "It returns calibrated answers in one forward pass, without generating tokens."
+        },
+        {
+          "url": "https://huggingface.co/LiquidAI/d1-2B",
+          "quote": "Millisecond decisions: 5.7 ms per decision on an NVIDIA H100 and 3.8 ms on an AMD MI325X, with any number of questions about one state in one call."
+        },
+        {
+          "url": "https://huggingface.co/LiquidAI/d1-2B",
+          "quote": "Typed answers with their probabilities, with no generated tokens"
+        },
+        {
+          "url": "https://huggingface.co/LiquidAI/d1-2B",
+          "quote": "d1-2B is designed for any pipeline step that needs a decision: routing and triage, moderation and guardrails, intent and topic classification, extraction from documents and forms, judging and reranking, and visual inspection."
+        },
+        {
+          "url": "https://huggingface.co/LiquidAI/d1-2B",
+          "quote": "It reads its answers from a single forward pass, so there are no sampling parameters to set."
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "OpenBMB 发布 MiniCPM-OCR 1.0 文档解析模型",
+      "summary": "MiniCPM-OCR 1.0 是 MiniCPM-V/o 家族中首个 OCR 专用模型，参数规模 1.3B，基于 MiniCPM-V 4.6 训练，支持中英文文档的文本、表格、公式、图表、印章与关键信息抽取。官方称配合 DSpark 解码加速后端到端处理效率提升 55%，并可通过 vLLM、SGLang、llama.cpp 和 Ollama 部署。",
+      "tags": [
+        "模型",
+        "多模态",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_a3c7f95eb6",
+          "url": "https://huggingface.co/openbmb/MiniCPM-OCR-1.0"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/openbmb/MiniCPM-OCR-1.0",
+          "quote": "MiniCPM-OCR 1.0 (1.3B) is the first OCR-specific model in the"
+        },
+        {
+          "url": "https://huggingface.co/openbmb/MiniCPM-OCR-1.0",
+          "quote": "MiniCPM-V/o family."
+        },
+        {
+          "url": "https://huggingface.co/openbmb/MiniCPM-OCR-1.0",
+          "quote": "understanding — text, tables, formulas, charts, seals, and structured information extraction —"
+        },
+        {
+          "url": "https://huggingface.co/openbmb/MiniCPM-OCR-1.0",
+          "quote": "With DSpark decoding acceleration"
+        },
+        {
+          "url": "https://huggingface.co/openbmb/MiniCPM-OCR-1.0",
+          "quote": "processing efficiency improves by 55% ."
+        },
+        {
+          "url": "https://huggingface.co/openbmb/MiniCPM-OCR-1.0",
+          "quote": "🛠️ Easy to deploy and develop : vLLM, SGLang, llama.cpp, and Ollama from day one , with"
+        },
+        {
+          "url": "https://huggingface.co/openbmb/MiniCPM-OCR-1.0",
+          "quote": "Trained for OCR on top of MiniCPM-V 4.6"
+        },
+        {
+          "url": "https://huggingface.co/openbmb/MiniCPM-OCR-1.0",
+          "quote": "Our SDK supports different inference backends, including vLLM , SGLang , llama.cpp , Ollama , and FlagOS ."
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "小米开源 0.8B 的 Xiaomi-OCR-0 文档解析模型",
+      "summary": "Xiaomi-OCR-0 是从 Qwen3.5-0.8B-Base 出发训练的 0.8B 统一 OCR 视觉语言模型，同时覆盖文档解析、OCR 导向的视觉问答和关键信息抽取。它使用约 170M 样本的 OCR 语料与渐进式训练配方，官方称在 Real5-OmniDocBench 上取得 95.24 的成绩。",
+      "tags": [
+        "模型",
+        "多模态",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_1ce27c46fc",
+          "url": "https://huggingface.co/xiaomi-research/Xiaomi-OCR-0"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/xiaomi-research/Xiaomi-OCR-0",
+          "quote": "A unified 0.8B model for document parsing and OCR-related understanding."
+        },
+        {
+          "url": "https://huggingface.co/xiaomi-research/Xiaomi-OCR-0",
+          "quote": "Xiaomi-OCR-0 is a unified 0.8B OCR-specialized vision-language model for both document parsing and OCR-centric understanding ."
+        },
+        {
+          "url": "https://huggingface.co/xiaomi-research/Xiaomi-OCR-0",
+          "quote": "🥇 95.24 on Real5-OmniDocBench, ranked #1 ."
+        },
+        {
+          "url": "https://huggingface.co/xiaomi-research/Xiaomi-OCR-0",
+          "quote": "🧠 An average of 83.2 across five OCR-centric VQA benchmarks, exceeding Qwen3.5-2B ( 80.9 ) with only 0.8B parameters."
+        },
+        {
+          "url": "https://huggingface.co/xiaomi-research/Xiaomi-OCR-0",
+          "quote": "Starting from Qwen3.5-0.8B-Base, Xiaomi-OCR-0 is trained on an approximately 170M-sample OCR-centric corpus with a progressive training recipe:"
+        },
+        {
+          "url": "https://huggingface.co/xiaomi-research/Xiaomi-OCR-0",
+          "quote": "🧩 Compact and unified : one 0.8B model covering document parsing, OCR-oriented VQA, and key information extraction (KIE)."
+        },
+        {
+          "url": "https://huggingface.co/xiaomi-research/Xiaomi-OCR-0",
+          "quote": "Xiaomi-OCR-0 is trained on an approximately 170M-sample corpus covering document parsing and OCR-centric understanding."
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Pika 发布 Pika-H3-Flex 视频生成 LoRA",
+      "summary": "Pika-H3-Flex 是后训练过的 H3 模型，通过 LoRA 方式加载，可在六个采样步内生成带同步音频的视频，并支持最多 12 个参考输入来控制镜头走向。本地开源权重推理支持原生 480p / 768p 视频与混合立体声音轨，Pika 托管 API 则提供 1080p、2K 与 4K 生成。",
+      "tags": [
+        "模型",
+        "视频",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_36d92c2293",
+          "url": "https://huggingface.co/Pika-Labs/Pika-H3-Flex"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/Pika-Labs/Pika-H3-Flex",
+          "quote": "pipe.load_lora_weights(\"Pika-Labs/Pika-H3-Flex\")"
+        },
+        {
+          "url": "https://huggingface.co/Pika-Labs/Pika-H3-Flex",
+          "quote": "Six-step generation · Omni-reference · Native 480p / 768p · Up to 4K via Pika API"
+        },
+        {
+          "url": "https://huggingface.co/Pika-Labs/Pika-H3-Flex",
+          "quote": "Pika H3 Flex is a post-trained H3 model, designed to give professional creators the flexibility and speed to explore with precision."
+        },
+        {
+          "url": "https://huggingface.co/Pika-Labs/Pika-H3-Flex",
+          "quote": "Optimized for greater control, it generates video with synchronized audio in six sampling steps and supports up to 12 reference inputs, with shot direction through references and prompts."
+        },
+        {
+          "url": "https://huggingface.co/Pika-Labs/Pika-H3-Flex",
+          "quote": "Pika’s hosted API extends this workflow with 1080p, 2K and 4K video generation , audio stems and prompt enhancement ."
+        },
+        {
+          "url": "https://huggingface.co/Pika-Labs/Pika-H3-Flex",
+          "quote": "Local open-weight inference supports native 480p / 768p video with mixed stereo audio."
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Maya Research 开源 Maya 2 Native 流式语音模型",
+      "summary": "Maya 2 Native 支持 12 种语言、20 个内置声音和零样本声音克隆，可把 3–10 秒参考音频克隆成跨语言语音，输出 24 kHz 音频并按 80 ms 帧流式返回。发布内容包含开放权重与推理代码，提供 Python API、OpenAI 兼容的语音接口和 WebSocket 流式服务。",
+      "tags": [
+        "模型",
+        "语音",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_d0287189b3",
+          "url": "https://huggingface.co/maya-research/maya2-native"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/maya-research/maya2-native",
+          "quote": "Streaming text-to-speech for 11 Indian languages and English ."
+        },
+        {
+          "url": "https://huggingface.co/maya-research/maya2-native",
+          "quote": "Maya 2 Native brings streaming speech generation to the languages people use every day."
+        },
+        {
+          "url": "https://huggingface.co/maya-research/maya2-native",
+          "quote": "Built by Maya Research , it generates 24 kHz speech in 12 languages, with 20 built-in voices and zero-shot voice cloning from 3–10 seconds of reference audio ."
+        },
+        {
+          "url": "https://huggingface.co/maya-research/maya2-native",
+          "quote": "A voice can speak across languages: a Hindi reference can become Tamil speech."
+        },
+        {
+          "url": "https://huggingface.co/maya-research/maya2-native",
+          "quote": "The release includes open weights and inference code , with a Python API, an OpenAI-compatible speech endpoint, and WebSocket streaming."
+        },
+        {
+          "url": "https://huggingface.co/maya-research/maya2-native",
+          "quote": "2.50B unique parameters; approximately 5.0 GB of BF16 weights"
+        },
+        {
+          "url": "https://huggingface.co/maya-research/maya2-native",
+          "quote": "24 kHz, mono; streaming in 80 ms audio frames"
+        },
+        {
+          "url": "https://huggingface.co/maya-research/maya2-native",
+          "quote": "20 built-in voices; zero-shot and cross-lingual voice cloning"
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Orkas 开源本地优先的多 Agent 桌面应用",
+      "summary": "Orkas 是一个 MIT 许可的本地优先桌面多 Agent 应用，由 Commander 把目标拆成待办并协调 16 个内置专职 Agent，同时可接入 Claude Code、Codex、OpenCode 等外部编码 Agent。项目会保存目标、规则、记忆与文件，支持待办自动推进和按小时、天、周、月运行的定时自动化，数据留在本机。",
+      "tags": [
+        "工具",
+        "Agent",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_9dd592cb49",
+          "url": "https://github.com/Orkas-AI/Orkas"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/Orkas-AI/Orkas",
+          "quote": "Orkas Public Notifications You must be signed in to change notification settings Fork 404 ( 404 ) Star 6.6k ( 6.6k ) You must be signed in to star a repository About Orkas is an open-source (MIT), local-first AI team for your desktop: a Commander turns your goal into to-dos and coordinates 16 built-"
+        },
+        {
+          "url": "https://github.com/Orkas-AI/Orkas",
+          "quote": "in specialist agents plus Claude Code, Codex, OpenCode, OpenClaw and Hermes, with projects, scheduled automations and connectors."
+        },
+        {
+          "url": "https://github.com/Orkas-AI/Orkas",
+          "quote": "Orkas is an open-source (MIT), local-first multi-agent desktop app — an AI assistant that works as a team."
+        },
+        {
+          "url": "https://github.com/Orkas-AI/Orkas",
+          "quote": "Tell the Commander what you need: it finishes many tasks on its own, and for bigger work it plans the steps and brings in specialist agents along with the coding and personal agents you already use — Claude Code, Codex, OpenCode, OpenClaw and Hermes-Agent — to work on it together."
+        },
+        {
+          "url": "https://github.com/Orkas-AI/Orkas",
+          "quote": "A project holds the goal, rules, memory and files, so every new conversation picks up where the last one left off."
+        },
+        {
+          "url": "https://github.com/Orkas-AI/Orkas",
+          "quote": "To-dos split the work between people and agents, Auto-advance lets the team take on the next to-do by itself, and scheduled automations repeat routine work hourly, daily, weekly or monthly."
+        },
+        {
+          "url": "https://github.com/Orkas-AI/Orkas",
+          "quote": "All your data stays on your computer, and finished work comes back for your review — so you can trust Orkas with the ongoing work of your business."
+        },
+        {
+          "url": "https://github.com/Orkas-AI/Orkas",
+          "quote": "16 specialists ship with the app, each with its own skills, memory and tools."
+        }
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "Open-H3-Regenerate-2K 开源 MiniMax-H3 的 2K 重绘方案",
+      "summary": "Open-H3-Regenerate-2K 提供三步 MiniMax-H3 精修流程，可把 768P 草稿重绘为 2560×1440 视频，官方称其是对闭源 H3-Regenerate-2K API 的开源替代。",
+      "tags": [
+        "工具",
+        "视频",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_290358428a",
+          "url": "https://huggingface.co/Efficient-Large-Model/Open-H3-Regenerate-2K"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/Efficient-Large-Model/Open-H3-Regenerate-2K",
+          "quote": "An open replacement for the closed H3-Regenerate-2K API: a three-step MiniMax-H3 refinement pass that regenerates a"
+        },
+        {
+          "url": "https://huggingface.co/Efficient-Large-Model/Open-H3-Regenerate-2K",
+          "quote": "768P H3 draft (1344×768, 121 frames) at 2560×1440 ."
+        },
+        {
+          "url": "https://huggingface.co/Efficient-Large-Model/Open-H3-Regenerate-2K",
+          "quote": "it decodes the 2560×1440 clip in 1.6 s instead of 15 s."
+        },
+        {
+          "url": "https://huggingface.co/Efficient-Large-Model/Open-H3-Regenerate-2K",
+          "quote": "Latent upscale + refine alone go from 73.11 s to 20.46 s (3.57×)."
+        }
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "VOLTA 信息窃取木马用 LLM 给受害者排序资产",
+      "summary": "Talos 披露的 VOLTA 在窃取凭据后，把结构化证据包发给 LLM，要求模型按变现价值给受害者资产分级并评估其安全习惯。模型拒绝时，它会回退到另外两个模型继续请求。",
+      "tags": [
+        "安全",
+        "Agent"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_63bd5a5bb2",
+          "url": "https://blog.talosintelligence.com/appraisal-by-ai-model-driven-victim-prioritization-in-the-volta-infostealer/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://blog.talosintelligence.com/appraisal-by-ai-model-driven-victim-prioritization-in-the-volta-infostealer/",
+          "quote": "VOLTA is a mature stealer implant with an optional AI-integration layer."
+        },
+        {
+          "url": "https://blog.talosintelligence.com/appraisal-by-ai-model-driven-victim-prioritization-in-the-volta-infostealer/",
+          "quote": "After stealing credentials, sessions, and cryptocurrency wallets, VOLTA sends a structured evidence bundle to an LLM to rank the victim’s assets by monetization value."
+        },
+        {
+          "url": "https://blog.talosintelligence.com/appraisal-by-ai-model-driven-victim-prioritization-in-the-volta-infostealer/",
+          "quote": "If a model refuses to perform the target assessment, VOLTA fails over to a three-model chain, implying a direct engineering effort and expectation of hitting model guardrails."
+        },
+        {
+          "url": "https://blog.talosintelligence.com/appraisal-by-ai-model-driven-victim-prioritization-in-the-volta-infostealer/",
+          "quote": "The bundle is serialized and POSTed to OpenRouter under a system prompt that instructs the model to act as \"a forensic intelligence analyst drafting a target assessment.\" The required output includes a section titled “WHAT THEY'RE WORTH” with valuables ranked by monetization with a low/medium/high t"
+        },
+        {
+          "url": "https://blog.talosintelligence.com/appraisal-by-ai-model-driven-victim-prioritization-in-the-volta-infostealer/",
+          "quote": "Be blunt, specific, accurate.” VOLTA uses a multi-model architecture to fall back resiliently if it hits a model’s refusal, checking each response for phrases like “I can’t” or “I’m not able,” before passing on to a chain of up to three models."
+        }
+      ]
+    }
+  ],
+  "research": [
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/LiquidAI/d1-2B"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/baidu/Unlimited-OCR-2"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/xiaomi-research/Xiaomi-OCR-0"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/openbmb/MiniCPM-OCR-1.0"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/lightpanda-io/browser"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/Orkas-AI/Orkas"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/mattpocock/skills"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/OliviaRossi/Minimax-h3_Singularity-x-10Eros-Max_PRISM"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/Pika-Labs/Pika-H3-Flex"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/Efficient-Large-Model/Open-H3-Regenerate-2K"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/maya-research/maya2-native"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/obra/superpowers"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/microsoft/Mage-VL-Cowork"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://ryanmadden.net/gpt-56-beats-factorio/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://blog.talosintelligence.com/appraisal-by-ai-model-driven-victim-prioritization-in-the-volta-infostealer/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://v.redd.it/0886eezaruyh1"
+    }
+  ],
+  "validation": {
+    "validated_at": "2026-11-01T04:39:59+00:00",
+    "checked_links": true,
+    "dropped": [],
+    "warnings": [
+      "13 items (target 8-12)",
+      "0 paper items (target 2-3)"
+    ]
+  }
+}
