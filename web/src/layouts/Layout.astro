@@ -31,17 +31,18 @@ const {
 } = Astro.props
 const lang = langOf(Astro.currentLocale)
 const t = strings[lang]
-// The same page in both languages, for search engines. Not on a beta page (the English site has
-// no betas) nor on one without a canonical URL (the 404 page).
+// The same page in both languages, for search engines and for the redirect below. Not on a beta
+// or process page (the English site has neither) nor on one without a canonical URL (the 404 page).
 const page = pagePath(Astro.url.pathname, lang)
-const alternates =
-  canonical === null || /\/beta\//.test(page)
-    ? []
-    : [
-        { hreflang: "zh-CN", href: pageHref(page) },
-        { hreflang: "en", href: pageHref(page, "en") },
-        { hreflang: "x-default", href: pageHref(page) },
-      ]
+const bilingual = canonical !== null && !/\/(beta|process)\//.test(page)
+const alternates = bilingual
+  ? [
+      { hreflang: "zh-CN", href: pageHref(page) },
+      { hreflang: "en", href: pageHref(page, "en") },
+      { hreflang: "x-default", href: pageHref(page, "en") },
+    ]
+  : []
+const otherLang = bilingual ? (lang === "en" ? "zh" : "en") : undefined
 // The home page shows the newest issue: going between it and an issue slides by date, as if it
 // were at that issue's date (the script below).
 const home = pageHref("", lang)
@@ -49,9 +50,31 @@ const latest = issuesIn(lang)[0]?.date ?? ""
 ---
 
 <!doctype html>
-<html lang={lang === "en" ? "en" : "zh-CN"} data-home={home} data-latest={latest}>
+<html
+  lang={lang === "en" ? "en" : "zh-CN"}
+  data-home={home}
+  data-latest={latest}
+  data-other-lang={otherLang}
+  data-other-href={otherLang && pageHref(page, otherLang)}>
   <head>
     <meta charset="utf-8" />
+    <script is:inline>
+      // Show the edition the reader wants: the one they picked in the language menu, else Chinese
+      // if the browser's first language is Chinese, else English. Crawlers stay on the page they
+      // asked for, so both editions get indexed.
+      ;(() => {
+        const root = document.documentElement
+        const other = root.dataset.otherLang
+        if (!other || /bot|crawl|spider|slurp/i.test(navigator.userAgent)) return
+        let chosen = null
+        try {
+          chosen = localStorage.getItem("lang")
+        } catch {}
+        const first = (navigator.languages?.[0] ?? navigator.language ?? "").toLowerCase()
+        const wanted = chosen ?? (first.startsWith("zh") ? "zh" : "en")
+        if (wanted === other) location.replace(root.dataset.otherHref + location.search + location.hash)
+      })()
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- Opt into cross-document view transitions here, not in the stylesheet: when the new page
          is revealed its stylesheet may still be loading (not cached yet), and Chrome then skips

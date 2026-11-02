@@ -14,7 +14,8 @@ interface Props {
 }
 
 // The language icon in the header opens a menu of the two editions; each item goes to this same
-// page in that language.
+// page in that language and remembers the choice, which then outranks the browser's language
+// (the redirect in Layout.astro).
 export default function LanguageMenu({ lang, label, zh, en }: Props) {
   const options = [
     { lang: "zh", label: "中文", href: zh },
@@ -31,7 +32,7 @@ export default function LanguageMenu({ lang, label, zh, en }: Props) {
       <DropdownMenuContent align="end" className="w-auto">
         {options.map((option) => (
           <DropdownMenuItem key={option.lang} asChild>
-            <a href={option.href} hrefLang={option.lang} lang={option.lang}>
+            <a href={option.href} hrefLang={option.lang} lang={option.lang} onClick={() => remember(option.lang)}>
               {option.label}
               {option.lang === lang && <Check className="ml-auto" />}
             </a>
@@ -40,4 +41,10 @@ export default function LanguageMenu({ lang, label, zh, en }: Props) {
       </DropdownMenuContent>
     </DropdownMenu>
   )
+}
+
+function remember(lang: Lang) {
+  try {
+    localStorage.setItem("lang", lang)
+  } catch {}
 }

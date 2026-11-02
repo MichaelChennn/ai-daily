@@ -23,12 +23,12 @@ interface Props {
 // glides from one link to the other (z-order in global.css) while the labels stay put.
 const { current, beta } = Astro.props
 // This page in the other language: the English site mirrors the Chinese one under en/, and has
-// no betas, so a beta page's English counterpart is its main issue.
+// no betas or process pages, so their English counterpart is the main issue.
 const lang = langOf(Astro.currentLocale)
 const home = pageHref("", lang)
 const page = pagePath(Astro.url.pathname, lang)
 const zhHref = pageHref(page)
-const enHref = pageHref(page.replace(/beta\/.*$/, ""), "en")
+const enHref = pageHref(page.replace(/(beta|process)\/.*$/, ""), "en")
 const t = strings[lang]
 const nav: { page: NavPage; label: string; href: string; wide?: boolean }[] = [
   { page: "today", label: t.nav.today, href: home, wide: true },
