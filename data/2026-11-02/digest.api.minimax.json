@@ -1,0 +1,701 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-02",
+  "mode": "full",
+  "generated_at": "2026-11-02T04:41:06+00:00",
+  "channel": "api",
+  "model": "nvidia:minimaxai/minimax-m3.1-flash",
+  "highlights": [
+    "DeepSeek 发布 DeepSeek-V4.1-Flash-1017，官方称其在推理、编码、Agent 任务与视觉基准上均有提升，并降低任务执行时间与输出长度；MiniMax 发布原生多模态 MoE 模型 MiniMax-M3.1-Flash，上下文窗口最高 1M tokens。",
+    "Liquid AI 发布 LFM3-Omni-2B，一个端到端的全模态小模型，可同时理解文本、图像、视频与音频并输出文本和语音，面向手机、笔记本等端侧设备。",
+    "Kornia 以 PyTorch 为底座的微分计算机视觉库提供 1,200+ 可微算子，覆盖相机模型、几何求解、特征匹配与增强等方向，正朝可微分视觉与几何的参考实现演进。"
+  ],
+  "items": [
+    {
+      "section": "headline",
+      "title": "DeepSeek 发布 DeepSeek-V4.1-Flash-1017",
+      "summary": "DeepSeek-V4.1-Flash-1017 是 DeepSeek-V4.1-Flash 的小版本更新，官方称其在推理、编码、Agent 任务与视觉基准上均有明显改进，同时缩短任务执行时间与输出长度。模型支持 Transformers、vLLM、SGLang 部署，并以 MIT 许可开放，开发者可直接取权重做本地或服务化推理。",
+      "tags": [
+        "模型",
+        "推理",
+        "Agent"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_8b553ca25e",
+          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+          "quote": "DeepSeek-V4.1-Flash-1017 is a minor update to DeepSeek-V4.1-Flash , delivering substantial improvements across reasoning, coding, agentic tasks, and visual benchmarks."
+        },
+        {
+          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+          "quote": "Alongside these gains, the model reduces task execution time and output length, enabling users to complete tasks faster and at lower cost and advancing the performance–cost Pareto frontier across multiple agent harnesses."
+        },
+        {
+          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+          "quote": "For production use, we additionally release deepseek-recipe , a set of Rust libraries with Python bindings that provides the same prompt format as a maintained, protocol-aware toolkit."
+        },
+        {
+          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+          "quote": "This repository and the model weights are licensed under the MIT License ."
+        },
+        {
+          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+          "quote": "Safetensors Model size 763B params Tensor type BF16 · F32 · F8_E4M3 · I8 · Files info Inference Providers NEW Novita +1 Image-Text-to-Text Examples Input a message to start chatting with deepseek-ai/DeepSeek-V4.1-Flash-1017 ."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "MiniMax 发布 MiniMax-M3.1-Flash 原生多模态 MoE",
+      "summary": "MiniMax-M3.1-Flash 是面向编码、Agent 工作流、计算机操作与网络安全的原生多模态 MoE 模型，支持文本、图像、视频输入，上下文窗口最高 1M tokens，总参数约 428B、每 token 激活 23B。模型通过全模型稀疏注意力、量化感知训练和 DSpark 投机解码提升推理效率，推荐用 SGLang、vLLM 或 TokenSpeed 部署。",
+      "tags": [
+        "模型",
+        "多模态",
+        "推理"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_e848a88eb5",
+          "url": "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash",
+          "quote": "MiniMax-M3.1-Flash is a native multimodal mixture-of-experts model for coding, agentic workflows, computer use, and cybersecurity."
+        },
+        {
+          "url": "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash",
+          "quote": "It supports text, image, and video inputs with a context window of up to 1M tokens ."
+        },
+        {
+          "url": "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash",
+          "quote": "Building on MiniMax-M3, M3.1-Flash improves task performance and inference efficiency with sparse attention throughout the model, quantization-aware training, and DSpark speculative decoding."
+        },
+        {
+          "url": "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash",
+          "quote": "Parameters: Approximately 428B total; 23B activated per token"
+        },
+        {
+          "url": "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash",
+          "quote": "Context window: Up to 1,000,000 tokens"
+        },
+        {
+          "url": "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash",
+          "quote": "M3.1-Flash retains M3’s core mixture-of-experts architecture, with three main changes:"
+        },
+        {
+          "url": "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash",
+          "quote": "We recommend the following inference frameworks to serve the model:"
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Liquid AI 发布端侧全模态模型 LFM3-Omni-2B",
+      "summary": "LFM3-Omni-2B 是 LFM3 家族首个 omni-modal 模型，单个端到端模型即可理解文本、图像、视频与音频，并以文本或语音作答，从而取代单独的 ASR、视觉语言、LLM 与 TTS 模型。它按端侧场景设计，支持多语言、32K 输入输出上下文和 128,000 文本 tokens，可通过 Transformers 或 SGLang 在 CPU、GPU 上做本地推理。",
+      "tags": [
+        "模型",
+        "多模态",
+        "语音"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_73262d098d",
+          "url": "https://huggingface.co/LiquidAI/LFM3-Omni-2B"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/LiquidAI/LFM3-Omni-2B",
+          "quote": "LFM3-Omni-2B is Liquid AI 's first omni-modal model in the LFM3 family: a single end-to-end model that understands text, images, video and audio , and answers in text and speech ."
+        },
+        {
+          "url": "https://huggingface.co/LiquidAI/LFM3-Omni-2B",
+          "quote": "It is built for on-device use: one model replaces a separate ASR model, vision-language model, LLM and TTS model."
+        },
+        {
+          "url": "https://huggingface.co/LiquidAI/LFM3-Omni-2B",
+          "quote": "Small enough for devices: at 2.2B parameters, it is designed to run efficiently on phones, laptops and other edge hardware."
+        },
+        {
+          "url": "https://huggingface.co/LiquidAI/LFM3-Omni-2B",
+          "quote": "32K tokens (input + output)"
+        },
+        {
+          "url": "https://huggingface.co/LiquidAI/LFM3-Omni-2B",
+          "quote": "128,000 text tokens"
+        },
+        {
+          "url": "https://huggingface.co/LiquidAI/LFM3-Omni-2B",
+          "quote": "English, Arabic, Chinese, French, German, Italian, Japanese, Korean, Portuguese, Spanish, Vietnamese, Thai, Indonesian, Hindi, Russian, Polish"
+        },
+        {
+          "url": "https://huggingface.co/LiquidAI/LFM3-Omni-2B",
+          "quote": "Local inference on CPUs and GPUs, including a realtime speech server."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "AI Agent 群体在 Minecraft 里建不出文明",
+      "summary": "Y Combinator 与 Olam Labs 让一批代理在 Minecraft 中三小时内建设繁荣文明，结果是大量早期目标被放弃、群体陷入官僚流程，例如四个代理花 11 分钟为一份骨粉选定“唯一施肥员”。在对战测试中，GPT 代理与 Claude 代理对抗，Mindustry 对战由 GPT 一方以 6-1 获胜，这些群体实验已开源。",
+      "tags": [
+        "Agent",
+        "多模态",
+        "行业"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_2fd6149769",
+          "url": "https://www.tomshardware.com/tech-industry/artificial-intelligence/ai-agent-swarms-unleashed-in-minecraft-to-build-a-thriving-civilization-50-agent-teams-fail-after-falling-into-paralyzing-bureaucracy"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://www.tomshardware.com/tech-industry/artificial-intelligence/ai-agent-swarms-unleashed-in-minecraft-to-build-a-thriving-civilization-50-agent-teams-fail-after-falling-into-paralyzing-bureaucracy",
+          "quote": "AI researchers at ycombinator and Olam Labs recently tested AI agent swarms in gaming scenarios."
+        },
+        {
+          "url": "https://www.tomshardware.com/tech-industry/artificial-intelligence/ai-agent-swarms-unleashed-in-minecraft-to-build-a-thriving-civilization-50-agent-teams-fail-after-falling-into-paralyzing-bureaucracy",
+          "quote": "During this test phase, the researchers tasked 50 agents with building a thriving civilization in three hours."
+        },
+        {
+          "url": "https://www.tomshardware.com/tech-industry/artificial-intelligence/ai-agent-swarms-unleashed-in-minecraft-to-build-a-thriving-civilization-50-agent-teams-fail-after-falling-into-paralyzing-bureaucracy",
+          "quote": "After the first night saw zombies take out a large number of agents (but with little penalty) it was noted that “many ambitious initial tasks were abandoned.”"
+        },
+        {
+          "url": "https://www.tomshardware.com/tech-industry/artificial-intelligence/ai-agent-swarms-unleashed-in-minecraft-to-build-a-thriving-civilization-50-agent-teams-fail-after-falling-into-paralyzing-bureaucracy",
+          "quote": "As an example, “four agents spent 11 minutes appointing a ‘sole fertilizer operator’ for a single piece of bone meal on a single wheat block.” The researchers say this AI agent swarm behavior “felt similar to patterns seen while working with coding agents.”"
+        },
+        {
+          "url": "https://www.tomshardware.com/tech-industry/artificial-intelligence/ai-agent-swarms-unleashed-in-minecraft-to-build-a-thriving-civilization-50-agent-teams-fail-after-falling-into-paralyzing-bureaucracy",
+          "quote": "“The GPTs won 6-1 against the Claudes in the 7 games,” which was a great result for the OpenAI-created agents."
+        },
+        {
+          "url": "https://www.tomshardware.com/tech-industry/artificial-intelligence/ai-agent-swarms-unleashed-in-minecraft-to-build-a-thriving-civilization-50-agent-teams-fail-after-falling-into-paralyzing-bureaucracy",
+          "quote": "Researchers concluded that GPTs acted more like a hive, while Claudes had a single leader but a democratic-style decision process."
+        },
+        {
+          "url": "https://www.tomshardware.com/tech-industry/artificial-intelligence/ai-agent-swarms-unleashed-in-minecraft-to-build-a-thriving-civilization-50-agent-teams-fail-after-falling-into-paralyzing-bureaucracy",
+          "quote": "These swarms are open sourced so you can run your own, if you are interested in tweaking and testing."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Kornia 推进可微分视觉与几何的参考实现",
+      "summary": "Kornia 是基于 PyTorch 的可微分计算机视觉库，提供 1,200+ 公开算子，覆盖相机模型、对极几何、最小求解器与 RANSAC、特征检测匹配、形态学等，多数在 torchvision 中没有对应实现。项目方向是成为 PyTorch 生态中可微分视觉与几何的参考实现与可执行规范，强调显式约定、一致性测试与诚实基准，而非继续扩张 API。",
+      "tags": [
+        "开源",
+        "工具",
+        "图像"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_64fec6e3f5",
+          "url": "https://github.com/kornia/kornia"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/kornia/kornia",
+          "quote": "Kornia is a differentiable computer vision library that provides a rich set of differentiable image processing and geometric vision algorithms."
+        },
+        {
+          "url": "https://github.com/kornia/kornia",
+          "quote": "📢 Direction : Kornia is becoming the reference implementation and executable specification for differentiable computer vision and geometry in the PyTorch ecosystem — explicit conventions, conformance tests, and honest benchmarks over API growth."
+        },
+        {
+          "url": "https://github.com/kornia/kornia",
+          "quote": "1,200+ public operators, most with no torchvision equivalent: camera models and"
+        },
+        {
+          "url": "https://github.com/kornia/kornia",
+          "quote": "morphology, Lab and Bayer color, image losses and metrics."
+        },
+        {
+          "url": "https://github.com/kornia/kornia",
+          "quote": "Batched minimal solvers and robust estimation."
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Drex Max v1：只输出概率的多模态决策模型",
+      "summary": "Nace.AI 开源 Drex Max v1，这是一个 27B 稠密多模态决策模型，不生成任何 token，而是针对上下文状态与具名问题做一次前向，直接返回最多 255 个选项的概率。模型默认上下文 16,384 tokens，可上调至 262,144-token 窗口，Apple Silicon 上可通过其 llama.cpp、Ollama、Kapitsa 与 MLX 分支运行，另有 NVIDIA GPU 的 Python 路径。",
+      "tags": [
+        "模型",
+        "开源",
+        "多模态"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_f2001e1382",
+          "url": "https://huggingface.co/nace-ai/drex-max-v1"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/nace-ai/drex-max-v1",
+          "quote": "Drex Max, from Nace.AI , answers typed questions about a given context, in text, JSON and images."
+        },
+        {
+          "url": "https://huggingface.co/nace-ai/drex-max-v1",
+          "quote": "Pass the context as state ( request format ) with one or more named questions, and get a probability for every option back in one forward pass."
+        },
+        {
+          "url": "https://huggingface.co/nace-ai/drex-max-v1",
+          "quote": "Nothing is generated."
+        },
+        {
+          "url": "https://huggingface.co/nace-ai/drex-max-v1",
+          "quote": "Drex Max is a dense 27B-parameter model with a 255-way readout head, and is released under the Nace.AI Open RAIL-M license."
+        },
+        {
+          "url": "https://huggingface.co/nace-ai/drex-max-v1",
+          "quote": "On Apple silicon its text backbone runs on llama.cpp, Ollama, Kapitsa and MLX, and on the CPU with llama.cpp and Ollama."
+        },
+        {
+          "url": "https://huggingface.co/nace-ai/drex-max-v1",
+          "quote": "The default limit is 16,384 tokens per request."
+        },
+        {
+          "url": "https://huggingface.co/nace-ai/drex-max-v1",
+          "quote": "DREX_MAX_CONTEXT=N or --max-length N raises it up to the model's 262,144-token window (see context length )."
+        },
+        {
+          "url": "https://huggingface.co/nace-ai/drex-max-v1",
+          "quote": "The backbone has 64 layers: 48 Gated DeltaNet linear-attention layers that stay left to right, and 16 full-attention layers (every fourth) that are non-causal, so every token can attend to the whole sequence."
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Memdoor 用 5 个小模型组队刷编程题",
+      "summary": "Memdoor 的 team-solve 工作流让 5 个 Qwen3.8-27B 各自在全新上下文中扮演规划、两个点子、求解、评审与修复角色，仅通过磁盘文件通信，并以脚本判定成功。作者在 LiveCodeBench Hard 的前 10 道题上各跑 5 次，中位单次耗时 40 分钟、0.39 美元，声称与 Fable 5 的表现持平，同时明确指出样本量小、题目可能已被训练数据见过等问题。",
+      "tags": [
+        "Agent",
+        "开源",
+        "代码"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_00e82a92f4",
+          "url": "https://github.com/guregodevo/memdoor/tree/main/examples/workflows/team-solve"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/guregodevo/memdoor/tree/main/examples/workflows/team-solve",
+          "quote": "Five small models on one programming problem: a planner, two ideators, a"
+        },
+        {
+          "url": "https://github.com/guregodevo/memdoor/tree/main/examples/workflows/team-solve",
+          "quote": "solver, a manager and a repair worker, each from a fresh context, talking"
+        },
+        {
+          "url": "https://github.com/guregodevo/memdoor/tree/main/examples/workflows/team-solve",
+          "quote": "only through files on disk; a script that runs the samples decides success."
+        },
+        {
+          "url": "https://github.com/guregodevo/memdoor/tree/main/examples/workflows/team-solve",
+          "quote": "The method of GVS5H (Lee, 2026) as a"
+        },
+        {
+          "url": "https://github.com/guregodevo/memdoor/tree/main/examples/workflows/team-solve",
+          "quote": "The authors' harness on the same model, Qwen3.8-27B, with their prompts,"
+        },
+        {
+          "url": "https://github.com/guregodevo/memdoor/tree/main/examples/workflows/team-solve",
+          "quote": "The first ten problems of their LiveCodeBench Hard"
+        },
+        {
+          "url": "https://github.com/guregodevo/memdoor/tree/main/examples/workflows/team-solve",
+          "quote": "A median of 40 minutes and $0.39 a run; $35.79 for the 50."
+        },
+        {
+          "url": "https://github.com/guregodevo/memdoor/tree/main/examples/workflows/team-solve",
+          "quote": "Sample: ten problems, five passes, against the authors' 100."
+        },
+        {
+          "url": "https://github.com/guregodevo/memdoor/tree/main/examples/workflows/team-solve",
+          "quote": "Contamination: the contests date from spring 2025; the model may have seen"
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Numbat：Anthropic 未发布模型的中间预训练检查点",
+      "summary": "HF 用户 burner22 放出名为 numbat 的 Anthropic 中间预训练检查点，声称其架构与 Claude Code 源码泄露中出现过的代号一致，规模约 6.8T 参数，采用 Gated DeltaNet 与 Multi-head Latent Attention 混合栈加 MoE。仓库提供完整参考实现，但作者称这是约 1.96M 步训练中第 1,830,000 步的检查点，没有后训练也没有 RLHF，来源与真实性无法核实。",
+      "tags": [
+        "模型",
+        "开源",
+        "推理"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_b670ce3189",
+          "url": "https://huggingface.co/burner22/numbat"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/burner22/numbat",
+          "quote": "~14T param, 114 layers, hybrid GDN/MLA, MoE (1,224 experts, top-48 + 1"
+        },
+        {
+          "url": "https://huggingface.co/burner22/numbat",
+          "quote": "Internal codename numbat , Anthropic's next Mythos-class"
+        },
+        {
+          "url": "https://huggingface.co/burner22/numbat",
+          "quote": "byte-level BPE, 131,072 tokens"
+        },
+        {
+          "url": "https://huggingface.co/burner22/numbat",
+          "quote": "The 772 shards total ~7.72 TB of tensor data."
+        },
+        {
+          "url": "https://huggingface.co/burner22/numbat",
+          "quote": "The checkpoint's architecture (hybrid GDN/MLA, 1,224 experts, NVFP4)"
+        },
+        {
+          "url": "https://huggingface.co/burner22/numbat",
+          "quote": "The architecture is a hybrid Gated DeltaNet (GDN) + Multi-head Latent"
+        },
+        {
+          "url": "https://huggingface.co/burner22/numbat",
+          "quote": "But this is a pretraining checkpoint at step"
+        },
+        {
+          "url": "https://huggingface.co/burner22/numbat",
+          "quote": "1,830,000 of a ~1.96M step run."
+        },
+        {
+          "url": "https://huggingface.co/burner22/numbat",
+          "quote": "No post-training, no RLHF."
+        },
+        {
+          "url": "https://huggingface.co/burner22/numbat",
+          "quote": "Safetensors Model size 6.8T params Tensor type BF16 · F32 · U8 · Files info Inference Providers NEW This model isn't deployed by any Inference Provider."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "JEPA 论文声称 109M 模型超越 72B 的跨模态对齐",
+      "summary": "Yann LeCun 与 Randall Balestriero 的论文从数学上论证，在一定条件下两个独立训练的 JEPA 可以学到相同的世界表征：一个从同一场景的不同图像学习，另一个从不同文本描述学习，且从未使用图文对。论文称该方法用 42x 更少训练样本达到同等图文对齐，109M 参数的文本 JEPA 在跨模态对齐基准上超过最高 72B 参数的 LLM。",
+      "tags": [
+        "论文",
+        "多模态",
+        "训练"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_51ee2633f4",
+          "url": "https://x.com/askalphaxiv/status/2116779287390896418"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://x.com/askalphaxiv/status/2116779287390896418",
+          "quote": "Post Log in Sign up Post Log in Sign up alphaXiv on X: \"Yann LeCun and Randall Balestriero just Proved the Platonic Representation Hypothesis, and found a better way to achieve it."
+        },
+        {
+          "url": "https://x.com/askalphaxiv/status/2116779287390896418",
+          "quote": "So they mathematically show that, under certain conditions, two JEPAs trained completely separately can learn essentially the same underlying representation of the world."
+        },
+        {
+          "url": "https://x.com/askalphaxiv/status/2116779287390896418",
+          "quote": "One learns from different images of the same scene, while the other learns from different descriptions of that scene, without ever being trained on image-text pairs."
+        },
+        {
+          "url": "https://x.com/askalphaxiv/status/2116779287390896418",
+          "quote": "Their approach achieves the same image-text alignment with 42x fewer training samples than next-token prediction."
+        },
+        {
+          "url": "https://x.com/askalphaxiv/status/2116779287390896418",
+          "quote": "A 109M-parameter text JEPA even outperforms LLMs up to 72B parameters on cross-modal alignment benchmarks."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Nolan Lawson 实测 AI 生成前端框架的代价",
+      "summary": "作者用 PokéAPI 小型应用对多个 JavaScript 框架与元框架做了基准测试：让 Opus 5.5 以高 effort 按规范构建应用，用一致性测试套件校验，并统计开发时间、token 消耗、代码行数以及 Lighthouse 的性能与无障碍分数，每种框架取 5 次运行的中位数。结论是 SvelteKit、Gracile+Lit 与 Angular 的构建成本更高，但作者也强调实验随机性大、样本单一，框架之间的差距需谨慎解读。",
+      "tags": [
+        "论文",
+        "工具",
+        "行业"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_d6756f65c5",
+          "url": "https://nolanlawson.com/2026/10/28/the-ai-cost-of-javascript-frameworks/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://nolanlawson.com/2026/10/28/the-ai-cost-of-javascript-frameworks/",
+          "quote": "Design a small but non-trivial Pokémon app using the PokéAPI (those who have followed my work will be unsurprised)"
+        },
+        {
+          "url": "https://nolanlawson.com/2026/10/28/the-ai-cost-of-javascript-frameworks/",
+          "quote": "Instruct agents to build the app with a particular JavaScript framework/meta-framework (e.g."
+        },
+        {
+          "url": "https://nolanlawson.com/2026/10/28/the-ai-cost-of-javascript-frameworks/",
+          "quote": "Test the output against a spec conformance suite (to avoid agent cheating)"
+        },
+        {
+          "url": "https://nolanlawson.com/2026/10/28/the-ai-cost-of-javascript-frameworks/",
+          "quote": "Evaluate the results in terms of development time, tokens spent, lines of code, and performance and accessibility scores in Lighthouse"
+        },
+        {
+          "url": "https://nolanlawson.com/2026/10/28/the-ai-cost-of-javascript-frameworks/",
+          "quote": "I simply gave the spec to Opus 5.5 with high effort and told it to use the latest version of the given framework."
+        },
+        {
+          "url": "https://nolanlawson.com/2026/10/28/the-ai-cost-of-javascript-frameworks/",
+          "quote": "For each framework/meta-framework, I took the median of 5 runs: in other words, I built the same app 5 times in the same framework."
+        },
+        {
+          "url": "https://nolanlawson.com/2026/10/28/the-ai-cost-of-javascript-frameworks/",
+          "quote": "However some reliable patterns do emerge."
+        },
+        {
+          "url": "https://nolanlawson.com/2026/10/28/the-ai-cost-of-javascript-frameworks/",
+          "quote": "Most clearly, SvelteKit, Gracile+Lit, and Angular are more expensive to build than the other frameworks."
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Infernix：面向 RTX 5090 的单卡 Qwen 推理引擎",
+      "summary": "Infernix 是 C++/CUDA 编写的单张 NVIDIA RTX 5090 推理引擎，从 NInfer 分叉而来，针对 Qwen3.8 及 Qwen3.8-Flash-Next（含专家卸载）优化，作者称原生支持 262K 上下文、可用 YaRN 扩到 1M。README 强调不做精度捷径，按检查点指定的精度保持激活，并提供 DFlash2 投机解码、SSD 专家分层以及 Windows 一键安装等能力，作者自称属于业余开发。",
+      "tags": [
+        "工具",
+        "开源",
+        "推理"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_219f5747eb",
+          "url": "https://github.com/Wallawalla47/Infernix"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/Wallawalla47/Infernix",
+          "quote": "Infernix Public Sponsor Notifications You must be signed in to change notification settings Fork 32 ( 32 ) Star 190 ( 190 ) You must be signed in to star a repository About C++/CUDA single-GPU inference engine for Qwen3.8 (incl."
+        },
+        {
+          "url": "https://github.com/Wallawalla47/Infernix",
+          "quote": "This is hobby development."
+        },
+        {
+          "url": "https://github.com/Wallawalla47/Infernix",
+          "quote": "Infernix is a C++/CUDA inference engine that serves Qwen models on one NVIDIA RTX 5090."
+        },
+        {
+          "url": "https://github.com/Wallawalla47/Infernix",
+          "quote": "Speed without precision shortcuts."
+        },
+        {
+          "url": "https://github.com/Wallawalla47/Infernix",
+          "quote": "Infernix keeps every activation at the precision the"
+        },
+        {
+          "url": "https://github.com/Wallawalla47/Infernix",
+          "quote": "Activations as the checkpoint specifies : 16-bit wherever it keeps BF16 (all of them on GGUF),"
+        },
+        {
+          "url": "https://github.com/Wallawalla47/Infernix",
+          "quote": "Long context : 262K tokens natively, 1M with YaRN; a 250K prompt prefills in about 24 s."
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "AiSOC：可自托管的开源 AI 安全运营中心",
+      "summary": "AiSOC 是一个开源、可自托管的 AI Security Operations Center，负责接入安全遥测、检测并关联告警，再由 AI Agent 调查每个事件并给出处置建议，最终动作需人工批准。它采用 MIT 许可并附带面向 Claude、Cursor 与 Continue 的 MCP server，官方提供不依赖 Docker 的 pip 安装沙盒与 GitHub Codespaces 演示路径。",
+      "tags": [
+        "开源",
+        "工具",
+        "安全"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_1cc8167e7b",
+          "url": "https://github.com/beenuar/AiSOC"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/beenuar/AiSOC",
+          "quote": "AiSOC Public Notifications You must be signed in to change notification settings Fork 653 ( 653 ) Star 6.3k ( 6.3k ) You must be signed in to star a repository About Open-source AI Security Operations Center: alert fusion, LLM-agent triage, MITRE ATT&CK investigation, and a replayable decision ledge"
+        },
+        {
+          "url": "https://github.com/beenuar/AiSOC",
+          "quote": "Self-hostable, runs with no API keys, MIT licensed."
+        },
+        {
+          "url": "https://github.com/beenuar/AiSOC",
+          "quote": "Ships an MCP server for Claude, Cursor and Continue."
+        },
+        {
+          "url": "https://github.com/beenuar/AiSOC",
+          "quote": "An open-source, self-hostable AI Security Operations Center."
+        },
+        {
+          "url": "https://github.com/beenuar/AiSOC",
+          "quote": "It ingests your security telemetry, detects and correlates threats, investigates them with AI agents whose reasoning is fully auditable, and proposes responses a human approves."
+        },
+        {
+          "url": "https://github.com/beenuar/AiSOC",
+          "quote": "Without Docker at all , pip install aisoc-sandbox && aisoc-sandbox demo walks one alert through the agent funnel offline in under 30 seconds."
+        }
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "FineDNA 开源 DNA 领域训练数据与配方",
+      "summary": "作者发布 FineDNA，含 Midtraining 的 300B+ tokens 基因组文本、SFT 的约 200K 条对话与 RL 的约 98K 条可验证 prompt，配套代码与配方也开放。",
+      "tags": [
+        "开源",
+        "训练",
+        "论文"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_be8c8ba297",
+          "url": "https://i.redd.it/cdh8dfe7dyyh1.png"
+        }
+      ],
+      "evidence": []
+    },
+    {
+      "section": "brief",
+      "title": "Kapitsa 公布 M5 Max 端侧推理成绩",
+      "summary": "Kapitsa 在 M5 Max 上测 6 个模型，Qwen3.6 35B-A3B 解码 346 tok/s、预填充 6,036 tok/s，Clover 35B-A3B 为 304 与 5,981。",
+      "tags": [
+        "工具",
+        "硬件",
+        "推理"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_b2562ac341",
+          "url": "https://i.redd.it/32s48p6jx2zh1.png"
+        }
+      ],
+      "evidence": []
+    },
+    {
+      "section": "brief",
+      "title": "GLB-3D-Coder：4B 模型生成 Godot 可用 3D 资产",
+      "summary": "Qwen3.5-4B-GLB-3D-Coder 输出带 GLB 导出的 Three.js 场景，可导入 Godot。作者称是首个功能检查点，训练结束后计划公开完整 Safetensors 权重与训练数据集。",
+      "tags": [
+        "模型",
+        "代码",
+        "图像"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_a3b4d6d2a4",
+          "url": "https://v.redd.it/6ssijtngz2zh1"
+        }
+      ],
+      "evidence": []
+    }
+  ],
+  "research": [
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://x.com/askalphaxiv/status/2116779287390896418"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://i.redd.it/cdh8dfe7dyyh1.png"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/nace-ai/drex-max-v1"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://i.redd.it/gyfuu9jlwzyh1.jpeg"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/guregodevo/memdoor/tree/main/examples/workflows/team-solve"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/LiquidAI/LFM3-Omni-2B"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/beenuar/AiSOC"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/kornia/kornia"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/patchy631/ai-engineering-hub"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/burner22/numbat"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/Wallawalla47/Infernix"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://i.redd.it/32s48p6jx2zh1.png"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://v.redd.it/6ssijtngz2zh1"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://v.redd.it/5yly3ah9w1zh1"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://nolanlawson.com/2026/10/28/the-ai-cost-of-javascript-frameworks/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://www.tomshardware.com/tech-industry/artificial-intelligence/ai-agent-swarms-unleashed-in-minecraft-to-build-a-thriving-civilization-50-agent-teams-fail-after-falling-into-paralyzing-bureaucracy"
+    }
+  ],
+  "validation": {
+    "validated_at": "2026-11-02T04:41:06+00:00",
+    "checked_links": true,
+    "dropped": [],
+    "warnings": [
+      "GLB-3D-Coder：4B 模型生成 Godot 可用 3D 资产: could not check https://v.redd.it/6ssijtngz2zh1 (403)",
+      "15 items (target 8-12)"
+    ]
+  }
+}
