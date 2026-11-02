@@ -167,7 +167,7 @@ function Legend({ scored }: { scored: boolean }) {
       <span className="flex items-center gap-1.5">
         <Mark cell={{ state: "unpicked", step: null, reasons: [], score: null, total }} /> 未选
       </span>
-      <span>{scored ? "数字是三项打分之和（0–8）。" : "这期当时没有打分。"}点一行看详情。</span>
+      <span>{scored ? "数字是三项打分之和（0–8），点开一行能看到每项分数和原因" : "这期当时没有打分，点开一行能看到原因"}</span>
     </p>
   )
 }

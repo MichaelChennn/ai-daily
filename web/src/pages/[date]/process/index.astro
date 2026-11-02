@@ -47,9 +47,9 @@ const fetchMax = Math.max(1, ...fetch.map((s) => s.value ?? 0))
 const routeMax = Math.max(1, ...process.channels.flatMap((c) => c.funnel.slice(1).map((s) => s.value)))
 const failed = process.sources.filter((s) => s.status && s.status !== "ok")
 
-const mainLabel = process.channels.find((c) => c.main)?.label ?? "另一条路线"
+const mainLabel = process.channels.find((c) => c.main)?.label ?? "另一个编辑通道"
 
-// After a run, the site decides whether its digest becomes the issue at /<期号>/ (the 正式一期),
+// After a run, the site decides whether its digest becomes the issue at /<期号>/ (the 正式版),
 // and whether its English edition goes with it (publish.py). An API route's digest is shown as
 // its Beta edition either way.
 const ADOPT: Record<string, string> = {
@@ -63,7 +63,7 @@ const ADOPT: Record<string, string> = {
   unchanged: "和现有的正式版完全一样，没有改动。",
   "English edition of the main issue": "作为这一期的英文版发布：它和正式版出自同一次编辑。",
   "the current English edition is newer": "没有发布英文版：现有的英文版是更晚的一次运行。",
-  "the main issue comes from the other route": `没有发布英文版：英文版要和正式版出自同一条路线，这一期的正式版是 ${mainLabel} 写的。`,
+  "the main issue comes from the other route": `没有发布英文版：英文版要和正式版出自同一个编辑通道，这一期的正式版是 ${mainLabel} 写的。`,
   "the main issue comes from another model": `没有发布英文版：英文版要和正式版出自同一个模型，这一期的正式版是 ${mainLabel} 写的。`,
   "the main issue is a fallback": "没有发布英文版：正式版是保底版，保底版没有英文版。",
   "no main issue to go with": "没有发布英文版：这一期还没有合格的正式版。",
@@ -109,9 +109,9 @@ const REVISE: Record<string, string> = {
 }
 
 function status(c: Channel): string {
-  if (c.main) return "正式一期"
+  if (c.main) return "正式版"
   if (c.failure) return "运行失败"
-  return c.id.startsWith("api.") ? "Beta" : "未采用"
+  return c.id.startsWith("api.") ? "Beta版" : "未采用"
 }
 
 function summary(s: Step): string {
@@ -163,7 +163,7 @@ const number = "text-sm font-medium text-muted-foreground tabular-nums"
           fetch.map((s) => (
             <li class="grid grid-cols-[5.5rem_1fr_auto] items-center gap-3 text-sm">
               <span class="text-muted-foreground">{s.label}</span>
-              <span class="h-2 rounded-full bg-muted">
+              <span class="h-2 rounded-full bg-foreground/10">
                 {s.value !== null && (
                   <span class="block h-2 rounded-full bg-foreground" style={`width:${(s.value / fetchMax) * 100}%`} />
                 )}
@@ -215,7 +215,7 @@ const number = "text-sm font-medium text-muted-foreground tabular-nums"
                 {c.funnel.slice(1).map((s) => (
                   <li class="flex flex-col gap-1.5">
                     <span class="text-lg font-semibold tabular-nums">{s.value}</span>
-                    <span class="h-1.5 rounded-full bg-muted">
+                    <span class="h-1.5 rounded-full bg-foreground/10">
                       <span class="block h-1.5 rounded-full bg-foreground" style={`width:${(s.value / routeMax) * 100}%`} />
                     </span>
                     <span class="text-xs text-muted-foreground">{s.label}</span>
@@ -349,7 +349,7 @@ const number = "text-sm font-medium text-muted-foreground tabular-nums"
                             <>
                               这份稿子照常作为
                               <a href={link} class="underline underline-offset-2 hover:text-foreground">
-                                Beta 版
+                                Beta版
                               </a>
                               发布。
                             </>
