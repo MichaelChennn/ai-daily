@@ -54,10 +54,10 @@ const mainLabel = process.channels.find((c) => c.main)?.label ?? "另一个编�
 // its Beta edition either way.
 const ADOPT: Record<string, string> = {
   "no valid digest yet": "成为这一期的正式版：当时这一期还没有合格的版本。",
-  "replaces the fallback": "成为这一期的正式版，替换了 06:30 自动生成的保底版。",
+  "replaces the fallback": "成为这一期的正式版，替换了 06:30 自动生成的降级版。",
   "a Claude edit replaces the API edit": "成为这一期的正式版，替换了先到的 API 通道稿子。",
   "newer edit": "成为这一期的正式版，替换了同一通道更早的一次运行。",
-  "keeping the edited issue over a fallback": "没有替换正式版：保底版不会替换编辑写过的一期。",
+  "keeping the edited issue over a fallback": "没有替换正式版：降级版不会替换编辑写过的一期。",
   "keeping the edited issue over an API edit": `没有成为正式版：这一期已经用了 ${mainLabel} 编辑的稿子，API 通道的稿子不会替换它。`,
   "the current edit is newer": "没有替换正式版：现有的正式版是更晚的一次运行。",
   unchanged: "和现有的正式版完全一样，没有改动。",
@@ -65,7 +65,7 @@ const ADOPT: Record<string, string> = {
   "the current English edition is newer": "没有发布英文版：现有的英文版是更晚的一次运行。",
   "the main issue comes from the other route": `没有发布英文版：英文版要和正式版出自同一个编辑通道，这一期的正式版是 ${mainLabel} 写的。`,
   "the main issue comes from another model": `没有发布英文版：英文版要和正式版出自同一个模型，这一期的正式版是 ${mainLabel} 写的。`,
-  "the main issue is a fallback": "没有发布英文版：正式版是保底版，保底版没有英文版。",
+  "the main issue is a fallback": "没有发布英文版：这一期展示的是降级版，降级版没有英文版。",
   "no main issue to go with": "没有发布英文版：这一期还没有合格的正式版。",
 }
 
