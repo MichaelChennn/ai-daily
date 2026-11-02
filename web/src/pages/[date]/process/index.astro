@@ -1,0 +1,414 @@
+---
+import { cn } from "cn"
+import { ArrowLeft, TriangleAlert } from "lucide-react"
+
+import { Alert, AlertDescription } from "@/components/ui/alert"
+import DateWheel from "@/components/DateWheel"
+import ProcessMatrix from "@/components/ProcessMatrix"
+import Layout from "@/layouts/Layout.astro"
+import { betaHref, betas, issueHref, SITE_TITLE } from "@/lib/issues"
+import { type Adopt, type Channel, type Dropped, type Passed, type Process, processes, reasonZh, type Step } from "@/lib/process"
+
+// How one issue was made (issue #26): the fetch, what each editor route kept and dropped at each
+// step, and every candidate against every route. Chinese only.
+export function getStaticPaths() {
+  return processes.map((process) => ({ params: { date: process.date }, props: { process } }))
+}
+
+interface Props {
+  process: Process
+}
+
+const { process } = Astro.props
+const at = processes.findIndex((p) => p.date === process.date)
+const newer = processes[at - 1]?.date ?? null
+const older = processes[at + 1]?.date ?? null
+const published = new Set(processes.map((p) => p.date))
+const title = `${process.date} · 生成过程 · ${SITE_TITLE}`
+
+const f = process.funnel
+const fetched = f.filtered === null || f.raw === null ? null : f.raw + f.filtered
+const fetch = [
+  { label: "抓取", value: fetched, note: fetched === null ? "当时未记录" : null },
+  { label: "过滤后", value: f.raw, note: f.filtered === null ? null : `过滤 ${f.filtered}` },
+  {
+    label: "合并同链接",
+    value: f.after_url_merge,
+    note: f.raw !== null && f.after_url_merge !== null && f.raw > f.after_url_merge ? `合并 ${f.raw - f.after_url_merge}` : null,
+  },
+  {
+    label: "候选",
+    value: f.candidates,
+    note: f.already_published ? `去掉已发布过的 ${f.already_published}` : null,
+  },
+]
+const fetchMax = Math.max(1, ...fetch.map((s) => s.value ?? 0))
+// The routes' stages after 候选 share one scale, so the routes compare at a glance.
+const routeMax = Math.max(1, ...process.channels.flatMap((c) => c.funnel.slice(1).map((s) => s.value)))
+const failed = process.sources.filter((s) => s.status && s.status !== "ok")
+
+const mainLabel = process.channels.find((c) => c.main)?.label ?? "另一条路线"
+
+// After a run, the site decides whether its digest becomes the issue at /<期号>/ (the 正式一期),
+// and whether its English edition goes with it (publish.py). An API route's digest is shown as
+// its Beta edition either way.
+const ADOPT: Record<string, string> = {
+  "no valid digest yet": "成为这一期的正式版：当时这一期还没有合格的版本。",
+  "replaces the fallback": "成为这一期的正式版，替换了 06:30 自动生成的保底版。",
+  "a Claude edit replaces the API edit": "成为这一期的正式版，替换了先到的 API 通道稿子。",
+  "newer edit": "成为这一期的正式版，替换了同一通道更早的一次运行。",
+  "keeping the edited issue over a fallback": "没有替换正式版：保底版不会替换编辑写过的一期。",
+  "keeping the edited issue over an API edit": `没有成为正式版：这一期已经用了 ${mainLabel} 编辑的稿子，API 通道的稿子不会替换它。`,
+  "the current edit is newer": "没有替换正式版：现有的正式版是更晚的一次运行。",
+  unchanged: "和现有的正式版完全一样，没有改动。",
+  "English edition of the main issue": "作为这一期的英文版发布：它和正式版出自同一次编辑。",
+  "the current English edition is newer": "没有发布英文版：现有的英文版是更晚的一次运行。",
+  "the main issue comes from the other route": `没有发布英文版：英文版要和正式版出自同一条路线，这一期的正式版是 ${mainLabel} 写的。`,
+  "the main issue comes from another model": `没有发布英文版：英文版要和正式版出自同一个模型，这一期的正式版是 ${mainLabel} 写的。`,
+  "the main issue is a fallback": "没有发布英文版：正式版是保底版，保底版没有英文版。",
+  "no main issue to go with": "没有发布英文版：这一期还没有合格的正式版。",
+}
+
+function adopt(a: Adopt) {
+  return {
+    label: a.edition === "en" ? "选定英文版" : "选定正式版",
+    text: ADOPT[a.reason] ?? `${a.adopted ? "采用" : "未采用"}：${a.reason}`,
+  }
+}
+
+/** The route's Beta edition, when the site shows one. */
+function beta(c: Channel): string | null {
+  const slug = c.id.slice("api.".length)
+  return betas.some((b) => b.date === process.date && b.beta?.slug === slug) ? betaHref(process.date, slug) : null
+}
+
+// A validate round after another of the same language (第一稿 → 修改稿, 预检 → 正式校验) lists only
+// the items that newly passed; the rest passed the round before. In between, the editor revised the draft.
+const EN_STEPS = new Set(["en", "en_highlights"])
+function roundBefore(steps: Step[], at: number): Step | null {
+  const english = EN_STEPS.has(steps[at].step)
+  for (let i = at - 1; i >= 0; i--) {
+    const s = steps[i]
+    if (s.passed && EN_STEPS.has(s.step) === english) return s
+  }
+  return null
+}
+
+// The same item in another round: written from a shared candidate, since a revision may retitle it.
+// The title is the fallback for an item with no candidates.
+function sameItem(item: Passed, others: (Passed | Dropped)[] | undefined): boolean {
+  return (others ?? []).some((o) =>
+    item.candidates.length ? o.candidates.some((c) => item.candidates.includes(c)) : o.title === item.title,
+  )
+}
+
+// What the editor may do between two rounds (SKILL.md step 6; the API route's fix request).
+const REVISE: Record<string, string> = {
+  final: "Claude 按预检结果修改稿子：只能补原文引文、打开还没看过的一手来源，或者整条删掉，不能改写标题和摘要。具体改了什么当时没有记录。",
+  fix: "把第一稿的报错交给模型，让它改好被拒的新闻，不够数时再补几条，交回修改稿。",
+}
+
+function status(c: Channel): string {
+  if (c.main) return "正式一期"
+  if (c.failure) return "运行失败"
+  return c.id.startsWith("api.") ? "Beta" : "未采用"
+}
+
+function summary(s: Step): string {
+  const dropped = s.dropped?.length ?? 0
+  switch (s.step) {
+    case "no_first_hand":
+      return `去掉 ${s.candidates?.length ?? 0} 个候选`
+    case "pick":
+      return `挑出 ${s.groups?.length ?? 0} 组`
+    case "over_picks":
+      return `截掉 ${s.groups?.length ?? 0} 组`
+    case "self_check":
+      return dropped ? `删掉 ${dropped} 条` : "没有删"
+    default:
+      if (s.kept === undefined || s.kept === null) return ""
+      return dropped ? `通过 ${s.kept}，拒 ${dropped}` : `通过 ${s.kept}`
+  }
+}
+
+// The 日报简介 (highlights) checks that are not about one sentence, shown with the sentences.
+const HIGHLIGHT_COUNT = /^highlights must have/
+
+/** Drops a word that only repeats part of another (「2.1」 inside 「Mellum2.1-12B」, 「1.8」 inside 「1.8x」). */
+const outermost = (words: string[]) => words.filter((w) => !words.some((o) => o !== w && o.includes(w)))
+
+const time = (iso: string | null) =>
+  iso
+    ? new Date(iso).toLocaleTimeString("zh-CN", { timeZone: "Asia/Shanghai", hour: "2-digit", minute: "2-digit", hour12: false })
+    : ""
+const heading = "flex items-baseline gap-3 text-xl font-semibold tracking-tight"
+const number = "text-sm font-medium text-muted-foreground tabular-nums"
+---
+
+<Layout title={title} description={`${process.date} 这期日报从抓取到发布，每一步留下和去掉了什么。`} current={newer ? "archive" : "today"}>
+  <DateWheel date={process.date} published={published} older={older} newer={newer} path="process/" />
+
+  <div class="flex items-baseline justify-between gap-4">
+    <h1 class="text-2xl font-semibold tracking-tight">生成过程</h1>
+    <a href={issueHref(process.date)} class="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground">
+      <ArrowLeft className="size-3.5" />返回这期日报
+    </a>
+  </div>
+
+  <div class="mt-10 flex flex-col gap-14">
+    <section>
+      <h2 class={heading}><span class={number}>01</span><span>抓取</span></h2>
+      <ol class="mt-5 flex flex-col gap-2.5">
+        {
+          fetch.map((s) => (
+            <li class="grid grid-cols-[5.5rem_1fr_auto] items-center gap-3 text-sm">
+              <span class="text-muted-foreground">{s.label}</span>
+              <span class="h-2 rounded-full bg-muted">
+                {s.value !== null && (
+                  <span class="block h-2 rounded-full bg-foreground" style={`width:${(s.value / fetchMax) * 100}%`} />
+                )}
+              </span>
+              <span class="w-36 text-right tabular-nums">
+                {s.value ?? "—"}
+                {s.note && <span class="ml-1.5 text-xs text-muted-foreground">{s.note}</span>}
+              </span>
+            </li>
+          ))
+        }
+      </ol>
+      {
+        failed.length > 0 && (
+          <p class="mt-3 text-xs text-muted-foreground">
+            抓取失败：{failed.map((s) => `${s.name}（${s.error ?? s.status}）`).join("、")}
+          </p>
+        )
+      }
+    </section>
+
+    <section>
+      <h2 class={heading}><span class={number}>02</span><span>编辑</span></h2>
+      <div class="mt-5 flex flex-col gap-8">
+        {
+          process.channels.map((c) => (
+            <div>
+              <header class="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+                <h3 class="font-semibold">{c.label}</h3>
+                {c.model && <span class="font-mono text-xs text-muted-foreground">{c.model}</span>}
+                <span
+                  class={cn(
+                    "ml-auto rounded-full px-2.5 py-0.5 text-xs",
+                    c.main ? "bg-foreground text-background" : "ring-1 ring-foreground/20 text-muted-foreground",
+                  )}
+                >
+                  {status(c)}
+                </span>
+              </header>
+              {c.failure && (
+                <Alert className="mt-3 rounded-lg">
+                  <TriangleAlert />
+                  <AlertDescription>
+                    {c.failure.label}失败：{c.failure.error}
+                  </AlertDescription>
+                </Alert>
+              )}
+              <ol class="mt-3 grid grid-cols-4 gap-3">
+                {c.funnel.slice(1).map((s) => (
+                  <li class="flex flex-col gap-1.5">
+                    <span class="text-lg font-semibold tabular-nums">{s.value}</span>
+                    <span class="h-1.5 rounded-full bg-muted">
+                      <span class="block h-1.5 rounded-full bg-foreground" style={`width:${(s.value / routeMax) * 100}%`} />
+                    </span>
+                    <span class="text-xs text-muted-foreground">{s.label}</span>
+                  </li>
+                ))}
+              </ol>
+              <details class="group mt-3 text-sm">
+                <summary class="cursor-pointer text-xs text-muted-foreground select-none hover:text-foreground">
+                  {c.recorded ? `${c.steps.length} 个步骤` : "步骤（当时未记录，只有最后一次校验）"}
+                </summary>
+                <ol class="mt-3 flex flex-col gap-3 border-l border-foreground/10 pl-4">
+                  {c.steps.map((s, i) => {
+                    const prev = roundBefore(c.steps, i)
+                    const fresh = (s.passed ?? []).filter((p) => !sameItem(p, prev?.passed))
+                    const fixed = fresh.filter((p) => sameItem(p, prev?.dropped))
+                    const added = fresh.filter((p) => !sameItem(p, prev?.dropped))
+                    const again = (s.passed?.length ?? 0) - fresh.length
+                    const countErrors = (s.errors ?? []).filter((e) => HIGHLIGHT_COUNT.test(e))
+                    const otherErrors = (s.errors ?? []).filter((e) => !HIGHLIGHT_COUNT.test(e))
+                    return (
+                      <>
+                      {prev && REVISE[s.step] && (
+                        <li>
+                          <p class="font-medium">修改</p>
+                          <p class="mt-1 text-xs text-foreground/70">{REVISE[s.step]}</p>
+                        </li>
+                      )}
+                      <li>
+                        <p class="flex flex-wrap items-baseline gap-x-2">
+                          <span class="text-xs text-muted-foreground tabular-nums">{time(s.at)}</span>
+                          <span class="font-medium">{s.label}</span>
+                          <span class="text-muted-foreground">{summary(s)}</span>
+                        </p>
+                        <dl class="mt-1.5 grid grid-cols-[4rem_1fr] gap-x-2 gap-y-2 text-xs empty:hidden">
+                          {fixed.length > 0 && (
+                            <>
+                              <dt class="text-muted-foreground">改好</dt>
+                              <dd>
+                                <ul class="flex flex-col gap-0.5 text-foreground/70">
+                                  {fixed.map((p) => <li>{p.title}</li>)}
+                                </ul>
+                                <p class="text-muted-foreground">上一轮被拒，修改后通过</p>
+                              </dd>
+                            </>
+                          )}
+                          {(s.passed?.length ?? 0) > fixed.length && (
+                            <>
+                              <dt class="text-muted-foreground">通过</dt>
+                              <dd>
+                                <ul class="flex flex-col gap-0.5 text-foreground/70">
+                                  {added.map((p) => <li>{p.title}</li>)}
+                                </ul>
+                                {again > 0 && (
+                                  <p class="text-muted-foreground">
+                                    {added.length > 0 ? `另有 ${again} 条` : `这 ${again} 条`}上一轮已经通过，不再列出
+                                  </p>
+                                )}
+                              </dd>
+                            </>
+                          )}
+                          {(s.dropped?.length ?? 0) > 0 && (
+                            <>
+                              <dt class="text-muted-foreground">{s.step === "self_check" ? "删掉" : "拒绝"}</dt>
+                              <dd>
+                                <ul class="flex flex-col gap-1">
+                                  {s.dropped!.map((d) => (
+                                    <li>
+                                      <span class="text-foreground/90">{d.title}</span>
+                                      {d.reasons.filter(Boolean).map((r) => (
+                                        <span class="block text-muted-foreground">{reasonZh(r)}</span>
+                                      ))}
+                                    </li>
+                                  ))}
+                                </ul>
+                              </dd>
+                            </>
+                          )}
+                          {(s.highlights?.length ?? 0) + countErrors.length > 0 && (
+                            <>
+                              <dt class="text-muted-foreground">日报简介</dt>
+                              <dd class="flex flex-col gap-2">
+                                {s.highlights!.map((h) => (
+                                  <div>
+                                    {h.text && <p class="text-foreground/90">「{h.text}」</p>}
+                                    <p class="text-muted-foreground">
+                                      写到了
+                                      {outermost(h.missing).map((w) => `「${w}」`).join("")}
+                                      ，这一轮通过的新闻里都没有{h.text ? "" : "（当时没有记录是哪几句）"}。
+                                    </p>
+                                  </div>
+                                ))}
+                                {countErrors.map((e) => (
+                                  <p class="text-foreground/90">{reasonZh(e)}</p>
+                                ))}
+                                {(s.highlights?.length ?? 0) > 0 && (
+                                  <p class="text-muted-foreground">
+                                    日报简介是一期开头的 1–3 句概括，只能写通过校验的新闻里有的内容。它提到的新闻被拒以后，这里会跟着报错，修改时要一起删改。
+                                  </p>
+                                )}
+                              </dd>
+                            </>
+                          )}
+                          {otherErrors.length > 0 && (
+                            <>
+                              <dt class="text-muted-foreground">整期</dt>
+                              <dd>
+                                <ul class="flex flex-col gap-0.5 text-foreground/70">
+                                  {otherErrors.map((e) => <li>{reasonZh(e)}</li>)}
+                                </ul>
+                              </dd>
+                            </>
+                          )}
+                        </dl>
+                        {s.error && <p class="mt-1 text-xs text-muted-foreground">{s.error}</p>}
+                      </li>
+                      </>
+                    )
+                  })}
+                  {c.adopt.map((a) => {
+                    const { label, text } = adopt(a)
+                    const link = a.edition === "zh" && !a.adopted ? beta(c) : null
+                    return (
+                      <li>
+                        <p class="flex flex-wrap items-baseline gap-x-2">
+                          <span class="text-xs text-muted-foreground tabular-nums">{time(a.at)}</span>
+                          <span class="font-medium">{label}</span>
+                        </p>
+                        <p class="mt-1 text-xs text-foreground/70">
+                          {text}
+                          {link && (
+                            <>
+                              这份稿子照常作为
+                              <a href={link} class="underline underline-offset-2 hover:text-foreground">
+                                Beta 版
+                              </a>
+                              发布。
+                            </>
+                          )}
+                        </p>
+                      </li>
+                    )
+                  })}
+                </ol>
+              </details>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <section>
+      <h2 class={heading}><span class={number}>03</span><span>候选</span></h2>
+      <div class="mt-5">
+        <ProcessMatrix
+          client:load
+          rows={process.rows}
+          channels={process.channels.map(({ id, label, main, scored }) => ({ id, label, main, scored }))}
+        />
+      </div>
+    </section>
+
+    <section>
+      <h2 class={heading}><span class={number}>04</span><span>过滤</span></h2>
+      {
+        process.filtered === null ? (
+          <p class="mt-5 text-sm text-muted-foreground">当时未记录。</p>
+        ) : (
+          <div class="mt-5 flex flex-col gap-2">
+            {process.filtered.map((group) => (
+              <details class="text-sm">
+                <summary class="cursor-pointer select-none">
+                  {group.name}
+                  <span class="ml-2 text-xs text-muted-foreground tabular-nums">{group.items.length}</span>
+                </summary>
+                <ul class="mt-2 mb-3 flex flex-col gap-1 pl-4 text-xs">
+                  {group.items.map((item) => (
+                    <li class="flex flex-wrap gap-x-2">
+                      <a href={item.url} target="_blank" rel="noreferrer" class="text-foreground/80 hover:underline">
+                        {item.title}
+                      </a>
+                      <span class="text-muted-foreground">
+                        {item.reason}
+                        {item.value !== null && item.value !== undefined && `（${item.value}）`}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </details>
+            ))}
+            <p class="mt-2 text-xs text-muted-foreground">Hacker News 的分数门槛在它的服务器上过滤，这里看不到。</p>
+          </div>
+        )
+      }
+    </section>
+  </div>
+</Layout>

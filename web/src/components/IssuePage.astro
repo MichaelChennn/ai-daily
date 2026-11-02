@@ -12,6 +12,7 @@ import SectionFilter from "@/components/SectionFilter"
 import Layout from "@/layouts/Layout.astro"
 import { langOf, strings } from "@/lib/i18n"
 import { betaHref, type Issue, issueHref, issuesIn } from "@/lib/issues"
+import { processHref } from "@/lib/process"
 
 interface Props {
   issue: Issue
@@ -120,6 +121,16 @@ const beta = issue.beta
         })
       }
     </div>
+
+    {
+      lang === "zh" && (
+        <p class="mt-12 text-center">
+          <a href={processHref(issue.date)} class="text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline">
+            查看生成过程
+          </a>
+        </p>
+      )
+    }
 
     <Pager older={older} newer={newer} lang={lang} />
   </div>

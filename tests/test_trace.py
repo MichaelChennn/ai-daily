@@ -180,3 +180,17 @@ def test_process_data_lists_the_filtered_items_by_source(issue_dir):
             "items": [{"title": "SimCity", "url": "https://x.com", "reason": "与 AI 无关", "value": None}],
         }
     ]
+
+
+def test_process_data_puts_each_highlight_error_under_its_highlight(issue_dir, monkeypatch):
+    _cli(issue_dir, "trace", "scores", stdin={}, monkeypatch=monkeypatch)
+    data = _digest()
+    data["highlights"] = ["OpenAI 发布 GPT-6，上下文达到 1M token。", "vLLM 新版本快了 40%，支持 Qwen9。"]
+    _write(issue_dir / "digest.json", data)
+    _cli(issue_dir, "validate")
+    assert _trace(issue_dir)["steps"][0]["highlights"] == data["highlights"]
+
+    (step,) = _process(issue_dir)["channels"][0]["steps"]
+    assert step["highlights"] == [{"text": data["highlights"][1], "missing": ["Qwen9", "40", "9"]}]
+    assert [p["title"] for p in step["passed"]] == [item["title"] for item in data["items"]]
+    assert all(p["candidates"] for p in step["passed"])
