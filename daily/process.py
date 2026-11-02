@@ -13,8 +13,12 @@ false: the page marks the rest 当时未记录.
                null when not recorded
   channels[]   id ("claude", "api.<slug>"), label, model, main, recorded, scored,
                failure {step, label, error} or null,
-               funnel[] {label, value}, steps[] {step, label, at, kept, dropped[]}, adopt[]
+               funnel[] {label, value}, adopt[],
+               steps[] {step, label, at, kept, passed[], dropped[], highlights[], errors[]}
+    passed[]   title, candidates[]
     dropped[]  title, candidates[], reasons[]
+    highlights[]
+               text (a 日报简介 sentence; null if unknown), missing[]: its words that no passing item has
   rows[]       one per candidate: id, title, url, source, kind, cells {channel id: cell},
                differs (the routes did not treat it alike), dropped (a route dropped it),
                high_unpicked (scored >= HIGH_SCORE by a route that did not publish it)
@@ -25,6 +29,7 @@ false: the page marks the rest 当时未记录.
 from __future__ import annotations
 
 import json
+import re
 from pathlib import Path
 from typing import Any
 
@@ -152,7 +157,7 @@ def _channel(
         if failure
         else None,
         "funnel": _funnel(candidates, steps, published),
-        "steps": [_step(s) for s in steps],
+        "steps": [_step(s, (raw or {}).get("highlights") or []) for s in steps],
         "adopt": (record or {}).get("adopt") or [],
         "cells": _cells(candidates, steps, published, (record or {}).get("scores") or {}),
     }
@@ -196,14 +201,14 @@ def _funnel(
     passed = sum(1 for item in rounds[-1]["items"] if not item.get("reasons")) if rounds else 0
     return [
         {"label": "候选", "value": len(candidates.get("candidates") or [])},
-        {"label": "挑选", "value": len(picked)},
+        {"label": "挑中的候选", "value": len(picked)},
         {"label": "写成条目", "value": written},
         {"label": "通过校验", "value": passed},
         {"label": "发布", "value": len(published["items"]) if published else 0},
     ]
 
 
-def _step(s: dict[str, Any]) -> dict[str, Any]:
+def _step(s: dict[str, Any], highlights: list[str]) -> dict[str, Any]:
     name = s.get("step")
     result: dict[str, Any] = {"step": name, "label": STEP_LABELS.get(name, name), "at": s.get("at")}
     if "items" in s and name == "self_check":
@@ -212,13 +217,27 @@ def _step(s: dict[str, Any]) -> dict[str, Any]:
         items = s["items"]
         result.update(
             kept=sum(1 for i in items if not i.get("reasons")),
+            passed=[
+                {"title": i.get("title"), "candidates": i.get("candidates") or []}
+                for i in items
+                if not i.get("reasons")
+            ],
             dropped=[
                 {"title": i.get("title"), "candidates": i.get("candidates") or [], "reasons": i["reasons"]}
                 for i in items
                 if i.get("reasons")
             ],
-            errors=s.get("errors") or [],
         )
+        errors = s.get("errors") or []
+        if "highlights" in s:
+            result["highlights"], result["errors"] = _highlight_errors(errors, s["highlights"])
+        else:
+            # Older traces did not keep the 今日要点 the round checked. The digest's own are a
+            # guess, used only when every missing word is found in them.
+            guess = _highlight_errors(errors, [] if name in EN_STEPS else highlights)
+            if any(h["text"] is None for h in guess[0]):
+                guess = _highlight_errors(errors, [])
+            result["highlights"], result["errors"] = guess
     elif "groups" in s:
         result.update(kept=len(s["groups"]) if name == "pick" else 0, groups=s["groups"])
     elif "candidates" in s:
@@ -226,6 +245,27 @@ def _step(s: dict[str, Any]) -> dict[str, Any]:
     if s.get("error"):
         result["error"] = s["error"]
     return result
+
+
+HIGHLIGHT_ERROR = re.compile(r"^highlight: (?:'(.+)'|number (.+)) does not appear in the published items$")
+
+
+def _highlight_errors(errors: list[str], highlights: list[str]) -> tuple[list[dict[str, Any]], list[str]]:
+    """The 今日要点 with words no passing item has, each with those words; and the other errors.
+    Words found in no highlight go under text None."""
+    missing: dict[str | None, list[str]] = {}
+    other = []
+    for error in errors:
+        m = HIGHLIGHT_ERROR.match(error)
+        if not m:
+            other.append(error)
+            continue
+        word = m[1] or m[2]
+        pattern = re.escape(word) if m[1] else rf"(?<![\d.]){re.escape(word)}(?![\d])"
+        text = next((h for h in highlights if re.search(pattern, str(h))), None)
+        missing.setdefault(text, []).append(word)
+    order = [h for h in highlights if h in missing] + ([None] if None in missing else [])
+    return [{"text": text, "missing": missing[text]} for text in order], other
 
 
 def _cells(

@@ -3,7 +3,7 @@ import { cn } from "cn"
 
 import { Button } from "@/components/ui/button"
 import { type Lang, strings } from "@/lib/i18n"
-import { addDays, formatDay, issueHref } from "@/lib/issues"
+import { addDays, formatDay, issueHref, pageHref } from "@/lib/issues"
 
 type Props = {
   date: string
@@ -12,16 +12,19 @@ type Props = {
   older: string | null
   newer: string | null
   lang?: Lang
+  /** A page under each issue, such as "process/"; the issue itself by default. */
+  path?: string
 }
 
 // Five calendar days centred on this issue. Days with an issue link to it; days without one
 // (gaps, the future) stay as faded labels. The arrows skip to the nearest issue either way.
-export default function DateWheel({ date, published, older, newer, lang = "zh" }: Props) {
+export default function DateWheel({ date, published, older, newer, lang = "zh", path = "" }: Props) {
   const t = strings[lang]
+  const dayHref = (day: string) => (path ? pageHref(`${day}/${path}`, lang) : issueHref(day, lang))
   const current = formatDay(date, lang)
   return (
     <nav aria-label={t.issues} className="flex items-center justify-between gap-2 pt-10 pb-8">
-      <StepButton target={older} label={t.older} lang={lang}>
+      <StepButton target={older} href={older && dayHref(older)} label={t.older} lang={lang}>
         <ChevronLeft />
       </StepButton>
       <ol className="flex items-center justify-center gap-3 font-rounded [view-transition-name:date-wheel] sm:gap-6">
@@ -57,7 +60,7 @@ export default function DateWheel({ date, published, older, newer, lang = "zh" }
             <li key={offset} className={className}>
               {published.has(day) ? (
                 <a
-                  href={issueHref(day, lang)}
+                  href={dayHref(day)}
                   className={cn(
                     "flex flex-col items-center transition-opacity hover:text-foreground hover:opacity-100",
                     far ? "opacity-50" : "opacity-80",
@@ -74,7 +77,7 @@ export default function DateWheel({ date, published, older, newer, lang = "zh" }
           )
         })}
       </ol>
-      <StepButton target={newer} label={t.newer} lang={lang}>
+      <StepButton target={newer} href={newer && dayHref(newer)} label={t.newer} lang={lang}>
         <ChevronRight />
       </StepButton>
     </nav>
@@ -83,16 +86,18 @@ export default function DateWheel({ date, published, older, newer, lang = "zh" }
 
 function StepButton({
   target,
+  href,
   label,
   lang,
   children,
 }: {
   target: string | null
+  href: string | null
   label: string
   lang: Lang
   children: React.ReactNode
 }) {
-  if (!target) {
+  if (!target || !href) {
     return (
       <Button size="icon" className="rounded-full" disabled aria-label={label}>
         {children}
@@ -102,7 +107,7 @@ function StepButton({
   return (
     <Button asChild size="icon" className="rounded-full">
       <a
-        href={issueHref(target, lang)}
+        href={href}
         aria-label={`${label}${lang === "en" ? ": " : "："}${formatDay(target, lang).monthDay}`}
       >
         {children}

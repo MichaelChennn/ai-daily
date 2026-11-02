@@ -18,8 +18,9 @@ to show.
     over_picks       groups[]: picks beyond api_editor.PICKS, cut
     self_check       items[] {title, candidates[], reason}: what Claude dropped in its self-check
     check, precheck, final, en, draft, fix, highlights
-                     one validate round: checked_links, errors[], warnings[],
-                     items[] {title, section, candidates[], reasons[]} (reasons empty: it passed)
+                     one validate round: checked_links, errors[], warnings[], highlights[]
+                     (the 今日要点 it checked), items[] {title, section, candidates[], reasons[]}
+                     (reasons empty: it passed)
     a step may carry an error instead, when the request behind it failed
   failure     {step, error} when the run produced no digest, else null
   adopt[]     at, edition ("zh" | "en"), run (the digest's generated_at), adopted, reason
@@ -89,12 +90,14 @@ def scores(raw: Any, known: set[str]) -> dict[str, list[int]]:
 def validate_step(step: str, data: Any, report: digest.Report, checked_links: bool) -> dict[str, Any]:
     """One validate round: every item it saw, with the reasons it failed (none: it passed)."""
     items = data.get("items") if isinstance(data, dict) else None
+    highlights = data.get("highlights") if isinstance(data, dict) else None
     return {
         "step": step,
         "at": now(),
         "checked_links": checked_links,
         "errors": report.errors,
         "warnings": report.warnings,
+        "highlights": [str(h) for h in highlights] if isinstance(highlights, list) else [],
         "items": [
             {
                 "title": item.get("title") if isinstance(item, dict) else None,

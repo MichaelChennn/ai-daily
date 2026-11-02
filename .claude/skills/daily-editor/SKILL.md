@@ -102,7 +102,7 @@ uv run python -m daily list --date <期号> --kind blog --summary-chars 1500    
 
 第 1–4 条不过关：**整条删掉**（同时检查 highlights 有没有提到它），不要改写成差不多对的版本。第 5 条不过关：先按下一步补 evidence，补不上再整条删掉。
 
-自检删掉的条目 validate 看不到，要你自己记进生成记录：每条写它用的候选 id、标题和一句原因。没有删掉任何条目就跳过这一步。
+自检删掉的条目 validate 看不到，要你自己记进生成记录：每条写它用的候选 id、标题和一句原因。没有删掉任何条目也要记，传一个空列表 `[]`，这样页面能分清「自检过、没删」和「没做自检」。
 
 ```bash
 uv run python -m daily trace self-check --date <期号> <<'EOF'
