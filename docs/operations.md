@@ -51,7 +51,7 @@ Actions 的 cron 只认 UTC，柏林有夏令时（CEST UTC+2 / CET UTC+1），�
 
 ## 网站
 
-`web/`：Astro + React + Tailwind + [shadcn/ui](https://ui.shadcn.com/)，黑白配色，页面都是预渲染的静态 HTML。中文在根路径，英文版在 `/en/` 下，页面一一对应。首页就是最新一期（canonical 指向它的日期页），每期一页（`YYYY-MM-DD/`），Beta 版在 `YYYY-MM-DD/beta/`，往期归档按年份和月份筛选，信息源页用卡片列出白名单和最近 30 期的抓取成功次数、平均候选数、入选条目数。降级版在正文顶部和 RSS 标题里都有标注。
+`web/`：Astro + React + Tailwind + [shadcn/ui](https://ui.shadcn.com/)，黑白配色，页面都是预渲染的静态 HTML。中文在根路径，英文版在 `/en/` 下，页面一一对应。打开页面时按读者的语言跳到对应版本：在语言菜单里选过的以所选为准，否则浏览器首选语言是中文就看中文版，其他一律看英文版；只有中文的 Beta 版和生成过程页不跳。首页就是最新一期（canonical 指向它的日期页），每期一页（`YYYY-MM-DD/`），Beta 版在 `YYYY-MM-DD/beta/`，往期归档按年份和月份筛选，信息源页用卡片列出白名单和最近 30 期的抓取成功次数、平均候选数、入选条目数。降级版在正文顶部和 RSS 标题里都有标注。
 
 - **数据**：`daily export` 把能通过 `validate`（离线部分）的各期写成 `web/data/issues/*.json`，内容是分区、条目、来源链接、发布方（GitHub / Hugging Face 的 owner 头像，其他站点用 favicon）和发布时间；信息源写成 `web/data/sources.json`；全文 RSS 写成 `web/public/feed.xml`（英文 `feed.en.xml`），链接用 `SITE_URL`（默认线上地址）。这些都在构建时重新生成，不提交。前端只负责排版，发布规则都留在 Python。只有一手来源的时间才算发布时间（HN、Reddit 的时间是发帖时间，不显示），只精确到天的来源只显示日期。
 - **RSS**：最近 30 天，全文，只发主版。guid 带上 mode，降级版被正式版替换后，阅读器会把正式版当作新条目收到。
