@@ -1,0 +1,253 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-03",
+  "mode": "full",
+  "generated_at": "2026-11-03T04:44:17+00:00",
+  "channel": "api",
+  "model": "gemini:gemini-3.5-flash-lite",
+  "highlights": [
+    "开源语音推理模型 Apriel Voice 27B Preview 发布，统一了语音理解、推理与工具调用。",
+    "Git 镜像与分支管理工具 worktrunk 登上 GitHub Trending 榜首，专为并行 AI agent 工作流设计。",
+    "vLLM v0.33.0 正式发布，带来多款新模型支持以及针对 NVIDIA 与 AMD 硬件的大幅解码优化。"
+  ],
+  "items": [
+    {
+      "section": "model",
+      "title": "Apriel Voice 27B Preview：ServiceNow 开源语音推理与工具调用模型",
+      "summary": "基于 Gemma 4 26B-A4B 检查点构建，Apriel Voice 27B Preview 是一个开源的语音语言模型，在一个共享的推理骨干网络中统一了语音理解、推理和工具调用能力。它在保持文本和图像输入模态的同时可直接处理语音并生成响应与工具调用，无需单独的对话模型。",
+      "tags": [
+        "模型",
+        "开源",
+        "语音"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_7dc1512049",
+          "url": "https://huggingface.co/papers/2610.40738"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2610.40738",
+          "quote": "le Gauthier Melançon + 9 authors Abstract Apriel Voice 27B Preview is an open speech-language model that integrates speech understanding, reasoning, and tool use within a shared backbone, achieving strong results on audio benchmarks through a two-stage training procedure with online distillation."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.40738",
+          "quote": "We present Apriel Voice 27B Preview, an open speech-language model that unifies these capabilities within a shared reasoning backbone while retaining text and image input modalities."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.40738",
+          "quote": "Built on the post-trained Gemma 4 26B-A4B checkpoint, Apriel Voice directly processes speech and generates both responses and tool calls without requiring a separate dialogue model."
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "agent-desktop：Vercel 实验室开源的 AI agent 桌面端操作 CLI 与库",
+      "summary": "agent-desktop 是一个用于 AI agent 的桌面操作命令行工具和 C 库，支持 macOS、Windows 和 Linux。它通过操作系统无障碍树读取和操作桌面应用，返回带引用的结构化 JSON，使 agent 能够进行精确的元素交互。",
+      "tags": [
+        "Agent",
+        "开源",
+        "工具"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_885299c2ed",
+          "url": "https://github.com/vercel-labs/agent-desktop"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/vercel-labs/agent-desktop",
+          "quote": "Computer use for AI agents: read and operate desktop apps through the OS accessibility tree."
+        },
+        {
+          "url": "https://github.com/vercel-labs/agent-desktop",
+          "quote": "A CLI and C library for macOS, Windows and Linux."
+        },
+        {
+          "url": "https://github.com/vercel-labs/agent-desktop",
+          "quote": "A snapshot returns JSON with a ref for every element an agent can act on."
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Worktrunk：专为并行 AI agent 工作流设计的 Git 工作树管理 CLI",
+      "summary": "Worktrunk 是一个用于 Git 工作树管理的命令行工具，旨在简化多任务并行开发。它通过三个核心命令让工作树管理像切换分支一样简单，并提供了构建缓存共享、LLM 自动生成提交信息以及钩子自动化等丰富特性。",
+      "tags": [
+        "工具",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_5a4dedc905",
+          "url": "https://github.com/max-sixty/worktrunk"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/max-sixty/worktrunk",
+          "quote": "Worktrunk is a CLI for git worktree management, designed for running AI agents in parallel."
+        },
+        {
+          "url": "https://github.com/max-sixty/worktrunk",
+          "quote": "Worktrunk's three core commands make worktrees as easy as branches."
+        },
+        {
+          "url": "https://github.com/max-sixty/worktrunk",
+          "quote": "Plus, Worktrunk has a bunch of quality-of-life features to simplify working with many parallel changes, including hooks to automate local workflows & copy-on-write build caches."
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "vLLM v0.33.0 发布：加入多款新模型并全面升级 CUDA 13.0 与硬件加速",
+      "summary": "vLLM 发布 v0.33.0 版本，带来了 927 个提交与多款新模型支持，并全面转向 CUDA 13.0。新版本针对 NVIDIA Blackwell 与 Hopper 架构以及 AMD ROCm 带来了显著的解码加速与内核优化。",
+      "tags": [
+        "开源",
+        "推理",
+        "硬件"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_2e7f3b9f6c",
+          "url": "https://github.com/vllm-project/vllm/releases/tag/v0.33.0rc3"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/vllm-project/vllm/releases/tag/v0.33.0rc3",
+          "quote": "This release features 927 commits from 389 contributors (122 new)!"
+        },
+        {
+          "url": "https://github.com/vllm-project/vllm/releases/tag/v0.33.0rc3",
+          "quote": "New models : Reflection Beam-1.0 (501B MoE, 23B active) with its DFlash2 drafter ( #62074 ), Yandex AliceAI-Foundation-80B-A3B ( #57963 ), Recursive Flint (40B MoE, 2.5B active) ( #62938 ), Muse Spark Open ( #61879 ), Step-5 Preview ( #61727 , #63147 ), NVIDIA Alpamayo 2 Super ( #62957 ), Nemotron-L"
+        },
+        {
+          "url": "https://github.com/vllm-project/vllm/releases/tag/v0.33.0rc3",
+          "quote": "CUDA 12.9 dropped : release wheels and images are CUDA 13.0 only."
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "SGLang v0.5.23 发布：引入 DeepSeek-V4.1 低延迟模式与 MoE 优化",
+      "summary": "SGLang 发布 v0.5.23 版本，支持 DeepSeek-V4.1 在 GB300 上的高吞吐与低延迟优化。新版本引入了 NVIDIA 巨内核和 AMD 单内核插件，并增强了 MoE 模型与 Paged Experts 的性能。",
+      "tags": [
+        "开源",
+        "推理",
+        "模型"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_e5ad0b7540",
+          "url": "https://github.com/sgl-project/sglang/releases/tag/v0.5.23"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/sgl-project/sglang/releases/tag/v0.5.23",
+          "quote": "1007 PRs from 257 contributors."
+        },
+        {
+          "url": "https://github.com/sgl-project/sglang/releases/tag/v0.5.23",
+          "quote": "DeepSeek-V4.1 on GB300 gets up to 1.5x more prefill throughput under load and about 28% lower first-token latency on 32K to 64K prompts ( #44403 , #45059 , #45107 )."
+        },
+        {
+          "url": "https://github.com/sgl-project/sglang/releases/tag/v0.5.23",
+          "quote": "SGLang low-latency mode: the opt-in NVIDIA megakernel and AMD monokernel plugins run DeepSeek-V4.1-Flash decode as fused persistent kernels, for up to 44% faster single-user decode on GB300 and 75% on MI350X ( #44945 , #45450 , #44353 , #44621 )."
+        }
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "OpenAI 发布 LifeVal 评测基准",
+      "summary": "OpenAI 推出了 LifeVal 评测基准，用于衡量 AI 帮助人们完成日常任务（从寻找育儿服务到管理财务和政府文书工作）的能力。",
+      "tags": [
+        "产品",
+        "行业"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_ab3e631e1e",
+          "url": "https://openai.com/index/lifeval"
+        }
+      ],
+      "evidence": []
+    }
+  ],
+  "research": [
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.40738"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://rikiyat.github.io/blog/weight-space-programming/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/vllm-project/vllm/releases/tag/v0.33.0rc3"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/sgl-project/sglang/releases/tag/v0.5.23"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/vercel-labs/agent-desktop"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/max-sixty/worktrunk"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://i.redd.it/jr6yx14eq7zh1.jpeg"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://momentic.ai/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31306"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://v.redd.it/ad6xt7pi57zh1"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://i.redd.it/mjqrl0p8z7zh1.png"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://x.com/jcrwhittington/status/2117317159777177602?a=02yfc9wrBoQ2Xi7DDjQ&amp;s=46"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/QwenLM/qwen-code/pull/15762"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://labs.cloudsecurityalliance.org/research/csa-research-note-china-ai-export-controls-announcement-48-2/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://openai.com/index/lifeval"
+    }
+  ],
+  "validation": {
+    "validated_at": "2026-11-03T04:44:17+00:00",
+    "checked_links": true,
+    "dropped": [],
+    "warnings": [
+      "OpenAI 发布 LifeVal 评测基准: could not check https://openai.com/index/lifeval (403)",
+      "6 items (target 8-12)",
+      "0 headline items (target 3-5)",
+      "0 paper items (target 2-3)"
+    ]
+  }
+}

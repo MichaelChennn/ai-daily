@@ -1,0 +1,602 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-03",
+  "mode": "full",
+  "generated_at": "2026-11-03T04:43:47+00:00",
+  "channel": "api",
+  "model": "nvidia:minimaxai/minimax-m3.1-flash",
+  "highlights": [
+    "Astra's weight-space programming approach edits Qwen weights directly, lifting MATH-500 from 7.9% to 48.1% without writing training loops.",
+    "vLLM v0.33.0 moves to PyTorch 2.14 and CUDA 13.0, while SGLang v0.5.23 adds Paged Experts, TPU7x support and an opt-in LoRA engine.",
+    "Apriel Voice 27B Preview unifies speech, reasoning and tool use in one open speech-language model, and REA routes deliberative and reactive policies without making running policies wait on the brain."
+  ],
+  "items": [
+    {
+      "section": "headline",
+      "title": "Astra edits Qwen weights directly to raise MATH-500 to 48.1%",
+      "summary": "Astra, a general-purpose LLM, can read and write a network's weights directly, an approach its authors call Weight-Space Programming. Asked to improve Qwen3.5-0.8B at math without gradients, it edited 0.016% of the weights, raising MATH-500 from 7.9% to 48.1% and improving IFEval by 3x under the same sampling settings.",
+      "tags": [
+        "模型",
+        "推理"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_cf0ceff712",
+          "url": "https://rikiyat.github.io/blog/weight-space-programming/"
+        },
+        {
+          "candidate_id": "c_93f890cbb0",
+          "url": "https://explainx.ai/blog/weight-space-programming-gpt-6-astra-edits-qwen3-5-0-8b-weights-math-7-9-to-48-1-mit-csail-2026"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://rikiyat.github.io/blog/weight-space-programming/",
+          "quote": "Sparks of Weight-Space Programming: LLMs can natively read & write neural network weights"
+        },
+        {
+          "url": "https://rikiyat.github.io/blog/weight-space-programming/",
+          "quote": "Likewise, asked to make Qwen3.5-0.8B better at math without gradients, Astra identifies an issue in its weights causing reasoning loops that Qwen’s own model card warns about, and fixes this by natively editing 0.016% of the weights ."
+        },
+        {
+          "url": "https://rikiyat.github.io/blog/weight-space-programming/",
+          "quote": "With the same sampling settings, this weight correction raises MATH-500 from 7.9% to 48.1% and generalizes out of the box to instruction following, raising IFEval by 3x."
+        },
+        {
+          "url": "https://rikiyat.github.io/blog/weight-space-programming/",
+          "quote": "All of this is possible without allowing Astra to write training loops."
+        },
+        {
+          "url": "https://rikiyat.github.io/blog/weight-space-programming/",
+          "quote": "We call this Weight-Space Programming ."
+        },
+        {
+          "url": "https://rikiyat.github.io/blog/weight-space-programming/",
+          "quote": "In Weight-Space Programming , a general-purpose LLM reads and writes a network’s weights directly (i.e., not through an optimizer, and in particular not with gradient descent) around some natural language spec, sometimes even with no environment feedback at all."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "vLLM v0.33.0 adopts PyTorch 2.14 and drops CUDA 12.9",
+      "summary": "vLLM v0.33.0 features 927 commits from 389 contributors, adds models such as Reflection Beam-1.0 (501B MoE, 23B active) and Yandex AliceAI-Foundation-80B-A3B, and introduces a shorter vllm/vllm image alias. The release upgrades to PyTorch 2.14.0 with torchvision 0.29.0 and Triton 3.8.0, and publishes CUDA 13.0 artifacts only.",
+      "tags": [
+        "工具",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_2e7f3b9f6c",
+          "url": "https://github.com/vllm-project/vllm/releases/tag/v0.33.0rc3"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/vllm-project/vllm/releases/tag/v0.33.0rc3",
+          "quote": "This release features 927 commits from 389 contributors (122 new)!"
+        },
+        {
+          "url": "https://github.com/vllm-project/vllm/releases/tag/v0.33.0rc3",
+          "quote": "New models : Reflection Beam-1.0 (501B MoE, 23B active) with its DFlash2 drafter ( #62074 ), Yandex AliceAI-Foundation-80B-A3B ( #57963 ), Recursive Flint (40B MoE, 2.5B active) ( #62938 ), Muse Spark Open ( #61879 ), Step-5 Preview ( #61727 , #63147 ), NVIDIA Alpamayo 2 Super ( #62957 ), Nemotron-L"
+        },
+        {
+          "url": "https://github.com/vllm-project/vllm/releases/tag/v0.33.0rc3",
+          "quote": "PyTorch 2.14 : vLLM is upgraded to PyTorch 2.14.0, with torchvision 0.29.0 and Triton 3.8.0 ( #52183 )."
+        },
+        {
+          "url": "https://github.com/vllm-project/vllm/releases/tag/v0.33.0rc3",
+          "quote": "CUDA 12.9 dropped : release wheels and images are CUDA 13.0 only."
+        },
+        {
+          "url": "https://github.com/vllm-project/vllm/releases/tag/v0.33.0rc3",
+          "quote": "The CUDA 12.9 wheels and the -cu129 / -cu129-ubuntu2404 images are no longer published ( #62575 ); use the default CUDA 13.0 artifacts instead."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "SGLang v0.5.23 adds Paged Experts and Google TPU7x support",
+      "summary": "SGLang v0.5.23 combines 1007 PRs from 257 contributors and adds support for models including Muse Spark Open, MiniMax-M3.1-Flash and Beam-1.0. Its opt-in Paged Experts runs MoE models larger than GPU memory on a single consumer GPU, up to 30x faster than CPU offload, and SGLang now runs on Google TPU7x through SGLang-TorchTPU.",
+      "tags": [
+        "工具",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_e5ad0b7540",
+          "url": "https://github.com/sgl-project/sglang/releases/tag/v0.5.23"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/sgl-project/sglang/releases/tag/v0.5.23",
+          "quote": "1007 PRs from 257 contributors."
+        },
+        {
+          "url": "https://github.com/sgl-project/sglang/releases/tag/v0.5.23",
+          "quote": "Muse Spark Open"
+        },
+        {
+          "url": "https://github.com/sgl-project/sglang/releases/tag/v0.5.23",
+          "quote": "MiniMax-M3.1-Flash"
+        },
+        {
+          "url": "https://github.com/sgl-project/sglang/releases/tag/v0.5.23",
+          "quote": "Paged Experts (opt-in) runs MoE models larger than GPU memory on a single consumer GPU, up to 30x faster than CPU offload ( #42557 , #45787 )."
+        },
+        {
+          "url": "https://github.com/sgl-project/sglang/releases/tag/v0.5.23",
+          "quote": "SGLang now runs on Google TPU7x through SGLang-TorchTPU , a PyTorch-native plugin for TPU."
+        },
+        {
+          "url": "https://github.com/sgl-project/sglang/releases/tag/v0.5.23",
+          "quote": "uv pip install --prerelease=allow sglang==0.5.23"
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Apriel Voice 27B Preview unifies speech, reasoning and tool use",
+      "summary": "Apriel Voice 27B Preview is an open speech-language model built on the post-trained Gemma 4 26B-A4B checkpoint, processing speech and generating responses and tool calls without a separate dialogue model. In thinking mode it scores 98.90 on Big Bench Audio, 81.13 on Speech-BFCL and 65.51% task success on τ-Voice, with a mean latency of 1.91 seconds.",
+      "tags": [
+        "模型",
+        "语音",
+        "多模态"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_7dc1512049",
+          "url": "https://huggingface.co/papers/2610.40738"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2610.40738",
+          "quote": "le Gauthier Melançon + 9 authors Abstract Apriel Voice 27B Preview is an open speech-language model that integrates speech understanding, reasoning, and tool use within a shared backbone, achieving strong results on audio benchmarks through a two-stage training procedure with online distillation."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.40738",
+          "quote": "We present Apriel Voice 27B Preview, an open speech-language model that unifies these capabilities within a shared reasoning backbone while retaining text and image input modalities."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.40738",
+          "quote": "Built on the post-trained Gemma 4 26B-A4B checkpoint, Apriel Voice directly processes speech and generates both responses and tool calls without requiring a separate dialogue model."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.40738",
+          "quote": "We introduce a two-stage training procedure to adapt the model to speech."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.40738",
+          "quote": "Automatically constructed speech-conditioned dialogues provide conversational training data, while local teacher serving, overlapping teacher and student computation, and fused full-vocabulary losses enable efficient online distillation ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.40738",
+          "quote": "In thinking mode, Apriel Voice achieves a score of 98.90 on Big Bench Audio , 81.13 on Speech-BFCL , and a task success rate of 65.51% on τ-Voice , with a mean latency of 1.91 seconds."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "REA routes deliberative and reactive robot policies asynchronously",
+      "summary": "REA (Routed Embodied Agent) is a runtime where a deliberative System 2, an embodied router System 1 and reactive System 0 policies cooperate under a rule that no running policy waits on the brain. Across 3,000 test episodes on 60 LIBERO-Pro tasks it reaches 95.9% success, above the best single-agent baseline in its own policy pool at 94.7%, while cutting control steps by 25% and control time by 17%.",
+      "tags": [
+        "论文",
+        "Agent",
+        "工具"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_afe419ffaf",
+          "url": "https://huggingface.co/papers/2610.42053"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2610.42053",
+          "quote": "in Wang , Wangbo Zhao , Yang You Abstract REA unifies deliberative and reactive policies in a single runtime with asynchronous coordination, achieving high success rates with reduced control overhead across simulated and real robot tasks."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.42053",
+          "quote": "To address this, we propose REA (Routed Embodied Agent), a unified runtime where a deliberative System 2 , an embodied router System 1 and reactive System 0 policies cooperate under a single golden rule - no running policy waits on the brain."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.42053",
+          "quote": "Instead of querying the brain at each failure, REA employs a route memory that stores each policy's measured success ahead of time, a boundary-triggered judge gate that consults the brain on policy execution, and a shared-budget escalation ladder for bounded recovery."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.42053",
+          "quote": "Evaluated on 3,000 test episodes across 60 LIBERO-Pro tasks, REA reaches 95.9% success and beats the best single-agent baseline in its own policy pool (94.7%) while reducing control steps by 25% and control time by 17%."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.42053",
+          "quote": "REA also transfers to BEHAVIOR-1K and a real Unitree G1 humanoid, achieving the highest observed success among the compared methods."
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Nanbeige releases Nanbeige4.3-33B as an open agentic teacher model",
+      "summary": "Nanbeige4.3-33B is the flagship teacher model of the Nanbeige4.3 series and targets the ~30B parameter class for agentic coding and professional cowork tasks. It scores 80.9 on Terminal-Bench 2.1 and 65.5 on DeepSWE, supports a context length of up to 524,288 tokens (512K), and runs with Transformers, SGLang or vLLM.",
+      "tags": [
+        "模型",
+        "Agent",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_0c3cc6bf0a",
+          "url": "https://huggingface.co/Nanbeige/Nanbeige4.3-33B"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/Nanbeige/Nanbeige4.3-33B",
+          "quote": "In Nanbeige4.3, we take a foundational step toward pushing the boundaries of lightweight agents."
+        },
+        {
+          "url": "https://huggingface.co/Nanbeige/Nanbeige4.3-33B",
+          "quote": "To this end, we first introduce Nanbeige4.3-33B, designed as the flagship teacher model for the Nanbeige4.3 series."
+        },
+        {
+          "url": "https://huggingface.co/Nanbeige/Nanbeige4.3-33B",
+          "quote": "Delivering state-of-the-art agentic performance among open models in the ~30B parameter class, Nanbeige4.3-33B excels at complex coding and professional cowork tasks."
+        },
+        {
+          "url": "https://huggingface.co/Nanbeige/Nanbeige4.3-33B",
+          "quote": "Agentic Coding Terminal-Bench 2.1 2 80.9 73.0 61.8 47.2"
+        },
+        {
+          "url": "https://huggingface.co/Nanbeige/Nanbeige4.3-33B",
+          "quote": "Terminal-Bench 4.0 3 23.8 6.3 1.6 0.0"
+        },
+        {
+          "url": "https://huggingface.co/Nanbeige/Nanbeige4.3-33B",
+          "quote": "DeepSWE 3 65.5 42.5 4.4 2.7"
+        },
+        {
+          "url": "https://huggingface.co/Nanbeige/Nanbeige4.3-33B",
+          "quote": "The model supports a context length of up to 524,288 tokens (512K)."
+        },
+        {
+          "url": "https://huggingface.co/Nanbeige/Nanbeige4.3-33B",
+          "quote": "You can run the model with Transformers, SGLang, or vLLM:"
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "R²Orch trains orchestrators through recursive self-play and skill withdrawal",
+      "summary": "R²Orch pairs an inner loop of self-play that improves an orchestrator on self-chosen tasks with an outer loop that improves how that inner loop improves. Its Recursive Learnability objective rewards a Proposer for choosing tasks whose rollouts keep differing in outcome, while Skill Withdrawal drops skills once evaluation shows the orchestrator performs as well without them; results across twelve datasets outperform baselines on question answering, math, code and interactive tasks.",
+      "tags": [
+        "论文",
+        "Agent"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_4185c9fbf8",
+          "url": "https://huggingface.co/papers/2610.22740"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2610.22740",
+          "quote": "g , Qiang Huang , Yanjin Li , Rui Qian , Qichao Zhao , Tiesunlong Shen , Na Zhao , Jian Wang , Xiaoying Tang Abstract R²Orch uses recursive self-play with learnable task selection and skill withdrawal to train orchestrators without hand-designed curricula, improving performance across reasoning and"
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.22740",
+          "quote": "To address these challenges, we propose R^2Orch, a new paradigm of Recursive Self-Play Orchestration: an inner loop of self-play that improves the orchestrator on self-chosen tasks, and an outer loop that improves how the inner loop improves."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.22740",
+          "quote": "To support this paradigm, we introduce Recursive Learnability , a training objective that rewards a Proposer for choosing tasks whose rollouts keep reaching different outcomes as skills are withdrawn."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.22740",
+          "quote": "Built on this objective, we further propose Skill Withdrawal , in which the outer loop withdraws each skill once a controlled evaluation within self-play shows that the orchestrator performs as well without it."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.22740",
+          "quote": "Experimental results on twelve datasets show that R^2Orch consistently outperforms baselines across question answering, math, code, and interactive tasks."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.22740",
+          "quote": "Our code is available at https://github.com/beita6969/R2Orch."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "FrameForge adapts video model priors for unified image generation",
+      "summary": "FrameForge handles conditional image generation by modeling variable condition-target relationships through input-adaptive virtual temporal relations in pretrained video models. Its Mixture of Temporal Experts dynamically selects temporal RoPE experts, while Chain of Temporal Reasoning routes the condition to the target through a latent intermediate state, and experiments on DreamBench, COCO2017 and GEdit-Bench show superior results in subject-driven generation, canny-to-image generation and image editing.",
+      "tags": [
+        "论文",
+        "图像",
+        "视频"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_a1103b9d73",
+          "url": "https://huggingface.co/papers/2610.36545"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2610.36545",
+          "quote": "ng Zhang Abstract FrameForge enables adaptive conditional image generation by modeling variable condition-target relationships through dynamic temporal experts and intermediate reasoning pathways in pretrained video models."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.36545",
+          "quote": "Pretrained video models provide a promising foundation by encoding visual transformations across time, yet existing approaches typically assign the condition and target to fixed temporal positions."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.36545",
+          "quote": "This motivates us to model conditional generation through input-adaptive virtual temporal relations."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.36545",
+          "quote": "Mixture of Temporal Experts (MoTE) models how far the target lies from the condition by dynamically selecting temporal RoPE experts with different virtual intervals."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.36545",
+          "quote": "Chain of Temporal Reasoning (CoTR) models how the condition is transformed into the target through a latent intermediate state, with a reasoning-bottleneck attention mask encouraging information propagation through this pathway."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.36545",
+          "quote": "Experiments on DreamBench, COCO2017, and GEdit-Bench show that FrameForge achieves superior performance in subject-driven generation , canny-to-image generation, and image editing among the compared methods."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "SimpleLoRIF filters fine-tuning data that degrades LLM safety",
+      "summary": "SimpleLoRIF is a scalable gradient embedding method that finds fine-tuning examples whose gradients align with unsafe behavior, restricting backpropagation to the final four transformer blocks so datasets on the order of a million examples can be embedded. The resulting SafeTulu drops the 20% of Tulu 3 examples most aligned with unsafe responses, reducing GCG attack success rate by up to 22% across Qwen, Llama and Olmo while largely preserving capability.",
+      "tags": [
+        "论文",
+        "安全",
+        "训练"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_781973903a",
+          "url": "https://huggingface.co/papers/2610.37481"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2610.37481",
+          "quote": "mpleLoRIF uses gradient alignment to filter instruction data that silently degrades LLM safety, yielding a safer dataset that reduces adversarial success while preserving capabilities."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.37481",
+          "quote": "We tackle this problem by developing SimpleLoRIF , a scalable gradient embedding method that identifies fine-tuning examples whose gradients align with unsafe behavior."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.37481",
+          "quote": "By simplifying a low-rank attribution method and restricting backpropagation to the final four transformer blocks , SimpleLoRIF can embed datasets on the order of a million examples, boosting gradient attribution from a small-scale analysis tool into a practical filter for full post-training dataset"
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.37481",
+          "quote": "We then use SimpleLoRIF to build SafeTulu , a version of Tulu 3 with the 20% of examples most gradient-aligned with unsafe responses removed."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.37481",
+          "quote": "Training on SafeTulu reduces GCG attack success rate by up to 22% across Qwen, Llama, and Olmo, outperforming both LLM-as-a-judge and prior gradient-based filtering, while largely preserving or even improving capability."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.37481",
+          "quote": "We release SafeTulu along with a Hugging Face Space that lets researchers build their own customized versions of SafeTulu to fine-tune on, such as by changing the removal fraction or filtering only certain subsets."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "OSWAM generates actions in one diffusion step for autonomous control",
+      "summary": "OSWAM is a world action model that generates actions in one diffusion step for autonomous driving and embodied control, initializing diffusion with structured imagination tokens and distilling future-conditioned privileged information. It achieves comparable or better results than direct-policy WAM and Joint-WAM baselines that require tens of steps, with approximately 3times speedup and latency as low as 40ms on an NVIDIA RTX 5090 GPU.",
+      "tags": [
+        "论文",
+        "推理",
+        "多模态"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_96c41a3fbd",
+          "url": "https://huggingface.co/papers/2610.35850"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2610.35850",
+          "quote": "tract OSWAM enables real-time, high-quality action generation in autonomous driving and embodied control by initializing diffusion with structured imagination tokens and distilling future-conditioned privileged information into a single denoising step."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.35850",
+          "quote": "To reduce the denoising steps while enabling real-time action generation, we present an effective world action model with one-step action generation, namely OSWAM , for autonomous driving and embodied control."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.35850",
+          "quote": "Hence, we construct imagination tokens to initialize the diffusion process, providing physical priors and action-conditioned representations."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.35850",
+          "quote": "We further introduce privileged information distillation with future conditioning to enhance future-aware action generation."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.35850",
+          "quote": "As a result, OSWAM can efficiently and effectively generate high quality actions in just one diffusion step."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.35850",
+          "quote": "Our experiments demonstrate that OSWAM achieves comparable or even better results in both autonomous driving and embodied control than direct-policy WAM and Joint-WAM that require tens of steps."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.35850",
+          "quote": "It obtains approximately 3times speedup over direct-policy WAM baselines and supports real-time compiled inference with latency as low as 40ms on an NVIDIA RTX 5090 GPU."
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "agent-desktop gives AI agents a CLI over desktop accessibility trees",
+      "summary": "agent-desktop is a CLI and C library for macOS, Windows and Linux that lets AI agents read and operate desktop apps through the OS accessibility tree. A snapshot returns JSON with a ref for every element an agent can act on, so the agent acts on a ref and snapshots again to verify without pixel matching, and each release also ships libagent_desktop_ffi for in-process calls.",
+      "tags": [
+        "工具",
+        "开源",
+        "Agent"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_885299c2ed",
+          "url": "https://github.com/vercel-labs/agent-desktop"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/vercel-labs/agent-desktop",
+          "quote": "Computer use for AI agents: read and operate desktop apps through the OS accessibility tree."
+        },
+        {
+          "url": "https://github.com/vercel-labs/agent-desktop",
+          "quote": "A CLI and C library for macOS, Windows and Linux."
+        },
+        {
+          "url": "https://github.com/vercel-labs/agent-desktop",
+          "quote": "A snapshot returns JSON with a ref for every element an agent can act on."
+        },
+        {
+          "url": "https://github.com/vercel-labs/agent-desktop",
+          "quote": "The agent acts on a ref and snapshots again to check, with no pixel matching; the loop stays in your agent."
+        },
+        {
+          "url": "https://github.com/vercel-labs/agent-desktop",
+          "quote": "Install on macOS, Windows or Linux with npm:"
+        },
+        {
+          "url": "https://github.com/vercel-labs/agent-desktop",
+          "quote": "npm install -g agent-desktop"
+        },
+        {
+          "url": "https://github.com/vercel-labs/agent-desktop",
+          "quote": "Each release also ships libagent_desktop_ffi for macOS, Linux and Windows, so a program can call the tool in process instead of starting the CLI for each command."
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Latent Sparse Attention speeds up attention at ultra-long context",
+      "summary": "Latent Sparse Attention (LSA) is an open research release aimed at subquadratic attention that matches full attention accuracy at ultra-long context. It makes sparse attention up to 22.7× faster and full attention 72.4x faster, and the team reports that at 10M tokens the search takes 98% of the attention layer's time.",
+      "tags": [
+        "工具",
+        "开源",
+        "推理"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_7564218447",
+          "url": "https://x.com/jcrwhittington/status/2117317159777177602?a=02yfc9wrBoQ2Xi7DDjQ&amp;s=46"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://x.com/jcrwhittington/status/2117317159777177602?a=02yfc9wrBoQ2Xi7DDjQ&amp;s=46",
+          "quote": "Post Log in Sign up Post Log in Sign up James Whittington on X: \"Today we are happy to share one of our first open research releases: Latent Sparse Attention (LSA), a step towards subquadratic attention that matches accuracy of full attention at ultra-long context."
+        },
+        {
+          "url": "https://x.com/jcrwhittington/status/2117317159777177602?a=02yfc9wrBoQ2Xi7DDjQ&amp;s=46",
+          "quote": "At 10M tokens, that search takes 98% of the attention layer's time."
+        },
+        {
+          "url": "https://x.com/jcrwhittington/status/2117317159777177602?a=02yfc9wrBoQ2Xi7DDjQ&amp;s=46",
+          "quote": "LSA makes sparse attention up to 22.7× faster and full attention 72.4x faster."
+        },
+        {
+          "url": "https://x.com/jcrwhittington/status/2117317159777177602?a=02yfc9wrBoQ2Xi7DDjQ&amp;s=46",
+          "quote": "With @kubicek_ales @caciolai @PengLiangzu @SukritSumant @Ben_Hoov @FraserGreenlee @RMBattleday @radim_urban @thoefler @jcrwhittington\" James Whittington @jcrwhittington Today we are happy to share one of our first open research releases: Latent Sparse Attention (LSA), a step towards subquadratic att"
+        }
+      ]
+    }
+  ],
+  "research": [
+    {
+      "via": "webfetch",
+      "url": "https://rikiyat.github.io/blog/weight-space-programming/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://openai.com/index/scaling-git-at-openai"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/sgl-project/sglang/releases/tag/v0.5.23"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/vllm-project/vllm/releases/tag/v0.33.0rc3"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.40738"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.36545"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.22740"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.42053"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/vercel-labs/agent-desktop"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/Nanbeige/Nanbeige4.3-33B"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.35850"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.37918"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.37481"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31306"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://i.redd.it/cjcpaqzw98zh1.jpeg"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://longcat.ai/blog/longcat-2.5/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://x.com/jcrwhittington/status/2117317159777177602?a=02yfc9wrBoQ2Xi7DDjQ&amp;s=46"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://i.redd.it/jr6yx14eq7zh1.jpeg"
+    }
+  ],
+  "lang": "en",
+  "validation": {
+    "validated_at": "2026-11-03T04:43:47+00:00",
+    "checked_links": false,
+    "dropped": [],
+    "warnings": [
+      "4 paper items (target 2-3)"
+    ]
+  }
+}
