@@ -314,6 +314,7 @@ sources:
     kind: commentary
     url: https://importai.substack.com/feed
     homepage: https://importai.substack.com/
+    enabled: false   # substack.com 的 feed 在 GitHub Actions 上返回 403（2026-11-04 source-check）
 
   - id: latent-space
     name: Latent Space
@@ -387,6 +388,7 @@ sources:
     kind: commentary
     url: https://recodechinaai.substack.com/feed
     homepage: https://recodechinaai.substack.com/
+    enabled: false   # substack.com 的 feed 在 GitHub Actions 上返回 403（2026-11-04 source-check）
 
   - id: chinai
     name: ChinAI
@@ -395,6 +397,7 @@ sources:
     kind: commentary
     url: https://chinai.substack.com/feed
     homepage: https://chinai.substack.com/
+    enabled: false   # substack.com 的 feed 在 GitHub Actions 上返回 403（2026-11-04 source-check）
 
   # ---------------------------------------------------------------- 社区信号（Tier 2）
   - id: hackernews
