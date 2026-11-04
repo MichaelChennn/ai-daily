@@ -209,12 +209,20 @@ def test_export_english_issues(tmp_path, data_dir):
 
 
 def test_export_sources(tmp_path, data_dir):
-    sources = [*SOURCES, source("github_releases", kind="release", id_="gh", repos=["vllm-project/vllm"])]
+    sources = [
+        *SOURCES,
+        source("github_releases", kind="release", id_="gh", repos=["vllm-project/vllm"]),
+        source("rss", kind="commentary", tier=2, id_="simon", homepage="https://simonwillison.net/"),
+        source("json_api", id_="qwen", homepage="https://qwen.ai/research"),
+    ]
     export.export(tmp_path, tmp_path / "public", data_dir, sources)
     data = json.loads((tmp_path / "sources.json").read_text())
     assert data["runs"] == 30
     groups = {g["label"]: g["sources"] for g in data["groups"]}
-    assert list(groups) == ["官方博客", "论文", "开源", "社区信号"]  # in display order, empty ones left out
+    # in display order, empty ones left out
+    assert list(groups) == ["官方博客", "论文", "开源", "博主与周报", "社区信号"]
+    assert groups["博主与周报"][0]["kind"] == "评论 · RSS"
+    assert next(s for s in groups["官方博客"] if s["id"] == "qwen")["kind"] == "官方博客 · API"
     openai = groups["官方博客"][0]
     assert openai["homepage"] == "https://openai.com/news/" and openai["kind"] == "官方博客 · RSS"
     assert openai["stats"] == {"ok": 4, "runs": 4, "candidates": 1.0, "picked": 0}
@@ -228,7 +236,15 @@ def test_export_sources(tmp_path, data_dir):
     assert gh["homepage"] is None and "domain=github.com" in gh["icon"]
 
     en = json.loads((tmp_path / "en" / "sources.json").read_text())
-    assert [g["label"] for g in en["groups"]] == ["Official blogs", "Papers", "Open source", "Community"]
+    assert [g["label"] for g in en["groups"]] == [
+        "Official blogs",
+        "Papers",
+        "Open source",
+        "Writers & newsletters",
+        "Community",
+    ]
+    assert en["groups"][3]["sources"][0]["kind"] == "Commentary · RSS"
+    assert next(s for s in en["groups"][0]["sources"] if s["id"] == "qwen")["kind"] == "Official blog · API"
     assert en["groups"][0]["sources"][0]["kind"] == "Official blog · RSS"
     assert en["groups"][0]["sources"][0]["stats"] == openai["stats"]
 

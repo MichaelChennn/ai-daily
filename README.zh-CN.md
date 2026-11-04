@@ -86,9 +86,10 @@ docs/               开发文档、ADR、调研
 
 | 类别 | 信源 |
 |---|---|
-| 官方博客 | OpenAI、Anthropic News / Research、Google DeepMind、Google AI、Mistral、Hugging Face、Meta AI、MiniMax、Kimi、DeepSeek |
+| 官方博客 | OpenAI、Anthropic News / Research、Claude 博客、Google DeepMind、Google AI、Google Research、Microsoft Research、Apple ML Research、Ai2、Mistral、Hugging Face、Meta AI、xAI、Cohere、Cursor、Liquid AI、Black Forest Labs、Stability AI、Thinking Machines、MiniMax、Kimi、DeepSeek、Qwen、字节 Seed、百度 ERNIE |
 | 论文 | Hugging Face Daily Papers |
 | 开源 | GitHub Releases（vLLM、Ollama、llama.cpp、transformers 等 14 个仓库）、GitHub Trending、Hugging Face Trending Models |
+| 博主与周报 | Simon Willison、Interconnects、Import AI、Latent Space、Sebastian Raschka、Andrej Karpathy、Lilian Weng、Answer.AI、Sam Altman、Ethan Mollick、科学空间、Recode China AI、ChinAI |
 | 社区 | Hacker News、Reddit（r/LocalLLaMA + r/MachineLearning） |
 
 </details>

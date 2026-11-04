@@ -1,13 +1,18 @@
 """Each fetcher against a small canned response (no network)."""
 
+from datetime import datetime, timedelta, timezone
+
+import httpx
 import pytest
 
+from daily import pipeline
 from daily.fetchers.base import collect_filtered
 from daily.fetchers.community import fetch_hackernews, fetch_reddit
 from daily.fetchers.feeds import fetch_rss
 from daily.fetchers.github import fetch_releases, fetch_trending
 from daily.fetchers.html_listing import fetch_html_listing
 from daily.fetchers.huggingface import fetch_daily_papers, fetch_trending_models, is_noisy_model
+from daily.fetchers.json_api import fetch_json_api
 from tests.conftest import BEFORE_WINDOW, IN_WINDOW, mock_client, source
 
 RSS = f"""<?xml version="1.0"?>
@@ -145,7 +150,7 @@ async def test_github_releases(window):
     releases = [
         _release("v0.11.0", IN_WINDOW),
         _release("v0.11.0rc1", IN_WINDOW, prerelease=True),
-        _release("v0.10.9", BEFORE_WINDOW),
+        _release("v0.10.9", BEFORE_WINDOW - timedelta(days=3)),
     ]
     async with mock_client({"api.github.com/repos/vllm-project/vllm/releases": releases}) as client:
         items = await fetch_releases(
@@ -350,3 +355,377 @@ async def test_content_filters_record_what_they_skip(window):
         ("hackernews", "Maintaining a legacy codebase", "not_ai", None),
     ]
     assert skipped[0].url == "https://github.com/acme/css-grid"
+
+
+# ---------------------------------------------------------------- rss: dates and title filter
+
+
+def _rss(*items: tuple[str, str]) -> str:
+    entries = "".join(
+        f"<item><title>{title}</title><link>https://example.com/{i}</link><pubDate>{date}</pubDate></item>"
+        for i, (title, date) in enumerate(items)
+    )
+    return f'<?xml version="1.0"?><rss version="2.0"><channel><title>B</title>{entries}</channel></rss>'
+
+
+async def _fetch_feed(body: str, window, **options):
+    async with mock_client({"example.com/feed": body}) as client:
+        return await fetch_rss(client, source("rss", url="https://example.com/feed", **options), window)
+
+
+async def test_rss_midnight_means_date_only(window):
+    # The issue's window starts 10-19 02:00 UTC, so 10-19 00:00 was out of it as a real timestamp.
+    items = await _fetch_feed(_rss(("Date only", "Mon, 19 Oct 2026 00:00:00 GMT")), window)
+    assert [(i.title, i.published_precision) for i in items] == [("Date only", "day")]
+    assert items[0].published_at == datetime(2026, 10, 19, tzinfo=timezone.utc)
+
+
+async def test_rss_midnight_is_judged_in_the_feeds_own_timezone(window):
+    # Ai2 writes 00:00 Pacific: 08:00 UTC, but still only a date, and the date is the one written.
+    pacific = await _fetch_feed(_rss(("Pacific", "Sun, 18 Oct 2026 00:00:00 -0800")), window)
+    assert [(i.published_at.day, i.published_precision) for i in pacific] == [(18, "day")]
+    # Midnight UTC written from Beijing is a real 08:00 there, a real timestamp.
+    beijing = await _fetch_feed(_rss(("Beijing", "Mon, 19 Oct 2026 08:00:00 +0800")), window)
+    assert beijing == []  # 00:00 UTC is before the window start
+
+
+async def test_rss_atom_midnight_with_offset(window):
+    atom = """<?xml version="1.0"?><feed xmlns="http://www.w3.org/2005/Atom"><title>A</title>
+    <entry><title>Ai2 post</title><link href="https://allenai.org/blog/x"/>
+    <published>2026-10-19T00:00:00-08:00</published></entry></feed>"""
+    items = await _fetch_feed(atom, window)
+    assert [(i.published_at.day, i.published_precision) for i in items] == [(19, "day")]
+
+
+async def test_rss_real_timestamps_keep_second_precision(window):
+    items = await _fetch_feed(_rss(("Real", IN_WINDOW.strftime("%a, %d %b %Y %H:%M:%S GMT"))), window)
+    assert items[0].published_precision == "second" and items[0].published_at == IN_WINDOW
+
+
+async def test_rss_exclude_title_pattern_is_recorded_as_filtered(window):
+    when = IN_WINDOW.strftime("%a, %d %b %Y %H:%M:%S GMT")
+    body = _rss(("[AINews] Daily roundup", when), ("A long essay", when))
+    with collect_filtered() as skipped:
+        items = await _fetch_feed(body, window, exclude_title_pattern=r"^\[AINews\]")
+    assert [i.title for i in items] == ["A long essay"]
+    assert [(f.title, f.reason) for f in skipped] == [("[AINews] Daily roundup", "exclude_title")]
+
+
+async def test_rss_logs_last_build_date_and_entry_count(window, caplog):
+    body = _rss(("One", "Mon, 19 Oct 2026 12:00:00 GMT")).replace(
+        "<title>B</title>", "<title>B</title><lastBuildDate>Mon, 19 Oct 2026 13:00:00 GMT</lastBuildDate>"
+    )
+    with caplog.at_level("INFO", logger="daily.fetchers.feeds"):
+        await _fetch_feed(body, window)
+    assert "Mon, 19 Oct 2026 13:00:00 GMT" in caplog.text and "1 entries" in caplog.text
+
+
+# ---------------------------------------------------------------- html_listing: titles, diagnostics
+
+# Cohere: the card is a link around title, subtitle, date and reading time, none of them headings.
+COHERE_CARDS = """<html><body>
+<div><a href="https://cohere.com/blog/rerank-5">Learn more</a></div>
+<div><a href="/blog/rerank-5" aria-label="Read full article: Introducing Rerank 5: precise retrieval">
+  <div><img src="/x.png"></div></a>
+  <a href="/blog/rerank-5"><p>Introducing Rerank 5: precise retrieval</p>
+  <p>Give your AI the most relevant context for each request.</p>
+  <span><p>Oct 19, 2026</p><div></div><p>8 min read</p></span></a></div>
+<div><a href="/blog/embed-5"><div><img src="/x.png"></div><span>Introducing Embed 5: a new family of
+  <span>models<i></i></span></span></a>
+  <a href="/blog/embed-5"><p>Introducing Embed 5: a new family of models</p>
+  <span><p>Oct 20, 2026</p><div></div><p>7 min read</p></span></a></div>
+</body></html>"""
+
+# Cursor: date and category first, then the title, then the author and reading time, twice.
+CURSOR_CARDS = """<html><body>
+<a href="/blog/projects"><article><div><time>Oct 19, 2026</time><span>·</span><span>product</span></div>
+  <div><p>Introducing Projects</p></div><div><span>Alexi &amp; Fredrika</span></div><div>5m</div>
+  <div><span>Alexi &amp; Fredrika</span><span>·</span><span>5m</span></div></article></a>
+<a href="/blog/navan"><div><p>Navan cuts a month-long migration down to a week</p>
+  <div><time>Oct 20, 2026</time></div></div><div><div><span></span></div></div></a>
+</body></html>"""
+
+# One inline run with nothing separating the title from what follows it.
+INLINE_CARD = """<html><body><a href="/blog/inline"><span>A title that runs into its metadata</span>
+  <span>Oct 19, 2026</span> · <span>11 min read</span></a></body></html>"""
+
+
+async def test_html_listing_cohere_title_without_date_or_subtitle(window):
+    async with mock_client({"cohere.com/blog": COHERE_CARDS}) as client:
+        src = source(
+            "html_listing",
+            url="https://cohere.com/blog",
+            link_pattern=r"^(https://cohere.com)?/blog/[a-z0-9-]+$",
+        )
+        items = await fetch_html_listing(client, src, window)
+    assert [(i.title, i.summary) for i in items] == [
+        (
+            "Introducing Rerank 5: precise retrieval",
+            "Give your AI the most relevant context for each request.",
+        ),
+        ("Introducing Embed 5: a new family of models", ""),
+    ]
+
+
+async def test_html_listing_cursor_title_without_date_author_or_reading_time(window):
+    async with mock_client({"cursor.com/blog": CURSOR_CARDS}) as client:
+        src = source("html_listing", url="https://cursor.com/blog", link_pattern=r"^/blog/[a-z0-9-]+$")
+        items = await fetch_html_listing(client, src, window)
+    assert [i.title for i in items] == [
+        "Introducing Projects",
+        "Navan cuts a month-long migration down to a week",
+    ]
+
+
+async def test_html_listing_strips_trailing_metadata_from_an_inline_title(window):
+    async with mock_client({"x.com/blog": INLINE_CARD}) as client:
+        src = source("html_listing", url="https://x.com/blog", link_pattern=r"^/blog/")
+        items = await fetch_html_listing(client, src, window)
+    assert [i.title for i in items] == ["A title that runs into its metadata"]
+
+
+async def test_html_listing_failure_says_what_the_runner_actually_got(window):
+    page = "<html><body><a href='/x'>one</a><a href='/y'>two</a><p>Verify   you are\nhuman " + "z" * 400
+    response = httpx.Response(
+        200,
+        text=page,
+        headers={
+            "server": "tencent-cos",
+            "content-type": "text/html",
+            "eo-cache-status": "MISS",
+            "cf-ray": "abc-FRA",
+            "x-amz-cf-pop": "IAD12",
+            "x-unrelated": "nope",
+        },
+    )
+    async with mock_client({"example.com/blog": response}) as client:
+        src = source("html_listing", url="https://example.com/blog", link_pattern="^/blog/")
+        report = (await pipeline.run_source(client, src, window))[1]
+    error = report.error
+    assert "\n" not in error
+    for part in (
+        "no post links found",
+        "status=200",
+        "url=https://example.com/blog",
+        f"bytes={len(page.encode())}",
+        "server=tencent-cos",
+        "content-type=text/html",
+        "eo-cache-status=MISS",
+        "cf-ray=abc-FRA",
+        "x-amz-cf-pop=IAD12",
+        "links=2",
+        "Verify you are human",
+    ):
+        assert part in error, part
+    assert "x-unrelated" not in error
+    assert "z" * 260 in error and "z" * 300 not in error  # 300 characters of text, whole message kept
+
+
+# ---------------------------------------------------------------- github releases: promoted versions
+
+
+def _ollama_release(tag, published, **kw):
+    return {
+        "tag_name": tag,
+        "name": tag,
+        "html_url": f"https://github.com/ollama/ollama/releases/tag/{tag}",
+        "published_at": published,
+        "draft": False,
+        "prerelease": False,
+        "body": "",
+        **kw,
+    }
+
+
+async def test_github_releases_marks_recent_versions_before_the_window_as_late(window):
+    releases = [
+        _ollama_release("v3", "2026-10-19T12:00:00Z"),  # in the window
+        _ollama_release(
+            "v2", "2026-10-18T01:00:00Z"
+        ),  # before it, within 3 days of its end: may have been promoted
+        _ollama_release("v1", "2026-10-16T03:00:00Z"),  # more than 3 days before the end
+        _ollama_release("v0", "2026-10-18T02:00:00Z", prerelease=True),  # still a pre-release
+    ]
+    urls = []
+
+    async with mock_client({"api.github.com/repos/ollama/ollama/releases": releases}) as client:
+        client.event_hooks["request"].append(_record_url(urls))
+        items = await fetch_releases(
+            client, source("github_releases", "release", repos=["ollama/ollama"]), window
+        )
+    assert [(i.title, i.signals) for i in items] == [
+        ("ollama/ollama v3", {}),
+        ("ollama/ollama v2", {"late_release": True}),
+    ]
+    assert "per_page=30" in urls[0]
+
+
+def _record_url(urls):
+    async def record(request):
+        urls.append(str(request.url))
+
+    return record
+
+
+# ---------------------------------------------------------------- hf_daily_papers: weekly fallback
+
+
+def _paper(arxiv_id, upvotes):
+    return {
+        "title": f"Paper {arxiv_id}",
+        "paper": {"id": arxiv_id, "title": f"Paper {arxiv_id}", "upvotes": upvotes, "summary": "s"},
+    }
+
+
+def _papers_client(day_list, week_list, requests):
+    def handler(request):
+        requests.append(dict(request.url.params))
+        return httpx.Response(200, json=week_list if "week" in request.url.params else day_list)
+
+    return httpx.AsyncClient(transport=httpx.MockTransport(handler))
+
+
+async def test_hf_daily_papers_does_not_touch_the_weekly_list_when_the_day_has_papers(window):
+    requests = []
+    src = source("hf_daily_papers", "paper", week_fallback_limit=10)
+    async with _papers_client([_paper("2610.00001", 20)], [_paper("2610.00002", 99)], requests) as client:
+        items = await fetch_daily_papers(client, src, window)
+    assert [i.title for i in items] == ["Paper 2610.00001"]
+    assert "week" not in items[0].signals
+    assert len(requests) == 1
+
+
+async def test_hf_daily_papers_falls_back_to_top_of_the_iso_week(window):
+    # Window 10-19 .. 10-20: the list it asks for is 10-19, in ISO week 2026-W43.
+    week = [_paper(f"2610.{i:05d}", votes) for i, votes in enumerate([12, 300, 5, 40, 9, 100])]
+    requests = []
+    src = source("hf_daily_papers", "paper", min_upvotes=10, week_fallback_limit=3)
+    with collect_filtered() as skipped:
+        async with _papers_client([], week, requests) as client:
+            items = await fetch_daily_papers(client, src, window)
+    assert [i.signals["upvotes"] for i in items] == [300, 100, 40]
+    assert {i.signals["week"] for i in items} == {"2026-W43"}
+    assert requests[1]["week"] == "2026-W43"
+    assert skipped == []  # the ones below the top 3 were never looked at
+
+
+async def test_hf_daily_papers_week_fallback_still_applies_min_upvotes(window):
+    week = [_paper("2610.00001", 50), _paper("2610.00002", 3)]
+    src = source("hf_daily_papers", "paper", min_upvotes=10, week_fallback_limit=10)
+    with collect_filtered() as skipped:
+        async with _papers_client([], week, []) as client:
+            items = await fetch_daily_papers(client, src, window)
+    assert [i.signals["upvotes"] for i in items] == [50]
+    assert [f.reason for f in skipped] == ["min_upvotes"]
+
+
+async def test_hf_daily_papers_stays_empty_without_the_option(window):
+    requests = []
+    async with _papers_client([], [_paper("2610.00001", 50)], requests) as client:
+        assert await fetch_daily_papers(client, source("hf_daily_papers", "paper"), window) == []
+    assert len(requests) == 1
+
+
+# ---------------------------------------------------------------- json_api
+
+QWEN = {
+    "success": True,
+    "data": {
+        "articles": [
+            {
+                "title": "Qwen-Image-3: new &amp; better",
+                "path": "qwen-image-3",
+                "content": '<meta property="article:published_time" content="2026-10-19T20:00:00+08:00">',
+                "extra": {
+                    "date": "2026-10-19T20:00:00+08:00",
+                    "introduction": "<div>Hello <b>world</b></div>",
+                },
+            },
+            {
+                "title": "Old",
+                "path": "old",
+                "content": '<meta property="article:published_time" content="2026-01-01T20:00:00+08:00">',
+                "extra": {"date": "2026-01-01T20:00:00+08:00"},
+            },
+            {"title": "No date", "path": "no-date", "content": "", "extra": {}},
+            {"title": "", "path": "no-title", "extra": {"date": "2026-10-19T20:00:00+08:00"}},
+        ]
+    },
+}
+QWEN_OPTIONS = {
+    "url": "https://qwen.ai/api/articles",
+    "items": "data.articles",
+    "title": "title",
+    "date": "extra.date",
+    "link": "https://qwen.ai/blog?id={path}",
+    "summary": "extra.introduction",
+}
+
+
+async def test_json_api_reads_nested_fields(window):
+    async with mock_client({"qwen.ai/api/articles": QWEN}) as client:
+        items = await fetch_json_api(client, source("json_api", **QWEN_OPTIONS), window)
+    assert [(i.title, i.url, i.summary, i.published_precision) for i in items] == [
+        ("Qwen-Image-3: new & better", "https://qwen.ai/blog?id=qwen-image-3", "Hello world", "second")
+    ]
+    assert items[0].published_at == datetime(2026, 10, 19, 12, tzinfo=timezone.utc)
+
+
+async def test_json_api_date_pattern_takes_the_date_out_of_a_field(window):
+    options = {
+        **QWEN_OPTIONS,
+        "date": "content",
+        "date_pattern": r'article:published_time" content="([^"]+)"',
+    }
+    async with mock_client({"qwen.ai/api/articles": QWEN}) as client:
+        items = await fetch_json_api(client, source("json_api", **options), window)
+    assert [i.url for i in items] == ["https://qwen.ai/blog?id=qwen-image-3"]
+    assert items[0].published_at == datetime(2026, 10, 19, 12, tzinfo=timezone.utc)
+
+
+def _seed_article(key, millis):
+    return {
+        "ArticleMeta": {"PublishDate": millis},
+        "ArticleSubContentEn": {"Title": f"Seed {key}", "TitleKey": key, "Abstract": "Abstract."},
+    }
+
+
+SEED_OPTIONS = {
+    "url": "https://seed.bytedance.com/api/list",
+    "items": "sub_article_list",
+    "title": "ArticleSubContentEn.Title",
+    "date": "ArticleMeta.PublishDate",
+    "date_timezone": "Asia/Shanghai",
+    "link": "https://seed.bytedance.com/en/blog/{ArticleSubContentEn.TitleKey}",
+    "summary": "ArticleSubContentEn.Abstract",
+}
+
+
+async def test_json_api_epoch_millis_as_a_date_in_the_sites_timezone(window):
+    # 2026-10-19T16:00Z is midnight on 10-20 in Beijing.
+    body = {
+        "sub_article_list": [
+            _seed_article("recent", 1792425600000),
+            _seed_article("old", 1791907200000),
+        ]
+    }
+    async with mock_client({"seed.bytedance.com/api/list": body}) as client:
+        items = await fetch_json_api(client, source("json_api", **SEED_OPTIONS), window)
+    assert [(i.title, i.url, i.published_precision, i.summary) for i in items] == [
+        ("Seed recent", "https://seed.bytedance.com/en/blog/recent", "day", "Abstract.")
+    ]
+    assert items[0].published_at == datetime(2026, 10, 20, tzinfo=timezone.utc)
+
+
+@pytest.mark.parametrize("body", [{"sub_article_list": []}, {"other": 1}, {"sub_article_list": {"a": 1}}])
+async def test_json_api_fails_loudly_when_the_list_is_gone(window, body):
+    async with mock_client({"seed.bytedance.com/api/list": body}) as client:
+        with pytest.raises(ValueError, match="sub_article_list"):
+            await fetch_json_api(client, source("json_api", **SEED_OPTIONS), window)
+
+
+async def test_json_api_link_with_a_missing_field_skips_the_item(window):
+    article = _seed_article("x", 1792425600000)
+    del article["ArticleSubContentEn"]["TitleKey"]
+    async with mock_client({"seed.bytedance.com/api/list": {"sub_article_list": [article]}}) as client:
+        assert await fetch_json_api(client, source("json_api", **SEED_OPTIONS), window) == []

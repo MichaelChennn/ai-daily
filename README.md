@@ -84,9 +84,10 @@ Listed in [`sources.yaml`](sources.yaml). The website's [sources page](https://m
 
 | Kind | Sources |
 |---|---|
-| Official blogs | OpenAI, Anthropic News / Research, Google DeepMind, Google AI, Mistral, Hugging Face, Meta AI, MiniMax, Kimi, DeepSeek |
+| Official blogs | OpenAI, Anthropic News / Research, Claude Blog, Google DeepMind, Google AI, Google Research, Microsoft Research, Apple ML Research, Ai2, Mistral, Hugging Face, Meta AI, xAI, Cohere, Cursor, Liquid AI, Black Forest Labs, Stability AI, Thinking Machines, MiniMax, Kimi, DeepSeek, Qwen, ByteDance Seed, Baidu ERNIE |
 | Papers | Hugging Face Daily Papers |
 | Open source | GitHub Releases (14 repos including vLLM, Ollama, llama.cpp, transformers), GitHub Trending, Hugging Face Trending Models |
+| Writers & newsletters | Simon Willison, Interconnects, Import AI, Latent Space, Sebastian Raschka, Andrej Karpathy, Lilian Weng, Answer.AI, Sam Altman, Ethan Mollick, Kexue.fm, Recode China AI, ChinAI |
 | Community | Hacker News, Reddit (r/LocalLLaMA + r/MachineLearning) |
 
 </details>

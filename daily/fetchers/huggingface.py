@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from datetime import timedelta
+from typing import Any
 
 import httpx
 
@@ -49,24 +50,38 @@ def is_noisy_model(repo_id: str) -> bool:
 async def fetch_daily_papers(
     client: httpx.AsyncClient, source: SourceConfig, window: Window
 ) -> list[Candidate]:
-    """Options: min_upvotes (default 0).
+    """Options: min_upvotes (default 0); week_fallback_limit (default none).
 
     Takes the Daily Papers list of the last UTC day that is complete, or nearly so, when the
     window ends: the 05:07 Berlin run happens at 03:07 / 04:07 UTC, so that is the day before.
     Papers listed later on the same UTC day are picked up by the next issue.
+
+    HF lists nothing on weekends and some holidays. For such a day, week_fallback_limit takes that
+    many of the highest-voted papers of its ISO week instead, marked with `signals.week`; the ones
+    an issue already published are dropped by dedup, so the next empty day gets the next ones.
     """
     min_upvotes = int(source.options.get("min_upvotes", 0))
-    day = (window.end - timedelta(hours=12)).date().isoformat()
+    day = (window.end - timedelta(hours=12)).date()
     response = await get(
-        client, "https://huggingface.co/api/daily_papers", params={"date": day, "limit": 100}
+        client, "https://huggingface.co/api/daily_papers", params={"date": day.isoformat(), "limit": 100}
     )
+    entries = response.json()
+
+    week: str | None = None
+    if not entries and (week_limit := source.options.get("week_fallback_limit")):
+        year, number, _ = day.isocalendar()
+        week = f"{year}-W{number:02d}"
+        response = await get(
+            client, "https://huggingface.co/api/daily_papers", params={"week": week, "limit": 100}
+        )
+        entries = sorted(response.json(), key=_upvotes, reverse=True)[: int(week_limit)]
 
     items: list[Candidate] = []
-    for entry in response.json():
+    for entry in entries:
         paper = entry.get("paper") or {}
         paper_id = paper.get("id")
         title = clean_title(paper.get("title") or entry.get("title"))
-        upvotes = int(paper.get("upvotes") or 0)
+        upvotes = _upvotes(entry)
         if not paper_id or not title:
             continue
         url = f"https://huggingface.co/papers/{paper_id}"
@@ -74,6 +89,8 @@ async def fetch_daily_papers(
             filtered(source, "min_upvotes", title, url, f"upvotes {upvotes} < {min_upvotes}")
             continue
         signals = {"upvotes": upvotes, "comments": int(entry.get("numComments") or 0)}
+        if week:
+            signals["week"] = week
         if paper.get("githubRepo"):
             signals["github_repo"] = paper["githubRepo"]
             signals["github_stars"] = int(paper.get("githubStars") or 0)
@@ -93,6 +110,10 @@ async def fetch_daily_papers(
             )
         )
     return items
+
+
+def _upvotes(entry: dict[str, Any]) -> int:
+    return int((entry.get("paper") or {}).get("upvotes") or 0)
 
 
 async def fetch_trending_models(

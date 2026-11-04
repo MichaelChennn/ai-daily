@@ -93,6 +93,7 @@ SOURCE_GROUPS = {
     "release": "开源",
     "repo": "开源",
     "model": "模型",
+    "commentary": "博主与周报",
     "discussion": "社区信号",
 }
 KIND_LABELS = {
@@ -101,6 +102,7 @@ KIND_LABELS = {
     "release": "版本发布",
     "repo": "开源项目",
     "model": "模型",
+    "commentary": "评论",
     "discussion": "社区讨论",
 }
 SOURCE_GROUPS_EN = {
@@ -109,6 +111,7 @@ SOURCE_GROUPS_EN = {
     "release": "Open source",
     "repo": "Open source",
     "model": "Models",
+    "commentary": "Writers & newsletters",
     "discussion": "Community",
 }
 KIND_LABELS_EN = {
@@ -117,11 +120,13 @@ KIND_LABELS_EN = {
     "release": "Release",
     "repo": "Open-source project",
     "model": "Model",
+    "commentary": "Commentary",
     "discussion": "Discussion",
 }
 TYPE_LABELS = {
     "rss": "RSS",
     "html_listing": "列表页",
+    "json_api": "API",
     "hf_daily_papers": "API",
     "hf_trending_models": "API",
     "github_releases": "GitHub API",

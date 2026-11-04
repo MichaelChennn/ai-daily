@@ -214,3 +214,54 @@ def test_cli_fetch_takes_a_separate_reported_lookback(tmp_path, monkeypatch):
 
     assert cli.main(args) == 0 and reported() == 1
     assert cli.main([*args, "--reported-days", "10"]) == 0 and reported() == 0
+
+def _release(version, signals=None):
+    return Candidate(
+        source="github-releases",
+        source_name="GitHub Releases",
+        tier=1,
+        kind="release",
+        title=f"ollama/ollama {version}",
+        url=f"https://github.com/ollama/ollama/releases/tag/{version}",
+        published_at=IN_WINDOW,
+        signals=signals or {},
+    )
+
+
+def test_late_release_only_stays_if_no_earlier_candidate_had_it(window):
+    sources = [source("github_releases", "release", id_="github-releases")]
+    seen = dedup.url_key("https://github.com/ollama/ollama/releases/tag/v2")
+    history = dedup.History({seen: ["2026-10-19"]}, {})
+    raw = [
+        _release("v1", {"late_release": True}),  # first time we see it: was a pre-release until now
+        _release("v2", {"late_release": True}),  # an earlier issue already had it
+        _release("v3"),
+    ]
+    data = pipeline.build_candidates(raw, sources, window, [], history)
+    assert [c["title"] for c in data["candidates"]] == [
+        "ollama/ollama v1",
+        "ollama/ollama v3",
+    ]
+    assert data["stats"]["seen_before"] == 0
+
+
+def test_shipped_sources_are_the_agreed_list():
+    sources = {s.id: s for s in load_sources(DEFAULT_SOURCES_FILE)}
+    commentary = {s.id for s in sources.values() if s.kind == "commentary"}
+    assert len(commentary) == 13
+    assert all(sources[i].tier == 2 and sources[i].type == "rss" for i in commentary)
+    assert all(sources[i].options.get("homepage") for i in commentary)  # the sources page links to them
+    assert sources["latent-space"].options["exclude_title_pattern"] == r"^\[AINews\]"
+    assert sources["simon-willison"].options["url"].endswith("/atom/entries/")
+    assert {"qwen-blog", "seed-blog"} <= {s.id for s in sources.values() if s.type == "json_api"}
+    assert sources["hf-daily-papers"].options["week_fallback_limit"] == 10
+    assert sources["minimax-blog"].options["link_pattern"] == "^/(blog|news)/[a-z0-9-]+$"
+    # Every existing source is still there, and still on.
+    existing = {
+        "openai-news", "anthropic-news", "anthropic-research", "deepmind-blog", "google-ai-blog", "mistral-news",
+        "huggingface-blog", "meta-ai-news", "minimax-blog", "kimi-blog", "deepseek-news", "hf-daily-papers",
+        "github-releases", "github-trending", "hf-trending-models", "hackernews", "reddit-ai",
+    }  # fmt: skip
+    assert existing <= sources.keys()
+    assert all(sources[i].enabled for i in existing)
+    assert len(sources) == 46

@@ -18,16 +18,17 @@ sources.yaml ──► fetchers（并发、相互隔离）──► 去重 ─�
 
 | type | 信源 | 说明 |
 |---|---|---|
-| `rss` | OpenAI、Google DeepMind、Google AI、Hugging Face Blog、Meta 新闻室（AI 标签） | Meta 用新闻室的 AI 标签 feed（ai.meta.com 拒绝非浏览器请求） |
-| `html_listing` | Anthropic News / Research、Mistral、MiniMax、Kimi、DeepSeek（API 文档的新闻侧栏） | 没有 RSS，按链接定位卡片，日期只精确到天 |
-| `hf_daily_papers` | Hugging Face Daily Papers | 带 upvotes、代码仓库 |
-| `github_releases` | vLLM、Ollama、llama.cpp、transformers 等 | 跳过 draft 和 pre-release |
+| `rss` | OpenAI、Google DeepMind、Google AI、Google Research、Microsoft Research、Apple ML Research、Ai2、Thinking Machines、Stability AI、百度 ERNIE、Hugging Face Blog、Meta 新闻室（AI 标签）、xAI（第三方 feed），以及全部博主和周报 | Meta 用新闻室的 AI 标签 feed（ai.meta.com 拒绝非浏览器请求）；xAI 用 alan-turing-institute/ai-rss-feeds 生成的 feed（x.ai 拒绝非浏览器请求）。feed 自己的时钟正好是午夜的条目按「只有日期」处理 |
+| `html_listing` | Anthropic News / Research、Claude 博客、Mistral、MiniMax、Kimi、DeepSeek（官网和 API 文档的新闻侧栏）、Black Forest Labs、Liquid AI、Cohere、Cursor | 没有 RSS，按链接定位卡片，日期只精确到天。找不到文章链接时，报错里写上状态码、最终 URL、页面大小、CDN 响应头、链接总数和正文开头 |
+| `json_api` | Qwen、字节 Seed | 网站前端用的 JSON 接口（没有文档），数组路径、标题、日期、链接模板写在 `sources.yaml` 里 |
+| `hf_daily_papers` | Hugging Face Daily Papers | 带 upvotes、代码仓库。当天列表为空（周末、节假日）时取所在 ISO 周周榜的前 `week_fallback_limit` 篇，带 `signals.week` |
+| `github_releases` | vLLM、Ollama、llama.cpp、transformers 等 | 跳过 draft 和 pre-release。窗口之前 3 天内的版本带 `signals.late_release`：之前的候选里没出现过才收，用来接住先发 pre-release、后转正的版本（如 Ollama） |
 | `github_trending` | GitHub Trending | 只保留 AI 相关、当日 star 达到阈值的 |
 | `hf_trending_models` | Hugging Face Trending Models | 过滤量化 / 合并 / 适配器，以及创建超过 45 天的（`createdAt` 是建仓时间，大厂会提前建私有仓库） |
 | `hackernews` | Hacker News（Algolia API） | Tier 2，AI 相关且分数达到阈值 |
 | `reddit` | r/LocalLLaMA + r/MachineLearning | Tier 2，RSS（JSON API 拒绝匿名的云端请求）；匿名 RSS 每分钟只给 1 次，两个版合成一个请求 |
 
-Qwen（官方列表页是 JS 渲染）、xAI（对非浏览器 UA 返回 403）暂时没有可抓的官方列表页，由 HF Trending、HN 和 Reddit 覆盖。
+`day` 精度的日期按日历日判断：窗口两端碰到的 UTC 和柏林日期，再加窗口开始的前一天（美西晚上发的文章日期是前一天）。
 
 ## 去重
 
@@ -46,6 +47,7 @@ Qwen（官方列表页是 JS 渲染）、xAI（对非浏览器 UA 返回 403）�
 | `min_upvotes` | HF Daily Papers | `upvotes 3 < 5` |
 | `max_age_days` | HF Trending Models | `61 days old > 14` |
 | `noisy_model` | HF Trending Models | `repo id contains gguf` |
+| `exclude_title` | 配了 `exclude_title_pattern` 的 RSS（Latent Space） | `title matches ^\[AINews\]` |
 
 时间窗口之外的、缺标题或链接的条目本来就不是候选，不记录。Hacker News 的 `min_points` 由 Algolia 在服务器端过滤，分数不够的帖子我们看不到，也就无法记录。
 
@@ -68,7 +70,7 @@ Qwen（官方列表页是 JS 渲染）、xAI（对非浏览器 UA 返回 403）�
   "candidates": [{
     "id": "c_6ecc1d71a5",                   // 由 URL key 生成，跨天稳定
     "source": "openai-news", "source_name": "OpenAI News", "tier": 1,
-    "kind": "blog|paper|release|model|repo|discussion",
+    "kind": "blog|paper|release|model|repo|commentary|discussion",
     "title": "...", "url": "...", "summary": "...",
     "published_at": "...", "published_precision": "second|day",
     "discussion_url": null, "signals": {"hn_points": 812}, "tags": [],

@@ -61,6 +61,7 @@ FILTER_REASONS = {
     "min_upvotes": "点赞不够",
     "max_age_days": "模型发布太久",
     "noisy_model": "衍生权重",
+    "exclude_title": "标题命中排除规则",
 }
 
 
