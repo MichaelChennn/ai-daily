@@ -52,7 +52,7 @@ TEXT = {
         "name": "AI 科技日报",
         "name_size": 76,
         "lines": ["每天一期 AI 技术日报，5 分钟读完。", "每个数字都能追到一手来源的原文。"],
-        "chips": ["17 个信源", "中文 / English", "全文 RSS"],
+        "chips": [["官方和一手 31 个", "博主与周报 13 个"], ["中文 / English", "全文 RSS"]],
         "meta": "Mistral AI News · 10月29日",
         "title": "Mistral 开放 Mistral Large 4 权重",
         "summary": [
@@ -62,7 +62,7 @@ TEXT = {
         "check": "逐字核对",
         "pipeline_title": "AI 科技日报的流水线",
         "s1": "信源采集",
-        "s1_note": "17 个信源 · 05:07",
+        "s1_note": "官方和一手 31 个 + 博主与周报 13 个 · 05:07",
         "merge": "去重 → 候选",
         "s2": "编辑与把关",
         "s2_note": "05:30 → 06:00",
@@ -85,7 +85,7 @@ TEXT = {
             "A five-minute AI tech digest, every morning.",
             "Every number traces back to a primary source.",
         ],
-        "chips": ["17 sources", "English / 中文", "Full-text RSS"],
+        "chips": [["31 official & primary", "13 writers & newsletters"], ["English / 中文", "Full-text RSS"]],
         "meta": "Mistral AI News · Oct 29",
         "title": "Mistral releases Mistral Large 4 weights",
         "summary": [
@@ -95,7 +95,7 @@ TEXT = {
         "check": "verbatim",
         "pipeline_title": "The AI Daily pipeline",
         "s1": "Source collection",
-        "s1_note": "17 sources · 05:07",
+        "s1_note": "31 official & primary + 13 writers & newsletters · 05:07",
         "merge": "dedupe → candidates",
         "s2": "Editing and checks",
         "s2_note": "05:30 → 06:00",
@@ -201,15 +201,17 @@ def hero(lang, t):
     b.append(text(60, 236, escape(s["name"]), s["name_size"], t["fg"], 800, extra=' letter-spacing="-2"'))
     for i, line in enumerate(s["lines"]):
         b.append(text(64, 292 + i * 36, escape(line), 23, t["body"]))
-    x = 64
-    for label in s["chips"]:
-        w = chip_width(label, 18) + 36
-        b.append(
-            f'<rect x="{x}" y="364" width="{w:.0f}" height="40" rx="20" fill="none" '
-            f'stroke="{t["border"]}" stroke-width="1.5"/>'
-        )
-        b.append(text(x + w / 2, 390, escape(label), 18, t["fg"], 500, anchor="middle"))
-        x += w + 10
+    for row, labels in enumerate(s["chips"]):
+        x = 64
+        y = 348 + row * 48
+        for label in labels:
+            w = chip_width(label, 18) + 36
+            b.append(
+                f'<rect x="{x}" y="{y}" width="{w:.0f}" height="40" rx="20" fill="none" '
+                f'stroke="{t["border"]}" stroke-width="1.5"/>'
+            )
+            b.append(text(x + w / 2, y + 26, escape(label), 18, t["fg"], 500, anchor="middle"))
+            x += w + 10
 
     # Proof: a real item from 2026-10-30, and the sentence on mistral.ai its numbers come from.
     cx, cw = 640, 496
