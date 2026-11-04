@@ -1,0 +1,679 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-04",
+  "mode": "full",
+  "generated_at": "2026-11-04T04:38:49+00:00",
+  "channel": "api",
+  "model": "nvidia:minimaxai/minimax-m3.1-flash",
+  "highlights": [
+    "agent 框架与评测密集涌现：CoworkOS 用分层运行时做长周期协作，CUA-Master、NorthCUA 与 ReTRACE 分别从数据飞轮、经验闭环和失败恢复切入计算机使用智能体。",
+    "视频生成走向实时与长时一致：Wave Forcing 提出流式生成与执行协同设计，History Forcing 用历史残差修正蒸馏目标。",
+    "Claude Code v2.1.318 修复多项会话、认证与配置写入问题，并为 mantle 上游加入 assume_role 与 mod 的 effort 选项。"
+  ],
+  "items": [
+    {
+      "section": "headline",
+      "title": "CoworkOS 把长期工作拆成策略与执行两层",
+      "summary": "中国人民大学团队提出通用长周期工作框架 CoworkOS，把任务策略与执行管理分离：模型决定动作、委派与验收，运行时维护状态和反馈。三层架构支持直接执行或委派给 Subagents，并借助分层工作区与持久语义记忆让工作文件、关键决策和长时间 Job 日志可共享、可恢复。",
+      "tags": [
+        "Agent",
+        "论文",
+        "工具"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_991beae516",
+          "url": "https://huggingface.co/papers/2611.03178"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.03178",
+          "quote": "We introduce CoworkOS, a general-purpose harness for long-horizon work that separates task strategy from execution management: the model decides actions, delegation, and acceptance, while the runtime maintains state and feedback."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.03178",
+          "quote": "Its three-layer architecture enables direct execution or delegation to Subagents , synchronously or asynchronously, under stable responsibilities."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.03178",
+          "quote": "To sustain continuity across agents and sessions, CoworkOS further introduces hierarchical workspaces and persistent semantic memory , so working files, key decisions, and long-running Job logs remain shareable, reusable, and resumable after interruption."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "CUA-Master 用嵌套双循环扩展计算机使用智能体",
+      "summary": "CUA-Master 提出系统层与数据层嵌套的递归改进框架：外层持续引入开放世界语料并利用模型弱点指导迭代，内层从教学视频挖掘种子任务并将其转化为可复用的可验证任务原语。它还引入反馈引导的快照回滚重试机制以稳定采集轨迹。",
+      "tags": [
+        "Agent",
+        "论文",
+        "训练"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_bbe3067310",
+          "url": "https://huggingface.co/papers/2611.03126"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.03126",
+          "quote": "To address these challenges, we introduce CUA-Master , a nested double-loop recursive improvement framework."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.03126",
+          "quote": "At the system level, an outer world-data-model flywheel continuously incorporates open-world corpus and leverages evolving model weaknesses to guide subsequent data construction and optimization iterations."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.03126",
+          "quote": "At the data level, an inner flywheel couples open-world seeding and autocatalytic propagation ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.03126",
+          "quote": "The former mines authentic workflows as seed tasks from instructional videos, and employs visual-semantic dual-path trajectory reconstruction ; The latter transforms these seeds into reusable primitives for controllable synthesis of diverse, complex, and verifiable tasks."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.03126",
+          "quote": "To enable efficient and reliable trajectory collection, we further introduce a feedback-guided snapshot-rollback retry mechanism in various real environments."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Wave Forcing 让流式视频生成跑出 147.6 DiT FPS",
+      "summary": "Wave Forcing 协同设计生成、训练与执行流程，用分块因果注意力在早期分块去噪完成前读取其更干净的状态，并在完整模型副本间错开去噪与缓存刷新以实现 1F1C。配套的 Wave Runtime 用 Wave Parallelism 提前投递 K/V 并重叠通信与计算，在八块 H200 上 4-step WF 达到 147.6 DiT FPS 和 134.8 端到端 FPS。",
+      "tags": [
+        "视频",
+        "论文",
+        "推理"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_42da0213ee",
+          "url": "https://huggingface.co/papers/2611.00859"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.00859",
+          "quote": "We propose Wave Forcing (WF), which co-designs generation, training, and execution for continuous video output with multi-step denoising ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.00859",
+          "quote": "WF uses chunk-wise causal attention to access earlier, cleaner chunks before their denoising is complete, and distributes staggered denoising and cache-refresh stages across full-model replicas to achieve 1F1C: one output chunk per concurrent forward round after pipeline fill ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.00859",
+          "quote": "To execute this process efficiently, Wave Runtime (WaveRT) uses Wave Parallelism (WP) for early K/V delivery and communication-computation overlap, together with optimized kernels and pipelined VAE decoding."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.00859",
+          "quote": "Our system efficiency experiments show that 4-step WF achieves 147.6 DiT FPS and 134.8 end-to-end FPS on eight H200 GPUs, yielding 7.07x the single-GPU end-to-end throughput."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Claude Code v2.1.318 修复会话与配置写入问题",
+      "summary": "Claude Code v2.1.318 新增 mantle 上游的 assume_role（支持跨 AWS 账号角色与按开发者归集成本）、mod 的 $.model.fork effort 选项，并把登录过期时间写入 claude auth status 与 claude -p JSON 结果。版本还修复了 --continue 丢失早前对话、macOS 上大量 Bash 命令卡死、共享网络目录配置写入失败等问题。",
+      "tags": [
+        "工具",
+        "代码"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_96e66634f2",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.318"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.318",
+          "quote": "Added assume_role on mantle upstreams of the Claude apps gateway, for a role in another AWS account and for per-developer AWS cost attribution"
+        },
+        {
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.318",
+          "quote": "Added an effort option to a mod's $.model.fork , so a quick side job can run at low whatever effort the session uses; the result reports the effort sent"
+        },
+        {
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.318",
+          "quote": "Added the date a stored claude.ai sign-in ends to claude auth status ( loginExpiresAt ) and to claude -p JSON results ( credential_expires_at )"
+        },
+        {
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.318",
+          "quote": "Fixed --continue sometimes losing the earlier conversation after a malformed tool call's retries ran out (regression in 2.1.314)"
+        },
+        {
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.318",
+          "quote": "Fixed macOS sessions with many running Bash commands stalling while memory grew"
+        },
+        {
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.318",
+          "quote": "Fixed /logout , claude auth logout and claude mcp remove reporting success, and changes to trust, consent or MCP settings being dropped with no word, when the config file could not be updated on a shared network home directory"
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "NorthCUA 用经验飞轮训练计算机使用模型",
+      "summary": "NorthCUA 以 Experience Flywheel 提供可执行任务，由 Harness 维持长交互、记录决策并核验结果，再据此筛选已验证轨迹；未解决任务则通过递归自我改进演化可复用技能并保留已验证里程碑。训练端结合中训与长周期监督微调以及桌面-网页联合强化学习，产出 Nano、Mini 和 Pro 三个规模。",
+      "tags": [
+        "Agent",
+        "模型",
+        "训练"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_f954b07c15",
+          "url": "https://huggingface.co/papers/2611.02102"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.02102",
+          "quote": "Its Experience Flywheel supplies diverse executable tasks to the NorthCUA Harness, which sustains long interactions, records decisions, and checks task outcomes."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.02102",
+          "quote": "For unsolved tasks, recursive self-improvement evolves reusable skills and preserves verified milestones so later attempts build on earlier progress."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.02102",
+          "quote": "Staged Learning combines this experience with grounding data from the Flywheel to develop GUI competence through mid-training and long-horizon supervised fine-tuning ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.02102",
+          "quote": "The policy then learns from fresh attempts in the same Harness through joint desktop-web reinforcement learning , closing the loop between experience production and policy improvement."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.02102",
+          "quote": "The resulting Nano, Mini, and Pro family achieves state-of-the-art results among open-source models across GUI grounding , desktop execution , and Web interaction under the reported evaluation settings."
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "colibri 在本机分层运行超大 MoE 模型",
+      "summary": "colibri 是用 C 编写的分层推理引擎：热点专家放在 GPU（支持 CUDA、Vulkan），温层放 RAM，冷层从 NVMe 流式读取，可在不持有整台模型的前提下运行大参数 MoE。仓库当前提供十种语言模型引擎与 Qwen-Image-2.1 图像引擎，最低需要 8 GB 内存，显卡为可选，并暴露 OpenAI 与 Anthropic 兼容的 base URL。",
+      "tags": [
+        "模型",
+        "开源",
+        "工具"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_2a0662c2ca",
+          "url": "https://github.com/JustVugg/colibri"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/JustVugg/colibri",
+          "quote": "colibri Public Notifications You must be signed in to change notification settings Fork 5.5k ( 5.5k ) Star 47.3k ( 47.3k ) You must be signed in to star a repository About A hierarchical inference engine for frontier MoE models: hot experts on the GPU (CUDA, Vulkan), warm ones in RAM, cold ones stre"
+        },
+        {
+          "url": "https://github.com/JustVugg/colibri",
+          "quote": "amed from NVMe."
+        },
+        {
+          "url": "https://github.com/JustVugg/colibri",
+          "quote": "Written in C, runs on the hardware you already own."
+        },
+        {
+          "url": "https://github.com/JustVugg/colibri",
+          "quote": "Pure C, one file per model family, no GPU required."
+        },
+        {
+          "url": "https://github.com/JustVugg/colibri",
+          "quote": "draws pictures: Qwen-Image-2.1 ."
+        },
+        {
+          "url": "https://github.com/JustVugg/colibri",
+          "quote": "and on NVIDIA cards through CUDA."
+        },
+        {
+          "url": "https://github.com/JustVugg/colibri",
+          "quote": "You need a computer with 8 GB of RAM at the very least (16 GB or more is"
+        },
+        {
+          "url": "https://github.com/JustVugg/colibri",
+          "quote": "OpenAI base URL: http://127.0.0.1:8000/v1"
+        },
+        {
+          "url": "https://github.com/JustVugg/colibri",
+          "quote": "Anthropic base URL: http://127.0.0.1:8000"
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "StateBench 划分四级长文档状态跟踪难度",
+      "summary": "StateBench 基准用四个难度层级衡量语言模型在长文档中跟踪实体状态变化的能力，层级越高越依赖链式更新。测试显示，Gemini 3.8 Flash、Claude Opus 5.5 和 GPT-6 Sol、Luna 在最难的一般有限问题上随输入变长准确率降至 13% 或更低；直接在任务上训练时，Gated DeltaNet 与混合模型在 r-trivial、aperiodic 和 soluble 上几乎完美泛化，Transformer 则始终学不会一般有限问题。",
+      "tags": [
+        "论文",
+        "推理",
+        "训练"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_740e2c0cc8",
+          "url": "https://huggingface.co/blog/allenai/statebench"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/blog/allenai/statebench",
+          "quote": "StateBench consists of four difficulty levels that permit increasingly complex state update operations."
+        },
+        {
+          "url": "https://huggingface.co/blog/allenai/statebench",
+          "quote": "To compare the four levels fairly, we start with a general finite sequence of variable assignments and derive three easier versions from it, producing four comparable StateBench problems—one at each difficulty level."
+        },
+        {
+          "url": "https://huggingface.co/blog/allenai/statebench",
+          "quote": "We then tested four frontier models – Gemini 3.8 Flash, Claude Opus 5.5, and GPT-6 Sol and Luna – asking them to read each sequence of variable assignments and generate the final value of every variable."
+        },
+        {
+          "url": "https://huggingface.co/blog/allenai/statebench",
+          "quote": "But on soluble and general finite problems, accuracy fell sharply as inputs grew longer, dropping to 13% or lower on the longest general finite problems."
+        },
+        {
+          "url": "https://huggingface.co/blog/allenai/statebench",
+          "quote": "We trained several 275-million-parameter models from scratch on StateBench: two transformer variants, two hybrids, and two Gated DeltaNet variants with different memory-update constraints."
+        },
+        {
+          "url": "https://huggingface.co/blog/allenai/statebench",
+          "quote": "Gated DeltaNet and hybrid models generalized almost perfectly on r-trivial, aperiodic, and soluble problems out to the longest sequences we tested, tens of thousands of assignments."
+        },
+        {
+          "url": "https://huggingface.co/blog/allenai/statebench",
+          "quote": "Transformers learned the easier levels but degraded on longer sequences, and they never learned general finite problems."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "FLAMIA 为 Blackwell 上的低比特注意力加速",
+      "summary": "FLAMIA 是面向 NVIDIA Blackwell 的注意力内核家族，提供 MXFP8 与混合 NVFP4/FP8 训练路径，通过 token 分块缩放复用量化操作数，并加入防缩放信息泄漏的机制。在多种因果打包文档负载下，MXFP8 路径相对各负载最快基线，在 B200 上加速 1.10–1.40 倍、在 B300 上加速 1.06–1.42 倍。",
+      "tags": [
+        "论文",
+        "训练",
+        "硬件"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_cab752f3a5",
+          "url": "https://huggingface.co/papers/2611.03344"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.03344",
+          "quote": "We present FLAMIA, a family of attention kernels for Blackwell with MXFP8 and mixed NVFP4 / FP8 training paths."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.03344",
+          "quote": "Our design combines token-block scaling that reuses quantized operands across matrix orientations, targeted safeguards against scale-induced leakage, and consistent forward and backward computations."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.03344",
+          "quote": "Across various causal packed-document workloads, the MXFP8 path accelerates the combined forward and backward attention call, including quantization, by factors of 1.10--1.40times on B200 and 1.06--1.42times on B300 relative to the fastest evaluated baseline for each workload."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "CrossSWE 评测跨仓库联合开发",
+      "summary": "CrossSWE 基准包含来自 165 个仓库、20 个技术领域和 13 种编程语言的 171 个真实任务，要求 coding agent 在多个相互依赖的仓库间协调改动。五个 LLM 的评测显示，最强的 GPT-6.1 Sol 仅取得 58.48% Pass@1，跨仓库不一致是最主要的失败模式，占 44.2%。",
+      "tags": [
+        "论文",
+        "代码",
+        "Agent"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_b001997253",
+          "url": "https://huggingface.co/papers/2611.01484"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.01484",
+          "quote": "Rather than further increasing complexity within individual repositories, we introduce CrossSWE , a benchmark for cross-repository joint development comprising 171 real-world instances spanning 165 repositories, 20 technical domains, and 13 programming languages."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.01484",
+          "quote": "CrossSWE verifies the necessity of coordinated changes by testing whether partial repository modifications are insufficient to achieve the intended behavior."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.01484",
+          "quote": "Our evaluation of five LLMs reveals substantial challenges, with the strongest model, GPT-6.1 Sol, achieving only 58.48% Pass@1 ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.01484",
+          "quote": "Furthermore, cross-repository inconsistencies emerge as the most prevalent failure mode (44.2%), highlighting the difficulty of maintaining consistency across interdependent repositories."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "SWE-Trail 用历史轨迹指导采集但不进上下文",
+      "summary": "蚂蚁集团提出轨迹采集器 SWE-Trail，用早期轨迹决定后续采集投入的位置，同时把历史留在 coding agent 上下文之外，避免模型在测试时依赖拿不到的建议。实验中，以 Ling-3.0-flash-base 初始化的 124B 学生模型，相比独立采样在 SWE-bench Multilingual 和 SWE-bench Pro 上平均解决率分别提升 2.33 和 1.60 个百分点。",
+      "tags": [
+        "论文",
+        "代码",
+        "训练"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_371d331b4d",
+          "url": "https://huggingface.co/papers/2611.02074"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.02074",
+          "quote": "Instead, we argue that history should guide where collection effort is spent, while the coding agent decides what to generate."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.02074",
+          "quote": "We introduce SWE-Trail , a trajectory collector that uses earlier trajectories to guide subsequent collection while keeping that history outside the coding agent 's context."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.02074",
+          "quote": "For a 124B student initialized from Ling-3.0-flash-base, SWE-Trail improves mean resolution over independent sampling by 2.33 and 1.60 percentage points on SWE-bench Multilingual and SWE-bench Pro , respectively."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "O³PD 只蒸馏教师 token 的排序",
+      "summary": "Order-Only On-Policy Distillation（O³PD）在学生生成的前缀上只训练学生复现教师 top-K token 的顺序，不拟合概率值，因此目标对教师温度不变且无需调温。在六组教师-学生组合上，O³PD 在 HMMT25、AIME24 和 AIME25 的平均成绩上都优于 OPD，平均最多提升 2.9 分，AIME25 上最多提升 5.6 分。",
+      "tags": [
+        "论文",
+        "训练",
+        "推理"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_fae6497d42",
+          "url": "https://huggingface.co/papers/2611.02112"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.02112",
+          "quote": "We ask whether the teacher's ordering of candidate tokens is enough, and propose Order-Only On-Policy Distillation (O^{3}PD)."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.02112",
+          "quote": "At each student-generated prefix, O^{3}PD trains the student to reproduce the order of the teacher's top-K tokens, without fitting their probability values."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.02112",
+          "quote": "The objective is therefore invariant to the teacher temperature and needs no temperature tuning."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.02112",
+          "quote": "Across six teacher--student pairs, O^{3}PD outperforms OPD on the average over HMMT25, AIME24, and AIME25 in every pair, by up to 2.9 points, with gains of up to 5.6 points on AIME25."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "ReTRACE 系统研究计算机使用智能体的恢复能力",
+      "summary": "ReTRACE 提出 Transition-Consistent Recovery：从恢复后的状态与目标状态执行相同后续动作，必须得到一致结果，并通过受控注入错误后的目标导向动作回放来操作化这一标准。基于该框架的研究首次系统考察自主的、基于模型的恢复能力，发现理想的恢复能释放模型潜在的任务完成能力，而现有智能体未能利用这种潜力。",
+      "tags": [
+        "论文",
+        "Agent",
+        "安全"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_b0eae1227f",
+          "url": "https://huggingface.co/papers/2610.27954"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2610.27954",
+          "quote": "To address this gap, we present ReTrace, a scalable evaluation framework for systematically studying recovery behavior in computer-use agents ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.27954",
+          "quote": "We formalize Transition-Consistent Recovery : identical downstream actions from the recovered and target states must yield identical outcomes."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.27954",
+          "quote": "We operationalize this criterion through goal-oriented action replay following controlled error injection ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.27954",
+          "quote": "Using ReTrace, we present the first systematic study of autonomous, model-based recovery , revealing that (i) ideal recovery can unlock model's latent task completion capabilities, (ii) current computer-use agents fail to exploit their latent recovery capabilities, and (iii) accurate model-based rec"
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "uni-robot-agent 让开源权重模型做机器人操作",
+      "summary": "uni-robot-agent 是面向开源权重机器人使用智能体的统一 harness，支持后续训练。在没有特权输入的情况下，开箱即用的 Qwen3.8-Flash-Next 取得 31.39 的 RoboDojo Score，高于已发表的 GPT-6 Astra-RoboProbe 结果 28.97，并在 19 个真实任务上表现有竞争力。",
+      "tags": [
+        "论文",
+        "Agent",
+        "模型"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_2a9dfe71c2",
+          "url": "https://huggingface.co/papers/2611.01560"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.01560",
+          "quote": "To democratize RUA research, we introduce uni-robot-agent , a unified harness for competitive open-weight robot use that supports further training."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.01560",
+          "quote": "Without privileged inputs, an out-of-the-box Qwen3.8-Flash-Next achieves a RoboDojo Score of 31.39, surpassing the published GPT-6 Astra-RoboProbe result of 28.97 and many VLA / WAM baselines, and performs competitively on 19 real-world tasks ."
+        }
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "IBM Palette 用 20B 开源权重模型生成演示文稿",
+      "summary": "IBM 微调了一个 20B 模型按 IBM Design Language 生成演示文稿，设计者与编码者由单一 LoRA adapter 承载，并在 PresentBench 三个领域中的两个排名第一。",
+      "tags": [
+        "工具",
+        "模型",
+        "代码"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_c3cda67991",
+          "url": "https://huggingface.co/blog/ibm-research/palette-deck-building"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/blog/ibm-research/palette-deck-building",
+          "quote": "We fine-tuned a 20B model to build decks the way people do: a designer plans the deck and a coder draws each slide."
+        },
+        {
+          "url": "https://huggingface.co/blog/ibm-research/palette-deck-building",
+          "quote": "Its training data follows the IBM Design Language , and on PresentBench it ranks first on two of the three domains we measured."
+        },
+        {
+          "url": "https://huggingface.co/blog/ibm-research/palette-deck-building",
+          "quote": "Palette splits the work the same way, into two roles served by a single LoRA adapter:"
+        }
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "History Forcing 用历史残差修正视频蒸馏目标",
+      "summary": "History Forcing 用教师在有无历史上下文两种预测之间的残差分离历史监督，再加权加到蒸馏所用的 score 或 velocity 预测上。",
+      "tags": [
+        "视频",
+        "论文",
+        "训练"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_4eb189c2bd",
+          "url": "https://huggingface.co/papers/2611.02782"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.02782",
+          "quote": "The framework uses the residual between teacher predictions with and without informative historical context to decouple this supervision."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.02782",
+          "quote": "The residual is then weighted and added to the score or velocity prediction used for distillation, forming a corrected target."
+        }
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "Video Generation 与 Agent Harness 的交叉综述",
+      "summary": "综述以围绕视频模型构建上下文、暴露工具、维护状态、路由反馈并管理预算的可执行运行时为主线，梳理三个研究方向。",
+      "tags": [
+        "视频",
+        "Agent",
+        "论文"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_04f56b52c4",
+          "url": "https://huggingface.co/papers/2610.40191"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2610.40191",
+          "quote": "We study their intersection through the agent harness : an executable runtime that constructs context, exposes tools, maintains state, routes feedback, and manages budgets around video models."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.40191",
+          "quote": "This report examines three directions."
+        }
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "Collaborative Intelligence Benchmark 测 AI 当队友",
+      "summary": "该基准用 240 个任务、8 个团队协作维度衡量 AI 智能体作为队友的表现，任务结果可程序化验证。",
+      "tags": [
+        "论文",
+        "Agent",
+        "安全"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_512bfde6c7",
+          "url": "https://huggingface.co/papers/2611.02633"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.02633",
+          "quote": "Inspired by this, we introduce the Collaborative Intelligence Benchmark , which measures how well an AI agent works as a teammate."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.02633",
+          "quote": "It contains 240 tasks across 8 dimensions of teamwork, from refusing an unsafe shortcut to checking the work that a weaker model leaves behind."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.02633",
+          "quote": "Each task comes from a real record or an existing benchmark, from aviation accident reports and clinical cases to coding tasks and negotiations, and has a programmatically verifiable outcome ."
+        }
+      ]
+    }
+  ],
+  "research": [
+    {
+      "via": "webfetch",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.318"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/blog/allenai/statebench"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.03344"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/JustVugg/colibri"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.03178"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.03126"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.01560"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.01484"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.00859"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.40191"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.02633"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.03092"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.02102"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.02782"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.02074"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.27954"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.02112"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/blog/ibm-research/palette-deck-building"
+    }
+  ],
+  "validation": {
+    "validated_at": "2026-11-04T04:38:49+00:00",
+    "checked_links": true,
+    "dropped": [],
+    "warnings": [
+      "17 items (target 8-12)",
+      "7 paper items (target 2-3)"
+    ]
+  }
+}

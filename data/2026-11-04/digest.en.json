@@ -1,0 +1,609 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-04",
+  "mode": "full",
+  "generated_at": "2026-11-04T04:39:38+00:00",
+  "channel": "api",
+  "model": "nvidia:minimaxai/minimax-m3.1-flash",
+  "highlights": [
+    "CoworkOS applies a three-layer harness, hierarchical workspaces, and persistent semantic memory to long-horizon agent work, while ReTrace formalizes Transition-Consistent Recovery for computer-use agents that need to recover from errors.",
+    "CUA-Master and NorthCUA push computer-use agents forward with recursive improvement loops and experience at scale, and CrossSWE shows that GPT-6.1 Sol reaches only 58.48% Pass@1 on cross-repository coding tasks.",
+    "Wave Forcing reaches 147.6 DiT FPS on eight H200 GPUs, and FLAMIA delivers 1.10--1.40times attention speedups on B200 for low-precision training."
+  ],
+  "items": [
+    {
+      "section": "headline",
+      "title": "CoworkOS: a harness for long-horizon agent work",
+      "summary": "CoworkOS separates task strategy from execution management, with the model deciding actions, delegation, and acceptance while the runtime maintains state and feedback. Its three-layer architecture supports direct execution or delegation to Subagents, and hierarchical workspaces plus persistent semantic memory keep working files, decisions, and Job logs resumable across agents and sessions. Developers can use the shared application layer to inspect and revise evolving documents, presentations, CAD models, and Blender scenes together with agents.",
+      "tags": [
+        "Agent",
+        "论文",
+        "工具"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_991beae516",
+          "url": "https://huggingface.co/papers/2611.03178"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.03178",
+          "quote": "We introduce CoworkOS, a general-purpose harness for long-horizon work that separates task strategy from execution management: the model decides actions, delegation, and acceptance, while the runtime maintains state and feedback."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.03178",
+          "quote": "Its three-layer architecture enables direct execution or delegation to Subagents , synchronously or asynchronously, under stable responsibilities."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.03178",
+          "quote": "To sustain continuity across agents and sessions, CoworkOS further introduces hierarchical workspaces and persistent semantic memory , so working files, key decisions, and long-running Job logs remain shareable, reusable, and resumable after interruption."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "CUA-Master scales computer-use agents with recursive improvement",
+      "summary": "CUA-Master is a nested double-loop framework whose outer flywheel incorporates open-world corpus and model weaknesses to guide data construction, while the inner flywheel seeds tasks from instructional videos and turns them into reusable primitives for controllable synthesis. A feedback-guided snapshot-rollback retry mechanism supports trajectory collection in real environments. CUA-Master-27B scores 80.2 on OSWorld Verified, 36.9 on OSWorld 2.0, 43.9 on WeaveBench, and 25.0 on Agents' Last Exam.",
+      "tags": [
+        "Agent",
+        "论文",
+        "训练"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_bbe3067310",
+          "url": "https://huggingface.co/papers/2611.03126"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.03126",
+          "quote": "To address these challenges, we introduce CUA-Master , a nested double-loop recursive improvement framework."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.03126",
+          "quote": "At the system level, an outer world-data-model flywheel continuously incorporates open-world corpus and leverages evolving model weaknesses to guide subsequent data construction and optimization iterations."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.03126",
+          "quote": "At the data level, an inner flywheel couples open-world seeding and autocatalytic propagation ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.03126",
+          "quote": "The former mines authentic workflows as seed tasks from instructional videos, and employs visual-semantic dual-path trajectory reconstruction ; The latter transforms these seeds into reusable primitives for controllable synthesis of diverse, complex, and verifiable tasks."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.03126",
+          "quote": "To enable efficient and reliable trajectory collection, we further introduce a feedback-guided snapshot-rollback retry mechanism in various real environments."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Wave Forcing targets streaming video generation on eight H200 GPUs",
+      "summary": "Wave Forcing co-designs generation, training, and execution so chunk-wise causal attention can read earlier chunks before denoising finishes, and Wave Runtime adds Wave Parallelism, optimized kernels, and pipelined VAE decoding. In system efficiency experiments, 4-step WF achieves 147.6 DiT FPS and 134.8 end-to-end FPS on eight H200 GPUs, yielding 7.07x the single-GPU end-to-end throughput. On Wan2.1-T2V-1.3B, 5-step WF keeps quality comparable to Rolling Forcing while raising Dynamic Degree on short and long videos.",
+      "tags": [
+        "视频",
+        "论文",
+        "推理"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_42da0213ee",
+          "url": "https://huggingface.co/papers/2611.00859"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.00859",
+          "quote": "We propose Wave Forcing (WF), which co-designs generation, training, and execution for continuous video output with multi-step denoising ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.00859",
+          "quote": "WF uses chunk-wise causal attention to access earlier, cleaner chunks before their denoising is complete, and distributes staggered denoising and cache-refresh stages across full-model replicas to achieve 1F1C: one output chunk per concurrent forward round after pipeline fill ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.00859",
+          "quote": "To execute this process efficiently, Wave Runtime (WaveRT) uses Wave Parallelism (WP) for early K/V delivery and communication-computation overlap, together with optimized kernels and pipelined VAE decoding."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.00859",
+          "quote": "Our system efficiency experiments show that 4-step WF achieves 147.6 DiT FPS and 134.8 end-to-end FPS on eight H200 GPUs, yielding 7.07x the single-GPU end-to-end throughput."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Claude Code v2.1.318 adds AWS role assumptions and auth fixes",
+      "summary": "Claude Code v2.1.318 adds assume_role on mantle upstreams of the Claude apps gateway for a role in another AWS account and per-developer AWS cost attribution, plus an effort option for a mod's $.model.fork. It also adds loginExpiresAt to claude auth status and credential_expires_at to claude -p JSON results. Fixes cover --continue losing earlier conversation after a malformed tool call's retries ran out, a regression in 2.1.314, macOS sessions stalling as memory grew, and silent failures when the config file could not be updated on a shared network home directory.",
+      "tags": [
+        "工具",
+        "代码"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_96e66634f2",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.318"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.318",
+          "quote": "Added assume_role on mantle upstreams of the Claude apps gateway, for a role in another AWS account and for per-developer AWS cost attribution"
+        },
+        {
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.318",
+          "quote": "Added an effort option to a mod's $.model.fork , so a quick side job can run at low whatever effort the session uses; the result reports the effort sent"
+        },
+        {
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.318",
+          "quote": "Added the date a stored claude.ai sign-in ends to claude auth status ( loginExpiresAt ) and to claude -p JSON results ( credential_expires_at )"
+        },
+        {
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.318",
+          "quote": "Fixed --continue sometimes losing the earlier conversation after a malformed tool call's retries ran out (regression in 2.1.314)"
+        },
+        {
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.318",
+          "quote": "Fixed macOS sessions with many running Bash commands stalling while memory grew"
+        },
+        {
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.318",
+          "quote": "Fixed /logout , claude auth logout and claude mcp remove reporting success, and changes to trust, consent or MCP settings being dropped with no word, when the config file could not be updated on a shared network home directory"
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "NorthCUA boosts computer-use agents through experience at scale",
+      "summary": "NorthCUA combines an Experience Flywheel that supplies executable tasks to the NorthCUA Harness with recursive self-improvement that evolves reusable skills, then trains the policy through mid-training, long-horizon supervised fine-tuning, and joint desktop-web reinforcement learning. The resulting Nano, Mini, and Pro family achieves state-of-the-art results among open-source models across GUI grounding, desktop execution, and Web interaction under the reported evaluation settings. NorthCUA-Ultrafast pairs direct action selection with open-ended generation on pre-RL Nano for a measured quality-latency tradeoff.",
+      "tags": [
+        "Agent",
+        "模型",
+        "训练"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_f954b07c15",
+          "url": "https://huggingface.co/papers/2611.02102"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.02102",
+          "quote": "Its Experience Flywheel supplies diverse executable tasks to the NorthCUA Harness, which sustains long interactions, records decisions, and checks task outcomes."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.02102",
+          "quote": "For unsolved tasks, recursive self-improvement evolves reusable skills and preserves verified milestones so later attempts build on earlier progress."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.02102",
+          "quote": "Staged Learning combines this experience with grounding data from the Flywheel to develop GUI competence through mid-training and long-horizon supervised fine-tuning ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.02102",
+          "quote": "The policy then learns from fresh attempts in the same Harness through joint desktop-web reinforcement learning , closing the loop between experience production and policy improvement."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.02102",
+          "quote": "The resulting Nano, Mini, and Pro family achieves state-of-the-art results among open-source models across GUI grounding , desktop execution , and Web interaction under the reported evaluation settings."
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "colibri runs MoE inference from GPU, RAM, and NVMe",
+      "summary": "colibri is a hierarchical inference engine for frontier MoE models that keeps hot experts on the GPU (CUDA, Vulkan), warm ones in RAM, and cold ones streamed from NVMe. Written in C, it runs on hardware you already own, with one file per model family and no GPU required. It exposes OpenAI and Anthropic compatible base URLs for clients that point at a local server.",
+      "tags": [
+        "模型",
+        "开源",
+        "工具"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_2a0662c2ca",
+          "url": "https://github.com/JustVugg/colibri"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/JustVugg/colibri",
+          "quote": "colibri Public Notifications You must be signed in to change notification settings Fork 5.5k ( 5.5k ) Star 47.3k ( 47.3k ) You must be signed in to star a repository About A hierarchical inference engine for frontier MoE models: hot experts on the GPU (CUDA, Vulkan), warm ones in RAM, cold ones stre"
+        },
+        {
+          "url": "https://github.com/JustVugg/colibri",
+          "quote": "amed from NVMe."
+        },
+        {
+          "url": "https://github.com/JustVugg/colibri",
+          "quote": "Written in C, runs on the hardware you already own."
+        },
+        {
+          "url": "https://github.com/JustVugg/colibri",
+          "quote": "Pure C, one file per model family, no GPU required."
+        },
+        {
+          "url": "https://github.com/JustVugg/colibri",
+          "quote": "draws pictures: Qwen-Image-2.1 ."
+        },
+        {
+          "url": "https://github.com/JustVugg/colibri",
+          "quote": "and on NVIDIA cards through CUDA."
+        },
+        {
+          "url": "https://github.com/JustVugg/colibri",
+          "quote": "You need a computer with 8 GB of RAM at the very least (16 GB or more is"
+        },
+        {
+          "url": "https://github.com/JustVugg/colibri",
+          "quote": "OpenAI base URL: http://127.0.0.1:8000/v1"
+        },
+        {
+          "url": "https://github.com/JustVugg/colibri",
+          "quote": "Anthropic base URL: http://127.0.0.1:8000"
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "StateBench tests how models track state over long documents",
+      "summary": "StateBench contains four difficulty levels built from a general finite sequence of variable assignments, letting teams compare models on increasingly complex state updates. In tests of Gemini 3.8 Flash, Claude Opus 5.5, and GPT-6 Sol and Luna, accuracy on soluble and general finite problems fell to 13% or lower on the longest inputs. Models trained from scratch on StateBench, including several 275-million-parameter transformers, hybrids, and Gated DeltaNet variants, showed that Gated DeltaNet and hybrid models generalized almost perfectly on r-trivial, aperiodic, and soluble problems out to tens of thousands of assignments.",
+      "tags": [
+        "论文",
+        "推理",
+        "训练"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_740e2c0cc8",
+          "url": "https://huggingface.co/blog/allenai/statebench"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/blog/allenai/statebench",
+          "quote": "StateBench consists of four difficulty levels that permit increasingly complex state update operations."
+        },
+        {
+          "url": "https://huggingface.co/blog/allenai/statebench",
+          "quote": "To compare the four levels fairly, we start with a general finite sequence of variable assignments and derive three easier versions from it, producing four comparable StateBench problems—one at each difficulty level."
+        },
+        {
+          "url": "https://huggingface.co/blog/allenai/statebench",
+          "quote": "We then tested four frontier models – Gemini 3.8 Flash, Claude Opus 5.5, and GPT-6 Sol and Luna – asking them to read each sequence of variable assignments and generate the final value of every variable."
+        },
+        {
+          "url": "https://huggingface.co/blog/allenai/statebench",
+          "quote": "But on soluble and general finite problems, accuracy fell sharply as inputs grew longer, dropping to 13% or lower on the longest general finite problems."
+        },
+        {
+          "url": "https://huggingface.co/blog/allenai/statebench",
+          "quote": "We trained several 275-million-parameter models from scratch on StateBench: two transformer variants, two hybrids, and two Gated DeltaNet variants with different memory-update constraints."
+        },
+        {
+          "url": "https://huggingface.co/blog/allenai/statebench",
+          "quote": "Gated DeltaNet and hybrid models generalized almost perfectly on r-trivial, aperiodic, and soluble problems out to the longest sequences we tested, tens of thousands of assignments."
+        },
+        {
+          "url": "https://huggingface.co/blog/allenai/statebench",
+          "quote": "Transformers learned the easier levels but degraded on longer sequences, and they never learned general finite problems."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "FLAMIA speeds up low-precision attention training on Blackwell",
+      "summary": "FLAMIA is a family of attention kernels for Blackwell with MXFP8 and mixed NVFP4/FP8 training paths, combining token-block scaling, safeguards against scale-induced leakage, and consistent forward and backward computations. Its MXFP8 path accelerates the combined forward and backward attention call, including quantization, by factors of 1.10--1.40times on B200 and 1.06--1.42times on B300 relative to the fastest evaluated baseline for each workload. The authors also validate training stability and quality preservation on pretraining Llama-style models.",
+      "tags": [
+        "论文",
+        "训练",
+        "硬件"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_cab752f3a5",
+          "url": "https://huggingface.co/papers/2611.03344"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.03344",
+          "quote": "We present FLAMIA, a family of attention kernels for Blackwell with MXFP8 and mixed NVFP4 / FP8 training paths."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.03344",
+          "quote": "Our design combines token-block scaling that reuses quantized operands across matrix orientations, targeted safeguards against scale-induced leakage, and consistent forward and backward computations."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.03344",
+          "quote": "Across various causal packed-document workloads, the MXFP8 path accelerates the combined forward and backward attention call, including quantization, by factors of 1.10--1.40times on B200 and 1.06--1.42times on B300 relative to the fastest evaluated baseline for each workload."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "CrossSWE benchmarks coding agents across repositories",
+      "summary": "CrossSWE contains 171 real-world instances spanning 165 repositories, 20 technical domains, and 13 programming languages, and checks whether partial repository modifications are enough to reach the intended behavior. Across five LLMs, the strongest model, GPT-6.1 Sol, achieved only 58.48% Pass@1. Cross-repository inconsistencies were the most prevalent failure mode at 44.2%.",
+      "tags": [
+        "论文",
+        "代码",
+        "Agent"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_b001997253",
+          "url": "https://huggingface.co/papers/2611.01484"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.01484",
+          "quote": "Rather than further increasing complexity within individual repositories, we introduce CrossSWE , a benchmark for cross-repository joint development comprising 171 real-world instances spanning 165 repositories, 20 technical domains, and 13 programming languages."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.01484",
+          "quote": "CrossSWE verifies the necessity of coordinated changes by testing whether partial repository modifications are insufficient to achieve the intended behavior."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.01484",
+          "quote": "Our evaluation of five LLMs reveals substantial challenges, with the strongest model, GPT-6.1 Sol, achieving only 58.48% Pass@1 ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.01484",
+          "quote": "Furthermore, cross-repository inconsistencies emerge as the most prevalent failure mode (44.2%), highlighting the difficulty of maintaining consistency across interdependent repositories."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "SWE-Trail guides trajectory collection with earlier attempts",
+      "summary": "SWE-Trail is a trajectory collector that uses earlier trajectories to decide where to spend additional collection effort while keeping that history outside the coding agent's context, avoiding a train-test mismatch. The agent proposes candidate next actions from its ordinary context, and SWE-Trail briefly executes them from the same checkpoint to decide which route continues. For a 124B student initialized from Ling-3.0-flash-base, it improves mean resolution over independent sampling by 2.33 and 1.60 percentage points on SWE-bench Multilingual and SWE-bench Pro.",
+      "tags": [
+        "论文",
+        "代码",
+        "训练"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_371d331b4d",
+          "url": "https://huggingface.co/papers/2611.02074"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.02074",
+          "quote": "Instead, we argue that history should guide where collection effort is spent, while the coding agent decides what to generate."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.02074",
+          "quote": "We introduce SWE-Trail , a trajectory collector that uses earlier trajectories to guide subsequent collection while keeping that history outside the coding agent 's context."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.02074",
+          "quote": "For a 124B student initialized from Ling-3.0-flash-base, SWE-Trail improves mean resolution over independent sampling by 2.33 and 1.60 percentage points on SWE-bench Multilingual and SWE-bench Pro , respectively."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Order-only distillation drops probability fitting from OPD",
+      "summary": "Order-Only On-Policy Distillation trains the student to reproduce the order of the teacher's top-K tokens at each student-generated prefix without fitting their probability values, which makes the objective invariant to teacher temperature and removes temperature tuning. Across six teacher--student pairs, O^{3}PD outperformed OPD on the average over HMMT25, AIME24, and AIME25 in every pair, by up to 2.9 points, with gains of up to 5.6 points on AIME25. The analysis shows the ranking, not the probability values, carries the knowledge on-policy distillation needs to transfer.",
+      "tags": [
+        "论文",
+        "训练",
+        "推理"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_fae6497d42",
+          "url": "https://huggingface.co/papers/2611.02112"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.02112",
+          "quote": "We ask whether the teacher's ordering of candidate tokens is enough, and propose Order-Only On-Policy Distillation (O^{3}PD)."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.02112",
+          "quote": "At each student-generated prefix, O^{3}PD trains the student to reproduce the order of the teacher's top-K tokens, without fitting their probability values."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.02112",
+          "quote": "The objective is therefore invariant to the teacher temperature and needs no temperature tuning."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.02112",
+          "quote": "Across six teacher--student pairs, O^{3}PD outperforms OPD on the average over HMMT25, AIME24, and AIME25 in every pair, by up to 2.9 points, with gains of up to 5.6 points on AIME25."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "ReTrace studies how computer-use agents recover from errors",
+      "summary": "ReTrace is a scalable evaluation framework for studying recovery behavior in computer-use agents, and it formalizes Transition-Consistent Recovery so identical downstream actions from recovered and target states must yield identical outcomes. The criterion is operationalized through goal-oriented action replay after controlled error injection. The study reports that ideal recovery can unlock a model's latent task completion capabilities, that current computer-use agents fail to exploit them, and that accurate model-based recovery yields measurable end-to-end gains.",
+      "tags": [
+        "论文",
+        "Agent",
+        "安全"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_b0eae1227f",
+          "url": "https://huggingface.co/papers/2610.27954"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2610.27954",
+          "quote": "To address this gap, we present ReTrace, a scalable evaluation framework for systematically studying recovery behavior in computer-use agents ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.27954",
+          "quote": "We formalize Transition-Consistent Recovery : identical downstream actions from the recovered and target states must yield identical outcomes."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.27954",
+          "quote": "We operationalize this criterion through goal-oriented action replay following controlled error injection ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.27954",
+          "quote": "Using ReTrace, we present the first systematic study of autonomous, model-based recovery , revealing that (i) ideal recovery can unlock model's latent task completion capabilities, (ii) current computer-use agents fail to exploit their latent recovery capabilities, and (iii) accurate model-based rec"
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "uni-robot-agent trains open-weight robot-use agents",
+      "summary": "uni-robot-agent is a unified harness for competitive open-weight robot use that supports further training, aiming to open robot-use agent research beyond frontier proprietary models. Without privileged inputs, an out-of-the-box Qwen3.8-Flash-Next achieves a RoboDojo Score of 31.39, surpassing the published GPT-6 Astra-RoboProbe result of 28.97 and many VLA/WAM baselines, and performs competitively on 19 real-world tasks. The team's analysis links effective robot use to four general capabilities.",
+      "tags": [
+        "论文",
+        "Agent",
+        "模型"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_2a9dfe71c2",
+          "url": "https://huggingface.co/papers/2611.01560"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.01560",
+          "quote": "To democratize RUA research, we introduce uni-robot-agent , a unified harness for competitive open-weight robot use that supports further training."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.01560",
+          "quote": "Without privileged inputs, an out-of-the-box Qwen3.8-Flash-Next achieves a RoboDojo Score of 31.39, surpassing the published GPT-6 Astra-RoboProbe result of 28.97 and many VLA / WAM baselines, and performs competitively on 19 real-world tasks ."
+        }
+      ]
+    }
+  ],
+  "research": [
+    {
+      "via": "webfetch",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.318"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/blog/allenai/statebench"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.03344"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/JustVugg/colibri"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.03178"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.03126"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.01560"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.01484"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.00859"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.40191"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.02633"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.03092"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.02102"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.02782"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.02074"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.27954"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.02112"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/blog/ibm-research/palette-deck-building"
+    }
+  ],
+  "lang": "en",
+  "validation": {
+    "validated_at": "2026-11-04T04:39:38+00:00",
+    "checked_links": false,
+    "dropped": [
+      {
+        "title": "Palette teaches a 20B model to build design-language decks",
+        "section": "brief",
+        "candidates": [
+          "c_c3cda67991"
+        ],
+        "reasons": [
+          "summary longer than 250 characters"
+        ]
+      },
+      {
+        "title": "History Forcing distills history-dependent video continuations",
+        "section": "brief",
+        "candidates": [
+          "c_4eb189c2bd"
+        ],
+        "reasons": [
+          "summary longer than 250 characters"
+        ]
+      },
+      {
+        "title": "A report maps agent harnesses for video generation",
+        "section": "brief",
+        "candidates": [
+          "c_04f56b52c4"
+        ],
+        "reasons": [
+          "summary longer than 250 characters"
+        ]
+      },
+      {
+        "title": "Collaborative Intelligence Benchmark scores agents as teammates",
+        "section": "brief",
+        "candidates": [
+          "c_512bfde6c7"
+        ],
+        "reasons": [
+          "summary longer than 250 characters"
+        ]
+      }
+    ],
+    "warnings": [
+      "13 items (target 8-12)",
+      "7 paper items (target 2-3)"
+    ]
+  }
+}
