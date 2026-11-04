@@ -20,7 +20,7 @@
 
 ## 01 功能
 
-- **每个数字都有出处**：从 17 个一手信源抓取。正文里的每个数字、模型名和版本号都要能在来源和逐字摘录的 evidence 里找到，找不到就整条删掉，不做“修正”。
+- **每个数字都有出处**：信源分两类：官方和一手 31 个，博主与周报 10 个。正文里的每个数字、模型名和版本号都要能在来源和逐字摘录的 evidence 里找到，找不到就整条删掉，不做“修正”。
 - **两条编辑通道**：Claude 和云端模型 API 每天各编一份。Claude 那份优先成为主版，API 那份作为 Beta 版并排展示；两条都失败时，发布只有标题和链接的降级版。
 - **中英双语**：英文版沿用主版的条目和 evidence，依据英文原文直接写成，不是翻译。
 - **全文 RSS 与归档**：[中文 RSS](https://michaelchennn.github.io/ai-daily/feed.xml)、[English RSS](https://michaelchennn.github.io/ai-daily/feed.en.xml)；网站上有往期归档和每个信源的抓取统计。
@@ -29,7 +29,7 @@
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/assets/readme/pipeline-zh-dark.svg">
-  <img src="docs/assets/readme/pipeline-zh-light.svg" width="100%" alt="流水线：17 个信源抓取去重后交给 Claude 通道和 API 通道编辑，validate 逐条核对引文，通过后按 Claude 通道、API 通道、降级版的顺序选出今日日报，发布中文、英文和 RSS">
+  <img src="docs/assets/readme/pipeline-zh-light.svg" width="100%" alt="流水线：官方和一手 31 个、博主与周报 10 个信源抓取去重后交给 Claude 通道和 API 通道编辑，validate 逐条核对引文，通过后按 Claude 通道、API 通道、降级版的顺序选出今日日报，发布中文、英文和 RSS">
 </picture>
 
 每天柏林时间 05:07 抓取并去重，05:30 两条通道开始编辑，`daily validate` 逐条核对后在 06:00 发布；06:30 还没有合格的日报就发布降级版。
@@ -86,9 +86,10 @@ docs/               开发文档、ADR、调研
 
 | 类别 | 信源 |
 |---|---|
-| 官方博客 | OpenAI、Anthropic News / Research、Google DeepMind、Google AI、Mistral、Hugging Face、Meta AI、MiniMax、Kimi、DeepSeek |
+| 官方博客 | OpenAI、Anthropic News / Research、Claude 博客、Google DeepMind、Google AI、Google Research、Microsoft Research、Apple ML Research、Ai2、Mistral、Hugging Face、Meta AI、xAI、Cohere、Cursor、Liquid AI、Black Forest Labs、Stability AI、Thinking Machines、MiniMax、Kimi、DeepSeek、Qwen、字节 Seed、百度 ERNIE |
 | 论文 | Hugging Face Daily Papers |
 | 开源 | GitHub Releases（vLLM、Ollama、llama.cpp、transformers 等 14 个仓库）、GitHub Trending、Hugging Face Trending Models |
+| 博主与周报 | Simon Willison、Interconnects、Import AI、Latent Space、Sebastian Raschka、Andrej Karpathy、Lilian Weng、Answer.AI、Sam Altman、Ethan Mollick、科学空间、Recode China AI、ChinAI |
 | 社区 | Hacker News、Reddit（r/LocalLLaMA + r/MachineLearning） |
 
 </details>

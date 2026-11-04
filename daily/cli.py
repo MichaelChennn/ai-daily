@@ -29,6 +29,9 @@ def main(argv: list[str] | None = None) -> int:
     fetch.add_argument("--data-dir", type=Path, default=DEFAULT_DATA_DIR, help="数据目录")
     fetch.add_argument("--only", action="append", metavar="SOURCE_ID", help="只跑指定信源（可重复）")
     fetch.add_argument("--history-days", type=int, default=7, help="跨天去重回看天数")
+    fetch.add_argument(
+        "--reported-days", type=int, default=dedup.REPORTED_DAYS, help="reported_on 回看的主版天数"
+    )
 
     listing = commands.add_parser("list", help="精简列出候选，给编辑浏览用")
     _issue_args(listing)
@@ -145,7 +148,7 @@ def _fetch(args: argparse.Namespace) -> int:
 
     window = issue_window(args.date or local_today())
     raw, reports = asyncio.run(pipeline.fetch_all(sources, window))
-    history = dedup.load_history(args.data_dir, window.issue_date, args.history_days)
+    history = dedup.load_history(args.data_dir, window.issue_date, args.history_days, args.reported_days)
     data = pipeline.build_candidates(raw, sources, window, reports, history)
     path = pipeline.write_candidates(data, args.data_dir)
 
@@ -170,6 +173,7 @@ def _print_report(data: dict, path: Path) -> None:
         f"{stats['filtered']} filtered by the fetchers; raw {stats['raw']} "
         f"-> url-merged {stats['after_url_merge']} -> candidates {stats['candidates']} "
         f"({stats['dropped_already_published']} already published, {stats['seen_before']} seen before, "
+        f"{stats['reported_before']} reported before, "
         f"{stats['clusters']} clusters)",
         file=sys.stderr,
     )
@@ -200,6 +204,10 @@ def _validate(args: argparse.Namespace) -> int:
                 return await digest.check_links(digest.digest_urls(data), client)
 
         report = digest.validate(data, candidates, asyncio.run(check()))
+    if not args.en and _needs_self_check(issue_dir, data):
+        report.warnings.append(
+            "no self_check in trace.claude.json: run `daily trace self-check` (SKILL.md 5)"
+        )
     step = "en" if args.en else "final" if args.drop_invalid else "precheck" if args.check_links else "check"
     _trace_claude(issue_dir, data, trace.validate_step(step, data, report, checked_links))
 
@@ -219,6 +227,14 @@ def _validate(args: argparse.Namespace) -> int:
         return 0
     print("ok" if report.ok else f"{len(report.item_errors)} invalid items", file=sys.stderr)
     return 0 if report.ok else 1
+
+
+def _needs_self_check(issue_dir: Path, data: Any) -> bool:
+    """A Claude route edit whose trace has no self-check, not even an empty one."""
+    if not isinstance(data, dict) or digest.is_api(data) or data.get("mode") != "full":
+        return False
+    record = trace.load(issue_dir / "trace.claude.json")
+    return not any(s.get("step") == "self_check" for s in (record or {}).get("steps") or [])
 
 
 def _trace_claude(issue_dir: Path, data: Any, step: dict[str, Any]) -> None:

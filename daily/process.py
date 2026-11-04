@@ -54,6 +54,7 @@ STEP_LABELS = {
     "en_highlights": "英文版要点改用标题后校验",
 }
 EN_STEPS = {"en", "en_highlights"}
+HIDDEN_STEPS = {"read", "skipped"}  # in the trace for #25's counts, not shown on the page yet
 VALIDATE_STEPS = {"check", "precheck", "draft", "fix", "highlights", "final"}
 FILTER_REASONS = {
     "not_ai": "与 AI 无关",
@@ -61,6 +62,7 @@ FILTER_REASONS = {
     "min_upvotes": "点赞不够",
     "max_age_days": "模型发布太久",
     "noisy_model": "衍生权重",
+    "exclude_title": "标题命中排除规则",
 }
 
 
@@ -157,7 +159,7 @@ def _channel(
         if failure
         else None,
         "funnel": _funnel(candidates, steps, published),
-        "steps": [_step(s, (raw or {}).get("highlights") or []) for s in steps],
+        "steps": [_step(s, (raw or {}).get("highlights") or []) for s in visible_steps(steps)],
         "adopt": (record or {}).get("adopt") or [],
         "cells": _cells(candidates, steps, published, (record or {}).get("scores") or {}),
     }
@@ -206,6 +208,10 @@ def _funnel(
         {"label": "通过校验", "value": passed},
         {"label": "发布", "value": len(published["items"]) if published else 0},
     ]
+
+
+def visible_steps(steps: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    return [s for s in steps if s.get("step") not in HIDDEN_STEPS]
 
 
 def _step(s: dict[str, Any], highlights: list[str]) -> dict[str, Any]:

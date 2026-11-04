@@ -4,7 +4,7 @@ import json
 import httpx
 import pytest
 
-from daily import cli, dedup, digest, fallback, render
+from daily import api_editor, cli, dedup, digest, fallback, render
 from daily.digest import Page
 from tests.conftest import ISSUE, mock_client
 
@@ -28,6 +28,7 @@ def _candidate(id_, kind, title, url, summary="", tier=1, **extra):
         "cluster_id": extra.pop("cluster_id", "k_" + id_),
         "also_from": extra.pop("also_from", []),
         "seen_on": extra.pop("seen_on", []),
+        "reported_on": extra.pop("reported_on", []),
     }
 
 
@@ -137,7 +138,7 @@ def test_valid_digest_passes_and_fills_in_candidate_urls():
     report = digest.validate(data, CANDIDATES)
     assert report.ok, (report.errors, report.item_errors)
     assert data["items"][0]["sources"][0]["url"] == "https://openai.com/index/gpt-6/"
-    assert any("items" in w for w in report.warnings)  # 4 items, target 8-12
+    assert any("items" in w for w in report.warnings)  # 4 items, fewer than the target
 
 
 def test_unknown_or_foreign_sources_are_rejected():
@@ -309,7 +310,7 @@ def test_apply_report_drops_and_records():
     assert digest.validate(result, CANDIDATES).ok  # idempotent
 
 
-def test_fallback_is_valid_and_skips_seen_and_clustered_candidates():
+def test_fallback_is_valid_and_skips_reported_and_clustered_candidates():
     candidates = copy.deepcopy(CANDIDATES)
     candidates["candidates"] += [
         _candidate(
@@ -318,7 +319,7 @@ def test_fallback_is_valid_and_skips_seen_and_clustered_candidates():
             "Yesterday's paper",
             "https://huggingface.co/papers/2610.00002",
             signals={"upvotes": 999},
-            seen_on=["2026-10-19"],
+            reported_on=[{"date": "2026-10-12", "title": "以前报道过的论文"}],
         ),
         _candidate(
             "c_dup",
@@ -348,6 +349,50 @@ def test_fallback_is_valid_and_skips_seen_and_clustered_candidates():
         "paper",
         "tool",
     ]  # Ask HN skipped
+
+
+def _fallback_papers(*papers):
+    candidates = {"date": DATE, "candidates": list(papers)}
+    data = fallback.build_fallback(candidates)
+    return [i["sources"][0]["candidate_id"] for i in data["items"] if i["section"] == "paper"]
+
+
+def test_fallback_ranks_by_reported_on_not_seen_on():
+    # Listed yesterday but never reported: still news, so its heat decides.
+    seen = _candidate(
+        "c_seen",
+        "paper",
+        "Seen paper",
+        "https://huggingface.co/papers/2610.00011",
+        signals={"upvotes": 99},
+        seen_on=["2026-10-19"],
+    )
+    fresh = _candidate(
+        "c_fresh", "paper", "Fresh paper", "https://huggingface.co/papers/2610.00012", signals={"upvotes": 1}
+    )
+    assert _fallback_papers(fresh, seen) == ["c_seen", "c_fresh"]
+
+
+def test_fallback_uses_reported_candidates_only_when_nothing_else_is_left():
+    reported = _candidate(
+        "c_reported",
+        "paper",
+        "Reported paper",
+        "https://huggingface.co/papers/2610.00013",
+        signals={"upvotes": 99},
+        reported_on=[{"date": "2026-10-12", "title": "以前报道过的论文"}],
+    )
+    fresh = _candidate(
+        "c_fresh", "paper", "Fresh paper", "https://huggingface.co/papers/2610.00014", signals={"upvotes": 1}
+    )
+    assert _fallback_papers(reported, fresh) == ["c_fresh", "c_reported"]
+
+
+def test_fallback_reads_candidates_without_reported_on():
+    # Issues fetched before reported_on existed don't have the field.
+    old = _candidate("c_old", "paper", "Old paper", "https://huggingface.co/papers/2610.00015")
+    del old["reported_on"]
+    assert _fallback_papers(old) == ["c_old"]
 
 
 def test_render_markdown():
@@ -468,3 +513,325 @@ def test_cli_page_prints_verbatim_context(monkeypatch, capsys):
     out = capsys.readouterr().out
     assert "1 match(es)" in out and "It achieves sub-500ms latency." in out
     assert cli.main(["page", "https://a.example/gone", "--grep", "x"]) == 1
+
+
+# --- #51: the item targets, V1-V3, A7 ---------------------------------------------------------
+
+
+def _many(count, candidates=None):
+    """A digest of count clean brief items, and the candidates behind them."""
+    candidates = copy.deepcopy(candidates or CANDIDATES)
+    items = []
+    for n in range(count):
+        cid = f"c_brief{n}"
+        url = f"https://example.com/post/{n}"
+        candidates["candidates"].append(_candidate(cid, "blog", "A post", url))
+        items.append(_item("brief", "一篇文章", "一篇文章。", cid))
+    return _digest(items=items, highlights=["今天有一篇文章。"]), candidates
+
+
+@pytest.mark.parametrize("count, warned", [(7, True), (8, False), (15, False), (18, False), (19, True)])
+def test_item_counts_outside_the_target_only_warn(count, warned):
+    data, candidates = _many(count)
+    report = digest.validate(data, candidates)
+    assert not report.item_errors and not report.errors  # nothing is dropped, however many there are
+    assert any(w.startswith(f"{count} items") for w in report.warnings) is warned
+
+
+def test_too_few_items_warns_that_a_source_may_be_missing():
+    data, candidates = _many(7)
+    (warning,) = [w for w in digest.validate(data, candidates).warnings if w.startswith("7 items")]
+    assert "信源漏抓" in warning
+
+
+def test_targets_match_the_spec():
+    assert digest.ITEMS_TARGET == (8, 18) and digest.ITEMS_EXPECTED == 15
+    assert digest.SECTION_TARGETS == {"headline": (3, 5), "paper": (2, 4)}  # no limit on briefs
+    assert digest.BUDGET == {"webfetch": 30, "websearch": 5}
+
+
+def test_section_targets_only_warn():
+    data = _digest()
+    report = digest.validate(data, CANDIDATES)
+    assert report.ok
+    assert any("headline items" in w for w in report.warnings)  # 1 headline, target 3-5
+
+
+def test_the_skill_states_the_same_targets():
+    skill = api_editor.SKILL_FILE.read_text(encoding="utf-8")
+    low, high = digest.ITEMS_TARGET
+    assert f"{digest.ITEMS_EXPECTED} 条" in skill and f"{high} 条" in skill and f"{low} 条" in skill
+    assert "8–12" not in skill and "12 条" not in skill
+    assert f"WebFetch 最多 {digest.BUDGET['webfetch']} 次" in skill
+    assert f"{digest.BUDGET['webfetch']} 次的预算" in skill
+
+
+@pytest.mark.parametrize(
+    "url",
+    [
+        "https://i.redd.it/cdh8dfe7dyyh1.png",
+        "https://v.redd.it/6ssijtngz2zh1",
+        "https://x.com/someone/status/1",
+        "https://twitter.com/someone/status/1",
+        "https://www.reddit.com/r/LocalLLaMA/comments/1/x/",
+        "https://news.ycombinator.com/item?id=2",
+    ],
+)
+def test_images_videos_and_tweets_are_not_first_hand(url):
+    candidates = copy.deepcopy(CANDIDATES)
+    candidates["candidates"].append(_candidate("c_post", "discussion", "A post", url, tier=2))
+    data = _digest()
+    data["items"].append(_item("brief", "一条帖子", "一条帖子。", "c_post"))
+    assert "first-hand" in _errors(digest.validate(data, candidates), 4)
+
+
+def test_hosts_that_merely_end_alike_are_first_hand():
+    assert not digest.is_discussion("https://netflix.com/post", None)
+    assert not digest.is_discussion("https://github.com/a/b", None)
+
+
+def _quoted(url_quote, summary="GPT-6 支持 1M token 上下文，在 SWE-bench 上得分 74.9%。"):
+    data = _digest()
+    data["items"][0]["summary"] = summary
+    data["items"][0]["evidence"] = [{"url": url_quote, "quote": "GPT-6 scores 74.9% on SWE-bench."}]
+    digest.validate(data, CANDIDATES)  # fills in urls
+    return data
+
+
+@pytest.mark.parametrize(
+    "page",
+    [Page(403), Page(None, error="ConnectError: refused"), Page(200, text=None)],  # 200: a PDF
+    ids=["403", "unreachable", "no text"],
+)
+def test_quotes_from_a_page_that_cannot_be_read_support_no_facts(page):
+    url = "https://openai.com/index/gpt-6/"
+    report = digest.validate(_quoted(url), CANDIDATES, {url: page})
+    assert "74.9" in _errors(report, 0)
+    assert any("unverified" in w for w in report.warnings)
+
+
+def test_a_fact_from_the_candidate_survives_a_page_that_cannot_be_read():
+    url = "https://openai.com/index/gpt-6/"
+    data = _quoted(url, summary="GPT-6 支持 1M token 上下文。")  # in the candidate's summary
+    assert 0 not in digest.validate(data, CANDIDATES, {url: Page(403)}).item_errors
+
+
+def test_quotes_found_on_a_readable_page_support_facts():
+    url = "https://openai.com/index/gpt-6/"
+    page = Page(200, text="Today GPT-6 scores 74.9% on SWE-bench. Try it.")
+    assert 0 not in digest.validate(_quoted(url), CANDIDATES, {url: page}).item_errors
+
+
+def test_offline_validate_still_counts_quotes():
+    assert 0 not in digest.validate(_quoted("https://openai.com/index/gpt-6/"), CANDIDATES).item_errors
+
+
+@pytest.mark.parametrize(
+    "text, material, problems",
+    [
+        ("升级到 PyTorch 2.14", "PyTorch 2.14.0", []),  # a version's prefix
+        ("升级到 v2.14", "v2.14.0", []),
+        ("版本 1.2.3", "1.2.3.4", []),
+        ("提升 2 倍", "PyTorch 2.14.0", ["number 2 "]),  # the prefix is a version, not any number
+        ("提升 3 倍", "cost is 3.5 dollars", ["number 3 "]),
+        ("版本 2.15", "PyTorch 2.14.0", ["number 2.15"]),
+        ("a 763B-parameter model", "763B params", []),
+        ("a 6.8T-parameter model", "6.8T params", []),
+        ("a 32-bit build", "32 bit", []),
+        ("a 764B-parameter model", "763B params", ["'764B'", "number 764"]),
+        # Names keep every part: only a leading number is cut from the word after it.
+        ("GPT-6", "GPT-5 and 6 others", ["'GPT-6'"]),
+        ("DeepSeek-V4-Flash", "DeepSeek-V4-Pro", ["'DeepSeek-V4-Flash'"]),
+        ("Qwen3.5-72B", "Qwen3.5-7B and 72 others", ["'Qwen3.5-72B'"]),
+    ],
+)
+def test_fact_tokens(text, material, problems):
+    errors = " | ".join(digest._check_facts(text, [material])) + " "
+    for problem in problems:
+        assert problem in errors
+    if not problems:
+        assert errors == " "
+
+
+def _paper_item(cid="c_gpt", **extra):
+    return _item("paper", "一篇文章", "一篇文章。", cid, **extra)
+
+
+@pytest.mark.parametrize(
+    "url",
+    [
+        "https://arxiv.org/abs/2610.00009",
+        "https://www.arxiv.org/pdf/2610.00009",
+        "https://huggingface.co/papers/2610.00009",
+        "https://openreview.net/forum?id=abc",
+    ],
+)
+def test_paper_section_accepts_paper_links_of_any_kind(url):
+    candidates = copy.deepcopy(CANDIDATES)
+    candidates["candidates"].append(_candidate("c_link", "discussion", "A paper", url, tier=2))
+    data = _digest()
+    data["items"].append(_paper_item("c_link"))
+    assert 4 not in digest.validate(data, candidates).item_errors
+
+
+def test_paper_section_needs_a_paper_as_its_main_source():
+    data = _digest()
+    data["items"][3] = _paper_item()  # c_gpt is a blog post
+    assert "paper" in _errors(digest.validate(data, CANDIDATES), 3)
+
+
+def test_paper_section_looks_at_the_main_source_only():
+    data = _digest()
+    del data["items"][1]
+    data["items"][2]["sources"] = [{"candidate_id": "c_vllm"}, {"candidate_id": "c_paper"}]
+    assert "paper" in _errors(digest.validate(data, CANDIDATES), 2)
+    data = _digest()
+    del data["items"][1]  # c_vllm's own item
+    data["items"][2]["sources"] = [{"candidate_id": "c_paper"}, {"candidate_id": "c_vllm"}]
+    assert 2 not in digest.validate(data, CANDIDATES).item_errors
+
+
+def test_paper_section_rejects_lookalike_hugging_face_pages():
+    candidates = copy.deepcopy(CANDIDATES)
+    candidates["candidates"].append(
+        _candidate("c_hf", "model", "A model", "https://huggingface.co/acme/papers")
+    )
+    data = _digest()
+    data["items"].append(_paper_item("c_hf"))
+    assert "paper" in _errors(digest.validate(data, candidates), 4)
+
+
+def _trace_file(issue_dir, steps):
+    record = {"schema_version": 1, "date": DATE, "channel": "claude", "scores": {}, "steps": steps}
+    (issue_dir / "trace.claude.json").write_text(json.dumps(record))
+
+
+def test_cli_validate_warns_without_a_self_check(issue_dir, capsys):
+    (issue_dir / "digest.json").write_text(json.dumps(_digest()))
+    assert _run(issue_dir, "validate") == 0
+    assert "WARN  no self_check" in capsys.readouterr().err
+
+    _trace_file(issue_dir, [{"step": "self_check", "at": "x", "items": []}])
+    assert _run(issue_dir, "validate") == 0
+    assert "self_check" not in capsys.readouterr().err  # an empty list counts: it was done
+
+
+def test_cli_validate_only_asks_the_claude_routes_main_issue_for_a_self_check(issue_dir, capsys):
+    (issue_dir / "digest.json").write_text(json.dumps(_digest(channel="api", model="nvidia:a/b")))
+    assert _run(issue_dir, "validate") == 0
+    assert "self_check" not in capsys.readouterr().err
+
+    (issue_dir / "digest.json").write_text(json.dumps(fallback.build_fallback(CANDIDATES)))
+    assert _run(issue_dir, "validate") == 0
+    assert "self_check" not in capsys.readouterr().err
+
+    (issue_dir / "digest.en.json").write_text(json.dumps(_digest(lang="en")))
+    _run(issue_dir, "validate", "--en")
+    assert "self_check" not in capsys.readouterr().err
+
+
+def test_cli_validate_records_the_self_check_warning(issue_dir):
+    (issue_dir / "digest.json").write_text(json.dumps(_digest()))
+    assert _run(issue_dir, "validate", "--drop-invalid") == 0
+    written = json.loads((issue_dir / "digest.json").read_text())
+    assert any("self_check" in w for w in written["validation"]["warnings"])
+    record = json.loads((issue_dir / "trace.claude.json").read_text())
+    assert any("self_check" in w for w in record["steps"][-1]["warnings"])
+
+
+def _with_commentary(count=3):
+    candidates = copy.deepcopy(CANDIDATES)
+    for n in range(count):
+        candidates["candidates"].append(
+            _candidate(
+                f"c_blog{n}",
+                "commentary",
+                f"Essay number{n}",
+                f"https://writer{n}.example/essay",
+                tier=2,
+            )
+        )
+    return candidates
+
+
+def _essay(n, section="brief", **extra):
+    return _item(section, f"一篇评论 number{n}", "作者的分析。", f"c_blog{n}", **extra)
+
+
+@pytest.mark.parametrize("section", ["headline", "model", "tool"])
+def test_commentary_outside_the_brief_section_is_dropped(section):
+    data = _digest()
+    data["items"].append(_essay(0, section))
+    report = digest.validate(data, _with_commentary())
+    assert "commentary" in _errors(report, 4) and "brief" in _errors(report, 4)
+
+
+def test_commentary_in_the_brief_section_passes():
+    data = _digest()
+    data["items"] += [_essay(0), _essay(1)]
+    assert digest.validate(data, _with_commentary()).ok
+
+
+def test_only_the_first_two_commentary_items_are_kept():
+    data = _digest()
+    data["items"] += [_essay(0), _essay(1), _essay(2)]
+    report = digest.validate(data, _with_commentary())
+    assert sorted(report.item_errors) == [6]
+    assert "at most 2 commentary" in _errors(report, 6)
+
+
+def test_dropped_commentary_items_do_not_use_up_the_limit():
+    data = _digest()
+    data["items"] += [
+        _essay(0, "tool"),  # wrong section
+        _item("brief", "一篇评论 GPT-99", "作者的分析。", "c_blog1"),  # GPT-99 is not in the material
+        _essay(2),
+        _essay(3),
+        _essay(4),
+    ]
+    report = digest.validate(data, _with_commentary(5))
+    assert sorted(report.item_errors) == [4, 5, 8]  # c_blog2 and c_blog3 are the two that count
+
+
+def test_commentary_rule_looks_at_the_main_source_only():
+    candidates = _with_commentary()
+    data = _digest()
+    data["items"][0]["sources"].append({"candidate_id": "c_blog0"})  # supports an official post
+    data["items"] += [_essay(1), _essay(2)]
+    assert digest.validate(data, candidates).ok  # c_blog0 is not counted, wherever it sits
+    data = _digest()
+    data["items"][0]["sources"].insert(0, {"candidate_id": "c_blog0"})
+    assert "brief" in _errors(digest.validate(data, candidates), 0)
+
+
+def test_commentary_main_source_found_by_url():
+    data = _digest()
+    data["items"].append(
+        {
+            "section": "tool",
+            "title": "一篇评论 number0",
+            "summary": "作者的分析。",
+            "sources": [{"url": "https://writer0.example/essay"}],
+            "tags": [],
+        }
+    )
+    assert "brief" in _errors(digest.validate(data, _with_commentary()), 4)
+
+
+def test_commentary_rule_applies_to_the_english_edition():
+    data = _digest(lang="en")
+    data["items"] = [
+        _item("headline", "OpenAI ships GPT-6", "GPT-6 has a 1M token context.", "c_gpt"),
+        _item("tool", "An essay number0", "The author's analysis.", "c_blog0"),
+        _item("brief", "An essay number1", "The author's analysis.", "c_blog1"),
+        _item("brief", "An essay number2", "The author's analysis.", "c_blog2"),
+        _item("brief", "An essay number3", "The author's analysis.", "c_blog3"),
+    ]
+    data["highlights"] = ["OpenAI ships GPT-6."]
+    report = digest.validate(data, _with_commentary(4))
+    assert sorted(report.item_errors) == [1, 4]
+
+
+def test_fallback_never_breaks_the_commentary_rule():
+    candidates = _with_commentary(5)
+    assert digest.validate(fallback.build_fallback(candidates), candidates).ok

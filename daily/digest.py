@@ -4,7 +4,9 @@ The editor (Claude, .claude/skills/daily-editor) only writes; this module decide
 published. Item-level failures drop the item and are never "fixed" (charter, principle 5):
 
 - every source is a candidate from candidates.json, or a page the editor recorded as opened;
-- every item has at least one first-hand source, not just a HN / Reddit thread;
+- every item has at least one first-hand source, not just a HN / Reddit thread, image or tweet;
+- an item in the paper section has a paper as its main source;
+- an item whose main source is commentary sits in the brief section, at most COMMENTARY_MAX per issue;
 - numbers and model names / versions in the text (Chinese, or English in digest.en.json) appear
   in the cited material (candidate title and summary, or a verbatim evidence quote);
 - with --check-links: links are not 404, and evidence quotes really are on the cited page.
@@ -33,9 +35,13 @@ SECTIONS = {
     "brief": "⚡ 快讯",
 }
 MODES = ("full", "fallback")
-ITEMS_TARGET = (8, 12)
+# How many items an issue should have. Outside the target is a warning: no padding, and items that
+# were written and passed are not cut.
+ITEMS_TARGET = (8, 18)
+ITEMS_EXPECTED = 15
 MIN_ITEMS = 3  # fewer surviving items in a full digest means the edit failed: publish the fallback
-SECTION_TARGETS = {"headline": (3, 5), "paper": (2, 3)}
+SECTION_TARGETS = {"headline": (3, 5), "paper": (2, 4)}
+COMMENTARY_MAX = 2  # items whose main source is a writer's or newsletter's post; over it they are dropped
 HIGHLIGHTS_MAX = 3
 # The main issue is Chinese; the English edition (digest.en.json, "lang": "en") has the same
 # schema, and English takes about twice the characters.
@@ -47,8 +53,10 @@ SUMMARY_MAX_DEFAULT = {"zh": 400, "en": 800}
 QUOTE_MAX = 300  # evidence, not reprints
 TAGS_MAX = 5
 # Daily budget for the editor (charter open item 2); exceeding it is a warning, not a failure.
-BUDGET = {"webfetch": 20, "websearch": 5}
-DISCUSSION_HOSTS = ("news.ycombinator.com", "reddit.com")
+BUDGET = {"webfetch": 30, "websearch": 5}
+# Not first-hand: threads, and posts whose text cannot be downloaded and quoted (images, videos, tweets).
+DISCUSSION_HOSTS = ("news.ycombinator.com", "reddit.com", "redd.it", "x.com", "twitter.com")
+PAPER_HOSTS = ("arxiv.org", "openreview.net")
 
 _URL_IN_TEXT = re.compile(r"https?://|www\.", re.I)
 _NUMBER = re.compile(r"\d+(?:[.,]\d+)*")
@@ -56,6 +64,9 @@ _NUMBER = re.compile(r"\d+(?:[.,]\d+)*")
 _MIXED = re.compile(
     r"(?<![A-Za-z0-9])(?=[A-Za-z0-9._-]*[A-Za-z])(?=[A-Za-z0-9._-]*\d)[A-Za-z0-9][A-Za-z0-9._-]*"
 )
+# A number with a word hyphenated to it ("763B-parameter", "32-bit"): the number is the fact. Names
+# start with letters or carry digits in more parts ("GPT-6", "Qwen3.5-72B") and are checked whole.
+_NUMBER_AND_WORD = re.compile(r"^(\d[A-Za-z0-9.]*)(?:-[A-Za-z]+)+$")
 _NUMBER_WORDS = (
     "zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen "
     "sixteen seventeen eighteen nineteen twenty"
@@ -125,12 +136,20 @@ def validate(digest: Any, candidates: dict[str, Any], pages: dict[str, Page] | N
 
     context = _Context(candidates, digest.get("research"), report)
     cited: dict[str, int] = {}
+    commentary = 0  # items kept so far with commentary as their main source
     for index, item in enumerate(items):
         errors = _check_item(item, mode, lang, context, pages, report)
         for cid in _cited_ids(item, context) if not errors else []:
             if cid in cited:
                 errors.append(f"candidate {cid} is already used by item {cited[cid] + 1}")
             cited.setdefault(cid, index)
+        if not errors and _main_kind(item, context) == "commentary":
+            if item["section"] != "brief":
+                errors.append(f"a commentary item belongs in the brief section, not {item['section']}")
+            elif commentary >= COMMENTARY_MAX:
+                errors.append(f"at most {COMMENTARY_MAX} commentary items per issue")
+            else:
+                commentary += 1
         if errors:
             report.item_errors[index] = errors
 
@@ -177,6 +196,7 @@ def candidate_urls(c: dict[str, Any]) -> list[str]:
     urls = [c["url"], c.get("discussion_url")]
     for other in c.get("also_from") or []:
         urls += [other.get("url"), other.get("discussion_url")]
+    urls += c.get("links") or []  # last: only used when there is no first-hand page before them
     return [u for u in urls if u]
 
 
@@ -194,21 +214,34 @@ def _check_highlights(highlights: Any, mode: Any, report: Report) -> None:
 
 def _check_counts(items: list[dict[str, Any]], report: Report) -> None:
     low, high = ITEMS_TARGET
-    if not low <= len(items) <= high:
-        report.warnings.append(f"{len(items)} items (target {low}-{high})")
+    count = len(items)
+    if count < low:
+        report.warnings.append(f"{count} items, fewer than {low}: 这一期可能有信源漏抓了")
+    elif count > high:
+        report.warnings.append(f"{count} items, more than {high} (expected about {ITEMS_EXPECTED})")
     for section, (low, high) in SECTION_TARGETS.items():
         count = sum(1 for item in items if item["section"] == section)
         if not low <= count <= high:
             report.warnings.append(f"{count} {section} items (target {low}-{high})")
 
 
+def _source_id(source: dict[str, Any], context: _Context) -> str | None:
+    return source.get("candidate_id") or context.by_key.get(url_key(source["url"]))
+
+
 def _cited_ids(item: dict[str, Any], context: _Context) -> list[str]:
     ids = []
     for s in item["sources"]:
-        cid = s.get("candidate_id") or context.by_key.get(url_key(s["url"]))
+        cid = _source_id(s, context)
         if cid and cid not in ids:
             ids.append(cid)
     return ids
+
+
+def _main_kind(item: dict[str, Any], context: _Context) -> str | None:
+    """The kind of the candidate behind the first source; a page the editor opened has none."""
+    c = context.by_id.get(_source_id(item["sources"][0], context) or "")
+    return c.get("kind") if c else None
 
 
 def _check_item(
@@ -243,6 +276,7 @@ def _check_item(
     cited: list[dict[str, Any]] = []  # candidates this item cites
     urls: list[str] = []
     first_hand = False
+    main: dict[str, Any] | None = None  # the candidate of the first source
     for s in sources:
         if not isinstance(s, dict):
             errors.append("source is not an object")
@@ -272,6 +306,8 @@ def _check_item(
                 continue
         if c is not None and c not in cited:
             cited.append(c)
+        if not urls:
+            main = c
         urls.append(url)
         if not is_discussion(url, c):
             first_hand = True
@@ -279,6 +315,8 @@ def _check_item(
         return errors
     if not first_hand:
         errors.append("needs a first-hand source, not only a discussion thread")
+    if section == "paper" and not _is_paper(urls[0], main):
+        errors.append(f"the paper section needs a paper as its main source, not {urls[0]}")
 
     material = [part for c in cited for part in _candidate_text(c)]
     quotes, source_keys = [], {url_key(u) for u in urls}
@@ -298,7 +336,9 @@ def _check_item(
     if errors:
         return errors
 
-    errors += _check_facts(f"{title}\n{summary}", material + [q["quote"] for q in quotes])
+    # A quote from a page that cannot be read is unchecked (see _check_online): it supports nothing.
+    checked = [q["quote"] for q in quotes if pages is None or _readable(pages.get(q["url"]))]
+    errors += _check_facts(f"{title}\n{summary}", material + checked)
     if pages is not None:
         errors += _check_online(urls, quotes, material, pages, report, title)
     return errors
@@ -328,6 +368,20 @@ def is_discussion(url: str, c: dict[str, Any] | None) -> bool:
     return any(host == h or host.endswith("." + h) for h in DISCUSSION_HOSTS)
 
 
+def _is_paper(url: str, c: dict[str, Any] | None) -> bool:
+    if c is not None and c.get("kind") == "paper":
+        return True
+    parts = urlsplit(url)
+    host = parts.hostname or ""
+    if host == "huggingface.co":
+        return parts.path.startswith("/papers/")
+    return any(host == h or host.endswith("." + h) for h in PAPER_HOSTS)
+
+
+def _readable(page: Page | None) -> bool:
+    return page is not None and page.text is not None
+
+
 def _candidate_text(c: dict[str, Any]) -> list[str]:
     parts = [c.get("title") or "", c.get("summary") or "", c.get("published_at") or ""]
     parts += [str(v) for v in (c.get("signals") or {}).values()]
@@ -337,18 +391,29 @@ def _candidate_text(c: dict[str, Any]) -> list[str]:
 
 def _check_facts(text: str, material: list[str]) -> list[str]:
     blob = "\n".join(material)
-    numbers = {_number(n) for n in _NUMBER.findall(blob)}
+    numbers = {v for n in _NUMBER.findall(blob) for v in _number_forms(_number(n))}
     words = set(re.findall(r"[a-z]+", blob.lower()))
     numbers |= {str(i) for i, w in enumerate(_NUMBER_WORDS) if w in words}
     squashed = _squash(blob)
     errors = []
-    for token in dict.fromkeys(_MIXED.findall(text)):
+    for token in dict.fromkeys(_fact_token(t) for t in _MIXED.findall(text)):
         if _squash(token) not in squashed:
             errors.append(f"{token!r} does not appear in the cited material")
     for n in dict.fromkeys(_number(n) for n in _NUMBER.findall(text)):
         if n not in numbers:
             errors.append(f"number {n} does not appear in the cited material")
     return errors
+
+
+def _fact_token(token: str) -> str:
+    match = _NUMBER_AND_WORD.match(token)
+    return match.group(1) if match else token
+
+
+def _number_forms(number: str) -> list[str]:
+    """A number and, for a version like 2.14.0, its prefixes down to two parts: 2.14 but not 2."""
+    parts = number.split(".")
+    return [number] + [".".join(parts[:n]) for n in range(2, len(parts))]
 
 
 def _check_online(

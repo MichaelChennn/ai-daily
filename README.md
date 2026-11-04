@@ -18,7 +18,7 @@
 
 ## 01 Features
 
-- **Every number has a source**: items come from 17 primary sources. Every number, model name and version in an item has to appear in its sources or their verbatim evidence quotes. If one doesn't, the whole item is dropped, never "fixed".
+- **Every number has a source**: items come from 31 official and primary sources, plus 10 writers and newsletters. Every number, model name and version in an item has to appear in its sources or their verbatim evidence quotes. If one doesn't, the whole item is dropped, never "fixed".
 - **Two editor routes**: Claude and cloud model APIs each edit the issue every day. Claude's edit takes priority as the main issue, and the API edit is shown next to it as a Beta. If both fail, a fallback issue with only titles and links goes out.
 - **Chinese and English**: the English edition keeps the main issue's items and evidence and is written straight from the English originals, not translated.
 - **Full-text RSS and archive**: [English RSS](https://michaelchennn.github.io/ai-daily/feed.en.xml), [Chinese RSS](https://michaelchennn.github.io/ai-daily/feed.xml); the website has the archive and fetch stats for every source.
@@ -27,7 +27,7 @@
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/assets/readme/pipeline-en-dark.svg">
-  <img src="docs/assets/readme/pipeline-en-light.svg" width="100%" alt="Pipeline: 17 sources are fetched and deduped, the Claude route and the API route edit, validate checks every quote, and today's issue is chosen in the order Claude, API, fallback and published in Chinese, English and RSS">
+  <img src="docs/assets/readme/pipeline-en-light.svg" width="100%" alt="Pipeline: 31 official and primary sources plus 10 writers and newsletters are fetched and deduped, the Claude route and the API route edit, validate checks every quote, and today's issue is chosen in the order Claude, API, fallback and published in Chinese, English and RSS">
 </picture>
 
 Every day, Berlin time: fetch and dedupe at 05:07, both routes start editing at 05:30, and the issue that passes `daily validate` goes out at 06:00. If nothing has passed by 06:30, the fallback goes out.
@@ -84,9 +84,10 @@ Listed in [`sources.yaml`](sources.yaml). The website's [sources page](https://m
 
 | Kind | Sources |
 |---|---|
-| Official blogs | OpenAI, Anthropic News / Research, Google DeepMind, Google AI, Mistral, Hugging Face, Meta AI, MiniMax, Kimi, DeepSeek |
+| Official blogs | OpenAI, Anthropic News / Research, Claude Blog, Google DeepMind, Google AI, Google Research, Microsoft Research, Apple ML Research, Ai2, Mistral, Hugging Face, Meta AI, xAI, Cohere, Cursor, Liquid AI, Black Forest Labs, Stability AI, Thinking Machines, MiniMax, Kimi, DeepSeek, Qwen, ByteDance Seed, Baidu ERNIE |
 | Papers | Hugging Face Daily Papers |
 | Open source | GitHub Releases (14 repos including vLLM, Ollama, llama.cpp, transformers), GitHub Trending, Hugging Face Trending Models |
+| Writers & newsletters | Simon Willison, Interconnects, Import AI, Latent Space, Sebastian Raschka, Andrej Karpathy, Lilian Weng, Answer.AI, Sam Altman, Ethan Mollick, Kexue.fm, Recode China AI, ChinAI |
 | Community | Hacker News, Reddit (r/LocalLLaMA + r/MachineLearning) |
 
 </details>

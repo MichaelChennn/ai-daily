@@ -7,7 +7,7 @@ from datetime import datetime
 from typing import Any
 
 # What kind of thing a candidate is; the editor uses it to pick a digest section.
-KINDS = {"blog", "paper", "release", "model", "repo", "discussion"}
+KINDS = {"blog", "paper", "release", "model", "repo", "discussion", "commentary"}
 
 
 @dataclass
@@ -27,6 +27,8 @@ class Candidate:
     discussion_url: str | None = None
     signals: dict[str, Any] = field(default_factory=dict)
     tags: list[str] = field(default_factory=list)
+    # First-hand pages a discussion post's body links to (fetchers.base.first_hand_links).
+    links: list[str] = field(default_factory=list)
 
     # Filled in by dedup.
     id: str = ""
@@ -34,6 +36,7 @@ class Candidate:
     cluster_id: str = ""
     also_from: list[dict[str, Any]] = field(default_factory=list)
     seen_on: list[str] = field(default_factory=list)
+    reported_on: list[dict[str, str]] = field(default_factory=list)  # [{date, title}]: earlier main digests
 
     def to_json(self) -> dict[str, Any]:
         data = asdict(self)
@@ -48,7 +51,7 @@ class Filtered:
     source: str
     title: str
     url: str
-    reason: str  # not_ai | min_stars_today | min_upvotes | max_age_days | noisy_model
+    reason: str  # not_ai | min_stars_today | min_upvotes | max_age_days | noisy_model | exclude_title
     value: str | None = None  # what triggered it, e.g. "stars_today 12 < 20"
 
 

@@ -7,7 +7,9 @@
 2. Same event, different pages: titles are compared (token overlap + shared model names) and
    similar candidates get the same `cluster_id`. Clusters are hints for the editor, not merges.
 3. Across days: keys seen in the last N days of candidates are recorded in `seen_on`; keys that
-   were already published in a digest are dropped.
+   were already published in a digest are dropped. Over a longer lookback, candidates that an
+   earlier main digest already covered (same link, or the same story by title) get `reported_on`.
+   They are kept: the same model page may hold new weights, so the editor decides.
 """
 
 from __future__ import annotations
@@ -16,7 +18,7 @@ import hashlib
 import json
 import re
 from collections.abc import Iterable
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import date, timedelta
 from pathlib import Path
 from typing import Any
@@ -188,6 +190,7 @@ _TOKEN = re.compile(r"[a-z0-9]+(?:\.[0-9]+)*|[\u4e00-\u9fff]+")
 # Model / product names with a version: gpt-6, qwen3.5, deepseek-v4.1, llama 4, claude opus 5.5.
 _ENTITY = re.compile(r"\b([a-z]{2,})[\s-]?(v?\d+(?:\.\d+)*[a-z]?)\b")
 _YEAR = re.compile(r"^(19|20)\d\d$")
+_CJK = re.compile(r"[\u4e00-\u9fff]+")
 
 JACCARD_ALONE = 0.5
 JACCARD_WITH_ENTITY = 0.2
@@ -220,13 +223,28 @@ def title_entities(title: str) -> set[str]:
 
 
 def similar(a: Candidate, b: Candidate) -> bool:
-    ta, tb = title_tokens(a.title), title_tokens(b.title)
+    return _similar_titles(a.title, b.title)
+
+
+def _similar_titles(a: str, b: str) -> bool:
+    ta, tb = title_tokens(a), title_tokens(b)
     if not ta or not tb:
         return False
     jaccard = len(ta & tb) / len(ta | tb)
     if jaccard >= JACCARD_ALONE:
         return True
-    return jaccard >= JACCARD_WITH_ENTITY and bool(title_entities(a.title) & title_entities(b.title))
+    return jaccard >= JACCARD_WITH_ENTITY and bool(title_entities(a) & title_entities(b))
+
+
+def same_story(candidate_title: str, digest_title: str) -> bool:
+    """Whether a candidate is what a digest item reported, judging by their titles.
+
+    Candidates are mostly English and digest titles Chinese, whose many bigrams swamp the overlap,
+    so the titles are compared a second time without the Chinese.
+    """
+    return _similar_titles(candidate_title, digest_title) or _similar_titles(
+        _CJK.sub(" ", candidate_title), _CJK.sub(" ", digest_title)
+    )
 
 
 def assign_clusters(items: list[Candidate]) -> list[dict[str, Any]]:
@@ -264,13 +282,44 @@ def assign_clusters(items: list[Candidate]) -> list[dict[str, Any]]:
 # ---------------------------------------------------------------- 3. history
 
 
+REPORTED_DAYS = 30
+
+
+@dataclass
+class ReportedItem:
+    """An item of an earlier main digest."""
+
+    date: str
+    title: str
+    keys: set[str]  # url keys of its sources
+
+
 @dataclass
 class History:
     seen: dict[str, list[str]]  # key -> dates it appeared as a candidate
     published: dict[str, str]  # key -> date it was published in a digest
+    reported: list[ReportedItem] = field(default_factory=list)  # oldest first
 
 
-def load_history(data_dir: Path, issue_date: date, days: int = 7) -> History:
+def load_reported(data_dir: Path, issue_date: date, days: int = REPORTED_DAYS) -> list[ReportedItem]:
+    from daily.digest import published_urls  # deferred: digest imports dedup
+
+    reported: list[ReportedItem] = []
+    for offset in range(days, 0, -1):
+        day = (issue_date - timedelta(days=offset)).isoformat()
+        digest_file = data_dir / day / "digest.json"
+        if not digest_file.exists():
+            continue
+        for item in json.loads(digest_file.read_text(encoding="utf-8")).get("items") or []:
+            if isinstance(item, dict):
+                keys = {url_key(url) for url in published_urls({"items": [item]})}
+                reported.append(ReportedItem(day, str(item.get("title") or ""), keys))
+    return reported
+
+
+def load_history(
+    data_dir: Path, issue_date: date, days: int = 7, reported_days: int = REPORTED_DAYS
+) -> History:
     seen: dict[str, list[str]] = {}
     published: dict[str, str] = {}
     for offset in range(days, 0, -1):
@@ -288,11 +337,15 @@ def load_history(data_dir: Path, issue_date: date, days: int = 7) -> History:
 
             for url in published_urls(json.loads(digest_file.read_text(encoding="utf-8"))):
                 published.setdefault(url_key(url), day)
-    return History(seen={k: sorted(set(v)) for k, v in seen.items()}, published=published)
+    return History(
+        seen={k: sorted(set(v)) for k, v in seen.items()},
+        published=published,
+        reported=load_reported(data_dir, issue_date, reported_days),
+    )
 
 
 def apply_history(items: list[Candidate], history: History) -> tuple[list[Candidate], list[dict[str, str]]]:
-    """Drop already-published candidates; annotate the rest with the days they were seen."""
+    """Drop already-published candidates; annotate the rest with when they were seen and reported."""
     kept: list[Candidate] = []
     dropped: list[dict[str, str]] = []
     for item in items:
@@ -304,5 +357,10 @@ def apply_history(items: list[Candidate], history: History) -> tuple[list[Candid
             )
             continue
         item.seen_on = sorted({d for k in keys for d in history.seen.get(k, [])})
+        item.reported_on = [
+            {"date": r.date, "title": r.title}
+            for r in history.reported
+            if r.keys.intersection(keys) or same_story(item.title, r.title)
+        ]
         kept.append(item)
     return kept, dropped

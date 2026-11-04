@@ -26,6 +26,7 @@ logger = logging.getLogger(__name__)
 
 USER_AGENT = f"ai-daily/{__version__} (+https://github.com/MichaelChennn/ai-daily)"
 SOURCE_TIMEOUT_SECONDS = 60
+MAX_ERROR_CHARS = 1000  # html_listing puts what it got from the server in there
 
 
 @dataclass
@@ -60,7 +61,8 @@ async def run_source(
         detail = str(exc).splitlines()[0] if str(exc) else ""
         message = f"{type(exc).__name__}: {detail}" if detail else type(exc).__name__
         logger.warning("source %s failed: %s", source.id, message)
-        return [], SourceReport(source.id, "error", seconds=time.monotonic() - started, error=message[:500])
+        seconds = time.monotonic() - started
+        return [], SourceReport(source.id, "error", seconds=seconds, error=message[:MAX_ERROR_CHARS])
     logger.info("source %s: %d items", source.id, len(items))
     seconds = time.monotonic() - started
     return items, SourceReport(source.id, "ok", count=len(items), seconds=seconds, filtered=skipped)
@@ -91,6 +93,7 @@ def build_candidates(
     now: datetime | None = None,
 ) -> dict[str, Any]:
     source_order = {s.id: i for i, s in enumerate(sources)}
+    raw = [c for c in raw if not (c.signals.get("late_release") and dedup.url_key(c.url) in history.seen)]
     merged = dedup.merge_by_url(raw, source_order)
     kept, dropped = dedup.apply_history(merged, history)
     kept.sort(
@@ -117,6 +120,7 @@ def build_candidates(
             "candidates": len(kept),
             "clusters": len(clusters),
             "seen_before": sum(1 for c in kept if c.seen_on),
+            "reported_before": sum(1 for c in kept if c.reported_on),
         },
         "sources": [
             {**report.__dict__, "filtered": dict(Counter(f.reason for f in report.filtered))}
@@ -144,6 +148,8 @@ def candidate_listing(data: dict[str, Any], kinds: list[str] | None = None, summ
             notes.append(f"cluster {c['cluster_id']}({clusters[c['cluster_id']]})")
         if c["seen_on"]:
             notes.append(f"seen {','.join(c['seen_on'])}")
+        # .get: issues fetched before reported_on existed don't have it.
+        notes += [f"reported {r['date'][5:]}「{r['title']}」" for r in c.get("reported_on", [])]
         head = f"{c['id']} {c['kind']:<10} T{c['tier']} [{c['source']}] {c['title']}"
         lines.append(f"{head}  | {' '.join(notes)}")
         if summary_chars and c["summary"]:

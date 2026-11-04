@@ -139,3 +139,130 @@ async def test_filtered_items_are_counted_per_source_and_listed(window):
         "value": None,
     }
     json.dumps(data)
+
+
+def _listing_data(**candidate):
+    return {
+        "date": ISSUE.isoformat(),
+        "clusters": [],
+        "sources": [],
+        "candidates": [
+            {
+                "id": "c_1",
+                "kind": "model",
+                "tier": 1,
+                "source": "hf",
+                "title": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+                "summary": "",
+                "signals": {},
+                "also_from": [],
+                "cluster_id": "k_1",
+                "seen_on": [],
+                **candidate,
+            }
+        ],
+    }
+
+
+def test_listing_shows_when_a_candidate_was_reported():
+    data = _listing_data(reported_on=[{"date": "2026-10-21", "title": "DeepSeek-V4.1-Flash-1017 更新权重"}])
+    assert "reported 10-21「DeepSeek-V4.1-Flash-1017 更新权重」" in pipeline.candidate_listing(data)
+
+
+def test_listing_reads_issues_from_before_reported_on():
+    assert "reported" not in pipeline.candidate_listing(_listing_data())
+
+
+def test_build_candidates_writes_reported_on_and_counts_it(window):
+    sources = [source("rss", id_="openai-news")]
+    url = "https://openai.com/index/gpt-6"
+    blog = Candidate(
+        source="openai-news",
+        source_name="OpenAI",
+        tier=1,
+        kind="blog",
+        title="Introducing GPT-6",
+        url=url,
+        published_at=IN_WINDOW,
+    )
+    reported = dedup.ReportedItem("2026-10-01", "OpenAI 发布 GPT-6", {dedup.url_key(url)})
+    data = pipeline.build_candidates([blog], sources, window, [], dedup.History({}, {}, [reported]))
+    assert data["candidates"][0]["reported_on"] == [{"date": "2026-10-01", "title": "OpenAI 发布 GPT-6"}]
+    assert data["stats"]["reported_before"] == 1
+    json.dumps(data)
+
+
+def test_cli_fetch_takes_a_separate_reported_lookback(tmp_path, monkeypatch):
+    sources_file = tmp_path / "sources.yaml"
+    sources_file.write_text(
+        "sources:\n  - {id: openai-news, name: OpenAI, type: rss, tier: 1, kind: blog, "
+        'url: "https://openai.com/news/rss.xml"}\n'
+    )
+    data_dir = tmp_path / "data"
+    old = data_dir / (ISSUE - timedelta(days=20)).isoformat()
+    old.mkdir(parents=True)
+    (old / "digest.json").write_text(
+        json.dumps({"items": [{"title": "旧条目", "sources": [{"url": "https://openai.com/index/gpt-6"}]}]})
+    )
+    monkeypatch.setattr(pipeline, "make_client", lambda: mock_client({"openai.com/news/rss.xml": RSS}))
+    args = ["fetch", "--date", ISSUE.isoformat(), "--sources", str(sources_file), "--data-dir", str(data_dir)]
+
+    def reported():
+        return json.loads((data_dir / ISSUE.isoformat() / "candidates.json").read_text())["stats"][
+            "reported_before"
+        ]
+
+    assert cli.main(args) == 0 and reported() == 1
+    assert cli.main([*args, "--reported-days", "10"]) == 0 and reported() == 0
+
+
+def _release(version, signals=None):
+    return Candidate(
+        source="github-releases",
+        source_name="GitHub Releases",
+        tier=1,
+        kind="release",
+        title=f"ollama/ollama {version}",
+        url=f"https://github.com/ollama/ollama/releases/tag/{version}",
+        published_at=IN_WINDOW,
+        signals=signals or {},
+    )
+
+
+def test_late_release_only_stays_if_no_earlier_candidate_had_it(window):
+    sources = [source("github_releases", "release", id_="github-releases")]
+    seen = dedup.url_key("https://github.com/ollama/ollama/releases/tag/v2")
+    history = dedup.History({seen: ["2026-10-19"]}, {})
+    raw = [
+        _release("v1", {"late_release": True}),  # first time we see it: was a pre-release until now
+        _release("v2", {"late_release": True}),  # an earlier issue already had it
+        _release("v3"),
+    ]
+    data = pipeline.build_candidates(raw, sources, window, [], history)
+    assert [c["title"] for c in data["candidates"]] == [
+        "ollama/ollama v1",
+        "ollama/ollama v3",
+    ]
+    assert data["stats"]["seen_before"] == 0
+
+
+def test_shipped_sources_are_the_agreed_list():
+    sources = {s.id: s for s in load_sources(DEFAULT_SOURCES_FILE)}
+    commentary = {s.id for s in sources.values() if s.kind == "commentary"}
+    assert len(commentary) == 13
+    assert all(sources[i].tier == 2 and sources[i].type == "rss" for i in commentary)
+    assert all(sources[i].options.get("homepage") for i in commentary)  # the sources page links to them
+    assert sources["latent-space"].options["exclude_title_pattern"] == r"^\[AINews\]"
+    assert sources["simon-willison"].options["url"].endswith("/atom/entries/")
+    assert {"qwen-blog", "seed-blog"} <= {s.id for s in sources.values() if s.type == "json_api"}
+    assert sources["hf-daily-papers"].options["week_fallback_limit"] == 10
+    assert sources["minimax-blog"].options["link_pattern"] == "^/(blog|news)/[a-z0-9-]+$"
+    # Every existing source is still there, and still on.
+    existing = {
+        "openai-news", "anthropic-news", "anthropic-research", "deepmind-blog", "google-ai-blog", "mistral-news",
+        "huggingface-blog", "meta-ai-news", "minimax-blog", "kimi-blog", "deepseek-news", "hf-daily-papers",
+        "github-releases", "github-trending", "hf-trending-models", "hackernews", "reddit-ai",
+    }  # fmt: skip
+    assert existing <= sources.keys()
+    assert all(sources[i].enabled for i in existing)
+    assert len(sources) == 46

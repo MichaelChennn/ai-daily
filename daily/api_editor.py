@@ -48,7 +48,7 @@ RETRY_DELAY = 15.0  # doubled on each retry, unless the provider says how long (
 # prompt for minutes before the first token.
 CHAT_TIMEOUT = httpx.Timeout(30.0, read=600.0)
 MAX_TOKENS = 16384  # reasoning counts too
-PICKS = 18  # stories the model shortlists: one page each, inside the webfetch budget
+PICKS = 22  # stories the model shortlists: one page each, inside the webfetch budget
 PAGE_CHARS = 8000  # of each page, cut into numbered passages
 PASSAGE_MIN = 15  # shorter pieces are menus and buttons
 CODE_SHARE = 0.08  # pieces with more of {}[]<>"=|\\ than this are inlined JSON and templates, not prose
@@ -68,19 +68,24 @@ ROUTE_NOTES = """
    程序把原文逐字放进去，你不用复制引文，也不用写 research。
 3. 修改：程序按 validate 的规则检查，把不合格的条目和原因发回给你，只有这一次机会；稿子没问题就没有这一步。
 
-没有 WebSearch：不做补漏，只用候选。生成记录也由程序记：第 2、5 节里的 `daily trace` 命令不用管，
+没有 WebSearch：不做补漏，只用候选。程序打不开的页面，只能依据候选的标题和摘要写。
+生成记录也由程序记：第 2、5 节里的 `daily trace` 命令不用管，
 分数写在挑选那一步的回答里。
 """
 
 WRITE_FORMAT = """\
 只回答 JSON：
 {"highlights": ["……"], "items": [{"section": "headline", "title": "……", "summary": "……",
-  "candidates": ["c_xxx"], "evidence": [3, 17], "tags": ["模型"]}]}
+  "candidates": ["c_xxx"], "evidence": [3, 17], "tags": ["模型"]}],
+ "skipped": [{"group": 5, "reason": "原文打不开，摘要写不出是什么"}]}
 
 - section：headline | model | paper | tool | brief，按这个顺序排，版块内按重要性排。
 - candidates：这一条依据的候选 id，第一个是主来源。一个候选只能用在一条里。
 - evidence：支撑关键事实的片段编号，只能用这一条候选的原文片段。标题和 summary 里的每个数字、模型名、
-  版本号，都要原样出现在这一条候选的标题 / 摘要或所引的片段里，否则整条会被删掉。"""
+  版本号，都要原样出现在这一条候选的标题 / 摘要或所引的片段里，否则整条会被删掉。
+- skipped：你挑了却没有写的组，group 是组号，reason 用一句话说明原因。每一组要么写成条目，要么写在这里。
+- kind 是 commentary 的候选（博主和周报）：只有作者的原创分析才能单独成条，只放进 brief，每期最多 2 条；
+  评论别人发布的内容时，这一条不要写。"""
 
 EN_ROUTE_NOTES = """
 
@@ -101,8 +106,25 @@ EN_FORMAT = """\
   否则整条会被删掉。"""
 
 FIX_RULES = """\
-不合格的条目只能这样改：删掉材料里没有的数字和名称，换用或补充片段编号，或者整条删掉。
-不要加入材料里没有的事实。数字和名称只核对这一条候选的标题 / 摘要和所引的片段。"""
+数字或名称在这一条候选的标题 / 摘要和原文片段里都找不到：说明这一条写了材料之外的内容，整条删掉，
+不要只删掉那个数字或名称后保留这一条。数字或名称在原文片段里、只是没有引用：补上片段编号。
+其他错误（片段编号、长度之类）可以改。不要加入材料里没有的事实。"""
+
+HIGHLIGHT_RULES = """\
+今日要点的数字和名称只能来自已入选条目的标题和 summary，每句要点都要说得清引用的是哪一条。"""
+
+# Claude's scores from earlier issues, to calibrate the pick step. They stay here, not in the skill:
+# the Claude route does not need them, and the API route's scores are not used for statistics.
+SCORE_EXAMPLES = """\
+打分例子（[重要性, 实用性, 新颖性]）：
+- [0, 0, 0]「OBLITERATUS/DeepSeek-V4.1-Flash-1017-obliterated」：别人做的去审查衍生权重。
+- [0, 0, 0]「Running UNCENSORED DeepSeek-V4.1-Flash-1017 on a 12 Gb VRAM」：衍生权重的讨论帖。
+- [1, 0, 1]「Preparing our next security sprint to harden OpenAI」：公司内部事务，和开发无关。
+- [1, 1, 0]「The latest AI news we announced in October 2026」：月度汇总，没有新内容。
+- [1, 1, 1]「langchain-ai/langchain langchain-core==1.7.4」：常规小版本。
+- [2, 3, 2]「vllm-project/vllm v0.33.0」：主流工具的重要版本，开发者今天就能用上。
+- [3, 2, 2]「China's First Frontier AI Export Controls: Mofcom Announcement No. 48」：行业格局变化。
+多数候选的重要性和实用性都是 0 或 1；3 分每期只有几个。"""
 
 
 class EditorError(Exception):
@@ -272,6 +294,11 @@ async def _ask(chat: Chat, messages: list[dict[str, Any]]) -> dict[str, Any]:
     raise AssertionError("unreachable")
 
 
+def rank_groups(groups: list[list[str]], scores: dict[str, list[int]]) -> list[list[str]]:
+    """Best total score first; a group counts as its best candidate, ties keep the model's order."""
+    return sorted(groups, key=lambda group: -max(sum(scores.get(cid, [0])) for cid in group))
+
+
 def _titles_as_highlights(data: dict[str, Any], report: digest.Report) -> bool:
     """Titles are published text, so they always pass as highlights: use the first ones when the
     highlights are what failed. False when something else failed too."""
@@ -316,14 +343,18 @@ class Editor:
             {"role": "user", "content": self._write_prompt(groups)},
         ]
         self.step = "draft"
-        data = self._draft(await self._ask(messages))
+        first = await self._ask(messages)
+        data = self._draft(first)
         report = await self._validate(data)
         log.info("write: %d items, %d rejected", len(data["items"]), len(report.item_errors))
-        feedback = self._feedback(data, report, groups)
+        self._record_skipped(first, groups, "draft")
+        feedback = self._feedback(data, report)
         if feedback:
             self.step = "fix"
             messages.append({"role": "user", "content": feedback})
-            data = self._draft(await self._ask(messages))
+            second = await self._ask(messages)
+            self._record_skipped(second, groups, "fix")
+            data = self._draft(second)
             report = await self._validate(data)
             log.info("fix: %d items, %d rejected", len(data["items"]), len(report.item_errors))
         if _titles_as_highlights(data, report):
@@ -346,7 +377,8 @@ class Editor:
             "按第 2 节给下面每一个候选打分，scores 里写 [重要性, 实用性, 新颖性]，一个都不要漏；"
             f"再挑出最多 {PICKS} 组值得写的，重要的在前；同一事件的几个候选放进同一组，"
             f"第一个是主来源，程序会打开它的原文。"
-            f"目标是最后写 {digest.ITEMS_TARGET[0]}–{digest.ITEMS_TARGET[1]} 条，可以多挑几组留余量。"
+            f"期望最后写约 {digest.ITEMS_EXPECTED} 条，最多 {digest.ITEMS_TARGET[1]} 条，"
+            "可以多挑几组留余量；值得写的不够时少写，不要凑数。\n" + SCORE_EXAMPLES + "\n"
             '只回答 JSON：{"scores": {"c_xxx": [3, 2, 2], "c_yyy": [1, 0, 1]}, '
             '"picks": [["c_xxx", "c_yyy"], ["c_zzz"]]}\n\n' + listing
         )
@@ -364,6 +396,7 @@ class Editor:
                 seen.update(ids)
         if not groups:
             raise EditorError("the model picked no known candidate")
+        groups = rank_groups(groups, self.trace["scores"])
         log.info("pick: %d groups, %d candidates", len(groups[:PICKS]), len(seen))
         self._record({"step": "pick", "groups": groups[:PICKS]})
         if groups[PICKS:]:
@@ -378,9 +411,24 @@ class Editor:
         heads = [(g[0], first_hand_url(self.by_id[g[0]]) or "") for g in groups]
         self.pages.update(await digest.check_links([url for _, url in heads], self.client))
         self.research = [{"via": "webfetch", "url": url} for url in dict.fromkeys(url for _, url in heads)]
+        states = []
         for cid, url in heads:
-            text = self.pages[url].body or self.pages[url].text
-            self.passages += [Passage(url, cid, p) for p in passages(text)] if text else []
+            page = self.pages[url]
+            text = page.body or page.text
+            found = [Passage(url, cid, p) for p in passages(text)] if text else []
+            self.passages += found
+            state = "failed" if page.text is None else "ok" if found else "no_prose"
+            states.append(
+                {
+                    "candidate": cid,
+                    "url": url,
+                    "state": state,
+                    "status": page.status,
+                    "error": page.error,
+                    "passages": len(found),
+                }
+            )
+        self._record({"step": "read", "pages": states})
         log.info("read: %d pages, %d passages", len(self.research), len(self.passages))
 
     def _write_prompt(self, groups: list[list[str]]) -> str:
@@ -408,6 +456,7 @@ class Editor:
         head = (
             f"第二步：写作。下面是你挑的 {len(groups)} 组："
             "候选的标题、摘要和信号，以及每组第一个候选的原文片段。"
+            f"期望写约 {digest.ITEMS_EXPECTED} 条，最多 {digest.ITEMS_TARGET[1]} 条，超过时先写总分高的。"
         )
         return head + "\n\n" + WRITE_FORMAT + "\n\n" + "\n\n".join(blocks)
 
@@ -417,7 +466,9 @@ class Editor:
             return raw  # validate says what is wrong
         ids = [i for i in raw.get("candidates") or [] if isinstance(i, str)]
         sources = [
-            {"candidate_id": i, "url": self.by_id[i]["url"]} if i in self.by_id else {"candidate_id": i}
+            {"candidate_id": i, "url": first_hand_url(self.by_id[i]) or self.by_id[i]["url"]}
+            if i in self.by_id
+            else {"candidate_id": i}
             for i in ids
         ]
         evidence = []
@@ -456,26 +507,38 @@ class Editor:
         self.trace["steps"].append(trace.validate_step(self.step, data, report, checked_links=True))
         return report
 
-    def _feedback(self, data: dict[str, Any], report: digest.Report, groups: list[list[str]]) -> str | None:
-        """What to fix and how many more items to look for; None when the draft is done."""
+    def _record_skipped(self, answer: dict[str, Any], groups: list[list[str]], round_: str) -> None:
+        """The groups the model says it did not write, and why; what is malformed is left out."""
+        raw = answer.get("skipped")
+        if not isinstance(raw, list):
+            return
+        skipped = []
+        for entry in raw:
+            if not isinstance(entry, dict) or not isinstance(entry.get("reason"), str):
+                continue
+            group = entry.get("group")
+            group = int(group) if isinstance(group, str) and group.isdigit() else group
+            if isinstance(group, int) and 1 <= group <= len(groups):
+                skipped.append({"group": group, "candidates": groups[group - 1], "reason": entry["reason"]})
+        self._record({"step": "skipped", "round": round_, "skipped": skipped})
+
+    def _feedback(self, data: dict[str, Any], report: digest.Report) -> str | None:
+        """What to fix, None when nothing failed. Never how many items there are: that would ask for
+        padding, and an issue with few good items is fine (too few to publish fails the edit)."""
         items = data["items"] if isinstance(data["items"], list) else []
         titles = [item.get("title") if isinstance(item, dict) else "" for item in items]
         lines = [
             f"- 第 {i + 1} 条「{titles[i]}」：{'; '.join(e)}" for i, e in sorted(report.item_errors.items())
         ]
-        lines += [f"- {e}" for e in report.errors]
-        used = {s.get("candidate_id") for item in items if isinstance(item, dict) for s in item["sources"]}
-        unused = [str(n) for n, group in enumerate(groups, 1) if group[0] not in used]
-        good, (low, high) = len(items) - len(report.item_errors), digest.ITEMS_TARGET
-        more = good < low and unused
-        if not lines and not more:
+        errors = [e for e in report.errors if not e.endswith(f"valid items (minimum {digest.MIN_ITEMS})")]
+        lines += [f"- {e}" for e in errors]
+        if not lines:
             return None
-        text = "第三步：修改。程序按 validate 检查了你的稿子。\n"
-        if lines:
-            text += "不合格：\n" + "\n".join(lines) + "\n" + FIX_RULES + "\n"
-        if more:
-            text += f"合格 {good} 条，目标 {low}–{high} 条。还没用上的组：{'、'.join(unused)}，"
-            text += "值得写的可以补上，宁缺毋滥。\n"
+        text = "第三步：修改。程序按 validate 检查了你的稿子。\n不合格：\n" + "\n".join(lines) + "\n"
+        text += FIX_RULES + "\n"
+        if any(e.startswith("highlight:") for e in errors):
+            good = [f"第 {i + 1} 条「{t}」" for i, t in enumerate(titles) if i not in report.item_errors]
+            text += HIGHLIGHT_RULES + "目前通过校验的条目：" + "、".join(good) + "。\n"
         return text + "回答修改后的完整 JSON，格式同上，包括没有问题的条目和 highlights。"
 
 

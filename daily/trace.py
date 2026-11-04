@@ -16,6 +16,10 @@ to show.
     no_first_hand    candidates[]: removed before the API route's pick, as discussion threads alone
     pick             groups[]: the API route's picks, candidate ids, main source first
     over_picks       groups[]: picks beyond api_editor.PICKS, cut
+    read             pages[] {candidate, url, state ("ok" | "failed" | "no_prose"), status, error,
+                     passages}: the pages the API route opened (not on the process page yet)
+    skipped          round ("draft" | "fix"), skipped[] {group, candidates[], reason}: picks the API
+                     route's model says it did not write, and why (not on the process page yet)
     self_check       items[] {title, candidates[], reason}: what Claude dropped in its self-check
     check, precheck, final, en, draft, fix, highlights
                      one validate round: checked_links, errors[], warnings[], highlights[]

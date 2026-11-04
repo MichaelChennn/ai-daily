@@ -1,6 +1,7 @@
 """`daily degrade`: the title + link issue published when the editor did not deliver.
 
 Deterministic, no LLM: official posts first, then the hottest few of each kind by their signals.
+Candidates an earlier main digest already reported (`reported_on`) go last.
 Items keep their original (English) titles and have no summary.
 """
 
@@ -19,6 +20,7 @@ SECTION_OF_KIND = {
     "release": "tool",
     "repo": "tool",
     "discussion": "brief",
+    "commentary": "brief",
 }
 SECTION_LIMITS = {"headline": 4, "model": 2, "paper": 2, "tool": 2, "brief": 2}
 
@@ -36,7 +38,7 @@ def build_fallback(candidates: dict[str, Any]) -> dict[str, Any]:
     # Ties keep candidates.json order, which follows sources.yaml (labs' own blogs first).
     ranked = sorted(
         enumerate(candidates.get("candidates", [])),
-        key=lambda pair: (bool(pair[1].get("seen_on")), pair[1].get("tier", 2), -heat(pair[1]), pair[0]),
+        key=lambda pair: (bool(pair[1].get("reported_on")), pair[1].get("tier", 2), -heat(pair[1]), pair[0]),
     )
     picked: dict[str, list[dict[str, Any]]] = {section: [] for section in SECTION_LIMITS}
     clusters_used: set[str] = set()

@@ -3,7 +3,7 @@ import json
 import httpx
 import pytest
 
-from daily import api_editor, cli, digest, publish
+from daily import api_editor, cli, digest, process, publish
 from tests.test_digest import CANDIDATES, DATE, _digest
 
 CHAT = "integrate.api.nvidia.com/v1/chat/completions"
@@ -171,11 +171,25 @@ def test_a_clean_draft_takes_two_requests(issue_dir, slept, monkeypatch):
     assert len(web.chats) == 2 and len(_result(issue_dir)["items"]) == 4
 
 
-def test_too_few_items_asks_for_the_unused_picks(issue_dir, slept, monkeypatch):
-    web = FakeWeb([_picks(), _written(count=3), _written()])
+def test_few_items_are_not_sent_back_for_more(issue_dir, slept, monkeypatch):
+    web = FakeWeb([_picks(), _written(count=3)])  # all clean, fewer than ITEMS_TARGET: no fix round
     assert _edit(issue_dir, web, monkeypatch) == 0
-    assert "还没用上的组：4" in web.prompt(2)
-    assert len(_result(issue_dir)["items"]) == 4
+    assert len(web.chats) == 2 and len(_result(issue_dir)["items"]) == 3
+
+
+def test_the_fix_round_does_not_talk_about_item_counts(issue_dir, slept, monkeypatch):
+    web = FakeWeb([_picks(), _written(count=3, **FASTER), _written({1: [VLLM]}, count=3, **FASTER)])
+    assert _edit(issue_dir, web, monkeypatch) == 0
+    feedback = web.prompt(2)
+    assert "第 2 条" in feedback  # what to fix
+    for padding in ("目标", "还没用上", "合格 2 条", "valid items"):
+        assert padding not in feedback
+
+
+def test_too_few_clean_items_fail_without_a_fix_round(issue_dir, slept, monkeypatch):
+    web = FakeWeb([_picks(), _written(count=2)])
+    assert _edit(issue_dir, web, monkeypatch) == 1
+    assert len(web.chats) == 2
 
 
 def test_highlights_that_still_fail_become_the_first_titles(issue_dir, slept, monkeypatch):
@@ -311,9 +325,9 @@ def test_edit_records_its_steps_and_scores_in_the_trace(issue_dir, slept, monkey
     assert (trace["channel"], trace["model"], trace["date"], trace["failure"]) == ("api", MODEL, DATE, None)
     assert trace["scores"] == {"c_gpt": [3, 2, 2], "c_vllm": [2, 3, 1]}  # out of range or unknown: left out
     steps = trace["steps"]
-    assert [s["step"] for s in steps] == ["no_first_hand", "pick", "draft", "fix"]
+    assert [s["step"] for s in steps] == ["no_first_hand", "pick", "read", "draft", "fix"]
     assert steps[0]["candidates"] == ["c_hn"] and steps[1]["groups"] == GROUPS
-    draft, fix = steps[2], steps[3]
+    draft, fix = steps[3], steps[4]
     assert draft["checked_links"] is True
     assert [i["candidates"] for i in draft["items"]] == [["c_gpt"], ["c_vllm"], ["c_qwen"], ["c_paper"]]
     assert draft["items"][1]["reasons"] and not draft["items"][0]["reasons"]  # 40% unsupported
@@ -333,7 +347,7 @@ def test_a_failed_edit_still_writes_its_trace(issue_dir, slept, monkeypatch):
     assert _edit(issue_dir, web, monkeypatch) == 1
     trace = _trace(issue_dir)
     assert trace["failure"]["step"] == "draft" and "JSON" in trace["failure"]["error"]
-    assert [s["step"] for s in trace["steps"]] == ["no_first_hand", "pick"]
+    assert [s["step"] for s in trace["steps"]] == ["no_first_hand", "pick", "read"]
 
     monkeypatch.delenv("NVIDIA_API_KEY")
     assert _edit(issue_dir, FakeWeb([]), monkeypatch) == 2
@@ -351,3 +365,194 @@ def test_edit_en_adds_its_round_to_the_trace(issue_dir, slept, monkeypatch):
     web = FakeWeb([_reply("no JSON"), _reply("still none")])
     assert _edit_en(issue_dir, web, monkeypatch, path) == 1
     assert "JSON" in _trace(issue_dir)["steps"][-1]["error"]
+
+
+# --- #51: A1-A6 -------------------------------------------------------------------------------
+
+
+def test_picks_and_prompts_carry_the_item_targets(issue_dir, slept, monkeypatch):
+    assert api_editor.PICKS == 22
+    web = FakeWeb([_picks(), _written()])
+    assert _edit(issue_dir, web, monkeypatch) == 0
+    for index in (0, 1):
+        assert f"{digest.ITEMS_EXPECTED} 条" in web.prompt(index)
+        assert f"最多 {digest.ITEMS_TARGET[1]} 条" in web.prompt(index)
+
+
+def test_a1_a_made_up_number_means_the_item_goes(issue_dir, slept, monkeypatch):
+    web = FakeWeb([_picks(), _written(**FASTER), _written({0: [GPT], 1: [VLLM]}, **FASTER)])
+    assert _edit(issue_dir, web, monkeypatch) == 0
+    feedback = web.prompt(2)
+    assert "整条删掉" in feedback and "片段编号" in feedback
+    assert "删掉材料里没有的数字" not in feedback
+
+
+def test_a2_rejected_highlights_are_told_where_their_numbers_may_come_from(issue_dir, slept, monkeypatch):
+    wrong = ["OpenAI 发布 GPT-7。"]
+    web = FakeWeb([_picks(), _written(highlights=wrong), _written()])
+    assert _edit(issue_dir, web, monkeypatch) == 0
+    feedback = web.prompt(2)
+    assert "已入选条目的标题和 summary" in feedback and "哪一条" in feedback
+    assert "第 1 条「OpenAI 发布 GPT-6」" in feedback  # the items it may draw on
+
+
+def test_a2_rejected_items_get_no_highlight_note(issue_dir, slept, monkeypatch):
+    web = FakeWeb([_picks(), _written(**FASTER), _written({0: [GPT], 1: [VLLM]}, **FASTER)])
+    assert _edit(issue_dir, web, monkeypatch) == 0
+    assert "已入选条目的标题和 summary" not in web.prompt(2)
+
+
+REDDIT_POST = "https://www.reddit.com/r/LocalLLaMA/comments/9/tool/"
+
+
+def _with_post(issue_dir, links):
+    """Adds a Reddit post that has no first-hand page of its own, its body linking to links."""
+    data = json.loads((issue_dir / "candidates.json").read_text())
+    data["candidates"].append(
+        {
+            **data["candidates"][4],
+            "id": "c_post",
+            "title": "I made vLLM faster",
+            "url": REDDIT_POST,
+            "discussion_url": REDDIT_POST,
+            "links": links,
+        }
+    )
+    (issue_dir / "candidates.json").write_text(json.dumps(data))
+
+
+def test_a3_a_link_in_the_post_body_is_its_first_hand_source(issue_dir, slept, monkeypatch):
+    _with_post(issue_dir, ["https://github.com/vllm-project/vllm/releases/tag/v0.12.0"])
+    answer = {
+        "highlights": ["有人让 vLLM 更快了。"],
+        "items": [
+            {
+                "section": "tool",
+                "title": "有人让 vLLM 更快了",
+                "summary": "投机解码快了 40%。",
+                "candidates": ["c_post"],
+                "evidence": [1],
+                "tags": ["工具"],
+            },
+        ],
+    }
+    web = FakeWeb([_picks([["c_post"]]), _reply(json.dumps(answer, ensure_ascii=False))])
+    _edit(issue_dir, web, monkeypatch)  # too few items: the point is what was offered and opened
+    assert "c_post" in web.prompt(0)
+    assert "[1] Speculative decoding is now 40% faster." in web.prompt(1)
+    (step,) = [s for s in _trace(issue_dir)["steps"] if s["step"] == "draft"]
+    assert step["items"][0]["reasons"] == []
+    (no_first_hand,) = [s for s in _trace(issue_dir)["steps"] if s["step"] == "no_first_hand"]
+    assert no_first_hand["candidates"] == ["c_hn"]
+
+
+def test_a3_the_body_link_is_the_items_source_even_without_evidence(issue_dir, slept, monkeypatch):
+    link = "https://github.com/vllm-project/vllm/releases/tag/v0.12.0"
+    _with_post(issue_dir, [link])
+    data = json.loads((issue_dir / "candidates.json").read_text())
+    editor = api_editor.Editor(data, MODEL, FakeWeb([]).client())
+    item = editor._item({"section": "tool", "title": "t", "summary": "s", "candidates": ["c_post"]})
+    assert item["sources"] == [{"candidate_id": "c_post", "url": link}]
+
+
+def test_a3_a_post_without_links_is_still_left_out(issue_dir, slept, monkeypatch):
+    _with_post(issue_dir, [])
+    web = FakeWeb([_picks(), _written()])
+    assert _edit(issue_dir, web, monkeypatch) == 0
+    assert "c_post" not in web.prompt(0)
+    assert "c_post" in _trace(issue_dir)["steps"][0]["candidates"]
+
+
+def test_a4_the_trace_says_how_each_page_opened(issue_dir, slept, monkeypatch):
+    monkeypatch.setitem(PAGES, "huggingface.co/papers/2610.00001", "<p>{}</p>")
+    data = json.loads((issue_dir / "candidates.json").read_text())
+    data["candidates"][1]["url"] = "https://github.com/gone"
+    (issue_dir / "candidates.json").write_text(json.dumps(data))
+    web = FakeWeb([_picks(), _written(count=1), _written(count=1)])
+    _edit(issue_dir, web, monkeypatch)
+    (read,) = [s for s in _trace(issue_dir)["steps"] if s["step"] == "read"]
+    pages = {p["candidate"]: p for p in read["pages"]}
+    assert pages["c_gpt"]["state"] == "ok" and pages["c_gpt"]["status"] == 200
+    assert pages["c_gpt"]["passages"] == 1 and pages["c_gpt"]["url"] == "https://openai.com/index/gpt-6/"
+    assert pages["c_vllm"]["state"] == "failed" and pages["c_vllm"]["status"] == 404
+    assert pages["c_paper"]["state"] == "no_prose" and pages["c_paper"]["passages"] == 0
+
+
+def test_a5_the_groups_the_model_skipped_go_into_the_trace(issue_dir, slept, monkeypatch):
+    written = json.loads(_written_json())
+    written["skipped"] = [
+        {"group": 2, "reason": "页面打不开"},
+        {"group": "3", "reason": "不重要"},
+        {"group": 99, "reason": "没有这一组"},
+        {"group": 4},
+        "乱写",
+    ]
+    web = FakeWeb([_picks(), _reply(json.dumps(written, ensure_ascii=False))])
+    assert _edit(issue_dir, web, monkeypatch) == 0
+    assert "skipped" in web.prompt(1)
+    (step,) = [s for s in _trace(issue_dir)["steps"] if s["step"] == "skipped"]
+    assert step["round"] == "draft"
+    assert step["skipped"] == [
+        {"group": 2, "candidates": ["c_vllm"], "reason": "页面打不开"},
+        {"group": 3, "candidates": ["c_qwen"], "reason": "不重要"},
+    ]
+
+
+def test_a5_no_skipped_answer_records_no_step(issue_dir, slept, monkeypatch):
+    web = FakeWeb([_picks(), _written()])
+    assert _edit(issue_dir, web, monkeypatch) == 0
+    assert not [s for s in _trace(issue_dir)["steps"] if s["step"] == "skipped"]
+
+
+def _written_json():
+    return "".join(
+        json.loads(line[5:])["choices"][0]["delta"].get("content", "")
+        for line in _written().content.decode().splitlines()
+        if line.startswith("data:") and "[DONE]" not in line
+    )
+
+
+def test_a6_the_pick_prompt_has_score_examples(issue_dir, slept, monkeypatch):
+    web = FakeWeb([_picks(), _written()])
+    assert _edit(issue_dir, web, monkeypatch) == 0
+    prompt = web.prompt(0)
+    assert api_editor.SCORE_EXAMPLES in prompt
+    for score in ("[0, 0, 0]", "[1, 1, 1]", "[3, 2, 2]"):
+        assert score in prompt
+    system = json.loads(web.chats[0].content)["messages"][0]["content"]
+    assert api_editor.SCORE_EXAMPLES not in system
+
+
+def test_a6_groups_are_ranked_by_score_before_the_pages_are_chosen(issue_dir, slept, monkeypatch):
+    monkeypatch.setattr(api_editor, "PICKS", 2)
+    scores = {"c_gpt": [1, 0, 0], "c_vllm": [0, 1, 1], "c_qwen": [2, 2, 2], "c_paper": [3, 3, 1]}
+    picks = _reply(json.dumps({"scores": scores, "picks": [["c_gpt"], ["c_vllm"], ["c_qwen"], ["c_paper"]]}))
+    web = FakeWeb([picks, _written(count=1), _written(count=1)])
+    _edit(issue_dir, web, monkeypatch)
+    steps = {s["step"]: s for s in _trace(issue_dir)["steps"]}
+    assert steps["pick"]["groups"] == [["c_paper"], ["c_qwen"]]
+    assert steps["over_picks"]["groups"] == [["c_vllm"], ["c_gpt"]]
+    assert [p["candidate"] for p in steps["read"]["pages"]] == ["c_paper", "c_qwen"]
+
+
+def test_a6_a_group_counts_as_its_best_member_and_ties_keep_the_models_order():
+    groups = [["c_a"], ["c_b", "c_c"], ["c_d"], ["c_e"]]
+    scores = {"c_a": [1, 1, 1], "c_b": [0, 0, 0], "c_c": [2, 2, 2], "c_d": [1, 1, 1]}
+    assert api_editor.rank_groups(groups, scores) == [["c_b", "c_c"], ["c_a"], ["c_d"], ["c_e"]]
+
+
+def test_commentary_rules_are_in_the_write_prompt(issue_dir, slept, monkeypatch):
+    web = FakeWeb([_picks(), _written()])
+    assert _edit(issue_dir, web, monkeypatch) == 0
+    assert "commentary" in web.prompt(1) and "brief" in web.prompt(1)
+    system = json.loads(web.chats[0].content)["messages"][0]["content"]
+    assert "commentary" in system  # SKILL.md section 2
+
+
+def test_the_process_page_leaves_out_the_read_and_skipped_steps():
+    steps = [
+        {"step": "read", "pages": []},
+        {"step": "skipped", "skipped": []},
+        {"step": "pick", "groups": []},
+    ]
+    assert [s["step"] for s in process.visible_steps(steps)] == ["pick"]

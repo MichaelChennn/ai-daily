@@ -154,3 +154,117 @@ def test_history_drops_published_and_marks_seen(tmp_path):
 
     assert [d["published_on"] for d in dropped] == [yesterday.isoformat()]
     assert {k.title: k.seen_on for k in kept} == {"org/model": [yesterday.isoformat()], "old": []}
+
+
+# ---------------------------------------------------------------- reported_on
+
+
+def _digest(*items):
+    return {"items": [{"title": title, "sources": [{"url": url} for url in urls]} for title, urls in items]}
+
+
+def _annotate(data_dir, *items):
+    history = dedup.load_history(data_dir, ISSUE)
+    return dedup.apply_history(dedup.merge_by_url(list(items), {}), history)
+
+
+def test_same_link_past_the_drop_window_is_annotated_not_dropped(tmp_path):
+    day = ISSUE - timedelta(days=12)
+    url = "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017"
+    _write_day(tmp_path, day, digest=_digest(("DeepSeek-V4.1-Flash-1017 更新权重", [url])))
+
+    kept, dropped = _annotate(tmp_path, make("deepseek-ai/DeepSeek-V4.1-Flash-1017", url, kind="model"))
+
+    assert dropped == []
+    assert kept[0].reported_on == [{"date": day.isoformat(), "title": "DeepSeek-V4.1-Flash-1017 更新权重"}]
+
+
+def test_same_link_inside_the_drop_window_is_still_dropped(tmp_path):
+    day = ISSUE - timedelta(days=7)
+    url = "https://openai.com/index/gpt-6"
+    _write_day(tmp_path, day, digest=_digest(("OpenAI 发布 GPT-6", [url])))
+
+    kept, dropped = _annotate(tmp_path, make("Introducing GPT-6", url))
+
+    assert kept == []
+    assert [d["published_on"] for d in dropped] == [day.isoformat()]
+
+
+def test_link_in_also_from_counts_as_reported(tmp_path):
+    day = ISSUE - timedelta(days=10)
+    _write_day(tmp_path, day, digest=_digest(("某条目", ["https://news.ycombinator.com/item?id=9"])))
+
+    item = make("Unrelated title", "https://example.com/post")
+    item.also_from.append({"source": "hackernews", "url": "https://news.ycombinator.com/item?id=9"})
+    kept, _ = _annotate(tmp_path, item)
+
+    assert kept[0].reported_on == [{"date": day.isoformat(), "title": "某条目"}]
+
+
+def test_different_link_same_story_matches_by_title_across_languages(tmp_path):
+    day = ISSUE - timedelta(days=5)
+    title = "Liquid AI 发布 LFM3 系列端侧开放权重模型"
+    _write_day(tmp_path, day, digest=_digest((title, ["https://huggingface.co/blog/LiquidAI/lfm3"])))
+
+    kept, dropped = _annotate(
+        tmp_path, make("LiquidAI/LFM3-Omni-2B", "https://huggingface.co/LiquidAI/LFM3-Omni-2B", kind="model")
+    )
+
+    assert dropped == []  # a title match never drops, even inside the 7-day window
+    assert kept[0].reported_on == [{"date": day.isoformat(), "title": title}]
+
+
+def test_candidate_never_reported_stays_empty(tmp_path):
+    _write_day(
+        tmp_path,
+        ISSUE - timedelta(days=5),
+        digest=_digest(
+            ("Liquid AI 发布 LFM3 系列端侧开放权重模型", ["https://huggingface.co/blog/LiquidAI/lfm3"])
+        ),
+    )
+    kept, _ = _annotate(tmp_path, make("acme/Rocket-9", "https://huggingface.co/acme/Rocket-9", kind="model"))
+    assert kept[0].reported_on == []
+
+
+def test_reported_lookback_is_separate_from_the_seen_window(tmp_path):
+    url = "https://example.com/post"
+    _write_day(tmp_path, ISSUE - timedelta(days=30), digest=_digest(("第 30 天", [url])))
+    _write_day(tmp_path, ISSUE - timedelta(days=31), digest=_digest(("第 31 天", [url])))
+
+    kept, _ = _annotate(tmp_path, make("Some post", url))
+    assert [r["title"] for r in kept[0].reported_on] == ["第 30 天"]
+
+    history = dedup.load_history(tmp_path, ISSUE, days=7, reported_days=31)
+    kept, _ = dedup.apply_history(dedup.merge_by_url([make("Some post", url)], {}), history)
+    assert [r["title"] for r in kept[0].reported_on] == ["第 31 天", "第 30 天"]
+
+
+def test_item_matching_by_link_and_title_is_reported_once(tmp_path):
+    day = ISSUE - timedelta(days=9)
+    url = "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash"
+    _write_day(tmp_path, day, digest=_digest(("MiniMaxAI/MiniMax-M3.1-Flash", [url])))
+
+    kept, _ = _annotate(tmp_path, make("MiniMaxAI/MiniMax-M3.1-Flash", url, kind="model"))
+
+    assert len(kept[0].reported_on) == 1
+
+
+def test_only_the_main_digest_counts_as_reported(tmp_path):
+    day = ISSUE - timedelta(days=9)
+    url = "https://example.com/post"
+    _write_day(tmp_path, day)
+    (tmp_path / day.isoformat() / "digest.api.gemini.json").write_text(json.dumps(_digest(("Beta", [url]))))
+    research = {"items": [], "research": [{"url": url, "title": "只是读过"}]}
+    (tmp_path / day.isoformat() / "digest.json").write_text(json.dumps(research))
+
+    kept, _ = _annotate(tmp_path, make("Some post", url))
+
+    assert kept[0].reported_on == []
+
+
+def test_reported_title_match_does_not_change_clusters():
+    """Dropping Chinese is for matching against digests; candidates still cluster on the full title."""
+    a = make("LiquidAI/LFM3-Omni-2B", "https://huggingface.co/LiquidAI/LFM3-Omni-2B")
+    b = make("Liquid AI 发布 LFM3 系列端侧开放权重模型", "https://example.com/lfm3")
+    assert not dedup.similar(a, b)
+    assert dedup.same_story(a.title, b.title)

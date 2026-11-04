@@ -6,10 +6,12 @@ from daily.fetchers.feeds import fetch_rss
 from daily.fetchers.github import fetch_releases, fetch_trending
 from daily.fetchers.html_listing import fetch_html_listing
 from daily.fetchers.huggingface import fetch_daily_papers, fetch_trending_models
+from daily.fetchers.json_api import fetch_json_api
 
 FETCHERS: dict[str, Fetcher] = {
     "rss": fetch_rss,
     "html_listing": fetch_html_listing,
+    "json_api": fetch_json_api,
     "github_releases": fetch_releases,
     "github_trending": fetch_trending,
     "hf_daily_papers": fetch_daily_papers,

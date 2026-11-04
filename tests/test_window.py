@@ -44,3 +44,12 @@ def test_local_today_rolls_over_at_berlin_midnight():
     assert local_today(datetime(2026, 10, 20, 21, 59, tzinfo=timezone.utc)) == date(2026, 10, 20)  # CEST
     assert local_today(datetime(2026, 10, 20, 22, 0, tzinfo=timezone.utc)) == date(2026, 10, 21)
     assert local_today(datetime(2026, 12, 20, 22, 59, tzinfo=timezone.utc)) == date(2026, 12, 20)  # CET
+
+
+def test_day_precision_reaches_back_one_more_day(window):
+    # Window start is 10-19 (UTC and Berlin); a post from US evening of 10-18 is dated 10-18 and
+    # went up after the 10-19 issue's fetch.
+    assert window.contains(datetime(2026, 10, 18, tzinfo=timezone.utc), "day")
+    assert not window.contains(datetime(2026, 10, 17, tzinfo=timezone.utc), "day")
+    # Real timestamps do not get the extra day.
+    assert not window.contains(datetime(2026, 10, 18, 12, tzinfo=timezone.utc))
