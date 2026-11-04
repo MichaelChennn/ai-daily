@@ -1,0 +1,58 @@
+# TEMPORARY (#49): delete this workflow before source-refine merges into main.
+# Checks that every source can be fetched from Actions, whose network differs from a local one.
+# Sources that fail here get `enabled: false` in sources.yaml. Results stay in the runner's temp
+# directory and nothing is committed.
+name: source-check
+
+on:
+  push:
+    branches: [source-refine]
+    paths:
+      - sources.yaml
+      - daily/fetchers/**
+      - .github/workflows/source-check.yml
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v10.3.2
+        with:
+          python-version: "3.12"
+          enable-cache: true
+      - run: uv sync --locked
+      - name: Fetch all sources
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: uv run python -m daily fetch --data-dir "$RUNNER_TEMP/all"
+      # The daily list is empty on Sundays, so this exercises the week_fallback_limit path (#50).
+      - name: Fetch hf-daily-papers for last Sunday
+        if: ${{ !cancelled() }}
+        run: |
+          sunday=$(TZ=Europe/Berlin date -d "last sunday" +%F)
+          uv run python -m daily fetch --date "$sunday" --only hf-daily-papers --data-dir "$RUNNER_TEMP/sunday"
+      - name: Print source statuses
+        if: ${{ !cancelled() }}
+        run: |
+          uv run python - "$RUNNER_TEMP"/all/*/candidates.json "$RUNNER_TEMP"/sunday/*/candidates.json <<'PY'
+          import json
+          import sys
+
+          for path in sys.argv[1:]:
+              try:
+                  with open(path, encoding="utf-8") as f:
+                      data = json.load(f)
+              except FileNotFoundError:
+                  print(f"\nmissing: {path}")
+                  continue
+              week = sum("week" in c.get("signals", {}) for c in data["candidates"])
+              print(f"\n{data['date']}: {len(data['candidates'])} candidates, {week} with signals.week")
+              for r in data["sources"]:
+                  if r["status"] != "disabled":
+                      print(f"{r['id']:<24} {r['status']:<6} {r['count']:>4}  {r['error'] or ''}")
+          PY
