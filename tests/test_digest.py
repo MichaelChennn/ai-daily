@@ -737,3 +737,101 @@ def test_cli_validate_records_the_self_check_warning(issue_dir):
     assert any("self_check" in w for w in written["validation"]["warnings"])
     record = json.loads((issue_dir / "trace.claude.json").read_text())
     assert any("self_check" in w for w in record["steps"][-1]["warnings"])
+
+
+def _with_commentary(count=3):
+    candidates = copy.deepcopy(CANDIDATES)
+    for n in range(count):
+        candidates["candidates"].append(
+            _candidate(
+                f"c_blog{n}",
+                "commentary",
+                f"Essay number{n}",
+                f"https://writer{n}.example/essay",
+                tier=2,
+            )
+        )
+    return candidates
+
+
+def _essay(n, section="brief", **extra):
+    return _item(section, f"一篇评论 number{n}", "作者的分析。", f"c_blog{n}", **extra)
+
+
+@pytest.mark.parametrize("section", ["headline", "model", "tool"])
+def test_commentary_outside_the_brief_section_is_dropped(section):
+    data = _digest()
+    data["items"].append(_essay(0, section))
+    report = digest.validate(data, _with_commentary())
+    assert "commentary" in _errors(report, 4) and "brief" in _errors(report, 4)
+
+
+def test_commentary_in_the_brief_section_passes():
+    data = _digest()
+    data["items"] += [_essay(0), _essay(1)]
+    assert digest.validate(data, _with_commentary()).ok
+
+
+def test_only_the_first_two_commentary_items_are_kept():
+    data = _digest()
+    data["items"] += [_essay(0), _essay(1), _essay(2)]
+    report = digest.validate(data, _with_commentary())
+    assert sorted(report.item_errors) == [6]
+    assert "at most 2 commentary" in _errors(report, 6)
+
+
+def test_dropped_commentary_items_do_not_use_up_the_limit():
+    data = _digest()
+    data["items"] += [
+        _essay(0, "tool"),  # wrong section
+        _item("brief", "一篇评论 GPT-99", "作者的分析。", "c_blog1"),  # GPT-99 is not in the material
+        _essay(2),
+        _essay(3),
+        _essay(4),
+    ]
+    report = digest.validate(data, _with_commentary(5))
+    assert sorted(report.item_errors) == [4, 5, 8]  # c_blog2 and c_blog3 are the two that count
+
+
+def test_commentary_rule_looks_at_the_main_source_only():
+    candidates = _with_commentary()
+    data = _digest()
+    data["items"][0]["sources"].append({"candidate_id": "c_blog0"})  # supports an official post
+    data["items"] += [_essay(1), _essay(2)]
+    assert digest.validate(data, candidates).ok  # c_blog0 is not counted, wherever it sits
+    data = _digest()
+    data["items"][0]["sources"].insert(0, {"candidate_id": "c_blog0"})
+    assert "brief" in _errors(digest.validate(data, candidates), 0)
+
+
+def test_commentary_main_source_found_by_url():
+    data = _digest()
+    data["items"].append(
+        {
+            "section": "tool",
+            "title": "一篇评论 number0",
+            "summary": "作者的分析。",
+            "sources": [{"url": "https://writer0.example/essay"}],
+            "tags": [],
+        }
+    )
+    assert "brief" in _errors(digest.validate(data, _with_commentary()), 4)
+
+
+def test_commentary_rule_applies_to_the_english_edition():
+    data = _digest(lang="en")
+    data["items"] = [
+        _item("headline", "OpenAI ships GPT-6", "GPT-6 has a 1M token context.", "c_gpt"),
+        _item("tool", "An essay number0", "The author's analysis.", "c_blog0"),
+        _item("brief", "An essay number1", "The author's analysis.", "c_blog1"),
+        _item("brief", "An essay number2", "The author's analysis.", "c_blog2"),
+        _item("brief", "An essay number3", "The author's analysis.", "c_blog3"),
+    ]
+    data["highlights"] = ["OpenAI ships GPT-6."]
+    report = digest.validate(data, _with_commentary(4))
+    assert sorted(report.item_errors) == [1, 4]
+
+
+def test_fallback_never_breaks_the_commentary_rule():
+    candidates = _with_commentary(5)
+    assert digest.validate(fallback.build_fallback(candidates), candidates).ok
