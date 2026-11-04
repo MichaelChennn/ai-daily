@@ -2,335 +2,232 @@
   "schema_version": 1,
   "date": "2026-11-04",
   "mode": "full",
-  "generated_at": "2026-11-04T04:39:38+00:00",
-  "channel": "api",
-  "model": "nvidia:minimaxai/minimax-m3.1-flash",
+  "generated_at": "2026-11-04T04:45:15+00:00",
+  "model": "claude-opus-5-5",
   "highlights": [
-    "CoworkOS applies a three-layer harness, hierarchical workspaces, and persistent semantic memory to long-horizon agent work, while ReTrace formalizes Transition-Consistent Recovery for computer-use agents that need to recover from errors.",
-    "CUA-Master and NorthCUA push computer-use agents forward with recursive improvement loops and experience at scale, and CrossSWE shows that GPT-6.1 Sol reaches only 58.48% Pass@1 on cross-repository coding tasks.",
-    "Wave Forcing reaches 147.6 DiT FPS on eight H200 GPUs, and FLAMIA delivers 1.10--1.40times attention speedups on B200 for low-precision training."
+    "A GitHub report says Postman's desktop app auto-installed Claude Code and Codex plugins plus a SessionStart hook for signed-in existing users; Postman says it will make the opt-in clearer.",
+    "Revolut serves GLM-5.3 on 56 Nvidia B200 GPUs for internal coding, and open-weight Qwen3.8-Flash-Next with uni-robot-agent beats the published GPT-6 Astra-RoboProbe result on RoboDojo.",
+    "Matthew Honnibal argues the GPT-6 Astra weight read/write paper lumps different techniques together, while Simon Willison ran its weights-to-game test with Qwen 3.8 27B on a laptop."
   ],
   "items": [
     {
       "section": "headline",
-      "title": "CoworkOS: a harness for long-horizon agent work",
-      "summary": "CoworkOS separates task strategy from execution management, with the model deciding actions, delegation, and acceptance while the runtime maintains state and feedback. Its three-layer architecture supports direct execution or delegation to Subagents, and hierarchical workspaces plus persistent semantic memory keep working files, decisions, and Job logs resumable across agents and sessions. Developers can use the shared application layer to inspect and revise evolving documents, presentations, CAD models, and Blender scenes together with agents.",
-      "tags": [
-        "Agent",
-        "论文",
-        "工具"
-      ],
+      "title": "Postman desktop reportedly auto-installs Claude Code and Codex plugins",
+      "summary": "A GitHub issue reports that Postman desktop 12.33.4 auto-installed Claude Code and Codex plugins for a signed-in existing user and registered a SessionStart hook telling agents to load a Postman skill before any non-trivial API engineering task; the reporter says it does not establish data exfiltration. Postman replied that it bundles the CLI and agent plugins on purpose, will make the opt-in clearer for existing users, and is reviewing the hook approval and session-start behavior. If you use AI coding agents, check your global agent configs for plugins and hooks you did not install.",
       "sources": [
         {
-          "candidate_id": "c_991beae516",
-          "url": "https://huggingface.co/papers/2611.03178"
+          "candidate_id": "c_2e948531de",
+          "url": "https://github.com/postmanlabs/postman-app-support/issues/14370"
+        },
+        {
+          "candidate_id": "c_2e948531de",
+          "url": "https://news.ycombinator.com/item?id=50354960"
         }
       ],
       "evidence": [
         {
-          "url": "https://huggingface.co/papers/2611.03178",
-          "quote": "We introduce CoworkOS, a general-purpose harness for long-horizon work that separates task strategy from execution management: the model decides actions, delegation, and acceptance, while the runtime maintains state and feedback."
+          "url": "https://github.com/postmanlabs/postman-app-support/issues/14370",
+          "quote": "PostmanAgentPluginService~install: script completed {\"source\":\"auto-existing-upgrade\",\"results\":[\"claude-code:installed\",\"codex:installed\"],\"installer\":\"script\"}"
         },
         {
-          "url": "https://huggingface.co/papers/2611.03178",
-          "quote": "Its three-layer architecture enables direct execution or delegation to Subagents , synchronously or asynchronously, under stable responsibilities."
+          "url": "https://github.com/postmanlabs/postman-app-support/issues/14370",
+          "quote": "Postman Version 12.33.4 (Codex plugin 1.1.0; Claude plugin 2.0.1)"
         },
         {
-          "url": "https://huggingface.co/papers/2611.03178",
-          "quote": "To sustain continuity across agents and sessions, CoworkOS further introduces hierarchical workspaces and persistent semantic memory , so working files, key decisions, and long-running Job logs remain shareable, reusable, and resumable after interruption."
+          "url": "https://github.com/postmanlabs/postman-app-support/issues/14370",
+          "quote": "registers a SessionStart command with matcher startup|clear|compact. It prints hooks/session-start-context.md, including: Before responding to any non-trivial API engineering task"
+        },
+        {
+          "url": "https://github.com/postmanlabs/postman-app-support/issues/14370",
+          "quote": "This report establishes unwanted integration and instruction changes; it does not claim to establish data exfiltration."
+        },
+        {
+          "url": "https://github.com/postmanlabs/postman-app-support/issues/14370",
+          "quote": "we bundle the Postman CLI and the agent plugins with the desktop app because many users had trouble installing and wiring them up separately."
+        },
+        {
+          "url": "https://github.com/postmanlabs/postman-app-support/issues/14370",
+          "quote": "We’re going to make the opt-in clearer, especially for existing users, and we’re reviewing the hook approval and session-start behavior you flagged."
         }
-      ]
-    },
-    {
-      "section": "headline",
-      "title": "CUA-Master scales computer-use agents with recursive improvement",
-      "summary": "CUA-Master is a nested double-loop framework whose outer flywheel incorporates open-world corpus and model weaknesses to guide data construction, while the inner flywheel seeds tasks from instructional videos and turns them into reusable primitives for controllable synthesis. A feedback-guided snapshot-rollback retry mechanism supports trajectory collection in real environments. CUA-Master-27B scores 80.2 on OSWorld Verified, 36.9 on OSWorld 2.0, 43.9 on WeaveBench, and 25.0 on Agents' Last Exam.",
+      ],
       "tags": [
-        "Agent",
-        "论文",
-        "训练"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_bbe3067310",
-          "url": "https://huggingface.co/papers/2611.03126"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2611.03126",
-          "quote": "To address these challenges, we introduce CUA-Master , a nested double-loop recursive improvement framework."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.03126",
-          "quote": "At the system level, an outer world-data-model flywheel continuously incorporates open-world corpus and leverages evolving model weaknesses to guide subsequent data construction and optimization iterations."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.03126",
-          "quote": "At the data level, an inner flywheel couples open-world seeding and autocatalytic propagation ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.03126",
-          "quote": "The former mines authentic workflows as seed tasks from instructional videos, and employs visual-semantic dual-path trajectory reconstruction ; The latter transforms these seeds into reusable primitives for controllable synthesis of diverse, complex, and verifiable tasks."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.03126",
-          "quote": "To enable efficient and reliable trajectory collection, we further introduce a feedback-guided snapshot-rollback retry mechanism in various real environments."
-        }
-      ]
-    },
-    {
-      "section": "headline",
-      "title": "Wave Forcing targets streaming video generation on eight H200 GPUs",
-      "summary": "Wave Forcing co-designs generation, training, and execution so chunk-wise causal attention can read earlier chunks before denoising finishes, and Wave Runtime adds Wave Parallelism, optimized kernels, and pipelined VAE decoding. In system efficiency experiments, 4-step WF achieves 147.6 DiT FPS and 134.8 end-to-end FPS on eight H200 GPUs, yielding 7.07x the single-GPU end-to-end throughput. On Wan2.1-T2V-1.3B, 5-step WF keeps quality comparable to Rolling Forcing while raising Dynamic Degree on short and long videos.",
-      "tags": [
-        "视频",
-        "论文",
-        "推理"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_42da0213ee",
-          "url": "https://huggingface.co/papers/2611.00859"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2611.00859",
-          "quote": "We propose Wave Forcing (WF), which co-designs generation, training, and execution for continuous video output with multi-step denoising ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.00859",
-          "quote": "WF uses chunk-wise causal attention to access earlier, cleaner chunks before their denoising is complete, and distributes staggered denoising and cache-refresh stages across full-model replicas to achieve 1F1C: one output chunk per concurrent forward round after pipeline fill ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.00859",
-          "quote": "To execute this process efficiently, Wave Runtime (WaveRT) uses Wave Parallelism (WP) for early K/V delivery and communication-computation overlap, together with optimized kernels and pipelined VAE decoding."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.00859",
-          "quote": "Our system efficiency experiments show that 4-step WF achieves 147.6 DiT FPS and 134.8 end-to-end FPS on eight H200 GPUs, yielding 7.07x the single-GPU end-to-end throughput."
-        }
-      ]
-    },
-    {
-      "section": "headline",
-      "title": "Claude Code v2.1.318 adds AWS role assumptions and auth fixes",
-      "summary": "Claude Code v2.1.318 adds assume_role on mantle upstreams of the Claude apps gateway for a role in another AWS account and per-developer AWS cost attribution, plus an effort option for a mod's $.model.fork. It also adds loginExpiresAt to claude auth status and credential_expires_at to claude -p JSON results. Fixes cover --continue losing earlier conversation after a malformed tool call's retries ran out, a regression in 2.1.314, macOS sessions stalling as memory grew, and silent failures when the config file could not be updated on a shared network home directory.",
-      "tags": [
+        "安全",
         "工具",
-        "代码"
-      ],
+        "Agent"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Revolut self-hosts GLM-5.3 for coding, leaning less on Claude",
+      "summary": "The Register reports that Revolut serves GLM-5.3 on 56 Nvidia B200 GPUs for internal AI coding, with the headline claiming a 10x cost cut. The biggest gains came from tuning hyperparameters, NVFP4 quantization, disaggregated prefill and decode, and context-length tuning, reaching sub 3-second time to first token at around 256,000 tokens of context and about 200 tokens a second. GLM is text only, so a router still sends vision queries to Gemini or GPT Luna; it is a concrete reference point for teams weighing self-hosted coding models.",
       "sources": [
         {
-          "candidate_id": "c_96e66634f2",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.318"
+          "candidate_id": "c_8975ecb567",
+          "url": "https://www.theregister.com/ai-and-ml/2026/11/03/british-fintech-revolut-slashes-ai-coding-costs-10x-by-cutting-out-claude-and-going-self-hosted/5307345"
+        },
+        {
+          "candidate_id": "c_8975ecb567",
+          "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xn568h/british_fintech_revolut_slashes_ai_coding_costs/"
         }
       ],
       "evidence": [
         {
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.318",
-          "quote": "Added assume_role on mantle upstreams of the Claude apps gateway, for a role in another AWS account and for per-developer AWS cost attribution"
+          "url": "https://www.theregister.com/ai-and-ml/2026/11/03/british-fintech-revolut-slashes-ai-coding-costs-10x-by-cutting-out-claude-and-going-self-hosted/5307345",
+          "quote": "To serve GLM-5.3 at scale, Revolut deployed 56 Nvidia B200 GPUs, equivalent in GPU count to seven eight-GPU DGX B200 systems."
         },
         {
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.318",
-          "quote": "Added an effort option to a mod's $.model.fork , so a quick side job can run at low whatever effort the session uses; the result reports the effort sent"
+          "url": "https://www.theregister.com/ai-and-ml/2026/11/03/british-fintech-revolut-slashes-ai-coding-costs-10x-by-cutting-out-claude-and-going-self-hosted/5307345",
+          "quote": "the greatest performance gains didn't come from adding GPUs, but rather tuning the model's hyperparameters along with switching to NVFP4 quantization, implementing disaggregated prefill and decode, and tuning context lengths."
         },
         {
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.318",
-          "quote": "Added the date a stored claude.ai sign-in ends to claude auth status ( loginExpiresAt ) and to claude -p JSON results ( credential_expires_at )"
+          "url": "https://www.theregister.com/ai-and-ml/2026/11/03/british-fintech-revolut-slashes-ai-coding-costs-10x-by-cutting-out-claude-and-going-self-hosted/5307345",
+          "quote": "achieve sub 3-second time to first token on context windows of around 256,000 tokens, and generation speeds of around 200 tokens a second"
         },
         {
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.318",
-          "quote": "Fixed --continue sometimes losing the earlier conversation after a malformed tool call's retries ran out (regression in 2.1.314)"
-        },
-        {
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.318",
-          "quote": "Fixed macOS sessions with many running Bash commands stalling while memory grew"
-        },
-        {
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.318",
-          "quote": "Fixed /logout , claude auth logout and claude mcp remove reporting success, and changes to trust, consent or MCP settings being dropped with no word, when the config file could not be updated on a shared network home directory"
+          "url": "https://www.theregister.com/ai-and-ml/2026/11/03/british-fintech-revolut-slashes-ai-coding-costs-10x-by-cutting-out-claude-and-going-self-hosted/5307345",
+          "quote": "GLM hasn't replaced GPT or Claude entirely. The Chinese model is text only, so it isn't ideal for things like UI work. So instead, Revolut used a model router to direct vision queries to models like Gemini or GPT Luna"
         }
+      ],
+      "tags": [
+        "行业",
+        "推理",
+        "代码"
       ]
     },
     {
-      "section": "model",
-      "title": "NorthCUA boosts computer-use agents through experience at scale",
-      "summary": "NorthCUA combines an Experience Flywheel that supplies executable tasks to the NorthCUA Harness with recursive self-improvement that evolves reusable skills, then trains the policy through mid-training, long-horizon supervised fine-tuning, and joint desktop-web reinforcement learning. The resulting Nano, Mini, and Pro family achieves state-of-the-art results among open-source models across GUI grounding, desktop execution, and Web interaction under the reported evaluation settings. NorthCUA-Ultrafast pairs direct action selection with open-ended generation on pre-RL Nano for a measured quality-latency tradeoff.",
+      "section": "headline",
+      "title": "Weight-space programming paper questioned; Qwen 3.8 27B repeats a weights test locally",
+      "summary": "spaCy author Matthew Honnibal argues that in the GPT-6 Astra weight read/write paper, the raw-weights-only setting appears only on networks of 17K–172K weights, while every experiment on a real language model uses Python, and the headline Qwen result (MATH-500 from 7.9% to 48.1%) also runs the model on up to 50 batches of practice problems. Simon Willison ran the paper's guess-the-game-from-weights prompts with the 17GB Qwen 3.8 27B on his laptop with no tools, and it identified Pac-Man, Pong and Breakout but failed on Freeway. The results are interesting, but claims about models editing weights depend heavily on each experiment's setup.",
+      "sources": [
+        {
+          "candidate_id": "c_d799a9ad6b",
+          "url": "https://honnibal.dev/blog/astra-read-write-misleading"
+        },
+        {
+          "candidate_id": "c_fdf1822c9e",
+          "url": "https://simonwillison.net/2026/Nov/3/qwen-can-interpret-model-weights/"
+        },
+        {
+          "candidate_id": "c_d799a9ad6b",
+          "url": "https://news.ycombinator.com/item?id=50351111"
+        },
+        {
+          "candidate_id": "c_fdf1822c9e",
+          "url": "https://news.ycombinator.com/item?id=50355251"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://honnibal.dev/blog/astra-read-write-misleading",
+          "quote": "I'm the author of the spaCy Natural Language Processing library"
+        },
+        {
+          "url": "https://honnibal.dev/blog/astra-read-write-misleading",
+          "quote": "only appears in experiments 1, 2 and 4, on networks of 17K–172K weights. Every experiment involving a real language model uses Python, and the Qwen result, which is the headline one, also gets to run the model on up to 50 batches of practice problems."
+        },
+        {
+          "url": "https://honnibal.dev/blog/astra-read-write-misleading",
+          "quote": "this weight correction raises MATH-500 from 7.9% to 48.1%"
+        },
+        {
+          "url": "https://honnibal.dev/blog/astra-read-write-misleading",
+          "quote": "But to me the Qwen result and the other experiments that use Python don’t belong in the same post or paper as the experiments that read the weights directly."
+        },
+        {
+          "url": "https://simonwillison.net/2026/Nov/3/qwen-can-interpret-model-weights/",
+          "quote": "But how about Qwen 3.8 27B ? That’s still my favorite model to run on my own laptop—it’s just 17GB"
+        },
+        {
+          "url": "https://simonwillison.net/2026/Nov/3/qwen-can-interpret-model-weights/",
+          "quote": "You have no tools: no code execution, no calculator, nothing to run."
+        },
+        {
+          "url": "https://simonwillison.net/2026/Nov/3/qwen-can-interpret-model-weights/",
+          "quote": "Game: A simplified Pac-Man-style gridworld"
+        },
+        {
+          "url": "https://simonwillison.net/2026/Nov/3/qwen-can-interpret-model-weights/",
+          "quote": "It identified Pong ( reasoning ) in 1h 4m 54s"
+        },
+        {
+          "url": "https://simonwillison.net/2026/Nov/3/qwen-can-interpret-model-weights/",
+          "quote": "Game: Breakout, or an Arkanoid-like paddle/ball/brick game."
+        },
+        {
+          "url": "https://simonwillison.net/2026/Nov/3/qwen-can-interpret-model-weights/",
+          "quote": "Qwen failed at the Freeway prompt"
+        }
+      ],
+      "tags": [
+        "模型",
+        "训练",
+        "行业"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "uni-robot-agent harness lets Qwen3.8-Flash-Next operate robots",
+      "summary": "uni-robot-agent is a unified harness that connects open-weight models to robots through tool calls and supports further training. Without privileged inputs, out-of-the-box Qwen3.8-Flash-Next reaches a RoboDojo Score of 31.39, above the published GPT-6 Astra-RoboProbe result of 28.97, and performs competitively on 19 real-world tasks. Teams doing robot-agent research with open models get a ready baseline.",
+      "sources": [
+        {
+          "candidate_id": "c_2a9dfe71c2",
+          "url": "https://huggingface.co/papers/2611.01560"
+        },
+        {
+          "candidate_id": "c_ecdd7fba48",
+          "url": "https://github.com/Open-RUA/uni-robot-agent"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.01560",
+          "quote": "Without privileged inputs, an out-of-the-box Qwen3.8-Flash-Next achieves a RoboDojo Score of 31.39, surpassing the published GPT-6 Astra-RoboProbe result of 28.97 and many VLA / WAM baselines, and performs competitively on 19 real-world tasks"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.01560",
+          "quote": "uni-robot-agent, a unified harness for robot-use agents with open-weight models, designed to support further training."
+        }
+      ],
       "tags": [
         "Agent",
-        "模型",
-        "训练"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_f954b07c15",
-          "url": "https://huggingface.co/papers/2611.02102"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2611.02102",
-          "quote": "Its Experience Flywheel supplies diverse executable tasks to the NorthCUA Harness, which sustains long interactions, records decisions, and checks task outcomes."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.02102",
-          "quote": "For unsolved tasks, recursive self-improvement evolves reusable skills and preserves verified milestones so later attempts build on earlier progress."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.02102",
-          "quote": "Staged Learning combines this experience with grounding data from the Flywheel to develop GUI competence through mid-training and long-horizon supervised fine-tuning ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.02102",
-          "quote": "The policy then learns from fresh attempts in the same Harness through joint desktop-web reinforcement learning , closing the loop between experience production and policy improvement."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.02102",
-          "quote": "The resulting Nano, Mini, and Pro family achieves state-of-the-art results among open-source models across GUI grounding , desktop execution , and Web interaction under the reported evaluation settings."
-        }
+        "开源",
+        "论文"
       ]
     },
     {
       "section": "model",
-      "title": "colibri runs MoE inference from GPU, RAM, and NVMe",
-      "summary": "colibri is a hierarchical inference engine for frontier MoE models that keeps hot experts on the GPU (CUDA, Vulkan), warm ones in RAM, and cold ones streamed from NVMe. Written in C, it runs on hardware you already own, with one file per model family and no GPU required. It exposes OpenAI and Anthropic compatible base URLs for clients that point at a local server.",
+      "title": "NVIDIA releases NemotronLabs RE-USE speech enhancement model",
+      "summary": "NVIDIA NemotronLabs RE-USE is a 9.6-million-parameter multilingual universal speech enhancement model that handles noise, reverberation, clipping, bandwidth limits, codec artifacts, packet loss and low-quality mics, with input sampling rates from 8 to 48 kHz. The model card says it is ready for commercial use under the OpenMDW License Agreement, version 1.1. Its small size makes it a candidate for cleaning audio ahead of ASR or voice agents.",
+      "sources": [
+        {
+          "candidate_id": "c_97d55957e2",
+          "url": "https://huggingface.co/nvidia/NVIDIA-NemotronLabs-RE-USE"
+        },
+        {
+          "candidate_id": "c_97d55957e2",
+          "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xmorim/nvidianvidianemotronlabsreuse_hugging_face/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/nvidia/NVIDIA-NemotronLabs-RE-USE",
+          "quote": "This model is ready for commercial use."
+        },
+        {
+          "url": "https://huggingface.co/nvidia/NVIDIA-NemotronLabs-RE-USE",
+          "quote": "License/Terms of Use: OpenMDW License Agreement, version 1.1 (OpenMDW-1.1)"
+        }
+      ],
       "tags": [
+        "语音",
         "模型",
-        "开源",
-        "工具"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_2a0662c2ca",
-          "url": "https://github.com/JustVugg/colibri"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://github.com/JustVugg/colibri",
-          "quote": "colibri Public Notifications You must be signed in to change notification settings Fork 5.5k ( 5.5k ) Star 47.3k ( 47.3k ) You must be signed in to star a repository About A hierarchical inference engine for frontier MoE models: hot experts on the GPU (CUDA, Vulkan), warm ones in RAM, cold ones stre"
-        },
-        {
-          "url": "https://github.com/JustVugg/colibri",
-          "quote": "amed from NVMe."
-        },
-        {
-          "url": "https://github.com/JustVugg/colibri",
-          "quote": "Written in C, runs on the hardware you already own."
-        },
-        {
-          "url": "https://github.com/JustVugg/colibri",
-          "quote": "Pure C, one file per model family, no GPU required."
-        },
-        {
-          "url": "https://github.com/JustVugg/colibri",
-          "quote": "draws pictures: Qwen-Image-2.1 ."
-        },
-        {
-          "url": "https://github.com/JustVugg/colibri",
-          "quote": "and on NVIDIA cards through CUDA."
-        },
-        {
-          "url": "https://github.com/JustVugg/colibri",
-          "quote": "You need a computer with 8 GB of RAM at the very least (16 GB or more is"
-        },
-        {
-          "url": "https://github.com/JustVugg/colibri",
-          "quote": "OpenAI base URL: http://127.0.0.1:8000/v1"
-        },
-        {
-          "url": "https://github.com/JustVugg/colibri",
-          "quote": "Anthropic base URL: http://127.0.0.1:8000"
-        }
+        "开源"
       ]
     },
     {
       "section": "paper",
-      "title": "StateBench tests how models track state over long documents",
-      "summary": "StateBench contains four difficulty levels built from a general finite sequence of variable assignments, letting teams compare models on increasingly complex state updates. In tests of Gemini 3.8 Flash, Claude Opus 5.5, and GPT-6 Sol and Luna, accuracy on soluble and general finite problems fell to 13% or lower on the longest inputs. Models trained from scratch on StateBench, including several 275-million-parameter transformers, hybrids, and Gated DeltaNet variants, showed that Gated DeltaNet and hybrid models generalized almost perfectly on r-trivial, aperiodic, and soluble problems out to tens of thousands of assignments.",
-      "tags": [
-        "论文",
-        "推理",
-        "训练"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_740e2c0cc8",
-          "url": "https://huggingface.co/blog/allenai/statebench"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/blog/allenai/statebench",
-          "quote": "StateBench consists of four difficulty levels that permit increasingly complex state update operations."
-        },
-        {
-          "url": "https://huggingface.co/blog/allenai/statebench",
-          "quote": "To compare the four levels fairly, we start with a general finite sequence of variable assignments and derive three easier versions from it, producing four comparable StateBench problems—one at each difficulty level."
-        },
-        {
-          "url": "https://huggingface.co/blog/allenai/statebench",
-          "quote": "We then tested four frontier models – Gemini 3.8 Flash, Claude Opus 5.5, and GPT-6 Sol and Luna – asking them to read each sequence of variable assignments and generate the final value of every variable."
-        },
-        {
-          "url": "https://huggingface.co/blog/allenai/statebench",
-          "quote": "But on soluble and general finite problems, accuracy fell sharply as inputs grew longer, dropping to 13% or lower on the longest general finite problems."
-        },
-        {
-          "url": "https://huggingface.co/blog/allenai/statebench",
-          "quote": "We trained several 275-million-parameter models from scratch on StateBench: two transformer variants, two hybrids, and two Gated DeltaNet variants with different memory-update constraints."
-        },
-        {
-          "url": "https://huggingface.co/blog/allenai/statebench",
-          "quote": "Gated DeltaNet and hybrid models generalized almost perfectly on r-trivial, aperiodic, and soluble problems out to the longest sequences we tested, tens of thousands of assignments."
-        },
-        {
-          "url": "https://huggingface.co/blog/allenai/statebench",
-          "quote": "Transformers learned the easier levels but degraded on longer sequences, and they never learned general finite problems."
-        }
-      ]
-    },
-    {
-      "section": "paper",
-      "title": "FLAMIA speeds up low-precision attention training on Blackwell",
-      "summary": "FLAMIA is a family of attention kernels for Blackwell with MXFP8 and mixed NVFP4/FP8 training paths, combining token-block scaling, safeguards against scale-induced leakage, and consistent forward and backward computations. Its MXFP8 path accelerates the combined forward and backward attention call, including quantization, by factors of 1.10--1.40times on B200 and 1.06--1.42times on B300 relative to the fastest evaluated baseline for each workload. The authors also validate training stability and quality preservation on pretraining Llama-style models.",
-      "tags": [
-        "论文",
-        "训练",
-        "硬件"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_cab752f3a5",
-          "url": "https://huggingface.co/papers/2611.03344"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2611.03344",
-          "quote": "We present FLAMIA, a family of attention kernels for Blackwell with MXFP8 and mixed NVFP4 / FP8 training paths."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.03344",
-          "quote": "Our design combines token-block scaling that reuses quantized operands across matrix orientations, targeted safeguards against scale-induced leakage, and consistent forward and backward computations."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.03344",
-          "quote": "Across various causal packed-document workloads, the MXFP8 path accelerates the combined forward and backward attention call, including quantization, by factors of 1.10--1.40times on B200 and 1.06--1.42times on B300 relative to the fastest evaluated baseline for each workload."
-        }
-      ]
-    },
-    {
-      "section": "paper",
-      "title": "CrossSWE benchmarks coding agents across repositories",
-      "summary": "CrossSWE contains 171 real-world instances spanning 165 repositories, 20 technical domains, and 13 programming languages, and checks whether partial repository modifications are enough to reach the intended behavior. Across five LLMs, the strongest model, GPT-6.1 Sol, achieved only 58.48% Pass@1. Cross-repository inconsistencies were the most prevalent failure mode at 44.2%.",
-      "tags": [
-        "论文",
-        "代码",
-        "Agent"
-      ],
+      "title": "CrossSWE: cross-repo coding benchmark tops out at 58.48% Pass@1",
+      "summary": "CrossSWE has 171 real-world instances spanning 165 repositories, 20 technical domains and 13 programming languages, and checks that changing only some of the repositories is not enough. Among five LLMs, the strongest, GPT-6.1 Sol, reaches only 58.48% Pass@1, and cross-repository inconsistency is the most common failure mode (44.2%). Developers using coding agents on multi-repo projects should still watch interface consistency closely.",
       "sources": [
         {
           "candidate_id": "c_b001997253",
@@ -340,159 +237,202 @@
       "evidence": [
         {
           "url": "https://huggingface.co/papers/2611.01484",
-          "quote": "Rather than further increasing complexity within individual repositories, we introduce CrossSWE , a benchmark for cross-repository joint development comprising 171 real-world instances spanning 165 repositories, 20 technical domains, and 13 programming languages."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.01484",
-          "quote": "CrossSWE verifies the necessity of coordinated changes by testing whether partial repository modifications are insufficient to achieve the intended behavior."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.01484",
-          "quote": "Our evaluation of five LLMs reveals substantial challenges, with the strongest model, GPT-6.1 Sol, achieving only 58.48% Pass@1 ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.01484",
-          "quote": "Furthermore, cross-repository inconsistencies emerge as the most prevalent failure mode (44.2%), highlighting the difficulty of maintaining consistency across interdependent repositories."
+          "quote": "Our evaluation of five LLMs reveals substantial challenges, with the strongest model, GPT-6.1 Sol, achieving only 58.48% Pass@1 . Furthermore, cross-repository inconsistencies emerge as the most prevalent failure mode (44.2%)"
         }
-      ]
-    },
-    {
-      "section": "paper",
-      "title": "SWE-Trail guides trajectory collection with earlier attempts",
-      "summary": "SWE-Trail is a trajectory collector that uses earlier trajectories to decide where to spend additional collection effort while keeping that history outside the coding agent's context, avoiding a train-test mismatch. The agent proposes candidate next actions from its ordinary context, and SWE-Trail briefly executes them from the same checkpoint to decide which route continues. For a 124B student initialized from Ling-3.0-flash-base, it improves mean resolution over independent sampling by 2.33 and 1.60 percentage points on SWE-bench Multilingual and SWE-bench Pro.",
+      ],
       "tags": [
         "论文",
         "代码",
-        "训练"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_371d331b4d",
-          "url": "https://huggingface.co/papers/2611.02074"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2611.02074",
-          "quote": "Instead, we argue that history should guide where collection effort is spent, while the coding agent decides what to generate."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.02074",
-          "quote": "We introduce SWE-Trail , a trajectory collector that uses earlier trajectories to guide subsequent collection while keeping that history outside the coding agent 's context."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.02074",
-          "quote": "For a 124B student initialized from Ling-3.0-flash-base, SWE-Trail improves mean resolution over independent sampling by 2.33 and 1.60 percentage points on SWE-bench Multilingual and SWE-bench Pro , respectively."
-        }
+        "Agent"
       ]
     },
     {
       "section": "paper",
-      "title": "Order-only distillation drops probability fitting from OPD",
-      "summary": "Order-Only On-Policy Distillation trains the student to reproduce the order of the teacher's top-K tokens at each student-generated prefix without fitting their probability values, which makes the objective invariant to teacher temperature and removes temperature tuning. Across six teacher--student pairs, O^{3}PD outperformed OPD on the average over HMMT25, AIME24, and AIME25 in every pair, by up to 2.9 points, with gains of up to 5.6 points on AIME25. The analysis shows the ranking, not the probability values, carries the knowledge on-policy distillation needs to transfer.",
+      "title": "CUA-Master-27B trains computer-use agents on tasks mined from videos",
+      "summary": "CUA-Master is a nested double-loop recursive improvement framework: an outer loop feeds in open-world data guided by the model's weaknesses, and an inner loop mines real workflows from instructional videos as seeds for synthesizing diverse, verifiable tasks, with snapshot-rollback retries during trajectory collection. CUA-Master-27B scores 80.2 on OSWorld Verified, 36.9 on OSWorld 2.0 and 43.9 on WeaveBench. Teams building GUI-agent data pipelines can borrow the flywheel design.",
+      "sources": [
+        {
+          "candidate_id": "c_bbe3067310",
+          "url": "https://huggingface.co/papers/2611.03126"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.03126",
+          "quote": "CUA-Master -27B achieves competitive performance across GUI-only and GUI-CLI hybrid benchmarks , scoring 80.2 on OSWorld Verified, 36.9 on OSWorld 2.0, 43.9 on WeaveBench, and 25.0 on Agents' Last Exam."
+        }
+      ],
       "tags": [
         "论文",
-        "训练",
-        "推理"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_fae6497d42",
-          "url": "https://huggingface.co/papers/2611.02112"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2611.02112",
-          "quote": "We ask whether the teacher's ordering of candidate tokens is enough, and propose Order-Only On-Policy Distillation (O^{3}PD)."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.02112",
-          "quote": "At each student-generated prefix, O^{3}PD trains the student to reproduce the order of the teacher's top-K tokens, without fitting their probability values."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.02112",
-          "quote": "The objective is therefore invariant to the teacher temperature and needs no temperature tuning."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.02112",
-          "quote": "Across six teacher--student pairs, O^{3}PD outperforms OPD on the average over HMMT25, AIME24, and AIME25 in every pair, by up to 2.9 points, with gains of up to 5.6 points on AIME25."
-        }
+        "Agent",
+        "训练"
       ]
     },
     {
       "section": "paper",
-      "title": "ReTrace studies how computer-use agents recover from errors",
-      "summary": "ReTrace is a scalable evaluation framework for studying recovery behavior in computer-use agents, and it formalizes Transition-Consistent Recovery so identical downstream actions from recovered and target states must yield identical outcomes. The criterion is operationalized through goal-oriented action replay after controlled error injection. The study reports that ideal recovery can unlock a model's latent task completion capabilities, that current computer-use agents fail to exploit them, and that accurate model-based recovery yields measurable end-to-end gains.",
+      "title": "Collaborative Intelligence Benchmark measures AI agents as teammates",
+      "summary": "The benchmark has 240 tasks across 8 dimensions of teamwork, drawn from real records or existing benchmarks, and scores models only on tasks they can solve alone. Across 18 models the best, Gemini 4 Argon at high effort, scores 82.2 out of 100; frontier models almost always refuse unsafe shortcuts, yet reach the best overall deal in only 14% of conflicts, and their pass rate drops from 97% to 81% when taking over a task a weaker model cheated on. Multi-agent builders should test handoffs and pressure scenarios explicitly.",
+      "sources": [
+        {
+          "candidate_id": "c_512bfde6c7",
+          "url": "https://huggingface.co/papers/2611.02633"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.02633",
+          "quote": "It contains 240 tasks across 8 dimensions of teamwork, from refusing an unsafe shortcut to checking the work that a weaker model leaves behind."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.02633",
+          "quote": "Every model has clear weaknesses as a teammate. The best, Gemini 4 Argon at high effort, scores 82.2 out of 100. Frontier models almost always refuse unsafe shortcuts and report misconduct, yet they reach the best overall deal in only 14% of conflicts. Their pass rate drops from 97% to 81% when they"
+        }
+      ],
       "tags": [
         "论文",
         "Agent",
         "安全"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_b0eae1227f",
-          "url": "https://huggingface.co/papers/2610.27954"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2610.27954",
-          "quote": "To address this gap, we present ReTrace, a scalable evaluation framework for systematically studying recovery behavior in computer-use agents ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2610.27954",
-          "quote": "We formalize Transition-Consistent Recovery : identical downstream actions from the recovered and target states must yield identical outcomes."
-        },
-        {
-          "url": "https://huggingface.co/papers/2610.27954",
-          "quote": "We operationalize this criterion through goal-oriented action replay following controlled error injection ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2610.27954",
-          "quote": "Using ReTrace, we present the first systematic study of autonomous, model-based recovery , revealing that (i) ideal recovery can unlock model's latent task completion capabilities, (ii) current computer-use agents fail to exploit their latent recovery capabilities, and (iii) accurate model-based rec"
-        }
       ]
     },
     {
-      "section": "paper",
-      "title": "uni-robot-agent trains open-weight robot-use agents",
-      "summary": "uni-robot-agent is a unified harness for competitive open-weight robot use that supports further training, aiming to open robot-use agent research beyond frontier proprietary models. Without privileged inputs, an out-of-the-box Qwen3.8-Flash-Next achieves a RoboDojo Score of 31.39, surpassing the published GPT-6 Astra-RoboProbe result of 28.97 and many VLA/WAM baselines, and performs competitively on 19 real-world tasks. The team's analysis links effective robot use to four general capabilities.",
-      "tags": [
-        "论文",
-        "Agent",
-        "模型"
-      ],
+      "section": "tool",
+      "title": "colibri runs huge MoE models on ordinary hardware",
+      "summary": "colibri is a C inference engine that keeps hot experts on the GPU (CUDA, Vulkan), warm ones in RAM and streams cold ones from NVMe, with engines for GLM-5.2/5.3, Kimi K3, DeepSeek V4 Flash, Qwen3.8-Flash-Next and more, under Apache 2.0. It needs 8 GB of RAM at the very least and a GPU is optional; on an RTX PRO 4000, Qwen3.6-35B-A3B decodes at 104.8 tok/s. Its Anthropic-compatible endpoint means Claude Code and the Anthropic SDKs can point at a local model.",
       "sources": [
         {
-          "candidate_id": "c_2a9dfe71c2",
-          "url": "https://huggingface.co/papers/2611.01560"
+          "candidate_id": "c_2a0662c2ca",
+          "url": "https://github.com/JustVugg/colibri"
         }
       ],
       "evidence": [
         {
-          "url": "https://huggingface.co/papers/2611.01560",
-          "quote": "To democratize RUA research, we introduce uni-robot-agent , a unified harness for competitive open-weight robot use that supports further training."
+          "url": "https://github.com/JustVugg/colibri",
+          "quote": "Ten are for language models: GLM-5.2/5.3 (which also runs Mistral-Large-4 ), GLM-5.3-Flash , Inkling , Kimi K3 , DeepSeek V4 Flash , DeepSeek V4.1 Flash , MiMo-V2.6 Flash (and Pro), Qwen3.8-Flash-Next"
         },
         {
-          "url": "https://huggingface.co/papers/2611.01560",
-          "quote": "Without privileged inputs, an out-of-the-box Qwen3.8-Flash-Next achieves a RoboDojo Score of 31.39, surpassing the published GPT-6 Astra-RoboProbe result of 28.97 and many VLA / WAM baselines, and performs competitively on 19 real-world tasks ."
+          "url": "https://github.com/JustVugg/colibri",
+          "quote": "License Apache 2.0, Copyright 2026 Vincenzo Fornaro."
+        },
+        {
+          "url": "https://github.com/JustVugg/colibri",
+          "quote": "You need a computer with 8 GB of RAM at the very least (16 GB or more is better), 22 GB free on the disk for the smallest model, and an internet connection. A graphics card is optional."
+        },
+        {
+          "url": "https://github.com/JustVugg/colibri",
+          "quote": "On an RTX PRO 4000, Qwen3.6-35B-A3B UD-Q4_K_M decodes at 104.8 tok/s"
+        },
+        {
+          "url": "https://github.com/JustVugg/colibri",
+          "quote": "Anthropic-compatible : /v1/messages , so Claude Code and the Anthropic SDKs work against it"
         }
+      ],
+      "tags": [
+        "推理",
+        "开源",
+        "工具"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "llama.cpp merges Nemotron 3.5 Transcribe support",
+      "summary": "llama.cpp merged PR #31471, adding NVIDIA's Nemotron 3.5 Transcribe for offline transcription in 40 languages with prompt context and speaker attribution. Only the BF16 checkpoint layout converts for now (not the FP8 and NVFP4 releases), word timestamps and streaming are out of scope, and llama-server needs --reasoning off or it returns only reasoning and no transcript. It adds an open option for local, offline multilingual transcription.",
+      "sources": [
+        {
+          "candidate_id": "c_d8ffd74dd3",
+          "url": "https://github.com/ggml-org/llama.cpp/pull/31471"
+        },
+        {
+          "candidate_id": "c_d8ffd74dd3",
+          "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xmu0iz/mtmd_add_nemotron_35_transcribe_support_by/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/pull/31471",
+          "quote": "CISC merged commit 28b812d into ggml-org : master Nov 3, 2026"
+        },
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/pull/31471",
+          "quote": "offline transcription in 40 languages with support for prompt context, and speaker attribution. Word timestamps and streaming are beyond the scope of this PR."
+        },
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/pull/31471",
+          "quote": "llama-server needs --reasoning off : The checkpoint's chat template turns thinking on by default; without the flag the server returns only reasoning and no transcript."
+        },
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/pull/31471",
+          "quote": "# the FP8 and NVFP4 releases store the decoder as backbone.* raise ValueError ( f\"unexpected tensor { name } : only the BF16 checkpoint layout (llm.*) is supported\" )"
+        }
+      ],
+      "tags": [
+        "语音",
+        "开源",
+        "推理"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Claude Code v2.1.318 shows when your sign-in expires",
+      "summary": "Claude Code v2.1.318 adds the claude.ai sign-in end date to claude auth status and claude -p JSON results, prints a stderr warning in claude -p text output starting 10 days before it ends, and adds an effort option to a mod's $.model.fork. It also fixes --continue losing the earlier conversation after a malformed tool call's retries ran out (a regression in 2.1.314). Teams running claude -p in CI can catch expiring credentials early.",
+      "sources": [
+        {
+          "candidate_id": "c_96e66634f2",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.318"
+        }
+      ],
+      "evidence": [],
+      "tags": [
+        "工具",
+        "代码",
+        "Agent"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "Ai2's StateBench tests state tracking over long documents",
+      "summary": "On Ai2's StateBench, frontier models drop to 13% or lower on the longest general finite problems, and transformers trained from scratch never learned general finite problems.",
+      "sources": [
+        {
+          "candidate_id": "c_740e2c0cc8",
+          "url": "https://huggingface.co/blog/allenai/statebench"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/blog/allenai/statebench",
+          "quote": "StateBench: Testing how language models track state changes over long documents Enterprise Article Published November 3, 2026 Upvote 7 +1 Kyle Wiggers Ai2Comms"
+        },
+        {
+          "url": "https://huggingface.co/blog/allenai/statebench",
+          "quote": "dropping to 13% or lower on the longest general finite problems"
+        },
+        {
+          "url": "https://huggingface.co/blog/allenai/statebench",
+          "quote": "Transformers learned the easier levels but degraded on longer sequences, and they never learned general finite problems."
+        }
+      ],
+      "tags": [
+        "论文",
+        "推理"
       ]
     }
   ],
   "research": [
     {
       "via": "webfetch",
-      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.318"
+      "url": "https://github.com/postmanlabs/postman-app-support/issues/14370"
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/blog/allenai/statebench"
+      "url": "https://honnibal.dev/blog/astra-read-write-misleading"
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.03344"
+      "url": "https://simonwillison.net/2026/Nov/3/qwen-can-interpret-model-weights/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://www.theregister.com/ai-and-ml/2026/11/03/british-fintech-revolut-slashes-ai-coding-costs-10x-by-cutting-out-claude-and-going-self-hosted/5307345"
     },
     {
       "via": "webfetch",
@@ -500,7 +440,7 @@
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.03178"
+      "url": "https://huggingface.co/papers/2611.01560"
     },
     {
       "via": "webfetch",
@@ -508,19 +448,15 @@
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.01560"
-    },
-    {
-      "via": "webfetch",
       "url": "https://huggingface.co/papers/2611.01484"
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.00859"
+      "url": "https://huggingface.co/blog/allenai/statebench"
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/papers/2610.40191"
+      "url": "https://huggingface.co/nvidia/NVIDIA-NemotronLabs-RE-USE"
     },
     {
       "via": "webfetch",
@@ -528,82 +464,14 @@
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.03092"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.02102"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.02782"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.02074"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2610.27954"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.02112"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/blog/ibm-research/palette-deck-building"
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31471"
     }
   ],
   "lang": "en",
   "validation": {
-    "validated_at": "2026-11-04T04:39:38+00:00",
+    "validated_at": "2026-11-04T04:45:15+00:00",
     "checked_links": false,
-    "dropped": [
-      {
-        "title": "Palette teaches a 20B model to build design-language decks",
-        "section": "brief",
-        "candidates": [
-          "c_c3cda67991"
-        ],
-        "reasons": [
-          "summary longer than 250 characters"
-        ]
-      },
-      {
-        "title": "History Forcing distills history-dependent video continuations",
-        "section": "brief",
-        "candidates": [
-          "c_4eb189c2bd"
-        ],
-        "reasons": [
-          "summary longer than 250 characters"
-        ]
-      },
-      {
-        "title": "A report maps agent harnesses for video generation",
-        "section": "brief",
-        "candidates": [
-          "c_04f56b52c4"
-        ],
-        "reasons": [
-          "summary longer than 250 characters"
-        ]
-      },
-      {
-        "title": "Collaborative Intelligence Benchmark scores agents as teammates",
-        "section": "brief",
-        "candidates": [
-          "c_512bfde6c7"
-        ],
-        "reasons": [
-          "summary longer than 250 characters"
-        ]
-      }
-    ],
-    "warnings": [
-      "13 items (target 8-12)",
-      "7 paper items (target 2-3)"
-    ]
+    "dropped": [],
+    "warnings": []
   }
 }
