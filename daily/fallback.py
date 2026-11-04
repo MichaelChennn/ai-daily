@@ -19,6 +19,7 @@ SECTION_OF_KIND = {
     "release": "tool",
     "repo": "tool",
     "discussion": "brief",
+    "commentary": "brief",
 }
 SECTION_LIMITS = {"headline": 4, "model": 2, "paper": 2, "tool": 2, "brief": 2}
 

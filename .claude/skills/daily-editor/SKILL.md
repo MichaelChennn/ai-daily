@@ -58,15 +58,20 @@ uv run python -m daily list --date <期号> --kind blog --summary-chars 1500    
   ```
 
   输出会说有几个候选没有分数；漏了就补全后重跑这条命令（它会重新开始记录）。
-- 总分大致 ≥ 5 才入选。每期目标 **8–12 条**：🔥 头条 3–5 条，📄 论文 2–3 篇，🧠 模型和 🛠 开源与工具看当天情况，⚡ 快讯放其余值得一句话提一下的。某天平淡就少写，不要凑数。
-- 直接排除：客户案例和营销稿（如 “X uses ChatGPT to …”）、量化 / 合并 / 微调的衍生权重、和 AI 开发无关的社区帖、只是提问或吐槽的讨论帖。
+- 总分大致 ≥ 5 才入选。总分 ≥ 5 的候选都值得写，通常在 **15 条**左右，写到一个固定条数就停是漏报。**最多 18 条**：≥ 5 分的候选超过 18 个时，先写总分高的。
+- 版块分配：🔥 头条 3–5 条，📄 论文 2–4 篇，🧠 模型和 🛠 开源与工具看当天情况，⚡ 快讯放其余值得一句话提一下的，不设上限。
+- 某天平淡就少写，不要凑数。少于 8 条时 validate 只发 WARN，提醒这一期可能有信源漏抓了；条数和版块分配不符合目标都只发 WARN。
+- 📄 论文的主来源（`sources` 第一个）必须是 `kind` 为 `paper` 的候选，或者 arXiv、HF papers、OpenReview 的链接，否则整条会被删掉。博客文章和推文不要放进论文。
+- `kind` 是 `commentary` 的候选（博主和周报）：作者的原创分析可以单独成条，只放进 ⚡ 快讯，**每期最多 2 条**。文章评论的是别人发布的内容时，它只是线索：回去找一手页面，按那个页面写。
+- 直接排除：客户案例和营销稿（如 “X uses ChatGPT to …”）、和 AI 开发无关的社区帖、只是提问或吐槽的讨论帖。
+- **衍生权重**：别人做的衍生版本（名字带 -abliterated、-obliterated、UNCENSORED，量化版、合并版）重要性最多 1 分，新颖性 0 分，所以不会入选；除非这个衍生版本本身就是新闻。讨论这类权重的帖子同样打分。
 - **同一事件合并成一条**：`cluster_id` 相同的候选通常是同一件事（例如同一个模型的多个权重仓库、相邻两个版本的 Release）。不同类型的候选也可能是同一件事（官方博客 + HF 模型页 + 社区讨论），把它们都放进这一条的 `sources`。
 - 一手来源优先：Tier 2 的 HN / Reddit 帖子只是热度信号。帖子指向的页面（官方博客、GitHub、论文）才是来源；自述帖（Reddit 正文、Ask HN）不能单独成条，除非你找到并打开了一手页面。
 
 ## 3. 打开原文
 
 - 除了快讯和 Release，每一条都要用 WebFetch 打开至少一个一手来源，依据原文写，不要只凭候选摘要。快讯的摘要足够时可以不打开。
-- **预算**：WebFetch 最多 20 次，WebSearch 最多 5 次（超出时 validate 会警告）。第 6 步预检之后补开的页面也算在内。
+- **预算**：WebFetch 最多 30 次，WebSearch 最多 5 次（超出时 validate 会警告）。第 6 步预检之后补开的页面也算在内。
 - 每一次 WebFetch 和 WebSearch 都要记进 `research`（见下面的 schema），包括没用上的。
 - **摘录 evidence**：从原文逐字复制支撑关键事实的句子（保持原文语言，每段 ≤ 300 字符），放进条目的 `evidence`。条目里出现的每个数字、模型名、版本号，都要能在候选标题 / 摘要或 evidence 里找到。必须是原文**逐字复制**，不能意译、翻译或拼接：`validate --check-links` 会下载页面，核对引文是否真的在页面上。
 - **WebFetch 的回答不是原文**：它由一个小模型转述，连“引用”也可能改了词（例如把 achieves 写成 achieve），这样的引文会被 validate 判为找不到、整条删掉。用 WebFetch 读懂内容之后，引文用下面的命令从原始页面复制；这个命令和 validate 用的是同一份页面文本：
@@ -75,9 +80,9 @@ uv run python -m daily list --date <期号> --kind blog --summary-chars 1500    
   uv run python -m daily page <url> --grep "500ms" --grep "Apache License"    # 打印每个关键词前后的原文
   ```
 
-  `daily page` 拿不到页面文本（403、PDF）时，引文无法核对，validate 只给警告；这时只写候选摘要里有的数字。
+  `daily page` 拿不到页面文本（403、需要 JS 渲染、PDF）时，引文无法核对：这个页面的引文不能支撑任何数字或名称，`validate --check-links` 不把它算进材料。
 - GitHub Release 候选的摘要就是 release notes 原文，可以直接依据它写，不必再打开。
-- 打不开的页面（403、需要 JS 渲染）：只能依据候选摘要写，不写摘要里没有的事实；写不出“是什么 + 为什么重要”就放进快讯或者放弃。
+- 打不开的页面（403、需要 JS 渲染）：**只能依据候选标题和摘要写**，WebFetch 读到的内容也不能用，因为没核对过。不写标题和摘要里没有的事实；写不出“是什么 + 为什么重要”就放进快讯或者放弃。
 - **补漏**：可以用 WebSearch 查固定信源可能漏掉的重大事件（Qwen、xAI 等没有被抓取的厂商，或者失败的信源）。只有找到一手链接并用 WebFetch 打开之后才能写入，source 写成 `{"url": ..., "title": ...}`，而且这个 URL 必须出现在 `research` 里，`via` 为 `webfetch`。
 
 ## 4. 写作规范
@@ -102,7 +107,10 @@ uv run python -m daily list --date <期号> --kind blog --summary-chars 1500    
 
 第 1–4 条不过关：**整条删掉**（同时检查 highlights 有没有提到它），不要改写成差不多对的版本。第 5 条不过关：先按下一步补 evidence，补不上再整条删掉。
 
-自检删掉的条目 validate 看不到，要你自己记进生成记录：每条写它用的候选 id、标题和一句原因。没有删掉任何条目也要记，传一个空列表 `[]`，这样页面能分清「自检过、没删」和「没做自检」。
+**这一步必做**，完成后确认两项：
+
+- [ ] 自检结果记进了生成记录：自检删掉的条目 validate 看不到，要你自己记，每条写它用的候选 id、标题和一句原因。没有删掉任何条目也要记，传一个空列表 `[]`，这样页面能分清「自检过、没删」和「没做自检」。没有记录时 validate 会发 WARN。
+- [ ] `generated_at` 是真实时间：用 `date -u +%Y-%m-%dT%H:%M:%S+00:00` 取，不要手写整点。
 
 ```bash
 uv run python -m daily trace self-check --date <期号> <<'EOF'
@@ -125,7 +133,7 @@ uv run python -m daily validate --date <期号> --check-links    # 不带 --drop
 预检之后，**只允许下面三种修改**：
 
 - **补充或延长 evidence 引文**：用 `uv run python -m daily page <url> --grep "<关键词>"` 从原文逐字复制，把缺的数字、模型名、版本号包含进去。evidence 的 url 必须是本条的某个 source。
-- **打开还没打开的一手来源**：用 WebFetch 打开，记进 `research`（`via` 为 `webfetch`），再从中摘 evidence。这里的 WebFetch 算进每天 20 次的预算。
+- **打开还没打开的一手来源**：用 WebFetch 打开，记进 `research`（`via` 为 `webfetch`），再从中摘 evidence。这里的 WebFetch 算进每天 30 次的预算。
 - **整条删掉**：同时检查 highlights 有没有提到它，提到了就一起删去相关内容。
 
 **不允许改写正文**（标题、summary）去迁就材料：原文里找不到某个写法（例如正文写 `OpenMDW-1.1`，原文是 "version 1.1"），就整条删掉。预检不重跑，改完直接进入正式校验。
@@ -189,7 +197,7 @@ git push -u origin HEAD                  # 推到当前分支，不要开 PR
   "schema_version": 1,
   "date": "2026-10-21",                       // 期号，必须和 candidates.json 一致
   "mode": "full",                             // full：编辑版；fallback：degrade 生成的降级版
-  "generated_at": "2026-10-20T21:40:00+00:00",
+  "generated_at": "2026-10-20T21:40:00+00:00", // 用 date -u 取真实时间
   "model": "claude-opus-5-5",                 // 可选：你自己的模型 ID，网站页脚显示“本期由 … 编辑”；不确定就省略
   "highlights": ["今日要点第一句。", "第二句。"],   // 1-3 句，不含链接
   "items": [                                  // 按版块的顺序写，版块内按重要性排

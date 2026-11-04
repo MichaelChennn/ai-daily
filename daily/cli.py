@@ -200,6 +200,10 @@ def _validate(args: argparse.Namespace) -> int:
                 return await digest.check_links(digest.digest_urls(data), client)
 
         report = digest.validate(data, candidates, asyncio.run(check()))
+    if not args.en and _needs_self_check(issue_dir, data):
+        report.warnings.append(
+            "no self_check in trace.claude.json: run `daily trace self-check` (SKILL.md 5)"
+        )
     step = "en" if args.en else "final" if args.drop_invalid else "precheck" if args.check_links else "check"
     _trace_claude(issue_dir, data, trace.validate_step(step, data, report, checked_links))
 
@@ -219,6 +223,14 @@ def _validate(args: argparse.Namespace) -> int:
         return 0
     print("ok" if report.ok else f"{len(report.item_errors)} invalid items", file=sys.stderr)
     return 0 if report.ok else 1
+
+
+def _needs_self_check(issue_dir: Path, data: Any) -> bool:
+    """A Claude route edit whose trace has no self-check, not even an empty one."""
+    if not isinstance(data, dict) or digest.is_api(data) or data.get("mode") != "full":
+        return False
+    record = trace.load(issue_dir / "trace.claude.json")
+    return not any(s.get("step") == "self_check" for s in (record or {}).get("steps") or [])
 
 
 def _trace_claude(issue_dir: Path, data: Any, step: dict[str, Any]) -> None:
