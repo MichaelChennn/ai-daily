@@ -7,7 +7,7 @@ from datetime import datetime
 from typing import Any
 
 # What kind of thing a candidate is; the editor uses it to pick a digest section.
-KINDS = {"blog", "paper", "release", "model", "repo", "discussion"}
+KINDS = {"blog", "paper", "release", "model", "repo", "discussion", "commentary"}
 
 
 @dataclass
@@ -48,7 +48,7 @@ class Filtered:
     source: str
     title: str
     url: str
-    reason: str  # not_ai | min_stars_today | min_upvotes | max_age_days | noisy_model
+    reason: str  # not_ai | min_stars_today | min_upvotes | max_age_days | noisy_model | exclude_title
     value: str | None = None  # what triggered it, e.g. "stars_today 12 < 20"
 
 

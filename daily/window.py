@@ -32,9 +32,11 @@ class Window:
             return False
         if precision == "day":
             # Day-precision dates (e.g. "Oct 6, 2026") have no timezone; accept any calendar day
-            # the window touches, in either UTC or Berlin time.
+            # the window touches, in either UTC or Berlin time, and the day before it: a post from
+            # a US evening carries yesterday's date and went up after yesterday's fetch.
             day = value.date()
             days = {
+                self.start.date() - timedelta(days=1),
                 self.start.date(),
                 self.end.date(),
                 self.start.astimezone(TIMEZONE).date(),

@@ -5,6 +5,7 @@ from __future__ import annotations
 import asyncio
 import os
 import re
+from datetime import timedelta
 
 import httpx
 
@@ -13,6 +14,12 @@ from daily.fetchers.base import SUMMARY_MAX_CHARS, candidate, filtered, get, is_
 from daily.models import Candidate
 from daily.text import clean_text, clean_title, parse_datetime, truncate
 from daily.window import Window
+
+# Some repos (ollama) publish a pre-release and promote it hours later, keeping `published_at`: by
+# then the date is behind the window. Up to this far back, a version counts as just promoted unless
+# an earlier issue already had it (pipeline.build_candidates checks, this module has no history).
+LATE_RELEASE = timedelta(days=3)
+RELEASES_PER_PAGE = 30  # llama.cpp posts a dozen pre-release builds a day
 
 
 def _api_headers() -> dict[str, str]:
@@ -32,19 +39,26 @@ async def fetch_releases(client: httpx.AsyncClient, source: SourceConfig, window
 
     async def one(repo: str) -> list[Candidate]:
         response = await get(
-            client, f"https://api.github.com/repos/{repo}/releases", headers=headers, params={"per_page": 10}
+            client,
+            f"https://api.github.com/repos/{repo}/releases",
+            headers=headers,
+            params={"per_page": RELEASES_PER_PAGE},
         )
         found = []
         for release in response.json():
             if release.get("draft") or (release.get("prerelease") and not include_prereleases):
                 continue
             published = parse_datetime(release.get("published_at") or release.get("created_at"))
-            if not window.contains(published):
+            late = published is not None and window.end - LATE_RELEASE <= published < window.start
+            if not late and not window.contains(published):
                 continue
             name = clean_title(release.get("name") or release.get("tag_name"))
             tag = release.get("tag_name") or ""
             if tag and tag not in name:
                 name = f"{name} ({tag})" if name else tag
+            signals = {"prerelease": True} if release.get("prerelease") else {}
+            if late:
+                signals["late_release"] = True
             found.append(
                 candidate(
                     source,
@@ -52,7 +66,7 @@ async def fetch_releases(client: httpx.AsyncClient, source: SourceConfig, window
                     url=release["html_url"],
                     summary=truncate(clean_text(release.get("body")), SUMMARY_MAX_CHARS),
                     published_at=published,
-                    signals={"prerelease": True} if release.get("prerelease") else {},
+                    signals=signals,
                     tags=[repo],
                 )
             )

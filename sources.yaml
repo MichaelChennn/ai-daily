@@ -3,7 +3,7 @@
 # 顺序有意义：同一 URL 被多个信源抓到时，tier 小的优先，同 tier 按这里的先后顺序选主记录。
 # 每个信源相互隔离，单个失败只记录在 candidates.json 的 sources 里，不影响其他信源。
 #
-# 字段：id / name / type / tier（1 一手，2 社区信号）/ kind（blog|paper|release|model|repo|discussion）
+# 字段：id / name / type / tier（1 一手，2 博主和社区信号）/ kind（blog|paper|release|model|repo|commentary|discussion）
 #       enabled（默认 true），homepage（网站信息源卡片的链接，url 是 feed 时填写），
 #       其余字段是该 type 的选项，见 daily/fetchers/ 各函数的 docstring。
 
@@ -79,7 +79,7 @@ sources:
     tier: 1
     kind: blog
     url: https://www.minimax.io/blog
-    link_pattern: ^/blog/[a-z0-9-]+$
+    link_pattern: ^/(blog|news)/[a-z0-9-]+$ # 列表页也链接 /news/ 下的文章
 
   - id: kimi-blog
     name: Kimi Blog
@@ -94,12 +94,151 @@ sources:
     type: html_listing # 没有博客；API 文档每页都带完整的新闻侧栏，选一篇老页面当列表
     tier: 1
     kind: release
-    url: https://api-docs.deepseek.com/news/news250120
+    # 结尾的斜杠不能省：不带斜杠的地址，CDN 有时缓存成首页（200，只有 1 个新闻链接）。
+    url: https://api-docs.deepseek.com/news/news250120/
     link_pattern: ^/news/news[0-9]+/?$
     homepage: https://api-docs.deepseek.com/
 
-  # Qwen（qwenlm.github.io 停更于 2025-09，qwen.ai 是 JS 渲染）、xAI（x.ai 对非浏览器 UA 返回 403）
-  # 暂无可抓的官方列表页；它们的发布靠 HF Trending、HN、Reddit 覆盖。
+  - id: deepseek-website
+    name: DeepSeek
+    type: html_listing # 官网只发大版本，小版本更新看上面的 deepseek-news；两个站的 CDN 不同
+    tier: 1
+    kind: blog
+    url: https://www.deepseek.com/en/news/
+    link_pattern: ^/en/news/[a-z0-9-]+/$
+
+  - id: qwen-blog
+    name: Qwen
+    type: json_api # qwen.ai 是 JS 渲染，这是前端用的接口，没有文档
+    tier: 1
+    kind: blog
+    url: https://qwen.ai/api/v2/article/retrieval?type=qwen_ai&language=en-US
+    items: data.articles
+    title: title
+    date: extra.date # content 里的 article:published_time 有几篇比这里早几周甚至一年，不能用
+    link: https://qwen.ai/blog?id={path}
+    summary: extra.introduction
+    homepage: https://qwen.ai/research
+
+  - id: seed-blog
+    name: ByteDance Seed
+    type: json_api # 前端用的接口，没有文档。招聘帖也在里面，交给编辑过滤
+    tier: 1
+    kind: blog
+    url: https://seed.bytedance.com/api/get_article_list_v2?article_type=2&count=30&order_desc=true
+    items: sub_article_list
+    title: ArticleSubContentEn.Title
+    date: ArticleMeta.PublishDate
+    date_timezone: Asia/Shanghai # 毫秒时间戳，是北京时间当天零点
+    link: https://seed.bytedance.com/en/blog/{ArticleSubContentEn.TitleKey}
+    summary: ArticleSubContentEn.Abstract
+    homepage: https://seed.bytedance.com/en/blog
+
+  - id: google-research
+    name: Google Research
+    type: rss
+    tier: 1
+    kind: blog
+    url: https://research.google/blog/rss/
+    homepage: https://research.google/blog/
+
+  - id: microsoft-research
+    name: Microsoft Research
+    type: rss
+    tier: 1
+    kind: blog
+    url: https://www.microsoft.com/en-us/research/feed/
+    homepage: https://www.microsoft.com/en-us/research/blog/
+
+  - id: apple-ml-research
+    name: Apple Machine Learning Research
+    type: rss
+    tier: 1
+    kind: blog
+    url: https://machinelearning.apple.com/rss.xml
+    homepage: https://machinelearning.apple.com/research
+
+  - id: ai2-blog
+    name: Ai2
+    type: rss
+    tier: 1
+    kind: blog
+    url: https://allenai.org/rss.xml
+    homepage: https://allenai.org/news
+
+  - id: thinking-machines
+    name: Thinking Machines
+    type: rss
+    tier: 1
+    kind: blog
+    url: https://thinkingmachines.ai/blog/index.xml
+    homepage: https://thinkingmachines.ai/blog/
+
+  - id: stability-news
+    name: Stability AI
+    type: rss
+    tier: 1
+    kind: blog
+    url: https://stability.ai/news-updates?format=rss
+    homepage: https://stability.ai/news-updates
+
+  - id: baidu-ernie
+    name: Baidu ERNIE
+    type: rss
+    tier: 1
+    kind: blog
+    url: https://ernie.baidu.com/blog/index.xml
+    homepage: https://ernie.baidu.com/blog/
+
+  - id: xai-news
+    name: xAI
+    # x.ai 对普通客户端返回 403。这个 feed 不是官方的：依赖别人的仓库 alan-turing-institute/ai-rss-feeds，
+    # 它在 Actions 上每 3 小时生成一次，选择器坏了不归我们修。只有日期。
+    type: rss
+    tier: 1
+    kind: blog
+    url: https://raw.githubusercontent.com/alan-turing-institute/ai-rss-feeds/refs/heads/main/feeds/spacex-ai-news.xml
+    homepage: https://x.ai/news
+
+  - id: claude-blog
+    name: Claude Blog
+    type: html_listing # claude.com/blog 跳转到这里
+    tier: 1
+    kind: blog
+    url: https://claude.com/resources/articles
+    link_pattern: ^(https://claude.com)?/(blog|resources/articles)/[a-z0-9-]+$
+
+  - id: black-forest-labs
+    name: Black Forest Labs
+    type: html_listing
+    tier: 1
+    kind: blog
+    url: https://bfl.ai/blog
+    link_pattern: ^/blog/[a-z0-9-]+$
+
+  - id: liquid-ai
+    name: Liquid AI
+    type: html_listing # /blog 跳转到这里
+    tier: 1
+    kind: blog
+    url: https://www.liquid.ai/news/models
+    link_pattern: ^/(news|blog)/[a-z0-9-]+(/[a-z0-9-]+)?$
+
+  - id: cohere-blog
+    name: Cohere
+    type: html_listing
+    tier: 1
+    kind: blog
+    url: https://cohere.com/blog
+    link_pattern: ^(https://cohere.com)?/blog/[a-z0-9-]+$
+
+  - id: cursor-blog
+    name: Cursor
+    type: html_listing
+    tier: 1
+    kind: blog
+    url: https://cursor.com/blog
+    link_pattern: ^/blog/[a-z0-9-]+$
 
   # ---------------------------------------------------------------- 论文（Tier 1）
   - id: hf-daily-papers
@@ -108,6 +247,7 @@ sources:
     tier: 1
     kind: paper
     min_upvotes: 10 # 5 时每天约 50 篇，太多
+    week_fallback_limit: 10 # 当天列表为空（周末、节假日）时，取当周周榜的前 10 篇
 
   # ---------------------------------------------------------------- 开源（Tier 1）
   - id: github-releases
@@ -148,6 +288,113 @@ sources:
     kind: model
     limit: 50
     max_age_days: 45 # 按 HF 的 createdAt 算，那是建仓时间：大厂会提前几周建私有仓库，14 天会漏掉大发布
+
+  # ---------------------------------------------------------------- 博主与周报（Tier 2）
+  # 低频博客也不需要 max_age_days：rss 只看当期窗口。
+  - id: simon-willison
+    name: Simon Willison
+    type: rss
+    tier: 2
+    kind: commentary
+    url: https://simonwillison.net/atom/entries/ # 只订长文；/atom/everything/ 混着短链和引用
+    homepage: https://simonwillison.net/
+
+  - id: interconnects
+    name: Interconnects
+    type: rss
+    tier: 2
+    kind: commentary
+    url: https://www.interconnects.ai/feed
+    homepage: https://www.interconnects.ai/
+
+  - id: import-ai
+    name: Import AI
+    type: rss
+    tier: 2
+    kind: commentary
+    url: https://importai.substack.com/feed
+    homepage: https://importai.substack.com/
+
+  - id: latent-space
+    name: Latent Space
+    type: rss
+    tier: 2
+    kind: commentary
+    url: https://www.latent.space/feed
+    exclude_title_pattern: ^\[AINews\] # 每天一期的汇总
+    homepage: https://www.latent.space/
+
+  - id: sebastian-raschka
+    name: Sebastian Raschka
+    type: rss
+    tier: 2
+    kind: commentary
+    url: https://magazine.sebastianraschka.com/feed
+    homepage: https://magazine.sebastianraschka.com/
+
+  - id: karpathy
+    name: Andrej Karpathy
+    type: rss
+    tier: 2
+    kind: commentary
+    url: https://karpathy.bearblog.dev/feed/
+    homepage: https://karpathy.bearblog.dev/
+
+  - id: lilian-weng
+    name: Lilian Weng
+    type: rss
+    tier: 2
+    kind: commentary
+    url: https://lilianweng.github.io/index.xml
+    homepage: https://lilianweng.github.io/
+
+  - id: answer-ai
+    name: Answer.AI
+    type: rss
+    tier: 2
+    kind: commentary
+    url: https://www.answer.ai/index.xml
+    homepage: https://www.answer.ai/
+
+  - id: sam-altman
+    name: Sam Altman
+    type: rss
+    tier: 2
+    kind: commentary
+    url: https://blog.samaltman.com/posts.atom
+    homepage: https://blog.samaltman.com/
+
+  - id: ethan-mollick
+    name: Ethan Mollick
+    type: rss
+    tier: 2
+    kind: commentary
+    url: https://www.oneusefulthing.org/feed
+    homepage: https://www.oneusefulthing.org/
+
+  - id: kexue-fm
+    name: 科学空间
+    type: rss
+    tier: 2
+    kind: commentary
+    url: https://kexue.fm/feed
+    homepage: https://kexue.fm/
+
+  - id: recode-china-ai
+    name: Recode China AI
+    type: rss
+    tier: 2
+    kind: commentary
+    url: https://recodechinaai.substack.com/feed
+    homepage: https://recodechinaai.substack.com/
+
+  - id: chinai
+    name: ChinAI
+    type: rss
+    tier: 2
+    kind: commentary
+    url: https://chinai.substack.com/feed
+    homepage: https://chinai.substack.com/
 
   # ---------------------------------------------------------------- 社区信号（Tier 2）
   - id: hackernews

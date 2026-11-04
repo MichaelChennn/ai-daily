@@ -63,18 +63,22 @@ def _strip_controls(text: str) -> str:
 
 def parse_datetime(value: str | None) -> datetime | None:
     """Parse ISO 8601 or RFC 2822 timestamps; naive values are assumed UTC."""
+    parsed = parse_written_datetime(value)
+    return as_utc(parsed) if parsed else None
+
+
+def parse_written_datetime(value: str | None) -> datetime | None:
+    """Like parse_datetime, but keeps the clock and offset the timestamp was written in."""
     if not value:
         return None
     value = value.strip()
-    parsed: datetime | None
     try:
-        parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+        return datetime.fromisoformat(value.replace("Z", "+00:00"))
     except ValueError:
         try:
-            parsed = parsedate_to_datetime(value)
+            return parsedate_to_datetime(value)
         except (TypeError, ValueError, IndexError):
             return None
-    return as_utc(parsed)
 
 
 _MONTHS = {
