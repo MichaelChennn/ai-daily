@@ -117,6 +117,7 @@ def build_candidates(
             "candidates": len(kept),
             "clusters": len(clusters),
             "seen_before": sum(1 for c in kept if c.seen_on),
+            "reported_before": sum(1 for c in kept if c.reported_on),
         },
         "sources": [
             {**report.__dict__, "filtered": dict(Counter(f.reason for f in report.filtered))}
@@ -144,6 +145,8 @@ def candidate_listing(data: dict[str, Any], kinds: list[str] | None = None, summ
             notes.append(f"cluster {c['cluster_id']}({clusters[c['cluster_id']]})")
         if c["seen_on"]:
             notes.append(f"seen {','.join(c['seen_on'])}")
+        # .get: issues fetched before reported_on existed don't have it.
+        notes += [f"reported {r['date'][5:]}「{r['title']}」" for r in c.get("reported_on", [])]
         head = f"{c['id']} {c['kind']:<10} T{c['tier']} [{c['source']}] {c['title']}"
         lines.append(f"{head}  | {' '.join(notes)}")
         if summary_chars and c["summary"]:

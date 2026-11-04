@@ -34,6 +34,7 @@ class Candidate:
     cluster_id: str = ""
     also_from: list[dict[str, Any]] = field(default_factory=list)
     seen_on: list[str] = field(default_factory=list)
+    reported_on: list[dict[str, str]] = field(default_factory=list)  # [{date, title}]: earlier main digests
 
     def to_json(self) -> dict[str, Any]:
         data = asdict(self)

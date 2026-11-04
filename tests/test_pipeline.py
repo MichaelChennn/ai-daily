@@ -139,3 +139,78 @@ async def test_filtered_items_are_counted_per_source_and_listed(window):
         "value": None,
     }
     json.dumps(data)
+
+
+def _listing_data(**candidate):
+    return {
+        "date": ISSUE.isoformat(),
+        "clusters": [],
+        "sources": [],
+        "candidates": [
+            {
+                "id": "c_1",
+                "kind": "model",
+                "tier": 1,
+                "source": "hf",
+                "title": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+                "summary": "",
+                "signals": {},
+                "also_from": [],
+                "cluster_id": "k_1",
+                "seen_on": [],
+                **candidate,
+            }
+        ],
+    }
+
+
+def test_listing_shows_when_a_candidate_was_reported():
+    data = _listing_data(reported_on=[{"date": "2026-10-21", "title": "DeepSeek-V4.1-Flash-1017 更新权重"}])
+    assert "reported 10-21「DeepSeek-V4.1-Flash-1017 更新权重」" in pipeline.candidate_listing(data)
+
+
+def test_listing_reads_issues_from_before_reported_on():
+    assert "reported" not in pipeline.candidate_listing(_listing_data())
+
+
+def test_build_candidates_writes_reported_on_and_counts_it(window):
+    sources = [source("rss", id_="openai-news")]
+    url = "https://openai.com/index/gpt-6"
+    blog = Candidate(
+        source="openai-news",
+        source_name="OpenAI",
+        tier=1,
+        kind="blog",
+        title="Introducing GPT-6",
+        url=url,
+        published_at=IN_WINDOW,
+    )
+    reported = dedup.ReportedItem("2026-10-01", "OpenAI 发布 GPT-6", {dedup.url_key(url)})
+    data = pipeline.build_candidates([blog], sources, window, [], dedup.History({}, {}, [reported]))
+    assert data["candidates"][0]["reported_on"] == [{"date": "2026-10-01", "title": "OpenAI 发布 GPT-6"}]
+    assert data["stats"]["reported_before"] == 1
+    json.dumps(data)
+
+
+def test_cli_fetch_takes_a_separate_reported_lookback(tmp_path, monkeypatch):
+    sources_file = tmp_path / "sources.yaml"
+    sources_file.write_text(
+        "sources:\n  - {id: openai-news, name: OpenAI, type: rss, tier: 1, kind: blog, "
+        'url: "https://openai.com/news/rss.xml"}\n'
+    )
+    data_dir = tmp_path / "data"
+    old = data_dir / (ISSUE - timedelta(days=20)).isoformat()
+    old.mkdir(parents=True)
+    (old / "digest.json").write_text(
+        json.dumps({"items": [{"title": "旧条目", "sources": [{"url": "https://openai.com/index/gpt-6"}]}]})
+    )
+    monkeypatch.setattr(pipeline, "make_client", lambda: mock_client({"openai.com/news/rss.xml": RSS}))
+    args = ["fetch", "--date", ISSUE.isoformat(), "--sources", str(sources_file), "--data-dir", str(data_dir)]
+
+    def reported():
+        return json.loads((data_dir / ISSUE.isoformat() / "candidates.json").read_text())["stats"][
+            "reported_before"
+        ]
+
+    assert cli.main(args) == 0 and reported() == 1
+    assert cli.main([*args, "--reported-days", "10"]) == 0 and reported() == 0
