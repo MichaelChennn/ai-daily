@@ -28,6 +28,7 @@ def _candidate(id_, kind, title, url, summary="", tier=1, **extra):
         "cluster_id": extra.pop("cluster_id", "k_" + id_),
         "also_from": extra.pop("also_from", []),
         "seen_on": extra.pop("seen_on", []),
+        "reported_on": extra.pop("reported_on", []),
     }
 
 
@@ -309,7 +310,7 @@ def test_apply_report_drops_and_records():
     assert digest.validate(result, CANDIDATES).ok  # idempotent
 
 
-def test_fallback_is_valid_and_skips_seen_and_clustered_candidates():
+def test_fallback_is_valid_and_skips_reported_and_clustered_candidates():
     candidates = copy.deepcopy(CANDIDATES)
     candidates["candidates"] += [
         _candidate(
@@ -318,7 +319,7 @@ def test_fallback_is_valid_and_skips_seen_and_clustered_candidates():
             "Yesterday's paper",
             "https://huggingface.co/papers/2610.00002",
             signals={"upvotes": 999},
-            seen_on=["2026-10-19"],
+            reported_on=[{"date": "2026-10-12", "title": "以前报道过的论文"}],
         ),
         _candidate(
             "c_dup",
@@ -348,6 +349,50 @@ def test_fallback_is_valid_and_skips_seen_and_clustered_candidates():
         "paper",
         "tool",
     ]  # Ask HN skipped
+
+
+def _fallback_papers(*papers):
+    candidates = {"date": DATE, "candidates": list(papers)}
+    data = fallback.build_fallback(candidates)
+    return [i["sources"][0]["candidate_id"] for i in data["items"] if i["section"] == "paper"]
+
+
+def test_fallback_ranks_by_reported_on_not_seen_on():
+    # Listed yesterday but never reported: still news, so its heat decides.
+    seen = _candidate(
+        "c_seen",
+        "paper",
+        "Seen paper",
+        "https://huggingface.co/papers/2610.00011",
+        signals={"upvotes": 99},
+        seen_on=["2026-10-19"],
+    )
+    fresh = _candidate(
+        "c_fresh", "paper", "Fresh paper", "https://huggingface.co/papers/2610.00012", signals={"upvotes": 1}
+    )
+    assert _fallback_papers(fresh, seen) == ["c_seen", "c_fresh"]
+
+
+def test_fallback_uses_reported_candidates_only_when_nothing_else_is_left():
+    reported = _candidate(
+        "c_reported",
+        "paper",
+        "Reported paper",
+        "https://huggingface.co/papers/2610.00013",
+        signals={"upvotes": 99},
+        reported_on=[{"date": "2026-10-12", "title": "以前报道过的论文"}],
+    )
+    fresh = _candidate(
+        "c_fresh", "paper", "Fresh paper", "https://huggingface.co/papers/2610.00014", signals={"upvotes": 1}
+    )
+    assert _fallback_papers(reported, fresh) == ["c_fresh", "c_reported"]
+
+
+def test_fallback_reads_candidates_without_reported_on():
+    # Issues fetched before reported_on existed don't have the field.
+    old = _candidate("c_old", "paper", "Old paper", "https://huggingface.co/papers/2610.00015")
+    del old["reported_on"]
+    assert _fallback_papers(old) == ["c_old"]
 
 
 def test_render_markdown():
