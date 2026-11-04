@@ -6,6 +6,7 @@ published. Item-level failures drop the item and are never "fixed" (charter, pri
 - every source is a candidate from candidates.json, or a page the editor recorded as opened;
 - every item has at least one first-hand source, not just a HN / Reddit thread, image or tweet;
 - an item in the paper section has a paper as its main source;
+- an item whose main source is commentary sits in the brief section, at most COMMENTARY_MAX per issue;
 - numbers and model names / versions in the text (Chinese, or English in digest.en.json) appear
   in the cited material (candidate title and summary, or a verbatim evidence quote);
 - with --check-links: links are not 404, and evidence quotes really are on the cited page.
@@ -40,6 +41,7 @@ ITEMS_TARGET = (8, 18)
 ITEMS_EXPECTED = 15
 MIN_ITEMS = 3  # fewer surviving items in a full digest means the edit failed: publish the fallback
 SECTION_TARGETS = {"headline": (3, 5), "paper": (2, 4)}
+COMMENTARY_MAX = 2  # items whose main source is a writer's or newsletter's post; over it they are dropped
 HIGHLIGHTS_MAX = 3
 # The main issue is Chinese; the English edition (digest.en.json, "lang": "en") has the same
 # schema, and English takes about twice the characters.
@@ -134,12 +136,20 @@ def validate(digest: Any, candidates: dict[str, Any], pages: dict[str, Page] | N
 
     context = _Context(candidates, digest.get("research"), report)
     cited: dict[str, int] = {}
+    commentary = 0  # items kept so far with commentary as their main source
     for index, item in enumerate(items):
         errors = _check_item(item, mode, lang, context, pages, report)
         for cid in _cited_ids(item, context) if not errors else []:
             if cid in cited:
                 errors.append(f"candidate {cid} is already used by item {cited[cid] + 1}")
             cited.setdefault(cid, index)
+        if not errors and _main_kind(item, context) == "commentary":
+            if item["section"] != "brief":
+                errors.append(f"a commentary item belongs in the brief section, not {item['section']}")
+            elif commentary >= COMMENTARY_MAX:
+                errors.append(f"at most {COMMENTARY_MAX} commentary items per issue")
+            else:
+                commentary += 1
         if errors:
             report.item_errors[index] = errors
 
@@ -215,13 +225,23 @@ def _check_counts(items: list[dict[str, Any]], report: Report) -> None:
             report.warnings.append(f"{count} {section} items (target {low}-{high})")
 
 
+def _source_id(source: dict[str, Any], context: _Context) -> str | None:
+    return source.get("candidate_id") or context.by_key.get(url_key(source["url"]))
+
+
 def _cited_ids(item: dict[str, Any], context: _Context) -> list[str]:
     ids = []
     for s in item["sources"]:
-        cid = s.get("candidate_id") or context.by_key.get(url_key(s["url"]))
+        cid = _source_id(s, context)
         if cid and cid not in ids:
             ids.append(cid)
     return ids
+
+
+def _main_kind(item: dict[str, Any], context: _Context) -> str | None:
+    """The kind of the candidate behind the first source; a page the editor opened has none."""
+    c = context.by_id.get(_source_id(item["sources"][0], context) or "")
+    return c.get("kind") if c else None
 
 
 def _check_item(
