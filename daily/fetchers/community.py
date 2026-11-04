@@ -14,7 +14,14 @@ import feedparser
 import httpx
 
 from daily.config import SourceConfig
-from daily.fetchers.base import SUMMARY_MAX_CHARS, candidate, filtered, get, is_ai_related
+from daily.fetchers.base import (
+    SUMMARY_MAX_CHARS,
+    candidate,
+    filtered,
+    first_hand_links,
+    get,
+    is_ai_related,
+)
 from daily.fetchers.feeds import entry_datetime
 from daily.models import Candidate
 from daily.text import clean_text, clean_title, truncate
@@ -60,6 +67,7 @@ async def fetch_hackernews(
                 published_at=datetime.fromtimestamp(hit["created_at_i"], timezone.utc),
                 discussion_url=discussion,
                 signals={"hn_points": hit.get("points") or 0, "hn_comments": hit.get("num_comments") or 0},
+                links=first_hand_links(hit.get("story_text")),
             )
         )
     return items
@@ -109,6 +117,7 @@ async def fetch_reddit(client: httpx.AsyncClient, source: SourceConfig, window: 
                 published_at=published,
                 discussion_url=comments,
                 signals={"reddit_rank": rank, "subreddit": tags[0].get("term") if tags else subreddit},
+                links=first_hand_links(html),
             )
         )
     return items

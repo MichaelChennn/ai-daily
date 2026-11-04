@@ -27,6 +27,8 @@ class Candidate:
     discussion_url: str | None = None
     signals: dict[str, Any] = field(default_factory=dict)
     tags: list[str] = field(default_factory=list)
+    # First-hand pages a discussion post's body links to (fetchers.base.first_hand_links).
+    links: list[str] = field(default_factory=list)
 
     # Filled in by dedup.
     id: str = ""

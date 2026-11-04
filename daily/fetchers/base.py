@@ -2,11 +2,13 @@
 
 from __future__ import annotations
 
+import html
 import re
 from collections.abc import Awaitable, Callable, Iterator
 from contextlib import contextmanager
 from contextvars import ContextVar
 from typing import Any
+from urllib.parse import urlsplit
 
 import httpx
 
@@ -95,7 +97,31 @@ def is_ai_related(*texts: str | None, extra_keywords: list[str] | None = None) -
     return any(k.lower() in blob.lower() for k in extra_keywords or [])
 
 
+# What counts as a first-hand page when a discussion post links to it (#51 A3).
+FIRST_HAND_HOSTS = {"github.com", "huggingface.co", "arxiv.org"}
+_URL = re.compile(r"https?://[^\s\"'<>()\[\]]+")
+
+
+def first_hand_links(markup: str | None) -> list[str]:
+    """The links in a post's body to a page of a project, model or paper, in order, without repeats.
+    A page has at least two path segments (github.com/owner/repo, arxiv.org/abs/id): a bare site
+    or section link says nothing about what the post is about."""
+    links: list[str] = []
+    for match in _URL.findall(html.unescape(markup or "")):
+        url = match.rstrip(".,;:!?*_`")
+        parts = urlsplit(url)
+        host = (parts.hostname or "").removeprefix("www.")
+        if host in FIRST_HAND_HOSTS and len([p for p in parts.path.split("/") if p]) >= 2:
+            if url not in links:
+                links.append(url)
+    return links
+
+
 def candidate(source: SourceConfig, **fields: Any) -> Candidate:
+    # Links scraped from markup or feeds may still hold entities (&amp; in a query string).
+    for key in ("url", "discussion_url"):
+        if fields.get(key):
+            fields[key] = html.unescape(fields[key])
     return Candidate(source=source.id, source_name=source.name, tier=source.tier, kind=source.kind, **fields)
 
 

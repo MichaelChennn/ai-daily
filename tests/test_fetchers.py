@@ -1,8 +1,10 @@
 """Each fetcher against a small canned response (no network)."""
 
+import httpx
 import pytest
 
-from daily.fetchers.base import collect_filtered
+from daily.config import SourceConfig
+from daily.fetchers.base import candidate, collect_filtered, first_hand_links
 from daily.fetchers.community import fetch_hackernews, fetch_reddit
 from daily.fetchers.feeds import fetch_rss
 from daily.fetchers.github import fetch_releases, fetch_trending
@@ -350,3 +352,76 @@ async def test_content_filters_record_what_they_skip(window):
         ("hackernews", "Maintaining a legacy codebase", "not_ai", None),
     ]
     assert skipped[0].url == "https://github.com/acme/css-grid"
+
+
+def test_candidate_urls_have_their_html_entities_decoded():
+    source = SourceConfig("s", "rss", "S", 1, "blog")
+    item = candidate(
+        source,
+        title="t",
+        url="https://x.example/p?a=1&amp;s=46",
+        discussion_url="https://y.example/d?a=1&amp;b=2",
+    )
+    assert item.url == "https://x.example/p?a=1&s=46"
+    assert item.discussion_url == "https://y.example/d?a=1&b=2"
+    assert candidate(source, title="t", url="https://x.example/").discussion_url is None
+
+
+def test_first_hand_links_only_keeps_project_pages_on_the_three_hosts():
+    body = (
+        '<p>Code: <a href="https://github.com/p-e-w/heretic">repo</a>, '
+        "weights https://huggingface.co/acme/model-1.5B, and paper https://arxiv.org/abs/2610.00001.</p>"
+        '<a href="https://www.reddit.com/r/x">r/x</a> https://github.com/p-e-w/heretic again, '
+        "https://example.com/a/b https://github.com/ https://huggingface.co/models https://notgithub.com/a/b"
+    )
+    assert first_hand_links(body) == [
+        "https://github.com/p-e-w/heretic",
+        "https://huggingface.co/acme/model-1.5B",
+        "https://arxiv.org/abs/2610.00001",
+    ]
+    assert first_hand_links("") == [] and first_hand_links(None) == []
+
+
+def test_first_hand_links_read_escaped_markup():
+    # Algolia escapes the slashes in HN's story_text.
+    assert first_hand_links('<a href="https:&#x2F;&#x2F;github.com&#x2F;a&#x2F;b">x</a>') == [
+        "https://github.com/a/b"
+    ]
+
+
+REDDIT_SELF_POST = (
+    """<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><entry>
+  <title>I made a tool</title>
+  <link href="https://www.reddit.com/r/LocalLLaMA/comments/abc/tool/" />
+  <updated>"""
+    + IN_WINDOW.isoformat()
+    + """</updated>
+  <content type="html">&lt;div&gt;Code at &lt;a href=&quot;https://github.com/a/tool&quot;&gt;here&lt;/a&gt;&lt;/div&gt;
+  submitted by &lt;a href=&quot;https://www.reddit.com/user/u&quot;&gt; /u/u &lt;/a&gt;
+  &lt;span&gt;&lt;a href=&quot;https://www.reddit.com/r/LocalLLaMA/comments/abc/tool/&quot;&gt;[link]&lt;/a&gt;&lt;/span&gt;</content>
+</entry></feed>"""
+)
+
+
+async def test_reddit_keeps_first_hand_links_from_the_post_body(window):
+    async with mock_client({"www.reddit.com/r/LocalLLaMA/top/.rss": REDDIT_SELF_POST}) as client:
+        items = await fetch_reddit(
+            client, source("reddit", "discussion", tier=2, subreddit="LocalLLaMA"), window
+        )
+    assert items[0].links == ["https://github.com/a/tool"]
+    assert "github.com" not in items[0].summary
+
+
+async def test_hackernews_keeps_first_hand_links_from_the_post_body(window):
+    hit = {
+        "objectID": "7",
+        "title": "Show HN: An AI agent",
+        "story_text": 'Repo: <a href="https:&#x2F;&#x2F;github.com&#x2F;a&#x2F;agent">link</a>',
+        "created_at_i": int(IN_WINDOW.timestamp()),
+        "points": 60,
+    }
+    routes = {"hn.algolia.com/api/v1/search_by_date": httpx.Response(200, json={"hits": [hit]})}
+    async with mock_client(routes) as client:
+        items = await fetch_hackernews(client, source("hackernews", "discussion", tier=2), window)
+    assert items[0].links == ["https://github.com/a/agent"]
