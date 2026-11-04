@@ -215,6 +215,7 @@ def test_cli_fetch_takes_a_separate_reported_lookback(tmp_path, monkeypatch):
     assert cli.main(args) == 0 and reported() == 1
     assert cli.main([*args, "--reported-days", "10"]) == 0 and reported() == 0
 
+
 def _release(version, signals=None):
     return Candidate(
         source="github-releases",
