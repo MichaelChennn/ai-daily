@@ -2,105 +2,126 @@
   "schema_version": 1,
   "date": "2026-11-05",
   "mode": "full",
-  "generated_at": "2026-11-05T04:43:49+00:00",
-  "channel": "api",
-  "model": "nvidia:minimaxai/minimax-m3.1-flash",
+  "generated_at": "2026-11-05T04:45:22+00:00",
+  "model": "claude-opus-5-5",
   "highlights": [
-    "MoonshotAI released the open-weight, natively multimodal Kimi-K3.1-Pro with a 1-million-token context window.",
-    "Tencent launched Hy4 with vision and computer use through APIs, but the weights of the final version are not downloadable yet.",
-    "Axion 1.0 and Ripple-65B Preview add open options for agentic work, while SpecPilot reports raising speculative decoding speedup over AR from 4.46times to 10.87times with one request."
+    "Moonshot AI released open weights for Kimi K3.1 Pro, an MoE model with 2.8T total and 104B activated parameters.",
+    "OpenAI's autonomous pipeline generated patches for 948 local privilege-escalation vulnerabilities in the Linux kernel, and Anthropic open-sourced FlashProve, a provable inference prototype, under Apache 2.0.",
+    "Ricursive Intelligence released the dense Ripple-65B Preview, which it says scores 80.52 on TerminalBench 2.1."
   ],
   "items": [
     {
       "section": "headline",
-      "title": "MoonshotAI releases the multimodal Kimi-K3.1-Pro",
-      "summary": "Kimi K3.1 Pro is an open-weight, natively multimodal agentic model and the first model in the K3.1 series, post-trained from Kimi K3 with large-scale joint reinforcement learning. It offers a 1-million-token context window and can be served locally with vllm serve \"moonshotai/Kimi-K3.1-Pro\" or run through Docker.",
-      "tags": [
-        "模型",
-        "多模态",
-        "推理"
-      ],
+      "title": "Moonshot AI releases open weights for Kimi K3.1 Pro",
+      "summary": "Kimi K3.1 Pro is Moonshot AI's open-weight, natively multimodal agentic model, post-trained from Kimi K3. It is an MoE with 2.8T total and 104B activated parameters and a context length of 1048576. In Moonshot's table it scores 65.7 on Terminal-Bench 4.0 and 51.7 on SWE Marathon v1.1 at max effort. Moonshot recommends vLLM, SGLang or TokenSpeed for serving, so teams with the hardware to self-host can start evaluating it.",
       "sources": [
         {
           "candidate_id": "c_398ce84e27",
           "url": "https://huggingface.co/moonshotai/Kimi-K3.1-Pro"
+        },
+        {
+          "candidate_id": "c_398ce84e27",
+          "url": "https://news.ycombinator.com/item?id=50366999"
         }
       ],
       "evidence": [
         {
           "url": "https://huggingface.co/moonshotai/Kimi-K3.1-Pro",
-          "quote": "Kimi K3.1 Pro is an open-weight, natively multimodal agentic model, and our most capable 3T-class model to date."
+          "quote": "Kimi K3.1 Pro is an open-weight, natively multimodal agentic model, and our most capable 3T-class model to date. Post-trained from Kimi K3 with large-scale joint reinforcement learning across hundreds of downstream domains, it is the first model in the K3.1 series."
         },
         {
           "url": "https://huggingface.co/moonshotai/Kimi-K3.1-Pro",
-          "quote": "Post-trained from Kimi K3 with large-scale joint reinforcement learning across hundreds of downstream domains, it is the first model in the K3.1 series."
+          "quote": "Architecture Mixture-of-Experts (MoE) Total Parameters 2.8T Activated Parameters 104B"
         },
         {
           "url": "https://huggingface.co/moonshotai/Kimi-K3.1-Pro",
-          "quote": "With a 1-million-token context window, Kimi K3.1 Pro delivers substantial improvements in coding, 3D creation, financial research, factual accuracy, and other agentic capabilities."
+          "quote": "Vocabulary Size 160K Context Length 1048576"
         },
         {
           "url": "https://huggingface.co/moonshotai/Kimi-K3.1-Pro",
-          "quote": "vllm serve \"moonshotai/Kimi-K3.1-Pro\""
+          "quote": "Coding Terminal-Bench 4.0 65.7 57.9 58.2 66.4 42.3 41.8 Terminal-Bench-Science 0.1 38.1 40.0 68.1 63.3 15.7 8.1 SWE Marathon v1.1 51.7"
         },
         {
           "url": "https://huggingface.co/moonshotai/Kimi-K3.1-Pro",
-          "quote": "}' Use Docker docker model run hf.co/moonshotai/Kimi-K3.1-Pro SGLang How to use moonshotai/Kimi-K3.1-Pro with SGLang: Install from pip and serve model # Install SGLang from pip:"
-        }
-      ]
-    },
-    {
-      "section": "headline",
-      "title": "Thinking Machines releases Axion 1.0 as a fully open agent model",
-      "summary": "Axion 1.0 is trained in only three stages: two lightweight supervised fine-tuning stages followed by reinforcement learning, without dedicated mid-training, direct preference optimization (DPO), or on-policy distillation (OPD). The team released the full recipe, including data construction, generation, filtering, verification, prompts, and training code, and the Axion 1.0-35B reproduction checkpoint is available under Apache 2.0.",
-      "tags": [
-        "模型",
-        "Agent",
-        "训练",
-        "开源"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_70fc1abeb1",
-          "url": "https://huggingface.co/papers/2611.03233"
-        },
-        {
-          "candidate_id": "c_026a3a5849",
-          "url": "https://huggingface.co/Axion1-0/Axion-1.0-35B"
+          "quote": "Currently, Kimi K3.1 Pro is recommended to run on the following inference engines: vLLM — see recipes SGLang — see cookbook TokenSpeed — see recipes"
         }
       ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2611.03233",
-          "quote": "Generated by thinkingmachines/Inkling-Small We introduce Axion 1.0, a fully open agent foundation model that combines strong and broad agentic capabilities with a remarkably simple training recipe."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.03233",
-          "quote": "Axion 1.0 is trained in only three stages: two lightweight supervised fine-tuning stages followed by reinforcement learning , without dedicated mid-training, direct preference optimization (DPO), or on-policy distillation (OPD)."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.03233",
-          "quote": "Equally importantly, Axion 1.0 is open beyond model weights: we release the complete recipe, including data construction, generation, filtering, verification, prompts, and training code, enabling the entire development process to be reproduced and extended."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.03233",
-          "quote": "With approximately 18K SFT examples, Axion 1.0-35B and 122B achieve competitive results across six evaluation settings: HLE, BioMysteryBench, SEAL-0, HiPhO, and the Olympiad and Research splits of FrontierScience."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.03233",
-          "quote": "The Axion 1.0-35B reproduction checkpoint is now available under Apache 2.0."
-        }
-      ]
-    },
-    {
-      "section": "headline",
-      "title": "Ricursive Intelligence releases Ripple-65B Preview",
-      "summary": "Ripple-65B Preview is a 65B parameter dense Transformer model pretrained on 12 trillion tokens with support for up to 1M context length. The preview includes an instruction-tuned model in BF16 and NVFP4 numerics plus a BF16 base model, and the team says it can fit on consumer hardware such as the NVIDIA DGX Spark.",
       "tags": [
         "模型",
         "开源",
-        "代码"
+        "Agent"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "OpenAI pipeline patches 948 Linux kernel privilege-escalation bugs",
+      "summary": "OpenAI built an autonomous pipeline that found, validated and generated patches for 948 local privilege-escalation vulnerabilities in the Linux kernel. It shows AI handling the full loop from discovery to patch, which teams maintaining low-level code should watch.",
+      "sources": [
+        {
+          "candidate_id": "c_d094672a40",
+          "url": "https://openai.com/index/a-thousand-fewer-paths-to-root"
+        }
       ],
+      "evidence": [],
+      "tags": [
+        "安全",
+        "Agent"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Anthropic open-sources FlashProve for provable LLM inference",
+      "summary": "FlashProve uses zkSNARKs so a model provider can commit to a model and then prove each response was produced by it, without the proof revealing the weights. On Llama 4 Maverick (400B MoE, 4-bit weights), a single H100 generates proofs at around 110 tokens/second, with a ~19 MB proof per 1,024-token request and ~70-95x the GPU time of running the model on vLLM. Code, Lean proofs and documentation are released under Apache 2.0; it is a research prototype, relevant to anyone who wants to verify which model an API actually served.",
+      "sources": [
+        {
+          "candidate_id": "c_df3112427f",
+          "url": "https://www.anthropic.com/research/provable-inference"
+        },
+        {
+          "candidate_id": "c_df3112427f",
+          "url": "https://news.ycombinator.com/item?id=50368626"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://www.anthropic.com/research/provable-inference",
+          "quote": "Cryptographic proofs of inference solve this problem: they let a model provider commit to a model and then prove that each response was produced by that model."
+        },
+        {
+          "url": "https://www.anthropic.com/research/provable-inference",
+          "quote": "Claude has produced improvements on zkSNARKs for inference, building a system that is substantially faster than prior open-source systems."
+        },
+        {
+          "url": "https://www.anthropic.com/research/provable-inference",
+          "quote": "For a large model (Llama 4 Maverick, 400B-parameter mixture of experts), a single H100 GPU generates proofs at around 110 tokens/second, with a proof size of ~19 MB per 1,024-token request, when in 4-bit quantized weights"
+        },
+        {
+          "url": "https://www.anthropic.com/research/provable-inference",
+          "quote": "Importantly, cryptographic techniques ensure that the proof reveals nothing about the model’s weights. Today, we release FlashProve: an open-source performant prototype for provable inference"
+        },
+        {
+          "url": "https://www.anthropic.com/research/provable-inference",
+          "quote": "We release our code, Lean proofs, and documentation under the Apache 2.0 license."
+        },
+        {
+          "url": "https://www.anthropic.com/research/provable-inference",
+          "quote": "This release is a research prototype"
+        },
+        {
+          "url": "https://www.anthropic.com/research/provable-inference",
+          "quote": "This is ~70-95x the GPU time of running the model itself on vLLM"
+        }
+      ],
+      "tags": [
+        "安全",
+        "推理",
+        "开源"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Ricursive Intelligence releases dense open-weight Ripple-65B Preview",
+      "summary": "Ripple-65B Preview is a general-purpose variant of the proprietary model behind Ricursive Intelligence's chip design platform: a dense Transformer rather than MoE, pretrained on 12 trillion tokens with up to 1M context. The company reports a U.S. open-weight state-of-the-art 80.52 on TerminalBench 2.1. It is available on Hugging Face, Together AI, GMI Cloud and OpenRouter, and the company says it runs efficiently on local devices such as NVIDIA DGX Spark.",
       "sources": [
         {
           "candidate_id": "c_30c3b4e12d",
@@ -113,125 +134,52 @@
       ],
       "evidence": [
         {
-          "url": "https://huggingface.co/ricursiveAI/Ripple-65B-Preview",
-          "quote": "Ricursive Intelligence introduces Ripple-65B Preview , a 65B parameter dense Transformer model pretrained on 12 trillion tokens with support for up to 1M context length."
+          "url": "https://www.ricursive.com/ripple",
+          "quote": "Today, we release Ripple-65B Preview , a general-purpose variant of the proprietary model that powers our AI chip design platform. The model is pretrained on 12 trillion tokens with support for up to 1M context length."
         },
         {
-          "url": "https://huggingface.co/ricursiveAI/Ripple-65B-Preview",
-          "quote": "Ripple-65B Preview delivers strong results on agentic coding, scoring 80.52 on TerminalBench 2.1 and"
+          "url": "https://www.ricursive.com/ripple",
+          "quote": "achieving U.S. open-weight state-of-the-art (80.52) on TerminalBench 2.1"
         },
         {
-          "url": "https://huggingface.co/ricursiveAI/Ripple-65B-Preview",
-          "quote": "Our Preview release includes an instruction-tuned model in BF16 and NVFP4 numerics, and a BF16 base model."
+          "url": "https://www.ricursive.com/ripple",
+          "quote": "we chose to train a modernized dense Transformer model rather than use Mixture-of-Experts (MoE) like other labs."
         },
         {
-          "url": "https://huggingface.co/ricursiveAI/Ripple-65B-Preview",
-          "quote": "At only 65B total parameters, the model can fit on consumer hardware such as the NVIDIA DGX Spark."
+          "url": "https://www.ricursive.com/ripple",
+          "quote": "The model’s small parameter envelope also enables it to run efficiently on local devices such as NVIDIA DGX Spark"
         },
         {
-          "url": "https://huggingface.co/ricursiveAI/Ripple-65B-Preview",
-          "quote": "To encourage local model development, we provide an NVFP4 checkpoint and colab to help you get started."
+          "url": "https://www.ricursive.com/ripple",
+          "quote": "Ripple-65B Preview is available on Hugging Face , Together AI , GMI Cloud , and OpenRouter ."
         }
-      ]
-    },
-    {
-      "section": "headline",
-      "title": "Tencent releases Hy4 with vision and computer use, weights pending",
-      "summary": "Tencent's Hy team released the final version of Hy4 on November 4, 2026, making it available the same day through APIs on Tencent Cloud and the OpenRouter platform. The weights of this version cannot be downloaded yet, though Tencent says it plans to release them; compared with the preview released on August 28, Hy4 adds vision and computer use.",
+      ],
       "tags": [
         "模型",
-        "多模态",
-        "Agent",
-        "产品"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_453fbccfb8",
-          "url": "https://maccus.fr/en/tencent-hy4-ai-model/"
-        },
-        {
-          "candidate_id": "c_24caf384ef",
-          "url": "https://hy.tencent.ai/research/hy4?langVersion=en"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://maccus.fr/en/tencent-hy4-ai-model/",
-          "quote": "Tencent’s Hy team released the final version of Hy4, its large language model, on November 4, 2026, and made it available the same day through APIs on Tencent Cloud and the OpenRouter platform."
-        },
-        {
-          "url": "https://maccus.fr/en/tencent-hy4-ai-model/",
-          "quote": "In its launch post, written in Chinese, Tencent says Hy now ranks among the strongest open-source models “for the first time.” The weights of this version can’t be downloaded, though."
-        },
-        {
-          "url": "https://maccus.fr/en/tencent-hy4-ai-model/",
-          "quote": "Tencent says it “plans” to release them, gives no date and acknowledges a “large gap” between Hy4 and the top closed models (our translations)."
-        },
-        {
-          "url": "https://maccus.fr/en/tencent-hy4-ai-model/",
-          "quote": "Compared with the preview released on August 28, Hy4 adds vision and computer use."
-        },
-        {
-          "url": "https://maccus.fr/en/tencent-hy4-ai-model/",
-          "quote": "Hy4 can also edit Word, Excel and PowerPoint files alongside the user in real time."
-        },
-        {
-          "url": "https://maccus.fr/en/tencent-hy4-ai-model/",
-          "quote": "The model’s system card, with fuller safety evaluations, will come out “at that time.” As of early afternoon on November 4, Tencent’s Hugging Face account held only two Hy4 repositories, Hy4-preview and its FP8 version, both under the Apache 2.0 license."
-        }
-      ]
-    },
-    {
-      "section": "headline",
-      "title": "Ai2 and Google develop NeuralGCM+ for coupled climate simulation",
-      "summary": "Ai2 is developing NeuralGCM+, an open-source model that combines physics and AI to simulate the atmosphere and ocean together for faster, more reliable long-term climate projections. The project receives multimillion-dollar, three-year funding from Google.org with technical support from Google Research and builds on Google Research's NeuralGCM.",
-      "tags": [
-        "论文",
-        "多模态",
-        "行业"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_5e947338fe",
-          "url": "https://allenai.org/blog/google-climate-partnership"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://allenai.org/blog/google-climate-partnership",
-          "quote": "Ai2 and Google collaborate on a new generation of climate models November 4, 2026 Ai2 Share Ai2 is launching a new climate modeling initiative with multimillion-dollar, three-year funding from Google.org and technical support from Google Research."
-        },
-        {
-          "url": "https://allenai.org/blog/google-climate-partnership",
-          "quote": "The funding will expand our Climate Modeling team as we develop NeuralGCM+, an open-source model designed to make climate projections faster and more reliable."
-        },
-        {
-          "url": "https://allenai.org/blog/google-climate-partnership",
-          "quote": "The project builds on Google Research’s NeuralGCM , which uses physical equations to simulate large scale dynamics and AI to represent smaller-scale processes such as cloud formation and rainfall."
-        },
-        {
-          "url": "https://allenai.org/blog/google-climate-partnership",
-          "quote": "We will extend it to simulate the atmosphere and ocean together, capturing how oceans absorb and redistribute heat—a major influence on long-term climate."
-        },
-        {
-          "url": "https://allenai.org/blog/google-climate-partnership",
-          "quote": "We will develop NeuralGCM+ along three connected fronts: Connect the atmosphere and ocean."
-        },
-        {
-          "url": "https://allenai.org/blog/google-climate-partnership",
-          "quote": "We aim to link NeuralGCM with an ocean and sea-ice model to produce stable simulations spanning decades."
-        }
+        "开源",
+        "代码"
       ]
     },
     {
       "section": "model",
-      "title": "Deep Principle releases Hydrogen-1.0 for scientific problem solving",
-      "summary": "Hydrogen-1.0 is an open-weight scientific problem-solving and research assistance model post-trained from GLM-5.3 for chemistry, materials science, and life sciences. It was trained with supervised fine-tuning and reinforcement learning using domain data, scientist feedback, laboratory records, and discovery trajectories, but full training datasets and complete training recipes are not released with the model weights.",
-      "tags": [
-        "模型",
-        "开源",
-        "推理"
+      "title": "OpenAI launches Images 2.6",
+      "summary": "Images 2.6 brings faster image generation, GIF creation, more precise editing and new API controls across ChatGPT, Codex and the API. Developers using OpenAI image generation should check the new API controls.",
+      "sources": [
+        {
+          "candidate_id": "c_06128555e5",
+          "url": "https://openai.com/index/introducing-images-2-6"
+        }
       ],
+      "evidence": [],
+      "tags": [
+        "图像",
+        "产品"
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Deep Principle releases Hydrogen-1.0 open-weight science model",
+      "summary": "Hydrogen-1.0 is post-trained from GLM-5.3 for chemistry, materials science and life sciences; the model is 753B parameters, with BF16 weights under the MIT License. The team reports a 38.3% pass rate on FrontierScience Research versus 33.3% for GPT-6 Astra at max thinking. It is an option for teams that want a self-hosted research assistant, though the numbers come from the team's own evaluation setup.",
       "sources": [
         {
           "candidate_id": "c_fd1772fd6c",
@@ -239,7 +187,7 @@
         },
         {
           "candidate_id": "c_677df7ecdc",
-          "url": "https://huggingface.co/deep-principle/Hydrogen-1.0"
+          "url": "https://www.reddit.com/gallery/1xnjhdd"
         }
       ],
       "evidence": [
@@ -249,233 +197,81 @@
         },
         {
           "url": "https://huggingface.co/deep-principle/Hydrogen-1.0",
-          "quote": "BF16 (unquantized)"
+          "quote": "The Hydrogen-1.0 BF16 model weights in this repository are provided under the MIT License ."
         },
         {
           "url": "https://huggingface.co/deep-principle/Hydrogen-1.0",
-          "quote": "deep-principle/Hydrogen-1.0-NVFP4"
-        },
-        {
-          "url": "https://huggingface.co/deep-principle/Hydrogen-1.0",
-          "quote": "deep-principle/Hydrogen-1.0-MXFP4"
-        },
-        {
-          "url": "https://huggingface.co/deep-principle/Hydrogen-1.0",
-          "quote": "NVFP4 and MXFP4 quantized versions are published in separate repositories (see Versions)."
-        },
-        {
-          "url": "https://huggingface.co/deep-principle/Hydrogen-1.0",
-          "quote": "Tested with SGLang on 8 GPUs."
-        },
-        {
-          "url": "https://huggingface.co/deep-principle/Hydrogen-1.0",
-          "quote": "The technical blog describes the public training overview, including supervised fine-tuning (SFT), reinforcement learning (RL), and data-source categories such as domain knowledge, research scenarios, laboratory records, and discovery trajectories."
-        },
-        {
-          "url": "https://huggingface.co/deep-principle/Hydrogen-1.0",
-          "quote": "Full training datasets and complete training recipes are not released with the model weights in this repository."
+          "quote": "Model size 753B params"
         }
+      ],
+      "tags": [
+        "模型",
+        "开源"
       ]
     },
     {
       "section": "model",
-      "title": "AuroraIMG2-100M adds a 256×256 text-to-image model",
-      "summary": "AuroraIMG2-100M is a 256×256 text-to-image model built around a 100.6M-parameter flow-matching diffusion transformer and a 44.9M-parameter text encoder, both trained from scratch on a single NVIDIA RTX PRO 6000. It works in the FLUX.2 VAE latent space and turns latents into pixels with the frozen, pretrained FLUX.2 small decoder, and the model card includes a diffusers-compatible quick start.",
+      "title": "Cohere Embed 5 and Rerank 5 arrive on OpenRouter",
+      "summary": "Cohere's Embed 5 and Rerank 5 retrieval models are now available through OpenRouter's single API, with unified billing and no extra SDKs. Embed 5 Pro and Fast share one embedding space, so you can index with Pro and query with Fast, and Rerank 5 scores are calibrated so one relevance threshold works across queries. RAG apps already on OpenRouter can drop a separate vendor integration.",
+      "sources": [
+        {
+          "candidate_id": "c_a0505debcc",
+          "url": "https://cohere.com/blog/embed-rerank-5-openrouter"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://cohere.com/blog/embed-rerank-5-openrouter",
+          "quote": "Embed 5 Pro and Fast share one embedding space. Index with embed-5-pro for quality, then query with embed-5-fast for latency. Rerank 5 scores are calibrated. A score means the same thing across queries and domains, so one relevance threshold can filter out weak context before it reaches the LLM."
+        }
+      ],
       "tags": [
         "模型",
-        "开源",
-        "图像"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_be3accbf00",
-          "url": "https://huggingface.co/AuroraAI-Research/AuroraIMG2-100M"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/AuroraAI-Research/AuroraIMG2-100M",
-          "quote": "AuroraIMG2-100M is a 256×256 text-to-image model built around a 100.6M-parameter flow-matching diffusion transformer and a 44.9M-parameter text encoder ."
-        },
-        {
-          "url": "https://huggingface.co/AuroraAI-Research/AuroraIMG2-100M",
-          "quote": "Both were trained from scratch on a single NVIDIA RTX PRO 6000."
-        },
-        {
-          "url": "https://huggingface.co/AuroraAI-Research/AuroraIMG2-100M",
-          "quote": "The model works in the FLUX.2 VAE latent space and turns latents into pixels with the frozen, pretrained FLUX.2 small decoder (Apache-2.0, bundled unchanged in vae/ )."
-        },
-        {
-          "url": "https://huggingface.co/AuroraAI-Research/AuroraIMG2-100M",
-          "quote": "256×256 RGB (fixed)"
-        },
-        {
-          "url": "https://huggingface.co/AuroraAI-Research/AuroraIMG2-100M",
-          "quote": "145.5M (text encoder 44.9M / denoiser 100.6M)"
-        }
+        "工具"
       ]
     },
     {
       "section": "paper",
-      "title": "SpecPilot discovers decoding optimizations per deployment",
-      "summary": "SpecPilot is an autonomous agentic loop that discovers algorithms and systems optimizations for each speculative decoding deployment, using a cost model and parallel agents while checking every output token against stock to detect reward hacking. It discovered a general lossless 12-bit weight format, tree verification for hybrid recurrent targets, two-level verification and three batching mechanisms, raising the speedup over AR from stock's 4.46times to 10.87times with one request, and from 1.94times to 3.93times with batching.",
-      "tags": [
-        "论文",
-        "推理",
-        "Agent"
-      ],
+      "title": "Axion 1.0: an agent foundation model with its full recipe open",
+      "summary": "Axion 1.0 is trained with two lightweight SFT stages followed by reinforcement learning, without dedicated mid-training, DPO or on-policy distillation, and the paper says it is competitive with leading commercial models on several agentic benchmarks. Beyond the weights, the authors release data construction, generation, filtering, verification, prompts and training code; the Axion 1.0-35B reproduction checkpoint on Hugging Face is an MoE with approximately 35B total and 3B active parameters under the Apache License 2.0. Teams that want to reproduce agent post-training can start from it.",
       "sources": [
         {
-          "candidate_id": "c_c9f75cc384",
-          "url": "https://huggingface.co/papers/2611.02501"
+          "candidate_id": "c_70fc1abeb1",
+          "url": "https://huggingface.co/papers/2611.03233"
         },
         {
-          "candidate_id": "c_5820ba8b62",
-          "url": "https://arxiv.org/abs/2611.02501"
+          "candidate_id": "c_026a3a5849",
+          "url": "https://huggingface.co/Axion1-0/Axion-1.0-35B"
         }
       ],
       "evidence": [
         {
-          "url": "https://huggingface.co/papers/2611.02501",
-          "quote": "To address these challenges, we present SpecPilot, an autonomous agentic loop that discovers algorithms and systems optimizations for each deployment."
+          "url": "https://arxiv.org/abs/2611.03233",
+          "quote": "Axion 1.0 achieves strong performance across a broad suite of agentic benchmarks and is competitive with leading commercial models on several of them."
         },
         {
-          "url": "https://huggingface.co/papers/2611.02501",
-          "quote": "Token forcing checks every output token against stock to detect reward hacking."
+          "url": "https://huggingface.co/Axion1-0/Axion-1.0-35B",
+          "quote": "Model Axion 1.0-35B Release Reproduction checkpoint Architecture Mixture of Experts (MoE) Parameters Approximately 35B total, 3B active"
         },
         {
-          "url": "https://huggingface.co/papers/2611.02501",
-          "quote": "SpecPilot discovered a general lossless 12-bit weight format, tree verification for hybrid recurrent targets, two-level verification and three batching mechanisms ."
+          "url": "https://huggingface.co/Axion1-0/Axion-1.0-35B",
+          "quote": "This model is released under the Apache License 2.0 ."
         },
         {
-          "url": "https://huggingface.co/papers/2611.02501",
-          "quote": "We evaluate it across four target models, three drafters, two GPU platforms and five benchmarks."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.02501",
-          "quote": "Without training or quality loss, it raises the speedup over AR from stock's 4.46times to 10.87times with one request, and from 1.94times to 3.93times with batching."
-        }
-      ]
-    },
-    {
-      "section": "paper",
-      "title": "Route Anything studies routing across general-purpose AI systems",
-      "summary": "Route Anything is a unified framework for studying model and policy routing across general-purpose AI systems, with a theoretical account of quality--cost trade-offs and how a router's available information limits performance. Its omni-modal trajectory matrix spans 25 benchmarks and 374,401 scored runs from 452 candidate configurations, and routing raises efficiency by 8.82x on average compared with the reference model.",
-      "tags": [
-        "论文",
-        "推理",
-        "Agent"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_9825171215",
-          "url": "https://huggingface.co/papers/2611.05275"
+          "url": "https://arxiv.org/abs/2611.03233",
+          "quote": "Axion 1.0 is open beyond model weights: we release the complete recipe, including data construction, generation, filtering, verification, prompts, and training code"
         }
       ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2611.05275",
-          "quote": "In this work, we present Route Anything, a unified framework for studying model and policy routing across general-purpose AI systems."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.05275",
-          "quote": "We develop a unified theoretical foundation that characterizes optimal routing under quality--cost trade-offs and establishes how the information available to a router determines its attainable performance."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.05275",
-          "quote": "To systematically investigate routing across diverse capabilities, we first construct an omni-modal trajectory matrix spanning 25 benchmarks across language understanding, image, video, and speech generation, coding and workplace agents, and robotic manipulation, comprising 374,401 scored runs from"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.05275",
-          "quote": "452 candidate configurations."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.05275",
-          "quote": "Our results reveal substantial opportunities for capability orchestration : per-input oracle routing outperforms the best fixed candidate by 5.4 points, and learned routers outperform it by 0.3 points across 16 benchmarks, by 2.1 points on video generation, and by 1.1 points on robot manipulation wh"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.05275",
-          "quote": "More importantly, routing raises efficiency by 8.82x on average compared with the reference model."
-        }
-      ]
-    },
-    {
-      "section": "paper",
-      "title": "ToolSpace synthesizes tool-centric environments for long-horizon agents",
-      "summary": "ToolSpace mines data, state, and retry dependencies from adjacent calls in execution traces of real MCP services and open agent corpora, then clusters the resulting weighted tool-composition graph into environments. Applied to AutomationBench and tau3-Bench Banking, the pipeline produces harder Pro versions on which 7 frontier models drop by up to 38.2 points, giving developers a harder way to stress-test tool-using agents.",
       "tags": [
         "论文",
         "Agent",
-        "训练"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_ba44072dea",
-          "url": "https://huggingface.co/papers/2611.05036"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2611.05036",
-          "quote": "We propose ToolSpace, a tool-centric framework that reverses this order."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.05036",
-          "quote": "ToolSpace mines data, state, and retry dependencies from adjacent calls in execution traces of real MCP services and open agent corpora, using deterministic rules rather than LLM judgment, and clusters the resulting weighted tool-composition graph into environments."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.05036",
-          "quote": "ToolSpace then performs state-aware random walks with rollback and decompiles each chain into a natural-language task with assertion-based checks , keeping only samples that replay successfully from the initial state."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.05036",
-          "quote": "Applied to AutomationBench and tau3-Bench Banking, the pipeline produces harder Pro versions on which 7 frontier models drop by up to 38.2 points."
-        }
+        "开源"
       ]
     },
     {
       "section": "paper",
-      "title": "MoviEdit targets long-form multi-shot video editing",
-      "summary": "MoviEdit is an end-to-end framework for scalable long-form multi-shot video editing that combines automatic data-generation pipelines, a cascaded bidirectional-autoregressive design, and a dedicated evaluation benchmark. Its data pipelines yield 87K paired editing videos without manual annotation, and the authors introduce MoviEdit-Bench for systematic evaluation of the task.",
-      "tags": [
-        "论文",
-        "视频",
-        "多模态"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_85c9daa922",
-          "url": "https://huggingface.co/papers/2611.02737"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2611.02737",
-          "quote": "We introduce MoviEdit, an end-to-end framework for scalable long-form multi-shot video editing that jointly addresses the challenges of data, modeling, and evaluation."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.02737",
-          "quote": "To provide cross-shot supervision data at scale, we develop automatic data-generation pipelines spanning synchronized multi-view footage, real-world multi-shot videos, and generated multi-shot content, yielding 87K paired editing videos without manual annotation."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.02737",
-          "quote": "Architecturally, MoviEdit employs a cascaded bidirectional-autoregressive design : a lightweight bidirectional stage first establishes a globally coherent editing draft over a spatiotemporally compressed representation , which is then autoregressively propagated and refined over the full video."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.02737",
-          "quote": "We further introduce MoviEdit-Bench , a dedicated benchmark for systematic evaluation of long-form multi-shot video editing ."
-        }
-      ]
-    },
-    {
-      "section": "paper",
-      "title": "LoCo compresses reasoning by learning when to stop",
-      "summary": "LoCo detects candidate overthinking states from the model's own traces, freezes the corresponding reasoning prefixes, regenerates shorter verified continuations, and trains on the resulting state-conditioned preference pairs with DPO. Built entirely from self-generated mathematical traces, it reduces completion length by 41.7%--45.4% on mathematics and 23.4%--36.3% on code while maintaining or improving accuracy.",
-      "tags": [
-        "论文",
-        "推理",
-        "训练"
-      ],
+      "title": "LoCo teaches reasoning models when to stop thinking",
+      "summary": "LoCo detects candidate overthinking states in a model's own traces, freezes the reasoning prefix, regenerates shorter verified continuations, and trains on the resulting preference pairs with DPO. Across five math and three code benchmarks it cuts completion length by 41.7%-45.4% on math and 23.4%-36.3% on code while maintaining or improving accuracy. Training data comes entirely from self-generated math traces, which makes it relevant to teams trying to cut reasoning token costs.",
       "sources": [
         {
           "candidate_id": "c_bd563b515f",
@@ -483,146 +279,88 @@
         },
         {
           "candidate_id": "c_3fb6890d8e",
-          "url": "https://arxiv.org/abs/2611.04814"
+          "url": "https://www.reddit.com/gallery/1xnrcfw"
         }
       ],
-      "evidence": [
+      "evidence": [],
+      "tags": [
+        "论文",
+        "推理",
+        "训练"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Caper pre-executes coding agent commands before approval",
+      "summary": "Caper pre-executes each shell command a coding agent proposes in a snapshotted sandbox, hands an independent approver a bounded report of the observed effects, commits allowed commands and rolls back blocked ones with a reason the agent can act on. Against six existing systems it has the lowest harmful-outcome rate on SABER (6.7% versus at least 14.8%) and on YoloFS-Ext (7.8% versus at least 35.3%), while blocking 1.0% of the safe twins. It is a useful pattern for anyone building permission controls for coding agents.",
+      "sources": [
         {
-          "url": "https://huggingface.co/papers/2611.04814",
-          "quote": "We propose LoCo, a local preference learning method for reasoning compression ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.04814",
-          "quote": "LoCo detects candidate overthinking states from the model's own traces, freezes the corresponding reasoning prefixes, regenerates shorter verified continuations from the same states, and trains on the resulting state-conditioned preference pairs with DPO ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.04814",
-          "quote": "This formulation teaches the model when to continue reasoning and when to conclude, rather than simply encouraging shorter trajectories overall."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.04814",
-          "quote": "We construct training data entirely from self-generated mathematical traces and evaluate LoCo on five mathematical and three code generation benchmarks."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.04814",
-          "quote": "LoCo reduces completion length by 41.7\\%--45.4\\% on mathematics and 23.4\\%--36.3\\% on code, while maintaining or improving accuracy and achieving the best AUC across all code benchmarks."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.04814",
-          "quote": "The code and model will be publicly released at https://github.com/MuyaoYuan/LoCo."
+          "candidate_id": "c_33b67ad0c1",
+          "url": "https://huggingface.co/papers/2610.40753"
         }
+      ],
+      "evidence": [],
+      "tags": [
+        "论文",
+        "安全",
+        "Agent"
       ]
     },
     {
       "section": "tool",
-      "title": "llama.cpp v0.9.0 adds FP8 E4M3 quantization and new architectures",
-      "summary": "The llama.cpp v0.9.0 release adds OCP FP8 E4M3 quantization support, a flash_attn_ext_rows op that makes the unified KV cache efficient for multi-sequence inference, and a generic batched tensor copy API, with ggml updated to v0.29.0. Four new architectures are supported (Clover, Limite, Metis-1.6 and Mistral Large 4), audio work expands with Chatterbox TTS and Nemotron 3.5 Transcribe, and the Gemma 4 E2B/E4B models get major prefill optimizations.",
-      "tags": [
-        "工具",
-        "开源",
-        "推理"
-      ],
+      "title": "llama.cpp v0.9.0 adds FP8 E4M3 and Mistral Large 4",
+      "summary": "llama.cpp v0.9.0 adds OCP FP8 E4M3 quantization, a flash attn ext rows op that makes the unified KV cache efficient for multi-sequence inference, and support for Clover, Limite, Metis-1.6 and Mistral Large 4. Audio gains Chatterbox TTS and Nemotron 3.5 Transcribe, Gemma 4 E2B/E4B get major prefill optimizations, and ggml v0.29.0 brings NCCL-based multi-node tensor parallelism. Local inference users can try FP8 quantization and multi-node setups after upgrading.",
       "sources": [
         {
           "candidate_id": "c_40dd8adbe2",
           "url": "https://github.com/ggml-org/llama.cpp/releases/tag/v0.9.0"
         }
       ],
-      "evidence": [
-        {
-          "url": "https://github.com/ggml-org/llama.cpp/releases/tag/v0.9.0",
-          "quote": "This release adds OCP FP8 E4M3 quantization support, a new flash_attn_ext_rows op that makes the unified KV cache efficient for multi-sequence inference, and a generic batched tensor copy API."
-        },
-        {
-          "url": "https://github.com/ggml-org/llama.cpp/releases/tag/v0.9.0",
-          "quote": "Four new architectures are supported (Clover, Limite, Metis-1.6 and Mistral Large 4), audio generation and transcription expand with Chatterbox TTS, Nemotron 3.5 Transcribe and predefined Pocket TTS voices, and the Gemma 4 E2B/E4B models get major prefill optimizations."
-        },
-        {
-          "url": "https://github.com/ggml-org/llama.cpp/releases/tag/v0.9.0",
-          "quote": "ggml is updated to v0.29.0, bringing FP8 E4M3, flash attention rows, NCCL-based multi-node tensor parallelism and performance work across the CPU, CUDA, SYCL, Metal, Vulkan, OpenCL and Hexagon backends."
-        },
-        {
-          "url": "https://github.com/ggml-org/llama.cpp/releases/tag/v0.9.0",
-          "quote": "Quant: OCP FP8 E4M3 tensor type (saturating mode) with conversion helpers and a new ftype ( #27512 )"
-        },
-        {
-          "url": "https://github.com/ggml-org/llama.cpp/releases/tag/v0.9.0",
-          "quote": "llama: flash_attn_ext_rows - more efficient unified KV for multi-seq, restoring non-unified KV prefill performance ( #29510 )"
-        },
-        {
-          "url": "https://github.com/ggml-org/llama.cpp/releases/tag/v0.9.0",
-          "quote": "ggml: batched tensor copy API ( ggml_backend_tensor_copy_n / set_n / get_n ) superseding the _2d API, implemented for Metal and CUDA ( #30881 )"
-        },
-        {
-          "url": "https://github.com/ggml-org/llama.cpp/releases/tag/v0.9.0",
-          "quote": "add Chatterbox TTS support ( #30993 )"
-        },
-        {
-          "url": "https://github.com/ggml-org/llama.cpp/releases/tag/v0.9.0",
-          "quote": "add Nemotron 3.5 Transcribe support: offline transcription in 40 languages with prompt context and speaker attribution ( #31471 )"
-        }
+      "evidence": [],
+      "tags": [
+        "开源",
+        "推理",
+        "工具"
       ]
     },
     {
       "section": "tool",
-      "title": "RustingStrata runs Qwen models in pure Rust on a 12 GB GPU",
-      "summary": "RustingStrata is a pure-Rust inference engine for Qwen GGUF models with no ggml, compiling CUDA kernels at run time with NVRTC and running the same kernels on Vulkan. Experts that do not fit in VRAM run on the CPU at the same time as the GPU work, and the repository lists status v1.1.0.",
-      "tags": [
-        "工具",
-        "开源",
-        "推理"
-      ],
+      "title": "NVIDIA open-sources Auto Ontology, a data context layer for agents",
+      "summary": "Auto Ontology is an NVIDIA Python framework that builds an ontology layer from enterprise metadata, reconciles definitions across systems and exposes it to any agent harness through MCP, CLI and API. Natural-language questions are translated to SQL and executed against connected databases, with provenance returned with every answer, under the Apache License 2.0. Teams building enterprise data Q&A or text-to-SQL agents can use it as their context layer.",
       "sources": [
         {
-          "candidate_id": "c_b3b5b51eac",
-          "url": "https://github.com/RustingStudio/RustingStrata"
+          "candidate_id": "c_4a023c67da",
+          "url": "https://github.com/NVIDIA/auto-ontology"
         }
       ],
       "evidence": [
         {
-          "url": "https://github.com/RustingStudio/RustingStrata",
-          "quote": "RustingStrata Public Notifications You must be signed in to change notification settings Fork 5 ( 5 ) Star 36 ( 36 ) You must be signed in to star a repository About Pure-Rust MoE inference engine for Qwen3.5/3.6 GGUF."
+          "url": "https://github.com/NVIDIA/auto-ontology",
+          "quote": "NVIDIA Auto Ontology is an open library that builds that layer from enterprise metadata, reconciles definitions across systems, and exposes it to any agent harness through MCP, CLI, and API."
         },
         {
-          "url": "https://github.com/RustingStudio/RustingStrata",
-          "quote": "CPU+GPU hybrid experts, NVRTC CUDA kernels, OpenAI-compatible server."
+          "url": "https://github.com/NVIDIA/auto-ontology",
+          "quote": "Natural-language querying of structured data — questions are translated to SQL and executed against connected databases, powered by NVIDIA NIM."
         },
         {
-          "url": "https://github.com/RustingStudio/RustingStrata",
-          "quote": "A pure-Rust inference engine for the Qwen3.5/3.6 hybrid model family ( qwen35moe , qwen35 ) in GGUF; Qwen3-Next"
+          "url": "https://github.com/NVIDIA/auto-ontology",
+          "quote": "Validate: check generated queries against certified definitions and lineage; return provenance with every answer."
         },
         {
-          "url": "https://github.com/RustingStudio/RustingStrata",
-          "quote": "CUDA kernels are compiled at run time with NVRTC through"
-        },
-        {
-          "url": "https://github.com/RustingStudio/RustingStrata",
-          "quote": "committed): no C++ build step, no ggml."
-        },
-        {
-          "url": "https://github.com/RustingStudio/RustingStrata",
-          "quote": "Experts that do not fit in VRAM run on the CPU at the same time as the GPU"
-        },
-        {
-          "url": "https://github.com/RustingStudio/RustingStrata",
-          "quote": "work, and the expert placement adapts to the routing it sees."
-        },
-        {
-          "url": "https://github.com/RustingStudio/RustingStrata",
-          "quote": "Status: v1.1.0."
+          "url": "https://github.com/NVIDIA/auto-ontology",
+          "quote": "Auto Ontology is distributed under the Apache License 2.0 ."
         }
+      ],
+      "tags": [
+        "开源",
+        "Agent",
+        "工具"
       ]
     },
     {
       "section": "tool",
-      "title": "Collinear AI opens CWE-bench v2 with 100 security tasks",
-      "summary": "CWE-bench v2 opens up a public set of 100 tasks that anyone can run to evaluate models on finding and fixing security weaknesses in real open-source repositories without breaking existing functionality. Scoring is fully programmatic and deterministic, the tasks cover 91 different CWEs, and the public set, grader and harness are open.",
-      "tags": [
-        "工具",
-        "安全",
-        "Agent",
-        "开源"
-      ],
+      "title": "Collinear AI opens CWE-bench v2 for vulnerability repair",
+      "summary": "CWE-bench v2 opens a public set of 100 tasks covering 91 different CWEs, where an agent gets a real open-source repository and a short instruction to find and fix a weakness. Of the 11 models evaluated, Gemini 4 Argon leads at 67.8% pass@1, just ahead of Claude Opus 5.5 at 67.3%, while DeepSeek V4.1 Flash reaches 57.0% at $0.04 per rollout; even the leader fails 19% of the set on every attempt. The public set, grader and harness are open, so you can evaluate your own security agent.",
       "sources": [
         {
           "candidate_id": "c_e84a4f4e59",
@@ -632,15 +370,7 @@
       "evidence": [
         {
           "url": "https://huggingface.co/blog/cwe-bench",
-          "quote": "In our continued pursuit to push the horizon at Collinear AI , CWE-bench v2 opens up a public set of 100 tasks that anyone can run and evaluate their models on."
-        },
-        {
-          "url": "https://huggingface.co/blog/cwe-bench",
-          "quote": "An agent gets a checkout of a real open-source repository and a short instruction, with the goal of finding and fixing a security weakness without breaking existing functionality."
-        },
-        {
-          "url": "https://huggingface.co/blog/cwe-bench",
-          "quote": "Scoring is fully programmatic, so results are deterministic and anyone can reproduce them without extra cost."
+          "quote": "In our continued pursuit to push the horizon at Collinear AI , CWE-bench v2 opens up a public set of 100 tasks that anyone can run and evaluate their models on. The setup is the same as before. An agent gets a checkout of a real open-source repository and a short instruction"
         },
         {
           "url": "https://huggingface.co/blog/cwe-bench",
@@ -648,111 +378,119 @@
         },
         {
           "url": "https://huggingface.co/blog/cwe-bench",
-          "quote": "The public set, the grader and the harness are open."
+          "quote": "Of the 11 models evaluated, Gemini 4 Argon leads with 67.8% pass@1 and 81.0% pass@4, just ahead of Claude Opus 5.5 (67.3% pass@1, 78.0% pass@4)."
         },
         {
           "url": "https://huggingface.co/blog/cwe-bench",
-          "quote": "Every task is a self-contained Harbor task (a Dockerized environment, an instruction, and a deterministic verifier), and the dataset ships a registry.json ."
-        }
-      ]
-    },
-    {
-      "section": "brief",
-      "title": "OpenAI introduces Images 2.6",
-      "summary": "Images 2.6 brings faster image generation, GIF creation, more precise editing, and new API controls across ChatGPT, Codex, and the API.",
-      "tags": [
-        "图像",
-        "产品"
-      ],
-      "sources": [
+          "quote": "However, even the leader fails 19% of the set on every attempt, so the long tail is far from solved. The public set, the grader and the harness are open."
+        },
         {
-          "candidate_id": "c_06128555e5",
-          "url": "https://openai.com/index/introducing-images-2-6"
-        }
-      ],
-      "evidence": []
-    },
-    {
-      "section": "brief",
-      "title": "OpenAI to acquire Pierre Computer Company",
-      "summary": "OpenAI will acquire Pierre Computer Company, expanding Codex's tools for building, understanding, and reviewing code.",
-      "tags": [
-        "代码",
-        "产品",
-        "行业"
-      ],
-      "sources": [
+          "url": "https://huggingface.co/blog/cwe-bench",
+          "quote": "DeepSeek reaches 57.0% pass@1 at $0.04 per rollout"
+        },
         {
-          "candidate_id": "c_f04b9dbfe8",
-          "url": "https://openai.com/index/openai-to-acquire-pierre"
+          "url": "https://huggingface.co/blog/cwe-bench",
+          "quote": "On cost, DeepSeek V4.1 Flash (1017), Claude Opus 5.5 and Gemini 4 Argon form the Pareto frontier"
         }
       ],
-      "evidence": []
-    },
-    {
-      "section": "brief",
-      "title": "OpenAI finds 948 Linux kernel privilege-escalation flaws",
-      "summary": "OpenAI built an autonomous pipeline that found, validated, and generated patches for 948 local privilege-escalation vulnerabilities in the Linux kernel.",
       "tags": [
         "安全",
         "代码",
-        "产品"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_d094672a40",
-          "url": "https://openai.com/index/a-thousand-fewer-paths-to-root"
-        }
-      ],
-      "evidence": []
+        "工具"
+      ]
     },
     {
-      "section": "brief",
-      "title": "Claude Marketplace adds security, developer and creative tools",
-      "summary": "OpenAI...",
-      "tags": [
-        "Agent",
-        "产品",
-        "行业"
-      ],
+      "section": "tool",
+      "title": "Ai2's StateBench tests state tracking over long documents",
+      "summary": "StateBench uses four difficulty levels to test whether language models can track changing values across long documents. Gemini 3.8 Flash, Claude Opus 5.5, and GPT-6 Sol and Luna do well on the easier levels but drop to 13% or lower on the longest general finite problems; trained from scratch, Gated DeltaNet and hybrid models generalize almost perfectly on the first three levels while Transformers degrade on longer sequences. Teams building long-context applications or comparing architectures can use it to check state tracking.",
       "sources": [
         {
-          "candidate_id": "c_d9cac51626",
-          "url": "https://claude.com/resources/articles/new-agents-and-products-claude-marketplace"
+          "candidate_id": "c_f3b8c1cee1",
+          "url": "https://allenai.org/blog/statebench"
         }
       ],
       "evidence": [
         {
-          "url": "https://claude.com/resources/articles/new-agents-and-products-claude-marketplace",
-          "quote": "New agents and products for security, productivity, and creative work on Claude Marketplace Date November 4, 2026 Reading time 5 min Share Copy link We’ve added new agents and products to Claude Marketplace , where teams find partner tools and services to help them get more from Claude."
+          "url": "https://allenai.org/blog/statebench",
+          "quote": "Gemini 3.8 Flash, Claude Opus 5.5, and GPT-6 Sol and Luna still break down on harder forms of state tracking as inputs grow longer. Four levels of state tracking StateBench consists of four difficulty levels"
         },
         {
-          "url": "https://claude.com/resources/articles/new-agents-and-products-claude-marketplace",
-          "quote": "The additions cover security, developer infrastructure, creative, and productivity."
+          "url": "https://allenai.org/blog/statebench",
+          "quote": "All four performed well on r-trivial and aperiodic problems. But on soluble and general finite problems, accuracy fell sharply as inputs grew longer, dropping to 13% or lower on the longest general finite problems."
         },
         {
-          "url": "https://claude.com/resources/articles/new-agents-and-products-claude-marketplace",
-          "quote": "There are now over 25 partner agents and products on the marketplace."
+          "url": "https://allenai.org/blog/statebench",
+          "quote": "Gated DeltaNet and hybrid models generalized almost perfectly on r-trivial, aperiodic, and soluble problems out to the longest sequences we tested, tens of thousands of assignments. Transformers learned the easier levels but degraded on longer sequences"
+        },
+        {
+          "url": "https://allenai.org/blog/statebench",
+          "quote": "StateBench: Testing how language models track state changes over long documents November 3, 2026 Ai2 Share Tech Report Data Code We’re introducing StateBench , a benchmark for long-context state tracking"
         }
+      ],
+      "tags": [
+        "论文",
+        "推理"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Hugging Face proposes Model Integration Contracts for Transformers",
+      "summary": "A Model Integration Contract pairs a shrunk fixture model with a runnable usage path and human-reviewed baselines, and holds if the usage path on the fixture still produces the baselines; a small UMT5 model on CPU flagged a bug that had stayed in main for almost two months. The tmic CLI drafts the contract, builds the fixture and records baselines locally, with the LLM drafting and a human approving. Authors integrating new models into Transformers can use it to catch regressions cheaply.",
+      "sources": [
+        {
+          "candidate_id": "c_dd4cc698b5",
+          "url": "https://huggingface.co/blog/transformers-mic"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/blog/transformers-mic",
+          "quote": "The contract holds if running the usage path on the fixture still produces the baselines."
+        },
+        {
+          "url": "https://huggingface.co/blog/transformers-mic",
+          "quote": "Nothing crashed, and the bug stayed in main for almost two months. When we later replayed those commits, a small UMT5 model running on CPU flagged it on every one of them."
+        },
+        {
+          "url": "https://huggingface.co/blog/transformers-mic",
+          "quote": "Our CLI, tmic , creates the contract and builds the fixture. For a new model, an LLM drafts the usage code and manifest, and CPU and GPU runs measure the candidate baselines. The LLM drafts; it doesn't approve."
+        },
+        {
+          "url": "https://huggingface.co/blog/transformers-mic",
+          "quote": "It drafts the contract, builds the fixture and records its baselines on your machine, asking you to review each step"
+        }
+      ],
+      "tags": [
+        "开源",
+        "工具",
+        "模型"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "OpenAI to acquire Pierre Computer Company",
+      "summary": "OpenAI will acquire Pierre Computer Company, expanding Codex's tools for building, understanding and reviewing code.",
+      "sources": [
+        {
+          "candidate_id": "c_f04b9dbfe8",
+          "url": "https://openai.com/index/openai-to-acquire-pierre"
+        },
+        {
+          "candidate_id": "c_f04b9dbfe8",
+          "url": "https://news.ycombinator.com/item?id=50366863"
+        }
+      ],
+      "evidence": [],
+      "tags": [
+        "行业",
+        "代码"
       ]
     }
   ],
   "research": [
     {
       "via": "webfetch",
-      "url": "https://openai.com/index/introducing-images-2-6"
-    },
-    {
-      "via": "webfetch",
       "url": "https://huggingface.co/moonshotai/Kimi-K3.1-Pro"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.03233"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://github.com/ggml-org/llama.cpp/releases/tag/v0.9.0"
     },
     {
       "via": "webfetch",
@@ -764,19 +502,27 @@
     },
     {
       "via": "webfetch",
-      "url": "https://github.com/ollama/ollama/releases/tag/v0.40.14"
+      "url": "https://openai.com/index/introducing-images-2-6"
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/ricursiveAI/Ripple-65B-Preview"
+      "url": "https://www.ricursive.com/ripple"
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.02501"
+      "url": "https://www.anthropic.com/research/provable-inference"
     },
     {
       "via": "webfetch",
-      "url": "https://allenai.org/blog/google-climate-partnership"
+      "url": "https://huggingface.co/Axion1-0/Axion-1.0-35B"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://hy.tencent.ai/research/hy4?langVersion=en"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://cohere.com/blog/embed-rerank-5-openrouter"
     },
     {
       "via": "webfetch",
@@ -784,35 +530,23 @@
     },
     {
       "via": "webfetch",
+      "url": "https://huggingface.co/blog/transformers-mic"
+    },
+    {
+      "via": "webfetch",
       "url": "https://allenai.org/blog/statebench"
     },
     {
       "via": "webfetch",
-      "url": "https://claude.com/resources/articles/new-agents-and-products-claude-marketplace"
+      "url": "https://github.com/NVIDIA/auto-ontology"
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.05275"
+      "url": "https://spectrum.ieee.org/ai-in-cybersecurity-php2shell-vulnerability"
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.04814"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.02737"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.05036"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://maccus.fr/en/tencent-hy4-ai-model/"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/AuroraAI-Research/AuroraIMG2-100M"
+      "url": "https://www.mindstudio.ai/blog/linux-nvidia-rtx-spark-laptop"
     },
     {
       "via": "webfetch",
@@ -820,42 +554,41 @@
     },
     {
       "via": "webfetch",
-      "url": "https://www.anthropic.com/research/investigating-vault-particles-with-claude"
+      "url": "https://arxiv.org/abs/2611.02501"
     },
     {
       "via": "webfetch",
-      "url": "https://github.com/RustingStudio/RustingStrata"
+      "url": "https://arxiv.org/abs/2611.04814"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://arxiv.org/abs/2610.40753"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://arxiv.org/abs/2611.03233"
     }
   ],
   "lang": "en",
   "validation": {
-    "validated_at": "2026-11-05T04:43:49+00:00",
+    "validated_at": "2026-11-05T04:45:53+00:00",
     "checked_links": false,
     "dropped": [
       {
-        "title": "ollama v0.40.14 fixes API handling and adds MLX sampling",
-        "section": "brief",
+        "title": "SpecPilot uses agents to optimize speculative decoding",
+        "section": "paper",
         "candidates": [
-          "c_5290ea1dfd"
+          "c_c9f75cc384",
+          "c_5820ba8b62"
         ],
         "reasons": [
-          "summary longer than 250 characters"
-        ]
-      },
-      {
-        "title": "Ai2 introduces StateBench for long-document state tracking",
-        "section": "brief",
-        "candidates": [
-          "c_f3b8c1cee1"
-        ],
-        "reasons": [
-          "summary longer than 250 characters"
+          "'4.46x' does not appear in the cited material",
+          "'10.87x' does not appear in the cited material",
+          "'1.94x' does not appear in the cited material",
+          "'3.93x' does not appear in the cited material"
         ]
       }
     ],
-    "warnings": [
-      "19 items, more than 18 (expected about 15)",
-      "5 paper items (target 2-4)"
-    ]
+    "warnings": []
   }
 }
