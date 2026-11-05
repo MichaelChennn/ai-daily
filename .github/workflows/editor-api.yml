@@ -9,9 +9,9 @@
 # is committed too, also for a model that failed.
 #
 # Configuration (Settings -> Secrets and variables -> Actions):
-#   secrets    GEMINI_API_KEY, NVIDIA_API_KEY
+#   secrets    NVIDIA_API_KEY
 #   variable   EDITOR_API_MODEL: provider:model, comma separated, in order of priority for the main
-#              issue, e.g. nvidia:deepseek-ai/deepseek-v4.1-flash,gemini:gemini-3.5-flash-lite
+#              issue, e.g. nvidia:minimaxai/minimax-m3.1-flash
 name: editor-api
 
 on:
@@ -66,7 +66,6 @@ jobs:
         env:
           ISSUE_DATE: ${{ inputs.date }}
           EDITOR_API_MODEL: ${{ vars.EDITOR_API_MODEL }}
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           NVIDIA_API_KEY: ${{ secrets.NVIDIA_API_KEY }}
         run: |
           date=${ISSUE_DATE:-$(uv run python -c "from daily.window import local_today; print(local_today())")}

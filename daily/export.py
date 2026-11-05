@@ -81,7 +81,8 @@ UNWRITTEN_NOTICE_EN = (
     "for it, with their original titles and links."
 )
 MONTHS_EN = "Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec".split()
-# Beta slug (digest.api.<slug>.json) -> its label on the page.
+# Beta slug (digest.api.<slug>.json) -> its label on the page. gemini: the Google AI Studio route,
+# removed on 2026-11-05; its betas up to 2026-11-03 are still in data/.
 BETA_LABELS = {"deepseek": "DeepSeek", "gemini": "Gemini", "minimax": "MiniMax"}
 # Whose icon a source with neither a homepage nor a page url gets.
 ICON_HOSTS = {"github_releases": "github.com"}

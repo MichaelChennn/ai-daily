@@ -316,7 +316,7 @@ def pipeline(lang, t):
         return out
 
     b += route(440, ["claude"], s["claude"], s["claude_sub"])
-    b += route(572, ["nvidia", "googlegemini"], s["api"], s["api_sub"])
+    b += route(572, ["nvidia"], s["api"], s["api_sub"])
     # Both routes feed validate.
     for y in (492, 624):
         b.append(

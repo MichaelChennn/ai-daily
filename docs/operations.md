@@ -29,8 +29,8 @@
 
 ## API 通道配置
 
-- secrets：`GEMINI_API_KEY`、`NVIDIA_API_KEY`。
-- variable `EDITOR_API_MODEL`：`厂商:模型`，逗号分隔，顺序就是成为主版的优先级。同一个模型家族只放一个，文件名按家族取，如 `deepseek`、`gemini`。
+- secrets：`NVIDIA_API_KEY`。
+- variable `EDITOR_API_MODEL`：`厂商:模型`，逗号分隔，顺序就是成为主版的优先级。同一个模型家族只放一个，文件名按家族取，如 `deepseek`、`minimax`。
 - 可选模型和免费额度的调研见 [research/nvidia-nim-models.md](research/nvidia-nim-models.md)。
 
 ## 告警

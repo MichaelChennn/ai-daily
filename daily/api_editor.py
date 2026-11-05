@@ -39,7 +39,6 @@ class Provider:
 
 
 PROVIDERS = {
-    "gemini": Provider("https://generativelanguage.googleapis.com/v1beta/openai/", "GEMINI_API_KEY", 13.0),
     "nvidia": Provider("https://integrate.api.nvidia.com/v1", "NVIDIA_API_KEY", 2.0),
 }
 RETRIES = 3  # after the first attempt
@@ -312,7 +311,7 @@ def _titles_as_highlights(data: dict[str, Any], report: digest.Report) -> bool:
 
 class Editor:
     """One edit in at most three requests: pick, write, fix. Each request is a full turn on a free
-    tier (Gemini's flash allows 20 a day), so the reading is done here and not by the model.
+    tier, so the reading is done here and not by the model.
     What each step kept and dropped goes into self.trace, whether or not the edit succeeds."""
 
     def __init__(self, candidates: dict[str, Any], model: str, client: httpx.AsyncClient) -> None:
