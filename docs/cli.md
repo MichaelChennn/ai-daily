@@ -27,7 +27,7 @@ Claude 通道的编辑环节在 Claude Code 里运行 skill：`/daily-editor 202
 | 变量 | 用途 |
 |---|---|
 | `GITHUB_TOKEN` | 可选，用于 GitHub Releases（不设置时限额 60 次/小时） |
-| `GEMINI_API_KEY`、`NVIDIA_API_KEY` | `daily edit` 调用对应厂商的模型时需要 |
+| `NVIDIA_API_KEY` | `daily edit` 调用 NVIDIA NIM 的模型时需要 |
 
 本地运行时把 key 写进 `.env`（已忽略），`set -a; . ./.env; set +a` 后再跑。
 

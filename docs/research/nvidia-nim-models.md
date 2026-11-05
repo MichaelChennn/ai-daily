@@ -75,5 +75,5 @@ step 和 ultra 都把 Nanbeige 的跑分写成了全面领先。修正那一步�
 
 ## 后续
 
-- Gemini 路线改用 Jules 的事放在另一个 issue 里。
+- Gemini（Google AI Studio）路线已于 2026-11-05 删除（#35）。
 - NIM 上只保留 MiniMax；step-5-preview 作为备选，需要时加进 `EDITOR_API_MODEL`。
