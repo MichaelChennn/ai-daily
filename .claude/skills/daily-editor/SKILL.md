@@ -20,7 +20,7 @@ uv run python -c "from daily.window import local_today; print(local_today())"   
 - `data/<期号>/candidates.json` 不存在：先 `git pull origin main` 再看一次（05:07 的抓取可能被 Actions 推迟）。
   还是没有就停止并报告，06:30 的兜底会处理（并发出告警）。
 - `data/<期号>/digest.json` 已经存在且 `mode` 是 `full`：不要覆盖，除非被明确要求重做。
-  例外是 `"channel": "api"`（API 通道的结果先顶上了主版）：照常编辑，你的版本会替换它。
+  例外是 `channel` 不是 `claude`（比如 `api`：API 通道的结果先顶上了主版）：照常编辑，你的版本会替换它。
   `mode` 是 `fallback`（06:30 的兜底已经发布了降级版）：照常编辑，正式版会替换它。
 - `digest.en.json`（英文版）跟着主版走：你重做或替换了主版，就照常写英文版，覆盖原来的文件。
 - `digest.api.*.json` 是 API 通道各模型的版本（网站上的 Beta 版），`trace.api.*.json` 是它们的生成记录，都不要读也不要改。
@@ -199,6 +199,7 @@ git push -u origin HEAD                  # 推到当前分支，不要开 PR
   "schema_version": 1,
   "date": "2026-10-21",                       // 期号，必须和 candidates.json 一致
   "mode": "full",                             // full：编辑版；fallback：degrade 生成的降级版
+  "channel": "claude",                        // 必填：写这一期的通道，你永远写 claude；缺了 validate 会报错
   "generated_at": "2026-10-20T21:40:00+00:00", // 用 date -u 取真实时间
   "model": "claude-opus-5-5",                 // 可选：你自己的模型 ID，网站页脚显示“本期由 … 编辑”；不确定就省略
   "highlights": ["今日要点第一句。", "第二句。"],   // 1-3 句，不含链接

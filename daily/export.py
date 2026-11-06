@@ -45,11 +45,12 @@ from pathlib import Path
 from typing import Any
 from urllib.parse import quote, urlsplit
 
-from daily import process
+from daily import process, routes
 from daily.config import SourceConfig
 from daily.dedup import url_key
-from daily.digest import SECTIONS, is_api
+from daily.digest import SECTIONS
 from daily.render import HOST_LABELS, source_labels
+from daily.routes import is_api
 from daily.site import (
     DEFAULT_BASE_URL,
     FALLBACK_NOTICE,
@@ -81,9 +82,6 @@ UNWRITTEN_NOTICE_EN = (
     "for it, with their original titles and links."
 )
 MONTHS_EN = "Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec".split()
-# Beta slug (digest.api.<slug>.json) -> its label on the page. gemini: the Google AI Studio route,
-# removed on 2026-11-05; its betas up to 2026-11-03 are still in data/.
-BETA_LABELS = {"deepseek": "DeepSeek", "gemini": "Gemini", "minimax": "MiniMax"}
 # Whose icon a source with neither a homepage nor a page url gets.
 ICON_HOSTS = {"github_releases": "github.com"}
 
@@ -170,7 +168,7 @@ def export(
     names = {source.id: source.name for source in sources}
     for issue in issues:
         _write_json(folder / f"{issue.slug}.json", issue_data(issue))
-        steps = process.issue_process(data_dir / issue.slug, issue.candidates, names, BETA_LABELS)
+        steps = process.issue_process(data_dir / issue.slug, issue.candidates, names)
         _write_json(process_folder / f"{issue.slug}.json", steps)
         _write_json(en_folder / f"{issue.slug}.json", issue_data_en(issue))
         for slug in issue.betas:
@@ -284,8 +282,8 @@ def issue_data(issue: Issue, beta: str | None = None) -> dict[str, Any]:
         "notice": FALLBACK_NOTICE if fallback else None,
         "description": " ".join(digest.get("highlights") or []),
         "editor": None if fallback else editor(digest),
-        "betas": [_beta(slug) for slug in issue.betas],
-        "beta": _beta(beta) if beta else None,
+        "betas": [_beta(issue, slug) for slug in issue.betas],
+        "beta": _beta(issue, beta) if beta else None,
         "sections": _sections(digest["items"], issue.by_id, "zh"),
     }
 
@@ -347,8 +345,8 @@ def editor(digest: dict[str, Any]) -> str:
     return model or "Claude"
 
 
-def _beta(slug: str) -> dict[str, str]:
-    return {"slug": slug, "label": BETA_LABELS.get(slug, slug)}
+def _beta(issue: Issue, slug: str) -> dict[str, str]:
+    return {"slug": slug, "label": routes.label(str(routes.key(issue.betas[slug])))}
 
 
 def _item(

@@ -7,8 +7,9 @@ digest (the editor finishing after the 06:30 fallback), and an edited issue is o
 a newer edit (an explicit redo).
 
 The API route (.github/workflows/editor-api.yml, daily.api_editor) hands its digests here too,
-so the main issue goes Claude route > API route > fallback: a Claude edit always replaces an API
-edit, and an API edit never replaces any edit, whichever was written first.
+so the main issue goes by the routes' priority (daily.routes): Claude route > API route > fallback.
+A Claude edit always replaces an API edit, and an API edit never replaces any edit, whichever was
+written first.
 
 The English edition (digest.en.json, `daily adopt --en`) goes with the main issue: it is written
 by the route that wrote the main issue (docs/adr/0001-two-editor-routes.md), so one from the other
@@ -20,7 +21,7 @@ from __future__ import annotations
 from datetime import datetime, timezone
 from typing import Any
 
-from daily import digest
+from daily import digest, routes
 
 
 def decide(current: Any, incoming: Any, candidates: dict[str, Any]) -> tuple[dict[str, Any] | None, str]:
@@ -36,14 +37,14 @@ def decide(current: Any, incoming: Any, candidates: dict[str, Any]) -> tuple[dic
         return None, "unchanged"
     if not current_ok:
         return incoming, "no valid digest yet"
-    if current.get("mode") == "fallback":
-        return incoming, "replaces the fallback"
-    if incoming.get("mode") == "fallback":
-        return None, "keeping the edited issue over a fallback"
-    if digest.is_api(current) and not digest.is_api(incoming):
-        return incoming, "a Claude edit replaces the API edit"
-    if digest.is_api(incoming):
-        return None, "keeping the edited issue over an API edit"
+    cur, inc = routes.of(current), routes.of(incoming)
+    assert cur is not None and inc is not None  # validate checks the channel
+    if inc.priority > cur.priority:
+        if cur.mode == "fallback":
+            return incoming, "replaces the fallback"
+        return incoming, f"{inc.a_noun} replaces the {cur.noun}"
+    if inc.priority < cur.priority or not inc.redo:
+        return None, f"keeping the edited issue over {inc.a_noun}"
     if _time(incoming) > _time(current):
         return incoming, "newer edit"
     return None, "the current edit is newer"
@@ -81,9 +82,9 @@ def goes_with(main: Any, en: dict[str, Any], candidates: dict[str, Any]) -> str 
         return "no main issue to go with"
     if main.get("mode") != "full":
         return "the main issue is a fallback"
-    if digest.is_api(main) != digest.is_api(en):
+    if routes.of(main) != routes.of(en):
         return "the main issue comes from the other route"
-    if digest.is_api(main) and main.get("model") != en.get("model"):
+    if routes.is_api(main) and main.get("model") != en.get("model"):
         return "the main issue comes from another model"
     return None
 

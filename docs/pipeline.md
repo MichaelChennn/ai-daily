@@ -90,6 +90,7 @@ sources.yaml ──► fetchers（并发、相互隔离）──► 去重 ─�
 | 检查 | 不通过时 |
 |---|---|
 | 结构：schema_version、期号、mode、版块、标题 / 摘要长度、正文里不能有链接 | 条目删除；整期结构错误则整期不合格 |
+| `channel` 是通道表（`daily/routes.py`）里的一行，`mode` 和它相符；API 通道还要写 `model` | 整期不合格 |
 | 每个来源都是候选，或是编辑记录在 `research` 里、用 WebFetch 打开过的页面 | 条目删除 |
 | 至少有一个一手来源，不能只有 HN / Reddit 讨论帖、`i.redd.it` / `v.redd.it` 图片和视频或 `x.com` / `twitter.com` 推文（正文下载不到，引文核对不了） | 条目删除 |
 | 📄 论文的主来源是 `kind` 为 `paper` 的候选，或 arXiv、HF papers、OpenReview 的链接 | 条目删除 |
@@ -104,6 +105,8 @@ sources.yaml ──► fetchers（并发、相互隔离）──► 去重 ─�
 条数目标：期望约 15 条（`ITEMS_EXPECTED`），8–18 条（`ITEMS_TARGET`）；🔥 头条 3–5 条、📄 论文 2–4 篇（`SECTION_TARGETS`）。不符合只给警告，不删条目，也不凑数。
 
 编辑预算（立项书待决 2，暂定）：每期 WebFetch ≤ 30 次、WebSearch ≤ 5 次，超出时 validate 只给警告。
+
+`channel` 决定一期日报能不能成为主版（按通道表里的优先级，见 ADR 0001）、生成记录叫什么、Beta 版放在哪个文件。
 
 `degrade` 不用 LLM：官方博客优先，再按热度信号挑各类候选的前几名，保留英文原标题和链接。
 

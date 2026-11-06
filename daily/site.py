@@ -18,9 +18,11 @@ from typing import Any
 from urllib.parse import urlsplit
 
 from daily import digest as digest_mod
-from daily.digest import SECTIONS, is_api
+from daily import routes
+from daily.digest import SECTIONS
 from daily.publish import goes_with
 from daily.render import source_labels
+from daily.routes import is_api
 from daily.window import PUBLISH_TIME, TIMEZONE, TIMEZONE_LABEL
 
 log = logging.getLogger(__name__)
@@ -54,7 +56,8 @@ class Issue:
     date: date
     digest: dict[str, Any]
     candidates: dict[str, Any]
-    # API route editions shown beside the main issue: slug (from digest.api.<slug>.json) -> digest.
+    # The per-model routes' editions shown beside the main issue: slug (from digest.api.<slug>.json,
+    # daily.routes.keyed_files) -> digest. The site's beta urls use the slug alone.
     betas: dict[str, dict[str, Any]] = field(default_factory=dict)
     # The English edition (digest.en.json), when it was written and passes validate.
     en: dict[str, Any] | None = None
@@ -110,11 +113,11 @@ def load_issues(data_dir: Path) -> list[Issue]:
         # Left from the other route, or the main issue fell back: the English site shows titles only.
         if en is not None and en.get("lang") == "en" and goes_with(data, en, candidates) is None:
             issue.en = en
-        for beta_path in sorted(path.parent.glob("digest.api.*.json")):
+        for route_key, beta_path in routes.keyed_files(path.parent, "digest").items():
             beta = publishable(beta_path, candidates)
-            # The API edit that became the main issue is not shown again as a beta.
+            # The edit that became the main issue is not shown again as a beta.
             if beta is not None and not (is_api(data) and beta.get("model") == data.get("model")):
-                issue.betas[beta_path.name.removeprefix("digest.api.").removesuffix(".json")] = beta
+                issue.betas[route_key.partition(".")[2]] = beta
         issues.append(issue)
     return issues
 

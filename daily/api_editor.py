@@ -38,6 +38,7 @@ class Provider:
     min_interval: float  # seconds between requests, to stay under the free tier's requests per minute
 
 
+CHANNEL = "api"  # its row in daily.routes
 PROVIDERS = {
     "nvidia": Provider("https://integrate.api.nvidia.com/v1", "NVIDIA_API_KEY", 2.0),
 }
@@ -316,7 +317,7 @@ class Editor:
 
     def __init__(self, candidates: dict[str, Any], model: str, client: httpx.AsyncClient) -> None:
         self.candidates = candidates
-        self.trace = trace.new(candidates["date"], "api", model)
+        self.trace = trace.new(candidates["date"], CHANNEL, model)
         self.step = "pick"
         self.by_id = {c["id"]: c for c in candidates["candidates"]}
         self.model = model
@@ -498,7 +499,7 @@ class Editor:
             "date": self.candidates["date"],
             "mode": "full",
             "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
-            "channel": "api",
+            "channel": CHANNEL,
             "model": self.model,
             "highlights": answer.get("highlights"),
             "items": [self._item(i) for i in items] if isinstance(items, list) else items,

@@ -13,7 +13,7 @@ from datetime import date
 from pathlib import Path
 from typing import Any
 
-from daily import api_editor, dedup, digest, export, fallback, pipeline, publish, render, site, trace
+from daily import api_editor, dedup, digest, export, fallback, pipeline, publish, render, routes, site, trace
 from daily.config import DEFAULT_DATA_DIR, DEFAULT_SOURCES_FILE, load_sources
 from daily.window import issue_window, local_today
 
@@ -47,6 +47,7 @@ def main(argv: list[str] | None = None) -> int:
     degrade = commands.add_parser("degrade", help="digest.json 缺失或不合格时，写入“标题 + 链接”降级版")
     _issue_args(degrade)
     degrade.add_argument("--force", action="store_true", help="无论现有 digest.json 是否合格都覆盖")
+    _channel_arg(degrade, "--force 时把放弃记进哪条路线的 trace")
 
     md = commands.add_parser("render", help="digest.json → digest.md")
     _issue_args(md)
@@ -82,9 +83,10 @@ def main(argv: list[str] | None = None) -> int:
         help="网站地址，用于 RSS 里的绝对链接（默认取 SITE_URL）",
     )
 
-    record = commands.add_parser("trace", help="Claude 通道：把打分或自检删掉的条目记进 trace.claude.json")
+    record = commands.add_parser("trace", help="按 SKILL.md 编辑的路线：把打分或自检删掉的条目记进它的 trace")
     record.add_argument("what", choices=["scores", "self-check"], help="scores 开始一次新的记录")
     _issue_args(record)
+    _channel_arg(record, "记进哪条路线的 trace")
 
     page = commands.add_parser("page", help="打印页面里关键词附近的原文，供编辑逐字摘录 evidence")
     page.add_argument("url")
@@ -122,6 +124,16 @@ def main(argv: list[str] | None = None) -> int:
 def _issue_args(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--date", type=date.fromisoformat, help="期号日期（柏林时间），默认今天")
     parser.add_argument("--data-dir", type=Path, default=DEFAULT_DATA_DIR, help="数据目录")
+
+
+def _channel_arg(parser: argparse.ArgumentParser, help_: str) -> None:
+    parser.add_argument(
+        "--channel", choices=routes.SKILL_ROUTES, default="claude", help=f"{help_}（默认 claude）"
+    )
+
+
+def _skill_trace(issue_dir: Path, channel: str) -> Path:
+    return issue_dir / str(routes.trace_name({"channel": channel}))
 
 
 def _issue_dir(args: argparse.Namespace) -> Path:
@@ -206,10 +218,10 @@ def _validate(args: argparse.Namespace) -> int:
         report = digest.validate(data, candidates, asyncio.run(check()))
     if not args.en and _needs_self_check(issue_dir, data):
         report.warnings.append(
-            "no self_check in trace.claude.json: run `daily trace self-check` (SKILL.md 5)"
+            f"no self_check in {routes.trace_name(data)}: run `daily trace self-check` (SKILL.md 5)"
         )
     step = "en" if args.en else "final" if args.drop_invalid else "precheck" if args.check_links else "check"
-    _trace_claude(issue_dir, data, trace.validate_step(step, data, report, checked_links))
+    _trace_skill_route(issue_dir, data, trace.validate_step(step, data, report, checked_links))
 
     for error in report.errors:
         print(f"ERROR {error}", file=sys.stderr)
@@ -229,31 +241,37 @@ def _validate(args: argparse.Namespace) -> int:
     return 0 if report.ok else 1
 
 
+def _skill_route(data: Any) -> str | None:
+    """The channel of an edit by a route that works by SKILL.md (the Claude route); None otherwise."""
+    route = routes.of(data)
+    return route.channel if route is not None and route.channel in routes.SKILL_ROUTES else None
+
+
 def _needs_self_check(issue_dir: Path, data: Any) -> bool:
-    """A Claude route edit whose trace has no self-check, not even an empty one."""
-    if not isinstance(data, dict) or digest.is_api(data) or data.get("mode") != "full":
+    """An edit by a SKILL.md route whose trace has no self-check, not even an empty one."""
+    if (channel := _skill_route(data)) is None:
         return False
-    record = trace.load(issue_dir / "trace.claude.json")
+    record = trace.load(_skill_trace(issue_dir, channel))
     return not any(s.get("step") == "self_check" for s in (record or {}).get("steps") or [])
 
 
-def _trace_claude(issue_dir: Path, data: Any, step: dict[str, Any]) -> None:
-    """Add a validate round of the Claude route's edit to its trace; other digests have none."""
-    if not isinstance(data, dict) or digest.is_api(data) or data.get("mode") != "full":
+def _trace_skill_route(issue_dir: Path, data: Any, step: dict[str, Any]) -> None:
+    """Add a validate round of a SKILL.md route's edit to its trace; other digests have none."""
+    if (channel := _skill_route(data)) is None:
         return
-    path = issue_dir / "trace.claude.json"
-    record = trace.load(path) or trace.new(issue_dir.name, "claude")
+    path = _skill_trace(issue_dir, channel)
+    record = trace.load(path) or trace.new(issue_dir.name, channel)
     record["model"] = data.get("model") or record.get("model")
     record["steps"].append(step)
     trace.save(path, record)
 
 
 def _trace(args: argparse.Namespace) -> int:
-    """What the Claude editor records itself: its scores (which start the trace of a new run) and
-    the items its self-check dropped. The JSON comes on stdin."""
+    """What an editor working by SKILL.md records itself: its scores (which start the trace of a new
+    run) and the items its self-check dropped. The JSON comes on stdin."""
     issue_dir = _issue_dir(args)
     candidates = _read(issue_dir / "candidates.json")
-    path = issue_dir / "trace.claude.json"
+    path = _skill_trace(issue_dir, args.channel)
     try:
         value = json.loads(sys.stdin.read())
     except json.JSONDecodeError as exc:
@@ -261,7 +279,7 @@ def _trace(args: argparse.Namespace) -> int:
         return 1
     known = {c["id"] for c in candidates["candidates"]}
     if args.what == "scores":
-        record = trace.new(candidates["date"], "claude")
+        record = trace.new(candidates["date"], args.channel)
         record["scores"] = trace.scores(value, known)
         missing = len(known - record["scores"].keys())
         trace.save(path, record)
@@ -270,7 +288,7 @@ def _trace(args: argparse.Namespace) -> int:
     if not isinstance(value, list) or not all(isinstance(v, dict) for v in value):
         print('ERROR self-check takes [{"candidates": [...], "title": ..., "reason": ...}]', file=sys.stderr)
         return 1
-    record = trace.load(path) or trace.new(candidates["date"], "claude")
+    record = trace.load(path) or trace.new(candidates["date"], args.channel)
     items = [
         {
             "title": v.get("title"),
@@ -302,8 +320,8 @@ def _degrade(args: argparse.Namespace) -> int:
         )
     if path.exists():
         shutil.copy(path, issue_dir / "digest.rejected.json")
-    trace_path = issue_dir / "trace.claude.json"
-    if args.force and (record := trace.load(trace_path)):  # the Claude editor gave up (SKILL.md step 6)
+    trace_path = _skill_trace(issue_dir, args.channel)
+    if args.force and (record := trace.load(trace_path)):  # the editor gave up (SKILL.md step 6)
         last = record["steps"][-1] if record["steps"] else {}
         error = "; ".join(last.get("errors") or []) or "the editor published the fallback"
         record["failure"] = {"step": last.get("step"), "error": error}
@@ -362,9 +380,14 @@ def _trace_adopt(
     a rejected run is noted in the trace already there. Either way the verdict is appended."""
     if not isinstance(incoming, dict) or reason == "unchanged":
         return
-    path = issue_dir / trace.file_name(incoming)
-    record = trace.load(path)
     run = trace.load(source) if source is not None else None
+    # A run's trace names its route: a fallback the Claude editor wrote when it gave up
+    # (`degrade --force`) goes with trace.claude.json, though the fallback route keeps none.
+    name = trace.file_name(run if run is not None else incoming)
+    if name is None:
+        return
+    path = issue_dir / name
+    record = trace.load(path)
     if run is not None and edition == "zh" and (adopted or record is None):
         record = run
     if record is None:
@@ -378,13 +401,14 @@ def _edit(args: argparse.Namespace) -> int:
     candidates = _read(issue_dir / "candidates.json")
     if args.en:
         return _edit_en(args, issue_dir, candidates)
-    trace_path = issue_dir / f"trace.api.{digest.slug(args.model or '')}.json"
+    route = {"channel": api_editor.CHANNEL, "model": args.model or ""}
+    trace_path = issue_dir / str(routes.trace_name(route))
     try:
         api_editor.resolve(args.model or "")
     except api_editor.EditorError as exc:
         print(exc, file=sys.stderr)
         if args.model:
-            failed = trace.new(candidates["date"], "api", args.model)
+            failed = trace.new(candidates["date"], api_editor.CHANNEL, args.model)
             trace.save(trace_path, {**failed, "failure": {"step": "setup", "error": str(exc)}})
         return 2
 
@@ -400,7 +424,7 @@ def _edit(args: argparse.Namespace) -> int:
         return 1
     finally:
         trace.save(trace_path, editor.trace)  # also when it failed: the trace says where
-    path = issue_dir / f"digest.api.{digest.slug(args.model)}.json"
+    path = issue_dir / routes.beta_name(api_editor.CHANNEL, args.model)
     _write(path, data)
     print(f"{args.model}: {len(data['items'])} items", file=sys.stderr)
     print(path)
@@ -424,8 +448,8 @@ def _edit_en(args: argparse.Namespace, issue_dir: Path, candidates: dict[str, An
         print(exc, file=sys.stderr)
         return 2
 
-    trace_path = issue_dir / trace.file_name(main)
-    record = trace.load(trace_path) or trace.new(candidates["date"], "api", model)
+    trace_path = issue_dir / str(trace.file_name(main))
+    record = trace.load(trace_path) or trace.new(candidates["date"], api_editor.CHANNEL, model)
 
     async def run() -> dict[str, Any]:
         async with pipeline.make_client() as client:
@@ -438,7 +462,7 @@ def _edit_en(args: argparse.Namespace, issue_dir: Path, candidates: dict[str, An
         return 1
     finally:
         trace.save(trace_path, record)
-    path = issue_dir / f"digest.en.{digest.slug(model)}.json"
+    path = issue_dir / f"digest.en.{routes.slug(model)}.json"
     _write(path, data)
     print(f"{model}: {len(data['items'])} items in English", file=sys.stderr)
     print(path)
