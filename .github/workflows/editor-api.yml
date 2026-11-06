@@ -1,12 +1,11 @@
 # The API route (docs/adr/0001-two-editor-routes.md): edits today's issue with cloud model APIs,
 # next to the Claude route, and commits each model's digest as data/YYYY-MM-DD/digest.api.<slug>.json
-# (a beta on the site). `daily adopt` then makes the first one that passed the main issue if the
-# Claude route has not delivered: Claude route > API route > fallback, and a Claude edit that
-# arrives later through ingest.yml still replaces it.
-# The English edition goes with the main issue: the first model that passes also writes
-# digest.en.json, one more request, when its digest would become the main issue (`daily edit --en`).
-# Each model's trace (trace.api.<slug>.json: what it picked, what validate dropped, where it failed)
-# is committed too, also for a model that failed.
+# (a beta on the site). `daily edit` runs every model; the one whose digest would become the main
+# issue (daily.publish: Claude route > API route > fallback, the first API model in) also writes the
+# English edition. `daily ingest --from-dir` then adopts the run on the latest main: a Claude edit
+# that arrives later through ingest.yml still replaces it. Each model's trace
+# (trace.api.<slug>.json: what it picked, what validate dropped, where it failed) is committed too,
+# also for a model that failed.
 #
 # Configuration (Settings -> Secrets and variables -> Actions):
 #   secrets    NVIDIA_API_KEY
@@ -70,36 +69,8 @@ jobs:
         run: |
           date=${ISSUE_DATE:-$(uv run python -c "from daily.window import local_today; print(local_today())")}
           echo "date=$date" >> "$GITHUB_OUTPUT"
-          if [ ! -f "data/$date/candidates.json" ]; then
-            echo "::warning::data/$date/candidates.json is missing: nothing to edit (fallback.yml alerts)"
-            exit 0
-          fi
-          if [ -z "$EDITOR_API_MODEL" ]; then
-            echo "::error::the EDITOR_API_MODEL variable is not set"
-            exit 1
-          fi
           failed=0
-          mkdir -p "$RUNNER_TEMP/api"
-          n=0
-          for model in ${EDITOR_API_MODEL//,/ }; do
-            if path=$(uv run python -m daily edit --date "$date" --model "$model"); then
-              n=$((n + 1))
-              cp "$path" "$RUNNER_TEMP/api/$n-$(basename "$path")" # numbered: the priority order
-              # Only the first one can become the main issue. A failed English edition does not fail
-              # the job: the English page then shows the original titles.
-              if [ "$n" = 1 ]; then
-                if en=$(uv run python -m daily edit --date "$date" --en "$path"); then
-                  if [ -n "$en" ]; then cp "$en" "$RUNNER_TEMP/api/en.json"; fi
-                else
-                  echo "::warning::$model did not produce a valid English edition for $date"
-                fi
-              fi
-            else
-              echo "::error::$model did not produce a valid digest for $date"
-              failed=1
-            fi
-          done
-          cp "data/$date"/trace.api.*.json "$RUNNER_TEMP/api/" 2>/dev/null || true
+          uv run python -m daily edit --date "$date" --out "$RUNNER_TEMP/api" || failed=1
           echo "failed=$failed" >> "$GITHUB_OUTPUT"
       - uses: actions/upload-artifact@v4
         if: steps.edit.outputs.date != ''
@@ -112,8 +83,8 @@ jobs:
       failed: ${{ steps.edit.outputs.failed }}
 
   # Editing takes a while and runs unlocked; committing shares the publish lock with ingest.yml and
-  # fallback.yml. adopt runs on the latest main each attempt: the Claude route may have been
-  # ingested meanwhile, and adopt in priority order makes the first valid digest the main issue.
+  # fallback.yml. ingest runs on the latest main each attempt: the Claude route may have been
+  # ingested meanwhile.
   publish:
     needs: edit
     if: needs.edit.outputs.date != ''
@@ -143,24 +114,10 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          files=$(cd "$RUNNER_TEMP/api" 2>/dev/null && ls [0-9]*-*.json 2>/dev/null | sort -n || true)
-          traces=$(cd "$RUNNER_TEMP/api" 2>/dev/null && ls trace.api.*.json 2>/dev/null || true)
-          [ -z "$files$traces" ] && exit 0
           for attempt in 1 2 3; do
             git fetch --no-tags origin main && git reset --hard origin/main
-            # Before adopt, which notes in each model's trace whether it became the main issue.
-            for file in $traces; do
-              cp "$RUNNER_TEMP/api/$file" "data/$DATE/$file"
-            done
-            for file in $files; do
-              cp "$RUNNER_TEMP/api/$file" "data/$DATE/${file#*-}"
-              uv run python -m daily adopt --date "$DATE" --from "data/$DATE/${file#*-}"
-            done
-            # Taken only when its digest did become the main issue (publish.goes_with).
-            if [ -f "$RUNNER_TEMP/api/en.json" ]; then
-              uv run python -m daily adopt --date "$DATE" --en --from "$RUNNER_TEMP/api/en.json"
-            fi
-            git add "data/$DATE"
+            uv run python -m daily ingest --from-dir "$RUNNER_TEMP/api"
+            git add data/
             git diff --cached --quiet && exit 0
             git commit -m "digest: $DATE (from the API route)"
             if git push origin HEAD:main; then break; fi

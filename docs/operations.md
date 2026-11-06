@@ -8,14 +8,14 @@
 |---|---|---|
 | 05:07 | Actions `fetch.yml` | 抓取，把 `candidates.json` 提交到 main |
 | 05:30 | Claude 定时任务（每次新开一个 cloud session） | 运行 daily-editor skill，写中文版和英文版，推到本会话的 `claude/` 分支 |
-| 05:30 | Actions `editor-api.yml` | API 通道：`EDITOR_API_MODEL` 里的每个模型各编一份 `digest.api.<slug>.json`（Beta 版）和生成记录 `trace.api.<slug>.json`（模型失败时也提交）；Claude 还没出结果时，第一份合格的成为主版，同一个模型再写一份英文版 |
-| 推送后 | Actions `ingest.yml` | 用 main 上的候选重新校验，按规则并入 main，启动 `pages.yml` |
+| 05:30 | Actions `editor-api.yml` | API 通道：`EDITOR_API_MODEL` 里的每个模型各编一份 `digest.api.<slug>.json`（Beta 版）和生成记录 `trace.api.<slug>.json`（模型失败时也提交）；Claude 还没出结果时，第一份合格的成为主版，同一个模型再写一份英文版。谁写英文版由 `daily.publish` 决定，workflow 只调 `daily edit --out` 和 `daily ingest --from-dir` |
+| 推送后 | Actions `ingest.yml` | `daily ingest --ref`：用 main 上的候选重新校验，按规则并入 main，启动 `pages.yml` |
 | 06:30 | Actions `fallback.yml` | 当天没有合格的 digest 就发布降级版，提交并启动 `pages.yml` |
 | 之后 | Actions `pages.yml` | `web/` 构建（含 `daily export`）→ GitHub Pages |
 
 **为什么抓取放在 Actions**：Claude cloud session 访问不了其他仓库的 GitHub API，Reddit 也会拒绝它的请求；Actions 自带 `GITHUB_TOKEN`，网络不受限制。05:30 的 Claude 编辑任务直接从仓库读取候选。`fetch.yml` 也可以在 Actions 页面手动触发，指定期号日期补抓。
 
-**为什么要 ingest**：cloud session 只能推送到它自己的 `claude/` 分支。ingest 只从分支拿 `data/*/digest.json`、`data/*/digest.en.json` 和生成记录 `data/*/trace.claude.json`（日报被采用时替换 main 上的，没被采用时只在 main 上的记录里记一笔），`digest.md` 在 main 上重新渲染，其他改动不会进入 main。也可以在 Actions 页面手动运行 ingest，指定分支名，补收没有触发它的分支。已经并入的 `claude/` 分支两天后由 `prune-branches.yml` 删除。
+**为什么要 ingest**：cloud session 只能推送到它自己的 `claude/` 分支。ingest（`daily/ingest.py`）只从分支拿 `data/*/digest.json`、`data/*/digest.en.json` 和生成记录 `data/*/trace.claude.json`（日报被采用时替换 main 上的，没被采用时只在 main 上的记录里记一笔），`digest.md` 在 main 上重新渲染，其他改动不会进入 main。也可以在 Actions 页面手动运行 ingest，指定分支名，补收没有触发它的分支。已经并入的 `claude/` 分支两天后由 `prune-branches.yml` 删除。
 
 **为什么用 workflow_dispatch 串起来**：用 `GITHUB_TOKEN` 推送的提交不会触发其他 workflow（workflow_dispatch 除外），所以 ingest 和兜底提交之后用 `gh workflow run pages.yml --ref main` 启动构建。人推到 main（合并 PR）会直接触发 `pages.yml`。
 
