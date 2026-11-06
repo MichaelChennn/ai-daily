@@ -1,0 +1,59 @@
+# Commits data/ to main and pushes, retrying when someone pushed first, then starts pages.yml
+# (pushes made with GITHUB_TOKEN do not trigger other workflows).
+#
+# With `run`, every attempt starts again from the latest main and runs it: the commands that write
+# data/ (daily ingest, degrade) decide on what is there now, so a retry never has to rebase.
+# Without it, the changes already in data/ are committed once and rebased on retry: for fetch, which
+# cannot run twice, and whose candidates.json nothing else writes.
+name: publish
+description: Commit data/ to main with retries, then rebuild the site
+inputs:
+  message:
+    description: Commit message; {dates} becomes the issue dates the commit touches
+    required: true
+  run:
+    description: Shell commands that write data/, run on the latest main before each attempt
+    default: ""
+  pages:
+    description: Start pages.yml after pushing
+    default: "true"
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      env:
+        MESSAGE: ${{ inputs.message }}
+        RUN: ${{ inputs.run }}
+        PAGES: ${{ inputs.pages }}
+        GH_TOKEN: ${{ github.token }}
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+        # Commits what data/ has now; false when there is nothing to commit.
+        commit() {
+          git add data/
+          git diff --cached --quiet && return 1
+          dates=$(git diff --cached --name-only -- data/ | cut -d/ -f2 | sort -u | xargs)
+          git commit -m "${MESSAGE//\{dates\}/$dates}"
+        }
+
+        if [ -z "$RUN" ]; then
+          commit || exit 0
+        fi
+        for attempt in 1 2 3; do
+          if [ -n "$RUN" ]; then
+            git fetch --no-tags origin main
+            git reset --hard origin/main
+            eval "$RUN"
+            commit || exit 0
+          elif [ "$attempt" != 1 ]; then
+            git pull --rebase --no-tags origin main
+          fi
+          if git push origin HEAD:main; then break; fi
+          if [ "$attempt" = 3 ]; then exit 1; fi
+          sleep 5
+        done
+        if [ "$PAGES" = true ]; then
+          gh workflow run pages.yml --ref main
+        fi

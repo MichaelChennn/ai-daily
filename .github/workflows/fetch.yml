@@ -24,22 +24,10 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # Actions cron is UTC only and Berlin moves between UTC+2 (CEST) and UTC+1 (CET): both
-  # schedules fire every day, and only the one matching today's offset goes on.
   due:
-    runs-on: ubuntu-latest
-    outputs:
-      run: ${{ steps.check.outputs.run }}
-    steps:
-      - id: check
-        env:
-          SCHEDULE: ${{ github.event.schedule }}
-          CEST: "7 3 * * *"
-          CET: "7 4 * * *"
-        run: |
-          expected=$([ "$(TZ=Europe/Berlin date +%z)" = "+0200" ] && echo "$CEST" || echo "$CET")
-          if [ -z "$SCHEDULE" ] || [ "$SCHEDULE" = "$expected" ]; then run=true; else run=false; fi
-          echo "run=$run" >> "$GITHUB_OUTPUT"
+    uses: ./.github/workflows/due.yml
+    with:
+      at: "05:07"
 
   fetch:
     needs: due
@@ -48,26 +36,16 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v10.3.2
-        with:
-          python-version: "3.12"
-          enable-cache: true
-      - run: uv sync --locked
+      - uses: ./.github/actions/setup
       - name: Fetch sources
-        id: fetch
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE_DATE: ${{ inputs.date }}
-        # Prints the written path on stdout; exits 1 (failing the job, which notifies) when no
-        # source returned anything.
-        run: |
-          path=$(uv run python -m daily fetch ${ISSUE_DATE:+--date "$ISSUE_DATE"})
-          echo "date=$(basename "$(dirname "$path")")" >> "$GITHUB_OUTPUT"
+        # Exits 1 (failing the job, which notifies) when no source returned anything.
+        run: uv run python -m daily fetch ${ISSUE_DATE:+--date "$ISSUE_DATE"}
+      # Fetching again on a retry would hit every source again: the commit is rebased instead.
       - name: Commit candidates
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/
-          git diff --cached --quiet && exit 0
-          git commit -m "data: candidates for ${{ steps.fetch.outputs.date }}"
-          git push
+        uses: ./.github/actions/publish
+        with:
+          message: "data: candidates for {dates}"
+          pages: "false"

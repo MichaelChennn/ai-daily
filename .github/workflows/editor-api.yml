@@ -28,22 +28,10 @@ permissions:
   actions: write
 
 jobs:
-  # Actions cron is UTC only and Berlin moves between UTC+2 (CEST) and UTC+1 (CET): both
-  # schedules fire every day, and only the one matching today's offset goes on.
   due:
-    runs-on: ubuntu-latest
-    outputs:
-      run: ${{ steps.check.outputs.run }}
-    steps:
-      - id: check
-        env:
-          SCHEDULE: ${{ github.event.schedule }}
-          CEST: "30 3 * * *"
-          CET: "30 4 * * *"
-        run: |
-          expected=$([ "$(TZ=Europe/Berlin date +%z)" = "+0200" ] && echo "$CEST" || echo "$CET")
-          if [ -z "$SCHEDULE" ] || [ "$SCHEDULE" = "$expected" ]; then run=true; else run=false; fi
-          echo "run=$run" >> "$GITHUB_OUTPUT"
+    uses: ./.github/workflows/due.yml
+    with:
+      at: "05:30"
 
   edit:
     needs: due
@@ -54,11 +42,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: main
-      - uses: astral-sh/setup-uv@v10.3.2
-        with:
-          python-version: "3.12"
-          enable-cache: true
-      - run: uv sync --locked
+      - uses: ./.github/actions/setup
       # One model failing does not stop the others; the job fails afterwards so GitHub notifies.
       - name: Edit with each model
         id: edit
@@ -97,34 +81,17 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: main
-      - uses: astral-sh/setup-uv@v10.3.2
-        with:
-          python-version: "3.12"
-          enable-cache: true
-      - run: uv sync --locked
+      - uses: ./.github/actions/setup
       - uses: actions/download-artifact@v4
         continue-on-error: true # no artifact when every model failed
         with:
           name: api-digests
           path: ${{ runner.temp }}/api
       - name: Commit and rebuild the site
-        env:
-          GH_TOKEN: ${{ github.token }}
-          DATE: ${{ needs.edit.outputs.date }}
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          for attempt in 1 2 3; do
-            git fetch --no-tags origin main && git reset --hard origin/main
-            uv run python -m daily ingest --from-dir "$RUNNER_TEMP/api"
-            git add data/
-            git diff --cached --quiet && exit 0
-            git commit -m "digest: $DATE (from the API route)"
-            if git push origin HEAD:main; then break; fi
-            [ "$attempt" = 3 ] && exit 1
-            sleep 5
-          done
-          gh workflow run pages.yml --ref main
+        uses: ./.github/actions/publish
+        with:
+          message: "digest: {dates} (from the API route)"
+          run: uv run python -m daily ingest --from-dir "$RUNNER_TEMP/api"
       - name: Fail if a model failed
         if: needs.edit.outputs.failed == '1'
         run: exit 1
