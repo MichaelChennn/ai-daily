@@ -48,6 +48,7 @@ STEP_LABELS = {
     "precheck": "预检",
     "draft": "第一稿校验",
     "fix": "修改稿校验",
+    "fix_ignored": "修改稿没有条目，沿用第一稿",
     "highlights": "要点改用标题后校验",
     "final": "正式校验",
     "en": "英文版校验",

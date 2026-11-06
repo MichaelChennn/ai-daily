@@ -345,7 +345,8 @@ class Editor:
         first = await self._ask(messages)
         data = self._draft(first)
         report = await self._validate(data)
-        log.info("write: %d items, %d rejected", len(data["items"]), len(report.item_errors))
+        written = len(data["items"]) if isinstance(data["items"], list) else 0
+        log.info("write: %d items, %d rejected", written, len(report.item_errors))
         self._record_skipped(first, groups, "draft")
         feedback = self._feedback(data, report)
         if feedback:
@@ -353,9 +354,15 @@ class Editor:
             messages.append({"role": "user", "content": feedback})
             second = await self._ask(messages)
             self._record_skipped(second, groups, "fix")
-            data = self._draft(second)
-            report = await self._validate(data)
-            log.info("fix: %d items, %d rejected", len(data["items"]), len(report.item_errors))
+            if isinstance(second.get("items"), list) and second["items"]:
+                data = self._draft(second)
+                report = await self._validate(data)
+                log.info("fix: %d items, %d rejected", len(data["items"]), len(report.item_errors))
+            else:
+                # Nothing to go on, and the draft may well be publishable without what it failed on.
+                problem = "the fix reply has no items: keeping the draft"
+                log.warning(problem)
+                self._record({"step": "fix_ignored", "error": problem})
         if _titles_as_highlights(data, report):
             self.step = "highlights"
             report = await self._validate(data)

@@ -556,3 +556,35 @@ def test_the_process_page_leaves_out_the_read_and_skipped_steps():
         {"step": "pick", "groups": []},
     ]
     assert [s["step"] for s in process.visible_steps(steps)] == ["pick"]
+
+
+@pytest.mark.parametrize("reply", ["{}", '{"items": []}', '{"items": "没有修改"}'])
+def test_a_fix_reply_without_items_keeps_the_draft(issue_dir, slept, monkeypatch, reply):
+    web = FakeWeb([_picks(), _written(**FASTER), _reply(reply)])
+    assert _edit(issue_dir, web, monkeypatch) == 0
+    written = _result(issue_dir)
+    assert len(written["items"]) == 3  # the draft, without the item it failed on
+    assert [d["title"] for d in written["validation"]["dropped"]] == [_digest()["items"][1]["title"]]
+
+
+def test_a_fix_reply_without_items_is_noted_in_the_trace(issue_dir, slept, monkeypatch):
+    web = FakeWeb([_picks(), _written(**FASTER), _reply("{}")])
+    assert _edit(issue_dir, web, monkeypatch) == 0
+    trace = _trace(issue_dir)
+    assert trace["failure"] is None
+    assert [s["step"] for s in trace["steps"]][-2:] == ["draft", "fix_ignored"]
+    assert "items" in trace["steps"][-1]["error"]
+
+
+def test_a_draft_without_items_fails_the_edit_when_the_fix_has_none_either(issue_dir, slept, monkeypatch):
+    web = FakeWeb([_picks(), _reply("{}"), _reply("{}")])
+    assert _edit(issue_dir, web, monkeypatch) == 1
+    failure = _trace(issue_dir)["failure"]
+    assert failure["step"] == "fix" and "items must be a non-empty list" in failure["error"]
+
+
+def test_a_draft_without_items_is_sent_back(issue_dir, slept, monkeypatch):
+    web = FakeWeb([_picks(), _reply("{}"), _written()])
+    assert _edit(issue_dir, web, monkeypatch) == 0
+    assert "items must be a non-empty list" in web.prompt(2)
+    assert len(_result(issue_dir)["items"]) == 4

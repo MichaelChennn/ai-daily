@@ -25,6 +25,7 @@ to show.
                      one validate round: checked_links, errors[], warnings[], highlights[]
                      (the 今日要点 it checked), items[] {title, section, candidates[], reasons[]}
                      (reasons empty: it passed)
+    fix_ignored      error: the API route's fix reply had no items, so the draft went on
     a step may carry an error instead, when the request behind it failed
   failure     {step, error} when the run produced no digest, else null
   adopt[]     at, edition ("zh" | "en"), run (the digest's generated_at), adopted, reason
