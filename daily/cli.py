@@ -13,7 +13,20 @@ from datetime import date
 from pathlib import Path
 from typing import Any
 
-from daily import api_editor, dedup, digest, export, fallback, pipeline, publish, render, routes, site, trace
+from daily import (
+    api_editor,
+    dedup,
+    digest,
+    export,
+    fallback,
+    ingest,
+    pipeline,
+    publish,
+    render,
+    routes,
+    site,
+    trace,
+)
 from daily.config import DEFAULT_DATA_DIR, DEFAULT_SOURCES_FILE, load_sources
 from daily.window import issue_window, local_today
 
@@ -58,12 +71,25 @@ def main(argv: list[str] | None = None) -> int:
     adopt.add_argument("--en", action="store_true", help="推来的是英文版，并入 digest.en.json")
     adopt.add_argument("--trace", type=Path, help="推来的那次运行的 trace；采用时替换本期这个通道的 trace")
 
+    pull = commands.add_parser(
+        "ingest", help="并入一次运行的全部 digest：编辑分支的提交，或 edit --out 的目录"
+    )
+    pull.add_argument("--data-dir", type=Path, default=DEFAULT_DATA_DIR, help="数据目录")
+    source = pull.add_mutually_exclusive_group(required=True)
+    source.add_argument("--ref", help="编辑分支推来的提交（sha 或 FETCH_HEAD）")
+    source.add_argument("--from-dir", type=Path, help="edit --out 留下的目录")
+    pull.add_argument("--base", default="origin/main", help="--ref 从哪里分出来（默认 origin/main）")
+
     api = commands.add_parser("edit", help="API 通道：用云端模型编辑，写入 digest.api.<slug>.json")
     _issue_args(api)
     api.add_argument(
         "--model",
         default=os.environ.get("EDITOR_API_MODEL"),
-        help="厂商:模型，如 nvidia:deepseek-ai/deepseek-v4.1-flash（默认取 EDITOR_API_MODEL）",
+        help="厂商:模型，逗号分隔、按主版优先级排列，如 nvidia:minimaxai/minimax-m3.1-flash"
+        "（默认取 EDITOR_API_MODEL）；会成为主版的那份另写英文版",
+    )
+    api.add_argument(
+        "--out", type=Path, help="把这次运行的 digest、英文版和 trace 留在这个目录，给 ingest --from-dir"
     )
     api.add_argument(
         "--en",
@@ -110,6 +136,7 @@ def main(argv: list[str] | None = None) -> int:
             "degrade": _degrade,
             "render": _render,
             "adopt": _adopt,
+            "ingest": _ingest,
             "edit": _edit,
             "export": _export,
             "page": _page,
@@ -346,127 +373,124 @@ def _render(args: argparse.Namespace) -> int:
 
 
 def _adopt(args: argparse.Namespace) -> int:
-    issue_dir = _issue_dir(args)
-    candidates = _read(issue_dir / "candidates.json")
-    path = issue_dir / ("digest.en.json" if args.en else "digest.json")
-    try:
-        incoming = _read(args.source)
-    except json.JSONDecodeError as exc:
-        incoming = f"invalid JSON: {exc}"
-    try:
-        current = _read(path) if path.exists() else None
-    except json.JSONDecodeError:
-        current = None
-    if args.en:
-        main_path = issue_dir / "digest.json"
-        main = _read(main_path) if main_path.exists() else None
-        data, reason = publish.decide_en(main, current, incoming, candidates)
-    else:
-        data, reason = publish.decide(current, incoming, candidates)
-    print(f"{issue_dir.name}: {'adopted' if data else 'kept'} ({reason})", file=sys.stderr)
-    _trace_adopt(issue_dir, incoming, args.trace, data is not None, reason, "en" if args.en else "zh")
-    if data is not None:
-        _write(path, data)
-        if not args.en:
-            (issue_dir / "digest.md").write_text(render.to_markdown(data, candidates), encoding="utf-8")
-        print(path)
+    ingest.adopt(_issue_dir(args), args.source, args.trace, args.en)
     return 0
 
 
-def _trace_adopt(
-    issue_dir: Path, incoming: Any, source: Path | None, adopted: bool, reason: str, edition: str
-) -> None:
-    """The trace follows the digest: the trace of an adopted run (source) replaces the route's, and
-    a rejected run is noted in the trace already there. Either way the verdict is appended."""
-    if not isinstance(incoming, dict) or reason == "unchanged":
-        return
-    run = trace.load(source) if source is not None else None
-    # A run's trace names its route: a fallback the Claude editor wrote when it gave up
-    # (`degrade --force`) goes with trace.claude.json, though the fallback route keeps none.
-    name = trace.file_name(run if run is not None else incoming)
-    if name is None:
-        return
-    path = issue_dir / name
-    record = trace.load(path)
-    if run is not None and edition == "zh" and (adopted or record is None):
-        record = run
-    if record is None:
-        return
-    record.setdefault("adopt", []).append(trace.adopt_record(edition, incoming, adopted, reason))
-    trace.save(path, record)
+def _ingest(args: argparse.Namespace) -> int:
+    if args.ref:
+        ingest.from_ref(args.data_dir, args.ref, args.base)
+    else:
+        ingest.from_dir(args.data_dir, args.from_dir)
+    return 0
 
 
 def _edit(args: argparse.Namespace) -> int:
+    """Edits with each model in order; the one whose digest adopt would make the main issue also
+    writes the English edition. Every model runs, and the exit status says whether one failed."""
     issue_dir = _issue_dir(args)
-    candidates = _read(issue_dir / "candidates.json")
     if args.en:
-        return _edit_en(args, issue_dir, candidates)
-    route = {"channel": api_editor.CHANNEL, "model": args.model or ""}
-    trace_path = issue_dir / str(routes.trace_name(route))
+        return _edit_en(issue_dir, _read(issue_dir / "candidates.json"), args.en)
+    models = [m.strip() for m in (args.model or "").split(",") if m.strip()]
+    if not models:
+        print("no model: pass --model or set EDITOR_API_MODEL", file=sys.stderr)
+        return 2
+    if not (issue_dir / "candidates.json").exists():  # fallback.yml alerts
+        print(f"::warning::{issue_dir}/candidates.json is missing: nothing to edit", file=sys.stderr)
+        return 0
+    candidates = _read(issue_dir / "candidates.json")
+    status, written = 0, []
+    for model in models:
+        code, path = _edit_one(issue_dir, candidates, model)
+        status = max(status, code)
+        if path is not None:
+            written.append(path)
+    en = None
+    current_path = issue_dir / "digest.json"
+    current = _read(current_path) if current_path.exists() else None
+    found = publish.main_of(current, [_read(p) for p in written], candidates)
+    if found is None:
+        print("no digest of this run would be the main issue: no English edition", file=sys.stderr)
+    else:
+        # A failed English edition does not fail the run: the English page shows the original titles.
+        en = _write_en(issue_dir, candidates, found[1])
+    if args.out is not None:
+        traces = [issue_dir / _api_trace(model) for model in models]
+        ingest.save_run(args.out, issue_dir.name, written, en, [t for t in traces if t.exists()])
+    return status
+
+
+def _edit_one(issue_dir: Path, candidates: dict[str, Any], model: str) -> tuple[int, Path | None]:
+    trace_path = issue_dir / _api_trace(model)
     try:
-        api_editor.resolve(args.model or "")
+        api_editor.resolve(model)
     except api_editor.EditorError as exc:
         print(exc, file=sys.stderr)
-        if args.model:
-            failed = trace.new(candidates["date"], api_editor.CHANNEL, args.model)
-            trace.save(trace_path, {**failed, "failure": {"step": "setup", "error": str(exc)}})
-        return 2
+        failed = trace.new(candidates["date"], api_editor.CHANNEL, model)
+        trace.save(trace_path, {**failed, "failure": {"step": "setup", "error": str(exc)}})
+        return 2, None
 
     async def run(editor: api_editor.Editor) -> dict[str, Any]:
         async with editor.client:
             return await editor.run()
 
-    editor = api_editor.Editor(candidates, args.model, pipeline.make_client())
+    editor = api_editor.Editor(candidates, model, pipeline.make_client())
     try:
         data = asyncio.run(run(editor))
     except api_editor.EditorError as exc:
-        print(f"{args.model}: {exc}", file=sys.stderr)
-        return 1
+        print(f"::error::{model} did not produce a valid digest: {exc}", file=sys.stderr)
+        return 1, None
     finally:
         trace.save(trace_path, editor.trace)  # also when it failed: the trace says where
-    path = issue_dir / routes.beta_name(api_editor.CHANNEL, args.model)
+    path = issue_dir / routes.beta_name(api_editor.CHANNEL, model)
     _write(path, data)
-    print(f"{args.model}: {len(data['items'])} items", file=sys.stderr)
+    print(f"{model}: {len(data['items'])} items", file=sys.stderr)
     print(path)
-    return 0
+    return 0, path
 
 
-def _edit_en(args: argparse.Namespace, issue_dir: Path, candidates: dict[str, Any]) -> int:
-    """The English edition goes with the main issue, so it is only written for the API digest that
-    adopt would make the main issue now; a Claude edit ingested later replaces both."""
-    main = _read(args.en)
+def _api_trace(model: str) -> str:
+    return str(routes.trace_name({"channel": api_editor.CHANNEL, "model": model}))
+
+
+def _edit_en(issue_dir: Path, candidates: dict[str, Any], source: Path) -> int:
+    """`edit --en`: the English edition for one API digest, if adopt would make it the main issue now."""
     current_path = issue_dir / "digest.json"
     current = _read(current_path) if current_path.exists() else None
-    adopted, reason = publish.decide(current, main, candidates)
+    adopted, reason = publish.decide(current, _read(source), candidates)
     if adopted is None:
-        print(f"{args.en.name} would not be the main issue ({reason}): no English edition", file=sys.stderr)
+        print(f"{source.name} would not be the main issue ({reason}): no English edition", file=sys.stderr)
         return 0
-    model = main.get("model") or ""
     try:
-        api_editor.resolve(model)
+        api_editor.resolve(adopted.get("model") or "")
     except api_editor.EditorError as exc:
         print(exc, file=sys.stderr)
         return 2
+    return 0 if _write_en(issue_dir, candidates, adopted) is not None else 1
 
+
+def _write_en(issue_dir: Path, candidates: dict[str, Any], main: dict[str, Any]) -> Path | None:
+    """Writes the English edition of main, the API digest that would be the main issue."""
+    model = main.get("model") or ""
     trace_path = issue_dir / str(trace.file_name(main))
     record = trace.load(trace_path) or trace.new(candidates["date"], api_editor.CHANNEL, model)
 
     async def run() -> dict[str, Any]:
         async with pipeline.make_client() as client:
-            return await api_editor.write_en(adopted, candidates, model, client, record["steps"])
+            return await api_editor.write_en(main, candidates, model, client, record["steps"])
 
     try:
         data = asyncio.run(run())
     except api_editor.EditorError as exc:
-        print(f"{model}: no English edition: {exc}", file=sys.stderr)
-        return 1
+        print(f"::warning::{model}: no English edition: {exc}", file=sys.stderr)
+        return None
     finally:
         trace.save(trace_path, record)
     path = issue_dir / f"digest.en.{routes.slug(model)}.json"
     _write(path, data)
     print(f"{model}: {len(data['items'])} items in English", file=sys.stderr)
     print(path)
-    return 0
+    return path
 
 
 def _export(args: argparse.Namespace) -> int:
