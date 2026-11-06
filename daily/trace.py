@@ -3,12 +3,13 @@
 candidates.json says what was fetched and filtered; the digest says what was published. The trace
 holds what happened in between, so the process page (issue #26) can show what each route picked,
 what each validate round dropped and why, and #25 can count it across days. One file per route:
-data/YYYY-MM-DD/trace.claude.json and trace.api.<slug>.json, next to the digest it explains.
+data/YYYY-MM-DD/trace.claude.json and trace.api.<slug>.json (daily.routes names them), next to the
+digest it explains.
 
 Nothing here decides what gets published; a missing or broken trace only leaves the page with less
 to show.
 
-  schema_version, date, channel ("claude" | "api"), model (or null)
+  schema_version, date, channel (a route of daily.routes: "claude" | "api"), model (or null)
   started_at  when the run started
   scores      candidate id -> [重要性 0-3, 实用性 0-3, 新颖性 0-2], the rubric of SKILL.md section 2;
               null when the route did not record them
@@ -38,7 +39,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from daily import digest
+from daily import digest, routes
 
 SCHEMA_VERSION = 1
 SCORE_MAX = (3, 3, 2)
@@ -48,11 +49,10 @@ def now() -> str:
     return datetime.now(timezone.utc).isoformat(timespec="seconds")
 
 
-def file_name(data: dict[str, Any]) -> str:
-    """The trace that goes with a digest (or a trace): trace.claude.json or trace.api.<slug>.json."""
-    if digest.is_api(data):
-        return f"trace.api.{digest.slug(data.get('model') or '')}.json"
-    return "trace.claude.json"
+def file_name(data: dict[str, Any]) -> str | None:
+    """The trace that goes with a digest (or a trace), trace.claude.json or trace.api.<slug>.json;
+    None for a route that keeps none (daily.routes)."""
+    return routes.trace_name(data)
 
 
 def new(date: str, channel: str, model: str | None = None) -> dict[str, Any]:

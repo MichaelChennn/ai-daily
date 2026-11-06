@@ -78,6 +78,17 @@ def test_the_forced_fallback_is_recorded_as_the_claude_route_failing(issue_dir):
     assert failure["step"] == "final" and "GPT-7" in failure["error"]
 
 
+def test_a_forced_fallback_brings_the_claude_trace_with_it(issue_dir, tmp_path):
+    trace_path, digest_path = tmp_path / "run.trace.json", tmp_path / "run.json"
+    failure = {"step": "final", "error": "too few items"}
+    _write(trace_path, {"channel": "claude", "steps": [{"step": "final"}], "failure": failure, "adopt": []})
+    _write(digest_path, fallback.build_fallback(CANDIDATES))
+    assert _cli(issue_dir, "adopt", "--from", str(digest_path), "--trace", str(trace_path)) == 0
+    trace = _trace(issue_dir)
+    assert trace["failure"] == failure
+    assert [(a["adopted"], a["reason"]) for a in trace["adopt"]] == [(True, "no valid digest yet")]
+
+
 def test_the_trace_follows_the_adopted_digest(issue_dir, tmp_path):
     def run(name, steps, generated_at):
         trace_path, digest_path = tmp_path / f"{name}.trace.json", tmp_path / f"{name}.json"
@@ -114,7 +125,7 @@ def test_adopt_notes_in_the_api_trace_whether_it_became_the_main_issue(issue_dir
 
 def _process(issue_dir):
     candidates = json.loads((issue_dir / "candidates.json").read_text())
-    return process.issue_process(issue_dir, candidates, {}, {"deepseek": "DeepSeek"})
+    return process.issue_process(issue_dir, candidates, {})
 
 
 def test_process_data_follows_each_candidate_through_each_route(issue_dir, monkeypatch):
@@ -171,7 +182,7 @@ def test_process_data_lists_the_filtered_items_by_source(issue_dir):
             }
         ],
     }
-    result = process.issue_process(issue_dir, candidates, {"hackernews": "Hacker News"}, {})
+    result = process.issue_process(issue_dir, candidates, {"hackernews": "Hacker News"})
     assert result["sources"][0]["filtered"] == {"not_ai": 1}
     assert result["filtered"] == [
         {

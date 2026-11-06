@@ -104,6 +104,7 @@ def _digest(**overrides):
         "schema_version": 1,
         "date": DATE,
         "mode": "full",
+        "channel": "claude",
         "highlights": ["OpenAI 发布 GPT-6，上下文达到 1M token。"],
         "items": [
             _item(

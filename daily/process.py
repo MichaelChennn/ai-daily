@@ -6,7 +6,8 @@ traces, or a route without one, shows what its digest's validation still says, a
 false: the page marks the rest 当时未记录.
 
   date
-  main         the route whose digest is the main issue: "claude", "api.<slug>", or "fallback"
+  main         the route whose digest is the main issue (daily.routes.key): "claude", "api.<slug>",
+               or "fallback"
   funnel       filtered (null: not recorded), raw, after_url_merge, already_published, candidates
   sources[]    id, name, status, count, error, filtered {reason: count} or null
   filtered[]   source, name, items[] {title, url, reason, value}: the fetchers' 过滤, by source;
@@ -33,7 +34,7 @@ import re
 from pathlib import Path
 from typing import Any
 
-from daily import digest, trace
+from daily import digest, routes, trace
 from daily.site import publishable
 
 HIGH_SCORE = 5  # SKILL.md section 2: a total of about 5 qualifies
@@ -68,12 +69,11 @@ FILTER_REASONS = {
 
 
 def issue_process(
-    issue_dir: Path, candidates: dict[str, Any], source_names: dict[str, str], labels: dict[str, str]
+    issue_dir: Path, candidates: dict[str, Any], source_names: dict[str, str]
 ) -> dict[str, Any]:
-    """labels: API slug -> its name on the page."""
     stats = candidates.get("stats") or {}
     main = _read(issue_dir / "digest.json")
-    channels = [_channel(issue_dir, cid, candidates, main, labels) for cid in _channel_ids(issue_dir, main)]
+    channels = [_channel(issue_dir, cid, candidates, main) for cid in _channel_ids(issue_dir, main)]
     channels = [c for c in channels if c is not None]
     recorded = "filtered" in candidates
     return {
@@ -113,21 +113,21 @@ def _read(path: Path) -> dict[str, Any] | None:
 
 
 def _main_id(main: dict[str, Any] | None) -> str | None:
-    if main is None:
-        return None
-    if main.get("mode") == "fallback":
-        return "fallback"
-    return "api." + digest.slug(main.get("model") or "") if digest.is_api(main) else "claude"
+    return routes.key(main)
 
 
 def _channel_ids(issue_dir: Path, main: dict[str, Any] | None) -> list[str]:
-    ids = ["claude"] if (issue_dir / "trace.claude.json").exists() or _main_id(main) == "claude" else []
-    slugs = {
-        p.name.split(".")[2]
-        for pattern in ("digest.api.*.json", "trace.api.*.json")
-        for p in issue_dir.glob(pattern)
-    }
-    return ids + [f"api.{slug}" for slug in sorted(slugs)]
+    """The routes that ran on this issue: the traced ones that write digest.json (the Claude route),
+    then the per-model ones, by the files they left."""
+    ids = [
+        r.channel
+        for r in routes.ROUTES.values()
+        if r.traced
+        and not r.per_model
+        and ((issue_dir / f"trace.{r.channel}.json").exists() or _main_id(main) == r.channel)
+    ]
+    keyed = routes.keyed_files(issue_dir, "digest").keys() | routes.keyed_files(issue_dir, "trace").keys()
+    return ids + sorted(keyed)
 
 
 def _channel(
@@ -135,14 +135,14 @@ def _channel(
     cid: str,
     candidates: dict[str, Any],
     main: dict[str, Any] | None,
-    labels: dict[str, str],
 ) -> dict[str, Any] | None:
-    api = cid.startswith("api.")
+    found = routes.route_of_key(cid)
+    per_model = found is not None and found[0].per_model
     record = trace.load(issue_dir / f"trace.{cid}.json")
-    digest_path = issue_dir / (f"digest.{cid}.json" if api else "digest.json")
+    digest_path = issue_dir / (f"digest.{cid}.json" if per_model else "digest.json")
     raw = _read(digest_path)
-    if not api and raw is not None and (digest.is_api(raw) or raw.get("mode") != "full"):
-        raw = None  # the main issue is not the Claude route's
+    if not per_model and raw is not None and routes.key(raw) != cid:
+        raw = None  # the main issue is not this route's
     published = publishable(digest_path, candidates) if raw is not None else None
     if record is None and raw is None:
         return None
@@ -151,7 +151,7 @@ def _channel(
     failure = (record or {}).get("failure")
     return {
         "id": cid,
-        "label": labels.get(cid[4:], cid[4:]) if api else "Claude",
+        "label": routes.label(cid),
         "model": model,
         "main": _main_id(main) == cid,
         "recorded": record is not None,

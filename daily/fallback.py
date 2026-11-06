@@ -62,6 +62,7 @@ def build_fallback(candidates: dict[str, Any]) -> dict[str, Any]:
         "schema_version": SCHEMA_VERSION,
         "date": candidates["date"],
         "mode": "fallback",
+        "channel": "fallback",
         "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "highlights": [],
         "items": [item for section in SECTION_LIMITS for item in picked[section]],

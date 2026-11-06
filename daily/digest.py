@@ -24,6 +24,7 @@ from urllib.parse import urlsplit
 
 import httpx
 
+from daily import routes
 from daily.dedup import url_key
 
 SCHEMA_VERSION = 1
@@ -124,6 +125,8 @@ def validate(digest: Any, candidates: dict[str, Any], pages: dict[str, Page] | N
     mode = digest.get("mode")
     if mode not in MODES:
         report.errors.append(f"mode must be one of {MODES}")
+    elif (problem := routes.check(digest)) is not None:
+        report.errors.append(problem)
     lang = digest.get("lang", "zh")
     if lang not in LANGS:
         report.errors.append(f"lang must be one of {LANGS}")
@@ -348,17 +351,6 @@ def _title_max(mode: Any, lang: str) -> int:
     if mode == "full" and lang == "en":
         return TITLE_MAX_EN
     return TITLE_MAX.get(mode, TITLE_MAX["full"])
-
-
-def is_api(digest: dict[str, Any]) -> bool:
-    """Written by the API route; digests without a channel come from the Claude route."""
-    return digest.get("channel") == "api"
-
-
-def slug(model: str) -> str:
-    """An API digest's slug, from the model's family: nvidia:deepseek-ai/deepseek-v4.1-flash -> deepseek,
-    for digest.api.<slug>.json. So EDITOR_API_MODEL holds at most one model per family."""
-    return model.partition(":")[2].rsplit("/", 1)[-1].split("-", 1)[0].lower()
 
 
 def is_discussion(url: str, c: dict[str, Any] | None) -> bool:
