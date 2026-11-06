@@ -37,31 +37,14 @@ jobs:
         with:
           ref: main
           fetch-depth: 0
-      - uses: astral-sh/setup-uv@v10.3.2
+      - uses: ./.github/actions/setup
+      # A named ref: the publish action's own fetches overwrite FETCH_HEAD.
+      - name: Fetch the branch
+        env:
+          BRANCH: ${{ inputs.branch || github.ref_name }}
+        run: git fetch --no-tags origin "+refs/heads/$BRANCH:refs/ingest/branch"
+      - name: Adopt the branch's digests, commit and rebuild the site
+        uses: ./.github/actions/publish
         with:
-          python-version: "3.12"
-          enable-cache: true
-      - run: uv sync --locked
-      - name: Adopt the branch's digests
-        env:
-          BRANCH: ${{ inputs.branch || github.ref_name }}
-        run: |
-          git fetch --no-tags origin "refs/heads/$BRANCH"
-          uv run python -m daily ingest --ref FETCH_HEAD
-      - name: Commit and rebuild the site
-        env:
-          GH_TOKEN: ${{ github.token }}
-          BRANCH: ${{ inputs.branch || github.ref_name }}
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/
-          git diff --cached --quiet && exit 0
-          dates=$(git diff --cached --name-only | xargs -n1 dirname | xargs -n1 basename | sort -u | xargs)
-          git commit -m "digest: $dates (from $BRANCH)"
-          for attempt in 1 2 3; do
-            if git pull --rebase && git push; then break; fi
-            [ "$attempt" = 3 ] && exit 1
-            sleep 5
-          done
-          gh workflow run pages.yml --ref main
+          message: "digest: {dates} (from ${{ inputs.branch || github.ref_name }})"
+          run: uv run python -m daily ingest --ref refs/ingest/branch

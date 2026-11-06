@@ -1,0 +1,50 @@
+# Whether a scheduled run is the one for today. Actions cron is UTC only and Berlin moves between
+# UTC+2 (CEST) and UTC+1 (CET), so a workflow meant for a Berlin time schedules both UTC times; both
+# fire every day, and only the one that falls on `at` in Berlin today goes on. A run started by hand
+# always goes on.
+#
+#   on:
+#     schedule:
+#       - cron: "7 3 * * *" # 05:07 CEST (summer)
+#       - cron: "7 4 * * *" # 05:07 CET (winter)
+#   jobs:
+#     due:
+#       uses: ./.github/workflows/due.yml
+#       with:
+#         at: "05:07"
+#     work:
+#       needs: due
+#       if: needs.due.outputs.run == 'true'
+name: due
+
+on:
+  workflow_call:
+    inputs:
+      at:
+        description: Berlin time the workflow is meant for (HH:MM)
+        required: true
+        type: string
+    outputs:
+      run:
+        description: "'true' when this run goes on"
+        value: ${{ jobs.due.outputs.run }}
+
+jobs:
+  due:
+    runs-on: ubuntu-latest
+    outputs:
+      run: ${{ steps.check.outputs.run }}
+    steps:
+      - id: check
+        env:
+          SCHEDULE: ${{ github.event.schedule }}
+          AT: ${{ inputs.at }}
+        run: |
+          run=true
+          if [ -n "$SCHEDULE" ]; then
+            read -r minute hour _ <<< "$SCHEDULE"
+            berlin=$(TZ=Europe/Berlin date -d "$(date -u +%F) $(printf '%02d:%02d' "$hour" "$minute") UTC" +%H:%M)
+            if [ "$berlin" != "$AT" ]; then run=false; fi
+            echo "$SCHEDULE UTC is $berlin in Berlin today; due at $AT: $run"
+          fi
+          echo "run=$run" >> "$GITHUB_OUTPUT"

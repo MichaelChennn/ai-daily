@@ -2,9 +2,9 @@
 # page; its data and the RSS feed come from python -m daily export (npm's prebuild, run inside
 # `uv run` so it finds the project environment), so the publish gate stays in Python.
 #
-# Pushes made with GITHUB_TOKEN do not trigger other workflows, so fallback.yml and ingest.yml
-# start this one with `gh workflow run pages.yml --ref main` after they commit (workflow_dispatch
-# is the exception to that rule). Pushes to main by people (merged PRs) trigger it directly.
+# Pushes made with GITHUB_TOKEN do not trigger other workflows (workflow_dispatch is the exception),
+# so the workflows that commit data/ start this one with `gh workflow run pages.yml --ref main`
+# (.github/actions/publish). Pushes to main by people (merged PRs) trigger it directly.
 # It always deploys from main: the github-pages environment only accepts the default branch.
 name: pages
 
@@ -36,11 +36,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: main
-      - uses: astral-sh/setup-uv@v10.3.2
-        with:
-          python-version: "3.12"
-          enable-cache: true
-      - run: uv sync --locked
+      - uses: ./.github/actions/setup
       - uses: actions/setup-node@v4
         with:
           node-version: "24"

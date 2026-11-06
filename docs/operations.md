@@ -43,7 +43,12 @@ Actions 失败时 GitHub 会发通知：
 
 ## 时区
 
-Actions 的 cron 只认 UTC，柏林有夏令时（CEST UTC+2 / CET UTC+1），所以 `fetch.yml` 和 `fallback.yml` 各写了冬夏两条 cron，每天都会触发两次，由第一个 job（`due`）按当天的 UTC 偏移只放行一次。Claude 定时任务的 cron 直接写 `CRON_TZ=Europe/Berlin`。
+Actions 的 cron 只认 UTC，柏林有夏令时（CEST UTC+2 / CET UTC+1），所以 `fetch.yml`、`editor-api.yml` 和 `fallback.yml` 各写了冬夏两条 cron，每天都会触发两次。第一个 job `due` 调用可复用 workflow `due.yml`，只传柏林时间（如 `at: "05:07"`）：这次触发的 UTC 时刻换算成今天的柏林时间等于 `at` 才放行，手动触发总是放行。改时间时只改 `on.schedule` 的两条 cron 和 `at`。Claude 定时任务的 cron 直接写 `CRON_TZ=Europe/Berlin`。
+
+## 共用的 action
+
+- `.github/actions/setup`：checkout 之后装 uv、Python 3.12 和锁定的依赖，所有跑 `daily` 的 workflow 都用它。
+- `.github/actions/publish`：把 `data/` 提交到 main 并推送，有人先推了就重试，最多 3 次，然后启动 `pages.yml`。传 `run` 时（ingest、editor-api、fallback）每次尝试都先回到最新的 main 再执行它，判断总是基于 main 上现有的稿子，不需要 rebase；不传时（fetch，不能重抓）只提交一次，重试时 rebase。提交信息里的 `{dates}` 换成这次改动的期号日期。
 
 ## 一次性设置
 
