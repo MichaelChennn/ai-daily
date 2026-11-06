@@ -27,7 +27,7 @@ _Avoid_: 新闻、卡片（卡片只指页面上的样式）
 ## 编辑
 
 **编辑通道**：
-产出一期日报的一种方式。现在有两条：**Claude 通道**（Claude Code 会话运行 daily-editor skill）和 **API 通道**（Actions 里调用云端模型 API）。
+产出一期日报的一种方式。现在有两条：**Claude 通道**（Claude Code 会话运行 daily-editor skill）和 **API 通道**（Actions 里调用云端模型 API）。日报的 `channel` 写明它来自哪条通道；各通道的优先级等属性集中在 `daily/routes.py` 的通道表里（降级版也占一行）。
 _Avoid_: 编辑器、后端、路线
 
 **主版**：
