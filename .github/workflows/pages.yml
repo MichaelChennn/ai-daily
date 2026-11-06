@@ -12,8 +12,7 @@ on:
   push:
     branches: [main]
     paths:
-      - "data/*/digest.json"
-      - "data/*/digest.api.*.json"
+      - "data/**" # every file of an issue shows somewhere: digests, betas, traces, candidates
       - "daily/**"
       - "web/**"
       - "sources.yaml"

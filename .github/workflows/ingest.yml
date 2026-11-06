@@ -1,14 +1,9 @@
 # Brings digests the Claude editor pushes into main, then rebuilds the site.
 #
 # The scheduled editor runs in a Claude cloud session, which can only push to its own claude/
-# branch. For every data/*/digest.json that branch changed, `daily adopt` validates it against
-# main's candidates.json and applies the skill's rules: an edited issue replaces a fallback
-# (the editor finished after 06:30), a fallback never replaces an edited issue, and an edited
-# issue is only replaced by a newer edit. The English edition (digest.en.json) comes after its
-# date's digest.json and is taken only to go with a main issue from the Claude route. The run's
-# trace (trace.claude.json, what the editor picked and validate dropped) goes along: it replaces
-# main's when the digest is adopted, and a rejected run is only noted in main's. Only these files
-# are taken from the branch; digest.md is re-rendered here. Nothing else on the branch reaches main.
+# branch. `daily ingest --ref` (daily/ingest.py) adopts every data/*/digest.json and digest.en.json
+# the branch changed, with the run's trace, by the rules of daily.publish; nothing else on the branch
+# reaches main. This workflow only fetches the branch and commits.
 # Run it by hand with a branch name to pick up a branch whose push did not run this workflow
 # (e.g. one created before this file existed on main).
 name: ingest
@@ -52,24 +47,7 @@ jobs:
           BRANCH: ${{ inputs.branch || github.ref_name }}
         run: |
           git fetch --no-tags origin "refs/heads/$BRANCH"
-          sha=$(git rev-parse FETCH_HEAD)
-          base=$(git merge-base origin/main "$sha")
-          # The main issues first: an English edition is adopted only to go with one.
-          for path in $(git diff --name-only --diff-filter=AM "$base" "$sha" -- 'data/*/digest.json') \
-                      $(git diff --name-only --diff-filter=AM "$base" "$sha" -- 'data/*/digest.en.json'); do
-            date=$(basename "$(dirname "$path")")
-            if [ ! -f "data/$date/candidates.json" ]; then
-              echo "::warning::$path: main has no data/$date/candidates.json, skipped"
-              continue
-            fi
-            git show "$sha:$path" > "$RUNNER_TEMP/incoming.json"
-            en=$([ "$(basename "$path")" = digest.en.json ] && echo --en || true)
-            trace=""
-            if [ -z "$en" ] && git show "$sha:data/$date/trace.claude.json" > "$RUNNER_TEMP/trace.json" 2>/dev/null; then
-              trace="--trace $RUNNER_TEMP/trace.json"
-            fi
-            uv run python -m daily adopt --date "$date" --from "$RUNNER_TEMP/incoming.json" $en $trace
-          done
+          uv run python -m daily ingest --ref FETCH_HEAD
       - name: Commit and rebuild the site
         env:
           GH_TOKEN: ${{ github.token }}

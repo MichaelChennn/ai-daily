@@ -1,10 +1,10 @@
 """`daily adopt`: decide whether a digest from an editor route replaces the one on main.
 
 The Claude editor runs in a cloud session that can only push to its own claude/ branch;
-.github/workflows/ingest.yml hands each digest.json it pushes to `adopt`. The rules match the
-skill's: an edited issue is never replaced by a fallback, a fallback is replaced by any valid
-digest (the editor finishing after the 06:30 fallback), and an edited issue is only replaced by
-a newer edit (an explicit redo).
+`daily ingest` (daily.ingest, .github/workflows/ingest.yml) hands each digest.json it pushes here.
+The rules match the skill's: an edited issue is never replaced by a fallback, a fallback is
+replaced by any valid digest (the editor finishing after the 06:30 fallback), and an edited issue
+is only replaced by a newer edit (an explicit redo).
 
 The API route (.github/workflows/editor-api.yml, daily.api_editor) hands its digests here too,
 so the main issue goes by the routes' priority (daily.routes): Claude route > API route > fallback.
@@ -48,6 +48,19 @@ def decide(current: Any, incoming: Any, candidates: dict[str, Any]) -> tuple[dic
     if _time(incoming) > _time(current):
         return incoming, "newer edit"
     return None, "the current edit is newer"
+
+
+def main_of(
+    current: Any, incoming: list[Any], candidates: dict[str, Any]
+) -> tuple[int, dict[str, Any]] | None:
+    """Which of the digests, adopted in this order after current, ends up the main issue, and as
+    what; None if none of them does. The API route writes the English edition for that one."""
+    found = None
+    for index, data in enumerate(incoming):
+        adopted, _ = decide(current, data, candidates)
+        if adopted is not None:
+            current, found = adopted, (index, adopted)
+    return found
 
 
 def decide_en(

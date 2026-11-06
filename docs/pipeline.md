@@ -122,5 +122,5 @@ validate 只留下最后一轮删掉的条目。编辑过程中的其他步骤�
 | `trace.api.<slug>.json` | `daily edit` 和 `daily edit --en`，成功失败都写 | 无一手来源预先去掉、挑选、超出 18 组截掉、第一稿校验、修改稿校验、英文版校验 |
 
 - **打分**：两个通道都给每个候选打 SKILL.md 第 2 节的三维分数（重要性 0–3、实用性 0–3、新颖性 0–2），写在 `scores` 里。代码不按分数筛选，分数只用来看编辑是怎么选的。有生成记录之前的期没有分数。
-- **adopt**：`daily adopt` 把结果（采用 / 不采用和原因）追加进那个通道的生成记录。生成记录跟着日报走：Claude 通道的新稿被采用，`ingest.yml` 用分支上的 `trace.claude.json` 替换 main 上的；没被采用，就保留 main 上原来的，只追加一条「运行被拒」。API 通道每次运行都覆盖自己的 Beta 版，生成记录也一起覆盖，`editor-api.yml` 在模型失败时也提交。
+- **adopt**：`daily adopt` 把结果（采用 / 不采用和原因）追加进那个通道的生成记录。生成记录跟着日报走：Claude 通道的新稿被采用，`daily ingest --ref`（`ingest.yml`）用分支上的 `trace.claude.json` 替换 main 上的；没被采用，就保留 main 上原来的，只追加一条「运行被拒」。API 通道每次运行都覆盖自己的 Beta 版，生成记录也一起覆盖，`editor-api.yml` 在模型失败时也提交。
 - **导出**：`daily export` 把每期的过程数据写进 `web/data/process/<期号>.json`（格式见 `daily/process.py`）。没有生成记录的旧期，只能从 digest 的 `validation` 推出最后一轮校验，页面上把其他步骤标为「当时未记录」。

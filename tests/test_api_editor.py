@@ -107,6 +107,7 @@ def slept(monkeypatch):
 
 def _edit(issue_dir, web, monkeypatch):
     monkeypatch.setattr(cli.pipeline, "make_client", web.client)
+    monkeypatch.setattr(cli, "_write_en", lambda *args: None)  # the English edition: test_edit_runs_*
     return cli.main(["edit", "--date", DATE, "--data-dir", str(issue_dir.parent), "--model", MODEL])
 
 
