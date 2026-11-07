@@ -7,27 +7,26 @@ import asyncio
 import json
 import logging
 import os
-import shutil
 import sys
 from datetime import date
 from pathlib import Path
-from typing import Any
 
 from daily import (
-    api_editor,
     dedup,
     digest,
+    edit,
     export,
     fallback,
     ingest,
+    issue,
     pipeline,
-    publish,
     render,
     routes,
     site,
     trace,
 )
 from daily.config import DEFAULT_DATA_DIR, DEFAULT_SOURCES_FILE, load_sources
+from daily.issue import IssueDir
 from daily.window import issue_window, local_today
 
 
@@ -159,20 +158,8 @@ def _channel_arg(parser: argparse.ArgumentParser, help_: str) -> None:
     )
 
 
-def _skill_trace(issue_dir: Path, channel: str) -> Path:
-    return issue_dir / str(routes.trace_name({"channel": channel}))
-
-
-def _issue_dir(args: argparse.Namespace) -> Path:
-    return args.data_dir / (args.date or local_today()).isoformat()
-
-
-def _read(path: Path) -> Any:
-    return json.loads(path.read_text(encoding="utf-8"))
-
-
-def _write(path: Path, data: Any) -> None:
-    path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+def _issue(args: argparse.Namespace) -> IssueDir:
+    return IssueDir.of(args.data_dir, args.date or local_today())
 
 
 def _fetch(args: argparse.Namespace) -> int:
@@ -220,16 +207,16 @@ def _print_report(data: dict, path: Path) -> None:
 
 
 def _list(args: argparse.Namespace) -> int:
-    data = _read(_issue_dir(args) / "candidates.json")
+    data = _issue(args).read_candidates()
     print(pipeline.candidate_listing(data, args.kind, args.summary_chars))
     return 0
 
 
 def _validate(args: argparse.Namespace) -> int:
-    issue_dir = _issue_dir(args)
-    candidates = _read(issue_dir / "candidates.json")
-    path = issue_dir / ("digest.en.json" if args.en else "digest.json")
-    data = _read(path)
+    folder = _issue(args)
+    candidates = folder.read_candidates()
+    path = folder.edition(args.en)
+    data = issue.read(path)
     if args.en and data.get("lang") != "en":
         print('ERROR digest.en.json needs "lang": "en"', file=sys.stderr)
         return 1
@@ -243,12 +230,12 @@ def _validate(args: argparse.Namespace) -> int:
                 return await digest.check_links(digest.digest_urls(data), client)
 
         report = digest.validate(data, candidates, asyncio.run(check()))
-    if not args.en and _needs_self_check(issue_dir, data):
+    if not args.en and trace.needs_self_check(folder, data):
         report.warnings.append(
             f"no self_check in {routes.trace_name(data)}: run `daily trace self-check` (SKILL.md 5)"
         )
     step = "en" if args.en else "final" if args.drop_invalid else "precheck" if args.check_links else "check"
-    _trace_skill_route(issue_dir, data, trace.validate_step(step, data, report, checked_links))
+    trace.record_validate(folder, data, trace.validate_step(step, data, report, checked_links))
 
     for error in report.errors:
         print(f"ERROR {error}", file=sys.stderr)
@@ -260,7 +247,7 @@ def _validate(args: argparse.Namespace) -> int:
     if report.errors:
         return 1
     if args.drop_invalid:
-        _write(path, digest.apply_report(data, report, args.check_links))
+        issue.write(path, digest.apply_report(data, report, args.check_links))
         kept = len(data["items"]) - len(report.item_errors)
         print(f"ok: {kept} items kept, {len(report.item_errors)} dropped", file=sys.stderr)
         return 0
@@ -268,112 +255,44 @@ def _validate(args: argparse.Namespace) -> int:
     return 0 if report.ok else 1
 
 
-def _skill_route(data: Any) -> str | None:
-    """The channel of an edit by a route that works by SKILL.md (the Claude route); None otherwise."""
-    route = routes.of(data)
-    return route.channel if route is not None and route.channel in routes.SKILL_ROUTES else None
-
-
-def _needs_self_check(issue_dir: Path, data: Any) -> bool:
-    """An edit by a SKILL.md route whose trace has no self-check, not even an empty one."""
-    if (channel := _skill_route(data)) is None:
-        return False
-    record = trace.load(_skill_trace(issue_dir, channel))
-    return not any(s.get("step") == "self_check" for s in (record or {}).get("steps") or [])
-
-
-def _trace_skill_route(issue_dir: Path, data: Any, step: dict[str, Any]) -> None:
-    """Add a validate round of a SKILL.md route's edit to its trace; other digests have none."""
-    if (channel := _skill_route(data)) is None:
-        return
-    path = _skill_trace(issue_dir, channel)
-    record = trace.load(path) or trace.new(issue_dir.name, channel)
-    record["model"] = data.get("model") or record.get("model")
-    record["steps"].append(step)
-    trace.save(path, record)
-
-
 def _trace(args: argparse.Namespace) -> int:
     """What an editor working by SKILL.md records itself: its scores (which start the trace of a new
     run) and the items its self-check dropped. The JSON comes on stdin."""
-    issue_dir = _issue_dir(args)
-    candidates = _read(issue_dir / "candidates.json")
-    path = _skill_trace(issue_dir, args.channel)
+    folder = _issue(args)
+    candidates = folder.read_candidates()
     try:
         value = json.loads(sys.stdin.read())
     except json.JSONDecodeError as exc:
         print(f"ERROR stdin is not JSON: {exc}", file=sys.stderr)
         return 1
-    known = {c["id"] for c in candidates["candidates"]}
     if args.what == "scores":
-        record = trace.new(candidates["date"], args.channel)
-        record["scores"] = trace.scores(value, known)
-        missing = len(known - record["scores"].keys())
-        trace.save(path, record)
-        print(f"{len(record['scores'])} candidates scored, {missing} without a score", file=sys.stderr)
+        scored, missing = trace.record_scores(folder, args.channel, candidates, value)
+        print(f"{scored} candidates scored, {missing} without a score", file=sys.stderr)
         return 0
-    if not isinstance(value, list) or not all(isinstance(v, dict) for v in value):
-        print('ERROR self-check takes [{"candidates": [...], "title": ..., "reason": ...}]', file=sys.stderr)
+    try:
+        dropped = trace.record_self_check(folder, args.channel, candidates, value)
+    except ValueError as exc:
+        print(f"ERROR {exc}", file=sys.stderr)
         return 1
-    record = trace.load(path) or trace.new(candidates["date"], args.channel)
-    items = [
-        {
-            "title": v.get("title"),
-            "candidates": [c for c in v.get("candidates") or [] if c in known],
-            "reason": v.get("reason"),
-        }
-        for v in value
-    ]
-    record["steps"].append({"step": "self_check", "at": trace.now(), "items": items})
-    trace.save(path, record)
-    print(f"{len(items)} items dropped in the self-check recorded", file=sys.stderr)
+    print(f"{dropped} items dropped in the self-check recorded", file=sys.stderr)
     return 0
 
 
 def _degrade(args: argparse.Namespace) -> int:
-    issue_dir = _issue_dir(args)
-    candidates = _read(issue_dir / "candidates.json")
-    path = issue_dir / "digest.json"
-    if path.exists() and not args.force:
-        try:
-            report = digest.validate(_read(path), candidates)
-        except json.JSONDecodeError as exc:
-            report = digest.Report(errors=[f"invalid JSON: {exc}"])
-        if report.ok:
-            print(f"{path} is valid, nothing to do", file=sys.stderr)
-            return 0
-        print(
-            f"{path} is not valid ({(report.errors or ['invalid items'])[0]}), replacing it", file=sys.stderr
-        )
-    if path.exists():
-        shutil.copy(path, issue_dir / "digest.rejected.json")
-    trace_path = _skill_trace(issue_dir, args.channel)
-    if args.force and (record := trace.load(trace_path)):  # the editor gave up (SKILL.md step 6)
-        last = record["steps"][-1] if record["steps"] else {}
-        error = "; ".join(last.get("errors") or []) or "the editor published the fallback"
-        record["failure"] = {"step": last.get("step"), "error": error}
-        trace.save(trace_path, record)
-    data = fallback.build_fallback(candidates)
-    if not data["items"]:
-        print("no candidates to publish", file=sys.stderr)
-        return 1
-    _write(path, digest.apply_report(data, digest.validate(data, candidates), checked_links=False))
-    print(path)
-    return 0
+    return 0 if fallback.degrade(_issue(args), args.force, args.channel) else 1
 
 
 def _render(args: argparse.Namespace) -> int:
-    issue_dir = _issue_dir(args)
-    candidates_file = issue_dir / "candidates.json"
-    candidates = _read(candidates_file) if candidates_file.exists() else None
-    path = issue_dir / "digest.md"
-    path.write_text(render.to_markdown(_read(issue_dir / "digest.json"), candidates), encoding="utf-8")
+    folder = _issue(args)
+    candidates = issue.read_if_exists(folder.candidates)
+    path = folder.markdown
+    path.write_text(render.to_markdown(issue.read(folder.digest), candidates), encoding="utf-8")
     print(path)
     return 0
 
 
 def _adopt(args: argparse.Namespace) -> int:
-    ingest.adopt(_issue_dir(args), args.source, args.trace, args.en)
+    ingest.adopt(_issue(args), args.source, args.trace, args.en)
     return 0
 
 
@@ -386,111 +305,14 @@ def _ingest(args: argparse.Namespace) -> int:
 
 
 def _edit(args: argparse.Namespace) -> int:
-    """Edits with each model in order; the one whose digest adopt would make the main issue also
-    writes the English edition. Every model runs, and the exit status says whether one failed."""
-    issue_dir = _issue_dir(args)
+    folder = _issue(args)
     if args.en:
-        return _edit_en(issue_dir, _read(issue_dir / "candidates.json"), args.en)
+        return edit.write_en_for(folder, args.en)
     models = [m.strip() for m in (args.model or "").split(",") if m.strip()]
     if not models:
         print("no model: pass --model or set EDITOR_API_MODEL", file=sys.stderr)
         return 2
-    if not (issue_dir / "candidates.json").exists():  # fallback.yml alerts
-        print(f"::warning::{issue_dir}/candidates.json is missing: nothing to edit", file=sys.stderr)
-        return 0
-    candidates = _read(issue_dir / "candidates.json")
-    status, written = 0, []
-    for model in models:
-        code, path = _edit_one(issue_dir, candidates, model)
-        status = max(status, code)
-        if path is not None:
-            written.append(path)
-    en = None
-    current_path = issue_dir / "digest.json"
-    current = _read(current_path) if current_path.exists() else None
-    found = publish.main_of(current, [_read(p) for p in written], candidates)
-    if found is None:
-        print("no digest of this run would be the main issue: no English edition", file=sys.stderr)
-    else:
-        # A failed English edition does not fail the run: the English page shows the original titles.
-        en = _write_en(issue_dir, candidates, found[1])
-    if args.out is not None:
-        traces = [issue_dir / _api_trace(model) for model in models]
-        ingest.save_run(args.out, issue_dir.name, written, en, [t for t in traces if t.exists()])
-    return status
-
-
-def _edit_one(issue_dir: Path, candidates: dict[str, Any], model: str) -> tuple[int, Path | None]:
-    trace_path = issue_dir / _api_trace(model)
-    try:
-        api_editor.resolve(model)
-    except api_editor.EditorError as exc:
-        print(exc, file=sys.stderr)
-        failed = trace.new(candidates["date"], api_editor.CHANNEL, model)
-        trace.save(trace_path, {**failed, "failure": {"step": "setup", "error": str(exc)}})
-        return 2, None
-
-    async def run(editor: api_editor.Editor) -> dict[str, Any]:
-        async with editor.client:
-            return await editor.run()
-
-    editor = api_editor.Editor(candidates, model, pipeline.make_client())
-    try:
-        data = asyncio.run(run(editor))
-    except api_editor.EditorError as exc:
-        print(f"::error::{model} did not produce a valid digest: {exc}", file=sys.stderr)
-        return 1, None
-    finally:
-        trace.save(trace_path, editor.trace)  # also when it failed: the trace says where
-    path = issue_dir / routes.beta_name(api_editor.CHANNEL, model)
-    _write(path, data)
-    print(f"{model}: {len(data['items'])} items", file=sys.stderr)
-    print(path)
-    return 0, path
-
-
-def _api_trace(model: str) -> str:
-    return str(routes.trace_name({"channel": api_editor.CHANNEL, "model": model}))
-
-
-def _edit_en(issue_dir: Path, candidates: dict[str, Any], source: Path) -> int:
-    """`edit --en`: the English edition for one API digest, if adopt would make it the main issue now."""
-    current_path = issue_dir / "digest.json"
-    current = _read(current_path) if current_path.exists() else None
-    adopted, reason = publish.decide(current, _read(source), candidates)
-    if adopted is None:
-        print(f"{source.name} would not be the main issue ({reason}): no English edition", file=sys.stderr)
-        return 0
-    try:
-        api_editor.resolve(adopted.get("model") or "")
-    except api_editor.EditorError as exc:
-        print(exc, file=sys.stderr)
-        return 2
-    return 0 if _write_en(issue_dir, candidates, adopted) is not None else 1
-
-
-def _write_en(issue_dir: Path, candidates: dict[str, Any], main: dict[str, Any]) -> Path | None:
-    """Writes the English edition of main, the API digest that would be the main issue."""
-    model = main.get("model") or ""
-    trace_path = issue_dir / str(trace.file_name(main))
-    record = trace.load(trace_path) or trace.new(candidates["date"], api_editor.CHANNEL, model)
-
-    async def run() -> dict[str, Any]:
-        async with pipeline.make_client() as client:
-            return await api_editor.write_en(main, candidates, model, client, record["steps"])
-
-    try:
-        data = asyncio.run(run())
-    except api_editor.EditorError as exc:
-        print(f"::warning::{model}: no English edition: {exc}", file=sys.stderr)
-        return None
-    finally:
-        trace.save(trace_path, record)
-    path = issue_dir / f"digest.en.{routes.slug(model)}.json"
-    _write(path, data)
-    print(f"{model}: {len(data['items'])} items in English", file=sys.stderr)
-    print(path)
-    return path
+    return edit.run(folder, models, args.out)
 
 
 def _export(args: argparse.Namespace) -> int:

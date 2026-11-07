@@ -15,7 +15,6 @@
 from __future__ import annotations
 
 import hashlib
-import json
 import re
 from collections.abc import Iterable
 from dataclasses import dataclass, field
@@ -24,6 +23,7 @@ from pathlib import Path
 from typing import Any
 from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
+from daily import issue
 from daily.models import Candidate
 
 # ---------------------------------------------------------------- 1. URL keys
@@ -307,10 +307,10 @@ def load_reported(data_dir: Path, issue_date: date, days: int = REPORTED_DAYS) -
     reported: list[ReportedItem] = []
     for offset in range(days, 0, -1):
         day = (issue_date - timedelta(days=offset)).isoformat()
-        digest_file = data_dir / day / "digest.json"
-        if not digest_file.exists():
+        main = issue.IssueDir.of(data_dir, day).read_digest()
+        if main is None:
             continue
-        for item in json.loads(digest_file.read_text(encoding="utf-8")).get("items") or []:
+        for item in main.get("items") or []:
             if isinstance(item, dict):
                 keys = {url_key(url) for url in published_urls({"items": [item]})}
                 reported.append(ReportedItem(day, str(item.get("title") or ""), keys))
@@ -324,18 +324,17 @@ def load_history(
     published: dict[str, str] = {}
     for offset in range(days, 0, -1):
         day = (issue_date - timedelta(days=offset)).isoformat()
-        day_dir = data_dir / day
-        candidates_file = day_dir / "candidates.json"
-        if candidates_file.exists():
-            for item in json.loads(candidates_file.read_text(encoding="utf-8")).get("candidates", []):
+        folder = issue.IssueDir.of(data_dir, day)
+        if folder.candidates.exists():
+            for item in folder.read_candidates().get("candidates", []):
                 for url in [item.get("url"), *(a.get("url") for a in item.get("also_from", []))]:
                     if url:
                         seen.setdefault(url_key(url), []).append(day)
-        digest_file = day_dir / "digest.json"
-        if digest_file.exists():
+        main = folder.read_digest()
+        if main is not None:
             from daily.digest import published_urls  # deferred: digest imports dedup
 
-            for url in published_urls(json.loads(digest_file.read_text(encoding="utf-8"))):
+            for url in published_urls(main):
                 published.setdefault(url_key(url), day)
     return History(
         seen={k: sorted(set(v)) for k, v in seen.items()},

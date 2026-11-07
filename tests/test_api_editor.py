@@ -3,7 +3,8 @@ import json
 import httpx
 import pytest
 
-from daily import api_editor, cli, digest, process, publish
+from daily import api_editor, cli, digest, edit, llm, pipeline, process, publish
+from daily.issue import IssueDir
 from tests.test_digest import CANDIDATES, DATE, _digest
 
 CHAT = "integrate.api.nvidia.com/v1/chat/completions"
@@ -101,14 +102,14 @@ def slept(monkeypatch):
     async def sleep(value):
         seconds.append(value)
 
-    monkeypatch.setattr(api_editor, "_sleep", sleep)
+    monkeypatch.setattr(llm, "_sleep", sleep)
     return seconds
 
 
 def _edit(issue_dir, web, monkeypatch):
-    monkeypatch.setattr(cli.pipeline, "make_client", web.client)
-    monkeypatch.setattr(cli, "_write_en", lambda *args: None)  # the English edition: test_edit_runs_*
-    return cli.main(["edit", "--date", DATE, "--data-dir", str(issue_dir.parent), "--model", MODEL])
+    monkeypatch.setattr(pipeline, "make_client", web.client)
+    monkeypatch.setattr(edit, "_write_en", lambda *args: None)  # the English edition: test_edit_runs_*
+    return edit.run(IssueDir(issue_dir), [MODEL])
 
 
 def _result(issue_dir):
@@ -225,7 +226,7 @@ def test_rate_limits_are_waited_out_longer_each_time(issue_dir, slept, monkeypat
 
 def test_edit_needs_a_known_provider_and_its_key(issue_dir, monkeypatch):
     web = FakeWeb([])
-    monkeypatch.setattr(cli.pipeline, "make_client", web.client)
+    monkeypatch.setattr(pipeline, "make_client", web.client)
     base = ["edit", "--date", DATE, "--data-dir", str(issue_dir.parent), "--model"]
     assert cli.main([*base, "acme:some-model"]) == 2
     monkeypatch.delenv("NVIDIA_API_KEY")
@@ -255,8 +256,8 @@ ENGLISH = {
 
 
 def _edit_en(issue_dir, web, monkeypatch, path):
-    monkeypatch.setattr(cli.pipeline, "make_client", web.client)
-    return cli.main(["edit", "--date", DATE, "--data-dir", str(issue_dir.parent), "--en", str(path)])
+    monkeypatch.setattr(pipeline, "make_client", web.client)
+    return edit.write_en_for(IssueDir(issue_dir), path)
 
 
 def test_edit_en_writes_the_english_edition_in_one_request(issue_dir, slept, monkeypatch, capsys):

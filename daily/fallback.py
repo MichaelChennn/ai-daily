@@ -7,10 +7,15 @@ Items keep their original (English) titles and have no summary.
 
 from __future__ import annotations
 
+import json
+import shutil
+import sys
 from datetime import datetime, timezone
 from typing import Any
 
+from daily import digest, issue, trace
 from daily.digest import SCHEMA_VERSION, is_discussion
+from daily.issue import IssueDir
 
 # kind -> section, and how many items each section gets (12 in total at most).
 SECTION_OF_KIND = {
@@ -68,3 +73,33 @@ def build_fallback(candidates: dict[str, Any]) -> dict[str, Any]:
         "items": [item for section in SECTION_LIMITS for item in picked[section]],
         "research": [],
     }
+
+
+def degrade(folder: IssueDir, force: bool = False, channel: str = "claude") -> bool:
+    """Writes the fallback as digest.json when there is no valid one (with force: whatever there is),
+    keeping the digest it replaces as digest.rejected.json. With force, the editor of the route
+    `channel` gave up, which goes into its trace. False if there are no candidates to publish."""
+    candidates = folder.read_candidates()
+    path = folder.digest
+    if path.exists() and not force:
+        try:
+            report = digest.validate(issue.read(path), candidates)
+        except json.JSONDecodeError as exc:
+            report = digest.Report(errors=[f"invalid JSON: {exc}"])
+        if report.ok:
+            print(f"{path} is valid, nothing to do", file=sys.stderr)
+            return True
+        print(
+            f"{path} is not valid ({(report.errors or ['invalid items'])[0]}), replacing it", file=sys.stderr
+        )
+    if path.exists():
+        shutil.copy(path, folder.rejected)
+    if force:  # the editor gave up (SKILL.md step 6)
+        trace.record_give_up(folder, channel)
+    data = build_fallback(candidates)
+    if not data["items"]:
+        print("no candidates to publish", file=sys.stderr)
+        return False
+    issue.write(path, digest.apply_report(data, digest.validate(data, candidates), checked_links=False))
+    print(path)
+    return True

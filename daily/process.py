@@ -29,12 +29,12 @@ false: the page marks the rest 当时未记录.
 
 from __future__ import annotations
 
-import json
 import re
 from pathlib import Path
 from typing import Any
 
-from daily import digest, routes, trace
+from daily import digest, issue, routes, trace
+from daily.issue import IssueDir
 from daily.site import publishable
 
 HIGH_SCORE = 5  # SKILL.md section 2: a total of about 5 qualifies
@@ -72,8 +72,9 @@ def issue_process(
     issue_dir: Path, candidates: dict[str, Any], source_names: dict[str, str]
 ) -> dict[str, Any]:
     stats = candidates.get("stats") or {}
-    main = _read(issue_dir / "digest.json")
-    channels = [_channel(issue_dir, cid, candidates, main) for cid in _channel_ids(issue_dir, main)]
+    folder = IssueDir(issue_dir)
+    main = issue.try_read(folder.digest)
+    channels = [_channel(folder, cid, candidates, main) for cid in _channel_ids(folder, main)]
     channels = [c for c in channels if c is not None]
     recorded = "filtered" in candidates
     return {
@@ -104,19 +105,11 @@ def issue_process(
     }
 
 
-def _read(path: Path) -> dict[str, Any] | None:
-    try:
-        data = json.loads(path.read_text(encoding="utf-8"))
-    except (OSError, json.JSONDecodeError):
-        return None
-    return data if isinstance(data, dict) else None
-
-
 def _main_id(main: dict[str, Any] | None) -> str | None:
     return routes.key(main)
 
 
-def _channel_ids(issue_dir: Path, main: dict[str, Any] | None) -> list[str]:
+def _channel_ids(folder: IssueDir, main: dict[str, Any] | None) -> list[str]:
     """The routes that ran on this issue: the traced ones that write digest.json (the Claude route),
     then the per-model ones, by the files they left."""
     ids = [
@@ -124,23 +117,23 @@ def _channel_ids(issue_dir: Path, main: dict[str, Any] | None) -> list[str]:
         for r in routes.ROUTES.values()
         if r.traced
         and not r.per_model
-        and ((issue_dir / f"trace.{r.channel}.json").exists() or _main_id(main) == r.channel)
+        and (folder.keyed("trace", r.channel).exists() or _main_id(main) == r.channel)
     ]
-    keyed = routes.keyed_files(issue_dir, "digest").keys() | routes.keyed_files(issue_dir, "trace").keys()
+    keyed = routes.keyed_files(folder.path, "digest").keys() | routes.keyed_files(folder.path, "trace").keys()
     return ids + sorted(keyed)
 
 
 def _channel(
-    issue_dir: Path,
+    folder: IssueDir,
     cid: str,
     candidates: dict[str, Any],
     main: dict[str, Any] | None,
 ) -> dict[str, Any] | None:
     found = routes.route_of_key(cid)
     per_model = found is not None and found[0].per_model
-    record = trace.load(issue_dir / f"trace.{cid}.json")
-    digest_path = issue_dir / (f"digest.{cid}.json" if per_model else "digest.json")
-    raw = _read(digest_path)
+    record = trace.load(folder.keyed("trace", cid))
+    digest_path = folder.keyed("digest", cid) if per_model else folder.digest
+    raw = issue.try_read(digest_path)
     if not per_model and raw is not None and routes.key(raw) != cid:
         raw = None  # the main issue is not this route's
     published = publishable(digest_path, candidates) if raw is not None else None

@@ -4,8 +4,9 @@ import json
 import httpx
 import pytest
 
-from daily import api_editor, cli, dedup, digest, fallback, render
+from daily import api_editor, cli, dedup, digest, fallback, pipeline, render
 from daily.digest import Page
+from daily.issue import IssueDir
 from tests.conftest import ISSUE, mock_client
 
 DATE = ISSUE.isoformat()
@@ -451,17 +452,17 @@ def test_cli_validate_check_links(issue_dir, monkeypatch):
         "huggingface.co/Qwen/Qwen3.5-72B": "ok",
         "huggingface.co/papers/2610.00001": "ok",
     }
-    monkeypatch.setattr(cli.pipeline, "make_client", lambda: mock_client(routes))
+    monkeypatch.setattr(pipeline, "make_client", lambda: mock_client(routes))
     assert _run(issue_dir, "validate", "--check-links", "--drop-invalid") == 0
     written = json.loads((issue_dir / "digest.json").read_text())
     assert written["validation"]["checked_links"] is True
     assert "broken link" in written["validation"]["dropped"][0]["reasons"][0]
 
 
-def test_cli_degrade(issue_dir):
+def test_degrade(issue_dir):
     path = issue_dir / "digest.json"
     path.write_text(json.dumps(_digest()))
-    assert _run(issue_dir, "degrade") == 0
+    assert fallback.degrade(IssueDir(issue_dir))
     assert json.loads(path.read_text())["mode"] == "full"  # valid digest is kept
 
     path.write_text("{not json")
@@ -509,7 +510,7 @@ def test_render_labels_repeated_sources_by_candidate_title():
 
 def test_cli_page_prints_verbatim_context(monkeypatch, capsys):
     routes = {"a.example/post": httpx.Response(200, html="<p>It <b>achieves</b> sub-500ms   latency.</p>")}
-    monkeypatch.setattr(cli.pipeline, "make_client", lambda: mock_client(routes))
+    monkeypatch.setattr(pipeline, "make_client", lambda: mock_client(routes))
     assert cli.main(["page", "https://a.example/post", "--grep", "500ms", "--context", "20"]) == 0
     out = capsys.readouterr().out
     assert "1 match(es)" in out and "It achieves sub-500ms latency." in out

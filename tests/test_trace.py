@@ -5,7 +5,8 @@ import json
 
 import pytest
 
-from daily import cli, digest, fallback, process
+from daily import cli, digest, fallback, ingest, process, trace
+from daily.issue import IssueDir
 from tests.test_digest import CANDIDATES, DATE, _digest
 
 MODEL = "nvidia:deepseek-ai/deepseek-v4.1-flash"
@@ -45,12 +46,12 @@ def test_the_claude_route_records_scores_self_check_and_every_validate_round(iss
     assert _cli(issue_dir, "validate") == 1
     assert _cli(issue_dir, "validate", "--drop-invalid") == 0
 
-    trace = _trace(issue_dir)
-    assert (trace["channel"], trace["model"]) == ("claude", "claude-opus-5-5")
-    assert trace["scores"] == {"c_gpt": [3, 2, 2], "c_vllm": [2, 2, 1]}
-    assert [s["step"] for s in trace["steps"]] == ["self_check", "check", "final"]
-    assert trace["steps"][0]["items"] == [{**dropped[0]}]
-    final = trace["steps"][2]
+    record = _trace(issue_dir)
+    assert (record["channel"], record["model"]) == ("claude", "claude-opus-5-5")
+    assert record["scores"] == {"c_gpt": [3, 2, 2], "c_vllm": [2, 2, 1]}
+    assert [s["step"] for s in record["steps"]] == ["self_check", "check", "final"]
+    assert record["steps"][0]["items"] == [{**dropped[0]}]
+    final = record["steps"][2]
     assert [i["candidates"] for i in final["items"]] == [["c_gpt"], ["c_vllm"], ["c_qwen"], ["c_paper"]]
     assert final["items"][1]["reasons"] and not final["items"][0]["reasons"]
     validation = json.loads((issue_dir / "digest.json").read_text())["validation"]
@@ -73,7 +74,7 @@ def test_the_forced_fallback_is_recorded_as_the_claude_route_failing(issue_dir):
     data = _digest(highlights=["OpenAI 发布 GPT-7。"])  # fails the whole issue
     _write(issue_dir / "digest.json", data)
     assert _cli(issue_dir, "validate", "--drop-invalid") == 1
-    assert _cli(issue_dir, "degrade", "--force") == 0
+    assert fallback.degrade(IssueDir(issue_dir), force=True)
     failure = _trace(issue_dir)["failure"]
     assert failure["step"] == "final" and "GPT-7" in failure["error"]
 
@@ -83,10 +84,10 @@ def test_a_forced_fallback_brings_the_claude_trace_with_it(issue_dir, tmp_path):
     failure = {"step": "final", "error": "too few items"}
     _write(trace_path, {"channel": "claude", "steps": [{"step": "final"}], "failure": failure, "adopt": []})
     _write(digest_path, fallback.build_fallback(CANDIDATES))
-    assert _cli(issue_dir, "adopt", "--from", str(digest_path), "--trace", str(trace_path)) == 0
-    trace = _trace(issue_dir)
-    assert trace["failure"] == failure
-    assert [(a["adopted"], a["reason"]) for a in trace["adopt"]] == [(True, "no valid digest yet")]
+    assert ingest.adopt(IssueDir(issue_dir), digest_path, trace_path)
+    record = _trace(issue_dir)
+    assert record["failure"] == failure
+    assert [(a["adopted"], a["reason"]) for a in record["adopt"]] == [(True, "no valid digest yet")]
 
 
 def test_the_trace_follows_the_adopted_digest(issue_dir, tmp_path):
@@ -94,23 +95,24 @@ def test_the_trace_follows_the_adopted_digest(issue_dir, tmp_path):
         trace_path, digest_path = tmp_path / f"{name}.trace.json", tmp_path / f"{name}.json"
         _write(trace_path, {"channel": "claude", "started_at": generated_at, "steps": steps, "adopt": []})
         _write(digest_path, _digest(generated_at=generated_at))
-        return ["adopt", "--from", str(digest_path), "--trace", str(trace_path)]
+        return digest_path, trace_path
 
+    folder = IssueDir(issue_dir)
     first = run("first", [{"step": "final"}], "2026-10-19T21:00:00+00:00")
-    assert _cli(issue_dir, *first) == 0
-    trace = _trace(issue_dir)
-    assert trace["steps"] == [{"step": "final"}]
-    assert [(a["edition"], a["adopted"]) for a in trace["adopt"]] == [("zh", True)]
+    assert ingest.adopt(folder, *first)
+    record = _trace(issue_dir)
+    assert record["steps"] == [{"step": "final"}]
+    assert [(a["edition"], a["adopted"]) for a in record["adopt"]] == [("zh", True)]
 
     older = run("older", [{"step": "precheck"}], "2026-10-19T20:00:00+00:00")
-    assert _cli(issue_dir, *older) == 0
-    trace = _trace(issue_dir)
-    assert trace["steps"] == [{"step": "final"}]  # the adopted run's, kept
-    rejected = trace["adopt"][-1]
+    assert not ingest.adopt(folder, *older)
+    record = _trace(issue_dir)
+    assert record["steps"] == [{"step": "final"}]  # the adopted run's, kept
+    rejected = record["adopt"][-1]
     assert (rejected["adopted"], rejected["run"]) == (False, "2026-10-19T20:00:00+00:00")
     assert rejected["reason"] == "the current edit is newer"
 
-    assert _cli(issue_dir, *first) == 0  # unchanged: nothing to note
+    assert not ingest.adopt(folder, *first)  # unchanged: nothing to note
     assert len(_trace(issue_dir)["adopt"]) == 2
 
 
@@ -118,7 +120,7 @@ def test_adopt_notes_in_the_api_trace_whether_it_became_the_main_issue(issue_dir
     _write(issue_dir / "trace.api.deepseek.json", {"channel": "api", "steps": [], "adopt": []})
     incoming = issue_dir / "digest.api.deepseek.json"
     _write(incoming, _digest(channel="api", model=MODEL))
-    assert _cli(issue_dir, "adopt", "--from", str(incoming)) == 0
+    assert ingest.adopt(IssueDir(issue_dir), incoming)
     (record,) = _trace(issue_dir, "trace.api.deepseek.json")["adopt"]
     assert (record["adopted"], record["reason"]) == (True, "no valid digest yet")
 
@@ -128,11 +130,12 @@ def _process(issue_dir):
     return process.issue_process(issue_dir, candidates, {})
 
 
-def test_process_data_follows_each_candidate_through_each_route(issue_dir, monkeypatch):
+def test_process_data_follows_each_candidate_through_each_route(issue_dir):
     scores = {"c_gpt": [3, 2, 2], "c_vllm": [2, 2, 1], "c_hn": [1, 1, 1], "c_paper": [1, 1, 0]}
-    _cli(issue_dir, "trace", "scores", stdin=scores, monkeypatch=monkeypatch)
+    folder = IssueDir(issue_dir)
+    trace.record_scores(folder, "claude", CANDIDATES, scores)
     dropped = [{"candidates": ["c_hn"], "title": "有人在生产环境用 MCP 吗", "reason": "只是提问"}]
-    _cli(issue_dir, "trace", "self-check", stdin=dropped, monkeypatch=monkeypatch)
+    trace.record_self_check(folder, "claude", CANDIDATES, dropped)
     data = _digest()
     data["items"][1]["summary"] = "新版本速度提升 40%。"
     _write(issue_dir / "digest.json", data)
@@ -193,8 +196,8 @@ def test_process_data_lists_the_filtered_items_by_source(issue_dir):
     ]
 
 
-def test_process_data_puts_each_highlight_error_under_its_highlight(issue_dir, monkeypatch):
-    _cli(issue_dir, "trace", "scores", stdin={}, monkeypatch=monkeypatch)
+def test_process_data_puts_each_highlight_error_under_its_highlight(issue_dir):
+    trace.record_scores(IssueDir(issue_dir), "claude", CANDIDATES, {})
     data = _digest()
     data["highlights"] = ["OpenAI 发布 GPT-6，上下文达到 1M token。", "vLLM 新版本快了 40%，支持 Qwen9。"]
     _write(issue_dir / "digest.json", data)

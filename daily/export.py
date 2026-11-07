@@ -45,6 +45,7 @@ from pathlib import Path
 from typing import Any
 from urllib.parse import quote, urlsplit
 
+from daily import issue as issue_mod
 from daily import process, routes
 from daily.config import SourceConfig
 from daily.dedup import url_key
@@ -231,10 +232,10 @@ def sources_data(
 
 def source_stats(sources: list[SourceConfig], data_dir: Path, issues: list[Issue]) -> dict[str, SourceStats]:
     stats = {source.id: SourceStats() for source in sources}
-    runs = sorted(data_dir.glob("*/candidates.json"))[-RECENT_DAYS:]
+    runs = sorted(data_dir.glob(f"*/{issue_mod.CANDIDATES}"))[-RECENT_DAYS:]
     for path in runs:
         try:
-            reports = json.loads(path.read_text(encoding="utf-8")).get("sources", [])
+            reports = issue_mod.read(path).get("sources", [])
         except json.JSONDecodeError:
             continue
         for report in reports:

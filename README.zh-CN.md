@@ -62,7 +62,8 @@ daily/              Python 流水线（python -m daily）
   fetchers/         各类信源的抓取器
   dedup.py          三层去重
   digest.py         digest.json 的 schema 与 validate
-  api_editor.py     API 通道
+  issue.py          一期目录：文件名与 JSON 读写
+  edit.py           API 通道（编辑步骤在 api_editor.py，模型 API 在 llm.py）
   publish.py        选主版的规则
   export.py         各期、信息源和 RSS → 网站数据
 web/                Astro 网站
