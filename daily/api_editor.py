@@ -21,7 +21,7 @@ from typing import Any
 import httpx
 
 from daily import digest, pipeline, trace
-from daily.llm import Chat, LLMError
+from daily.llm import MAX_TOKENS, Chat, LLMError
 
 log = logging.getLogger(__name__)
 
@@ -159,16 +159,28 @@ class Passage:
 
 
 async def _ask(chat: Chat, messages: list[dict[str, Any]]) -> dict[str, Any]:
-    """One request, its answer as JSON; a reply that is not JSON is asked again once."""
-    for attempt in (1, 2):
-        content = (await chat.send(messages)).get("content") or ""
-        messages.append({"role": "assistant", "content": content})
+    """One request, its answer as JSON. A reply that is not JSON is asked again twice: first the same
+    request afresh, since a broken reply left in the conversation can lead the model on; then with that
+    reply and what is wrong with it. A reply that max_tokens cut off is not asked again: it would be
+    cut off again."""
+    for attempt in (1, 2, 3):
+        reply = await chat.send(messages)
         try:
-            return json_object(content)
+            answer = json_object(reply.content)
         except ValueError as exc:
-            if attempt == 2:
+            chars = len(reply.content)
+            log.warning("reply %d/3 is not JSON (%s): %s, %d chars", attempt, exc, reply.describe(), chars)
+            if reply.finish_reason == "length":
+                raise EditorError(f"the reply was cut off at max_tokens ({MAX_TOKENS}): {exc}") from exc
+            if attempt == 3:
                 raise EditorError(f"no JSON in the reply: {exc}") from exc
-            messages.append({"role": "user", "content": f"回答不是一个 JSON 对象（{exc}）。只回答 JSON。"})
+            if attempt == 2:
+                correction = f"回答不是一个 JSON 对象（{exc}）。只回答 JSON。"
+                messages.append({"role": "assistant", "content": reply.content})
+                messages.append({"role": "user", "content": correction})
+            continue
+        messages.append({"role": "assistant", "content": reply.content})
+        return answer
     raise AssertionError("unreachable")
 
 

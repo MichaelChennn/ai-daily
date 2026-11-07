@@ -12,7 +12,7 @@ import json
 import logging
 import os
 import time
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Any
 
 import httpx
@@ -79,21 +79,50 @@ def _merge(message: dict[str, Any], delta: dict[str, Any]) -> None:
             message[key] = value
 
 
-async def _read_stream(response: httpx.Response) -> dict[str, Any]:
-    """The assistant message from a chat completions event stream."""
-    message: dict[str, Any] = {"role": "assistant", "content": None}
+SKIPPED_KEPT = 5  # non-empty lines that are not events, kept to say what went wrong
+
+
+@dataclass
+class Reply:
+    """The assistant message of a streamed reply, and how the stream ended."""
+
+    message: dict[str, Any]
+    finish_reason: str | None = None  # "stop"; "length" when max_tokens cut it off
+    done: bool = False  # the stream ended with [DONE]
+    skipped: list[str] = field(default_factory=list)  # lines that were not events: a bare error?
+
+    @property
+    def content(self) -> str:
+        return self.message.get("content") or ""
+
+    def describe(self) -> str:
+        """How the stream ended, for the log."""
+        skipped = f", lines that were not events: {self.skipped}" if self.skipped else ""
+        return f"finish_reason {self.finish_reason}, [DONE] {'seen' if self.done else 'missing'}{skipped}"
+
+
+async def _read_stream(response: httpx.Response) -> Reply:
+    """The reply from a chat completions event stream. A stream that ends without both [DONE] and a
+    finish_reason was cut off: httpx.RemoteProtocolError, for Chat.send to send the request again."""
+    reply = Reply({"role": "assistant", "content": None})
     async for line in response.aiter_lines():
         if not line.startswith("data:"):
+            if line.strip() and not line.startswith(":") and len(reply.skipped) < SKIPPED_KEPT:
+                reply.skipped.append(line.strip()[:300])  # ": ..." lines are SSE comments
             continue
         data = line[5:].strip()
         if data == "[DONE]":
+            reply.done = True
             break
         chunk = json.loads(data)
         if "error" in chunk:
             raise httpx.RemoteProtocolError(f"error in the stream: {str(chunk['error'])[:300]}")
         for choice in chunk.get("choices") or []:
-            _merge(message, choice.get("delta") or {})
-    return message
+            _merge(reply.message, choice.get("delta") or {})
+            reply.finish_reason = choice.get("finish_reason") or reply.finish_reason
+    if not reply.done or reply.finish_reason is None:
+        raise httpx.RemoteProtocolError(f"the stream ended early ({reply.describe()})")
+    return reply
 
 
 class Chat:
@@ -104,7 +133,7 @@ class Chat:
         self.client = client
         self.last_request = 0.0
 
-    async def send(self, messages: list[dict[str, Any]]) -> dict[str, Any]:
+    async def send(self, messages: list[dict[str, Any]]) -> Reply:
         url = self.provider.base_url.rstrip("/") + "/chat/completions"
         payload = {
             "model": self.name,
