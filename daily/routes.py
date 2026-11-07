@@ -2,7 +2,7 @@
 
 Every digest names the route that wrote it in its `channel`; a digest without one, or with a channel
 not in ROUTES, is not valid. Everything else that depends on the route asks this table: which digest
-becomes the main issue (publish), the trace file a route writes and where its betas are (cli, site,
+becomes the main issue (publish), the trace file a route writes and where its betas are (issue, site,
 export, process). A new route is a new row here.
 
   priority  the main issue goes to the route ranked highest: Claude > API > fallback
@@ -100,16 +100,28 @@ def is_api(digest: Any) -> bool:
     return route is not None and route.per_model
 
 
+def file_name(kind: str, route_key: str) -> str:
+    """A route's own file, by its key: ("trace", "claude") -> trace.claude.json,
+    ("digest", "api.minimax") -> digest.api.minimax.json."""
+    return f"{kind}.{route_key}.json"
+
+
 def trace_name(digest: Any) -> str | None:
     """The trace that goes with a digest (or a trace); None for a route without one."""
     route = of(digest)
     if route is None or not route.traced:
         return None
-    return f"trace.{key(digest)}.json"
+    return file_name("trace", str(key(digest)))
 
 
 def beta_name(channel: str, model: str) -> str:
-    return f"digest.{channel}.{slug(model)}.json"
+    return file_name("digest", f"{channel}.{slug(model)}")
+
+
+def en_beta_name(model: str) -> str:
+    """The English edition a per-model route writes for its beta, before adopt takes it as
+    digest.en.json. Named by the model family alone, as it has been since the first one."""
+    return f"digest.en.{slug(model)}.json"
 
 
 def keyed_files(issue_dir: Path, kind: str) -> dict[str, Path]:

@@ -60,7 +60,8 @@ daily/              Python pipeline (python -m daily)
   fetchers/         one fetcher per kind of source
   dedup.py          three-level dedup
   digest.py         digest.json schema and validate
-  api_editor.py     the API route
+  issue.py          an issue's folder: file names and JSON
+  edit.py           the API route (steps in api_editor.py, model API in llm.py)
   publish.py        which edit becomes the main issue
   export.py         issues, sources and RSS → website data
 web/                Astro website

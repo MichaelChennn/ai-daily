@@ -3,7 +3,8 @@ import json
 import httpx
 import pytest
 
-from daily import api_editor, cli, digest, process, publish
+from daily import api_editor, cli, digest, edit, llm, pipeline, process, publish
+from daily.issue import IssueDir
 from tests.test_digest import CANDIDATES, DATE, _digest
 
 CHAT = "integrate.api.nvidia.com/v1/chat/completions"
@@ -22,11 +23,15 @@ GROUPS = [["c_gpt"], ["c_vllm"], ["c_qwen"], ["c_paper"]]
 GPT, VLLM = 1, 2  # their pages' passages, numbered in the order of GROUPS
 
 
-def _reply(content):
-    """A streamed reply: the content arrives in pieces, as on the wire."""
+def _reply(content, finish_reason="stop", done=True, extra=""):
+    """A streamed reply: the content arrives in pieces, as on the wire (NVIDIA NIM's: the last chunk has
+    the finish_reason, then [DONE]). extra is raw text added at the end, before [DONE]."""
     deltas = [{"role": "assistant"}] + [{"content": content[i : i + 7]} for i in range(0, len(content), 7)]
-    events = [json.dumps({"choices": [{"index": 0, "delta": d}]}) for d in deltas] + ["[DONE]"]
-    body = "".join(f"data: {e}\n\n" for e in events)
+    chunks = [{"index": 0, "delta": d, "finish_reason": None} for d in deltas]
+    if finish_reason:
+        chunks.append({"index": 0, "delta": {}, "finish_reason": finish_reason})
+    body = "".join(f"data: {json.dumps({'choices': [c]})}\n\n" for c in chunks) + extra
+    body += "data: [DONE]\n\n" if done else ""
     return httpx.Response(200, content=body.encode(), headers={"content-type": "text/event-stream"})
 
 
@@ -101,14 +106,14 @@ def slept(monkeypatch):
     async def sleep(value):
         seconds.append(value)
 
-    monkeypatch.setattr(api_editor, "_sleep", sleep)
+    monkeypatch.setattr(llm, "_sleep", sleep)
     return seconds
 
 
 def _edit(issue_dir, web, monkeypatch):
-    monkeypatch.setattr(cli.pipeline, "make_client", web.client)
-    monkeypatch.setattr(cli, "_write_en", lambda *args: None)  # the English edition: test_edit_runs_*
-    return cli.main(["edit", "--date", DATE, "--data-dir", str(issue_dir.parent), "--model", MODEL])
+    monkeypatch.setattr(pipeline, "make_client", web.client)
+    monkeypatch.setattr(edit, "_write_en", lambda *args: None)  # the English edition: test_edit_runs_*
+    return edit.run(IssueDir(issue_dir), [MODEL])
 
 
 def _result(issue_dir):
@@ -203,10 +208,51 @@ def test_highlights_that_still_fail_become_the_first_titles(issue_dir, slept, mo
 
 
 def test_edit_fails_when_the_reply_is_not_json(issue_dir, slept, monkeypatch):
-    web = FakeWeb([_reply("我挑好了。"), _reply("还是没有 JSON。")])
+    web = FakeWeb([_reply("我挑好了。"), _reply("还是没有 JSON。"), _reply('{"picks": [')])
     assert _edit(issue_dir, web, monkeypatch) == 1
-    assert "JSON" in web.prompt(1)  # asked once more
+    assert len(web.chats) == 3
+    assert web.prompt(1) == web.prompt(0)  # first the same request afresh
+    assert "还是没有 JSON" in web.chats[2].content.decode() and "回答不是一个 JSON 对象" in web.prompt(2)
     assert not (issue_dir / "digest.api.deepseek.json").exists()
+    record = json.loads((issue_dir / "trace.api.deepseek.json").read_text())
+    assert record["failure"]["error"].startswith("no JSON in the reply")
+
+
+def test_a_broken_reply_is_asked_again_afresh(issue_dir, slept, monkeypatch):
+    web = FakeWeb([_reply('{"picks": [["c_gpt"],'), _picks(), _written()])
+    assert _edit(issue_dir, web, monkeypatch) == 0
+    first, second = (json.loads(web.chats[i].content)["messages"] for i in (0, 1))
+    assert second == first  # the broken reply is not in the conversation
+    assert len(web.chats) == 3
+
+
+def test_a_reply_cut_off_at_max_tokens_is_not_asked_again(issue_dir, slept, monkeypatch, caplog):
+    web = FakeWeb([_reply('{"picks": [["c_gpt"], ["c_vl', finish_reason="length")])
+    assert _edit(issue_dir, web, monkeypatch) == 1
+    assert len(web.chats) == 1
+    record = json.loads((issue_dir / "trace.api.deepseek.json").read_text())
+    assert "cut off at max_tokens" in record["failure"]["error"]
+    assert "finish_reason length" in caplog.text
+
+
+@pytest.mark.parametrize(
+    "cut", [{"done": False}, {"finish_reason": None}], ids=["no [DONE]", "no finish_reason"]
+)
+def test_a_stream_that_ends_early_is_sent_again(issue_dir, slept, monkeypatch, cut):
+    web = FakeWeb([_reply('{"picks": [["c_gpt"]]}', **cut), _picks(), _written()])
+    assert _edit(issue_dir, web, monkeypatch) == 0
+    assert len(web.chats) == 3
+    first, second = (json.loads(web.chats[i].content)["messages"] for i in (0, 1))
+    assert second == first
+
+
+def test_lines_that_are_not_events_say_why_the_stream_failed(issue_dir, slept, monkeypatch):
+    bare = '{"status": 500, "detail": "worker crashed"}\n'
+    web = FakeWeb([_reply('{"picks": [', finish_reason=None, done=False, extra=bare)] * 4)
+    assert _edit(issue_dir, web, monkeypatch) == 1
+    record = json.loads((issue_dir / "trace.api.deepseek.json").read_text())
+    assert "the stream ended early" in record["failure"]["error"]
+    assert "worker crashed" in record["failure"]["error"]
 
 
 def test_edit_retries_a_stream_that_goes_quiet(issue_dir, slept, monkeypatch):
@@ -225,7 +271,7 @@ def test_rate_limits_are_waited_out_longer_each_time(issue_dir, slept, monkeypat
 
 def test_edit_needs_a_known_provider_and_its_key(issue_dir, monkeypatch):
     web = FakeWeb([])
-    monkeypatch.setattr(cli.pipeline, "make_client", web.client)
+    monkeypatch.setattr(pipeline, "make_client", web.client)
     base = ["edit", "--date", DATE, "--data-dir", str(issue_dir.parent), "--model"]
     assert cli.main([*base, "acme:some-model"]) == 2
     monkeypatch.delenv("NVIDIA_API_KEY")
@@ -255,8 +301,8 @@ ENGLISH = {
 
 
 def _edit_en(issue_dir, web, monkeypatch, path):
-    monkeypatch.setattr(cli.pipeline, "make_client", web.client)
-    return cli.main(["edit", "--date", DATE, "--data-dir", str(issue_dir.parent), "--en", str(path)])
+    monkeypatch.setattr(pipeline, "make_client", web.client)
+    return edit.write_en_for(IssueDir(issue_dir), path)
 
 
 def test_edit_en_writes_the_english_edition_in_one_request(issue_dir, slept, monkeypatch, capsys):
@@ -344,7 +390,7 @@ def test_picks_over_the_limit_are_recorded(issue_dir, slept, monkeypatch):
 
 
 def test_a_failed_edit_still_writes_its_trace(issue_dir, slept, monkeypatch):
-    web = FakeWeb([_picks(), _reply("写好了。"), _reply("还是没有。")])
+    web = FakeWeb([_picks(), _reply("写好了。"), _reply("还是没有。"), _reply("没有。")])
     assert _edit(issue_dir, web, monkeypatch) == 1
     trace = _trace(issue_dir)
     assert trace["failure"]["step"] == "draft" and "JSON" in trace["failure"]["error"]
@@ -363,7 +409,7 @@ def test_edit_en_adds_its_round_to_the_trace(issue_dir, slept, monkeypatch):
     assert step["step"] == "en" and step["checked_links"] is False
     assert [bool(i["reasons"]) for i in step["items"]] == [False, False, False, True]  # GPT-7
 
-    web = FakeWeb([_reply("no JSON"), _reply("still none")])
+    web = FakeWeb([_reply("no JSON"), _reply("still none"), _reply("none")])
     assert _edit_en(issue_dir, web, monkeypatch, path) == 1
     assert "JSON" in _trace(issue_dir)["steps"][-1]["error"]
 

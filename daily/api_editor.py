@@ -4,21 +4,15 @@ The rules stay in one place, .claude/skills/daily-editor/SKILL.md: its editorial
 system prompt, and ROUTE_NOTES says how this route differs. The model picks and writes; opening the
 pages, numbering their passages, turning passage numbers into verbatim evidence, the bookkeeping
 fields and the validate gate are done here. No tool calls: the answers are JSON in the reply text,
-which streams token by token on every provider and needs no tool call parser.
-
-One OpenAI compatible client (chat completions) for every provider: a model is named
-"provider:model" (EDITOR_API_MODEL), and PROVIDERS gives each provider's base_url and the
-environment variable holding its key. Adding a provider is one line.
+which streams token by token on every provider and needs no tool call parser. Talking to the
+providers is daily.llm; a whole run of the route (each model, the English edition) is daily.edit.
 """
 
 from __future__ import annotations
 
-import asyncio
 import json
 import logging
-import os
 import re
-import time
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
@@ -27,27 +21,11 @@ from typing import Any
 import httpx
 
 from daily import digest, pipeline, trace
+from daily.llm import MAX_TOKENS, Chat, LLMError
 
 log = logging.getLogger(__name__)
 
-
-@dataclass(frozen=True)
-class Provider:
-    base_url: str
-    key_env: str
-    min_interval: float  # seconds between requests, to stay under the free tier's requests per minute
-
-
 CHANNEL = "api"  # its row in daily.routes
-PROVIDERS = {
-    "nvidia": Provider("https://integrate.api.nvidia.com/v1", "NVIDIA_API_KEY", 2.0),
-}
-RETRIES = 3  # after the first attempt
-RETRY_DELAY = 15.0  # doubled on each retry, unless the provider says how long (Retry-After)
-# Replies stream in, so the limit is on silence, not on the whole reply: NVIDIA NIM may prefill a long
-# prompt for minutes before the first token.
-CHAT_TIMEOUT = httpx.Timeout(30.0, read=600.0)
-MAX_TOKENS = 16384  # reasoning counts too
 PICKS = 22  # stories the model shortlists: one page each, inside the webfetch budget
 PAGE_CHARS = 8000  # of each page, cut into numbered passages
 PASSAGE_MIN = 15  # shorter pieces are menus and buttons
@@ -127,24 +105,8 @@ SCORE_EXAMPLES = """\
 多数候选的重要性和实用性都是 0 或 1；3 分每期只有几个。"""
 
 
-class EditorError(Exception):
-    pass
-
-
-async def _sleep(seconds: float) -> None:  # replaced in tests
-    await asyncio.sleep(seconds)
-
-
-def resolve(model: str) -> tuple[Provider, str, str]:
-    """ "provider:model" -> (provider, model name, API key); EditorError when unknown or unset."""
-    name, _, model_name = model.partition(":")
-    provider = PROVIDERS.get(name)
-    if provider is None or not model_name:
-        raise EditorError(f"model must be provider:model with provider one of {list(PROVIDERS)}: {model!r}")
-    key = os.environ.get(provider.key_env)
-    if not key:
-        raise EditorError(f"{provider.key_env} is not set")
-    return provider, model_name, key
+class EditorError(LLMError):
+    """The model's answers did not make a digest. Catch LLMError for any failure of an edit."""
 
 
 def system_prompt(rules: tuple[str, ...] = RULES, notes: str = ROUTE_NOTES) -> str:
@@ -189,90 +151,6 @@ def json_object(text: str | None) -> dict[str, Any]:
     return value
 
 
-WHOLE = ("id", "type", "role", "name")  # streamed fields that are not text in pieces
-
-
-def _merge(message: dict[str, Any], delta: dict[str, Any]) -> None:
-    """Add one streamed delta to the message: text arrives in pieces, the rest whole."""
-    for key, value in delta.items():
-        if key == "tool_calls":
-            calls = message.setdefault("tool_calls", [])
-            for part in value:
-                index = part.get("index", len(calls))
-                while len(calls) <= index:
-                    calls.append({})
-                _merge(calls[index], {k: v for k, v in part.items() if k != "index"})
-        elif isinstance(value, dict):
-            _merge(message.setdefault(key, {}), value)
-        elif isinstance(value, str) and isinstance(message.get(key), str) and key not in WHOLE:
-            message[key] += value
-        elif value is not None:
-            message[key] = value
-
-
-async def _read_stream(response: httpx.Response) -> dict[str, Any]:
-    """The assistant message from a chat completions event stream."""
-    message: dict[str, Any] = {"role": "assistant", "content": None}
-    async for line in response.aiter_lines():
-        if not line.startswith("data:"):
-            continue
-        data = line[5:].strip()
-        if data == "[DONE]":
-            break
-        chunk = json.loads(data)
-        if "error" in chunk:
-            raise httpx.RemoteProtocolError(f"error in the stream: {str(chunk['error'])[:300]}")
-        for choice in chunk.get("choices") or []:
-            _merge(message, choice.get("delta") or {})
-    return message
-
-
-class Chat:
-    """Chat completions against one provider, paced and retried for the free tiers."""
-
-    def __init__(self, model: str, client: httpx.AsyncClient) -> None:
-        self.provider, self.name, self.key = resolve(model)
-        self.client = client
-        self.last_request = 0.0
-
-    async def send(self, messages: list[dict[str, Any]]) -> dict[str, Any]:
-        url = self.provider.base_url.rstrip("/") + "/chat/completions"
-        payload = {
-            "model": self.name,
-            "messages": messages,
-            "max_tokens": MAX_TOKENS,
-            "stream": True,
-            # Every reply is a JSON object: JSON mode has the provider hold the model to valid JSON.
-            "response_format": {"type": "json_object"},
-        }
-        for attempt in range(1, RETRIES + 2):
-            wait = self.last_request + self.provider.min_interval - time.monotonic()
-            if wait > 0:
-                await _sleep(wait)
-            self.last_request = time.monotonic()
-            status, delay = 0, RETRY_DELAY * 2 ** (attempt - 1)
-            try:
-                headers = {"Authorization": f"Bearer {self.key}"}
-                async with self.client.stream(
-                    "POST", url, json=payload, headers=headers, timeout=CHAT_TIMEOUT
-                ) as response:
-                    status = response.status_code
-                    if status == 200:
-                        return await _read_stream(response)
-                    problem = f"HTTP {status}: {(await response.aread()).decode(errors='replace')[:300]}"
-                    if response.headers.get("retry-after", "").isdigit():
-                        delay = float(response.headers["retry-after"])
-            except (httpx.HTTPError, json.JSONDecodeError) as exc:
-                problem = f"{type(exc).__name__}: {exc}"
-            if status not in (0, 200, 429) and status < 500:
-                raise EditorError(problem)
-            log.warning("chat request %d/%d failed: %s", attempt, RETRIES + 1, problem)
-            if attempt > RETRIES:
-                raise EditorError(problem)
-            await _sleep(delay)
-        raise AssertionError("unreachable")
-
-
 @dataclass(frozen=True)
 class Passage:
     url: str
@@ -281,16 +159,28 @@ class Passage:
 
 
 async def _ask(chat: Chat, messages: list[dict[str, Any]]) -> dict[str, Any]:
-    """One request, its answer as JSON; a reply that is not JSON is asked again once."""
-    for attempt in (1, 2):
-        content = (await chat.send(messages)).get("content") or ""
-        messages.append({"role": "assistant", "content": content})
+    """One request, its answer as JSON. A reply that is not JSON is asked again twice: first the same
+    request afresh, since a broken reply left in the conversation can lead the model on; then with that
+    reply and what is wrong with it. A reply that max_tokens cut off is not asked again: it would be
+    cut off again."""
+    for attempt in (1, 2, 3):
+        reply = await chat.send(messages)
         try:
-            return json_object(content)
+            answer = json_object(reply.content)
         except ValueError as exc:
-            if attempt == 2:
+            chars = len(reply.content)
+            log.warning("reply %d/3 is not JSON (%s): %s, %d chars", attempt, exc, reply.describe(), chars)
+            if reply.finish_reason == "length":
+                raise EditorError(f"the reply was cut off at max_tokens ({MAX_TOKENS}): {exc}") from exc
+            if attempt == 3:
                 raise EditorError(f"no JSON in the reply: {exc}") from exc
-            messages.append({"role": "user", "content": f"回答不是一个 JSON 对象（{exc}）。只回答 JSON。"})
+            if attempt == 2:
+                correction = f"回答不是一个 JSON 对象（{exc}）。只回答 JSON。"
+                messages.append({"role": "assistant", "content": reply.content})
+                messages.append({"role": "user", "content": correction})
+            continue
+        messages.append({"role": "assistant", "content": reply.content})
+        return answer
     raise AssertionError("unreachable")
 
 
@@ -330,7 +220,7 @@ class Editor:
     async def run(self) -> dict[str, Any]:
         try:
             return await self._run()
-        except EditorError as exc:
+        except LLMError as exc:
             self.trace["failure"] = {"step": self.step, "error": str(exc)}
             raise
 
@@ -558,13 +448,13 @@ async def write_en(
 ) -> dict[str, Any]:
     """The English edition of the validated API digest `main`, in one request: the model writes the
     titles, summaries and highlights from the same material, the rest is copied (SKILL.md step 7).
-    EditorError if it does not pass validate --en. Its validate rounds are appended to steps, the
-    trace's, and so is the error of a request that fails."""
+    EditorError if it does not pass validate --en, LLMError if the request fails. Its validate rounds
+    are appended to steps, the trace's, and so is the error of a request that fails."""
     steps = [] if steps is None else steps
     recorded = len(steps)
     try:
         return await _write_en(main, candidates, model, client, steps)
-    except EditorError as exc:
+    except LLMError as exc:
         if len(steps) == recorded:  # the request failed: no validate round says why
             steps.append({"step": "en", "at": trace.now(), "error": str(exc)})
         raise

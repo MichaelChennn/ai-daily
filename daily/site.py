@@ -18,6 +18,7 @@ from typing import Any
 from urllib.parse import urlsplit
 
 from daily import digest as digest_mod
+from daily import issue as issue_mod
 from daily import routes
 from daily.digest import SECTIONS
 from daily.publish import goes_with
@@ -90,17 +91,17 @@ class Issue:
 def load_issues(data_dir: Path) -> list[Issue]:
     """Every publishable issue under data_dir, newest first, with its publishable betas."""
     issues = []
-    for path in sorted(data_dir.glob("*/digest.json"), reverse=True):
+    for path in sorted(data_dir.glob(f"*/{issue_mod.DIGEST}"), reverse=True):
         try:
             issue_date = date.fromisoformat(path.parent.name)
         except ValueError:
             continue
-        candidates_file = path.parent / "candidates.json"
-        if not candidates_file.exists():
-            log.warning("skip %s: no candidates.json to validate against", path.parent.name)
+        folder = issue_mod.IssueDir(path.parent)
+        if not folder.candidates.exists():
+            log.warning("skip %s: no candidates.json to validate against", folder.date)
             continue
         try:
-            candidates = json.loads(candidates_file.read_text(encoding="utf-8"))
+            candidates = folder.read_candidates()
         except json.JSONDecodeError as exc:
             log.warning("skip %s: %s", path.parent.name, exc)
             continue
@@ -108,12 +109,11 @@ def load_issues(data_dir: Path) -> list[Issue]:
         if data is None:
             continue
         issue = Issue(issue_date, data, candidates)
-        en_path = path.parent / "digest.en.json"
-        en = publishable(en_path, candidates) if en_path.exists() else None
+        en = publishable(folder.digest_en, candidates) if folder.digest_en.exists() else None
         # Left from the other route, or the main issue fell back: the English site shows titles only.
         if en is not None and en.get("lang") == "en" and goes_with(data, en, candidates) is None:
             issue.en = en
-        for route_key, beta_path in routes.keyed_files(path.parent, "digest").items():
+        for route_key, beta_path in routes.keyed_files(folder.path, "digest").items():
             beta = publishable(beta_path, candidates)
             # The edit that became the main issue is not shown again as a beta.
             if beta is not None and not (is_api(data) and beta.get("model") == data.get("model")):
@@ -126,7 +126,7 @@ def publishable(path: Path, candidates: dict[str, Any]) -> dict[str, Any] | None
     """The digest at path without the items validate would drop; None if it does not pass."""
     name = f"{path.parent.name}/{path.name}"
     try:
-        data = json.loads(path.read_text(encoding="utf-8"))
+        data = issue_mod.read(path)
     except json.JSONDecodeError as exc:
         log.warning("skip %s: %s", name, exc)
         return None

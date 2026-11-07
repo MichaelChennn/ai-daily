@@ -40,6 +40,7 @@ from pathlib import Path
 from typing import Any
 
 from daily import digest, routes
+from daily.issue import IssueDir
 
 SCHEMA_VERSION = 1
 SCORE_MAX = (3, 3, 2)
@@ -47,12 +48,6 @@ SCORE_MAX = (3, 3, 2)
 
 def now() -> str:
     return datetime.now(timezone.utc).isoformat(timespec="seconds")
-
-
-def file_name(data: dict[str, Any]) -> str | None:
-    """The trace that goes with a digest (or a trace), trace.claude.json or trace.api.<slug>.json;
-    None for a route that keeps none (daily.routes)."""
-    return routes.trace_name(data)
 
 
 def new(date: str, channel: str, model: str | None = None) -> dict[str, Any]:
@@ -118,3 +113,73 @@ def validate_step(step: str, data: Any, report: digest.Report, checked_links: bo
 def adopt_record(edition: str, incoming: Any, adopted: bool, reason: str) -> dict[str, Any]:
     run = incoming.get("generated_at") if isinstance(incoming, dict) else None
     return {"at": now(), "edition": edition, "run": run, "adopted": adopted, "reason": reason}
+
+
+# The routes that work by SKILL.md (the Claude route) record their trace through the CLI, step by step:
+# `daily trace scores` starts a run, `daily validate` adds each round, `daily trace self-check` what the
+# self-check dropped, and `daily degrade --force` that the editor gave up.
+
+
+def skill_route(data: Any) -> str | None:
+    """The channel of an edit by a route that works by SKILL.md (the Claude route); None otherwise."""
+    route = routes.of(data)
+    return route.channel if route is not None and route.channel in routes.SKILL_ROUTES else None
+
+
+def needs_self_check(folder: IssueDir, data: Any) -> bool:
+    """An edit by a SKILL.md route whose trace has no self-check, not even an empty one."""
+    if (channel := skill_route(data)) is None:
+        return False
+    record = load(folder.route_trace(channel))
+    return not any(s.get("step") == "self_check" for s in (record or {}).get("steps") or [])
+
+
+def record_validate(folder: IssueDir, data: Any, step: dict[str, Any]) -> None:
+    """Add a validate round of a SKILL.md route's edit to its trace; other digests have none."""
+    if (channel := skill_route(data)) is None:
+        return
+    path = folder.route_trace(channel)
+    record = load(path) or new(folder.date, channel)
+    record["model"] = data.get("model") or record.get("model")
+    record["steps"].append(step)
+    save(path, record)
+
+
+def record_scores(folder: IssueDir, channel: str, candidates: dict[str, Any], raw: Any) -> tuple[int, int]:
+    """Starts the trace of a new run with the editor's scores: (scored, candidates without a score)."""
+    known = {c["id"] for c in candidates["candidates"]}
+    record = new(candidates["date"], channel)
+    record["scores"] = scores(raw, known)
+    save(folder.route_trace(channel), record)
+    return len(record["scores"]), len(known - record["scores"].keys())
+
+
+def record_self_check(folder: IssueDir, channel: str, candidates: dict[str, Any], raw: Any) -> int:
+    """Adds the items the editor's self-check dropped; how many. ValueError if raw is not a list of them."""
+    if not isinstance(raw, list) or not all(isinstance(v, dict) for v in raw):
+        raise ValueError('self-check takes [{"candidates": [...], "title": ..., "reason": ...}]')
+    known = {c["id"] for c in candidates["candidates"]}
+    path = folder.route_trace(channel)
+    record = load(path) or new(candidates["date"], channel)
+    items = [
+        {
+            "title": v.get("title"),
+            "candidates": [c for c in v.get("candidates") or [] if c in known],
+            "reason": v.get("reason"),
+        }
+        for v in raw
+    ]
+    record["steps"].append({"step": "self_check", "at": now(), "items": items})
+    save(path, record)
+    return len(items)
+
+
+def record_give_up(folder: IssueDir, channel: str) -> None:
+    """The editor gave up and published the fallback (SKILL.md step 6): its last step is the failure."""
+    path = folder.route_trace(channel)
+    if not (record := load(path)):
+        return
+    last = record["steps"][-1] if record["steps"] else {}
+    error = "; ".join(last.get("errors") or []) or "the editor published the fallback"
+    record["failure"] = {"step": last.get("step"), "error": error}
+    save(path, record)

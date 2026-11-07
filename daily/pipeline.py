@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import asyncio
-import json
 import logging
 import time
 from collections import Counter
@@ -14,7 +13,7 @@ from typing import Any
 
 import httpx
 
-from daily import __version__, dedup
+from daily import __version__, dedup, issue
 from daily.config import SourceConfig
 from daily.fetchers import FETCHERS
 from daily.fetchers.base import collect_filtered
@@ -159,8 +158,7 @@ def candidate_listing(data: dict[str, Any], kinds: list[str] | None = None, summ
 
 
 def write_candidates(data: dict[str, Any], data_dir: Path) -> Path:
-    out_dir = data_dir / data["date"]
-    out_dir.mkdir(parents=True, exist_ok=True)
-    path = out_dir / "candidates.json"
-    path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    return path
+    folder = issue.IssueDir.of(data_dir, data["date"])
+    folder.path.mkdir(parents=True, exist_ok=True)
+    issue.write(folder.candidates, data)
+    return folder.candidates

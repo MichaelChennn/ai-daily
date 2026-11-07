@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI 科技日报生成流程</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-paper:   #f7f7f5;
+      --color-ink:     #111111;
+      --color-muted:   #4a4a4a;
+      --color-soft:    #5c5c5c;
+      --font-sans:     'Geist', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+      --font-serif:    'Instrument Serif', 'Noto Serif SC', serif;
+      --font-mono:     'Geist Mono', ui-monospace, monospace;
+    }
+    body {
+      font-family: var(--font-sans);
+      background: var(--color-paper);
+      color: var(--color-ink);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 1rem;
+    }
+    .frame { max-width: 1320px; width: 100%; min-width: 0; }
+    .diagram-container { width: 100%; overflow-x: auto; }
+    .eyebrow-html {
+      font-family: var(--font-mono);
+      font-size: 0.66rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      margin-bottom: 0.5rem;
+    }
+    h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(1.75rem, 2.4vw + 1rem, 2.5rem);
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      line-height: 1.15;
+      margin-bottom: 0.75rem;
+    }
+    .lede { font-size: 0.95rem; line-height: 1.6; color: var(--color-muted); max-width: 46rem; margin-bottom: 2rem; }
+    svg { width: 100%; min-width: 1280px; display: block; }
+    svg .name { font-family: var(--font-sans); font-size: 13px; font-weight: 600; }
+    svg .mono { font-family: var(--font-mono); font-size: 10px; }
+    svg .zh { font-family: var(--font-sans); font-size: 12px; font-weight: 400; }
+    svg .head { font-family: var(--font-sans); font-size: 14px; font-weight: 600; }
+    svg .when { font-family: var(--font-mono); font-size: 12px; font-weight: 500; letter-spacing: 0.06em; }
+    svg .when-zh { font-family: var(--font-sans); font-size: 12px; font-weight: 500; }
+    svg .eyebrow { font-family: var(--font-mono); font-size: 8px; font-weight: 500; letter-spacing: 0.14em; }
+    svg .alabel { font-family: var(--font-sans); font-size: 12px; font-weight: 500; }
+    @media print {
+      .diagram-container { overflow-x: visible; }
+      svg { min-width: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <p class="eyebrow-html">Process · ai-daily</p>
+    <h1>AI 科技日报 · 每日生成流程</h1>
+    <p class="lede">05:07 抓取候选，05:30 Claude 和 API 两条通道同时开编，推送后并入 main，按 Claude &gt; API &gt; 降级版选主版。06:30 还没有合格日报就发布降级版。每次提交 main 都会重建网站。</p>
+    <div class="diagram-container">
+      <svg viewBox="0 0 1280 864" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="daily-flow-title daily-flow-desc">
+        <title id="daily-flow-title">AI 科技日报每日生成流程</title>
+        <desc id="daily-flow-desc">每天 05:07 fetch.yml 抓取并提交 candidates.json；05:30 Claude 通道和 API 通道各自读取候选、打分、写稿、校验、写英文版；之后 daily ingest 把日报并入 main，按 Claude、API、降级版的优先级选出主版；06:30 fallback.yml 在仍无合格日报时发布降级版；每次提交 main 后 pages.yml 导出数据、构建并发布网站。</desc>
+        <defs>
+          <marker id="daily-flow-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4a4a4a"/></marker>
+        </defs>
+        <rect width="100%" height="100%" fill="#f7f7f5"/>
+<text x="40" y="88" class="when" fill="#4a4a4a">05:07</text>
+<text x="40" y="110" class="head" fill="#111111">抓取</text>
+<text x="40" y="128" class="mono" fill="#5c5c5c">fetch.yml</text>
+<line x1="40" y1="168" x2="1240" y2="168" stroke="rgba(17,17,17,0.12)" stroke-width="0.8"/>
+<text x="40" y="208" class="when" fill="#4a4a4a">05:30</text>
+<text x="40" y="230" class="head" fill="#111111">Claude 通道</text>
+<text x="40" y="248" class="mono" fill="#5c5c5c">daily-editor skill</text>
+<line x1="40" y1="288" x2="1240" y2="288" stroke="rgba(17,17,17,0.12)" stroke-width="0.8"/>
+<text x="40" y="328" class="when" fill="#4a4a4a">05:30</text>
+<text x="40" y="350" class="head" fill="#111111">API 通道</text>
+<text x="40" y="368" class="mono" fill="#5c5c5c">editor-api.yml</text>
+<line x1="40" y1="408" x2="1240" y2="408" stroke="rgba(17,17,17,0.12)" stroke-width="0.8"/>
+<text x="40" y="448" class="when-zh" fill="#4a4a4a">推送后</text>
+<text x="40" y="470" class="head" fill="#111111">并入</text>
+<text x="40" y="488" class="mono" fill="#5c5c5c">ingest.yml</text>
+<line x1="40" y1="528" x2="1240" y2="528" stroke="rgba(17,17,17,0.12)" stroke-width="0.8"/>
+<text x="40" y="568" class="when" fill="#4a4a4a">06:30</text>
+<text x="40" y="590" class="head" fill="#111111">兜底</text>
+<text x="40" y="608" class="mono" fill="#5c5c5c">fallback.yml</text>
+<line x1="40" y1="648" x2="1240" y2="648" stroke="rgba(17,17,17,0.12)" stroke-width="0.8"/>
+<text x="40" y="688" class="when-zh" fill="#4a4a4a">之后</text>
+<text x="40" y="710" class="head" fill="#111111">网站</text>
+<text x="40" y="728" class="mono" fill="#5c5c5c">pages.yml</text>
+<line x1="40" y1="48" x2="1240" y2="48" stroke="#111111" stroke-width="2"/>
+<line x1="40" y1="768" x2="1240" y2="768" stroke="#111111" stroke-width="2"/>
+<path d="M376,108 L406,108" fill="none" stroke="#4a4a4a" stroke-width="1.2" stroke-linejoin="round" marker-end="url(#daily-flow-arrow)"/>
+<path d="M592,108 L622,108" fill="none" stroke="#4a4a4a" stroke-width="1.2" stroke-linejoin="round" marker-end="url(#daily-flow-arrow)"/>
+<path d="M716,140 L716,154 L172,154 L172,348 L190,348" fill="none" stroke="#4a4a4a" stroke-width="1.2" stroke-linejoin="round" marker-end="url(#daily-flow-arrow)"/>
+<path d="M172,228 L190,228" fill="none" stroke="#4a4a4a" stroke-width="1.2" stroke-linejoin="round" marker-end="url(#daily-flow-arrow)"/>
+<path d="M376,228 L406,228" fill="none" stroke="#4a4a4a" stroke-width="1.2" stroke-linejoin="round" marker-end="url(#daily-flow-arrow)"/>
+<path d="M592,228 L622,228" fill="none" stroke="#4a4a4a" stroke-width="1.2" stroke-linejoin="round" marker-end="url(#daily-flow-arrow)"/>
+<path d="M808,228 L838,228" fill="none" stroke="#4a4a4a" stroke-width="1.2" stroke-linejoin="round" marker-end="url(#daily-flow-arrow)"/>
+<path d="M1024,228 L1054,228" fill="none" stroke="#4a4a4a" stroke-width="1.2" stroke-linejoin="round" marker-end="url(#daily-flow-arrow)"/>
+<path d="M376,348 L406,348" fill="none" stroke="#4a4a4a" stroke-width="1.2" stroke-linejoin="round" marker-end="url(#daily-flow-arrow)"/>
+<path d="M592,348 L622,348" fill="none" stroke="#4a4a4a" stroke-width="1.2" stroke-linejoin="round" marker-end="url(#daily-flow-arrow)"/>
+<path d="M808,348 L838,348" fill="none" stroke="#4a4a4a" stroke-width="1.2" stroke-linejoin="round" marker-end="url(#daily-flow-arrow)"/>
+<path d="M1148,260 L1148,394 L716,394 L716,434" fill="none" stroke="#4a4a4a" stroke-width="1.2" stroke-linejoin="round" marker-end="url(#daily-flow-arrow)"/>
+<path d="M932,380 L932,394" fill="none" stroke="#4a4a4a" stroke-width="1.2" stroke-linejoin="round"/>
+<path d="M808,468 L838,468" fill="none" stroke="#4a4a4a" stroke-width="1.2" stroke-linejoin="round" marker-end="url(#daily-flow-arrow)"/>
+<path d="M1024,468 L1054,468" fill="none" stroke="#4a4a4a" stroke-width="1.2" stroke-linejoin="round" marker-end="url(#daily-flow-arrow)"/>
+<path d="M376,588 L406,588" fill="none" stroke="#4a4a4a" stroke-width="1.2" stroke-linejoin="round" marker-end="url(#daily-flow-arrow)"/>
+<path d="M592,588 L1108,588 L1108,502" fill="none" stroke="#4a4a4a" stroke-width="1.2" stroke-linejoin="round" marker-end="url(#daily-flow-arrow)"/>
+<path d="M1188,500 L1188,634 L284,634 L284,674" fill="none" stroke="#4a4a4a" stroke-width="1.2" stroke-linejoin="round" marker-end="url(#daily-flow-arrow)"/>
+<path d="M376,708 L406,708" fill="none" stroke="#4a4a4a" stroke-width="1.2" stroke-linejoin="round" marker-end="url(#daily-flow-arrow)"/>
+<path d="M592,708 L622,708" fill="none" stroke="#4a4a4a" stroke-width="1.2" stroke-linejoin="round" marker-end="url(#daily-flow-arrow)"/>
+<circle cx="172" cy="228" r="4" fill="#111111"/>
+<circle cx="932" cy="394" r="4" fill="#111111"/>
+<rect x="390" y="146" width="108" height="16" rx="2" fill="#f7f7f5"/>
+<text x="444" y="158" class="alabel" fill="#5c5c5c" text-anchor="middle">两条通道同时读取</text>
+<rect x="992" y="386" width="96" height="16" rx="2" fill="#f7f7f5"/>
+<text x="1040" y="398" class="alabel" fill="#5c5c5c" text-anchor="middle">push 触发</text>
+<rect x="782" y="580" width="84" height="16" rx="2" fill="#f7f7f5"/>
+<text x="824" y="592" class="alabel" fill="#5c5c5c" text-anchor="middle">仍无合格日报</text>
+<rect x="576" y="626" width="168" height="16" rx="2" fill="#f7f7f5"/>
+<text x="660" y="638" class="alabel" fill="#5c5c5c" text-anchor="middle">每次提交 main 后重建</text>
+<g data-node-id="抓取信源">
+<rect x="192" y="76" width="184" height="64" rx="6" fill="#f7f7f5"/>
+<rect x="192" y="76" width="184" height="64" rx="6" fill="#ffffff" stroke="#111111" stroke-width="1"/>
+<text x="204" y="96" class="name" fill="#111111">抓取信源</text>
+<text x="204" y="112" class="mono" fill="#4a4a4a">daily fetch · pipeline</text>
+<text x="204" y="130" class="zh" fill="#5c5c5c">各类抓取器并发请求</text>
+</g>
+<g data-node-id="窗口与去重">
+<rect x="408" y="76" width="184" height="64" rx="6" fill="#f7f7f5"/>
+<rect x="408" y="76" width="184" height="64" rx="6" fill="#ffffff" stroke="#111111" stroke-width="1"/>
+<text x="420" y="96" class="name" fill="#111111">窗口与去重</text>
+<text x="420" y="112" class="mono" fill="#4a4a4a">window · dedup</text>
+<text x="420" y="130" class="zh" fill="#5c5c5c">只留本期窗口，跨源合并</text>
+</g>
+<g data-node-id="candidates.json">
+<rect x="624" y="76" width="184" height="64" rx="6" fill="#f7f7f5"/>
+<rect x="624" y="76" width="184" height="64" rx="6" fill="rgba(17,17,17,0.05)" stroke="#4a4a4a" stroke-width="1"/>
+<text x="636" y="96" class="name" fill="#111111">candidates.json</text>
+<text x="636" y="112" class="mono" fill="#4a4a4a">data/YYYY-MM-DD/</text>
+<text x="636" y="130" class="zh" fill="#5c5c5c">提交到 main</text>
+</g>
+<g data-node-id="打分筛选">
+<rect x="192" y="196" width="184" height="64" rx="6" fill="#f7f7f5"/>
+<rect x="192" y="196" width="184" height="64" rx="6" fill="#ffffff" stroke="#111111" stroke-width="1"/>
+<text x="204" y="216" class="name" fill="#111111">打分筛选</text>
+<text x="204" y="232" class="mono" fill="#4a4a4a">SKILL.md §1–2</text>
+<text x="204" y="250" class="zh" fill="#5c5c5c">浏览候选，逐条打分</text>
+</g>
+<g data-node-id="读原文写稿">
+<rect x="408" y="196" width="184" height="64" rx="6" fill="#f7f7f5"/>
+<rect x="408" y="196" width="184" height="64" rx="6" fill="#ffffff" stroke="#111111" stroke-width="1"/>
+<text x="420" y="216" class="name" fill="#111111">读原文写稿</text>
+<text x="420" y="232" class="mono" fill="#4a4a4a">§3–4 · digest.json</text>
+<text x="420" y="250" class="zh" fill="#5c5c5c">打开原文，写中文版</text>
+</g>
+<g data-node-id="自检与校验">
+<rect x="624" y="196" width="184" height="64" rx="6" fill="#f7f7f5"/>
+<rect x="624" y="196" width="184" height="64" rx="6" fill="#ffffff" stroke="#111111" stroke-width="1"/>
+<text x="636" y="216" class="name" fill="#111111">自检与校验</text>
+<text x="636" y="232" class="mono" fill="#4a4a4a">daily trace · validate</text>
+<text x="636" y="250" class="zh" fill="#5c5c5c">忠实性自检，校验到通过</text>
+</g>
+<g data-node-id="英文版">
+<rect x="840" y="196" width="184" height="64" rx="6" fill="#f7f7f5"/>
+<rect x="840" y="196" width="184" height="64" rx="6" fill="#ffffff" stroke="#111111" stroke-width="1"/>
+<text x="852" y="216" class="name" fill="#111111">英文版</text>
+<text x="852" y="232" class="mono" fill="#4a4a4a">digest.en.json</text>
+<text x="852" y="250" class="zh" fill="#5c5c5c">依据同一份材料来写</text>
+</g>
+<g data-node-id="推到 claude/ 分支">
+<rect x="1056" y="196" width="184" height="64" rx="6" fill="#f7f7f5"/>
+<rect x="1056" y="196" width="184" height="64" rx="6" fill="#ffffff" stroke="#111111" stroke-width="1"/>
+<text x="1068" y="216" class="name" fill="#111111">推到 claude/ 分支</text>
+<text x="1068" y="232" class="mono" fill="#4a4a4a">git push</text>
+<text x="1068" y="250" class="zh" fill="#5c5c5c">会话只能推自己的分支</text>
+</g>
+<g data-node-id="选稿">
+<rect x="192" y="316" width="184" height="64" rx="6" fill="#f7f7f5"/>
+<rect x="192" y="316" width="184" height="64" rx="6" fill="#ffffff" stroke="#111111" stroke-width="1"/>
+<text x="204" y="336" class="name" fill="#111111">选稿</text>
+<text x="204" y="352" class="mono" fill="#4a4a4a">daily edit · Editor</text>
+<text x="204" y="370" class="zh" fill="#5c5c5c">每个模型各编一份</text>
+</g>
+<g data-node-id="读原文写稿">
+<rect x="408" y="316" width="184" height="64" rx="6" fill="#f7f7f5"/>
+<rect x="408" y="316" width="184" height="64" rx="6" fill="#ffffff" stroke="#111111" stroke-width="1"/>
+<text x="420" y="336" class="name" fill="#111111">读原文写稿</text>
+<text x="420" y="352" class="mono" fill="#4a4a4a">api_editor · llm.Chat</text>
+<text x="420" y="370" class="zh" fill="#5c5c5c">流式请求，断流重发</text>
+</g>
+<g data-node-id="校验与重写">
+<rect x="624" y="316" width="184" height="64" rx="6" fill="#f7f7f5"/>
+<rect x="624" y="316" width="184" height="64" rx="6" fill="#ffffff" stroke="#111111" stroke-width="1"/>
+<text x="636" y="336" class="name" fill="#111111">校验与重写</text>
+<text x="636" y="352" class="mono" fill="#4a4a4a">digest.validate</text>
+<text x="636" y="370" class="zh" fill="#5c5c5c">不过就发回问题重写</text>
+</g>
+<g data-node-id="主版写英文版">
+<rect x="840" y="316" width="184" height="64" rx="6" fill="#f7f7f5"/>
+<rect x="840" y="316" width="184" height="64" rx="6" fill="#ffffff" stroke="#111111" stroke-width="1"/>
+<text x="852" y="336" class="name" fill="#111111">主版写英文版</text>
+<text x="852" y="352" class="mono" fill="#4a4a4a">edit.write_en_for</text>
+<text x="852" y="370" class="zh" fill="#5c5c5c">只有将成主版的模型写</text>
+</g>
+<g data-node-id="daily ingest">
+<rect x="624" y="436" width="184" height="64" rx="6" fill="#f7f7f5"/>
+<rect x="624" y="436" width="184" height="64" rx="6" fill="#ffffff" stroke="#111111" stroke-width="1"/>
+<text x="636" y="456" class="name" fill="#111111">daily ingest</text>
+<text x="636" y="472" class="mono" fill="#4a4a4a">--ref · --from-dir</text>
+<text x="636" y="490" class="zh" fill="#5c5c5c">取分支或产物里的日报</text>
+</g>
+<g data-node-id="选主版">
+<rect x="840" y="436" width="184" height="64" rx="6" fill="#f7f7f5"/>
+<rect x="840" y="436" width="184" height="64" rx="6" fill="#ffffff" stroke="#111111" stroke-width="1"/>
+<text x="852" y="456" class="name" fill="#111111">选主版</text>
+<text x="852" y="472" class="mono" fill="#4a4a4a">publish.decide</text>
+<text x="852" y="490" class="zh" fill="#5c5c5c">Claude &gt; API &gt; 降级版</text>
+</g>
+<g data-node-id="main · data/">
+<rect x="1056" y="436" width="184" height="64" rx="6" fill="#f7f7f5"/>
+<rect x="1056" y="436" width="184" height="64" rx="6" fill="rgba(17,17,17,0.05)" stroke="#4a4a4a" stroke-width="1"/>
+<text x="1068" y="456" class="name" fill="#111111">main · data/</text>
+<text x="1068" y="472" class="mono" fill="#4a4a4a">digest · betas · traces</text>
+<text x="1068" y="490" class="zh" fill="#5c5c5c">提交到 main</text>
+</g>
+<g data-node-id="daily degrade">
+<rect x="192" y="556" width="184" height="64" rx="6" fill="#f7f7f5"/>
+<rect x="192" y="556" width="184" height="64" rx="6" fill="#ffffff" stroke="#111111" stroke-width="1"/>
+<text x="204" y="576" class="name" fill="#111111">daily degrade</text>
+<text x="204" y="592" class="mono" fill="#4a4a4a">fallback</text>
+<text x="204" y="610" class="zh" fill="#5c5c5c">已有合格日报就不动</text>
+</g>
+<g data-node-id="daily render">
+<rect x="408" y="556" width="184" height="64" rx="6" fill="#f7f7f5"/>
+<rect x="408" y="556" width="184" height="64" rx="6" fill="#ffffff" stroke="#111111" stroke-width="1"/>
+<text x="420" y="576" class="name" fill="#111111">daily render</text>
+<text x="420" y="592" class="mono" fill="#4a4a4a">digest.md</text>
+<text x="420" y="610" class="zh" fill="#5c5c5c">GitHub 上的版本</text>
+</g>
+<g data-node-id="daily export">
+<rect x="192" y="676" width="184" height="64" rx="6" fill="#f7f7f5"/>
+<rect x="192" y="676" width="184" height="64" rx="6" fill="#ffffff" stroke="#111111" stroke-width="1"/>
+<text x="204" y="696" class="name" fill="#111111">daily export</text>
+<text x="204" y="712" class="mono" fill="#4a4a4a">JSON · RSS → web/</text>
+<text x="204" y="730" class="zh" fill="#5c5c5c">已发布各期给网站</text>
+</g>
+<g data-node-id="Astro 构建">
+<rect x="408" y="676" width="184" height="64" rx="6" fill="#f7f7f5"/>
+<rect x="408" y="676" width="184" height="64" rx="6" fill="#ffffff" stroke="#111111" stroke-width="1"/>
+<text x="420" y="696" class="name" fill="#111111">Astro 构建</text>
+<text x="420" y="712" class="mono" fill="#4a4a4a">npm run build</text>
+<text x="420" y="730" class="zh" fill="#5c5c5c">web/ → dist/</text>
+</g>
+<g data-node-id="GitHub Pages">
+<rect x="624" y="676" width="184" height="64" rx="20" fill="#f7f7f5"/>
+<rect x="624" y="676" width="184" height="64" rx="20" fill="#111111" stroke="#111111" stroke-width="1"/>
+<text x="636" y="696" class="name" fill="#ffffff">GitHub Pages</text>
+<text x="636" y="712" class="mono" fill="rgba(255,255,255,0.72)">deploy-pages</text>
+<text x="636" y="730" class="zh" fill="rgba(255,255,255,0.86)">网站更新</text>
+</g>
+<text x="40" y="820" class="eyebrow" fill="#4a4a4a">LEGEND</text>
+<rect x="136" y="808" width="20" height="16" rx="3" fill="#ffffff" stroke="#111111"/>
+<text x="164" y="821" class="zh" fill="#5c5c5c">步骤</text>
+<rect x="248" y="808" width="20" height="16" rx="3" fill="rgba(17,17,17,0.05)" stroke="#4a4a4a"/>
+<text x="276" y="821" class="zh" fill="#5c5c5c">提交到 main 的数据</text>
+<rect x="444" y="808" width="28" height="16" rx="8" fill="#111111"/>
+<text x="480" y="821" class="zh" fill="#5c5c5c">终点</text>
+<circle cx="568" cy="816" r="4" fill="#111111"/>
+<text x="580" y="821" class="zh" fill="#5c5c5c">分叉与合流</text>
+<line x1="700" y1="816" x2="730" y2="816" stroke="#4a4a4a" stroke-width="1.2" marker-end="url(#daily-flow-arrow)"/>
+<text x="740" y="821" class="zh" fill="#5c5c5c">流向</text>
+<text x="1240" y="821" class="zh" fill="#5c5c5c" text-anchor="end">左侧为柏林时间</text>
+      </svg>
+    </div>
+  </div>
+</body>
+</html>

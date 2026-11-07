@@ -24,43 +24,42 @@ import tempfile
 from pathlib import Path
 from typing import Any
 
-from daily import publish, render, routes, trace
+from daily import issue, publish, render, routes, trace
+from daily.issue import IssueDir
 
 # In a run folder: {"date", "digests": [file names, in priority order], "en": file name | null}.
 RUN = "run.json"
 
 
-def adopt(issue_dir: Path, source: Path, run_trace: Path | None = None, en: bool = False) -> bool:
+def adopt(folder: IssueDir, source: Path, run_trace: Path | None = None, en: bool = False) -> bool:
     """Adopts the digest at source into the issue if publish says so. True if it was adopted."""
-    candidates = _read(issue_dir / "candidates.json")
-    path = issue_dir / ("digest.en.json" if en else "digest.json")
+    candidates = folder.read_candidates()
+    path = folder.edition(en)
     try:
-        incoming = _read(source)
+        incoming = issue.read(source)
     except json.JSONDecodeError as exc:
         incoming = f"invalid JSON: {exc}"
     try:
-        current = _read(path) if path.exists() else None
+        current = issue.read_if_exists(path)
     except json.JSONDecodeError:
         current = None
     if en:
-        main_path = issue_dir / "digest.json"
-        main = _read(main_path) if main_path.exists() else None
-        data, reason = publish.decide_en(main, current, incoming, candidates)
+        data, reason = publish.decide_en(folder.read_digest(), current, incoming, candidates)
     else:
         data, reason = publish.decide(current, incoming, candidates)
-    print(f"{issue_dir.name}: {'adopted' if data else 'kept'} ({reason})", file=sys.stderr)
-    _trace_adopt(issue_dir, incoming, run_trace, data is not None, reason, "en" if en else "zh")
+    print(f"{folder.date}: {'adopted' if data else 'kept'} ({reason})", file=sys.stderr)
+    _trace_adopt(folder, incoming, run_trace, data is not None, reason, "en" if en else "zh")
     if data is None:
         return False
-    _write(path, data)
+    issue.write(path, data)
     if not en:
-        (issue_dir / "digest.md").write_text(render.to_markdown(data, candidates), encoding="utf-8")
+        folder.markdown.write_text(render.to_markdown(data, candidates), encoding="utf-8")
     print(path)
     return True
 
 
 def _trace_adopt(
-    issue_dir: Path, incoming: Any, source: Path | None, adopted: bool, reason: str, edition: str
+    folder: IssueDir, incoming: Any, source: Path | None, adopted: bool, reason: str, edition: str
 ) -> None:
     """The trace follows the digest: the trace of an adopted run (source) replaces the route's, and
     a rejected run is noted in the trace already there. Either way the verdict is appended."""
@@ -69,10 +68,9 @@ def _trace_adopt(
     run = trace.load(source) if source is not None else None
     # A run's trace names its route: a fallback the Claude editor wrote when it gave up
     # (`degrade --force`) goes with trace.claude.json, though the fallback route keeps none.
-    name = trace.file_name(run if run is not None else incoming)
-    if name is None:
+    path = folder.trace(run if run is not None else incoming)
+    if path is None:
         return
-    path = issue_dir / name
     record = trace.load(path)
     if run is not None and edition == "zh" and (adopted or record is None):
         record = run
@@ -94,12 +92,12 @@ def from_ref(data_dir: Path, ref: str, base: str = "origin/main") -> None:
         return paths.split()
 
     with tempfile.TemporaryDirectory() as tmp:
-        for path in changed("digest.json") + changed("digest.en.json"):
+        for path in changed(issue.DIGEST) + changed(issue.DIGEST_EN):
             en = path.endswith(".en.json")
             date = path.split("/")[-2]
-            issue_dir = data_dir / date
-            if not (issue_dir / "candidates.json").exists():
-                print(f"::warning::{path}: main has no {date}/candidates.json, skipped", file=sys.stderr)
+            folder = IssueDir.of(data_dir, date)
+            if not folder.candidates.exists():
+                print(f"::warning::{path}: main has no {date}/{issue.CANDIDATES}, skipped", file=sys.stderr)
                 continue
             incoming = Path(tmp) / f"{date}.{'en' if en else 'zh'}.json"
             incoming.write_text(_git(root, "show", f"{sha}:{path}"), encoding="utf-8")
@@ -110,14 +108,14 @@ def from_ref(data_dir: Path, ref: str, base: str = "origin/main") -> None:
                     continue
                 saved = Path(tmp) / f"{date}.trace.json"
                 run_trace = _branch_trace(root, sha, f"{data}/{date}", incoming, saved)
-            adopt(issue_dir, incoming, run_trace, en)
+            adopt(folder, incoming, run_trace, en)
 
 
 def _branch_refuses(incoming: Path) -> str | None:
     """A branch carries the runs of the routes that edit by SKILL.md (and the fallback such an editor
     writes when it gives up); a per-model route publishes through its own workflow."""
     try:
-        route = routes.of(_read(incoming))
+        route = routes.of(issue.read(incoming))
     except json.JSONDecodeError:
         return None  # adopt reports it
     if route is not None and route.per_model:
@@ -125,11 +123,11 @@ def _branch_refuses(incoming: Path) -> str | None:
     return None
 
 
-def _branch_trace(root: Path, sha: str, issue: str, incoming: Path, out: Path) -> Path | None:
+def _branch_trace(root: Path, sha: str, issue_path: str, incoming: Path, out: Path) -> Path | None:
     """The trace of the run on the branch: its route's, or for a fallback the editor wrote when it gave
     up, that of the SKILL.md route whose trace the branch carries."""
     try:
-        data = _read(incoming)
+        data = issue.read(incoming)
     except json.JSONDecodeError:
         return None
     route = routes.of(data)
@@ -139,7 +137,7 @@ def _branch_trace(root: Path, sha: str, issue: str, incoming: Path, out: Path) -
         names = [str(routes.trace_name({"channel": channel})) for channel in routes.SKILL_ROUTES]
     for name in names:
         try:
-            out.write_text(_git(root, "show", f"{sha}:{issue}/{name}"), encoding="utf-8")
+            out.write_text(_git(root, "show", f"{sha}:{issue_path}/{name}"), encoding="utf-8")
         except subprocess.CalledProcessError:
             continue
         return out
@@ -152,7 +150,7 @@ def save_run(folder: Path, date: str, digests: list[Path], en: Path | None, trac
     for path in [*digests, *traces, *([en] if en else [])]:
         shutil.copy(path, folder / path.name)
     manifest = {"date": date, "digests": [p.name for p in digests], "en": en.name if en else None}
-    _write(folder / RUN, manifest)
+    issue.write(folder / RUN, manifest)
 
 
 def from_dir(data_dir: Path, folder: Path) -> None:
@@ -161,26 +159,18 @@ def from_dir(data_dir: Path, folder: Path) -> None:
     if not (folder / RUN).exists():
         print(f"{folder}: no run to adopt", file=sys.stderr)
         return
-    run = _read(folder / RUN)
-    issue_dir = data_dir / run["date"]
+    run = issue.read(folder / RUN)
+    target = IssueDir.of(data_dir, run["date"])
     for path in sorted(folder.glob("trace.*.json")):
-        shutil.copy(path, issue_dir / path.name)
+        shutil.copy(path, target.path / path.name)
     for name in run["digests"]:
-        shutil.copy(folder / name, issue_dir / name)
-        adopt(issue_dir, issue_dir / name)
+        shutil.copy(folder / name, target.path / name)
+        adopt(target, target.path / name)
     if run.get("en"):  # taken only when its digest did become the main issue (publish.goes_with)
-        adopt(issue_dir, folder / run["en"], en=True)
+        adopt(target, folder / run["en"], en=True)
 
 
 def _git(cwd: Path, *args: str) -> str:
     return subprocess.run(
         ["git", *args], cwd=cwd, check=True, capture_output=True, text=True, encoding="utf-8"
     ).stdout
-
-
-def _read(path: Path) -> Any:
-    return json.loads(path.read_text(encoding="utf-8"))
-
-
-def _write(path: Path, data: Any) -> None:
-    path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
