@@ -2,23 +2,18 @@
   "schema_version": 1,
   "date": "2026-11-07",
   "mode": "full",
-  "generated_at": "2026-11-07T04:43:51+00:00",
-  "channel": "api",
-  "model": "nvidia:minimaxai/minimax-m3.1-flash",
+  "channel": "claude",
+  "generated_at": "2026-11-07T04:45:55+00:00",
+  "model": "claude-opus-5-5",
   "highlights": [
-    "Anthropic breaks down the components of agent memory, including how \"dreaming\" helps Claude organize memory and correct mistakes.",
-    "Drex is a family of four open decision models that return option probabilities without autoregressive decoding; Max answers a typical request in 183 ms.",
-    "PLatour, an open-source PACT framework, beats open-source baselines on generation tasks, but controlled experiments show some gains come from uninformative signals rather than communication."
+    "Anthropic explains how layered memory and offline \"dreaming\" help agents learn from past sessions; Mistral Studio adds managed agents, workflows and a Mistral MCP server.",
+    "Cloudflare open-sources an MIT-licensed security-audit skill, and Foundry Local now runs Qwen3.8-27B on GPUs with 24 GB of VRAM as a GitHub Copilot backend."
   ],
   "items": [
     {
       "section": "headline",
-      "title": "Anthropic breaks down the components of agent memory",
-      "summary": "Anthropic shares how it thinks about agent memory and walks through evaluations of its components, including the use of \"dreaming\" for memory organization. The post describes how Claude can tag salient events, record failures, test theories about what went wrong, and turn validated findings into rules for future answers.",
-      "tags": [
-        "Agent",
-        "论文"
-      ],
+      "title": "Anthropic explains agent memory and \"dreaming\"",
+      "summary": "Anthropic describes dreaming, an offline pass where an agent reflects on its logs to fix mistakes and produce new notes and representations; the experiments ran on Claude Managed Agents. In one test, Claude's score rose from 54% to 61% as its wiki grew when it used both search and the wiki, versus 53% with search alone, while saving about 20,000 tokens per question. Developers building long-running agents get a concrete pattern for structuring and periodically consolidating memory.",
       "sources": [
         {
           "candidate_id": "c_b44ca4f50a",
@@ -28,104 +23,64 @@
       "evidence": [
         {
           "url": "https://www.anthropic.com/research/components-of-agent-memory",
-          "quote": "In this post, we share how we’ve come to think about agent memory and walk through several evaluations we’ve used to explore agent memory, including the use of dreaming, and what each component contributes to memory organization."
+          "quote": "The same idea can help agents organize their memory by reflecting on logs to fix mistakes or produce new notes and representations. This process is often called dreaming (Figure 1)."
         },
         {
           "url": "https://www.anthropic.com/research/components-of-agent-memory",
-          "quote": "Memory notes By “agent memory,” we mean knowledge that Claude gains from experience—including interactions with users and tasks it’s been assigned—and that it retains between sessions, saved as context it can read later."
+          "quote": "We ran the CL-Bench 1.0 task using Claude Managed Agents ."
         },
         {
           "url": "https://www.anthropic.com/research/components-of-agent-memory",
-          "quote": "Similarly, Claude can tag salient events in a session log as they happen, so they’re easier to find later, or it can write them to a memory store, such as a folder of memory notes (Figure 2)."
+          "quote": "When it used both search and the wiki, Claude’s aggregate score rose from 54% to 61% as that wiki grew, compared with 53% when it had access to the search tool alone."
         },
         {
           "url": "https://www.anthropic.com/research/components-of-agent-memory",
-          "quote": "If Claude gets a question wrong, it can record the failure, come up with theories about what went wrong, test those theories, and turn what it finds into a rule about how to answer in the future."
-        },
-        {
-          "url": "https://www.anthropic.com/research/components-of-agent-memory",
-          "quote": "Like Opus 5, Claude Opus 5.5 and Claude Sonnet 5.5 both closed the loop, using memory to capture validated rules about how to best answer future questions."
-        },
-        {
-          "url": "https://www.anthropic.com/research/components-of-agent-memory",
-          "quote": "We compared the memory folders from one run each of Claude Sonnet 3.7 and Claude Fable 5, when each was about 10,000 steps into the game."
-        },
-        {
-          "url": "https://www.anthropic.com/research/components-of-agent-memory",
-          "quote": "Ultimately, Sonnet 3.7 wrote 413 memory files across 225 folders and earned one badge (badges mark a player’s progress through the game)."
-        },
-        {
-          "url": "https://www.anthropic.com/research/components-of-agent-memory",
-          "quote": "Fable 5, by comparison, wrote nine files in two folders, plus a single top-level file called global.md , and earned four badges."
-        },
-        {
-          "url": "https://www.anthropic.com/research/components-of-agent-memory",
-          "quote": "Fable 5’s approach used memory for things the game didn’t explicitly tell it."
-        },
-        {
-          "url": "https://www.anthropic.com/research/components-of-agent-memory",
-          "quote": "Its global.md file acted as a dashboard, holding the current goal, a prewritten plan for tackling gyms (the challenges where badges are won), and the model’s own rules for using memory."
+          "quote": "Using search and the wiki also saved about 20,000 tokens per question."
         }
+      ],
+      "tags": [
+        "Agent",
+        "产品"
       ]
     },
     {
       "section": "headline",
-      "title": "VFlash decodes visual primitives jointly for faster visual planning",
-      "summary": "VFlash predicts the coordinates of visual primitives jointly with a lightweight drafter that generates an entire primitive in one forward pass. Across evaluated 2D and 3D robot trajectory tasks it reduces prediction errors relative to autoregressive decoding, with preliminary single-rollout measurements indicating approximately 25x faster generation for 3D point motion forecasting.",
-      "tags": [
-        "论文",
-        "多模态"
-      ],
+      "title": "Mistral Studio adds managed agents, workflows and an MCP server",
+      "summary": "Mistral updated Studio with managed agents, workflows and enterprise context, and both models and platform can be deployed in your own cloud, VPC or on-premises. The new Mistral MCP server lets developers build with Mistral Vibe or their existing coding agent, test locally and deploy with one command, while OpenTelemetry traces show model calls, tool use and approvals. Enterprise teams that need self-hosted agents get runtime, deployment and debugging tooling around the models.",
       "sources": [
         {
-          "candidate_id": "c_a5946317f4",
-          "url": "https://huggingface.co/papers/2611.08449"
+          "candidate_id": "c_450b47c5db",
+          "url": "https://mistral.ai/news/build-with-studio/"
         }
       ],
       "evidence": [
         {
-          "url": "https://huggingface.co/papers/2611.08449",
-          "quote": "W e i n t r o d u c e V F l a s h , a m e t h o d f o r f a s t , a c c u r a t e v i s u a l p l a n n i n g t h r o u g h F l a s h P r i m i t i v e D e c o d i n g ."
+          "url": "https://mistral.ai/news/build-with-studio/",
+          "quote": "New features like managed agents, workflows, and enterprise context streamline business processes, enabling faster development and deployment of AI solutions."
         },
         {
-          "url": "https://huggingface.co/papers/2611.08449",
-          "quote": "V F l a s h e x p l o i t s t h e k n o w n s t r u c t u r e o f v i s u a l p r i m i t i v e s t o p r e d i c t t h e i r c o o r d i n a t e s j o i n t l y , u s i n g a l i g h t w e i g h t d r a f t e r t h a t g e n e r a t e s a n e n t i r e p r i m i t i v e i n o n e f o r w a r d p a"
+          "url": "https://mistral.ai/news/build-with-studio/",
+          "quote": "Deploy both the models and the platform in your own cloud, VPC or on-premises environment."
         },
         {
-          "url": "https://huggingface.co/papers/2611.08449",
-          "quote": "T h e l a y o u t a d a p t s t o t h e p r i m i t i v e ' s t y p e , d i m e n s i o n a l i t y , a n d l e n g t h , s u p p o r t i n g c o m p a c t b o x e s a n d l o n g , v a r i a b l e - l e n g t h t r a j e c t o r i e s ."
+          "url": "https://mistral.ai/news/build-with-studio/",
+          "quote": "Through the new Mistral MCP server, developers can build with Mistral Vibe or the coding agent they already use, test locally and deploy to their Studio environment with one command."
         },
         {
-          "url": "https://huggingface.co/papers/2611.08449",
-          "quote": "A c r o s s t h e e v a l u a t e d 2 D a n d 3 D r o b o t t r a j e c t o r y t a s k s , V F l a s h c o n s i s t e n t l y r e d u c e s p r e d i c t i o n e r r o r s r e l a t i v e t o a u t o r e g r e s s i v e d e c o d i n g ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.08449",
-          "quote": "P r e l i m i n a r y s i n g l e - r o l l o u t m e a s u r e m e n t s i n d i c a t e a p p r o x i m a t e l y 2 5 x f a s t e r g e n e r a t i o n f o r 3 D p o i n t m o t i o n f o r e c a s t i n g ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.08449",
-          "quote": "A w o r l d a c t i o n m o d e l c o n d i t i o n e d o n V F l a s h p l a n s a c h i e v e s 7 0 ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.08449",
-          "quote": "2 % a v e r a g e s u c c e s s a c r o s s f o u r M o l m o S p a c e s t a s k s u i t e s , c o m p a r e d w i t h 6 2 ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.08449",
-          "quote": "6 % f o r t h e b a s e l i n e ."
+          "url": "https://mistral.ai/news/build-with-studio/",
+          "quote": "OpenTelemetry traces show each step of a run, including model calls, tool use and approvals"
         }
+      ],
+      "tags": [
+        "Agent",
+        "产品",
+        "工具"
       ]
     },
     {
       "section": "headline",
-      "title": "Cloudflare releases a multi-phase security audit skill for coding agents",
-      "summary": "A coding-agent skill that orchestrates isolated agents through reconnaissance, coverage-led hunting, candidate validation, structured output, independent record verification, and target-neutral reporting. The agent that checks a finding is never the agent that found it, and confirmed, needs_validation, and rejected records are written to findings.json.",
-      "tags": [
-        "开源",
-        "安全",
-        "Agent"
-      ],
+      "title": "Cloudflare open-sources a multi-phase security-audit agent skill",
+      "summary": "Cloudflare released security-audit, an MIT-licensed skill that turns a coding agent into a multi-phase security auditor. Its core rule is that the agent that checks a finding is never the agent that found it, and results are written to findings.json and validated against a schema; it needs a model that supports tool use and parallel sub-agents. Teams already using coding agents can install it to get independently verified, machine-readable audit findings.",
       "sources": [
         {
           "candidate_id": "c_57e1609901",
@@ -135,15 +90,7 @@
       "evidence": [
         {
           "url": "https://github.com/cloudflare/security-audit-skill",
-          "quote": "A coding-agent skill that turns your agent into a security auditor."
-        },
-        {
-          "url": "https://github.com/cloudflare/security-audit-skill",
-          "quote": "It orchestrates isolated agents through reconnaissance, coverage-led hunting, candidate validation, structured output, independent record verification, and target-neutral reporting."
-        },
-        {
-          "url": "https://github.com/cloudflare/security-audit-skill",
-          "quote": "The skill runs a structured audit in six phases:"
+          "quote": "Adversarial validation. The agent that checks a finding is never the agent that found it."
         },
         {
           "url": "https://github.com/cloudflare/security-audit-skill",
@@ -151,150 +98,129 @@
         },
         {
           "url": "https://github.com/cloudflare/security-audit-skill",
-          "quote": "Independent record verification -- fresh agents verify final source claims."
+          "quote": "A coding agent with a model that supports tool use and parallel sub-agents"
         },
         {
           "url": "https://github.com/cloudflare/security-audit-skill",
-          "quote": "Target-neutral reporting -- derive REPORT.md , FINDINGS-DETAIL.md , and NEEDS-VALIDATION.md from the verified records and coverage ledger."
-        },
-        {
-          "url": "https://github.com/cloudflare/security-audit-skill",
-          "quote": "The verdicts are distinct: confirmed has a complete source trace and bounded observed result, needs_validation has an exact unresolved fact and no severity, and rejected records a disproved candidate."
-        },
-        {
-          "url": "https://github.com/cloudflare/security-audit-skill",
-          "quote": "Install the skill with the Skills CLI :"
-        },
-        {
-          "url": "https://github.com/cloudflare/security-audit-skill",
-          "quote": "--skill security-audit"
-        },
-        {
-          "url": "https://github.com/cloudflare/security-audit-skill",
-          "quote": "The skill activates automatically when the request matches its trigger (security audit, find vulnerabilities, pen-test the code, etc.)."
-        },
-        {
-          "url": "https://github.com/cloudflare/security-audit-skill",
-          "quote": "Adversarial validation."
-        },
-        {
-          "url": "https://github.com/cloudflare/security-audit-skill",
-          "quote": "The agent that checks a finding is never the agent that found it."
+          "quote": "License MIT -- see LICENSE ."
         }
+      ],
+      "tags": [
+        "安全",
+        "Agent",
+        "开源"
       ]
     },
     {
       "section": "headline",
-      "title": "Harness-S rescues agent failures with sibling harnesses",
-      "summary": "Harness-S selectively rescues failures of a base execution system through sibling harnesses and transfers the resulting capabilities into a single policy that stays effective under the original harness. Across AppWorld, SWE-Gym, and DBBench, the trained policy substantially outperforms policy-only training when returned to the original base harness.",
-      "tags": [
-        "Agent",
-        "论文",
-        "训练"
-      ],
+      "title": "Foundry Local runs Qwen3.8-27B locally for agentic coding",
+      "summary": "Foundry Local can now run Qwen3.8-27B locally and connect it to GitHub Copilot: with 4-bit quantization the model is about 18 GB and fits consumer GPUs with 24 GB of VRAM at up to 64K tokens of context, or up to 262K tokens with 32 GB or more. It uses DFlash2 speculative decoding and requires Foundry Local CLI 0.13.0 or later. Developers with an NVIDIA GPU who want code to stay on their machine can try it today.",
       "sources": [
         {
-          "candidate_id": "c_7da5db721b",
-          "url": "https://huggingface.co/papers/2611.04277"
+          "candidate_id": "c_ab18e401bc",
+          "url": "https://devblogs.microsoft.com/foundry/foundry-local-agentic-coding-qwen3-8-27b/"
         }
       ],
       "evidence": [
         {
-          "url": "https://huggingface.co/papers/2611.04277",
-          "quote": "Rather than seeking a universally superior harness, we introduce Harness-S to selectively rescue failures of a base execution system through sibling harnesses and transfer the resulting capabilities into a single policy that remains effective under the original harness."
+          "url": "https://devblogs.microsoft.com/foundry/foundry-local-agentic-coding-qwen3-8-27b/",
+          "quote": "Run Qwen3.8-27B locally, connect it to GitHub Copilot, and get a responsive coding experience with predictable inference costs, greater privacy, and the freedom to keep working offline."
         },
         {
-          "url": "https://huggingface.co/papers/2611.04277",
-          "quote": "Directional Harness Evolution develops specialized sibling harnesses along distinct repair directions, forming a reusable Sibling Harness Pool that remains fixed during policy training ."
+          "url": "https://devblogs.microsoft.com/foundry/foundry-local-agentic-coding-qwen3-8-27b/",
+          "quote": "With 4-bit quantization, the model size is reduced to approximately 18 GB, making it runnable on consumer GPUs with 24 GB of VRAM, supporting context windows of up to 64K tokens."
         },
         {
-          "url": "https://huggingface.co/papers/2611.04277",
-          "quote": "Complementary Harness Rescue Training invokes this pool only when all initial attempts under the base harness fail."
+          "url": "https://devblogs.microsoft.com/foundry/foundry-local-agentic-coding-qwen3-8-27b/",
+          "quote": "GPUs with 32 GB or more of VRAM can support longer context windows of up to the model’s maximum supported length of 262K tokens."
         },
         {
-          "url": "https://huggingface.co/papers/2611.04277",
-          "quote": "The same policy generates fresh rollouts under selected auxiliary harnesses , and these trajectories replace the failed group for reinforcement learning ."
+          "url": "https://devblogs.microsoft.com/foundry/foundry-local-agentic-coding-qwen3-8-27b/",
+          "quote": "It leverages DFlash2 speculative decoding"
         },
         {
-          "url": "https://huggingface.co/papers/2611.04277",
-          "quote": "An Adaptive Harness Router selects the Top-k variants using Harness Behavior Profiles and voting across multiple LLMs ."
+          "url": "https://devblogs.microsoft.com/foundry/foundry-local-agentic-coding-qwen3-8-27b/",
+          "quote": "This experience requires Foundry Local CLI 0.13.0 or later"
         },
         {
-          "url": "https://huggingface.co/papers/2611.04277",
-          "quote": "Across AppWorld, SWE-Gym, and DBBench, the trained policy substantially outperforms policy-only training when returned to the original base harness ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.04277",
-          "quote": "Behavioral analyses and held-out cases support the transfer of harness-elicited behaviors into the policy itself."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.04277",
-          "quote": "Reusing the router for Rank-1 inference provides additional gains at the same executor rollout count."
+          "url": "https://devblogs.microsoft.com/foundry/foundry-local-agentic-coding-qwen3-8-27b/",
+          "quote": "Have an NVIDIA GPU with at least 24 GB of VRAM?"
         }
+      ],
+      "tags": [
+        "代码",
+        "推理",
+        "工具"
       ]
     },
     {
-      "section": "headline",
-      "title": "Drex open decision models return option probabilities without decoding",
-      "summary": "Drex is a family of four open decision models with 8B (DLM), 9B (v1.5), 35B with 3B active (v2.0), and 27B (Max) parameters, trained with supervised fine-tuning and reinforcement learning from adjusted feedback (RLAF). Max answers a typical request in 183 ms, against about 2.0 s for GPT-6 Sol and 3.5 s for Claude Opus 5.5.",
-      "tags": [
-        "模型",
-        "开源",
-        "推理"
-      ],
+      "section": "model",
+      "title": "Nace AI opens the Drex family of decision models",
+      "summary": "Drex is a family of four open decision models at 8B (DLM), 9B (v1.5), 35B with 3B active (v2.0) and 27B (Max) that take a state plus options and return a probability distribution over the options without autoregressive decoding. The paper reports that Max answers a typical request in 183 ms and trails Claude Opus 5.5 by 1.6 points on Decision Bench v4. For classification, judgment and scoring over fixed options, it avoids long chain-of-thought and output parsing.",
       "sources": [
         {
           "candidate_id": "c_6c55f1bca7",
           "url": "https://huggingface.co/papers/2611.07854"
+        },
+        {
+          "candidate_id": "c_2e8857fad6",
+          "url": "https://i.redd.it/fez7h4dxu00i1.png"
         }
       ],
       "evidence": [
         {
           "url": "https://huggingface.co/papers/2611.07854",
-          "quote": "Decision models address this: given a question and a set of options supplied by the user, they return a probability distribution over the options without autoregressive decoding ."
+          "quote": "Max answers a typical request in 183 ms, against about 2.0 s for GPT-6 Sol and 3.5 s for Claude Opus 5.5, and its outputs are stable under option reordering . All four models are open source"
         },
         {
           "url": "https://huggingface.co/papers/2611.07854",
-          "quote": "We present Drex, a family of four open decision models with 8B (DLM), 9B (v1.5), 35B with 3B active (v2.0), and 27B (Max) parameters."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.07854",
-          "quote": "Training combines supervised fine-tuning with reinforcement learning from adjusted feedback ( RLAF ), plus vision tuning for Max."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.07854",
-          "quote": "On Decision Index 0.4.1, Max sets a new state of the art among the decision models we compare (67.52 on the public suite vs."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.07854",
-          "quote": "60.70 for Jev 1.14.0)."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.07854",
-          "quote": "Max answers a typical request in 183 ms, against about 2.0 s for GPT-6 Sol and 3.5 s for Claude Opus 5.5, and its outputs are stable under option reordering ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.07854",
-          "quote": "The family spans 8B (DLM), 9B (v1.5), 35B-A3B (v2.0), and 27B (Max) parameters."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.07854",
-          "quote": "Training combines supervised fine-tuning with our in-house RL recipe, reinforcement learning from adjusted feedback (RLAF), which blends verified outcomes with a reasoning judge under a KL constraint; ablations show RLAF raises accuracy while consistency losses cut option-order flips from 6.3% to 4."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.07854",
-          "quote": "All weights and inference code are open: github.com/nace-ai/drex-decision-models"
+          "quote": "On Decision Bench v4, it is statistically tied with d3-turbo and GPT-6 Sol and trails Claude Opus 5.5 by 1.6 points"
         }
+      ],
+      "tags": [
+        "模型",
+        "开源",
+        "推理"
       ]
     },
     {
-      "section": "headline",
-      "title": "SLA scales spatial alignment for vision-language-action models",
-      "summary": "SLA, a Spatial-Language-Action Model, scales implicit spatial alignment to continual pre-training and maintains it during downstream post-training. Initialized from a pretrained pi05 policy, it aligns intermediate visual embeddings with spatial representations from a frozen 3D perception model, and all auxiliary components are used only during training.",
-      "tags": [
-        "论文",
-        "多模态"
+      "section": "model",
+      "title": "Linum releases a 2B text-to-image model trained for about $21K",
+      "summary": "Linum AI released P-JiT 21K, a 2B-parameter research checkpoint trained on 660M samples for about $21K of compute, under apache-2.0. Rendered-text images were filtered out on purpose, so it cannot write text or generate posters, and Linum calls it an experimental artifact rather than a production model. It is a useful reference point for anyone studying efficient image-model training.",
+      "sources": [
+        {
+          "candidate_id": "c_43b680a763",
+          "url": "https://huggingface.co/Linum-AI/pjit-21k"
+        }
       ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/Linum-AI/pjit-21k",
+          "quote": "P-JiT 21K is a 2B-parameter model trained on 660M samples for about $21K of compute, as a stepping stone towards our next video model."
+        },
+        {
+          "url": "https://huggingface.co/Linum-AI/pjit-21k",
+          "quote": "Research checkpoint: this is an experimental research artifact, not a production model."
+        },
+        {
+          "url": "https://huggingface.co/Linum-AI/pjit-21k",
+          "quote": "This model cannot write text or generate posters."
+        },
+        {
+          "url": "https://huggingface.co/Linum-AI/pjit-21k",
+          "quote": "License: apache-2.0"
+        }
+      ],
+      "tags": [
+        "模型",
+        "图像",
+        "开源"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "SLA builds spatial alignment into VLA continual pre-training",
+      "summary": "SLA starts from a pretrained pi05 policy and jointly optimizes action prediction with alignment between intermediate visual embeddings and representations from a frozen 3D perception model. All auxiliary components are used only during training, so pretrained VLA weights can be reused and the inference architecture is unchanged. Robotics teams can adopt the training recipe without changing deployment.",
       "sources": [
         {
           "candidate_id": "c_2894bfea6d",
@@ -304,260 +230,58 @@
       "evidence": [
         {
           "url": "https://huggingface.co/papers/2611.08373",
-          "quote": "We present SLA, a Spatial-Language-Action Model that scales implicit spatial alignment to continual pre-training and maintains it during downstream post-training ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.08373",
-          "quote": "Initialized from a pretrained pi05 policy , SLA jointly optimizes action prediction and alignment between intermediate visual embeddings and spatial representations from a frozen 3D perception model ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.08373",
-          "quote": "We curate and unify heterogeneous robot datasets to support spatial learning across diverse embodiments, tasks, and scenes."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.08373",
-          "quote": "To accommodate this diversity, we introduce feature-dependent gates that adaptively aggregate visual embeddings from multiple VLA layers for spatial supervision ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.08373",
-          "quote": "Probabilistic state dropout encourages reliance on visual cues and mitigates overfitting to demonstration trajectories ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.08373",
           "quote": "All auxiliary components are used only during training, allowing direct reuse of pretrained VLA weights and preserving the original inference architecture ."
         }
-      ]
-    },
-    {
-      "section": "model",
-      "title": "Open-HumanScale opens a 50,000-hour egocentric pretraining recipe",
-      "summary": "Open-HumanScale is an open recipe for scaling egocentric pretraining to 50,000 hours, anchored by the Open-HumanScale-50K corpus annotated with hand motion and natural language. The world-action model HumanWAM-Goal, trained with joint human-robot data, reaches 92.70% on RoboTwin 2.0 Clean2Clean and 84.60% on Clean2Random after post-training.",
-      "tags": [
-        "模型",
-        "开源",
-        "多模态"
       ],
-      "sources": [
-        {
-          "candidate_id": "c_b8df4857f1",
-          "url": "https://huggingface.co/papers/2611.06817"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2611.06817",
-          "quote": "W e i n t r o d u c e O p e n - H u m a n S c a l e , t h e f i r s t f u l l y o p e n r e c i p e f o r s c a l i n g e g o c e n t r i c p r e t r a i n i n g t o 5 0 , 0 0 0 h o u r s , a n c h o r e d b y O p e n - H u m a n S c a l e - 5 0 K - - - a c u r a t e d e g o c e n t r i c v i d e o"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.06817",
-          "quote": "c o r p u s d e n s e l y a n n o t a t e d w i t h h a n d m o t i o n a n d n a t u r a l l a n g u a g e ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.06817",
-          "quote": "g p r e t r a i n i n g d a t a h o u r s t o d o w n s t r e a m r o b o t s u c c e s s r a t e s ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.06817",
-          "quote": "G r o u n d e d i n t h e s e f i n d i n g s , w e d e v e l o p H u m a n W A M - V a n i l l a , a w o r l d - - a c t i o n m o d e l p r e t r a i n e d e x c l u s i v e l y o n 5 0 k h o u r s o f e g o c e n t r i c h u m a n v i d e o ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.06817",
-          "quote": "U p o n r o b o t p o s t - t r a i n i n g , H u m a n W A M - V a n i l l a r e a c h e s 9 2 ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.06817",
-          "quote": "0 C l e a n 2 C l e a n a n d 6 8 ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.06817",
-          "quote": "8 8 % o n C l e a n 2 R a n d o m , a l o n g s i d e a 1 4 ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.06817",
-          "quote": "0 p e r f o r m a n c e t o n e w s t a t e - o f - t h e - a r t l e v e l s : 9 2 ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.06817",
-          "quote": "7 0 % o n C l e a n 2 C l e a n a n d a s u b s t a n t i a l l e a p t o 8 4 ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.06817",
-          "quote": "T o s u p p o r t r e p r o d u c i b l e s c a l i n g r e s e a r c h i n e m b o d i e d A I , w e o p e n - s o u r c e t h e O p e n - H u m a n S c a l e - 5 0 K c o r p u s , d a t a c u r a t i o n a n d p r e t r a i n i n g p i p e l i n e s , a l o n g s i d e t h e p r e t r a i n e d a"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.06817",
-          "quote": "n d p o s t - t r a i n e d H u m a n W A M c h e c k p o i n t s , i n f e r e n c e c o d e , a n d s i m u l a t i o n e v a l u a t i o n s u i t e s ."
-        }
-      ]
-    },
-    {
-      "section": "model",
-      "title": "TailSteer reduces visual drift in multi-turn image editing",
-      "summary": "TailSteer is a final-stage training framework that keeps early denoising dynamics close to the base model and concentrates preservation corrections near the trajectory tail. Experiments across the FLUX, SenseNova, and Qwen families show it substantially reduces cumulative drift over 15-20 editing turns while largely preserving base-model performance.",
       "tags": [
         "论文",
-        "图像"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_2afe0859df",
-          "url": "https://huggingface.co/papers/2611.06741"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2611.06741",
-          "quote": "We introduce TailSteer, a final-stage training framework that improves multi-turn robustness while retaining the generative and editing capabilities acquired through earlier training."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.06741",
-          "quote": "TailSteer follows a simple principle: keep early denoising dynamics close to those of the base model and concentrate preservation corrections near the trajectory tail , where fine-grained deviations can be suppressed."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.06741",
-          "quote": "These corrections are learned from the editor's own on-policy denoising rollouts , using unchanged source content as a preservation reference without requiring curated ground-truth editing pairs ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.06741",
-          "quote": "Experiments across the FLUX , SenseNova , and Qwen families show that TailSteer substantially reduces cumulative drift over 15-20 editing turns while largely preserving base-model performance on extensive text-to-image and single-image editing benchmarks."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.06741",
-          "quote": "These results demonstrate that long-horizon editing robustness can be unlocked in foundation models after TailSteer, rather than by relearning their existing capabilities."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.06741",
-          "quote": "View arXiv page View PDF Project page GitHub 37 Add to collection Community Lyricccco Paper submitter about 22 hours ago TailSteer introduces a final refinement stage after SFT, RL, or OPD to unlock persistent multi-turn editing."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.06741",
-          "quote": "It substantially reduces long-horizon drift while preserving the base model's original generative and editing capabilities, without changing its architecture or inference pipeline."
-        }
-      ]
-    },
-    {
-      "section": "model",
-      "title": "PLatour tests whether cross-model transfer really uses sender information",
-      "summary": "PLatour is an open-source PACT framework that connects frozen models through lightweight, zero-initialized linear bridges trained directly with task rewards, and supports hybrid-attention architectures. Controlled experiments show gains on some tasks can be reproduced by uninformative sender signals or self-communication, so the authors propose PACT-Check to measure how much of a gain genuinely comes from communication.",
-      "tags": [
-        "论文",
-        "模型",
+        "多模态",
         "训练"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_8ae8e33e0a",
-          "url": "https://huggingface.co/papers/2611.06976"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2611.06976",
-          "quote": "W e i n t r o d u c e P L a t o u r , a n o p e n - s o u r c e P A C T f r a m e w o r k t h a t c o n n e c t s f r o z e n m o d e l s t h r o u g h l i g h t w e i g h t , z e r o - i n i t i a l i z e d l i n e a r b r i d g e s t r a i n e d d i r e c t l y w i t h t a s k r e w a r d s a n d"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.06976",
-          "quote": "P L a t o u r s i g n i f i c a n t l y o u t p e r f o r m s o p e n - s o u r c e b a s e l i n e s o n g e n e r a t i o n t a s k s a n d s u r p a s s e s M o s t i k ' s r e p o r t e d r e s u l t s o n s h a r e d m a t h e m a t i c s a n d c o d i n g b e n c h m a r k s u s i n g a s u b"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.06976",
-          "quote": "s t a n t i a l l y s m a l l e r s e n d e r ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.06976",
-          "quote": "H o w e v e r , c o n t r o l l e d e x p e r i m e n t s s h o w t h a t t h e g a i n s o n s o m e t a s k s c a n b e r e p r o d u c e d b y u n i n f o r m a t i v e s e n d e r s i g n a l s , s e l f - c o m m u n i c a t i o n , o r r e c e i v e r - o n l y t r a i n i n g ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.06976",
-          "quote": "W e f i n d t h a t t r a i n a b l e b r i d g e s c a n a c t a s p a r a m e t e r - e f f i c i e n t a d a p t a t i o n m e c h a n i s m s w i t h o u t e x p l o i t i n g u s e f u l s e n d e r i n f o r m a t i o n ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.06976",
-          "quote": "W e t h e r e f o r e p r o p o s e P A C T - C h e c k t o q u a n t i f y h o w m u c h o f a t r a i n e d P A C T s y s t e m ' s g a i n g e n u i n e l y c o m e s f r o m c o m m u n i c a t i o n ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.06976",
-          "quote": "We introduce PLatour, a simple and scalable framework that connects frozen models through lightweight linear bridges trained directly with reinforcement learning."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.06976",
-          "quote": "It also supports hybrid-attention architectures."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.06976",
-          "quote": "Using a 35B sender, it also exceeds Mostik AI’s reported results on shared math and coding benchmarks, compared with Mostik's 753B sender—although the training setups may differ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.06976",
-          "quote": "To examine this systematically, we introduce PACT-Check."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.06976",
-          "quote": "PACT-Score measures the accuracy margin over the strongest applicable control."
-        }
-      ]
-    },
-    {
-      "section": "model",
-      "title": "EvoMemState adds relational and reasoning states to agent memory",
-      "summary": "EvoMemState augments persistent facts with Relational States that track how facts stay valid and relate to one another, plus a Reasoning State for the current request. Experiments on long-term dialogue and memory-use benchmarks show consistent improvements over existing memory systems in retrieval completeness and memory-grounded response accuracy.",
-      "tags": [
-        "Agent",
-        "论文"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_96428f7295",
-          "url": "https://huggingface.co/papers/2611.03743"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2611.03743",
-          "quote": "I n t h i s p a p e r , w e i n t r o d u c e E v o M e m S t a t e , a s t a t e - c e n t r i c f r a m e w o r k t h a t a u g m e n t s p e r s i s t e n t f a c t s w i t h t w o c o m p l e m e n t a r y s t a t e s : R e l a t i o n a l S t a t e s t h a t c a p t u r e h o w f a c t s r e m"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.03743",
-          "quote": "a i n v a l i d a n d r e l a t e t o o n e a n o t h e r a s m e m o r y e v o l v e s , a n d a R e a s o n i n g S t a t e t h a t d e t e r m i n e s h o w t h e s e f a c t s s h o u l d b e a p p l i e d t o t h e c u r r e n t r e q u e s t ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.03743",
-          "quote": "S p e c i f i c a l l y , E v o M e m S t a t e c o n s i s t s o f t h r e e k e y c o m p o n e n t s : ( i ) O n t o l o g y - G u i d e d M e m o r y S t a t e I n d u c t i o n e x t r a c t s P e r s i s t e n t F a c t s a n d c o n s t r u c t s R e l a t i o n a l S t a t e s t h a t m a i"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.03743",
-          "quote": "n t a i n t h e i r v a l i d i t y , s c o p e , a n d e v o l v i n g r e l a t i o n s ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.03743",
-          "quote": "( i i ) R L - B a s e d S t a t e E v o l u t i o n i n t e r n a l i z e s m e m o r y - u s e e x p e r i e n c e i n t o a p o l i c y t h r o u g h r e i n f o r c e m e n t l e a r n i n g t o g e n e r a t e a r e q u e s t - s p e c i f i c R e a s o n i n g S t a t e ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.03743",
-          "quote": "( i i i ) S t a t e - A w a r e R e a s o n i n g t h e n c o m b i n e s t h e r e l e v a n t f a c t s w i t h t h e i r R e l a t i o n a l S t a t e s a n d t h e g e n e r a t e d R e a s o n i n g S t a t e t o g u i d e t h e p e r s o n a l a g e n t ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.03743",
-          "quote": "E x t e n s i v e e x p e r i m e n t s o n l o n g - t e r m d i a l o g u e a n d m e m o r y - u s e b e n c h m a r k s d e m o n s t r a t e c o n s i s t e n t i m p r o v e m e n t s o v e r e x i s t i n g m e m o r y s y s t e m s i n r e t r i e v a l c o m p l e t e n e s s a n d m e m o"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.03743",
-          "quote": "Extensive experiments on long-term dialogue and memory-use benchmarks demonstrate consistent improvements over existing memory systems in retrieval completeness and memory-grounded response accuracy."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.03743",
-          "quote": "Our code and implementation details are available at https://github.com/XMUDeepLIT/EvoMemState.git ."
-        }
       ]
     },
     {
       "section": "paper",
-      "title": "BestRand stabilizes benchmark compression with lower error",
-      "summary": "BestRand preserves the efficiency of random sampling while substantially reducing its high-error tail, which the authors show is inherent to modern foundation models. Validated on 70+ text, multimodal, and agent benchmarks, it reduces high-error risk by 50.2% and estimation error by 16.4% on average while requiring only 51.3% of the construction cost.",
+      "title": "VFlash decodes whole visual plans in one forward pass",
+      "summary": "Instead of generating boxes and trajectories one coordinate token at a time, VFlash uses a lightweight drafter that generates an entire primitive in one forward pass and directly accepts structurally valid predictions. Preliminary measurements show approximately 25x faster generation for 3D point motion forecasting, and a world action model conditioned on VFlash plans reaches 70.2% average success on MolmoSpaces versus 62.6% for the baseline. Systems that use VLMs for spatial planning in robotics or driving can cut decoding latency this way.",
+      "sources": [
+        {
+          "candidate_id": "c_a5946317f4",
+          "url": "https://huggingface.co/papers/2611.08449"
+        }
+      ],
+      "evidence": [],
       "tags": [
         "论文",
-        "工具"
+        "多模态",
+        "推理"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Harness-S trains agents by rescuing failures with sibling harnesses",
+      "summary": "Harness-S evolves a pool of sibling harnesses that repair different failures, and only when all attempts under the base harness fail does the policy roll out again under selected siblings, with those trajectories replacing the failed group for reinforcement learning. Across AppWorld, SWE-Gym and DBBench, the trained policy substantially outperforms policy-only training when returned to the original base harness. Agent RL teams can fold harness improvements into the model itself.",
+      "sources": [
+        {
+          "candidate_id": "c_7da5db721b",
+          "url": "https://huggingface.co/papers/2611.04277"
+        }
       ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.04277",
+          "quote": "Across AppWorld, SWE-Gym, and DBBench, the trained policy substantially outperforms policy-only training when returned to the original base harness."
+        }
+      ],
+      "tags": [
+        "论文",
+        "Agent",
+        "训练"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "BestRand makes benchmark compression stable and cheap",
+      "summary": "The paper shows that estimating full-benchmark scores from random subsets usually gives small errors but has a long tail of large ones, and proposes BestRand to cut that tail. Across 70+ text, multimodal and agent benchmarks, it reduces high-error risk by 50.2% and estimation error by 16.4% on average while requiring only 51.3% of the construction cost of competing methods. Teams on a tight eval budget can use it to pick small subsets instead of running full benchmarks.",
       "sources": [
         {
           "candidate_id": "c_a4f95935e3",
@@ -567,116 +291,65 @@
       "evidence": [
         {
           "url": "https://huggingface.co/papers/2611.00883",
-          "quote": "T o q u a n t i f y e s t i m a t i o n e r r o r , w e d e r i v e a n a c c u r a t e a n a l y t i c a l a p p r o x i m a t i o n t o t h e e r r o r d i s t r i b u t i o n w h e n e s t i m a t i n g f u l l - b e n c h m a r k s c o r e s f r o m a s u b s e t , s h o w i n g t h a t m o s t"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.00883",
-          "quote": "s u b s e t s y i e l d s m a l l e r r o r s , w h i l e a f e w p r o d u c e m u c h l a r g e r e r r o r s , r e s u l t i n g i n a l o n g - t a i l e d d i s t r i b u t i o n ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.00883",
-          "quote": "T h i s m e a n s r a n d o m s a m p l i n g a l o n e c a n a c h i e v e s u r p r i s i n g l y s t r o n g p e r f o r m a n c e w i t h h i g h p r o b a b i l i t y , b u t r e m a i n s u n s t a b l e d u e t o r a r e l a r g e e r r o r s ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.00883",
-          "quote": "W e f u r t h e r s h o w t h a t t h i s i n s t a b i l i t y i s i n h e r e n t t o m o d e r n f o u n d a t i o n m o d e l s a n d p e r s i s t s e v e n a s m o r e m o d e l s a r e e v a l u a t e d ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.00883",
-          "quote": "B a s e d o n t h e s e f i n d i n g s , w e i n t r o d u c e B e s t R a n d , a s t a b l e a n d l o w - c o s t b e n c h m a r k c o m p r e s s i o n m e t h o d t h a t p r e s e r v e s t h e e f f i c i e n c y o f r a n d o m s a m p l i n g w h i l e s u b s t a n t i a l l y r e d u c"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.00883",
-          "quote": "i n g i t s h i g h - e r r o r t a i l ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.00883",
-          "quote": "W e v a l i d a t e B e s t R a n d o n 7 0 + t e x t , m u l t i m o d a l , a n d a g e n t b e n c h m a r k s , a n d f u r t h e r e x t e n d i t t o V L A e v a l u a t i o n ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.00883",
-          "quote": "C o m p a r e d w i t h c o m p e t i t i v e m e t h o d s , B e s t R a n d r e d u c e s h i g h - e r r o r r i s k b y 5 0 ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.00883",
-          "quote": "2 % a n d e s t i m a t i o n e r r o r b y 1 6 ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.00883",
-          "quote": "4 % o n a v e r a g e , w h i l e r e q u i r i n g o n l y 5 1 ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.00883",
-          "quote": "3 % o f t h e c o n s t r u c t i o n c o s t ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.00883",
-          "quote": "I t f u r t h e r r e d u c e s O O D e s t i m a t i o n e r r o r b y 2 1 ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.00883",
-          "quote": "8 % o n a v e r a g e a c r o s s s c o r e - r a n g e , m o d e l - f a m i l y , a n d t e m p o r a l s h i f t s ."
+          "quote": "Across 70+ benchmarks, BestRand reduces high-error risk by 50.2% and estimation error by 16.4%, while requiring only 51.3% of the construction cost of competing methods."
         }
-      ]
-    },
-    {
-      "section": "paper",
-      "title": "VisSearch-Bench tests long-horizon visual search in agents",
-      "summary": "VisSearch-Bench contains 204 human-written tasks across 7 main domains and 25 subdomains, covering Set-wise Visual Search, Sequential Visual Search, Hybrid Wide-Deep Search, Competitive Visual Disambiguation, and Visual-Structure-Guided Search. Across 16 multimodal models, the best system fully solves only 26.47% of tasks even with search tools.",
+      ],
       "tags": [
         "论文",
-        "多模态",
-        "Agent"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_eebbb6a390",
-          "url": "https://huggingface.co/papers/2611.04894"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2611.04894",
-          "quote": "We therefore focus on visual context management ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.04894",
-          "quote": "Visually intensive tasks require agents to combine object appearance, local details, or spatial relations with external information."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.04894",
-          "quote": "We introduce VisSearch-Bench , with 204 human-written tasks across 7 main domains and 25 subdomains."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.04894",
-          "quote": "It covers Set-wise Visual Search , Sequential Visual Search , Hybrid Wide-Deep Search , Competitive Visual Disambiguation , and Visual-Structure-Guided Search ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.04894",
-          "quote": "Each task provides a reference answer, traceable evidence, and scoring rules."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.04894",
-          "quote": "Accuracy measures complete task success, while Process Score measures the correctness and completeness of individual results and subquestion answers."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.04894",
-          "quote": "Across 16 multimodal models , the best system fully solves only 26.47% of tasks, even with search tools ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.04894",
-          "quote": "These results highlight the challenge of linking visual evidence with search results to produce complete answers."
-        }
+        "训练"
       ]
     },
     {
       "section": "tool",
-      "title": "Apple trains small networks to speed up maximum inner product search",
-      "summary": "Researchers from Apple train small neural networks offline for a fixed database of keys to route queries toward their best match faster. Two specialized designs are used, the SupportNet architecture learning the support function directly with a loosely constrained ICNN, and KeyNet learning to output the best-matching key vector, with a consistency loss derived from Euler's theorem keeping predictions grounded in the support function.",
+      "title": "Claude Code v2.1.319 runs MCP tasks in the background",
+      "summary": "When an MCP server runs a tool call as a task, Claude Code now moves it to the background right away and tells Claude the result when it finishes, and a new permissions.denyInsteadOfPrompting setting denies tool calls that would wait on a permission prompt so the turn continues. Auto mode also changed with telemetry or feature flags off: calls the server can't check are asked about or denied, with no fallback to the built-in classifier. Teams running Claude Code behind gateways or unattended should review these behavior changes before upgrading.",
+      "sources": [
+        {
+          "candidate_id": "c_7754da829e",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.319"
+        }
+      ],
+      "evidence": [],
       "tags": [
         "工具",
-        "论文"
+        "代码",
+        "Agent"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "llama.cpp merges Kimi-K3.1-Pro text model support",
+      "summary": "llama.cpp merged PR #31779, adding text support for Kimi-K3.1-Pro; K3.1 reuses most of K3 but replaces the full-attention MLA layers with DSA. The vision tower and mm_projector are skipped for now, so it is text only. Users with enough hardware can now run the model locally with llama.cpp.",
+      "sources": [
+        {
+          "candidate_id": "c_d59e83ece9",
+          "url": "https://github.com/ggml-org/llama.cpp/pull/31779"
+        }
       ],
+      "evidence": [
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/pull/31779",
+          "quote": "K3.1 reuses most of K3, but replaces the full-attention MLA layers with DSA."
+        },
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/pull/31779",
+          "quote": "the vision tower and mm_projector are skipped: text only for now"
+        },
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/pull/31779",
+          "quote": "ngxson merged commit bcb0152 into ggml-org : master Nov 6, 2026"
+        }
+      ],
+      "tags": [
+        "开源",
+        "推理",
+        "工具"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Apple speeds up RAG retrieval with small learned networks",
+      "summary": "In an ICML 2026 paper, Apple researchers train small neural networks once, offline, for a fixed database of keys so queries are routed toward their best match faster: SupportNet handles cluster routing, and KeyNet can act as a query rewriter in front of a standard IVF index. Reaching 99% recall takes up to ~8× less time with the largest KeyNet model (0.23 ms vs 1.8 ms). RAG and recommendation systems with a fairly stable key set can trade offline training for lower query latency.",
       "sources": [
         {
           "candidate_id": "c_f49a26309d",
@@ -686,265 +359,105 @@
       "evidence": [
         {
           "url": "https://machinelearning.apple.com/research/faster-retrieval",
-          "quote": "content type highlight published November 5, 2026 Faster Retrieval for Better, More Efficient RAG Maximum inner product search (MIPS) sits at the core of recommendation systems, search, and retrieval-augmented generation (RAG)."
-        },
-        {
-          "url": "https://machinelearning.apple.com/research/faster-retrieval",
-          "quote": "As the number of keys grows to millions and vector dimensions reach thousands, the computational cost of running an exhaustive comparison of the query to all keys grows dramatically."
-        },
-        {
-          "url": "https://machinelearning.apple.com/research/faster-retrieval",
           "quote": "In Amortizing Maximum Inner Product Search with Learned Support Functions , a paper presented at ICML 2026, researchers from Apple train small neural networks (NNs) — once, offline, for a fixed database of keys — that learn how to route queries toward their best match faster."
         },
         {
           "url": "https://machinelearning.apple.com/research/faster-retrieval",
-          "quote": "Their approach trades off an upfront amortization cost to understand how typical queries tend to be matched in exchange for faster, more accurate retrieval at inference time through these small NNs."
+          "quote": "The SupportNet neural network architecture can learn the support function directly"
         },
         {
           "url": "https://machinelearning.apple.com/research/faster-retrieval",
-          "quote": "This function has two important properties: First, it is convex, so it can be approximated by a class of neural networks specifically designed for convex functions, input convex neural networks (ICNNs) ."
+          "quote": "KeyNet works naturally as a “query rewriter” in front of a standard approximate search index"
         },
         {
           "url": "https://machinelearning.apple.com/research/faster-retrieval",
-          "quote": "Second, the gradient of that support function at any query returns the best-matching key itself."
+          "quote": "reaching 99% recall takes up to ~8× less time with the largest model (0.23 ms vs 1.8 ms for the raw query)"
         },
         {
           "url": "https://machinelearning.apple.com/research/faster-retrieval",
-          "quote": "In practice, we observe that training separate, specialized networks for each of these two tasks works best:"
-        },
-        {
-          "url": "https://machinelearning.apple.com/research/faster-retrieval",
-          "quote": "The SupportNet neural network architecture can learn the support function directly, using a (loosely constrained) ICNN."
-        },
-        {
-          "url": "https://machinelearning.apple.com/research/faster-retrieval",
-          "quote": "KeyNet models learn to directly output the best-matching key vector when fed a query."
-        },
-        {
-          "url": "https://machinelearning.apple.com/research/faster-retrieval",
-          "quote": "A consistency loss derived from Euler’s theorem for homogeneous functions keeps their predictions geometrically grounded in the underlying support function, even though no convexity is explicitly enforced."
-        },
-        {
-          "url": "https://machinelearning.apple.com/research/faster-retrieval",
-          "quote": "Both models are trained on examples drawn from the relevant query distribution: for each sampled query, the ground-truth best match is computed once via exhaustive search and stored, creating a supervised dataset that captures the MIPS solution landscape for the distribution of queries that actually"
-        },
-        {
-          "url": "https://machinelearning.apple.com/research/faster-retrieval",
-          "quote": "Leaning on this theoretical insight, we propose to learn these k support functions jointly with a trained SupportNet that can output k scores at once."
-        },
-        {
-          "url": "https://machinelearning.apple.com/research/faster-retrieval",
-          "quote": "We can then use the largest of these k scores to route any new query instead."
+          "quote": "With KeyNet, we can also keep the IVF system as is and just feed it a modified version of the query."
         }
-      ]
-    },
-    {
-      "section": "tool",
-      "title": "ToyBlocks provides a controlled simulation world for robot learning",
-      "summary": "ToyBlocks is an open simulation framework built around a robot arm and blocks on a tabletop, automatically generating skills and task demonstrations without teleoperation. It scales data generation by running hundreds of plans in parallel on a single GPU, reaching up to 24 times real-time performance, and its evaluation reports execution speeds, forces exerted on objects, and task progress.",
+      ],
       "tags": [
-        "开源",
-        "工具",
-        "多模态"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_d9e0f4b741",
-          "url": "https://huggingface.co/blog/allenai/toyblocks"
-        },
-        {
-          "candidate_id": "c_402b883388",
-          "url": "https://allenai.org/blog/toyblocks"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/blog/allenai/toyblocks",
-          "quote": "Today we're introducing a framework for creating these environments; we call them FoundationWorlds."
-        },
-        {
-          "url": "https://huggingface.co/blog/allenai/toyblocks",
-          "quote": "Each pairs a controlled, simulated world targeted at studying robotics in a specific environment with tools for automatically generating tasks and training demonstrations, as well as metrics for measuring a robot's behavior over time."
-        },
-        {
-          "url": "https://huggingface.co/blog/allenai/toyblocks",
-          "quote": "Our first foundation world is ToyBlocks : an open simulation framework built around a robot arm and blocks on a tabletop."
-        },
-        {
-          "url": "https://huggingface.co/blog/allenai/toyblocks",
-          "quote": "ToyBlocks automatically generates demonstrations, which are recordings of a robot completing tasks in simulation, without requiring time-consuming teleoperation, in which a person remotely controls the robot."
-        },
-        {
-          "url": "https://huggingface.co/blog/allenai/toyblocks",
-          "quote": "As a FoundationWorld, ToyBlocks is designed around four requirements: (1) realistic physics and appearance, (2) automatic generation of tasks and demonstrations at scale, (3) challenges that combine reasoning with dexterity, and (4) broad coverage of the tasks possible within a domain."
-        },
-        {
-          "url": "https://huggingface.co/blog/allenai/toyblocks",
-          "quote": "ToyBlocks automatically generates skills (behaviors for short tasks) and task demonstrations that can be used to train models or adapt previously trained models through additional training (fine-tuning)."
-        },
-        {
-          "url": "https://huggingface.co/blog/allenai/toyblocks",
-          "quote": "ToyBlocks uses reinforcement learning (RL) and motion planning, which computes how the robot should move, to generate skills for short-horizon tasks, which involve brief sequences of actions."
-        },
-        {
-          "url": "https://huggingface.co/blog/allenai/toyblocks",
-          "quote": "Skill training takes place in Isaac Lab, Nvidia's open-source framework for robot learning in simulation."
-        },
-        {
-          "url": "https://huggingface.co/blog/allenai/toyblocks",
-          "quote": "To generate demonstration data, a task-and-motion planner (TAMP) automatically selects and sequences the skills needed to solve a task and plans the robot’s movements between them."
-        },
-        {
-          "url": "https://huggingface.co/blog/allenai/toyblocks",
-          "quote": "Running each plan in simulation produces a dataset of recorded demonstrations along with labels describing which task or skill the robot performs."
-        },
-        {
-          "url": "https://huggingface.co/blog/allenai/toyblocks",
-          "quote": "ToyBlocks scales data generation through generating and executing hundreds of such plans in parallel on a single graphics processing unit (GPU), reaching up to 24 times real-time performance."
-        },
-        {
-          "url": "https://huggingface.co/blog/allenai/toyblocks",
-          "quote": "Execution of Molmo 2 (a high-level model) and ManiFlow (a low-level model) trained in ToyBlocks."
-        },
-        {
-          "url": "https://huggingface.co/blog/allenai/toyblocks",
-          "quote": "Molmo 2 selects skills such as rotation and flipping, indicating the relevant block via a pointing interface, while ManiFlow controls the simulated arm to execute the commanded skills."
-        },
-        {
-          "url": "https://huggingface.co/blog/allenai/toyblocks",
-          "quote": "Importantly, evaluation of trained models generates metrics beyond success rates; it provides information such as execution speeds, forces exerted on objects, and task progress measured via the same specifications used by the planning module."
-        },
-        {
-          "url": "https://huggingface.co/blog/allenai/toyblocks",
-          "quote": "A webpage interface lets users connect Claude – or another frontier model – and use natural language to instruct the robot or try tasks, offering a way to explore how a model plans and acts without needing robotics expertise."
-        }
-      ]
-    },
-    {
-      "section": "tool",
-      "title": "Transformers releases patch v5.22.2 with security and distributed fixes",
-      "summary": "Patch release v5.22.2 bundles security and distributed fixes. It sets device_id only for NCCL and hardens Jinja sandboxing.",
-      "tags": [
-        "开源",
-        "安全",
-        "工具"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_0d3ad536d8",
-          "url": "https://github.com/huggingface/transformers/releases/tag/v5.22.2"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://github.com/huggingface/transformers/releases/tag/v5.22.2",
-          "quote": "Patch release v5.22.2"
-        },
-        {
-          "url": "https://github.com/huggingface/transformers/releases/tag/v5.22.2",
-          "quote": "Some in between patch for security and distributed fixes."
-        },
-        {
-          "url": "https://github.com/huggingface/transformers/releases/tag/v5.22.2",
-          "quote": "[Distributed] Set device_id only for NCCL ( #50281 ) by @michaelbenayoun and @3outeille"
-        },
-        {
-          "url": "https://github.com/huggingface/transformers/releases/tag/v5.22.2",
-          "quote": "Harden our Jinja sandboxing ( #50431 ) by @Rocketknight1"
-        }
+        "论文",
+        "推理"
       ]
     },
     {
       "section": "brief",
-      "title": "LangGraph CLI and SDK publish new releases",
-      "summary": "langgraph-cli==0.4.42 adds a deploy metrics command and bumps filelock and langgraph-api for security fixes. langgraph-sdk==0.4.14 adds strict resume to runs.create, stream and wait, plus tools and lifecycle to StreamMode.",
-      "tags": [
-        "工具",
-        "Agent"
-      ],
+      "title": "Anthropic studies how scientists use Claude",
+      "summary": "Analyzing 207,000 research sessions, Anthropic finds scientists primarily use Claude to analyze data and to write, and computer science accounts for 32.7% of Claude Code sessions.",
       "sources": [
         {
-          "candidate_id": "c_9773a78a2e",
-          "url": "https://github.com/langchain-ai/langgraph/releases/tag/cli%3D%3D0.4.42"
-        },
-        {
-          "candidate_id": "c_c7ae563dd8",
-          "url": "https://github.com/langchain-ai/langgraph/releases/tag/sdk%3D%3D0.4.14"
+          "candidate_id": "c_911df70d08",
+          "url": "https://www.anthropic.com/research/how-researchers-use-claude"
         }
       ],
       "evidence": [
         {
-          "url": "https://github.com/langchain-ai/langgraph/releases/tag/cli%3D%3D0.4.42",
-          "quote": "Changes since cli==0.4.41"
+          "url": "https://www.anthropic.com/research/how-researchers-use-claude",
+          "quote": "Scientists primarily use Claude to analyze data and to write."
         },
         {
-          "url": "https://github.com/langchain-ai/langgraph/releases/tag/cli%3D%3D0.4.42",
-          "quote": "release(cli): 0.4.42 ( #9611 )"
-        },
-        {
-          "url": "https://github.com/langchain-ai/langgraph/releases/tag/cli%3D%3D0.4.42",
-          "quote": "feat(cli): add deploy metrics command ( #9479 )"
-        },
-        {
-          "url": "https://github.com/langchain-ai/langgraph/releases/tag/cli%3D%3D0.4.42",
-          "quote": "chore(deps): bump filelock and langgraph-api for security fixes ( #9606 )"
+          "url": "https://www.anthropic.com/research/how-researchers-use-claude",
+          "quote": "Despite making up only 4.3% of the world’s researchers, computer science alone accounts for 32.7% of Claude Code sessions."
         }
+      ],
+      "tags": [
+        "行业"
       ]
     },
     {
       "section": "brief",
-      "title": "Open ASR Leaderboard adds Egyptian and Nigerian English",
-      "summary": "A new collaboration with Liva AI adds two more accents to the Open ASR Leaderboard, with the private datasets Liva AI Conversational EG and Liva AI Conversational NG.",
-      "tags": [
-        "语音",
-        "工具"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_112f9c7e11",
-          "url": "https://huggingface.co/blog/open-asr-leaderboard-liva"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/blog/open-asr-leaderboard-liva",
-          "quote": "We’re excited to announce a new collaboration with Liva AI to add even more private data with two new accents: Egyptian 🇪🇬 and Nigerian 🇳🇬."
-        },
-        {
-          "url": "https://huggingface.co/blog/open-asr-leaderboard-liva",
-          "quote": "Liva AI Conversational EG"
-        },
-        {
-          "url": "https://huggingface.co/blog/open-asr-leaderboard-liva",
-          "quote": "Liva AI Conversational NG"
-        }
-      ]
-    },
-    {
-      "section": "brief",
-      "title": "OpenAI introduces BioBasicsBench for wet-lab science agents",
-      "summary": "OpenAI introduces BioBasicsBench, a 100-task benchmark measuring how well AI agents interpret raw experimental data and handle everyday wet-lab science.",
-      "tags": [
-        "Agent",
-        "论文"
-      ],
+      "title": "OpenAI introduces the BioBasicsBench wet-lab benchmark",
+      "summary": "OpenAI's BioBasicsBench is a 100-task benchmark measuring how well AI agents interpret raw experimental data and handle everyday wet-lab science.",
       "sources": [
         {
           "candidate_id": "c_18f7bd5e51",
           "url": "https://openai.com/index/measuring-how-ai-agents-handle-wet-lab-science"
         }
       ],
-      "evidence": []
+      "evidence": [],
+      "tags": [
+        "Agent"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "WeLM-Image unifies image generation for single-GPU deployment",
+      "summary": "WeLM-Image combines multimodal understanding with text-to-image generation, instruction-guided editing and multi-reference synthesis, with 31.7B stored parameters and approximately 5.4B generation parameters activated per target latent token.",
+      "sources": [
+        {
+          "candidate_id": "c_044151e747",
+          "url": "https://huggingface.co/papers/2611.07392"
+        }
+      ],
+      "evidence": [],
+      "tags": [
+        "论文",
+        "图像"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "Meta adds spaces to the Muse app",
+      "summary": "Meta's new spaces let Muse users describe an idea and have Muse build a custom experience they can keep adjusting as they use it.",
+      "sources": [
+        {
+          "candidate_id": "c_87b926f4b8",
+          "url": "https://about.fb.com/news/2026/11/introducing-spaces-customize-muse-app/"
+        }
+      ],
+      "evidence": [],
+      "tags": [
+        "产品"
+      ]
     }
   ],
   "research": [
     {
       "via": "webfetch",
-      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.319"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://openai.com/index/measuring-how-ai-agents-handle-wet-lab-science"
+      "url": "https://www.perplexity.ai/en-GB/hub/blog/teammates-are-agents-for-complex-ongoing-work"
     },
     {
       "via": "webfetch",
@@ -952,7 +465,7 @@
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.07854"
+      "url": "https://openai.com/index/measuring-how-ai-agents-handle-wet-lab-science"
     },
     {
       "via": "webfetch",
@@ -960,47 +473,11 @@
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.08373"
+      "url": "https://mistral.ai/news/build-with-studio/"
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.08449"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.07392"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.06741"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.04277"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.06976"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.04894"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.03743"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.00883"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.06817"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/blog/allenai/toyblocks"
+      "url": "https://devblogs.microsoft.com/foundry/foundry-local-agentic-coding-qwen3-8-27b/"
     },
     {
       "via": "webfetch",
@@ -1008,43 +485,58 @@
     },
     {
       "via": "webfetch",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31779"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.07854"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.04277"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.00883"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.08449"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.08373"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/blog/allenai/toyblocks"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/Linum-AI/pjit-21k"
+    },
+    {
+      "via": "webfetch",
       "url": "https://www.anthropic.com/research/how-researchers-use-claude"
     },
     {
-      "via": "webfetch",
-      "url": "https://github.com/huggingface/transformers/releases/tag/v5.22.2"
+      "via": "websearch",
+      "query": "Cactus Compute Mirage 22 MB vision language model"
     },
     {
-      "via": "webfetch",
-      "url": "https://huggingface.co/blog/open-asr-leaderboard-liva"
+      "via": "websearch",
+      "query": "Hugging Face blog \"harness adapters\" LoRA"
     },
     {
-      "via": "webfetch",
-      "url": "https://github.com/langchain-ai/langgraph/releases/tag/cli%3D%3D0.4.42"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://latent.space/p/controlling-biology-fabian-theis-helmholtz-munich/"
+      "via": "websearch",
+      "query": "Boson AI \"Higgs Realtime Duplex\""
     }
   ],
   "lang": "en",
   "validation": {
-    "validated_at": "2026-11-07T04:43:51+00:00",
+    "validated_at": "2026-11-07T04:45:55+00:00",
     "checked_links": false,
-    "dropped": [
-      {
-        "title": "Anthropic studies how researchers use Claude in science",
-        "section": "brief",
-        "candidates": [
-          "c_911df70d08"
-        ],
-        "reasons": [
-          "summary longer than 250 characters"
-        ]
-      }
-    ],
-    "warnings": [
-      "6 headline items (target 3-5)"
-    ]
+    "dropped": [],
+    "warnings": []
   }
 }

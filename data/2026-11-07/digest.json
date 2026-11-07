@@ -2,23 +2,18 @@
   "schema_version": 1,
   "date": "2026-11-07",
   "mode": "full",
-  "generated_at": "2026-11-07T04:42:47+00:00",
-  "channel": "api",
-  "model": "nvidia:minimaxai/minimax-m3.1-flash",
+  "channel": "claude",
+  "generated_at": "2026-11-07T04:45:01+00:00",
+  "model": "claude-opus-5-5",
   "highlights": [
-    "Anthropic 提出用「dreaming」整理 Agent 记忆，并用 Pokémon Red、CL-Bench 等任务评估不同模型写入记忆的方式。",
-    "NVIDIA 的 VFlash 用 Flash Primitive Decoding 联合预测视觉图元，3D 轨迹生成速度约 25 倍，配套世界动作模型在 MolmoSpaces 四个任务集上平均成功率 70.2%。",
-    "Cloudflare 开源 security-audit-skill：把安全审计拆成六个阶段，用独立 agent 复核发现并输出机器可读结果。"
+    "Anthropic 介绍 Agent 记忆的分层和 dreaming 离线整理；Mistral Studio 新增 managed agents、workflows 和 Mistral MCP server。",
+    "Cloudflare 以 MIT 许可开源安全审计 skill；微软 Foundry Local 能在 24 GB 显存的显卡上本地运行 Qwen3.8-27B 并接入 GitHub Copilot。"
   ],
   "items": [
     {
       "section": "headline",
-      "title": "Anthropic 探索用「dreaming」整理 Agent 记忆",
-      "summary": "Anthropic 研究了 Agent 记忆的组成：Agent 把日志整理成笔记、标记重要事件，再在空闲时通过「dreaming」反思日志、修正错误并组织记忆。评测显示，不同模型判断什么值得记住的能力差异明显——在 Pokémon Red 中，Claude Fable 5 只写了九个文件、四个文件夹，却拿到四个徽章，而 Claude Sonnet 3.7 写了 413 个记忆文件、225 个文件夹，只拿到一个徽章。这给做长期记忆的开发者一个直接抓手：记忆质量取决于判断和取舍，而非记得更多。",
-      "tags": [
-        "Agent",
-        "论文"
-      ],
+      "title": "Anthropic 详解 Agent 记忆分层与 dreaming",
+      "summary": "Anthropic 的研究文章介绍了 dreaming：Agent 离线回看日志，修正记忆里的错误、生成新的笔记和表示。实验在 Claude Managed Agents 上进行；在一项测试中，同时用搜索和 wiki 时 Claude 的得分随 wiki 增长从 54% 升到 61%，只用搜索为 53%，每题还省下约 20,000 tokens。构建长期运行 Agent 的开发者可以参考这套记忆分层和定期整理的思路。",
       "sources": [
         {
           "candidate_id": "c_b44ca4f50a",
@@ -28,104 +23,64 @@
       "evidence": [
         {
           "url": "https://www.anthropic.com/research/components-of-agent-memory",
-          "quote": "In this post, we share how we’ve come to think about agent memory and walk through several evaluations we’ve used to explore agent memory, including the use of dreaming, and what each component contributes to memory organization."
+          "quote": "The same idea can help agents organize their memory by reflecting on logs to fix mistakes or produce new notes and representations. This process is often called dreaming (Figure 1)."
         },
         {
           "url": "https://www.anthropic.com/research/components-of-agent-memory",
-          "quote": "Memory notes By “agent memory,” we mean knowledge that Claude gains from experience—including interactions with users and tasks it’s been assigned—and that it retains between sessions, saved as context it can read later."
+          "quote": "We ran the CL-Bench 1.0 task using Claude Managed Agents ."
         },
         {
           "url": "https://www.anthropic.com/research/components-of-agent-memory",
-          "quote": "Similarly, Claude can tag salient events in a session log as they happen, so they’re easier to find later, or it can write them to a memory store, such as a folder of memory notes (Figure 2)."
+          "quote": "When it used both search and the wiki, Claude’s aggregate score rose from 54% to 61% as that wiki grew, compared with 53% when it had access to the search tool alone."
         },
         {
           "url": "https://www.anthropic.com/research/components-of-agent-memory",
-          "quote": "If Claude gets a question wrong, it can record the failure, come up with theories about what went wrong, test those theories, and turn what it finds into a rule about how to answer in the future."
-        },
-        {
-          "url": "https://www.anthropic.com/research/components-of-agent-memory",
-          "quote": "Like Opus 5, Claude Opus 5.5 and Claude Sonnet 5.5 both closed the loop, using memory to capture validated rules about how to best answer future questions."
-        },
-        {
-          "url": "https://www.anthropic.com/research/components-of-agent-memory",
-          "quote": "We compared the memory folders from one run each of Claude Sonnet 3.7 and Claude Fable 5, when each was about 10,000 steps into the game."
-        },
-        {
-          "url": "https://www.anthropic.com/research/components-of-agent-memory",
-          "quote": "Ultimately, Sonnet 3.7 wrote 413 memory files across 225 folders and earned one badge (badges mark a player’s progress through the game)."
-        },
-        {
-          "url": "https://www.anthropic.com/research/components-of-agent-memory",
-          "quote": "Fable 5, by comparison, wrote nine files in two folders, plus a single top-level file called global.md , and earned four badges."
-        },
-        {
-          "url": "https://www.anthropic.com/research/components-of-agent-memory",
-          "quote": "Fable 5’s approach used memory for things the game didn’t explicitly tell it."
-        },
-        {
-          "url": "https://www.anthropic.com/research/components-of-agent-memory",
-          "quote": "Its global.md file acted as a dashboard, holding the current goal, a prewritten plan for tackling gyms (the challenges where badges are won), and the model’s own rules for using memory."
+          "quote": "Using search and the wiki also saved about 20,000 tokens per question."
         }
+      ],
+      "tags": [
+        "Agent",
+        "产品"
       ]
     },
     {
       "section": "headline",
-      "title": "NVIDIA 提出 VFlash 视觉规划解码，3D 轨迹生成约 25 倍加速",
-      "summary": "NVIDIA 等团队提出 VFlash，用轻量 drafter 一次前向联合预测整个视觉图元（点、框、轨迹），不再逐坐标 token 自回归解码。在评测的 2D 和 3D 机器人轨迹任务上预测误差持续低于自回归解码，初步单次 rollout 测量显示 3D 点运动预测生成约快 25 倍。以 VFlash 规划为条件的世界动作模型在四个 MolmoSpaces 任务集上平均成功率 70.2%，基线为 62.6%。",
-      "tags": [
-        "论文",
-        "多模态"
-      ],
+      "title": "Mistral Studio 新增托管 Agent、工作流和 MCP 服务器",
+      "summary": "Mistral 更新 Studio 平台，新增 managed agents、workflows 和 enterprise context 等功能，模型和平台可以部署在云、自有 VPC 或本地环境。新的 Mistral MCP server 让开发者用 Mistral Vibe 或现有编码 Agent 在本地测试，再用一条命令部署到 Studio；OpenTelemetry trace 记录每一步的模型调用、工具调用和审批。需要私有化部署 Agent 的企业团队，在模型之外多了一套运行、部署和排查工具。",
       "sources": [
         {
-          "candidate_id": "c_a5946317f4",
-          "url": "https://huggingface.co/papers/2611.08449"
+          "candidate_id": "c_450b47c5db",
+          "url": "https://mistral.ai/news/build-with-studio/"
         }
       ],
       "evidence": [
         {
-          "url": "https://huggingface.co/papers/2611.08449",
-          "quote": "W e i n t r o d u c e V F l a s h , a m e t h o d f o r f a s t , a c c u r a t e v i s u a l p l a n n i n g t h r o u g h F l a s h P r i m i t i v e D e c o d i n g ."
+          "url": "https://mistral.ai/news/build-with-studio/",
+          "quote": "New features like managed agents, workflows, and enterprise context streamline business processes, enabling faster development and deployment of AI solutions."
         },
         {
-          "url": "https://huggingface.co/papers/2611.08449",
-          "quote": "V F l a s h e x p l o i t s t h e k n o w n s t r u c t u r e o f v i s u a l p r i m i t i v e s t o p r e d i c t t h e i r c o o r d i n a t e s j o i n t l y , u s i n g a l i g h t w e i g h t d r a f t e r t h a t g e n e r a t e s a n e n t i r e p r i m i t i v e i n o n e f o r w a r d p a"
+          "url": "https://mistral.ai/news/build-with-studio/",
+          "quote": "Deploy both the models and the platform in your own cloud, VPC or on-premises environment."
         },
         {
-          "url": "https://huggingface.co/papers/2611.08449",
-          "quote": "T h e l a y o u t a d a p t s t o t h e p r i m i t i v e ' s t y p e , d i m e n s i o n a l i t y , a n d l e n g t h , s u p p o r t i n g c o m p a c t b o x e s a n d l o n g , v a r i a b l e - l e n g t h t r a j e c t o r i e s ."
+          "url": "https://mistral.ai/news/build-with-studio/",
+          "quote": "Through the new Mistral MCP server, developers can build with Mistral Vibe or the coding agent they already use, test locally and deploy to their Studio environment with one command."
         },
         {
-          "url": "https://huggingface.co/papers/2611.08449",
-          "quote": "A c r o s s t h e e v a l u a t e d 2 D a n d 3 D r o b o t t r a j e c t o r y t a s k s , V F l a s h c o n s i s t e n t l y r e d u c e s p r e d i c t i o n e r r o r s r e l a t i v e t o a u t o r e g r e s s i v e d e c o d i n g ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.08449",
-          "quote": "P r e l i m i n a r y s i n g l e - r o l l o u t m e a s u r e m e n t s i n d i c a t e a p p r o x i m a t e l y 2 5 x f a s t e r g e n e r a t i o n f o r 3 D p o i n t m o t i o n f o r e c a s t i n g ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.08449",
-          "quote": "A w o r l d a c t i o n m o d e l c o n d i t i o n e d o n V F l a s h p l a n s a c h i e v e s 7 0 ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.08449",
-          "quote": "2 % a v e r a g e s u c c e s s a c r o s s f o u r M o l m o S p a c e s t a s k s u i t e s , c o m p a r e d w i t h 6 2 ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.08449",
-          "quote": "6 % f o r t h e b a s e l i n e ."
+          "url": "https://mistral.ai/news/build-with-studio/",
+          "quote": "OpenTelemetry traces show each step of a run, including model calls, tool use and approvals"
         }
+      ],
+      "tags": [
+        "Agent",
+        "产品",
+        "工具"
       ]
     },
     {
       "section": "headline",
-      "title": "Cloudflare 开源 security-audit-skill 编码 Agent 安全审计技能",
-      "summary": "Cloudflare 发布 security-audit-skill，把安全审计拆成六个阶段：勘察、按覆盖度分配 hunt、候选验证、结构化输出、记录独立复核和目标中立报告，产出 findings.json、REPORT.md 等文件。设计上强调「发现的 Agent 不能是验证的 Agent」，并把无法确认的线索记为 needs_validation 而不是直接判定漏洞。开发者可用 Skills CLI 安装，在目标代码库中直接触发完整审计。",
-      "tags": [
-        "开源",
-        "安全",
-        "Agent"
-      ],
+      "title": "Cloudflare 开源多阶段安全审计 Agent skill",
+      "summary": "Cloudflare 发布 security-audit，一个让编码 Agent 做多阶段安全审计的 skill，以 MIT 许可开源。它的原则是核查发现的 Agent 永远不是发现它的那个 Agent，结果写入 findings.json 并按 schema 校验；运行需要支持工具调用和并行子 Agent 的模型。想用编码 Agent 做代码安全审计的团队可以直接装上，得到可机器读取、经过独立核验的结果。",
       "sources": [
         {
           "candidate_id": "c_57e1609901",
@@ -135,15 +90,7 @@
       "evidence": [
         {
           "url": "https://github.com/cloudflare/security-audit-skill",
-          "quote": "A coding-agent skill that turns your agent into a security auditor."
-        },
-        {
-          "url": "https://github.com/cloudflare/security-audit-skill",
-          "quote": "It orchestrates isolated agents through reconnaissance, coverage-led hunting, candidate validation, structured output, independent record verification, and target-neutral reporting."
-        },
-        {
-          "url": "https://github.com/cloudflare/security-audit-skill",
-          "quote": "The skill runs a structured audit in six phases:"
+          "quote": "Adversarial validation. The agent that checks a finding is never the agent that found it."
         },
         {
           "url": "https://github.com/cloudflare/security-audit-skill",
@@ -151,150 +98,129 @@
         },
         {
           "url": "https://github.com/cloudflare/security-audit-skill",
-          "quote": "Independent record verification -- fresh agents verify final source claims."
+          "quote": "A coding agent with a model that supports tool use and parallel sub-agents"
         },
         {
           "url": "https://github.com/cloudflare/security-audit-skill",
-          "quote": "Target-neutral reporting -- derive REPORT.md , FINDINGS-DETAIL.md , and NEEDS-VALIDATION.md from the verified records and coverage ledger."
-        },
-        {
-          "url": "https://github.com/cloudflare/security-audit-skill",
-          "quote": "The verdicts are distinct: confirmed has a complete source trace and bounded observed result, needs_validation has an exact unresolved fact and no severity, and rejected records a disproved candidate."
-        },
-        {
-          "url": "https://github.com/cloudflare/security-audit-skill",
-          "quote": "Install the skill with the Skills CLI :"
-        },
-        {
-          "url": "https://github.com/cloudflare/security-audit-skill",
-          "quote": "--skill security-audit"
-        },
-        {
-          "url": "https://github.com/cloudflare/security-audit-skill",
-          "quote": "The skill activates automatically when the request matches its trigger (security audit, find vulnerabilities, pen-test the code, etc.)."
-        },
-        {
-          "url": "https://github.com/cloudflare/security-audit-skill",
-          "quote": "Adversarial validation."
-        },
-        {
-          "url": "https://github.com/cloudflare/security-audit-skill",
-          "quote": "The agent that checks a finding is never the agent that found it."
+          "quote": "License MIT -- see LICENSE ."
         }
+      ],
+      "tags": [
+        "安全",
+        "Agent",
+        "开源"
       ]
     },
     {
       "section": "headline",
-      "title": "Harness-S 让 Agent 从兄弟 harness 中学习并迁移能力",
-      "summary": "上海交通大学等团队提出 Harness-S：不追求通用最优的 harness，而是用「兄弟 harness」补齐基础执行系统的失败。只有当基础 harness 下所有尝试都失败时，才调用兄弟 harness 池重新采样，用这些轨迹替换失败组做强化学习，再把获得的能力迁移回原 harness。论文称在 AppWorld、SWE-Gym 和 DBBench 上训练后的策略回到基础 harness 仍明显优于只做策略训练。",
-      "tags": [
-        "Agent",
-        "论文",
-        "训练"
-      ],
+      "title": "微软 Foundry Local 支持本地运行 Qwen3.8-27B 写代码",
+      "summary": "微软 Foundry Local 现在可以在本地运行 Qwen3.8-27B 并接入 GitHub Copilot：4-bit 量化后模型约 18 GB，24 GB 显存的消费级显卡即可运行、支持 64K 上下文，32 GB 以上显存最长可到 262K。推理用 DFlash2 投机解码加速，需要 Foundry Local CLI 0.13.0 或更高版本。有 NVIDIA 显卡、又不想让代码离开本机的开发者可以试一试。",
       "sources": [
         {
-          "candidate_id": "c_7da5db721b",
-          "url": "https://huggingface.co/papers/2611.04277"
+          "candidate_id": "c_ab18e401bc",
+          "url": "https://devblogs.microsoft.com/foundry/foundry-local-agentic-coding-qwen3-8-27b/"
         }
       ],
       "evidence": [
         {
-          "url": "https://huggingface.co/papers/2611.04277",
-          "quote": "Rather than seeking a universally superior harness, we introduce Harness-S to selectively rescue failures of a base execution system through sibling harnesses and transfer the resulting capabilities into a single policy that remains effective under the original harness."
+          "url": "https://devblogs.microsoft.com/foundry/foundry-local-agentic-coding-qwen3-8-27b/",
+          "quote": "Run Qwen3.8-27B locally, connect it to GitHub Copilot, and get a responsive coding experience with predictable inference costs, greater privacy, and the freedom to keep working offline."
         },
         {
-          "url": "https://huggingface.co/papers/2611.04277",
-          "quote": "Directional Harness Evolution develops specialized sibling harnesses along distinct repair directions, forming a reusable Sibling Harness Pool that remains fixed during policy training ."
+          "url": "https://devblogs.microsoft.com/foundry/foundry-local-agentic-coding-qwen3-8-27b/",
+          "quote": "With 4-bit quantization, the model size is reduced to approximately 18 GB, making it runnable on consumer GPUs with 24 GB of VRAM, supporting context windows of up to 64K tokens."
         },
         {
-          "url": "https://huggingface.co/papers/2611.04277",
-          "quote": "Complementary Harness Rescue Training invokes this pool only when all initial attempts under the base harness fail."
+          "url": "https://devblogs.microsoft.com/foundry/foundry-local-agentic-coding-qwen3-8-27b/",
+          "quote": "GPUs with 32 GB or more of VRAM can support longer context windows of up to the model’s maximum supported length of 262K tokens."
         },
         {
-          "url": "https://huggingface.co/papers/2611.04277",
-          "quote": "The same policy generates fresh rollouts under selected auxiliary harnesses , and these trajectories replace the failed group for reinforcement learning ."
+          "url": "https://devblogs.microsoft.com/foundry/foundry-local-agentic-coding-qwen3-8-27b/",
+          "quote": "It leverages DFlash2 speculative decoding"
         },
         {
-          "url": "https://huggingface.co/papers/2611.04277",
-          "quote": "An Adaptive Harness Router selects the Top-k variants using Harness Behavior Profiles and voting across multiple LLMs ."
+          "url": "https://devblogs.microsoft.com/foundry/foundry-local-agentic-coding-qwen3-8-27b/",
+          "quote": "This experience requires Foundry Local CLI 0.13.0 or later"
         },
         {
-          "url": "https://huggingface.co/papers/2611.04277",
-          "quote": "Across AppWorld, SWE-Gym, and DBBench, the trained policy substantially outperforms policy-only training when returned to the original base harness ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.04277",
-          "quote": "Behavioral analyses and held-out cases support the transfer of harness-elicited behaviors into the policy itself."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.04277",
-          "quote": "Reusing the router for Rank-1 inference provides additional gains at the same executor rollout count."
+          "url": "https://devblogs.microsoft.com/foundry/foundry-local-agentic-coding-qwen3-8-27b/",
+          "quote": "Have an NVIDIA GPU with at least 24 GB of VRAM?"
         }
+      ],
+      "tags": [
+        "代码",
+        "推理",
+        "工具"
       ]
     },
     {
-      "section": "headline",
-      "title": "Drex 开源决策模型家族，单次前向输出选项概率",
-      "summary": "Nace.AI 提出 Drex 决策模型家族：给定问题与用户提供的选项，直接返回选项上的概率分布，不做自回归解码，输出无需解析长文本。家族包含 8B（DLM）、9B（v1.5）、35B-A3B（v2.0）和 27B（Max）四个模型，训练结合监督微调与 RLAF，Max 还做了视觉调优。论文报告 Max 在 Decision Index 0.4.1 公开集上取得 67.52，典型请求响应 183 ms，而 GPT-6 Sol 约 2.0 s、Claude Opus 5.5 约 3.5 s；全部权重与推理代码开放。",
-      "tags": [
-        "模型",
-        "开源",
-        "推理"
-      ],
+      "section": "model",
+      "title": "Nace AI 开放 Drex 决策模型家族",
+      "summary": "Drex 是四个开放的决策模型，规模为 8B（DLM）、9B（v1.5）、35B with 3B active（v2.0）和 27B（Max）：输入状态和一组选项，直接返回各选项的概率分布，不做自回归解码。论文称 Max 典型请求耗时 183 ms，在 Decision Bench v4 上落后 Claude Opus 5.5 1.6 分。只需在固定选项中做选择的分类、判断、打分场景，可以用它省掉长链推理和输出解析。",
       "sources": [
         {
           "candidate_id": "c_6c55f1bca7",
           "url": "https://huggingface.co/papers/2611.07854"
+        },
+        {
+          "candidate_id": "c_2e8857fad6",
+          "url": "https://i.redd.it/fez7h4dxu00i1.png"
         }
       ],
       "evidence": [
         {
           "url": "https://huggingface.co/papers/2611.07854",
-          "quote": "Decision models address this: given a question and a set of options supplied by the user, they return a probability distribution over the options without autoregressive decoding ."
+          "quote": "Max answers a typical request in 183 ms, against about 2.0 s for GPT-6 Sol and 3.5 s for Claude Opus 5.5, and its outputs are stable under option reordering . All four models are open source"
         },
         {
           "url": "https://huggingface.co/papers/2611.07854",
-          "quote": "We present Drex, a family of four open decision models with 8B (DLM), 9B (v1.5), 35B with 3B active (v2.0), and 27B (Max) parameters."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.07854",
-          "quote": "Training combines supervised fine-tuning with reinforcement learning from adjusted feedback ( RLAF ), plus vision tuning for Max."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.07854",
-          "quote": "On Decision Index 0.4.1, Max sets a new state of the art among the decision models we compare (67.52 on the public suite vs."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.07854",
-          "quote": "60.70 for Jev 1.14.0)."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.07854",
-          "quote": "Max answers a typical request in 183 ms, against about 2.0 s for GPT-6 Sol and 3.5 s for Claude Opus 5.5, and its outputs are stable under option reordering ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.07854",
-          "quote": "The family spans 8B (DLM), 9B (v1.5), 35B-A3B (v2.0), and 27B (Max) parameters."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.07854",
-          "quote": "Training combines supervised fine-tuning with our in-house RL recipe, reinforcement learning from adjusted feedback (RLAF), which blends verified outcomes with a reasoning judge under a KL constraint; ablations show RLAF raises accuracy while consistency losses cut option-order flips from 6.3% to 4."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.07854",
-          "quote": "All weights and inference code are open: github.com/nace-ai/drex-decision-models"
+          "quote": "On Decision Bench v4, it is statistically tied with d3-turbo and GPT-6 Sol and trails Claude Opus 5.5 by 1.6 points"
         }
+      ],
+      "tags": [
+        "模型",
+        "开源",
+        "推理"
       ]
     },
     {
-      "section": "headline",
-      "title": "SLA 把空间对齐扩展到 VLA 持续预训练",
-      "summary": "港科大等团队提出 SLA（Spatial-Language-Action Model），在预训练阶段就让策略对齐冻结 3D 感知模型给出的空间表征，并在后训练中保持这种对齐。SLA 从预训练 pi05 策略初始化，联合优化动作预测与中间视觉嵌入的空间对齐，并用 feature-dependent gates 聚合多层视觉特征、概率化 state dropout 抑制对演示轨迹的过拟合。所有辅助组件只用于训练，可直接复用预训练 VLA 权重，推理架构不变。",
-      "tags": [
-        "论文",
-        "多模态"
+      "section": "model",
+      "title": "Linum 开放训练成本约 $21K 的 2B 文生图模型",
+      "summary": "Linum AI 发布研究检查点 P-JiT 21K：2B 参数，用 660M 样本训练，算力成本约 $21K，许可为 apache-2.0。训练数据刻意去掉了渲染文字类图片，所以它不能生成文字或海报；官方说明这是通往下一个视频模型的过渡产物，不是生产模型。关注低成本训练的开发者可以拿它作参考。",
+      "sources": [
+        {
+          "candidate_id": "c_43b680a763",
+          "url": "https://huggingface.co/Linum-AI/pjit-21k"
+        }
       ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/Linum-AI/pjit-21k",
+          "quote": "P-JiT 21K is a 2B-parameter model trained on 660M samples for about $21K of compute, as a stepping stone towards our next video model."
+        },
+        {
+          "url": "https://huggingface.co/Linum-AI/pjit-21k",
+          "quote": "Research checkpoint: this is an experimental research artifact, not a production model."
+        },
+        {
+          "url": "https://huggingface.co/Linum-AI/pjit-21k",
+          "quote": "This model cannot write text or generate posters."
+        },
+        {
+          "url": "https://huggingface.co/Linum-AI/pjit-21k",
+          "quote": "License: apache-2.0"
+        }
+      ],
+      "tags": [
+        "模型",
+        "图像",
+        "开源"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "SLA：在持续预训练中加入空间对齐的 VLA 模型",
+      "summary": "SLA 从预训练的 pi05 策略出发，在持续预训练中联合优化动作预测，以及中间视觉嵌入与冻结 3D 感知模型空间表示之间的对齐。所有辅助组件只在训练时使用，可以直接复用已有 VLA 权重，推理架构保持不变。做机器人操作的团队可以在不改部署的前提下借鉴这种训练方式。",
       "sources": [
         {
           "candidate_id": "c_2894bfea6d",
@@ -304,260 +230,58 @@
       "evidence": [
         {
           "url": "https://huggingface.co/papers/2611.08373",
-          "quote": "We present SLA, a Spatial-Language-Action Model that scales implicit spatial alignment to continual pre-training and maintains it during downstream post-training ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.08373",
-          "quote": "Initialized from a pretrained pi05 policy , SLA jointly optimizes action prediction and alignment between intermediate visual embeddings and spatial representations from a frozen 3D perception model ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.08373",
-          "quote": "We curate and unify heterogeneous robot datasets to support spatial learning across diverse embodiments, tasks, and scenes."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.08373",
-          "quote": "To accommodate this diversity, we introduce feature-dependent gates that adaptively aggregate visual embeddings from multiple VLA layers for spatial supervision ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.08373",
-          "quote": "Probabilistic state dropout encourages reliance on visual cues and mitigates overfitting to demonstration trajectories ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.08373",
           "quote": "All auxiliary components are used only during training, allowing direct reuse of pretrained VLA weights and preserving the original inference architecture ."
         }
-      ]
-    },
-    {
-      "section": "model",
-      "title": "Open-HumanScale 开源 5 万小时第一人称视频配方",
-      "summary": "北京大学团队提出 Open-HumanScale，一套完全开放的具身基础模型配方，配套开放标注了手部动作和自然语言的 Open-HumanScale-50K 第一人称视频语料。研究用闭环仿真评估发现预训练数据时长与下游机器人成功率之间存在对数线性 scaling law，并据此训练只用人类视频的 HumanWAM-Vanilla，机器人后训练后在 RoboTwin 2.0 Clean2Clean 达 92.08%、Clean2Random 达 68.88%。人机混合预训练的 HumanWAM-Goal 后训练后达到 92.70% 和 84.60%，语料、检查点与代码一并开放。",
-      "tags": [
-        "模型",
-        "开源",
-        "多模态"
       ],
-      "sources": [
-        {
-          "candidate_id": "c_b8df4857f1",
-          "url": "https://huggingface.co/papers/2611.06817"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2611.06817",
-          "quote": "W e i n t r o d u c e O p e n - H u m a n S c a l e , t h e f i r s t f u l l y o p e n r e c i p e f o r s c a l i n g e g o c e n t r i c p r e t r a i n i n g t o 5 0 , 0 0 0 h o u r s , a n c h o r e d b y O p e n - H u m a n S c a l e - 5 0 K - - - a c u r a t e d e g o c e n t r i c v i d e o"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.06817",
-          "quote": "c o r p u s d e n s e l y a n n o t a t e d w i t h h a n d m o t i o n a n d n a t u r a l l a n g u a g e ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.06817",
-          "quote": "g p r e t r a i n i n g d a t a h o u r s t o d o w n s t r e a m r o b o t s u c c e s s r a t e s ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.06817",
-          "quote": "G r o u n d e d i n t h e s e f i n d i n g s , w e d e v e l o p H u m a n W A M - V a n i l l a , a w o r l d - - a c t i o n m o d e l p r e t r a i n e d e x c l u s i v e l y o n 5 0 k h o u r s o f e g o c e n t r i c h u m a n v i d e o ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.06817",
-          "quote": "U p o n r o b o t p o s t - t r a i n i n g , H u m a n W A M - V a n i l l a r e a c h e s 9 2 ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.06817",
-          "quote": "0 C l e a n 2 C l e a n a n d 6 8 ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.06817",
-          "quote": "8 8 % o n C l e a n 2 R a n d o m , a l o n g s i d e a 1 4 ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.06817",
-          "quote": "0 p e r f o r m a n c e t o n e w s t a t e - o f - t h e - a r t l e v e l s : 9 2 ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.06817",
-          "quote": "7 0 % o n C l e a n 2 C l e a n a n d a s u b s t a n t i a l l e a p t o 8 4 ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.06817",
-          "quote": "T o s u p p o r t r e p r o d u c i b l e s c a l i n g r e s e a r c h i n e m b o d i e d A I , w e o p e n - s o u r c e t h e O p e n - H u m a n S c a l e - 5 0 K c o r p u s , d a t a c u r a t i o n a n d p r e t r a i n i n g p i p e l i n e s , a l o n g s i d e t h e p r e t r a i n e d a"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.06817",
-          "quote": "n d p o s t - t r a i n e d H u m a n W A M c h e c k p o i n t s , i n f e r e n c e c o d e , a n d s i m u l a t i o n e v a l u a t i o n s u i t e s ."
-        }
-      ]
-    },
-    {
-      "section": "model",
-      "title": "TailSteer 在训练尾段抑制多轮图像编辑漂移",
-      "summary": "TailSteer 是一个末段训练框架，针对图像编辑反复复用输出时不断累积的视觉漂移。它的做法是让早期去噪动态贴近基座模型，只在轨迹尾部集中学习保持性修正，这些修正从编辑器自身的 on-policy 去噪 rollout 中学习，用未改动的源内容作为保持参考，不需要精标编辑对。在 FLUX、SenseNova 和 Qwen 系列上的实验显示，它在 15-20 轮编辑中显著降低累积漂移，同时基本保持基座模型原有的生成与编辑能力，且不改动架构和推理流程。",
       "tags": [
         "论文",
-        "图像"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_2afe0859df",
-          "url": "https://huggingface.co/papers/2611.06741"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2611.06741",
-          "quote": "We introduce TailSteer, a final-stage training framework that improves multi-turn robustness while retaining the generative and editing capabilities acquired through earlier training."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.06741",
-          "quote": "TailSteer follows a simple principle: keep early denoising dynamics close to those of the base model and concentrate preservation corrections near the trajectory tail , where fine-grained deviations can be suppressed."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.06741",
-          "quote": "These corrections are learned from the editor's own on-policy denoising rollouts , using unchanged source content as a preservation reference without requiring curated ground-truth editing pairs ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.06741",
-          "quote": "Experiments across the FLUX , SenseNova , and Qwen families show that TailSteer substantially reduces cumulative drift over 15-20 editing turns while largely preserving base-model performance on extensive text-to-image and single-image editing benchmarks."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.06741",
-          "quote": "These results demonstrate that long-horizon editing robustness can be unlocked in foundation models after TailSteer, rather than by relearning their existing capabilities."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.06741",
-          "quote": "View arXiv page View PDF Project page GitHub 37 Add to collection Community Lyricccco Paper submitter about 22 hours ago TailSteer introduces a final refinement stage after SFT, RL, or OPD to unlock persistent multi-turn editing."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.06741",
-          "quote": "It substantially reduces long-horizon drift while preserving the base model's original generative and editing capabilities, without changing its architecture or inference pipeline."
-        }
-      ]
-    },
-    {
-      "section": "model",
-      "title": "PLatour 跨模型 latent 通信框架与 PACT-Check 检验",
-      "summary": "伦敦国王学院团队提出 PLatour，一个开源的 prefill-to-autoregressive 跨模型迁移（PACT）框架：用轻量零初始化线性桥连接冻结模型，直接以任务奖励训练，并支持混合注意力架构。作者同时提出 PACT-Check 来量化收益有多少真正来自通信，因为对照实验显示部分任务上的提升可由无信息发送方信号、自我通信或只训练接收方复现，线性桥可能只是参数高效的适配机制。论文称 PLatour 在生成任务上超过所评开源 PACT 基线，并以 35B 发送方在共享数学与代码基准上超过 Mostik 报告的结果（其发送方为 753B）。",
-      "tags": [
-        "论文",
-        "模型",
+        "多模态",
         "训练"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_8ae8e33e0a",
-          "url": "https://huggingface.co/papers/2611.06976"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2611.06976",
-          "quote": "W e i n t r o d u c e P L a t o u r , a n o p e n - s o u r c e P A C T f r a m e w o r k t h a t c o n n e c t s f r o z e n m o d e l s t h r o u g h l i g h t w e i g h t , z e r o - i n i t i a l i z e d l i n e a r b r i d g e s t r a i n e d d i r e c t l y w i t h t a s k r e w a r d s a n d"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.06976",
-          "quote": "P L a t o u r s i g n i f i c a n t l y o u t p e r f o r m s o p e n - s o u r c e b a s e l i n e s o n g e n e r a t i o n t a s k s a n d s u r p a s s e s M o s t i k ' s r e p o r t e d r e s u l t s o n s h a r e d m a t h e m a t i c s a n d c o d i n g b e n c h m a r k s u s i n g a s u b"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.06976",
-          "quote": "s t a n t i a l l y s m a l l e r s e n d e r ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.06976",
-          "quote": "H o w e v e r , c o n t r o l l e d e x p e r i m e n t s s h o w t h a t t h e g a i n s o n s o m e t a s k s c a n b e r e p r o d u c e d b y u n i n f o r m a t i v e s e n d e r s i g n a l s , s e l f - c o m m u n i c a t i o n , o r r e c e i v e r - o n l y t r a i n i n g ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.06976",
-          "quote": "W e f i n d t h a t t r a i n a b l e b r i d g e s c a n a c t a s p a r a m e t e r - e f f i c i e n t a d a p t a t i o n m e c h a n i s m s w i t h o u t e x p l o i t i n g u s e f u l s e n d e r i n f o r m a t i o n ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.06976",
-          "quote": "W e t h e r e f o r e p r o p o s e P A C T - C h e c k t o q u a n t i f y h o w m u c h o f a t r a i n e d P A C T s y s t e m ' s g a i n g e n u i n e l y c o m e s f r o m c o m m u n i c a t i o n ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.06976",
-          "quote": "We introduce PLatour, a simple and scalable framework that connects frozen models through lightweight linear bridges trained directly with reinforcement learning."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.06976",
-          "quote": "It also supports hybrid-attention architectures."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.06976",
-          "quote": "Using a 35B sender, it also exceeds Mostik AI’s reported results on shared math and coding benchmarks, compared with Mostik's 753B sender—although the training setups may differ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.06976",
-          "quote": "To examine this systematically, we introduce PACT-Check."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.06976",
-          "quote": "PACT-Score measures the accuracy margin over the strongest applicable control."
-        }
-      ]
-    },
-    {
-      "section": "model",
-      "title": "EvoMemState 用关系状态与推理状态管理 Agent 记忆",
-      "summary": "EvoMemState 针对以独立事实为单位存储记忆的局限，把持久化事实扩展为两种互补状态：记录事实有效性、范围和相互关系的 Relational States，以及决定这些事实如何用于当前请求的 Reasoning State。框架由本体引导的记忆状态归纳、用强化学习内化记忆使用经验的 RL-Based State Evolution，以及结合事实与两类状态做推理的 State-Aware Reasoning 三部分组成。论文称在长期对话与记忆使用基准上，检索完整性和基于记忆的回复准确率都稳定优于既有记忆系统，代码与实现细节已开放。",
-      "tags": [
-        "Agent",
-        "论文"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_96428f7295",
-          "url": "https://huggingface.co/papers/2611.03743"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2611.03743",
-          "quote": "I n t h i s p a p e r , w e i n t r o d u c e E v o M e m S t a t e , a s t a t e - c e n t r i c f r a m e w o r k t h a t a u g m e n t s p e r s i s t e n t f a c t s w i t h t w o c o m p l e m e n t a r y s t a t e s : R e l a t i o n a l S t a t e s t h a t c a p t u r e h o w f a c t s r e m"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.03743",
-          "quote": "a i n v a l i d a n d r e l a t e t o o n e a n o t h e r a s m e m o r y e v o l v e s , a n d a R e a s o n i n g S t a t e t h a t d e t e r m i n e s h o w t h e s e f a c t s s h o u l d b e a p p l i e d t o t h e c u r r e n t r e q u e s t ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.03743",
-          "quote": "S p e c i f i c a l l y , E v o M e m S t a t e c o n s i s t s o f t h r e e k e y c o m p o n e n t s : ( i ) O n t o l o g y - G u i d e d M e m o r y S t a t e I n d u c t i o n e x t r a c t s P e r s i s t e n t F a c t s a n d c o n s t r u c t s R e l a t i o n a l S t a t e s t h a t m a i"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.03743",
-          "quote": "n t a i n t h e i r v a l i d i t y , s c o p e , a n d e v o l v i n g r e l a t i o n s ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.03743",
-          "quote": "( i i ) R L - B a s e d S t a t e E v o l u t i o n i n t e r n a l i z e s m e m o r y - u s e e x p e r i e n c e i n t o a p o l i c y t h r o u g h r e i n f o r c e m e n t l e a r n i n g t o g e n e r a t e a r e q u e s t - s p e c i f i c R e a s o n i n g S t a t e ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.03743",
-          "quote": "( i i i ) S t a t e - A w a r e R e a s o n i n g t h e n c o m b i n e s t h e r e l e v a n t f a c t s w i t h t h e i r R e l a t i o n a l S t a t e s a n d t h e g e n e r a t e d R e a s o n i n g S t a t e t o g u i d e t h e p e r s o n a l a g e n t ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.03743",
-          "quote": "E x t e n s i v e e x p e r i m e n t s o n l o n g - t e r m d i a l o g u e a n d m e m o r y - u s e b e n c h m a r k s d e m o n s t r a t e c o n s i s t e n t i m p r o v e m e n t s o v e r e x i s t i n g m e m o r y s y s t e m s i n r e t r i e v a l c o m p l e t e n e s s a n d m e m o"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.03743",
-          "quote": "Extensive experiments on long-term dialogue and memory-use benchmarks demonstrate consistent improvements over existing memory systems in retrieval completeness and memory-grounded response accuracy."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.03743",
-          "quote": "Our code and implementation details are available at https://github.com/XMUDeepLIT/EvoMemState.git ."
-        }
       ]
     },
     {
       "section": "paper",
-      "title": "BestRand：把评测子集选择的随机误差长尾压下去",
-      "summary": "CMU 等团队推导了用子集估计全量基准分数时误差分布的近似解析式，发现多数随机子集误差很小、少数子集误差很大，呈长尾分布，因此随机采样常常够用但不稳定，并指出这种不稳定在现代基础模型上依然存在。据此提出 BestRand，在保留随机采样效率的同时削减高误差尾部：在 70+ 文本、多模态和 Agent 基准上，相比有竞争力的方法将高误差风险降低 50.2%、平均估计误差降低 16.4%，构建成本只需 51.3%，OOD 估计误差平均再降 21.8%。",
+      "title": "VFlash：一次前向生成整段视觉规划",
+      "summary": "VFlash 让 VLM 不再逐个坐标 token 生成框、轨迹这类视觉规划，而是用轻量 drafter 一次前向生成整个 primitive，并直接接受结构有效的预测。初步测量显示 3D 点运动预测的生成快约 25x；以 VFlash 规划为条件的世界动作模型在 MolmoSpaces 任务套件上平均成功率 70.2%，基线为 62.6%。在机器人和自动驾驶里用 VLM 输出空间规划的系统，可以借此降低解码延迟。",
+      "sources": [
+        {
+          "candidate_id": "c_a5946317f4",
+          "url": "https://huggingface.co/papers/2611.08449"
+        }
+      ],
+      "evidence": [],
       "tags": [
         "论文",
-        "工具"
+        "多模态",
+        "推理"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Harness-S：用兄弟 harness 救回失败轨迹训练 Agent",
+      "summary": "Harness-S 从同一基础 harness 演化出一组各自修复不同失败的兄弟 harness；只有基础 harness 下所有初始尝试都失败时，才让同一策略在选中的兄弟 harness 下重新采样，用这些轨迹替换失败组做强化学习。在 AppWorld、SWE-Gym 和 DBBench 上，训练后的策略回到原 harness 时明显优于只训练策略的做法。做 Agent 强化学习的团队可以把 harness 的改进沉淀进模型本身。",
+      "sources": [
+        {
+          "candidate_id": "c_7da5db721b",
+          "url": "https://huggingface.co/papers/2611.04277"
+        }
       ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.04277",
+          "quote": "Across AppWorld, SWE-Gym, and DBBench, the trained policy substantially outperforms policy-only training when returned to the original base harness."
+        }
+      ],
+      "tags": [
+        "论文",
+        "Agent",
+        "训练"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "BestRand：稳定且低成本的基准压缩方法",
+      "summary": "论文分析了用子集估计完整基准分数的误差分布：多数随机子集误差很小，少数误差很大，呈长尾分布。据此提出的 BestRand 在 70+ 个文本、多模态和 Agent 基准上验证，相比已有方法把高误差风险降低 50.2%、估计误差平均降低 16.4%，构建成本只要 51.3%。评测预算紧张的团队可以用它挑出小子集，代替跑完整基准。",
       "sources": [
         {
           "candidate_id": "c_a4f95935e3",
@@ -567,116 +291,65 @@
       "evidence": [
         {
           "url": "https://huggingface.co/papers/2611.00883",
-          "quote": "T o q u a n t i f y e s t i m a t i o n e r r o r , w e d e r i v e a n a c c u r a t e a n a l y t i c a l a p p r o x i m a t i o n t o t h e e r r o r d i s t r i b u t i o n w h e n e s t i m a t i n g f u l l - b e n c h m a r k s c o r e s f r o m a s u b s e t , s h o w i n g t h a t m o s t"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.00883",
-          "quote": "s u b s e t s y i e l d s m a l l e r r o r s , w h i l e a f e w p r o d u c e m u c h l a r g e r e r r o r s , r e s u l t i n g i n a l o n g - t a i l e d d i s t r i b u t i o n ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.00883",
-          "quote": "T h i s m e a n s r a n d o m s a m p l i n g a l o n e c a n a c h i e v e s u r p r i s i n g l y s t r o n g p e r f o r m a n c e w i t h h i g h p r o b a b i l i t y , b u t r e m a i n s u n s t a b l e d u e t o r a r e l a r g e e r r o r s ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.00883",
-          "quote": "W e f u r t h e r s h o w t h a t t h i s i n s t a b i l i t y i s i n h e r e n t t o m o d e r n f o u n d a t i o n m o d e l s a n d p e r s i s t s e v e n a s m o r e m o d e l s a r e e v a l u a t e d ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.00883",
-          "quote": "B a s e d o n t h e s e f i n d i n g s , w e i n t r o d u c e B e s t R a n d , a s t a b l e a n d l o w - c o s t b e n c h m a r k c o m p r e s s i o n m e t h o d t h a t p r e s e r v e s t h e e f f i c i e n c y o f r a n d o m s a m p l i n g w h i l e s u b s t a n t i a l l y r e d u c"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.00883",
-          "quote": "i n g i t s h i g h - e r r o r t a i l ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.00883",
-          "quote": "W e v a l i d a t e B e s t R a n d o n 7 0 + t e x t , m u l t i m o d a l , a n d a g e n t b e n c h m a r k s , a n d f u r t h e r e x t e n d i t t o V L A e v a l u a t i o n ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.00883",
-          "quote": "C o m p a r e d w i t h c o m p e t i t i v e m e t h o d s , B e s t R a n d r e d u c e s h i g h - e r r o r r i s k b y 5 0 ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.00883",
-          "quote": "2 % a n d e s t i m a t i o n e r r o r b y 1 6 ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.00883",
-          "quote": "4 % o n a v e r a g e , w h i l e r e q u i r i n g o n l y 5 1 ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.00883",
-          "quote": "3 % o f t h e c o n s t r u c t i o n c o s t ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.00883",
-          "quote": "I t f u r t h e r r e d u c e s O O D e s t i m a t i o n e r r o r b y 2 1 ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.00883",
-          "quote": "8 % o n a v e r a g e a c r o s s s c o r e - r a n g e , m o d e l - f a m i l y , a n d t e m p o r a l s h i f t s ."
+          "quote": "Across 70+ benchmarks, BestRand reduces high-error risk by 50.2% and estimation error by 16.4%, while requiring only 51.3% of the construction cost of competing methods."
         }
-      ]
-    },
-    {
-      "section": "paper",
-      "title": "VisSearch-Bench 评测多模态 Agent 的长程视觉搜索",
-      "summary": "蚂蚁集团等团队提出 VisSearch-Bench，聚焦多模态 Agent 的视觉上下文管理——把图像、物体外观、局部细节和空间关系与外部检索结果串联起来，而不是只用图片识别出首个实体再转纯文本检索。基准含 7 个主领域、25 个子领域的 204 个人工编写任务，覆盖集合式、序贯式、宽深混合、竞争性视觉消歧和视觉结构引导搜索，每题给出参考答案、可追溯证据和评分规则。评测 16 个多模态模型时，即使带上搜索工具，最好的系统也只完整解出 26.47% 的任务。",
+      ],
       "tags": [
         "论文",
-        "多模态",
-        "Agent"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_eebbb6a390",
-          "url": "https://huggingface.co/papers/2611.04894"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2611.04894",
-          "quote": "We therefore focus on visual context management ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.04894",
-          "quote": "Visually intensive tasks require agents to combine object appearance, local details, or spatial relations with external information."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.04894",
-          "quote": "We introduce VisSearch-Bench , with 204 human-written tasks across 7 main domains and 25 subdomains."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.04894",
-          "quote": "It covers Set-wise Visual Search , Sequential Visual Search , Hybrid Wide-Deep Search , Competitive Visual Disambiguation , and Visual-Structure-Guided Search ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.04894",
-          "quote": "Each task provides a reference answer, traceable evidence, and scoring rules."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.04894",
-          "quote": "Accuracy measures complete task success, while Process Score measures the correctness and completeness of individual results and subquestion answers."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.04894",
-          "quote": "Across 16 multimodal models , the best system fully solves only 26.47% of tasks, even with search tools ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.04894",
-          "quote": "These results highlight the challenge of linking visual evidence with search results to produce complete answers."
-        }
+        "训练"
       ]
     },
     {
       "section": "tool",
-      "title": "Apple 用小神经网络加速 MIPS 检索",
-      "summary": "Apple 介绍 ICML 2026 论文 Amortizing Maximum Inner Product Search with Learned Support Functions：在固定的 key 数据库上离线训练小神经网络，学习如何把查询更快路由到最佳匹配，用一次性的摊销成本换取推理时更快、更准的检索。方法把最大内积搜索看成支撑函数，用 SupportNet 近似支撑函数改善聚类路由，用 KeyNet 直接输出最佳匹配的 key 向量，两者都基于真实查询分布采样训练。对做 RAG 的团队，这意味着在高维、大规模向量库上可以绕开纯几何索引的部分误差，换取检索延迟收益。",
+      "title": "Claude Code v2.1.319 支持后台运行 MCP 任务",
+      "summary": "新版本中，MCP 服务器以任务方式运行工具调用时，Claude Code 会立即把它移到后台，完成后再把结果告诉 Claude；新增 permissions.denyInsteadOfPrompting 设置，需要等待权限确认的工具调用会直接被拒绝，回合继续。关闭遥测或 feature flag 时 auto mode 也有变化：服务器无法检查的调用会询问或拒绝，不再回退到内置分类器。在网关后面或无人值守运行 Claude Code 的团队，升级前要留意这些行为变化。",
+      "sources": [
+        {
+          "candidate_id": "c_7754da829e",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.319"
+        }
+      ],
+      "evidence": [],
       "tags": [
         "工具",
-        "论文"
+        "代码",
+        "Agent"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "llama.cpp 合并 Kimi-K3.1-Pro 文本模型支持",
+      "summary": "llama.cpp 合并了 PR #31779，加入 Kimi-K3.1-Pro 文本模型支持：K3.1 复用 K3 的大部分结构，但把全注意力的 MLA 层换成了 DSA。视觉塔和 mm_projector 暂时跳过，目前只支持文本。硬件足够的用户现在可以用 llama.cpp 在本地运行这个模型。",
+      "sources": [
+        {
+          "candidate_id": "c_d59e83ece9",
+          "url": "https://github.com/ggml-org/llama.cpp/pull/31779"
+        }
       ],
+      "evidence": [
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/pull/31779",
+          "quote": "K3.1 reuses most of K3, but replaces the full-attention MLA layers with DSA."
+        },
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/pull/31779",
+          "quote": "the vision tower and mm_projector are skipped: text only for now"
+        },
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/pull/31779",
+          "quote": "ngxson merged commit bcb0152 into ggml-org : master Nov 6, 2026"
+        }
+      ],
+      "tags": [
+        "开源",
+        "推理",
+        "工具"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Apple 用小型神经网络加速 RAG 向量检索",
+      "summary": "Apple 在 ICML 2026 论文中提出，为固定的 key 数据库离线训练小型神经网络，学会把查询路由到最佳匹配：SupportNet 用于聚类路由，KeyNet 可以作为现有 IVF 索引前面的 query rewriter。实验中，KeyNet 最大模型达到 99% 召回所需时间最多减少约 8×（0.23 ms 对 1.8 ms）。key 库相对固定、查询量大的 RAG 和推荐系统，可以考虑用离线训练换在线延迟。",
       "sources": [
         {
           "candidate_id": "c_f49a26309d",
@@ -686,264 +359,34 @@
       "evidence": [
         {
           "url": "https://machinelearning.apple.com/research/faster-retrieval",
-          "quote": "content type highlight published November 5, 2026 Faster Retrieval for Better, More Efficient RAG Maximum inner product search (MIPS) sits at the core of recommendation systems, search, and retrieval-augmented generation (RAG)."
-        },
-        {
-          "url": "https://machinelearning.apple.com/research/faster-retrieval",
-          "quote": "As the number of keys grows to millions and vector dimensions reach thousands, the computational cost of running an exhaustive comparison of the query to all keys grows dramatically."
-        },
-        {
-          "url": "https://machinelearning.apple.com/research/faster-retrieval",
           "quote": "In Amortizing Maximum Inner Product Search with Learned Support Functions , a paper presented at ICML 2026, researchers from Apple train small neural networks (NNs) — once, offline, for a fixed database of keys — that learn how to route queries toward their best match faster."
         },
         {
           "url": "https://machinelearning.apple.com/research/faster-retrieval",
-          "quote": "Their approach trades off an upfront amortization cost to understand how typical queries tend to be matched in exchange for faster, more accurate retrieval at inference time through these small NNs."
+          "quote": "The SupportNet neural network architecture can learn the support function directly"
         },
         {
           "url": "https://machinelearning.apple.com/research/faster-retrieval",
-          "quote": "This function has two important properties: First, it is convex, so it can be approximated by a class of neural networks specifically designed for convex functions, input convex neural networks (ICNNs) ."
+          "quote": "KeyNet works naturally as a “query rewriter” in front of a standard approximate search index"
         },
         {
           "url": "https://machinelearning.apple.com/research/faster-retrieval",
-          "quote": "Second, the gradient of that support function at any query returns the best-matching key itself."
+          "quote": "reaching 99% recall takes up to ~8× less time with the largest model (0.23 ms vs 1.8 ms for the raw query)"
         },
         {
           "url": "https://machinelearning.apple.com/research/faster-retrieval",
-          "quote": "In practice, we observe that training separate, specialized networks for each of these two tasks works best:"
-        },
-        {
-          "url": "https://machinelearning.apple.com/research/faster-retrieval",
-          "quote": "The SupportNet neural network architecture can learn the support function directly, using a (loosely constrained) ICNN."
-        },
-        {
-          "url": "https://machinelearning.apple.com/research/faster-retrieval",
-          "quote": "KeyNet models learn to directly output the best-matching key vector when fed a query."
-        },
-        {
-          "url": "https://machinelearning.apple.com/research/faster-retrieval",
-          "quote": "A consistency loss derived from Euler’s theorem for homogeneous functions keeps their predictions geometrically grounded in the underlying support function, even though no convexity is explicitly enforced."
-        },
-        {
-          "url": "https://machinelearning.apple.com/research/faster-retrieval",
-          "quote": "Both models are trained on examples drawn from the relevant query distribution: for each sampled query, the ground-truth best match is computed once via exhaustive search and stored, creating a supervised dataset that captures the MIPS solution landscape for the distribution of queries that actually"
-        },
-        {
-          "url": "https://machinelearning.apple.com/research/faster-retrieval",
-          "quote": "Leaning on this theoretical insight, we propose to learn these k support functions jointly with a trained SupportNet that can output k scores at once."
-        },
-        {
-          "url": "https://machinelearning.apple.com/research/faster-retrieval",
-          "quote": "We can then use the largest of these k scores to route any new query instead."
+          "quote": "With KeyNet, we can also keep the IVF system as is and just feed it a modified version of the query."
         }
-      ]
-    },
-    {
-      "section": "tool",
-      "title": "ToyBlocks 开放机器人学习仿真框架",
-      "summary": "ToyBlocks 是 FoundationWorlds 的第一个环境：一个开放仿真框架，围绕桌面上的机械臂和积木，支持自动生成任务与训练演示，并给出行为指标，目标是让研究者能改变训练数据、重复测试并追溯失败原因。框架用强化学习和运动规划生成短时程技能，在 Isaac Lab 中训练推、翻等非抓取技能，再由任务-运动规划器串接技能产出带标签的演示数据，单 GPU 并行执行可达 24 倍实时。开发者可用网页界面接入 Claude 等前沿模型用自然语言指挥机器人。",
+      ],
       "tags": [
-        "开源",
-        "工具",
-        "多模态"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_d9e0f4b741",
-          "url": "https://huggingface.co/blog/allenai/toyblocks"
-        },
-        {
-          "candidate_id": "c_402b883388",
-          "url": "https://allenai.org/blog/toyblocks"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/blog/allenai/toyblocks",
-          "quote": "Today we're introducing a framework for creating these environments; we call them FoundationWorlds."
-        },
-        {
-          "url": "https://huggingface.co/blog/allenai/toyblocks",
-          "quote": "Each pairs a controlled, simulated world targeted at studying robotics in a specific environment with tools for automatically generating tasks and training demonstrations, as well as metrics for measuring a robot's behavior over time."
-        },
-        {
-          "url": "https://huggingface.co/blog/allenai/toyblocks",
-          "quote": "Our first foundation world is ToyBlocks : an open simulation framework built around a robot arm and blocks on a tabletop."
-        },
-        {
-          "url": "https://huggingface.co/blog/allenai/toyblocks",
-          "quote": "ToyBlocks automatically generates demonstrations, which are recordings of a robot completing tasks in simulation, without requiring time-consuming teleoperation, in which a person remotely controls the robot."
-        },
-        {
-          "url": "https://huggingface.co/blog/allenai/toyblocks",
-          "quote": "As a FoundationWorld, ToyBlocks is designed around four requirements: (1) realistic physics and appearance, (2) automatic generation of tasks and demonstrations at scale, (3) challenges that combine reasoning with dexterity, and (4) broad coverage of the tasks possible within a domain."
-        },
-        {
-          "url": "https://huggingface.co/blog/allenai/toyblocks",
-          "quote": "ToyBlocks automatically generates skills (behaviors for short tasks) and task demonstrations that can be used to train models or adapt previously trained models through additional training (fine-tuning)."
-        },
-        {
-          "url": "https://huggingface.co/blog/allenai/toyblocks",
-          "quote": "ToyBlocks uses reinforcement learning (RL) and motion planning, which computes how the robot should move, to generate skills for short-horizon tasks, which involve brief sequences of actions."
-        },
-        {
-          "url": "https://huggingface.co/blog/allenai/toyblocks",
-          "quote": "Skill training takes place in Isaac Lab, Nvidia's open-source framework for robot learning in simulation."
-        },
-        {
-          "url": "https://huggingface.co/blog/allenai/toyblocks",
-          "quote": "To generate demonstration data, a task-and-motion planner (TAMP) automatically selects and sequences the skills needed to solve a task and plans the robot’s movements between them."
-        },
-        {
-          "url": "https://huggingface.co/blog/allenai/toyblocks",
-          "quote": "Running each plan in simulation produces a dataset of recorded demonstrations along with labels describing which task or skill the robot performs."
-        },
-        {
-          "url": "https://huggingface.co/blog/allenai/toyblocks",
-          "quote": "ToyBlocks scales data generation through generating and executing hundreds of such plans in parallel on a single graphics processing unit (GPU), reaching up to 24 times real-time performance."
-        },
-        {
-          "url": "https://huggingface.co/blog/allenai/toyblocks",
-          "quote": "Execution of Molmo 2 (a high-level model) and ManiFlow (a low-level model) trained in ToyBlocks."
-        },
-        {
-          "url": "https://huggingface.co/blog/allenai/toyblocks",
-          "quote": "Molmo 2 selects skills such as rotation and flipping, indicating the relevant block via a pointing interface, while ManiFlow controls the simulated arm to execute the commanded skills."
-        },
-        {
-          "url": "https://huggingface.co/blog/allenai/toyblocks",
-          "quote": "Importantly, evaluation of trained models generates metrics beyond success rates; it provides information such as execution speeds, forces exerted on objects, and task progress measured via the same specifications used by the planning module."
-        },
-        {
-          "url": "https://huggingface.co/blog/allenai/toyblocks",
-          "quote": "A webpage interface lets users connect Claude – or another frontier model – and use natural language to instruct the robot or try tasks, offering a way to explore how a model plans and acts without needing robotics expertise."
-        }
-      ]
-    },
-    {
-      "section": "tool",
-      "title": "Hugging Face Transformers 发 v5.22.2 补丁版修安全问题",
-      "summary": "Hugging Face 发布 Transformers v5.22.2 补丁版本，包含安全与分布式相关修复：其中一项是加固 Jinja 沙箱，另一项是让 device_id 只为 NCCL 设置。升级量不大，但模板沙箱与多卡训练配置都属于容易在生产里踩坑的环节，升级前值得核对现有部署的模板与分布式启动方式。",
-      "tags": [
-        "开源",
-        "安全",
-        "工具"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_0d3ad536d8",
-          "url": "https://github.com/huggingface/transformers/releases/tag/v5.22.2"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://github.com/huggingface/transformers/releases/tag/v5.22.2",
-          "quote": "Patch release v5.22.2"
-        },
-        {
-          "url": "https://github.com/huggingface/transformers/releases/tag/v5.22.2",
-          "quote": "Some in between patch for security and distributed fixes."
-        },
-        {
-          "url": "https://github.com/huggingface/transformers/releases/tag/v5.22.2",
-          "quote": "[Distributed] Set device_id only for NCCL ( #50281 ) by @michaelbenayoun and @3outeille"
-        },
-        {
-          "url": "https://github.com/huggingface/transformers/releases/tag/v5.22.2",
-          "quote": "Harden our Jinja sandboxing ( #50431 ) by @Rocketknight1"
-        }
+        "论文",
+        "推理"
       ]
     },
     {
       "section": "brief",
-      "title": "LangGraph CLI 与 SDK 小版本更新",
-      "summary": "langgraph-cli 0.4.42 新增 deploy metrics 命令并升级 filelock、langgraph-api 依赖以修复安全问题。",
-      "tags": [
-        "工具",
-        "Agent"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_9773a78a2e",
-          "url": "https://github.com/langchain-ai/langgraph/releases/tag/cli%3D%3D0.4.42"
-        },
-        {
-          "candidate_id": "c_c7ae563dd8",
-          "url": "https://github.com/langchain-ai/langgraph/releases/tag/sdk%3D%3D0.4.14"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://github.com/langchain-ai/langgraph/releases/tag/cli%3D%3D0.4.42",
-          "quote": "Changes since cli==0.4.41"
-        },
-        {
-          "url": "https://github.com/langchain-ai/langgraph/releases/tag/cli%3D%3D0.4.42",
-          "quote": "release(cli): 0.4.42 ( #9611 )"
-        },
-        {
-          "url": "https://github.com/langchain-ai/langgraph/releases/tag/cli%3D%3D0.4.42",
-          "quote": "feat(cli): add deploy metrics command ( #9479 )"
-        },
-        {
-          "url": "https://github.com/langchain-ai/langgraph/releases/tag/cli%3D%3D0.4.42",
-          "quote": "chore(deps): bump filelock and langgraph-api for security fixes ( #9606 )"
-        }
-      ]
-    },
-    {
-      "section": "brief",
-      "title": "Open ASR 榜单新增埃及与尼日利亚英语私有数据",
-      "summary": "Open ASR Leaderboard 与 Liva AI 合作新增埃及英语、尼日利亚英语两个口音的私有数据分区。",
-      "tags": [
-        "语音",
-        "工具"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_112f9c7e11",
-          "url": "https://huggingface.co/blog/open-asr-leaderboard-liva"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/blog/open-asr-leaderboard-liva",
-          "quote": "We’re excited to announce a new collaboration with Liva AI to add even more private data with two new accents: Egyptian 🇪🇬 and Nigerian 🇳🇬."
-        },
-        {
-          "url": "https://huggingface.co/blog/open-asr-leaderboard-liva",
-          "quote": "Liva AI Conversational EG"
-        },
-        {
-          "url": "https://huggingface.co/blog/open-asr-leaderboard-liva",
-          "quote": "Liva AI Conversational NG"
-        }
-      ]
-    },
-    {
-      "section": "brief",
-      "title": "OpenAI 推出湿实验科学 Agent 基准 BioBasicsBench",
-      "summary": "OpenAI 发布 BioBasicsBench，用 100 个任务衡量 AI Agent 解读原始实验数据、处理日常湿实验科学工作的能力。",
-      "tags": [
-        "Agent",
-        "论文"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_18f7bd5e51",
-          "url": "https://openai.com/index/measuring-how-ai-agents-handle-wet-lab-science"
-        }
-      ],
-      "evidence": []
-    },
-    {
-      "section": "brief",
-      "title": "Anthropic 报告 207,000 次科研会话中的 Claude 使用情况",
-      "summary": "Anthropic 分析 207,000 次科研会话：数据分析约占 Claude 会话的三分之一、Claude Code 会话接近一半。",
-      "tags": [
-        "行业",
-        "Agent"
-      ],
+      "title": "Anthropic 分析科学家如何使用 Claude",
+      "summary": "Anthropic 分析 207,000 个科研会话发现，科学家主要用 Claude 做数据分析和写作，计算机科学占 Claude Code 会话的 32.7%。",
       "sources": [
         {
           "candidate_id": "c_911df70d08",
@@ -953,23 +396,68 @@
       "evidence": [
         {
           "url": "https://www.anthropic.com/research/how-researchers-use-claude",
-          "quote": "Using privacy-preserving methods, we study 207,000 Claude and Claude Code research sessions to understand how Claude is used across scientific fields and research tasks."
+          "quote": "Scientists primarily use Claude to analyze data and to write."
         },
         {
           "url": "https://www.anthropic.com/research/how-researchers-use-claude",
-          "quote": "Data analysis alone accounts for about one-third of sessions on Claude and nearly half of sessions on Claude Code."
+          "quote": "Despite making up only 4.3% of the world’s researchers, computer science alone accounts for 32.7% of Claude Code sessions."
         }
+      ],
+      "tags": [
+        "行业"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "OpenAI 发布湿实验基准 BioBasicsBench",
+      "summary": "OpenAI 发布 BioBasicsBench，用 100 个任务衡量 AI Agent 解读原始实验数据、处理日常湿实验科学工作的能力。",
+      "sources": [
+        {
+          "candidate_id": "c_18f7bd5e51",
+          "url": "https://openai.com/index/measuring-how-ai-agents-handle-wet-lab-science"
+        }
+      ],
+      "evidence": [],
+      "tags": [
+        "Agent"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "WeLM-Image：面向单 GPU 部署的统一图像生成模型",
+      "summary": "WeLM-Image 把多模态理解融入文生图、指令编辑和多参考合成，共 31.7B 存储参数，每个目标 latent token 约激活 5.4B 生成参数。",
+      "sources": [
+        {
+          "candidate_id": "c_044151e747",
+          "url": "https://huggingface.co/papers/2611.07392"
+        }
+      ],
+      "evidence": [],
+      "tags": [
+        "论文",
+        "图像"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "Meta 为 Muse 应用推出 spaces",
+      "summary": "Meta 为 Muse 推出 spaces：用户描述一个想法，Muse 就构建出对应的定制体验，之后还能边用边调整。",
+      "sources": [
+        {
+          "candidate_id": "c_87b926f4b8",
+          "url": "https://about.fb.com/news/2026/11/introducing-spaces-customize-muse-app/"
+        }
+      ],
+      "evidence": [],
+      "tags": [
+        "产品"
       ]
     }
   ],
   "research": [
     {
       "via": "webfetch",
-      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.319"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://openai.com/index/measuring-how-ai-agents-handle-wet-lab-science"
+      "url": "https://www.perplexity.ai/en-GB/hub/blog/teammates-are-agents-for-complex-ongoing-work"
     },
     {
       "via": "webfetch",
@@ -977,7 +465,7 @@
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.07854"
+      "url": "https://openai.com/index/measuring-how-ai-agents-handle-wet-lab-science"
     },
     {
       "via": "webfetch",
@@ -985,47 +473,11 @@
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.08373"
+      "url": "https://mistral.ai/news/build-with-studio/"
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.08449"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.07392"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.06741"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.04277"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.06976"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.04894"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.03743"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.00883"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.06817"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/blog/allenai/toyblocks"
+      "url": "https://devblogs.microsoft.com/foundry/foundry-local-agentic-coding-qwen3-8-27b/"
     },
     {
       "via": "webfetch",
@@ -1033,54 +485,60 @@
     },
     {
       "via": "webfetch",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31779"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.07854"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.04277"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.00883"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.08449"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.08373"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/blog/allenai/toyblocks"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/Linum-AI/pjit-21k"
+    },
+    {
+      "via": "webfetch",
       "url": "https://www.anthropic.com/research/how-researchers-use-claude"
     },
     {
-      "via": "webfetch",
-      "url": "https://github.com/huggingface/transformers/releases/tag/v5.22.2"
+      "via": "websearch",
+      "query": "Cactus Compute Mirage 22 MB vision language model"
     },
     {
-      "via": "webfetch",
-      "url": "https://huggingface.co/blog/open-asr-leaderboard-liva"
+      "via": "websearch",
+      "query": "Hugging Face blog \"harness adapters\" LoRA"
     },
     {
-      "via": "webfetch",
-      "url": "https://github.com/langchain-ai/langgraph/releases/tag/cli%3D%3D0.4.42"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://latent.space/p/controlling-biology-fabian-theis-helmholtz-munich/"
+      "via": "websearch",
+      "query": "Boson AI \"Higgs Realtime Duplex\""
     }
   ],
   "validation": {
-    "validated_at": "2026-11-07T04:42:47+00:00",
+    "validated_at": "2026-11-07T04:45:19+00:00",
     "checked_links": true,
-    "dropped": [
-      {
-        "title": "WeLM-Image 统一图像生成与编辑，面向单卡部署",
-        "section": "model",
-        "candidates": [
-          "c_044151e747"
-        ],
-        "reasons": [
-          "number 20 does not appear in the cited material"
-        ]
-      },
-      {
-        "title": "Anthropic 估算 AI 对科研产出的潜在影响",
-        "section": "brief",
-        "candidates": [
-          "c_911df70d08"
-        ],
-        "reasons": [
-          "candidate c_911df70d08 is already used by item 20"
-        ]
-      }
-    ],
+    "dropped": [],
     "warnings": [
-      "OpenAI 推出湿实验科学 Agent 基准 BioBasicsBench: could not check https://openai.com/index/measuring-how-ai-agents-handle-wet-lab-science (403)",
-      "19 items, more than 18 (expected about 15)",
-      "6 headline items (target 3-5)"
+      "Nace AI 开放 Drex 决策模型家族: could not check https://i.redd.it/fez7h4dxu00i1.png (403)",
+      "OpenAI 发布湿实验基准 BioBasicsBench: could not check https://openai.com/index/measuring-how-ai-agents-handle-wet-lab-science (403)"
     ]
   }
 }

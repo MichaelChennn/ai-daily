@@ -2,111 +2,98 @@
 
 ## 今日要点
 
-- Anthropic 提出用「dreaming」整理 Agent 记忆，并用 Pokémon Red、CL-Bench 等任务评估不同模型写入记忆的方式。
-- NVIDIA 的 VFlash 用 Flash Primitive Decoding 联合预测视觉图元，3D 轨迹生成速度约 25 倍，配套世界动作模型在 MolmoSpaces 四个任务集上平均成功率 70.2%。
-- Cloudflare 开源 security-audit-skill：把安全审计拆成六个阶段，用独立 agent 复核发现并输出机器可读结果。
+- Anthropic 介绍 Agent 记忆的分层和 dreaming 离线整理；Mistral Studio 新增 managed agents、workflows 和 Mistral MCP server。
+- Cloudflare 以 MIT 许可开源安全审计 skill；微软 Foundry Local 能在 24 GB 显存的显卡上本地运行 Qwen3.8-27B 并接入 GitHub Copilot。
 
 ## 🔥 头条
 
-### Anthropic 探索用「dreaming」整理 Agent 记忆
+### Anthropic 详解 Agent 记忆分层与 dreaming
 
-Anthropic 研究了 Agent 记忆的组成：Agent 把日志整理成笔记、标记重要事件，再在空闲时通过「dreaming」反思日志、修正错误并组织记忆。评测显示，不同模型判断什么值得记住的能力差异明显——在 Pokémon Red 中，Claude Fable 5 只写了九个文件、四个文件夹，却拿到四个徽章，而 Claude Sonnet 3.7 写了 413 个记忆文件、225 个文件夹，只拿到一个徽章。这给做长期记忆的开发者一个直接抓手：记忆质量取决于判断和取舍，而非记得更多。
+Anthropic 的研究文章介绍了 dreaming：Agent 离线回看日志，修正记忆里的错误、生成新的笔记和表示。实验在 Claude Managed Agents 上进行；在一项测试中，同时用搜索和 wiki 时 Claude 的得分随 wiki 增长从 54% 升到 61%，只用搜索为 53%，每题还省下约 20,000 tokens。构建长期运行 Agent 的开发者可以参考这套记忆分层和定期整理的思路。
 
-来源：[Anthropic Research](https://www.anthropic.com/research/components-of-agent-memory)　`Agent` `论文`
+来源：[Anthropic Research](https://www.anthropic.com/research/components-of-agent-memory)　`Agent` `产品`
 
-### NVIDIA 提出 VFlash 视觉规划解码，3D 轨迹生成约 25 倍加速
+### Mistral Studio 新增托管 Agent、工作流和 MCP 服务器
 
-NVIDIA 等团队提出 VFlash，用轻量 drafter 一次前向联合预测整个视觉图元（点、框、轨迹），不再逐坐标 token 自回归解码。在评测的 2D 和 3D 机器人轨迹任务上预测误差持续低于自回归解码，初步单次 rollout 测量显示 3D 点运动预测生成约快 25 倍。以 VFlash 规划为条件的世界动作模型在四个 MolmoSpaces 任务集上平均成功率 70.2%，基线为 62.6%。
+Mistral 更新 Studio 平台，新增 managed agents、workflows 和 enterprise context 等功能，模型和平台可以部署在云、自有 VPC 或本地环境。新的 Mistral MCP server 让开发者用 Mistral Vibe 或现有编码 Agent 在本地测试，再用一条命令部署到 Studio；OpenTelemetry trace 记录每一步的模型调用、工具调用和审批。需要私有化部署 Agent 的企业团队，在模型之外多了一套运行、部署和排查工具。
 
-来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2611.08449)　`论文` `多模态`
+来源：[Mistral AI News](https://mistral.ai/news/build-with-studio/)　`Agent` `产品` `工具`
 
-### Cloudflare 开源 security-audit-skill 编码 Agent 安全审计技能
+### Cloudflare 开源多阶段安全审计 Agent skill
 
-Cloudflare 发布 security-audit-skill，把安全审计拆成六个阶段：勘察、按覆盖度分配 hunt、候选验证、结构化输出、记录独立复核和目标中立报告，产出 findings.json、REPORT.md 等文件。设计上强调「发现的 Agent 不能是验证的 Agent」，并把无法确认的线索记为 needs_validation 而不是直接判定漏洞。开发者可用 Skills CLI 安装，在目标代码库中直接触发完整审计。
+Cloudflare 发布 security-audit，一个让编码 Agent 做多阶段安全审计的 skill，以 MIT 许可开源。它的原则是核查发现的 Agent 永远不是发现它的那个 Agent，结果写入 findings.json 并按 schema 校验；运行需要支持工具调用和并行子 Agent 的模型。想用编码 Agent 做代码安全审计的团队可以直接装上，得到可机器读取、经过独立核验的结果。
 
-来源：[GitHub Trending](https://github.com/cloudflare/security-audit-skill)　`开源` `安全` `Agent`
+来源：[GitHub Trending](https://github.com/cloudflare/security-audit-skill)　`安全` `Agent` `开源`
 
-### Harness-S 让 Agent 从兄弟 harness 中学习并迁移能力
+### 微软 Foundry Local 支持本地运行 Qwen3.8-27B 写代码
 
-上海交通大学等团队提出 Harness-S：不追求通用最优的 harness，而是用「兄弟 harness」补齐基础执行系统的失败。只有当基础 harness 下所有尝试都失败时，才调用兄弟 harness 池重新采样，用这些轨迹替换失败组做强化学习，再把获得的能力迁移回原 harness。论文称在 AppWorld、SWE-Gym 和 DBBench 上训练后的策略回到基础 harness 仍明显优于只做策略训练。
+微软 Foundry Local 现在可以在本地运行 Qwen3.8-27B 并接入 GitHub Copilot：4-bit 量化后模型约 18 GB，24 GB 显存的消费级显卡即可运行、支持 64K 上下文，32 GB 以上显存最长可到 262K。推理用 DFlash2 投机解码加速，需要 Foundry Local CLI 0.13.0 或更高版本。有 NVIDIA 显卡、又不想让代码离开本机的开发者可以试一试。
 
-来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2611.04277)　`Agent` `论文` `训练`
-
-### Drex 开源决策模型家族，单次前向输出选项概率
-
-Nace.AI 提出 Drex 决策模型家族：给定问题与用户提供的选项，直接返回选项上的概率分布，不做自回归解码，输出无需解析长文本。家族包含 8B（DLM）、9B（v1.5）、35B-A3B（v2.0）和 27B（Max）四个模型，训练结合监督微调与 RLAF，Max 还做了视觉调优。论文报告 Max 在 Decision Index 0.4.1 公开集上取得 67.52，典型请求响应 183 ms，而 GPT-6 Sol 约 2.0 s、Claude Opus 5.5 约 3.5 s；全部权重与推理代码开放。
-
-来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2611.07854)　`模型` `开源` `推理`
-
-### SLA 把空间对齐扩展到 VLA 持续预训练
-
-港科大等团队提出 SLA（Spatial-Language-Action Model），在预训练阶段就让策略对齐冻结 3D 感知模型给出的空间表征，并在后训练中保持这种对齐。SLA 从预训练 pi05 策略初始化，联合优化动作预测与中间视觉嵌入的空间对齐，并用 feature-dependent gates 聚合多层视觉特征、概率化 state dropout 抑制对演示轨迹的过拟合。所有辅助组件只用于训练，可直接复用预训练 VLA 权重，推理架构不变。
-
-来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2611.08373)　`论文` `多模态`
+来源：[devblogs.microsoft.com](https://devblogs.microsoft.com/foundry/foundry-local-agentic-coding-qwen3-8-27b/)　`代码` `推理` `工具`
 
 ## 🧠 模型
 
-### Open-HumanScale 开源 5 万小时第一人称视频配方
+### Nace AI 开放 Drex 决策模型家族
 
-北京大学团队提出 Open-HumanScale，一套完全开放的具身基础模型配方，配套开放标注了手部动作和自然语言的 Open-HumanScale-50K 第一人称视频语料。研究用闭环仿真评估发现预训练数据时长与下游机器人成功率之间存在对数线性 scaling law，并据此训练只用人类视频的 HumanWAM-Vanilla，机器人后训练后在 RoboTwin 2.0 Clean2Clean 达 92.08%、Clean2Random 达 68.88%。人机混合预训练的 HumanWAM-Goal 后训练后达到 92.70% 和 84.60%，语料、检查点与代码一并开放。
+Drex 是四个开放的决策模型，规模为 8B（DLM）、9B（v1.5）、35B with 3B active（v2.0）和 27B（Max）：输入状态和一组选项，直接返回各选项的概率分布，不做自回归解码。论文称 Max 典型请求耗时 183 ms，在 Decision Bench v4 上落后 Claude Opus 5.5 1.6 分。只需在固定选项中做选择的分类、判断、打分场景，可以用它省掉长链推理和输出解析。
 
-来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2611.06817)　`模型` `开源` `多模态`
+来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2611.07854) · [i.redd.it](https://i.redd.it/fez7h4dxu00i1.png)　`模型` `开源` `推理`
 
-### TailSteer 在训练尾段抑制多轮图像编辑漂移
+### Linum 开放训练成本约 $21K 的 2B 文生图模型
 
-TailSteer 是一个末段训练框架，针对图像编辑反复复用输出时不断累积的视觉漂移。它的做法是让早期去噪动态贴近基座模型，只在轨迹尾部集中学习保持性修正，这些修正从编辑器自身的 on-policy 去噪 rollout 中学习，用未改动的源内容作为保持参考，不需要精标编辑对。在 FLUX、SenseNova 和 Qwen 系列上的实验显示，它在 15-20 轮编辑中显著降低累积漂移，同时基本保持基座模型原有的生成与编辑能力，且不改动架构和推理流程。
+Linum AI 发布研究检查点 P-JiT 21K：2B 参数，用 660M 样本训练，算力成本约 $21K，许可为 apache-2.0。训练数据刻意去掉了渲染文字类图片，所以它不能生成文字或海报；官方说明这是通往下一个视频模型的过渡产物，不是生产模型。关注低成本训练的开发者可以拿它作参考。
 
-来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2611.06741)　`论文` `图像`
-
-### PLatour 跨模型 latent 通信框架与 PACT-Check 检验
-
-伦敦国王学院团队提出 PLatour，一个开源的 prefill-to-autoregressive 跨模型迁移（PACT）框架：用轻量零初始化线性桥连接冻结模型，直接以任务奖励训练，并支持混合注意力架构。作者同时提出 PACT-Check 来量化收益有多少真正来自通信，因为对照实验显示部分任务上的提升可由无信息发送方信号、自我通信或只训练接收方复现，线性桥可能只是参数高效的适配机制。论文称 PLatour 在生成任务上超过所评开源 PACT 基线，并以 35B 发送方在共享数学与代码基准上超过 Mostik 报告的结果（其发送方为 753B）。
-
-来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2611.06976)　`论文` `模型` `训练`
-
-### EvoMemState 用关系状态与推理状态管理 Agent 记忆
-
-EvoMemState 针对以独立事实为单位存储记忆的局限，把持久化事实扩展为两种互补状态：记录事实有效性、范围和相互关系的 Relational States，以及决定这些事实如何用于当前请求的 Reasoning State。框架由本体引导的记忆状态归纳、用强化学习内化记忆使用经验的 RL-Based State Evolution，以及结合事实与两类状态做推理的 State-Aware Reasoning 三部分组成。论文称在长期对话与记忆使用基准上，检索完整性和基于记忆的回复准确率都稳定优于既有记忆系统，代码与实现细节已开放。
-
-来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2611.03743)　`Agent` `论文`
+来源：[Hugging Face](https://huggingface.co/Linum-AI/pjit-21k)　`模型` `图像` `开源`
 
 ## 📄 论文
 
-### BestRand：把评测子集选择的随机误差长尾压下去
+### SLA：在持续预训练中加入空间对齐的 VLA 模型
 
-CMU 等团队推导了用子集估计全量基准分数时误差分布的近似解析式，发现多数随机子集误差很小、少数子集误差很大，呈长尾分布，因此随机采样常常够用但不稳定，并指出这种不稳定在现代基础模型上依然存在。据此提出 BestRand，在保留随机采样效率的同时削减高误差尾部：在 70+ 文本、多模态和 Agent 基准上，相比有竞争力的方法将高误差风险降低 50.2%、平均估计误差降低 16.4%，构建成本只需 51.3%，OOD 估计误差平均再降 21.8%。
+SLA 从预训练的 pi05 策略出发，在持续预训练中联合优化动作预测，以及中间视觉嵌入与冻结 3D 感知模型空间表示之间的对齐。所有辅助组件只在训练时使用，可以直接复用已有 VLA 权重，推理架构保持不变。做机器人操作的团队可以在不改部署的前提下借鉴这种训练方式。
 
-来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2611.00883)　`论文` `工具`
+来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2611.08373)　`论文` `多模态` `训练`
 
-### VisSearch-Bench 评测多模态 Agent 的长程视觉搜索
+### VFlash：一次前向生成整段视觉规划
 
-蚂蚁集团等团队提出 VisSearch-Bench，聚焦多模态 Agent 的视觉上下文管理——把图像、物体外观、局部细节和空间关系与外部检索结果串联起来，而不是只用图片识别出首个实体再转纯文本检索。基准含 7 个主领域、25 个子领域的 204 个人工编写任务，覆盖集合式、序贯式、宽深混合、竞争性视觉消歧和视觉结构引导搜索，每题给出参考答案、可追溯证据和评分规则。评测 16 个多模态模型时，即使带上搜索工具，最好的系统也只完整解出 26.47% 的任务。
+VFlash 让 VLM 不再逐个坐标 token 生成框、轨迹这类视觉规划，而是用轻量 drafter 一次前向生成整个 primitive，并直接接受结构有效的预测。初步测量显示 3D 点运动预测的生成快约 25x；以 VFlash 规划为条件的世界动作模型在 MolmoSpaces 任务套件上平均成功率 70.2%，基线为 62.6%。在机器人和自动驾驶里用 VLM 输出空间规划的系统，可以借此降低解码延迟。
 
-来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2611.04894)　`论文` `多模态` `Agent`
+来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2611.08449)　`论文` `多模态` `推理`
+
+### Harness-S：用兄弟 harness 救回失败轨迹训练 Agent
+
+Harness-S 从同一基础 harness 演化出一组各自修复不同失败的兄弟 harness；只有基础 harness 下所有初始尝试都失败时，才让同一策略在选中的兄弟 harness 下重新采样，用这些轨迹替换失败组做强化学习。在 AppWorld、SWE-Gym 和 DBBench 上，训练后的策略回到原 harness 时明显优于只训练策略的做法。做 Agent 强化学习的团队可以把 harness 的改进沉淀进模型本身。
+
+来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2611.04277)　`论文` `Agent` `训练`
+
+### BestRand：稳定且低成本的基准压缩方法
+
+论文分析了用子集估计完整基准分数的误差分布：多数随机子集误差很小，少数误差很大，呈长尾分布。据此提出的 BestRand 在 70+ 个文本、多模态和 Agent 基准上验证，相比已有方法把高误差风险降低 50.2%、估计误差平均降低 16.4%，构建成本只要 51.3%。评测预算紧张的团队可以用它挑出小子集，代替跑完整基准。
+
+来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2611.00883)　`论文` `训练`
 
 ## 🛠 开源与工具
 
-### Apple 用小神经网络加速 MIPS 检索
+### Claude Code v2.1.319 支持后台运行 MCP 任务
 
-Apple 介绍 ICML 2026 论文 Amortizing Maximum Inner Product Search with Learned Support Functions：在固定的 key 数据库上离线训练小神经网络，学习如何把查询更快路由到最佳匹配，用一次性的摊销成本换取推理时更快、更准的检索。方法把最大内积搜索看成支撑函数，用 SupportNet 近似支撑函数改善聚类路由，用 KeyNet 直接输出最佳匹配的 key 向量，两者都基于真实查询分布采样训练。对做 RAG 的团队，这意味着在高维、大规模向量库上可以绕开纯几何索引的部分误差，换取检索延迟收益。
+新版本中，MCP 服务器以任务方式运行工具调用时，Claude Code 会立即把它移到后台，完成后再把结果告诉 Claude；新增 permissions.denyInsteadOfPrompting 设置，需要等待权限确认的工具调用会直接被拒绝，回合继续。关闭遥测或 feature flag 时 auto mode 也有变化：服务器无法检查的调用会询问或拒绝，不再回退到内置分类器。在网关后面或无人值守运行 Claude Code 的团队，升级前要留意这些行为变化。
 
-来源：[Apple Machine Learning Research](https://machinelearning.apple.com/research/faster-retrieval)　`工具` `论文`
+来源：[GitHub Releases](https://github.com/anthropics/claude-code/releases/tag/v2.1.319)　`工具` `代码` `Agent`
 
-### ToyBlocks 开放机器人学习仿真框架
+### llama.cpp 合并 Kimi-K3.1-Pro 文本模型支持
 
-ToyBlocks 是 FoundationWorlds 的第一个环境：一个开放仿真框架，围绕桌面上的机械臂和积木，支持自动生成任务与训练演示，并给出行为指标，目标是让研究者能改变训练数据、重复测试并追溯失败原因。框架用强化学习和运动规划生成短时程技能，在 Isaac Lab 中训练推、翻等非抓取技能，再由任务-运动规划器串接技能产出带标签的演示数据，单 GPU 并行执行可达 24 倍实时。开发者可用网页界面接入 Claude 等前沿模型用自然语言指挥机器人。
+llama.cpp 合并了 PR #31779，加入 Kimi-K3.1-Pro 文本模型支持：K3.1 复用 K3 的大部分结构，但把全注意力的 MLA 层换成了 DSA。视觉塔和 mm_projector 暂时跳过，目前只支持文本。硬件足够的用户现在可以用 llama.cpp 在本地运行这个模型。
 
-来源：[Hugging Face Blog](https://huggingface.co/blog/allenai/toyblocks) · [Ai2](https://allenai.org/blog/toyblocks)　`开源` `工具` `多模态`
+来源：[GitHub](https://github.com/ggml-org/llama.cpp/pull/31779)　`开源` `推理` `工具`
 
-### Hugging Face Transformers 发 v5.22.2 补丁版修安全问题
+### Apple 用小型神经网络加速 RAG 向量检索
 
-Hugging Face 发布 Transformers v5.22.2 补丁版本，包含安全与分布式相关修复：其中一项是加固 Jinja 沙箱，另一项是让 device_id 只为 NCCL 设置。升级量不大，但模板沙箱与多卡训练配置都属于容易在生产里踩坑的环节，升级前值得核对现有部署的模板与分布式启动方式。
+Apple 在 ICML 2026 论文中提出，为固定的 key 数据库离线训练小型神经网络，学会把查询路由到最佳匹配：SupportNet 用于聚类路由，KeyNet 可以作为现有 IVF 索引前面的 query rewriter。实验中，KeyNet 最大模型达到 99% 召回所需时间最多减少约 8×（0.23 ms 对 1.8 ms）。key 库相对固定、查询量大的 RAG 和推荐系统，可以考虑用离线训练换在线延迟。
 
-来源：[GitHub Releases](https://github.com/huggingface/transformers/releases/tag/v5.22.2)　`开源` `安全` `工具`
+来源：[Apple Machine Learning Research](https://machinelearning.apple.com/research/faster-retrieval)　`论文` `推理`
 
 ## ⚡ 快讯
 
-- **LangGraph CLI 与 SDK 小版本更新** langgraph-cli 0.4.42 新增 deploy metrics 命令并升级 filelock、langgraph-api 依赖以修复安全问题。 [langchain-ai/langgraph langgraph-cli==0.4.42](https://github.com/langchain-ai/langgraph/releases/tag/cli%3D%3D0.4.42) · [langchain-ai/langgraph langgraph-sdk==0.4.14](https://github.com/langchain-ai/langgraph/releases/tag/sdk%3D%3D0.4.14)
-- **Open ASR 榜单新增埃及与尼日利亚英语私有数据** Open ASR Leaderboard 与 Liva AI 合作新增埃及英语、尼日利亚英语两个口音的私有数据分区。 [Hugging Face Blog](https://huggingface.co/blog/open-asr-leaderboard-liva)
-- **OpenAI 推出湿实验科学 Agent 基准 BioBasicsBench** OpenAI 发布 BioBasicsBench，用 100 个任务衡量 AI Agent 解读原始实验数据、处理日常湿实验科学工作的能力。 [OpenAI News](https://openai.com/index/measuring-how-ai-agents-handle-wet-lab-science)
-- **Anthropic 报告 207,000 次科研会话中的 Claude 使用情况** Anthropic 分析 207,000 次科研会话：数据分析约占 Claude 会话的三分之一、Claude Code 会话接近一半。 [Anthropic Research](https://www.anthropic.com/research/how-researchers-use-claude)
+- **Anthropic 分析科学家如何使用 Claude** Anthropic 分析 207,000 个科研会话发现，科学家主要用 Claude 做数据分析和写作，计算机科学占 Claude Code 会话的 32.7%。 [Anthropic Research](https://www.anthropic.com/research/how-researchers-use-claude)
+- **OpenAI 发布湿实验基准 BioBasicsBench** OpenAI 发布 BioBasicsBench，用 100 个任务衡量 AI Agent 解读原始实验数据、处理日常湿实验科学工作的能力。 [OpenAI News](https://openai.com/index/measuring-how-ai-agents-handle-wet-lab-science)
+- **WeLM-Image：面向单 GPU 部署的统一图像生成模型** WeLM-Image 把多模态理解融入文生图、指令编辑和多参考合成，共 31.7B 存储参数，每个目标 latent token 约激活 5.4B 生成参数。 [Hugging Face Daily Papers](https://huggingface.co/papers/2611.07392)
+- **Meta 为 Muse 应用推出 spaces** Meta 为 Muse 推出 spaces：用户描述一个想法，Muse 就构建出对应的定制体验，之后还能边用边调整。 [Meta Newsroom · AI](https://about.fb.com/news/2026/11/introducing-spaces-customize-muse-app/)
