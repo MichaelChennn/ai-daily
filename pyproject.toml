@@ -33,3 +33,4 @@ ignore = ["UP017"] # timezone.utc reads clearer next to the BEIJING timezone
 
 [tool.ruff.lint.per-file-ignores]
 "tests/*" = ["E501"] # canned HTTP fixtures
+"docs/diagrams/*" = ["E501"] # one SVG element per line
