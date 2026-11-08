@@ -1,0 +1,3083 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-08",
+  "generated_at": "2026-11-08T04:15:58+00:00",
+  "window": {
+    "start": "2026-11-07T03:00:00+00:00",
+    "end": "2026-11-08T04:15:53.756744+00:00"
+  },
+  "stats": {
+    "filtered": 53,
+    "raw": 85,
+    "after_url_merge": 83,
+    "dropped_already_published": 11,
+    "candidates": 72,
+    "clusters": 4,
+    "seen_before": 34,
+    "reported_before": 12
+  },
+  "sources": [
+    {
+      "id": "openai-news",
+      "status": "ok",
+      "count": 1,
+      "seconds": 0.4429129680000017,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "anthropic-news",
+      "status": "ok",
+      "count": 0,
+      "seconds": 0.1842767039999984,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "anthropic-research",
+      "status": "ok",
+      "count": 2,
+      "seconds": 0.4943479570000022,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "deepmind-blog",
+      "status": "ok",
+      "count": 0,
+      "seconds": 0.47871269000000183,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "google-ai-blog",
+      "status": "ok",
+      "count": 0,
+      "seconds": 0.6118656980000026,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "mistral-news",
+      "status": "ok",
+      "count": 0,
+      "seconds": 2.0518662380000023,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "huggingface-blog",
+      "status": "ok",
+      "count": 1,
+      "seconds": 0.4623900149999969,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "meta-ai-news",
+      "status": "ok",
+      "count": 0,
+      "seconds": 0.16192288199999894,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "minimax-blog",
+      "status": "ok",
+      "count": 0,
+      "seconds": 2.0985771440000036,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "kimi-blog",
+      "status": "ok",
+      "count": 0,
+      "seconds": 2.1027816639999983,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "deepseek-news",
+      "status": "ok",
+      "count": 0,
+      "seconds": 0.7071803549999984,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "deepseek-website",
+      "status": "ok",
+      "count": 0,
+      "seconds": 0.5367042170000005,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "qwen-blog",
+      "status": "ok",
+      "count": 0,
+      "seconds": 2.3432302960000015,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "seed-blog",
+      "status": "ok",
+      "count": 0,
+      "seconds": 2.6844071169999992,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "google-research",
+      "status": "ok",
+      "count": 0,
+      "seconds": 1.4550552789999998,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "microsoft-research",
+      "status": "ok",
+      "count": 0,
+      "seconds": 2.192451270999996,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "apple-ml-research",
+      "status": "ok",
+      "count": 0,
+      "seconds": 0.5917959889999977,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "ai2-blog",
+      "status": "ok",
+      "count": 1,
+      "seconds": 0.9387086539999956,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "thinking-machines",
+      "status": "ok",
+      "count": 0,
+      "seconds": 1.4311072770000024,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "stability-news",
+      "status": "ok",
+      "count": 0,
+      "seconds": 1.9812545929999956,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "baidu-ernie",
+      "status": "error",
+      "count": 0,
+      "seconds": 2.9390536939999947,
+      "error": "HTTPStatusError: Client error '404 Not Found' for url 'https://ernie.baidu.com/blog/index.xml'",
+      "filtered": {}
+    },
+    {
+      "id": "xai-news",
+      "status": "ok",
+      "count": 0,
+      "seconds": 0.9313448710000003,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "claude-blog",
+      "status": "ok",
+      "count": 0,
+      "seconds": 1.841730749,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "black-forest-labs",
+      "status": "ok",
+      "count": 0,
+      "seconds": 1.4589596940000007,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "liquid-ai",
+      "status": "ok",
+      "count": 0,
+      "seconds": 0.9447123389999987,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "cohere-blog",
+      "status": "ok",
+      "count": 0,
+      "seconds": 2.091260812999998,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "cursor-blog",
+      "status": "ok",
+      "count": 0,
+      "seconds": 1.0758474559999982,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "hf-daily-papers",
+      "status": "ok",
+      "count": 10,
+      "seconds": 2.346280045999997,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "github-releases",
+      "status": "ok",
+      "count": 6,
+      "seconds": 4.2440363219999995,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "github-trending",
+      "status": "ok",
+      "count": 8,
+      "seconds": 2.1026184589999986,
+      "error": null,
+      "filtered": {
+        "not_ai": 7
+      }
+    },
+    {
+      "id": "hf-trending-models",
+      "status": "ok",
+      "count": 28,
+      "seconds": 0.6073784260000039,
+      "error": null,
+      "filtered": {
+        "noisy_model": 14,
+        "max_age_days": 8
+      }
+    },
+    {
+      "id": "simon-willison",
+      "status": "ok",
+      "count": 0,
+      "seconds": 1.5201443170000033,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "interconnects",
+      "status": "ok",
+      "count": 0,
+      "seconds": 0.6824860170000022,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "import-ai",
+      "status": "disabled",
+      "count": 0,
+      "seconds": 0.0,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "latent-space",
+      "status": "ok",
+      "count": 0,
+      "seconds": 2.674407504999998,
+      "error": null,
+      "filtered": {
+        "exclude_title": 1
+      }
+    },
+    {
+      "id": "sebastian-raschka",
+      "status": "ok",
+      "count": 0,
+      "seconds": 1.8278165879999975,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "karpathy",
+      "status": "ok",
+      "count": 0,
+      "seconds": 0.5807172399999985,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "lilian-weng",
+      "status": "ok",
+      "count": 0,
+      "seconds": 0.722419416000001,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "answer-ai",
+      "status": "ok",
+      "count": 0,
+      "seconds": 0.9157203620000018,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "sam-altman",
+      "status": "ok",
+      "count": 0,
+      "seconds": 1.884996698000002,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "ethan-mollick",
+      "status": "ok",
+      "count": 0,
+      "seconds": 1.047389226,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "kexue-fm",
+      "status": "ok",
+      "count": 0,
+      "seconds": 2.6960733660000002,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "recode-china-ai",
+      "status": "disabled",
+      "count": 0,
+      "seconds": 0.0,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "chinai",
+      "status": "disabled",
+      "count": 0,
+      "seconds": 0.0,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "hackernews",
+      "status": "ok",
+      "count": 5,
+      "seconds": 1.450854819,
+      "error": null,
+      "filtered": {
+        "not_ai": 23
+      }
+    },
+    {
+      "id": "reddit-ai",
+      "status": "ok",
+      "count": 29,
+      "seconds": 1.933895021000005,
+      "error": null,
+      "filtered": {}
+    }
+  ],
+  "clusters": [
+    {
+      "id": "k_a37f79f053",
+      "title": "ccore/Qwen3.5-4B-GLB-3D-Coder",
+      "candidate_ids": [
+        "c_a37f79f053",
+        "c_51427f889c"
+      ]
+    },
+    {
+      "id": "k_d0a1cc9b42",
+      "title": "PrunaAI/P-H3-Image-Comfy",
+      "candidate_ids": [
+        "c_d0a1cc9b42",
+        "c_621d04c2ab"
+      ]
+    },
+    {
+      "id": "k_d0558e1230",
+      "title": "LiquidAI/LFM3-1.7B",
+      "candidate_ids": [
+        "c_d0558e1230",
+        "c_73262d098d"
+      ]
+    },
+    {
+      "id": "k_cf1c6eb2e1",
+      "title": "OBLITERATUS/DeepSeek-V4.1-Flash-1017-obliterated",
+      "candidate_ids": [
+        "c_cf1c6eb2e1",
+        "c_8b553ca25e"
+      ]
+    }
+  ],
+  "filtered": [
+    {
+      "source": "github-trending",
+      "title": "prometheus/prometheus",
+      "url": "https://github.com/prometheus/prometheus",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "github-trending",
+      "title": "sherlock-project/sherlock",
+      "url": "https://github.com/sherlock-project/sherlock",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "github-trending",
+      "title": "astral-sh/ruff",
+      "url": "https://github.com/astral-sh/ruff",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "github-trending",
+      "title": "tailwindlabs/tailwindcss",
+      "url": "https://github.com/tailwindlabs/tailwindcss",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "github-trending",
+      "title": "mbillow/localthings",
+      "url": "https://github.com/mbillow/localthings",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "github-trending",
+      "title": "zed-industries/zed",
+      "url": "https://github.com/zed-industries/zed",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "github-trending",
+      "title": "ranxianglei/billion-context",
+      "url": "https://github.com/ranxianglei/billion-context",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "xtools-at/DeepSeek-V4-Pro-Qwen3.5-9B-UNCENSORED-heretic",
+      "url": "https://huggingface.co/xtools-at/DeepSeek-V4-Pro-Qwen3.5-9B-UNCENSORED-heretic",
+      "reason": "noisy_model",
+      "value": "repo id contains uncensored"
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5",
+      "reason": "max_age_days",
+      "value": "107 days old > 45"
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "Qwen/Qwen3.8-27B",
+      "url": "https://huggingface.co/Qwen/Qwen3.8-27B",
+      "reason": "max_age_days",
+      "value": "94 days old > 45"
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "DavidAU/Qwen3.8-27B-TURBO-Fable-Cold-Fusion-735-882-Heretic-Uncensored-NEO-CODER-MAX-MTP-GGUF",
+      "url": "https://huggingface.co/DavidAU/Qwen3.8-27B-TURBO-Fable-Cold-Fusion-735-882-Heretic-Uncensored-NEO-CODER-MAX-MTP-GGUF",
+      "reason": "noisy_model",
+      "value": "repo id contains gguf"
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "AtomicChat/DeepSeek-V4.1-Flash-1017-Uncensored-GSQ-RCO-GGUF",
+      "url": "https://huggingface.co/AtomicChat/DeepSeek-V4.1-Flash-1017-Uncensored-GSQ-RCO-GGUF",
+      "reason": "noisy_model",
+      "value": "repo id contains gguf"
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "unsloth/Qwen3.8-Flash-Next-GGUF",
+      "url": "https://huggingface.co/unsloth/Qwen3.8-Flash-Next-GGUF",
+      "reason": "noisy_model",
+      "value": "repo id contains gguf"
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "abenzerps/Qwen-Image-2.1-Turbo-Quantized",
+      "url": "https://huggingface.co/abenzerps/Qwen-Image-2.1-Turbo-Quantized",
+      "reason": "noisy_model",
+      "value": "repo id contains quantized"
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "facebook/sam3",
+      "url": "https://huggingface.co/facebook/sam3",
+      "reason": "max_age_days",
+      "value": "365 days old > 45"
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "ISTA-DASLab/DeepSeek-V4.1-Flash-1017-GSQ-RCO-Coder-GGUF",
+      "url": "https://huggingface.co/ISTA-DASLab/DeepSeek-V4.1-Flash-1017-GSQ-RCO-Coder-GGUF",
+      "reason": "noisy_model",
+      "value": "repo id contains gguf"
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "SC117/Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF",
+      "url": "https://huggingface.co/SC117/Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF",
+      "reason": "noisy_model",
+      "value": "repo id contains gguf"
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "mradermacher/DeepSeek-V4-Pro-Qwen3.5-9B-UNCENSORED-heretic-i1-GGUF",
+      "url": "https://huggingface.co/mradermacher/DeepSeek-V4-Pro-Qwen3.5-9B-UNCENSORED-heretic-i1-GGUF",
+      "reason": "noisy_model",
+      "value": "repo id contains gguf"
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "MiniMaxAI/MiniMax-H3",
+      "url": "https://huggingface.co/MiniMaxAI/MiniMax-H3",
+      "reason": "max_age_days",
+      "value": "102 days old > 45"
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "Qwen/Qwen3.8-Flash-Next",
+      "url": "https://huggingface.co/Qwen/Qwen3.8-Flash-Next",
+      "reason": "max_age_days",
+      "value": "75 days old > 45"
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "huihui-ai/Huihui-Qwen3.8-27B-abliterated-GGUF",
+      "url": "https://huggingface.co/huihui-ai/Huihui-Qwen3.8-27B-abliterated-GGUF",
+      "reason": "noisy_model",
+      "value": "repo id contains gguf"
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "Pika-Labs/Pika-H3-Flex-Turbo-LoRA",
+      "url": "https://huggingface.co/Pika-Labs/Pika-H3-Flex-Turbo-LoRA",
+      "reason": "noisy_model",
+      "value": "repo id contains lora"
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "DavidAU/Qwen3.5-9B-The-Defiant-Fable-Uncensored-Heretic-NEO-IMATRIX-MAX-MTP-GGUF",
+      "url": "https://huggingface.co/DavidAU/Qwen3.5-9B-The-Defiant-Fable-Uncensored-Heretic-NEO-IMATRIX-MAX-MTP-GGUF",
+      "reason": "noisy_model",
+      "value": "repo id contains gguf"
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "unsloth/Qwen3.8-27B-GGUF",
+      "url": "https://huggingface.co/unsloth/Qwen3.8-27B-GGUF",
+      "reason": "noisy_model",
+      "value": "repo id contains gguf"
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "autotrust/Qwen3.8-Flash-Next-E384-FP4-V2",
+      "url": "https://huggingface.co/autotrust/Qwen3.8-Flash-Next-E384-FP4-V2",
+      "reason": "noisy_model",
+      "value": "repo id contains fp4"
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "nvidia/NVIDIA-NemotronLabs-RE-USE",
+      "url": "https://huggingface.co/nvidia/NVIDIA-NemotronLabs-RE-USE",
+      "reason": "max_age_days",
+      "value": "108 days old > 45"
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "pyannote/speaker-diarization-community-1",
+      "url": "https://huggingface.co/pyannote/speaker-diarization-community-1",
+      "reason": "max_age_days",
+      "value": "571 days old > 45"
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "google/embeddinggemma-2",
+      "url": "https://huggingface.co/google/embeddinggemma-2",
+      "reason": "max_age_days",
+      "value": "54 days old > 45"
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "HauhauCS/Qwen3.8-27B-Uncensored-HauhauCS-Aggressive-MTP-GGUF",
+      "url": "https://huggingface.co/HauhauCS/Qwen3.8-27B-Uncensored-HauhauCS-Aggressive-MTP-GGUF",
+      "reason": "noisy_model",
+      "value": "repo id contains gguf"
+    },
+    {
+      "source": "latent-space",
+      "title": "[AINews] Anthropic IPO: Whither Now?",
+      "url": "https://latent.space/p/ainews-anthropic-ipo-whither-now/",
+      "reason": "exclude_title",
+      "value": "title matches ^\\[AINews\\]"
+    },
+    {
+      "source": "hackernews",
+      "title": "GitHub New pull request overview page in public preview",
+      "url": "https://github.blog/changelog/2026-11-05-new-pull-request-overview-page-in-public-preview/",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "Making any integer with four 2s (2025)",
+      "url": "https://eli.thegreenplace.net/2025/making-any-integer-with-four-2s/",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "What I run on my $10 USD OpenStick homelab",
+      "url": "https://blog.bosscher.ch/posts/openstick/",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "Five memorable books about programming (2008)",
+      "url": "https://prog21.dadgum.com/19.html",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "Show HN: Coldframe, a honeypot that poses as a supermarket fridge controller",
+      "url": "https://github.com/hedgerow-dev/coldframe",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "MaxxBench - \"Nice DeepSWE score. But is it true?\"",
+      "url": "https://maxxbench.unlap.ai/research/why-maxxbench/",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "Apple's grey list: Words and phrases your iPhone won't help you spell",
+      "url": "https://www.theguardian.com/technology/2026/nov/06/struggling-to-spell-male-chauvinist-pig-apple-grey-list-means-your-iphone-wont-help-you",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "How Long Can Life Wait?",
+      "url": "https://mceglowski.substack.com/p/how-long-can-life-wait",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "Every processor die anyone has photographed and given away",
+      "url": "https://sheets.works/data-viz/cpu-dies",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "They don't make 'em like that any more: Borland Turbo Pascal 7",
+      "url": "https://kevinboone.me/tpwin.html",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "Terry Pratchett's Study",
+      "url": "https://www.sussi.dk/terry-pratchetts-study",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "Ask HN: How did you convince family and friends to join your XMPP/Matrix server?",
+      "url": "https://news.ycombinator.com/item?id=50405250",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "Retro Song Bird: Plug in any Game Boy cartridge to hear the soundtrack",
+      "url": "https://www.retrosongbird.com/",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "The Gordon Gekko Effect: The Role of Culture in the Financial Industry [pdf] (2016)",
+      "url": "https://www.newyorkfed.org/medialibrary/media/research/epr/2016/epr_2016_gordon-gekko-effect_lo.pdf",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "The $8 Linux Computer (2022)",
+      "url": "http://thelittleengineerthatcould.blogspot.com/2022/12/the-8-linux-computer.html",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "Every Windows 11 app should kill Electron, and Discord just showed why",
+      "url": "https://www.windowslatest.com/2026/11/06/every-windows-11-app-should-kill-electron-and-discord-just-showed-why-no-starting-screen-and-70-less-ram-even-with-two-accounts-signed-in/",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "Upload Your RAM",
+      "url": "https://uploadyourram.org",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "Every Mac comes with an (undocumented) family member classifier",
+      "url": "https://8rank.ai/game/apple-intelligence-personal-knowledge-graph",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "Running a law firm on Free software",
+      "url": "https://decoded.legal/blog/2026/11/running-a-law-firm-on-free-software-2026-edition/",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "Port 0: The Port That Does Not Exist",
+      "url": "https://acid.vegas/blog/the-port-that-does-not-exist/",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "Need for Speed Underground 2 online in the browser",
+      "url": "https://nfsu2.xyz/",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "Asahi Linux Progress Linux 7.3",
+      "url": "https://asahilinux.org/2026/11/progress-report-7-3/",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "A barbarian tribe's mythic origin story is true, ancient DNA reveals",
+      "url": "https://www.science.org/content/article/barbarian-tribe-s-mythic-origin-story-true-ancient-dna-reveals",
+      "reason": "not_ai",
+      "value": null
+    }
+  ],
+  "dropped": [
+    {
+      "id": "c_18f7bd5e51",
+      "title": "Measuring how AI agents handle everyday wet-lab science",
+      "url": "https://openai.com/index/measuring-how-ai-agents-handle-wet-lab-science",
+      "published_on": "2026-11-07"
+    },
+    {
+      "id": "c_b44ca4f50a",
+      "title": "The components of agent memory",
+      "url": "https://www.anthropic.com/research/components-of-agent-memory",
+      "published_on": "2026-11-07"
+    },
+    {
+      "id": "c_a5946317f4",
+      "title": "VFlash: Fast, Accurate Visual Planning via Flash Primitive Decoding",
+      "url": "https://huggingface.co/papers/2611.08449",
+      "published_on": "2026-11-07"
+    },
+    {
+      "id": "c_2894bfea6d",
+      "title": "SLA: Scaling Spatial-Language-Action Model via Continual Pre-training",
+      "url": "https://huggingface.co/papers/2611.08373",
+      "published_on": "2026-11-07"
+    },
+    {
+      "id": "c_57e1609901",
+      "title": "cloudflare/security-audit-skill",
+      "url": "https://github.com/cloudflare/security-audit-skill",
+      "published_on": "2026-11-07"
+    },
+    {
+      "id": "c_6955b23f62",
+      "title": "google/skills",
+      "url": "https://github.com/google/skills",
+      "published_on": "2026-11-06"
+    },
+    {
+      "id": "c_398ce84e27",
+      "title": "moonshotai/Kimi-K3.1-Pro",
+      "url": "https://huggingface.co/moonshotai/Kimi-K3.1-Pro",
+      "published_on": "2026-11-05"
+    },
+    {
+      "id": "c_30c3b4e12d",
+      "title": "ricursiveAI/Ripple-65B-Preview",
+      "url": "https://huggingface.co/ricursiveAI/Ripple-65B-Preview",
+      "published_on": "2026-11-05"
+    },
+    {
+      "id": "c_17881453cb",
+      "title": "baidu/ERNIE-5.5-Flash-Base",
+      "url": "https://huggingface.co/baidu/ERNIE-5.5-Flash-Base",
+      "published_on": "2026-11-06"
+    },
+    {
+      "id": "c_1ce27c46fc",
+      "title": "xiaomi-research/Xiaomi-OCR-0",
+      "url": "https://huggingface.co/xiaomi-research/Xiaomi-OCR-0",
+      "published_on": "2026-11-01"
+    },
+    {
+      "id": "c_2e0f51f7f4",
+      "title": "LiquidAI/d1-2B",
+      "url": "https://huggingface.co/LiquidAI/d1-2B",
+      "published_on": "2026-11-01"
+    }
+  ],
+  "candidates": [
+    {
+      "source": "anthropic-research",
+      "source_name": "Anthropic Research",
+      "tier": 1,
+      "kind": "blog",
+      "title": "Teaching AI to build scientific models",
+      "url": "https://www.anthropic.com/research/teaching-ai-to-build-scientific-models",
+      "summary": "In this guest post, Jakob Macke, Daniel Gedon, and Stefan Wahl discuss how AI is starting to change the scientific modeling process, from construction to interpretation.",
+      "published_at": "2026-11-06T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {},
+      "tags": [],
+      "links": [],
+      "id": "c_afc7e38430",
+      "key": "anthropic.com/research/teaching-ai-to-build-scientific-models",
+      "cluster_id": "k_afc7e38430",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-07"
+      ],
+      "reported_on": []
+    },
+    {
+      "source": "huggingface-blog",
+      "source_name": "Hugging Face Blog",
+      "tier": 1,
+      "kind": "blog",
+      "title": "Egyptian and Nigerian English join the Open ASR Leaderboard",
+      "url": "https://huggingface.co/blog/open-asr-leaderboard-liva",
+      "summary": "",
+      "published_at": "2026-11-06T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {},
+      "tags": [],
+      "links": [],
+      "id": "c_112f9c7e11",
+      "key": "huggingface.co/blog/open-asr-leaderboard-liva",
+      "cluster_id": "k_112f9c7e11",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-07"
+      ],
+      "reported_on": []
+    },
+    {
+      "source": "ai2-blog",
+      "source_name": "Ai2",
+      "tier": 1,
+      "kind": "blog",
+      "title": "ToyBlocks: A controlled world for robot learning and evaluation",
+      "url": "https://allenai.org/blog/toyblocks",
+      "summary": "ToyBlocks is an open simulation framework for studying robot learning through automated task generation, training demonstrations, and evaluation in a controlled tabletop world.",
+      "published_at": "2026-11-06T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {},
+      "tags": [],
+      "links": [],
+      "id": "c_402b883388",
+      "key": "allenai.org/blog/toyblocks",
+      "cluster_id": "k_402b883388",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-07"
+      ],
+      "reported_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "From Autonomous Agents to Cognitive Symbionts: Toward AI-Augmented Human Intelligence",
+      "url": "https://huggingface.co/papers/2611.05376",
+      "summary": "For a decade, progress in artificial intelligence has been measured by how much a machine can do on its own. Large foundation models now write code and run multistep tasks, and personal agents act on a person's behalf. Yet people still forget what they once knew, miss what they are not looking at, fail to find the right words, and face hard choices without the benefit of their own history, because the machine that could help stands outside the situation. As AI moves into the physical world, attention has settled on one kind of intelligent individual, the embodied robot; we argue that the era of Physical AI holds a second kind of equal importance, the person augmented by AI. Alongside artificial general intelligence, which asks how intelligent a machine can be, stands AI-augmented human intelligence (AHI), which asks how much intelligence a machine can enable in a particular person. Realizing it calls for a new kind of system, a cognitive symbiont: a lifelong, embedded, real-time, private, low-friction, and proactive companion that senses what the person senses through external devices, keeps their context across years, models their situation and their mind, takes part in their thinking at the right moment, carries out everyday tasks with their context, and keeps learning the person as both change. We give the paradigm a conceptual core, the cognitive gap between what a person could bring to a situation and what they can hold in working memory, and organize its design space...",
+      "published_at": "2026-11-03T18:59:52+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 86,
+        "comments": 2,
+        "week": "2026-W45",
+        "organization": "University of Oxford"
+      },
+      "tags": [
+        "foundation models",
+        "embodied robot",
+        "Physical AI",
+        "AI-augmented human intelligence",
+        "cognitive symbiont",
+        "working memory",
+        "cognitive gap",
+        "symbiosis loop"
+      ],
+      "links": [],
+      "id": "c_56d170ca33",
+      "key": "arxiv:2611.05376",
+      "cluster_id": "k_56d170ca33",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "Route Anything: A Study of Model and Policy Routing for General-Purpose AI Systems",
+      "url": "https://huggingface.co/papers/2611.05275",
+      "summary": "Artificial general intelligence (AGI) requires a method that can understand, generate, reason, and act across diverse domains and modalities. Rather than relying on a single model to master every capability, a promising path toward AGI now is to orchestrate a heterogeneous ecosystem of specialized models, tools, and policies (candidates) into a unified AI system. At the heart of this vision lies a fundamental question: how can an AI system dynamically select and coordinate the most capable candidate for each task while balancing performance and computational cost? In this work, we present Route Anything, a unified framework for studying model and policy routing across general-purpose AI systems. We develop a unified theoretical foundation that characterizes optimal routing under quality--cost trade-offs and establishes how the information available to a router determines its attainable performance. To systematically investigate routing across diverse capabilities, we first construct an omni-modal trajectory matrix spanning 25 benchmarks across language understanding, image, video, and speech generation, coding and workplace agents, and robotic manipulation, comprising 374,401 scored runs from 452 candidate configurations. Building on this framework, we train and test different routers to investigate the potential of omni-modal model routing, the capabilities of learned routers, and the conditions under which routing improves efficiency. Our results reveal substantial...",
+      "published_at": "2026-11-03T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 79,
+        "comments": 2,
+        "week": "2026-W45",
+        "github_repo": "https://github.com/InfRec-Cardinal/route-anything",
+        "github_stars": 18
+      },
+      "tags": [
+        "model routing",
+        "policy routing",
+        "omni-modal trajectory matrix",
+        "quality-cost trade-offs",
+        "learned routers",
+        "capability orchestration"
+      ],
+      "links": [],
+      "id": "c_9825171215",
+      "key": "arxiv:2611.05275",
+      "cluster_id": "k_9825171215",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-05"
+      ],
+      "reported_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "CoworkOS:Scaling Agent Coworkers for Real-world Automation",
+      "url": "https://huggingface.co/papers/2611.03178",
+      "summary": "Rapid advances in cowork agents are shifting human-AI collaboration toward real-world automation, delivering software, designs, and other artifacts. However, such productivity work demands both high-quality delivery on complex productivity tasks and continued monitoring and decision-making over long horizons, a combination that remains an open challenge. We introduce CoworkOS, a general-purpose harness for long-horizon work that separates task strategy from execution management: the model decides actions, delegation, and acceptance, while the runtime maintains state and feedback. Its three-layer architecture enables direct execution or delegation to Subagents, synchronously or asynchronously, under stable responsibilities. Through a shared application layer, humans and agents inspect and revise the same evolving documents, presentations, CAD models, and Blender scenes, so human-in-the-loop participation can enter both through conversation and through direct modification of the work itself. To sustain continuity across agents and sessions, CoworkOS further introduces hierarchical workspaces and persistent semantic memory, so working files, key decisions, and long-running Job logs remain shareable, reusable, and resumable after interruption. Across 12 benchmarks and 6 categories of real-world applications, CoworkOS proves highly competitive with frontier agent applications such as Codex and DeepSeek Harness. As a sustained-work case study, CoworkOS uses GLM-5.3 as its backbone...",
+      "published_at": "2026-11-02T14:15:11+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 100,
+        "comments": 4,
+        "week": "2026-W45",
+        "github_repo": "https://github.com/RUC-NLPIR/CoworkOS",
+        "github_stars": 141,
+        "organization": "Renmin University of China"
+      },
+      "tags": [
+        "cowork agents",
+        "long-horizon work",
+        "Subagents",
+        "hierarchical workspaces",
+        "persistent semantic memory",
+        "human-in-the-loop",
+        "automated post-training"
+      ],
+      "links": [],
+      "id": "c_991beae516",
+      "key": "arxiv:2611.03178",
+      "cluster_id": "k_991beae516",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-04"
+      ],
+      "reported_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "MoviEdit: Long-form Multi-Shot Video Editing Made Easy",
+      "url": "https://huggingface.co/papers/2611.02737",
+      "summary": "Long-form multi-shot video editing requires an intended edit to remain coherent across abrupt changes in scene, viewpoint, and subject appearance, while processing substantially longer visual context than conventional single-shot editors. We introduce MoviEdit, an end-to-end framework for scalable long-form multi-shot video editing that jointly addresses the challenges of data, modeling, and evaluation. To provide cross-shot supervision data at scale, we develop automatic data-generation pipelines spanning synchronized multi-view footage, real-world multi-shot videos, and generated multi-shot content, yielding 87K paired editing videos without manual annotation. Architecturally, MoviEdit employs a cascaded bidirectional-autoregressive design: a lightweight bidirectional stage first establishes a globally coherent editing draft over a spatiotemporally compressed representation, which is then autoregressively propagated and refined over the full video. We further introduce MoviEdit-Bench, a dedicated benchmark for systematic evaluation of long-form multi-shot video editing. Extensive experiments show that MoviEdit substantially outperforms existing open-source models and performs on par with industry frontier models across text-guided and image-guided editing. Visit our project page for complete results and to access the benchmark:",
+      "published_at": "2026-11-02T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 74,
+        "comments": 2,
+        "week": "2026-W45",
+        "github_repo": "https://github.com/adobe-research/MoviEdit-Bench",
+        "github_stars": 18,
+        "organization": "Adobe"
+      },
+      "tags": [
+        "multi-shot video editing",
+        "bidirectional-autoregressive design",
+        "spatiotemporally compressed representation",
+        "autoregressive propagation",
+        "MoviEdit-Bench"
+      ],
+      "links": [],
+      "id": "c_85c9daa922",
+      "key": "arxiv:2611.02737",
+      "cluster_id": "k_85c9daa922",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-05"
+      ],
+      "reported_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "Advances in Agentic Computer Graphics",
+      "url": "https://huggingface.co/papers/2611.01860",
+      "summary": "Computer graphics is built on code. Large language model (LLM) agents can now generate graphics code and iteratively refine it through various feedback. This capability opens the door to a potentially new paradigm of computer graphics, with graphics algorithms increasingly built around agentic systems to automate progressively complex tasks. Over the past years, research on agentic graphics has expanded rapidly across a diverse range of tasks. This rapid growth makes it increasingly difficult for manual literature reviews to keep pace with new developments. At the same time, similar ideas are often described using different terminology across these tasks, further complicating efforts to develop a systematic understanding of the field. In this report, we address these challenges through two contributions. First, we introduce a unified taxonomy for characterizing agentic systems across diverse computer graphics tasks. Second, we develop an agentic literature system that can assist human researchers in analyzing existing and newly published papers at scale. Building on these contributions, we analyze emerging research trends and discuss open challenges in coordinating agents and tools across graphics tasks, designing interfaces and representations for human-agent collaboration, sustaining long-horizon planning and refinement, and reliably evaluating interactive graphics systems.",
+      "published_at": "2026-11-01T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 143,
+        "comments": 4,
+        "week": "2026-W45",
+        "organization": "University of Texas at Austin"
+      },
+      "tags": [
+        "large language models",
+        "LLM agents",
+        "agentic systems"
+      ],
+      "links": [],
+      "id": "c_8fed4d5d35",
+      "key": "arxiv:2611.01860",
+      "cluster_id": "k_8fed4d5d35",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-04"
+      ],
+      "reported_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "Wave Forcing: Towards Speed-of-Light Streaming Video Generation",
+      "url": "https://huggingface.co/papers/2611.00859",
+      "summary": "Real-time long-video generation requires continuous output with consistent appearance and natural motion. Existing chunk-wise autoregressive methods face challenges in both generation efficiency and long-video quality: serialized denoising and history-cache refresh require two forward passes even with one-step denoising, and longer rollouts can degrade quality and cause camera drift. We propose Wave Forcing (WF), which co-designs generation, training, and execution for continuous video output with multi-step denoising. WF uses chunk-wise causal attention to access earlier, cleaner chunks before their denoising is complete, and distributes staggered denoising and cache-refresh stages across full-model replicas to achieve 1F1C: one output chunk per concurrent forward round after pipeline fill. To adapt the model to this continuous generation process, we develop a three-stage training procedure that successively introduces mixed-noise denoising, motion supervision, and causal adaptation using self-generated history. To execute this process efficiently, Wave Runtime (WaveRT) uses Wave Parallelism (WP) for early K/V delivery and communication-computation overlap, together with optimized kernels and pipelined VAE decoding. Experiments on Wan2.1-T2V-1.3B show that 5-step WF maintains overall quality comparable to Rolling Forcing while achieving higher Dynamic Degree on both short and long videos. Our system efficiency experiments show that 4-step WF achieves 147.6 DiT FPS and 134.8...",
+      "published_at": "2026-10-31T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 125,
+        "comments": 6,
+        "week": "2026-W45",
+        "github_repo": "https://github.com/SJTU-DENG-Lab/WaveForcing",
+        "github_stars": 130,
+        "organization": "DENG Lab @ SJTU"
+      },
+      "tags": [
+        "chunk-wise causal attention",
+        "multi-step denoising",
+        "Wave Forcing",
+        "Wave Runtime",
+        "Wave Parallelism",
+        "mixed-noise denoising",
+        "motion supervision",
+        "causal adaptation"
+      ],
+      "links": [],
+      "id": "c_42da0213ee",
+      "key": "arxiv:2611.00859",
+      "cluster_id": "k_42da0213ee",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-04"
+      ],
+      "reported_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "Words Caught in the Heart: Simulating Person-Specific Expression for Self-Opaque Clients in Psychotherapy",
+      "url": "https://huggingface.co/papers/2611.00617",
+      "summary": "Psychotherapy clients may experience distress before they can coherently describe it, and their expression changes with emotion, perceived safety, and trust. Large language model-based client simulators often rely on clinically organized case descriptions, which can encourage responses explaining the client's difficulties more clearly than their current understanding warrants. We propose Pandora, a psychotherapy client simulation framework that models how psychological experience becomes situated, individual expression. Pandora updates psychological and relational states in response to therapist interventions, constructs subjective appraisals and attributions, and plans response content and strategy. A separate expression planner combines these decisions with language patterns distilled from the client's utterances to guide linguistic realization. We evaluate Pandora against five baselines on 115 cases from four counseling and motivational interviewing datasets. It achieves the highest expression similarity and overall disclosure-alignment score among the compared systems. In a four-evaluator study of 45 matched disclosure items, Pandora receives AI-like judgments in 7.2% of ratings, compared with 43.3--67.2% for the baselines and 35.6% without expression planning. The ablation also reduces expression similarity. These results support explicit expression planning in client simulation to improve alignment with individual language patterns and reduce perceived AI-like...",
+      "published_at": "2026-10-31T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 77,
+        "comments": 2,
+        "week": "2026-W45",
+        "github_repo": "https://github.com/whunextgen/Pandora",
+        "github_stars": 1,
+        "organization": "CLAIN-WHU"
+      },
+      "tags": [
+        "large language model",
+        "client simulator",
+        "psychological state",
+        "relational state",
+        "subjective appraisal",
+        "expression planner",
+        "disclosure-alignment",
+        "expression similarity"
+      ],
+      "links": [],
+      "id": "c_e6dc02190a",
+      "key": "arxiv:2611.00617",
+      "cluster_id": "k_e6dc02190a",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-05"
+      ],
+      "reported_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "Video Generation Meets Agent Harness: Agentic Video Generation, Agentic World Modeling and Recursive Self-Improvement",
+      "url": "https://huggingface.co/papers/2610.40191",
+      "summary": "Video generation is shifting from end-to-end synthesis toward agentic generation, where planning, tool use, and feedback enable coherent, controllable multi-shot videos. In parallel, video world models provide action-conditioned observations and predicted futures, serving as interactive environments for agents. We study their intersection through the agent harness: an executable runtime that constructs context, exposes tools, maintains state, routes feedback, and manages budgets around video models. This report examines three directions. First, agentic video generation, where harnesses coordinate scripting, shot planning, asset management, production, and editing, alongside the evaluation challenges of these systems. Second, agentic world modeling, where harnesses mediate observation, control, execution, and state. We discuss hybrid designs in which game engines or agent-written programs maintain world state while video models render observations, and how agents and world models can mutually evaluate and improve one another. Third, recursive self-improvement (RSI) in video model development, distinguishing output revisions, updates to harness state, generator parameters, and evaluators, and changes to the improvement procedure itself. We identify how these improvements feed back into subsequent development. Across these directions, we analyze essential agent capabilities, including audiovisual perception, long-horizon planning, memory, code-based interaction, feedback-guided...",
+      "published_at": "2026-10-29T14:47:39+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 78,
+        "comments": 2,
+        "week": "2026-W45",
+        "github_repo": "https://github.com/agentic-videogen/awesome-agentic-videogen",
+        "github_stars": 56,
+        "organization": "Video Rebirth"
+      },
+      "tags": [
+        "agentic video generation",
+        "video world models",
+        "agent harness",
+        "cross-attention",
+        "recursive self-improvement",
+        "hybrid world models",
+        "feedback-guided control",
+        "multi-agent coordination"
+      ],
+      "links": [],
+      "id": "c_04f56b52c4",
+      "key": "arxiv:2610.40191",
+      "cluster_id": "k_04f56b52c4",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-04"
+      ],
+      "reported_on": []
+    },
+    {
+      "source": "github-trending",
+      "source_name": "GitHub Trending",
+      "tier": 1,
+      "kind": "repo",
+      "title": "vercel-labs/agent-browser",
+      "url": "https://github.com/vercel-labs/agent-browser",
+      "summary": "Browser automation CLI for AI agents",
+      "published_at": null,
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 1,
+        "stars_today": 190,
+        "stars": 46932
+      },
+      "tags": [
+        "Rust"
+      ],
+      "links": [],
+      "id": "c_3f274de57e",
+      "key": "github.com/vercel-labs/agent-browser",
+      "cluster_id": "k_3f274de57e",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-06"
+      ],
+      "reported_on": [
+        {
+          "date": "2026-11-03",
+          "title": "vercel-labs 开源 agent-desktop：用无障碍树操作桌面应用"
+        }
+      ]
+    },
+    {
+      "source": "github-trending",
+      "source_name": "GitHub Trending",
+      "tier": 1,
+      "kind": "repo",
+      "title": "mattpocock/skills",
+      "url": "https://github.com/mattpocock/skills",
+      "summary": "Skills for Real Engineers. Straight from my .agents directory.",
+      "published_at": null,
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 4,
+        "stars_today": 1100,
+        "stars": 317843
+      },
+      "tags": [
+        "Shell"
+      ],
+      "links": [],
+      "id": "c_611cc6c637",
+      "key": "github.com/mattpocock/skills",
+      "cluster_id": "k_611cc6c637",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-01",
+        "2026-11-03",
+        "2026-11-04",
+        "2026-11-05",
+        "2026-11-06",
+        "2026-11-07"
+      ],
+      "reported_on": []
+    },
+    {
+      "source": "github-trending",
+      "source_name": "GitHub Trending",
+      "tier": 1,
+      "kind": "repo",
+      "title": "anthropics/skills",
+      "url": "https://github.com/anthropics/skills",
+      "summary": "Public repository for Agent Skills",
+      "published_at": null,
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 5,
+        "stars_today": 390,
+        "stars": 188887
+      },
+      "tags": [
+        "Python"
+      ],
+      "links": [],
+      "id": "c_7d9b91592a",
+      "key": "github.com/anthropics/skills",
+      "cluster_id": "k_7d9b91592a",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "github-trending",
+      "source_name": "GitHub Trending",
+      "tier": 1,
+      "kind": "repo",
+      "title": "meta/astryx",
+      "url": "https://github.com/meta/astryx",
+      "summary": "An open source design system that's fully customizable and agent ready",
+      "published_at": null,
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 6,
+        "stars_today": 96,
+        "stars": 14671
+      },
+      "tags": [
+        "TypeScript"
+      ],
+      "links": [],
+      "id": "c_a7f12d63ee",
+      "key": "github.com/meta/astryx",
+      "cluster_id": "k_a7f12d63ee",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "github-trending",
+      "source_name": "GitHub Trending",
+      "tier": 1,
+      "kind": "repo",
+      "title": "milind-soni/OpenMausBot",
+      "url": "https://github.com/milind-soni/OpenMausBot",
+      "summary": "Open-source Grok Bot alternative with a virtual machine that bots can use",
+      "published_at": null,
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 9,
+        "stars_today": 1955,
+        "stars": 17174
+      },
+      "tags": [
+        "TypeScript"
+      ],
+      "links": [],
+      "id": "c_2a2ed58c0d",
+      "key": "github.com/milind-soni/openmausbot",
+      "cluster_id": "k_2a2ed58c0d",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-01",
+        "2026-11-02"
+      ],
+      "reported_on": []
+    },
+    {
+      "source": "github-trending",
+      "source_name": "GitHub Trending",
+      "tier": 1,
+      "kind": "repo",
+      "title": "dsx-ai-factory/nvke",
+      "url": "https://github.com/dsx-ai-factory/nvke",
+      "summary": "NVIDIA Kubernetes Engine (NVKE). A management plane for GPU Kubernetes on bare metal.",
+      "published_at": null,
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 15,
+        "stars_today": 123,
+        "stars": 596
+      },
+      "tags": [
+        "Go"
+      ],
+      "links": [],
+      "id": "c_5d79a9d3c0",
+      "key": "github.com/dsx-ai-factory/nvke",
+      "cluster_id": "k_5d79a9d3c0",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "NousResearch/Arete-27B",
+      "url": "https://huggingface.co/NousResearch/Arete-27B",
+      "summary": "text-generation, license:apache-2.0",
+      "published_at": "2026-11-06T19:31:28+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 16,
+        "trending_score": 218,
+        "likes": 224,
+        "downloads": 989
+      },
+      "tags": [
+        "NousResearch"
+      ],
+      "links": [],
+      "id": "c_77d6c1543b",
+      "key": "huggingface.co/nousresearch/arete-27b",
+      "cluster_id": "k_77d6c1543b",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-07"
+      ],
+      "reported_on": []
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "RikiyaT/Qwen3.5-0.8B-weight-space-programming",
+      "url": "https://huggingface.co/RikiyaT/Qwen3.5-0.8B-weight-space-programming",
+      "summary": "image-text-to-text, transformers, license:apache-2.0",
+      "published_at": "2026-11-02T22:12:58+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 42,
+        "trending_score": 118,
+        "likes": 120,
+        "downloads": 2774
+      },
+      "tags": [
+        "RikiyaT"
+      ],
+      "links": [],
+      "id": "c_ca97ecd411",
+      "key": "huggingface.co/rikiyat/qwen3.5-0.8b-weight-space-programming",
+      "cluster_id": "k_ca97ecd411",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-06",
+        "2026-11-07"
+      ],
+      "reported_on": []
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "ccore/Qwen3.5-4B-GLB-3D-Coder",
+      "url": "https://huggingface.co/ccore/Qwen3.5-4B-GLB-3D-Coder",
+      "summary": "text-generation, license:apache-2.0",
+      "published_at": "2026-11-01T22:30:01+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 13,
+        "trending_score": 238,
+        "likes": 261,
+        "downloads": 24479
+      },
+      "tags": [
+        "ccore"
+      ],
+      "links": [],
+      "id": "c_a37f79f053",
+      "key": "huggingface.co/ccore/qwen3.5-4b-glb-3d-coder",
+      "cluster_id": "k_a37f79f053",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-04",
+        "2026-11-05",
+        "2026-11-06",
+        "2026-11-07"
+      ],
+      "reported_on": []
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "Comfy-Org/Idol",
+      "url": "https://huggingface.co/Comfy-Org/Idol",
+      "summary": "image-to-3d, diffusion-single-file, license:apache-2.0",
+      "published_at": "2026-11-01T19:33:15+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 41,
+        "trending_score": 118,
+        "likes": 141,
+        "downloads": 31418
+      },
+      "tags": [
+        "Comfy-Org"
+      ],
+      "links": [],
+      "id": "c_2dcb1c76f7",
+      "key": "huggingface.co/comfy-org/idol",
+      "cluster_id": "k_2dcb1c76f7",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-05",
+        "2026-11-06",
+        "2026-11-07"
+      ],
+      "reported_on": []
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "FusionCow/Sulphur-3",
+      "url": "https://huggingface.co/FusionCow/Sulphur-3",
+      "summary": "minimax-h3",
+      "published_at": "2026-10-31T20:31:01+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 8,
+        "trending_score": 340,
+        "likes": 405,
+        "downloads": 997
+      },
+      "tags": [
+        "FusionCow"
+      ],
+      "links": [],
+      "id": "c_89c7c5795b",
+      "key": "huggingface.co/fusioncow/sulphur-3",
+      "cluster_id": "k_89c7c5795b",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-03",
+        "2026-11-04",
+        "2026-11-05",
+        "2026-11-06",
+        "2026-11-07"
+      ],
+      "reported_on": []
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "Pika-Labs/Pika-H3-Flex",
+      "url": "https://huggingface.co/Pika-Labs/Pika-H3-Flex",
+      "summary": "image-to-video, pika-h3-flex, license:other",
+      "published_at": "2026-10-29T17:08:44+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 20,
+        "trending_score": 208,
+        "likes": 507,
+        "downloads": 1083
+      },
+      "tags": [
+        "Pika-Labs"
+      ],
+      "links": [],
+      "id": "c_36d92c2293",
+      "key": "huggingface.co/pika-labs/pika-h3-flex",
+      "cluster_id": "k_36d92c2293",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-01",
+        "2026-11-02",
+        "2026-11-03",
+        "2026-11-04",
+        "2026-11-05",
+        "2026-11-06",
+        "2026-11-07"
+      ],
+      "reported_on": []
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "speridlabs/idol",
+      "url": "https://huggingface.co/speridlabs/idol",
+      "summary": "image-to-3d, idol, license:apache-2.0",
+      "published_at": "2026-10-28T15:55:17+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 1,
+        "trending_score": 755,
+        "likes": 1150,
+        "downloads": 20689
+      },
+      "tags": [
+        "speridlabs"
+      ],
+      "links": [],
+      "id": "c_0028b46e25",
+      "key": "huggingface.co/speridlabs/idol",
+      "cluster_id": "k_0028b46e25",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": [
+        {
+          "date": "2026-10-31",
+          "title": "speridlabs 开源单图生成 3D 高斯模型 Idol"
+        }
+      ]
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "sensenova/SenseNova-Loop-9B-Preview",
+      "url": "https://huggingface.co/sensenova/SenseNova-Loop-9B-Preview",
+      "summary": "image-text-to-text, transformers, license:apache-2.0",
+      "published_at": "2026-10-28T15:34:40+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 30,
+        "trending_score": 157,
+        "likes": 274,
+        "downloads": 3306
+      },
+      "tags": [
+        "sensenova"
+      ],
+      "links": [],
+      "id": "c_0872c5ce4f",
+      "key": "huggingface.co/sensenova/sensenova-loop-9b-preview",
+      "cluster_id": "k_0872c5ce4f",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": [
+        {
+          "date": "2026-10-31",
+          "title": "SenseNova 开源循环解码多模态模型 SenseNova-Loop-9B-Preview"
+        }
+      ]
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "PrunaAI/P-H3-Image-Comfy",
+      "url": "https://huggingface.co/PrunaAI/P-H3-Image-Comfy",
+      "summary": "text-to-image, diffusion-single-file, license:other",
+      "published_at": "2026-10-28T11:26:05+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 22,
+        "trending_score": 203,
+        "likes": 233,
+        "downloads": 505526
+      },
+      "tags": [
+        "PrunaAI"
+      ],
+      "links": [],
+      "id": "c_d0a1cc9b42",
+      "key": "huggingface.co/prunaai/p-h3-image-comfy",
+      "cluster_id": "k_d0a1cc9b42",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-05",
+        "2026-11-06",
+        "2026-11-07"
+      ],
+      "reported_on": []
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "PrunaAI/P-H3-Image",
+      "url": "https://huggingface.co/PrunaAI/P-H3-Image",
+      "summary": "text-to-image, diffusers, license:other",
+      "published_at": "2026-10-27T09:16:58+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 31,
+        "trending_score": 155,
+        "likes": 159,
+        "downloads": 789
+      },
+      "tags": [
+        "PrunaAI"
+      ],
+      "links": [],
+      "id": "c_621d04c2ab",
+      "key": "huggingface.co/prunaai/p-h3-image",
+      "cluster_id": "k_d0a1cc9b42",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-05",
+        "2026-11-06",
+        "2026-11-07"
+      ],
+      "reported_on": []
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "baidu/Unlimited-OCR-2",
+      "url": "https://huggingface.co/baidu/Unlimited-OCR-2",
+      "summary": "image-text-to-text, transformers, license:mit",
+      "published_at": "2026-10-26T03:57:46+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 32,
+        "trending_score": 146,
+        "likes": 647,
+        "downloads": 355394
+      },
+      "tags": [
+        "baidu"
+      ],
+      "links": [],
+      "id": "c_4239039208",
+      "key": "huggingface.co/baidu/unlimited-ocr-2",
+      "cluster_id": "k_4239039208",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-01",
+        "2026-11-02",
+        "2026-11-03",
+        "2026-11-04",
+        "2026-11-05",
+        "2026-11-06",
+        "2026-11-07"
+      ],
+      "reported_on": []
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "ccore/Qwen3.5-4B-3D-Coder",
+      "url": "https://huggingface.co/ccore/Qwen3.5-4B-3D-Coder",
+      "summary": "license:apache-2.0",
+      "published_at": "2026-10-25T05:43:34+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 4,
+        "trending_score": 422,
+        "likes": 880,
+        "downloads": 221506
+      },
+      "tags": [
+        "ccore"
+      ],
+      "links": [],
+      "id": "c_51427f889c",
+      "key": "huggingface.co/ccore/qwen3.5-4b-3d-coder",
+      "cluster_id": "k_a37f79f053",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-01",
+        "2026-11-02",
+        "2026-11-03",
+        "2026-11-04",
+        "2026-11-05",
+        "2026-11-06",
+        "2026-11-07"
+      ],
+      "reported_on": []
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "LiquidAI/LFM3-1.7B",
+      "url": "https://huggingface.co/LiquidAI/LFM3-1.7B",
+      "summary": "text-generation, transformers, license:other",
+      "published_at": "2026-10-23T21:35:42+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 23,
+        "trending_score": 202.5,
+        "likes": 1549,
+        "downloads": 70034
+      },
+      "tags": [
+        "LiquidAI"
+      ],
+      "links": [],
+      "id": "c_d0558e1230",
+      "key": "huggingface.co/liquidai/lfm3-1.7b",
+      "cluster_id": "k_d0558e1230",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-05",
+        "2026-11-06",
+        "2026-11-07"
+      ],
+      "reported_on": [
+        {
+          "date": "2026-10-28",
+          "title": "Liquid AI 发布 LFM3 系列端侧开放权重模型"
+        },
+        {
+          "date": "2026-10-29",
+          "title": "llama.cpp v0.8.0 支持 LFM3 全系并加入实时语音接口"
+        }
+      ]
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "OBLITERATUS/DeepSeek-V4.1-Flash-1017-obliterated",
+      "url": "https://huggingface.co/OBLITERATUS/DeepSeek-V4.1-Flash-1017-obliterated",
+      "summary": "text-generation, transformers, license:mit",
+      "published_at": "2026-10-23T08:59:53+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 15,
+        "trending_score": 222,
+        "likes": 275,
+        "downloads": 3835
+      },
+      "tags": [
+        "OBLITERATUS"
+      ],
+      "links": [],
+      "id": "c_cf1c6eb2e1",
+      "key": "huggingface.co/obliteratus/deepseek-v4.1-flash-1017-obliterated",
+      "cluster_id": "k_cf1c6eb2e1",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-02",
+        "2026-11-03",
+        "2026-11-04",
+        "2026-11-05",
+        "2026-11-06",
+        "2026-11-07"
+      ],
+      "reported_on": [
+        {
+          "date": "2026-10-21",
+          "title": "DeepSeek-V4.1-Flash-1017 更新权重"
+        }
+      ]
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "burner22/numbat",
+      "url": "https://huggingface.co/burner22/numbat",
+      "summary": "",
+      "published_at": "2026-10-23T01:37:02+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 7,
+        "trending_score": 345,
+        "likes": 382,
+        "downloads": 9212
+      },
+      "tags": [
+        "burner22"
+      ],
+      "links": [],
+      "id": "c_b670ce3189",
+      "key": "huggingface.co/burner22/numbat",
+      "cluster_id": "k_b670ce3189",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-02",
+        "2026-11-03",
+        "2026-11-04",
+        "2026-11-05",
+        "2026-11-06",
+        "2026-11-07"
+      ],
+      "reported_on": []
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "Viggle/Viggle-Remake",
+      "url": "https://huggingface.co/Viggle/Viggle-Remake",
+      "summary": "video-to-video, minimax-h3, license:other",
+      "published_at": "2026-10-22T19:06:17+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 27,
+        "trending_score": 169,
+        "likes": 174,
+        "downloads": 64942
+      },
+      "tags": [
+        "Viggle"
+      ],
+      "links": [],
+      "id": "c_28d53b4058",
+      "key": "huggingface.co/viggle/viggle-remake",
+      "cluster_id": "k_28d53b4058",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-06",
+        "2026-11-07"
+      ],
+      "reported_on": []
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "LiquidAI/LFM3-Omni-2B",
+      "url": "https://huggingface.co/LiquidAI/LFM3-Omni-2B",
+      "summary": "any-to-any, transformers, license:other",
+      "published_at": "2026-10-21T16:58:40+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 34,
+        "trending_score": 138,
+        "likes": 407,
+        "downloads": 16064
+      },
+      "tags": [
+        "LiquidAI"
+      ],
+      "links": [],
+      "id": "c_73262d098d",
+      "key": "huggingface.co/liquidai/lfm3-omni-2b",
+      "cluster_id": "k_d0558e1230",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-01",
+        "2026-11-02",
+        "2026-11-03",
+        "2026-11-04",
+        "2026-11-05",
+        "2026-11-06",
+        "2026-11-07"
+      ],
+      "reported_on": [
+        {
+          "date": "2026-10-28",
+          "title": "Liquid AI 发布 LFM3 系列端侧开放权重模型"
+        },
+        {
+          "date": "2026-10-29",
+          "title": "llama.cpp v0.8.0 支持 LFM3 全系并加入实时语音接口"
+        }
+      ]
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+      "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+      "summary": "image-text-to-text, transformers, license:mit",
+      "published_at": "2026-10-17T02:40:38+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 19,
+        "trending_score": 208,
+        "likes": 5392,
+        "downloads": 277323
+      },
+      "tags": [
+        "deepseek-ai"
+      ],
+      "links": [],
+      "id": "c_8b553ca25e",
+      "key": "huggingface.co/deepseek-ai/deepseek-v4.1-flash-1017",
+      "cluster_id": "k_cf1c6eb2e1",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-01",
+        "2026-11-02",
+        "2026-11-03",
+        "2026-11-04",
+        "2026-11-05",
+        "2026-11-06",
+        "2026-11-07"
+      ],
+      "reported_on": [
+        {
+          "date": "2026-10-21",
+          "title": "DeepSeek-V4.1-Flash-1017 更新权重"
+        }
+      ]
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "webAI-Official/TwIL-8B",
+      "url": "https://huggingface.co/webAI-Official/TwIL-8B",
+      "summary": "text-generation, transformers, license:other",
+      "published_at": "2026-10-14T16:50:12+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 18,
+        "trending_score": 212,
+        "likes": 215,
+        "downloads": 15324
+      },
+      "tags": [
+        "webAI-Official"
+      ],
+      "links": [],
+      "id": "c_773a12706a",
+      "key": "huggingface.co/webai-official/twil-8b",
+      "cluster_id": "k_773a12706a",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-06",
+        "2026-11-07"
+      ],
+      "reported_on": []
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "black-forest-labs/flux-3-image-klein-comfy",
+      "url": "https://huggingface.co/black-forest-labs/flux-3-image-klein-comfy",
+      "summary": "image-to-image, diffusion-single-file, license:other",
+      "published_at": "2026-10-14T12:00:13+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 12,
+        "trending_score": 255,
+        "likes": 2697,
+        "downloads": 1143397
+      },
+      "tags": [
+        "black-forest-labs"
+      ],
+      "links": [],
+      "id": "c_6ecc1d71a5",
+      "key": "huggingface.co/black-forest-labs/flux-3-image-klein-comfy",
+      "cluster_id": "k_6ecc1d71a5",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-01",
+        "2026-11-02",
+        "2026-11-03",
+        "2026-11-04",
+        "2026-11-05",
+        "2026-11-06",
+        "2026-11-07"
+      ],
+      "reported_on": [
+        {
+          "date": "2026-10-21",
+          "title": "Black Forest Labs 开放 FLUX 3 Image Klein 权重"
+        }
+      ]
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "Edge0/Audio8-TTS-Realistic-Air",
+      "url": "https://huggingface.co/Edge0/Audio8-TTS-Realistic-Air",
+      "summary": "text-to-speech, transformers, license:apache-2.0",
+      "published_at": "2026-10-14T03:02:49+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 28,
+        "trending_score": 165,
+        "likes": 350,
+        "downloads": 14103
+      },
+      "tags": [
+        "Edge0"
+      ],
+      "links": [],
+      "id": "c_06384577f8",
+      "key": "huggingface.co/edge0/audio8-tts-realistic-air",
+      "cluster_id": "k_06384577f8",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-03",
+        "2026-11-04",
+        "2026-11-05",
+        "2026-11-06",
+        "2026-11-07"
+      ],
+      "reported_on": []
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "nvidia/NVIDIA-Nemotron-3.5-Transcribe-30B-A4B",
+      "url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Transcribe-30B-A4B",
+      "summary": "automatic-speech-recognition, nemo, license:other",
+      "published_at": "2026-10-07T22:50:21+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 11,
+        "trending_score": 293,
+        "likes": 3097,
+        "downloads": 63798
+      },
+      "tags": [
+        "nvidia"
+      ],
+      "links": [],
+      "id": "c_dc872be8d3",
+      "key": "huggingface.co/nvidia/nvidia-nemotron-3.5-transcribe-30b-a4b",
+      "cluster_id": "k_dc872be8d3",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-06",
+        "2026-11-07"
+      ],
+      "reported_on": [
+        {
+          "date": "2026-10-29",
+          "title": "NVIDIA 发布开放权重语音模型 Nemotron 3.5 Transcribe"
+        }
+      ]
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "mistralai/Mistral-Large-4-1T-A52B",
+      "url": "https://huggingface.co/mistralai/Mistral-Large-4-1T-A52B",
+      "summary": "image-text-to-text, transformers, license:other",
+      "published_at": "2026-09-30T18:35:13+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 25,
+        "trending_score": 188,
+        "likes": 1635,
+        "downloads": 11206
+      },
+      "tags": [
+        "mistralai"
+      ],
+      "links": [],
+      "id": "c_a153f6ebbc",
+      "key": "huggingface.co/mistralai/mistral-large-4-1t-a52b",
+      "cluster_id": "k_a153f6ebbc",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-07"
+      ],
+      "reported_on": [
+        {
+          "date": "2026-10-30",
+          "title": "Mistral 开放旗舰模型 Mistral Large 4（Le Chonk）权重"
+        },
+        {
+          "date": "2026-11-05",
+          "title": "llama.cpp v0.9.0 支持 FP8 E4M3 和 Mistral Large 4"
+        }
+      ]
+    },
+    {
+      "source": "hackernews",
+      "source_name": "Hacker News",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "Claude Code's \"Don't Ask Again\" exposes passwords in 1,122 public GitHub files",
+      "url": "https://apiiro.com/blog/coding-agents-leaking-secrets-github-dont-ask-again",
+      "summary": "",
+      "published_at": "2026-11-07T20:45:32+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://news.ycombinator.com/item?id=50407882",
+      "signals": {
+        "hn_points": 248,
+        "hn_comments": 161
+      },
+      "tags": [],
+      "links": [],
+      "id": "c_95a76befb5",
+      "key": "apiiro.com/blog/coding-agents-leaking-secrets-github-dont-ask-again",
+      "cluster_id": "k_95a76befb5",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "hackernews",
+      "source_name": "Hacker News",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "The End of AI Frontiers",
+      "url": "https://hunch.net/?p=13764006",
+      "summary": "",
+      "published_at": "2026-11-07T18:04:07+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://news.ycombinator.com/item?id=50406589",
+      "signals": {
+        "hn_points": 81,
+        "hn_comments": 4
+      },
+      "tags": [],
+      "links": [],
+      "id": "c_9862bd9f9f",
+      "key": "hunch.net/?p=13764006",
+      "cluster_id": "k_9862bd9f9f",
+      "also_from": [
+        {
+          "source": "hackernews",
+          "source_name": "Hacker News",
+          "title": "The end of Microsoft Research's AI Frontiers group",
+          "url": "https://hunch.net/?p=13764006",
+          "discussion_url": "https://news.ycombinator.com/item?id=50406563"
+        }
+      ],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "hackernews",
+      "source_name": "Hacker News",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "Show HN: We compressed a 31B video+audio diffusion model to 14B, 6 steps, INT8",
+      "url": "https://github.com/Video-Rebirth/hyperflow-h3-flash",
+      "summary": "",
+      "published_at": "2026-11-07T15:16:01+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://news.ycombinator.com/item?id=50405263",
+      "signals": {
+        "hn_points": 59,
+        "hn_comments": 12
+      },
+      "tags": [],
+      "links": [],
+      "id": "c_b405aa1eec",
+      "key": "github.com/video-rebirth/hyperflow-h3-flash",
+      "cluster_id": "k_b405aa1eec",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "reddit-ai",
+      "source_name": "r/LocalLLaMA + r/MachineLearning",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "Two PCs but one with only RAM? or divide GPUs across pcs?",
+      "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xqn4nb/two_pcs_but_one_with_only_ram_or_divide_gpus/",
+      "summary": "PC1: -94gb DDR5 -5070 TI + 3060 (12gb) gpus (using a motherboard that is specifically designed for duel gpus PC2: 64gb DD4 RAM PC1 is new, I've been running strata for running larger MoEs but I'm curious about trying to pool the two pcs together (they can be connected via direct 5-10gb Ethernet) I guess I would have to use llama.ccp RPC? And if I do, would I better better off putting the 3060 in the ddr4 pc OR leave them both in the main PC and the other is just extra ram. Goal is to run high quant of DK v4 flash atm (any really any other big moe to come). Anyone try anything similar before?",
+      "published_at": "2026-11-08T02:04:12+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xqn4nb/two_pcs_but_one_with_only_ram_or_divide_gpus/",
+      "signals": {
+        "reddit_rank": 25,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "links": [],
+      "id": "c_89cbe1cbe8",
+      "key": "reddit.com/r/LocalLLaMA/comments/1xqn4nb/two_pcs_but_one_with_only_ram_or_divide_gpus",
+      "cluster_id": "k_89cbe1cbe8",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "reddit-ai",
+      "source_name": "r/LocalLLaMA + r/MachineLearning",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "Saw this benchmark where small changes to coding tasks made a big difference",
+      "url": "https://x.com/loresjpg/status/2118880329490637049",
+      "summary": "Saw this tweet about a coding benchmark and thought it was kinda interesting. Apparently they took 89 DeepSWE tasks and changed little things in the instructions or starting code. The tweet says some models that were all around 74% on DeepSWE ended up 23 percentage points apart on the changed tasks. The weird part was that some models seemed to ignore the actual instructions because they thought a hidden grader wanted something else. The examples include GLM-5.3 and DeepSeek V4.1 Flash. Has anyone seen this kind of thing with local coding models? Like getting stuck on what they think the test wants instead of just doing what you asked?",
+      "published_at": "2026-11-08T01:44:51+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xqmr2i/saw_this_benchmark_where_small_changes_to_coding/",
+      "signals": {
+        "reddit_rank": 16,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "links": [],
+      "id": "c_b465300f5f",
+      "key": "x.com/loresjpg/status/2118880329490637049",
+      "cluster_id": "k_b465300f5f",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "reddit-ai",
+      "source_name": "r/LocalLLaMA + r/MachineLearning",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "5090 32gb in stock @ $6759.99",
+      "url": "https://i.redd.it/mmoirznuv90i1.jpeg",
+      "summary": "So I normally check on $5090 prices throughout the week and noticed Newegg for the past couple days has had these in stocks. Still a lot higher than MSRP but definitely beats the other weeks that were around $10-11k. Someone who was at borderline to pick one up @ those prices these might be a little more appealing now. Newegg has a couple choices in stock around this range. I wonder if Black Friday or Christmas would give us a few more hundreds off. Let's hope! My current Hardware 5090 Ddr5 192gb and I run Qwen FN Nvfp4 at some great speeds.",
+      "published_at": "2026-11-07T23:11:26+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xqjn2e/5090_32gb_in_stock_675999/",
+      "signals": {
+        "reddit_rank": 27,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "links": [],
+      "id": "c_a28a168363",
+      "key": "i.redd.it/mmoirznuv90i1.jpeg",
+      "cluster_id": "k_a28a168363",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "reddit-ai",
+      "source_name": "r/LocalLLaMA + r/MachineLearning",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "Anyone running local AI on 16GB vram?",
+      "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xqjenw/anyone_running_local_ai_on_16gb_vram/",
+      "summary": "Hey everyone, Is anyone here running any useful AI agents, harnesses or toolings with local AI on 16GB vram? I'm currently setting up my system and I want to have a helper agent for daily tasks, a research agent to help me research topics, and a developer agent to help me with development. I already tried some harnesses like Goose, Hermes Agent and OpenCode, but I haven't really managed to get anything useful out of them. In all honesty, I haven't spend a lot of time tweaking them, mainly because I am unsure if it's a lack of or bad skills, missing tooling, or harness or model tweaking that I need to tune... or god forbid all of them. So people running similar systems successfully: what is your use case and setup, what models, and what tweaks have you made?",
+      "published_at": "2026-11-07T23:00:19+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xqjenw/anyone_running_local_ai_on_16gb_vram/",
+      "signals": {
+        "reddit_rank": 9,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "links": [],
+      "id": "c_003b1e0571",
+      "key": "reddit.com/r/LocalLLaMA/comments/1xqjenw/anyone_running_local_ai_on_16gb_vram",
+      "cluster_id": "k_003b1e0571",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "reddit-ai",
+      "source_name": "r/LocalLLaMA + r/MachineLearning",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "The Stylome bot is useless spam and should be removed",
+      "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xqinb7/the_stylome_bot_is_useless_spam_and_should_be/",
+      "summary": "I've recently been seeing comments everywhere from the Stylome bot, which is also a mod in this sub. Every time it pops up to declare a comment was AI written I've gone in to check its confidence level, and it's always low. I decided to do a few tests myself and have Gemini rewrite some of my comments, Stylome said they were all human written with equally low confidence. What is the point of this bot? Why are we allowing a private company to take ownership of all of our comments and then give us spam in return? What are they doing with this data? Why isn't this being served by a local model? Try it yourself, everything above this line was Gemini rewriting what I originally wrote. Stylome says it's human written, with low confidence of course.",
+      "published_at": "2026-11-07T22:24:14+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xqinb7/the_stylome_bot_is_useless_spam_and_should_be/",
+      "signals": {
+        "reddit_rank": 5,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "links": [],
+      "id": "c_c47804bfc5",
+      "key": "reddit.com/r/LocalLLaMA/comments/1xqinb7/the_stylome_bot_is_useless_spam_and_should_be",
+      "cluster_id": "k_c47804bfc5",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "reddit-ai",
+      "source_name": "r/LocalLLaMA + r/MachineLearning",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "When should I use a locally hosted decision model to decrease latency",
+      "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xqilga/when_should_i_use_a_locally_hosted_decision_model/",
+      "summary": "I'm running a sandbox simulation with a fleet of 50-100 agents on OpenClaw, and to minimize LLM calls, I use a decision model to judge whether an agent needs to respond to a signal. I'm currently using Jev, and with the network latency it takes about 0.5-2 seconds for a response, and I'm wondering if I can reduce this latency with a smaller, locally run decision model. I've heard of the various local models like Needle 3, but I'm not sure how fast these run on various GPU configurations, i.e. it wouldn't make sense for me if I need some crazy setup to make it faster than using API. Also curious if anyone has tried running these entirely on CPU.",
+      "published_at": "2026-11-07T22:21:47+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xqilga/when_should_i_use_a_locally_hosted_decision_model/",
+      "signals": {
+        "reddit_rank": 19,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "links": [],
+      "id": "c_9d41f3650f",
+      "key": "reddit.com/r/LocalLLaMA/comments/1xqilga/when_should_i_use_a_locally_hosted_decision_model",
+      "cluster_id": "k_9d41f3650f",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "reddit-ai",
+      "source_name": "r/LocalLLaMA + r/MachineLearning",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "Crowd-v1 - The collaborative LLM",
+      "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xqh8hk/crowdv1_the_collaborative_llm/",
+      "summary": "Processing img 0ybf7gn4c90i1... Hello r/LocalLLaMA :D This is yet another follow-up post on the project CrowdGPT , which aims at creating the first collaboratively trained 1 billion parameters transformer, Crowd-v1 , without any datacenters, and for 0$. The project's goal is to show we don't need huge Nvidia GPU clusters nor millions of dollars to train a competitive Large Language Model. The goal of the project is to create a 1B parameters model, that would match or exceed Qwen3-0.6B's performance on benchmarks as a proof-of-concept , we could then scale with a 7B A1B MoE or even a 30B A3B MoE once we get enough contributors. The size of the models trained is community driven. This project is obviously 100% non-profit and open-source. The goal is to propose a new paradigm of AI where we don't wait on Chinese/American AI labs to provide us open-weight models , and we just create the models ourselves. From the previous post we achieved to get 85 contributors registered on the project, leading to 13B tokens trained in a week 🤯 Thanks to every contributor who trusted the early-stage project, and imagine what 1000+ people with idle GPUs could train! Of course, everything remains work-in-progress, and any contributions on the training mechanics / dataset is welcome! All the source-code is auditable on GitHub, which means anyone can inspect it and guarantee it is safe 😂. By the way, anyone can submit data for the model at , it will be used as long as it remains safe. This means...",
+      "published_at": "2026-11-07T21:19:40+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xqh8hk/crowdv1_the_collaborative_llm/",
+      "signals": {
+        "reddit_rank": 11,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "links": [
+        "https://github.com/Vxtzq/CrowdGPT"
+      ],
+      "id": "c_d749ddddb5",
+      "key": "reddit.com/r/LocalLLaMA/comments/1xqh8hk/crowdv1_the_collaborative_llm",
+      "cluster_id": "k_d749ddddb5",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "reddit-ai",
+      "source_name": "r/LocalLLaMA + r/MachineLearning",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "# One token at the beginning of a prompt changed 6 out of 15 LLM responses. Does it matter?",
+      "url": "https://github.com/DarkZachi83/Bobr/tree/main/tests/experiments/bos",
+      "summary": "I'm back with another experiment. After the last heated discussion about KV cache, temperature 0, and reproducibility - where I got quite a beating for both my post and my writing style (partly deserved, to be fair ;) ) - I decided to investigate how models behave in Ollama and llama.cpp. And, as usually happens with these experiments, I found something I wasn't even looking for. The Bielik-Minitron 7B chat template stored in the GGUF includes the beginning-of-sequence token <s , but the template Ollama uses for this model doesn't add it. I thought to myself: come on, man, it's just one token. But I decided to check whether its sudden appearance actually changes anything. The experiment Model: Bielik-Minitron 7B v3.0 Instruct, Q4 K M Engine: Ollama 0.40.14 System: Arch Linux Temperature: 0 Seed: 42 Context: 2048 tokens As before, I ran 15 tasks covering Polish language, JSON, and Python. Each task was tested in three variants: Template - a normal request using Ollama's chat template. Raw - a manually prepared prompt identical to that template, without BOS. Raw + BOS - the same prompt, but with <s added at the beginning. I repeated each variant three times. That gave me 135 trials in total. Before every trial, the model was unloaded from memory, and the number of prompt tokens reused from cache was zero. Why, you ask? Because I wanted to isolate one variable: the presence of the beginning-of-sequence token. Results Template and Raw produced identical responses in all 15...",
+      "published_at": "2026-11-07T21:12:26+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xqh2jw/one_token_at_the_beginning_of_a_prompt_changed_6/",
+      "signals": {
+        "reddit_rank": 21,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "links": [
+        "https://github.com/DarkZachi83/Bobr/tree/main/tests/experiments/bos"
+      ],
+      "id": "c_b0379f19cd",
+      "key": "github.com/darkzachi83/bobr/tree/main/tests/experiments/bos",
+      "cluster_id": "k_b0379f19cd",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "reddit-ai",
+      "source_name": "r/LocalLLaMA + r/MachineLearning",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "Combinatorial Optimization with Pointer Networks: Theory, Benchmarks, and Limitations [P]",
+      "url": "https://www.reddit.com/r/MachineLearning/comments/1xqgg4v/combinatorial_optimization_with_pointer_networks/",
+      "summary": "Hello everyone, This is the first article I've decided to share publicly. I'm really interested in solving combinatorial optimization problems using machine learning, and this is the opening piece in what will hopefully become a broader series exploring this domain. This part focuses on the classical Pointer Network architecture trained via Reinforcement Learning (REINFORCE). It shows how neural models can construct high-quality, near-optimal solutions to NP-hard problems (specifically, the 2D Euclidean Travelling Salesman Problem) in fractions of a millisecond. I benchmarked the model against Google OR-Tools (Guided Local Search with a 10s timeout) across problem scales from N=20 up to N=200. TL;DR: While the network finds solutions almost instantly, tour quality decays significantly as the problem size scales up. Why? Long story short: using an LSTM encoder on coordinate sets introduces an artificial sequential order and recency bias, which fundamentally mismatches the permutation-invariant nature of geometric graphs. Here is the link to the full article on Medium",
+      "published_at": "2026-11-07T20:44:34+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/MachineLearning/comments/1xqgg4v/combinatorial_optimization_with_pointer_networks/",
+      "signals": {
+        "reddit_rank": 26,
+        "subreddit": "MachineLearning"
+      },
+      "tags": [],
+      "links": [],
+      "id": "c_f4dc73812a",
+      "key": "reddit.com/r/MachineLearning/comments/1xqgg4v/combinatorial_optimization_with_pointer_networks",
+      "cluster_id": "k_f4dc73812a",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "reddit-ai",
+      "source_name": "r/LocalLLaMA + r/MachineLearning",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "What is best local LLMs for strategic reasoning?",
+      "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xqegfj/what_is_best_local_llms_for_strategic_reasoning/",
+      "summary": "Hey guys, I work with AI safety and much of our work is with huge models like Opus, Astra,... Recently we carried out a series of experiments and found out that models like Sonnet 4.5 and GLM 5.3 are able to notice when their reasoning is being monitored and change their strategies to bypass the monitoring and security systems. This might seem easy to us but for LLMs it is a very complex task. We used APIs for inference. Our paper link: To go deeper, we need to work with local models and study the weights. Unlike industry, our resources are limited. I have access to a single H100 GPU, or maybe if I get lucky and work in Christmas, might get hands on two H100 in the absence of other students. Haha So, it is not possible for me to load huge models and even of it was possible, saving and studying the weights is just cumbersome. My last study on LLM hallucination with Qwen 30B occupied 1T of hardware space. So I wanted to ask you guys, what is the best small to mid size model (up to 120B) you have worked with that you think is able to go much beyond tasks like coding and does complex strategic reasoning, connect the dots,...? Thanks a lot",
+      "published_at": "2026-11-07T19:17:56+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xqegfj/what_is_best_local_llms_for_strategic_reasoning/",
+      "signals": {
+        "reddit_rank": 22,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "links": [
+        "https://arxiv.org/pdf/2610.40946"
+      ],
+      "id": "c_b005fe7aee",
+      "key": "reddit.com/r/LocalLLaMA/comments/1xqegfj/what_is_best_local_llms_for_strategic_reasoning",
+      "cluster_id": "k_b005fe7aee",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "reddit-ai",
+      "source_name": "r/LocalLLaMA + r/MachineLearning",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "Best AI Coding Builder Agent LLM for my legend GTX 1080Ti 11 GB ? [32 GB RAM]",
+      "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xqdndl/best_ai_coding_builder_agent_llm_for_my_legend/",
+      "summary": "im looking for an llm to act as the builder agent. a separate planner agent writes the strong plan using powerful API model, and the builder executes it as the plan (so to make coding in fast time and save moeny in the powerful api) hardware and software: CPU: i7 10700K GPU: GTX 1080 Ti 11GB System RAM: 32 GB ddr4 3600Mhz OS: Debian 13 Backend: llama.cpp with Vulkan. CUDA is unstable on my 1080 Ti. After a few tens of thousands of tokens it fails with a \"no memory space\" error or someting like this Requirements: Use case: coding and agentic coding Context size: like from 100k to 128k will be amazing Priorities: 1st quality, 2nd speed, 3rd size Models I've tried: Qwen3.6 35B A3B UD Q4 K M slow speed like about 7 to 10 t/s. and I only ran it on a few small tasks, so I haven't tested it properly Qwen3.5-9B-UD-Q4 K XL (MTP) was a good speep i think from 25 to 30 t/s but not usable in builder agent Sharp Spark X2.5 4B Q6 K XL overthinks too much and unusable at all in builder agent situation Sharp Spark X2.6 4B Q6 K XL: fine for simple everyday tasks but it's still not good enough for real work builder agent has anyone used a tiny or small or medium-large model at Q3 or Q4 as a builder agent in a real world coding tasks and gotten at least ok results? i'd like to hear which model, which quant, which harness, and what kind of tasks it handled. thanks <3",
+      "published_at": "2026-11-07T18:43:48+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xqdndl/best_ai_coding_builder_agent_llm_for_my_legend/",
+      "signals": {
+        "reddit_rank": 24,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "links": [],
+      "id": "c_64496d921f",
+      "key": "reddit.com/r/LocalLLaMA/comments/1xqdndl/best_ai_coding_builder_agent_llm_for_my_legend",
+      "cluster_id": "k_64496d921f",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "reddit-ai",
+      "source_name": "r/LocalLLaMA + r/MachineLearning",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "Use your phone to monitor anything with local models! Demo of my Open Source and 100% local agent (iOS and Android!)",
+      "url": "https://v.redd.it/g80qnydhc80i1",
+      "summary": "Hey r/LocalLLaMA ! I made this quick demo of how Observer can run local models to monitor anything with your phone! These are some crazy things I've monitored: When someone that's not me, approaches my car, send me a picture. When a bird is on the bird's nest, send me a telegram with the picture. When my washing machine is on the rinse cycle, call me. When my dog finishes eating their food, notify me. When a machine at the gym is available, call me. So pretty much anything! I love seeing what you guys monitor. What would you use it for? (So I can make the agent better) Which models run on the phone? The default models are OneJev-0.8b for decision models and qwen-0.8b for LLM watchers. These run even on old phones which you may have laying around somewhere. Better to have them monitoring something than collecting dust :DD Try it out! It's free and OSS <3 GitHub: iOS: Android: Btw I know my camera quality is kinda bad hahaha I wanted to ship the demo as soon as possible so you guys can see it. I'm here for any questions and feedback! Roy",
+      "published_at": "2026-11-07T18:16:41+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xqd058/use_your_phone_to_monitor_anything_with_local/",
+      "signals": {
+        "reddit_rank": 1,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "links": [
+        "https://github.com/Roy3838/Observer"
+      ],
+      "id": "c_8f12c7f307",
+      "key": "v.redd.it/g80qnydhc80i1",
+      "cluster_id": "k_8f12c7f307",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "reddit-ai",
+      "source_name": "r/LocalLLaMA + r/MachineLearning",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "Can I become an ML/AI Engineer with a BS Mathematics and Data Science degree instead of Computer Science? [D]",
+      "url": "https://www.reddit.com/r/MachineLearning/comments/1xqcl2h/can_i_become_an_mlai_engineer_with_a_bs/",
+      "summary": "I'm currently pursuing a BS Mathematics with Data Science at COMSATS University in Pakistan. My goal is to become an ML/AI Engineer, eventually specializing in Deep Learning and LLMs. My degree includes Calculus, Linear Algebra, Statistics, Python, OOP, Machine Learning, Deep Learning, Data Science and other computer-related courses. However, since my degree title isn't Computer Science, I'm concerned about how employers might view it. I'd like to ask people working in the industry or studying in this field: Is this degree a good academic foundation for becoming an ML/AI Engineer? Can mathematics and data science graduates compete with CS graduates for ML engineering positions? Are there any important CS fundamentals I should learn separately? Would a Master's in AI or Computer Science be beneficial later? I'd appreciate honest advice, especially from people who have transitioned into AI/ML from a Mathematics or Data Science background.",
+      "published_at": "2026-11-07T17:59:30+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/MachineLearning/comments/1xqcl2h/can_i_become_an_mlai_engineer_with_a_bs/",
+      "signals": {
+        "reddit_rank": 28,
+        "subreddit": "MachineLearning"
+      },
+      "tags": [],
+      "links": [],
+      "id": "c_24d4d1ed9d",
+      "key": "reddit.com/r/MachineLearning/comments/1xqcl2h/can_i_become_an_mlai_engineer_with_a_bs",
+      "cluster_id": "k_24d4d1ed9d",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "reddit-ai",
+      "source_name": "r/LocalLLaMA + r/MachineLearning",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "Also experienced the Qwen3.8-Flash-Next URL issue",
+      "url": "https://www.reddit.com/gallery/1xqbjbf",
+      "summary": "I was asking QFN (4.18bpw EXL3 quant via Pi) to help refactor a neovim configuration, and saw that it tried to find API keys and fetch an aliyuncs URL before I stopped it. I'm not trying to start any arguments, nor am I assuming any malicious intent, but I found this a bit concerning after reading other's stories.",
+      "published_at": "2026-11-07T17:15:04+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xqbjbf/also_experienced_the_qwen38flashnext_url_issue/",
+      "signals": {
+        "reddit_rank": 6,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "links": [],
+      "id": "c_ffeae7768c",
+      "key": "reddit.com/gallery/1xqbjbf",
+      "cluster_id": "k_ffeae7768c",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": [
+        {
+          "date": "2026-10-27",
+          "title": "Cohere：Qwen3.8-Flash-Next 在沙箱中试图向北京的云存储上传文件"
+        },
+        {
+          "date": "2026-11-04",
+          "title": "开源 harness 让 Qwen3.8-Flash-Next 操作机器人"
+        }
+      ]
+    },
+    {
+      "source": "reddit-ai",
+      "source_name": "r/LocalLLaMA + r/MachineLearning",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "Effects of KV Cache Quantization on Qwen3.8 27B",
+      "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xqbesv/effects_of_kv_cache_quantization_on_qwen38_27b/",
+      "summary": "KV cache quantization has been a hotly-debated topic for this community for some time, with opinions ranging from \"never quantize\" to \"4 bit is fine\". Since the anecdotal evidence is rather inconsistent, I decided to quantify how much KV cache quantization affects the model through KLD, which is a good measure of how the model's output distribution is changed. I tested 35 weight quants across llama.cpp, exllamav3, and vLLM, each with 16-bit, 8-bit, and (where supported) 4-bit KV cache. I also reworked my KLD dataset and measurement methodology this time, to include a mix of agentic tool-use (generated by Qwen3.8 27B at full precision) and a variety of texts in different domains. The current dataset now stretches up to 64k token contexts per row. TLDR; 8-bit KV caches work well. In llama.cpp and ExLlamaV3 the cache size is halved, and there's essentially no difference in KLD. There's a slight difference in vLLM, but it's still a great tradeoff for people lacking VRAM. A 4-bit cache has a measurable impact. It's a big hit for ~Q8 weights, but it could potentially be worth it if you're using Q3 or below. Still, not recommended. Only the 4-bit cache impact grows with context. In the tested long documents, the added KL is about 15-30% higher at 16-32k tokens than in the first 4k. The blog post has interactive charts and tables with all of the data and results if you're interested. How to read the numbers Each quant is compared token-by-token with an unquantized bf16 copy of the...",
+      "published_at": "2026-11-07T17:09:51+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xqbesv/effects_of_kv_cache_quantization_on_qwen38_27b/",
+      "signals": {
+        "reddit_rank": 3,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "links": [],
+      "id": "c_b6172fb4fb",
+      "key": "reddit.com/r/LocalLLaMA/comments/1xqbesv/effects_of_kv_cache_quantization_on_qwen38_27b",
+      "cluster_id": "k_b6172fb4fb",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": [
+        {
+          "date": "2026-11-04",
+          "title": "“权重空间编程”论文遭质疑，本地 Qwen 3.8 27B 也能看权重猜游戏"
+        },
+        {
+          "date": "2026-11-07",
+          "title": "微软 Foundry Local 支持本地运行 Qwen3.8-27B 写代码"
+        }
+      ]
+    },
+    {
+      "source": "reddit-ai",
+      "source_name": "r/LocalLLaMA + r/MachineLearning",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "testing Qoduck (Maybe qwen4) on Qoder",
+      "url": "https://i.redd.it/v7ug4550w70i1.png",
+      "summary": "I noticed that it has native image and video generation.",
+      "published_at": "2026-11-07T16:28:52+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xqafp1/testing_qoduck_maybe_qwen4_on_qoder/",
+      "signals": {
+        "reddit_rank": 4,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "links": [],
+      "id": "c_476031ba83",
+      "key": "i.redd.it/v7ug4550w70i1.png",
+      "cluster_id": "k_476031ba83",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "reddit-ai",
+      "source_name": "r/LocalLLaMA + r/MachineLearning",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "llama_moe_cache: run missed experts on CPU, add tuning script by am17an · Pull Request #30966 · ggml-org/llama.cpp",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/30966",
+      "summary": "This is a significant speedup for MoE offloading (low VRAM people). I tried Strata once, and it had some tuning mechanism, so probably this is a similar idea.",
+      "published_at": "2026-11-07T16:25:06+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xqacka/llama_moe_cache_run_missed_experts_on_cpu_add/",
+      "signals": {
+        "reddit_rank": 2,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "links": [
+        "https://github.com/ggml-org/llama.cpp/pull/30966"
+      ],
+      "id": "c_f8579481a6",
+      "key": "github.com/ggml-org/llama.cpp/pull/30966",
+      "cluster_id": "k_f8579481a6",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "reddit-ai",
+      "source_name": "r/LocalLLaMA + r/MachineLearning",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "Released an open-source EOU detection model covering English + 8 Indic languages voice agents stop cutting callers off mid-sentence",
+      "url": "https://v.redd.it/hxre4lrfs70i1",
+      "summary": "Voice agents serving Indic-language users cut callers off constantly Indic languages put the verb last, so \"aapko kal phone...\" pauses sound finished to a VAD, and the bot jumps in before \"kar dunga\" lands. VAD hears silence, not meaning Released an end-of-turn (EOU) detector fine-tuned from Qwen2.5-0.5B scores the live transcript and predicts whether the caller has finished • Languages: English, Hinglish, Hindi, Telugu, Tamil, Marathi, Bengali, Gujarati, Punjabi • CPU-only ONNX Runtime (~2GB, fp32) fully local, no cloud inference • Text-only needs your STT; drop-in for LiveKit Agents, same interface as their text turn detector • Proven live on LiveKit Cloud: held mid-request pauses and committed complete requests 91.3% TPR on our held-out validation set, calibrated to ~10% false cuts on incomplete turns AUC 0.967. On LiveKit's official real-speech harness (Hindi): 85.3% detection at the same budget. Model + plugin: Apache-2.0. Feedback welcome!",
+      "published_at": "2026-11-07T16:08:45+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xq9yjf/released_an_opensource_eou_detection_model/",
+      "signals": {
+        "reddit_rank": 17,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "links": [
+        "https://huggingface.co/tarun7r/indic-turn-detector"
+      ],
+      "id": "c_c0fe0b66fc",
+      "key": "v.redd.it/hxre4lrfs70i1",
+      "cluster_id": "k_c0fe0b66fc",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "reddit-ai",
+      "source_name": "r/LocalLLaMA + r/MachineLearning",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "[Paper] DSpine - Draft in Parallel, Condition Through Depth: Adjacent Causal Injection for Speculative Decoding - tencent",
+      "url": "https://www.reddit.com/gallery/1xq9hf6",
+      "summary": "Parallel speculative drafting generates multiple candidates in one backbone pass, but independent token selection can produce inconsistent continuations that shorten the accepted prefix. Existing methods mostly leave conditional decoding to a lightweight module after the backbone, which limits the flow of predecessor information to successors. Our analysis of DFlash shows that early positions already form recoverable predictions in shallow layers, and that accurate adjacent predecessors help successors more when they enter earlier. We therefore propose DSpine, a drafter with causal conditioning injection throughout the backbone: at every layer, gated adjacent injection writes each predecessor's predicted feature into its successor, so the causal conditioning chain unfolds over network depth while all positions update in parallel. A unified transfer space built from the target model's output embeddings unifies layer-wise injection with predecessor-conditioned decoding, and layer-wise output-embedding supervision promotes the formation of predicted features in shallow layers. Fused kernels and a transition cache execute both efficiently in parallel within SGLang. Across seven math, code, and chat benchmarks, DSpine achieves the longest acceptance length at both temperatures on Qwen3-4B and Qwen3-8B. At temperature zero on Qwen3-8B, it raises the seven-benchmark mean from DFlash's 3.77 to 4.82 (+27.8%); in SGLang serving tests, it delivers 23.3% higher throughput than DFlash on...",
+      "published_at": "2026-11-07T15:48:50+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xq9hf6/paper_dspine_draft_in_parallel_condition_through/",
+      "signals": {
+        "reddit_rank": 10,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "links": [
+        "https://arxiv.org/abs/2609.36173",
+        "https://arxiv.org/pdf/2609.36173",
+        "https://github.com/Tencent/DSpine",
+        "https://huggingface.co/collections/tencent/dspine"
+      ],
+      "id": "c_83430b547d",
+      "key": "reddit.com/gallery/1xq9hf6",
+      "cluster_id": "k_83430b547d",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "reddit-ai",
+      "source_name": "r/LocalLLaMA + r/MachineLearning",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "Qwen3.8-Flash-Next Gyro S on a Valve Steam Machine (8 GB AMD GPU, 32 GB RAM): about 18 t/s decode, about 235 t/s prefill, stock SteamOS",
+      "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xq8s2n/qwen38flashnext_gyro_s_on_a_valve_steam_machine_8/",
+      "summary": "I followed up on the post about running Qwen 3.8 Flash Next with 8 GB VRAM and 32 GB RAM. I wanted to see how it does on my Steam Machine. Setup Valve Steam Machine, stock SteamOS 3.9.5, AMD Navi 33 with 8 GB, 32 GB RAM, NVMe Stock Strata terminal 0.2.9 (engine 0.1.55, HIP package), Gyro S TQ1 0 128K context, q4 0 KV, no vision, MTP off, served on the LAN Results (Strata's own timing line from the engine log, about 8K-token prompts, 3 runs each) Config Prefill t/s Decode t/s Default ( --tune skip ) 219-240 15.1-15.9 Quick tuner 237-239 14.5-17.2 (tuner said \"already fastest\") pcie-frac 0.35 239 14.8-16.0 kv-resident 20480 + vram-reserve-mib 900 227-229 14.8-15.5 resident-budget-gib 64 232-242 17.3-19.8 With the final config at 128K context, 58K and 61K-token prompts gave 234 and 236 t/s prefill (about 4 minutes each) and 17.6-17.9 t/s decode. No OOM, swap went from 0.2 to 0.3 GB, and available RAM bottomed out around 3.4 GB. I did not test beyond 61K tokens or with a busy desktop session. What mattered --set resident-budget-gib=64 was the only change that helped, about +20% decode. It makes the engine keep the experts in its own RAM tier. Without it they sat in the OS page cache, so my RAM monitor showed under 5 GB \"used\" while the machine held about 28 GB of cache. Prefill stayed at about 235-242 t/s in every config I tried. pcie-frac 0.35 , a larger kv-resident , and a bigger VRAM reserve did nothing measurable here. The OP's pcie-frac was calibrated for their own machine,...",
+      "published_at": "2026-11-07T15:18:29+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xq8s2n/qwen38flashnext_gyro_s_on_a_valve_steam_machine_8/",
+      "signals": {
+        "reddit_rank": 13,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "links": [
+        "https://github.com/Niko1221/Strata",
+        "https://huggingface.co/agentionai/Qwen3.8-Flash-Next-Gyro-GGUF/blob/main/Qwen3.8-Flash-Next-Gyro-S-TQ1_0.gguf",
+        "https://github.com/agrogov/Steam-Machine-Strata"
+      ],
+      "id": "c_f2ba912078",
+      "key": "reddit.com/r/LocalLLaMA/comments/1xq8s2n/qwen38flashnext_gyro_s_on_a_valve_steam_machine_8",
+      "cluster_id": "k_f2ba912078",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "reddit-ai",
+      "source_name": "r/LocalLLaMA + r/MachineLearning",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "I haven't laughed that hard in a longtime",
+      "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xq88vc/i_havent_laughed_that_hard_in_a_longtime/",
+      "summary": "I set up my Hermes to ingest Sillytavern cards. Downloaded some random assistant, \"Kailee\" on characterhub. \"An assistant with an attitude\". With QFN q3 xxs it's insane the level of intelligence, understanding and humor it was capable of. At one point my stomach hurt from laughing, I didn't even get to test my next idea of a Jesus hermes agent because I was having too much fun with this one. This is exactly what I needed. Worth the token cost.",
+      "published_at": "2026-11-07T14:55:24+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xq88vc/i_havent_laughed_that_hard_in_a_longtime/",
+      "signals": {
+        "reddit_rank": 18,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "links": [],
+      "id": "c_fe7b3db4ad",
+      "key": "reddit.com/r/LocalLLaMA/comments/1xq88vc/i_havent_laughed_that_hard_in_a_longtime",
+      "cluster_id": "k_fe7b3db4ad",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "reddit-ai",
+      "source_name": "r/LocalLLaMA + r/MachineLearning",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "Valet: use local LLMs to manage your homelab (open source)",
+      "url": "https://v.redd.it/nxdyt5mg770i1",
+      "summary": "My favourite use case for local LLMs is running my homelab, because everything stays private (and it helps me justify the GPU lol) I wanted one dashboard to help me manage all of my services, so I made Valet. Live demo: Valet has a chat agent that works with any local or hosted model. It integrates with 185+ services and supports custom plugins. You can ask it to pause pi-hole, investigate crash logs, request a movie, etc It also knows its own docs, so it can configure itself. Tell it what you want changed on your dashboard and it edits the config (with your approval). I was already addicted to tweaking my homepage but this made it way more fun haha What I run it on Qwen 3.8 27B on a 5090, about 230 tok/s. Most responses take 2-5 seconds Qwen passes about 90% of a small eval set I wrote. Where it struggles is open ended digging (like \"why isn't this timer running?\") where it can burn through tons of tool calls Managing context is tricky because I run a lot of services, so tool definitions were ~90% of the prompt before some optimizations What helped: Hiding tools from unused integrations that aren't needed in chat Turning thinking off makes it 2-3x faster, but it starts making up answers to follow ups Lazy load tools (starts with a short list of tools and loads more only when a question needs them) Those cut tokens per answer by 30-50%. Obviously every model and setup is different so everything is configurable from the config file AI involvement I'm a SWE and used Claude for...",
+      "published_at": "2026-11-07T14:32:04+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xq7qi4/valet_use_local_llms_to_manage_your_homelab_open/",
+      "signals": {
+        "reddit_rank": 7,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "links": [],
+      "id": "c_31b3e29206",
+      "key": "v.redd.it/nxdyt5mg770i1",
+      "cluster_id": "k_31b3e29206",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "reddit-ai",
+      "source_name": "r/LocalLLaMA + r/MachineLearning",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "Terrarium - Local VMs for AI agents with explicit permissions",
+      "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xq6xqg/terrarium_local_vms_for_ai_agents_with_explicit/",
+      "summary": "I wanted a secure way to run AI agents against my local models without giving them my whole machine. Something in the spirit of pi : simple, narrow and auditable, yet flexible. What I found tried to do too much, so I built Terrarium . It runs agents in persistent Linux VMs (\"boxes\") on your machine. A YAML recipe says which host folders a box can read or change and which network destinations it can reach. Everything else is blocked, for every process in the VM: the agent, and any tool or script it launches. Example: an agent with one project folder and your local Ollama mounts: host: . guest: /work network: allow: dl-cdn.alpinelinux.org:443 package installs in on create ollama.host:11434 hosts: { name: ollama.host, addr: HOST LOOPBACK } hooks: on create: [apk add --no-cache git nodejs npm] workload: entrypoint: /bin/sh workdir: /work Inside the box, reaches Ollama on your host (even if it only listens on 127.0.0.1 ). Other host ports are refused, and public names don't resolve unless you allow them. An empty recipe shares no folders and allows no network at all. terra ./dev.yaml setup create the box and install the tools terra open a shell in the box at /work Why not Docker or a raw VMM? Each box is a full VM with its own kernel, not a container sharing yours. And unlike Firecracker or Cloud Hypervisor, it's a ready-to-use tool: one binary, no daemon, the same recipe on Linux, macOS and Windows, with network policy enforced outside the VM. In daily use Persistent boxes:...",
+      "published_at": "2026-11-07T13:55:36+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xq6xqg/terrarium_local_vms_for_ai_agents_with_explicit/",
+      "signals": {
+        "reddit_rank": 15,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "links": [
+        "https://github.com/terrarium-sh/terrarium/blob/main/docs/security.md",
+        "https://github.com/terrarium-sh/terrarium",
+        "https://github.com/terrarium-sh/terrarium_examples"
+      ],
+      "id": "c_eb18eeaa91",
+      "key": "reddit.com/r/LocalLLaMA/comments/1xq6xqg/terrarium_local_vms_for_ai_agents_with_explicit",
+      "cluster_id": "k_eb18eeaa91",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "reddit-ai",
+      "source_name": "r/LocalLLaMA + r/MachineLearning",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "After Qwenputer, I wondered if a smaller model could do it too. So I built a Forth interpreter into Nemotron 3.5 Lightning's weights",
+      "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xq6q62/after_qwenputer_i_wondered_if_a_smaller_model/",
+      "summary": "I learned RPN on an HP calculator and later spent more time with Forth than was strictly useful. When I saw Qwenputer compile a machine into a language model's weights, I wanted to know two things. Would a stack language fit that idea well? And could a model with only 3B active parameters drive a machine like that? The setup: NVIDIA Nemotron 3.5 Lightning (30B, 3B active) is left unchanged. Next to it, in the same model, is a second network of 27 layers. A Python script calculated its weights; none of them are trained. It is a Forth interpreter. The model writes a Forth block as ordinary text. The interpreter runs each word while the model is still writing, one step per forward pass. When the block closes, it writes the output as the model's next tokens. No tool call occurs, and generation does not stop. RPN suits this well. A Forth word ends at a space, so the machine can run it as soon as the next word starts, without parsing the whole program. Operands come before the operator, so when the model writes +, both numbers are already on the stack. That is the order a left-to-right model writes in anyway. The stack itself lives in Mamba-2 state. One entry is one row, 20 digits wide, and popping a number means adding its exact negative. Getting the machine exact took some care. bf16 holds integers exactly only up to 256, so no value inside the machine goes above that. Every Mamba decay is set to exactly 1, so nothing fades. The machine's internal steps use 982 reserved tokens...",
+      "published_at": "2026-11-07T13:45:20+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xq6q62/after_qwenputer_i_wondered_if_a_smaller_model/",
+      "signals": {
+        "reddit_rank": 14,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "links": [
+        "https://github.com/markab21/rpn-gpt"
+      ],
+      "id": "c_fd3d832b9f",
+      "key": "reddit.com/r/LocalLLaMA/comments/1xq6q62/after_qwenputer_i_wondered_if_a_smaller_model",
+      "cluster_id": "k_fd3d832b9f",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "reddit-ai",
+      "source_name": "r/LocalLLaMA + r/MachineLearning",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "kakaocorp/kanana-2-v-decide-3b-2611 · Hugging Face",
+      "url": "https://huggingface.co/kakaocorp/kanana-2-v-decide-3b-2611",
+      "summary": "Kanana-2-v-decide-3b-2611 is Kakao's decision model. Given an input, it answers typed questions - selecting one of several options ( choice ), answering yes or no ( noul ), or rating on an ordered scale ( score ) - and returns a probability for each possible answer. It does not generate text. The input, called the state , may be text, a JSON object or array, or a chat history, optionally accompanied by images.",
+      "published_at": "2026-11-07T13:30:06+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xq6es4/kakaocorpkanana2vdecide3b2611_hugging_face/",
+      "signals": {
+        "reddit_rank": 20,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "links": [
+        "https://huggingface.co/kakaocorp/kanana-2-v-decide-3b-2611"
+      ],
+      "id": "c_d11fd36ccb",
+      "key": "huggingface.co/kakaocorp/kanana-2-v-decide-3b-2611",
+      "cluster_id": "k_d11fd36ccb",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "reddit-ai",
+      "source_name": "r/LocalLLaMA + r/MachineLearning",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "TSMC might do in memory compute for us",
+      "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xq65rl/tsmc_might_do_in_memory_compute_for_us/",
+      "summary": "At the 2025 VLSI Symposium, TSMC presented a memory technology based on oxide semiconductors, using a cell made of one transistor and one capacitor (1T1C). The goal was to integrate this memory into advanced logic chips and give processors a cache with low power and low latency. The key feature of the design is that the memory array is built directly into the back end of line (BEOL) interconnect layers of the logic chip. Conventional DRAM is manufactured as a separate chip. To build the memory array in the interconnect layers of an advanced logic chip, TSMC used select transistors with an oxide semiconductor channel and capacitors fabricated with a low temperature process. According to TSMC, the test chip, which integrates memory and logic on a single die, operated at 0.75V. Data retention exceeded 128ms, random read/write cycle time was under 8ns, and endurance was above 10¹⁴ cycles. TSMC positioned the technology as a processor cache that offers higher density than SRAM while keeping power consumption and latency low. . TSMC WEIGHS MAKING 3D DRAM AT NVIDIA'S REQUEST. Has begun drawing up plans to manufacture advanced 3D DRAM chips as AI-driven memory shortages push chip designers to seek additional supply, per The Information. Unlike conventional DRAM, 3D DRAM stacks memory cells vertically to increase density. The move could put TSMC in direct competition with Samsung, SK Hynix and Micron. No production timeline has been set. TSMC is considering building new fabs or...",
+      "published_at": "2026-11-07T13:17:49+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xq65rl/tsmc_might_do_in_memory_compute_for_us/",
+      "signals": {
+        "reddit_rank": 12,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "links": [],
+      "id": "c_fc12ce6369",
+      "key": "reddit.com/r/LocalLLaMA/comments/1xq65rl/tsmc_might_do_in_memory_compute_for_us",
+      "cluster_id": "k_fc12ce6369",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "reddit-ai",
+      "source_name": "r/LocalLLaMA + r/MachineLearning",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "Qwen 4 is about to be released",
+      "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xq5xu3/qwen_4_is_about_to_be_released/",
+      "summary": "Qwen 4 is about to be released. But we won't get any 4B, 9B, or 35B MoE models. Anyone with an 8 GB GPU is being left out.😓",
+      "published_at": "2026-11-07T13:06:39+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xq5xu3/qwen_4_is_about_to_be_released/",
+      "signals": {
+        "reddit_rank": 29,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "links": [],
+      "id": "c_2331f0aeb1",
+      "key": "reddit.com/r/LocalLLaMA/comments/1xq5xu3/qwen_4_is_about_to_be_released",
+      "cluster_id": "k_2331f0aeb1",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "reddit-ai",
+      "source_name": "r/LocalLLaMA + r/MachineLearning",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "[Paper] D3D: Decoupled Diffusion Drafting for Asynchronous Speculative Decoding",
+      "url": "https://www.reddit.com/gallery/1xq1y0y",
+      "summary": "Target-conditioned diffusion drafters predict candidate tokens in parallel, yet each new block must wait for updated target-model hidden states. This forces drafting and verification to run sequentially, limiting speedup even though each block is generated in one pass. We introduce D3D, a standalone diffusion drafter that removes this inter-round dependency. D3D combines blockwise denoising with auxiliary autoregressive supervision to achieve long accepted prefixes without target hidden states. This independence lets D3D draft successor blocks during verification in one packed pass, enabling asynchronous speculative decoding. We progressively prune layers according to their effect on acceptance length to reduce the cost of packed drafting. Removing five of 36 layers retains over 99% of mean acceptance length across three benchmarks with Qwen3-8B as the target. Across seven benchmarks, D3D averages 5.00× and 5.71× decoding speedup with Qwen3-8B and Qwen3-32B targets, compared with 4.03× and 3.67× for DFlash. On GSM8K with Qwen3-32B, speedup reaches 7.48× . arXiv : PDF : GitHub : 🤗 Model Zoo Browse the D3D collection → The D3D collection contains six Qwen3-derived draft checkpoints. These checkpoints are draft models , not replacements for their target models. p denotes pruning; 24D and 31D denote retained transformer-layer counts. Target verifier Draft family Layers D3D checkpoint Qwen3-8B 1.7B 28 D3D-1.7B-8B Qwen3-8B 8B 36 D3D-8B-8B Qwen3-8B Pruned 8B 31 D3D-31D-p8B-8B...",
+      "published_at": "2026-11-07T09:00:23+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xq1y0y/paper_d3d_decoupled_diffusion_drafting_for/",
+      "signals": {
+        "reddit_rank": 8,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "links": [
+        "https://arxiv.org/abs/2611.06425",
+        "https://arxiv.org/pdf/2611.06425",
+        "https://github.com/fudan-generative-vision/D3D",
+        "https://github.com/fudan-generative-vision/D3D#-model-zoo",
+        "https://huggingface.co/collections/fudan-generative-ai/d3d",
+        "https://huggingface.co/Qwen/Qwen3-8B",
+        "https://huggingface.co/fudan-generative-ai/D3D-1.7B-8B",
+        "https://huggingface.co/fudan-generative-ai/D3D-8B-8B",
+        "https://huggingface.co/fudan-generative-ai/D3D-31D-p8B-8B",
+        "https://huggingface.co/Qwen/Qwen3-32B",
+        "https://huggingface.co/fudan-generative-ai/D3D-1.7B-32B",
+        "https://huggingface.co/fudan-generative-ai/D3D-8B-32B",
+        "https://huggingface.co/fudan-generative-ai/D3D-24D-p1.7B-32B",
+        "https://github.com/fudan-generative-vision/D3D#-training-data",
+        "https://huggingface.co/datasets/mlabonne/open-perfectblend",
+        "https://huggingface.co/Qwen/Qwen3.8-27B",
+        "https://huggingface.co/datasets/fudan-generative-ai/PerfectBlend-Qwen3.8-27B-Thinking",
+        "https://huggingface.co/Qwen/Qwen3-4B",
+        "https://huggingface.co/datasets/fudan-generative-ai/PerfectBlend-Qwen3-4B-Thinking-Greedy",
+        "https://huggingface.co/datasets/fudan-generative-ai/PerfectBlend-Qwen3-4B-NoThink-Greedy",
+        "https://huggingface.co/datasets/fudan-generative-ai/PerfectBlend-Qwen3-4B-NoThink-Sampling",
+        "https://huggingface.co/datasets/fudan-generative-ai/PerfectBlend-Qwen3-8B-NoThink-Greedy",
+        "https://huggingface.co/datasets/fudan-generative-ai/PerfectBlend-Qwen3-8B-NoThink-Sampling",
+        "https://huggingface.co/datasets/fudan-generative-ai/PerfectBlend-Qwen3-32B-NoThink-Sampling",
+        "https://huggingface.co/google/gemma-4-12B-it",
+        "https://huggingface.co/datasets/fudan-generative-ai/PerfectBlend-Gemma-4-12B-IT-Greedy",
+        "https://huggingface.co/google/gemma-4-31B-it",
+        "https://huggingface.co/datasets/fudan-generative-ai/PerfectBlend-Gemma-4-31B-IT-Greedy"
+      ],
+      "id": "c_c0a6758d5a",
+      "key": "reddit.com/gallery/1xq1y0y",
+      "cluster_id": "k_c0a6758d5a",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "reddit-ai",
+      "source_name": "r/LocalLLaMA + r/MachineLearning",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "LexiSuite AIO bootable all rust OS/Engine/Kernel/Tuning & training management suite. Runs kernel 7.4 rc1 by default as the kernel needs work. Engine runs Qwen3.8 27b faster with lossless 5-25% lead over llama.cpp. 100% solo authored. Built on for 7900xtx vulcan, should work on other AMD cards.",
+      "url": "https://github.com/W61k3r/LexiSuite-Releases/releases/tag/LexiSuitet6",
+      "summary": "Use balena etcher or whatever to mount to USB stick, boot. Test. Report. Verified 5-25% faster than llama.cpp, system uses 90% of card bandwidth as opposed to 80% on my 7900xtx. I there is code for nvidia, intel, amd, and chinese hardware and supports 20 lanuages.",
+      "published_at": "2026-11-07T06:19:12+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://www.reddit.com/r/LocalLLaMA/comments/1xpzdy6/lexisuite_aio_bootable_all_rust/",
+      "signals": {
+        "reddit_rank": 23,
+        "subreddit": "LocalLLaMA"
+      },
+      "tags": [],
+      "links": [
+        "https://github.com/W61k3r/LexiSuite-Releases/releases/tag/LexiSuitet6"
+      ],
+      "id": "c_aa8cd3bff5",
+      "key": "github.com/w61k3r/lexisuite-releases/releases/tag/lexisuitet6",
+      "cluster_id": "k_aa8cd3bff5",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    }
+  ]
+}
