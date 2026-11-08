@@ -1,0 +1,804 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-08",
+  "mode": "full",
+  "generated_at": "2026-11-08T04:50:14+00:00",
+  "channel": "api",
+  "model": "nvidia:minimaxai/minimax-m3.1-flash",
+  "highlights": [
+    "论文方面，CoworkOS 用分层架构把长周期任务的策略与执行拆开；Wave Forcing 则把流式视频生成推到 147.6 DiT FPS。",
+    "推理侧，D3D 用解耦扩散草稿实现异步投机解码，在 Qwen3-32B 上平均加速 5.71×；NVIDIA Kubernetes Engine 开源了裸金属 GPU Kubernetes 的管理面。",
+    "工具与模型方面，Anthropic 的 skills 仓库、TwIL-8B 推理模型和 HyperFlow H3 Flash 压缩版 MiniMax-H3 都可以直接上手试用。"
+  ],
+  "items": [
+    {
+      "section": "headline",
+      "title": "CoworkOS：面向长周期协作任务的 Agent 运行框架",
+      "summary": "中国人民大学团队提出通用长周期 Agent harness CoworkOS，把任务策略与执行管理分离：模型决定动作、委派与验收，运行时维护状态和反馈。它用三层架构支持直接执行或委派给 Subagents，并通过分层工作区与持久语义记忆让任务可中断后恢复。",
+      "tags": [
+        "Agent",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_991beae516",
+          "url": "https://huggingface.co/papers/2611.03178"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.03178",
+          "quote": "Papers arxiv:2611.03178 Copy markdown CoworkOS:Scaling Agent Coworkers for Real-world Automation Published on Nov 2 · Submitted by KABI on Nov 3 #3 Paper of the day · Renmin University of China Upvote 100 +92 Authors: Jiajie Jin , Guanting Dong , Chengjun Pan , Xin Deng , Zhuohui Sheng , Guoqiang Wa"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.03178",
+          "quote": "We introduce CoworkOS, a general-purpose harness for long-horizon work that separates task strategy from execution management: the model decides actions, delegation, and acceptance, while the runtime maintains state and feedback."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.03178",
+          "quote": "Its three-layer architecture enables direct execution or delegation to Subagents , synchronously or asynchronously, under stable responsibilities."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.03178",
+          "quote": "To sustain continuity across agents and sessions, CoworkOS further introduces hierarchical workspaces and persistent semantic memory , so working files, key decisions, and long-running Job logs remain shareable, reusable, and resumable after interruption."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Wave Forcing：流式视频生成加速到 147.6 DiT FPS",
+      "summary": "SJTU DENG Lab 提出 Wave Forcing（WF），协同设计生成、训练与执行，用分块因果注意力在更早的片段去噪完成前读取其状态，并在多副本间错开去噪与缓存刷新。实验显示 4-step WF 在八块 H200 上达到 147.6 DiT FPS 与 134.8 端到端 FPS，代码、训练配方与 4-step/5-step 检查点均已开放。",
+      "tags": [
+        "视频",
+        "论文"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_42da0213ee",
+          "url": "https://huggingface.co/papers/2611.00859"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.00859",
+          "quote": "Papers arxiv:2611.00859 Copy markdown Wave Forcing: Towards Speed-of-Light Streaming Video Generation Published on Oct 31 · Submitted by Yijie Jin on Nov 3 #2 Paper of the day · DENG Lab @ SJTU Upvote 125 +117 Authors: Yijie Jin , Yuxuan Liu , Jiajun Xu , Ye Huang , Chuzhi Wang , Jiayang Li , Ruiyan"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.00859",
+          "quote": "We propose Wave Forcing (WF), which co-designs generation, training, and execution for continuous video output with multi-step denoising ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.00859",
+          "quote": "WF uses chunk-wise causal attention to access earlier, cleaner chunks before their denoising is complete, and distributes staggered denoising and cache-refresh stages across full-model replicas to achieve 1F1C: one output chunk per concurrent forward round after pipeline fill ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.00859",
+          "quote": "Our system efficiency experiments show that 4-step WF achieves 147.6 DiT FPS and 134.8 end-to-end FPS on eight H200 GPUs, yielding 7.07x the single-GPU end-to-end throughput."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.00859",
+          "quote": "Code, training recipes, and 4-step/5-step checkpoints are available."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "D3D：解耦扩散草稿实现异步投机解码",
+      "summary": "D3D 提出独立的扩散草稿器，不依赖目标模型的隐状态，因此可以在验证当前块的同时打包草拟后续块，打破草稿与验证串行的限制。论文报告其在七个基准上以 Qwen3-8B 和 Qwen3-32B 为目标模型时平均解码加速分别为 5.00× 与 5.71×，代码已公开。",
+      "tags": [
+        "推理",
+        "论文"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_c0a6758d5a",
+          "url": "https://arxiv.org/abs/2611.06425"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2611.06425",
+          "quote": "Title: D3D: Decoupled Diffusion Drafting for Asynchronous Speculative Decoding"
+        },
+        {
+          "url": "https://arxiv.org/abs/2611.06425",
+          "quote": "We introduce D3D, a standalone diffusion drafter that removes this inter-round dependency."
+        },
+        {
+          "url": "https://arxiv.org/abs/2611.06425",
+          "quote": "This independence lets D3D draft successor blocks during verification in one packed pass, enabling asynchronous speculative decoding."
+        },
+        {
+          "url": "https://arxiv.org/abs/2611.06425",
+          "quote": "Across seven benchmarks, D3D averages 5.00$\\times$ and 5.71$\\times$ decoding speedup with Qwen3-8B and Qwen3-32B targets, compared with 4.03$\\times$ and 3.67$\\times$ for DFlash."
+        },
+        {
+          "url": "https://arxiv.org/abs/2611.06425",
+          "quote": "Code is publicly available at this https URL ."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "NVIDIA 开源裸金属 GPU Kubernetes 管理面 NVKE",
+      "summary": "NVKE 是 NVIDIA Kubernetes Engine，为平台团队提供管理面，用来在自己的 NVIDIA GPU 基础设施上创建和运维 Kubernetes 集群，每个工作负载集群拥有独立控制面与节点池。项目以 Apache-2.0 协议开放，目前处于 preview 阶段，官方不建议用于生产。",
+      "tags": [
+        "开源",
+        "工具",
+        "硬件"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_5d79a9d3c0",
+          "url": "https://github.com/dsx-ai-factory/nvke"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/dsx-ai-factory/nvke",
+          "quote": "nvke Public Notifications You must be signed in to change notification settings Fork 92 ( 92 ) Star 596 ( 596 ) You must be signed in to star a repository About NVIDIA Kubernetes Engine (NVKE)."
+        },
+        {
+          "url": "https://github.com/dsx-ai-factory/nvke",
+          "quote": "A management plane for GPU Kubernetes on bare metal."
+        },
+        {
+          "url": "https://github.com/dsx-ai-factory/nvke",
+          "quote": "buting Apache-2.0 license Security More items NVIDIA Kubernetes Engine (NVKE)"
+        },
+        {
+          "url": "https://github.com/dsx-ai-factory/nvke",
+          "quote": "NVIDIA Kubernetes® Engine (NVKE) provides the management plane that platform teams install to create and"
+        },
+        {
+          "url": "https://github.com/dsx-ai-factory/nvke",
+          "quote": "operate Kubernetes clusters for their customers."
+        },
+        {
+          "url": "https://github.com/dsx-ai-factory/nvke",
+          "quote": "Preview: NVKE is available as a preview."
+        },
+        {
+          "url": "https://github.com/dsx-ai-factory/nvke",
+          "quote": "can change between releases, and we do not recommend NVKE for production"
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Route Anything：多模态模型与策略路由的统一研究框架",
+      "summary": "Route Anything 研究如何在质量与算力成本之间动态选择并协调专用模型、工具和策略，构建了覆盖 25 个基准的 omni-modal trajectory matrix，包含 452 种候选配置的 374,401 次打分运行。论文报告按输入的 oracle 路由比最佳固定候选高 5.4 分，学习型路由器相对参考模型平均提升 8.82x 效率。",
+      "tags": [
+        "论文",
+        "推理"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_9825171215",
+          "url": "https://huggingface.co/papers/2611.05275"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.05275",
+          "quote": "bstract Route Anything is a framework for dynamically selecting and coordinating specialized AI models and policies across diverse tasks to improve performance and efficiency."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.05275",
+          "quote": "In this work, we present Route Anything, a unified framework for studying model and policy routing across general-purpose AI systems."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.05275",
+          "quote": "To systematically investigate routing across diverse capabilities, we first construct an omni-modal trajectory matrix spanning 25 benchmarks across language understanding, image, video, and speech generation, coding and workplace agents, and robotic manipulation, comprising 374,401 scored runs from"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.05275",
+          "quote": "452 candidate configurations."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.05275",
+          "quote": "Our results reveal substantial opportunities for capability orchestration : per-input oracle routing outperforms the best fixed candidate by 5.4 points, and learned routers outperform it by 0.3 points across 16 benchmarks, by 2.1 points on video generation, and by 1.1 points on robot manipulation wh"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.05275",
+          "quote": "More importantly, routing raises efficiency by 8.82x on average compared with the reference model."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "MoviEdit：Adobe 的长片段多镜头视频编辑框架",
+      "summary": "Adobe 提出端到端的长片段多镜头视频编辑框架 MoviEdit，自动数据生成流水线产出 87K 对配对编辑视频，无需人工标注。架构上采用级联双向-自回归设计，先在时空压缩表示上生成全局一致草稿，再自回归地在完整视频上传播与精修，并配套发布 MoviEdit-Bench 基准。",
+      "tags": [
+        "视频",
+        "论文"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_85c9daa922",
+          "url": "https://huggingface.co/papers/2611.02737"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.02737",
+          "quote": "Papers arxiv:2611.02737 MoviEdit: Long-form Multi-Shot Video Editing Made Easy Published on Nov 2 · Submitted by Hyeonho Jeong on Nov 4 #3 Paper of the day · Adobe Upvote 74 +66 Authors: Suhyeon Lee , Zhengang Li , Soo Ye Kim , Peihao Zhu , Jong Chul Ye , Chun-Hao Paul Huang , Duygu Ceylan , Yan Kan"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.02737",
+          "quote": "g , Hyeonho Jeong Abstract MoviEdit is an end-to-end framework for long-form multi-shot video editing that uses cascaded bidirectional-autoregressive modeling and a new benchmark to maintain coherence across scenes while reducing manual data annotation."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.02737",
+          "quote": "To provide cross-shot supervision data at scale, we develop automatic data-generation pipelines spanning synchronized multi-view footage, real-world multi-shot videos, and generated multi-shot content, yielding 87K paired editing videos without manual annotation."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.02737",
+          "quote": "Architecturally, MoviEdit employs a cascaded bidirectional-autoregressive design : a lightweight bidirectional stage first establishes a globally coherent editing draft over a spatiotemporally compressed representation , which is then autoregressively propagated and refined over the full video."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.02737",
+          "quote": "We further introduce MoviEdit-Bench , a dedicated benchmark for systematic evaluation of long-form multi-shot video editing ."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "DSpine：按深度注入相邻因果信息的并行投机解码",
+      "summary": "DSpine 提出的草稿器在骨干网络每一层都做门控相邻注入，把前一位位置的预测特征写入后继位置，让因果条件链沿网络深度展开、同时并行更新所有位置。论文称其在 Qwen3-4B 和 Qwen3-8B 上取得最长接受长度，在 Qwen3-8B 温度为零时把七个基准均值从 DFlash 的 3.77 提到 4.82。",
+      "tags": [
+        "推理",
+        "论文"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_83430b547d",
+          "url": "https://arxiv.org/abs/2609.36173"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2609.36173",
+          "quote": "Title: Draft in Parallel, Condition Through Depth: Adjacent Causal Injection for Speculative Decoding"
+        },
+        {
+          "url": "https://arxiv.org/abs/2609.36173",
+          "quote": "We therefore propose DSpine, a drafter with causal conditioning injection throughout the backbone: at every layer, gated adjacent injection writes each predecessor's predicted feature into its successor, so the causal conditioning chain unfolds over network depth while all positions update in parall"
+        },
+        {
+          "url": "https://arxiv.org/abs/2609.36173",
+          "quote": "A unified transfer space built from the target model's output embeddings unifies layer-wise injection with predecessor-conditioned decoding, and layer-wise output-embedding supervision promotes the formation of predicted features in shallow layers."
+        },
+        {
+          "url": "https://arxiv.org/abs/2609.36173",
+          "quote": "Across seven math, code, and chat benchmarks, DSpine achieves the longest acceptance length at both temperatures on Qwen3-4B and Qwen3-8B."
+        },
+        {
+          "url": "https://arxiv.org/abs/2609.36173",
+          "quote": "At temperature zero on Qwen3-8B, it raises the seven-benchmark mean from DFlash's 3.77 to 4.82 (+27.8%); in SGLang serving tests, it delivers 23.3% higher throughput than DFlash on average."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Agentic Computer Graphics 综述：统一分类法与文献系统",
+      "summary": "这份报告为 LLM 驱动的智能体图形学建立统一分类法，覆盖不同图形任务中的智能体系统。它还开发了可批量辅助研究人员分析既有与新发表论文的 agentic literature system，并据此分析趋势与人机协作、长周期规划等开放挑战。",
+      "tags": [
+        "论文",
+        "Agent"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_8fed4d5d35",
+          "url": "https://huggingface.co/papers/2611.01860"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.01860",
+          "quote": "Papers arxiv:2611.01860 Copy markdown Advances in Agentic Computer Graphics Published on Nov 1 · Submitted by zhiqin yang on Nov 3 #1 Paper of the day · University of Texas at Austin Upvote 143 +135 Authors: Hengyu Liu , Jihyeon Je , Ruiqi Wang , Mingxuan Wu , Haven Feng , Qixing Huang , Georgios Pa"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.01860",
+          "quote": "Kenny Jones , Shangzhe Wu , Guandao Yang Abstract This report proposes a unified taxonomy and literature system for agentic computer graphics driven by large language models, analyzing trends and open challenges in human-agent collaboration and long-horizon planning."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.01860",
+          "quote": "First, we introduce a unified taxonomy for characterizing agentic systems across diverse computer graphics tasks."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.01860",
+          "quote": "Second, we develop an agentic literature system that can assist human researchers in analyzing existing and newly published papers at scale."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.01860",
+          "quote": "Building on these contributions, we analyze emerging research trends and discuss open challenges in coordinating agents and tools across graphics tasks, designing interfaces and representations for human-agent collaboration, sustaining long-horizon planning and refinement, and reliably evaluating in"
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "HyperFlow H3 Flash：MiniMax-H3 的压缩少步版本",
+      "summary": "Video Rebirth 发布 HyperFlow H3 Flash，是 MiniMax-H3 的压缩少步版本，可同时生成视频与同步立体声音频，模型规模为 13.7B（fl2va）或 13.9B（ref2va），不到约 31B MiniMax-H3 的一半。权重以 INT8 与 GGUF 形式提供，最低 Q4_K_M 为 9.1 GB，可在 24 GB 和 32 GB 显存的 PC 上运行。",
+      "tags": [
+        "模型",
+        "开源",
+        "视频"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_b405aa1eec",
+          "url": "https://github.com/Video-Rebirth/hyperflow-h3-flash"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/Video-Rebirth/hyperflow-h3-flash",
+          "quote": "hyperflow-h3-flash Public Notifications You must be signed in to change notification settings Fork 2 ( 2 ) Star 102 ( 102 ) You must be signed in to star a repository About HyperFlow H3 Flash: Video Rebirth's 13.7B, 4- to 8-step compressed MiniMax-H3 for joint video and audio generation (INT8 and GG"
+        },
+        {
+          "url": "https://github.com/Video-Rebirth/hyperflow-h3-flash",
+          "quote": "HyperFlow H3 Flash is Video Rebirth 's compressed, few-step version of MiniMax-H3 ."
+        },
+        {
+          "url": "https://github.com/Video-Rebirth/hyperflow-h3-flash",
+          "quote": "It generates video and synchronized stereo audio together."
+        },
+        {
+          "url": "https://github.com/Video-Rebirth/hyperflow-h3-flash",
+          "quote": "Sampling: 4, 6 (default), or 8 steps, without classifier-free guidance (CFG)."
+        },
+        {
+          "url": "https://github.com/Video-Rebirth/hyperflow-h3-flash",
+          "quote": "Model size: 13.7B ( fl2va ) or 13.9B ( ref2va ) parameters, less than half of the ~31B MiniMax-H3 transformer."
+        },
+        {
+          "url": "https://github.com/Video-Rebirth/hyperflow-h3-flash",
+          "quote": "Minimum footprint: Q4_K_M is 9.1 GB ( Q8_0 is 14.9 GB)."
+        },
+        {
+          "url": "https://github.com/Video-Rebirth/hyperflow-h3-flash",
+          "quote": "It runs on 24 GB and 32 GB GPUs in PCs with 16 GB of system RAM ."
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "TwIL-8B：从 granite-4.2-8b 后训练的推理模型",
+      "summary": "TwIL-8B 是面向数学、代码和指令遵循的 8.8B 推理模型，从 ibm-granite/granite-4.2-8b 全参数监督微调并用 GRPO/DAPO 强化学习后训练，提供 balanced 与 verbose 两个共享架构和分词器的变体。模型卡显示其 bf16 规模为 8.79B 参数（16.38 GiB），另提供 4.98 GiB 的 Q4_K_M GGUF 版本，许可证为 webai-non-commercial-license-ver.-1.0。",
+      "tags": [
+        "模型",
+        "推理"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_773a12706a",
+          "url": "https://huggingface.co/webAI-Official/TwIL-8B"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/webAI-Official/TwIL-8B",
+          "quote": "webAI-Official / TwIL-8B Like 215 Follow webAI 259 Text Generation Transformers Safetensors GGUF English granite granite-4.2 twil reasoning math code instruction-following reinforcement-learning grpo conversational arxiv: 2607.02770 License: webai-non-commercial-license-ver.-1.0 Model card Files Fil"
+        },
+        {
+          "url": "https://huggingface.co/webAI-Official/TwIL-8B",
+          "quote": "An 8.8B reasoning model for math, code and instruction following , post-trained from"
+        },
+        {
+          "url": "https://huggingface.co/webAI-Official/TwIL-8B",
+          "quote": "ibm-granite/granite-4.2-8b with"
+        },
+        {
+          "url": "https://huggingface.co/webAI-Official/TwIL-8B",
+          "quote": "full-parameter supervised fine-tuning and GRPO/DAPO reinforcement learning."
+        },
+        {
+          "url": "https://huggingface.co/webAI-Official/TwIL-8B",
+          "quote": "variants that share one architecture and tokenizer: balanced (the default) and verbose ."
+        },
+        {
+          "url": "https://huggingface.co/webAI-Official/TwIL-8B",
+          "quote": "8.79B parameters in bf16 (16.38 GiB), with a 4.98 GiB Q4_K_M GGUF for CPU or"
+        },
+        {
+          "url": "https://huggingface.co/webAI-Official/TwIL-8B",
+          "quote": "modest-VRAM GPUs."
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Anthropic skills 仓库：Claude 的 Agent Skills 规范与示例",
+      "summary": "Anthropic 的 skills 仓库公开了 Claude skills 的实现，是按文件夹组织的指令、脚本与资源集合，Claude 会按需动态加载以改进特定任务表现。仓库包含 skills 示例、Agent Skills 规范 spec 和 skill 模板 template，其中大量 skill 以 Apache 2.0 开放，可通过 plugin marketplace 直接安装。",
+      "tags": [
+        "工具",
+        "Agent"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_7d9b91592a",
+          "url": "https://github.com/anthropics/skills"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/anthropics/skills",
+          "quote": "Note: This repository contains Anthropic's implementation of skills for Claude."
+        },
+        {
+          "url": "https://github.com/anthropics/skills",
+          "quote": "Skills are folders of instructions, scripts, and resources that Claude loads dynamically to improve performance on specialized tasks."
+        },
+        {
+          "url": "https://github.com/anthropics/skills",
+          "quote": "Each skill is self-contained in its own folder with a SKILL.md file containing the instructions and metadata that Claude uses."
+        },
+        {
+          "url": "https://github.com/anthropics/skills",
+          "quote": "Many skills in this repo are open source (Apache 2.0)."
+        },
+        {
+          "url": "https://github.com/anthropics/skills",
+          "quote": "./skills : Skill examples for Creative & Design, Development & Technical, Enterprise & Communication, and Document Skills"
+        },
+        {
+          "url": "https://github.com/anthropics/skills",
+          "quote": "./spec : The Agent Skills specification"
+        },
+        {
+          "url": "https://github.com/anthropics/skills",
+          "quote": "You can register this repository as a Claude Code Plugin marketplace by running the following command in Claude Code:"
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "mattpocock/skills：面向工程实践的可组合 Agent 技能集",
+      "summary": "mattpocock/skills 收录作者日常使用的工程类 Agent skills，强调小巧、易改写、可组合，并支持 Claude、Codex、GitHub Copilot、Gemini CLI 等多种 agent。仓库覆盖需求对齐、共享术语表、红绿重构测试循环和代码架构改进等常见失败模式，MIT 协议开放。",
+      "tags": [
+        "工具",
+        "代码"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_611cc6c637",
+          "url": "https://github.com/mattpocock/skills"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/mattpocock/skills",
+          "quote": "skills Public Notifications You must be signed in to change notification settings Fork 26.6k ( 26.6k ) Star 318k ( 318k ) You must be signed in to star a repository About Skills for Real Engineers."
+        },
+        {
+          "url": "https://github.com/mattpocock/skills",
+          "quote": "GLOSSARY.md GLOSSARY.md LICENSE LICENSE README.md README.md SCOPE.md SCOPE.md package-lock.json package-lock.json package.json package.json View all files Repository files navigation README Contributing MIT license More items"
+        },
+        {
+          "url": "https://github.com/mattpocock/skills",
+          "quote": "My agent skills that I use every day to do real engineering - not vibe coding."
+        },
+        {
+          "url": "https://github.com/mattpocock/skills",
+          "quote": "These skills are designed to be small, easy to adapt, and composable."
+        },
+        {
+          "url": "https://github.com/mattpocock/skills",
+          "quote": "They work with any model."
+        },
+        {
+          "url": "https://github.com/mattpocock/skills",
+          "quote": "claude plugin install mattpocock-skills@claude-plugins-official"
+        },
+        {
+          "url": "https://github.com/mattpocock/skills",
+          "quote": "codex plugin marketplace add mattpocock/skills"
+        },
+        {
+          "url": "https://github.com/mattpocock/skills",
+          "quote": "copilot plugin marketplace add mattpocock/skills"
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Terrarium：用显式权限的本地 VM 承载 AI Agent",
+      "summary": "Terrarium 在本机运行持久化 Linux VM（box），由 YAML recipe 指定可读写的宿主目录与可达的网络目的地，其余默认全部阻断，且策略对 VM 内每个进程生效。其安全模型把 guest 内核与所有 guest 进程视为敌对对象，硬件虚拟化 VM 与网络 broker 分进程运行，默认是空 allowlist。",
+      "tags": [
+        "工具",
+        "安全",
+        "Agent"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_eb18eeaa91",
+          "url": "https://github.com/terrarium-sh/terrarium/blob/main/docs/security.md"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/terrarium-sh/terrarium/blob/main/docs/security.md",
+          "quote": "Terra protects the host from a hostile guest by running each box in a"
+        },
+        {
+          "url": "https://github.com/terrarium-sh/terrarium/blob/main/docs/security.md",
+          "quote": "hardware-virtualized VM: KVM on Linux, Hypervisor.framework on macOS, WHP on"
+        },
+        {
+          "url": "https://github.com/terrarium-sh/terrarium/blob/main/docs/security.md",
+          "quote": "Hostile: the guest kernel, every guest process including guest root,"
+        },
+        {
+          "url": "https://github.com/terrarium-sh/terrarium/blob/main/docs/security.md",
+          "quote": "A recipe is a permission"
+        },
+        {
+          "url": "https://github.com/terrarium-sh/terrarium/blob/main/docs/security.md",
+          "quote": "It decides what the box can reach:"
+        },
+        {
+          "url": "https://github.com/terrarium-sh/terrarium/blob/main/docs/security.md",
+          "quote": "Outbound access to that destination and port."
+        },
+        {
+          "url": "https://github.com/terrarium-sh/terrarium/blob/main/docs/security.md",
+          "quote": "The default is an empty allowlist: nothing is reachable until a rule allows it."
+        },
+        {
+          "url": "https://github.com/terrarium-sh/terrarium/blob/main/docs/security.md",
+          "quote": "Every connection goes through a"
+        },
+        {
+          "url": "https://github.com/terrarium-sh/terrarium/blob/main/docs/security.md",
+          "quote": "the VM process is compromised."
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "indic-turn-detector：面向印度语系的轮次结束检测模型",
+      "summary": "indic-turn-detector 是从 Qwen2.5-0.5B-Instruct 微调的轮次结束（EOU）检测模型，覆盖 English、Hinglish 及七个印度语言。它基于 STT 转写文本判断用户是否说完，可作为 LiveKit 文本轮次检测器的即插即用替代，仅在本地用 ONNX Runtime 推理，权重与插件以 Apache-2.0 开放。",
+      "tags": [
+        "工具",
+        "语音",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_c0fe0b66fc",
+          "url": "https://huggingface.co/tarun7r/indic-turn-detector"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/tarun7r/indic-turn-detector",
+          "quote": "tarun7r / indic-turn-detector Like 2 Text Classification Transformers ONNX Safetensors 8 languages qwen2 text-generation voice-ai voice-agents turn-detection end-of-utterance end-of-turn eou livekit conversational-ai indic multilingual hindi hinglish Eval Results (legacy) text-embeddings-inference L"
+        },
+        {
+          "url": "https://huggingface.co/tarun7r/indic-turn-detector",
+          "quote": "An open-weights text model for contextually-aware end-of-utterance (EOU) detection in voice AI applications, covering English, Hinglish, and seven Indic languages ."
+        },
+        {
+          "url": "https://huggingface.co/tarun7r/indic-turn-detector",
+          "quote": "Qwen2.5-0.5B-Instruct"
+        },
+        {
+          "url": "https://huggingface.co/tarun7r/indic-turn-detector",
+          "quote": "📖 Integration: Drop-in replacement for LiveKit's text turn detector (deprecated; slated for removal in the 2.0 SDK) — the EOUTurnDetector helper implements the MultilingualModel interface, and covers the Indic languages LiveKit's text model doesn't (it ships Hindi only)."
+        },
+        {
+          "url": "https://huggingface.co/tarun7r/indic-turn-detector",
+          "quote": "This model scores the transcribed text instead and predicts whether the user has finished their turn, so agents can wait on continuations and commit the turn when semantics say the user is done."
+        },
+        {
+          "url": "https://huggingface.co/tarun7r/indic-turn-detector",
+          "quote": "Covers 9 language groups — English, Hinglish (hi-Latn), and seven Indic languages (Hindi, Telugu, Tamil, Marathi, Bengali, Gujarati, Punjabi) — trained on MultiWOZ-style dialogues, TOP-style slots, and synthetic continuation/prefix negatives."
+        },
+        {
+          "url": "https://huggingface.co/tarun7r/indic-turn-detector",
+          "quote": "Fine-tuned from Qwen/Qwen2.5-0.5B-Instruct , selected for strong multilingual performance on this task while enabling low-latency CPU inference, with a small scalar classification head on the final token hidden state."
+        },
+        {
+          "url": "https://huggingface.co/tarun7r/indic-turn-detector",
+          "quote": "The trained checkpoint is exported to a fp32 ONNX graph ( model.onnx ) for CPU-only inference with ONNX Runtime — the same graph the thresholds are calibrated on."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "从自主 Agent 到认知共生体：AI 增强人类智能视角",
+      "summary": "牛津大学 Hao Fei 的视角论文提出 AI-augmented human intelligence（AHI），与 AGI 并列，认为 Physical AI 时代同样需要被 AI 增强的个人。它把实现路径定义为「认知共生体」：一个长期、嵌入、实时、私密且主动的伴侣系统，以「认知差距」为概念内核，并强调治理是该范式的一部分。",
+      "tags": [
+        "论文",
+        "Agent"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_56d170ca33",
+          "url": "https://huggingface.co/papers/2611.05376"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.05376",
+          "quote": "Papers arxiv:2611.05376 Copy markdown From Autonomous Agents to Cognitive Symbionts: Toward AI-Augmented Human Intelligence Published on Nov 3 · Submitted by Hao Fei on Nov 6 #2 Paper of the day · University of Oxford Upvote 86 +78 Authors: Hao Fei Abstract Physical AI should include AI-augmented hu"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.05376",
+          "quote": "Alongside artificial general intelligence, which asks how intelligent a machine can be, stands AI-augmented human intelligence (AHI), which asks how much intelligence a machine can enable in a particular person."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.05376",
+          "quote": "Realizing it calls for a new kind of system, a cognitive symbiont : a lifelong, embedded, real-time, private, low-friction, and proactive companion that senses what the person senses through external devices, keeps their context across years, models their situation and their mind, takes part in thei"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.05376",
+          "quote": "We give the paradigm a conceptual core, the cognitive gap between what a person could bring to a situation and what they can hold in working memory , and organize its design space as a symbiosis loop of sensing, keeping, understanding, living alongside, acting for and thinking with the person, and g"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.05376",
+          "quote": "Because a symbiont changes what a person can do in front of others, it also raises risks of a new kind, from covert assistance in examinations to pressure on everyone to adopt it, and we treat their governance as part of the paradigm."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "视频生成遇上 Agent Harness：三条研究方向综述",
+      "summary": "这份报告以 agent harness 为切入点，研究视频生成模型与视频世界模型交汇处的运行时如何构建上下文、暴露工具、维护状态、路由反馈并管理预算。报告覆盖 agentic video generation、agentic world modeling 与递归自我改进（RSI）三个方向，并梳理视听感知、长周期规划、记忆等必备能力与开放挑战。",
+      "tags": [
+        "论文",
+        "视频",
+        "Agent"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_04f56b52c4",
+          "url": "https://huggingface.co/papers/2610.40191"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2610.40191",
+          "quote": "Papers arxiv:2610.40191 Video Generation Meets Agent Harness: Agentic Video Generation, Agentic World Modeling and Recursive Self-Improvement Published on Oct 29 · Submitted by Dongxing Mao on Nov 3 · Video Rebirth Upvote 78 +70 Authors: Liaoyuan Fan , Yuhao Zheng , Dongxing Mao , Hangyu Ran , Siyua"
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.40191",
+          "quote": "anning, tool use, and recursive self-improvement for autonomous multi-shot video production."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.40191",
+          "quote": "We study their intersection through the agent harness : an executable runtime that constructs context, exposes tools, maintains state, routes feedback, and manages budgets around video models."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.40191",
+          "quote": "This report examines three directions."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.40191",
+          "quote": "Third, recursive self-improvement (RSI) in video model development, distinguishing output revisions, updates to harness state, generator parameters, and evaluators, and changes to the improvement procedure itself."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.40191",
+          "quote": "Across these directions, we analyze essential agent capabilities, including audiovisual perception, long-horizon planning, memory, code-based interaction, feedback-guided control , skill reuse, and multi-agent coordination ."
+        }
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "Ai2 发布机器人学习仿真框架 ToyBlocks",
+      "summary": "Ai2 发布开放仿真框架 ToyBlocks，围绕桌面上的机械臂与积木构建受控环境，可自动生成任务与训练演示，并支持度量机器人行为随时间的变化。",
+      "tags": [
+        "工具",
+        "开源",
+        "硬件"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_402b883388",
+          "url": "https://allenai.org/blog/toyblocks"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://allenai.org/blog/toyblocks",
+          "quote": "ToyBlocks: A controlled world for robot learning and evaluation November 6, 2026 Ai2 Share Code Data Models Documentation Robots are learning to fold laundry, sort parts, and handle unfamiliar objects."
+        },
+        {
+          "url": "https://allenai.org/blog/toyblocks",
+          "quote": "Today we're introducing a framework for creating these environments; we call them FoundationWorlds."
+        },
+        {
+          "url": "https://allenai.org/blog/toyblocks",
+          "quote": "Each pairs a controlled, simulated world targeted at studying robotics in a specific environment with tools for automatically generating tasks and training demonstrations, as well as metrics for measuring a robot's behavior over time."
+        },
+        {
+          "url": "https://allenai.org/blog/toyblocks",
+          "quote": "Our first foundation world is ToyBlocks : an open simulation framework built around a robot arm and blocks on a tabletop."
+        }
+      ]
+    }
+  ],
+  "research": [
+    {
+      "via": "webfetch",
+      "url": "https://apiiro.com/blog/coding-agents-leaking-secrets-github-dont-ask-again"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.03178"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.05275"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.01860"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.00859"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.02737"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.40191"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://arxiv.org/abs/2609.36173"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://arxiv.org/abs/2611.06425"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/Video-Rebirth/hyperflow-h3-flash"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/anthropics/skills"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/dsx-ai-factory/nvke"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/webAI-Official/TwIL-8B"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/mattpocock/skills"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.05376"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/terrarium-sh/terrarium/blob/main/docs/security.md"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/tarun7r/indic-turn-detector"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://allenai.org/blog/toyblocks"
+    }
+  ],
+  "validation": {
+    "validated_at": "2026-11-08T04:50:14+00:00",
+    "checked_links": true,
+    "dropped": [],
+    "warnings": [
+      "6 paper items (target 2-4)"
+    ]
+  }
+}
