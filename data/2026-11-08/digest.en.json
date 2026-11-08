@@ -1,0 +1,497 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-08",
+  "mode": "full",
+  "channel": "claude",
+  "generated_at": "2026-11-08T04:45:32+00:00",
+  "model": "claude-opus-5-5",
+  "highlights": [
+    "llama.cpp merged PR #30966: MoE cache misses can now run experts on the CPU, plus a tuning script for low-VRAM setups.",
+    "Nous Research released Arete-27B, post-trained from Qwen3.8-27B; Ai2 released the ToyBlocks robot simulation framework.",
+    "Two speculative decoding papers, D3D and DSpine, report gains over the DFlash baseline."
+  ],
+  "items": [
+    {
+      "section": "headline",
+      "title": "llama.cpp can now compute missed MoE experts on the CPU",
+      "summary": "llama.cpp merged PR #30966: depending on --moe-cache-cpu-share, experts that miss the MoE cache are executed on the CPU. A new scripts/moe-cache-tune.py goes in front of a llama-server command and searches for the best --moe-cache-mib and CPU share settings. One maintainer reported about a 10% decode boost on an R9700 + RAM setup with Qwen 3.8 Next IQ3_XXS, so local users offloading MoE experts can tune their config directly.",
+      "sources": [
+        {
+          "candidate_id": "c_f8579481a6",
+          "url": "https://github.com/ggml-org/llama.cpp/pull/30966"
+        },
+        {
+          "candidate_id": "c_f8579481a6",
+          "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xqacka/llama_moe_cache_run_missed_experts_on_cpu_add/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/pull/30966",
+          "quote": "Depending on --moe-cache-cpu-share , this PR executes experts on the CPU. Depending on how fast the CPU can read experts, this can affect decode speeds a bit."
+        },
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/pull/30966",
+          "quote": "Since --moe-cache-mib and --moe-cache-cpu-share are now \"free\" parameters, I have also added a tuning script to run to find the ideal config for them on your machine."
+        },
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/pull/30966",
+          "quote": "To run, put it in front of your llama-server command: python3 scripts/moe-cache-tune.py -- build/bin/llama-server -m model.gguf -cmoe -t 8 -c 32768"
+        },
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/pull/30966",
+          "quote": "On my tested conf (R9700 + RAM, Qwen 3.8 Next IQ3_XXS) I'm getting about a 10% decode boost on this PR."
+        },
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/pull/30966",
+          "quote": "am17an merged commit e95426f into master Nov 7, 2026"
+        }
+      ],
+      "tags": [
+        "开源",
+        "推理",
+        "工具"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Nous Research releases Arete-27B, a values post-train of Qwen3.8-27B",
+      "summary": "Nous Research post-trained Qwen3.8-27B with supervised fine-tuning only (no RL, no preference optimization, no architectural changes) to alter its biases on politically sensitive topics. On its 803-prompt evaluation, the fact score rose from 2.32 to 2.98 out of 5 and answers containing propaganda fell from 22% to 0.9%, while Hermes Bench scores stayed within 0.2 percentage points. The weights are apache-2.0 and the full prompt set is released, useful for studying how post-training shifts a model's values.",
+      "sources": [
+        {
+          "candidate_id": "c_77d6c1543b",
+          "url": "https://huggingface.co/NousResearch/Arete-27B"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/NousResearch/Arete-27B",
+          "quote": "We post-trained over Alibaba's Qwen3.8-27B to reinforce western values on a Chinese-trained model. We call this new model Arete-27B."
+        },
+        {
+          "url": "https://huggingface.co/NousResearch/Arete-27B",
+          "quote": "politically sensitive topics in Qwen3.8-27B, and post-trained to alter those biases"
+        },
+        {
+          "url": "https://huggingface.co/NousResearch/Arete-27B",
+          "quote": "We used supervised fine-tuning only. No RL, no preference optimization, and no architectural modification."
+        },
+        {
+          "url": "https://huggingface.co/NousResearch/Arete-27B",
+          "quote": "On our evaluation, Arete-27B raised its fact score from 2.32 to 2.98 out of 5 and cut answers containing propaganda from 22% to 0.9%."
+        },
+        {
+          "url": "https://huggingface.co/NousResearch/Arete-27B",
+          "quote": "Our propaganda evaluation contains 803 prompts spanning the seven value categories above."
+        },
+        {
+          "url": "https://huggingface.co/NousResearch/Arete-27B",
+          "quote": "On Hermes Bench, the scores are within 0.2 percentage points, which we interpret as noise."
+        },
+        {
+          "url": "https://huggingface.co/NousResearch/Arete-27B",
+          "quote": "The evaluation release contains all 803 prompts with the source article for each."
+        }
+      ],
+      "tags": [
+        "模型",
+        "开源",
+        "训练"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Ai2 releases ToyBlocks, an open simulation framework for robot learning",
+      "summary": "ToyBlocks is an open simulation framework built around a robot arm and blocks on a tabletop; it automatically generates demonstrations without teleoperation and runs hundreds of plans in parallel on a single GPU at up to 24 times real-time. The initial release has 85,336 long-horizon demonstrations, with Molmo 2 as a high-level planner and ManiFlow as a low-level policy. Teams working on VLAs and embodied AI get cheap training data and a controlled setting for comparing methods.",
+      "sources": [
+        {
+          "candidate_id": "c_402b883388",
+          "url": "https://allenai.org/blog/toyblocks"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://allenai.org/blog/toyblocks",
+          "quote": "ToyBlocks: A controlled world for robot learning and evaluation November 6, 2026 Ai2"
+        },
+        {
+          "url": "https://allenai.org/blog/toyblocks",
+          "quote": "Our first foundation world is ToyBlocks : an open simulation framework built around a robot arm and blocks on a tabletop."
+        },
+        {
+          "url": "https://allenai.org/blog/toyblocks",
+          "quote": "ToyBlocks automatically generates demonstrations, which are recordings of a robot completing tasks in simulation, without requiring time-consuming teleoperation"
+        },
+        {
+          "url": "https://allenai.org/blog/toyblocks",
+          "quote": "ToyBlocks scales data generation through generating and executing hundreds of such plans in parallel on a single graphics processing unit (GPU), reaching up to 24 times real-time performance."
+        },
+        {
+          "url": "https://allenai.org/blog/toyblocks",
+          "quote": "Our initial data release is a proof point with 85,336 long-horizon demonstrations"
+        },
+        {
+          "url": "https://allenai.org/blog/toyblocks",
+          "quote": "In this instance, we choose Molmo 2, a vision-language model (VLM), as the high-level planner, and ManiFlow as the low-level policy."
+        }
+      ],
+      "tags": [
+        "开源",
+        "训练",
+        "工具"
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Baidu releases Unlimited-OCR-2 for ultra-long document parsing",
+      "summary": "Unlimited-OCR-2 (MIT license) uses Sparse Reference Sliding Window Attention (SR-SWA), which compresses attention over ultra-long sequences to a fixed set of working references so per-step decoding latency and memory stay nearly constant regardless of document length. Baidu claims state-of-the-art results on MPDocBench and the hundred-page MarathonDocBench, which it also released. It supports Transformers and SGLang, a fit for pipelines that need to parse long PDFs end to end.",
+      "sources": [
+        {
+          "candidate_id": "c_4239039208",
+          "url": "https://huggingface.co/baidu/Unlimited-OCR-2"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/baidu/Unlimited-OCR-2",
+          "quote": "Sparse Reference Sliding Window Attention (SR-SWA): Compresses text-visual attention interactions from ultra-long sequences down to a fixed-size set of working references (e.g., 512 tokens)."
+        },
+        {
+          "url": "https://huggingface.co/baidu/Unlimited-OCR-2",
+          "quote": "This bounds computational complexity, keeping per-step decoding latency and memory footprint nearly constant regardless of document length."
+        },
+        {
+          "url": "https://huggingface.co/baidu/Unlimited-OCR-2",
+          "quote": "Achieves state-of-the-art performance across both dozens-of-pages benchmarks (e.g., MPDocBench) and extreme hundred-page benchmarks (e.g., MarathonDocBench)."
+        },
+        {
+          "url": "https://huggingface.co/baidu/Unlimited-OCR-2",
+          "quote": "We release MarathonDocBench , a new benchmark for ultra-long document parsing."
+        },
+        {
+          "url": "https://huggingface.co/baidu/Unlimited-OCR-2",
+          "quote": "Unlimited OCR 2 supports Transformers (native, for quick tests) and SGLang (recommended for serving)."
+        }
+      ],
+      "tags": [
+        "模型",
+        "多模态",
+        "开源"
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Kakao releases Kanana-2-v-decide-3b-2611, a decision model",
+      "summary": "The model does not generate text; it answers typed questions (choice, yes/no, or an ordered score) and returns a probability for each possible answer, taking text, JSON, or chat messages with up to 10 images and up to 20,480 tokens. Built on Kanana-2-v-3b with 3.67B parameters, its weights are under the KananaOpenLicense. It fits classification and judgment steps in agents or business workflows that need probabilities rather than free text.",
+      "sources": [
+        {
+          "candidate_id": "c_d11fd36ccb",
+          "url": "https://huggingface.co/kakaocorp/kanana-2-v-decide-3b-2611"
+        },
+        {
+          "candidate_id": "c_d11fd36ccb",
+          "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xq6es4/kakaocorpkanana2vdecide3b2611_hugging_face/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/kakaocorp/kanana-2-v-decide-3b-2611",
+          "quote": "and returns a probability for each possible answer. It does not generate text. The input, called the state , may be text, a JSON object or array, or a chat history, optionally accompanied by images. The model is built on Kanana-2-v-3b"
+        },
+        {
+          "url": "https://huggingface.co/kakaocorp/kanana-2-v-decide-3b-2611",
+          "quote": "Accepts text, JSON, or chat messages with up to 10 images and up to 20,480 tokens."
+        },
+        {
+          "url": "https://huggingface.co/kakaocorp/kanana-2-v-decide-3b-2611",
+          "quote": "Parameters 3.67B (vision encoder 0.49B, language model 3.18B)"
+        },
+        {
+          "url": "https://huggingface.co/kakaocorp/kanana-2-v-decide-3b-2611",
+          "quote": "The model weights are released under the KananaOpenLicense ."
+        }
+      ],
+      "tags": [
+        "模型",
+        "多模态"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "D3D: a standalone diffusion drafter for asynchronous speculative decoding",
+      "summary": "D3D is a diffusion drafter that needs no target-model hidden states, combining blockwise denoising with auxiliary autoregressive supervision, so it can draft successor blocks during verification. Across seven benchmarks it averages 5.00× and 5.71× decoding speedup with Qwen3-8B and Qwen3-32B targets, versus 4.03× and 3.67× for DFlash, and the code is public. Inference teams should watch drafters that no longer serialize drafting and verification.",
+      "sources": [
+        {
+          "candidate_id": "c_c0a6758d5a",
+          "url": "https://arxiv.org/abs/2611.06425"
+        },
+        {
+          "candidate_id": "c_c0a6758d5a",
+          "url": "https://www.reddit.com/gallery/1xq1y0y"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2611.06425",
+          "quote": "We introduce D3D, a standalone diffusion drafter that removes this inter-round dependency. D3D combines blockwise denoising with auxiliary autoregressive supervision to achieve long accepted prefixes without target hidden states."
+        },
+        {
+          "url": "https://arxiv.org/abs/2611.06425",
+          "quote": "This independence lets D3D draft successor blocks during verification in one packed pass, enabling asynchronous speculative decoding."
+        },
+        {
+          "url": "https://arxiv.org/abs/2611.06425",
+          "quote": "Across seven benchmarks, D3D averages 5.00$\\times$ and 5.71$\\times$ decoding speedup with Qwen3-8B and Qwen3-32B targets, compared with 4.03$\\times$ and 3.67$\\times$ for DFlash."
+        }
+      ],
+      "tags": [
+        "论文",
+        "推理"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "DSpine injects causal conditioning at every layer of a speculative drafter",
+      "summary": "Parallel drafting picks tokens independently, which can produce inconsistent continuations; DSpine writes each predecessor's predicted feature into its successor at every layer, so the causal chain unfolds over network depth while all positions still update in parallel. At temperature zero on Qwen3-8B, the seven-benchmark mean acceptance length rises from DFlash's 3.77 to 4.82 (+27.8%), and SGLang serving throughput is 23.3% higher than DFlash on average.",
+      "sources": [
+        {
+          "candidate_id": "c_83430b547d",
+          "url": "https://arxiv.org/abs/2609.36173"
+        },
+        {
+          "candidate_id": "c_83430b547d",
+          "url": "https://www.reddit.com/gallery/1xq9hf6"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2609.36173",
+          "quote": "We therefore propose DSpine, a drafter with causal conditioning injection throughout the backbone: at every layer, gated adjacent injection writes each predecessor's predicted feature into its successor, so the causal conditioning chain unfolds over network depth while all"
+        },
+        {
+          "url": "https://arxiv.org/abs/2609.36173",
+          "quote": "At temperature zero on Qwen3-8B, it raises the seven-benchmark mean from DFlash's 3.77 to 4.82 (+27.8%); in SGLang serving tests, it delivers 23.3% higher throughput than DFlash on average."
+        }
+      ],
+      "tags": [
+        "论文",
+        "推理"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "CoworkOS: a general-purpose agent harness for long-horizon work",
+      "summary": "CoworkOS separates task strategy from execution management: the model decides actions, delegation, and acceptance, while the runtime maintains state and feedback. Across 12 benchmarks the paper reports it is highly competitive with Codex and DeepSeek Harness, and with GLM-5.3 as backbone, five rounds of automated post-training lifted Qwen3.6-35B-A3B's average on eight benchmarks from 33.19 to 42.95. The code is on GitHub as a reference design for long-running agents.",
+      "sources": [
+        {
+          "candidate_id": "c_991beae516",
+          "url": "https://huggingface.co/papers/2611.03178"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.03178",
+          "quote": "We introduce CoworkOS, a general-purpose harness for long-horizon work that separates task strategy from execution management: the model decides actions, delegation, and acceptance, while the runtime maintains state and feedback."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.03178",
+          "quote": "Across 12 benchmarks and 6 categories of real-world applications, CoworkOS proves highly competitive with frontier agent applications such as Codex and DeepSeek Harness."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.03178",
+          "quote": "CoworkOS uses GLM-5.3 as its backbone to conduct RSI-driven automated post-training on Qwen3.6-35B-A3B. Over five rounds, the model's average score across eight benchmarks rose from 33.19 to 42.95 (+9.76)."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.03178",
+          "quote": "Code: https://github.com/RUC-NLPIR/CoworkOS"
+        }
+      ],
+      "tags": [
+        "论文",
+        "Agent"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Wave Forcing denoises several video chunks at once for streaming generation",
+      "summary": "Wave Forcing co-designs generation, training, and execution, using chunk-wise causal attention so each chunk can read earlier, cleaner chunks before their denoising finishes. On Wan2.1-T2V-1.3B, 5-step WF keeps quality comparable to Rolling Forcing, and the 4-step version reaches 134.8 end-to-end FPS on 8×H200, 7.07× single-GPU throughput. Teams building real-time or long video generation can borrow its parallel execution approach.",
+      "sources": [
+        {
+          "candidate_id": "c_42da0213ee",
+          "url": "https://huggingface.co/papers/2611.00859"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.00859",
+          "quote": "We propose Wave Forcing (WF), which co-designs generation, training, and execution for continuous video output with multi-step denoising . WF uses chunk-wise causal attention to access earlier, cleaner chunks before their denoising is complete"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.00859",
+          "quote": "Experiments on Wan2.1-T2V-1.3B show that 5-step WF maintains overall quality comparable to Rolling Forcing while achieving higher Dynamic Degree on both short and long videos."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.00859",
+          "quote": "Our 4-step benchmark on 8×H200 reaches 147.6 DiT FPS and 134.8 end-to-end FPS, delivering 7.07× single-GPU E2E throughput."
+        }
+      ],
+      "tags": [
+        "论文",
+        "视频"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Meta open-sources Astryx, a design system built for people and AI assistants",
+      "summary": "Astryx grew inside Meta over eight years and powers 13,000+ apps; it is now open source under MIT with 150+ accessible components, brand-level theming, dark mode, templates, and a CLI, on React 19+ and StyleX. Its API, docs, and CLI are designed so a person and an AI assistant build the same way from the same reference. Worth a try for teams that build React front ends with coding agents.",
+      "sources": [
+        {
+          "candidate_id": "c_a7f12d63ee",
+          "url": "https://github.com/meta/astryx"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/meta/astryx",
+          "quote": "Astryx is an open source design system that grew inside Meta over the last eight years, where it became the most-used and largest design system in the company — powering 13,000+ apps"
+        },
+        {
+          "url": "https://github.com/meta/astryx",
+          "quote": "It ships 150+ accessible components, brand-level theming, dark mode, ready-to-ship templates, and a CLI as one cohesive system."
+        },
+        {
+          "url": "https://github.com/meta/astryx",
+          "quote": "on React 19+ and StyleX"
+        },
+        {
+          "url": "https://github.com/meta/astryx",
+          "quote": "The API, docs, and CLI are designed together so a person and an AI assistant build the same way, from the same reference."
+        },
+        {
+          "url": "https://github.com/meta/astryx",
+          "quote": "Readme MIT license"
+        }
+      ],
+      "tags": [
+        "开源",
+        "工具",
+        "代码"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "NVIDIA previews NVKE for running Kubernetes on your own GPU machines",
+      "summary": "NVKE is a management plane for running a managed Kubernetes service on your own NVIDIA GPU infrastructure: platform teams create and operate workload clusters, and customers use them through the Kubernetes API and kubectl. It is Apache License 2.0 and available as a preview that NVIDIA does not recommend for production workloads. Platform teams offering GPU clusters can start evaluating it.",
+      "sources": [
+        {
+          "candidate_id": "c_5d79a9d3c0",
+          "url": "https://github.com/dsx-ai-factory/nvke"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/dsx-ai-factory/nvke",
+          "quote": "Run a managed Kubernetes service on your own NVIDIA GPU infrastructure. NVIDIA Kubernetes® Engine (NVKE) provides the management plane that platform teams install to create and operate Kubernetes clusters for thei"
+        },
+        {
+          "url": "https://github.com/dsx-ai-factory/nvke",
+          "quote": "your customers use their clusters through the Kubernetes API and kubectl . Preview: NVKE is available as a preview. APIs, configuration and behavior can change between releases, and we do not recommend NVKE for production workloads."
+        },
+        {
+          "url": "https://github.com/dsx-ai-factory/nvke",
+          "quote": "License Apache License 2.0. See LICENSE and NOTICE . Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES."
+        }
+      ],
+      "tags": [
+        "开源",
+        "工具",
+        "硬件"
+      ]
+    }
+  ],
+  "research": [
+    {
+      "via": "webfetch",
+      "url": "https://apiiro.com/blog/coding-agents-leaking-secrets-github-dont-ask-again"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://hunch.net/?p=13764006"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/NousResearch/Arete-27B"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/30966"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://www.anthropic.com/research/teaching-ai-to-build-scientific-models"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://allenai.org/blog/toyblocks"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/Video-Rebirth/hyperflow-h3-flash"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/meta/astryx"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.03178"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.00859"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://arxiv.org/abs/2609.36173"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://arxiv.org/abs/2611.06425"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.01860"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/kakaocorp/kanana-2-v-decide-3b-2611"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/baidu/Unlimited-OCR-2"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/dsx-ai-factory/nvke"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/blog/open-asr-leaderboard-liva"
+    },
+    {
+      "via": "websearch",
+      "query": "Qwen 4 release November 2026"
+    },
+    {
+      "via": "websearch",
+      "query": "Baidu ERNIE new model release November 7 2026"
+    }
+  ],
+  "lang": "en",
+  "validation": {
+    "validated_at": "2026-11-08T04:45:32+00:00",
+    "checked_links": false,
+    "dropped": [],
+    "warnings": []
+  }
+}
