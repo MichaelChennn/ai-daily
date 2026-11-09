@@ -1,0 +1,1024 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-09",
+  "mode": "full",
+  "generated_at": "2026-11-09T04:50:34+00:00",
+  "channel": "api",
+  "model": "nvidia:minimaxai/minimax-m3.1-flash",
+  "highlights": [
+    "Anthropic 开源 Claude Skills 实现与规范",
+    "vercel-labs 发布 Agent 浏览器自动化 CLI",
+    "Route Anything：跨模态模型路由研究框架"
+  ],
+  "items": [
+    {
+      "section": "headline",
+      "title": "Anthropic 开源 Claude Skills 实现与规范",
+      "summary": "anthropics/skills 是 Agent Skills 的公开仓库，包含 skills 目录、spec 规范目录和 template 模板目录，涵盖创意设计、开发技术、企业协作与文档处理等场景。仓库同时给出 skills/docx、skills/pdf、skills/pptx、skills/xlsx，这些文档处理 skill 采用 Apache 2.0 开源。开发者可以用 /plugin marketplace add anthropics/skills 把仓库注册为 Claude Code 插件市场，或通过 Skills API 上传自定义 skill。",
+      "tags": [
+        "开源",
+        "Agent",
+        "工具"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_7d9b91592a",
+          "url": "https://github.com/anthropics/skills"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/anthropics/skills",
+          "quote": "skills Public Notifications You must be signed in to change notification settings Fork 22.4k ( 22.4k ) Star 190k ( 190k ) You must be signed in to star a repository About Public repository for Agent Skills Topics agent-skills Resources Readme Activity Custom properties Stars 189.8k stars Watchers 1."
+        },
+        {
+          "url": "https://github.com/anthropics/skills",
+          "quote": "2k watching Forks 22.4k forks Report repository main Branches Tags Go to file Code Open more actions menu Latest commit History 62 Commits 62 Commits Folders and files Name Name Last commit message Last commit date .claude-plugin .claude-plugin skills skills spec spec template template .gitignore .g"
+        },
+        {
+          "url": "https://github.com/anthropics/skills",
+          "quote": "These skills range from creative applications (art, music, design) to technical tasks (testing web apps, MCP server generation) to enterprise workflows (communications, branding, etc.)."
+        },
+        {
+          "url": "https://github.com/anthropics/skills",
+          "quote": "Many skills in this repo are open source (Apache 2.0)."
+        },
+        {
+          "url": "https://github.com/anthropics/skills",
+          "quote": "We've also included the document creation & editing skills that power Claude's document capabilities under the hood in the skills/docx , skills/pdf , skills/pptx , and skills/xlsx subfolders."
+        },
+        {
+          "url": "https://github.com/anthropics/skills",
+          "quote": "These are also open source (Apache 2.0), and we wanted to share them with developers as a reference for more complex skills that are actively used in a production AI application."
+        },
+        {
+          "url": "https://github.com/anthropics/skills",
+          "quote": "./skills : Skill examples for Creative & Design, Development & Technical, Enterprise & Communication, and Document Skills"
+        },
+        {
+          "url": "https://github.com/anthropics/skills",
+          "quote": "./spec : The Agent Skills specification"
+        },
+        {
+          "url": "https://github.com/anthropics/skills",
+          "quote": "./template : Skill template"
+        },
+        {
+          "url": "https://github.com/anthropics/skills",
+          "quote": "You can register this repository as a Claude Code Plugin marketplace by running the following command in Claude Code:"
+        },
+        {
+          "url": "https://github.com/anthropics/skills",
+          "quote": "/plugin marketplace add anthropics/skills"
+        },
+        {
+          "url": "https://github.com/anthropics/skills",
+          "quote": "To use any skill from this repository or upload custom skills, follow the instructions in Using skills in Claude ."
+        },
+        {
+          "url": "https://github.com/anthropics/skills",
+          "quote": "You can use Anthropic's pre-built skills, and upload custom skills, via the Claude API."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "vercel-labs 发布 Agent 浏览器自动化 CLI",
+      "summary": "agent-browser 是原生 Rust 实现的浏览器自动化 CLI，AI Agent 用一条条命令打开页面、读取可访问性树并操作元素。snapshot 会返回带 @e1 这类 ref 的紧凑文本，Agent 据此点击、填写后再读取结果确认；浏览器在命令之间保持打开。安装可用 npm install -g agent-browser，还提供 MCP server 模式 agent-browser mcp 供 MCP 客户端接入。",
+      "tags": [
+        "工具",
+        "Agent",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_3f274de57e",
+          "url": "https://github.com/vercel-labs/agent-browser"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/vercel-labs/agent-browser",
+          "quote": "agent-browser Public Notifications You must be signed in to change notification settings Fork 3.3k ( 3.3k ) Star 47.8k ( 47.8k ) You must be signed in to star a repository About Browser automation CLI for AI agents agent-browser.dev Resources Readme Apache-2.0 license Activity Custom properties Star"
+        },
+        {
+          "url": "https://github.com/vercel-labs/agent-browser",
+          "quote": "Browser automation for AI agents: open pages, read them as an accessibility tree, and act on elements from the shell."
+        },
+        {
+          "url": "https://github.com/vercel-labs/agent-browser",
+          "quote": "agent-browser is a native Rust CLI that gives an AI agent a browser it can drive one command at a time."
+        },
+        {
+          "url": "https://github.com/vercel-labs/agent-browser",
+          "quote": "snapshot returns the page as compact text with a ref such as @e1 for each element."
+        },
+        {
+          "url": "https://github.com/vercel-labs/agent-browser",
+          "quote": "The agent acts on a ref, reads the page again to check the result, and repeats."
+        },
+        {
+          "url": "https://github.com/vercel-labs/agent-browser",
+          "quote": "The browser stays open between commands, so each step is one short shell call."
+        },
+        {
+          "url": "https://github.com/vercel-labs/agent-browser",
+          "quote": "npm install -g agent-browser"
+        },
+        {
+          "url": "https://github.com/vercel-labs/agent-browser",
+          "quote": "agent-browser install # download Chrome for Testing (first time only)"
+        },
+        {
+          "url": "https://github.com/vercel-labs/agent-browser",
+          "quote": "For MCP clients, agent-browser mcp starts an MCP server over stdio."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Route Anything：跨模态模型路由研究框架",
+      "summary": "Route Anything 研究通用 AI 系统中如何按任务动态选择并协调专用模型、工具和策略，在质量与计算成本之间取平衡。作者构建了覆盖 25 个基准的跨模态轨迹矩阵，包含 452 个候选配置的 374,401 次打分运行，并训练测试了多种路由器。论文报告，按输入的 oracle 路由比最佳固定候选高 5.4 分，学习到的路由器平均相对参考模型提升 8.82x 效率。",
+      "tags": [
+        "论文",
+        "推理",
+        "工具"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_9825171215",
+          "url": "https://huggingface.co/papers/2611.05275"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.05275",
+          "quote": "In this work, we present Route Anything, a unified framework for studying model and policy routing across general-purpose AI systems."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.05275",
+          "quote": "To systematically investigate routing across diverse capabilities, we first construct an omni-modal trajectory matrix spanning 25 benchmarks across language understanding, image, video, and speech generation, coding and workplace agents, and robotic manipulation, comprising 374,401 scored runs from"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.05275",
+          "quote": "452 candidate configurations."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.05275",
+          "quote": "Building on this framework, we train and test different routers to investigate the potential of omni-modal model routing , the capabilities of learned routers , and the conditions under which routing improves efficiency."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.05275",
+          "quote": "Our results reveal substantial opportunities for capability orchestration : per-input oracle routing outperforms the best fixed candidate by 5.4 points, and learned routers outperform it by 0.3 points across 16 benchmarks, by 2.1 points on video generation, and by 1.1 points on robot manipulation wh"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.05275",
+          "quote": "ile using 24% less policy time."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.05275",
+          "quote": "More importantly, routing raises efficiency by 8.82x on average compared with the reference model."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Kling 团队详解视频生成背后的多模态理解栈",
+      "summary": "这份技术报告总结 Kling 多代模型在多模态理解上的经验，把生成质量视为数据—条件—对齐—评估链路的投影，并逐环节展开。核心是共享的 Kling-MLLM，它统一图像、视频、音频、同步音视频和交错输入，并被专用于各下游模块。报告还覆盖密集字幕与 reference-grounded captioning、prompt enhancement、感知训练的文本编码器、奖励模型以及任务特定的自动评测协议。",
+      "tags": [
+        "论文",
+        "视频",
+        "多模态"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_6dc982f8f4",
+          "url": "https://huggingface.co/papers/2611.04916"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.04916",
+          "quote": "Generated by thinkingmachines/Inkling-Small Video generation has progressed from isolated clips to coherent short-form audiovisual sequences, and the bottleneck is shifting from rendering to semantic control."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.04916",
+          "quote": "This report summarizes the observations and insights on multimodal understanding gained from successive generations of Kling."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.04916",
+          "quote": "We argue that generation quality is the projection of multimodal understanding through the entire data--con dit ioning--alignment--evaluation chain, and we examine this chain module by module."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.04916",
+          "quote": "Kling-MLLM , a shared multimodal foundation model that unifies image, video, audio, synchronized audio--video, and interleaved inputs, is specialized for each downstream module."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.04916",
+          "quote": "Because a DiT is trained on far fewer training samples than a language model, we treat captioning as a semantic contract that maximizes description density, and extend it to reference-grounded captioning that makes reference bindings explicit."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.04916",
+          "quote": "Prompt enhancement translates user intent into this caption distribution: basic PE is derived from captions of compelling videos and refined with text-level and generator-in-the-loop reinforcement learning , while agentic PE refines the story and retrieves compelling examples."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.04916",
+          "quote": "We show that a reliable text encoder comes from perceptual training rather than from stronger language ability, and that candidates can be screened from text alone before end-to-end training."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.04916",
+          "quote": "Reward modeling pairs a general reward model for explainable, localized critiques with a decision reward model for fast multidimensional scoring, treating perceptual bandwidth as a first-class design parameter."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.04916",
+          "quote": "Finally, we review task-specific automatic evaluation , focusing on protocols that expose scoring shortcuts and help trace failures to their upstream source."
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "webAI 发布 TwIL-8B 推理模型",
+      "summary": "TwIL-8B 是面向数学、代码与指令遵循的 8.8B 推理模型，由 ibm-granite/granite-4.2-8b 全参数微调并结合 GRPO/DAPO 强化学习训练而来，提供 balanced 与 verbose 两个共享架构和分词器的变体。模型卡称其在对比中取得最高 MATH-500（98.2）和 LiveCodeBench（81.6）成绩，并在 AIME 2026 每题约用 19.5k 输出 token，比 Qwen3.5-9B 少 38%。权重提供 bf16 版本与 4.98 GiB 的 Q4_K_M GGUF，可在 CPU 或显存较小的 GPU 上运行。",
+      "tags": [
+        "模型",
+        "开源",
+        "推理"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_773a12706a",
+          "url": "https://huggingface.co/webAI-Official/TwIL-8B"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/webAI-Official/TwIL-8B",
+          "quote": "An 8.8B reasoning model for math, code and instruction following , post-trained from"
+        },
+        {
+          "url": "https://huggingface.co/webAI-Official/TwIL-8B",
+          "quote": "ibm-granite/granite-4.2-8b with"
+        },
+        {
+          "url": "https://huggingface.co/webAI-Official/TwIL-8B",
+          "quote": "full-parameter supervised fine-tuning and GRPO/DAPO reinforcement learning."
+        },
+        {
+          "url": "https://huggingface.co/webAI-Official/TwIL-8B",
+          "quote": "It ships in two"
+        },
+        {
+          "url": "https://huggingface.co/webAI-Official/TwIL-8B",
+          "quote": "variants that share one architecture and tokenizer: balanced (the default) and verbose ."
+        },
+        {
+          "url": "https://huggingface.co/webAI-Official/TwIL-8B",
+          "quote": "Against open models of similar size and up to 3.5x larger, TwIL-8B posts the highest MATH-500"
+        },
+        {
+          "url": "https://huggingface.co/webAI-Official/TwIL-8B",
+          "quote": "(98.2) and LiveCodeBench (81.6 †) scores in the comparison and leads Qwen3.5-9B on IFBench"
+        },
+        {
+          "url": "https://huggingface.co/webAI-Official/TwIL-8B",
+          "quote": "Highest MATH-500 and AIME 2025 in the comparison."
+        },
+        {
+          "url": "https://huggingface.co/webAI-Official/TwIL-8B",
+          "quote": "MATH-500 98.2 against 96.6 for"
+        },
+        {
+          "url": "https://huggingface.co/webAI-Official/TwIL-8B",
+          "quote": "Best LiveCodeBench in the group."
+        },
+        {
+          "url": "https://huggingface.co/webAI-Official/TwIL-8B",
+          "quote": "81.6 † against 80.0 for Gemma 4 31B, 72.0 for Gemma 4 12B"
+        },
+        {
+          "url": "https://huggingface.co/webAI-Official/TwIL-8B",
+          "quote": "Fewer tokens per problem."
+        },
+        {
+          "url": "https://huggingface.co/webAI-Official/TwIL-8B",
+          "quote": "About 19.5k output tokens per AIME 2026 problem against 31.2k"
+        },
+        {
+          "url": "https://huggingface.co/webAI-Official/TwIL-8B",
+          "quote": "for Qwen3.5-9B (38% fewer), and 32.9k against 40.6k on HMMT Feb 2026 (19% fewer)."
+        },
+        {
+          "url": "https://huggingface.co/webAI-Official/TwIL-8B",
+          "quote": "8.79B parameters in bf16 (16.38 GiB), with a 4.98 GiB Q4_K_M GGUF for CPU or"
+        },
+        {
+          "url": "https://huggingface.co/webAI-Official/TwIL-8B",
+          "quote": "modest-VRAM GPUs."
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "AutoTrust-JEV-27B-v1.1 开源选项决策模型",
+      "summary": "AutoTrust-JEV-27B v1.1 是一个为每个问题给出的选项分配概率的文本决策模型，以 AutoTrust-JEV-27B-v1.1 名称发布在 Hugging Face，采用 apache-2.0 许可并提供 vllm 推理支持。模型卡报告其在 Decision Index 0.3 公开套件上自评为 67.31，覆盖 37 个基准、140,178 次可计分请求，最强的区域是 Tools & Automation（85.19 skill points）。这些成绩是自报结果，尚未经维护者验证，作者也提示这不代表真实场景可靠性或部署就绪。",
+      "tags": [
+        "模型",
+        "开源",
+        "工具"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_06a4c8c738",
+          "url": "https://huggingface.co/autotrust/AutoTrust-JEV-27B-v1.1"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/autotrust/AutoTrust-JEV-27B-v1.1",
+          "quote": "autotrust / AutoTrust-JEV-27B-v1.1 Like 1.37k Follow AutoTrust AI Lab 2.5k Text Classification Safetensors vllm qwen3_5 decision-model classification structured-decisions License: apache-2.0 Model card Files Files and versions xet Community 1 Copy to bucket AutoTrust-JEV-27B v1.1 Benchmark highlight"
+        },
+        {
+          "url": "https://huggingface.co/autotrust/AutoTrust-JEV-27B-v1.1",
+          "quote": "AutoTrust-JEV-27B v1.1"
+        },
+        {
+          "url": "https://huggingface.co/autotrust/AutoTrust-JEV-27B-v1.1",
+          "quote": "AutoTrust-JEV-27B v1.1 is a text decision model that assigns probabilities to the answer options supplied with each question."
+        },
+        {
+          "url": "https://huggingface.co/autotrust/AutoTrust-JEV-27B-v1.1",
+          "quote": "This card reports its measured performance on the Decision Index 0.3 public suite."
+        },
+        {
+          "url": "https://huggingface.co/autotrust/AutoTrust-JEV-27B-v1.1",
+          "quote": "Public index: 67.31 | 37 indexed benchmarks | 140,178 completed scoreable requests"
+        },
+        {
+          "url": "https://huggingface.co/autotrust/AutoTrust-JEV-27B-v1.1",
+          "quote": "This is a complete local evaluation using the official evaluation kit, self-reported pending maintainer verification."
+        },
+        {
+          "url": "https://huggingface.co/autotrust/AutoTrust-JEV-27B-v1.1",
+          "quote": "The clearest strengths in this evaluation are tool selection, intent classification, and everyday automation decisions ."
+        },
+        {
+          "url": "https://huggingface.co/autotrust/AutoTrust-JEV-27B-v1.1",
+          "quote": "Tools & Automation is the highest-scoring area at 85.19 skill points ."
+        },
+        {
+          "url": "https://huggingface.co/autotrust/AutoTrust-JEV-27B-v1.1",
+          "quote": "These are scores on the Decision Index task adaptations, not claims of perfect real-world reliability or general deployment readiness."
+        },
+        {
+          "url": "https://huggingface.co/autotrust/AutoTrust-JEV-27B-v1.1",
+          "quote": "AutoTrust-JEV-27B-v1.1 is released under the Apache License 2.0 (see LICENSE )."
+        },
+        {
+          "url": "https://huggingface.co/autotrust/AutoTrust-JEV-27B-v1.1",
+          "quote": "This repository contains the fine-tuned AutoTrust-JEV-27B-v1.1 model weights and its decision readout head."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Terminal-RSI 递归改进终端 Agent",
+      "summary": "Terminal-RSI 在 Qwen3.8-27B 基础上交替进行验证轨迹的 Recursive Self-Rewrite（RSR）与继承 critic 的 Recursive Policy-Refine（RPR），并提出 Turn-Boundary Skip-Observation GAE（TB-GAE）等训练组件。论文报告五阶段流程得到 Terminal-RSI-27B，在 Terminal-Bench 4.0 上 19.84%、Terminal-Bench 2.1 上 86.52%、Terminal-Bench 3.0 上 16.95%、Terminal-Bench Hard 上 79.00%。这展示了把已验证的部分修复推进到严格任务完成的一种训练思路。",
+      "tags": [
+        "论文",
+        "Agent",
+        "推理"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_240d8f04fc",
+          "url": "https://arxiv.org/abs/2610.22192"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.22192",
+          "quote": "We present Terminal-RSI, which alternates Recursive Self-Rewrite (RSR) of verified trajectories with critic-inheriting Recursive Policy-Refine (RPR)."
+        },
+        {
+          "url": "https://arxiv.org/abs/2610.22192",
+          "quote": "We formulate Turn-Boundary Skip-Observation GAE (TB-GAE) to retain token-specific baselines while applying decay across interaction turns."
+        },
+        {
+          "url": "https://arxiv.org/abs/2610.22192",
+          "quote": "Family Dense Reward (FDR) calibrates semantic progress across task families; Success-Prioritized Reward (SPR) separates strict success from bounded partial credit."
+        },
+        {
+          "url": "https://arxiv.org/abs/2610.22192",
+          "quote": "A Warm-up Critic Model, recursive critic handoff, and stage-specific learning rates coordinate the two refinement phases."
+        },
+        {
+          "url": "https://arxiv.org/abs/2610.22192",
+          "quote": "The five-stage sequence from Qwen3.8-27B base model through RSR-1, RPR-1, RSR-2, and RPR-2 yields Terminal-RSI-27B: 19.84% on Terminal-Bench 4.0, 86.52% on Terminal-Bench 2.1, 16.95% on Terminal-Bench 3.0, and 79.00% on Terminal-Bench Hard."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Agentic Computer Graphics 综述与分类体系",
+      "summary": "这份报告面向由大语言模型驱动的 agentic computer graphics，提出统一分类体系，并开发了一套 agentic 文献系统，帮助研究者规模化分析已有和新发表的论文。作者据此分析新兴趋势，并讨论跨图形任务协调 Agent 与工具、人机协作的接口与表示、维持长程规划与迭代、以及可靠评测交互式图形系统等开放挑战。",
+      "tags": [
+        "论文",
+        "Agent",
+        "图像"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_8fed4d5d35",
+          "url": "https://huggingface.co/papers/2611.01860"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.01860",
+          "quote": "Kenny Jones , Shangzhe Wu , Guandao Yang Abstract This report proposes a unified taxonomy and literature system for agentic computer graphics driven by large language models, analyzing trends and open challenges in human-agent collaboration and long-horizon planning."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.01860",
+          "quote": "Large language model (LLM) agents can now generate graphics code and iteratively refine it through various feedback."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.01860",
+          "quote": "In this report, we address these challenges through two contributions."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.01860",
+          "quote": "First, we introduce a unified taxonomy for characterizing agentic systems across diverse computer graphics tasks."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.01860",
+          "quote": "Second, we develop an agentic literature system that can assist human researchers in analyzing existing and newly published papers at scale."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.01860",
+          "quote": "Building on these contributions, we analyze emerging research trends and discuss open challenges in coordinating agents and tools across graphics tasks, designing interfaces and representations for human-agent collaboration, sustaining long-horizon planning and refinement, and reliably evaluating in"
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "视频生成遇上 Agent Harness 综述",
+      "summary": "这篇综述以 agent harness 为线索，研究视频生成模型与视频世界模型的交叉：harness 是围绕视频模型组织上下文、工具、状态、反馈和预算的可执行运行时。报告分三个方向展开：agentic video generation、agentic world modeling，以及视频模型开发中的递归自我改进（RSI）。作者还梳理了视听感知、长程规划、记忆、基于代码的交互等必备 Agent 能力，以及自主视频制作、记忆与评测等挑战。",
+      "tags": [
+        "论文",
+        "视频",
+        "Agent"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_04f56b52c4",
+          "url": "https://huggingface.co/papers/2610.40191"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2610.40191",
+          "quote": "n Hu , Weijia Mao , Rui Zhao , Weijia Wu , Guian Fang , Yanzhe Chen , Zeyu Zhu , Yuxin Jiang , Yiren Song , Yuchao Gu , Junchao Yi , Qi Hu , Dan Kong , Alex Jinpeng Wang , Kevin Qinghong Lin , Mike Zheng Shou , Wei Liu Abstract Agent harnesses integrate video generation and world models to enable pl"
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.40191",
+          "quote": "anning, tool use, and recursive self-improvement for autonomous multi-shot video production."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.40191",
+          "quote": "Generated by thinkingmachines/Inkling-Small Video generation is shifting from end-to-end synthesis toward agentic generation, where planning, tool use, and feedback enable coherent, controllable multi-shot videos."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.40191",
+          "quote": "We study their intersection through the agent harness : an executable runtime that constructs context, exposes tools, maintains state, routes feedback, and manages budgets around video models."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.40191",
+          "quote": "This report examines three directions."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.40191",
+          "quote": "First, agentic video generation , where harnesses coordinate scripting, shot planning, asset management, production, and editing, alongside the evaluation challenges of these systems."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.40191",
+          "quote": "Second, agentic world modeling, where harnesses mediate observation, control, execution, and state."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.40191",
+          "quote": "Third, recursive self-improvement (RSI) in video model development, distinguishing output revisions, updates to harness state, generator parameters, and evaluators, and changes to the improvement procedure itself."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.40191",
+          "quote": "Across these directions, we analyze essential agent capabilities, including audiovisual perception, long-horizon planning, memory, code-based interaction, feedback-guided control , skill reuse, and multi-agent coordination ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.40191",
+          "quote": "We conclude with challenges in autonomous video production, lifelong memory, programmable hybrid control, autonomous model development, provenance, cost accounting, and evaluation linking video quality and task performance to sustained improvements in models and harnesses."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "从自主 Agent 到认知共生体",
+      "summary": "牛津大学 Hao Fei 的观点论文提出 AI 增强人类智能（AHI）这一范式：相比追问机器能有多聪明，它追问机器能在多大程度上提升某个人的智能。论文把认知共生体定义为终身、嵌入式、实时、隐私、低摩擦且主动的伴侣，能感知人所感知、跨年保留上下文，在恰当时刻参与人的思考，并围绕信任形成感知、保留、理解、行动与共同思考的共生循环。作者同时讨论了考试中的隐蔽辅助等风险，把治理纳入范式本身。",
+      "tags": [
+        "论文",
+        "Agent",
+        "产品"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_56d170ca33",
+          "url": "https://huggingface.co/papers/2611.05376"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.05376",
+          "quote": "As AI moves into the physical world, attention has settled on one kind of intelligent individual, the embodied robot ; we argue that the era of Physical AI holds a second kind of equal importance, the person augmented by AI."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.05376",
+          "quote": "Alongside artificial general intelligence, which asks how intelligent a machine can be, stands AI-augmented human intelligence (AHI), which asks how much intelligence a machine can enable in a particular person."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.05376",
+          "quote": "Realizing it calls for a new kind of system, a cognitive symbiont : a lifelong, embedded, real-time, private, low-friction, and proactive companion that senses what the person senses through external devices, keeps their context across years, models their situation and their mind, takes part in thei"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.05376",
+          "quote": "r thinking at the right moment, carries out everyday tasks with their context, and keeps learning the person as both change."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.05376",
+          "quote": "We give the paradigm a conceptual core, the cognitive gap between what a person could bring to a situation and what they can hold in working memory , and organize its design space as a symbiosis loop of sensing, keeping, understanding, living alongside, acting for and thinking with the person, and g"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.05376",
+          "quote": "rowing, enclosed by a personal runtime and by trust."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.05376",
+          "quote": "Because a symbiont changes what a person can do in front of others, it also raises risks of a new kind, from covert assistance in examinations to pressure on everyone to adopt it, and we treat their governance as part of the paradigm."
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "llama-modchip：纯 CPU 运行 284B MoE 模型",
+      "summary": "llama-modchip 是一组 ggml / llama.cpp 内核补丁、量化转码器和运行时工具，用于把稀疏 MoE 检查点完全放进系统内存运行，支持 x86_64（AVX-512 / AVX2）和 ARM64。项目称通过新的缓存与分块调度把 DeepSeek-V4-Flash 的 284B MoE 检查点压到 56.56 GiB，可在 64 GB 物理内存上以 256K 上下文运行，且无需 NVMe swap，并提供 /dev/shm KV slot 快照以快速恢复 Agent 上下文。",
+      "tags": [
+        "工具",
+        "开源",
+        "硬件"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_7b0caeadc3",
+          "url": "https://github.com/synchopate/llama-modchip"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/synchopate/llama-modchip",
+          "quote": "llama-modchip Public Notifications You must be signed in to change notification settings Fork 29 ( 29 ) Star 544 ( 544 ) You must be signed in to star a repository About 🐋 Run 284B DeepSeek-V4-Flash (<59GiB RAM, 44.4 tok/s pp, 9.1-14.7 tok/s) & 30B MoEs (25-111 tok/s) on a pure 64GB CPU at 256K ctx"
+        },
+        {
+          "url": "https://github.com/synchopate/llama-modchip",
+          "quote": "284.33B Total MoE params (13.17B active)"
+        },
+        {
+          "url": "https://github.com/synchopate/llama-modchip",
+          "quote": "56.56 GiB DeepSeek-V4 GGUF (1.71 bpw)"
+        },
+        {
+          "url": "https://github.com/synchopate/llama-modchip",
+          "quote": "57.61 GiB Peak VmRSS @ 256K ctx"
+        },
+        {
+          "url": "https://github.com/synchopate/llama-modchip",
+          "quote": "44.36 tok/s 284B CPU prefill (16C Zen 5)"
+        },
+        {
+          "url": "https://github.com/synchopate/llama-modchip",
+          "quote": "0 GPUs required"
+        },
+        {
+          "url": "https://github.com/synchopate/llama-modchip",
+          "quote": "DeepSeek-V4-Flash 284B ( 56.56 GiB , 1.71 bpw )"
+        },
+        {
+          "url": "https://github.com/synchopate/llama-modchip",
+          "quote": "44.4 tok/s pp · 9.1–14.7 tok/s tg"
+        },
+        {
+          "url": "https://github.com/synchopate/llama-modchip",
+          "quote": "Fits in 62.5 GiB usable Linux RAM (57.61 GiB VmRSS) with zero NVMe swap"
+        },
+        {
+          "url": "https://github.com/synchopate/llama-modchip",
+          "quote": "llama-modchip is a set of ggml / llama.cpp kernel patches, quantization transcoders, and runtime tools designed to run sparse Mixture-of-Experts (MoE) checkpoints entirely in system RAM on x86_64 ( AVX-512 / AVX2 ) and ARM64 ( NEON / SVE / Apple Metal) processors:"
+        },
+        {
+          "url": "https://github.com/synchopate/llama-modchip",
+          "quote": "Fitting 284B DeepSeek-V4-Flash into 64 GB Physical RAM ( 56.56 GiB on disk, 1.71 bpw ): Standard UD-IQ1_S builds of DeepSeek-V4-Flash ( 284.33B total, 13.17B active across 43 MLA layers and 256 routed experts) occupy 76.87 GiB ( 82.5 GB ), exceeding the ~62.5 GiB of usable RAM on a 64 GB Linux syste"
+        },
+        {
+          "url": "https://github.com/synchopate/llama-modchip",
+          "quote": "llama-modchip reduces the checkpoint to 56.56 GiB ( 60.73 GB ) so the entire model plus a 256K KV cache ( 57.61–58.9 GiB VmRSS ) locks into RAM with zero swap."
+        },
+        {
+          "url": "https://github.com/synchopate/llama-modchip",
+          "quote": "Self-Speculative Drafting & Instant Agent Context Restore: Pairs a 1.64 MB L2/L3 Zobrist n-gram drafter ( Stockfish-PVS v2 ) with /dev/shm KV slot snapshots ( 13.1–32.6 ms restore time for 40-tool Claude Code prompts) and an $O(1)$ speculative rollback fix for deepseek4 recurrent/MLA states."
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "TorchLens：可视化并干预神经网络内部计算",
+      "summary": "TorchLens 用一个 tl.trace 调用即可记录模型的全部操作、激活与梯度以及计算图和 800+ 元数据字段，无需修改模型代码、不需要 hook 或 wrapper，并支持 PyTorch、JAX、TensorFlow、MLX、PaddlePaddle 和 tinygrad。基于保存的完整 trace，可以用选择器挑出特定单元、绘制计算图、抽��激活，或对一个注意力头做 zero_ablate 之类的干预。项目称已在 6400+ 模型上验证。",
+      "tags": [
+        "工具",
+        "开源",
+        "代码"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_8edb11351c",
+          "url": "https://github.com/johnmarktaylor91/torchlens"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/johnmarktaylor91/torchlens",
+          "quote": "Capture every activation and gradient, the full computational graph and 800+ metadata fields without changing model code."
+        },
+        {
+          "url": "https://github.com/johnmarktaylor91/torchlens",
+          "quote": "Supports PyTorch, JAX, TensorFlow, MLX, PaddlePaddle and tinygrad."
+        },
+        {
+          "url": "https://github.com/johnmarktaylor91/torchlens",
+          "quote": "Validated on 6400+ models."
+        },
+        {
+          "url": "https://github.com/johnmarktaylor91/torchlens",
+          "quote": "Built for researchers and their AI agents."
+        },
+        {
+          "url": "https://github.com/johnmarktaylor91/torchlens",
+          "quote": "Inspect, visualize and intervene on any operation in any neural network."
+        },
+        {
+          "url": "https://github.com/johnmarktaylor91/torchlens",
+          "quote": "Almost everything you do in TorchLens starts with one function, tl.trace ."
+        },
+        {
+          "url": "https://github.com/johnmarktaylor91/torchlens",
+          "quote": "You don't have to set anything up."
+        },
+        {
+          "url": "https://github.com/johnmarktaylor91/torchlens",
+          "quote": "Pass it any PyTorch model and its input exactly as they are, with no hooks, wrappers or changes to your code:"
+        },
+        {
+          "url": "https://github.com/johnmarktaylor91/torchlens",
+          "quote": "That one tl.trace call runs your model as usual and logs the result of every operation it executes, not just module outputs."
+        },
+        {
+          "url": "https://github.com/johnmarktaylor91/torchlens",
+          "quote": "Select activations or gradients by any criteria, from simple (\"every LayerNorm in the transformer.h.5 module\") to sophisticated (\"every unit in layer1 and layer2 of a ResNet affected by a specific set of units in conv1 \")."
+        },
+        {
+          "url": "https://github.com/johnmarktaylor91/torchlens",
+          "quote": "Extract activations at whatever speed or level of detail you need: save them all, stop the forward pass once you have the ones you want, or quickly run a dynamic model many times while saving only those matching your criteria (e.g., every ReLU after a convolution)."
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Parsimony：衡量 Agent 新增代码量的基准",
+      "summary": "Parsimony 解析 DeepSWE、SWE-bench Verified、SWE-bench Live 等公开基准中已发布的补丁，统计每个补丁新增和删除了多少语法单元，一个单元指语句、调用、比较、名称或字面量，不计注释、格式和名称长度。排行榜按模型在其解出任务上净增的语法单元除以同任务其他模型的均值排序，0.8× 表示少写 20% 代码，所有数字都可用已发布数据复算。项目也提醒代码量不等于可读性或设计质量，且排名只在成功且可计量的修复上成立。",
+      "tags": [
+        "工具",
+        "开源",
+        "代码"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_b08b48f747",
+          "url": "https://github.com/La5u/Parsimony"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/La5u/Parsimony",
+          "quote": "Parsimony Public Notifications You must be signed in to change notification settings Fork 3 ( 3 ) Star 13 ( 13 ) You must be signed in to star a repository About Measures how much code AI coding agents add, from patches benchmarks already publish parsimony.lasu.dev Topics ai-agents benchmark code-co"
+        },
+        {
+          "url": "https://github.com/La5u/Parsimony",
+          "quote": "Parsimony takes the patches that agents published for public benchmarks (DeepSWE, SWE-bench Verified, SWE-bench Live), parses the code before and after each patch, and counts how many coding units each one added and removed."
+        },
+        {
+          "url": "https://github.com/La5u/Parsimony",
+          "quote": "Nothing is run, so anyone can recompute every number from the published data."
+        },
+        {
+          "url": "https://github.com/La5u/Parsimony",
+          "quote": "So each model is ranked by the net coding units it added on the tasks it solved, divided by what the other models added on those same tasks (0.8× = 20% less code), smallest first."
+        },
+        {
+          "url": "https://github.com/La5u/Parsimony",
+          "quote": "A coding unit is one syntax element: a statement, call, comparison, name or literal."
+        },
+        {
+          "url": "https://github.com/La5u/Parsimony",
+          "quote": "Comments, formatting, punctuation and name length do not count."
+        },
+        {
+          "url": "https://github.com/La5u/Parsimony",
+          "quote": "Smaller isn't always better."
+        },
+        {
+          "url": "https://github.com/La5u/Parsimony",
+          "quote": "Units measure size, not readability or design."
+        },
+        {
+          "url": "https://github.com/La5u/Parsimony",
+          "quote": "Models that write more code also tend to solve more tasks (Spearman 0.33–0.60 on the boards with 26+ models)."
+        },
+        {
+          "url": "https://github.com/La5u/Parsimony",
+          "quote": "The ranking is conditional on successful, measured repairs."
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "OpenMausBot：本地运行的多 Agent 聊天应用",
+      "summary": "OpenMausBot 是一个开源的 Grok Bot 替代方案，把 AI Agent 做成聊天应用里可像联系人一样对话的机器人，每个机器人有自己的性格、模型、云端电脑和已连接应用。机器人跑在本机的 claude、codex、grok CLI 上，复用现有登录与订阅，转录、密钥和事件都存放在 ~/.openmausbot 而非云端。项目采用 Apache 2.0 许可，Shell 命令、文件修改等操作会以卡片形式请求 Allow / Deny 批准，并可通过 Composio 接入 Gmail、Slack、GitHub、Notion、Linear 等应用。",
+      "tags": [
+        "工具",
+        "开源",
+        "Agent"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_2a2ed58c0d",
+          "url": "https://github.com/milind-soni/OpenMausBot"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/milind-soni/OpenMausBot",
+          "quote": "The open-source Grok Bot alternative: your own team of AI bots, in a chat app."
+        },
+        {
+          "url": "https://github.com/milind-soni/OpenMausBot",
+          "quote": "OpenMausBot is an open-source Grok Bot alternative: an independent project inspired by Grok Bot , and the open-source alternative to Meta Muse , OpenAI dots and Cue by Manus — bring-your-own-agent, local-first, on the models you already have."
+        },
+        {
+          "url": "https://github.com/milind-soni/OpenMausBot",
+          "quote": "Not affiliated with xAI, Meta, OpenAI or Manus."
+        },
+        {
+          "url": "https://github.com/milind-soni/OpenMausBot",
+          "quote": "Every bot in the sidebar is a real agent — Claude or Codex running locally under the hood — with its own"
+        },
+        {
+          "url": "https://github.com/milind-soni/OpenMausBot",
+          "quote": "personality, its own model, its own cloud computer, and its own connected apps."
+        },
+        {
+          "url": "https://github.com/milind-soni/OpenMausBot",
+          "quote": "Bots run on the claude , codex , and grok CLIs installed on your own machine"
+        },
+        {
+          "url": "https://github.com/milind-soni/OpenMausBot",
+          "quote": "— your existing logins and subscriptions, no new accounts, no proxy in the middle."
+        },
+        {
+          "url": "https://github.com/milind-soni/OpenMausBot",
+          "quote": "One small harness server on 127.0.0.1 owns every agent process."
+        },
+        {
+          "url": "https://github.com/milind-soni/OpenMausBot",
+          "quote": "Transcripts, keys, and"
+        },
+        {
+          "url": "https://github.com/milind-soni/OpenMausBot",
+          "quote": "events live in ~/.openmausbot , not a cloud."
+        },
+        {
+          "url": "https://github.com/milind-soni/OpenMausBot",
+          "quote": "apps, running on your machine under Apache 2.0."
+        },
+        {
+          "url": "https://github.com/milind-soni/OpenMausBot",
+          "quote": "🙋 Bots ask before they act"
+        },
+        {
+          "url": "https://github.com/milind-soni/OpenMausBot",
+          "quote": "Shell commands, file edits, and questions surface as inline cards — Allow / Deny / answer in chat."
+        },
+        {
+          "url": "https://github.com/milind-soni/OpenMausBot",
+          "quote": "A one-click marketplace over Composio Sessions: Gmail, Slack, GitHub, Notion, Linear and hundreds more."
+        },
+        {
+          "url": "https://github.com/milind-soni/OpenMausBot",
+          "quote": "OAuth once, and every bot can use them as tools."
+        }
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "Goldman Sachs 将 Claude Code 收回工程师手中",
+      "summary": "报道指 Goldman Sachs 已把 Claude Code 和 GitHub 限定给工程师，交易员和银行家不再能在工作中使用。",
+      "tags": [
+        "行业",
+        "Agent",
+        "安全"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_98a50a037d",
+          "url": "https://www.thestateofai.com/news/goldman-sachs-claude-code-traders-bankers"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://www.thestateofai.com/news/goldman-sachs-claude-code-traders-bankers",
+          "quote": "By State of AI Editorial Nov 2, 2026 Goldman Sachs has restricted Anthropic's Claude Code and Microsoft's GitHub to its engineers, cutting off traders and bankers who used the tools to track client flows and build market models."
+        },
+        {
+          "url": "https://www.thestateofai.com/news/goldman-sachs-claude-code-traders-bankers",
+          "quote": "Internal guidance updated in October restricts Anthropic's Claude Code and Microsoft's GitHub to the bank's engineers, Bloomberg News reported , following a review of productivity and risk concerns."
+        },
+        {
+          "url": "https://www.thestateofai.com/news/goldman-sachs-claude-code-traders-bankers",
+          "quote": "The restriction applies to third-party agents that can write and run code by themselves."
+        }
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "OpenAI 首轮融资 $11B，估值 $1.25T",
+      "summary": "报道称约 $11 billion 新资金到账，按 $1.25 trillion 投前估值定价，其余部分尚未完成。",
+      "tags": [
+        "行业",
+        "产品"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_5c69a499a8",
+          "url": "https://247wallst.com/investing/2026/11/07/openai-just-raised-11-billion-at-a-1-25-trillion-valuation-below-the-1-4-trillion-it-first-sought/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://247wallst.com/investing/2026/11/07/openai-just-raised-11-billion-at-a-1-25-trillion-valuation-below-the-1-4-trillion-it-first-sought/",
+          "quote": "About $11 billion in new money reached OpenAI’s accounts by Friday, November 6, 2026, people familiar with the deal said."
+        },
+        {
+          "url": "https://247wallst.com/investing/2026/11/07/openai-just-raised-11-billion-at-a-1-25-trillion-valuation-below-the-1-4-trillion-it-first-sought/",
+          "quote": "That cash is the first part of a round priced at a $1.25 trillion pre-money valuation, a figure the company’s CFO, Sarah Friar, confirmed in a TV interview."
+        },
+        {
+          "url": "https://247wallst.com/investing/2026/11/07/openai-just-raised-11-billion-at-a-1-25-trillion-valuation-below-the-1-4-trillion-it-first-sought/",
+          "quote": "That second portion has not closed."
+        }
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "LexiSuite 发布全 Rust 本地推理栈",
+      "summary": "LexiSuite 是从内核、操作系统、推理引擎到浏览器面板的本地推理栈，可写入 U 盘启动。",
+      "tags": [
+        "工具",
+        "开源",
+        "硬件"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_7231d28c52",
+          "url": "https://github.com/W61k3r/LexiSuite-Releases/releases/tag/LexiSuiteT7"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/W61k3r/LexiSuite-Releases/releases/tag/LexiSuiteT7",
+          "quote": "OS / Kernel / Engine / Panel."
+        },
+        {
+          "url": "https://github.com/W61k3r/LexiSuite-Releases/releases/tag/LexiSuiteT7",
+          "quote": "A complete local inference stack, from the kernel that boots the machine to the browser"
+        },
+        {
+          "url": "https://github.com/W61k3r/LexiSuite-Releases/releases/tag/LexiSuiteT7",
+          "quote": "Native Rust inference server: GGUF models on Vulkan, CUDA and CPU, with compatible HTTP APIs"
+        },
+        {
+          "url": "https://github.com/W61k3r/LexiSuite-Releases/releases/tag/LexiSuiteT7",
+          "quote": "One USB image carries LexiOS on Linux 7.4-rc1 and LexiKernel side by side, boots with"
+        }
+      ]
+    }
+  ],
+  "research": [
+    {
+      "via": "webfetch",
+      "url": "https://github.com/anthropics/skills"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://www.thestateofai.com/news/goldman-sachs-claude-code-traders-bankers"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://247wallst.com/investing/2026/11/07/openai-just-raised-11-billion-at-a-1-25-trillion-valuation-below-the-1-4-trillion-it-first-sought/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/vercel-labs/agent-browser"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.01860"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.40191"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.05275"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.04916"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/autotrust/AutoTrust-JEV-27B-v1.1"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/webAI-Official/TwIL-8B"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/theIvanR/torch-on-clunkers%5D"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/johnmarktaylor91/torchlens"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/La5u/Parsimony"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/synchopate/llama-modchip"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://www.lorekit.io/blog/open-agent-memory-format"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/milind-soni/OpenMausBot"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://arxiv.org/abs/2610.22192"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/rickey1990/Gated-Attention-Projection"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/grawnchtoader/strata"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.05376"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.00617"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/W61k3r/LexiSuite-Releases/releases/tag/LexiSuiteT7"
+    }
+  ],
+  "validation": {
+    "validated_at": "2026-11-09T04:50:34+00:00",
+    "checked_links": true,
+    "dropped": [],
+    "warnings": []
+  }
+}
