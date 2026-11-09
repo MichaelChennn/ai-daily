@@ -1,0 +1,485 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-09",
+  "mode": "full",
+  "channel": "claude",
+  "generated_at": "2026-11-09T04:41:42+00:00",
+  "model": "claude-opus-5-5",
+  "highlights": [
+    "腾讯在 Hugging Face 开源 Qwen3.8-27B 的 DSpine 草稿模型，作者报告在 WorkBuddy Office 上吞吐达到自回归解码的 3.84×。",
+    "llama-modchip 把 284B 的 DeepSeek-V4-Flash 压到 56.56 GiB，在 64 GB 内存、无 GPU 的机器上跑。",
+    "Goldman Sachs 把 Claude Code 收回给工程师，大多数交易员和银行家不能再用 AI 编程工具。"
+  ],
+  "items": [
+    {
+      "section": "headline",
+      "title": "腾讯开源 Qwen3.8-27B 投机解码草稿模型 DSpine",
+      "summary": "腾讯在 Hugging Face 发布 Qwen3.8-27B-DSpine-b16，这是给 Qwen3.8-27B 用的五层草稿模型，用 DSpine 方法并行生成草稿 token，block size 16。作者在 SGLang 上测得，低推理档下 WorkBuddy Code 吞吐是自回归解码的 2.71×，WorkBuddy Office 达 3.84×，均高于官方 DFlash2。本地或自建部署 Qwen3.8-27B 的团队可以直接拿它加速，Apache 2.0 许可，但数字都是作者自测。",
+      "sources": [
+        {
+          "candidate_id": "c_abb4f94b30",
+          "url": "https://huggingface.co/tencent/Qwen3.8-27B-DSpine-b16"
+        },
+        {
+          "candidate_id": "c_abb4f94b30",
+          "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xr2aaa/tencentqwen3827bdspineb16_hugging_face/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/tencent/Qwen3.8-27B-DSpine-b16",
+          "quote": "DSpine generates draft tokens in parallel. Each layer passes predicted predecessor features to adjacent positions, carrying causal dependencies through network depth. This checkpoint is a five-layer draft model for Qwen3.8-27B , with block size 16 and an 8,192-token sliding window."
+        },
+        {
+          "url": "https://huggingface.co/tencent/Qwen3.8-27B-DSpine-b16",
+          "quote": "Runtime: SGLang 0.5.22, BF16, FlashAttention 3, concurrency 8. Draft blocks: DSpine 16; official DFlash2 8."
+        },
+        {
+          "url": "https://huggingface.co/tencent/Qwen3.8-27B-DSpine-b16",
+          "quote": "WorkBuddy Code 253.35 590.27 (2.33×) 686.23 (2.71×) 193.00 550.40 (2.85×) 613.55 (3.18×) WorkBuddy Web 247.40 639.74 (2.59×) 773.19 (3.13×) 252.26 734.04 (2.91×) 840.14 (3.33×) WorkBuddy Office 210.03 664.77 (3.17×) 805.53 (3.84×)"
+        }
+      ],
+      "tags": [
+        "开源",
+        "推理",
+        "模型"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "llama-modchip：在 64 GB 内存无 GPU 机器上跑 284B DeepSeek",
+      "summary": "开源项目 llama-modchip（v2.4.0）给 llama.cpp 打补丁并重新量化，把 284B 的 DeepSeek-V4-Flash 压到 56.56 GiB（1.71 bpw），连同 256K 上下文的 KV cache 一起放进 64 GB 内存，不需要 GPU。作者在 16 核 Zen 5 上测得预填充 44.36 tok/s。想在纯 CPU 机器上跑大 MoE 的开发者可以试试，但这些文件只能用它打过补丁的二进制加载，原版 llama.cpp、Ollama、LM Studio 会报错。",
+      "sources": [
+        {
+          "candidate_id": "c_7b0caeadc3",
+          "url": "https://github.com/synchopate/llama-modchip"
+        },
+        {
+          "candidate_id": "c_7b0caeadc3",
+          "url": "https://news.ycombinator.com/item?id=50411961"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/synchopate/llama-modchip",
+          "quote": "llama-modchip (v2.4.0) CPU-First Inference for 284B & 30B Mixture-of-Experts Models on 16–64 GB RAM"
+        },
+        {
+          "url": "https://github.com/synchopate/llama-modchip",
+          "quote": "llama-modchip reduces the checkpoint to 56.56 GiB ( 60.73 GB ) so the entire model plus a 256K KV cache ( 57.61–58.9 GiB VmRSS ) locks into RAM with zero swap."
+        },
+        {
+          "url": "https://github.com/synchopate/llama-modchip",
+          "quote": "56.56 GiB DeepSeek-V4 GGUF (1.71 bpw) 57.61 GiB Peak VmRSS @ 256K ctx 44.36 tok/s 284B CPU prefill (16C Zen 5)"
+        },
+        {
+          "url": "https://github.com/synchopate/llama-modchip",
+          "quote": "Fitting 284B DeepSeek-V4-Flash into 64 GB Physical RAM"
+        },
+        {
+          "url": "https://github.com/synchopate/llama-modchip",
+          "quote": "Unpatched llama.cpp , Ollama, or LM Studio binaries will reject them with unknown tensor type 40 ."
+        }
+      ],
+      "tags": [
+        "开源",
+        "推理",
+        "工具"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Goldman Sachs 收回交易员和银行家的 Claude Code 权限",
+      "summary": "据 Bloomberg 报道，Goldman Sachs 更新内部规定，把 Claude Code 和 Microsoft 的 GitHub 限定给工程师使用，大多数交易员和银行家不能再用 AI 编程工具；限制针对能自己写代码、跑代码的第三方智能体，此前银行对生产力和风险做了审查。这说明在受监管行业，非工程人员用编程智能体自建工具会碰到代码审查和合规的门槛，给企业推这类工具的团队可以参考。",
+      "sources": [
+        {
+          "candidate_id": "c_98a50a037d",
+          "url": "https://www.thestateofai.com/news/goldman-sachs-claude-code-traders-bankers"
+        },
+        {
+          "candidate_id": "c_98a50a037d",
+          "url": "https://news.ycombinator.com/item?id=50415628"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://www.thestateofai.com/news/goldman-sachs-claude-code-traders-bankers",
+          "quote": "Most traders and bankers at Goldman Sachs can no longer use AI coding tools at work. Internal guidance updated in October restricts Anthropic's Claude Code and Microsoft's GitHub to the bank's engineers, Bloomberg News reported , following a review of productivity and risk concerns."
+        },
+        {
+          "url": "https://www.thestateofai.com/news/goldman-sachs-claude-code-traders-bankers",
+          "quote": "The restriction applies to third-party agents that can write and run code by themselves."
+        }
+      ],
+      "tags": [
+        "行业",
+        "代码",
+        "Agent"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "OpenAI 以 $1.25T 估值完成 $11B 首轮到账",
+      "summary": "据 24/7 Wall St. 报道，约 $11B 新资金已到账 OpenAI，这是一轮融资的第一部分，投前估值 $1.25T，CFO Sarah Friar 在电视采访中确认了估值，SoftBank 和 MGX 参与。估值低于此前报道的目标，第二部分尚未完成，对依赖 OpenAI API 的团队，这是观察其资金面的一个参考。",
+      "sources": [
+        {
+          "candidate_id": "c_5c69a499a8",
+          "url": "https://247wallst.com/investing/2026/11/07/openai-just-raised-11-billion-at-a-1-25-trillion-valuation-below-the-1-4-trillion-it-first-sought/"
+        },
+        {
+          "candidate_id": "c_5c69a499a8",
+          "url": "https://news.ycombinator.com/item?id=50413822"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://247wallst.com/investing/2026/11/07/openai-just-raised-11-billion-at-a-1-25-trillion-valuation-below-the-1-4-trillion-it-first-sought/",
+          "quote": "About $11 billion in new money reached OpenAI’s accounts by Friday, November 6, 2026, people familiar with the deal said. That cash is the first part of a round priced at a $1.25 trillion pre-money valuation, a figure the company’s CFO, Sarah Friar, confirmed in a TV interview."
+        },
+        {
+          "url": "https://247wallst.com/investing/2026/11/07/openai-just-raised-11-billion-at-a-1-25-trillion-valuation-below-the-1-4-trillion-it-first-sought/",
+          "quote": "SoftBank and Abu Dhabi’s MGX took part in the round."
+        },
+        {
+          "url": "https://247wallst.com/investing/2026/11/07/openai-just-raised-11-billion-at-a-1-25-trillion-valuation-below-the-1-4-trillion-it-first-sought/",
+          "quote": "OpenAI's $11 billion first close values it at $1.25 trillion, below its reported $1.4 trillion ask"
+        },
+        {
+          "url": "https://247wallst.com/investing/2026/11/07/openai-just-raised-11-billion-at-a-1-25-trillion-valuation-below-the-1-4-trillion-it-first-sought/",
+          "quote": "© 24/7 Wall St. About $11 billion in new money reached OpenAI’s accounts"
+        }
+      ],
+      "tags": [
+        "行业"
+      ]
+    },
+    {
+      "section": "model",
+      "title": "webAI 发布 8.8B 推理模型 TwIL-8B",
+      "summary": "webAI 基于 ibm-granite/granite-4.2-8b 做全参数 SFT 和 GRPO/DAPO 强化学习，得到面向数学、代码和指令遵循的 TwIL-8B，作者报告 MATH-500 为 98.2，并提供 4.98 GiB 的 Q4_K_M GGUF。模型卡自己说明它不是知识型模型，GPQA Diamond 落后 Qwen3.5-9B；采用 webAI Non-Commercial License，只能用于非商业场景。",
+      "sources": [
+        {
+          "candidate_id": "c_773a12706a",
+          "url": "https://huggingface.co/webAI-Official/TwIL-8B"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/webAI-Official/TwIL-8B",
+          "quote": "TwIL-8B An 8.8B reasoning model for math, code and instruction following , post-trained from ibm-granite/granite-4.2-8b with full-parameter supervised fine-tuning and GRPO/DAPO reinforcement learning."
+        },
+        {
+          "url": "https://huggingface.co/webAI-Official/TwIL-8B",
+          "quote": "TwIL-8B posts the highest MATH-500 (98.2) and LiveCodeBench (81.6 †) scores in the comparison"
+        },
+        {
+          "url": "https://huggingface.co/webAI-Official/TwIL-8B",
+          "quote": "8.79B parameters in bf16 (16.38 GiB), with a 4.98 GiB Q4_K_M GGUF for CPU or modest-VRAM GPUs. It is not a knowledge model. GPQA Diamond (70.2) trails Qwen3.5-9B by 11.5"
+        },
+        {
+          "url": "https://huggingface.co/webAI-Official/TwIL-8B",
+          "quote": "Released under the webAI Non-Commercial License ver. 1.0"
+        }
+      ],
+      "tags": [
+        "模型",
+        "推理"
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Pika Labs 开放 Pika H3 Flex 音视频生成适配器",
+      "summary": "Pika Labs 在 Hugging Face 发布 Pika H3 Flex，这是基于 MiniMax-H3 后训练的适配器，六步采样生成带同步音频的视频，输出 24 fps，最多支持 12 个参考输入。想本地跑音视频生成的开发者多了一个选项，但它按 MiniMax H3 Community License 分发，作者在 H100 80GB 上测试，大请求可能需要 CPU offload。",
+      "sources": [
+        {
+          "candidate_id": "c_36d92c2293",
+          "url": "https://huggingface.co/Pika-Labs/Pika-H3-Flex"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/Pika-Labs/Pika-H3-Flex",
+          "quote": "Pika H3 Flex is a post-trained H3 model, designed to give professional creators the flexibility and speed to explore with precision. Optimized for greater control, it generates video with synchronized audio in six sampling steps and supports up to 12 reference inputs"
+        },
+        {
+          "url": "https://huggingface.co/Pika-Labs/Pika-H3-Flex",
+          "quote": "It builds on MiniMax-H3 and generates video with synchronized stereo audio in six sampling steps."
+        },
+        {
+          "url": "https://huggingface.co/Pika-Labs/Pika-H3-Flex",
+          "quote": "Output frame rate 24 fps"
+        },
+        {
+          "url": "https://huggingface.co/Pika-Labs/Pika-H3-Flex",
+          "quote": "These adapters are Model Derivatives of MiniMax H3 and are distributed under the MiniMax H3 Community License Agreement ."
+        },
+        {
+          "url": "https://huggingface.co/Pika-Labs/Pika-H3-Flex",
+          "quote": "Representative 480p and 768p CLI requests passed on H100 80GB. Large requests may require --cpu-offload and substantial host RAM."
+        }
+      ],
+      "tags": [
+        "模型",
+        "视频",
+        "多模态"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Route Anything：跨模态模型与策略路由研究",
+      "summary": "论文构建了覆盖 25 个基准、452 个候选配置、374,401 次打分运行的全模态轨迹矩阵，研究怎样为每个任务挑选模型或策略。逐输入的 oracle 路由比最好的固定候选高 5.4 分，路由平均把效率提高到参考模型的 8.82x。做多模型调度、按成本选模型的团队可以参考它的数据和结论。",
+      "sources": [
+        {
+          "candidate_id": "c_9825171215",
+          "url": "https://huggingface.co/papers/2611.05275"
+        },
+        {
+          "url": "https://arxiv.org/abs/2611.05275",
+          "title": "arXiv"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2611.05275",
+          "quote": "we first construct an omni-modal trajectory matrix spanning 25 benchmarks across language understanding, image, video, and speech generation, coding and workplace agents, and robotic manipulation, comprising 374,401 scored runs from 452 candidate configurations."
+        },
+        {
+          "url": "https://arxiv.org/abs/2611.05275",
+          "quote": "per-input oracle routing outperforms the best fixed candidate by 5.4 points"
+        },
+        {
+          "url": "https://arxiv.org/abs/2611.05275",
+          "quote": "routing raises efficiency by 8.82x on average compared with the reference model."
+        }
+      ],
+      "tags": [
+        "论文",
+        "Agent",
+        "多模态"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Next-Concept Modeling：由粗到细并行生成文本",
+      "summary": "论文提出 NCM：用多尺度残差 VQ-VAE 把文本编码成层级离散码，Transformer 逐层生成、同一层内的码并行预测。在 LM1B 上，同参数规模下生成困惑度优于最强的扩散语言模型基线，在 Sudoku 上用更少的函数评估超过自回归和扩散基线。这是扩散语言模型之外另一条并行文本生成路线，值得关注。",
+      "sources": [
+        {
+          "candidate_id": "c_660ed690e5",
+          "url": "https://arxiv.org/abs/2610.14162"
+        },
+        {
+          "candidate_id": "c_660ed690e5",
+          "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xr6krp/nextconcept_modeling_fast_parallel_coarsetofine/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.14162",
+          "quote": "We introduce Next-Concept Modeling (NCM), a two-stage, coarse-to-fine framework: a multiscale residual VQ-VAE encodes text into a hierarchy of discrete codes, and a transformer generates one level at a time, predicting all codes within a level in parallel."
+        },
+        {
+          "url": "https://arxiv.org/abs/2610.14162",
+          "quote": "At matched parameter scales, NCM achieves better generative perplexity than the strongest DLM baseline on LM1B"
+        },
+        {
+          "url": "https://arxiv.org/abs/2610.14162",
+          "quote": "On the reasoning task of Sudoku, NCM outperforms autoregressive and diffusion baselines across all difficulty levels, using fewer function evaluations."
+        }
+      ],
+      "tags": [
+        "论文",
+        "训练"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "可灵团队总结视频生成中的多模态理解经验",
+      "summary": "Kling Team 的报告认为视频生成的瓶颈正从渲染转向语义控制，并沿数据、条件、对齐、评测整条链路逐个模块总结经验，核心是一个统一图像、视频、音频输入的共享多模态基座 Kling-MLLM。报告还讨论了把 caption 当作语义契约、提示词增强和奖励模型的设计，做视频生成管线的团队可以对照参考。",
+      "sources": [
+        {
+          "candidate_id": "c_6dc982f8f4",
+          "url": "https://huggingface.co/papers/2611.04916"
+        },
+        {
+          "url": "https://arxiv.org/abs/2611.04916",
+          "title": "arXiv"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2611.04916",
+          "quote": "Video generation has progressed from isolated clips to coherent short-form audiovisual sequences, and the bottleneck is shifting from rendering to semantic control."
+        },
+        {
+          "url": "https://arxiv.org/abs/2611.04916",
+          "quote": "Kling-MLLM, a shared multimodal foundation model that unifies image, video, audio, synchronized audio--video, and interleaved inputs, is specialized for each downstream module."
+        },
+        {
+          "url": "https://arxiv.org/abs/2611.04916",
+          "quote": "Reward modeling pairs a general reward model for explainable, localized critiques with a decision reward model for fast multidimensional scoring"
+        }
+      ],
+      "tags": [
+        "论文",
+        "视频",
+        "多模态"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "OpenMausBot：自托管的多智能体聊天应用",
+      "summary": "OpenMausBot 是 Apache-2.0 开源的聊天应用，侧栏里每个 bot 都是在本地运行的 Claude 或 Codex 智能体，各自有自己的模型、云端电脑和连接的应用。今天登上 GitHub Trending，想自建一套“智能体团队”的开发者可以拿来参考或直接部署。",
+      "sources": [
+        {
+          "candidate_id": "c_2a2ed58c0d",
+          "url": "https://github.com/milind-soni/OpenMausBot"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/milind-soni/OpenMausBot",
+          "quote": "OpenMausBot The open-source Grok Bot alternative: your own team of AI bots, in a chat app."
+        },
+        {
+          "url": "https://github.com/milind-soni/OpenMausBot",
+          "quote": "Every bot in the sidebar is a real agent — Claude or Codex running locally under the hood — with its own personality, its own model, its own cloud computer, and its own connected apps."
+        },
+        {
+          "url": "https://github.com/milind-soni/OpenMausBot",
+          "quote": "Readme Apache-2.0 license"
+        }
+      ],
+      "tags": [
+        "开源",
+        "Agent",
+        "工具"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "TorchLens：记录并干预神经网络的每一步运算",
+      "summary": "TorchLens 不改模型代码就能捕获每个激活和梯度、完整计算图和 800+ 个元数据字段，支持 PyTorch、JAX、TensorFlow、MLX、PaddlePaddle 和 tinygrad。做可解释性研究或排查训练问题的开发者可以用它代替手写 hook。",
+      "sources": [
+        {
+          "candidate_id": "c_8edb11351c",
+          "url": "https://github.com/johnmarktaylor91/torchlens"
+        },
+        {
+          "candidate_id": "c_8edb11351c",
+          "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xrh5iz/github_repo_torchlens_inspect_visualize_and/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/johnmarktaylor91/torchlens",
+          "quote": "Capture every activation and gradient, the full computational graph and 800+ metadata fields without changing model code. Supports PyTorch, JAX, TensorFlow, MLX, PaddlePaddle and tinygrad. Validated on 6400+ models."
+        }
+      ],
+      "tags": [
+        "工具",
+        "开源",
+        "训练"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "vercel-labs/agent-browser 登上 GitHub Trending",
+      "summary": "Vercel Labs 给 AI 智能体用的浏览器自动化 CLI agent-browser 今天登上 GitHub Trending。",
+      "sources": [
+        {
+          "candidate_id": "c_3f274de57e",
+          "url": "https://github.com/vercel-labs/agent-browser"
+        }
+      ],
+      "evidence": [],
+      "tags": [
+        "工具",
+        "Agent"
+      ]
+    }
+  ],
+  "research": [
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/tencent/Qwen3.8-27B-DSpine-b16"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/synchopate/llama-modchip"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://www.thestateofai.com/news/goldman-sachs-claude-code-traders-bankers"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://arxiv.org/abs/2610.14162"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://247wallst.com/investing/2026/11/07/openai-just-raised-11-billion-at-a-1-25-trillion-valuation-below-the-1-4-trillion-it-first-sought/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://www.lorekit.io/blog/open-agent-memory-format"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/johnmarktaylor91/torchlens"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://caleb.software/posts/claude-to-pi.html"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/autotrust/AutoTrust-JEV-27B-v1.1"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/webAI-Official/TwIL-8B"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/Pika-Labs/Pika-H3-Flex"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/milind-soni/OpenMausBot"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://arxiv.org/abs/2611.05275"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://arxiv.org/abs/2611.04916"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/Comfy-Org/RelayVSR"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/VideoRebirthAI/hyperflow-h3-flash"
+    },
+    {
+      "via": "websearch",
+      "query": "Baidu ERNIE new model release November 2026"
+    },
+    {
+      "via": "websearch",
+      "query": "AI model release announced November 8 2026 Qwen xAI Grok"
+    }
+  ],
+  "validation": {
+    "validated_at": "2026-11-09T04:43:27+00:00",
+    "checked_links": true,
+    "dropped": [],
+    "warnings": [
+      "腾讯开源 Qwen3.8-27B 投机解码草稿模型 DSpine: could not check https://www.reddit.com/r/LocalLLaMA/comments/1xr2aaa/tencentqwen3827bdspineb16_hugging_face/ (403)",
+      "Next-Concept Modeling：由粗到细并行生成文本: could not check https://www.reddit.com/r/LocalLLaMA/comments/1xr6krp/nextconcept_modeling_fast_parallel_coarsetofine/ (403)",
+      "TorchLens：记录并干预神经网络的每一步运算: could not check https://www.reddit.com/r/LocalLLaMA/comments/1xrh5iz/github_repo_torchlens_inspect_visualize_and/ (403)"
+    ]
+  }
+}
