@@ -1,0 +1,1063 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-11",
+  "mode": "full",
+  "generated_at": "2026-11-11T04:46:23+00:00",
+  "channel": "api",
+  "model": "nvidia:minimaxai/minimax-m3.1-flash",
+  "highlights": [
+    "Google DeepMind 的 AlphaProof Code 用 AI 智能体为 Signal 核心加密代码生成 Lean 形式化证明，验证过程仅用四周，并开源验证产物。",
+    "MiniMax 发布开放权重图像生成模型 H3-Image，称可在 10 秒内生成 4K（4096 × 4096）图像，并同时放出模型权重。",
+    "Google DeepMind 开放 Gemini 4 Carbon，面向长流程智能体编码、网络安全与科学推理，API 定价与 Gemini 4 Argon 相同。"
+  ],
+  "items": [
+    {
+      "section": "headline",
+      "title": "AlphaProof Code 用 AI 智能体验证 Signal 加密代码",
+      "summary": "Google DeepMind 研究者用 AlphaProof Code 智能体框架，为 Signal 核心密码协议的实际代码生成 Lean 形式化证明，验证流程耗时四周；官方称这是首次对广泛部署的密码协议实现做这一深度的形式化验证，并开源验证产物。对开发者而言，它展示了 AI 智能体在安全关键代码验证上的可用路径。",
+      "tags": [
+        "安全",
+        "Agent",
+        "代码"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_4133c672fa",
+          "url": "https://deepmind.google/blog/introducing-alphaproof-code/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://deepmind.google/blog/introducing-alphaproof-code/",
+          "quote": "November 10, 2026 Research Introducing AlphaProof Code: a breakthrough in verifying complex software at depth Pushmeet Kohli and Swarat Chaudhuri Read the technical paper Share Copied How Google DeepMind researchers built a new agentic framework that formally verified the code of Signal’s cryptograp"
+        },
+        {
+          "url": "https://deepmind.google/blog/introducing-alphaproof-code/",
+          "quote": "This breakthrough discovery was made using AlphaProof Code , a novel agentic framework for formal verification at unprecedented depth that combines human expertise with AI agents."
+        },
+        {
+          "url": "https://deepmind.google/blog/introducing-alphaproof-code/",
+          "quote": "Our work marks the first time AI has been used to formally verify a widely deployed cryptographic protocol at this depth."
+        },
+        {
+          "url": "https://deepmind.google/blog/introducing-alphaproof-code/",
+          "quote": "How we verified Signal AlphaProof Code is a multi-LLM agentic framework that splits the work of formal verification the way a research team would: human experts work with AI to decide what to prove, and a group of AI agents does it."
+        },
+        {
+          "url": "https://deepmind.google/blog/introducing-alphaproof-code/",
+          "quote": "From there, agents powered by Gemini Carbon did the proofs, generating over six million lines of Lean, a computer language that mathematically proves the accuracy of code."
+        },
+        {
+          "url": "https://deepmind.google/blog/introducing-alphaproof-code/",
+          "quote": "Even at this complexity, our verification process took just four weeks – a task that historically takes expert teams years – proving that Signal's core cryptographic code delivers the security protections our experts specified."
+        },
+        {
+          "url": "https://deepmind.google/blog/introducing-alphaproof-code/",
+          "quote": "We are open-sourcing our formal verification artifacts for community use."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "MiniMax 发布开放权重图像模型 H3-Image",
+      "summary": "MiniMax 推出基于 H3 的开放权重图像生成模型 H3-Image，支持文生图、参考图生成和图像编辑，可处理最多 16 张参考图。官方称它能在 10 秒内生成 4K（4096 × 4096）图像，并已同步放出模型权重和 API 接口，开发者可以自行定制或接入工作流。",
+      "tags": [
+        "模型",
+        "图像",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_749427a05c",
+          "url": "https://www.minimax.io/blog/minimax-h3-image"
+        },
+        {
+          "candidate_id": "c_46a9ff30f5",
+          "url": "https://huggingface.co/MiniMaxAI/MiniMax-H3-Image"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://www.minimax.io/blog/minimax-h3-image",
+          "quote": "MiniMax H3-Image: Bringing 4K Image Generation into the 10-Second Era 2026-11-11 Today, we're releasing MiniMax H3-Image, an open-weight image generation model built on H3."
+        },
+        {
+          "url": "https://www.minimax.io/blog/minimax-h3-image",
+          "quote": "It supports text-to-image generation, reference-based generation, and image editing."
+        },
+        {
+          "url": "https://www.minimax.io/blog/minimax-h3-image",
+          "quote": "H3-Image can generate a 4K (4096 × 4096) image in under 10 seconds, with rich, realistic details, strong prompt adherence, the ability to understand and work with up to 16 reference image."
+        },
+        {
+          "url": "https://www.minimax.io/blog/minimax-h3-image",
+          "quote": "H3-Image delivers state-of-the-art prompt adherence among open-weight models, with support for up to 16 reference images."
+        },
+        {
+          "url": "https://www.minimax.io/blog/minimax-h3-image",
+          "quote": "As with H3, we're releasing H3-Image's model weights."
+        },
+        {
+          "url": "https://www.minimax.io/blog/minimax-h3-image",
+          "quote": "Get started: Hugging Face: https://huggingface.co/MiniMaxAI/MiniMax-H3-Image API: https://platform.minimax.io/docs/guides/image-generation MiniMax Code: https://code.minimax.io/about We hope H3-Image can be useful in more people's daily work and creative projects."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Gemini 4 Carbon 正式开放",
+      "summary": "Google DeepMind 宣布 Gemini 4 Carbon 向开发者、企业、科学家和消费者开放，定位为比 Gemini 4 Argon 更强的前沿模型，面向复杂多步编码调试、开放式科学研究和长流程智能体任务。开发者可通过 Google AI Studio 和 Gemini for business 的 API 使用，定价与 Gemini 4 Argon 相同，为每百万输入 token $2、输出 token $10。",
+      "tags": [
+        "模型",
+        "Agent",
+        "产品"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_e55418bb42",
+          "url": "https://deepmind.google/blog/gemini-4-carbon-is-now-available/"
+        },
+        {
+          "candidate_id": "c_1eb783cac9",
+          "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-carbon-now-available/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://deepmind.google/blog/gemini-4-carbon-is-now-available/",
+          "quote": "Gemini 4 Carbon is now available"
+        },
+        {
+          "url": "https://deepmind.google/blog/gemini-4-carbon-is-now-available/",
+          "quote": "Developers, enterprises, scientists, and consumers can now try our latest frontier model."
+        },
+        {
+          "url": "https://deepmind.google/blog/gemini-4-carbon-is-now-available/",
+          "quote": "Today, we’re making Gemini 4 Carbon available to developers, enterprises, scientists, and consumers."
+        },
+        {
+          "url": "https://deepmind.google/blog/gemini-4-carbon-is-now-available/",
+          "quote": "Carbon is our strongest model with frontier performance in cybersecurity capabilities and long-horizon agentic workflows across complex knowledge work, software engineering, and scientific reasoning."
+        },
+        {
+          "url": "https://deepmind.google/blog/gemini-4-carbon-is-now-available/",
+          "quote": "Argon remains the ideal choice for the majority of software engineering and knowledge work, while Carbon is built for tasks that test the limits of a model’s intelligence like complex, multi-step coding and debugging and open-ended scientific research and discovery — using more tokens than Argon to"
+        },
+        {
+          "url": "https://deepmind.google/blog/gemini-4-carbon-is-now-available/",
+          "quote": "Gemini 4 Carbon is available via the API in Google AI Studio and Gemini for business for all paying developers and enterprises, at the same introductory price"
+        },
+        {
+          "url": "https://deepmind.google/blog/gemini-4-carbon-is-now-available/",
+          "quote": "as Gemini 4 Argon ($2 per million input tokens and $10 per million output tokens)."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "微软研究披露权重后门技术 Lazarus",
+      "summary": "微软研究人员提出 Lazarus 后门方法，通过改写 LLM 中少于 10 个休眠神经元就能让智能体在触发条件下执行恶意命令，且无需重新训练。研究指出这类模型能通过常规评测，因此模型来源与权重完整性成为部署环节的关键问题；微软称其 Foundry 已在接入开放权重模型时校验来源并扫描周边软件环境。",
+      "tags": [
+        "安全",
+        "Agent",
+        "模型"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_88a8bd4f85",
+          "url": "https://www.microsoft.com/en-us/research/blog/lazare-veni-foras-reprogramming-dormant-neurons-to-backdoor-ai-agents/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://www.microsoft.com/en-us/research/blog/lazare-veni-foras-reprogramming-dormant-neurons-to-backdoor-ai-agents/",
+          "quote": "Microsoft researchers have discovered “Lazarus,” a backdoor technique that can reprogram dormant neurons in an AI model, causing an otherwise normal AI agent to execute malicious commands when a hidden trigger appears."
+        },
+        {
+          "url": "https://www.microsoft.com/en-us/research/blog/lazare-veni-foras-reprogramming-dormant-neurons-to-backdoor-ai-agents/",
+          "quote": "A triggered model could quietly download and run attacker code, steal secrets, or execute destructive commands while still passing standard safety evaluations."
+        },
+        {
+          "url": "https://www.microsoft.com/en-us/research/blog/lazare-veni-foras-reprogramming-dormant-neurons-to-backdoor-ai-agents/",
+          "quote": "These backdoors can be inserted without retraining the model and are difficult to detect through normal testing, making model provenance and weight integrity critical security concerns."
+        },
+        {
+          "url": "https://www.microsoft.com/en-us/research/blog/lazare-veni-foras-reprogramming-dormant-neurons-to-backdoor-ai-agents/",
+          "quote": "We find (opens in new tab) that weight-reprogramming fewer than 10 dormant neurons in an LLM, is enough to backdoor an agent built on it, and requires no training."
+        },
+        {
+          "url": "https://www.microsoft.com/en-us/research/blog/lazare-veni-foras-reprogramming-dormant-neurons-to-backdoor-ai-agents/",
+          "quote": "The model passes standard evals and behaves normally, until a trigger appears."
+        },
+        {
+          "url": "https://www.microsoft.com/en-us/research/blog/lazare-veni-foras-reprogramming-dormant-neurons-to-backdoor-ai-agents/",
+          "quote": "The trigger can be as mundane as a date change, e.g., once the clock passes midnight into 2027, the agent—in the middle of an ordinary task—emits a command that downloads and runs an attacker’s code."
+        },
+        {
+          "url": "https://www.microsoft.com/en-us/research/blog/lazare-veni-foras-reprogramming-dormant-neurons-to-backdoor-ai-agents/",
+          "quote": "The attack requires altering a model’s weights, and Foundry onboards open-weight models through sourcing controls that tie each model to its original publisher, which every model card identifies."
+        },
+        {
+          "url": "https://www.microsoft.com/en-us/research/blog/lazare-veni-foras-reprogramming-dormant-neurons-to-backdoor-ai-agents/",
+          "quote": "Then, models are run inside Microsoft’s own containers, which are separately scanned for critical vulnerabilities."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Cursor Projects 支持多人协作与 Agent 间通信",
+      "summary": "Cursor 宣布 Projects 升级为多人协作模式，团队成员可在同一工作区与各自智能体一起规划、开发和交付，并共享需求文档、图表、技术规格等上下文层。新加入的成员会自动获得已配置好的上下文，成员之间的智能体也能互相协调工作顺序和阻塞项；该功能正以 beta 形式向 Cursor 全部用户开放。",
+      "tags": [
+        "工具",
+        "Agent",
+        "代码"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_e8faa7eeae",
+          "url": "https://cursor.com/blog/projects-multiplayer"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://cursor.com/blog/projects-multiplayer",
+          "quote": "Today Projects gets a major upgrade: it's now multiplayer."
+        },
+        {
+          "url": "https://cursor.com/blog/projects-multiplayer",
+          "quote": "Invite your teammates into a Project, and you can plan, build and ship together, alongside all of your agents."
+        },
+        {
+          "url": "https://cursor.com/blog/projects-multiplayer",
+          "quote": "Projects is the first workspace where software teams work side by side with all of their agents, with shared context, memory, and documents."
+        },
+        {
+          "url": "https://cursor.com/blog/projects-multiplayer",
+          "quote": "On top of that, Projects adds a shared context system that holds requirements docs, diagrams, tech specs, mockups, and more."
+        },
+        {
+          "url": "https://cursor.com/blog/projects-multiplayer",
+          "quote": "A decision made in one chat is accessible to every agent in the Project."
+        },
+        {
+          "url": "https://cursor.com/blog/projects-multiplayer",
+          "quote": "When a new teammate is invited to a Project, context is pre-configured and up to date, avoiding repetitive setup."
+        },
+        {
+          "url": "https://cursor.com/blog/projects-multiplayer",
+          "quote": "A shared workspace and shared context open up agent-to-agent communication between teammates."
+        },
+        {
+          "url": "https://cursor.com/blog/projects-multiplayer",
+          "quote": "It's rolling out in beta to all users in Cursor starting today."
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Google 扩大 Gemini Intelligence 设备覆盖",
+      "summary": "Google 宣布 Gemini Intelligence 扩展到更多 Android 设备，motorola signature 27 成为摩托罗拉首款支持该功能的机型，Pixel 10 系列也通过 Pixel Drop 获得最新能力。新功能包括用自然语言描述生成主屏小组件的 Create My Widget，以及可协助排查设备问题的 Device Assistance，任务自动化则扩展到英国、印度和日本。",
+      "tags": [
+        "产品",
+        "硬件",
+        "工具"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_6f37bd791c",
+          "url": "https://blog.google/products-and-platforms/platforms/android/gemini-intelligence-november-features-devices/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://blog.google/products-and-platforms/platforms/android/gemini-intelligence-november-features-devices/",
+          "quote": "Gemini Intelligence is now available on more devices, including motorola signature 27 and Pixel 10."
+        },
+        {
+          "url": "https://blog.google/products-and-platforms/platforms/android/gemini-intelligence-november-features-devices/",
+          "quote": "Today, we’re introducing new features built for Gemini Intelligence, and expanding capabilities to more of Android’s most advanced devices ."
+        },
+        {
+          "url": "https://blog.google/products-and-platforms/platforms/android/gemini-intelligence-november-features-devices/",
+          "quote": "Motorola is introducing its first Gemini Intelligence device, motorola signature 27 , which is available for pre-order in the U.S."
+        },
+        {
+          "url": "https://blog.google/products-and-platforms/platforms/android/gemini-intelligence-november-features-devices/",
+          "quote": "And with today’s Pixel Drop , Pixel 10, Pixel 10 Pro XL, and Pixel 10 Pro Fold get the latest features for Gemini Intelligence."
+        },
+        {
+          "url": "https://blog.google/products-and-platforms/platforms/android/gemini-intelligence-november-features-devices/",
+          "quote": "— which lets you ask Gemini to handle logistics like ordering food, hailing rides, or booking reservations across your favorite apps — is expanding to the UK, India, and Japan."
+        },
+        {
+          "url": "https://blog.google/products-and-platforms/platforms/android/gemini-intelligence-november-features-devices/",
+          "quote": ", which is rolling out over the next few weeks, lets you design a personalized widget with a simple description in your own words — no coding required."
+        },
+        {
+          "url": "https://blog.google/products-and-platforms/platforms/android/gemini-intelligence-november-features-devices/",
+          "quote": "Get personalized tech support with Device Assistance Device Assistance"
+        },
+        {
+          "url": "https://blog.google/products-and-platforms/platforms/android/gemini-intelligence-november-features-devices/",
+          "quote": "helps you control, change, or fix your device by just asking your phone for help."
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Claude 上线 Whiteboards、Sheets 与 Data",
+      "summary": "Anthropic 在 Claude 中推出 Claude Whiteboards 和 Claude Sheets 的 beta，并将 Claude Dashboards 正式更名为 Claude Data。Whiteboards 用于团队围绕 Claude 头脑风暴并生成带时间线、负责人和日期的看板，Sheets 可生成带标签页、公式和格式的电子表格，Claude Data 支持数据故事、认证查询和实时共享；这些能力覆盖所有付费方案。",
+      "tags": [
+        "产品",
+        "工具"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_956883dd2d",
+          "url": "https://claude.com/resources/articles/sheets-whiteboards-data"
+        },
+        {
+          "candidate_id": "c_71ae3ecc25",
+          "url": "https://claude.com/resources/articles/more-ways-to-work-with-claude-sheets-whiteboards-and-interactive-connectors"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://claude.com/resources/articles/sheets-whiteboards-data",
+          "quote": "Introducing Claude Whiteboards, Claude Sheets, and Claude Data Now you can brainstorm on whiteboards, build sheets, and share data directly in Claude."
+        },
+        {
+          "url": "https://claude.com/resources/articles/sheets-whiteboards-data",
+          "quote": "Category Product updates Product Claude apps Date November 10, 2026 Reading time 6 min Share Copy link Contents Claude Whiteboards Claude Sheets Claude Data Work in your other tools, too Getting started Today we’re launching Claude Whiteboards and Claude Sheets in beta, and Claude Dashboards (opens"
+        },
+        {
+          "url": "https://claude.com/resources/articles/sheets-whiteboards-data",
+          "quote": "in new tab) becomes generally available as Claude Data."
+        },
+        {
+          "url": "https://claude.com/resources/articles/sheets-whiteboards-data",
+          "quote": "Whiteboards is a shared board where your team brainstorms with Claude, Sheets is a spreadsheet Claude builds and edits with you, and Claude Data adds data stories, certified queries, and live sharing."
+        },
+        {
+          "url": "https://claude.com/resources/articles/sheets-whiteboards-data",
+          "quote": "These are available on all paid plans."
+        },
+        {
+          "url": "https://claude.com/resources/articles/sheets-whiteboards-data",
+          "quote": "Now, you can talk through a messy plan out loud with Claude, and Claude can turn it into a board with a timeline with owners and dates, so you and your team can collaborate in real time."
+        },
+        {
+          "url": "https://claude.com/resources/articles/sheets-whiteboards-data",
+          "quote": "Claude Sheets Claude can now generate spreadsheets with tabs, formulas, formatting, and drop-downs, often from just a prompt like asking for a campaign tracker or a hiring budget."
+        },
+        {
+          "url": "https://claude.com/resources/articles/sheets-whiteboards-data",
+          "quote": "Claude Data Claude Dashboards (opens in new tab) launched in beta in October, enabling teams to ask quick questions of their company’s data in tools like Amazon Redshift, BigQuery, and ClickHouse."
+        },
+        {
+          "url": "https://claude.com/resources/articles/sheets-whiteboards-data",
+          "quote": "Starting today, it’s generally available as Claude Data."
+        },
+        {
+          "url": "https://claude.com/resources/articles/sheets-whiteboards-data",
+          "quote": "Certified queries and live sharing are in beta."
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "MCP Apps 支持完整应用嵌入 Claude",
+      "summary": "Claude 现在支持把合作方的完整应用以全屏或并列方式嵌入对话中，用户可直接操作界面并让 Claude 同时修改页面、表格或文件。交互式连接器构建在 MCP Apps 扩展之上，一个 MCP App 不限于 Claude，也可运行在任何支持该扩展的 AI 应用中；app 工具和嵌入式站点能力面向开发者处于 public preview。",
+      "tags": [
+        "工具",
+        "Agent",
+        "产品"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_9b2b6099f0",
+          "url": "https://claude.com/resources/articles/interactive-connectors-full-tool"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://claude.com/resources/articles/interactive-connectors-full-tool",
+          "quote": "Your apps can now open in Claude, and Claude can work in them Our partners can now embed their apps directly in Claude, so you and Claude can work in the same tool, on the same screen, without switching tabs."
+        },
+        {
+          "url": "https://claude.com/resources/articles/interactive-connectors-full-tool",
+          "quote": "Starting today, where a connector supports it, you can open a tool beside your conversation or expand it to full screen, and ask Claude to work alongside you and make changes directly."
+        },
+        {
+          "url": "https://claude.com/resources/articles/interactive-connectors-full-tool",
+          "quote": "You can ask Claude to make changes to a page, row, or file that you have open and approve its actions the same way you approve a connector’s actions."
+        },
+        {
+          "url": "https://claude.com/resources/articles/interactive-connectors-full-tool",
+          "quote": "For tools like Confluence or Notion, that means you get the full editor, signed into your own account, rather than a limited preview."
+        },
+        {
+          "url": "https://claude.com/resources/articles/interactive-connectors-full-tool",
+          "quote": "For developers: built on MCP Apps Interactive connectors run on MCP Apps, the open extension to the Model Context Protocol (opens in new tab) that lets an MCP server bring its own interface into AI applications."
+        },
+        {
+          "url": "https://claude.com/resources/articles/interactive-connectors-full-tool",
+          "quote": "An MCP App you build isn’t limited to Claude and can run in any AI application that supports the extension (opens in new tab) ."
+        },
+        {
+          "url": "https://claude.com/resources/articles/interactive-connectors-full-tool",
+          "quote": "Claude now supports more of the extension, such as app tools, along with embedded sites, so a developer’s full app can run inside Claude."
+        },
+        {
+          "url": "https://claude.com/resources/articles/interactive-connectors-full-tool",
+          "quote": "Support for these capabilities is in public preview for developers."
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Hugging Face 介绍决策模型与 Transformers 支持",
+      "summary": "Hugging Face 发布决策模型（decision model）介绍文章，说明这类模型以 State + Questions + Allowed Answers → Decisions + Probabilities 的接口替代自回归生成，直接对预定义答案给出概率分布。文章介绍其与分类模型、零样本分类的差异，以及在 Transformers、llama.cpp 服务和 Hub 上的使用方式。",
+      "tags": [
+        "工具",
+        "推理",
+        "模型"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_e8f22730f8",
+          "url": "https://huggingface.co/blog/decision"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/blog/decision",
+          "quote": "November 10, 2026 Update on GitHub Upvote 45 +39 Aritra Roy Gosthipaty ariG23498 Follow Lysandre lysandre Follow Pedro Cuenca pcuenq Follow Tom Aarsen tomaarsen Follow What are decision models?"
+        },
+        {
+          "url": "https://huggingface.co/blog/decision",
+          "quote": "This is the key idea behind decision models ."
+        },
+        {
+          "url": "https://huggingface.co/blog/decision",
+          "quote": "A decision model takes some input context (state), evaluates a question with a set of predefined possible answers (primitives), and returns a structured decision along with probabilities."
+        },
+        {
+          "url": "https://huggingface.co/blog/decision",
+          "quote": "Instead of asking a model to generate an answer token by token, we ask it to assign probabilities to the answers that our application already understands."
+        },
+        {
+          "url": "https://huggingface.co/blog/decision",
+          "quote": "The community has converged to the term decision model , because it describes the model's computational role rather than invoking a particular theory of cognition."
+        },
+        {
+          "url": "https://huggingface.co/blog/decision",
+          "quote": "For a decision model, the fundamental interface is:"
+        },
+        {
+          "url": "https://huggingface.co/blog/decision",
+          "quote": "State + Questions + Allowed Answers → Decisions + Probabilities"
+        },
+        {
+          "url": "https://huggingface.co/blog/decision",
+          "quote": "Decision models extend this idea beyond simply assigning an input to a category."
+        },
+        {
+          "url": "https://huggingface.co/blog/decision",
+          "quote": "The types can be choosing between alternatives (choice), scoring an ordered scale (score), or estimating the probability that a statement is true (noul)."
+        },
+        {
+          "url": "https://huggingface.co/blog/decision",
+          "quote": "The advantage of decision models is not that they invented runtime-defined labels or probabilistic classification."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "LingBot-Touch：跨传感器统一触觉表征",
+      "summary": "Robbyant 等人提出触觉基础模型 LingBot-Touch，在压阻、磁式和视触觉传感器之间学习统一且可扩展的表征。其输出的触觉 token 可即插即用接入扩散策略和 π_{0.5}、LingBot-VLA 等 VLA 模型，并在仿真与多平台真机实验中提升操作灵巧度。",
+      "tags": [
+        "论文",
+        "多模态",
+        "模型"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_1d02ca2175",
+          "url": "https://huggingface.co/papers/2611.12806"
+        },
+        {
+          "candidate_id": "c_d22b7e4e01",
+          "url": "https://huggingface.co/collections/robbyant/lingbot-touch"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.12806",
+          "quote": "Papers arxiv:2611.12806 Learning Heterogeneous Tactile Representation for General Dexterous Manipulation Published on Nov 9 · Submitted by Nan on Nov 10 #1 Paper of the day · Robbyant Upvote 94 +86 Authors: Bing Han , Yichuan Peng , Haoyu Dong , Yuanmeng Hu , Yongyi Jia , Fangjing Wang , Kecheng Zhe"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.12806",
+          "quote": "ng , Yiming Zhang , Yanhong Zeng , Xiaoqing Zhang , Chen Song , Rundong Zou , Anqi Dong , Yuan Guan , Ka Leong Cheng , Xing Zhu , Yujun Shen , Nan Xue , Wei Ning Abstract LingBot-Touch is a tactile foundation model that learns a unified, extensible representation across heterogeneous tactile sensors"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.12806",
+          "quote": ", yielding plug-and-play tactile tokens that consistently enhance manipulation policies such as diffusion policy and VLA models."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.12806",
+          "quote": "To this end, we develop LingBot-Touch, a tactile foundation model characterized by the following properties."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.12806",
+          "quote": "(i) Our model yields a unified representation across different tactile sensors (i.e., piezoresistive, magnetic, and visuotactile sensors), and is easily extensible to new sensor types."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.12806",
+          "quote": "(ii) The resulting tactile tokens are plug-and-play : they can be seamlessly integrated into policy models across paradigms, from diffusion policy to vision-language-action (VLA) models such as π_{0.5} and LingBot-VLA , consistently enhancing manipulation dexterity ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.12806",
+          "quote": "(iii) Extensive experiments, spanning simulation and real-robot deployments across multiple hardware platforms, demonstrate that our tactile representation substantially benefits complex manipulation tasks while maintaining strong computational efficiency."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Sage-Taiyi：面向科学发现的元认知架构",
+      "summary": "上海人工智能实验室提出 Sage-Taiyi，通过显式的监控与控制修订对证据、假设和未解问题的理解，再据此调整研究目标并复用推理方法。在 Taiyi-Bench 上，该系统在历史复现与开放式创想八个指标上均排名第一，Overall 得分 54.0，强于最强基线 AI Scientist-v2 的 47.9。",
+      "tags": [
+        "论文",
+        "Agent",
+        "推理"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_6249004e85",
+          "url": "https://huggingface.co/papers/2611.12762"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.12762",
+          "quote": "Papers arxiv:2611.12762 Copy markdown Sage-Taiyi: A Metacognitive Architecture for Scientific Discovery Published on Nov 9 · Submitted by Weida Wang on Nov 10 #3 Paper of the day · Shanghai AI Laboratory Upvote 54 +46 Authors: Weida Wang , Benteng Chen , Yigeng Jiang , Shuchen Pu , Weiping Shen , Zi"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.12762",
+          "quote": "n - i n s p i r e d a r c h i t e c t u r e t h a t u s e s a c c u m u l a t e d s c i e n t i f i c u n d e r s t a n d i n g t o g u i d e w h a t t o i n v e s t i g a t e n e x t a n d h o w t o i n v e s t i g a t e i t ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.12762",
+          "quote": "T h r o u g h e x p l i c i t m o n i t o r i n g a n d c o n t r o l , t h e s y s t e m r e v i s e s i t s u n d e r s t a n d i n g o f e v i d e n c e , a s s u m p t i o n s , a n d u n r e s o l v e d q u e s t i o n s , t h e n u s e s t h e s e a s s e s s m e n t s t o a d a p t r e s e a"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.12762",
+          "quote": "r c h t a r g e t s a n d s e l e c t r e u s a b l e r e a s o n i n g m e t h o d s ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.12762",
+          "quote": "O n T a i y i - B e n c h , a n A I c o - s c i e n t i s t i d e a t i o n b e n c h m a r k c o m p r i s i n g 2 6 5 t a s k s f r o m 5 0 p a p e r s a c r o s s t e n d i s c i p l i n e s , S a g e - T a i y i r a n k s f i r s t o n a l l e i g h t m e t r i c s o f h i s t o r i c a l r e d"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.12762",
+          "quote": "i s c o v e r y a n d o p e n - e n d e d i d e a t i o n , a c h i e v i n g a n O v e r a l l s c o r e o f 5 4 ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.12762",
+          "quote": "0 c o m p a r e d w i t h 4 7 ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.12762",
+          "quote": "9 f o r t h e s t r o n g e s t b a s e l i n e , A I S c i e n t i s t - v 2 ."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "WorldFoundry：统一世界模型推理与评测基建",
+      "summary": "OpenEnvision 等人发布开源基础设施 WorldFoundry，面向视频、3D/4D、具身动作和交互式系统的世界模型，统一模型与基准发现、运行环境与资产准备、执行编排、产物管理和交互可视化。其目录目前收录 270 个模型条目、74 个基准和 62 个已注册指标，并用清单与证据化评分卡区分可执行状态和评测结论。",
+      "tags": [
+        "论文",
+        "开源",
+        "工具"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_43430aa80d",
+          "url": "https://huggingface.co/papers/2611.10771"
+        },
+        {
+          "candidate_id": "c_29888057f2",
+          "url": "https://arxiv.org/abs/2611.10771"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.10771",
+          "quote": "Papers arxiv:2611.10771 Copy markdown WorldFoundry: Towards Unified Infrastructure for World Intelligence Published on Nov 7 · Submitted by Juanxi Tian on Nov 10 #2 Paper of the day · OpenEnvision Upvote 54 +46 Authors: Juanxi Tian , Jiadong Hou , Baiang Li , Xin Lin , Zhengbo Jiao , Weijia Zhang ,"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.10771",
+          "quote": "Yeying Jin , Truong Nguyen , Haitian Zheng , Zhifei Zhang , Jianfei Yang , Ming-Hsuan Yang , Felix Heide , Wei Xiong , Enze Xie , Wanhua Li Abstract WorldFoundry offers open-source infrastructure for reproducible inference and evaluation of generative world models across video, 3D/4D, embodied actio"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.10771",
+          "quote": "n, and interactive systems, with traceable evidence and benchmarks."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.10771",
+          "quote": "We present WorldFoundry, open-source infrastructure for reproducible inference and evaluation across video , 3D and 4D , embodied action , and interactive world systems ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.10771",
+          "quote": "WorldFoundry unifies model and benchmark discovery, runtime and asset preparation, execution orchestration , artifact management , and interactive visualization , while modality-specific adapters preserve native inputs, execution semantics, output representations, and evaluation protocols."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.10771",
+          "quote": "Explicit manifests, durable artifact contracts, and evidence-aware scorecards separate execution readiness from evaluative claims, making each claim traceable to its supporting artifacts."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.10771",
+          "quote": "The catalog contains 270 model entries, 74 benchmarks, and 62 registered metric entries, with readiness and execution evidence recorded separately."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.10771",
+          "quote": "The current catalog contains 270 model entries, 74 benchmarks, and 62 registered metric entries, with integration readiness and execution evidence recorded separately for each entry."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Reframe：对齐观察状态的多教师在策略蒸馏",
+      "summary": "南京大学提出视觉智能体后训练框架 Reframe，把工具返回的观察状态本身作为对齐对象，分两阶段进行：GD-GRPO 用证据感知奖励和随机丢弃原始视觉输入训练空间与时间专家，OG-MOPD 则在 rollout 中把有缺陷的工具动作替换为标准动作后继续蒸馏。该方法不需要任务特定的 SFT 冷启动，在 14 个图像与视频基准上超过 Mix-RL 和原始 MOPD。",
+      "tags": [
+        "论文",
+        "多模态",
+        "训练"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_aaf794c3c0",
+          "url": "https://huggingface.co/papers/2611.12886"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.12886",
+          "quote": "Papers arxiv:2611.12886 Copy markdown Reframe: Observation-Aligned Multi-Teacher On-Policy Distillation for Agentic Visual Reasoning Published on Nov 9 · Submitted by Haozhi Yuan on Nov 10 · Nanjing University Upvote 38 +30 Authors: Haozhi Yuan , Handong Li , Yifan Zhang , Qianshan Wei Abstract Refr"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.12886",
+          "quote": "ame is a two-stage post-training framework that aligns visual agents’ observation states through evidence-aware reinforcement learning and observation-gated on-policy distillation, improving tool use and outperforming Mix-RL and vanilla MOPD across image and video benchmarks."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.12886",
+          "quote": "We introduce Reframe, a post-training framework that treats the observation state, rather than only the output distribution, as an object of alignment."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.12886",
+          "quote": "First, Ground-Drop-GRPO ( GD-GRPO ) trains spatial and temporal specialists with evidence-aware rewards and stochastic removal of the original visual input, encouraging them to acquire grounded evidence and use the returned observations."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.12886",
+          "quote": "Second, Observation-Gated-MOPD ( OG-MOPD ) replaces deficient tool actions with canonical ones mid-rollout and resumes distillation from the repaired observation."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.12886",
+          "quote": "Neither stage requires a task-specific SFT cold start ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.12886",
+          "quote": "Extensive experiments over 14 image and video benchmarks demonstrate that Reframe outperforms both Mix-RL and vanilla MOPD ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.12886",
+          "quote": "Ablation results show that GD-GRPO increases observation dependence and tool gain compared with outcome-based GRPO ."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Longtail-SWE：13 种冷门语言的 SWE 基准",
+      "summary": "Nebius 团队发布 Longtail-SWE 基准，包含 13 种在现有仓库级基准中覆盖不足的语言（Clojure、Dart、Elixir、Erlang、F#、Haskell、Julia、Kotlin、Lua、OCaml、R、Scala、Swift）的 202 个 issue 修复任务。基准通过 solver–judge–repairer 流水线修订测试与任务描述，团队同时公开了全部任务实例、可执行环境、构建与评测工具以及智能体轨迹。",
+      "tags": [
+        "论文",
+        "代码",
+        "Agent"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_3faefedb98",
+          "url": "https://huggingface.co/papers/2611.10304"
+        },
+        {
+          "candidate_id": "c_45c3a8bd08",
+          "url": "https://longtail-swe.com/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.10304",
+          "quote": "Papers arxiv:2611.10304 Copy markdown Longtail-SWE: High-Quality SWE Tasks for Underrepresented Languages Published on Nov 6 · Submitted by Alexander on Nov 10 · Nebius Upvote 20 +12 Authors: Vladimir Dobrovolskii , Ibragim Badertdinov , Alexander Golubev Abstract C h a l l e n g i n g r e p o s i t"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.10304",
+          "quote": "W e i n t r o d u c e L o n g t a i l - S W E , a b e n c h m a r k o f 2 0 2 i s s u e - r e s o l u t i o n t a s k s a c r o s s 1 3 l a n g u a g e s w i t h l i m i t e d c o v e r a g e i n e x i s t i n g r e p o s i t o r y - l e v e l b e n c h m a r k s : C l o j u r e , D a r t , E l i x"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.10304",
+          "quote": "i r , E r l a n g , F # , H a s k e l l , J u l i a , K o t l i n , L u a , O C a m l , R , S c a l a , a n d S w i f t ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.10304",
+          "quote": "I t s c o n s t r u c t i o n u s e s a s o l v e r - - j u d g e - - r e p a i r e r p i p e l i n e : a s o l v e r a t t e m p t s e a c h c a n d i d a t e t a s k , a n d a j u d g e r e v i e w s t h e t a s k t o g e t h e r w i t h t h e s o l v e r ' s t r a j e c t o r y a n d t e s t r e"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.10304",
+          "quote": "s u l t s t o g u i d e r e v i s i o n s t o t e s t s a n d t a s k d e s c r i p t i o n s ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.10304",
+          "quote": "W e e v a l u a t e n i n e m o d e l c o n f i g u r a t i o n s , i n c l u d i n g f r o n t i e r m o d e l s , a n d a n a l y z e t a s k - s o l v i n g p e r f o r m a n c e , c o n s i s t e n c y a c r o s s r e p e a t e d a t t e m p t s , a n d r e s o u r c e u s a g e ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.10304",
+          "quote": "W e r e l e a s e a l l b e n c h m a r k i n s t a n c e s , e x e c u t a b l e e n v i r o n m e n t s , c o m p l e t e c o n s t r u c t i o n a n d e v a l u a t i o n t o o l i n g , a n d a g e n t t r a j e c t o r i e s , t o g e t h e r w i t h a n a d d i t i o n a l s e t o f e a s i e"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.10304",
+          "quote": "r t a s k s t o s u p p o r t e v a l u a t i o n o f s m a l l e r m o d e l s ."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Deletion Tuning：只删权重也能匹配全量微调",
+      "summary": "论文《The Surprising Effectiveness of Deleting Weights in LLM Post-Training》提出 Deletion Tuning：只在 Transformer block 的 gate projection 上学习一个二值掩码，把少于 0.05% 的权重置零，在强化学习、监督微调和在策略蒸馏三种后训练场景下均匹配全量微调。训练出的掩码比对应的全量微调检查点小数百到数千倍，且在强化学习下对旧任务的遗忘远少于全量微调、LoRA 和随机稀疏微调。",
+      "tags": [
+        "论文",
+        "训练",
+        "推理"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_953a42c917",
+          "url": "https://arxiv.org/abs/2611.10866"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2611.10866",
+          "quote": "Title: The Surprising Effectiveness of Deleting Weights in LLM Post-Training"
+        },
+        {
+          "url": "https://arxiv.org/abs/2611.10866",
+          "quote": "We find that zeroing fewer than 0.05% of its weights, with no other modification, matches full fine-tuning (FFT) at scale across three LLM post-training regimes: reinforcement learning with verifiable rewards, supervised fine-tuning, and on-policy distillation."
+        },
+        {
+          "url": "https://arxiv.org/abs/2611.10866",
+          "quote": "Our method, Deletion Tuning, learns a binary mask over the gate projection of transformer blocks."
+        },
+        {
+          "url": "https://arxiv.org/abs/2611.10866",
+          "quote": "Two practical advantages follow: the trained mask is hundreds to thousands of times smaller than the corresponding FFT checkpoint, and Deletion Tuning forgets far less, which addresses a central challenge in continual learning."
+        },
+        {
+          "url": "https://arxiv.org/abs/2611.10866",
+          "quote": "Under reinforcement learning, its prior-task accuracy stays near the base level while FFT, LoRA, and random sparse fine-tuning lose up to 5.4 points."
+        },
+        {
+          "url": "https://arxiv.org/abs/2611.10866",
+          "quote": "Compared with LoRA and random sparse fine-tuning, Deletion Tuning is closest to FFT across the three measures."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Flide：决策模型的精确分支推理引擎",
+      "summary": "新加坡国立大学团队提出 Flide，一个面向 Jev 类决策模型的精确推理引擎，通过 ForkAttention 把请求的逻辑树结构与扁平 token 流中的物理执行解耦，保证各分支结果与单独前向完全一致。论文报告其在公开的混合与决策模型上查询速度最高可达 vLLM 和 SGLang 的 9.5 倍，同时在总变差距离上最接近 float32 参考实现。",
+      "tags": [
+        "论文",
+        "推理",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_dc5f077b93",
+          "url": "https://huggingface.co/papers/2610.42148"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2610.42148",
+          "quote": "Papers arxiv:2610.42148 Copy markdown Flide: Accelerating Decision Inference with Exact State Forking Published on Oct 30 · Submitted by Li Bobo on Nov 10 · National University of Singapore Upvote 32 +24 Authors: Bobo Li , Jiajia Song , Hao Fei , Wynne Hsu , Mong Li Lee Abstract Flide is an exact in"
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.42148",
+          "quote": "ference engine that accelerates decision-model LLM agents by decoupling logical request trees from physical execution and using ForkAttention to preserve exact branch evaluations."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.42148",
+          "quote": "To address this challenge, we propose Flide, an efficient and exact inference engine that decouples the logical tree structure of a decision request from its physical execution within a single flattened token stream ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.42148",
+          "quote": "Through ForkAttention , Flide navigates request dependencies using GPU-resident indices across both standard attention and recurrent Gated DeltaNet layers , guaranteeing in exact arithmetic that every query branch evaluates identically to an isolated forward pass ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.42148",
+          "quote": "Extensive evaluations on public hybrid and decision models demonstrate that Flide answers queries up to 9.5 times faster than vLLM and SGLang while staying closest to a float32 reference in total variation distance ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.42148",
+          "quote": "We built Flide from scratch, an open-source inference engine for Jev-like decision models."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.42148",
+          "quote": "In our testing, Flide achieves up to 9.5× faster inference than vLLM and SGLang."
+        },
+        {
+          "url": "https://huggingface.co/papers/2610.42148",
+          "quote": "Get started with one line: pip install flide"
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "ReproBridge：把可复现性写进研究产物",
+      "summary": "Google 团队提出 ReproBridge，通过 Specify → Execute → Preserve 流程让智能体把论文与官方仓库整理成精炼的可复现产物，包括精炼代码、环境配置、实验启动脚本和记录决策依据的复现指南。配套的 ReproBridge-Bench 覆盖 36 篇论文的 387 个实验共 1,029 个任务；在四个模型上，精炼产物把平均复现成功率从 76.4% 提升到 92.6%，并使下游 API 支出平均下降 19.7%。",
+      "tags": [
+        "论文",
+        "Agent",
+        "工具"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_d718f7e6fe",
+          "url": "https://huggingface.co/papers/2611.08452"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.08452",
+          "quote": "Papers arxiv:2611.08452 Copy markdown ReproBridge: Building Reproducibility into ML Research Artifacts Published on Nov 5 · Submitted by Yubo Wang on Nov 10 · Google Upvote 30 +22 Authors: Yubo Wang , Rui Meng , Jaehyun Nam , Tomas Pfister , Jinsung Yoon Abstract R e p r o d u c i n g m a c h i n e"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.08452",
+          "quote": "W e d e f i n e a s t a n d a r d i z e d a r t i f a c t d e s i g n c o m p r i s i n g a r e f i n e d c o d e b a s e , e n v i r o n m e n t s e t u p , e x p e r i m e n t l a u n c h e r s , a n d a r e p r o d u c t i o n g u i d e , a n d i n t r o d u c e R e p r o B r i d g e , a n a g e"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.08452",
+          "quote": "n t w o r k f l o w f o r c o n s t r u c t i n g t h e s e r e f i n e d r e p r o d u c i b l e a r t i f a c t s ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.08452",
+          "quote": "R e p r o B r i d g e - B e n c h p r o v i d e s 1 , 0 2 9 t a s k s f r o m 3 8 7 e x p e r i m e n t s a c r o s s 3 6 p a p e r s , a n c h o r e d b y f i v e h u m a n - v e r i f i e d r e f e r e n c e s c o r e s p e r t a s k ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.08452",
+          "quote": "A c r o s s f o u r e v a l u a t e d m o d e l s , r e f i n e d a r t i f a c t s r a i s e m e a n r e p r o d u c t i o n s u c c e s s f r o m 7 6 ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.08452",
+          "quote": "6 % a n d r e d u c e d o w n s t r e a m A P I s p e n d i n g b y 1 9 ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.08452",
+          "quote": "7 % o n a v e r a g e ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.08452",
+          "quote": "ReproBridge: an agent workflow that constructs RRAs from a paper and its official repository (Specify → Execute → Preserve, with an independent Reviewer)."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.08452",
+          "quote": "ReproBridge-Bench: 1,029 tasks from 387 experiments across 36 ICML 2026 papers, each anchored by five human-verified reference scores."
+        }
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "InfraRSI 用智能体优化 LLM 训练基础设施",
+      "summary": "InfraRSI 用五阶段工作流把优化指令变成经验证的训练配置与代码补丁，在单节点与多节点的稠密及 MoE 负载上取得最高 2.75 倍加速。",
+      "tags": [
+        "论文",
+        "训练",
+        "工具"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_be9fa76245",
+          "url": "https://huggingface.co/papers/2611.11558"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.11558",
+          "quote": "Papers arxiv:2611.11558 Copy markdown InfraRSI: Harnessing Recursive Self-Improvement for Training Infrastructure Published on Nov 8 · Submitted by YuchuanTian on Nov 10 · TokenRhythm Upvote 17 +9 Authors: InfraRSI Team , Yuchuan Tian , Haocheng Mei , Ye Yuan , Chao Xu , Boxun Li , Guohao Dai , Kai"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.11558",
+          "quote": "W e p r e s e n t I n f r a R S I , t h e a g e n t i c h a r n e s s t h a t t u r n s o p e n - e n d e d h u m a n c o m m a n d s i n t o v e r i f i e d t r a i n i n g o p t i m i z a t i o n s v i a a f i v e - s t a g e w o r k f l o w : i n i t l o c k s e d i t a b l e s c o p e a n d a f"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.11558",
+          "quote": "i x e d t a s k c o n t r a c t o v e r w o r k l o a d , l o s s , a n d t i m i n g i n v a r i a n t s t o p r e v e n t r e w a r d h a c k i n g , d o c t o r p r o f i l e s b a s e l i n e p h a s e s a n d c a l i b r a t e s c l u s t e r n o i s e , r u n c o - o p t i m i z e s l a u n c"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.11558",
+          "quote": "A c r o s s f o u r s i n g l e - a n d m u l t i - n o d e d e n s e a n d M i x t u r e - o f - E x p e r t s ( M o E ) L L M w o r k l o a d s , I n f r a R S I a c h i e v e s a s p e e d u p o f u p t o 2 ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.11558",
+          "quote": "7 5 t i m e s a n d l i f t s m e a n M o d e l F L O P s U t i l i z a t i o n ( M F U ) f r o m 1 7 ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.11558",
+          "quote": "0 % , o u t p e r f o r m i n g e x i s t i n g t u n e r s a n d c o d i n g a g e n t s w h i l e t r a n s f e r r i n g e x p e r i e n c e a c r o s s G P U s ."
+        }
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "Latent Space 实测 Naive-N0.5-Flash 编码速度",
+      "summary": "Latent Space 实测显示，Naive-N0.5-Flash 思考模式吞吐接近或超过 1,000 tokens per second，但难题平均完成 token 更多、单位问题成本略高。",
+      "tags": [
+        "模型",
+        "代码",
+        "推理"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_ce73ef3781",
+          "url": "https://latent.space/p/naiveai/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://latent.space/p/naiveai/",
+          "quote": "Naive-N0.5-Flash is a new open-weights model built for AI coding tasks and tuned to generate as many tokens per second as possible ."
+        },
+        {
+          "url": "https://latent.space/p/naiveai/",
+          "quote": "The model is an evolution of Xiaomi’s MiMo-V2.5 , which NaiveAI has trained further for long-context reasoning and paired with its own NaiveRT inference engine."
+        },
+        {
+          "url": "https://latent.space/p/naiveai/",
+          "quote": "Graphic by Gabriele Beltramo Key observations Naive-N0.5-Flash reports exceptionally high throughput , approaching or passing 1,000 tokens per second in both thinking configurations."
+        },
+        {
+          "url": "https://latent.space/p/naiveai/",
+          "quote": "Because its figures are server-side and the other models' figures come from OpenRouter, we do not claim an exact speed multiple over DeepSeek V4.1 Flash 1017 or GLM 5.3 Flash."
+        },
+        {
+          "url": "https://latent.space/p/naiveai/",
+          "quote": "On the hard HLE questions, Naive-N0.5-Flash with thinking on averaged about 108,500 completion tokens, roughly nine times the GLM 5.3 Flash (high) average and 11 times the DeepSeek V4.1 Flash 1017 (high) average."
+        },
+        {
+          "url": "https://latent.space/p/naiveai/",
+          "quote": "The median question took 3.1 seconds with Naive-N0.5-Flash (thinking), against 5.3 seconds for GLM 5.3 Flash (high) and 10.1 seconds for DeepSeek V4.1 Flash 1017 (high)."
+        }
+      ]
+    }
+  ],
+  "research": [
+    {
+      "via": "webfetch",
+      "url": "https://claude.com/resources/articles/sheets-whiteboards-data"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://deepmind.google/blog/introducing-alphaproof-code/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://claude.com/resources/articles/interactive-connectors-full-tool"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://blog.google/products-and-platforms/platforms/android/gemini-intelligence-november-features-devices/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://www.anthropic.com/news/roadshow-launch"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://www.microsoft.com/en-us/research/blog/lazare-veni-foras-reprogramming-dormant-neurons-to-backdoor-ai-agents/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://www.minimax.io/blog/minimax-h3-image"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://openai.com/index/introducing-businesses-chatgpt"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://cursor.com/blog/projects-multiplayer"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.12806"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.10771"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.10304"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.08452"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2610.42148"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.12762"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.12886"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.11558"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://arxiv.org/abs/2611.10866"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://mp.weixin.qq.com/s/J_zbVHa2R3mmY5KD4v3-bw"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://deepmind.google/blog/gemini-4-carbon-is-now-available/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/blog/decision"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://latent.space/p/naiveai/"
+    }
+  ],
+  "validation": {
+    "validated_at": "2026-11-11T04:46:23+00:00",
+    "checked_links": true,
+    "dropped": [],
+    "warnings": [
+      "19 items, more than 18 (expected about 15)",
+      "8 paper items (target 2-4)"
+    ]
+  }
+}
