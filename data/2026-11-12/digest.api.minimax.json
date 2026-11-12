@@ -1,0 +1,922 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-12",
+  "mode": "full",
+  "generated_at": "2026-11-12T04:48:14+00:00",
+  "channel": "api",
+  "model": "nvidia:minimaxai/minimax-m3.1-flash",
+  "highlights": [
+    "Google 发布 Gemini Decisions API，用 Gemini Decision 1 在一次前向中为最多 1,000 个封闭集问题打分并返回置信度，面向路由、策略检查和内容评分。",
+    "华为开源 MXFP4 W4A4 后训练量化方法 MACaQ，逐层独立量化，Qwen3-32B 在 vLLM 上相对纯 MXFP4 仅增加 2.3% 端到端开销。",
+    "Tree-Ising 把语言模型权重修复建模为 BF16 位级 Ising/QUBO 优化问题，在 MATH-500 上以 54.6% 超过 agent 直接改权重的 51.7%，且只需 4 次前向、零 LLM token。"
+  ],
+  "items": [
+    {
+      "section": "headline",
+      "title": "Google 发布 Gemini Decisions API",
+      "summary": "Google 推出新的 Gemini Decisions API 端点，由 Gemini Decision 1 模型驱动，可在单次前向中对文本、图像、音频、视频和 PDF 做封闭集判断。每次请求可带最多 256K tokens 输入和 1,000 个独立问题，返回概率与 0 到 1 的置信度，可直接用于工具选择、模型路由、策略检查和内容评分。",
+      "tags": [
+        "工具",
+        "产品",
+        "推理"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_4b7190847a",
+          "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/",
+          "quote": "Today, we’re introducing the Gemini Decisions API, a new endpoint for fast, closed-set decisions powered by our new Gemini Decision 1 model (gemini-decision-1), available through the Gemini API in Google AI Studio ."
+        },
+        {
+          "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/",
+          "quote": "The Decisions API gives you purpose-built primitives for bounded choices like tool selection, policy checks, model routing, and context grading."
+        },
+        {
+          "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/",
+          "quote": "You can pass one multimodal input across text, images, audio, video, and PDFs (up to 256K tokens) along with up to 1,000 independent questions."
+        },
+        {
+          "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/",
+          "quote": "Rather than generating answer text token by token, Gemini Decision 1 scores your candidate options in a single forward pass, returning probabilities and confidence scores in 150-250 ms end-to-end latency at $0.10 per 1M input tokens with zero output tokens billed."
+        },
+        {
+          "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/",
+          "quote": "Every answer includes a confidence score (from 0 to 1) so your code can route ambiguous cases to a fallback or human reviewer: noul (Yes/No): Estimates the probability that a yes/no condition holds, with optional true and false description criteria."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "华为开源 W4A4 量化方法 MACaQ",
+      "summary": "华为 HUAWEI Computing Systems Lab 开源 MACaQ，一种 MXFP4 W4A4 后训练量化方法，对每个线性层独立处理，用在线 block-Hadamard 变换激活并把逆变换吸收进权重。它在 Qwen3-32B 的 vLLM 推理中相对纯 MXFP4 只增加 2.3% 端到端开销，并在 64 分钟、仅用 32.5GB GPU RAM 的条件下完成 122B 参数模型量化。",
+      "tags": [
+        "开源",
+        "推理",
+        "工具"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_4369998f73",
+          "url": "https://huggingface.co/papers/2611.10649"
+        },
+        {
+          "candidate_id": "c_b2ef51a147",
+          "url": "https://github.com/huawei-csl/MACaQ"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.10649",
+          "quote": "We introduce MACaQ, an MXFP4 W4A4 post-training quantization method that treats every linear layer independently."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.10649",
+          "quote": "MACaQ applies a per-channel scale and a block-Hadamard transform online to each layer's activations, while absorbing the corresponding inverse transforms into its weights."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.10649",
+          "quote": "Retaining these transforms online avoids cross-layer dependencies and enables a simple streaming implementation of the quantization process, in which only one layer must reside in memory at a time."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.10649",
+          "quote": "Despite executing the activation transforms at inference time, MACaQ adds only 2.3% end-to-end overhead over pure MXFP4 on Qwen3-32B in vLLM ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.10649",
+          "quote": "We further apply MACaQ without architecture-specific modifications to an image diffusion model , illustrating the generality of its layer-local design and show quantization of a 122B parameter model in 64 minutes, using only 32.5GB GPU RAM."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.10649",
+          "quote": "My team at Huawei-CSL is open sourcing 🐵 MACAQ, the quantizer we’ve been using internally over the past few months."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.10649",
+          "quote": "Code is available here https://github.com/huawei-csl/MACaQ under the Apache 2.0 license!"
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Tree-Ising 用位级 Ising 优化修复模型权重",
+      "summary": "Tree-Ising 把语言模型的权重修复写成 BF16 参数上的稀疏 Ising/QUBO 问题，每个输出行独立求解，可用 GPU 上的模拟退火或模拟分岔完成。在两个被修复层上它在 MATH-500 得到 54.6%，高于 agent 直接改动的 51.7%，且只需 4 次前向请求、零 LLM token，GPU 时间约 $0.90。",
+      "tags": [
+        "论文",
+        "推理",
+        "工具"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_c0ca624872",
+          "url": "https://huggingface.co/papers/2611.14210"
+        },
+        {
+          "candidate_id": "c_481abc707e",
+          "url": "https://arxiv.org/abs/2611.14210"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.14210",
+          "quote": "Our method, Tree-Ising, casts this repair as a sparse discrete optimization problem over the model's own BF16 weights ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.14210",
+          "quote": "We decompose this objective exactly into independent QUBO (Ising) problems, one per output row , which we solve on a GPU using simulated annealing or quantum-inspired simulated bifurcation ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.14210",
+          "quote": "On the agent's two layers, Tree-Ising achieves 54.6% on MATH-500 , outperforming the agent's edit (51.7%) under the same evaluation protocol, while the base model scores 7.9% as reported."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.14210",
+          "quote": "The simulated bifurcation solver yields a statistically indistinguishable repair at 55.1%."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.14210",
+          "quote": "It requires only four forward-pass requests and zero LLM tokens, with the annealing recipe costing about $0.90 in GPU time."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "WaveGen 实现端到端文本到波形生成",
+      "summary": "WaveGen 是完全端到端的扩散式文本到波形框架，通过 Spectral Forcing 在单一模型内联合学习频谱轨迹与波形轨迹，不依赖神经音频编解码器、Mel-spectrogram vocoder、VAE 潜变量模型或时长预测器等外部模块。作者同时验证了从 0.1B 到 0.6B 参数规模的扩展性，并在 Seed-en 上达到 WER 1.47、SIM 0.75。",
+      "tags": [
+        "论文",
+        "语音",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_a2295a9821",
+          "url": "https://huggingface.co/papers/2611.12527"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.12527",
+          "quote": "Generated by deepseek-ai/DeepSeek-V4.1-Flash This work proposes WaveGen, a fully end-to-end diffusion-based text-to-waveform framework based on Spectral Forcing , which jointly learns an internal spectral trajectory and the target waveform trajectory within a single model, enabling direct end-to-end"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.12527",
+          "quote": "Unlike recent TTS pipelines , WaveGen does not rely on separately trained or externally decoded intermediate representations, such as neural audio codecs , Mel-spectrogram vocoders , or VAE-based latent models ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.12527",
+          "quote": "In addition, WaveGen performs internal text-speech alignment within a single model, eliminating the need for external alignment modules such as duration predictors ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.12527",
+          "quote": "To preserve a truly end-to-end formulation, our framework further avoids dependence on self-supervised representations , such as BERT-based text embeddings and Wav2Vec 2.0-based semantic representations , as well as semantic distillation methods for training optimization."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.12527",
+          "quote": "We further validate the scalability of end-to-end TTS models by scaling the model size from 0.1B to 0.6B parameters."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.12527",
+          "quote": "In particular, WaveGen achieves a WER of 1.47 and a SIM of 0.75 on the Seed-en benchmark."
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Tether 发布端侧 Agent 模型 BotPsy",
+      "summary": "Tether AI Research 发布 BotPsy，一款基于 Qwen3.5-0.8B 的 0.8B 参数模型，面向函数调用和端侧 Agent 工作流，覆盖搜索、旅行、电商、设备控制、日历与邮件等场景。作者称其在六项工具使用与 Agent 基准上超过所有不超过 1.2B 参数的对比模型，权重将以 Apache 2.0 许可发布，提供 bf16、Q8、Q4 三种精度及 GGUF 文件。",
+      "tags": [
+        "模型",
+        "Agent",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_0993614045",
+          "url": "https://huggingface.co/blog/qvac/botpsy"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/blog/qvac/botpsy",
+          "quote": "Tether AI Research introduces BotPsy , a 0.8B-parameter model introduce BotPsy , a 0.8B-parameter model designed for function calling and agentic workflows, built on top of Qwen3.5-0.8B and suitable for on-device deployment."
+        },
+        {
+          "url": "https://huggingface.co/blog/qvac/botpsy",
+          "quote": "BotPsy is a \"personal assistant\" that uses tools to perform a variety of simple tasks for the user, in domains such as web search & research, travel & lifestyle, commerce & finance, business & customer operations, device & vehicle control, files & documents, calendar, and email & messaging."
+        },
+        {
+          "url": "https://huggingface.co/blog/qvac/botpsy",
+          "quote": "BotPsy achieves state-of-the-art (SOTA) tool-use and agentic performance for its size, outperforming every model of up to 1.2B parameters that we tested (Figures 1 and 2)."
+        },
+        {
+          "url": "https://huggingface.co/blog/qvac/botpsy",
+          "quote": "Best agent in its category: BotPsy outperforms leading models in the ≤1.2B-parameter weight class (Qwen3.5-0.8B-Think, LFM2.5-1.2B-Think, MiniCPM5-1B-Think) on all six tool-use and agentic benchmarks: BFCL v4, ACEBench, τ-bench, ToolSandbox, Claw-Eval and BrowseComp-Plus."
+        },
+        {
+          "url": "https://huggingface.co/blog/qvac/botpsy",
+          "quote": "Open-source and ready to use: BotPsy will be released with open weights under the Apache 2.0 license for research and educational use."
+        },
+        {
+          "url": "https://huggingface.co/blog/qvac/botpsy",
+          "quote": "It will be available in three precisions (bf16, Q8, Q4), as Hugging Face safetensors and as GGUF files for the QVAC SDK and llama.cpp."
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Zyphra 发布端侧语音模型 ZONOS3-Mini",
+      "summary": "Zyphra 的 ZONOS3-Mini 是一个紧凑的开源文本转语音模型，总参数 800M、每 token 约 100M 激活参数，支持 43 种语言与高保真声音克隆，可在手机、笔记本乃至浏览器 WebGPU 中实时运行。模型提供 GGUF 权重，Apache 2.0 许可，并可用 llama.cpp、SGLang-Omni 等运行时以 OpenAI 兼容接口提供流式语音。",
+      "tags": [
+        "模型",
+        "语音",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_30fdfa7f28",
+          "url": "https://huggingface.co/Zyphra/ZONOS3-Mini"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/Zyphra/ZONOS3-Mini",
+          "quote": "ZONOS3-Mini is Zyphra’s compact, open-source text-to-speech model, delivering natural reliable speech and high-fidelity voice"
+        },
+        {
+          "url": "https://huggingface.co/Zyphra/ZONOS3-Mini",
+          "quote": "cloning with just 100 million active parameters."
+        },
+        {
+          "url": "https://huggingface.co/Zyphra/ZONOS3-Mini",
+          "quote": "It runs in real time on phones and laptops, including directly in the browser."
+        },
+        {
+          "url": "https://huggingface.co/Zyphra/ZONOS3-Mini",
+          "quote": "under Apache 2.0."
+        },
+        {
+          "url": "https://huggingface.co/Zyphra/ZONOS3-Mini",
+          "quote": "ZONOS3-Mini supports 43 languages."
+        },
+        {
+          "url": "https://huggingface.co/Zyphra/ZONOS3-Mini",
+          "quote": "ZONOS3-Mini runs entirely on your own GPU through WebGPU: no install and no server."
+        },
+        {
+          "url": "https://huggingface.co/Zyphra/ZONOS3-Mini",
+          "quote": "SGLang-Omni serves ZONOS3-Mini on NVIDIA GPUs behind the OpenAI-compatible"
+        },
+        {
+          "url": "https://huggingface.co/Zyphra/ZONOS3-Mini",
+          "quote": "11 layers, model dim 1,024; 800M parameters total, about 100M active per token (latent MoE: 64 experts, top-2 routing, from layer 1)"
+        },
+        {
+          "url": "https://huggingface.co/Zyphra/ZONOS3-Mini",
+          "quote": "GGUF Model size 0.9B params Architecture zonos3 Hardware compatibility Log In to add your hardware We're not able to determine the quantization variants."
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "DeepMind 发布 DNA 模型 AlphaGenome 2",
+      "summary": "Google DeepMind 推出 AlphaGenome 2，这是一个以特定生物条件为输入的条件模型，可预测 DNA 序列及其变异对具体人类细胞类型的影响，训练数据包含超过 100 million 个细胞谱。它能在新单细胞数据上直接泛化而不必重训，并在 TenK10K 数据集上识别出 30% 的因果变异，高于原版微调模型的 16%；目前通过 AlphaGenome API 提供非商业研究使用。",
+      "tags": [
+        "模型",
+        "论文",
+        "多模态"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_25575f3581",
+          "url": "https://deepmind.google/blog/alphagenome-2-deciphering-how-cells-read-dna-to-better-understand-disease/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://deepmind.google/blog/alphagenome-2-deciphering-how-cells-read-dna-to-better-understand-disease/",
+          "quote": "Today, we are announcing AlphaGenome 2, our next-generation model that predicts how DNA sequences and their variations impact specific human cell types, giving scientists a powerful new tool to uncover the cellular drivers of disease."
+        },
+        {
+          "url": "https://deepmind.google/blog/alphagenome-2-deciphering-how-cells-read-dna-to-better-understand-disease/",
+          "quote": "By zooming in from broad tissue averages to individual cell types and cell states, and redesigning the model’s architecture, AlphaGenome 2 represents a step-change improvement in variant predictive performance."
+        },
+        {
+          "url": "https://deepmind.google/blog/alphagenome-2-deciphering-how-cells-read-dna-to-better-understand-disease/",
+          "quote": "Trained on more than 100 million individual cell profiles across 68 tissues, the model turns static cell atlases into a predictive engine for human genetics."
+        },
+        {
+          "url": "https://deepmind.google/blog/alphagenome-2-deciphering-how-cells-read-dna-to-better-understand-disease/",
+          "quote": "AlphaGenome 2 is available today for non-commercial research via the AlphaGenome API, and in private preview for commercial research."
+        },
+        {
+          "url": "https://deepmind.google/blog/alphagenome-2-deciphering-how-cells-read-dna-to-better-understand-disease/",
+          "quote": "We trained AlphaGenome 2 on both bulk and single-cell data from human and mouse samples, including over 107 million individual cell profiles."
+        },
+        {
+          "url": "https://deepmind.google/blog/alphagenome-2-deciphering-how-cells-read-dna-to-better-understand-disease/",
+          "quote": "Improved variant effect prediction On the TenK10K dataset, a large single-cell map of 28 primary immune cell types, AlphaGenome 2 reliably identified nearly twice as many causal variants (30% vs."
+        },
+        {
+          "url": "https://deepmind.google/blog/alphagenome-2-deciphering-how-cells-read-dna-to-better-understand-disease/",
+          "quote": "16%) and directional gene effects (43% vs."
+        },
+        {
+          "url": "https://deepmind.google/blog/alphagenome-2-deciphering-how-cells-read-dna-to-better-understand-disease/",
+          "quote": "23%) as the original AlphaGenome fine-tuned on single-cell data and other specialized tools."
+        },
+        {
+          "url": "https://deepmind.google/blog/alphagenome-2-deciphering-how-cells-read-dna-to-better-understand-disease/",
+          "quote": "Analyzing new cell types and states without retraining AlphaGenome 2 can also generalize to entirely new single-cell experiments without needing to be retrained."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "清华提出少步流式视频生成方法 APEX",
+      "summary": "清华团队把 APEX 扩展到流式视频生成，用 condition shifting 让生成器与 fake 估计器共享同一套参数，从而去掉 DMD 中独立的 fake-score 网络。在 180 秒视频上，APEX 相对 S2-Avatar 在指令遵循上获得 +30.0% 的净人工偏好，在匹配训练设置下比 DMD 少用 4.4% 峰值 GPU 显存、平均迭代时间短 9.2%。",
+      "tags": [
+        "论文",
+        "视频",
+        "训练"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_04dc57421a",
+          "url": "https://huggingface.co/papers/2611.14033"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.14033",
+          "quote": "Generated by deepseek-ai/DeepSeek-V4.1-Flash Few-step sampling reduces the cost of streaming video generation ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.14033",
+          "quote": "We extend APEX to streaming video by using condition shifting to estimate the velocity field of the generated distribution within the generator."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.14033",
+          "quote": "The original text condition selects generation, while a shifted condition selects fake estimation using the same parameters."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.14033",
+          "quote": "This removes the independent fake network while retaining S2-Avatar 's frozen reference teacher , Self-Replay Forcing , and perceptual regularization ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.14033",
+          "quote": "We evaluate APEX on 180-second videos using three backbone evaluations per block and a one-step spatial Refiner , with a 70-case human study and a 320-case StreamAV-Bench comparison."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.14033",
+          "quote": "Human raters favor APEX most strongly on instruction following, with +30.0% net preference, followed by consistency and video quality at +4.3% each."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.14033",
+          "quote": "Separate measurements under matched training settings show 4.4% lower peak allocated GPU memory per GPU and 9.2% shorter mean iteration time than DMD ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.14033",
+          "quote": "On 180-second videos , APEX achieves +30.0% net human preference for instruction following over S2-Avatar."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.14033",
+          "quote": "Under matched training settings, it reduces peak GPU memory by 4.4% and average iteration time by 9.2% compared with DMD."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "KAIST 提出证据链接记忆系统 WikiTrace",
+      "summary": "KAIST AI 提出的 WikiTrace 让 Agent 的每条经验都与来源轨迹和成败原因相连，Agent 在经验细节不足、彼此冲突或源自失败任务时，可沿链接下钻到原始轨迹再行动。作者在五个 Agent 基准上验证，该方法持续优于既有记忆方案与只给同样经验的基线，同时缓解记忆引发的能力退化。",
+      "tags": [
+        "论文",
+        "Agent",
+        "工具"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_7a3b1b2f65",
+          "url": "https://huggingface.co/papers/2611.14320"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.14320",
+          "quote": "Generated by deepseek-ai/DeepSeek-V4.1-Flash External memory enables LLM agents to improve from experience by distilling trajectories of past tasks into concise lessons for new tasks."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.14320",
+          "quote": "However, memory can also lead to memory-induced degradation , where an agent fails on tasks it would solve without memory, often because it follows a lesson that is incorrect, or misapplies or misreads a valid one."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.14320",
+          "quote": "To address this, we introduce WikiTrace, an evidence-linked memory system designed to let agents check each lesson against its original trajectory."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.14320",
+          "quote": "Specifically, motivated by the finding that a trajectory often still holds the evidence needed to catch an erroneous lesson, WikiTrace stores each lesson as a concise insight linked to a summary of why its trajectory succeeded or failed and to the raw trajectory itself."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.14320",
+          "quote": "Then, on a new task, the agent starts from all insights and, whenever one lacks details needed to act, conflicts with another, or comes from a failed task, descends through its links with terminal tools to fill in missing details or correct the insight before acting."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.14320",
+          "quote": "We validate WikiTrace on five agentic benchmarks , showing that it consistently outperforms existing memory approaches and a baseline given the same insights alone, while also reducing memory-induced degradation ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.14320",
+          "quote": "Across five benchmarks, WikiTrace scored 3.2 points higher on average than using the same lessons alone."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "RoboScript 用上下文学习机器人操作任务",
+      "summary": "ArcheOne-AI 提出 World In-Context Learning（WICL）：冻结模型从单次演示出发，在仿真环境中排练任务，把反馈写进上下文而非权重，并冻结为 Task Memory。其 RoboScript 系统在 RoboTwin 2.0 全部 50 个任务上平均成功率达 83.4%，不做梯度更新，比最强训练式动作策略高出 20 分以上，代码已开源。",
+      "tags": [
+        "论文",
+        "Agent",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_52811214f1",
+          "url": "https://huggingface.co/papers/2611.12885"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.12885",
+          "quote": "Based on this insight, we propose World In-Context Learning (WICL), a paradigm in which a frozen model starts from a demonstration, rehearses the task in a world such as a simulator, and writes the feedback into its context rather than its weights."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.12885",
+          "quote": "From a single demonstration, RoboScript learns each task through rehearsal in simulation, freezes the learned knowledge as a Task Memory, and deploys the frozen memory on new scenes with data isolation that ensures every deployment input is available on a real robot."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.12885",
+          "quote": "On all 50 tasks of RoboTwin 2.0, RoboScript reaches 83.4% mean success across clean and randomized settings with one demonstration per task and no gradient updates, exceeding the strongest trained action policy by over 20 points."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.12885",
+          "quote": "The method generalizes across visual distributions, improves through reflection, scales with the foundation model, and transfers to a physical dual-arm robot through cross-embodiment memory adaptation."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.12885",
+          "quote": "With a world in the loop, a robot can learn a manipulation task in its context as well as it learns one in its weights."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.12885",
+          "quote": "All code is available."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Embodied First Exam 评测编码 Agent 控制机器人",
+      "summary": "MLL Lab 提出面向编码 Agent 的机器人评测框架 Embodied First Exam，Agent 可自选直接控制、写代码控制或训练策略三种方式，涵盖 1,156 个任务、35 个套件和 47 台机器人。在 456 个核心任务上，八个 Agent 中最强的 GPT-6 Astra in Codex 在最贴近真实世界的 Standard Setting 下成功率仅为 34%。",
+      "tags": [
+        "论文",
+        "Agent",
+        "代码"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_76ffb78916",
+          "url": "https://huggingface.co/papers/2611.12177"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.12177",
+          "quote": "W e t h e r e f o r e i n t r o d u c e t h e E m b o d i e d F i r s t E x a m , a u n i f i e d , c o m p r e h e n s i v e , a n d a g e n t - n a t i v e e v a l u a t i o n f r a m e w o r k w h e r e c o d i n g a g e n t s c a n c h o o s e t h e i r o w n c o n t r o l a p p r o a c h : d i"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.12177",
+          "quote": "r e c t c o n t r o l , c o d e t o c o n t r o l , o r t r a i n a p o l i c y t o c o n t r o l ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.12177",
+          "quote": "W e h o p e i t s e r v e s a s a f i r s t e x a m f o r c o d i n g a g e n t s b e f o r e t h e y e n t e r t h e p h y s i c a l w o r l d , w i t h 1 , 1 5 6 t a s k s i n 3 5 s u i t e s o n 4 7 r o b o t s , i n c l u d i n g 9 n e w s u i t e s t h a t g o b e y o n d p i c k - a n d - p l"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.12177",
+          "quote": "E a c h t a s k c a n b e r u n i n u p t o t h r e e e v a l u a t i o n s e t t i n g s ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.12177",
+          "quote": "T h e S t a n d a r d S e t t i n g m i m i c s t h e r e a l w o r l d : t h e a g e n t r e c e i v e s o n l y s e n s o r o b s e r v a t i o n s a n d , b y d e f a u l t , c a n n o t r e s e t t h e e n v i r o n m e n t ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.12177",
+          "quote": "O n t h e 4 5 6 c o r e t a s k s , t h e s t r o n g e s t o f e i g h t a g e n t s , G P T - 6 A s t r a i n C o d e x , a c h i e v e s a s u c c e s s r a t e o f 3 4 % i n t h e S t a n d a r d S e t t i n g , l e a v i n g m u c h r o o m f o r i m p r o v e m e n t ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.12177",
+          "quote": "Scale: 1,156 tasks · 35 suites · 47 robots, including 9 new suites that go beyond pick-and-place: spatial puzzles, dexterous manipulation, multi-robot interaction, dynamic whole-body control, and sim-to-sim engineering."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.12177",
+          "quote": "📉 Result: On the 456 core tasks, the best of 8 agents ( GPT-6 Astra in Codex ) reaches only 34% in the Standard Setting."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "FINCOSMOS 评测金融 Agent 的静默失败",
+      "summary": "The Fin AI 提出开放世界评测范式 FINCOSMOS：模拟用户持有隐藏策略，Agent 必须自行从 Web 获取数据、在数据截止点前构建回测并交付可验证结果，评分由程序逐项核对。跨四个编码 Agent 和一个无工具模型共 150 次会话，没有一次被接受，所有被模拟用户认可的会话都未通过程序检查。",
+      "tags": [
+        "论文",
+        "Agent",
+        "安全"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_3251d37cba",
+          "url": "https://huggingface.co/papers/2611.07464"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.07464",
+          "quote": "W e i n t r o d u c e F I N C O S M O S , a n o p e n - w o r l d e v a l u a t i o n p a r a d i g m f o r a g e n t s d o i n g f i n a n c i a l w o r k ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.07464",
+          "quote": "A s i m u l a t e d u s e r h o l d s a h i d d e n s t r a t e g y s a m p l e d f r o m a c o m p o s i t i o n a l g r a m m a r a n d r e v e a l s i t o n l y w h e n a s k e d ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.07464",
+          "quote": "T h e a g e n t r e c e i v e s n o d a t a , s o i t m u s t a c q u i r e d a t a f r o m t h e W e b , b u i l d i t s o w n b a c k t e s t u n d e r a d a t a c u t o f f , a n d d e l i v e r v e r i f i a b l e r e s u l t s ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.07464",
+          "quote": "G r a d i n g n e e d s n o r e f e r e n c e a n s w e r ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.07464",
+          "quote": "w h e n t h e u s e r i s s a t i s f i e d a n d n o n e o f 1 5 v e t o c h e c k s f a i l s ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.07464",
+          "quote": "A c r o s s f o u r c o d i n g a g e n t s a n d a m o d e l w i t h o u t t o o l s i n 1 5 0 s e s s i o n s , n o s e s s i o n i s a c c e p t e d : e v e r y s e s s i o n t h a t t h e s i m u l a t e d u s e r s i g n e d o f f f a i l s a p r o g r a m c h e c k , a n d a g e n t s r a i s"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.07464",
+          "quote": "View arXiv page View PDF Project page Add to collection Community YupengCao Paper author Paper submitter about 21 hours ago • edited about 21 hours ago 🚀 The User Signed Off."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.07464",
+          "quote": "Can We Trust AI Agents with Financial Work?"
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "LongCat 推出离散视觉表示模型 dNaViT",
+      "summary": "LongCat 的 dNaViT 是一种原生分辨率的离散视觉 Transformer，在冻结的预训练编码器上用残差调制和双分支目标注入重建信息，并通过分组乘积量化扩展离散容量而不拉长空间序列。作者称它在 12 个视觉理解基准、4 个生成基准和一个图像编辑基准上达到或超过任务专用基线，可作为通用视觉 tokenizer 使用。",
+      "tags": [
+        "论文",
+        "多模态",
+        "图像"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_985e8391d0",
+          "url": "https://huggingface.co/papers/2611.12426"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.12426",
+          "quote": "We present dNaViT, a Discrete Native-resolution Vision Transformer that produces discrete visual primitives analogous to language tokens ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.12426",
+          "quote": "Built upon a frozen pretrained encoder , dNaViT applies lightweight residual modulation with a dual-branch objective to inject reconstruction-aware cues into semantic features."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.12426",
+          "quote": "By leveraging grouped product quantization , it scales discrete capacity without inflating spatial sequence lengths , while a balanced training recipe maintains both semantic and pixel-level information."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.12426",
+          "quote": "Consequently, dNaViT functions as a versatile discrete visual tokenizer , enabling unified encoding across downstream tasks alongside high-fidelity image decoding ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.12426",
+          "quote": "Extensive evaluations show that dNaViT matches or exceeds task-specific baselines across 12 visual understanding benchmarks, 4 generation benchmarks, and an image editing benchmark."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.12426",
+          "quote": "View arXiv page View PDF Project page Add to collection Community XiaotongLi97 Paper submitter 1 day ago We introduce dNaViT: Discrete Codes are General-Purpose Visual Representations."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.12426",
+          "quote": "Its shared discrete visual codes support high-fidelity reconstruction, visual understanding, generation, and editing."
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "OpenAI 开源 Codex Security 扫描工具",
+      "summary": "OpenAI 的 codex-security 仓库提供 CLI 与 TypeScript SDK，可扫描仓库、指定路径或代码变更，验证候选漏洞、生成补丁并核对已有修复，还能起草 SECURITY.md 策略和保存威胁模型。结果可按严重程度分级、建议责任人，并以 SARIF、JSON、CSV 导出，便于接入 CI 与 Linear、Jira、GitHub 等工作流。",
+      "tags": [
+        "开源",
+        "安全",
+        "代码",
+        "工具"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_60b4017b3f",
+          "url": "https://github.com/openai/codex-security"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/openai/codex-security",
+          "quote": "codex-security Public Notifications You must be signed in to change notification settings Fork 945 ( 945 ) Star 11.9k ( 11.9k ) You must be signed in to star a repository About OpenAI's Codex Security CLI and TypeScript SDK for finding, validating, and fixing security vulnerabilities."
+        },
+        {
+          "url": "https://github.com/openai/codex-security",
+          "quote": "Codex Security helps you find, investigate, and fix vulnerabilities in your code."
+        },
+        {
+          "url": "https://github.com/openai/codex-security",
+          "quote": "Use its security workflows in Codex, or automate them with the"
+        },
+        {
+          "url": "https://github.com/openai/codex-security",
+          "quote": "@openai/codex-security CLI and TypeScript SDK."
+        },
+        {
+          "url": "https://github.com/openai/codex-security",
+          "quote": "Scan repositories, selected paths, or Git changes."
+        },
+        {
+          "url": "https://github.com/openai/codex-security",
+          "quote": "Validate candidate findings, generate patches, and verify existing fixes."
+        },
+        {
+          "url": "https://github.com/openai/codex-security",
+          "quote": "Draft SECURITY.md policies and save threat models for later review."
+        },
+        {
+          "url": "https://github.com/openai/codex-security",
+          "quote": "Browse saved scans and findings, identify duplicates, assess severity against"
+        },
+        {
+          "url": "https://github.com/openai/codex-security",
+          "quote": "your own rubric, and suggest owners from source and Git history."
+        },
+        {
+          "url": "https://github.com/openai/codex-security",
+          "quote": "Track findings in Linear, Jira, or GitHub, publish completed scans, or export SARIF, JSON, and CSV."
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "LangChain 1.5.0 转向 Python 3.11 并加入模型路由",
+      "summary": "langchain 1.5.0 不再支持已结束生命周期的 Python 3.10，最低版本提升到 Python 3.11，同时要求 langchain-core 1.8.0，Python 3.10 用户会继续解析到 langchain 1.4.x。该版本新增 model router 与 auto mode 中间件，并把 ModelRouterMiddleware 标记为 beta。",
+      "tags": [
+        "工具",
+        "开源",
+        "代码"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_732b98c9da",
+          "url": "https://github.com/langchain-ai/langchain/releases/tag/langchain%3D%3D1.5.0"
+        },
+        {
+          "candidate_id": "c_4e1fe34728",
+          "url": "https://github.com/langchain-ai/langchain/releases/tag/langchain-core%3D%3D1.8.0"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/langchain-ai/langchain/releases/tag/langchain%3D%3D1.5.0",
+          "quote": "langchain 1.5.0 drops support for Python 3.10 , which has reached end-of-life."
+        },
+        {
+          "url": "https://github.com/langchain-ai/langchain/releases/tag/langchain%3D%3D1.5.0",
+          "quote": "The minimum supported version is now Python 3.11, and the minimum langchain-core version is now 1.8.0."
+        },
+        {
+          "url": "https://github.com/langchain-ai/langchain/releases/tag/langchain%3D%3D1.5.0",
+          "quote": "Users on Python 3.10 will continue to resolve langchain 1.4.x."
+        },
+        {
+          "url": "https://github.com/langchain-ai/langchain/releases/tag/langchain%3D%3D1.5.0",
+          "quote": "fix(langchain): mark ModelRouterMiddleware as beta ( #41797 )"
+        },
+        {
+          "url": "https://github.com/langchain-ai/langchain/releases/tag/langchain%3D%3D1.5.0",
+          "quote": "feat(langchain): add model router and auto mode middleware ( #41766 )"
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Home Assistant 推出 HA-MCP 集成式部署",
+      "summary": "homeassistant-ai 的 ha-mcp 让 Claude、ChatGPT 等 AI 助手配置和自动化 Home Assistant，推荐以 HA-MCP 集成方式安装，通过 HACS 或 Home Assistant 2026.11+ 的 Marketplace 装入并以进程内服务器运行。该集成替代此前 app、Docker 和 uvx/PyPI 等安装方式，同一客户端只应保留一种安装方式，否则容易出现连接卡死。",
+      "tags": [
+        "开源",
+        "工具",
+        "Agent"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_ea86bb1e07",
+          "url": "https://github.com/homeassistant-ai/ha-mcp"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/homeassistant-ai/ha-mcp",
+          "quote": "Configure and automate Home Assistant with Claude, ChatGPT, and other AI assistants."
+        },
+        {
+          "url": "https://github.com/homeassistant-ai/ha-mcp",
+          "quote": "The recommended way to run ha-mcp is the HA-MCP integration ."
+        },
+        {
+          "url": "https://github.com/homeassistant-ai/ha-mcp",
+          "quote": "It installs into Home Assistant through HACS (the built-in Marketplace on Home Assistant 2026.11+), runs the full server in-process , and works on every Home Assistant installation type — Home Assistant OS, Supervised, Container, and Core — with full feature parity."
+        },
+        {
+          "url": "https://github.com/homeassistant-ai/ha-mcp",
+          "quote": "Install the HA-MCP integration (requires Home Assistant 2026.8.0 or newer ; see compatibility details )."
+        },
+        {
+          "url": "https://github.com/homeassistant-ai/ha-mcp",
+          "quote": "On Home Assistant 2026.11 or newer , open Settings → Marketplace , accept its first-run warning, and search for HA-MCP , then Install ."
+        },
+        {
+          "url": "https://github.com/homeassistant-ai/ha-mcp",
+          "quote": "Replaces other install methods: the in-process server is a complete, standalone ha-mcp install — it takes the place of the app (add-on), Docker, and uvx/PyPI (stdio) methods."
+        },
+        {
+          "url": "https://github.com/homeassistant-ai/ha-mcp",
+          "quote": "Run only one; do not run the in-process server alongside another install."
+        },
+        {
+          "url": "https://github.com/homeassistant-ai/ha-mcp",
+          "quote": "The custom component, the app, Docker/PyPI, and local stdio are independent ways to run the same server — pick one and point your AI client at that single URL."
+        },
+        {
+          "url": "https://github.com/homeassistant-ai/ha-mcp",
+          "quote": "Keeping two entries for the same server in one client (for example a local uvx --python 3.14 ha-mcp@latest entry with HOMEASSISTANT_URL / HOMEASSISTANT_TOKEN alongside an app or component URL) is a known cause of connection hangs."
+        }
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "Apple 评估 LLM 裁判的个性化写作风格判断",
+      "summary": "Apple 研究比较人类标注与 judge-LLM 的成对排序，发现裁判质量与 MMLU 衡量的通用能力弱相关（Pearson ρ ≤ 0.2），成对比较比独立打分更稳定，而最强的 LLM 并不最可靠地复现人类评价。",
+      "tags": [
+        "论文",
+        "评测"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_194d2db012",
+          "url": "https://machinelearning.apple.com/research/evaluating-evaluators-llm-judges"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://machinelearning.apple.com/research/evaluating-evaluators-llm-judges",
+          "quote": "To this end, we generate text with four LLMs for three long-form writing tasks, collect human labels evaluating which of two responses is better, collect judge-LLM, pairwise-ranking annotations, and then compare the human and judge LLM annotations."
+        },
+        {
+          "url": "https://machinelearning.apple.com/research/evaluating-evaluators-llm-judges",
+          "quote": "We find that judge quality correlates weakly with general LLM ability measured using MMLU (Pearson’s ρ ≤ 0.2) and varies by both writing task and evaluation criteria (i.e., general helpfulness versus style personalization)."
+        },
+        {
+          "url": "https://machinelearning.apple.com/research/evaluating-evaluators-llm-judges",
+          "quote": "We also find that LLM evaluators are more consistent and performant using paired comparisons rather than scoring responses independently."
+        },
+        {
+          "url": "https://machinelearning.apple.com/research/evaluating-evaluators-llm-judges",
+          "quote": "Finally, we find that the “strongest” LLMs do not most reliably reproduce the human evaluations, which we hypothesize relates to exaggerated sensitivity to subtle details that human annotators and weaker LLMs ignore."
+        }
+      ]
+    }
+  ],
+  "research": [
+    {
+      "via": "webfetch",
+      "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.10649"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/langchain-ai/langchain/releases/tag/langchain%3D%3D1.5.0"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/blog/qvac/botpsy"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/openai/codex-security"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://machinelearning.apple.com/research/gating-memorization-in-context"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.14210"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.14033"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.14320"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.12885"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.12426"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.12177"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.07464"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://deepmind.google/blog/alphagenome-2-deciphering-how-cells-read-dna-to-better-understand-disease/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://machinelearning.apple.com/research/evaluating-evaluators-llm-judges"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.12527"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/homeassistant-ai/ha-mcp"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/Zyphra/ZONOS3-Mini"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://machinelearning.apple.com/research/weighted-state-souping"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/blog/token-pooling"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://latent.space/p/codex-work/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://www.cbsnews.com/news/united-airlines-bans-ai-agents-booking-flights/"
+    }
+  ],
+  "validation": {
+    "validated_at": "2026-11-12T04:48:14+00:00",
+    "checked_links": true,
+    "dropped": [
+      {
+        "title": "多向量嵌入模型引入 token pooling 感知训练",
+        "section": "brief",
+        "candidates": [
+          "c_375e312bc0"
+        ],
+        "reasons": [
+          "summary longer than 120 characters"
+        ]
+      }
+    ],
+    "warnings": [
+      "6 paper items (target 2-4)"
+    ]
+  }
+}
