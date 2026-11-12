@@ -6,6 +6,7 @@ import Rail from "@/components/press/Rail.astro"
 import PressLayout from "@/layouts/PressLayout.astro"
 import { langOf, strings } from "@/lib/i18n"
 import { betaName, type Issue, issueHref, pageHref } from "@/lib/issues"
+import controls from "@/scripts/controls.js?raw"
 import script from "@/scripts/press.js?raw"
 
 interface Props {
@@ -70,5 +71,6 @@ const description = issue.description || t.description(issue.date)
   </main>
   <PressFooter issue={issue} />
 
+  <script is:inline set:html={controls} />
   <script is:inline set:html={script} />
 </PressLayout>

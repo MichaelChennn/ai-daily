@@ -1,6 +1,6 @@
 // The issue page's behaviour, ported from the issue #43 prototype: the timeline (Stripe Press's
-// rail), the entrance, cards folding into a stack of spines, briefs opening as they scroll in,
-// the source popovers and the theme toggle.
+// rail), the entrance, cards folding into a stack of spines, briefs opening as they scroll in and
+// the source popovers. The theme and language buttons are in controls.js.
 //
 // IssuePage.astro inlines this at the end of <body>, before the element the first paint waits
 // for, so everything here is in place before anything shows. Each issue is its own page: going
@@ -30,6 +30,7 @@
   const I = 0.4 // Stripe: transitionDelay = i*L + I (cards and rail start together here)
   const PITCH = 13
   const KEY = "press-nav"
+  const SWITCH = "press-switch" // set when going between an issue and the archive, either way
   let start = Math.max(0, DAYS.length - W)
 
   // Arriving from another issue page through the rail: where its window was and where it goes.
@@ -41,6 +42,14 @@
   if (arrived && (Date.now() - arrived.t > 10000 || arrived.n !== DAYS.length)) arrived = null
   const navType = performance.getEntriesByType("navigation")[0]?.type
   const intro = !reduce && !arrived && navType !== "back_forward"
+  // Arriving from the archive: the rail's ticks mean something else now, so only the rail plays
+  // its entrance; the logo and the cards stay put (the page cross-fades in).
+  let switched = false
+  try {
+    switched = Date.now() - Number(sessionStorage.getItem(SWITCH)) < 10000
+    sessionStorage.removeItem(SWITCH)
+  } catch {}
+  const pageIntro = intro && !switched
 
   // Without the entrance the ticks are just there: no scale-in, no fade.
   if (!intro) {
@@ -112,6 +121,13 @@
   ICONS.forEach((a, k) => {
     a.addEventListener("mouseenter", () => dock(start + W + k))
     a.addEventListener("mouseleave", undock)
+    // the archive's arrow comes back to this issue
+    a.addEventListener("click", () => {
+      try {
+        sessionStorage.setItem("press-from", current)
+        sessionStorage.setItem(SWITCH, String(Date.now()))
+      } catch {}
+    })
   })
   // Stripe: returnButton mouseenter -> handleMouseEnterIndicator(-1), docked just above the first tick
   ret.addEventListener("mouseenter", () => dock(start - 1))
@@ -390,45 +406,8 @@
     if (e.key === "Escape") document.querySelectorAll(".pop.open").forEach((p) => p.classList.remove("open"))
   })
 
-  /* ---------- 日夜切换 (the first paint's theme is set in PressLayout.astro) ---------- */
-  const darkMQ = matchMedia("(prefers-color-scheme: dark)")
-  let savedTheme = null
-  try {
-    savedTheme = localStorage.getItem("theme")
-  } catch {}
-  darkMQ.addEventListener("change", (e) => {
-    if (!savedTheme) root.dataset.theme = e.matches ? "dark" : "light"
-  })
-  $("#theme").addEventListener("click", () => {
-    savedTheme = root.dataset.theme === "dark" ? "light" : "dark"
-    root.dataset.theme = savedTheme
-    try {
-      localStorage.setItem("theme", savedTheme)
-    } catch {}
-  })
-
-  // The language switch remembers the choice, which then outranks the browser's language, and
-  // tells the next page to swap 文 and A from where they were here.
-  const langBtn = $("#lang")
-  langBtn.addEventListener("click", () => {
-    try {
-      localStorage.setItem("lang", langBtn.dataset.lang)
-      sessionStorage.setItem("press-lang", "1")
-    } catch {}
-  })
-  let swapLang = false
-  try {
-    swapLang = sessionStorage.getItem("press-lang") === "1"
-    sessionStorage.removeItem("press-lang")
-  } catch {}
-  if (swapLang && !reduce) {
-    langBtn.classList.add("from", "moving")
-    requestAnimationFrame(() => requestAnimationFrame(() => langBtn.classList.remove("from")))
-    setTimeout(() => langBtn.classList.remove("moving"), 600)
-  }
-
   /* ---------- boot ---------- */
-  if (intro) document.body.classList.add("intro")
+  if (pageIntro) document.body.classList.add("intro")
   setupStacks()
   setupLift()
   setupSources()
@@ -437,9 +416,11 @@
   if (intro) {
     // top to bottom, only what is on the first screen. The first card starts with the first tick and
     // the last card with the last rail item, so both sweep down the page at the same pace.
-    const els = [...document.querySelectorAll("#main .drop, #main .stack-card")].filter(
-      (el) => el.getBoundingClientRect().top <= innerHeight,
-    )
+    const els = pageIntro
+      ? [...document.querySelectorAll("#main .drop, #main .stack-card")].filter(
+          (el) => el.getBoundingClientRect().top <= innerHeight,
+        )
+      : []
     const span = (W + ICONS.length - 1) * L
     const step = els.length > 1 ? Math.max(L, span / (els.length - 1)) : 0
     els.forEach((el, k) => {

@@ -6,6 +6,7 @@
 
 **期**：
 以柏林时间日期为期号的一份日报，覆盖 D-1 04:00 到 D 06:00 的内容。
+代码和英文里叫 issue（`Issue`、`web/data/issues/`），和 GitHub issue 无关。
 _Avoid_: 天、篇
 
 **信源**：

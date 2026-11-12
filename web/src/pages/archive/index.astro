@@ -1,22 +1,61 @@
 ---
-import Archive from "@/components/Archive"
-import Layout from "@/layouts/Layout.astro"
+import MonthRail from "@/components/press/MonthRail.astro"
+import PressFooter from "@/components/press/PressFooter.astro"
+import PressLayout from "@/layouts/PressLayout.astro"
 import { langOf, strings } from "@/lib/i18n"
-import { issuesIn } from "@/lib/issues"
+import { type Issue, issueHref, issuesIn, pageHref } from "@/lib/issues"
+import script from "@/scripts/archive.js?raw"
+import controls from "@/scripts/controls.js?raw"
 
-// Also the English site's archive (en/archive/), in the language of the URL.
+// Also the English site's archive (en/archive/), in the language of the URL: every issue, newest
+// first, grouped by month. An issue is one spine: its first headline with the publisher's logo,
+// and the day at the right. Item counts stay in the data, off the page.
 const lang = langOf(Astro.currentLocale)
 const t = strings[lang]
-// Only what a row shows goes into the page, not every issue's full text. A fallback issue has no
-// description, nor does an English one not written yet; its first headline stands in.
-const entries = issuesIn(lang).map((issue) => ({
-  date: issue.date,
-  fallback: issue.fallback,
-  description: issue.description || (issue.sections[0]?.items[0]?.title ?? ""),
-  items: issue.sections.reduce((n, section) => n + section.items.length, 0),
-}))
+const title = `${t.nav.archive} · ${t.siteTitle}`
+const months = new Map<string, Issue[]>()
+for (const issue of issuesIn(lang)) {
+  const m = issue.date.slice(0, 7)
+  months.set(m, [...(months.get(m) ?? []), issue])
+}
+const monthLabel = (m: string) => t.press.month(Number(m.slice(0, 4)), Number(m.slice(5, 7)))
+const day = (date: string) => t.day(new Date(`${date}T00:00:00Z`)).monthDay
 ---
 
-<Layout title={`${t.nav.archive} · ${t.siteTitle}`} description={t.archive.description(t.siteTitle)} current="archive">
-  <Archive client:load entries={entries} lang={lang} />
-</Layout>
+<PressLayout title={title} description={t.archive.description(t.siteTitle)}>
+  <a class="logo" href={pageHref("", lang)} id="logo">{t.siteTitle}</a>
+  <MonthRail months={[...months.keys()].reverse()} lang={lang} />
+
+  <main id="main">
+    <h1 class="sr-only">{title}</h1>
+    {months.size === 0 && <p class="notice">{t.empty}</p>}
+    {
+      [...months].map(([m, list]) => (
+        <section class="month" id={`m-${m}`} data-m={m}>
+          <div class="sec-h drop"><h2>{monthLabel(m)}</h2></div>
+          {list.map((issue) => {
+            const lead = issue.sections[0]?.items[0]
+            return (
+              <a class="arc drop" href={issueHref(issue.date, lang)} data-iso={issue.date}>
+                <div class="face">
+                  {lead && (
+                    <span class="logo16">
+                      {lead.publisher.name.charAt(0)}
+                      <img data-logo src={lead.publisher.icon} alt="" loading="lazy" referrerpolicy="no-referrer" />
+                    </span>
+                  )}
+                  <span class="st">{lead?.title ?? issue.description}</span>
+                  <time class="date" datetime={issue.date}>{day(issue.date)}</time>
+                </div>
+              </a>
+            )
+          })}
+        </section>
+      ))
+    }
+  </main>
+  <PressFooter />
+
+  <script is:inline set:html={controls} />
+  <script is:inline set:html={script} />
+</PressLayout>

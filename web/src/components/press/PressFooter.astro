@@ -5,20 +5,24 @@ import { modelName } from "@/lib/models"
 import { processes, processHref } from "@/lib/process"
 
 interface Props {
-  issue: Issue
+  /** The issue on this page; a page without one (the archive) has a single line. */
+  issue?: Issue
 }
 
 // Two lines: this issue (who edited it, how it was made, its beta editions) with the site's
-// GitHub and RSS icons at the right; under it when the site updates and the license. The
-// language switch sits above the theme toggle in the bottom-left corner.
+// GitHub and RSS icons at the right; under it when the site updates and the license. Without an
+// issue, the update time and license move up to the left of the icons. The language switch sits
+// above the theme toggle in the bottom-left corner.
 const { issue } = Astro.props
 const lang = langOf(Astro.currentLocale)
 const t = strings[lang]
 const p = t.press
-const hasProcess = lang === "zh" && processes.some((x) => x.date === issue.date)
+const hasProcess = !!issue && lang === "zh" && processes.some((x) => x.date === issue.date)
 // On the main issue, its first beta by model name (as in the prototype); on a beta, the main issue
 // and every beta by family name only, since the line already names this beta's model.
-const editions = issue.beta
+const editions = !issue
+  ? []
+  : issue.beta
   ? [
       { label: p.main, href: issueHref(issue.date), current: false },
       ...issue.betas.map((b) => ({ label: p.edition(b.label), href: betaHref(issue.date, b.slug), current: b.slug === issue.beta!.slug })),
@@ -29,7 +33,9 @@ const other = lang === "zh" ? "en" : "zh"
 const otherHref = pageHref(pagePath(Astro.url.pathname, lang).replace(/beta\/.*$/, ""), other)
 ---
 
-<footer>
+<footer class:list={{ solo: !issue }}>
+  {
+    issue && (
   <p class="about">
     {
       [
@@ -48,6 +54,8 @@ const otherHref = pageHref(pagePath(Astro.url.pathname, lang).replace(/beta\/.*$
         ))
     }
   </p>
+    )
+  }
   <span class="ext">
     <a href={REPO_URL} aria-label={t.github} title={t.github}><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6 0-3.2 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8 0 3.2.9.8 1.3 1.9 1.3 3.2 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1 .9 2.2v3.3c0 .3.1.7.8.6A12 12 0 0 0 12 .3"></path></svg></a>
     <a href={href(t.feed)} aria-label={t.rss} title={t.rss}><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>

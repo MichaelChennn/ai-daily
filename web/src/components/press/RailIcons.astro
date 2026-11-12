@@ -1,0 +1,25 @@
+---
+import { type Lang, strings } from "@/lib/i18n"
+import { pageHref } from "@/lib/issues"
+
+interface Props {
+  lang: Lang
+  /** The page this is on, whose icon stays lit. */
+  current?: "archive" | "sources"
+}
+
+// The archive and sources links under the timeline, on every page that has one.
+const { lang, current } = Astro.props
+const t = strings[lang].press
+---
+
+<div class="icons">
+  <a class="icon-btn" href={pageHref("archive/", lang)} aria-label={t.archive} aria-current={current === "archive" ? "page" : undefined}>
+    <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="5" x="2" y="3" rx="1"></rect><path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"></path><path d="M10 12h4"></path></svg></span>
+    <span class="il">{t.archive}</span>
+  </a>
+  <a class="icon-btn" href={pageHref("sources/", lang)} aria-label={t.sources} aria-current={current === "sources" ? "page" : undefined}>
+    <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.9 19.1C1 15.2 1 8.8 4.9 4.9"></path><path d="M7.8 16.2c-2.3-2.3-2.3-6.1 0-8.5"></path><circle cx="12" cy="12" r="2"></circle><path d="M16.2 7.8c2.3 2.3 2.3 6.1 0 8.5"></path><path d="M19.1 4.9C23 8.8 23 15.1 19.1 19"></path></svg></span>
+    <span class="il">{t.sources}</span>
+  </a>
+</div>

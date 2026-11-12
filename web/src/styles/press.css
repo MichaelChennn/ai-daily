@@ -191,6 +191,32 @@ footer .colophon a{text-decoration:underline;text-decoration-color:var(--line);t
 /* view transition between issues */
 ::view-transition-old(root),::view-transition-new(root){animation-duration:.32s}
 
+/* ---------- archive: one tick per month, the issues as spines ---------- */
+/* the arrow back to the issues: the home page's down arrow turned to point left, always shown */
+.rail.back .ret{cursor:pointer;pointer-events:auto;animation:MenuLabelReveal .2s ease forwards}
+.rail.back .ret svg{transform:rotate(90deg)}
+.rail.back.labels-on .ret:hover .il{animation:MenuLabelReveal .2s ease forwards}
+/* this page's icon stays lit */
+.icon-btn[aria-current] .ic{opacity:1}
+/* a month: the section heading without its number */
+.month{scroll-margin-top:32px;margin-bottom:40px}
+/* an issue: a spine that stays one, spaced like the folded stack */
+.arc{display:block;margin-bottom:var(--gap)}
+.arc .face{height:var(--strip-h);display:flex;align-items:center;gap:10px;padding:0 20px}
+.arc .st{font-family:var(--f-title);font-weight:600;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1;min-width:0}
+.arc .date{flex:none;margin-left:14px;font-family:var(--f-mono);font-size:12px;color:var(--muted)}
+@media (hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+  .arc:hover .face{transform:translateY(-3px);box-shadow:var(--shadow-hi)}
+}
+.arc:focus-visible{outline:none}
+.arc:focus-visible .face{outline:2px solid var(--ink);outline-offset:2px}
+@media (max-width:899px){
+  .arc .face{padding:0 16px}
+  .arc .date{margin-left:10px}
+}
+/* a footer without an issue to credit: the update time and license take the first line's left */
+footer.solo .colophon{order:-1;flex:1;flex-basis:auto;min-width:0;margin:0;line-height:20px}
+
 /* ---------- phone ---------- */
 @media (max-width:899px){
   :root{--rail-x:10px}
