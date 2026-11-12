@@ -1,0 +1,45 @@
+---
+import { type Lang, strings } from "@/lib/i18n"
+import { pageHref } from "@/lib/issues"
+import RailIcons from "./RailIcons.astro"
+
+interface Props {
+  /** One tick per section of the page, top of the rail first; `id` is the section's element id. */
+  ticks: { id: string; label: string }[]
+  /** What the ticks do, for screen readers ("Jump to a month"). */
+  label: string
+  /** Every issue's date in this language, newest first: the arrow can go back to any of them. */
+  issues: string[]
+  lang: Lang
+  current: "archive" | "sources"
+}
+
+// The rail of a page without an issue (the archive, the sources): the issue pages' rail with one
+// tick per section of this page instead of one per day. A tick scrolls to its section and the page
+// script lights the one in view. Above the ticks, the arrow back to the issues; section-rail.js
+// points it at the issue the reader came from.
+const { ticks, label, issues, lang, current } = Astro.props
+const t = strings[lang].press
+const W = Math.min(20, ticks.length)
+---
+
+<nav class="rail back" id="rail" aria-label={label} style={`--W:${W}`}>
+  <a class="ret" id="ret" href={pageHref("", lang)} data-issues={issues.join(" ")} aria-label={t.back}>
+    <svg width="18" height="18" viewBox="0 0 19 20" fill="none"><path d="M9.11 .89v16.89" stroke-width="3" stroke-miterlimit="10"></path><path d="M1.06 9.83l8.05 8.05 8.04-8.05" stroke-width="3" stroke-miterlimit="10"></path></svg>
+    <span class="il">{t.back}</span>
+  </a>
+  <div class="ticks" id="ticks">
+    <div class="ticks-inner" id="ticksInner">
+      {
+        ticks.map((s) => (
+          <a class="tick" href={`#${s.id}`} aria-label={s.label}>
+            <div class="fill"></div>
+            <div class="label"><span class="t">{s.label}</span></div>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+  <RailIcons lang={lang} current={current} />
+</nav>
+<div class="bubble" id="bubble" hidden></div>

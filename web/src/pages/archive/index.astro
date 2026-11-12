@@ -1,10 +1,10 @@
 ---
-import MonthRail from "@/components/press/MonthRail.astro"
+import SectionRail from "@/components/press/SectionRail.astro"
 import PressFooter from "@/components/press/PressFooter.astro"
 import PressLayout from "@/layouts/PressLayout.astro"
 import { langOf, strings } from "@/lib/i18n"
 import { type Issue, issueHref, issuesIn, pageHref } from "@/lib/issues"
-import script from "@/scripts/archive.js?raw"
+import script from "@/scripts/section-rail.js?raw"
 import controls from "@/scripts/controls.js?raw"
 
 // Also the English site's archive (en/archive/), in the language of the URL: every issue, newest
@@ -24,19 +24,25 @@ const day = (date: string) => t.day(new Date(`${date}T00:00:00Z`)).monthDay
 
 <PressLayout title={title} description={t.archive.description(t.siteTitle)}>
   <a class="logo" href={pageHref("", lang)} id="logo">{t.siteTitle}</a>
-  <MonthRail months={[...months.keys()].reverse()} lang={lang} />
+  <SectionRail
+    ticks={[...months.keys()].reverse().map((m) => ({ id: `m-${m}`, label: monthLabel(m) }))}
+    label={t.press.months}
+    issues={issuesIn(lang).map((i) => i.date)}
+    lang={lang}
+    current="archive"
+  />
 
   <main id="main">
     <h1 class="sr-only">{title}</h1>
     {months.size === 0 && <p class="notice">{t.empty}</p>}
     {
       [...months].map(([m, list]) => (
-        <section class="month" id={`m-${m}`} data-m={m}>
+        <section class="month" id={`m-${m}`}>
           <div class="sec-h drop"><h2>{monthLabel(m)}</h2></div>
           {list.map((issue) => {
             const lead = issue.sections[0]?.items[0]
             return (
-              <a class="arc drop" href={issueHref(issue.date, lang)} data-iso={issue.date}>
+              <a class="arc drop" href={issueHref(issue.date, lang)}>
                 <div class="face">
                   {lead && (
                     <span class="logo16">

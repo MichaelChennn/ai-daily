@@ -1,8 +1,9 @@
-// The archive's behaviour, ported from its issue #43 prototype: the month rail (the issue pages'
-// rail with a tick per month: the same window, dock, wheel and phone scrubber), the month in view
-// lit on the rail, the arrow back to the issue the reader came from, and the entrance.
+// The pages without an issue (the archive, the sources), ported from their issue #43 prototypes:
+// SectionRail (the issue pages' rail with a tick per section: the same window, dock, wheel and
+// phone scrubber), the section in view lit on the rail, the arrow back to the issue the reader came
+// from, the GitHub repos' popover on the sources page, and the entrance.
 //
-// archive/index.astro inlines this at the end of <body>, after controls.js.
+// Both pages inline this at the end of <body>, after controls.js.
 ;(() => {
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches
   const finePointer = matchMedia("(hover: hover) and (pointer: fine)").matches
@@ -15,18 +16,21 @@
   const ticks = [...inner.querySelectorAll(".tick")]
   const ICONS = [...rail.querySelectorAll(".icon-btn")]
   const ret = $("#ret")
-  const MONTHS = ticks.map((t) => t.dataset.m) // oldest first
-  const sections = [...document.querySelectorAll(".month")] // newest first
-  const W = Math.min(20, MONTHS.length)
+  const KEYS = ticks.map((t) => t.hash.slice(1)) // rail order: the archive's oldest month first
+  const sections = [...document.querySelectorAll("#main > section[id]")] // page order
+  const TOP = sections[0]?.id // the section at the top of the page
+  const W = Math.min(20, KEYS.length)
   const EDGE = 4
   const LAND = 7
   const L = 0.1
   const I = 0.4
   const PITCH = 13
   const SWITCH = "press-switch" // set when going between an issue and the archive, either way
-  let start = Math.max(0, MONTHS.length - W)
+  // the window opens on the top section's end of the rail: its start, or the archive's bottom
+  let start = KEYS.indexOf(TOP) < W ? 0 : KEYS.length - W
 
   /* ---------- where the arrow goes: the issue the reader came from, else the newest ---------- */
+  // #ret links to the home page (the newest issue) and lists every issue's date, newest first.
   let from = null
   let switched = false
   try {
@@ -34,13 +38,13 @@
     switched = Date.now() - Number(sessionStorage.getItem(SWITCH)) < 10000
     sessionStorage.removeItem(SWITCH)
   } catch {}
-  const newest = $(".arc")
-  const fromCard = from && from !== newest?.dataset.iso && document.querySelector(`.arc[data-iso="${from}"]`)
-  if (fromCard) ret.href = fromCard.href
-  // Leaving for an issue: its page plays only the rail's entrance, as this one did.
+  const issues = ret.dataset.issues.split(" ")
+  if (from && from !== issues[0] && issues.includes(from)) ret.href = new URL(`${from}/`, ret.href).href
+  // Leaving for an issue or the other page with a rail: it plays only the rail's entrance, as this
+  // one did.
   const plainClick = (e) => e.button === 0 && !e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey
   document.addEventListener("click", (e) => {
-    if (!plainClick(e) || !e.target.closest(".arc, #ret, #logo")) return
+    if (!plainClick(e) || !e.target.closest(".arc, #ret, #logo, .icon-btn:not([aria-current])")) return
     try {
       sessionStorage.setItem(SWITCH, String(Date.now()))
     } catch {}
@@ -56,14 +60,14 @@
     let s = start
     if (p < EDGE) s = i - (jump ? LAND : EDGE)
     else if (p > W - 1 - EDGE) s = i - (W - 1 - (jump ? LAND : EDGE))
-    s = Math.max(0, Math.min(MONTHS.length - W, s))
+    s = Math.max(0, Math.min(KEYS.length - W, s))
     if (s !== start) {
       start = s
       place(true)
     }
   }
   function scrollBy(n) {
-    const s = Math.max(0, Math.min(MONTHS.length - W, start + n))
+    const s = Math.max(0, Math.min(KEYS.length - W, start + n))
     if (s !== start) {
       start = s
       place(true)
@@ -107,7 +111,7 @@
       if (!plainClick(e)) return
       e.preventDefault()
       reveal(i, true)
-      jumpTo(t.dataset.m)
+      jumpTo(KEYS[i])
     })
   })
   ICONS.forEach((a, k) => {
@@ -121,38 +125,38 @@
   self.addEventListener("click", (e) => {
     if (!plainClick(e)) return
     e.preventDefault()
-    jumpTo(MONTHS.at(-1))
+    jumpTo(TOP)
   })
 
-  /* ---------- months: jump to one, light the one in view ---------- */
+  /* ---------- sections: jump to one, light the one in view ---------- */
   let lock = 0
-  let activeM = null
-  function setActive(m) {
-    if (m === activeM) return
-    activeM = m
-    ticks.forEach((t) => {
-      const on = t.dataset.m === m
+  let activeK = null
+  function setActive(k) {
+    if (k === activeK) return
+    activeK = k
+    ticks.forEach((t, i) => {
+      const on = KEYS[i] === k
       t.classList.toggle("active", on)
       if (on) t.setAttribute("aria-current", "true")
       else t.removeAttribute("aria-current")
     })
-    reveal(MONTHS.indexOf(m), false)
+    reveal(KEYS.indexOf(k), false)
   }
-  function jumpTo(m) {
-    const sec = document.getElementById("m-" + m)
-    // the newest month is the top of the page
-    const y = m === MONTHS.at(-1) ? 0 : sec.getBoundingClientRect().top + scrollY - 32
+  function jumpTo(k) {
+    const sec = document.getElementById(k)
+    // the first section is the top of the page
+    const y = k === TOP ? 0 : sec.getBoundingClientRect().top + scrollY - 32
     window.scrollTo({ top: y, behavior: reduce ? "auto" : "smooth" })
-    setActive(m) // lit now; the scroll spy agrees once the page lands
+    setActive(k) // lit now; the scroll spy agrees once the page lands
     lock = Date.now() + 900
   }
-  // the month whose heading last passed 30% of the viewport; at the very bottom, the oldest
+  // the section whose heading last passed 30% of the viewport; at the very bottom, the last one
   function spy() {
     if (Date.now() < lock || !sections.length) return
-    let m = sections[0].dataset.m
-    for (const s of sections) if (s.getBoundingClientRect().top <= innerHeight * 0.3) m = s.dataset.m
-    if (innerHeight + scrollY >= root.scrollHeight - 2) m = sections.at(-1).dataset.m
-    setActive(m)
+    let k = sections[0].id
+    for (const s of sections) if (s.getBoundingClientRect().top <= innerHeight * 0.3) k = s.id
+    if (innerHeight + scrollY >= root.scrollHeight - 2) k = sections.at(-1).id
+    setActive(k)
   }
   let raf = 0
   addEventListener(
@@ -228,12 +232,47 @@
     const t = ticks[hit]
     ticks.forEach((t) => t.classList.remove("touch-hit"))
     hit = -1
-    if (t && e.type === "pointerup") jumpTo(t.dataset.m)
+    if (t && e.type === "pointerup") jumpTo(KEYS[ticks.indexOf(t)])
   }
   ticksBox.addEventListener("pointerup", endScrub)
   ticksBox.addEventListener("pointercancel", endScrub)
   ticksBox.addEventListener("click", (e) => {
     if (e.pointerType && e.pointerType !== "mouse") e.preventDefault()
+  })
+
+  /* ---------- the sources page's repo stack: the issue pages' source stack popover ---------- */
+  document.querySelectorAll(".srcs").forEach((b) => {
+    const pop = b.querySelector(".pop")
+    const button = b.querySelector("button")
+    let timer
+    const open = () => {
+      clearTimeout(timer)
+      document.querySelectorAll(".pop.open").forEach((p) => p !== pop && p.classList.remove("open"))
+      pop.classList.add("open")
+      button.setAttribute("aria-expanded", "true")
+    }
+    const close = () => {
+      timer = setTimeout(() => {
+        pop.classList.remove("open")
+        button.setAttribute("aria-expanded", "false")
+      }, 120)
+    }
+    if (finePointer) {
+      b.addEventListener("mouseenter", open)
+      b.addEventListener("mouseleave", close)
+    }
+    b.addEventListener("click", (e) => {
+      if (e.target.closest(".pop a")) return
+      e.preventDefault()
+      e.stopPropagation()
+      pop.classList.contains("open") ? close() : open()
+    })
+  })
+  document.addEventListener("click", (e) => {
+    if (!e.target.closest(".srcs")) document.querySelectorAll(".pop.open").forEach((p) => p.classList.remove("open"))
+  })
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") document.querySelectorAll(".pop.open").forEach((p) => p.classList.remove("open"))
   })
 
   /* ---------- boot: the issue pages' entrance; from an issue, only the rail's ---------- */
@@ -253,8 +292,11 @@
     : []
   if (pageIntro) document.body.classList.add("intro")
   const span = (W + ICONS.length - 1) * L
-  const step = els.length > 1 ? Math.max(L, span / (els.length - 1)) : 0
-  els.forEach((el, k) => el.style.setProperty("--d", I + k * step + "s"))
+  // one beat per row: the sources page's cards in a row drop together
+  const top = (el) => Math.round(el.getBoundingClientRect().top)
+  const rows = [...new Set(els.map(top))]
+  const step = rows.length > 1 ? Math.max(L, span / (rows.length - 1)) : 0
+  els.forEach((el) => el.style.setProperty("--d", I + rows.indexOf(top(el)) * step + "s"))
   root.style.setProperty("--logo-d", I - L + "s")
   ret.style.animationDelay = I - L + "s"
   ticks.forEach((t, i) => {
@@ -263,7 +305,7 @@
   })
   ICONS.forEach((a, k) => (a.style.transitionDelay = `${(W + k) * L + I}s`))
   requestAnimationFrame(() => requestAnimationFrame(() => rail.classList.add("ready")))
-  const end = I + Math.max(span + 0.3, (els.length - 1) * step + 0.9) + 0.1
+  const end = I + Math.max(span + 0.3, (rows.length - 1) * step + 0.9) + 0.1
   setTimeout(() => {
     ticks.forEach((t) => (t.style.transitionDelay = "0s"))
     ICONS.forEach((a) => (a.style.transitionDelay = "0s"))

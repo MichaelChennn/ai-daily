@@ -217,6 +217,48 @@ footer .colophon a{text-decoration:underline;text-decoration-color:var(--line);t
 /* a footer without an issue to credit: the update time and license take the first line's left */
 footer.solo .colophon{order:-1;flex:1;flex-basis:auto;min-width:0;margin:0;line-height:20px}
 
+/* ---------- sources: a group per section, three cards a row ---------- */
+/* three columns need a wider main than the reading pages' 720px; the footer follows it */
+@media (min-width:1200px){main.wide,footer.wide{max-width:1056px}}
+.group{scroll-margin-top:32px;margin-bottom:40px}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gap)}
+@media (max-width:1199px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:599px){.grid{grid-template-columns:minmax(0,1fr)}}
+.src{position:relative}
+.src:hover,.src:has(.pop.open){z-index:3}
+/* every card is the same height: one-line name and kind, stats pinned to the bottom */
+.src .face{height:100%;overflow:visible;padding:18px 20px 16px;display:flex;flex-direction:column}
+@media (hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+  .src:hover .face{transform:translateY(-3px);box-shadow:var(--shadow-hi)}
+}
+.head{display:flex;gap:10px;align-items:flex-start}
+.logo20{position:relative;flex:none;margin-top:3px;width:20px;height:20px;border-radius:4px;overflow:hidden;display:grid;place-items:center;background:var(--chip);color:var(--ink);font-size:11px;font-weight:600;text-transform:uppercase}
+.logo20 img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:var(--card)}
+.who{min-width:0;flex:1}
+.src h3{display:flex;align-items:center;min-width:0;padding-right:14px;font-size:17px;line-height:1.45;margin:0}
+/* a long name ends in an ellipsis; the full name is in the title tooltip */
+.src h3 a,.src h3 .nm{min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.src h3 a{background-position:0 calc(100% - 1px)}
+.src h3 .arr{flex:none;display:inline-block;width:0;white-space:nowrap;opacity:0;transform:translate(0,4px);transition:opacity .2s,transform .2s;font-family:var(--f-body);font-weight:400}
+.src h3 a:hover+.arr{opacity:1;transform:translate(4px,0)}
+.kind{margin:2px 0 0;font-size:12px;line-height:1.5;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.off-tag{flex:none;margin-left:8px;padding:0 6px;border:1px solid var(--line);border-radius:4px;font:500 11px/18px var(--f-mono);color:var(--muted)}
+.arr+.off-tag{margin-left:20px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:auto 0 0;padding-top:16px}
+/* no min-width:0: a label wider than a third (Avg. candidates on a 360px phone) widens its column */
+.stats div{text-align:center}
+.stats dt{font-size:12px;line-height:1.5;color:var(--muted);white-space:nowrap}
+.stats dd{margin:2px 0 0;font-family:var(--f-mono);font-size:17px;font-weight:500;line-height:1.4;font-variant-numeric:tabular-nums}
+.nostats{margin:auto 0 0;padding-top:16px;font-size:12px;color:var(--muted);line-height:44px}
+.stats,.nostats{min-height:44px}
+.src.paused .head,.src.paused .nostats{opacity:.6}
+/* GitHub Releases: owner avatars stacked in the top-right corner, every repo in the popover */
+.head>.srcs{flex:none;margin:1px -4px 0 0}
+.head>.srcs .dot img{width:100%;height:100%;border-radius:50%}
+.head>.srcs .pop{min-width:300px}
+.head>.srcs .pop a img{border-radius:50%}
+@media (max-width:899px){.src .face{padding:16px 16px 14px}}
+
 /* ---------- phone ---------- */
 @media (max-width:899px){
   :root{--rail-x:10px}
@@ -236,7 +278,9 @@ footer.solo .colophon{order:-1;flex:1;flex-basis:auto;min-width:0;margin:0;line-
 @media (prefers-reduced-motion:reduce){
   .briefs .bs,.briefs .bs .summary{transition:none!important}
   .tick,.tick .fill,.face{transition:none!important}
-  .label,.icon-btn .il{animation:none!important;opacity:1!important}
+  /* the label under the pointer appears at once; the others stay hidden */
+  .label,.icon-btn .il,.ret .il{animation:none!important}
+  .rail.labels-on .tick:hover .label,.tick.touch-hit .label,.rail.labels-on .icon-btn:hover .il,.rail.labels-on .ret:hover .il{opacity:1}
   body.intro .drop,body.intro .logo{animation:none!important}
 }
 /* arriving from another issue page: the rail is just there, without its entrance */
