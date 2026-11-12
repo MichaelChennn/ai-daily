@@ -1,0 +1,658 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-12",
+  "mode": "full",
+  "channel": "claude",
+  "generated_at": "2026-11-12T04:48:26+00:00",
+  "model": "claude-opus-5-5",
+  "highlights": [
+    "Google launched the Gemini Decisions API: Gemini Decision 1 scores options in one forward pass, handling up to 1,000 questions per request at 150-250 ms end-to-end.",
+    "Decision models arrived in force: LangChain 1.5.0 adds decision models to core, Strands Decider offers a small model that runs locally, and the MMDM benchmark finds the best Hard Multi-select Accuracy is only 36.81%.",
+    "Huawei open-sourced the MACaQ quantizer, which it says can quantize a 122B-parameter model in 64 minutes."
+  ],
+  "items": [
+    {
+      "section": "headline",
+      "title": "Google launches the Gemini Decisions API for fast closed-set decisions",
+      "summary": "The Gemini Decisions API runs on a new model, Gemini Decision 1 (gemini-decision-1), which scores candidate options in a single forward pass instead of generating text, returning probabilities and confidence scores for up to 1,000 yes/no, choice or rubric questions per request at 150-250 ms end-to-end and $0.10 per 1M input tokens, with zero output tokens billed. Bounded agent decisions such as tool selection, policy checks and model routing can move off general-purpose LLM calls onto a faster, cheaper endpoint that reports its confidence.",
+      "sources": [
+        {
+          "candidate_id": "c_4b7190847a",
+          "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/"
+        },
+        {
+          "candidate_id": "c_4b7190847a",
+          "url": "https://news.ycombinator.com/item?id=50456791"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/",
+          "quote": "Today, we’re introducing the Gemini Decisions API, a new endpoint for fast, closed-set decisions powered by our new Gemini Decision 1 model (gemini-decision-1), available through the Gemini API in Google AI Studio ."
+        },
+        {
+          "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/",
+          "quote": "Rather than generating answer text token by token, Gemini Decision 1 scores your candidate options in a single forward pass, returning probabilities and confidence scores in 150-250 ms end-to-end latency at $0.10 per 1M input tokens with zero output tokens billed."
+        },
+        {
+          "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/",
+          "quote": "You can pass one multimodal input across text, images, audio, video, and PDFs (up to 256K tokens) along with up to 1,000 independent questions."
+        }
+      ],
+      "tags": [
+        "模型",
+        "Agent",
+        "产品"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "LangChain 1.5.0 adds decision models and model-router middleware",
+      "summary": "langchain-core 1.8.0 adds decision models, langchain 1.5.0 adds model router and auto mode middleware (ModelRouterMiddleware is marked beta), and langchain-typesafe 0.1.0 implements TypeSafeClassifier as a decision model; all three drop end-of-life Python 3.10 and now require Python 3.11. Projects still on Python 3.10 will stay on the older releases until they upgrade the interpreter, while routing and classification steps in LangChain can now use this class of model directly.",
+      "sources": [
+        {
+          "candidate_id": "c_732b98c9da",
+          "url": "https://github.com/langchain-ai/langchain/releases/tag/langchain%3D%3D1.5.0"
+        },
+        {
+          "candidate_id": "c_4e1fe34728",
+          "url": "https://github.com/langchain-ai/langchain/releases/tag/langchain-core%3D%3D1.8.0"
+        },
+        {
+          "candidate_id": "c_167cc60798",
+          "url": "https://github.com/langchain-ai/langchain/releases/tag/langchain-typesafe%3D%3D0.1.0"
+        }
+      ],
+      "evidence": [],
+      "tags": [
+        "工具",
+        "Agent",
+        "开源"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Huawei open-sources MACaQ, a quantizer for GGUF, vLLM and diffusion models",
+      "summary": "MACaQ, from HUAWEI Computing Systems Lab, is an MXFP4 W4A4 post-training quantization method that treats every linear layer independently; the Apache 2.0 code produces 2/3/4-bit GGUF for llama.cpp and also targets vLLM, Diffusers and PyTorch, and the team says it can quantize a 122B-parameter model in 64 minutes using 32.5 GB of device memory. Its MACaQ-R GGUFs run on a standard llama.cpp install, and the README's Qwen3.6-35B-A3B Q4_K_XL shows lower KL divergence than Unsloth UD-Q4_K_XL at the same 22.36 GB, so local-inference users can benchmark it against the quants they use today.",
+      "sources": [
+        {
+          "candidate_id": "c_b2ef51a147",
+          "url": "https://github.com/huawei-csl/MACaQ"
+        },
+        {
+          "candidate_id": "c_4369998f73",
+          "url": "https://huggingface.co/papers/2611.10649"
+        },
+        {
+          "candidate_id": "c_b2ef51a147",
+          "url": "https://news.ycombinator.com/item?id=50458166"
+        },
+        {
+          "candidate_id": "c_bc1dded01c",
+          "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xto0fa/opensource_method_macaq_beats_unsloth_ggufs/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/huawei-csl/MACaQ",
+          "quote": "MACaQ can quantize a 122B-parameter model in 64 minutes using just 32.5 GB of device memory ."
+        },
+        {
+          "url": "https://github.com/huawei-csl/MACaQ",
+          "quote": "llama.cpp : text generation, 2/3/4-bit GGUF. vLLM : text generati"
+        },
+        {
+          "url": "https://github.com/huawei-csl/MACaQ",
+          "quote": "MACaQ-R refines the weight codes in a quantized GGUF while preserving its native formats and block scales. Its GGUFs run with a standard llama.cpp installation ."
+        },
+        {
+          "url": "https://github.com/huawei-csl/MACaQ",
+          "quote": "Qwen3.6-35B-A3B , KL divergence to FP16 (lower is better): Model GGUF size KL ↓ Unsloth UD-Q4_K_XL 22.36 GB 0.015731 MACaQ-R Q4_K_XL 22.36 GB 0.013367"
+        },
+        {
+          "url": "https://github.com/huawei-csl/MACaQ",
+          "quote": "MACaQ is licensed under the Apache License 2.0 ."
+        }
+      ],
+      "tags": [
+        "工具",
+        "开源",
+        "推理"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "DeepMind releases AlphaGenome 2 for cell-type-specific DNA predictions",
+      "summary": "AlphaGenome 2 is a conditional model: alongside the DNA sequence it takes one tissue, cell type or state at a time, adds DNA methylation as a readout, and was trained on more than 100 million individual cell profiles across 68 tissues. On TenK10K it identified 30% of causal variants versus 16% for the original AlphaGenome and other specialized tools. It is available for non-commercial research via the AlphaGenome API, with commercial research access in private preview.",
+      "sources": [
+        {
+          "candidate_id": "c_25575f3581",
+          "url": "https://deepmind.google/blog/alphagenome-2-deciphering-how-cells-read-dna-to-better-understand-disease/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://deepmind.google/blog/alphagenome-2-deciphering-how-cells-read-dna-to-better-understand-disease/",
+          "quote": "Instead of predicting in parallel, AlphaGenome 2 is a conditional model that predicts DNA effects for one condition - defined as a tissue, cell type or state - at a time."
+        },
+        {
+          "url": "https://deepmind.google/blog/alphagenome-2-deciphering-how-cells-read-dna-to-better-understand-disease/",
+          "quote": "but also DNA methylation, a widely requested readout."
+        },
+        {
+          "url": "https://deepmind.google/blog/alphagenome-2-deciphering-how-cells-read-dna-to-better-understand-disease/",
+          "quote": "On the TenK10K dataset, a large single-cell map of 28 primary immune cell types, AlphaGenome 2 reliably identified nearly twice as many causal variants (30% vs. 16%) and directional gene effects (43% vs. 23%) as the original AlphaGenome fine-tuned on single-cell data and other specialized tools."
+        },
+        {
+          "url": "https://deepmind.google/blog/alphagenome-2-deciphering-how-cells-read-dna-to-better-understand-disease/",
+          "quote": "Trained on more than 100 million individual cell profiles across 68 tissues, the model turns static cell atlases into a predictive engine for human genetics. AlphaGenome 2 is available today for non-commercial research via the AlphaGenome API, and in private preview for commercial research."
+        }
+      ],
+      "tags": [
+        "模型",
+        "行业"
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Nex-AGI releases Nex-N2.6, an agentic model built on GLM-5.3-Flash",
+      "summary": "Nex-N2.6 is a multimodal agentic model for computer use, coding and long-horizon tool tasks, released as FP8 weights with approximately 321B parameters. In Nex-AGI's internal evaluation, reasoning repetition fell from 16.0% to 1.6% compared with Nex-N2.5-Pro, and OSWorld rose from 82.2 to 83.0. The release targets reasoning loops and calls to tools that are not available, which matters most for long-running agent sessions.",
+      "sources": [
+        {
+          "url": "https://huggingface.co/nex-agi/Nex-N2.6",
+          "title": "Nex-N2.6 · Hugging Face"
+        },
+        {
+          "candidate_id": "c_8cd3809b4c",
+          "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xthiki/nexn26_is_out_the_update_is_mostly_about_getting/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/nex-agi/Nex-N2.6",
+          "quote": "This repository contains the FP8-quantized weights of Nex-N2.6, with approximately 321B parameters."
+        },
+        {
+          "url": "https://huggingface.co/nex-agi/Nex-N2.6",
+          "quote": "Reasoning repetition fell from 16.0% to 1.6% compared with Nex-N2.5-Pro in our internal checkpoint-replay evaluation—a 90% relative reduction."
+        },
+        {
+          "url": "https://huggingface.co/nex-agi/Nex-N2.6",
+          "quote": "Nex-N2.6 scored 83.0 on OSWorld, up from 82.2 for Nex-N2.5-Pro and 78.0 for the base model, GLM-5.3-Flash."
+        }
+      ],
+      "tags": [
+        "模型",
+        "Agent",
+        "开源"
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Zyphra open-sources ZONOS3-Mini, a TTS model with 100M active parameters",
+      "summary": "ZONOS3-Mini is a mixture-of-experts text-to-speech model with 800M parameters total and about 100M active per token, supporting 43 languages, voice cloning from an audio sample and word-level control of emotion and pace, with weights under Apache 2.0. Zyphra says it runs in real time on phones and laptops, including in the browser, giving apps another open option for local speech synthesis.",
+      "sources": [
+        {
+          "candidate_id": "c_30fdfa7f28",
+          "url": "https://huggingface.co/Zyphra/ZONOS3-Mini"
+        },
+        {
+          "candidate_id": "c_30fdfa7f28",
+          "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xtb9gw/zyphrazonos3mini_hugging_face/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/Zyphra/ZONOS3-Mini",
+          "quote": "It runs in real time on phones and laptops, including directly in the browser. Clone a voice from an audio sample, or design a character by shaping age, accent and vocal texture."
+        },
+        {
+          "url": "https://huggingface.co/Zyphra/ZONOS3-Mini",
+          "quote": "800M parameters total, about 100M active per token"
+        },
+        {
+          "url": "https://huggingface.co/Zyphra/ZONOS3-Mini",
+          "quote": "Model weights are released under Apache 2.0."
+        },
+        {
+          "url": "https://huggingface.co/Zyphra/ZONOS3-Mini",
+          "quote": "ZONOS3-Mini supports 43 languages."
+        }
+      ],
+      "tags": [
+        "模型",
+        "语音",
+        "开源"
+      ]
+    },
+    {
+      "section": "model",
+      "title": "KRAFTON open-sources Raon-1 nano, a small Korean-English model",
+      "summary": "Raon-1 nano has 1.5B effective parameters (3.1B total, including a 1.5B per-layer embedding table), was derived from Raon-1 mini preview (30B-A4B) through MoE-to-Dense pruning and distillation, mixes 18 linear attention layers with 6 full attention layers, and natively supports 262,144 tokens of context under Apache 2.0. It targets Korean and English conversation and tool calling, and ships in GGUF, MLX and LiteRT-LM formats for on-device use.",
+      "sources": [
+        {
+          "candidate_id": "c_bdf4a0f3d3",
+          "url": "https://huggingface.co/KRAFTON/Raon-1-nano"
+        },
+        {
+          "candidate_id": "c_bdf4a0f3d3",
+          "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xtmbkn/kraftonraon1nano_hugging_face/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/KRAFTON/Raon-1-nano",
+          "quote": "Raon-1 nano is a dense language model with 1.5B effective parameters (3.1B total, including a 1.5B per-layer embedding table), developed by KRAFTON AI ."
+        },
+        {
+          "url": "https://huggingface.co/KRAFTON/Raon-1-nano",
+          "quote": "Raon-1 nano was derived from Raon-1 mini preview (30B-A4B) through MoE-to-Dense pruning and knowledge distillation."
+        },
+        {
+          "url": "https://huggingface.co/KRAFTON/Raon-1-nano",
+          "quote": "Natively supports up to 262,144 tokens of context. Model Overview Raon-1 nano uses a hybrid dense architecture, consisting of 18 linear attention layers and 6 full attention layers."
+        }
+      ],
+      "tags": [
+        "模型",
+        "开源"
+      ]
+    },
+    {
+      "section": "model",
+      "title": "MBZUAI open-sources PAN 2, a world model that simulates actions as video",
+      "summary": "PAN 2 from IFM at MBZUAI takes an optional image plus actions described in text and simulates the outcome as a video of up to 20 seconds: a language model writes a structured next-state description, a 29B-parameter MMDiT trained from scratch predicts the video latents, and the Wan 2.2 VAE decodes them. Code and weights are under Apache 2.0, so agents can simulate candidate plans and act on the one with the best outcome.",
+      "sources": [
+        {
+          "candidate_id": "c_7353a36810",
+          "url": "https://huggingface.co/IFM/PAN2"
+        },
+        {
+          "candidate_id": "c_7353a36810",
+          "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xtb199/ifmpan2_hugging_face/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/IFM/PAN2",
+          "quote": "Given a current observation (an optional image plus text) and actions described in text, it simulates the outcome as a video of up to 20 seconds."
+        },
+        {
+          "url": "https://huggingface.co/IFM/PAN2",
+          "quote": "The 29B-parameter MMDiT, the perceptual reasoning backbone , trained from scratch on hundreds of millions of videos annotated in the same format"
+        },
+        {
+          "url": "https://huggingface.co/IFM/PAN2",
+          "quote": "PAN 2 is developed by the Institute of Foundation Models (IFM) at MBZUAI. Its own code and weights are released under the Apache License, Version 2.0 ."
+        }
+      ],
+      "tags": [
+        "模型",
+        "视频",
+        "开源"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "WikiTrace links agent memory to source trajectories so lessons can be checked",
+      "summary": "The paper argues that external memory can make agents fail on tasks they would otherwise solve, because lessons are inferred from success or failure labels and stored without their trajectories. WikiTrace links each lesson to a summary of why its trajectory succeeded or failed and to the raw trajectory, letting the agent drill down with terminal tools before acting, and it outperforms existing memory approaches on five agentic benchmarks. Keeping the evidence chain, not just the distilled lesson, is a design worth copying for long-term agent memory.",
+      "sources": [
+        {
+          "candidate_id": "c_7a3b1b2f65",
+          "url": "https://huggingface.co/papers/2611.14320"
+        },
+        {
+          "url": "https://arxiv.org/abs/2611.14320",
+          "title": "arXiv"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2611.14320",
+          "quote": "WikiTrace stores each lesson as a concise insight linked to a summary of why its trajectory succeeded or failed and to the raw trajectory itself."
+        },
+        {
+          "url": "https://arxiv.org/abs/2611.14320",
+          "quote": "We validate WikiTrace on five agentic benchmarks, showing that it consistently outperforms existing memory approaches and a baseline given the same insights alone, while also reducing memory-induced degradation."
+        }
+      ],
+      "tags": [
+        "论文",
+        "Agent"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "World In-Context Learning lets robots rehearse in simulation and keep lessons in context",
+      "summary": "World In-Context Learning (WICL) has a frozen model start from one demonstration, rehearse the task in a simulator and write the feedback into its context rather than its weights. The RoboScript system reaches 83.4% mean success on all 50 RoboTwin 2.0 tasks with one demonstration per task and no gradient updates, beating the strongest trained action policy by over 20 points, and transfers to a physical dual-arm robot. In-context learning is starting to compete with trained policies for manipulation, and all code is available.",
+      "sources": [
+        {
+          "candidate_id": "c_52811214f1",
+          "url": "https://huggingface.co/papers/2611.12885"
+        },
+        {
+          "url": "https://arxiv.org/abs/2611.12885",
+          "title": "arXiv"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2611.12885",
+          "quote": "On all 50 tasks of RoboTwin 2.0, RoboScript reaches 83.4% mean success across clean and randomized settings with one demonstration per task and no gradient updates, exceeding the strongest trained action policy by over 20 points."
+        },
+        {
+          "url": "https://arxiv.org/abs/2611.12885",
+          "quote": "transfers to a physical dual-arm robot through cross-embodiment memory adaptation. With a world in the loop, a robot can learn a manipulation task in its context as well as it learns one in its weights. All code is available at"
+        }
+      ],
+      "tags": [
+        "论文",
+        "Agent"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Embodied First Exam benchmarks coding agents that control robots",
+      "summary": "The benchmark has 1,156 tasks in 35 suites on 47 robots, and coding agents may choose direct control, code-based control or training a policy. On the 456 core tasks in the Standard Setting, the strongest of eight agents, GPT-6 Astra in Codex, succeeds only 34% of the time. Coding agents are still far from reliable at controlling physical robots.",
+      "sources": [
+        {
+          "candidate_id": "c_76ffb78916",
+          "url": "https://huggingface.co/papers/2611.12177"
+        },
+        {
+          "url": "https://arxiv.org/abs/2611.12177",
+          "title": "arXiv"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2611.12177",
+          "quote": "with 1,156 tasks in 35 suites on 47 robots, including 9 new suites that go beyond pick-and-place"
+        },
+        {
+          "url": "https://arxiv.org/abs/2611.12177",
+          "quote": "On the 456 core tasks, the strongest of eight agents, GPT-6 Astra in Codex, achieves a success rate of 34% in the Standard Setting, leaving much room for improvement."
+        }
+      ],
+      "tags": [
+        "论文",
+        "Agent",
+        "代码"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "MMDM benchmarks decision models across massive multitask settings",
+      "summary": "MMDM has 5,448 questions across 16 task categories, with option spaces from 2 to 1,024 and inputs up to 64,817 tokens, covering agent state tracking, tool and skill selection, preference judgments and rubric scoring. Across 28 decision models, Perplexity Decider-V1.2 reaches 78.75% Hard Single-select Accuracy on world knowledge but only 53.95% on option logic, and the best Hard Multi-select Accuracy is 36.81%. As decision-model APIs multiply, it is a way to test them on interdependent and constrained options before choosing one.",
+      "sources": [
+        {
+          "candidate_id": "c_f93e1a49f2",
+          "url": "https://huggingface.co/papers/2611.14309"
+        },
+        {
+          "url": "https://arxiv.org/abs/2611.14309",
+          "title": "arXiv"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2611.14309",
+          "quote": "we introduce MMDM (Massive Multitask Decision Making), a benchmark of 5,448 high-quality questions across 16 task categories"
+        },
+        {
+          "url": "https://arxiv.org/abs/2611.14309",
+          "quote": "r-V1.2 reaches 78.75% Hard Single-select Accuracy on world knowledge, but only 53.95% on option logic and 47.95% on constraint planning, while the best Hard Multi-select Accuracy across all models is 36.81%."
+        }
+      ],
+      "tags": [
+        "论文",
+        "Agent"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "OpenAI's Codex Security CLI and SDK trend on GitHub",
+      "summary": "Codex Security helps find, investigate and fix vulnerabilities, either inside Codex or through the @openai/codex-security CLI and TypeScript SDK in terminals and CI, with SARIF, JSON and CSV export under the Apache-2.0 license. Teams that want an AI security scan in their pipeline can try it directly.",
+      "sources": [
+        {
+          "candidate_id": "c_60b4017b3f",
+          "url": "https://github.com/openai/codex-security"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/openai/codex-security",
+          "quote": "Codex Security helps you find, investigate, and fix vulnerabilities in your code. Use its security workflows in Codex, or automate them with the @openai/codex-security CLI and TypeScript SDK."
+        },
+        {
+          "url": "https://github.com/openai/codex-security",
+          "quote": "Track findings in Linear, Jira, or GitHub, publish completed scans, or export SARIF, JSON, and CSV."
+        },
+        {
+          "url": "https://github.com/openai/codex-security",
+          "quote": "README Contributing Apache-2.0 license Security"
+        }
+      ],
+      "tags": [
+        "工具",
+        "安全",
+        "代码"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Strands Labs open-sources Strands Decider, a small decision model",
+      "summary": "Strands Decider removes the language-modelling head from Qwen3.5-2B-Base and replaces it with a pointer head of about a million parameters, so it only picks between options or rates on a scale, with a calibrated confidence on every decision; the 2B model answers in a median 115 ms on an RTX 3090 and is licensed under Apache 2.0. It follows the same idea as the Gemini Decisions API but runs locally.",
+      "sources": [
+        {
+          "url": "https://github.com/strands-labs/strands-decider",
+          "title": "strands-labs/strands-decider"
+        },
+        {
+          "candidate_id": "c_86102dce12",
+          "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xthu1w/strands_decider_v_the_jevs/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/strands-labs/strands-decider",
+          "quote": "A small, fast decision model, or system one model, for agentic workflows. Pick between options or rate on a scale faster than an LLM, with a calibrated confidence on every decision."
+        },
+        {
+          "url": "https://github.com/strands-labs/strands-decider",
+          "quote": "take a pretrained decoder LLM torso ( Qwen3.5-2B-Base ), discard its language-modelling head — taking away its ability to generate text — and replace it with a small pointer head of about a million parameters."
+        },
+        {
+          "url": "https://github.com/strands-labs/strands-decider",
+          "quote": "strands-decider-2B , the first model of the family, has 1.9 billion parameters. It answers a question in a median 115 ms on an RTX 3090"
+        },
+        {
+          "url": "https://github.com/strands-labs/strands-decider",
+          "quote": "This project is licensed under the Apache License 2.0"
+        }
+      ],
+      "tags": [
+        "工具",
+        "Agent",
+        "开源"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "llama.cpp merges FP8 KV-cache support",
+      "summary": "PR #28392 adds OCP-FP8-based KV caches to llama.cpp, with optional run-time static per-tensor scales, and has been merged into master by ggerganov. Local long-context runs gain a lower-precision storage option for the KV cache.",
+      "sources": [
+        {
+          "candidate_id": "c_3f49398347",
+          "url": "https://github.com/ggml-org/llama.cpp/pull/28392"
+        },
+        {
+          "candidate_id": "c_3f49398347",
+          "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xt9o3t/llamacpp_add_fp8_kvcache/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/pull/28392",
+          "quote": "Add support for OCP-FP8-based KV-caches. Run-time, static per-tensor scales are supported, but optional."
+        },
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/pull/28392",
+          "quote": "Add FP8 KV-cache support # 28392 ggerganov merged 24 commits into master"
+        }
+      ],
+      "tags": [
+        "工具",
+        "推理",
+        "开源"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Unsloth releases Dynamic V3.1 quants for Qwen3.8-27B and more",
+      "summary": "Unsloth Dynamic V3.1 covers Qwen3.8-27B, DeepSeek-V4.1-Flash-1017 and Qwen3.8-Flash-Next, and Unsloth claims 10-15% higher accuracy and 50% less token usage than other quants of the same size; Qwen3.8-27B quants from 2-bit to 6-bit are updated, while 3-bit stays on UD3. Community commenters note that V3 still looks better than V3.1 on DeepSWE v1.1 for some Q4 quants, so benchmark before switching.",
+      "sources": [
+        {
+          "candidate_id": "c_4b09653a77",
+          "url": "https://unsloth.ai/docs/basics/dynamic-3.0-ggufs"
+        },
+        {
+          "candidate_id": "c_1f54ffa272",
+          "url": "https://i.redd.it/rdisl2kib01i1.png"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://unsloth.ai/docs/basics/dynamic-3.0-ggufs",
+          "quote": "Unsloth Dynamic V3.1 (Nov 2026) is our latest quantization algorithm for Qwen3.8-27B, DeepSeek-V4.1-Flash-1017 and Qwen3.8-Flash-Next, resulting in 10-15% increased accuracy and 50% less token usage vs other quants of the same size."
+        }
+      ],
+      "tags": [
+        "工具",
+        "推理"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "United Airlines bans third-party AI agents from booking flights",
+      "summary": "United says it will prohibit unauthorized third-party personal AI agents or assistants on its platforms, citing exposed credentials, unintended purchases and use of MileagePlus miles.",
+      "sources": [
+        {
+          "candidate_id": "c_52badfaf3d",
+          "url": "https://www.cbsnews.com/news/united-airlines-bans-ai-agents-booking-flights/"
+        },
+        {
+          "candidate_id": "c_52badfaf3d",
+          "url": "https://news.ycombinator.com/item?id=50458900"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://www.cbsnews.com/news/united-airlines-bans-ai-agents-booking-flights/",
+          "quote": "to prohibit use by unauthorized, third-party personal AI agents or assistants,"
+        },
+        {
+          "url": "https://www.cbsnews.com/news/united-airlines-bans-ai-agents-booking-flights/",
+          "quote": "actions taken by these tools may result in unintended purchases, account changes, or use of MileagePlus miles."
+        }
+      ],
+      "tags": [
+        "Agent",
+        "行业"
+      ]
+    }
+  ],
+  "research": [
+    {
+      "via": "webfetch",
+      "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://deepmind.google/blog/alphagenome-2-deciphering-how-cells-read-dna-to-better-understand-disease/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/huawei-csl/MACaQ"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/openai/codex-security"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/KRAFTON/Raon-1-nano"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/nex-agi/Nex-N2.6"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/Zyphra/ZONOS3-Mini"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/IFM/PAN2"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/strands-labs/strands-decider"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/28392"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://unsloth.ai/docs/basics/dynamic-3.0-ggufs"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/OpenSenseNova/SenseNova-U1"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://blog.atuin.sh/threads-agent-sessions/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://www.cbsnews.com/news/united-airlines-bans-ai-agents-booking-flights/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/owenawsong/Inflect"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://arxiv.org/abs/2611.14320"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://arxiv.org/abs/2611.12885"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://arxiv.org/abs/2611.12177"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://arxiv.org/abs/2611.14210"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://arxiv.org/abs/2611.14309"
+    },
+    {
+      "via": "websearch",
+      "query": "NVIDIA Alpamayo 2 Edge release"
+    }
+  ],
+  "lang": "en",
+  "validation": {
+    "validated_at": "2026-11-12T04:48:26+00:00",
+    "checked_links": false,
+    "dropped": [],
+    "warnings": []
+  }
+}
