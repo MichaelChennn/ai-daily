@@ -1,0 +1,107 @@
+---
+// The issue pages' layout (issue #43 design): no header, no Tailwind. The other pages stay on
+// Layout.astro until they are redesigned too; both keep the reader's theme and language choices
+// under the same localStorage keys.
+import stylesheet from "@/styles/press.css?url"
+
+import { langOf, strings } from "@/lib/i18n"
+import { href, pageHref, pagePath } from "@/lib/issues"
+
+interface Props {
+  title: string
+  description: string
+  /** This page's canonical path, if not its own. */
+  canonical?: string
+}
+
+const { title, description, canonical = Astro.url.pathname } = Astro.props
+const lang = langOf(Astro.currentLocale)
+const t = strings[lang]
+// The same page in both languages, for search engines and for the redirect below. Not on a beta
+// page: the English site has none.
+const page = pagePath(Astro.url.pathname, lang)
+const bilingual = !/\/beta\//.test(page)
+const alternates = bilingual
+  ? [
+      { hreflang: "zh-CN", href: pageHref(page) },
+      { hreflang: "en", href: pageHref(page, "en") },
+      { hreflang: "x-default", href: pageHref(page, "en") },
+    ]
+  : []
+const otherLang = bilingual ? (lang === "en" ? "zh" : "en") : undefined
+---
+
+<!doctype html>
+<html
+  lang={lang === "en" ? "en" : "zh-CN"}
+  data-other-lang={otherLang}
+  data-other-href={otherLang && pageHref(page, otherLang)}>
+  <head>
+    <meta charset="utf-8" />
+    <script is:inline>
+      // Show the edition the reader wants: the one they picked, else Chinese if the browser's
+      // first language is Chinese, else English. Crawlers stay on the page they asked for.
+      ;(() => {
+        const root = document.documentElement
+        const other = root.dataset.otherLang
+        if (!other || /bot|crawl|spider|slurp/i.test(navigator.userAgent)) return
+        let chosen = null
+        try {
+          chosen = localStorage.getItem("lang")
+        } catch {}
+        const first = (navigator.languages?.[0] ?? navigator.language ?? "").toLowerCase()
+        const wanted = chosen ?? (first.startsWith("zh") ? "zh" : "en")
+        if (wanted === other) location.replace(root.dataset.otherHref + location.search + location.hash)
+      })()
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Cross-document view transitions are opted into here, not in the stylesheet, which may
+         still be loading when the new page is revealed. The first paint waits for the whole
+         page, so the transition and the entrance see all of it. -->
+    <style is:inline>
+      @view-transition {
+        navigation: auto;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        @view-transition {
+          navigation: none;
+        }
+      }
+    </style>
+    <link rel="stylesheet" href={stylesheet} />
+    <link rel="expect" href="#content-end" blocking="render" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={new URL(canonical, Astro.site)} />
+    <link rel="icon" type="image/svg+xml" href={href("favicon.svg")} />
+    {alternates.map((link) => <link rel="alternate" hreflang={link.hreflang} href={new URL(link.href, Astro.site)} />)}
+    <link rel="alternate" type="application/rss+xml" title={t.siteTitle} href={href(t.feed)} />
+    <meta name="generator" content={Astro.generator} />
+    <script is:inline>
+      // The theme before the first paint: the saved choice, else the system's. Without a saved
+      // choice it follows the system when that changes (the toggle is in the page script).
+      ;(() => {
+        let saved = null
+        try {
+          saved = localStorage.getItem("theme")
+        } catch {}
+        const dark = matchMedia("(prefers-color-scheme: dark)")
+        document.documentElement.dataset.theme = saved || (dark.matches ? "dark" : "light")
+      })()
+      // A publisher logo that fails to load leaves its monogram showing. Error events do not
+      // bubble, so listen in the capture phase; this runs before any <img> exists.
+      document.addEventListener(
+        "error",
+        (event) => {
+          const target = event.target
+          if (target instanceof HTMLImageElement && target.dataset.logo !== undefined) target.remove()
+        },
+        true,
+      )
+    </script>
+  </head>
+  <body>
+    <slot />
+    <div id="content-end" hidden></div>
+  </body>
+</html>

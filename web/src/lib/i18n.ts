@@ -5,6 +5,7 @@ export type Lang = "zh" | "en"
 
 const WEEKDAYS_ZH = "日一二三四五六"
 const WEEKDAYS_EN = "Sun Mon Tue Wed Thu Fri Sat".split(" ")
+const pad = (n: number) => String(n).padStart(2, "0")
 const MONTHS_EN = "Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec".split(" ")
 const MONTH_NAMES_EN =
   "January February March April May June July August September October November December".split(" ")
@@ -72,6 +73,24 @@ export const strings = {
       neverFetched: "还没有抓取记录",
       notFetched: "暂不抓取",
       repos: (n: number) => `${n} 个仓库`,
+    },
+    // The issue pages (issue #43 design): the timeline on the left, the cards, the footer.
+    press: {
+      rail: "日报时间轴",
+      latest: "回到最新一期",
+      archive: "归档",
+      sources: "信源",
+      noIssue: "这天没有日报",
+      tickDay: (day: Date) => `${pad(day.getUTCMonth() + 1)}.${pad(day.getUTCDate())} 周${WEEKDAYS_ZH[day.getUTCDay()]}`,
+      allSources: (n: number) => `全部 ${n} 个来源`,
+      original: "原文",
+      discussion: "讨论",
+      process: "生成过程",
+      main: "正式版",
+      edition: (label: string) => `${label} 版`,
+      theme: "切换日间/夜间",
+      languages: "Switch to English",
+      github: "GitHub",
     },
     day: (date: Date) => ({
       year: date.getUTCFullYear(),
@@ -144,6 +163,23 @@ export const strings = {
       neverFetched: "Not fetched yet",
       notFetched: "Not fetched",
       repos: (n: number) => `${n} ${n === 1 ? "repo" : "repos"}`,
+    },
+    press: {
+      rail: "Issue timeline",
+      latest: "Back to the latest issue",
+      archive: "Archive",
+      sources: "Sources",
+      noIssue: "No issue this day",
+      tickDay: (day: Date) => `${pad(day.getUTCMonth() + 1)}.${pad(day.getUTCDate())} ${WEEKDAYS_EN[day.getUTCDay()]}`,
+      allSources: (n: number) => `All ${n} sources`,
+      original: "Original",
+      discussion: "Discussion",
+      process: "How it was made",
+      main: "Main edition",
+      edition: (label: string) => `${label} edition`,
+      theme: "Toggle light / dark",
+      languages: "切换到中文版",
+      github: "GitHub",
     },
     day: (date: Date) => ({
       year: date.getUTCFullYear(),

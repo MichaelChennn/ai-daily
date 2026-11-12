@@ -1,6 +1,6 @@
 ---
 import IssuePage from "@/components/IssuePage.astro"
-import Layout from "@/layouts/Layout.astro"
+import PressLayout from "@/layouts/PressLayout.astro"
 import { strings } from "@/lib/i18n"
 import { issues, SITE_TITLE } from "@/lib/issues"
 
@@ -12,8 +12,8 @@ const [latest] = issues
   latest ? (
     <IssuePage issue={latest} home />
   ) : (
-    <Layout title={SITE_TITLE} description={`${SITE_TITLE}。`} current="today">
-      <p class="py-24 text-center text-sm text-muted-foreground">{strings.zh.empty}</p>
-    </Layout>
+    <PressLayout title={SITE_TITLE} description={`${SITE_TITLE}。`}>
+      <main><p class="notice">{strings.zh.empty}</p></main>
+    </PressLayout>
   )
 }

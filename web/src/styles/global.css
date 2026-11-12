@@ -137,8 +137,8 @@
     scrollbar-gutter: stable;
     }
 }
-/* View transitions: between issues (cross-document, opted into and given a direction in
-   Layout.astro, which sets data-slide) and when the section filter changes (SectionFilter sets
+/* View transitions: between process pages (cross-document, opted into and given a direction in
+   Layout.astro, which sets data-slide) and when a filter changes (filter-transition.ts sets
    data-filtering). Browsers without them just switch. */
 
 ::view-transition-group(*) {
@@ -161,21 +161,14 @@
   z-index: 3;
 }
 
-/* The old issue leaves before the new one arrives, so the two are hardly ever on screen together.
-   The wheel shifts less than the body: it moves by one day. */
-::view-transition-old(issue),
-::view-transition-new(issue) {
-  --vt-shift: 40px;
-}
+/* The wheel moves by one day. */
 ::view-transition-old(date-wheel),
 ::view-transition-new(date-wheel) {
   --vt-shift: 14px;
 }
-[data-slide]::view-transition-old(issue),
 [data-slide]::view-transition-old(date-wheel) {
   animation: 160ms ease-in both vt-fade-out, 200ms ease-in both vt-slide-out;
 }
-[data-slide]::view-transition-new(issue),
 [data-slide]::view-transition-new(date-wheel) {
   animation:
     260ms 120ms ease-out both vt-fade-in,

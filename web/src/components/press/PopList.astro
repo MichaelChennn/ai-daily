@@ -1,0 +1,29 @@
+---
+import type { Source } from "@/lib/issues"
+
+interface Props {
+  groups: [string, Source[]][]
+  favicon: (url: string) => string
+}
+
+// The rows of a source popover, under "Original" and "Discussion".
+const { groups, favicon } = Astro.props
+---
+
+{
+  groups.map(
+    ([label, list]) =>
+      list.length > 0 && (
+        <>
+          <div class="grp">{label}</div>
+          {list.map((s) => (
+            <a href={s.url} target="_blank" rel="noopener" role="menuitem">
+              <img src={favicon(s.url)} alt="" referrerpolicy="no-referrer" />
+              <span class="nm">{s.label}</span>
+              <span class="k">{s.discussion ? "💬" : "↗"}</span>
+            </a>
+          ))}
+        </>
+      ),
+  )
+}

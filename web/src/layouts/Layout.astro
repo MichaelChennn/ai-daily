@@ -1,5 +1,7 @@
 ---
-import "@/styles/global.css"
+// Linked by hand (?url), as is PressLayout's stylesheet: imported plainly, Astro assigns CSS to
+// pages by chunk, and the shared chunk put this Tailwind CSS on the issue pages as well.
+import stylesheet from "@/styles/global.css?url"
 import SiteFooter from "@/components/SiteFooter.astro"
 import SiteHeader, { type NavPage } from "@/components/SiteHeader.astro"
 import { langOf, strings } from "@/lib/i18n"
@@ -90,6 +92,7 @@ const latest = issuesIn(lang)[0]?.date ?? ""
         }
       }
     </style>
+    <link rel="stylesheet" href={stylesheet} />
     <link rel="expect" href="#content-end" blocking="render" />
     <title>{title}</title>
     <meta name="description" content={description} />
@@ -145,8 +148,5 @@ const latest = issuesIn(lang)[0]?.date ?? ""
       <div id="content-end" hidden></div>
     </main>
     <SiteFooter editor={editor} />
-    <script>
-      import "@/scripts/source-overflow"
-    </script>
   </body>
 </html>

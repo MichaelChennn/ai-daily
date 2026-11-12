@@ -1,0 +1,71 @@
+---
+import { type Lang, strings } from "@/lib/i18n"
+import type { Item, Source } from "@/lib/issues"
+import PopList from "./PopList.astro"
+
+interface Props {
+  item: Item
+  lang: Lang
+  /** A brief's: only the logos, the publisher's first; publisher, date and sources in the popover. */
+  compact?: boolean
+}
+
+// Publisher logo + name and the publication date; with more than one source, the source stack
+// at the right end opens a list of all of them (the page script opens and closes it).
+const { item, lang, compact = false } = Astro.props
+const t = strings[lang].press
+const { publisher, published, sources } = item
+const host = (url: string) => {
+  try {
+    return new URL(url).hostname.replace(/^www\./, "")
+  } catch {
+    return ""
+  }
+}
+const favicon = (url: string) => `https://www.google.com/s2/favicons?domain=${host(url)}&sz=64`
+const rest = sources.slice(1)
+const groups: [string, Source[]][] = [
+  [t.original, sources.filter((s) => !s.discussion)],
+  [t.discussion, sources.filter((s) => s.discussion)],
+]
+---
+
+{
+  compact ? (
+    <div class="meta">
+      <div class="srcs">
+        <button type="button" aria-label={t.allSources(sources.length)} aria-expanded="false">
+          <span class="dot mono">{publisher.name.charAt(0)}<img data-logo src={publisher.icon} alt="" referrerpolicy="no-referrer" /></span>
+          {rest.slice(0, 2).map((s) => (
+            <span class="dot"><img src={favicon(s.url)} alt="" referrerpolicy="no-referrer" /></span>
+          ))}
+          {rest.length > 2 && <span class="more">+{rest.length - 2}</span>}
+        </button>
+        <span class="pop" role="menu">
+          <div class="by"><span class="pub">{publisher.name}</span>{published && <> · <time datetime={published.iso}>{published.label}</time></>}</div>
+          {sources.length > 1 && <PopList groups={groups} favicon={favicon} />}
+        </span>
+      </div>
+    </div>
+  ) : (
+    <div class="meta">
+      <span class="logo16">{publisher.name.charAt(0)}<img data-logo src={publisher.icon} alt="" loading="lazy" referrerpolicy="no-referrer" /></span>
+      <span class="pub">{publisher.name}</span>
+      {published && <><span>·</span><time class="date" datetime={published.iso}>{published.label}</time></>}
+      <span class="sp"></span>
+      {
+        sources.length > 1 && (
+          <div class="srcs">
+            <button type="button" aria-label={t.allSources(sources.length)} aria-expanded="false">
+              {rest.slice(0, 3).map((s) => (
+                <span class="dot"><img src={favicon(s.url)} alt="" referrerpolicy="no-referrer" /></span>
+              ))}
+              {rest.length > 3 && <span class="more">+{rest.length - 3}</span>}
+            </button>
+            <span class="pop" role="menu"><PopList groups={groups} favicon={favicon} /></span>
+          </div>
+        )
+      }
+    </div>
+  )
+}

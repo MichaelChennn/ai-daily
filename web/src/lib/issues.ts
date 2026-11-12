@@ -1,6 +1,7 @@
 import { getRelativeLocaleUrl } from "astro:i18n"
 
 import { type Lang, strings } from "@/lib/i18n"
+import { modelName } from "@/lib/models"
 
 // The issues written by `python -m daily export` (web/data/issues/*.json, the English site's in
 // web/data/en/issues/). Only issues that pass
@@ -58,6 +59,12 @@ export const issuesIn = (lang: Lang) => (lang === "en" ? enIssues : issues)
 
 /** Every beta page. */
 export const betas: Issue[] = Object.values(betaFiles)
+
+/** The model that edited one beta, as the reader sees it ("MiniMax M3.1 Flash"); else its label. */
+export function betaName(date: string, beta: Beta): string {
+  const page = betas.find((b) => b.date === date && b.beta?.slug === beta.slug)
+  return modelName(page?.editor ?? null) ?? beta.label
+}
 
 function parse(day: string): Date {
   const [y, m, d] = day.split("-").map(Number)
