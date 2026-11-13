@@ -1,0 +1,54 @@
+---
+import { type Lang, strings } from "@/lib/i18n"
+import { addDays, issueHref, issuesIn, pageHref } from "@/lib/issues"
+import RailIcons from "./RailIcons.astro"
+
+interface Props {
+  /** The issue on this page. */
+  date: string
+  lang: Lang
+}
+
+// The timeline on the left, after Stripe Press's book rail: one tick per calendar day from the
+// first issue to the newest, 20 at a time (the page script slides the window). A day without an
+// issue keeps its tick but is not a link. Above it, the arrow back to the newest issue; below,
+// the archive and sources pages.
+const { date, lang } = Astro.props
+const t = strings[lang].press
+const issues = issuesIn(lang)
+const latest = issues[0].date
+const home = pageHref("", lang)
+const headlines = new Map(issues.map((i) => [i.date, i.sections[0]?.items[0]?.title ?? ""]))
+const days: string[] = []
+for (let d = issues.at(-1)!.date; d <= latest; d = addDays(d, 1)) days.push(d)
+const W = Math.min(20, days.length)
+const label = (d: string) => t.tickDay(new Date(`${d}T00:00:00Z`))
+---
+
+<nav class:list={["rail", { "off-latest": date !== latest }]} id="rail" aria-label={t.rail} style={`--W:${W}`} data-current={date} data-latest={latest}>
+  <a class="ret" id="ret" href={home} aria-label={t.latest} tabindex={date === latest ? -1 : undefined}>
+    <svg width="18" height="18" viewBox="0 0 19 20" fill="none"><path d="M9.11 .89v16.89" stroke-width="3" stroke-miterlimit="10"></path><path d="M1.06 9.83l8.05 8.05 8.04-8.05" stroke-width="3" stroke-miterlimit="10"></path></svg>
+    <span class="il">{t.latest}</span>
+  </a>
+  <div class="ticks" id="ticks">
+    <div class="ticks-inner" id="ticksInner">
+      {
+        days.map((d) =>
+          headlines.has(d) ? (
+            <a class:list={["tick", { active: d === date }]} data-iso={d} href={d === latest ? home : issueHref(d, lang)} aria-label={d} aria-current={d === date ? "page" : undefined}>
+              <div class="fill"></div>
+              <div class="label"><span class="d">{label(d)}</span><span class="t">{headlines.get(d)}</span></div>
+            </a>
+          ) : (
+            <span class="tick empty" data-iso={d} aria-disabled="true" aria-label={d}>
+              <div class="fill"></div>
+              <div class="label"><span class="d">{label(d)}</span><span class="t none">{t.noIssue}</span></div>
+            </span>
+          ),
+        )
+      }
+    </div>
+  </div>
+  <RailIcons lang={lang} />
+</nav>
+<div class="bubble" id="bubble" hidden></div>

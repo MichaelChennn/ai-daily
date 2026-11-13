@@ -404,7 +404,7 @@ def test_render_markdown():
         {"candidate_id": "c_gpt", "url": "https://news.ycombinator.com/item?id=1"}
     )
     text = render.to_markdown(data, CANDIDATES)
-    assert text.startswith(f"# {DATE} · AI 科技日报")
+    assert text.startswith(f"# {DATE} · AI 晨报")
     assert "## 今日要点" in text and "## 🔥 头条" in text and "### OpenAI 发布 GPT-6" in text
     assert (
         "[OpenAI News](https://openai.com/index/gpt-6/) · [HN 讨论](https://news.ycombinator.com/item?id=1)"

@@ -1,18 +1,14 @@
 ---
-import { cn } from "cn"
-import { TriangleAlert } from "lucide-react"
-
-import { Alert, AlertDescription } from "@/components/ui/alert"
-import { buttonVariants } from "@/components/ui/button"
-import BriefList from "@/components/BriefList"
-import DateWheel from "@/components/DateWheel"
-import ItemCard from "@/components/ItemCard"
-import Pager from "@/components/Pager"
-import SectionFilter from "@/components/SectionFilter"
-import Layout from "@/layouts/Layout.astro"
+import ItemCard from "@/components/press/ItemCard.astro"
+import ItemMeta from "@/components/press/ItemMeta.astro"
+import PressFooter from "@/components/press/PressFooter.astro"
+import Rail from "@/components/press/Rail.astro"
+import Wordmark from "@/components/press/Wordmark.astro"
+import PressLayout from "@/layouts/PressLayout.astro"
 import { langOf, strings } from "@/lib/i18n"
-import { betaHref, type Issue, issueHref, issuesIn } from "@/lib/issues"
-import { processHref } from "@/lib/process"
+import { betaName, type Issue, issueHref } from "@/lib/issues"
+import controls from "@/scripts/controls.js?raw"
+import script from "@/scripts/press.js?raw"
 
 interface Props {
   issue: Issue
@@ -21,117 +17,61 @@ interface Props {
 }
 
 // One issue, at YYYY-MM-DD/ and (the newest) at the home page, or one of its betas at
-// YYYY-MM-DD/beta/<slug>/ (the date wheel and pager still go between main issues).
+// YYYY-MM-DD/beta/<slug>/ (the timeline still goes between main issues). Sections start right
+// away: no issue number, date or summary above them.
 const { issue, home = false } = Astro.props
 const lang = langOf(Astro.currentLocale)
 const t = strings[lang]
-const issues = issuesIn(lang)
-const at = issues.findIndex((i) => i.date === issue.date)
-const newer = issues[at - 1]?.date ?? null
-const older = issues[at + 1]?.date ?? null
-const published = new Set(issues.map((i) => i.date))
 const title =
   `${issue.date} · ` +
-  (issue.beta ? `Beta · ${issue.beta.label} · ` : "") +
+  (issue.beta ? `Beta · ${betaName(issue.date, issue.beta)} · ` : "") +
   t.siteTitle +
   (issue.fallback ? t.fallbackTitle : "")
 const description = issue.description || t.description(issue.date)
-const filters = issue.sections.map(({ id, label }) => ({ id, label }))
-// A beta page switches between the issue's betas in a row above the filter; the header's Beta link
-// goes into this issue's betas, and on a beta page back to the main issue.
-const models = issue.beta
-  ? issue.betas.map(({ slug, label }) => ({
-      label,
-      href: betaHref(issue.date, slug),
-      current: slug === issue.beta!.slug,
-    }))
-  : []
-const beta = issue.beta
-  ? issueHref(issue.date)
-  : issue.betas.length
-    ? betaHref(issue.date, issue.betas[0].slug)
-    : undefined
 ---
 
+<PressLayout title={title} description={description} canonical={home ? issueHref(issue.date, lang) : undefined}>
+  <Wordmark lang={lang} />
+  <Rail date={issue.date} lang={lang} />
 
-<Layout
-  title={title}
-  description={description}
-  current={issue.beta ? "beta" : newer ? "archive" : "today"}
-  beta={beta}
-  canonical={home ? issueHref(issue.date, lang) : undefined}
-  editor={t.credit(issue.editor, issue.fallback)}
->
-  <h1 class="sr-only">{title}</h1>
-  <DateWheel date={issue.date} published={published} older={older} newer={newer} lang={lang} />
-  {
-    models.length > 0 && (
-      <nav aria-label={t.betaModels} class="mb-3 flex flex-wrap justify-center gap-1">
-        {models.map((model) => (
-          <a
-            href={model.href}
-            aria-current={model.current ? "page" : undefined}
-            class={cn(
-              buttonVariants({ variant: "outline", size: "sm" }),
-              "rounded-full px-3.5 text-[13px] font-normal aria-[current=page]:border-foreground aria-[current=page]:bg-foreground aria-[current=page]:text-background",
-            )}
-          >
-            {model.label}
-          </a>
-        ))}
-      </nav>
-    )
-  }
-  <SectionFilter client:load sections={filters} labels={{ all: t.all, filter: t.filter }} />
-
-  <div data-issue class="[view-transition-name:issue]">
+  <main id="main">
+    <h1 class="sr-only">{title}</h1>
+    {issue.notice && <p class="notice drop">{issue.notice}</p>}
     {
-      issue.notice && (
-        <Alert className="mt-8 rounded-lg">
-          <TriangleAlert />
-          <AlertDescription>{issue.notice}</AlertDescription>
-        </Alert>
-      )
-    }
-
-    <div class="mt-10 flex flex-col gap-12">
-      {
-        issue.sections.map((section, i) => {
-          const full = section.items.filter((item) => !item.compact)
-          const compact = section.items.filter((item) => item.compact)
-          return (
-            <section data-section={section.id} id={section.id} class="scroll-mt-20">
-              <header class="mb-5 flex items-baseline justify-between gap-4">
-                <h2 class="flex items-baseline gap-3 text-xl font-semibold tracking-tight">
-                  <span class="text-sm font-medium text-muted-foreground tabular-nums">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <span>{section.label}</span>
-                </h2>
-                <span class="text-xs text-muted-foreground tabular-nums">{t.count(section.items.length)}</span>
-              </header>
-              <div class="flex flex-col gap-6">
-                {full.map((item) => (
-                  <ItemCard item={item} lang={lang} />
+      issue.sections.map((section, k) => {
+        const full = section.items.filter((item) => !item.compact)
+        const briefs = section.items.filter((item) => item.compact)
+        return (
+          <section data-sec={section.id} id={section.id}>
+            <div class="sec-h drop">
+              <span class="n">{String(k + 1).padStart(2, "0")}</span>
+              <h2>{section.label}</h2>
+            </div>
+            <div class="stack">
+              {full.map((item, i) => (
+                <ItemCard item={item} lang={lang} index={i} />
+              ))}
+            </div>
+            {briefs.length > 0 && (
+              <ul class="briefs">
+                {briefs.map((item) => (
+                  <li class="drop">
+                    <span class="bt"><a href={item.sources[0].url} target="_blank" rel="noopener">{item.title}</a></span>
+                    <ItemMeta item={item} lang={lang} compact />
+                    {item.summary && (
+                      <div class="bs"><div><p class="summary">{item.summary}</p></div></div>
+                    )}
+                  </li>
                 ))}
-                {compact.length > 0 && <BriefList items={compact} lang={lang} />}
-              </div>
-            </section>
-          )
-        })
-      }
-    </div>
-
-    {
-      lang === "zh" && (
-        <p class="mt-12 text-center">
-          <a href={processHref(issue.date)} class="text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline">
-            查看生成过程
-          </a>
-        </p>
-      )
+              </ul>
+            )}
+          </section>
+        )
+      })
     }
+  </main>
+  <PressFooter issue={issue} />
 
-    <Pager older={older} newer={newer} lang={lang} />
-  </div>
-</Layout>
+  <script is:inline set:html={controls} />
+  <script is:inline set:html={script} />
+</PressLayout>

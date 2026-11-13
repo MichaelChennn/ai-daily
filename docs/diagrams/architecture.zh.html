@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI 晨报 · 后端架构</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&family=Noto+Serif+SC:wght@700&display=swap" rel="stylesheet">
+  <script>
+    const t = new URLSearchParams(location.search).get("theme");
+    if (t === "dark" || t === "light") document.documentElement.dataset.theme = t;
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --paper:#E8EBE3; --card:#F5F7F2; --ink:#161A15; --ink-2:#333A31; --muted:#626A5E; --line:rgba(22,26,21,.10); --chip:#D9DED2; --shade:rgba(22,26,21,.13); }
+    @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --paper:#16171A; --card:#202226; --ink:#EDEBE6; --ink-2:#C9C6BF; --muted:#8E8B85; --line:rgba(237,235,230,.12); --chip:#2E3035; --shade:rgba(0,0,0,.45); color-scheme: dark; } }
+    :root[data-theme="dark"] { --paper:#16171A; --card:#202226; --ink:#EDEBE6; --ink-2:#C9C6BF; --muted:#8E8B85; --line:rgba(237,235,230,.12); --chip:#2E3035; --shade:rgba(0,0,0,.45); color-scheme: dark; }
+    :root {
+      --f-title: "Noto Serif SC", serif;
+      --f-body: "Inter", "PingFang SC", "Noto Sans SC", sans-serif;
+      --f-mono: "JetBrains Mono", "Noto Sans SC", monospace;
+    }
+    html, body { background: var(--paper); }
+    body {
+      font-family: var(--f-body);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 16px;
+    }
+    .frame { max-width: 1320px; width: 100%; min-width: 0; }
+    .diagram-container { width: 100%; overflow-x: auto; }
+    .eyebrow-html {
+      font-family: var(--f-mono);
+      font-size: 12px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    h1 { font-family: var(--f-title); font-weight: 700; font-size: 28px; line-height: 1.3; margin-bottom: 12px; }
+    .lede { font-size: 15px; line-height: 1.7; color: var(--ink-2); max-width: 720px; margin-bottom: 32px; }
+    svg { width: 100%; min-width: 1280px; display: block; }
+    svg .card { filter: drop-shadow(0 6px 8px var(--shade)); }
+    svg .wire { fill: none; stroke: var(--muted); stroke-width: 1.2; stroke-linejoin: round; }
+    svg .name { font-family: var(--f-body); font-size: 13px; font-weight: 600; }
+    svg .cli { font-family: var(--f-mono); font-size: 18px; font-weight: 600; }
+    svg .mono { font-family: var(--f-mono); font-size: 11px; }
+    svg .desc { font-family: var(--f-body); font-size: 12px; }
+    svg .desc-strong { font-family: var(--f-body); font-size: 13px; font-weight: 500; }
+    svg .on-ink { opacity: .78; }
+    svg .head { font-family: var(--f-title); font-size: 15px; font-weight: 700; }
+    svg .when { font-family: var(--f-mono); font-size: 12px; font-weight: 500; }
+    svg .eyebrow { font-family: var(--f-mono); font-size: 9px; font-weight: 500; letter-spacing: .14em; }
+    svg .alabel { font-family: var(--f-body); font-size: 12px; font-weight: 500; }
+    @media print {
+      .diagram-container { overflow-x: visible; }
+      svg { min-width: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <p class="eyebrow-html">Architecture · ai-daily</p>
+    <h1>AI 晨报 · 后端架构</h1>
+    <p class="lede">三个触发方都只调 cli，cli 按命令分到五条流程，五条流程共用同一个下层。</p>
+    <div class="diagram-container">
+      <svg viewBox="0 0 1280 704" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="backend-architecture-title backend-architecture-desc">
+        <title id="backend-architecture-title">AI 晨报 · 后端架构</title>
+        <desc id="backend-architecture-desc">GitHub Actions、daily-editor skill 和本地手动运行都经 cli.py 进入抓取、API 通道、Claude 通道与降级、并入、网站五条流程，它们共用 issue.py、trace、routes 和 digest 读写与校验 data 目录里的每一期。</desc>
+        <defs>
+          <marker id="backend-architecture-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" style="fill:var(--muted)"/></marker>
+        </defs>
+        <rect width="100%" height="100%" style="fill:var(--paper)"/>
+<path d="M274,88 L274,126" class="wire" marker-end="url(#backend-architecture-arrow)"/>
+<path d="M762,88 L762,126" class="wire" marker-end="url(#backend-architecture-arrow)"/>
+<path d="M1128,88 L1128,126" class="wire" marker-end="url(#backend-architecture-arrow)"/>
+<path d="M152,184 L152,222" class="wire" marker-end="url(#backend-architecture-arrow)"/>
+<path d="M396,184 L396,222" class="wire" marker-end="url(#backend-architecture-arrow)"/>
+<path d="M640,184 L640,222" class="wire" marker-end="url(#backend-architecture-arrow)"/>
+<path d="M884,184 L884,222" class="wire" marker-end="url(#backend-architecture-arrow)"/>
+<path d="M1128,184 L1128,222" class="wire" marker-end="url(#backend-architecture-arrow)"/>
+<path d="M92,336 L92,374" class="wire" marker-end="url(#backend-architecture-arrow)"/>
+<path d="M212,336 L212,374" class="wire" marker-end="url(#backend-architecture-arrow)"/>
+<path d="M396,336 L396,374" class="wire" marker-end="url(#backend-architecture-arrow)"/>
+<path d="M396,432 L396,470" class="wire" marker-end="url(#backend-architecture-arrow)"/>
+<path d="M884,336 L884,374" class="wire" marker-end="url(#backend-architecture-arrow)"/>
+<path d="M1068,336 L1068,374" class="wire" marker-end="url(#backend-architecture-arrow)"/>
+<path d="M1188,336 L1188,374" class="wire" marker-end="url(#backend-architecture-arrow)"/>
+<path d="M1068,432 L1068,470" class="wire" marker-end="url(#backend-architecture-arrow)"/>
+<path d="M288,636 L250,636" class="wire" marker-end="url(#backend-architecture-arrow)"/>
+<path d="M536,636 L498,636" class="wire" marker-end="url(#backend-architecture-arrow)"/>
+<path d="M744,636 L782,636" class="wire" marker-end="url(#backend-architecture-arrow)"/>
+<path d="M1032,636 L994,636" class="wire" marker-end="url(#backend-architecture-arrow)"/>
+<g data-node-id="GitHub Actions">
+<rect x="40" y="32" width="468" height="56" rx="12" style="fill:var(--chip)"/>
+<text x="274" y="58" class="name" style="fill:var(--ink)" text-anchor="middle">GitHub Actions</text>
+<text x="274" y="75" class="mono" style="fill:var(--muted)" text-anchor="middle">fetch · editor-api · ingest · fallback · pages</text>
+</g>
+<g data-node-id="daily-editor skill">
+<rect x="528" y="32" width="468" height="56" rx="12" style="fill:var(--chip)"/>
+<text x="762" y="58" class="name" style="fill:var(--ink)" text-anchor="middle">daily-editor skill</text>
+<text x="762" y="75" class="mono" style="fill:var(--muted)" text-anchor="middle">Claude Code cloud session</text>
+</g>
+<g data-node-id="本地手动">
+<rect x="1016" y="32" width="224" height="56" rx="12" style="fill:var(--chip)"/>
+<text x="1128" y="58" class="name" style="fill:var(--ink)" text-anchor="middle">本地手动</text>
+<text x="1128" y="75" class="mono" style="fill:var(--muted)" text-anchor="middle">uv run python -m daily</text>
+</g>
+<g data-node-id="cli.py">
+<rect x="40" y="128" width="1200" height="56" rx="12" style="fill:var(--ink)"/>
+<text x="640" y="162" class="cli" style="fill:var(--paper)" text-anchor="middle">cli.py</text>
+</g>
+<line x1="40" y1="224" x2="264" y2="224" style="stroke:var(--ink);stroke-width:2"/>
+<text x="152" y="248" class="head" style="fill:var(--ink)" text-anchor="middle">抓取</text>
+<text x="152" y="264" class="mono" style="fill:var(--muted)" text-anchor="middle">fetch · list</text>
+<line x1="284" y1="224" x2="508" y2="224" style="stroke:var(--ink);stroke-width:2"/>
+<text x="396" y="248" class="head" style="fill:var(--ink)" text-anchor="middle">API 通道</text>
+<text x="396" y="264" class="mono" style="fill:var(--muted)" text-anchor="middle">edit</text>
+<line x1="528" y1="224" x2="752" y2="224" style="stroke:var(--ink);stroke-width:2"/>
+<text x="640" y="248" class="head" style="fill:var(--ink)" text-anchor="middle">Claude 通道与降级</text>
+<text x="640" y="264" class="mono" style="fill:var(--muted)" text-anchor="middle">validate · trace · degrade</text>
+<line x1="772" y1="224" x2="996" y2="224" style="stroke:var(--ink);stroke-width:2"/>
+<text x="884" y="248" class="head" style="fill:var(--ink)" text-anchor="middle">并入</text>
+<text x="884" y="264" class="mono" style="fill:var(--muted)" text-anchor="middle">adopt · ingest</text>
+<line x1="1016" y1="224" x2="1240" y2="224" style="stroke:var(--ink);stroke-width:2"/>
+<text x="1128" y="248" class="head" style="fill:var(--ink)" text-anchor="middle">网站</text>
+<text x="1128" y="264" class="mono" style="fill:var(--muted)" text-anchor="middle">export · render</text>
+<g data-node-id="抓取流程">
+<rect x="40" y="280" width="224" height="56" rx="12" class="card" style="fill:var(--card);stroke:var(--line)"/>
+<text x="152" y="306" class="name" style="fill:var(--ink)" text-anchor="middle">抓取流程</text>
+<text x="152" y="323" class="mono" style="fill:var(--muted)" text-anchor="middle">pipeline</text>
+</g>
+<g data-node-id="抓取器">
+<rect x="40" y="376" width="104" height="56" rx="12" class="card" style="fill:var(--card);stroke:var(--line)"/>
+<text x="92" y="402" class="name" style="fill:var(--ink)" text-anchor="middle">抓取器</text>
+<text x="92" y="419" class="mono" style="fill:var(--muted)" text-anchor="middle">fetchers/*</text>
+</g>
+<g data-node-id="去重">
+<rect x="160" y="376" width="104" height="56" rx="12" class="card" style="fill:var(--card);stroke:var(--line)"/>
+<text x="212" y="402" class="name" style="fill:var(--ink)" text-anchor="middle">去重</text>
+<text x="212" y="419" class="mono" style="fill:var(--muted)" text-anchor="middle">dedup</text>
+</g>
+<g data-node-id="各模型编辑，选主版">
+<rect x="284" y="280" width="224" height="56" rx="12" class="card" style="fill:var(--card);stroke:var(--line)"/>
+<text x="396" y="306" class="name" style="fill:var(--ink)" text-anchor="middle">各模型编辑，选主版</text>
+<text x="396" y="323" class="mono" style="fill:var(--muted)" text-anchor="middle">edit.py</text>
+</g>
+<g data-node-id="选稿、写稿、英文版">
+<rect x="284" y="376" width="224" height="56" rx="12" class="card" style="fill:var(--card);stroke:var(--line)"/>
+<text x="396" y="402" class="name" style="fill:var(--ink)" text-anchor="middle">选稿、写稿、英文版</text>
+<text x="396" y="419" class="mono" style="fill:var(--muted)" text-anchor="middle">api_editor</text>
+</g>
+<g data-node-id="调用模型，断流重发">
+<rect x="284" y="472" width="224" height="56" rx="12" class="card" style="fill:var(--card);stroke:var(--line)"/>
+<text x="396" y="498" class="name" style="fill:var(--ink)" text-anchor="middle">调用模型，断流重发</text>
+<text x="396" y="515" class="mono" style="fill:var(--muted)" text-anchor="middle">llm.py</text>
+</g>
+<g data-node-id="降级版">
+<rect x="528" y="280" width="224" height="56" rx="12" class="card" style="fill:var(--card);stroke:var(--line)"/>
+<text x="640" y="306" class="name" style="fill:var(--ink)" text-anchor="middle">降级版</text>
+<text x="640" y="323" class="mono" style="fill:var(--muted)" text-anchor="middle">fallback</text>
+</g>
+<g data-node-id="并入分支上的日报">
+<rect x="772" y="280" width="224" height="56" rx="12" class="card" style="fill:var(--card);stroke:var(--line)"/>
+<text x="884" y="306" class="name" style="fill:var(--ink)" text-anchor="middle">并入分支上的日报</text>
+<text x="884" y="323" class="mono" style="fill:var(--muted)" text-anchor="middle">ingest</text>
+</g>
+<g data-node-id="按优先级选主版">
+<rect x="772" y="376" width="224" height="56" rx="12" class="card" style="fill:var(--card);stroke:var(--line)"/>
+<text x="884" y="402" class="name" style="fill:var(--ink)" text-anchor="middle">按优先级选主版</text>
+<text x="884" y="419" class="mono" style="fill:var(--muted)" text-anchor="middle">publish</text>
+</g>
+<g data-node-id="导出给网站">
+<rect x="1016" y="280" width="224" height="56" rx="12" class="card" style="fill:var(--card);stroke:var(--line)"/>
+<text x="1128" y="306" class="name" style="fill:var(--ink)" text-anchor="middle">导出给网站</text>
+<text x="1128" y="323" class="mono" style="fill:var(--muted)" text-anchor="middle">export</text>
+</g>
+<g data-node-id="每期页面">
+<rect x="1016" y="376" width="104" height="56" rx="12" class="card" style="fill:var(--card);stroke:var(--line)"/>
+<text x="1068" y="402" class="name" style="fill:var(--ink)" text-anchor="middle">每期页面</text>
+<text x="1068" y="419" class="mono" style="fill:var(--muted)" text-anchor="middle">site</text>
+</g>
+<g data-node-id="过程页">
+<rect x="1136" y="376" width="104" height="56" rx="12" class="card" style="fill:var(--card);stroke:var(--line)"/>
+<text x="1188" y="402" class="name" style="fill:var(--ink)" text-anchor="middle">过程页</text>
+<text x="1188" y="419" class="mono" style="fill:var(--muted)" text-anchor="middle">process</text>
+</g>
+<g data-node-id="渲染 Markdown 版">
+<rect x="1016" y="472" width="224" height="56" rx="12" class="card" style="fill:var(--card);stroke:var(--line)"/>
+<text x="1128" y="498" class="name" style="fill:var(--ink)" text-anchor="middle">渲染 Markdown 版</text>
+<text x="1128" y="515" class="mono" style="fill:var(--muted)" text-anchor="middle">render</text>
+</g>
+<line x1="40" y1="568" x2="1240" y2="568" style="stroke:var(--ink);stroke-width:2"/>
+<text x="640" y="592" class="head" style="fill:var(--ink)" text-anchor="middle">共享下层</text>
+<g data-node-id="一期的全部文件">
+<rect x="40" y="608" width="208" height="56" rx="12" style="fill:var(--paper);stroke:var(--muted);stroke-dasharray:4 3"/>
+<text x="144" y="634" class="name" style="fill:var(--ink)" text-anchor="middle">一期的全部文件</text>
+<text x="144" y="651" class="mono" style="fill:var(--muted)" text-anchor="middle">data/YYYY-MM-DD/</text>
+</g>
+<g data-node-id="一期目录读写">
+<rect x="288" y="608" width="208" height="56" rx="12" class="card" style="fill:var(--card);stroke:var(--line)"/>
+<text x="392" y="634" class="name" style="fill:var(--ink)" text-anchor="middle">一期目录读写</text>
+<text x="392" y="651" class="mono" style="fill:var(--muted)" text-anchor="middle">issue.py</text>
+</g>
+<g data-node-id="生成记录">
+<rect x="536" y="608" width="208" height="56" rx="12" class="card" style="fill:var(--card);stroke:var(--line)"/>
+<text x="640" y="634" class="name" style="fill:var(--ink)" text-anchor="middle">生成记录</text>
+<text x="640" y="651" class="mono" style="fill:var(--muted)" text-anchor="middle">trace</text>
+</g>
+<g data-node-id="通道表">
+<rect x="784" y="608" width="208" height="56" rx="12" class="card" style="fill:var(--card);stroke:var(--line)"/>
+<text x="888" y="634" class="name" style="fill:var(--ink)" text-anchor="middle">通道表</text>
+<text x="888" y="651" class="mono" style="fill:var(--muted)" text-anchor="middle">routes</text>
+</g>
+<g data-node-id="日报校验">
+<rect x="1032" y="608" width="208" height="56" rx="12" class="card" style="fill:var(--card);stroke:var(--line)"/>
+<text x="1136" y="634" class="name" style="fill:var(--ink)" text-anchor="middle">日报校验</text>
+<text x="1136" y="651" class="mono" style="fill:var(--muted)" text-anchor="middle">digest</text>
+</g>
+      </svg>
+    </div>
+  </div>
+</body>
+</html>

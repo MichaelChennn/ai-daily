@@ -1,21 +1,37 @@
 ---
-import { cn } from "cn"
-
-import { buttonVariants } from "@/components/ui/button"
-import Layout from "@/layouts/Layout.astro"
+import PressFooter from "@/components/press/PressFooter.astro"
+import Wordmark from "@/components/press/Wordmark.astro"
+import PressLayout from "@/layouts/PressLayout.astro"
 import { langOf, strings } from "@/lib/i18n"
-import { pageHref } from "@/lib/issues"
+import { issueHref, issuesIn, pageHref } from "@/lib/issues"
+import controls from "@/scripts/controls.js?raw"
 
 // Served for any missing path, at any depth: pageHref() gives absolute paths under the base.
-// Also the English site's (en/404/, below).
+// Also the English site's (en/404/, below). No rail: the way on is three spines in the page, the
+// latest issue (as the archive shows it), the archive and the sources.
 const lang = langOf(Astro.currentLocale)
 const t = strings[lang]
 // GitHub Pages serves only this one 404 page: a missing page of the English site goes on to the
 // English one before anything is shown.
 const en404 = pageHref("404/", "en")
+const latest = issuesIn(lang)[0]
+const lead = latest?.sections[0]?.items[0]
+const day = (date: string) => t.day(new Date(`${date}T00:00:00Z`)).monthDay
+const pages = [
+  {
+    href: pageHref("archive/", lang),
+    label: t.nav.archive,
+    icon: '<rect width="20" height="5" x="2" y="3" rx="1"/><path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"/><path d="M10 12h4"/>',
+  },
+  {
+    href: pageHref("sources/", lang),
+    label: t.nav.sources,
+    icon: '<path d="M4.9 19.1C1 15.2 1 8.8 4.9 4.9"/><path d="M7.8 16.2c-2.3-2.3-2.3-6.1 0-8.5"/><circle cx="12" cy="12" r="2"/><path d="M16.2 7.8c2.3 2.3 2.3 6.1 0 8.5"/><path d="M19.1 4.9C23 8.8 23 15.1 19.1 19"/>',
+  },
+]
 ---
 
-<Layout title={`${t.notFound} · ${t.siteTitle}`} description={`${t.notFound}.`} canonical={null}>
+<PressLayout title={`${t.notFound} · ${t.siteTitle}`} description={`${t.notFound}.`} canonical={null}>
   {
     lang === "zh" && (
       <script is:inline define:vars={{ en: pageHref("", "en"), en404 }}>
@@ -23,16 +39,43 @@ const en404 = pageHref("404/", "en")
       </script>
     )
   }
-  <div class="flex flex-col items-center gap-6 py-24 text-center">
-    <h1 class="text-xl font-semibold tracking-tight">{t.notFound}</h1>
-    <div class="flex items-center gap-2">
-      <a href={pageHref("", lang)} class={cn(buttonVariants({ size: "sm" }), "rounded-full px-4")}>{t.nav.today}</a>
-      <a
-        href={pageHref("archive/", lang)}
-        class={cn(buttonVariants({ variant: "outline", size: "sm" }), "rounded-full px-4")}
-      >
-        {t.nav.archive}
-      </a>
-    </div>
-  </div>
-</Layout>
+  <Wordmark lang={lang} />
+
+  <main id="main" class="nf">
+    <p class="nf-code">404</p>
+    <h1>{t.notFound}</h1>
+    <p class="nf-hint">{t.notFoundHint}</p>
+    <nav aria-label={t.siteTitle}>
+      {
+        latest && (
+          <a class="arc" href={issueHref(latest.date, lang)}>
+            <div class="face">
+              {lead && (
+                <span class="logo16">
+                  {lead.publisher.name.charAt(0)}
+                  <img data-logo src={lead.publisher.icon} alt="" loading="lazy" referrerpolicy="no-referrer" />
+                </span>
+              )}
+              <span class="st">{lead?.title ?? latest.description}</span>
+              <time class="date" datetime={latest.date}>{day(latest.date)}</time>
+            </div>
+          </a>
+        )
+      }
+      {
+        pages.map((p) => (
+          <a class="arc" href={p.href}>
+            <div class="face">
+              <svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={p.icon} />
+              <span class="st">{p.label}</span>
+              <span class="date" aria-hidden="true">→</span>
+            </div>
+          </a>
+        ))
+      }
+    </nav>
+  </main>
+  <PressFooter />
+
+  <script is:inline set:html={controls} />
+</PressLayout>

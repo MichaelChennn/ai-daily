@@ -2,11 +2,11 @@
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/assets/readme/hero-zh-dark.svg">
-  <img src="docs/assets/readme/hero-zh-light.svg" width="100%" alt="AI 科技日报：每天 06:00 一期 AI 技术日报，每个数字都能追到一手来源的原文">
+  <img src="docs/assets/readme/hero-zh-light.svg" width="100%" alt="AI 晨报：每天 06:00 一期 AI 技术日报，每个数字都能追到一手来源的原文">
 </picture>
 
 [![deploy](https://img.shields.io/github/actions/workflow/status/MichaelChennn/ai-daily/pages.yml?branch=main&style=flat&label=deploy&logo=githubactions&logoColor=white)](https://github.com/MichaelChennn/ai-daily/actions/workflows/pages.yml)
-[![网站](https://img.shields.io/badge/%E7%BD%91%E7%AB%99-AI%20%E7%A7%91%E6%8A%80%E6%97%A5%E6%8A%A5-2563EB?style=flat&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIi8%2BPHBhdGggZD0iTTEyIDJhMTQuNSAxNC41IDAgMCAwIDAgMjAgMTQuNSAxNC41IDAgMCAwIDAtMjAiLz48cGF0aCBkPSJNMiAxMmgyMCIvPjwvc3ZnPg%3D%3D)](https://michaelchennn.github.io/ai-daily/)
+[![网站](https://img.shields.io/badge/%E7%BD%91%E7%AB%99-AI%20%E6%99%A8%E6%8A%A5-2563EB?style=flat&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIi8%2BPHBhdGggZD0iTTEyIDJhMTQuNSAxNC41IDAgMCAwIDAgMjAgMTQuNSAxNC41IDAgMCAwIDAtMjAiLz48cGF0aCBkPSJNMiAxMmgyMCIvPjwvc3ZnPg%3D%3D)](https://michaelchennn.github.io/ai-daily/)
 [![RSS](https://img.shields.io/badge/RSS-%E8%AE%A2%E9%98%85-F26522?style=flat&logo=rss&logoColor=white)](https://michaelchennn.github.io/ai-daily/feed.xml)
 [![edited by Claude](https://img.shields.io/badge/edited%20by-Claude-D97757?style=flat&logo=claude&logoColor=white)](https://github.com/MichaelChennn/ai-daily/tree/main/.claude/skills/daily-editor)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-3776AB?style=flat&logo=python&logoColor=white)](pyproject.toml)

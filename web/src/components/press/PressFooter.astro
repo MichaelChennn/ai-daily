@@ -1,0 +1,79 @@
+---
+import { langOf, strings } from "@/lib/i18n"
+import { betaHref, betaName, href, type Issue, issueHref, pageHref, pagePath, REPO_URL } from "@/lib/issues"
+import { modelName } from "@/lib/models"
+import { processes, processHref } from "@/lib/process"
+
+interface Props {
+  /** The issue on this page; a page without one (the archive, the sources) has a single line. */
+  issue?: Issue
+  /** On a page without an issue, a first item for that line (the sources' "stats over 30 issues"). */
+  note?: string
+  /** As wide as a page's main.wide (the sources' three columns). */
+  wide?: boolean
+}
+
+// Two lines: this issue (who edited it, how it was made, its beta editions) with the site's
+// GitHub and RSS icons at the right; under it when the site updates and the license. Without an
+// issue, the update time and license move up to the left of the icons. The language switch sits
+// above the theme toggle in the bottom-left corner.
+const { issue, note, wide } = Astro.props
+const lang = langOf(Astro.currentLocale)
+const t = strings[lang]
+const p = t.press
+const hasProcess = !!issue && lang === "zh" && processes.some((x) => x.date === issue.date)
+// On the main issue, its first beta by model name (as in the prototype); on a beta, the main issue
+// and every beta by family name only, since the line already names this beta's model.
+const editions = !issue
+  ? []
+  : issue.beta
+  ? [
+      { label: p.main, href: issueHref(issue.date), current: false },
+      ...issue.betas.map((b) => ({ label: p.edition(b.label), href: betaHref(issue.date, b.slug), current: b.slug === issue.beta!.slug })),
+    ]
+  : issue.betas.slice(0, 1).map((b) => ({ label: p.edition(betaName(issue.date, b)), href: betaHref(issue.date, b.slug), current: false }))
+// This page in the other language; the English site has no beta pages, so there it is the main issue.
+const other = lang === "zh" ? "en" : "zh"
+const otherHref = pageHref(pagePath(Astro.url.pathname, lang).replace(/beta\/.*$/, ""), other)
+---
+
+<footer class:list={{ solo: !issue, wide }}>
+  {
+    issue && (
+  <p class="about">
+    {
+      [
+        <span>{t.credit(modelName(issue.editor), issue.fallback)}</span>,
+        hasProcess && <a href={processHref(issue.date)}>{p.process}</a>,
+        ...editions.map((e) => <a href={e.href} aria-current={e.current ? "page" : undefined}>{e.label}</a>),
+      ]
+        .filter(Boolean)
+        .map((part, i, all) => (
+          <>
+            <span class="nw">
+              {part}
+              {i < all.length - 1 && " ·"}
+            </span>{" "}
+          </>
+        ))
+    }
+  </p>
+    )
+  }
+  <span class="ext">
+    <a href={REPO_URL} aria-label={t.github} title={t.github}><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6 0-3.2 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8 0 3.2.9.8 1.3 1.9 1.3 3.2 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1 .9 2.2v3.3c0 .3.1.7.8.6A12 12 0 0 0 12 .3"></path></svg></a>
+    <a href={href(t.feed)} aria-label={t.rss} title={t.rss}><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+  </span>
+  <p class="colophon">{note && `${note} · `}{t.schedule} · <a href={t.licenseUrl} rel="license">{t.license}</a></p>
+</footer>
+
+<!-- 文 and A from the Languages icon; the page's own language sits top left and is drawn last,
+     so it passes over the other one when the page arrives from the other language. -->
+<a class="lang" id="lang" href={otherHref} hreflang={other} data-lang={other} aria-label={p.languages} title={p.languages}>
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    {lang === "zh" ? <><g class="g-a"><path class="ko" d="m22 22-5-10-5 10M14 18h6"></path><path d="m22 22-5-10-5 10M14 18h6"></path></g><g class="g-wen"><path class="ko" d="m5 8 6 6m-7 0 6-6 2-3M2 5h12M7 2h1"></path><path d="m5 8 6 6m-7 0 6-6 2-3M2 5h12M7 2h1"></path></g></>
+      : <><g class="g-wen"><path class="ko" d="m5 8 6 6m-7 0 6-6 2-3M2 5h12M7 2h1"></path><path d="m5 8 6 6m-7 0 6-6 2-3M2 5h12M7 2h1"></path></g><g class="g-a"><path class="ko" d="m22 22-5-10-5 10M14 18h6"></path><path d="m22 22-5-10-5 10M14 18h6"></path></g></>}
+  </svg>
+</a>
+
+<button class="theme" id="theme" aria-label={p.theme}><svg class="moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg><svg class="sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg></button>

@@ -1,0 +1,30 @@
+---
+import ItemMeta from "@/components/press/ItemMeta.astro"
+import type { Lang } from "@/lib/i18n"
+import type { Item } from "@/lib/issues"
+
+interface Props {
+  item: Item
+  lang: Lang
+  /** Its place in the section's stack: later cards stick on top of earlier ones. */
+  index: number
+}
+
+// A full item. Scrolled up, it folds into a spine (.strip: logo + title) stacked under the
+// section's earlier cards; the page script sizes it.
+const { item, lang, index } = Astro.props
+---
+
+<article class="stack-card sticky" data-i={index} style={`z-index:${index + 1}`}>
+  <div class="face">
+    <div class="full">
+      <ItemMeta item={item} lang={lang} />
+      <h3><a href={item.sources[0].url} target="_blank" rel="noopener">{item.title}<span class="arr">↗</span></a></h3>
+      <p class="summary">{item.summary}</p>
+    </div>
+    <div class="strip" aria-hidden="true">
+      <span class="logo16">{item.publisher.name.charAt(0)}<img data-logo src={item.publisher.icon} alt="" loading="lazy" referrerpolicy="no-referrer" /></span>
+      <span class="st">{item.title}</span>
+    </div>
+  </div>
+</article>

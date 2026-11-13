@@ -137,9 +137,8 @@
     scrollbar-gutter: stable;
     }
 }
-/* View transitions: between issues (cross-document, opted into and given a direction in
-   Layout.astro, which sets data-slide) and when the section filter changes (SectionFilter sets
-   data-filtering). Browsers without them just switch. */
+/* View transitions between process pages (cross-document, opted into and given a direction in
+   Layout.astro, which sets data-slide). Browsers without them just switch. */
 
 ::view-transition-group(*) {
   animation-duration: 380ms;
@@ -161,21 +160,14 @@
   z-index: 3;
 }
 
-/* The old issue leaves before the new one arrives, so the two are hardly ever on screen together.
-   The wheel shifts less than the body: it moves by one day. */
-::view-transition-old(issue),
-::view-transition-new(issue) {
-  --vt-shift: 40px;
-}
+/* The wheel moves by one day. */
 ::view-transition-old(date-wheel),
 ::view-transition-new(date-wheel) {
   --vt-shift: 14px;
 }
-[data-slide]::view-transition-old(issue),
 [data-slide]::view-transition-old(date-wheel) {
   animation: 160ms ease-in both vt-fade-out, 200ms ease-in both vt-slide-out;
 }
-[data-slide]::view-transition-new(issue),
 [data-slide]::view-transition-new(date-wheel) {
   animation:
     260ms 120ms ease-out both vt-fade-in,
@@ -184,20 +176,6 @@
 [data-slide="older"]::view-transition-old(*),
 [data-slide="older"]::view-transition-new(*) {
   --vt-dir: -1;
-}
-
-/* Filtering: the sections that leave fade out quickly, the ones that stay then move to their new
-   place (the group's default animation), and the ones that come back rise in. */
-[data-filtering]::view-transition-group(*) {
-  animation-delay: 60ms;
-}
-[data-filtering]::view-transition-old(*):only-child {
-  animation: 120ms ease-in both vt-fade-out;
-}
-[data-filtering]::view-transition-new(*):only-child {
-  animation:
-    300ms 160ms ease-out both vt-fade-in,
-    380ms 160ms cubic-bezier(0.22, 1, 0.36, 1) both vt-rise;
 }
 
 /* --vt-dir is 1 going to a newer issue (the new one comes from the right), -1 to an older one. */
@@ -219,11 +197,6 @@
 @keyframes vt-fade-out {
   to {
     opacity: 0;
-  }
-}
-@keyframes vt-rise {
-  from {
-    translate: 0 12px;
   }
 }
 

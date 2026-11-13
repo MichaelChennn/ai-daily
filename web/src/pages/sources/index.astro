@@ -1,15 +1,120 @@
 ---
-import Sources from "@/components/Sources"
-import Layout from "@/layouts/Layout.astro"
+import PressFooter from "@/components/press/PressFooter.astro"
+import SectionRail from "@/components/press/SectionRail.astro"
+import Wordmark from "@/components/press/Wordmark.astro"
+import PressLayout from "@/layouts/PressLayout.astro"
 import { langOf, strings } from "@/lib/i18n"
-import sourcesEn from "../../../data/en/sources.json"
-import sourcesZh from "../../../data/sources.json"
+import { issuesIn } from "@/lib/issues"
+import { kindIn, type Source, sourcesIn } from "@/lib/sources"
+import controls from "@/scripts/controls.js?raw"
+import script from "@/scripts/section-rail.js?raw"
 
-// Also the English site's sources page (en/sources/), in the language of the URL.
+// Also the English site's sources page (en/sources/), in the language of the URL: the whitelist by
+// group, three cards a row on a wide screen. A card is one source: logo, name, kind, and its fetch
+// and pick stats over the last runs; GitHub Releases also stacks its repos' owners top right.
+// Every card has the same height, so a long name ends in an ellipsis (the full one in its title).
 const lang = langOf(Astro.currentLocale)
 const t = strings[lang]
+const s = t.sources
+const data = sourcesIn(lang)
+const title = `${t.nav.sources} · ${t.siteTitle}`
+const groups = data.groups.map((g, i) => ({
+  id: `g-${i}`,
+  label: g.label,
+  kind: kindIn(g),
+  // the paused sources go last in their group
+  sources: [...g.sources].sort((a, b) => Number(b.enabled) - Number(a.enabled)),
+}))
+const avatar = (repo: string) => `https://github.com/${repo.split("/")[0]}.png?size=40`
+const stats = (st: NonNullable<Source["stats"]>) => [
+  [s.ok, `${st.ok}/${st.runs}`],
+  [s.candidates, st.candidates.toFixed(1)],
+  [s.picked, String(st.picked)],
+]
 ---
 
-<Layout title={`${t.nav.sources} · ${t.siteTitle}`} description={t.sources.description(t.siteTitle)} wide current="sources">
-  <Sources client:load data={lang === "en" ? sourcesEn : sourcesZh} lang={lang} />
-</Layout>
+<PressLayout title={title} description={s.description(t.siteTitle)}>
+  <Wordmark lang={lang} />
+  <SectionRail
+    ticks={groups.map((g) => ({ id: g.id, label: g.label }))}
+    label={s.groups}
+    issues={issuesIn(lang).map((i) => i.date)}
+    lang={lang}
+    current="sources"
+  />
+
+  <main id="main" class="wide">
+    <h1 class="sr-only">{title}</h1>
+    {
+      groups.map((g) => (
+        <section class="group" id={g.id}>
+          <div class="sec-h drop"><h2>{g.label}</h2></div>
+          <div class="grid">
+            {g.sources.map((src) => (
+              <article class:list={["src drop", { paused: !src.enabled }]}>
+                <div class="face">
+                  <div class="head">
+                    <span class="logo16">
+                      {src.name.charAt(0)}
+                      {src.icon && <img data-logo src={src.icon} alt="" loading="lazy" referrerpolicy="no-referrer" />}
+                    </span>
+                    <div class="who">
+                      <h3>
+                        {src.homepage ? (
+                          <>
+                            <a href={src.homepage} target="_blank" rel="noopener" title={src.name}>{src.name}</a>
+                            <span class="arr" aria-hidden="true">↗</span>
+                          </>
+                        ) : (
+                          <span class="nm" title={src.name}>{src.name}</span>
+                        )}
+                        {!src.enabled && <span class="off-tag">{s.disabled}</span>}
+                      </h3>
+                      <p class="kind">{g.kind(src.kind)}</p>
+                    </div>
+                    {src.repos.length > 0 && (
+                      <div class="srcs">
+                        <button type="button" aria-label={s.repos(src.repos.length)} aria-expanded="false">
+                          {src.repos.slice(0, 3).map((r) => (
+                            <span class="dot"><img src={avatar(r)} alt="" loading="lazy" /></span>
+                          ))}
+                          {src.repos.length > 3 && <span class="more">+{src.repos.length - 3}</span>}
+                        </button>
+                        <span class="pop" role="menu">
+                          <span class="by">{s.repos(src.repos.length)}</span>
+                          {src.repos.map((r) => (
+                            <a href={`https://github.com/${r}`} target="_blank" rel="noopener" role="menuitem">
+                              <img src={avatar(r)} alt="" loading="lazy" />
+                              <span class="nm">{r}</span>
+                              <span class="k">↗</span>
+                            </a>
+                          ))}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                  {src.stats ? (
+                    <dl class="stats">
+                      {stats(src.stats).map(([dt, dd]) => (
+                        <div>
+                          <dt>{dt}</dt>
+                          <dd>{dd}</dd>
+                        </div>
+                      ))}
+                    </dl>
+                  ) : (
+                    <p class="nostats">{src.enabled ? s.neverFetched : s.notFetched}</p>
+                  )}
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+      ))
+    }
+  </main>
+  <PressFooter note={s.runs(data.runs)} wide />
+
+  <script is:inline set:html={controls} />
+  <script is:inline set:html={script} />
+</PressLayout>

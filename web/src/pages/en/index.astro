@@ -1,6 +1,6 @@
 ---
 import IssuePage from "@/components/IssuePage.astro"
-import Layout from "@/layouts/Layout.astro"
+import PressLayout from "@/layouts/PressLayout.astro"
 import { strings } from "@/lib/i18n"
 import { enIssues } from "@/lib/issues"
 
@@ -13,8 +13,8 @@ const t = strings.en
   latest ? (
     <IssuePage issue={latest} home />
   ) : (
-    <Layout title={t.siteTitle} description={`${t.siteTitle}.`} current="today">
-      <p class="py-24 text-center text-sm text-muted-foreground">{t.empty}</p>
-    </Layout>
+    <PressLayout title={t.siteTitle} description={`${t.siteTitle}.`}>
+      <main><p class="notice">{t.empty}</p></main>
+    </PressLayout>
   )
 }

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI 晨报 · 每日生成流程</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&family=Noto+Serif+SC:wght@700&display=swap" rel="stylesheet">
+  <script>
+    const t = new URLSearchParams(location.search).get("theme");
+    if (t === "dark" || t === "light") document.documentElement.dataset.theme = t;
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --paper:#E8EBE3; --card:#F5F7F2; --ink:#161A15; --ink-2:#333A31; --muted:#626A5E; --line:rgba(22,26,21,.10); --chip:#D9DED2; --shade:rgba(22,26,21,.13); }
+    @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --paper:#16171A; --card:#202226; --ink:#EDEBE6; --ink-2:#C9C6BF; --muted:#8E8B85; --line:rgba(237,235,230,.12); --chip:#2E3035; --shade:rgba(0,0,0,.45); color-scheme: dark; } }
+    :root[data-theme="dark"] { --paper:#16171A; --card:#202226; --ink:#EDEBE6; --ink-2:#C9C6BF; --muted:#8E8B85; --line:rgba(237,235,230,.12); --chip:#2E3035; --shade:rgba(0,0,0,.45); color-scheme: dark; }
+    :root {
+      --f-title: "Noto Serif SC", serif;
+      --f-body: "Inter", "PingFang SC", "Noto Sans SC", sans-serif;
+      --f-mono: "JetBrains Mono", "Noto Sans SC", monospace;
+    }
+    html, body { background: var(--paper); }
+    body {
+      font-family: var(--f-body);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 16px;
+    }
+    .frame { max-width: 1352px; width: 100%; min-width: 0; }
+    .diagram-container { width: 100%; overflow-x: auto; }
+    .eyebrow-html {
+      font-family: var(--f-mono);
+      font-size: 12px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    h1 { font-family: var(--f-title); font-weight: 700; font-size: 28px; line-height: 1.3; margin-bottom: 12px; }
+    .lede { font-size: 15px; line-height: 1.7; color: var(--ink-2); max-width: 720px; margin-bottom: 32px; }
+    svg { width: 100%; min-width: 1352px; display: block; }
+    svg .card { filter: drop-shadow(0 6px 8px var(--shade)); }
+    svg .wire { fill: none; stroke: var(--muted); stroke-width: 1.2; stroke-linejoin: round; }
+    svg .name { font-family: var(--f-body); font-size: 13px; font-weight: 600; }
+    svg .cli { font-family: var(--f-mono); font-size: 18px; font-weight: 600; }
+    svg .mono { font-family: var(--f-mono); font-size: 11px; }
+    svg .desc { font-family: var(--f-body); font-size: 12px; }
+    svg .desc-strong { font-family: var(--f-body); font-size: 13px; font-weight: 500; }
+    svg .on-ink { opacity: .78; }
+    svg .head { font-family: var(--f-title); font-size: 15px; font-weight: 700; }
+    svg .when { font-family: var(--f-mono); font-size: 12px; font-weight: 500; }
+    svg .eyebrow { font-family: var(--f-mono); font-size: 9px; font-weight: 500; letter-spacing: .14em; }
+    svg .alabel { font-family: var(--f-body); font-size: 12px; font-weight: 500; }
+    @media print {
+      .diagram-container { overflow-x: visible; }
+      svg { min-width: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <p class="eyebrow-html">Process · ai-daily</p>
+    <h1>AI 晨报 · 每日生成流程</h1>
+    <p class="lede">05:07 抓取候选，05:30 Claude 和 API 两条通道同时开编，推送后并入 main 并选出主版，06:30 仍无合格日报就发布降级版，提交后重建网站。</p>
+    <div class="diagram-container">
+      <svg viewBox="0 0 1352 640" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="daily-flow-title daily-flow-desc">
+        <title id="daily-flow-title">AI 晨报 · 每日生成流程</title>
+        <desc id="daily-flow-desc">05:07 fetch.yml 抓取信源、去重并提交 candidates.json；05:30 Claude 通道打分筛选、读原文写中文版、自检与校验、写英文版后推到 claude/ 分支，API 通道每个模型选稿、写稿、校验重写，主版模型再写英文版；ingest.yml 重新校验后并入，按 Claude、API、降级版的优先级选主版并提交到 main；06:30 fallback.yml 在仍无合格日报时发布降级版；之后 pages.yml 导出各期数据、构建并发布到 GitHub Pages。</desc>
+        <defs>
+          <marker id="daily-flow-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" style="fill:var(--muted)"/></marker>
+        </defs>
+        <rect width="100%" height="100%" style="fill:var(--paper)"/>
+<text x="40" y="62" class="when" style="fill:var(--muted)">05:07</text>
+<text x="40" y="84" class="head" style="fill:var(--ink)">抓取</text>
+<text x="40" y="102" class="mono" style="fill:var(--muted)">fetch.yml</text>
+<line x1="40" y1="128" x2="1312" y2="128" style="stroke:var(--line);stroke-width:1"/>
+<text x="40" y="158" class="when" style="fill:var(--muted)">05:30</text>
+<text x="40" y="180" class="head" style="fill:var(--ink)">Claude 通道</text>
+<text x="40" y="198" class="mono" style="fill:var(--muted)">daily-editor</text>
+<line x1="40" y1="224" x2="1312" y2="224" style="stroke:var(--line);stroke-width:1"/>
+<text x="40" y="254" class="when" style="fill:var(--muted)">05:30</text>
+<text x="40" y="276" class="head" style="fill:var(--ink)">API 通道</text>
+<text x="40" y="294" class="mono" style="fill:var(--muted)">editor-api.yml</text>
+<line x1="40" y1="320" x2="1312" y2="320" style="stroke:var(--line);stroke-width:1"/>
+<text x="40" y="350" class="when" style="fill:var(--muted)">推送后</text>
+<text x="40" y="372" class="head" style="fill:var(--ink)">并入</text>
+<text x="40" y="390" class="mono" style="fill:var(--muted)">ingest.yml</text>
+<line x1="40" y1="416" x2="1312" y2="416" style="stroke:var(--line);stroke-width:1"/>
+<text x="40" y="446" class="when" style="fill:var(--muted)">06:30</text>
+<text x="40" y="468" class="head" style="fill:var(--ink)">降级</text>
+<text x="40" y="486" class="mono" style="fill:var(--muted)">fallback.yml</text>
+<line x1="40" y1="512" x2="1312" y2="512" style="stroke:var(--line);stroke-width:1"/>
+<text x="40" y="542" class="when" style="fill:var(--muted)">之后</text>
+<text x="40" y="564" class="head" style="fill:var(--ink)">网站</text>
+<text x="40" y="582" class="mono" style="fill:var(--muted)">pages.yml</text>
+<line x1="40" y1="32" x2="1312" y2="32" style="stroke:var(--ink);stroke-width:2"/>
+<line x1="40" y1="608" x2="1312" y2="608" style="stroke:var(--ink);stroke-width:2"/>
+<path d="M304,80 L326,80" class="wire" marker-end="url(#daily-flow-arrow)"/>
+<path d="M400,108 L400,168 Q400,176 408,176 L494,176" class="wire" marker-end="url(#daily-flow-arrow)"/>
+<path d="M400,108 L400,264 Q400,272 408,272 L494,272" class="wire" marker-end="url(#daily-flow-arrow)"/>
+<path d="M640,176 L662,176" class="wire" marker-end="url(#daily-flow-arrow)"/>
+<path d="M808,176 L830,176" class="wire" marker-end="url(#daily-flow-arrow)"/>
+<path d="M976,176 L998,176" class="wire" marker-end="url(#daily-flow-arrow)"/>
+<path d="M1144,176 L1166,176" class="wire" marker-end="url(#daily-flow-arrow)"/>
+<path d="M640,272 L662,272" class="wire" marker-end="url(#daily-flow-arrow)"/>
+<path d="M808,272 L830,272" class="wire" marker-end="url(#daily-flow-arrow)"/>
+<path d="M976,272 L998,272" class="wire" marker-end="url(#daily-flow-arrow)"/>
+<path d="M1240,204 L1240,304 Q1240,312 1232,312 L912,312 Q904,312 904,320 L904,338" class="wire" marker-end="url(#daily-flow-arrow)"/>
+<path d="M1072,300 L1072,312" class="wire"/>
+<path d="M976,368 L998,368" class="wire" marker-end="url(#daily-flow-arrow)"/>
+<path d="M1144,368 L1166,368" class="wire" marker-end="url(#daily-flow-arrow)"/>
+<path d="M1072,436 L1072,398" class="wire" marker-end="url(#daily-flow-arrow)"/>
+<path d="M1240,396 L1240,496 Q1240,504 1232,504 L912,504 Q904,504 904,512 L904,530" class="wire" marker-end="url(#daily-flow-arrow)"/>
+<path d="M976,560 L998,560" class="wire" marker-end="url(#daily-flow-arrow)"/>
+<path d="M1144,560 L1166,560" class="wire" marker-end="url(#daily-flow-arrow)"/>
+<circle cx="400" cy="176" r="4" style="fill:var(--ink)"/>
+<circle cx="1072" cy="312" r="4" style="fill:var(--ink)"/>
+<g data-node-id="抓取信源并去重">
+<rect x="160" y="52" width="144" height="56" rx="12" class="card" style="fill:var(--card);stroke:var(--line)"/>
+<text x="174" y="78" class="name" style="fill:var(--ink)">抓取信源并去重</text>
+<text x="174" y="95" class="mono" style="fill:var(--muted)">daily fetch</text>
+</g>
+<g data-node-id="候选">
+<rect x="328" y="52" width="144" height="56" rx="12" style="fill:var(--paper);stroke:var(--muted);stroke-dasharray:4 3"/>
+<text x="342" y="78" class="name" style="fill:var(--ink)">候选</text>
+<text x="342" y="95" class="mono" style="fill:var(--muted)">candidates.json</text>
+</g>
+<g data-node-id="打分筛选">
+<rect x="496" y="148" width="144" height="56" rx="12" class="card" style="fill:var(--card);stroke:var(--line)"/>
+<text x="510" y="174" class="name" style="fill:var(--ink)">打分筛选</text>
+<text x="510" y="191" class="mono" style="fill:var(--muted)">SKILL.md §1–2</text>
+</g>
+<g data-node-id="读原文写中文版">
+<rect x="664" y="148" width="144" height="56" rx="12" class="card" style="fill:var(--card);stroke:var(--line)"/>
+<text x="678" y="174" class="name" style="fill:var(--ink)">读原文写中文版</text>
+<text x="678" y="191" class="mono" style="fill:var(--muted)">digest.json</text>
+</g>
+<g data-node-id="自检与校验">
+<rect x="832" y="148" width="144" height="56" rx="12" class="card" style="fill:var(--card);stroke:var(--line)"/>
+<text x="846" y="174" class="name" style="fill:var(--ink)">自检与校验</text>
+<text x="846" y="191" class="mono" style="fill:var(--muted)">trace · validate</text>
+</g>
+<g data-node-id="写英文版">
+<rect x="1000" y="148" width="144" height="56" rx="12" class="card" style="fill:var(--card);stroke:var(--line)"/>
+<text x="1014" y="174" class="name" style="fill:var(--ink)">写英文版</text>
+<text x="1014" y="191" class="mono" style="fill:var(--muted)">digest.en.json</text>
+</g>
+<g data-node-id="推到 claude/ 分支">
+<rect x="1168" y="148" width="144" height="56" rx="12" class="card" style="fill:var(--card);stroke:var(--line)"/>
+<text x="1182" y="174" class="name" style="fill:var(--ink)">推到 claude/ 分支</text>
+<text x="1182" y="191" class="mono" style="fill:var(--muted)">git push</text>
+</g>
+<g data-node-id="各模型选稿">
+<rect x="496" y="244" width="144" height="56" rx="12" class="card" style="fill:var(--card);stroke:var(--line)"/>
+<text x="510" y="270" class="name" style="fill:var(--ink)">各模型选稿</text>
+<text x="510" y="287" class="mono" style="fill:var(--muted)">daily edit</text>
+</g>
+<g data-node-id="读原文写稿">
+<rect x="664" y="244" width="144" height="56" rx="12" class="card" style="fill:var(--card);stroke:var(--line)"/>
+<text x="678" y="270" class="name" style="fill:var(--ink)">读原文写稿</text>
+<text x="678" y="287" class="mono" style="fill:var(--muted)">api_editor</text>
+</g>
+<g data-node-id="校验，不过就重写">
+<rect x="832" y="244" width="144" height="56" rx="12" class="card" style="fill:var(--card);stroke:var(--line)"/>
+<text x="846" y="270" class="name" style="fill:var(--ink)">校验，不过就重写</text>
+<text x="846" y="287" class="mono" style="fill:var(--muted)">digest.validate</text>
+</g>
+<g data-node-id="主版模型写英文版">
+<rect x="1000" y="244" width="144" height="56" rx="12" class="card" style="fill:var(--card);stroke:var(--line)"/>
+<text x="1014" y="270" class="name" style="fill:var(--ink)">主版模型写英文版</text>
+<text x="1014" y="287" class="mono" style="fill:var(--muted)">write_en_for</text>
+</g>
+<g data-node-id="重新校验后并入">
+<rect x="832" y="340" width="144" height="56" rx="12" class="card" style="fill:var(--card);stroke:var(--line)"/>
+<text x="846" y="366" class="name" style="fill:var(--ink)">重新校验后并入</text>
+<text x="846" y="383" class="mono" style="fill:var(--muted)">daily ingest</text>
+</g>
+<g data-node-id="按优先级选主版">
+<rect x="1000" y="340" width="144" height="56" rx="12" class="card" style="fill:var(--card);stroke:var(--line)"/>
+<text x="1014" y="366" class="name" style="fill:var(--ink)">按优先级选主版</text>
+<text x="1014" y="383" class="mono" style="fill:var(--muted)">publish.decide</text>
+</g>
+<g data-node-id="提交到 main">
+<rect x="1168" y="340" width="144" height="56" rx="12" style="fill:var(--paper);stroke:var(--muted);stroke-dasharray:4 3"/>
+<text x="1182" y="366" class="name" style="fill:var(--ink)">提交到 main</text>
+<text x="1182" y="383" class="mono" style="fill:var(--muted)">data/YYYY-MM-DD/</text>
+</g>
+<g data-node-id="无合格日报才降级">
+<rect x="1000" y="436" width="144" height="56" rx="12" class="card" style="fill:var(--card);stroke:var(--line)"/>
+<text x="1014" y="462" class="name" style="fill:var(--ink)">无合格日报才降级</text>
+<text x="1014" y="479" class="mono" style="fill:var(--muted)">daily degrade</text>
+</g>
+<g data-node-id="导出各期数据">
+<rect x="832" y="532" width="144" height="56" rx="12" class="card" style="fill:var(--card);stroke:var(--line)"/>
+<text x="846" y="558" class="name" style="fill:var(--ink)">导出各期数据</text>
+<text x="846" y="575" class="mono" style="fill:var(--muted)">daily export</text>
+</g>
+<g data-node-id="构建网站">
+<rect x="1000" y="532" width="144" height="56" rx="12" class="card" style="fill:var(--card);stroke:var(--line)"/>
+<text x="1014" y="558" class="name" style="fill:var(--ink)">构建网站</text>
+<text x="1014" y="575" class="mono" style="fill:var(--muted)">npm run build</text>
+</g>
+<g data-node-id="网站">
+<rect x="1168" y="532" width="144" height="56" rx="28" style="fill:var(--ink)"/>
+<text x="1240" y="558" class="name" style="fill:var(--paper)" text-anchor="middle">网站</text>
+<text x="1240" y="575" class="mono on-ink" style="fill:var(--paper)" text-anchor="middle">GitHub Pages</text>
+</g>
+      </svg>
+    </div>
+  </div>
+</body>
+</html>
