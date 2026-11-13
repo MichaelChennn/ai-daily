@@ -2,27 +2,27 @@
   "schema_version": 1,
   "date": "2026-11-13",
   "mode": "full",
-  "generated_at": "2026-11-13T04:43:50+00:00",
-  "channel": "api",
-  "model": "nvidia:minimaxai/minimax-m3.1-flash",
+  "channel": "claude",
+  "generated_at": "2026-11-13T04:47:18+00:00",
+  "model": "claude-opus-5-5",
   "highlights": [
-    "Google DeepMind introduced Gemini 4 Hydrogen for fast agentic workflows, and Orchestrator in Google Antigravity dynamically switches between models such as Carbon and Hydrogen. On Terminal-Bench 4.0, Orchestrator reached near-Carbon task success rates while consuming 24% less quota on average and completing 19% faster.",
-    "Anthropic released self-hosted Claude Managed Agents in private beta, letting teams run the harness, sandboxes, credentials, and session history inside their own cloud or on-premise.",
-    "Hugging Face released Granite 4.1 3B and 8B LLMON preview models, an LLM-native markup language for communicating structure and semantics to models."
+    "Google released Gemini 4 Hydrogen for fast coding and agentic work, priced flat at $1.50 per million input tokens and $7.50 per million output tokens across its whole context window.",
+    "Anthropic opened a private beta of self-hosted Claude Managed Agents, and a forensic report says recent models from DeepSeek, Moonshot AI and others carry an NVIDIA Blackwell fingerprint.",
+    "On the open-weights side, Inkling 2 Small, Edge0-145B and Runway's Praxis-1 are now downloadable."
   ],
   "items": [
     {
       "section": "headline",
-      "title": "Google DeepMind introduces Gemini 4 Hydrogen and Orchestrator",
-      "summary": "Google DeepMind introduced Gemini 4 Hydrogen for rapid execution across agentic workflows, and is bringing Gemini 4 to Google AI Studio, the Gemini API, Gemini for business, the Gemini app, Google Search, and paid Google AI Pro and Ultra subscribers in Google Antigravity. Orchestrator in Google Antigravity dynamically switches between models like Carbon and Hydrogen within the same session; on Terminal-Bench 4.0 it reached near-Carbon task success rates while consuming 24% less quota on average and completing 19% faster.",
-      "tags": [
-        "模型",
-        "Agent"
-      ],
+      "title": "Google releases Gemini 4 Hydrogen for coding and agents",
+      "summary": "Gemini 4 Hydrogen is Google's model for rapid execution across agentic workflows, rolling out globally in the Gemini API, Google AI Studio, the Gemini app and Google Search, priced flat across its 1 million-token context window at $1.50 per million input tokens and $7.50 per million output tokens, with a new xhigh thinking tier. Google says it finishes tasks 2.5 times faster than Gemini 3.8 Flash at its high default setting and scores 57% on Terminal-Bench 4.1 (vs. 18.2%); Antigravity also gains Orchestrator, where Carbon can plan in a read-only phase and Hydrogen then writes edits and runs tests. Teams on Gemini 3.8 Flash can compare speed and cost before migrating.",
       "sources": [
         {
           "candidate_id": "c_720825c8bb",
           "url": "https://deepmind.google/blog/introducing-gemini-4-hydrogen/"
+        },
+        {
+          "candidate_id": "c_aa44dcddf7",
+          "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/"
         },
         {
           "candidate_id": "c_e836720e11",
@@ -34,45 +34,45 @@
         },
         {
           "candidate_id": "c_aa44dcddf7",
-          "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/"
+          "url": "https://news.ycombinator.com/item?id=50471431"
         }
       ],
       "evidence": [
         {
-          "url": "https://deepmind.google/blog/introducing-gemini-4-hydrogen/",
-          "quote": "Today, we’re introducing Gemini 4 Hydrogen, bringing cutting-edge intelligence to everyone — with speed and efficiency for everyday coding and agentic workflows."
+          "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/",
+          "quote": "Hydrogen is built for rapid execution across diverse agentic workflows. With Hydrogen, we’re also bringing Gemini 4 to everyone — for all tiers of Google AI Studio , the Gemini API, Gemini for business , the Gemini app , Google Search"
         },
         {
-          "url": "https://deepmind.google/blog/introducing-gemini-4-hydrogen/",
-          "quote": "While our frontier models, Gemini 4 Carbon and Gemini 4 Argon , excel at deep, long-horizon reasoning on your hardest problems, Hydrogen is built for rapid execution across diverse agentic workflows."
+          "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/",
+          "quote": "Gemini 4 Hydrogen is priced flat across its entire 1 million-token context window at $1.50 per million input tokens and $7.50 per million output tokens."
         },
         {
-          "url": "https://deepmind.google/blog/introducing-gemini-4-hydrogen/",
-          "quote": "With Hydrogen, we’re also bringing Gemini 4 to everyone — for all tiers of Google AI Studio , the Gemini API, Gemini for business , the Gemini app , Google Search , and paid Google AI Pro and Ultra subscribers in Google Antigravity ."
+          "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/",
+          "quote": "finishing tasks 2.5 times faster at its high default setting while more than tripling Terminal-Bench 4.1 scores (57% vs. 18.2%)"
         },
         {
-          "url": "https://deepmind.google/blog/introducing-gemini-4-hydrogen/",
-          "quote": "To help make this multi-model collaboration automatic, we’re introducing Orchestrator in Google Antigravity ."
+          "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/",
+          "quote": "Hydrogen’s four thinking levels — low, medium, high (default), and a new xhigh tier"
         },
         {
-          "url": "https://deepmind.google/blog/introducing-gemini-4-hydrogen/",
-          "quote": "Rather than using a single model from start to finish, Orchestrator dynamically switches between models like Carbon and Hydrogen within the same session."
+          "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/",
+          "quote": "teams migrating from Gemini 3.8 Flash"
         },
         {
-          "url": "https://deepmind.google/blog/introducing-gemini-4-hydrogen/",
-          "quote": "On Terminal-Bench 4.0 , Orchestrator reached near-Carbon task success rates while, on average, consuming 24% less quota and completing 19% faster."
+          "url": "https://antigravity.google/blog/gemini-4-hydrogen-in-google-antigravity/",
+          "quote": "Carbon can start in a read-only phase to explore dependencies, resolve ambiguities, and build a concrete plan with explicit re-planning triggers. Hydrogen could then take over to write edits, update packages, and run tests."
         }
+      ],
+      "tags": [
+        "模型",
+        "代码",
+        "Agent"
       ]
     },
     {
       "section": "headline",
-      "title": "Anthropic offers self-hosted Claude Managed Agents in private beta",
-      "summary": "Self-hosted Claude Managed Agents runs the harness, sandboxes, credentials, and session history in your own cloud or on-premise, with model requests routed to Anthropic directly, a cloud provider such as Amazon Bedrock, Google's Agent Platform, or Microsoft Foundry, or your own gateway. Developers still build agents with the same core APIs as the hosted Managed Agents service, and access is available in private beta through your Anthropic account team.",
-      "tags": [
-        "Agent",
-        "产品",
-        "安全"
-      ],
+      "title": "Anthropic opens private beta of self-hosted Claude Managed Agents",
+      "summary": "Self-hosted Claude Managed Agents is in private beta: the harness, sandboxes, credentials and session history all run in your own cloud or on-premise, and model requests can go to Anthropic directly, Amazon Bedrock, Google's Agent Platform, Microsoft Foundry or your own gateway, using the same core APIs as the hosted service. Teams that want agents working inside internal code and systems without handing data to a hosted service can request access through their Anthropic account team.",
       "sources": [
         {
           "candidate_id": "c_ca1e61bc9c",
@@ -82,7 +82,7 @@
       "evidence": [
         {
           "url": "https://claude.com/resources/articles/self-hosted-claude-managed-agents",
-          "quote": "Category Product updates Product Claude Platform, Claude Managed Agents Date November 12, 2026 Reading time 5 min Share Copy link Contents Run your agent control plane in your own environment Designed for agent security Get started Self-hosted Claude Managed Agents is now available in private beta."
+          "quote": "Self-hosted Claude Managed Agents is now available in private beta."
         },
         {
           "url": "https://claude.com/resources/articles/self-hosted-claude-managed-agents",
@@ -90,131 +90,61 @@
         },
         {
           "url": "https://claude.com/resources/articles/self-hosted-claude-managed-agents",
-          "quote": "You operate the Managed Agents server, its database, and the workers where agents run their shell and file tools."
+          "quote": "Model requests go where you choose, whether that's Anthropic directly, your cloud provider (Amazon Bedrock, Google's Agent Platform, or Microsoft Foundry), or your own gateway. Your developers still build agents with the same core APIs as the hosted Managed Agents service."
         },
         {
           "url": "https://claude.com/resources/articles/self-hosted-claude-managed-agents",
-          "quote": "Model requests go where you choose, whether that's Anthropic directly, your cloud provider (Amazon Bedrock, Google's Agent Platform, or Microsoft Foundry), or your own gateway."
-        },
-        {
-          "url": "https://claude.com/resources/articles/self-hosted-claude-managed-agents",
-          "quote": "Your developers still build agents with the same core APIs as the hosted Managed Agents service."
-        },
-        {
-          "url": "https://claude.com/resources/articles/self-hosted-claude-managed-agents",
-          "quote": "Get started Self-hosted Claude Managed Agents is now available in private beta."
-        },
-        {
-          "url": "https://claude.com/resources/articles/self-hosted-claude-managed-agents",
-          "quote": "Contact your Anthropic account team to request access, or read the docs to learn more."
-        }
-      ]
-    },
-    {
-      "section": "headline",
-      "title": "Apple studies the theoretical limits of language model alignment",
-      "summary": "Apple's research characterizes the information-theoretic limits of KL-regularized alignment by deriving the maximum achievable expected reward gain for a fixed KL-divergence budget, governed by a Jeffreys divergence term. The work yields a practical estimator based on base model samples, shows that reward ensembling mitigates reward hacking, and finds that best-of-NNN approaches the theoretical limit while PPO and GRPO remain substantially suboptimal.",
-      "tags": [
-        "论文",
-        "训练",
-        "推理"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_7d99600904",
-          "url": "https://machinelearning.apple.com/research/theoretical-limits-alignment"
+          "quote": "Contact your Anthropic account team to request access"
         }
       ],
-      "evidence": [
-        {
-          "url": "https://machinelearning.apple.com/research/theoretical-limits-alignment",
-          "quote": "We characterize the information-theoretic limits of KL-regularized alignment by deriving the maximum achievable expected reward gain for a fixed KL-divergence budget."
-        },
-        {
-          "url": "https://machinelearning.apple.com/research/theoretical-limits-alignment",
-          "quote": "Our first result provides a closed-form expression for the optimal reward improvement, governed by a Jeffreys divergence term rather than the √ K L √KL √ K L used in prior analyses."
-        },
-        {
-          "url": "https://machinelearning.apple.com/research/theoretical-limits-alignment",
-          "quote": "We further reformulate this expression as a covariance under the base model, yielding a practical estimator that predicts achievable alignment gains from base model samples alone."
-        },
-        {
-          "url": "https://machinelearning.apple.com/research/theoretical-limits-alignment",
-          "quote": "We extend our analysis to the proxy reward setting, showing that the gap between ideal and proxy alignment ( reward hacking ) grows with the magnitude of reward error and when the KL penalty factor decreases."
-        },
-        {
-          "url": "https://machinelearning.apple.com/research/theoretical-limits-alignment",
-          "quote": "We then prove that reward ensembling mitigates reward hacking, providing a theoretical justification for this technique used in practice."
-        },
-        {
-          "url": "https://machinelearning.apple.com/research/theoretical-limits-alignment",
-          "quote": "Empirically, we compute the KL–reward Pareto frontier for two tasks for LMs, safety and summarization, and show that best-of- N N N closely approaches the theoretical limit, while PPO and GRPO remain substantially suboptimal."
-        }
-      ]
-    },
-    {
-      "section": "headline",
-      "title": "Hugging Face ships Granite 4.1 LLMON preview models",
-      "summary": "Hugging Face developed LLMON, an LLM-native markup language that marks semantically coherent components with meaningful tags and wraps them in reserved special-token delimiters, and released two experimental preview models derived from Granite 4.1 base models: granite-4.1-3b-LLMON-preview and granite-4.1-8b-LLMON-preview. A companion GitHub repo includes a toolkit plus workflow and template examples, and the LLMON models perform on par with the Granite 4.1 Instruct models while showing much stronger resistance to prompt injection.",
       "tags": [
-        "开源",
+        "Agent",
         "安全",
-        "工具"
-      ],
+        "产品"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Report finds Blackwell fingerprints in new Chinese frontier models",
+      "summary": "Will DePue of Unemployment Labs published a forensic analysis that recovers the random seed and GPU thread layout used to initialize public weights, and finds that six recent models from DeepSeek, Moonshot AI, MiniMax and Ant Group match NVIDIA Blackwell hardware, while the same companies' earlier models match Hopper. The report says this does not establish where the chips were located, how access was obtained, or whether export controls were violated. It shows that released weights can reveal the hardware used to create them.",
       "sources": [
         {
-          "candidate_id": "c_f40ced1f11",
-          "url": "https://huggingface.co/blog/ibm-granite/llmon-an-llm-native-markup-language-now-in-granite"
+          "candidate_id": "c_f3526a2cd8",
+          "url": "https://unemploymentlabs.com/checkpoint-forensics"
+        },
+        {
+          "candidate_id": "c_f3526a2cd8",
+          "url": "https://news.ycombinator.com/item?id=50474883"
         }
       ],
       "evidence": [
         {
-          "url": "https://huggingface.co/blog/ibm-granite/llmon-an-llm-native-markup-language-now-in-granite",
-          "quote": "To address this, we developed LLMON (LLM Object Notation, pronounced “lemon”), an LLM-native markup language for explicitly communicating structure and semantics to the models."
+          "url": "https://unemploymentlabs.com/checkpoint-forensics",
+          "quote": "Our forensic analysis of publicly released AI models finds evidence that DeepSeek, Moonshot AI, MiniMax and Ant Group have gained access to NVIDIA’s Blackwell GPUs, despite restrictions on exporting these chips to China"
         },
         {
-          "url": "https://huggingface.co/blog/ibm-granite/llmon-an-llm-native-markup-language-now-in-granite",
-          "quote": "Semantically coherent components are marked with meaningful tags which are wrapped in reserved special-token delimiters."
+          "url": "https://unemploymentlabs.com/checkpoint-forensics",
+          "quote": "Six models released by these companies since April 2026 contain numerical patterns matching Blackwell hardware, whereas earlier models from the same companies match NVIDIA’s older Hopper generation."
         },
         {
-          "url": "https://huggingface.co/blog/ibm-granite/llmon-an-llm-native-markup-language-now-in-granite",
-          "quote": "Data schemas, including nesting, are stated in a way that is unambiguous to a causal LLM."
+          "url": "https://unemploymentlabs.com/checkpoint-forensics",
+          "quote": "but do not establish where the chips were located, how access was obtained, or whether export controls were violated."
         },
         {
-          "url": "https://huggingface.co/blog/ibm-granite/llmon-an-llm-native-markup-language-now-in-granite",
-          "quote": "Unique IDs make it possible to point to specific instructions, which could reside anywhere in the context, and bind them to the data payloads they should act on, analogous to the way functions are called and arguments are passed to them in programming languages."
-        },
-        {
-          "url": "https://huggingface.co/blog/ibm-granite/llmon-an-llm-native-markup-language-now-in-granite",
-          "quote": "Today we are releasing two experimental preview models, derived from Granite 4.1 base models, trained to consume and generate LLMON-marked text: granite-4.1-3b-LLMON-preview and granite-4.1-8b-LLMON-preview ."
-        },
-        {
-          "url": "https://huggingface.co/blog/ibm-granite/llmon-an-llm-native-markup-language-now-in-granite",
-          "quote": "We are also releasing a GitHub repo, which includes a toolkit for working with LLMON and examples of workflows and templates."
-        },
-        {
-          "url": "https://huggingface.co/blog/ibm-granite/llmon-an-llm-native-markup-language-now-in-granite",
-          "quote": "LLMON practically eliminates the problem on this benchmark, avoiding 47% more attacks relative to the best frontier model that we tested, and 95% more than the best open-source model."
-        },
-        {
-          "url": "https://huggingface.co/blog/ibm-granite/llmon-an-llm-native-markup-language-now-in-granite",
-          "quote": "Across standard benchmark categories, the LLMON models perform on par with the Granite 4.1 Instruct models."
-        },
-        {
-          "url": "https://huggingface.co/blog/ibm-granite/llmon-an-llm-native-markup-language-now-in-granite",
-          "quote": "In short, if you’re experimenting with Granite 4.1 3B or 8B today, you can swap in the LLMON preview and should see comparable general performance with much stronger resistance to prompt injection."
+          "url": "https://unemploymentlabs.com/checkpoint-forensics",
+          "quote": "Will DePue November 12, 2026"
         }
+      ],
+      "tags": [
+        "硬件",
+        "行业",
+        "安全"
       ]
     },
     {
       "section": "model",
-      "title": "Edge0 open-sources Edge0-145B for local inference",
-      "summary": "Edge0 open-sourced Edge0-145B and Edge0-120B along with a unified inference framework and deployment tools, describing Edge0-145B as an on-device model with 145 billion parameters. A compatible laptop needs reported peak memory of 29GB, with decoding above 80 tokens/s, and roughly 10B of the 145B total parameters participate in computation on each inference step.",
-      "tags": [
-        "模型",
-        "开源",
-        "推理"
-      ],
+      "title": "Edge0 open-sources Edge0-145B, a 145B model for laptops",
+      "summary": "Edge0 open-sourced Edge0-145B and Edge0-120B with its inference framework: of 145B total parameters, about 10B participate in each inference step, each group of 64 experts shares two large matrices, hot experts stay in GPU memory, the expert library sits in system memory and vocabulary data is read from SSD on demand. Edge0 reports 29GB peak memory, decoding above 80 tokens/s and a 72.8 mean across six benchmarks, enabling local use on a 48GB laptop. The numbers are self-reported, so developers who want a large local model should verify them on their own hardware.",
       "sources": [
         {
           "candidate_id": "c_44e7c43c22",
@@ -223,32 +153,16 @@
         {
           "candidate_id": "c_87d2ae2805",
           "url": "https://huggingface.co/Edge0/Edge0-145B-q3k"
+        },
+        {
+          "candidate_id": "c_44e7c43c22",
+          "url": "https://news.ycombinator.com/item?id=50475713"
         }
       ],
       "evidence": [
         {
           "url": "https://edge0.ai/blog/introducing-edge0-145b-frontier-ai-capabilities-on-your-own-computer",
-          "quote": "Introducing Edge0-145B: Frontier AI Capabilities on Your Own Computer November 12, 2026 · 19 min read · Edge0 releases Today, we're open-sourcing Edge0-145B and Edge0-120B , together with our unified inference framework and deployment tools."
-        },
-        {
-          "url": "https://edge0.ai/blog/introducing-edge0-145b-frontier-ai-capabilities-on-your-own-computer",
-          "quote": "Edge0-145B is the world's first open-source on-device AI model with 145 billion parameters."
-        },
-        {
-          "url": "https://edge0.ai/blog/introducing-edge0-145b-frontier-ai-capabilities-on-your-own-computer",
-          "quote": "A 145B model runs locally on a compatible laptop, with reported peak memory of 29GB and decoding above 80 tokens/s."
-        },
-        {
-          "url": "https://edge0.ai/blog/introducing-edge0-145b-frontier-ai-capabilities-on-your-own-computer",
-          "quote": "29GB peak memory"
-        },
-        {
-          "url": "https://edge0.ai/blog/introducing-edge0-145b-frontier-ai-capabilities-on-your-own-computer",
-          "quote": "80+ tokens/s decode"
-        },
-        {
-          "url": "https://edge0.ai/blog/introducing-edge0-145b-frontier-ai-capabilities-on-your-own-computer",
-          "quote": "Architecture: share large matrices across sparse experts."
+          "quote": "Today, we're open-sourcing Edge0-145B and Edge0-120B , together with our unified inference framework and deployment tools."
         },
         {
           "url": "https://edge0.ai/blog/introducing-edge0-145b-frontier-ai-capabilities-on-your-own-computer",
@@ -257,369 +171,168 @@
         {
           "url": "https://edge0.ai/blog/introducing-edge0-145b-frontier-ai-capabilities-on-your-own-computer",
           "quote": "Of the model's 145B total parameters, only approximately 10B participate in computation on each inference step."
+        },
+        {
+          "url": "https://edge0.ai/blog/introducing-edge0-145b-frontier-ai-capabilities-on-your-own-computer",
+          "quote": "Frequently used “hot experts” remain in GPU memory. An expert library of approximately 40GB sits in system memory, with experts brought into GPU memory as needed. Approximately 48GB of vocabulary data resides on the SSD and is read on demand."
+        },
+        {
+          "url": "https://edge0.ai/blog/introducing-edge0-145b-frontier-ai-capabilities-on-your-own-computer",
+          "quote": "A 145B model runs locally on a compatible laptop, with reported peak memory of 29GB and decoding above 80 tokens/s."
+        },
+        {
+          "url": "https://edge0.ai/blog/introducing-edge0-145b-frontier-ai-capabilities-on-your-own-computer",
+          "quote": "Edge0-145B combines a 72.8 mean score across six benchmarks with 29GB measured peak memory ."
+        },
+        {
+          "url": "https://edge0.ai/blog/introducing-edge0-145b-frontier-ai-capabilities-on-your-own-computer",
+          "quote": "enabling local use on a 48GB laptop"
         }
+      ],
+      "tags": [
+        "模型",
+        "开源",
+        "推理"
       ]
     },
     {
       "section": "model",
-      "title": "Praxis-1 releases a 27B video-and-action diffusion model",
-      "summary": "Praxis-1 is a 27B-parameter mixture-of-experts diffusion transformer that predicts video and actions together and is available on GitHub, on Hugging Face with native LeRobot support, and in vLLM-Omni, with weights plus inference and fine-tuning code released under Apache 2.0. It supports full fine-tuning and LoRA across NVIDIA hardware from data center GPUs like H100 and B200 down to Jetson Thor on the robot.",
+      "title": "Thinking Machines releases Inkling 2 Small weights",
+      "summary": "Inkling 2 Small is now on Hugging Face with open weights under apache-2.0: a multimodal model with 594B total and 17B active parameters that takes text and image input and supports up to 1M tokens of context. It was trained natively in NVFP4, and the recommended NVFP4 checkpoint needs at least 500GB of aggregated VRAM, with an MXFP8 checkpoint also available. Teams that want to self-host or fine-tune a large open MoE can download it now.",
+      "sources": [
+        {
+          "candidate_id": "c_424f74445e",
+          "url": "https://huggingface.co/thinkingmachines/Inkling-2-Small"
+        },
+        {
+          "candidate_id": "c_424f74445e",
+          "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xuqplg/thinkingmachinesinkling2small_is_released/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/thinkingmachines/Inkling-2-Small",
+          "quote": "It is released with open weights to support research, fine-tuning and integration into third-party products by downstream developers."
+        },
+        {
+          "url": "https://huggingface.co/thinkingmachines/Inkling-2-Small",
+          "quote": "Parameters 594B total, 17B active Numerics support MXFP8 and NVFP4 Input modalities Inkling 2 Small accepts text input in UTF-8 encoding and image input"
+        },
+        {
+          "url": "https://huggingface.co/thinkingmachines/Inkling-2-Small",
+          "quote": "It supports a context window of up to 1M tokens."
+        },
+        {
+          "url": "https://huggingface.co/thinkingmachines/Inkling-2-Small",
+          "quote": "The main NVFP4 checkpoint requires a GPU cluster with at least 500GB of aggregated VRAM."
+        },
+        {
+          "url": "https://huggingface.co/thinkingmachines/Inkling-2-Small",
+          "quote": "The model was pretrained, midtrained and post-trained in NVFP4, so this is the native precision for the model."
+        }
+      ],
       "tags": [
         "模型",
         "开源",
-        "视频"
-      ],
+        "多模态"
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Runway releases Praxis-1 video-action robot policy",
+      "summary": "Praxis-1 is a robot policy that predicts the next video chunk and the next action chunk on each call; the Hugging Face collection has 27B base, single-arm DROID and bimanual YAM checkpoints plus LeRobot-format and NVFP4 versions. The code is under the Apache License 2.0, bf16 inference needs a CUDA GPU with at least 80 GB of memory, and the repo explains how to adapt praxis-1-droid to a task with LoRA on one 80 GB GPU. Robotics teams can fine-tune it for their own rigs.",
       "sources": [
         {
           "candidate_id": "c_1e0fa26fee",
           "url": "https://huggingface.co/collections/runwayml/praxis-1"
+        },
+        {
+          "url": "https://github.com/runwayml/praxis-1-oss",
+          "title": "runwayml/praxis-1-oss"
+        },
+        {
+          "candidate_id": "c_1e0fa26fee",
+          "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xu8u4f/praxis1_a_runwayml_collection/"
         }
       ],
       "evidence": [
         {
-          "url": "https://huggingface.co/collections/runwayml/praxis-1",
-          "quote": "Collection runwayml/praxis-1-droid Robotics • 27B • Updated 3 days ago • 155 • 4 runwayml/praxis-1-base Robotics • 27B • Updated 1 day ago • 78 • 9 runwayml/praxis-1-yam Robotics • 27B • Updated 1 day ago • 110 • 5 runwayml/praxis-1-droid-lerobot Robotics • 27B • Updated 3 days ago • 167 • 2 Note pr"
+          "url": "https://github.com/runwayml/praxis-1-oss",
+          "quote": "For each policy call, the model predicts the next video chunk and the next action chunk. The robot then executes the action chunk."
+        },
+        {
+          "url": "https://github.com/runwayml/praxis-1-oss",
+          "quote": "The code in this repository is licensed under the Apache License 2.0 (see LICENSE ). See the license file of each set of weights for the weights."
+        },
+        {
+          "url": "https://github.com/runwayml/praxis-1-oss",
+          "quote": "Use Python 3.12 and a CUDA GPU with at least 80 GB of memory (one H100 is sufficient). This is for the bf16 default"
+        },
+        {
+          "url": "https://github.com/runwayml/praxis-1-oss",
+          "quote": "how to adapt praxis-1-droid to a task with LoRA on one 80 GB GPU"
         },
         {
           "url": "https://huggingface.co/collections/runwayml/praxis-1",
-          "quote": "axis-1-droid in the LeRobot policy layout: --policy.path=runwayml/praxis-1-droid-lerobot runwayml/praxis-1-base-lerobot Robotics • 27B • Updated 1 day ago • 41 • 2 Note praxis-1-base (no rig heads) in the LeRobot layout: run examples/praxis/init_heads.py on it first, then --policy.path= to fine-tune"
+          "quote": "runwayml/praxis-1-base Robotics • 27B"
         },
         {
           "url": "https://huggingface.co/collections/runwayml/praxis-1",
-          "quote": "a new single-arm rig runwayml/praxis-1-yam-lerobot Robotics • 27B • Updated 1 day ago • 62 • 2 Note praxis-1-yam (bimanual, two YAM arms) in the LeRobot policy layout: --policy.path=runwayml/praxis-1-yam-lerobot runwayml/praxis-1-eval Viewer • Updated 2 days ago • 1.55k • 47 • 1 runwayml/praxis-1-d"
+          "quote": "Praxis-1 robot policies: base model, DROID and YAM fine-tunes."
         },
         {
-          "url": "https://huggingface.co/collections/runwayml/praxis-1",
-          "quote": "roid-nvfp4 Robotics • 27B • Updated 2 days ago • 30 • 1 Note NVFP4 QAT variant of praxis-1-droid (single arm); routed experts run in 4-bit on SM120 GPUs runwayml/praxis-1-yam-nvfp4 Robotics • 27B • Updated 1 day ago • 49 • 3 Note NVFP4 QAT variant of praxis-1-yam (bimanual); routed experts run in 4-"
-        },
-        {
-          "url": "https://huggingface.co/collections/runwayml/praxis-1",
-          "quote": "bit on SM120 GPUs runwayml/praxis-1-so101 Robotics • 27B • Updated about 9 hours ago runwayml/praxis-1-so101-nvfp4 Robotics • 27B • Updated about 9 hours ago Note NVFP4 QAT variant of praxis-1-so101 (SO-100 / SO-101 arm); routed experts run in 4-bit on SM120 GPUs Upvote 10 +6 Sort:"
+          "url": "https://github.com/runwayml/praxis-1-oss",
+          "quote": "Both checkpoints also have NVFP4 versions, fine-tuned with quantization-aware training of the routed experts"
         }
+      ],
+      "tags": [
+        "模型",
+        "开源",
+        "视频"
       ]
     },
     {
       "section": "model",
-      "title": "BotPsy-0.8B targets on-device tool use and agentic tasks",
-      "summary": "BotPsy-0.8B is a 0.8B-parameter model built on top of Qwen3.5-0.8B for function calling and agentic workflows on device, with BF16 weights in Hugging Face safetensors format and GGUF files for llama.cpp and the QVAC SDK. It roughly doubles the agentic capability of Qwen3.5-0.8B-Think on key benchmarks: BFCL v4 rises from 23.4 to 44.0, ACEBench from 30.1 to 58.7, and τ-bench from 23.2 to 51.5.",
+      "title": "Meta releases MetaEncoder for retrieval and decision making",
+      "summary": "MetaEncoder is built by contrastively fine-tuning meta-models/Muse-Glimmer-30B: give it a task and a list of candidates in natural language, optionally with images or video, and it scores the candidates. Task and candidates are encoded separately and matched by inner product, so candidate representations can be cached and an ANN index can serve millions of candidates without re-running the model; it is licensed under Apache 2.0. It suits fast retrieval, ranking and closed-choice decisions.",
+      "sources": [
+        {
+          "candidate_id": "c_9c9e32d405",
+          "url": "https://huggingface.co/collections/facebook/metaencoder"
+        },
+        {
+          "url": "https://huggingface.co/facebook/meta-encoder",
+          "title": "facebook/meta-encoder"
+        },
+        {
+          "candidate_id": "c_9c9e32d405",
+          "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xu8eie/metaencoder_a_facebook_collection_one_encoder_for/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/facebook/meta-encoder",
+          "quote": "give it a task and a list of candidates , and it scores the candidates by task specification."
+        },
+        {
+          "url": "https://huggingface.co/facebook/meta-encoder",
+          "quote": "Matching is an inner product over representations, so an ANN index can serve millions of candidates without re-running the model. The model is built by contrastively fine-tuning meta-models/Muse-Glimmer-30B ."
+        },
+        {
+          "url": "https://huggingface.co/facebook/meta-encoder",
+          "quote": "Licensed under Apache 2.0 , inherited from the base model."
+        }
+      ],
       "tags": [
         "模型",
-        "开源",
-        "Agent"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_0d3b9845e9",
-          "url": "https://huggingface.co/qvac/BotPsy-0.8B"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/qvac/BotPsy-0.8B",
-          "quote": "BotPsy-0.8B is a 0.8B-parameter model designed for function calling and agentic workflows, built on top of Qwen3.5-0.8B and suitable for on-device deployment."
-        },
-        {
-          "url": "https://huggingface.co/qvac/BotPsy-0.8B",
-          "quote": "BotPsy is a \"personal assistant\" that uses tools to perform a variety of simple tasks for the user, in domains such as web search & research, travel & lifestyle, commerce & finance, business & customer operations, device & vehicle control, files & documents, calendar, and email & messaging."
-        },
-        {
-          "url": "https://huggingface.co/qvac/BotPsy-0.8B",
-          "quote": "BotPsy achieves state-of-the-art (SOTA) tool-use and agentic performance for its size, outperforming every model of up to 1.2B parameters that we tested."
-        },
-        {
-          "url": "https://huggingface.co/qvac/BotPsy-0.8B",
-          "quote": "This repository holds the BF16 weights in Hugging Face safetensors format."
-        },
-        {
-          "url": "https://huggingface.co/qvac/BotPsy-0.8B",
-          "quote": "GGUF files (BF16, Q8_0 and Q4_K_M) for llama.cpp and the QVAC SDK are in qvac/BotPsy-0.8B-GGUFs ."
-        },
-        {
-          "url": "https://huggingface.co/qvac/BotPsy-0.8B",
-          "quote": "Twice the performance of its base model: BotPsy roughly doubles the agentic capability of Qwen3.5-0.8B-Think on key benchmarks: BFCL v4 rises from 23.4 to 44.0, ACEBench from 30.1 to 58.7, and τ-bench from 23.2 to 51.5 (mean of the retail, telecom and banking subsets)."
-        }
-      ]
-    },
-    {
-      "section": "tool",
-      "title": "Claude Code v2.1.323 adds Code Mode and plugin version ranges",
-      "summary": "Claude Code v2.1.323 adds an experimental opt-in Code Mode in which Claude writes JavaScript to call its tools, and an engines[\"claude-code\"] field in plugin.json so plugins outside their stated Claude Code version range are not installed, updated or loaded. The release also adds a progress heartbeat every 30 seconds while hooks run long in claude -p and SDK sessions, plus fixes for /compact, settings.json edits, and Edit and Bash running out of memory on certain /proc files.",
-      "tags": [
-        "工具",
-        "代码"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_cbc943d9a7",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.323"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.323",
-          "quote": "Added Code Mode, an experimental opt-in in which Claude writes JavaScript to call its tools; see https://code.claude.com/docs/en/code-mode to turn it on, or to turn it off for an organization"
-        },
-        {
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.323",
-          "quote": "Added engines[\"claude-code\"] to plugin.json : plugins outside their stated Claude Code version range are not installed, updated or loaded, and install and update pick the newest version that fits"
-        },
-        {
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.323",
-          "quote": "Added a progress heartbeat every 30 seconds while hooks run long in claude -p and SDK sessions, so a host such as Claude Desktop won't end the turn as hung (once it includes this version)"
-        },
-        {
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.323",
-          "quote": "Fixed running /compact again, or after a command such as /context , summarizing away a message that Claude had not answered yet"
-        },
-        {
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.323",
-          "quote": "Fixed a setting saved in a running session undoing a hand edit made to settings.json moments earlier; a settings file you delete during a session now stays deleted"
-        },
-        {
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.323",
-          "quote": "Fixed Edit and Bash running out of memory on certain /proc files, and Edit hanging or running out of memory on devices and named pipes"
-        }
-      ]
-    },
-    {
-      "section": "tool",
-      "title": "Codex 0.168.0 adds workspace panes and provider selection",
-      "summary": "Codex 0.168.0 lets you browse model providers under Sessions → Model providers and choose the default for new chats, and enables features.tui_workspace to view a side conversation beside the main chat with a draggable divider or leader z to zoom. It also supports attaching recordings with an audio-capable model, features.image_generation_animation for generating or editing animated GIFs, and tui.notification method = \"osc777\" terminal notifications.",
-      "tags": [
-        "工具",
-        "代码"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_fffefb8232",
-          "url": "https://github.com/openai/codex/releases/tag/rust-v0.168.0"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://github.com/openai/codex/releases/tag/rust-v0.168.0",
-          "quote": "Browse model providers under Sessions → Model providers and choose the default for new chats."
-        },
-        {
-          "url": "https://github.com/openai/codex/releases/tag/rust-v0.168.0",
-          "quote": "Enable features.tui_workspace to view a side conversation beside the main chat."
-        },
-        {
-          "url": "https://github.com/openai/codex/releases/tag/rust-v0.168.0",
-          "quote": "Drag the divider to resize the panes or press leader z to zoom the focused pane."
-        },
-        {
-          "url": "https://github.com/openai/codex/releases/tag/rust-v0.168.0",
-          "quote": "Attach recordings when using an audio-capable model."
-        },
-        {
-          "url": "https://github.com/openai/codex/releases/tag/rust-v0.168.0",
-          "quote": "Enable features.image_generation_animation to generate or edit animated GIFs with optional frame count and timing controls."
-        },
-        {
-          "url": "https://github.com/openai/codex/releases/tag/rust-v0.168.0",
-          "quote": "The app-server reference covers listing model providers, creating custom gateways, and updating gateway, Bedrock, and GCP settings."
-        }
-      ]
-    },
-    {
-      "section": "tool",
-      "title": "Hugging Face posts token pooling-aware training for embeddings",
-      "summary": "Token pooling-aware training teaches an encoder to preserve important information when similar token vectors are merged, and a new HierarchicalTokenPooling layer groups similar token embeddings using Ward hierarchical clustering with a straight-through estimator. With pool_factor=4, a normally trained model retains 94.6% of its unpooled NanoBEIR nDCG@10 with a 4x reduction in document vectors, while pooling-aware training raises that retention to 97.8% at the same storage budget.",
-      "tags": [
-        "工具",
-        "推理"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_375e312bc0",
-          "url": "https://huggingface.co/blog/token-pooling"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/blog/token-pooling",
-          "quote": "Token pooling makes these representations smaller by merging similar token vectors."
-        },
-        {
-          "url": "https://huggingface.co/blog/token-pooling",
-          "quote": "Pooling-aware training teaches the encoder to preserve the information that matters when its vectors are merged, helping you retrieve better from the same storage budget."
-        },
-        {
-          "url": "https://huggingface.co/blog/token-pooling",
-          "quote": "With pool_factor=4 , my normally trained model retains 94.6% of its unpooled NanoBEIR nDCG@10, with a 4x reduction in document vectors."
-        },
-        {
-          "url": "https://huggingface.co/blog/token-pooling",
-          "quote": "Token pooling-aware training raises that retention to 97.8% at the same storage budget!"
-        },
-        {
-          "url": "https://huggingface.co/blog/token-pooling",
-          "quote": "HierarchicalTokenPooling groups similar token embeddings using Ward hierarchical clustering ."
-        },
-        {
-          "url": "https://huggingface.co/blog/token-pooling",
-          "quote": "During training, HierarchicalTokenPooling uses a straight-through estimator to pass gradients from pooled vectors back to their member tokens, without differentiating the cluster assignments."
-        }
-      ]
-    },
-    {
-      "section": "tool",
-      "title": "Hugging Face publishes a fine-tuning guide for TRELLIS.2",
-      "summary": "This guide provides fine-tuning scripts and containers to fine-tune TRELLIS.2, a 3D model, on your own assets, running both locally and on Hugging Face Jobs. The configuration adds LoRA adapters only to the sparse-structure flow DiT and the shape flow DiT while freezing the texture flow DiT, training approximately 9.3 million adapter parameters in total for both targeted DiTs on a subset of 188 shoes from the 1,030 objects in GSO.",
-      "tags": [
-        "工具",
-        "图像",
-        "训练"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_851bd8cda7",
-          "url": "https://huggingface.co/blog/3d-lora-finetuning"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/blog/3d-lora-finetuning",
-          "quote": "TLDR; In this blog, we provide fine-tuning scripts and containers to fine-tune TRELLIS.2, a popular 3D model on your 3D assets, that can run both locally and on Hugging Face Jobs."
-        },
-        {
-          "url": "https://huggingface.co/blog/3d-lora-finetuning",
-          "quote": "If you are interested in fine-tuning, you can use our scripts with few arguments (assuming you updated your dataset to Hugging Face Hub) or tinker with them yourself with this repository ."
-        },
-        {
-          "url": "https://huggingface.co/blog/3d-lora-finetuning",
-          "quote": "We add LoRA adapters only to the sparse-structure flow DiT and the shape flow DiT."
-        },
-        {
-          "url": "https://huggingface.co/blog/3d-lora-finetuning",
-          "quote": "We freeze the texture flow DiT to keep its current capabilities."
-        },
-        {
-          "url": "https://huggingface.co/blog/3d-lora-finetuning",
-          "quote": "Our subset has 188 shoes from the 1,030 objects in GSO."
-        },
-        {
-          "url": "https://huggingface.co/blog/3d-lora-finetuning",
-          "quote": "Our configuration trains approximately 9.3 million adapter parameters in total for both targeted DiTs."
-        }
+        "多模态",
+        "开源"
       ]
     },
     {
       "section": "paper",
-      "title": "TOME-Math turns textbooks into structured proof supervision",
-      "summary": "TOME-Math (Textbook-Oriented Mathematical Evidence) converts 2,118 textbooks spanning core areas of university-level mathematics into approximately 380K structured proof-supervision records while preserving chapter order, proposition-proof links, dependency references, and source provenance. Fine-tuning on TOME-Math at full scale raises the unweighted mean score across held-out evaluations and established public benchmarks by 16.7 percentage points over the base model, and the authors will release the corpus.",
-      "tags": [
-        "论文",
-        "训练",
-        "推理"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_cb11945349",
-          "url": "https://huggingface.co/papers/2610.40394"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2610.40394",
-          "quote": "We introduce TOME-Math (Textbook-Oriented Mathematical Evidence), a large-scale corpus that converts 2,118 textbooks spanning the core areas of university-level mathematics subjects into approximately 380K structured proof-supervision records while preserving chapter order, proposition-proof links,"
-        },
-        {
-          "url": "https://huggingface.co/papers/2610.40394",
-          "quote": "dependency references, and source provenance."
-        },
-        {
-          "url": "https://huggingface.co/papers/2610.40394",
-          "quote": "At full scale, fine-tuning on TOME-Math raises the unweighted mean score across our held-out evaluations and established public benchmarks by 16.7 percentage points over the base model, while exceeding all three public instruction-data baselines evaluated in aggregate."
-        }
-      ]
-    },
-    {
-      "section": "paper",
-      "title": "Reinforcement learning incentivizes LLM self-learning",
-      "summary": "This work studies self-learning, where LLMs autonomously retrieve, study, and apply knowledge from long-form reference materials, and introduces a BookNavigator interface plus reinforcement learning with fine-grained rewards to support that process. The method raises Intern-S2-Preview-35B's overall proof accuracy from 51.5% to 79.5%, beats RL-trained textbook-free and fixed-retrieval baselines, and adds 1.7 and 2.3 percentage points over the base model on BrowseComp-Plus and CL-bench.",
-      "tags": [
-        "论文",
-        "训练",
-        "Agent"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_3b0e213828",
-          "url": "https://huggingface.co/papers/2610.39671"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2610.39671",
-          "quote": "W e i n t r o d u c e a B o o k N a v i g a t o r i n t e r f a c e t o s u p p o r t t h i s h u m a n - i n s p i r e d s t u d y p r o c e s s a n d i n c e n t i v i z e s e l f - l e a r n i n g t h r o u g h r e i n f o r c e m e n t l e a r n i n g ( R L ) w i t h f i n e - g r a i n e d r e"
-        },
-        {
-          "url": "https://huggingface.co/papers/2610.39671",
-          "quote": "E x p e r i m e n t s s h o w t h a t o u r m e t h o d i m p r o v e s p e r f o r m a n c e a c r o s s i n - d o m a i n a n d o u t - o f - d o m a i n t e x t b o o k s a n d s u b j e c t s , r a i s i n g I n t e r n - S 2 - P r e v i e w - 3 5 B ' s o v e r a l l p r o o f a c c u r a c y f"
-        },
-        {
-          "url": "https://huggingface.co/papers/2610.39671",
-          "quote": "5 % a n d o u t p e r f o r m i n g R L - t r a i n e d t e x t b o o k - f r e e a n d f i x e d - r e t r i e v a l b a s e l i n e s ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2610.39671",
-          "quote": "T h e s e g a i n s e x t e n d t o c o m p l e x l o n g - c o n t e x t b e n c h m a r k s i n v o l v i n g d i f f e r e n t t a s k t y p e s , w i t h i m p r o v e m e n t s o v e r t h e b a s e m o d e l o f 1 ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2610.39671",
-          "quote": "3 p e r c e n t a g e p o i n t s o n B r o w s e C o m p - P l u s a n d C L - b e n c h , r e s p e c t i v e l y ."
-        }
-      ]
-    },
-    {
-      "section": "paper",
-      "title": "SteerDistill quantizes LLM agents with closed-loop teacher steering",
-      "summary": "SteerDistill is a quantization-aware distillation method in which a full-precision teacher guides the student to revise failed responses and iteratively refines its guidance using feedback from student execution, producing locally verified behavioral corrections that are then internalized for unassisted inference. Across five agentic benchmarks and three models, it exceeds the strongest quantized baseline by 1.67--2.18 points in average score under W4A16 and stays within one point of BF16, and on τ^2-Bench it outperforms QeRL by 1.84 percentage points in success rate using 67% fewer training GPU hours.",
-      "tags": [
-        "论文",
-        "推理",
-        "Agent"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_0073617c1e",
-          "url": "https://huggingface.co/papers/2611.13410"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2611.13410",
-          "quote": "We introduce SteerDistill, a quantization-aware distillation method in which a full-precision teacher guides the student to revise failed responses and iteratively refines its guidance using feedback from student execution."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.13410",
-          "quote": "This closed-loop teacher steering produces locally verified behavioral corrections ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.13410",
-          "quote": "We internalize these corrections by training the student without guidance to match the steered student's predictions at corrected turns and the full-precision teacher 's at other turns, enabling unassisted inference ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.13410",
-          "quote": "Across five agentic benchmarks and three models, SteerDistill exceeds the strongest quantized baseline by 1.67--2.18 points in average score under W4A16 and stays within one point of BF16 ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.13410",
-          "quote": "On τ^2-Bench , it outperforms QeRL by 1.84 percentage points in success rate using 67% fewer training GPU hours and produces shorter successful trajectories than the quantized baselines."
-        }
-      ]
-    },
-    {
-      "section": "paper",
-      "title": "Evolving Infra adapts LLM serving to agent workloads",
-      "summary": "Evolving Infra is an agent-adaptive serving framework that decouples compute allocation from key--value (KV) cache management, letting nodes switch between prefill and decode, with an online planner matching the PD split to workload composition and an agent-aware distributed KV manager guiding cache eviction and transfer. Across coding, math, and computer-use tasks with GLM-5.2 and Kimi K2.6 on up to 256 GB300 GPUs, it reduces mean end-to-end request latency and P95 TTFT by up to 4.1x and 14x over Dynamo, NVIDIA's production framework.",
-      "tags": [
-        "论文",
-        "硬件",
-        "推理"
-      ],
+      "title": "Evolving Infra: agent-adaptive LLM serving",
+      "summary": "Evolving Infra decouples compute allocation from KV cache management so nodes can switch between prefill and decode, with an online planner that matches the PD split to the workload and a distributed KV manager that uses agent context-management signals for eviction and transfer. On coding, math and computer-use tasks with GLM-5.2 and Kimi K2.6 on up to 256 GB300 GPUs, it cuts mean end-to-end latency and P95 TTFT by up to 4.1x and 14x over Dynamo. Teams running their own agent inference clusters can borrow its scheduling ideas.",
       "sources": [
         {
           "candidate_id": "c_bdfe478867",
@@ -629,31 +342,23 @@
       "evidence": [
         {
           "url": "https://huggingface.co/papers/2611.12304",
-          "quote": "We present Evolving Infra, an agent-adaptive serving framework that adapts compute allocation to agent workloads and KV cache management to agent context management at runtime."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.12304",
           "quote": "We decouple compute allocation from key--value (KV) cache management, allowing nodes to switch efficiently between prefill and decode."
         },
         {
           "url": "https://huggingface.co/papers/2611.12304",
-          "quote": "Building on this design, an online planner matches the PD split to workload composition, while an agent-aware distributed KV manager guides cache eviction and transfer with signals from agent context management."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.12304",
-          "quote": "Across coding, math, and computer-use tasks with GLM-5.2 and Kimi K2.6 on up to 256 GB300 GPUs, Evolving Infra reduces mean end-to-end request latency and P95 TTFT by up to 4.1x and 14x over Dynamo, NVIDIA's production framework."
+          "quote": "with GLM-5.2 and Kimi K2.6 on up to 256 GB300 GPUs, Evolving Infra reduces mean end-to-end request latency and P95 TTFT by up to 4.1x and 14x over Dynamo, NVIDIA's production framework."
         }
+      ],
+      "tags": [
+        "论文",
+        "推理",
+        "Agent"
       ]
     },
     {
       "section": "paper",
-      "title": "SparseRead cuts token use for web-facing AI agents",
-      "summary": "SparseRead is a reusable reading control layer that governs content admission without modifying the agent model, combining a Read Intent Protocol, Adaptive Reader Backends, and a Budgeted Read Gate with faithful full-view fallback. Across six models, including Claude Opus 5, and five scenarios, it reduces total tokens by up to 92.9% and wall time by up to 89.0% while preserving or improving task quality in 97% settings, and on Web deep-search tasks it cuts tokens by 31.0--43.0% and task completion time by 23.0--37.0%.",
-      "tags": [
-        "论文",
-        "Agent",
-        "工具"
-      ],
+      "title": "SparseRead lets agents read only the evidence they need",
+      "summary": "SparseRead is a reading control layer that leaves the agent model unchanged: it tracks evolving read intent and source coverage, picks how evidence is located, and caps cumulative raw exposure per episode, with a full-view fallback. Across six models including Claude Opus 5, it reduces total tokens by up to 92.9% and wall time by up to 89.0% while preserving or improving task quality in 97% of settings. Agents that read many webpages, documents and repositories can adopt the approach, and the code is public.",
       "sources": [
         {
           "candidate_id": "c_9cd350af03",
@@ -663,123 +368,260 @@
       "evidence": [
         {
           "url": "https://huggingface.co/papers/2608.22237",
-          "quote": "W e p r e s e n t S p a r s e R e a d , a r e u s a b l e r e a d i n g c o n t r o l l a y e r t h a t g o v e r n s c o n t e n t a d m i s s i o n w i t h o u t m o d i f y i n g t h e a g e n t m o d e l ."
+          "quote": "the largest reductions compared with full reading were 92.9% in token use and 89.0% in wall time."
         },
         {
           "url": "https://huggingface.co/papers/2608.22237",
-          "quote": "I t s R e a d I n t e n t P r o t o c o l t r a c k s e v o l v i n g n e e d s a n d s o u r c e c o v e r a g e ; A d a p t i v e R e a d e r B a c k e n d s s e l e c t h o w e v i d e n c e i s l o c a t e d a n d e x p o s e d ; a n d t h e B u d g e t e d R e a d G a t e b o u n d s c u m u l"
-        },
-        {
-          "url": "https://huggingface.co/papers/2608.22237",
-          "quote": "a t i v e r a w e x p o s u r e p e r e p i s o d e w i t h f a i t h f u l f u l l - v i e w f a l l b a c k ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2608.22237",
-          "quote": "A u n i f i e d R e a d e r i n t e r f a c e s u p p o r t s i n t e r c h a n g e a b l e e v i d e n c e a c q u i s i t i o n a c r o s s h e t e r o g e n e o u s r e s o u r c e s ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2608.22237",
-          "quote": "0 % , p r e s e r v i n g o r i m p r o v i n g t a s k q u a l i t y i n 9 7 % s e t t i n g s ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2608.22237",
-          "quote": "O n W e b d e e p - s e a r c h t a s k s , i t r e d u c e s t o k e n s b y 3 1 ."
+          "quote": "Code and setup: https: https://github.com/Liuzedooong/SparseReading"
         }
+      ],
+      "tags": [
+        "论文",
+        "Agent"
       ]
     },
     {
       "section": "paper",
-      "title": "PISA routes prompts to models by cost and quality",
-      "summary": "PISA is a prompt-adaptive, cost-aware single-model router that combines soft cluster memberships with model-specific predictors to estimate individual model capabilities, and PISA-E extends it to ensemble routing by jointly selecting ensemble composition and cardinality under an explicit cost--quality preference adjustable at inference time without retraining. Across four LLM routing benchmarks under in-distribution (ID) and out-of-distribution (OOD) conditions, PISA achieves the highest macro-average cost--performance hypervolume among the evaluated single-model routers, while PISA-E surpasses the strongest ensemble competitors by 2.09 and 2.87 percentage points under ID and OOD conditions.",
+      "title": "SteerDistill quantizes LLM agents with closed-loop teacher steering",
+      "summary": "Quantized agents often overlook task requirements or environmental conditions; SteerDistill has a full-precision teacher guide the student to revise failed responses, refines that guidance from execution feedback, then trains the student to act without guidance. Across five agentic benchmarks and three models, it beats the strongest quantized baseline by 1.67 to 2.18 points under W4A16 and stays within one point of BF16. Teams deploying low-bit agents to cut cost can try the code on GitHub.",
+      "sources": [
+        {
+          "candidate_id": "c_0073617c1e",
+          "url": "https://huggingface.co/papers/2611.13410"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.13410",
+          "quote": "Across five agentic benchmarks and three models, SteerDistill exceeds the strongest quantized baseline by 1.67--2.18 points in average score under W4A16 and stays within one point of BF16 ."
+        }
+      ],
       "tags": [
         "论文",
         "推理",
-        "工具"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_8d3091d2d3",
-          "url": "https://huggingface.co/papers/2611.10193"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2611.10193",
-          "quote": "We introduce PISA, a prompt-adaptive, cost-aware single-model router , and PISA-E, its extension to ensemble routing ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.10193",
-          "quote": "At the core of both methods, PISA combines soft cluster memberships with model-specific predictors to estimate individual model capabilities."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.10193",
-          "quote": "Building on these estimates, PISA-E jointly selects ensemble composition and cardinality under an explicit cost--quality preference that can be adjusted at inference time without retraining."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.10193",
-          "quote": "Across four LLM routing benchmarks under in-distribution (ID) and out-of-distribution (OOD) conditions, PISA achieves the highest macro-average cost--performance hypervolume among the evaluated single-model routers in both settings."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.10193",
-          "quote": "Meanwhile, PISA-E achieves the highest macro-average task performance among the evaluated ensemble approaches when prioritizing response quality, surpassing the strongest competitors by 2.09 and 2.87 percentage points under ID and OOD conditions, respectively."
-        }
+        "Agent"
       ]
     },
     {
-      "section": "paper",
-      "title": "Interactive Visual Gym benchmarks visual interaction models",
-      "summary": "Interactive Visual Gym is a framework for closed-loop evaluation and training of visual interaction models through joint simulation of executable task environments and human users, instantiated as IVG-Bench with 315 interaction scenarios across cooking, household manipulation, and mobile-interface domains. The best-performing model, Gemini 4 Argon, completes only 53.4% of tasks within the time limit, and a human study finds 78.5% agreement between the interaction-quality metric and participant preferences.",
-      "tags": [
-        "论文",
-        "多模态",
-        "Agent"
-      ],
+      "section": "tool",
+      "title": "Claude Code v2.1.323 adds experimental Code Mode",
+      "summary": "The release adds Code Mode, an experimental opt-in in which Claude writes JavaScript to call its tools, which organizations can turn off. Plugins can declare engines[\"claude-code\"] in plugin.json so that versions outside the stated range are not installed, updated or loaded, and claude plugin validate now type-checks a plugin's TypeScript hooks module. Plugin authors can add version constraints after upgrading.",
       "sources": [
         {
-          "candidate_id": "c_8f02d5b2a8",
-          "url": "https://huggingface.co/papers/2611.08286"
+          "candidate_id": "c_cbc943d9a7",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.323"
+        }
+      ],
+      "evidence": [],
+      "tags": [
+        "工具",
+        "代码",
+        "Agent"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Codex 0.168.0 adds model provider switching and side-by-side chats",
+      "summary": "You can now browse model providers under Sessions → Model providers and pick the default for new chats, and the TUI workspace feature shows a side conversation beside the main chat. The release also lets you attach recordings when using an audio-capable model and generate or edit animated GIFs. Teams that switch between providers can upgrade and try it.",
+      "sources": [
+        {
+          "candidate_id": "c_fffefb8232",
+          "url": "https://github.com/openai/codex/releases/tag/rust-v0.168.0"
+        }
+      ],
+      "evidence": [],
+      "tags": [
+        "工具",
+        "代码"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "inferencekit turns coding agents into inference engineers",
+      "summary": "inferencekit is a plugin for Claude Code, Codex and OpenCode: give the agent a model, hardware and a goal, and it finds, benchmarks and tunes compatible inference engines, optionally going further with custom optimizations including GPU kernels, reverting changes that miss requirements and delivering a REPORT.md. It is licensed under Apache-2.0. Developers whose hardware differs from the model authors' can let an agent find the fastest setup for their machine.",
+      "sources": [
+        {
+          "url": "https://github.com/KittenML/inferencekit",
+          "title": "KittenML/inferencekit"
+        },
+        {
+          "candidate_id": "c_7b964bd39c",
+          "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xut6z0/inferencekit_opensource_plugin_to_optimize_any/"
         }
       ],
       "evidence": [
         {
-          "url": "https://huggingface.co/papers/2611.08286",
-          "quote": "We introduce Interactive Visual Gym, a framework for closed-loop evaluation and training of visual interaction models through joint simulation of executable task environments and human users."
+          "url": "https://github.com/KittenML/inferencekit",
+          "quote": "inferencekit is a plugin for Claude Code, Codex and OpenCode, backed by reusable CLI and MCP tools. Give your agent a model, hardware and a goal. It finds, benchmarks and tunes compatible inference engines for your workl"
         },
         {
-          "url": "https://huggingface.co/papers/2611.08286",
-          "quote": "We instantiate the framework as IVG-Bench , a benchmark with 315 interaction scenarios."
+          "url": "https://github.com/KittenML/inferencekit",
+          "quote": "You can stop with the best tested configuration or go further with custom optimizations, including GPU kernels."
         },
         {
-          "url": "https://huggingface.co/papers/2611.08286",
-          "quote": "Evaluating state-of-the-art VLMs as visual interaction models reveals substantial limitations: the best-performing model, Gemini 4 Argon, completes only 53.4% of tasks within the time limit, exhibits significant weaknesses in factual grounding and actionable guidance , and is often too slow to preve"
+          "url": "https://github.com/KittenML/inferencekit",
+          "quote": "Changes that miss the agreed performance or quality requirements are reverted. Ship it. You get the fastest proven configuration and a REPORT.md with the result"
         },
         {
-          "url": "https://huggingface.co/papers/2611.08286",
-          "quote": "We verify our evaluation protocol with a human study which finds 78.5% agreement between our interaction-quality metric and participant preferences."
+          "url": "https://github.com/KittenML/inferencekit",
+          "quote": "License Apache-2.0: LICENSE and NOTICE ."
         }
+      ],
+      "tags": [
+        "工具",
+        "推理",
+        "开源"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "llama.cpp merges Intel Vulkan flash attention prefill kernel",
+      "summary": "llama.cpp merged an Intel-specific Vulkan flash attention prefill shader, currently enabled on XE1 ARL-H and XE2/XE3 platforms, while the A770 stays disabled because of inconsistent test results. The author measured qwen3 8B pp8192 prefill on a B70 Pro under Windows rising from 1064.67 to 2955.83 t/s. Developers running local models on Intel GPUs get the speedup on master.",
+      "sources": [
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/pull/29357",
+          "title": "vulkan : Intel FA kernel for prefill · llama.cpp #29357"
+        },
+        {
+          "candidate_id": "c_8039b588a3",
+          "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xumdj4/intel_arc_vulkan_prefill_got_a_dedicated_fa/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/pull/29357",
+          "quote": "Add Intel prefill FA shader for LLM usages on supported platforms"
+        },
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/pull/29357",
+          "quote": "FA Customized shader is currently enabled on XE1 ARL-H, XE2/XE3 platforms For A770 (XE1 dGPU), the existing performance test data with coopmat enforce on showed inconsistent result, we will still keep it disabled"
+        },
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/pull/29357",
+          "quote": "0cc4m merged 14 commits into ggml - org : master"
+        }
+      ],
+      "tags": [
+        "工具",
+        "推理",
+        "硬件"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "Jensen Huang resigns as Nvidia CEO, Colette Kress named interim",
+      "summary": "Jensen Huang has resigned as Nvidia's CEO, and Colette Kress has been named interim CEO.",
+      "sources": [
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/0001045810/000104581026000082/nvidiaannouncesceotransiti.htm",
+          "title": "NVIDIA Form 8-K"
+        },
+        {
+          "candidate_id": "c_a7d95e53ce",
+          "url": "https://www.bloomberg.com/news/live-blog/2026-11-11/nvidia-turmoil-board-to-weigh-ceo-jensen-huang-future-over-alleged-affairs"
+        }
+      ],
+      "evidence": [],
+      "tags": [
+        "行业",
+        "硬件"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "Claude Meetings beta lets Claude join video calls",
+      "summary": "Claude can now join video calls as a visible participant, answer questions and write notes and action items, starting with Google Meet in a beta rolling out on Team and Enterprise plans.",
+      "sources": [
+        {
+          "candidate_id": "c_ddaff9f567",
+          "url": "https://claude.com/resources/articles/claude-meetings"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://claude.com/resources/articles/claude-meetings",
+          "quote": "Claude can now join your video calls as a visible participant, follow the conversation and start on work during the meeting."
+        },
+        {
+          "url": "https://claude.com/resources/articles/claude-meetings",
+          "quote": "Support is currently available for Google Meet, with other platforms coming soon."
+        },
+        {
+          "url": "https://claude.com/resources/articles/claude-meetings",
+          "quote": "Claude writes the notes and action items, so no one on the call has to. Claude Meetings is starting to roll out in beta on Team and Enterprise plans."
+        }
+      ],
+      "tags": [
+        "产品",
+        "Agent"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "UMAP 0.6 ships new initialization and optimizers",
+      "summary": "UMAP 0.6 brings new init and optimizer pipelines, and the author says it finishes on 3 million arXiv papers in under 5 minutes; upgrade with pip install -U umap-learn.",
+      "sources": [
+        {
+          "url": "https://github.com/lmcinnes/umap/releases",
+          "title": "lmcinnes/umap releases"
+        },
+        {
+          "candidate_id": "c_cd10354118",
+          "url": "https://www.reddit.com/gallery/1xudaah"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/lmcinnes/umap/releases",
+          "quote": "0.6 development: new init and optimizer pipelines by @lmcinnes in #1327"
+        }
+      ],
+      "tags": [
+        "工具",
+        "开源"
       ]
     }
   ],
   "research": [
     {
       "via": "webfetch",
-      "url": "https://claude.com/resources/articles/self-hosted-claude-managed-agents"
-    },
-    {
-      "via": "webfetch",
       "url": "https://deepmind.google/blog/introducing-gemini-4-hydrogen/"
     },
     {
       "via": "webfetch",
-      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.323"
+      "url": "https://antigravity.google/blog/gemini-4-hydrogen-in-google-antigravity/"
     },
     {
       "via": "webfetch",
-      "url": "https://github.com/openai/codex/releases/tag/rust-v0.168.0"
+      "url": "https://claude.com/resources/articles/self-hosted-claude-managed-agents"
     },
     {
       "via": "webfetch",
-      "url": "https://machinelearning.apple.com/research/theoretical-limits-alignment"
+      "url": "https://edge0.ai/blog/introducing-edge0-145b-frontier-ai-capabilities-on-your-own-computer"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/collections/runwayml/praxis-1"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/facebook/meta-encoder"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/KRAFTON/Raon-1-nano"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/runwayml/praxis-1-oss"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/thinkingmachines/Inkling-2-Small"
     },
     {
       "via": "webfetch",
@@ -787,15 +629,7 @@
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/papers/2610.40394"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2610.39671"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.13410"
+      "url": "https://github.com/GoogleChrome/modern-web-guidance-src"
     },
     {
       "via": "webfetch",
@@ -807,56 +641,50 @@
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.10193"
+      "url": "https://huggingface.co/papers/2611.13410"
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.08286"
+      "url": "https://claude.com/resources/articles/claude-meetings"
+    },
+    {
+      "via": "websearch",
+      "query": "Nvidia Jensen Huang resigns CEO Colette Kress interim press release"
+    },
+    {
+      "via": "websearch",
+      "query": "Baidu ERNIE 5.5 Flash Preview release"
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.13028"
+      "url": "https://unemploymentlabs.com/checkpoint-forensics"
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/collections/runwayml/praxis-1"
+      "url": "https://www.sec.gov/Archives/edgar/data/0001045810/000104581026000082/nvidiaannouncesceotransiti.htm"
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/collections/facebook/metaencoder"
+      "url": "https://ipo.anthropic.com/us/"
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/blog/token-pooling"
+      "url": "https://github.com/KittenML/inferencekit"
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/blog/3d-lora-finetuning"
+      "url": "https://github.com/lmcinnes/umap/releases"
     },
     {
       "via": "webfetch",
-      "url": "https://www.bloomberg.com/news/live-blog/2026-11-11/nvidia-turmoil-board-to-weigh-ceo-jensen-huang-future-over-alleged-affairs"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://github.com/lmcinnes/umap"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/qvac/BotPsy-0.8B"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://edge0.ai/blog/introducing-edge0-145b-frontier-ai-capabilities-on-your-own-computer"
+      "url": "https://github.com/ggml-org/llama.cpp/pull/29357"
     }
   ],
   "lang": "en",
   "validation": {
-    "validated_at": "2026-11-13T04:43:50+00:00",
+    "validated_at": "2026-11-13T04:47:46+00:00",
     "checked_links": false,
     "dropped": [],
-    "warnings": [
-      "7 paper items (target 2-4)"
-    ]
+    "warnings": []
   }
 }
