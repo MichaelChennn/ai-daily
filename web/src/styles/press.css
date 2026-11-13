@@ -243,6 +243,13 @@ footer.solo .colophon{order:-1;flex:1;flex-basis:auto;min-width:0;margin:0;line-
 .arc .face{height:var(--strip-h);display:flex;align-items:center;gap:10px;padding:0 20px}
 .arc .date{flex:none;margin-left:14px;font-size:var(--fs-xs);color:var(--muted)}
 .arc:focus-visible{outline:none}
+
+/* 404: the code, the heading, one line, then spines on to the latest issue, the archive, the sources */
+.nf{padding-top:max(96px,22vh)}
+.nf-code{margin:0;font-family:var(--f-mono);font-size:var(--fs-xs);color:var(--muted);letter-spacing:.08em}
+.nf h1{margin:6px 0 8px;font-family:var(--f-title);font-weight:700;font-size:var(--fs-xl);line-height:1.35}
+.nf-hint{margin:0 0 var(--space-group);font-size:var(--fs-s);color:var(--muted)}
+.arc .ic{flex:none;color:var(--muted)}
 .arc:focus-visible .face{outline:2px solid var(--ink);outline-offset:2px}
 
 /* ========== sources: a group per section, three cards a row ========== */

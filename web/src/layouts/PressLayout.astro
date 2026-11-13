@@ -10,17 +10,17 @@ import { href, pageHref, pagePath } from "@/lib/issues"
 interface Props {
   title: string
   description: string
-  /** This page's canonical path, if not its own. */
-  canonical?: string
+  /** This page's canonical path, if not its own; null for none (the 404 page). */
+  canonical?: string | null
 }
 
 const { title, description, canonical = Astro.url.pathname } = Astro.props
 const lang = langOf(Astro.currentLocale)
 const t = strings[lang]
 // The same page in both languages, for search engines and for the redirect below. Not on a beta
-// page: the English site has none.
+// page (the English site has none) nor on the 404 page, which stands in for any missing path.
 const page = pagePath(Astro.url.pathname, lang)
-const bilingual = !/\/beta\//.test(page)
+const bilingual = canonical !== null && !/\/beta\//.test(page)
 const alternates = bilingual
   ? [
       { hreflang: "zh-CN", href: pageHref(page) },
@@ -72,7 +72,7 @@ const otherLang = bilingual ? (lang === "en" ? "zh" : "en") : undefined
     <link rel="expect" href="#content-end" blocking="render" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={new URL(canonical, Astro.site)} />
+    {canonical === null ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={new URL(canonical, Astro.site)} />}
     <link rel="icon" type="image/svg+xml" href={href("favicon.svg")} />
     {alternates.map((link) => <link rel="alternate" hreflang={link.hreflang} href={new URL(link.href, Astro.site)} />)}
     <link rel="alternate" type="application/rss+xml" title={t.siteTitle} href={href(t.feed)} />

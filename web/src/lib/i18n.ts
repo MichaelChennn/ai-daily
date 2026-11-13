@@ -39,6 +39,7 @@ export const strings = {
     feed: "feed.xml",
     empty: "还没有发布任何一期",
     notFound: "页面不存在",
+    notFoundHint: "链接可能写错了，或者这一页已经移走。",
     archive: {
       description: (site: string) => `${site}的全部往期，按月份浏览。`,
     },
@@ -111,6 +112,7 @@ export const strings = {
     feed: "feed.en.xml",
     empty: "No issues published yet",
     notFound: "Page not found",
+    notFoundHint: "The link may be mistyped, or the page has moved.",
     archive: {
       description: (site: string) => `Every issue of ${site}, by month.`,
     },
