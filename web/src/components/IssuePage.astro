@@ -3,9 +3,10 @@ import ItemCard from "@/components/press/ItemCard.astro"
 import ItemMeta from "@/components/press/ItemMeta.astro"
 import PressFooter from "@/components/press/PressFooter.astro"
 import Rail from "@/components/press/Rail.astro"
+import Wordmark from "@/components/press/Wordmark.astro"
 import PressLayout from "@/layouts/PressLayout.astro"
 import { langOf, strings } from "@/lib/i18n"
-import { betaName, type Issue, issueHref, pageHref } from "@/lib/issues"
+import { betaName, type Issue, issueHref } from "@/lib/issues"
 import controls from "@/scripts/controls.js?raw"
 import script from "@/scripts/press.js?raw"
 
@@ -30,7 +31,7 @@ const description = issue.description || t.description(issue.date)
 ---
 
 <PressLayout title={title} description={description} canonical={home ? issueHref(issue.date, lang) : undefined}>
-  <a class="logo" href={pageHref("", lang)} id="logo">{t.siteTitle}</a>
+  <Wordmark lang={lang} />
   <Rail date={issue.date} lang={lang} />
 
   <main id="main">

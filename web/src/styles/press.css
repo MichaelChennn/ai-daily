@@ -57,7 +57,11 @@ a{color:inherit;text-decoration:none}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
 /* ========== wordmark ========== */
-.logo{position:fixed;left:var(--rail-x);top:26px;z-index:30;font-family:var(--f-title);font-weight:700;font-size:var(--fs-l);letter-spacing:.02em}
+/* lockup A (zh) / C (en): the 24-grid mark at 1.2em, then the name; English set 13/12 larger, as Latin
+   reads a size smaller than Han at the same px (docs/design-system.md § Brand) */
+.logo{position:fixed;left:var(--rail-x);top:24px;z-index:30;display:flex;align-items:center;gap:8px;font-family:var(--f-title);font-weight:700;font-size:var(--fs-l);line-height:1;letter-spacing:.04em;white-space:nowrap}
+.logo.en{font-size:calc(var(--fs-l) * 13 / 12);letter-spacing:.01em}
+.logo svg{flex:none;width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 
 /* ========== rail (Stripe Press menu, 1:1 params) ========== */
 .rail{position:fixed;left:var(--rail-x);top:50%;transform:translateY(-50%);z-index:40;margin-left:4px;user-select:none}

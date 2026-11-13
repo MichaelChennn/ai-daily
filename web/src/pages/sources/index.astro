@@ -1,9 +1,10 @@
 ---
 import PressFooter from "@/components/press/PressFooter.astro"
 import SectionRail from "@/components/press/SectionRail.astro"
+import Wordmark from "@/components/press/Wordmark.astro"
 import PressLayout from "@/layouts/PressLayout.astro"
 import { langOf, strings } from "@/lib/i18n"
-import { issuesIn, pageHref } from "@/lib/issues"
+import { issuesIn } from "@/lib/issues"
 import { kindIn, type Source, sourcesIn } from "@/lib/sources"
 import controls from "@/scripts/controls.js?raw"
 import script from "@/scripts/section-rail.js?raw"
@@ -33,7 +34,7 @@ const stats = (st: NonNullable<Source["stats"]>) => [
 ---
 
 <PressLayout title={title} description={s.description(t.siteTitle)}>
-  <a class="logo" href={pageHref("", lang)} id="logo">{t.siteTitle}</a>
+  <Wordmark lang={lang} />
   <SectionRail
     ticks={groups.map((g) => ({ id: g.id, label: g.label }))}
     label={s.groups}

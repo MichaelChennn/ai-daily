@@ -6,11 +6,55 @@ issue #43 重设计后的网页样式：每期页（含 beta 页）、归档页�
 
 ## 原则
 
-- 只有页面内容，不加顶栏。左上角放文字标，左侧是导航条，语言和日夜按钮在左下角，其余链接（GitHub、RSS、生成过程、Beta 版）都放在页脚。
+- 只有页面内容，不加顶栏。左上角放文字标（logo），左侧是导航条，语言和日夜按钮在左下角，其余链接（GitHub、RSS、生成过程、Beta 版）都放在页脚。
 - 卡片的动效只用整像素平移，不旋转，不缩放，不做 3D，否则文字会发虚。也不加高光。
 - 厂商 logo 一律用原色。正文不用浅灰色。
 - 交互连续点击时必须立即响应。不加加载进度条。
 - 新页面不要用 Tailwind：它的 preflight 会改默认样式。
+
+## 品牌
+
+中文名「AI 晨报」，英文名 AI Daily，仓库名 `ai-daily`。已经发布的旧期不改名。
+
+### 图形
+
+两条书脊叠在一张摊开的卡片上，卡片上有一行字，对应每期页的书脊叠放。24 格，2px 单线，圆头圆角，只用 `--ink`，不加强调色。日间、夜间都直接用 `--ink`，不另做反白版。
+
+```svg
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M7 3.5h10"/><path d="M5 7.5h14"/><rect x="3" y="11.5" width="18" height="9" rx="2"/><path d="M7 16h6"/>
+</svg>
+```
+
+最小 16px（favicon）。
+
+### 组合
+
+| 组合 | 写法 | 用在 |
+|---|---|---|
+| A | 图形 + 「AI 晨报」 | 中文页面左上角（`Wordmark`） |
+| C | 图形 + AI Daily | 英文页面左上角（`Wordmark`） |
+| B | 图形 + 「AI 晨报」，下面一行等宽的 AI DAILY | 中文 README 顶部 |
+| B-en | 图形 + AI Daily，下面一行小号「AI 晨报」 | 英文 README 顶部 |
+| D | 图形在上，「AI 晨报」和 AI DAILY 居中在下 | 中文封面、社交卡片 |
+| D-en | 图形在上，AI Daily 和「AI 晨报」居中在下 | 英文封面、社交卡片 |
+| favicon | 只用图形 | 浏览器标签 |
+
+- 名字用宋体 700。中文字距 .04em，英文 .01em。
+- 英文在上时，英文字号比同位置的中文大约 1/12，因为同样的 px 下拉丁字母看起来比汉字小一号。
+- 下面那行：英文用 JetBrains Mono 500，大写，字距 .28em，不透明度 .65；中文用 Noto Sans SC 500，字距 .14em 到 .24em，不透明度 .65。中文不要用等宽字体、大字距或大写，否则会像一串编号。
+- 不要把图形和名字拆开换色，不加描边、阴影或底色块。
+
+### 文件
+
+`docs/assets/brand/build.py` 用网站自带的字体（`web/node_modules/@fontsource*`）把名字转成路径，生成 `docs/assets/brand/` 下的图形和各组合，以及 `web/public/favicon.svg`。这些 SVG 不依赖字体，跟随系统的日夜模式切换颜色。README 的 hero 也从这里取组合 B 和 B-en。改图形或组合时改这个脚本，再重跑它和 `docs/assets/readme/source/build.py`：
+
+```sh
+uv run --no-project --with fonttools --with brotli python docs/assets/brand/build.py
+uv run --no-project --with fonttools --with brotli python docs/assets/readme/source/build.py
+```
+
+网站左上角的组合 A、C 不用 SVG，名字是页面上的文字，图形内联在 `Wordmark` 里。
 
 ## 颜色
 
@@ -91,9 +135,9 @@ issue #43 重设计后的网页样式：每期页（含 beta 页）、归档页�
 
 组件在 `web/src/components/press/`，页面脚本在 `web/src/scripts/`。
 
-### 文字标
+### 文字标（`Wordmark`）
 
-左上角的「AI 科技日报」：20px 宋体，`position:fixed`。手机上改成 absolute，跟着页面滚走。以后会换成图形 logo。
+左上角的组合 A（中文）或 C（英文），见上面的「品牌」。图形 24px，间距 8px，名字 `--fs-l` 宋体；英文名放大到 `--fs-l` 的 13/12。`position:fixed`，手机上改成 absolute，跟着页面滚走。
 
 ### 左侧条（`Rail`、`SectionRail`）
 
@@ -228,7 +272,7 @@ issue #43 重设计后的网页样式：每期页（含 beta 页）、归档页�
 ## 新页面接入清单
 
 1. 用 `PressLayout`。样式只用 `press.css`：通过 `import x from "…css?url"` 加手写 `<link>` 引入，不要在 JS 里直接 `import` CSS，否则会把旧页面的 Tailwind 一起带进来。
-2. 页面结构：`.logo` + 左侧条（`SectionRail`，或者不需要时只放 `RailIcons`）+ `main` + `PressFooter`。
+2. 页面结构：`Wordmark` + 左侧条（`SectionRail`，或者不需要时只放 `RailIcons`）+ `main` + `PressFooter`。
 3. 颜色、字号、圆角、阴影都用 token。需要新的值时，先确认现有档位确实不够，再在 `:root` 里加 token，并更新这份文档。
 4. 卡片用 `.face`，标题用对应档位的宋体字号，日期和数字用 `--f-mono`。
 5. 日夜两种主题、三种宽度（1440、1024、390）都要截图检查；还要打开「减少动态效果」检查一遍。

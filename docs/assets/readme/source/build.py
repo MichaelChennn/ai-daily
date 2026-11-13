@@ -3,14 +3,23 @@
     python docs/assets/readme/source/build.py
 
 Writes docs/assets/readme/{hero,pipeline}-{zh,en}-{light,dark}.svg. Brand icons come from
-simple-icons (CC0), copied into icons.json next to this file.
+simple-icons (CC0), copied into icons.json next to this file. The hero's name is the logo's lockup B
+(Chinese) or B-en (English), outlined by docs/assets/brand/build.py, so run it the same way:
+
+    uv run --no-project --with fonttools --with brotli python docs/assets/readme/source/build.py
 """
 
+import importlib.util
 import json
 from pathlib import Path
 from xml.sax.saxutils import escape
 
 HERE = Path(__file__).parent
+_spec = importlib.util.spec_from_file_location("brand", HERE.parents[1] / "brand" / "build.py")
+_brand = importlib.util.module_from_spec(_spec)
+_spec.loader.exec_module(_brand)
+lockup = _brand.lockup
+
 OUT = HERE.parent
 ICONS = json.loads((HERE / "icons.json").read_text())
 
@@ -49,8 +58,8 @@ DARK_BRANDS = {"anthropic", "github"}
 TEXT = {
     "zh": {
         "eyebrow": "每天 06:00 · 柏林时间",
-        "name": "AI 科技日报",
-        "name_size": 76,
+        "name": "AI 晨报",
+        "lockup": "b",
         "lines": ["每天一期 AI 技术日报，5 分钟读完。", "每个数字都能追到一手来源的原文。"],
         "chips": [["官方和一手 31 个", "博主与周报 10 个"], ["中文 / English", "全文 RSS"]],
         "meta": "Mistral AI News · 10月29日",
@@ -60,7 +69,7 @@ TEXT = {
             ["提升 ", ("13",), " 个百分点至 ", ("41%",), "。"],
         ],
         "check": "逐字核对",
-        "pipeline_title": "AI 科技日报的流水线",
+        "pipeline_title": "AI 晨报的流水线",
         "s1": "信源采集",
         "s1_note": "官方和一手 31 个 + 博主与周报 10 个 · 05:07",
         "merge": "去重 → 候选",
@@ -80,7 +89,7 @@ TEXT = {
     "en": {
         "eyebrow": "DAILY AT 06:00 BERLIN TIME",
         "name": "AI Daily",
-        "name_size": 84,
+        "lockup": "b-en",
         "lines": [
             "A five-minute AI tech digest, every morning.",
             "Every number traces back to a primary source.",
@@ -198,7 +207,9 @@ def hero(lang, t):
     b = []
     # Masthead: what it is, in the reader's words.
     b.append(text(64, 150, escape(s["eyebrow"]), 18, t["muted"], 500, MONO, extra=' letter-spacing="1"'))
-    b.append(text(60, 236, escape(s["name"]), s["name_size"], t["fg"], 800, extra=' letter-spacing="-2"'))
+    body, _, h = lockup(s["lockup"], t["fg"])
+    k = 84 / h  # as tall as the name it replaced, between the eyebrow and the lines
+    b.append(f'<g transform="translate(64 {250 - 84}) scale({k:g})">{body}</g>')
     for i, line in enumerate(s["lines"]):
         b.append(text(64, 292 + i * 36, escape(line), 23, t["body"]))
     for row, labels in enumerate(s["chips"]):
