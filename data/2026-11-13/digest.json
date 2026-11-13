@@ -1,0 +1,709 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-13",
+  "mode": "full",
+  "channel": "claude",
+  "generated_at": "2026-11-13T04:44:47+00:00",
+  "model": "claude-opus-5-5",
+  "highlights": [
+    "Google 发布面向编码和 Agent 工作流的 Gemini 4 Hydrogen，全上下文窗口统一按每百万 token $1.50（输入）/ $7.50（输出）计价。",
+    "Anthropic 推出自托管 Claude Managed Agents 私测；一份取证报告称 DeepSeek、Moonshot AI 等实验室的最新模型权重带有 NVIDIA Blackwell 指纹。",
+    "开放权重方面，Inkling 2 Small、Edge0-145B 和 Runway 的 Praxis-1 都已可以下载。"
+  ],
+  "items": [
+    {
+      "section": "headline",
+      "title": "Google 发布 Gemini 4 Hydrogen，主打编码与 Agent",
+      "summary": "Gemini 4 Hydrogen 是 Google 面向快速执行 Agent 工作流的新模型，今天起在 Gemini API、Google AI Studio、Gemini app 和 Google Search 等处全球上线，全上下文窗口统一按每百万 token $1.50（输入）/ $7.50（输出）计价，并新增 xhigh 推理档。Google 称它在默认 high 档下完成任务比 Gemini 3.8 Flash 快 2.5 倍，Terminal-Bench 4.1 得分 57%（对比 18.2%）；Antigravity 同时上线 Orchestrator，可以在同一任务中先由 Carbon 做只读规划、再交给 Hydrogen 改代码和跑测试。还在用 Gemini 3.8 Flash 的开发者可以直接对比迁移后的速度和成本。",
+      "sources": [
+        {
+          "candidate_id": "c_720825c8bb",
+          "url": "https://deepmind.google/blog/introducing-gemini-4-hydrogen/"
+        },
+        {
+          "candidate_id": "c_aa44dcddf7",
+          "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/"
+        },
+        {
+          "candidate_id": "c_e836720e11",
+          "url": "https://blog.google/products-and-platforms/products/search/gemini-4-hydrogen-search-upgrade/"
+        },
+        {
+          "candidate_id": "c_3933d801d1",
+          "url": "https://antigravity.google/blog/gemini-4-hydrogen-in-google-antigravity/"
+        },
+        {
+          "candidate_id": "c_aa44dcddf7",
+          "url": "https://news.ycombinator.com/item?id=50471431"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/",
+          "quote": "Hydrogen is built for rapid execution across diverse agentic workflows. With Hydrogen, we’re also bringing Gemini 4 to everyone — for all tiers of Google AI Studio , the Gemini API, Gemini for business , the Gemini app , Google Search"
+        },
+        {
+          "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/",
+          "quote": "Gemini 4 Hydrogen is priced flat across its entire 1 million-token context window at $1.50 per million input tokens and $7.50 per million output tokens."
+        },
+        {
+          "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/",
+          "quote": "finishing tasks 2.5 times faster at its high default setting while more than tripling Terminal-Bench 4.1 scores (57% vs. 18.2%)"
+        },
+        {
+          "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/",
+          "quote": "Hydrogen’s four thinking levels — low, medium, high (default), and a new xhigh tier"
+        },
+        {
+          "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/",
+          "quote": "teams migrating from Gemini 3.8 Flash"
+        },
+        {
+          "url": "https://antigravity.google/blog/gemini-4-hydrogen-in-google-antigravity/",
+          "quote": "Carbon can start in a read-only phase to explore dependencies, resolve ambiguities, and build a concrete plan with explicit re-planning triggers. Hydrogen could then take over to write edits, update packages, and run tests."
+        }
+      ],
+      "tags": [
+        "模型",
+        "代码",
+        "Agent"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Anthropic 推出自托管 Claude Managed Agents 私测",
+      "summary": "自托管版 Claude Managed Agents 进入 private beta：harness、沙箱、凭据和会话历史都运行在企业自己的云或本地环境中，模型请求可以直连 Anthropic，也可以走 Amazon Bedrock、Google's Agent Platform、Microsoft Foundry 或自有网关，开发者沿用托管版的同一套核心 API。需要让 Agent 直接操作内部代码和系统、又不能把数据交给托管服务的团队，可以通过 Anthropic 客户团队申请试用。",
+      "sources": [
+        {
+          "candidate_id": "c_ca1e61bc9c",
+          "url": "https://claude.com/resources/articles/self-hosted-claude-managed-agents"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://claude.com/resources/articles/self-hosted-claude-managed-agents",
+          "quote": "Self-hosted Claude Managed Agents is now available in private beta."
+        },
+        {
+          "url": "https://claude.com/resources/articles/self-hosted-claude-managed-agents",
+          "quote": "With self-hosted Managed Agents, every part of the service runs in your own cloud or on-premise, including the harness, sandboxes, credentials, and session history."
+        },
+        {
+          "url": "https://claude.com/resources/articles/self-hosted-claude-managed-agents",
+          "quote": "Model requests go where you choose, whether that's Anthropic directly, your cloud provider (Amazon Bedrock, Google's Agent Platform, or Microsoft Foundry), or your own gateway. Your developers still build agents with the same core APIs as the hosted Managed Agents service."
+        },
+        {
+          "url": "https://claude.com/resources/articles/self-hosted-claude-managed-agents",
+          "quote": "Contact your Anthropic account team to request access"
+        }
+      ],
+      "tags": [
+        "Agent",
+        "安全",
+        "产品"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "研究称多家中国实验室新模型权重带有 Blackwell 指纹",
+      "summary": "Unemployment Labs 的 Will DePue 发布取证报告：通过还原 PyTorch 初始化权重时的随机数种子和 GPU 线程布局，认为 DeepSeek、Moonshot AI、MiniMax 和 Ant Group 最新发布的六个模型与 NVIDIA Blackwell 硬件匹配，而这些公司更早的模型匹配上一代 Hopper。报告也说明，指纹只能说明初始权重由什么硬件生成，不能确定芯片在哪里、如何获得，也不能确定是否违反出口管制。这说明公开的权重本身就可能泄露训练硬件信息。",
+      "sources": [
+        {
+          "candidate_id": "c_f3526a2cd8",
+          "url": "https://unemploymentlabs.com/checkpoint-forensics"
+        },
+        {
+          "candidate_id": "c_f3526a2cd8",
+          "url": "https://news.ycombinator.com/item?id=50474883"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://unemploymentlabs.com/checkpoint-forensics",
+          "quote": "Our forensic analysis of publicly released AI models finds evidence that DeepSeek, Moonshot AI, MiniMax and Ant Group have gained access to NVIDIA’s Blackwell GPUs, despite restrictions on exporting these chips to China"
+        },
+        {
+          "url": "https://unemploymentlabs.com/checkpoint-forensics",
+          "quote": "Six models released by these companies since April 2026 contain numerical patterns matching Blackwell hardware, whereas earlier models from the same companies match NVIDIA’s older Hopper generation."
+        },
+        {
+          "url": "https://unemploymentlabs.com/checkpoint-forensics",
+          "quote": "but do not establish where the chips were located, how access was obtained, or whether export controls were violated."
+        },
+        {
+          "url": "https://unemploymentlabs.com/checkpoint-forensics",
+          "quote": "Will DePue November 12, 2026"
+        }
+      ],
+      "tags": [
+        "硬件",
+        "行业",
+        "安全"
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Edge0 开源可在笔记本上运行的 Edge0-145B",
+      "summary": "Edge0 开源了 Edge0-145B 和 Edge0-120B 以及配套推理框架：145B 总参数中每步约 10B 参与计算，每组 64 个专家共享两个大矩阵，热门专家留在显存，专家库放在系统内存，词表数据放在 SSD 上按需读取。官方报告峰值内存 29GB、解码速度超过 80 tokens/s，可在 48GB 笔记本上本地运行，六项基准均值 72.8。数字来自团队自测，想在个人电脑上跑大模型的开发者可以自己验证。",
+      "sources": [
+        {
+          "candidate_id": "c_44e7c43c22",
+          "url": "https://edge0.ai/blog/introducing-edge0-145b-frontier-ai-capabilities-on-your-own-computer"
+        },
+        {
+          "candidate_id": "c_87d2ae2805",
+          "url": "https://huggingface.co/Edge0/Edge0-145B-q3k"
+        },
+        {
+          "candidate_id": "c_44e7c43c22",
+          "url": "https://news.ycombinator.com/item?id=50475713"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://edge0.ai/blog/introducing-edge0-145b-frontier-ai-capabilities-on-your-own-computer",
+          "quote": "Today, we're open-sourcing Edge0-145B and Edge0-120B , together with our unified inference framework and deployment tools."
+        },
+        {
+          "url": "https://edge0.ai/blog/introducing-edge0-145b-frontier-ai-capabilities-on-your-own-computer",
+          "quote": "Each group of 64 experts shares two large matrices, while each expert retains a small set of parameters that captures its differences."
+        },
+        {
+          "url": "https://edge0.ai/blog/introducing-edge0-145b-frontier-ai-capabilities-on-your-own-computer",
+          "quote": "Of the model's 145B total parameters, only approximately 10B participate in computation on each inference step."
+        },
+        {
+          "url": "https://edge0.ai/blog/introducing-edge0-145b-frontier-ai-capabilities-on-your-own-computer",
+          "quote": "Frequently used “hot experts” remain in GPU memory. An expert library of approximately 40GB sits in system memory, with experts brought into GPU memory as needed. Approximately 48GB of vocabulary data resides on the SSD and is read on demand."
+        },
+        {
+          "url": "https://edge0.ai/blog/introducing-edge0-145b-frontier-ai-capabilities-on-your-own-computer",
+          "quote": "A 145B model runs locally on a compatible laptop, with reported peak memory of 29GB and decoding above 80 tokens/s."
+        },
+        {
+          "url": "https://edge0.ai/blog/introducing-edge0-145b-frontier-ai-capabilities-on-your-own-computer",
+          "quote": "Edge0-145B combines a 72.8 mean score across six benchmarks with 29GB measured peak memory ."
+        },
+        {
+          "url": "https://edge0.ai/blog/introducing-edge0-145b-frontier-ai-capabilities-on-your-own-computer",
+          "quote": "enabling local use on a 48GB laptop"
+        }
+      ],
+      "tags": [
+        "模型",
+        "开源",
+        "推理"
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Thinking Machines 开放 Inkling 2 Small 权重",
+      "summary": "Inkling 2 Small 的权重已在 Hugging Face 以 apache-2.0 许可开放，它是 594B 总参数、17B 激活的多模态模型，接受文本和图像输入，上下文最长 1M tokens。模型以 NVFP4 原生训练，主推的 NVFP4 checkpoint 需要至少 500GB 聚合显存，另有 MXFP8 版本。想自托管或微调大型开放 MoE 的团队现在可以直接下载。",
+      "sources": [
+        {
+          "candidate_id": "c_424f74445e",
+          "url": "https://huggingface.co/thinkingmachines/Inkling-2-Small"
+        },
+        {
+          "candidate_id": "c_424f74445e",
+          "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xuqplg/thinkingmachinesinkling2small_is_released/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/thinkingmachines/Inkling-2-Small",
+          "quote": "It is released with open weights to support research, fine-tuning and integration into third-party products by downstream developers."
+        },
+        {
+          "url": "https://huggingface.co/thinkingmachines/Inkling-2-Small",
+          "quote": "Parameters 594B total, 17B active Numerics support MXFP8 and NVFP4 Input modalities Inkling 2 Small accepts text input in UTF-8 encoding and image input"
+        },
+        {
+          "url": "https://huggingface.co/thinkingmachines/Inkling-2-Small",
+          "quote": "It supports a context window of up to 1M tokens."
+        },
+        {
+          "url": "https://huggingface.co/thinkingmachines/Inkling-2-Small",
+          "quote": "The main NVFP4 checkpoint requires a GPU cluster with at least 500GB of aggregated VRAM."
+        },
+        {
+          "url": "https://huggingface.co/thinkingmachines/Inkling-2-Small",
+          "quote": "The model was pretrained, midtrained and post-trained in NVFP4, so this is the native precision for the model."
+        }
+      ],
+      "tags": [
+        "模型",
+        "开源",
+        "多模态"
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Runway 发布机器人视频-动作策略模型 Praxis-1",
+      "summary": "Praxis-1 是 Runway 的机器人策略模型，每次调用同时预测下一段视频和下一段动作，Hugging Face 上有 27B 的 base、单臂 DROID 和双臂 YAM 等版本，还提供 LeRobot 格式和 NVFP4 版本。代码采用 Apache License 2.0，bf16 推理需要一块至少 80 GB 显存的 GPU，仓库也给出了用 LoRA 在单块 80 GB GPU 上适配任务的说明。做具身智能的团队可以直接拿来在自己的机械臂上微调。",
+      "sources": [
+        {
+          "candidate_id": "c_1e0fa26fee",
+          "url": "https://huggingface.co/collections/runwayml/praxis-1"
+        },
+        {
+          "url": "https://github.com/runwayml/praxis-1-oss",
+          "title": "runwayml/praxis-1-oss"
+        },
+        {
+          "candidate_id": "c_1e0fa26fee",
+          "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xu8u4f/praxis1_a_runwayml_collection/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/runwayml/praxis-1-oss",
+          "quote": "For each policy call, the model predicts the next video chunk and the next action chunk. The robot then executes the action chunk."
+        },
+        {
+          "url": "https://github.com/runwayml/praxis-1-oss",
+          "quote": "The code in this repository is licensed under the Apache License 2.0 (see LICENSE ). See the license file of each set of weights for the weights."
+        },
+        {
+          "url": "https://github.com/runwayml/praxis-1-oss",
+          "quote": "Use Python 3.12 and a CUDA GPU with at least 80 GB of memory (one H100 is sufficient). This is for the bf16 default"
+        },
+        {
+          "url": "https://github.com/runwayml/praxis-1-oss",
+          "quote": "how to adapt praxis-1-droid to a task with LoRA on one 80 GB GPU"
+        },
+        {
+          "url": "https://huggingface.co/collections/runwayml/praxis-1",
+          "quote": "runwayml/praxis-1-base Robotics • 27B"
+        },
+        {
+          "url": "https://huggingface.co/collections/runwayml/praxis-1",
+          "quote": "Praxis-1 robot policies: base model, DROID and YAM fine-tunes."
+        },
+        {
+          "url": "https://github.com/runwayml/praxis-1-oss",
+          "quote": "Both checkpoints also have NVFP4 versions, fine-tuned with quantization-aware training of the routed experts"
+        }
+      ],
+      "tags": [
+        "模型",
+        "开源",
+        "视频"
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Meta 发布 MetaEncoder，一个编码器做检索与决策",
+      "summary": "MetaEncoder 由 meta-models/Muse-Glimmer-30B 对比微调而来：用自然语言描述任务和一组候选（可附图像、视频），模型按任务给候选打分。任务和候选分开编码，匹配是表示之间的内积，因此候选表示可以缓存，用 ANN 索引服务海量候选而不必重跑模型；权重采用 Apache 2.0 许可。适合需要快速做检索、排序和封闭式选择的场景。",
+      "sources": [
+        {
+          "candidate_id": "c_9c9e32d405",
+          "url": "https://huggingface.co/collections/facebook/metaencoder"
+        },
+        {
+          "url": "https://huggingface.co/facebook/meta-encoder",
+          "title": "facebook/meta-encoder"
+        },
+        {
+          "candidate_id": "c_9c9e32d405",
+          "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xu8eie/metaencoder_a_facebook_collection_one_encoder_for/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/facebook/meta-encoder",
+          "quote": "give it a task and a list of candidates , and it scores the candidates by task specification."
+        },
+        {
+          "url": "https://huggingface.co/facebook/meta-encoder",
+          "quote": "Matching is an inner product over representations, so an ANN index can serve millions of candidates without re-running the model. The model is built by contrastively fine-tuning meta-models/Muse-Glimmer-30B ."
+        },
+        {
+          "url": "https://huggingface.co/facebook/meta-encoder",
+          "quote": "Licensed under Apache 2.0 , inherited from the base model."
+        }
+      ],
+      "tags": [
+        "模型",
+        "多模态",
+        "开源"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Evolving Infra：按 Agent 负载自适应的 LLM 推理服务",
+      "summary": "Evolving Infra 把算力分配和 KV cache 管理解耦，节点可以在 prefill 和 decode 之间高效切换；在线规划器按负载构成调整 PD 比例，分布式 KV 管理器借助 Agent 上下文管理的信号决定缓存淘汰和传输。在最多 256 张 GB300 上用 GLM-5.2 和 Kimi K2.6 跑编码、数学和 computer-use 任务，平均端到端延迟和 P95 TTFT 比 Dynamo 最多降低 4.1x 和 14x。自建 Agent 推理集群的团队可以参考它的调度思路。",
+      "sources": [
+        {
+          "candidate_id": "c_bdfe478867",
+          "url": "https://huggingface.co/papers/2611.12304"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.12304",
+          "quote": "We decouple compute allocation from key--value (KV) cache management, allowing nodes to switch efficiently between prefill and decode."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.12304",
+          "quote": "with GLM-5.2 and Kimi K2.6 on up to 256 GB300 GPUs, Evolving Infra reduces mean end-to-end request latency and P95 TTFT by up to 4.1x and 14x over Dynamo, NVIDIA's production framework."
+        }
+      ],
+      "tags": [
+        "论文",
+        "推理",
+        "Agent"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "SparseRead：让 Agent 只读需要的那部分内容",
+      "summary": "SparseRead 是一个不改动 Agent 模型的读取控制层：跟踪不断变化的阅读意图和来源覆盖，选择定位证据的后端，并给每个 episode 的累计原文读取量设上限，必要时回退到完整视图。在包括 Claude Opus 5 在内的六个模型上，总 token 最多减少 92.9%、耗时最多减少 89.0%，97% 的设置下任务质量持平或提升。经常读网页、文档和代码仓库的 Agent 可以借鉴，代码已公开。",
+      "sources": [
+        {
+          "candidate_id": "c_9cd350af03",
+          "url": "https://huggingface.co/papers/2608.22237"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2608.22237",
+          "quote": "the largest reductions compared with full reading were 92.9% in token use and 89.0% in wall time."
+        },
+        {
+          "url": "https://huggingface.co/papers/2608.22237",
+          "quote": "Code and setup: https: https://github.com/Liuzedooong/SparseReading"
+        }
+      ],
+      "tags": [
+        "论文",
+        "Agent"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "SteerDistill：用闭环教师引导量化 LLM Agent",
+      "summary": "作者发现低比特量化后的 Agent 常忽略任务要求或环境条件；SteerDistill 让全精度教师引导学生修正失败的回答，并根据学生的执行反馈迭代改进引导，再把这些修正蒸馏进不需要引导就能运行的学生模型。在五个 Agent 基准和三个模型上，W4A16 下比最强量化基线平均高 1.67–2.18 分，与 BF16 相差不到一分。想用低比特部署 Agent 降成本的团队可以参考，代码已在 GitHub 公开。",
+      "sources": [
+        {
+          "candidate_id": "c_0073617c1e",
+          "url": "https://huggingface.co/papers/2611.13410"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.13410",
+          "quote": "Across five agentic benchmarks and three models, SteerDistill exceeds the strongest quantized baseline by 1.67--2.18 points in average score under W4A16 and stays within one point of BF16 ."
+        }
+      ],
+      "tags": [
+        "论文",
+        "推理",
+        "Agent"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Claude Code v2.1.323 加入实验性 Code Mode",
+      "summary": "新版加入实验性的 Code Mode：开启后 Claude 编写 JavaScript 来调用自己的工具，组织也可以统一关闭。插件可以在 plugin.json 里用 engines[\"claude-code\"] 声明支持的版本范围，范围外的插件不会被安装、更新或加载；claude plugin validate 还会对插件的 TypeScript hooks 模块做类型检查。维护插件的开发者升级后可以给插件加上版本约束。",
+      "sources": [
+        {
+          "candidate_id": "c_cbc943d9a7",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.323"
+        }
+      ],
+      "evidence": [],
+      "tags": [
+        "工具",
+        "代码",
+        "Agent"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Codex 0.168.0 支持切换模型提供方和并排侧边对话",
+      "summary": "新版可以在 Sessions → Model providers 里浏览模型提供方，并设定新会话默认使用哪一个；开启 TUI workspace 功能后，可以在主对话旁并排查看侧边对话。它还支持在使用音频模型时附加录音，以及生成或编辑动画 GIF。在多个模型提供方之间切换的团队可以升级试试。",
+      "sources": [
+        {
+          "candidate_id": "c_fffefb8232",
+          "url": "https://github.com/openai/codex/releases/tag/rust-v0.168.0"
+        }
+      ],
+      "evidence": [],
+      "tags": [
+        "工具",
+        "代码"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "KittenML 开源 inferencekit，让编码 Agent 调优推理",
+      "summary": "inferencekit 是 Claude Code、Codex 和 OpenCode 的插件：告诉 Agent 模型、硬件和目标，它会查找、基准测试并调优兼容的推理引擎，还可以进一步做包括 GPU kernel 在内的自定义优化，不达标的改动会被回退，最后输出一份 REPORT.md。项目采用 Apache-2.0 许可。本地硬件和模型作者不同的开发者，可以让 Agent 为自己的机器找出最快的配置。",
+      "sources": [
+        {
+          "url": "https://github.com/KittenML/inferencekit",
+          "title": "KittenML/inferencekit"
+        },
+        {
+          "candidate_id": "c_7b964bd39c",
+          "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xut6z0/inferencekit_opensource_plugin_to_optimize_any/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/KittenML/inferencekit",
+          "quote": "inferencekit is a plugin for Claude Code, Codex and OpenCode, backed by reusable CLI and MCP tools. Give your agent a model, hardware and a goal. It finds, benchmarks and tunes compatible inference engines for your workl"
+        },
+        {
+          "url": "https://github.com/KittenML/inferencekit",
+          "quote": "You can stop with the best tested configuration or go further with custom optimizations, including GPU kernels."
+        },
+        {
+          "url": "https://github.com/KittenML/inferencekit",
+          "quote": "Changes that miss the agreed performance or quality requirements are reverted. Ship it. You get the fastest proven configuration and a REPORT.md with the result"
+        },
+        {
+          "url": "https://github.com/KittenML/inferencekit",
+          "quote": "License Apache-2.0: LICENSE and NOTICE ."
+        }
+      ],
+      "tags": [
+        "工具",
+        "推理",
+        "开源"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "llama.cpp 合并 Intel 专用 Vulkan FA prefill kernel",
+      "summary": "llama.cpp 合并了针对 Intel 平台的 Vulkan Flash Attention prefill shader，目前在 ARL-H 和 XE2/XE3 上启用，A770 因测试结果不一致仍保持关闭。作者在 B70 Pro（Windows）上测得 qwen3 8B 的 pp8192 prefill 从 1064.67 提升到 2955.83 t/s。用 Intel 核显或 Arc 显卡跑本地模型的开发者更新到 master 就能用上。",
+      "sources": [
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/pull/29357",
+          "title": "vulkan : Intel FA kernel for prefill · llama.cpp #29357"
+        },
+        {
+          "candidate_id": "c_8039b588a3",
+          "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xumdj4/intel_arc_vulkan_prefill_got_a_dedicated_fa/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/pull/29357",
+          "quote": "Add Intel prefill FA shader for LLM usages on supported platforms"
+        },
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/pull/29357",
+          "quote": "FA Customized shader is currently enabled on XE1 ARL-H, XE2/XE3 platforms For A770 (XE1 dGPU), the existing performance test data with coopmat enforce on showed inconsistent result, we will still keep it disabled"
+        },
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/pull/29357",
+          "quote": "0cc4m merged 14 commits into ggml - org : master"
+        }
+      ],
+      "tags": [
+        "工具",
+        "推理",
+        "硬件"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "Jensen Huang 辞去 Nvidia CEO，Colette Kress 任临时 CEO",
+      "summary": "Jensen Huang 辞去 Nvidia CEO 职务，Colette Kress 被任命为临时 CEO。",
+      "sources": [
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/0001045810/000104581026000082/nvidiaannouncesceotransiti.htm",
+          "title": "NVIDIA Form 8-K"
+        },
+        {
+          "candidate_id": "c_a7d95e53ce",
+          "url": "https://www.bloomberg.com/news/live-blog/2026-11-11/nvidia-turmoil-board-to-weigh-ceo-jensen-huang-future-over-alleged-affairs"
+        }
+      ],
+      "evidence": [],
+      "tags": [
+        "行业",
+        "硬件"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "Claude Meetings beta 上线，Claude 可加入视频会议",
+      "summary": "Claude 现在可以作为可见参会者加入视频会议、回答问题并记录笔记和待办，目前支持 Google Meet，正在 Team 和 Enterprise 计划中以 beta 推出。",
+      "sources": [
+        {
+          "candidate_id": "c_ddaff9f567",
+          "url": "https://claude.com/resources/articles/claude-meetings"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://claude.com/resources/articles/claude-meetings",
+          "quote": "Claude can now join your video calls as a visible participant, follow the conversation and start on work during the meeting."
+        },
+        {
+          "url": "https://claude.com/resources/articles/claude-meetings",
+          "quote": "Support is currently available for Google Meet, with other platforms coming soon."
+        },
+        {
+          "url": "https://claude.com/resources/articles/claude-meetings",
+          "quote": "Claude writes the notes and action items, so no one on the call has to. Claude Meetings is starting to roll out in beta on Team and Enterprise plans."
+        }
+      ],
+      "tags": [
+        "产品",
+        "Agent"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "UMAP 0.6 发布，换用新的初始化和优化器",
+      "summary": "UMAP 0.6 带来新的初始化和优化器流程，作者称在 3 million 篇 arXiv 论文上不到 5 分钟即可跑完，可用 pip install -U umap-learn 升级。",
+      "sources": [
+        {
+          "url": "https://github.com/lmcinnes/umap/releases",
+          "title": "lmcinnes/umap releases"
+        },
+        {
+          "candidate_id": "c_cd10354118",
+          "url": "https://www.reddit.com/gallery/1xudaah"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/lmcinnes/umap/releases",
+          "quote": "0.6 development: new init and optimizer pipelines by @lmcinnes in #1327"
+        }
+      ],
+      "tags": [
+        "工具",
+        "开源"
+      ]
+    }
+  ],
+  "research": [
+    {
+      "via": "webfetch",
+      "url": "https://deepmind.google/blog/introducing-gemini-4-hydrogen/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://antigravity.google/blog/gemini-4-hydrogen-in-google-antigravity/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://claude.com/resources/articles/self-hosted-claude-managed-agents"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://edge0.ai/blog/introducing-edge0-145b-frontier-ai-capabilities-on-your-own-computer"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/collections/runwayml/praxis-1"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/facebook/meta-encoder"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/KRAFTON/Raon-1-nano"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/runwayml/praxis-1-oss"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/thinkingmachines/Inkling-2-Small"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/blog/ibm-granite/llmon-an-llm-native-markup-language-now-in-granite"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/GoogleChrome/modern-web-guidance-src"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.12304"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2608.22237"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.13410"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://claude.com/resources/articles/claude-meetings"
+    },
+    {
+      "via": "websearch",
+      "query": "Nvidia Jensen Huang resigns CEO Colette Kress interim press release"
+    },
+    {
+      "via": "websearch",
+      "query": "Baidu ERNIE 5.5 Flash Preview release"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://unemploymentlabs.com/checkpoint-forensics"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://www.sec.gov/Archives/edgar/data/0001045810/000104581026000082/nvidiaannouncesceotransiti.htm"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://ipo.anthropic.com/us/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/KittenML/inferencekit"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/lmcinnes/umap/releases"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/29357"
+    }
+  ],
+  "validation": {
+    "validated_at": "2026-11-13T04:47:12+00:00",
+    "checked_links": true,
+    "dropped": [
+      {
+        "title": "IBM 推出 LLMON 标记语言和 Granite 4.1 预览模型",
+        "section": "model",
+        "candidates": [
+          "c_f40ced1f11"
+        ],
+        "reasons": [
+          "evidence quote not found on https://huggingface.co/blog/ibm-granite/llmon-an-llm-native-markup-language-now-in-granite: 'LLMON is an XML-like markup whose structural delimiters are '"
+        ]
+      }
+    ],
+    "warnings": [
+      "Thinking Machines 开放 Inkling 2 Small 权重: could not check https://www.reddit.com/r/LocalLLaMA/comments/1xuqplg/thinkingmachinesinkling2small_is_released/ (403)",
+      "Runway 发布机器人视频-动作策略模型 Praxis-1: could not check https://www.reddit.com/r/LocalLLaMA/comments/1xu8u4f/praxis1_a_runwayml_collection/ (403)",
+      "Meta 发布 MetaEncoder，一个编码器做检索与决策: could not check https://www.reddit.com/r/LocalLLaMA/comments/1xu8eie/metaencoder_a_facebook_collection_one_encoder_for/ (403)",
+      "KittenML 开源 inferencekit，让编码 Agent 调优推理: could not check https://www.reddit.com/r/LocalLLaMA/comments/1xut6z0/inferencekit_opensource_plugin_to_optimize_any/ (403)",
+      "llama.cpp 合并 Intel 专用 Vulkan FA prefill kernel: could not check https://www.reddit.com/r/LocalLLaMA/comments/1xumdj4/intel_arc_vulkan_prefill_got_a_dedicated_fa/ (403)",
+      "Jensen Huang 辞去 Nvidia CEO，Colette Kress 任临时 CEO: could not check https://www.sec.gov/Archives/edgar/data/0001045810/000104581026000082/nvidiaannouncesceotransiti.htm (403)",
+      "Jensen Huang 辞去 Nvidia CEO，Colette Kress 任临时 CEO: could not check https://www.bloomberg.com/news/live-blog/2026-11-11/nvidia-turmoil-board-to-weigh-ceo-jensen-huang-future-over-alleged-affairs (403)",
+      "UMAP 0.6 发布，换用新的初始化和优化器: could not check https://www.reddit.com/gallery/1xudaah (403)"
+    ]
+  }
+}
