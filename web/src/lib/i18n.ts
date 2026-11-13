@@ -12,7 +12,7 @@ const MONTH_NAMES_EN =
 
 export const strings = {
   zh: {
-    siteTitle: "AI 科技日报",
+    siteTitle: "AI 晨报",
     nav: { today: "今日日报", archive: "往期归档", sources: "信息源" },
     github: "GitHub 上的源代码",
     beta: "Beta 版",
@@ -30,7 +30,7 @@ export const strings = {
     moreSources: "+{n} 更多来源",
     localTime: "柏林时间",
     fallbackTitle: "（降级版）",
-    description: (date: string) => `${date} 的 AI 科技日报。`,
+    description: (date: string) => `${date} 的 AI 晨报。`,
     credit: (editor: string | null, fallback: boolean) => (fallback ? "本期降级版，未经编辑" : `本期由 ${editor} 编辑`),
     schedule: "每天柏林时间 06:00 更新",
     rss: "RSS 订阅",

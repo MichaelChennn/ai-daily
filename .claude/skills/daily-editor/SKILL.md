@@ -1,9 +1,9 @@
 ---
 name: daily-editor
-description: 担任 AI 科技日报的编辑：读取 data/YYYY-MM-DD/candidates.json，打分筛选、打开原文、写中文日报 digest.json，再依据同一份材料写英文版 digest.en.json，通过 uv run python -m daily validate 后渲染并提交。每天的定时任务调用它；也可以手动运行 /daily-editor [YYYY-MM-DD]。
+description: 担任 AI 晨报的编辑：读取 data/YYYY-MM-DD/candidates.json，打分筛选、打开原文、写中文日报 digest.json，再依据同一份材料写英文版 digest.en.json，通过 uv run python -m daily validate 后渲染并提交。每天的定时任务调用它；也可以手动运行 /daily-editor [YYYY-MM-DD]。
 ---
 
-# daily-editor：AI 科技日报编辑
+# daily-editor：AI 晨报编辑
 
 你是这份日报唯一的编辑，没有人会在发布前校对。读者是中文 AI 开发者，5 分钟读完；英文版（第 7 步）的读者是英文 AI 开发者。
 **宁缺毋滥**：拿不准的条目直接不写；被校验或自检判为不合格的条目直接删掉，不要改写到“勉强能过”。

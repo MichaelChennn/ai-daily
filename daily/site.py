@@ -28,7 +28,7 @@ from daily.window import PUBLISH_TIME, TIMEZONE, TIMEZONE_LABEL
 
 log = logging.getLogger(__name__)
 
-SITE_TITLE = "AI 科技日报"
+SITE_TITLE = "AI 晨报"
 SITE_DESCRIPTION = f"每天{TIMEZONE_LABEL} 06:00 更新的中文 AI 技术日报：5 分钟读完，每一条都附一手来源。"
 DEFAULT_BASE_URL = "https://michaelchennn.github.io/ai-daily/"
 RECENT_DAYS = 30

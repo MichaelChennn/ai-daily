@@ -21,7 +21,7 @@ HOST_LABELS = {
 
 def to_markdown(digest: dict[str, Any], candidates: dict[str, Any] | None = None) -> str:
     by_id = {c["id"]: c for c in (candidates or {}).get("candidates", [])}
-    lines = [f"# {digest['date']} · AI 科技日报", ""]
+    lines = [f"# {digest['date']} · AI 晨报", ""]
     if digest.get("mode") == "fallback":
         lines += [FALLBACK_NOTE, ""]
     if digest.get("highlights"):

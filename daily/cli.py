@@ -31,7 +31,7 @@ from daily.window import issue_window, local_today
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(prog="python -m daily", description="AI 科技日报流水线")
+    parser = argparse.ArgumentParser(prog="python -m daily", description="AI 晨报流水线")
     parser.add_argument("-v", "--verbose", action="store_true", help="debug logging")
     commands = parser.add_subparsers(dest="command", required=True)
 
