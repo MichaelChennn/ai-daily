@@ -72,6 +72,13 @@ export const strings = {
       process: "生成过程",
       main: "正式版",
       edition: (label: string) => `${label} 版`,
+      fallback: "降级版",
+      info: "关于本期",
+      /** The issue's date under the wordmark: 2026年11月7日. */
+      issueDate: (date: string) => {
+        const [y, m, d] = date.split("-").map(Number)
+        return `${y}年${m}月${d}日`
+      },
       theme: "切换日间/夜间",
       languages: "Switch to English",
       github: "GitHub",
@@ -144,6 +151,13 @@ export const strings = {
       process: "How it was made",
       main: "Main edition",
       edition: (label: string) => `${label} edition`,
+      fallback: "Fallback",
+      info: "About this issue",
+      /** The issue's date under the wordmark: 7 Nov 2026. */
+      issueDate: (date: string) => {
+        const [y, m, d] = date.split("-").map(Number)
+        return `${d} ${MONTHS_EN[m - 1]} ${y}`
+      },
       theme: "Toggle light / dark",
       languages: "切换到中文版",
       github: "GitHub",

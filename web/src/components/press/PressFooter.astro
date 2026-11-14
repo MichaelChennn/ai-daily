@@ -1,71 +1,87 @@
 ---
 import { langOf, strings } from "@/lib/i18n"
-import { betaHref, betaName, href, type Issue, issueHref, pageHref, pagePath, REPO_URL } from "@/lib/issues"
-import { modelName } from "@/lib/models"
+import { betaHref, href, type Issue, issueHref, pageHref, pagePath, REPO_URL } from "@/lib/issues"
+import { editionLogo, modelName } from "@/lib/models"
 import { processes, processHref } from "@/lib/process"
 
 interface Props {
-  /** The issue on this page; a page without one (the archive, the sources) has a single line. */
+  /** The issue on this page; without one (the archive, the sources) the line has the update time only. */
   issue?: Issue
-  /** On a page without an issue, a first item for that line (the sources' "stats over 30 issues"). */
+  /** On a page without an issue, what the line says instead of the update time (the sources' "stats over 30 issues"). */
   note?: string
   /** As wide as a page's main.wide (the sources' three columns). */
   wide?: boolean
 }
 
-// Two lines: this issue (who edited it, how it was made, its beta editions) with the site's
-// GitHub and RSS icons at the right; under it when the site updates and the license. Without an
-// issue, the update time and license move up to the left of the icons. The language switch sits
-// above the theme toggle in the bottom-left corner.
+// One line: who edited this issue and when the site updates at the left, the GitHub, RSS and
+// license icons at the right. How the issue was made and its other editions are hidden features,
+// in the toolbar behind the ⓘ button in the bottom-right corner. The language switch sits above
+// the theme toggle in the bottom-left corner.
 const { issue, note, wide } = Astro.props
 const lang = langOf(Astro.currentLocale)
 const t = strings[lang]
 const p = t.press
-const hasProcess = !!issue && lang === "zh" && processes.some((x) => x.date === issue.date)
-// On the main issue, its first beta by model name (as in the prototype); on a beta, the main issue
-// and every beta by family name only, since the line already names this beta's model.
-const editions = !issue
-  ? []
-  : issue.beta
-  ? [
-      { label: p.main, href: issueHref(issue.date), current: false },
-      ...issue.betas.map((b) => ({ label: p.edition(b.label), href: betaHref(issue.date, b.slug), current: b.slug === issue.beta!.slug })),
-    ]
-  : issue.betas.slice(0, 1).map((b) => ({ label: p.edition(betaName(issue.date, b)), href: betaHref(issue.date, b.slug), current: false }))
+const process = !!issue && lang === "zh" && processes.some((x) => x.date === issue.date) ? processHref(issue.date) : null
+// Every edition of the issue, the main one first, each by its maker's logo; none if it has no beta.
+const editions =
+  !issue || issue.betas.length === 0
+    ? []
+    : [
+        { slug: "main", label: p.main, href: issueHref(issue.date), current: !issue.beta },
+        ...issue.betas.map((b) => ({ slug: b.slug, label: p.edition(b.label), href: betaHref(issue.date, b.slug), current: b.slug === issue.beta?.slug })),
+      ].map((e) => ({ ...e, initial: (e.slug === "main" ? "Claude" : e.label).charAt(0), logo: editionLogo(e.slug) }))
 // This page in the other language; the English site has no beta pages, so there it is the main issue.
 const other = lang === "zh" ? "en" : "zh"
 const otherHref = pageHref(pagePath(Astro.url.pathname, lang).replace(/beta\/.*$/, ""), other)
+const icon = { width: 16, height: 16, viewBox: "0 0 24 24", "aria-hidden": "true" as const }
 ---
 
-<footer class:list={{ solo: !issue, wide }}>
-  {
-    issue && (
+<footer class:list={{ wide }}>
   <p class="about">
     {
-      [
-        <span>{t.credit(modelName(issue.editor), issue.fallback)}</span>,
-        hasProcess && <a href={processHref(issue.date)}>{p.process}</a>,
-        ...editions.map((e) => <a href={e.href} aria-current={e.current ? "page" : undefined}>{e.label}</a>),
-      ]
-        .filter(Boolean)
-        .map((part, i, all) => (
-          <>
-            <span class="nw">
-              {part}
-              {i < all.length - 1 && " ·"}
-            </span>{" "}
-          </>
-        ))
+      issue ? (
+        <>
+          <span class="nw">{t.credit(modelName(issue.editor), issue.fallback)} ·</span> <span class="nw">{t.schedule}</span>
+        </>
+      ) : (
+        <span class="nw">{note ?? t.schedule}</span>
+      )
     }
   </p>
-    )
-  }
   <span class="ext">
-    <a href={REPO_URL} aria-label={t.github} title={t.github}><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6 0-3.2 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8 0 3.2.9.8 1.3 1.9 1.3 3.2 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1 .9 2.2v3.3c0 .3.1.7.8.6A12 12 0 0 0 12 .3"></path></svg></a>
-    <a href={href(t.feed)} aria-label={t.rss} title={t.rss}><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+    <a href={REPO_URL} aria-label={t.github} title={t.github}><svg {...icon} fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6 0-3.2 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8 0 3.2.9.8 1.3 1.9 1.3 3.2 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1 .9 2.2v3.3c0 .3.1.7.8.6A12 12 0 0 0 12 .3"></path></svg></a>
+    <a href={href(t.feed)} aria-label={t.rss} title={t.rss}><svg {...icon} fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+    <!-- Creative Commons: two c's in a circle; the license's name is in the label and the tooltip -->
+    <a href={t.licenseUrl} rel="license" aria-label={t.license} title={t.license}><svg {...icon} fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><path d="M10.5 9.8a3 3 0 1 0 0 4.4"></path><path d="M17 9.8a3 3 0 1 0 0 4.4"></path></svg></a>
   </span>
-  <p class="colophon">{note && `${note} · `}{t.schedule} · <a href={t.licenseUrl} rel="license">{t.license}</a></p>
 </footer>
+
+{
+  (process || editions.length > 0) && (
+    <>
+      <button class="info" id="info" aria-label={p.info} title={p.info} aria-expanded="false" aria-controls="tools">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
+      </button>
+      <div class="tools" id="tools" role="toolbar" aria-label={p.info}>
+        {
+          process && (
+            <a href={process} aria-label={p.process} data-label={p.process}>
+              <svg {...icon} fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="8" x="3" y="3" rx="2"></rect><path d="M7 11v4a2 2 0 0 0 2 2h4"></path><rect width="8" height="8" x="13" y="13" rx="2"></rect></svg>
+            </a>
+          )
+        }
+        {process && editions.length > 0 && <span class="sep"></span>}
+        {
+          editions.map((e) => (
+            <a href={e.href} aria-label={e.label} data-label={e.label} aria-current={e.current ? "page" : undefined}>
+              <span class="logo16">{e.initial}{e.logo && <img data-logo src={e.logo} alt="" referrerpolicy="no-referrer" />}</span>
+            </a>
+          ))
+        }
+      </div>
+    </>
+  )
+}
 
 <!-- 文 and A from the Languages icon; the page's own language sits top left and is drawn last,
      so it passes over the other one when the page arrives from the other language. -->

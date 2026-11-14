@@ -29,3 +29,14 @@ export function modelName(id: string | null): string | null {
     .map((w) => BRANDS[w] ?? (/^([a-z]\d|\d)/.test(w) ? w.toUpperCase() : w.charAt(0).toUpperCase() + w.slice(1)))
     .join(" ")
 }
+
+// The site whose favicon stands for an edition in the ⓘ toolbar: the main issue (edited by Claude)
+// and each beta by its slug. An edition missing here shows its initial.
+const EDITION_HOSTS: Record<string, string> = {
+  main: "claude.ai",
+  minimax: "minimax.io",
+  gemini: "gemini.google.com",
+}
+
+export const editionLogo = (slug: string): string | null =>
+  EDITION_HOSTS[slug] ? `https://www.google.com/s2/favicons?domain=${EDITION_HOSTS[slug]}&sz=64` : null

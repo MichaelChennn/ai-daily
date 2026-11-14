@@ -1,5 +1,5 @@
 // The theme toggle and the language switch in the bottom-left corner, on every page in the
-// issue #43 design. Inlined before the page's own script.
+// issue #43 design, and the ⓘ toolbar in the bottom-right corner of an issue page. Inlined before the page's own script.
 ;(() => {
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches
   const root = document.documentElement
@@ -40,5 +40,28 @@
     langBtn.classList.add("from", "moving")
     requestAnimationFrame(() => requestAnimationFrame(() => langBtn.classList.remove("from")))
     setTimeout(() => langBtn.classList.remove("moving"), 600)
+  }
+
+  /* ---------- ⓘ: opens the toolbar to its left; a click elsewhere or Esc closes it ---------- */
+  const info = $("#info")
+  const tools = $("#tools")
+  if (info) {
+    const open = (on) => {
+      tools.classList.toggle("open", on)
+      info.setAttribute("aria-expanded", String(on))
+    }
+    info.addEventListener("click", (e) => {
+      e.stopPropagation()
+      open(!tools.classList.contains("open"))
+    })
+    document.addEventListener("click", (e) => {
+      if (!tools.contains(e.target)) open(false)
+    })
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && tools.classList.contains("open")) {
+        open(false)
+        info.focus()
+      }
+    })
   }
 })()

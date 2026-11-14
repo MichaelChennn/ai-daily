@@ -59,9 +59,16 @@ a{color:inherit;text-decoration:none}
 /* ========== wordmark ========== */
 /* lockup A (zh) / C (en): the 24-grid mark at 1.2em, then the name; English set 13/12 larger, as Latin
    reads a size smaller than Han at the same px (docs/design-system.md § Brand) */
-.logo{position:fixed;left:var(--rail-x);top:24px;z-index:30;display:flex;align-items:center;gap:8px;font-family:var(--f-title);font-weight:700;font-size:var(--fs-l);line-height:1;letter-spacing:.04em;white-space:nowrap}
+/* the lockup and, on an issue page, its date */
+.brand{position:fixed;left:var(--rail-x);top:24px;z-index:30;display:flex;flex-direction:column;align-items:flex-start;gap:6px}
+.logo{display:flex;align-items:center;gap:8px;font-family:var(--f-title);font-weight:700;font-size:var(--fs-l);line-height:1;letter-spacing:.04em;white-space:nowrap}
 .logo.en{font-size:calc(var(--fs-l) * 13 / 12);letter-spacing:.01em}
 .logo svg{flex:none;width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+/* centred under the name, not the mark: it starts past the mark (24px + the 8px gap) and is as wide as the
+   name; contain:inline-size keeps a longer date from widening it, so the date overflows both sides evenly */
+.issue-date{align-self:stretch;margin:0 0 0 32px;contain:inline-size;display:flex;flex-direction:column;align-items:center;gap:5px;font-size:var(--fs-xs);line-height:1;letter-spacing:.02em;color:var(--muted);white-space:nowrap}
+/* a beta's or a fallback's name: on its own line, so a long one does not push the date off the screen */
+.issue-date span{font-size:11px}
 
 /* ========== rail (Stripe Press menu, 1:1 params) ========== */
 .rail{position:fixed;left:var(--rail-x);top:50%;transform:translateY(-50%);z-index:40;margin-left:4px;user-select:none}
@@ -118,6 +125,7 @@ footer{position:relative;max-width:var(--w-read);margin:0 auto;padding:40px var(
 @keyframes Drop{from{opacity:0;transform:translateY(-18px)}to{opacity:1;transform:none}}
 body.intro .drop{animation:Drop var(--drop-t,.9s) var(--ease) both;animation-delay:var(--d,0s)}
 body.intro .logo{animation:Drop var(--drop-t,.9s) var(--ease) both;animation-delay:var(--logo-d,0s)}
+body.intro .issue-date{animation:Drop var(--drop-t,.9s) var(--ease) both;animation-delay:calc(var(--logo-d,0s) + .08s)}
 
 /* a section of an issue, numbered; a month or a source group is the same heading without the number */
 section{margin-bottom:var(--space-section);position:relative;display:flow-root}
@@ -196,20 +204,15 @@ h3{font-family:var(--f-title);font-weight:700;font-size:var(--fs-l);line-height:
 .briefs li.open .bs .summary{opacity:1;transform:none;transition-delay:.08s}
 
 /* ========== footer ========== */
-footer{display:flex;flex-wrap:wrap;gap:22px;font-size:var(--fs-s);color:var(--muted)}
+footer{display:flex;align-items:flex-start;gap:22px;font-size:var(--fs-s);color:var(--muted)}
 /* 分隔线只画在内容宽度上，和卡片左右对齐（不含 padding） */
 footer::before{content:"";position:absolute;top:0;left:var(--pad-l);right:var(--pad-r);height:1px;background:var(--line)}
 footer a:hover{color:var(--ink)}
 footer .about{margin:0;flex:1;min-width:0;line-height:20px}
 /* 折行时「·」留在上一行末尾，不落到下一行开头 */
 footer .about .nw{white-space:nowrap}
-footer .about a,footer .colophon a{text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px}
-footer .about a[aria-current]{color:var(--ink);text-decoration:none}
-footer .ext{display:flex;gap:16px;align-items:center;height:20px}
+footer .ext{flex:none;display:flex;gap:16px;align-items:center;height:20px}
 footer .ext svg{display:block}
-footer .colophon{flex-basis:100%;margin:-8px 0 0;font-size:var(--fs-xs)}
-/* a footer without an issue to credit (archive, sources): the update time and license take the first line's left */
-footer.solo .colophon{order:-1;flex:1;flex-basis:auto;min-width:0;margin:0;line-height:20px}
 /* an issue without its English edition yet, or a fallback */
 .notice{margin:0 0 var(--space-group);padding:2px 0 2px 14px;border-left:2px solid var(--line);font-size:var(--fs-s);color:var(--muted)}
 
@@ -234,6 +237,23 @@ footer.solo .colophon{order:-1;flex:1;flex-basis:auto;min-width:0;margin:0;line-
 .lang.from g{transition:none}
 ::view-transition-old(lang){display:none}
 ::view-transition-new(lang){animation:none}
+/* ========== ⓘ and its toolbar (bottom right): how the issue was made, its editions ========== */
+/* mirrors the theme toggle; hidden features, so they wait behind a button */
+.info{position:fixed;right:calc(var(--rail-x) + 4px);bottom:24px;z-index:31;width:18px;height:18px;padding:0;background:none;border:0;cursor:pointer;color:var(--ink);opacity:.3;transition:opacity .2s}
+.info:hover,.info[aria-expanded="true"]{opacity:1}
+.info svg{display:block}
+/* the bar opens to the left of the button, sliding in 8px */
+.tools{position:fixed;right:calc(var(--rail-x) + 32px);bottom:15px;z-index:31;display:flex;align-items:center;gap:2px;height:36px;padding:0 4px;background:var(--card);border-radius:var(--r-pop);box-shadow:var(--shadow-pop);
+  opacity:0;transform:translateX(8px);visibility:hidden;transition:opacity .2s var(--ease),transform .25s var(--ease),visibility 0s .25s}
+.tools.open{opacity:1;transform:none;visibility:visible;transition:opacity .2s var(--ease),transform .25s var(--ease)}
+.tools a{position:relative;display:grid;place-items:center;width:30px;height:28px;border-radius:var(--r-row);color:var(--ink)}
+.tools a svg{display:block}
+.tools a:hover,.tools a[aria-current]{background:var(--line)}
+/* each icon's name above it on hover, as the rail's bubble; none on touch */
+.tools a::after{content:attr(data-label);position:absolute;bottom:calc(100% + 10px);right:0;padding:5px 9px;border-radius:var(--r-bubble);background:var(--ink);color:var(--paper);font-size:var(--fs-xs);line-height:1.2;white-space:nowrap;pointer-events:none;opacity:0;transform:translateY(3px);transition:opacity .15s,transform .15s}
+.tools a:hover::after,.tools a:focus-visible::after{opacity:1;transform:none}
+.tools .sep{flex:none;width:1px;height:16px;margin:0 4px;background:var(--line)}
+
 /* view transition between pages */
 ::view-transition-old(root),::view-transition-new(root){animation-duration:.32s}
 
@@ -288,8 +308,11 @@ footer.solo .colophon{order:-1;flex:1;flex-basis:auto;min-width:0;margin:0;line-
 
 /* ========== phone ========== */
 @media (max-width:899px){
-  .logo{position:absolute;left:var(--pad-l);top:22px}
+  .brand{position:absolute;left:var(--pad-l);top:22px}
   main{padding-top:72px;padding-bottom:32px}
+  /* room for the date, and for the edition's line under it */
+  body:has(.issue-date) main{padding-top:84px}
+  body:has(.issue-date span) main{padding-top:100px}
   footer{padding-top:32px;padding-bottom:80px}
   .rail{touch-action:none;margin-left:0}
   .tick{width:14px}
@@ -313,7 +336,8 @@ footer.solo .colophon{order:-1;flex:1;flex-basis:auto;min-width:0;margin:0;line-
   /* the label under the pointer appears at once; the others stay hidden */
   .label,.icon-btn .il,.ret .il{animation:none!important}
   .rail.labels-on .tick:hover .label,.tick.touch-hit .label,.rail.labels-on .icon-btn:hover .il,.rail.labels-on .ret:hover .il{opacity:1}
-  body.intro .drop,body.intro .logo{animation:none!important}
+  body.intro .drop,body.intro .logo,body.intro .issue-date{animation:none!important}
+  .tools,.tools.open{transition:none;transform:none}
 }
 /* arriving from another issue page: the rail is just there, without its entrance */
 .rail.still .tick,.rail.still .icon-btn{transition:none}
