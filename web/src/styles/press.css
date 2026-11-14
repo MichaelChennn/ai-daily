@@ -107,6 +107,8 @@ a.tick{text-decoration:none}
 .rail.labels-on .ret .il{display:block}
 .rail.off-latest .ret,.rail.back .ret{cursor:pointer;pointer-events:auto;animation:MenuLabelReveal .2s ease forwards}
 .rail.off-latest .ret:hover .il,.rail.back.labels-on .ret:hover .il{animation:MenuLabelReveal .2s ease forwards}
+/* the issues: turned to point up, at the newest issue on the top tick */
+.ret svg{transform:rotate(180deg)}
 /* archive and sources: the same arrow turned to point left, back to the issues, always shown */
 .rail.back .ret svg{transform:rotate(90deg)}
 

@@ -31,7 +31,7 @@
   const PITCH = 13
   const KEY = "press-nav"
   const SWITCH = "press-switch" // set when going between an issue and the archive, either way
-  let start = Math.max(0, DAYS.length - W)
+  let start = 0 // the newest issue is the top tick
 
   // Arriving from another issue page through the rail: where its window was and where it goes.
   let arrived = null
@@ -132,11 +132,11 @@
   // Stripe: returnButton mouseenter -> handleMouseEnterIndicator(-1), docked just above the first tick
   ret.addEventListener("mouseenter", () => dock(start - 1))
   ret.addEventListener("mouseleave", undock)
-  // back to the newest issue, with the window scrolled so it sits at the bottom again
+  // back to the newest issue, with the window scrolled back to the top
   const goLatest = (e) => {
     if (!plainClick(e)) return
     e.preventDefault()
-    go(ret, Math.max(0, DAYS.length - W))
+    go(ret, 0)
   }
   ret.addEventListener("click", goLatest)
   $("#logo").addEventListener("click", goLatest)
