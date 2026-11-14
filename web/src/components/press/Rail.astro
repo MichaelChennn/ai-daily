@@ -10,9 +10,9 @@ interface Props {
 }
 
 // The timeline on the left, after Stripe Press's book rail: one tick per calendar day from the
-// first issue to the newest, 20 at a time (the page script slides the window). A day without an
-// issue keeps its tick but is not a link. Above it, the arrow back to the newest issue; below,
-// the archive and sources pages.
+// newest issue at the top down to the first, 20 at a time (the page script slides the window). A
+// day without an issue keeps its tick but is not a link. Above it, the arrow up to the newest
+// issue; below, the archive and sources pages.
 const { date, lang } = Astro.props
 const t = strings[lang].press
 const issues = issuesIn(lang)
@@ -20,7 +20,7 @@ const latest = issues[0].date
 const home = pageHref("", lang)
 const headlines = new Map(issues.map((i) => [i.date, i.sections[0]?.items[0]?.title ?? ""]))
 const days: string[] = []
-for (let d = issues.at(-1)!.date; d <= latest; d = addDays(d, 1)) days.push(d)
+for (let d = latest; d >= issues.at(-1)!.date; d = addDays(d, -1)) days.push(d)
 const W = Math.min(20, days.length)
 const label = (d: string) => t.tickDay(new Date(`${d}T00:00:00Z`))
 ---

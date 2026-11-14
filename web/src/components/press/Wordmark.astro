@@ -4,17 +4,32 @@ import { pageHref } from "@/lib/issues"
 
 interface Props {
   lang: Lang
+  /** On an issue page, the issue's date (YYYY-MM-DD), shown centred under the lockup. */
+  date?: string
+  /** Under the date, which edition this is when not the main one ("Gemini 版", "降级版"). */
+  edition?: string
 }
 
 // The top-left logo: the mark and the site's name, lockup A in Chinese, C in English
 // (docs/design-system.md § Brand). The name is live text in the page's title font; the mark is the
 // same 24-grid monoline as docs/assets/brand/mark.svg and takes the ink color.
-const { lang } = Astro.props
+const { lang, date, edition } = Astro.props
+const p = strings[lang].press
 ---
 
-<a class:list={["logo", lang]} href={pageHref("", lang)} id="logo">
-  <svg viewBox="0 0 24 24" aria-hidden="true">
-    <path d="M7 3.5h10" /><path d="M5 7.5h14" /><rect x="3" y="11.5" width="18" height="9" rx="2" /><path d="M7 16h6" />
-  </svg>
-  <span>{strings[lang].siteTitle}</span>
-</a>
+<div class="brand">
+  <a class:list={["logo", lang]} href={pageHref("", lang)} id="logo">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M7 3.5h10" /><path d="M5 7.5h14" /><rect x="3" y="11.5" width="18" height="9" rx="2" /><path d="M7 16h6" />
+    </svg>
+    <span>{strings[lang].siteTitle}</span>
+  </a>
+  {
+    date && (
+      <p class="issue-date">
+        <time datetime={date}>{p.issueDate(date)}</time>
+        {edition && <span>{edition}</span>}
+      </p>
+    )
+  }
+</div>

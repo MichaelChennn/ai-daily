@@ -16,7 +16,7 @@
   const ticks = [...inner.querySelectorAll(".tick")]
   const ICONS = [...rail.querySelectorAll(".icon-btn")]
   const ret = $("#ret")
-  const KEYS = ticks.map((t) => t.hash.slice(1)) // rail order: the archive's oldest month first
+  const KEYS = ticks.map((t) => t.hash.slice(1)) // rail order, the same as the page's: the archive's newest month first
   const sections = [...document.querySelectorAll("#main > section[id]")] // page order
   const TOP = sections[0]?.id // the section at the top of the page
   const W = Math.min(20, KEYS.length)

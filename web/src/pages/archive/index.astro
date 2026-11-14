@@ -26,7 +26,7 @@ const day = (date: string) => t.day(new Date(`${date}T00:00:00Z`)).monthDay
 <PressLayout title={title} description={t.archive.description(t.siteTitle)}>
   <Wordmark lang={lang} />
   <SectionRail
-    ticks={[...months.keys()].reverse().map((m) => ({ id: `m-${m}`, label: monthLabel(m) }))}
+    ticks={[...months.keys()].map((m) => ({ id: `m-${m}`, label: monthLabel(m) }))}
     label={t.press.months}
     issues={issuesIn(lang).map((i) => i.date)}
     lang={lang}
