@@ -1,0 +1,594 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-14",
+  "mode": "full",
+  "channel": "claude",
+  "generated_at": "2026-11-14T04:46:04+00:00",
+  "model": "claude-opus-5-5",
+  "highlights": [
+    "OpenAI launched ChatGPT Wallet: agents pay without access to the user's actual card details, and every purchase needs a security check.",
+    "llama.cpp reached v1.0.0; from now on API and ABI incompatibilities will be signalled by major-version bumps."
+  ],
+  "items": [
+    {
+      "section": "headline",
+      "title": "OpenAI launches ChatGPT Wallet so agents can pay on a user's behalf",
+      "summary": "Built with American Express, Mastercard and Visa, ChatGPT Wallet lets agents pay without access to the user's actual card details and requires a security check for every purchase; it starts in dots for ChatGPT Pro subscribers in the US. OpenAI also published a Commerce Partner Playbook: businesses can upload a product feed, build a plugin, or add WebMCP tools so agents can buy through their existing systems. Developers working on checkout or payments integrations should read it first.",
+      "sources": [
+        {
+          "candidate_id": "c_b75d22b73a",
+          "url": "https://openai.com/index/introducing-chatgpt-wallet"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://openai.com/index/introducing-chatgpt-wallet",
+          "quote": "It’s the first wallet that lets agents pay without access to users’ actual card details and that requires a security check for every purchase, while also preserving existing card rewards and protections for eligible disputes."
+        },
+        {
+          "url": "https://openai.com/index/introducing-chatgpt-wallet",
+          "quote": "Built in partnership with American Express, Mastercard, and Visa, ChatGPT Wallet will initially be available through dots"
+        },
+        {
+          "url": "https://openai.com/index/introducing-chatgpt-wallet",
+          "quote": "It will initially be available to ChatGPT Pro subscribers aged 18 and older in the US with eligible US-issued cards."
+        },
+        {
+          "url": "https://openai.com/index/introducing-chatgpt-wallet",
+          "quote": "Alongside ChatGPT Wallet, we’re publishing a Commerce Partner Playbook"
+        },
+        {
+          "url": "https://openai.com/index/introducing-chatgpt-wallet",
+          "quote": "Build a plugin to let agents check availability, manage carts, or take other actions through your existing systems. Websites can also add WebMCP tools."
+        }
+      ],
+      "tags": [
+        "产品",
+        "Agent"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "llama.cpp reaches v1.0.0 and will flag API breaks with major versions",
+      "summary": "The llama.cpp and ggml libraries both move to v1.0.0, and from now on API and ABI incompatibilities will be signalled by major-version bumps; the project supports more than 150 architecture variants. The release removes the deprecated public API, promotes the NextN/speculative API to llama.h, adds OCP FP8 KV caches and a host-memory MoE expert cache, and gives llama-server a /v1/audio/speech endpoint plus SSRF and CORS hardening. Downstream integrations can now treat the major version as the signal for whether an upgrade needs code changes.",
+      "sources": [
+        {
+          "candidate_id": "c_1c1521c176",
+          "url": "https://huggingface.co/blog/ggml-org/llama-cpp-v1"
+        },
+        {
+          "candidate_id": "c_add97d367d",
+          "url": "https://github.com/ggml-org/llama.cpp/releases/tag/v1.0.0"
+        },
+        {
+          "candidate_id": "c_7eaa0683cd",
+          "url": "https://v.redd.it/ulqil3yfud1i1"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/blog/ggml-org/llama-cpp-v1",
+          "quote": "Today we release libraries v1.0.0 , highlighting our responsibility to those developers. Moving forward, both llama.cpp and ggml will reflect API and ABI incompatibilities with major-version bumps."
+        },
+        {
+          "url": "https://huggingface.co/blog/ggml-org/llama-cpp-v1",
+          "quote": "Currently, llama.cpp supports more than 150 architecture variants as well as all mainstream speculative decoding methods."
+        }
+      ],
+      "tags": [
+        "开源",
+        "推理",
+        "工具"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "DeepSeek brings its app's search, file and voice features to the API",
+      "summary": "The capabilities behind the DeepSeek App are now in the API: V4.1-Flash (deepseek-flash) supports web search, URL reading, file input and safety checks across the Messages, Responses and Chat Completions interfaces, with tool calls and context assembly handled server-side. Search, Fetch, OCR, ASR and TTS are also available as standalone APIs, extended capabilities carry tool usage fees on top of token charges, and public-facing apps must enable safety checks. Apps that need search or document Q&A can skip building their own tool layer.",
+      "sources": [
+        {
+          "candidate_id": "c_c7ec05b559",
+          "url": "https://api-docs.deepseek.com/news/news261113"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://api-docs.deepseek.com/news/news261113",
+          "quote": "The capabilities behind the DeepSeek App are now available through the DeepSeek API. Enable built-in features with a few parameters, or call standalone APIs such as OCR, ASR, and TTS."
+        },
+        {
+          "url": "https://api-docs.deepseek.com/news/news261113",
+          "quote": "V4.1-Flash ( deepseek-flash ) now supports these capabilities across Messages , Responses , and Chat Completions , with tool calls and context assembly handled server-side"
+        },
+        {
+          "url": "https://api-docs.deepseek.com/news/news261113",
+          "quote": "File Input: Parse PDFs, Office files, images, and more into conversation context."
+        },
+        {
+          "url": "https://api-docs.deepseek.com/news/news261113",
+          "quote": "Public-facing apps must enable safety checks."
+        },
+        {
+          "url": "https://api-docs.deepseek.com/news/news261113",
+          "quote": "Search, Fetch, OCR, ASR, and TTS are also available as standalone APIs for custom workflows."
+        },
+        {
+          "url": "https://api-docs.deepseek.com/news/news261113",
+          "quote": "Extended capabilities incur tool usage fees in addition to standard token charges."
+        }
+      ],
+      "tags": [
+        "产品",
+        "Agent"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Claude Code projects now run parallel threads under a coordinator",
+      "summary": "In a redesigned Claude Code project you describe what needs to get done and Claude manages the work: a coordinator directs threads, each a Claude Code cloud session on its own branch and copy of the repo, sharing one memory, with overlapping edits resolved as ordinary merge conflicts. Updated projects are in beta for select Pro and Max subscribers; parallel threads reach usage limits faster, so you can pick the model and effort level for the coordinator and the workers separately. Multi-repo chores like migrations can be handed over as a single task.",
+      "sources": [
+        {
+          "candidate_id": "c_d03ffa90a0",
+          "url": "https://claude.com/resources/articles/projects-redesigned"
+        },
+        {
+          "candidate_id": "c_d03ffa90a0",
+          "url": "https://news.ycombinator.com/item?id=50492141"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://claude.com/resources/articles/projects-redesigned",
+          "quote": "Now in a Claude Code project, you describe what needs to get done and Claude manages the work."
+        },
+        {
+          "url": "https://claude.com/resources/articles/projects-redesigned",
+          "quote": "each thread is a Claude Code cloud session working on its own branch and copy of the repo. The coordinator keeps work organized, but if any threads work on the same code, the overlap is resolved as a merge conflict just like any other PR."
+        },
+        {
+          "url": "https://claude.com/resources/articles/projects-redesigned",
+          "quote": "Every thread now adds to and draws from a shared memory, reducing the need for complex prompt engineering."
+        },
+        {
+          "url": "https://claude.com/resources/articles/projects-redesigned",
+          "quote": "Because of this, projects can reach usage limits faster. You can check project specific usage and select the model and effort levels used by the coordinator chat as well as the worker threads."
+        },
+        {
+          "url": "https://claude.com/resources/articles/projects-redesigned",
+          "quote": "Starting today, updated projects are available in beta to select Claude Pro and Max subscribers who use cloud sessions in Claude Code"
+        }
+      ],
+      "tags": [
+        "Agent",
+        "代码",
+        "产品"
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Perplexity releases Decider v1.3 and Decider Flash v1.3 decision models",
+      "summary": "These are general-purpose classifiers built from generative LLM backbones: give them a state and one or more questions and they return a probability distribution over the answer options instead of generating text. pplx-decider-v1.3 is fine-tuned from Qwen3.8-27B and pplx-decider-flash-v1.3 is a Qwen3.5-4B distilled from it; both are Apache 2.0, take text and images, and add a locate type that extracts verbatim spans with character offsets. For closed-form tasks such as NER or PII detection, they can replace prompting a general LLM for labels.",
+      "sources": [
+        {
+          "url": "https://huggingface.co/perplexity-ai/pplx-decider-v1.3",
+          "title": "Hugging Face: perplexity-ai/pplx-decider-v1.3"
+        },
+        {
+          "candidate_id": "c_2a3eebbe22",
+          "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xv7fku/perplexity_releases_decider_v13_26b_and_decider/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/perplexity-ai/pplx-decider-v1.3",
+          "quote": "pplx-decider-v1.3 is the next version of pplx-decider-v1.2 , a multimodal classification model on Qwen3.8-27B. It comes with improved performance and robustness across decision tasks, and a new extraction capability: Locate , which extracts verbatim text spans from the state with character offsets"
+        }
+      ],
+      "tags": [
+        "模型",
+        "开源"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "A decision model that acts poorly can still teach RL policies well",
+      "summary": "The authors compare three decision models and three general LLMs as actors and judges on ALFWorld, then use JEV as a teacher giving step-level scores to GRPO. JEV raises a Qwen2.5-1.5B policy from 72.8% to 82.9% success on ALFWorld and from 56.8% to 71.4% on WebShop, which the authors attribute to judging an action after the episode, when its consequences are visible. When picking a reward model for agent training, how well it acts is not the right test.",
+      "sources": [
+        {
+          "candidate_id": "c_23fa06e2ea",
+          "url": "https://huggingface.co/papers/2611.17167"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.17167",
+          "quote": "We compare three decision models and three general LLMs as actors and judges on ALFWorld , and use JEV as a teacher on ALFWorld and WebShop ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.17167",
+          "quote": "As a teacher, JEV raises a Qwen2.5-1.5B policy over GRPO from 72.8% to 82.9% success on ALFWorld and from 56.8% to 71.4% on WebShop . These results suggest that a poor actor can still teach well, because judging an action after the episode ends reveals the consequences that acting must anticipate."
+        }
+      ],
+      "tags": [
+        "论文",
+        "Agent",
+        "训练"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "SimpleHC: Hyper-Connections with 2.4% extra training time",
+      "summary": "A systematic study of Hyper-Connections finds that learned read/write gating without mixing performs comparably to mHC, leading to SimpleHC, which removes residual mixing and uses shared memory access to cut repeated reads of the expanded residual state. At the largest tested scale it adds only 2.4% end-to-end training time over a vanilla residual baseline, matches mHC from 15B to 30B MoE models, and shows smoother gradient dynamics. Teams considering HC can start from this cheaper variant.",
+      "sources": [
+        {
+          "candidate_id": "c_0e6e1cee78",
+          "url": "https://huggingface.co/papers/2611.05984"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.05984",
+          "quote": "These findings lead to SimpleHC , which simplifies the architecture by removing residual mixing and simplifies execution through shared memory access"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.05984",
+          "quote": "SimpleHC incurs only 2.4% extra end-to-end training time over a vanilla residual baseline at the largest tested scale. It maintains performance comparable to mHC when scaling from 15B to 30B MoE models , exhibits smoother gradient dynamics during standard training, and remains stable under stress."
+        }
+      ],
+      "tags": [
+        "论文",
+        "训练"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "SO-Arena benchmarks capability and reliability of System One models",
+      "summary": "SO-Arena covers 11 domains and five capability families, and beyond accuracy it measures decision stability under option-set changes and whether a model recognizes when no valid option exists. Across 21 models, the gains from scaling and extra reasoning vary widely by domain, and the best-performing System One model ranks only seventh in reliability. When choosing a decision model, check stability separately from the headline score.",
+      "sources": [
+        {
+          "candidate_id": "c_07479e65c6",
+          "url": "https://huggingface.co/papers/2611.15777"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.15777",
+          "quote": "SO-Arena evaluates System One models across domains and capability families, revealing that scaling and reasoning gains vary and that high overall accuracy does not ensure reliable decision-making."
+        }
+      ],
+      "tags": [
+        "论文",
+        "Agent"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Open Vision Banana: an open recipe for turning image generators into perception models",
+      "summary": "Vision Banana frames vision tasks as conditional image editing but its data, weights and code are not public; OVB is a fully open, reproducible recipe starting from 4B and 9B open-weight base models and 2.1M-3.8M training pairs from public datasets. It surpasses Vision Banana's reported Cityscapes zero-shot result (73.9 vs. 69.9 mIoU) while largely keeping the base model's image-editing abilities. Researchers exploring generator-based perception now have a public starting point.",
+      "sources": [
+        {
+          "candidate_id": "c_fb20c3d982",
+          "url": "https://huggingface.co/papers/2611.15844"
+        }
+      ],
+      "evidence": [],
+      "tags": [
+        "论文",
+        "图像",
+        "多模态"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Alibaba open-sources Open Code Review, an AI code review CLI",
+      "summary": "Open Code Review started as Alibaba Group's internal AI code review assistant; it combines deterministic pipelines with an LLM agent for line-level comments, ships a multi-language ruleset (NPE, thread-safety, XSS, SQL injection), is OpenAI and Anthropic compatible, and is Apache-2.0 licensed. The project reports significantly higher Precision and F1 than Claude Code on the same underlying model with ~1/9 of the tokens, at the cost of lower Recall. Teams wanting a low-noise reviewer in CI can install it with npm and try it.",
+      "sources": [
+        {
+          "candidate_id": "c_769164b4a1",
+          "url": "https://github.com/alibaba/open-code-review"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/alibaba/open-code-review",
+          "quote": "Open Code Review is an AI-powered code review CLI tool. It originated as Alibaba Group's internal official AI code review assistant"
+        },
+        {
+          "url": "https://github.com/alibaba/open-code-review",
+          "quote": "Compared to general-purpose agents (Claude Code), Open Code Review achieves significantly higher Precision and F1 with the same underlying model, while consuming only ~1/9 of the tokens and completing reviews faster. Note that its Recall is lower than general-purpose agents"
+        },
+        {
+          "url": "https://github.com/alibaba/open-code-review",
+          "quote": "License Apache-2.0 — Copyright 2026 Alibaba"
+        },
+        {
+          "url": "https://github.com/alibaba/open-code-review",
+          "quote": "npm install -g @alibaba-group/open-code-review"
+        }
+      ],
+      "tags": [
+        "开源",
+        "代码",
+        "工具"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Google opens Antigravity's /teamwork multi-agent feature to developers",
+      "summary": "/teamwork pairs parallel exploration with dedicated falsifiers such as the Lean 4 proof checker and unmodified test suites to verify which candidate solutions work; Google used it to rewrite the libgav1 AV1 decoder in Rust and make the port 20-30% faster than the original C++. External scientists and developers can use Gemini 4 models with /teamwork and /boost in Antigravity today, and Google opened applications giving 10,000 academic researchers six months of free access to its highest usage tier.",
+      "sources": [
+        {
+          "candidate_id": "c_976c01153e",
+          "url": "https://research.google/blog/advancing-science-engineering-with-antigravitys-teamwork-feature/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://research.google/blog/advancing-science-engineering-with-antigravitys-teamwork-feature/",
+          "quote": "The system bridges this gap by pairing parallel exploration with dedicated falsifiers (e.g., the Lean 4 proof checker, unmodified software test suites, execution simulators, web search, or hardware counters) to automatically verify which candidate solutions work."
+        },
+        {
+          "url": "https://research.google/blog/advancing-science-engineering-with-antigravitys-teamwork-feature/",
+          "quote": "/teamwork also rewrote libgav1 , Google's AV1 video decoder, from C++ into around 170k lines Rust"
+        },
+        {
+          "url": "https://research.google/blog/advancing-science-engineering-with-antigravitys-teamwork-feature/",
+          "quote": "the Rust port became 20-30% faster than the original C++ and hand-optimized assembly code on both x86_64 and ARM."
+        },
+        {
+          "url": "https://research.google/blog/advancing-science-engineering-with-antigravitys-teamwork-feature/",
+          "quote": "External scientists and developers can use Gemini 4 models with /teamwork and /boost in Antigravity and Deep Review today. We have also opened applications giving 10,000 academic researchers six months of free access to our highest usage tier."
+        }
+      ],
+      "tags": [
+        "Agent",
+        "工具",
+        "代码"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Transformers v5.23.0 adds Inkling 2 Small and the JEV decision head",
+      "summary": "The release adds Thinking Machines Lab's Inkling 2 Small, a multimodal model taking text and image inputs whose language backbone has 48 mixture-of-experts decoder layers, for 594B total and 17B active parameters. It also adds JEV, an experimental decision head and decision pipeline; the same head reads the 255 answer codes of pplx-decider and d3. Teams already on Transformers can try both kinds of model without extra code.",
+      "sources": [
+        {
+          "candidate_id": "c_9b62cc4a39",
+          "url": "https://github.com/huggingface/transformers/releases/tag/v5.23.0"
+        }
+      ],
+      "evidence": [],
+      "tags": [
+        "开源",
+        "模型",
+        "工具"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Modern Web Guidance steers coding agents toward current web practices",
+      "summary": "Modern Web Guidance is a set of skills that puts web platform expertise, best practices and browser compatibility data into coding agents to steer them away from legacy patterns; it is stewarded by the Google Chrome, Microsoft Edge, Mozilla Firefox and MDN teams. Install it with npx modern-web-guidance@latest install, or try search and retrieve without installing and run legacy-scan to find outdated patterns in a codebase.",
+      "sources": [
+        {
+          "candidate_id": "c_3cb99331b7",
+          "url": "https://github.com/GoogleChrome/modern-web-guidance-src"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/GoogleChrome/modern-web-guidance-src",
+          "quote": "Modern Web Guidance is a set of skills that embed web platform expertise, best practices, and browser compatibility data directly into your coding agents. It helps to steer your coding agents away from legacy patterns"
+        },
+        {
+          "url": "https://github.com/GoogleChrome/modern-web-guidance-src",
+          "quote": "Stewarded by the Google Chrome, Microsoft Edge, Mozilla Firefox, and MDN teams, alongside the web development community."
+        },
+        {
+          "url": "https://github.com/GoogleChrome/modern-web-guidance-src",
+          "quote": "npx modern-web-guidance@latest install This command runs an interactive wizard to install Modern Web Guidance."
+        },
+        {
+          "url": "https://github.com/GoogleChrome/modern-web-guidance-src",
+          "quote": "npx modern-web-guidance@latest legacy-scan"
+        }
+      ],
+      "tags": [
+        "工具",
+        "代码",
+        "Agent"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "Anthropic shares how to build safety evals: validate graders against humans",
+      "summary": "Anthropic's top three recommendations: write down the construct before collecting data, validate your grader against human judgment, and report uncertainty, with 100 items as the floor for a complex multi-turn eval.",
+      "sources": [
+        {
+          "candidate_id": "c_bb5dd27fe8",
+          "url": "https://www.anthropic.com/research/building-strong-safety-evaluations"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://www.anthropic.com/research/building-strong-safety-evaluations",
+          "quote": "write down the construct you want to measure before collecting data, validate your grader against human judgment before trusting any number it produces, and report uncertainty so readers can tell signal from noise."
+        },
+        {
+          "url": "https://www.anthropic.com/research/building-strong-safety-evaluations",
+          "quote": "We treat 100 items as the floor for a complex, multi-turn eval and 1,000 as the floor for a simpler, single-turn one."
+        }
+      ],
+      "tags": [
+        "安全"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "XYBench tests whether models spot the misconception behind a question",
+      "summary": "Built from 8,115 programming and everyday questions, XYBench finds every model more likely to solve the stated request than the user's underlying goal.",
+      "sources": [
+        {
+          "candidate_id": "c_89f29999c7",
+          "url": "https://huggingface.co/blog/allenai/xybench"
+        },
+        {
+          "candidate_id": "c_336257e4c4",
+          "url": "https://allenai.org/blog/xybench"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/blog/allenai/xybench",
+          "quote": "Drawing on 8,115 real-world questions spanning programming and everyday activities such as cooking and home repair, we introduce a benchmark that measures whether models identify these misconceptions"
+        },
+        {
+          "url": "https://huggingface.co/blog/allenai/xybench",
+          "quote": "Across all four sources, every model was more likely to include a solution to the stated request (Y) than to the underlying goal (X)."
+        }
+      ],
+      "tags": [
+        "论文"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "Brave Search API accepts per-request agent payments via x402",
+      "summary": "No account needed: an unpaid request gets an HTTP 402 with the price, the agent signs a USDC payment on Base and retries, and LLM Context and web search cost $0.005 per request.",
+      "sources": [
+        {
+          "candidate_id": "c_15e07be6bd",
+          "url": "https://brave.com/blog/search-api-agentic-payments/"
+        },
+        {
+          "candidate_id": "c_15e07be6bd",
+          "url": "https://news.ycombinator.com/item?id=50477649"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://brave.com/blog/search-api-agentic-payments/",
+          "quote": "A request sent without payment receives an HTTP 402 Payment Required response that states the price of that search and the payment details needed to pay it. The agent signs a USDC payment for that amount and retries the request with the signed payment attached."
+        },
+        {
+          "url": "https://brave.com/blog/search-api-agentic-payments/",
+          "quote": "Brave runs its own facilitator accepting USDC on the Base blockchain"
+        },
+        {
+          "url": "https://brave.com/blog/search-api-agentic-payments/",
+          "quote": "LLM Context, an API designed specifically for providing search context for agents, will cost $0.005 ($5 per 1,000). Additionally, web (search for humans), news, image, video, and local endpoints will also be available for $0.005 ($5 per 1,000)."
+        },
+        {
+          "url": "https://brave.com/blog/search-api-agentic-payments/",
+          "quote": "Since each request carries its own payment, a Brave Search API account is no longer needed to use the service."
+        }
+      ],
+      "tags": [
+        "Agent",
+        "工具"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "langchain-openai 1.8.0 adds OpenAIClassifier and drops Python 3.10",
+      "summary": "The release adds OpenAIClassifier for the GA Decisions API and raises the minimums to Python 3.11 and langchain-core 1.8.0; Python 3.10 users stay on 1.7.x.",
+      "sources": [
+        {
+          "candidate_id": "c_87041a090c",
+          "url": "https://github.com/langchain-ai/langchain/releases/tag/langchain-openai%3D%3D1.8.0"
+        }
+      ],
+      "evidence": [],
+      "tags": [
+        "工具"
+      ]
+    }
+  ],
+  "research": [
+    {
+      "via": "webfetch",
+      "url": "https://openai.com/index/introducing-chatgpt-wallet/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/blog/ggml-org/llama-cpp-v1"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://cursor.com/blog/security-incident-update"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://api-docs.deepseek.com/news/news261113"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://claude.com/resources/articles/projects-redesigned"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/perplexity-ai/pplx-decider-v1.3"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://www.anthropic.com/research/building-strong-safety-evaluations"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/blog/allenai/xybench"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://research.google/blog/advancing-science-engineering-with-antigravitys-teamwork-feature/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://brave.com/blog/search-api-agentic-payments/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.15777"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.17167"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.15844"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.05984"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.16748"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/alibaba/open-code-review"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/GoogleChrome/modern-web-guidance-src"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/craitech/tontaube"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/ewhacc/tandem"
+    },
+    {
+      "via": "websearch",
+      "query": "Thinking Machines Lab Inkling 2 release"
+    }
+  ],
+  "lang": "en",
+  "validation": {
+    "validated_at": "2026-11-14T04:46:04+00:00",
+    "checked_links": false,
+    "dropped": [],
+    "warnings": []
+  }
+}

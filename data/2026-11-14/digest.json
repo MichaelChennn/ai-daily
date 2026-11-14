@@ -1,0 +1,596 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-14",
+  "mode": "full",
+  "channel": "claude",
+  "generated_at": "2026-11-14T04:45:02+00:00",
+  "model": "claude-opus-5-5",
+  "highlights": [
+    "OpenAI 推出 ChatGPT Wallet，Agent 付款时拿不到用户的真实卡号，每笔购买都要用户做一次安全验证。",
+    "llama.cpp 发布 v1.0.0，今后 API 和 ABI 不兼容的改动都会通过主版本号体现。"
+  ],
+  "items": [
+    {
+      "section": "headline",
+      "title": "OpenAI 推出 ChatGPT Wallet，让 Agent 代用户付款",
+      "summary": "ChatGPT Wallet 与 American Express、Mastercard、Visa 合作打造，Agent 付款时拿不到用户的真实卡号，每笔购买都要用户做一次安全验证；首批在 dots 中面向美国的 ChatGPT Pro 订阅用户上线。OpenAI 同时发布 Commerce Partner Playbook，商家可以上传商品 feed、构建插件或给网站加 WebMCP 工具，让 Agent 在现有系统里完成下单，做电商和支付集成的开发者可以先看这份指南。",
+      "sources": [
+        {
+          "candidate_id": "c_b75d22b73a",
+          "url": "https://openai.com/index/introducing-chatgpt-wallet"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://openai.com/index/introducing-chatgpt-wallet",
+          "quote": "It’s the first wallet that lets agents pay without access to users’ actual card details and that requires a security check for every purchase, while also preserving existing card rewards and protections for eligible disputes."
+        },
+        {
+          "url": "https://openai.com/index/introducing-chatgpt-wallet",
+          "quote": "Built in partnership with American Express, Mastercard, and Visa, ChatGPT Wallet will initially be available through dots"
+        },
+        {
+          "url": "https://openai.com/index/introducing-chatgpt-wallet",
+          "quote": "It will initially be available to ChatGPT Pro subscribers aged 18 and older in the US with eligible US-issued cards."
+        },
+        {
+          "url": "https://openai.com/index/introducing-chatgpt-wallet",
+          "quote": "Alongside ChatGPT Wallet, we’re publishing a Commerce Partner Playbook"
+        },
+        {
+          "url": "https://openai.com/index/introducing-chatgpt-wallet",
+          "quote": "Build a plugin to let agents check availability, manage carts, or take other actions through your existing systems. Websites can also add WebMCP tools."
+        }
+      ],
+      "tags": [
+        "产品",
+        "Agent"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "llama.cpp 发布 v1.0.0，今后按主版本号标示 API 变更",
+      "summary": "llama.cpp 和 ggml 的库版本同时升到 v1.0.0，今后 API 和 ABI 不兼容的改动都会通过主版本号体现；项目目前支持超过 150 种架构变体。这一版移除了废弃的公共 API，把 NextN/speculative API 提升进 llama.h，加入 OCP FP8 KV cache 和主机内存 MoE 专家缓存，并给 llama-server 加了 /v1/audio/speech 接口和 SSRF、CORS 等方面的加固。基于 llama.cpp 做集成的项目，可以把主版本号当作升级时要不要改代码的信号。",
+      "sources": [
+        {
+          "candidate_id": "c_1c1521c176",
+          "url": "https://huggingface.co/blog/ggml-org/llama-cpp-v1"
+        },
+        {
+          "candidate_id": "c_add97d367d",
+          "url": "https://github.com/ggml-org/llama.cpp/releases/tag/v1.0.0"
+        },
+        {
+          "candidate_id": "c_7eaa0683cd",
+          "url": "https://v.redd.it/ulqil3yfud1i1"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/blog/ggml-org/llama-cpp-v1",
+          "quote": "Today we release libraries v1.0.0 , highlighting our responsibility to those developers. Moving forward, both llama.cpp and ggml will reflect API and ABI incompatibilities with major-version bumps."
+        },
+        {
+          "url": "https://huggingface.co/blog/ggml-org/llama-cpp-v1",
+          "quote": "Currently, llama.cpp supports more than 150 architecture variants as well as all mainstream speculative decoding methods."
+        }
+      ],
+      "tags": [
+        "开源",
+        "推理",
+        "工具"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "DeepSeek API 开放 App 同款搜索、文件解析和语音能力",
+      "summary": "DeepSeek 把 App 背后的能力搬到了 API：V4.1-Flash（deepseek-flash）在 Messages、Responses 和 Chat Completions 接口里支持联网搜索、URL 读取、文件解析和安全检查，工具调用和上下文拼装在服务端完成；OCR、ASR、TTS、Search 和 Fetch 也能作为独立 API 调用。这些扩展能力在 token 费用之外另收工具费，面向公众的应用必须开启安全检查。想做带搜索和文件问答的应用，可以少自己搭一层工具链。",
+      "sources": [
+        {
+          "candidate_id": "c_c7ec05b559",
+          "url": "https://api-docs.deepseek.com/news/news261113"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://api-docs.deepseek.com/news/news261113",
+          "quote": "The capabilities behind the DeepSeek App are now available through the DeepSeek API. Enable built-in features with a few parameters, or call standalone APIs such as OCR, ASR, and TTS."
+        },
+        {
+          "url": "https://api-docs.deepseek.com/news/news261113",
+          "quote": "V4.1-Flash ( deepseek-flash ) now supports these capabilities across Messages , Responses , and Chat Completions , with tool calls and context assembly handled server-side"
+        },
+        {
+          "url": "https://api-docs.deepseek.com/news/news261113",
+          "quote": "File Input: Parse PDFs, Office files, images, and more into conversation context."
+        },
+        {
+          "url": "https://api-docs.deepseek.com/news/news261113",
+          "quote": "Public-facing apps must enable safety checks."
+        },
+        {
+          "url": "https://api-docs.deepseek.com/news/news261113",
+          "quote": "Search, Fetch, OCR, ASR, and TTS are also available as standalone APIs for custom workflows."
+        },
+        {
+          "url": "https://api-docs.deepseek.com/news/news261113",
+          "quote": "Extended capabilities incur tool usage fees in addition to standard token charges."
+        }
+      ],
+      "tags": [
+        "产品",
+        "Agent"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Claude Code 项目改版：协调者调度多个并行线程",
+      "summary": "在新版 Claude Code 项目里，用户只需描述要做的事，由协调者拆分任务、调度多个线程并汇总结果；每个线程都是一个 Claude Code 云端会话，在自己的分支和仓库副本上工作，线程之间共享记忆，改到同一处代码时按普通 PR 的合并冲突处理。目前以 beta 形式向部分 Pro 和 Max 订阅用户开放，并行线程会更快用完额度，可以分别给协调者和工作线程选择模型与 effort。跨多个仓库的迁移这类多步骤任务，可以整体交给它拆分。",
+      "sources": [
+        {
+          "candidate_id": "c_d03ffa90a0",
+          "url": "https://claude.com/resources/articles/projects-redesigned"
+        },
+        {
+          "candidate_id": "c_d03ffa90a0",
+          "url": "https://news.ycombinator.com/item?id=50492141"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://claude.com/resources/articles/projects-redesigned",
+          "quote": "Now in a Claude Code project, you describe what needs to get done and Claude manages the work."
+        },
+        {
+          "url": "https://claude.com/resources/articles/projects-redesigned",
+          "quote": "each thread is a Claude Code cloud session working on its own branch and copy of the repo. The coordinator keeps work organized, but if any threads work on the same code, the overlap is resolved as a merge conflict just like any other PR."
+        },
+        {
+          "url": "https://claude.com/resources/articles/projects-redesigned",
+          "quote": "Every thread now adds to and draws from a shared memory, reducing the need for complex prompt engineering."
+        },
+        {
+          "url": "https://claude.com/resources/articles/projects-redesigned",
+          "quote": "Because of this, projects can reach usage limits faster. You can check project specific usage and select the model and effort levels used by the coordinator chat as well as the worker threads."
+        },
+        {
+          "url": "https://claude.com/resources/articles/projects-redesigned",
+          "quote": "Starting today, updated projects are available in beta to select Claude Pro and Max subscribers who use cloud sessions in Claude Code"
+        }
+      ],
+      "tags": [
+        "Agent",
+        "代码",
+        "产品"
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Perplexity 发布决策模型 Decider v1.3 和 Decider Flash v1.3",
+      "summary": "这两个模型是由生成式 LLM 改成的通用分类器：输入一段状态和若干问题，直接返回各选项的概率分布，而不是逐 token 生成文本。pplx-decider-v1.3 基于 Qwen3.8-27B 微调，pplx-decider-flash-v1.3 是从它蒸馏出的 Qwen3.5-4B 版本，均采用 Apache 2.0 许可、支持文本和图像，新增的 locate 题型可以抽取原文片段并给出字符偏移。做 NER、PII 检测这类封闭式判断时，可以用它代替让通用 LLM 输出标签。",
+      "sources": [
+        {
+          "url": "https://huggingface.co/perplexity-ai/pplx-decider-v1.3",
+          "title": "Hugging Face: perplexity-ai/pplx-decider-v1.3"
+        },
+        {
+          "candidate_id": "c_2a3eebbe22",
+          "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xv7fku/perplexity_releases_decider_v13_26b_and_decider/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/perplexity-ai/pplx-decider-v1.3",
+          "quote": "pplx-decider-v1.3 is the next version of pplx-decider-v1.2 , a multimodal classification model on Qwen3.8-27B. It comes with improved performance and robustness across decision tasks, and a new extraction capability: Locate , which extracts verbatim text spans from the state with character offsets"
+        }
+      ],
+      "tags": [
+        "模型",
+        "开源"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "论文：动作做不好的决策模型，也能当好 RL 教师",
+      "summary": "研究者比较了三个决策模型和三个通用 LLM 在 ALFWorld 上当行动者和评判者的表现，再用 JEV 当教师给 GRPO 提供逐步打分。JEV 让 Qwen2.5-1.5B 策略在 ALFWorld 上的成功率从 72.8% 升到 82.9%，在 WebShop 上从 56.8% 升到 71.4%；作者的解释是事后评判能看到行动的后果。给 Agent 训练挑奖励模型时，不必只看它自己会不会做任务。",
+      "sources": [
+        {
+          "candidate_id": "c_23fa06e2ea",
+          "url": "https://huggingface.co/papers/2611.17167"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.17167",
+          "quote": "We compare three decision models and three general LLMs as actors and judges on ALFWorld , and use JEV as a teacher on ALFWorld and WebShop ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.17167",
+          "quote": "As a teacher, JEV raises a Qwen2.5-1.5B policy over GRPO from 72.8% to 82.9% success on ALFWorld and from 56.8% to 71.4% on WebShop . These results suggest that a poor actor can still teach well, because judging an action after the episode ends reveals the consequences that acting must anticipate."
+        }
+      ],
+      "tags": [
+        "论文",
+        "Agent",
+        "训练"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "SimpleHC：只多 2.4% 训练开销的 Hyper-Connections",
+      "summary": "论文系统拆解了 Hyper-Connections 架构，发现不做残差混合、只保留可学习的读写门控，效果就能与 mHC 相当，据此提出 SimpleHC，并通过共享内存访问减少对扩展残差状态的重复读取。在最大测试规模下，SimpleHC 比普通残差基线只多 2.4% 的端到端训练时间，从 15B 扩到 30B MoE 模型时性能与 mHC 相当，梯度也更平稳。想在自己模型里加 HC 的团队，可以先参考这个低开销版本。",
+      "sources": [
+        {
+          "candidate_id": "c_0e6e1cee78",
+          "url": "https://huggingface.co/papers/2611.05984"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.05984",
+          "quote": "These findings lead to SimpleHC , which simplifies the architecture by removing residual mixing and simplifies execution through shared memory access"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.05984",
+          "quote": "SimpleHC incurs only 2.4% extra end-to-end training time over a vanilla residual baseline at the largest tested scale. It maintains performance comparable to mHC when scaling from 15B to 30B MoE models , exhibits smoother gradient dynamics during standard training, and remains stable under stress."
+        }
+      ],
+      "tags": [
+        "论文",
+        "训练"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "SO-Arena：评测 System One 决策模型的能力与可靠性",
+      "summary": "SO-Arena 覆盖 11 个领域、五类能力，除了准确率，还测选项集变化时决策是否稳定，以及没有正确选项时模型能否识别出来。对 21 个模型的评测显示，扩大规模和增加推理的收益因领域差异很大，综合表现最好的 System One 模型可靠性只排第七。选用决策模型时，除了看总分，也要单独看稳定性。",
+      "sources": [
+        {
+          "candidate_id": "c_07479e65c6",
+          "url": "https://huggingface.co/papers/2611.15777"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.15777",
+          "quote": "SO-Arena evaluates System One models across domains and capability families, revealing that scaling and reasoning gains vary and that high overall accuracy does not ensure reliable decision-making."
+        }
+      ],
+      "tags": [
+        "论文",
+        "Agent"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Open Vision Banana：用公开数据把图像生成模型改成感知模型",
+      "summary": "Vision Banana 把视觉任务当作条件图像编辑来做，但数据、权重和代码都没有公开；OVB 给出完全开放、可复现的配方，从 4B 和 9B 的开放权重基础模型出发，只用公开数据集的 2.1M-3.8M 训练对。它在 Cityscapes 零样本分割上超过 Vision Banana 报告的成绩（73.9 vs. 69.9 mIoU），同时基本保留了基础模型的图像编辑能力。想复现“生成模型做感知”这条路线的研究者有了公开的起点。",
+      "sources": [
+        {
+          "candidate_id": "c_fb20c3d982",
+          "url": "https://huggingface.co/papers/2611.15844"
+        }
+      ],
+      "evidence": [],
+      "tags": [
+        "论文",
+        "图像",
+        "多模态"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "阿里开源代码审查 CLI Open Code Review",
+      "summary": "Open Code Review 原是阿里巴巴内部的 AI 代码审查助手，用确定性流水线加 LLM Agent 的混合架构给出行级评论，内置 NPE、线程安全、XSS、SQL 注入等多语言规则，兼容 OpenAI 和 Anthropic，采用 Apache-2.0 许可。项目称在同一底层模型下，它的 Precision 和 F1 明显高于 Claude Code，只用约 1/9 的 token，但 Recall 更低。想在 CI 里接一个噪音少的审查工具，可以用 npm 安装后直接试。",
+      "sources": [
+        {
+          "candidate_id": "c_769164b4a1",
+          "url": "https://github.com/alibaba/open-code-review"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/alibaba/open-code-review",
+          "quote": "Open Code Review is an AI-powered code review CLI tool. It originated as Alibaba Group's internal official AI code review assistant"
+        },
+        {
+          "url": "https://github.com/alibaba/open-code-review",
+          "quote": "Compared to general-purpose agents (Claude Code), Open Code Review achieves significantly higher Precision and F1 with the same underlying model, while consuming only ~1/9 of the tokens and completing reviews faster. Note that its Recall is lower than general-purpose agents"
+        },
+        {
+          "url": "https://github.com/alibaba/open-code-review",
+          "quote": "License Apache-2.0 — Copyright 2026 Alibaba"
+        },
+        {
+          "url": "https://github.com/alibaba/open-code-review",
+          "quote": "npm install -g @alibaba-group/open-code-review"
+        }
+      ],
+      "tags": [
+        "开源",
+        "代码",
+        "工具"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Google 在 Antigravity 开放多 Agent 协作功能 /teamwork",
+      "summary": "/teamwork 把并行探索和专门的“证伪器”（如 Lean 4 证明检查器、未改动的测试套件）配对，自动验证哪些候选解成立；Google 用它把 AV1 解码器 libgav1 改写成 Rust，并调到比原来的 C++ 快 20-30%。外部科学家和开发者现在就能在 Antigravity 里配合 Gemini 4 模型使用 /teamwork 和 /boost，Google 还开放申请，给 10,000 名学术研究者六个月最高用量档的免费使用。",
+      "sources": [
+        {
+          "candidate_id": "c_976c01153e",
+          "url": "https://research.google/blog/advancing-science-engineering-with-antigravitys-teamwork-feature/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://research.google/blog/advancing-science-engineering-with-antigravitys-teamwork-feature/",
+          "quote": "The system bridges this gap by pairing parallel exploration with dedicated falsifiers (e.g., the Lean 4 proof checker, unmodified software test suites, execution simulators, web search, or hardware counters) to automatically verify which candidate solutions work."
+        },
+        {
+          "url": "https://research.google/blog/advancing-science-engineering-with-antigravitys-teamwork-feature/",
+          "quote": "/teamwork also rewrote libgav1 , Google's AV1 video decoder, from C++ into around 170k lines Rust"
+        },
+        {
+          "url": "https://research.google/blog/advancing-science-engineering-with-antigravitys-teamwork-feature/",
+          "quote": "the Rust port became 20-30% faster than the original C++ and hand-optimized assembly code on both x86_64 and ARM."
+        },
+        {
+          "url": "https://research.google/blog/advancing-science-engineering-with-antigravitys-teamwork-feature/",
+          "quote": "External scientists and developers can use Gemini 4 models with /teamwork and /boost in Antigravity and Deep Review today. We have also opened applications giving 10,000 academic researchers six months of free access to our highest usage tier."
+        }
+      ],
+      "tags": [
+        "Agent",
+        "工具",
+        "代码"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Transformers v5.23.0 支持 Inkling 2 Small 和决策头 JEV",
+      "summary": "新版加入 Thinking Machines Lab 的多模态模型 Inkling 2 Small：语言骨干有 48 层 MoE 解码层，总参数 594B、激活 17B，接受文本和图像输入。另外加入实验性的决策头 JEV 和 decision pipeline，同一个头也能读取 pplx-decider 和 d3 的 255 个答案编码。已经在用 Transformers 的团队可以直接试这两类模型。",
+      "sources": [
+        {
+          "candidate_id": "c_9b62cc4a39",
+          "url": "https://github.com/huggingface/transformers/releases/tag/v5.23.0"
+        }
+      ],
+      "evidence": [],
+      "tags": [
+        "开源",
+        "模型",
+        "工具"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Modern Web Guidance：给编码 Agent 补上现代 Web 写法",
+      "summary": "Modern Web Guidance 是一组 skill，把 Web 平台的最佳实践和浏览器兼容性数据直接放进编码 Agent，引导它避开过时写法，由 Google Chrome、Microsoft Edge、Mozilla Firefox 和 MDN 团队共同维护。用 npx modern-web-guidance@latest install 安装，也可以不装直接 search、retrieve 指南，或用 legacy-scan 扫描代码库里的旧写法。",
+      "sources": [
+        {
+          "candidate_id": "c_3cb99331b7",
+          "url": "https://github.com/GoogleChrome/modern-web-guidance-src"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/GoogleChrome/modern-web-guidance-src",
+          "quote": "Modern Web Guidance is a set of skills that embed web platform expertise, best practices, and browser compatibility data directly into your coding agents. It helps to steer your coding agents away from legacy patterns"
+        },
+        {
+          "url": "https://github.com/GoogleChrome/modern-web-guidance-src",
+          "quote": "Stewarded by the Google Chrome, Microsoft Edge, Mozilla Firefox, and MDN teams, alongside the web development community."
+        },
+        {
+          "url": "https://github.com/GoogleChrome/modern-web-guidance-src",
+          "quote": "npx modern-web-guidance@latest install This command runs an interactive wizard to install Modern Web Guidance."
+        },
+        {
+          "url": "https://github.com/GoogleChrome/modern-web-guidance-src",
+          "quote": "npx modern-web-guidance@latest legacy-scan"
+        }
+      ],
+      "tags": [
+        "工具",
+        "代码",
+        "Agent"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "Anthropic 分享安全评测建议：先用人工判断校验评分器",
+      "summary": "Anthropic 总结设计、运行和报告安全评测的经验：先写清要测什么、用人工判断校验评分器、报告不确定性，复杂多轮评测至少 100 条样本。",
+      "sources": [
+        {
+          "candidate_id": "c_bb5dd27fe8",
+          "url": "https://www.anthropic.com/research/building-strong-safety-evaluations"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://www.anthropic.com/research/building-strong-safety-evaluations",
+          "quote": "write down the construct you want to measure before collecting data, validate your grader against human judgment before trusting any number it produces, and report uncertainty so readers can tell signal from noise."
+        },
+        {
+          "url": "https://www.anthropic.com/research/building-strong-safety-evaluations",
+          "quote": "We treat 100 items as the floor for a complex, multi-turn eval and 1,000 as the floor for a simpler, single-turn one."
+        }
+      ],
+      "tags": [
+        "安全"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "XYBench：测模型能否看出用户问题背后的误解",
+      "summary": "XYBench 收录 8,115 个编程和日常问题，评测发现每个模型都更倾向于回答用户字面上的请求，而不是背后的真实目标。",
+      "sources": [
+        {
+          "candidate_id": "c_89f29999c7",
+          "url": "https://huggingface.co/blog/allenai/xybench"
+        },
+        {
+          "candidate_id": "c_336257e4c4",
+          "url": "https://allenai.org/blog/xybench"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/blog/allenai/xybench",
+          "quote": "Drawing on 8,115 real-world questions spanning programming and everyday activities such as cooking and home repair, we introduce a benchmark that measures whether models identify these misconceptions"
+        },
+        {
+          "url": "https://huggingface.co/blog/allenai/xybench",
+          "quote": "Across all four sources, every model was more likely to include a solution to the stated request (Y) than to the underlying goal (X)."
+        }
+      ],
+      "tags": [
+        "论文"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "Brave Search API 支持 Agent 用 x402 按次付费",
+      "summary": "不用注册账号：请求先收到 HTTP 402 和报价，Agent 用 Base 链上的 USDC 签名付款后重试，LLM Context 和网页搜索等接口每次 $0.005。",
+      "sources": [
+        {
+          "candidate_id": "c_15e07be6bd",
+          "url": "https://brave.com/blog/search-api-agentic-payments/"
+        },
+        {
+          "candidate_id": "c_15e07be6bd",
+          "url": "https://news.ycombinator.com/item?id=50477649"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://brave.com/blog/search-api-agentic-payments/",
+          "quote": "A request sent without payment receives an HTTP 402 Payment Required response that states the price of that search and the payment details needed to pay it. The agent signs a USDC payment for that amount and retries the request with the signed payment attached."
+        },
+        {
+          "url": "https://brave.com/blog/search-api-agentic-payments/",
+          "quote": "Brave runs its own facilitator accepting USDC on the Base blockchain"
+        },
+        {
+          "url": "https://brave.com/blog/search-api-agentic-payments/",
+          "quote": "LLM Context, an API designed specifically for providing search context for agents, will cost $0.005 ($5 per 1,000). Additionally, web (search for humans), news, image, video, and local endpoints will also be available for $0.005 ($5 per 1,000)."
+        },
+        {
+          "url": "https://brave.com/blog/search-api-agentic-payments/",
+          "quote": "Since each request carries its own payment, a Brave Search API account is no longer needed to use the service."
+        }
+      ],
+      "tags": [
+        "Agent",
+        "工具"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "langchain-openai 1.8.0 新增 OpenAIClassifier，停止支持 Python 3.10",
+      "summary": "新版加入对接正式版 Decisions API 的 OpenAIClassifier，最低要求改为 Python 3.11 和 langchain-core 1.8.0，3.10 用户会继续装到 1.7.x。",
+      "sources": [
+        {
+          "candidate_id": "c_87041a090c",
+          "url": "https://github.com/langchain-ai/langchain/releases/tag/langchain-openai%3D%3D1.8.0"
+        }
+      ],
+      "evidence": [],
+      "tags": [
+        "工具"
+      ]
+    }
+  ],
+  "research": [
+    {
+      "via": "webfetch",
+      "url": "https://openai.com/index/introducing-chatgpt-wallet/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/blog/ggml-org/llama-cpp-v1"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://cursor.com/blog/security-incident-update"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://api-docs.deepseek.com/news/news261113"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://claude.com/resources/articles/projects-redesigned"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/perplexity-ai/pplx-decider-v1.3"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://www.anthropic.com/research/building-strong-safety-evaluations"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/blog/allenai/xybench"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://research.google/blog/advancing-science-engineering-with-antigravitys-teamwork-feature/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://brave.com/blog/search-api-agentic-payments/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.15777"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.17167"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.15844"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.05984"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.16748"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/alibaba/open-code-review"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/GoogleChrome/modern-web-guidance-src"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/craitech/tontaube"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/ewhacc/tandem"
+    },
+    {
+      "via": "websearch",
+      "query": "Thinking Machines Lab Inkling 2 release"
+    }
+  ],
+  "validation": {
+    "validated_at": "2026-11-14T04:45:34+00:00",
+    "checked_links": true,
+    "dropped": [],
+    "warnings": [
+      "llama.cpp 发布 v1.0.0，今后按主版本号标示 API 变更: could not check https://v.redd.it/ulqil3yfud1i1 (403)",
+      "Perplexity 发布决策模型 Decider v1.3 和 Decider Flash v1.3: could not check https://www.reddit.com/r/LocalLLaMA/comments/1xv7fku/perplexity_releases_decider_v13_26b_and_decider/ (403)"
+    ]
+  }
+}
