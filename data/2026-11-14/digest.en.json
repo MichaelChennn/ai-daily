@@ -2,23 +2,55 @@
   "schema_version": 1,
   "date": "2026-11-14",
   "mode": "full",
-  "generated_at": "2026-11-14T04:46:02+00:00",
-  "channel": "api",
-  "model": "nvidia:minimaxai/minimax-m3.1-flash",
+  "channel": "claude",
+  "generated_at": "2026-11-14T04:46:04+00:00",
+  "model": "claude-opus-5-5",
   "highlights": [
-    "llama.cpp v1.0.0 removes the deprecated public API and makes breaking changes visible through major-version bumps, while DeepSeek exposes the full DeepSeek App experience through its API.",
-    "Perplexity released Decider v1.3 (26B) and Decider Flash v1.3 (5B) under Apache 2.0, adding span extraction alongside classification.",
-    "Research on decision models and visual generation includes SO-Arena, PhysLoop, Open Vision Banana, and evidence that a poor actor can still teach well."
+    "OpenAI launched ChatGPT Wallet: agents pay without access to the user's actual card details, and every purchase needs a security check.",
+    "llama.cpp reached v1.0.0; from now on API and ABI incompatibilities will be signalled by major-version bumps."
   ],
   "items": [
     {
       "section": "headline",
-      "title": "llama.cpp v1.0.0 removes the deprecated public API",
-      "summary": "llama.cpp v1.0.0 removes the deprecated public API and promotes the NextN/speculative API to llama.h, adds OCP FP8 KV caches, a host-memory MoE expert cache, and loading of external PLE shards. The release also adds Kimi-K3.1-Pro, Ripple, xing4 0, drama-3 TTS, and Kimi-K3.1 vision support, hardens llama-server, and adds a /v1/audio/speech endpoint. With breaking public C API changes now tied to major-version bumps, downstream developers can rely on clearer compatibility boundaries.",
-      "tags": [
-        "开源",
-        "工具"
+      "title": "OpenAI launches ChatGPT Wallet so agents can pay on a user's behalf",
+      "summary": "Built with American Express, Mastercard and Visa, ChatGPT Wallet lets agents pay without access to the user's actual card details and requires a security check for every purchase; it starts in dots for ChatGPT Pro subscribers in the US. OpenAI also published a Commerce Partner Playbook: businesses can upload a product feed, build a plugin, or add WebMCP tools so agents can buy through their existing systems. Developers working on checkout or payments integrations should read it first.",
+      "sources": [
+        {
+          "candidate_id": "c_b75d22b73a",
+          "url": "https://openai.com/index/introducing-chatgpt-wallet"
+        }
       ],
+      "evidence": [
+        {
+          "url": "https://openai.com/index/introducing-chatgpt-wallet",
+          "quote": "It’s the first wallet that lets agents pay without access to users’ actual card details and that requires a security check for every purchase, while also preserving existing card rewards and protections for eligible disputes."
+        },
+        {
+          "url": "https://openai.com/index/introducing-chatgpt-wallet",
+          "quote": "Built in partnership with American Express, Mastercard, and Visa, ChatGPT Wallet will initially be available through dots"
+        },
+        {
+          "url": "https://openai.com/index/introducing-chatgpt-wallet",
+          "quote": "It will initially be available to ChatGPT Pro subscribers aged 18 and older in the US with eligible US-issued cards."
+        },
+        {
+          "url": "https://openai.com/index/introducing-chatgpt-wallet",
+          "quote": "Alongside ChatGPT Wallet, we’re publishing a Commerce Partner Playbook"
+        },
+        {
+          "url": "https://openai.com/index/introducing-chatgpt-wallet",
+          "quote": "Build a plugin to let agents check availability, manage carts, or take other actions through your existing systems. Websites can also add WebMCP tools."
+        }
+      ],
+      "tags": [
+        "产品",
+        "Agent"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "llama.cpp reaches v1.0.0 and will flag API breaks with major versions",
+      "summary": "The llama.cpp and ggml libraries both move to v1.0.0, and from now on API and ABI incompatibilities will be signalled by major-version bumps; the project supports more than 150 architecture variants. The release removes the deprecated public API, promotes the NextN/speculative API to llama.h, adds OCP FP8 KV caches and a host-memory MoE expert cache, and gives llama-server a /v1/audio/speech endpoint plus SSRF and CORS hardening. Downstream integrations can now treat the major version as the signal for whether an upgrade needs code changes.",
       "sources": [
         {
           "candidate_id": "c_1c1521c176",
@@ -27,55 +59,32 @@
         {
           "candidate_id": "c_add97d367d",
           "url": "https://github.com/ggml-org/llama.cpp/releases/tag/v1.0.0"
+        },
+        {
+          "candidate_id": "c_7eaa0683cd",
+          "url": "https://v.redd.it/ulqil3yfud1i1"
         }
       ],
       "evidence": [
         {
           "url": "https://huggingface.co/blog/ggml-org/llama-cpp-v1",
-          "quote": "llama.cpp v1.0.0 : A stronger foundation for the local AI ecosystem"
-        },
-        {
-          "url": "https://huggingface.co/blog/ggml-org/llama-cpp-v1",
-          "quote": "Today we release libraries v1.0.0 , highlighting our responsibility to those developers."
-        },
-        {
-          "url": "https://huggingface.co/blog/ggml-org/llama-cpp-v1",
-          "quote": "Moving forward, both llama.cpp and ggml will reflect API and ABI incompatibilities with major-version bumps."
-        },
-        {
-          "url": "https://huggingface.co/blog/ggml-org/llama-cpp-v1",
-          "quote": "As adoption grows, we will be stricter about making those boundaries visible to downstream consumers."
-        },
-        {
-          "url": "https://huggingface.co/blog/ggml-org/llama-cpp-v1",
-          "quote": "The following rules apply to all ggml-org projects using semantic versioning :"
-        },
-        {
-          "url": "https://huggingface.co/blog/ggml-org/llama-cpp-v1",
-          "quote": "Breaking change to the public C API in ./include"
-        },
-        {
-          "url": "https://huggingface.co/blog/ggml-org/llama-cpp-v1",
-          "quote": "Backward-compatible feature, backend updates, model support, or API addition"
-        },
-        {
-          "url": "https://huggingface.co/blog/ggml-org/llama-cpp-v1",
-          "quote": "Bug fix with no API change"
+          "quote": "Today we release libraries v1.0.0 , highlighting our responsibility to those developers. Moving forward, both llama.cpp and ggml will reflect API and ABI incompatibilities with major-version bumps."
         },
         {
           "url": "https://huggingface.co/blog/ggml-org/llama-cpp-v1",
           "quote": "Currently, llama.cpp supports more than 150 architecture variants as well as all mainstream speculative decoding methods."
         }
+      ],
+      "tags": [
+        "开源",
+        "推理",
+        "工具"
       ]
     },
     {
       "section": "headline",
-      "title": "DeepSeek exposes the full DeepSeek App through its API",
-      "summary": "The capabilities behind the DeepSeek App, including search, files, links, safety, and voice, are now available through the DeepSeek API, either as built-in features or standalone APIs such as OCR, ASR, and TTS. V4.1-Flash (deepseek-flash) supports these capabilities across Messages, Responses, and Chat Completions, with tool calls and context assembly handled server-side. Extended capabilities incur tool usage fees in addition to standard token charges.",
-      "tags": [
-        "产品",
-        "工具"
-      ],
+      "title": "DeepSeek brings its app's search, file and voice features to the API",
+      "summary": "The capabilities behind the DeepSeek App are now in the API: V4.1-Flash (deepseek-flash) supports web search, URL reading, file input and safety checks across the Messages, Responses and Chat Completions interfaces, with tool calls and context assembly handled server-side. Search, Fetch, OCR, ASR and TTS are also available as standalone APIs, extended capabilities carry tool usage fees on top of token charges, and public-facing apps must enable safety checks. Apps that need search or document Q&A can skip building their own tool layer.",
       "sources": [
         {
           "candidate_id": "c_c7ec05b559",
@@ -85,43 +94,19 @@
       "evidence": [
         {
           "url": "https://api-docs.deepseek.com/news/news261113",
-          "quote": "DeepSeek Full-Suite App API Release 2026/11/13 On this page Copy Markdown Copy Markdown Open Markdown The full DeepSeek App experience, now via API"
+          "quote": "The capabilities behind the DeepSeek App are now available through the DeepSeek API. Enable built-in features with a few parameters, or call standalone APIs such as OCR, ASR, and TTS."
         },
         {
           "url": "https://api-docs.deepseek.com/news/news261113",
-          "quote": "Search, files, links, safety, and voice."
+          "quote": "V4.1-Flash ( deepseek-flash ) now supports these capabilities across Messages , Responses , and Chat Completions , with tool calls and context assembly handled server-side"
         },
         {
           "url": "https://api-docs.deepseek.com/news/news261113",
-          "quote": "The capabilities behind the DeepSeek App are now available through the DeepSeek API."
+          "quote": "File Input: Parse PDFs, Office files, images, and more into conversation context."
         },
         {
           "url": "https://api-docs.deepseek.com/news/news261113",
-          "quote": "Enable built-in features with a few parameters, or call standalone APIs such as OCR, ASR, and TTS."
-        },
-        {
-          "url": "https://api-docs.deepseek.com/news/news261113",
-          "quote": "V4.1-Flash ( deepseek-flash ) now supports these capabilities across Messages , Responses , and Chat Completions , with tool calls and context assembly handled server-side:"
-        },
-        {
-          "url": "https://api-docs.deepseek.com/news/news261113",
-          "quote": "🔹 Web Search: Search the web or images with citations in non-thinking mode."
-        },
-        {
-          "url": "https://api-docs.deepseek.com/news/news261113",
-          "quote": "🔹 Deep Thinking Search: Search and read pages throughout multi-step reasoning."
-        },
-        {
-          "url": "https://api-docs.deepseek.com/news/news261113",
-          "quote": "🔹 File Input: Parse PDFs, Office files, images, and more into conversation context."
-        },
-        {
-          "url": "https://api-docs.deepseek.com/news/news261113",
-          "quote": "🔹 URL Reading: Automatically fetch links in user messages to inform answers."
-        },
-        {
-          "url": "https://api-docs.deepseek.com/news/news261113",
-          "quote": "🔹 Safety Checks: Screen inputs and outputs, returning refusal indicators when risks are detected."
+          "quote": "Public-facing apps must enable safety checks."
         },
         {
           "url": "https://api-docs.deepseek.com/news/news261113",
@@ -131,516 +116,83 @@
           "url": "https://api-docs.deepseek.com/news/news261113",
           "quote": "Extended capabilities incur tool usage fees in addition to standard token charges."
         }
+      ],
+      "tags": [
+        "产品",
+        "Agent"
       ]
     },
     {
       "section": "headline",
-      "title": "Perplexity releases Decider v1.3 (26B) and Decider Flash v1.3 (5B)",
-      "summary": "Perplexity released two open-weight classification models under Apache 2.0: pplx-decider-v1.3, fine-tuned from Qwen3.8-27B, and pplx-decider-flash-v1.3, distilled from the 27B using a KL objective. Both support text and images, and v1.3 adds a locate type that extracts verbatim spans with character offsets and confidence scores for NER, PII detection, and extractive QA. The 26B model needs about 49 GiB of BF16 weights plus working memory and a CUDA GPU, and training used sequences up to 30,720 tokens.",
+      "title": "Claude Code projects now run parallel threads under a coordinator",
+      "summary": "In a redesigned Claude Code project you describe what needs to get done and Claude manages the work: a coordinator directs threads, each a Claude Code cloud session on its own branch and copy of the repo, sharing one memory, with overlapping edits resolved as ordinary merge conflicts. Updated projects are in beta for select Pro and Max subscribers; parallel threads reach usage limits faster, so you can pick the model and effort level for the coordinator and the workers separately. Multi-repo chores like migrations can be handed over as a single task.",
+      "sources": [
+        {
+          "candidate_id": "c_d03ffa90a0",
+          "url": "https://claude.com/resources/articles/projects-redesigned"
+        },
+        {
+          "candidate_id": "c_d03ffa90a0",
+          "url": "https://news.ycombinator.com/item?id=50492141"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://claude.com/resources/articles/projects-redesigned",
+          "quote": "Now in a Claude Code project, you describe what needs to get done and Claude manages the work."
+        },
+        {
+          "url": "https://claude.com/resources/articles/projects-redesigned",
+          "quote": "each thread is a Claude Code cloud session working on its own branch and copy of the repo. The coordinator keeps work organized, but if any threads work on the same code, the overlap is resolved as a merge conflict just like any other PR."
+        },
+        {
+          "url": "https://claude.com/resources/articles/projects-redesigned",
+          "quote": "Every thread now adds to and draws from a shared memory, reducing the need for complex prompt engineering."
+        },
+        {
+          "url": "https://claude.com/resources/articles/projects-redesigned",
+          "quote": "Because of this, projects can reach usage limits faster. You can check project specific usage and select the model and effort levels used by the coordinator chat as well as the worker threads."
+        },
+        {
+          "url": "https://claude.com/resources/articles/projects-redesigned",
+          "quote": "Starting today, updated projects are available in beta to select Claude Pro and Max subscribers who use cloud sessions in Claude Code"
+        }
+      ],
+      "tags": [
+        "Agent",
+        "代码",
+        "产品"
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Perplexity releases Decider v1.3 and Decider Flash v1.3 decision models",
+      "summary": "These are general-purpose classifiers built from generative LLM backbones: give them a state and one or more questions and they return a probability distribution over the answer options instead of generating text. pplx-decider-v1.3 is fine-tuned from Qwen3.8-27B and pplx-decider-flash-v1.3 is a Qwen3.5-4B distilled from it; both are Apache 2.0, take text and images, and add a locate type that extracts verbatim spans with character offsets. For closed-form tasks such as NER or PII detection, they can replace prompting a general LLM for labels.",
+      "sources": [
+        {
+          "url": "https://huggingface.co/perplexity-ai/pplx-decider-v1.3",
+          "title": "Hugging Face: perplexity-ai/pplx-decider-v1.3"
+        },
+        {
+          "candidate_id": "c_2a3eebbe22",
+          "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xv7fku/perplexity_releases_decider_v13_26b_and_decider/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/perplexity-ai/pplx-decider-v1.3",
+          "quote": "pplx-decider-v1.3 is the next version of pplx-decider-v1.2 , a multimodal classification model on Qwen3.8-27B. It comes with improved performance and robustness across decision tasks, and a new extraction capability: Locate , which extracts verbatim text spans from the state with character offsets"
+        }
+      ],
       "tags": [
         "模型",
         "开源"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_2a3eebbe22",
-          "url": "https://huggingface.co/perplexity-ai/pplx-decider-v1.3"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/perplexity-ai/pplx-decider-v1.3",
-          "quote": "perplexity-ai / pplx-decider-v1.3 Like 22 Follow Perplexity 3.12k Text Classification PyTorch Safetensors qwen3_5 classification multimodal custom-code decider License: apache-2.0 Model card Files Files and versions xet Community 1 Copy to bucket pplx-decider-v1.3 Usage Request schema Several questi"
-        },
-        {
-          "url": "https://huggingface.co/perplexity-ai/pplx-decider-v1.3",
-          "quote": "pplx-decider-v1.3 is the next version of pplx-decider-v1.2 , a multimodal classification model on Qwen3.8-27B."
-        },
-        {
-          "url": "https://huggingface.co/perplexity-ai/pplx-decider-v1.3",
-          "quote": "It comes with improved performance and robustness across decision tasks, and a new extraction capability: Locate ,"
-        },
-        {
-          "url": "https://huggingface.co/perplexity-ai/pplx-decider-v1.3",
-          "quote": "which extracts verbatim text spans from the state with character offsets and confidence scores."
-        },
-        {
-          "url": "https://huggingface.co/perplexity-ai/pplx-decider-v1.3",
-          "quote": "Requirements: Python 3.12+ and a CUDA GPU with room for about 49 GiB of BF16 weights plus working memory."
-        },
-        {
-          "url": "https://huggingface.co/perplexity-ai/pplx-decider-v1.3",
-          "quote": "{option_name: description or None} , 1 to 255 options"
-        },
-        {
-          "url": "https://huggingface.co/perplexity-ai/pplx-decider-v1.3",
-          "quote": "spans : start , end , text , score"
-        },
-        {
-          "url": "https://huggingface.co/perplexity-ai/pplx-decider-v1.3",
-          "quote": "Locate: verbatim span extraction"
-        },
-        {
-          "url": "https://huggingface.co/perplexity-ai/pplx-decider-v1.3",
-          "quote": "Locate requires a nonempty text state , no images and at most 128 questions per request."
-        },
-        {
-          "url": "https://huggingface.co/perplexity-ai/pplx-decider-v1.3",
-          "quote": "Each span has character offsets start and end (exclusive), its text , and a score ;"
-        },
-        {
-          "url": "https://huggingface.co/perplexity-ai/pplx-decider-v1.3",
-          "quote": "Length: training used sequences up to 30,720 tokens."
-        }
-      ]
-    },
-    {
-      "section": "model",
-      "title": "Claude Blog explains the primitives of always-on agents",
-      "summary": "The guide describes always-on agents as stateful and proactive systems that manage context across sessions and act without direct supervision. It breaks the surrounding architecture into five core primitives: an event inbox, timers, memory, permissions, and an outbox. On one long-horizon coding benchmark, Opus 5.5 cost 78% less per solved task than Opus 5, compared with 40% less on typical workloads.",
-      "tags": [
-        "Agent"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_9da1c46946",
-          "url": "https://claude.com/resources/articles/building-always-on-agents"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://claude.com/resources/articles/building-always-on-agents",
-          "quote": "Building always-on agents Always-on agents run indefinitely, deciding how and when to act across many sessions."
-        },
-        {
-          "url": "https://claude.com/resources/articles/building-always-on-agents",
-          "quote": "This guide walks through their core primitives and how they fit together."
-        },
-        {
-          "url": "https://claude.com/resources/articles/building-always-on-agents",
-          "quote": "Always-on agents are stateful and proactive, meaning they manage context across sessions and take actions without direct supervision."
-        },
-        {
-          "url": "https://claude.com/resources/articles/building-always-on-agents",
-          "quote": "The difference is the surrounding architecture, which is built from primitives that control when the agents wake up, what carries over between runs, and how their work reaches the user."
-        },
-        {
-          "url": "https://claude.com/resources/articles/building-always-on-agents",
-          "quote": "For example, on one long-horizon coding benchmark , Opus 5.5 cost 78% less per solved task than Opus 5, compared with 40% less on typical workloads."
-        },
-        {
-          "url": "https://claude.com/resources/articles/building-always-on-agents",
-          "quote": "The core primitives The surrounding architecture of an always-on agent has five core primitives: an event inbox, timers, memory, permissions, and an outbox."
-        },
-        {
-          "url": "https://claude.com/resources/articles/building-always-on-agents",
-          "quote": "The inbox should be the source of truth ."
-        },
-        {
-          "url": "https://claude.com/resources/articles/building-always-on-agents",
-          "quote": "An inbox should only have one active worker at a time ."
-        },
-        {
-          "url": "https://claude.com/resources/articles/building-always-on-agents",
-          "quote": "As a rule of thumb, memory should only hold what the agent can’t look up again."
-        }
-      ]
-    },
-    {
-      "section": "model",
-      "title": "Transformers v5.23.0 adds Inkling 2 Small and new model support",
-      "summary": "Release v5.23.0 adds Inkling 2 Small, a multimodal model from Thinking Machines Lab that accepts text and image inputs and generates text outputs. Its language backbone has 48 mixture-of-experts decoder layers, routing tokens to 8 of 384 experts for 594B total and 17B active parameters. The release also adds the experimental JEV decision head and model support for LFM3, Dots 3, IQuest-Coder-V1, and InternLM3.",
-      "tags": [
-        "工具",
-        "模型"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_9b62cc4a39",
-          "url": "https://github.com/huggingface/transformers/releases/tag/v5.23.0"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://github.com/huggingface/transformers/releases/tag/v5.23.0",
-          "quote": "Release v5.23.0"
-        },
-        {
-          "url": "https://github.com/huggingface/transformers/releases/tag/v5.23.0",
-          "quote": "Inkling 2 Small is a multimodal model from Thinking Machines Lab that accepts text and image inputs and generates text outputs, and it is intended for use in English and other languages and across multiple coding languages."
-        },
-        {
-          "url": "https://github.com/huggingface/transformers/releases/tag/v5.23.0",
-          "quote": "Its language backbone has 48 mixture-of-experts decoder layers, each routing tokens to 8 of 384 experts, for 594B total and 17B active parameters."
-        },
-        {
-          "url": "https://github.com/huggingface/transformers/releases/tag/v5.23.0",
-          "quote": "LFM3 is the third generation of Liquid Foundation Models from Liquid AI."
-        },
-        {
-          "url": "https://github.com/huggingface/transformers/releases/tag/v5.23.0",
-          "quote": "Like LFM2, it is a hybrid architecture that combines gated short convolutions with grouped-query attention, with the attention layers split between full-attention and sliding-window layers."
-        },
-        {
-          "url": "https://github.com/huggingface/transformers/releases/tag/v5.23.0",
-          "quote": "Dots 3 Note Preview is a mixture-of-experts causal language model that accepts native text, image, video, and audio inputs."
-        },
-        {
-          "url": "https://github.com/huggingface/transformers/releases/tag/v5.23.0",
-          "quote": "IQuest-Coder-V1 is a family of code language models developed by IQuest Lab, available in 7B, 14B and 40B sizes with base, instruct and thinking variants."
-        },
-        {
-          "url": "https://github.com/huggingface/transformers/releases/tag/v5.23.0",
-          "quote": "InternLM3 is an 8B instruction-tuned language model developed by Shanghai AI Laboratory (checkpoint: internlm/internlm3-8b-instruct)."
-        },
-        {
-          "url": "https://github.com/huggingface/transformers/releases/tag/v5.23.0",
-          "quote": "Exporters: export, share and run any model on its backend ( #50029 , #50032 , #50309 , #50311 )"
-        },
-        {
-          "url": "https://github.com/huggingface/transformers/releases/tag/v5.23.0",
-          "quote": "Every export now returns an ExportedModel ."
-        },
-        {
-          "url": "https://github.com/huggingface/transformers/releases/tag/v5.23.0",
-          "quote": "You call it like the original model (same kwargs, same output class), push it to the Hub, and load it back on the backend's own runtime."
-        },
-        {
-          "url": "https://github.com/huggingface/transformers/releases/tag/v5.23.0",
-          "quote": "The same API covers Dynamo, ONNX Runtime, OpenVINO and ExecuTorch."
-        }
-      ]
-    },
-    {
-      "section": "model",
-      "title": "Cohere completes its AISLE acquisition and acquires cubic",
-      "summary": "Cohere completed the acquisition of AISLE, which builds autonomous systems for vulnerability discovery and remediation, and welcomed the team behind cubic, an AI-powered code review platform. With AISLE and cubic, Cohere has completed four strategic M&A transactions this year, following Aleph Alpha and Reliant AI. The cubic team will establish Cohere's secure coding vertical, with review agents built for enterprise environments including on-premises and air-gapped deployments.",
-      "tags": [
-        "行业",
-        "安全"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_7f666f1cd1",
-          "url": "https://cohere.com/blog/cohere-expands-its-sovereign-ai-platform-with-aisle-and-cubic"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://cohere.com/blog/cohere-expands-its-sovereign-ai-platform-with-aisle-and-cubic",
-          "quote": "Today, we're excited to share two important milestones in that journey."
-        },
-        {
-          "url": "https://cohere.com/blog/cohere-expands-its-sovereign-ai-platform-with-aisle-and-cubic",
-          "quote": "We're pleased to announce the completion of our acquisition of AISLE, the company building autonomous systems for vulnerability discovery and remediation."
-        },
-        {
-          "url": "https://cohere.com/blog/cohere-expands-its-sovereign-ai-platform-with-aisle-and-cubic",
-          "quote": "We're also welcoming the team behind cubic, one of the leading AI-powered code review platforms, to Cohere."
-        },
-        {
-          "url": "https://cohere.com/blog/cohere-expands-its-sovereign-ai-platform-with-aisle-and-cubic",
-          "quote": "With AISLE and cubic we’ve completed four strategic M&A transactions this year, following Aleph Alpha , Reliant AI to expand our capabilities across frontier AI, biopharma and healthcare, cybersecurity, and software development."
-        },
-        {
-          "url": "https://cohere.com/blog/cohere-expands-its-sovereign-ai-platform-with-aisle-and-cubic",
-          "quote": "AISLE’s co-founders are taking leadership roles spanning cybersecurity, corporate security, AI security research and frontier model development."
-        },
-        {
-          "url": "https://cohere.com/blog/cohere-expands-its-sovereign-ai-platform-with-aisle-and-cubic",
-          "quote": "Ondrej Vlcek will become Senior Vice President, Cohere Cyber, and lead the newly established cybersecurity business."
-        },
-        {
-          "url": "https://cohere.com/blog/cohere-expands-its-sovereign-ai-platform-with-aisle-and-cubic",
-          "quote": "Jaya Baloo will become Cohere’s Chief Information Security Officer, overseeing security across the company."
-        },
-        {
-          "url": "https://cohere.com/blog/cohere-expands-its-sovereign-ai-platform-with-aisle-and-cubic",
-          "quote": "Stanislav Fort will become Vice President, AI Security, joining Cohere’s core model research and training efforts while leading AI security research."
-        },
-        {
-          "url": "https://cohere.com/blog/cohere-expands-its-sovereign-ai-platform-with-aisle-and-cubic",
-          "quote": "The team has built an industry-leading AI-powered code review platform that helps engineering organizations review code, find bugs and vulnerabilities, understand complex codebases, and automatically remediate issues."
-        },
-        {
-          "url": "https://cohere.com/blog/cohere-expands-its-sovereign-ai-platform-with-aisle-and-cubic",
-          "quote": "Their review agents have consistently ranked among the strongest performers on code review benchmarks and were built for the environments many enterprise customers operate in, including on-premises and air-gapped deployments."
-        },
-        {
-          "url": "https://cohere.com/blog/cohere-expands-its-sovereign-ai-platform-with-aisle-and-cubic",
-          "quote": "They will establish Cohere's secure coding vertical, helping accelerate the integration of enterprise-grade coding capabilities into our platform while meeting the security, governance, and deployment requirements our customers demand."
-        }
-      ]
-    },
-    {
-      "section": "tool",
-      "title": "Tontaube V1.1 brings voice cloning and long-form TTS to local hardware",
-      "summary": "TontaubeV1.1 is a multilingual text-to-speech model by Craitech for expressive voice cloning, long-form speech, and low-latency streaming, with first-class support for English and German and additional support for Spanish, French, Italian, Dutch, and Portuguese. It clones a voice from 5–60 seconds of clean, single-speaker speech. The default backend runs the 4-bit model, loading in about 4 GiB of GPU memory and peaking at about 6.5 GiB, while the vLLM backend needs at least 24 GiB.",
-      "tags": [
-        "语音",
-        "开源"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_983ee12f62",
-          "url": "https://github.com/craitech/tontaube.git"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://github.com/craitech/tontaube.git",
-          "quote": "TontaubeV1.1 is a multilingual text-to-speech model by Craitech."
-        },
-        {
-          "url": "https://github.com/craitech/tontaube.git",
-          "quote": "for expressive voice cloning, long-form speech, and low-latency streaming, with"
-        },
-        {
-          "url": "https://github.com/craitech/tontaube.git",
-          "quote": "first-class support for English and German and additional support for Spanish,"
-        },
-        {
-          "url": "https://github.com/craitech/tontaube.git",
-          "quote": "French, Italian, Dutch, and Portuguese."
-        },
-        {
-          "url": "https://github.com/craitech/tontaube.git",
-          "quote": "This repository contains the inference server."
-        },
-        {
-          "url": "https://github.com/craitech/tontaube.git",
-          "quote": "By default it runs the 4-bit"
-        },
-        {
-          "url": "https://github.com/craitech/tontaube.git",
-          "quote": "model on small NVIDIA GPUs or on CPUs; a vLLM backend serves the full-precision"
-        },
-        {
-          "url": "https://github.com/craitech/tontaube.git",
-          "quote": "The model weights are distributed separately."
-        },
-        {
-          "url": "https://github.com/craitech/tontaube.git",
-          "quote": "5–60 seconds of clean, single-speaker speech; longer references generally give"
-        },
-        {
-          "url": "https://github.com/craitech/tontaube.git",
-          "quote": "stronger conditioning, up to the one-minute prompt cap."
-        },
-        {
-          "url": "https://github.com/craitech/tontaube.git",
-          "quote": "The default backend loads"
-        },
-        {
-          "url": "https://github.com/craitech/tontaube.git",
-          "quote": "in about 4 GiB of GPU memory and peaks at about 6.5 GiB."
-        },
-        {
-          "url": "https://github.com/craitech/tontaube.git",
-          "quote": "vLLM backend needs at least 24 GiB."
-        },
-        {
-          "url": "https://github.com/craitech/tontaube.git",
-          "quote": "release v1.1.0 ."
-        }
       ]
     },
     {
       "section": "paper",
-      "title": "SO-Arena benchmarks System One models across 11 domains",
-      "summary": "SO-Arena characterizes the capability spectrum and decision reliability of System One models across 11 domains and five capability families, combining evidence-grounded evaluation, domain-specific difficulty criteria, and interactive sandbox execution. Reliability is measured through decision stability under controlled option-set changes and missing-answer recognition. Evaluations across 21 models show that scaling and additional reasoning help unevenly, and the best-performing System One model ranks only seventh in reliability.",
-      "tags": [
-        "论文",
-        "评测"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_07479e65c6",
-          "url": "https://huggingface.co/papers/2611.15777"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2611.15777",
-          "quote": "We introduce SO-Arena , a benchmark characterizing the capability spectrum and decision reliability of System One models across 11 domains and five capability families."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.15777",
-          "quote": "For the capability spectrum , SO-Arena offers evidence-grounded evaluation through reliable sources and manual verification of reference labels against model-visible inputs ; fine-grained capability assessment through domain-specific difficulty criteria ; and realistic interactive evaluation , where"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.15777",
-          "quote": "models iteratively execute actions in sandboxes ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.15777",
-          "quote": "Beyond accuracy, SO-Arena assesses decision reliability through two complementary measures: decision stability under controlled option-set changes and missing-answer recognition when no valid option is available."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.15777",
-          "quote": "Evaluations across 21 models reveal that the benefits of scaling and additional reasoning vary substantially across domains."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.15777",
-          "quote": "More importantly, strong overall performance does not necessarily imply reliable decision-making: the best-performing System One model ranks only seventh in reliability."
-        }
-      ]
-    },
-    {
-      "section": "paper",
-      "title": "Duo v1 introduces a Reciprocal World Model for full-duplex interaction",
-      "summary": "The report introduces the Reciprocal World Model (RWM) and presents Duo v1, a full-duplex world model that continuously perceives audiovisual inputs while responding to users in real time. RWM pairs two capabilities, Intent and Realization, and Duo v1 adds autoregressive modeling for interaction reasoning, chunk-specific conditions and synchronized tokens on a unified timeline, and dual rollout distillation to mitigate distribution shift. Both modules perceive real-time audio, video, and text, enabling spontaneous conversations and interruptions.",
-      "tags": [
-        "论文",
-        "多模态"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_59a3d999fb",
-          "url": "https://huggingface.co/papers/2611.15131"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2611.15131",
-          "quote": "Generated by deepseek-ai/DeepSeek-V4.1-Flash In this report, we introduce the Reciprocal World Model (RWM) and present Duo v1 , a full-duplex world model that continuously perceives audiovisual inputs while responding to users in real time."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.15131",
-          "quote": "The RWM treats intelligence and physical reality as equally fundamental to what constitutes a world."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.15131",
-          "quote": "In RWM, we identify two equally fundamental capabilities: Intent , which provides the cognition underlying world interactions, and Realization , which generates coherent audio-visual behavior."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.15131",
-          "quote": "To realize this formulation, Duo v1 introduces three key technical designs: (1) Leveraging autoregressive modeling for continuous interaction reasoning and participation decisions , rather than restricting it to instruction understanding for diffusion models ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.15131",
-          "quote": "(2) Constructing chunk-specific conditions and synchronize tokens across Intent and Realization on a unified timeline ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.15131",
-          "quote": "(3) Mitigating distribution shift in both modules through dual rollout distillation , training on autoregressively generated Intent tokens and synthesized audiovisual histories from Realization ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.15131",
-          "quote": "Both modules continuously perceive real-time audio, video, and text, enabling full-duplex interaction with spontaneous conversations and interruptions."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.15131",
-          "quote": "View arXiv page View PDF Project page GitHub 27 Add to collection Community jaychempan Paper submitter 1 day ago arXiv: https://arxiv.org/abs/2611.15131 Homepage: https://duo-v1.github.io/ Github: https://github.com/inclusionAI/Duo Hugging Face Model: https://huggingface.co/collections/inclusionAI/d"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.15131",
-          "quote": "curl -LsSf https://hf.co/cli/install.sh | bash Models citing this paper 4 inclusionAI/Duo-1.0-distill Updated about 20 hours ago • 2 inclusionAI/Duo-1.0-distill-quant Updated about 20 hours ago • 2 inclusionAI/Duo-1.2-causal-base Updated about 20 hours ago • 1 inclusionAI/Duo-1.0-causal-base Updated"
-        }
-      ]
-    },
-    {
-      "section": "paper",
-      "title": "PhysLoop uses LLMs to improve video generation physical consistency",
-      "summary": "PhysLoop is a unified harness for physically grounded self-improvement in video generation models, guiding and constraining LLMs through generation, selection, and correction. The framework supports controllable training-data construction and inference-time video repair. The authors release 100K videos spanning diverse, realistic indoor and outdoor scenes, along with generation tools and two evaluation datasets: PhysLoop-Gen and PhysLoop-Repair, and they assess physical behavior on the external Physics-IQ Verified benchmark.",
-      "tags": [
-        "论文",
-        "视频"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_eb0a8524a4",
-          "url": "https://huggingface.co/papers/2611.16748"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2611.16748",
-          "quote": "We present PhysLoop , a unified harness designed to support physically grounded self-improvement in video generation models ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.16748",
-          "quote": "The harness guides and constrains LLMs throughout video generation, selection, and correction, distilling their physical knowledge into physically consistent videos."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.16748",
-          "quote": "The framework supports controllable training-data construction and inference-time video repair ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.16748",
-          "quote": "By identifying and correcting failures, PhysLoop marks a key milestone toward recursive self-improvement (RSI) in video generation models with limited human intervention."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.16748",
-          "quote": "We release 100K videos spanning diverse, realistic indoor and outdoor scenes, along with generation tools and two evaluation datasets: PhysLoop-Gen and PhysLoop-Repair ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.16748",
-          "quote": "We evaluate controllable generation and localized repair on these datasets, respectively, and assess physical behavior on the external Physics-IQ Verified benchmark ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.16748",
-          "quote": "Code release is pending company policy review."
-        }
-      ]
-    },
-    {
-      "section": "paper",
-      "title": "G-STAR compresses discrete autoregressive image tokens by 32× to 64×",
-      "summary": "G-STAR is a spatial--group co-scaling framework that enables 32× and even effective 64× compression while preserving reconstruction, understanding, and generation performance, supported by a semi-autoregressive decoder that combines parallel feature computation with lightweight causal modeling. The compressed models compete with leading models across five text-to-image benchmarks. At 1024×1024 resolution, the model delivers a 20× speedup over prior discrete autoregressive models, generating each image in 2.5 seconds on a single NVIDIA H200.",
-      "tags": [
-        "论文",
-        "图像"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_f6862927ae",
-          "url": "https://huggingface.co/papers/2611.13004"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2611.13004",
-          "quote": "Papers arxiv:2611.13004 Copy markdown G-STAR: Group-Scaled Token Capacity for Deeply Compressed Autoregressive Generation Published on Nov 8 · Submitted by Ye Huang on Nov 13 · LongCat Upvote 41 +33 Authors: Xu Huang , Ye Huang , Xiaotong Li , Zhengrong Yue , Jialv Zou , Minhao Jing , Haodong Li , W"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.13004",
-          "quote": "B u i l d i n g o n t h i s p r i n c i p l e , w e p r o p o s e G S T A R , a s p a t i a l - - g r o u p c o - s c a l i n g f r a m e w o r k t h a t e n a b l e s \\ ( 3 2 \\ t i m e s \\ ) a n d e v e n e f f e c t i v e \\ ( 6 4 \\ t i m e s \\ ) c o m p r e s s i o n w h i l e p r e s e r v i n g"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.13004",
-          "quote": "s t r o n g r e c o n s t r u c t i o n , u n d e r s t a n d i n g , a n d g e n e r a t i o n p e r f o r m a n c e ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.13004",
-          "quote": "e m i - a u t o r e g r e s s i v e d e c o d e r t h a t c o m b i n e s p a r a l l e l f e a t u r e c o m p u t a t i o n w i t h l i g h t w e i g h t c a u s a l m o d e l i n g ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.13004",
-          "quote": "W i t h t h e s e d e s i g n s , o u r h i g h l y c o m p r e s s e d m o d e l s p e r f o r m c o m p e t i t i v e l y w i t h l e a d i n g m o d e l s a c r o s s f i v e r e p r e s e n t a t i v e t e x t - t o - i m a g e b e n c h m a r k s ( G e n E v a l , D P G - B e n c h , P R I S M"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.13004",
-          "quote": ", L o n g T e x t - B e n c h , a n d Q w e n - I m a g e - B e n c h ) ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.13004",
-          "quote": "A t \\ ( 1 0 2 4 \\ t i m e s 1 0 2 4 \\ ) r e s o l u t i o n , o u r m o d e l d e l i v e r s a \\ ( 2 0 \\ t i m e s \\ ) s p e e d u p o v e r p r i o r d i s c r e t e a u t o r e g r e s s i v e m o d e l s , g e n e r a t i n g e a c h i m a g e i n 2 ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.13004",
-          "quote": "5 s e c o n d s o n a s i n g l e N V I D I A H 2 0 0 ."
-        }
-      ]
-    },
-    {
-      "section": "paper",
-      "title": "Decision models can teach well even when they act poorly",
-      "summary": "The study compares three decision models and three general LLMs as actors and judges on ALFWorld, and uses JEV as a teacher on ALFWorld and WebShop. As actors, all six models are pulled away from a required subgoal by an easier one, while as judges of full trajectories they credit steps toward that subgoal. As a teacher, JEV raises a Qwen2.5-1.5B policy over GRPO from 72.8% to 82.9% success on ALFWorld and from 56.8% to 71.4% on WebShop.",
-      "tags": [
-        "论文",
-        "Agent"
-      ],
+      "title": "A decision model that acts poorly can still teach RL policies well",
+      "summary": "The authors compare three decision models and three general LLMs as actors and judges on ALFWorld, then use JEV as a teacher giving step-level scores to GRPO. JEV raises a Qwen2.5-1.5B policy from 72.8% to 82.9% success on ALFWorld and from 56.8% to 71.4% on WebShop, which the authors attribute to judging an action after the episode, when its consequences are visible. When picking a reward model for agent training, how well it acts is not the right test.",
       "sources": [
         {
           "candidate_id": "c_23fa06e2ea",
@@ -650,103 +202,23 @@
       "evidence": [
         {
           "url": "https://huggingface.co/papers/2611.17167",
-          "quote": "Understanding Decision Models in Long-Horizon Agents Published on Nov 12 · Submitted by wangzixuan on Nov 13 · Zhejiang University Upvote 29 +21 Authors: Haochen Liu , Qianhao Zhu , Zixuan Wang , Dingming Li , Tongbo Chen , Peng Qiu , Yingqi Qu , Weiming Lu , Jun Xiao , Yongliang Shen Abstract A dec"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.17167",
           "quote": "We compare three decision models and three general LLMs as actors and judges on ALFWorld , and use JEV as a teacher on ALFWorld and WebShop ."
         },
         {
           "url": "https://huggingface.co/papers/2611.17167",
-          "quote": "As actors , all six models are pulled away from a subgoal that must come first by an easier one."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.17167",
-          "quote": "As judges that see the whole trajectory, the same models credit the steps toward that subgoal , and asking whether each action helped, rather than whether the task will succeed, separates useful from useless actions."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.17167",
-          "quote": "As a teacher, JEV raises a Qwen2.5-1.5B policy over GRPO from 72.8% to 82.9% success on ALFWorld and from 56.8% to 71.4% on WebShop ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.17167",
-          "quote": "These results suggest that a poor actor can still teach well, because judging an action after the episode ends reveals the consequences that acting must anticipate."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.17167",
-          "quote": "Code is available at https://github.com/ZJU-REAL/decision-agents."
-        }
-      ]
-    },
-    {
-      "section": "paper",
-      "title": "Open Vision Banana opens a recipe for generative visual perception",
-      "summary": "Open Vision Banana (OVB) is a fully open and reproducible recipe for converting pretrained generators into unified multi-task perception systems, covering color encoding, prompt design, parameter adaptation, and task balancing. Starting from 4B and 9B parameter open-weight base models with 2.1M-3.8M training pairs, OVB surpasses Vision Banana's reported Cityscapes zero-shot performance (73.9 vs. 69.9 mIoU). Its legend ensembling test-time scaling improves mIoU by up to 8.7 points on Cityscapes and 15.0 points on COCO-Object without retraining.",
-      "tags": [
-        "论文",
-        "多模态"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_fb20c3d982",
-          "url": "https://huggingface.co/papers/2611.15844"
+          "quote": "As a teacher, JEV raises a Qwen2.5-1.5B policy over GRPO from 72.8% to 82.9% success on ALFWorld and from 56.8% to 71.4% on WebShop . These results suggest that a poor actor can still teach well, because judging an action after the episode ends reveals the consequences that acting must anticipate."
         }
       ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2611.15844",
-          "quote": "Papers arxiv:2611.15844 Copy markdown Open Vision Banana: A Fully Open Recipe for Generative Visual Perception Published on Nov 11 · Submitted by Yuki Asano on Nov 13 · Fundamental AI Lab at UTN Upvote 31 +23 Authors: Arpit Jadon , Valentinos Pariza , Jona Ruthardt , Ryousuke Yamada , A."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.15844",
-          "quote": "W e p r e s e n t O p e n V i s i o n B a n a n a ( O V B ) , a f u l l y o p e n a n d r e p r o d u c i b l e r e c i p e f o r c o n v e r t i n g p r e t r a i n e d g e n e r a t o r s i n t o u n i f i e d m u l t i - t a s k p e r c e p t i o n s y s t e m s ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.15844",
-          "quote": "O u r a n a l y s e s i d e n t i f y t h e d e s i g n c h o i c e s t h a t m a t t e r m o s t f o r g e n e r a l i z a t i o n , i n c l u d i n g c o l o r e n c o d i n g , p r o m p t d e s i g n , p a r a m e t e r a d a p t a t i o n , a n d t a s k b a l a n c i n g ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.15844",
-          "quote": "S t a r t i n g f r o m 4 B a n d 9 B p a r a m e t e r o p e n - w e i g h t b a s e m o d e l s a n d u s i n g 2 ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.15844",
-          "quote": "8 M t r a i n i n g p a i r s f r o m p u b l i c d a t a s e t s , O V B s u r p a s s e s V i s i o n B a n a n a ' s r e p o r t e d C i t y s c a p e s z e r o - s h o t p e r f o r m a n c e ( 7 3 ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.15844",
-          "quote": "9 m I o U ) a n d r i v a l s s t a t e - o f - t h e - a r t a f f i n e - i n v a r i a n t d e p t h e s t i m a t o r s ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.15844",
-          "quote": "W i t h l e g e n d e n s e m b l i n g , w e i n t r o d u c e a t e s t - t i m e s c a l i n g m e t h o d f o r g e n e r a t o r - b a s e d p e r c e p t i o n ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.15844",
-          "quote": "I t s e g m e n t s a n i m a g e u n d e r s e v e r a l c l a s s - c o l o r l e g e n d s a n d f u s e s t h e r e s u l t s b y m a j o r i t y v o t e , c o r r e c t i n g u n s t a b l e c o l o r - c l a s s b i n d i n g s a n d i m p r o v i n g m I o U b y u p t o 8 ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.15844",
-          "quote": "7 p o i n t s o n C i t y s c a p e s a n d 1 5 ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.15844",
-          "quote": "0 p o i n t s o n C O C O - O b j e c t w i t h o u t r e t r a i n i n g ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.15844",
-          "quote": "W e r e l e a s e t h e d a t a s e t c o n s t r u c t i o n a n d p r o c e s s i n g p i p e l i n e , t h e t r a i n i n g a n d e v a l u a t i o n c o d e , a s w e l l a s t h e f i n a l , i n t e r m e d i a t e , a n d a b l a t i o n c h e c k p o i n t s ."
-        }
-      ]
-    },
-    {
-      "section": "paper",
-      "title": "SimpleHC simplifies Hyper-Connections with shared memory access",
-      "summary": "A systematic study of Hyper-Connections architectures finds that learned read/write gating without mixing and unconstrained mixing with fixed gates each achieve performance comparable to mHC, and that repeated access to the expanded residual state is a major source of training overhead. The resulting SimpleHC removes residual mixing and uses shared memory access, incurring only 2.4% extra end-to-end training time over a vanilla residual baseline at the largest tested scale. It maintains performance comparable to mHC when scaling from 15B to 30B MoE models.",
       "tags": [
         "论文",
+        "Agent",
         "训练"
-      ],
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "SimpleHC: Hyper-Connections with 2.4% extra training time",
+      "summary": "A systematic study of Hyper-Connections finds that learned read/write gating without mixing performs comparably to mHC, leading to SimpleHC, which removes residual mixing and uses shared memory access to cut repeated reads of the expanded residual state. At the largest tested scale it adds only 2.4% end-to-end training time over a vanilla residual baseline, matches mHC from 15B to 30B MoE models, and shows smoother gradient dynamics. Teams considering HC can start from this cheaper variant.",
       "sources": [
         {
           "candidate_id": "c_0e6e1cee78",
@@ -756,104 +228,292 @@
       "evidence": [
         {
           "url": "https://huggingface.co/papers/2611.05984",
-          "quote": "ng , Yizhou Chen , Yuliang Liu , Yu Cheng , Junchi Yan Abstract A systematic study of Hyper-Connections architectures identifies the simpler efficient design SimpleHC, which removes residual mixing and uses shared memory access to match mHC performance while adding minimal training overhead and impr"
+          "quote": "These findings lead to SimpleHC , which simplifies the architecture by removing residual mixing and simplifies execution through shared memory access"
         },
         {
           "url": "https://huggingface.co/papers/2611.05984",
-          "quote": "Generated by deepseek-ai/DeepSeek-V4.1-Flash Hyper-Connections (HC) architectures are increasingly adopted in frontier language models , yet their components remain insufficiently understood and introduce non-negligible training overhead."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.05984",
-          "quote": "We find that learned read/write gating without mixing and unconstrained mixing with fixed gates form two effective interaction groups: either alone achieves performance comparable to mHC ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.05984",
-          "quote": "We also identify repeated access to the expanded residual state as a major source of training overhead, even without mixing."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.05984",
-          "quote": "These findings lead to SimpleHC , which simplifies the architecture by removing residual mixing and simplifies execution through shared memory access , using the resulting additive structure and shared gate inputs ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.05984",
-          "quote": "SimpleHC incurs only 2.4% extra end-to-end training time over a vanilla residual baseline at the largest tested scale."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.05984",
-          "quote": "It maintains performance comparable to mHC when scaling from 15B to 30B MoE models , exhibits smoother gradient dynamics during standard training, and remains stable under stress."
+          "quote": "SimpleHC incurs only 2.4% extra end-to-end training time over a vanilla residual baseline at the largest tested scale. It maintains performance comparable to mHC when scaling from 15B to 30B MoE models , exhibits smoother gradient dynamics during standard training, and remains stable under stress."
         }
+      ],
+      "tags": [
+        "论文",
+        "训练"
       ]
     },
     {
       "section": "paper",
-      "title": "Controlled experiments favor dedicated vision capacity for multimodal models",
-      "summary": "The paper disentangles a visual prior, dedicated vision capacity, and pre-fusion placement through a controlled framework that pretrains all models from scratch on common data and compares them at matched lifetime compute. The visual prior is not necessary, since an encoder trained jointly from scratch is on par with a pretrained one, but dedicated vision capacity matters, as an encoder-free model trails on visual understanding. Vision-only modules added in-fusion to early backbone layers perform comparably to a pre-fusion encoder and can lower time to first token.",
-      "tags": [
-        "论文",
-        "多模态"
-      ],
+      "title": "SO-Arena benchmarks capability and reliability of System One models",
+      "summary": "SO-Arena covers 11 domains and five capability families, and beyond accuracy it measures decision stability under option-set changes and whether a model recognizes when no valid option exists. Across 21 models, the gains from scaling and extra reasoning vary widely by domain, and the best-performing System One model ranks only seventh in reliability. When choosing a decision model, check stability separately from the headline score.",
       "sources": [
         {
-          "candidate_id": "c_0c774f26b2",
-          "url": "https://huggingface.co/papers/2611.17334"
+          "candidate_id": "c_07479e65c6",
+          "url": "https://huggingface.co/papers/2611.15777"
         }
       ],
       "evidence": [
         {
-          "url": "https://huggingface.co/papers/2611.17334",
-          "quote": ", Jakob Verbeek , Saining Xie , Hu Xu Abstract Controlled experiments show that multimodal language models do not need a pretrained vision encoder, but benefit from dedicated vision capacity trained jointly with the backbone and integrated early rather than before fusion."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.17334",
-          "quote": "Vision encoder s bundle together three design choices: a visual prior from upstream pretraining , dedicated vision capacity , and pre-fusion placement of that capacity (i.e., before the multimodal backbone )."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.17334",
-          "quote": "We disentangle these choices via a controlled framework where we pretrain all models from scratch on common data and compare them on visual question answering and language benchmarks at matched lifetime compute ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.17334",
-          "quote": "We find that the visual prior is not necessary; an encoder trained jointly from scratch is on par with a pretrained one, without a separate training stage."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.17334",
-          "quote": "What matters instead is dedicated vision capacity : an encoder-free model trails on visual understanding even when its backbone is enlarged by the encoder's parameter count."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.17334",
-          "quote": "Yet that capacity need not precede multimodal fusion , as vision-only modules added in-fusion to early backbone layers perform comparably to a pre-fusion encoder and can lower time to first token ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.17334",
-          "quote": "Overall, our findings favor dedicated vision capacity trained jointly with the backbone and placed early within it."
+          "url": "https://huggingface.co/papers/2611.15777",
+          "quote": "SO-Arena evaluates System One models across domains and capability families, revealing that scaling and reasoning gains vary and that high overall accuracy does not ensure reliable decision-making."
         }
+      ],
+      "tags": [
+        "论文",
+        "Agent"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Open Vision Banana: an open recipe for turning image generators into perception models",
+      "summary": "Vision Banana frames vision tasks as conditional image editing but its data, weights and code are not public; OVB is a fully open, reproducible recipe starting from 4B and 9B open-weight base models and 2.1M-3.8M training pairs from public datasets. It surpasses Vision Banana's reported Cityscapes zero-shot result (73.9 vs. 69.9 mIoU) while largely keeping the base model's image-editing abilities. Researchers exploring generator-based perception now have a public starting point.",
+      "sources": [
+        {
+          "candidate_id": "c_fb20c3d982",
+          "url": "https://huggingface.co/papers/2611.15844"
+        }
+      ],
+      "evidence": [],
+      "tags": [
+        "论文",
+        "图像",
+        "多模态"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Alibaba open-sources Open Code Review, an AI code review CLI",
+      "summary": "Open Code Review started as Alibaba Group's internal AI code review assistant; it combines deterministic pipelines with an LLM agent for line-level comments, ships a multi-language ruleset (NPE, thread-safety, XSS, SQL injection), is OpenAI and Anthropic compatible, and is Apache-2.0 licensed. The project reports significantly higher Precision and F1 than Claude Code on the same underlying model with ~1/9 of the tokens, at the cost of lower Recall. Teams wanting a low-noise reviewer in CI can install it with npm and try it.",
+      "sources": [
+        {
+          "candidate_id": "c_769164b4a1",
+          "url": "https://github.com/alibaba/open-code-review"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/alibaba/open-code-review",
+          "quote": "Open Code Review is an AI-powered code review CLI tool. It originated as Alibaba Group's internal official AI code review assistant"
+        },
+        {
+          "url": "https://github.com/alibaba/open-code-review",
+          "quote": "Compared to general-purpose agents (Claude Code), Open Code Review achieves significantly higher Precision and F1 with the same underlying model, while consuming only ~1/9 of the tokens and completing reviews faster. Note that its Recall is lower than general-purpose agents"
+        },
+        {
+          "url": "https://github.com/alibaba/open-code-review",
+          "quote": "License Apache-2.0 — Copyright 2026 Alibaba"
+        },
+        {
+          "url": "https://github.com/alibaba/open-code-review",
+          "quote": "npm install -g @alibaba-group/open-code-review"
+        }
+      ],
+      "tags": [
+        "开源",
+        "代码",
+        "工具"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Google opens Antigravity's /teamwork multi-agent feature to developers",
+      "summary": "/teamwork pairs parallel exploration with dedicated falsifiers such as the Lean 4 proof checker and unmodified test suites to verify which candidate solutions work; Google used it to rewrite the libgav1 AV1 decoder in Rust and make the port 20-30% faster than the original C++. External scientists and developers can use Gemini 4 models with /teamwork and /boost in Antigravity today, and Google opened applications giving 10,000 academic researchers six months of free access to its highest usage tier.",
+      "sources": [
+        {
+          "candidate_id": "c_976c01153e",
+          "url": "https://research.google/blog/advancing-science-engineering-with-antigravitys-teamwork-feature/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://research.google/blog/advancing-science-engineering-with-antigravitys-teamwork-feature/",
+          "quote": "The system bridges this gap by pairing parallel exploration with dedicated falsifiers (e.g., the Lean 4 proof checker, unmodified software test suites, execution simulators, web search, or hardware counters) to automatically verify which candidate solutions work."
+        },
+        {
+          "url": "https://research.google/blog/advancing-science-engineering-with-antigravitys-teamwork-feature/",
+          "quote": "/teamwork also rewrote libgav1 , Google's AV1 video decoder, from C++ into around 170k lines Rust"
+        },
+        {
+          "url": "https://research.google/blog/advancing-science-engineering-with-antigravitys-teamwork-feature/",
+          "quote": "the Rust port became 20-30% faster than the original C++ and hand-optimized assembly code on both x86_64 and ARM."
+        },
+        {
+          "url": "https://research.google/blog/advancing-science-engineering-with-antigravitys-teamwork-feature/",
+          "quote": "External scientists and developers can use Gemini 4 models with /teamwork and /boost in Antigravity and Deep Review today. We have also opened applications giving 10,000 academic researchers six months of free access to our highest usage tier."
+        }
+      ],
+      "tags": [
+        "Agent",
+        "工具",
+        "代码"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Transformers v5.23.0 adds Inkling 2 Small and the JEV decision head",
+      "summary": "The release adds Thinking Machines Lab's Inkling 2 Small, a multimodal model taking text and image inputs whose language backbone has 48 mixture-of-experts decoder layers, for 594B total and 17B active parameters. It also adds JEV, an experimental decision head and decision pipeline; the same head reads the 255 answer codes of pplx-decider and d3. Teams already on Transformers can try both kinds of model without extra code.",
+      "sources": [
+        {
+          "candidate_id": "c_9b62cc4a39",
+          "url": "https://github.com/huggingface/transformers/releases/tag/v5.23.0"
+        }
+      ],
+      "evidence": [],
+      "tags": [
+        "开源",
+        "模型",
+        "工具"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Modern Web Guidance steers coding agents toward current web practices",
+      "summary": "Modern Web Guidance is a set of skills that puts web platform expertise, best practices and browser compatibility data into coding agents to steer them away from legacy patterns; it is stewarded by the Google Chrome, Microsoft Edge, Mozilla Firefox and MDN teams. Install it with npx modern-web-guidance@latest install, or try search and retrieve without installing and run legacy-scan to find outdated patterns in a codebase.",
+      "sources": [
+        {
+          "candidate_id": "c_3cb99331b7",
+          "url": "https://github.com/GoogleChrome/modern-web-guidance-src"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/GoogleChrome/modern-web-guidance-src",
+          "quote": "Modern Web Guidance is a set of skills that embed web platform expertise, best practices, and browser compatibility data directly into your coding agents. It helps to steer your coding agents away from legacy patterns"
+        },
+        {
+          "url": "https://github.com/GoogleChrome/modern-web-guidance-src",
+          "quote": "Stewarded by the Google Chrome, Microsoft Edge, Mozilla Firefox, and MDN teams, alongside the web development community."
+        },
+        {
+          "url": "https://github.com/GoogleChrome/modern-web-guidance-src",
+          "quote": "npx modern-web-guidance@latest install This command runs an interactive wizard to install Modern Web Guidance."
+        },
+        {
+          "url": "https://github.com/GoogleChrome/modern-web-guidance-src",
+          "quote": "npx modern-web-guidance@latest legacy-scan"
+        }
+      ],
+      "tags": [
+        "工具",
+        "代码",
+        "Agent"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "Anthropic shares how to build safety evals: validate graders against humans",
+      "summary": "Anthropic's top three recommendations: write down the construct before collecting data, validate your grader against human judgment, and report uncertainty, with 100 items as the floor for a complex multi-turn eval.",
+      "sources": [
+        {
+          "candidate_id": "c_bb5dd27fe8",
+          "url": "https://www.anthropic.com/research/building-strong-safety-evaluations"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://www.anthropic.com/research/building-strong-safety-evaluations",
+          "quote": "write down the construct you want to measure before collecting data, validate your grader against human judgment before trusting any number it produces, and report uncertainty so readers can tell signal from noise."
+        },
+        {
+          "url": "https://www.anthropic.com/research/building-strong-safety-evaluations",
+          "quote": "We treat 100 items as the floor for a complex, multi-turn eval and 1,000 as the floor for a simpler, single-turn one."
+        }
+      ],
+      "tags": [
+        "安全"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "XYBench tests whether models spot the misconception behind a question",
+      "summary": "Built from 8,115 programming and everyday questions, XYBench finds every model more likely to solve the stated request than the user's underlying goal.",
+      "sources": [
+        {
+          "candidate_id": "c_89f29999c7",
+          "url": "https://huggingface.co/blog/allenai/xybench"
+        },
+        {
+          "candidate_id": "c_336257e4c4",
+          "url": "https://allenai.org/blog/xybench"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/blog/allenai/xybench",
+          "quote": "Drawing on 8,115 real-world questions spanning programming and everyday activities such as cooking and home repair, we introduce a benchmark that measures whether models identify these misconceptions"
+        },
+        {
+          "url": "https://huggingface.co/blog/allenai/xybench",
+          "quote": "Across all four sources, every model was more likely to include a solution to the stated request (Y) than to the underlying goal (X)."
+        }
+      ],
+      "tags": [
+        "论文"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "Brave Search API accepts per-request agent payments via x402",
+      "summary": "No account needed: an unpaid request gets an HTTP 402 with the price, the agent signs a USDC payment on Base and retries, and LLM Context and web search cost $0.005 per request.",
+      "sources": [
+        {
+          "candidate_id": "c_15e07be6bd",
+          "url": "https://brave.com/blog/search-api-agentic-payments/"
+        },
+        {
+          "candidate_id": "c_15e07be6bd",
+          "url": "https://news.ycombinator.com/item?id=50477649"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://brave.com/blog/search-api-agentic-payments/",
+          "quote": "A request sent without payment receives an HTTP 402 Payment Required response that states the price of that search and the payment details needed to pay it. The agent signs a USDC payment for that amount and retries the request with the signed payment attached."
+        },
+        {
+          "url": "https://brave.com/blog/search-api-agentic-payments/",
+          "quote": "Brave runs its own facilitator accepting USDC on the Base blockchain"
+        },
+        {
+          "url": "https://brave.com/blog/search-api-agentic-payments/",
+          "quote": "LLM Context, an API designed specifically for providing search context for agents, will cost $0.005 ($5 per 1,000). Additionally, web (search for humans), news, image, video, and local endpoints will also be available for $0.005 ($5 per 1,000)."
+        },
+        {
+          "url": "https://brave.com/blog/search-api-agentic-payments/",
+          "quote": "Since each request carries its own payment, a Brave Search API account is no longer needed to use the service."
+        }
+      ],
+      "tags": [
+        "Agent",
+        "工具"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "langchain-openai 1.8.0 adds OpenAIClassifier and drops Python 3.10",
+      "summary": "The release adds OpenAIClassifier for the GA Decisions API and raises the minimums to Python 3.11 and langchain-core 1.8.0; Python 3.10 users stay on 1.7.x.",
+      "sources": [
+        {
+          "candidate_id": "c_87041a090c",
+          "url": "https://github.com/langchain-ai/langchain/releases/tag/langchain-openai%3D%3D1.8.0"
+        }
+      ],
+      "evidence": [],
+      "tags": [
+        "工具"
       ]
     }
   ],
   "research": [
     {
       "via": "webfetch",
+      "url": "https://openai.com/index/introducing-chatgpt-wallet/"
+    },
+    {
+      "via": "webfetch",
       "url": "https://huggingface.co/blog/ggml-org/llama-cpp-v1"
     },
     {
       "via": "webfetch",
-      "url": "https://github.com/huggingface/transformers/releases/tag/v5.23.0"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://openai.com/index/introducing-chatgpt-wallet"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://claude.com/resources/articles/building-always-on-agents"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/perplexity-ai/pplx-decider-v1.3"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://cohere.com/blog/cohere-expands-its-sovereign-ai-platform-with-aisle-and-cubic"
+      "url": "https://cursor.com/blog/security-incident-update"
     },
     {
       "via": "webfetch",
@@ -861,19 +521,31 @@
     },
     {
       "via": "webfetch",
+      "url": "https://claude.com/resources/articles/projects-redesigned"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/perplexity-ai/pplx-decider-v1.3"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://www.anthropic.com/research/building-strong-safety-evaluations"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/blog/allenai/xybench"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://research.google/blog/advancing-science-engineering-with-antigravitys-teamwork-feature/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://brave.com/blog/search-api-agentic-payments/"
+    },
+    {
+      "via": "webfetch",
       "url": "https://huggingface.co/papers/2611.15777"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.14815"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.15131"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.16748"
     },
     {
       "via": "webfetch",
@@ -881,15 +553,7 @@
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.13004"
-    },
-    {
-      "via": "webfetch",
       "url": "https://huggingface.co/papers/2611.15844"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.17331"
     },
     {
       "via": "webfetch",
@@ -897,57 +561,34 @@
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.17334"
+      "url": "https://huggingface.co/papers/2611.16748"
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.16217"
+      "url": "https://github.com/alibaba/open-code-review"
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.17060"
+      "url": "https://github.com/GoogleChrome/modern-web-guidance-src"
     },
     {
       "via": "webfetch",
-      "url": "https://github.com/craitech/tontaube.git"
+      "url": "https://github.com/craitech/tontaube"
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/RecursiveSI/flint"
+      "url": "https://github.com/ewhacc/tandem"
     },
     {
-      "via": "webfetch",
-      "url": "https://cursor.com/blog/security-incident-update"
+      "via": "websearch",
+      "query": "Thinking Machines Lab Inkling 2 release"
     }
   ],
   "lang": "en",
   "validation": {
-    "validated_at": "2026-11-14T04:46:02+00:00",
+    "validated_at": "2026-11-14T04:46:04+00:00",
     "checked_links": false,
-    "dropped": [
-      {
-        "title": "TTB bakes cross-view attention into a lightweight MLP",
-        "section": "brief",
-        "candidates": [
-          "c_adfb2fa523"
-        ],
-        "reasons": [
-          "summary longer than 250 characters"
-        ]
-      },
-      {
-        "title": "WorldDraft tests video models as renderers of coded 4D worlds",
-        "section": "brief",
-        "candidates": [
-          "c_34d3f43cb5"
-        ],
-        "reasons": [
-          "summary longer than 250 characters"
-        ]
-      }
-    ],
-    "warnings": [
-      "8 paper items (target 2-4)"
-    ]
+    "dropped": [],
+    "warnings": []
   }
 }
