@@ -1,3 +1,4 @@
+import type { Lang } from "@/lib/i18n"
 import { pageHref } from "@/lib/issues"
 
 // How each issue was made, for its 生成过程 page: web/data/process/*.json, written by
@@ -33,6 +34,8 @@ export type Step = {
   step: string
   label: string
   at: string | null
+  /** How many items the round was handed; null for the steps that do not check items. */
+  fed: number | null
   kept?: number | null
   /** The items that passed this round, with the candidates each was written from. */
   passed?: Passed[]
@@ -54,6 +57,8 @@ export type Channel = {
   main: boolean
   recorded: boolean
   scored: boolean
+  /** When the route's run began; null where it was not recorded. */
+  started_at: string | null
   failure: { step: string; label: string; error: string } | null
   funnel: { label: string; value: number }[]
   steps: Step[]
@@ -70,6 +75,8 @@ export type Process = {
     already_published: number | null
     candidates: number | null
   }
+  /** The candidates an earlier issue already had, with the issue that had them. */
+  already_published: { title: string; url: string; published_on: string }[]
   sources: {
     id: string
     name: string
@@ -88,7 +95,7 @@ const files = import.meta.glob<Process>("../../data/process/*.json", { eager: tr
 /** Every issue's process, newest first. */
 export const processes: Process[] = Object.values(files).sort((a, b) => b.date.localeCompare(a.date))
 
-export const processHref = (day: string) => pageHref(`${day}/process/`)
+export const processHref = (day: string, lang: Lang = "zh") => pageHref(`${day}/process/`, lang)
 
 // validate's messages (daily/digest.py), in Chinese. One it does not know stays as written.
 const REASONS: [RegExp, (...m: string[]) => string][] = [

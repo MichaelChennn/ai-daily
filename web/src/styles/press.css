@@ -1,5 +1,4 @@
-/* Self-hosted fonts, imported here rather than from the layout: a font module that both layouts
-   import from JS ends up in a chunk shared with the old pages' Tailwind CSS. */
+/* Self-hosted fonts, imported here so they come in with the one stylesheet. */
 @import "@fontsource/noto-serif-sc/700.css";
 @import "@fontsource/noto-sans-sc/400.css";
 @import "@fontsource/noto-sans-sc/500.css";
@@ -343,3 +342,205 @@ footer .ext svg{display:block}
 }
 /* arriving from another issue page: the rail is just there, without its entrance */
 .rail.still .tick,.rail.still .icon-btn{transition:none}
+
+/* ========== 生成过程: the flow chart (#63) ========== */
+/* Metro lines: one ink for every route, broken above and below each step's text; forks and joins
+   turn at rounded right angles. scripts/process.js draws them as the page scrolls. */
+@media (min-width:900px) and (max-width:1199px){main.process{max-width:min(var(--w-wide),calc(100vw - 244px))}}
+.process .sec-h{margin-bottom:40px}
+.flow{position:relative;--node-w:600px;--lane-gap:64px}
+.wires{position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+.wires path{fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.wires .track{stroke:var(--chip)}
+.wires .ink{stroke:var(--ink)}
+/* 当时未记录: the line into such a step is dashed */
+.wires .dash{stroke-dasharray:2 6}
+.wires mask path{stroke:#fff;stroke-width:6}
+/* a route that failed: its line ends in a bar above the failed step */
+.wires .stop{stroke-width:2;opacity:0;transition:opacity .2s}
+.wires .stop.on{opacity:1}
+
+/* a step: centred; four layers: name 20px ink, count mono ink-2, rule muted, then pills */
+.node{position:relative;display:block;width:fit-content;max-width:min(100%,var(--node-w));margin:0 auto 72px;text-align:center;color:inherit;text-decoration:none}
+.node>*{margin:0}
+.nm{font-family:var(--f-title);font-weight:700;font-size:var(--fs-l);color:var(--ink);position:relative;width:fit-content;margin-inline:auto!important}
+/* the time hangs right of the name's last line, outside the centring: a box with no width */
+.nm .at{display:inline-block;width:0;text-indent:8px;white-space:nowrap;font-family:var(--f-mono);font-weight:400;font-size:var(--fs-xs);line-height:1;color:var(--muted)}
+.num{margin-top:2px!important;font-family:var(--f-mono);font-size:var(--fs-m);color:var(--ink-2);font-variant-numeric:tabular-nums}
+.node.unrec .num,.node.fail .num{color:var(--muted)}
+.rule{margin-top:12px!important;font-size:var(--fs-s);line-height:1.7;color:var(--muted)}
+.rule .dim{color:var(--ink-2);text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:4px;transition:text-decoration-color .2s}
+.rule .dim:hover{text-decoration-color:currentColor}
+/* 信息来源: only these words are the link; the underline and ↗ always show */
+.source .tl{color:inherit;text-decoration:none;background-image:linear-gradient(currentColor,currentColor);background-size:100% 1px;background-repeat:no-repeat;background-position:0 100%}
+.source .tl .arr{opacity:1;transform:translate(4px,0)}
+
+/* entrance: when the line reaches a step its rows drop in one by one, and stay */
+.node>*,.lane-h{opacity:0;transform:translateY(-18px)}
+.node.on>*,.lane-h.on{animation:Drop .9s var(--ease) both}
+.node.on>:nth-child(2){animation-delay:.06s}
+.node.on>:nth-child(3){animation-delay:.12s}
+.node.on>:nth-child(4){animation-delay:.18s}
+.node.on>:nth-child(n+5){animation-delay:.24s}
+
+/* what a step removed: a filled pill opens its list; an outlined one (全部通过) is a state */
+.cut{display:inline-flex;align-items:center;gap:4px;margin-top:14px!important;padding:4px 10px 4px 12px;border:1px solid transparent;border-radius:999px;background:var(--chip);font:inherit;font-size:var(--fs-s);line-height:1.4;color:var(--ink-2);cursor:pointer;transition:color .2s,box-shadow .2s}
+.cut:hover,.cut[aria-expanded="true"]{color:var(--ink)}
+.cut.flat{display:block;width:fit-content;margin-inline:auto!important;padding:4px 12px;background:none;border-color:var(--line);cursor:default;color:var(--muted)}
+.cut .chev{display:inline-block;transition:transform .3s var(--ease)}
+.cut[aria-expanded="true"] .chev{transform:rotate(90deg)}
+.flow .fold,.mx .fold{display:grid;grid-template-rows:0fr;transition:grid-template-rows .5s var(--ease)}
+.flow .fold>div,.mx .fold>div{overflow:hidden;overflow:clip;min-height:0} /* clip, not a scroller: 收起 can stick to the screen's bottom */
+.cut[aria-expanded="true"]+.fold{grid-template-rows:1fr}
+
+/* the list: up to five rows in full; more scroll in a box that fades at the bottom. 展开 opens the
+   whole list in a dialog, the only place with search and chips */
+.bx{position:relative;width:min(100vw - 64px,var(--node-w));max-width:100%;margin:10px auto 18px;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:var(--r-pop);box-shadow:var(--shadow)}
+.lane .bx{width:100%}
+.bx .list{list-style:none;margin:0;padding:4px 14px 12px}
+.bx.scroll .list{max-height:276px;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:var(--chip) transparent;
+  -webkit-mask-image:linear-gradient(#000 calc(100% - 40px),transparent);mask-image:linear-gradient(#000 calc(100% - 40px),transparent)}
+.bx.scroll.at-end .list{-webkit-mask-image:none;mask-image:none}
+.bx .list::-webkit-scrollbar{width:6px}
+.bx .list::-webkit-scrollbar-thumb{background:var(--chip);border-radius:3px}
+.bx li{overflow-wrap:anywhere;padding:8px 0;border-top:1px solid var(--line);font-size:var(--fs-s);line-height:1.5;color:var(--ink-2)}
+.bx li:first-child,.bx li.f{border-top:0}
+.bx li[hidden]{display:none}
+.bx .s{display:block;font-family:var(--f-mono);font-size:var(--fs-2xs);color:var(--muted)}
+.bx .why{display:block;font-size:var(--fs-xs);color:var(--muted)}
+.bx .why[href]{text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px}
+.bx .why[href]:hover{color:var(--ink)}
+.bx-h{display:none}
+.bx-n{margin:0;padding:10px 14px 2px;font-size:var(--fs-xs);color:var(--muted)}
+.bx-n[hidden]{display:none}
+.bx-q{font:inherit;font-size:var(--fs-s);width:100%;box-sizing:border-box;padding:7px 12px;border:1px solid var(--line);border-radius:var(--r-row);background:var(--paper);color:var(--ink)}
+.bx-q::placeholder{color:var(--muted)}
+.bx-q:focus{outline:2px solid var(--ink);outline-offset:-1px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips .g{font:inherit;font-size:var(--fs-xs);padding:3px 9px;border:0;border-radius:999px;background:var(--chip);color:var(--ink-2);cursor:pointer}
+.chips .g[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.bx-none{margin:0;padding:12px 14px;font-size:var(--fs-s);color:var(--muted)}
+/* two round buttons: 收起 rides the box's bottom edge, its word always shown (phones have no
+   hover); 展开 sits top right, its word slides out on hover */
+.bx-f{display:flex;justify-content:center;height:0}
+.bx-x,.bx-up{display:flex;align-items:center;height:28px;min-width:28px;padding:0 8px;box-sizing:border-box;border:1px solid var(--line);border-radius:999px;background:var(--card);box-shadow:var(--shadow);font:inherit;font-size:var(--fs-xs);color:var(--ink-2);cursor:pointer;transition:color .2s,box-shadow .2s}
+.bx-x:hover,.bx-up:hover{color:var(--ink);box-shadow:var(--shadow-hi)}
+.bx-up{gap:4px;padding:0 12px;transform:translateY(-50%)}
+.bx-x{position:absolute;z-index:1;top:8px;right:8px}
+.bx-x span{max-width:0;overflow:hidden;white-space:nowrap;opacity:0;transition:max-width .3s var(--ease),opacity .2s,margin .3s var(--ease)}
+.bx-x:hover,.bx-x:focus-visible{color:var(--ink)}
+.bx-x:hover span,.bx-x:focus-visible span{max-width:3em;opacity:1;margin-right:4px}
+.bx-x svg{flex:none}
+.bx.scroll li:first-child{padding-right:40px}
+
+/* the dialog: the whole list, with search and chips */
+html.dlg-on{overflow:hidden}
+.dlg{width:min(720px,100vw - 32px);max-width:none;max-height:min(80vh,820px);padding:0;border:0;border-radius:var(--r-card);background:var(--card);color:var(--ink);box-shadow:var(--shadow-hi);overflow:hidden}
+.dlg[open]{animation:Pop .35s var(--ease) both}
+.dlg::backdrop{background:color-mix(in srgb,var(--ink) 28%,transparent);backdrop-filter:blur(2px);animation:Fade .3s ease both}
+@keyframes Pop{from{opacity:0;transform:translateY(12px) scale(.98)}to{opacity:1;transform:none}}
+@keyframes Fade{from{opacity:0}}
+.dlg-bx{display:flex;flex-direction:column;width:auto;max-height:inherit;margin:0;border:0;box-shadow:none;background:none}
+.dlg-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 16px 0 20px}
+.dlg-t{margin:0;font-family:var(--f-title);font-weight:700;font-size:var(--fs-l)}
+.dlg-c{display:grid;place-items:center;width:32px;height:32px;padding:0;border:0;border-radius:50%;background:none;color:var(--ink-2);cursor:pointer}
+.dlg-c:hover{background:var(--chip);color:var(--ink)}
+.dlg .bx-h{display:flex;flex-direction:column;gap:8px;padding:12px 20px;border-bottom:1px solid var(--line)}
+.dlg .bx-n{padding:12px 20px 0}
+.dlg .list{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:4px 20px 12px;scrollbar-width:thin;scrollbar-color:var(--chip) transparent}
+.dlg .bx-none{padding:16px 20px}
+
+/* the routes, side by side */
+.lanes{display:grid;grid-template-columns:repeat(var(--n,2),minmax(0,1fr));gap:var(--lane-gap);margin-top:96px}
+.lane .node{max-width:100%}
+.lane-h{display:flex;flex-direction:column;align-items:center;gap:2px;margin:0 auto 64px;text-align:center}
+.lane-h .mdl{font-family:var(--f-title);font-weight:700;font-size:var(--fs-l);color:var(--ink)}
+.lane-h .how{font-family:var(--f-mono);font-size:var(--fs-xs);color:var(--muted)}
+.lane-h .logo16{width:24px;height:24px;margin-bottom:6px;font-size:12px}
+
+#adopt{margin-top:24px}
+.story{list-style:none;margin:12px auto 0!important;padding:0;font-size:var(--fs-s);color:var(--ink-2);text-align:left;width:fit-content}
+.story li{display:flex;gap:10px;padding:3px 0}
+.story .at{font-family:var(--f-mono);font-size:var(--fs-xs);color:var(--muted);align-self:baseline}
+/* the end cards: logo and edition, then 本期日报 · 发布 17 条 */
+.ends{display:grid;grid-template-columns:repeat(var(--n,2),minmax(0,1fr));gap:var(--lane-gap);margin-top:96px}
+.node.end{width:100%;max-width:280px;margin-bottom:0}
+.end .face{display:flex;flex-direction:column;align-items:center;gap:4px;padding:16px 20px;text-align:center}
+.end .logo16{width:22px;height:22px;font-size:12px}
+.end .et{display:flex;align-items:center;gap:8px;font-family:var(--f-title);font-weight:700;font-size:var(--fs-l);color:var(--ink)}
+.end .es{font-family:var(--f-mono);font-size:var(--fs-xs);color:var(--muted)}
+@media (hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+  .end.on:hover .face{transform:translateY(var(--lift));box-shadow:var(--shadow-hi)}
+}
+
+/* 每条候选的打分和去向: every candidate against every route */
+.mx{margin-top:calc(var(--space-section) * 2);padding-top:32px;border-top:1px solid var(--line)}
+.mx-h{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.mx-h h3{margin:0;font-family:var(--f-title);font-weight:700;font-size:var(--fs-xl)}
+.seg{display:inline-flex;flex-wrap:wrap;padding:3px;background:var(--chip);border-radius:var(--r-pop)}
+.seg button{font:inherit;font-size:var(--fs-s);border:0;background:none;color:var(--ink-2);padding:6px 12px;border-radius:var(--r-row);cursor:pointer}
+.seg button .c{font-family:var(--f-mono);font-size:var(--fs-xs);color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--card);color:var(--ink);box-shadow:var(--shadow)}
+.mx>.legend{margin:16px 0 8px;font-size:var(--fs-xs);color:var(--muted)}
+.mx table{width:100%;table-layout:fixed;border-collapse:collapse;font-size:var(--fs-m)}
+.mx thead th{padding:8px 4px;font-weight:400;font-size:var(--fs-xs);color:var(--muted)}
+.mx thead .ch{width:96px}
+.mx thead th:last-child{width:24px}
+.mx thead .ch span:last-child{display:block;margin-top:2px}
+.mx thead .logo16{margin:0 auto}
+.mx tbody[hidden]{display:none}
+.mx .row{cursor:pointer}
+.mx .row>*{border-top:1px solid var(--line);padding:10px 4px}
+.mx .row:hover th .t{text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px}
+.mx .row th{text-align:left;font-weight:400;padding-right:12px}
+.mx .row .t{color:var(--ink);overflow-wrap:anywhere}
+.mx .row .s{display:block;font-family:var(--f-mono);font-size:var(--fs-2xs);color:var(--muted)}
+.mx .row td{text-align:center}
+.mx .row .na{color:var(--muted)}
+.mx .row .chev{color:var(--muted);transition:transform .3s var(--ease)}
+.mx .row[aria-expanded="true"] .chev{transform:rotate(90deg)}
+.mx .dt td{padding:0}
+.mx .row[aria-expanded="true"]+.dt .fold{grid-template-rows:1fr}
+.mx .dt .fold>div>*{margin:0 0 12px}
+.mx .url{display:block;word-break:break-all;font-size:var(--fs-xs);color:var(--muted);margin-top:2px!important}
+.dcs{display:grid;grid-template-columns:repeat(var(--n,2),minmax(0,1fr));gap:12px}
+.dc{background:var(--card);border:1px solid var(--line);border-radius:var(--r-pop);padding:12px 14px;font-size:var(--fs-s)}
+.dh{display:flex;align-items:flex-start;gap:6px;margin:0 0 8px;color:var(--ink-2)}
+.dh .logo16{margin-top:2px}
+.scs{display:flex;flex-direction:column;gap:4px}
+.scs .note{font-size:var(--fs-xs);color:var(--muted)}
+.sc{display:flex;justify-content:space-between;align-items:center;font-size:var(--fs-xs);color:var(--muted)}
+.pips{display:inline-flex;gap:3px}
+.pips i{width:16px;height:6px;border-radius:2px;background:var(--chip)}
+.pips i.on{background:var(--ink)}
+.mk{display:inline-flex;align-items:center;justify-content:center;min-width:24px;height:24px;padding:0 6px;border-radius:999px;font-family:var(--f-mono);font-size:var(--fs-xs);box-sizing:border-box}
+.mk.published{background:var(--ink);color:var(--paper);font-weight:600}
+.mk.dropped{box-shadow:inset 0 0 0 1px var(--muted);color:var(--ink-2);text-decoration:line-through}
+.mk.unpicked{color:var(--muted)}
+.mx>.legend .mk{min-width:20px;height:20px;margin-left:8px}
+.mx>.legend .mk:first-child{margin-left:0}
+
+@media (max-width:599px){
+  .flow{--lane-gap:16px}
+  .node{margin-bottom:56px}
+  .nm,.lane-h .mdl{font-size:var(--fs-m)}
+  .num,.rule,.cut{font-size:var(--fs-s)}
+  .lanes{margin-top:72px}
+  .lane-h{margin-bottom:48px}
+  .lane-h .how{font-size:var(--fs-2xs)}
+  .bx .list{padding:2px 10px}
+  .end .face{padding:14px 10px}
+  .end .logo16{width:18px;height:18px}
+  .end .et{gap:6px;font-size:var(--fs-m)}
+  .dlg{max-height:86vh}
+  .dlg-top{padding:12px 8px 0 16px}
+  .dlg .bx-h,.dlg .list{padding-inline:16px}
+  /* the lanes are narrow on a phone: the time goes back under the name */
+  .nm .at{display:block;width:auto;text-indent:0;padding-top:4px;text-align:center}
+  .mx .row th{font-size:var(--fs-s)}
+  .mx thead .ch{width:56px}
+  .dcs{grid-template-columns:minmax(0,1fr)}
+}
+@media (prefers-reduced-motion:reduce){
+  .node>*,.lane-h{opacity:1;transform:none;animation:none!important}
+}

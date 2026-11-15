@@ -11,26 +11,29 @@ interface Props {
   note?: string
   /** As wide as a page's main.wide (the sources' three columns). */
   wide?: boolean
+  /** On the issue's 生成过程 page: no editor credit, and the toolbar's 生成过程 is the current page. */
+  process?: boolean
 }
 
 // One line: who edited this issue and when the site updates at the left, the GitHub, RSS and
 // license icons at the right. How the issue was made and its other editions are hidden features,
 // in the toolbar behind the ⓘ button in the bottom-right corner. The language switch sits above
 // the theme toggle in the bottom-left corner.
-const { issue, note, wide } = Astro.props
+const { issue, note, wide, process: onProcess = false } = Astro.props
 const lang = langOf(Astro.currentLocale)
 const t = strings[lang]
 const p = t.press
-const process = !!issue && lang === "zh" && processes.some((x) => x.date === issue.date) ? processHref(issue.date) : null
+const process = !!issue && processes.some((x) => x.date === issue.date) ? processHref(issue.date, lang) : null
 // Every edition of the issue, the main one first, each by its maker's logo; none if it has no beta.
 const editions =
   !issue || issue.betas.length === 0
     ? []
     : [
-        { slug: "main", label: p.main, href: issueHref(issue.date), current: !issue.beta },
+        { slug: "main", label: p.main, href: issueHref(issue.date), current: !issue.beta && !onProcess },
         ...issue.betas.map((b) => ({ slug: b.slug, label: p.edition(b.label), href: betaHref(issue.date, b.slug), current: b.slug === issue.beta?.slug })),
       ].map((e) => ({ ...e, initial: (e.slug === "main" ? "Claude" : e.label).charAt(0), logo: editionLogo(e.slug) }))
-// This page in the other language; the English site has no beta pages, so there it is the main issue.
+// This page in the other language; the English site has no beta pages, so there it is the main
+// issue.
 const other = lang === "zh" ? "en" : "zh"
 const otherHref = pageHref(pagePath(Astro.url.pathname, lang).replace(/beta\/.*$/, ""), other)
 const icon = { width: 16, height: 16, viewBox: "0 0 24 24", "aria-hidden": "true" as const }
@@ -39,7 +42,7 @@ const icon = { width: 16, height: 16, viewBox: "0 0 24 24", "aria-hidden": "true
 <footer class:list={{ wide }}>
   <p class="about">
     {
-      issue ? (
+      issue && !onProcess ? (
         <>
           <span class="nw">{t.credit(modelName(issue.editor), issue.fallback)} ·</span> <span class="nw">{t.schedule}</span>
         </>
@@ -65,7 +68,7 @@ const icon = { width: 16, height: 16, viewBox: "0 0 24 24", "aria-hidden": "true
       <div class="tools" id="tools" role="toolbar" aria-label={p.info}>
         {
           process && (
-            <a href={process} aria-label={p.process} data-label={p.process}>
+            <a href={process} aria-label={p.process} data-label={p.process} aria-current={onProcess ? "page" : undefined}>
               <svg {...icon} fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="8" x="3" y="3" rx="2"></rect><path d="M7 11v4a2 2 0 0 0 2 2h4"></path><rect width="8" height="8" x="13" y="13" rx="2"></rect></svg>
             </a>
           )

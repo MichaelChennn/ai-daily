@@ -1,7 +1,5 @@
 ---
-// The issue pages' layout (issue #43 design): no header, no Tailwind. The other pages stay on
-// Layout.astro until they are redesigned too; both keep the reader's theme and language choices
-// under the same localStorage keys.
+// Every page's layout (issue #43 design): no header; the styles are press.css alone.
 import stylesheet from "@/styles/press.css?url"
 
 import { langOf, strings } from "@/lib/i18n"
@@ -18,7 +16,8 @@ const { title, description, canonical = Astro.url.pathname } = Astro.props
 const lang = langOf(Astro.currentLocale)
 const t = strings[lang]
 // The same page in both languages, for search engines and for the redirect below. Not on a beta
-// page (the English site has none) nor on the 404 page, which stands in for any missing path.
+// page (the English site has none), nor on the 404 page, which
+// stands in for any missing path.
 const page = pagePath(Astro.url.pathname, lang)
 const bilingual = canonical !== null && !/\/beta\//.test(page)
 const alternates = bilingual

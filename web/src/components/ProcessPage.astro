@@ -1,0 +1,222 @@
+---
+import CutBox from "@/components/press/CutBox.astro"
+import FlowStep from "@/components/press/FlowStep.astro"
+import PressFooter from "@/components/press/PressFooter.astro"
+import Rail from "@/components/press/Rail.astro"
+import Wordmark from "@/components/press/Wordmark.astro"
+import PressLayout from "@/layouts/PressLayout.astro"
+import { buildFlow, type End } from "@/lib/flow"
+import { langOf, strings } from "@/lib/i18n"
+import { issuesIn, pageHref } from "@/lib/issues"
+import type { Process } from "@/lib/process"
+import controls from "@/scripts/controls.js?raw"
+import script from "@/scripts/press.js?raw"
+import flowScript from "@/scripts/process.js?raw"
+
+interface Props {
+  process: Process
+}
+
+// How one issue was made (issues #26, #63), at YYYY-MM-DD/process/ in both languages: a flow chart
+// drawn as the reader scrolls (the sources, the shared filtering, one lane per editor route, then
+// the editions it published) and, at the end, every candidate against every route. lib/flow.ts
+// decides every count and line of copy; scripts/process.js draws the lines.
+const { process } = Astro.props
+const lang = langOf(Astro.currentLocale)
+const issue = issuesIn(lang).find((i) => i.date === process.date)!
+const flow = buildFlow(process, lang)
+const t = flow.t
+const title = `${process.date} · ${t.title} · ${strings[lang].siteTitle}`
+const n = Math.max(1, flow.lanes.length)
+// the three scores' maximums (daily-editor SKILL.md section 2)
+const MAX = [3, 3, 2]
+const STATE = { published: t.legend[0], dropped: t.legend[1], unpicked: t.legend[2] }
+---
+
+<PressLayout title={title} description={t.description(process.date)}>
+  <Wordmark lang={lang} date={process.date} />
+  <Rail date={process.date} lang={lang} process />
+
+  <main id="main" class="process wide">
+    <h1 class="sr-only">{process.date} · {t.title}</h1>
+    <div class="sec-h drop"><h2>{t.title}</h2></div>
+    <div class="flow" id="flow" style={`--n:${n}`}>
+      <svg class="wires" id="wires" aria-hidden="true"></svg>
+      <div class="node source" id="src">
+        <p class="nm"><a class="tl" href={pageHref(flow.source.href, lang)}>{t.sources}<span class="arr">↗</span></a></p>
+        <p class="num">{flow.source.num}</p>
+        {flow.source.cuts.map((cut) => <CutBox cut={cut} t={t} />)}
+      </div>
+      {flow.spine.map((node) => <FlowStep node={node} t={t} />)}
+      <div class="lanes">
+        {
+          flow.lanes.map((lane) => (
+            <div class:list={["lane", { failed: lane.failed }]} data-lane={lane.main ? "main" : "beta"}>
+              <div class="lane-h" id={`h-${lane.slug}`}>
+                <span class="logo16">
+                  {lane.initial}
+                  {lane.logo && <img data-logo src={lane.logo} alt="" referrerpolicy="no-referrer" />}
+                </span>
+                <span class="mdl">{lane.model}</span>
+                {lane.how && <span class="how">{lane.how}</span>}
+              </div>
+              {lane.nodes.map((node) => (
+                <FlowStep node={node} lane={lane.main ? "main" : "beta"} t={t} />
+              ))}
+            </div>
+          ))
+        }
+      </div>
+      <div class="node" id="adopt">
+        <p class="nm"><span>{t.adopt}</span></p>
+        <p class="rule" set:html={flow.adopt.rule} />
+        {
+          flow.adopt.story.length > 0 && (
+            <ol class="story">
+              {flow.adopt.story.map((s) => (
+                <li>
+                  <span class="at">{s.at}</span>
+                  {s.text}
+                </li>
+              ))}
+            </ol>
+          )
+        }
+      </div>
+      <div class="ends" style={`--n:${Math.max(1, flow.ends.length)}`}>
+        {
+          flow.ends.map((e: End) => (
+            <a class="node end" id={`end-${e.slug}`} href={e.href} hreflang={e.hreflang}>
+              <span class="face">
+                <span class="et">
+                  <span class="logo16">
+                    {e.initial}
+                    {e.logo && <img data-logo src={e.logo} alt="" referrerpolicy="no-referrer" />}
+                  </span>
+                  {e.title}
+                </span>
+                <span class="es">{e.sub}</span>
+              </span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+
+    <section class="mx" id="mx" style={`--n:${flow.matrix.channels.length}`}>
+      <div class="mx-h">
+        <h3>{t.table}</h3>
+        <div class="seg" role="group" aria-label={t.filterLabel}>
+          {
+            flow.matrix.filters.map((f) => (
+              <button data-f={f.key} aria-pressed={f.on ? "true" : "false"}>
+                {f.label} <span class="c">{f.count}</span>
+              </button>
+            ))
+          }
+        </div>
+      </div>
+      <p class="legend">
+        <span class="mk published">7</span> {t.legend[0]} <span class="mk dropped">7</span> {t.legend[1]} <span class="mk unpicked">7</span> {t.legend[2]}{t.legend[3]}
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            {
+              flow.matrix.channels.map((c) => (
+                <th class="ch">
+                  <span class="logo16">
+                    {c.initial}
+                    {c.logo && <img data-logo src={c.logo} alt="" referrerpolicy="no-referrer" />}
+                  </span>
+                  <span>{c.label}</span>
+                </th>
+              ))
+            }
+            <th></th>
+          </tr>
+        </thead>
+        {
+          flow.matrix.rows.map((r) => {
+            const first = flow.matrix.filters.find((f) => f.on)!.key
+            return (
+              <tbody class="r" data-f={r.filters.join(" ")} hidden={!r.filters.includes(first)}>
+                <tr class="row" tabindex="0" aria-expanded="false">
+                  <th>
+                    <span class="t">{r.title}</span>
+                    <span class="s">{r.source}</span>
+                  </th>
+                  {r.marks.map((m) =>
+                    m ? (
+                      <td>
+                        <span class:list={["mk", m.state]} title={STATE[m.state]}>{m.total ?? "·"}</span>
+                      </td>
+                    ) : (
+                      <td class="na">—</td>
+                    ),
+                  )}
+                  <td class="chev">›</td>
+                </tr>
+                <tr class="dt">
+                  <td colspan={flow.matrix.channels.length + 2}>
+                    <div class="fold">
+                      <div>
+                        <a class="url" href={r.url} target="_blank" rel="noopener">{r.url}</a>
+                        <div class="dcs">
+                          {r.details.map((d) => (
+                            <div class="dc">
+                              <p class="dh">
+                                <span class="logo16">
+                                  {d.initial}
+                                  {d.logo && <img data-logo src={d.logo} alt="" referrerpolicy="no-referrer" />}
+                                </span>
+                                {d.head}
+                              </p>
+                              <div class="scs">
+                                {d.scores ? (
+                                  d.scores.map((v, i) => (
+                                    <span class="sc">
+                                      <span>{t.dims[i]}</span>
+                                      <span class="pips">
+                                        {Array.from({ length: MAX[i] }, (_, j) => <i class:list={{ on: j < v }} />)}
+                                      </span>
+                                    </span>
+                                  ))
+                                ) : (
+                                  <span class="note">{t.unscored}</span>
+                                )}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            )
+          })
+        }
+      </table>
+    </section>
+
+    <dialog class="dlg" id="dlg" aria-labelledby="dlg-t">
+      <div class="bx dlg-bx">
+        <div class="dlg-top">
+          <p class="dlg-t" id="dlg-t"></p>
+          <button class="dlg-c" aria-label={t.close}><svg viewBox="0 0 12 12" width="14" height="14" aria-hidden="true"><path d="M2 2l8 8M10 2l-8 8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></path></svg></button>
+        </div>
+        <div class="bx-h"></div>
+        <p class="bx-n" hidden></p>
+        <ul class="list"></ul>
+        <p class="bx-none" hidden>{t.none}</p>
+      </div>
+    </dialog>
+  </main>
+  <PressFooter issue={issue} wide process />
+
+  <script is:inline set:html={controls} />
+  <script is:inline set:html={script} />
+  <script is:inline set:html={flowScript} />
+</PressLayout>
