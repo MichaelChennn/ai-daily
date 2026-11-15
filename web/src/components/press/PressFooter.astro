@@ -23,7 +23,7 @@ const { issue, note, wide, process: onProcess = false } = Astro.props
 const lang = langOf(Astro.currentLocale)
 const t = strings[lang]
 const p = t.press
-const process = !!issue && lang === "zh" && processes.some((x) => x.date === issue.date) ? processHref(issue.date) : null
+const process = !!issue && processes.some((x) => x.date === issue.date) ? processHref(issue.date, lang) : null
 // Every edition of the issue, the main one first, each by its maker's logo; none if it has no beta.
 const editions =
   !issue || issue.betas.length === 0
@@ -32,10 +32,10 @@ const editions =
         { slug: "main", label: p.main, href: issueHref(issue.date), current: !issue.beta && !onProcess },
         ...issue.betas.map((b) => ({ slug: b.slug, label: p.edition(b.label), href: betaHref(issue.date, b.slug), current: b.slug === issue.beta?.slug })),
       ].map((e) => ({ ...e, initial: (e.slug === "main" ? "Claude" : e.label).charAt(0), logo: editionLogo(e.slug) }))
-// This page in the other language; the English site has no beta pages, nor yet a 生成过程 page
-// (#63), so there it is the main issue.
+// This page in the other language; the English site has no beta pages, so there it is the main
+// issue.
 const other = lang === "zh" ? "en" : "zh"
-const otherHref = pageHref(pagePath(Astro.url.pathname, lang).replace(/(beta\/.*|process\/)$/, ""), other)
+const otherHref = pageHref(pagePath(Astro.url.pathname, lang).replace(/beta\/.*$/, ""), other)
 const icon = { width: 16, height: 16, viewBox: "0 0 24 24", "aria-hidden": "true" as const }
 ---
 

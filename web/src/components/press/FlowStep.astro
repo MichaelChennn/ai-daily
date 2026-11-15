@@ -1,21 +1,22 @@
 ---
 import CutBox from "@/components/press/CutBox.astro"
-import type { FlowNode } from "@/lib/flow"
+import type { Flow, FlowNode } from "@/lib/flow"
 
 interface Props {
   node: FlowNode
   lane?: string
+  t: Flow["t"]
 }
 
 // One step of the 生成过程 flow chart: its name (and Berlin time), 「255 条 → 145 条」, the rule in
 // plain words, then what it removed. The line stops above the name and goes on below the last row.
-const { node, lane } = Astro.props
+const { node, lane, t } = Astro.props
 ---
 
 <div class:list={["node", { unrec: node.unrecorded, fail: node.failed }]} id={node.id} data-lane={lane}>
   <p class="nm"><span>{node.name}</span>{node.at && <span class="at">{node.at}</span>}</p>
   {node.num && <p class="num">{node.num}</p>}
   {node.rule && <p class="rule" set:html={node.rule} />}
-  {node.cuts.map((cut) => <CutBox cut={cut} />)}
+  {node.cuts.map((cut) => <CutBox cut={cut} t={t} />)}
   {node.flat && <p class="cut flat">{node.flat}</p>}
 </div>

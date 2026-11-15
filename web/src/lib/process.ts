@@ -1,3 +1,4 @@
+import type { Lang } from "@/lib/i18n"
 import { pageHref } from "@/lib/issues"
 
 // How each issue was made, for its 生成过程 page: web/data/process/*.json, written by
@@ -94,7 +95,7 @@ const files = import.meta.glob<Process>("../../data/process/*.json", { eager: tr
 /** Every issue's process, newest first. */
 export const processes: Process[] = Object.values(files).sort((a, b) => b.date.localeCompare(a.date))
 
-export const processHref = (day: string) => pageHref(`${day}/process/`)
+export const processHref = (day: string, lang: Lang = "zh") => pageHref(`${day}/process/`, lang)
 
 // validate's messages (daily/digest.py), in Chinese. One it does not know stays as written.
 const REASONS: [RegExp, (...m: string[]) => string][] = [

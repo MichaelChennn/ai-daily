@@ -1,0 +1,18 @@
+---
+import ProcessPage from "@/components/ProcessPage.astro"
+import { enIssues } from "@/lib/issues"
+import { type Process, processes } from "@/lib/process"
+
+// The English site's 生成过程 page, for each English issue that has its record.
+export function getStaticPaths() {
+  return processes
+    .filter((process) => enIssues.some((i) => i.date === process.date))
+    .map((process) => ({ params: { date: process.date }, props: { process } }))
+}
+
+interface Props {
+  process: Process
+}
+---
+
+<ProcessPage process={Astro.props.process} />

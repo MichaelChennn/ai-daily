@@ -28,7 +28,7 @@ for (let d = latest; d >= issues.at(-1)!.date; d = addDays(d, -1)) days.push(d)
 const W = Math.min(20, days.length)
 const label = (d: string) => t.tickDay(new Date(`${d}T00:00:00Z`))
 const made = new Set(process ? processes.map((p) => p.date) : [])
-const tickHref = (d: string) => (made.has(d) ? processHref(d) : d === latest ? home : issueHref(d, lang))
+const tickHref = (d: string) => (made.has(d) ? processHref(d, lang) : d === latest ? home : issueHref(d, lang))
 const ret = process ? { href: issueHref(date, lang), label: t.backIssue } : { href: home, label: t.latest }
 ---
 
