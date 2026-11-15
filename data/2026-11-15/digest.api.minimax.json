@@ -1,0 +1,1167 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-15",
+  "mode": "full",
+  "generated_at": "2026-11-15T04:39:44+00:00",
+  "channel": "api",
+  "model": "nvidia:minimaxai/minimax-m3.1-flash",
+  "highlights": [
+    "Claude 官方梳理了常驻 Agent 的五个核心构件：事件收件箱、定时器、记忆、权限和发件箱，为自建长时运行 Agent 提供了架构参考。",
+    "IBM Granite 团队开源了带 LLMON 标注格式的预览模型 granite-4.1-3b-llmon-preview 与 granite-4.1-8b-llmon-preview，用于抵抗文档中的间接提示注入。",
+    "开源推理侧，tandem.cpp 为 llama.cpp 提供 MoE 卸载补丁并新增 AMD ROCm 支持，HarborRL 则更新了弹性网关与免 SSH 集群部署。"
+  ],
+  "items": [
+    {
+      "section": "headline",
+      "title": "Claude 官方详解常驻 Agent 的五个核心构件",
+      "summary": "Claude 博客把常驻 Agent 的实现拆成五个核心构件：事件收件箱、定时器、记忆、权限和发件箱，并说明它们如何组合成跨会话、有状态的主动型 Agent。文中称新模型判断力更好、推理成本下降，Opus 5.5 在某长程编码基准上每个已解任务成本比 Opus 5 低 78%。这套划分可直接作为自建常驻 Agent 的架构参考。",
+      "tags": [
+        "Agent",
+        "产品"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_9da1c46946",
+          "url": "https://claude.com/resources/articles/building-always-on-agents"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://claude.com/resources/articles/building-always-on-agents",
+          "quote": "Building always-on agents Always-on agents run indefinitely, deciding how and when to act across many sessions."
+        },
+        {
+          "url": "https://claude.com/resources/articles/building-always-on-agents",
+          "quote": "This guide walks through their core primitives and how they fit together."
+        },
+        {
+          "url": "https://claude.com/resources/articles/building-always-on-agents",
+          "quote": "Always-on agents are stateful and proactive, meaning they manage context across sessions and take actions without direct supervision."
+        },
+        {
+          "url": "https://claude.com/resources/articles/building-always-on-agents",
+          "quote": "Underneath, they run on the same core loop as other agents."
+        },
+        {
+          "url": "https://claude.com/resources/articles/building-always-on-agents",
+          "quote": "The difference is the surrounding architecture, which is built from primitives that control when the agents wake up, what carries over between runs, and how their work reaches the user."
+        },
+        {
+          "url": "https://claude.com/resources/articles/building-always-on-agents",
+          "quote": "The resurgence is largely due to recent model advancements, which have made always-on agents more practical to run."
+        },
+        {
+          "url": "https://claude.com/resources/articles/building-always-on-agents",
+          "quote": "First, the latest models have better judgment: they’re more reliable at understanding user intent and knowing when to check in."
+        },
+        {
+          "url": "https://claude.com/resources/articles/building-always-on-agents",
+          "quote": "Second, intelligence is becoming cheaper, with long-horizon tasks benefiting the most."
+        },
+        {
+          "url": "https://claude.com/resources/articles/building-always-on-agents",
+          "quote": "For example, on one long-horizon coding benchmark , Opus 5.5 cost 78% less per solved task than Opus 5, compared with 40% less on typical workloads."
+        },
+        {
+          "url": "https://claude.com/resources/articles/building-always-on-agents",
+          "quote": "The core primitives The surrounding architecture of an always-on agent has five core primitives: an event inbox, timers, memory, permissions, and an outbox."
+        },
+        {
+          "url": "https://claude.com/resources/articles/building-always-on-agents",
+          "quote": "Timers Together with the event inbox, timers let always-on agents be proactive."
+        },
+        {
+          "url": "https://claude.com/resources/articles/building-always-on-agents",
+          "quote": "Memory Always-on agents work across many disjointed runs and rely on memory to maintain continuity."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "IBM 开源两款抵抗提示注入的 Granite 预览模型",
+      "summary": "IBM Granite 团队发布 granite-4.1-3b-llmon-preview 和 granite-4.1-8b-llmon-preview，两个开放权重模型基于新的 LLMON 标注格式训练，让模型把文档、工具输出等素材当作内容而非指令。在 OPI 基准上攻击成功率从 100% 降至 0.1%（3B）、从 96.3% 降至 0.02%（8B）；IBM 将其限定为探索与评测用途。",
+      "tags": [
+        "安全",
+        "模型",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_5dc4a62dca",
+          "url": "https://maccus.fr/en/ibm-granite-prompt-injection/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://maccus.fr/en/ibm-granite-prompt-injection/",
+          "quote": "On November 12, 2026, IBM’s Granite AI team released two preview models trained to ignore commands hidden in the documents they read."
+        },
+        {
+          "url": "https://maccus.fr/en/ibm-granite-prompt-injection/",
+          "quote": "Both rely on LLMON, an IBM labeling system that separates the user’s instructions from the material the model reads."
+        },
+        {
+          "url": "https://maccus.fr/en/ibm-granite-prompt-injection/",
+          "quote": "The two models, granite-4.1-3b-llmon-preview and granite-4.1-8b-llmon-preview, have 3.7 billion and 8.8 billion parameters."
+        },
+        {
+          "url": "https://maccus.fr/en/ibm-granite-prompt-injection/",
+          "quote": "Both are open models: anyone can download them from Hugging Face, a platform for sharing AI models."
+        },
+        {
+          "url": "https://maccus.fr/en/ibm-granite-prompt-injection/",
+          "quote": "Their license, Apache 2.0, allows commercial use."
+        },
+        {
+          "url": "https://maccus.fr/en/ibm-granite-prompt-injection/",
+          "quote": "IBM tested them on a public benchmark, a standard set of attacks."
+        },
+        {
+          "url": "https://maccus.fr/en/ibm-granite-prompt-injection/",
+          "quote": "Against the standard Granite 4.1 models, which lack this training, the attacks worked 96% to 100% of the time."
+        },
+        {
+          "url": "https://maccus.fr/en/ibm-granite-prompt-injection/",
+          "quote": "Against the previews, they worked at most 0.1% of the time."
+        },
+        {
+          "url": "https://maccus.fr/en/ibm-granite-prompt-injection/",
+          "quote": "Even so, IBM limits the previews to exploration and evaluation and advises against real-world use."
+        },
+        {
+          "url": "https://maccus.fr/en/ibm-granite-prompt-injection/",
+          "quote": "On OPI, the attack success rate drops from 100% for the standard 3B model to 0.1% for its preview, and from 96.3% to 0.02% for the 8B."
+        },
+        {
+          "url": "https://maccus.fr/en/ibm-granite-prompt-injection/",
+          "quote": "On ASB, it falls from 99.2% to 5.6% for the 3B and from 52.8% to 3.1% for the 8B."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "tandem.cpp 让 llama.cpp 加速大 MoE 模型并支持 AMD",
+      "summary": "tandem.cpp 是 llama.cpp 的补丁集，把常用专家留在 GPU、其余交给 CPU，面向装不进显存的 MoE 模型。项目 README 称其他难以装入显存的 MoE 模型通常能获得 1.4–2.1× 提速，本次更新改进了共享的 CUDA/HIP 内核，RX 7900 XTX 上 +2.5%、RTX 5070 Ti 上 +1.3%，补丁也可用 HIP 构建。",
+      "tags": [
+        "开源",
+        "工具",
+        "推理"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_d387af51c6",
+          "url": "https://github.com/ewhacc/tandem.cpp"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/ewhacc/tandem.cpp",
+          "quote": "tandem.cpp is a patch set for llama.cpp ."
+        },
+        {
+          "url": "https://github.com/ewhacc/tandem.cpp",
+          "quote": "It makes MoE models that don't fit in VRAM run faster in llama.cpp."
+        },
+        {
+          "url": "https://github.com/ewhacc/tandem.cpp",
+          "quote": "It keeps the most-used experts on the GPU and lets the CPU help with the rest, for any MoE model llama.cpp supports."
+        },
+        {
+          "url": "https://github.com/ewhacc/tandem.cpp",
+          "quote": "Single-user decode is the target."
+        },
+        {
+          "url": "https://github.com/ewhacc/tandem.cpp",
+          "quote": "We tuned for Qwen3.8 only, but other MoE models that do not fit in VRAM gain too: typically 1.4–2.1× (gpt-oss-120b, GLM-4.5-Air, Qwen3.6-35B-A3B, DeepSeek-V4.1), less when the model nearly fits."
+        },
+        {
+          "url": "https://github.com/ewhacc/tandem.cpp",
+          "quote": "What's new (2026-11-15)"
+        },
+        {
+          "url": "https://github.com/ewhacc/tandem.cpp",
+          "quote": "Faster GPU work between the routing steps, on NVIDIA and AMD."
+        },
+        {
+          "url": "https://github.com/ewhacc/tandem.cpp",
+          "quote": "Three kernel changes in the shared CUDA/HIP code: the"
+        },
+        {
+          "url": "https://github.com/ewhacc/tandem.cpp",
+          "quote": "Qwen3.8 with one user, A/B on the same PC: RX 7900 XTX +2.5%, RTX 5070 Ti +1.3%."
+        },
+        {
+          "url": "https://github.com/ewhacc/tandem.cpp",
+          "quote": "AMD GPUs (ROCm)"
+        },
+        {
+          "url": "https://github.com/ewhacc/tandem.cpp",
+          "quote": "The patch builds with HIP."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "NVIDIA 教程：用两台 DGX Station 跑 GLM-5.3",
+      "summary": "NVIDIA 开发者博客给出用 vLLM 在两台通过 ConnectX-8 RDMA 互联的 NVIDIA DGX Station 上服务 GLM-5.3 的教程，采用 TP=2 张量并行。文中称 GLM-5.3 NVFP4 是 753 billion 参数、每 token 激活 40 billion 的量化 MoE 模型，约 464 GB 权重超过单块 GB300 的 252 GB HBM3e。",
+      "tags": [
+        "工具",
+        "硬件",
+        "推理"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_56f1f1f5ae",
+          "url": "https://developer.nvidia.com/blog/when-one-gpu-isnt-enough-serving-glm-5-3-across-two-nvidia-dgx-stations-with-vllm/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://developer.nvidia.com/blog/when-one-gpu-isnt-enough-serving-glm-5-3-across-two-nvidia-dgx-stations-with-vllm/",
+          "quote": "When One GPU Isn’t Enough: Serving GLM-5.3 Across Two NVIDIA DGX Stations with vLLM"
+        },
+        {
+          "url": "https://developer.nvidia.com/blog/when-one-gpu-isnt-enough-serving-glm-5-3-across-two-nvidia-dgx-stations-with-vllm/",
+          "quote": "Two NVIDIA DGX Stations connected over ConnectX-8 RDMA serve one model through a single endpoint, with tensor parallelism splitting the model weights and computation across both GPUs."
+        },
+        {
+          "url": "https://developer.nvidia.com/blog/when-one-gpu-isnt-enough-serving-glm-5-3-across-two-nvidia-dgx-stations-with-vllm/",
+          "quote": "The NVIDIA GLM-5.3 NVFP4 model, a quantized version of Z.ai ’s mixture-of-experts (MoE) model, has 753 billion parameters, with 40 billion activated per token."
+        },
+        {
+          "url": "https://developer.nvidia.com/blog/when-one-gpu-isnt-enough-serving-glm-5-3-across-two-nvidia-dgx-stations-with-vllm/",
+          "quote": "At about 464 GB, the checkpoint exceeds the 252 GB of HBM3e on a single GB300 GPU."
+        },
+        {
+          "url": "https://developer.nvidia.com/blog/when-one-gpu-isnt-enough-serving-glm-5-3-across-two-nvidia-dgx-stations-with-vllm/",
+          "quote": "This post shows how to serve GLM-5.3 locally across two NVIDIA DGX Stations with vLLM, send a request, and measure behavior under concurrent load."
+        },
+        {
+          "url": "https://developer.nvidia.com/blog/when-one-gpu-isnt-enough-serving-glm-5-3-across-two-nvidia-dgx-stations-with-vllm/",
+          "quote": "Tensor parallelism (TP=2) splits the model’s tensors across the two GB300 GPUs."
+        },
+        {
+          "url": "https://developer.nvidia.com/blog/when-one-gpu-isnt-enough-serving-glm-5-3-across-two-nvidia-dgx-stations-with-vllm/",
+          "quote": "Both Stations compute every request, and Station A returns the answer through one OpenAI-compatible API."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "HarborRL 更新弹性网关与免 SSH 集群部署",
+      "summary": "开源 Agentic RL 框架 HarborRL 的更新日志列出四项改动：带静态路由的弹性网关扩展、节点通过 HTTP 拉取任务的 Hub 部署模式、多算法统一到 Slime 训练管线，以及配置向导与沙箱 rollout 改进。项目 README 称其把模型服务、轨迹生成、工具执行、验证奖励和策略更新整合为一条可复现管线。",
+      "tags": [
+        "开源",
+        "Agent",
+        "训练"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_a07cd623f1",
+          "url": "https://github.com/datamllab/HarborRL"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/datamllab/HarborRL",
+          "quote": "HarborRL Public Notifications You must be signed in to change notification settings Fork 17 ( 17 ) Star 228 ( 228 ) You must be signed in to star a repository About An end-to-end framework for Agentic Reinforcement Learning."
+        },
+        {
+          "url": "https://github.com/datamllab/HarborRL",
+          "quote": "2026-11-12 Added elastic gateway scaling with static routing, remote-first auto-growth and automatic retirement."
+        },
+        {
+          "url": "https://github.com/datamllab/HarborRL",
+          "quote": "2026-11-12 Added Hub deployment mode for one-way-firewall clusters: nodes pull tasks over HTTP, no cross-machine SSH required."
+        },
+        {
+          "url": "https://github.com/datamllab/HarborRL",
+          "quote": "2026-11-12 Unified multiple training algorithms on the shared Slime pipeline, validated on mathematical reasoning tasks."
+        },
+        {
+          "url": "https://github.com/datamllab/HarborRL",
+          "quote": "2026-11-12 Improved the configuration wizard, web console and sandbox rollout with audited cleanup."
+        },
+        {
+          "url": "https://github.com/datamllab/HarborRL",
+          "quote": "HarborRL is a lightweight framework for training tool-using agents on verifiable, sandboxed tasks."
+        },
+        {
+          "url": "https://github.com/datamllab/HarborRL",
+          "quote": "It makes model serving, trajectory generation, tool execution, verifier rewards, and policy updates into a single reproducible pipeline."
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Haru-4B：全双工语音对话基础模型",
+      "summary": "higurashi-ai 发布 Haru-4B，一个低延迟、多语言的全双工连续语音对话基础模型，听与说同时进行，原生全双工频率为 7.5 Hz，每 133 ms 处理一帧用户音频并产出一帧自身音频和文本。模型卡说明它以 Qwen3.5-4B 为文本骨干、采用 VibeVoice 声学 tokenizer，权重以 Apache-2.0 发布。",
+      "tags": [
+        "模型",
+        "语音",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_53b3b546ce",
+          "url": "https://huggingface.co/higurashi-ai/Haru-4B"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/higurashi-ai/Haru-4B",
+          "quote": "Haru-4B is a low-latency and multilingual full-duplex continuous spoken dialogue foundation"
+        },
+        {
+          "url": "https://huggingface.co/higurashi-ai/Haru-4B",
+          "quote": "model: it listens and speaks at the same time, the way people do on a phone call."
+        },
+        {
+          "url": "https://huggingface.co/higurashi-ai/Haru-4B",
+          "quote": "pretrained base model, released for research."
+        },
+        {
+          "url": "https://huggingface.co/higurashi-ai/Haru-4B",
+          "quote": "Native full-duplex at 7.5 Hz."
+        },
+        {
+          "url": "https://huggingface.co/higurashi-ai/Haru-4B",
+          "quote": "Every 133 ms the model takes one frame of the user's audio"
+        },
+        {
+          "url": "https://huggingface.co/higurashi-ai/Haru-4B",
+          "quote": "and produces one frame of its own audio and text."
+        },
+        {
+          "url": "https://huggingface.co/higurashi-ai/Haru-4B",
+          "quote": "Audio is a 64-dimensional latent per frame."
+        },
+        {
+          "url": "https://huggingface.co/higurashi-ai/Haru-4B",
+          "quote": "MLP head with MeanFlow sampling produces it in one step from the language model's hidden"
+        },
+        {
+          "url": "https://huggingface.co/higurashi-ai/Haru-4B",
+          "quote": "Qwen3.5-4B text backbone, 32 layers, hidden size 2560"
+        },
+        {
+          "url": "https://huggingface.co/higurashi-ai/Haru-4B",
+          "quote": "VibeVoice acoustic tokenizer, causal, 24 kHz, 3200 samples per latent"
+        },
+        {
+          "url": "https://huggingface.co/higurashi-ai/Haru-4B",
+          "quote": "Haru-4B is a pretrained base model, released for research."
+        },
+        {
+          "url": "https://huggingface.co/higurashi-ai/Haru-4B",
+          "quote": "The weights are released under the Apache License 2.0."
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Viggle-Remake：MiniMax-H3 的视频重拍 LoRA",
+      "summary": "Viggle 发布 Viggle-Remake，一组基于 MiniMax-H3 的 rank 256 LoRA，用于给视频换人换物、改背景天气与光线，也提供 MCP server 让编码 Agent 自行切窗口、画关键帧并渲染。项目说明提供 ComfyUI 节点包和 int8/GGUF 文件以适配 12–24 GB 显卡，代码以 Apache 2.0 发布，权重沿用 MiniMax H3 Community License。",
+      "tags": [
+        "模型",
+        "视频",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_28d53b4058",
+          "url": "https://huggingface.co/Viggle/Viggle-Remake"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/Viggle/Viggle-Remake",
+          "quote": "Viggle / Viggle-Remake Like 403 Follow Viggle AI 532 Video-to-Video MiniMax H3 GGUF video-editing character-replacement lora License: minimax-h3-community-license Model card Files Files and versions xet Community 8 Deploy Copy to bucket Viggle Remake Quick start ComfyUI and smaller GPUs Agent: the M"
+        },
+        {
+          "url": "https://huggingface.co/Viggle/Viggle-Remake",
+          "quote": "Viggle Remake is built agent-first."
+        },
+        {
+          "url": "https://huggingface.co/Viggle/Viggle-Remake",
+          "quote": "Give an agent (Claude Code, codex, anything that speaks MCP) a video and one"
+        },
+        {
+          "url": "https://huggingface.co/Viggle/Viggle-Remake",
+          "quote": "sentence: \"recast the band as US politicians\", \"make it snow\", \"turn everyone into cats\"."
+        },
+        {
+          "url": "https://huggingface.co/Viggle/Viggle-Remake",
+          "quote": "Remake is the \"Viggle-Animate v2\" previewed on the Viggle-Animate card: Animate replaces a character; Remake also"
+        },
+        {
+          "url": "https://huggingface.co/Viggle/Viggle-Remake",
+          "quote": "one 12–24 GB card"
+        },
+        {
+          "url": "https://huggingface.co/Viggle/Viggle-Remake",
+          "quote": "ComfyUI with an int8 or GGUF file, workflows by hand (no agent): Smaller GPUs"
+        },
+        {
+          "url": "https://huggingface.co/Viggle/Viggle-Remake",
+          "quote": "Node pack, workflows, and int8/GGUF files down to 12 GB: COMFYUI.md ."
+        },
+        {
+          "url": "https://huggingface.co/Viggle/Viggle-Remake",
+          "quote": "Each mode is a LoRA (rank 256) on MiniMax-H3's base transformer ; --mode picks one."
+        },
+        {
+          "url": "https://huggingface.co/Viggle/Viggle-Remake",
+          "quote": "--mode swap ( lora/swap ): replace people and characters, one or several at once."
+        },
+        {
+          "url": "https://huggingface.co/Viggle/Viggle-Remake",
+          "quote": "--mode edit ( lora/edit ): everything else: swap, remove or insert objects, change the background, weather or light."
+        },
+        {
+          "url": "https://huggingface.co/Viggle/Viggle-Remake",
+          "quote": "The weights, including the merged int8/ and gguf/ files, are a Model Derivative of MiniMax H3, so the"
+        },
+        {
+          "url": "https://huggingface.co/Viggle/Viggle-Remake",
+          "quote": "The code in inference/ , examples/ , comfyui/ and mcp/ is Apache 2.0"
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "tiny-voca：4.5M 参数的全开放英文 TTS",
+      "summary": "tiny-voca 是一个从零训练的小型英文 TTS 模型，含波形生成部分共 4,537,291 参数、18 MB，支持两个音色、24 kHz 采样率。README 称其在四线程 CPU 上约 70 倍实时运行，可用 PyTorch、ONNX Runtime 和 ONNX Runtime Web，代码、权重、训练配方与数据集全部开放。",
+      "tags": [
+        "模型",
+        "语音",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_fc24dadf6d",
+          "url": "https://github.com/n4ze3m/tiny-voca"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/n4ze3m/tiny-voca",
+          "quote": "tiny-voca Public Notifications You must be signed in to change notification settings Fork 0 ( 0 ) Star 5 ( 5 ) You must be signed in to star a repository About A 4.5M-parameter two-voice English text-to-speech model, trained from scratch tiny-voca.n4ze3m.com Topics onnx text-to-speech tts Resources"
+        },
+        {
+          "url": "https://github.com/n4ze3m/tiny-voca",
+          "quote": "tiny-voca is a small English text-to-speech model."
+        },
+        {
+          "url": "https://github.com/n4ze3m/tiny-voca",
+          "quote": "It has two voices, 4.5M"
+        },
+        {
+          "url": "https://github.com/n4ze3m/tiny-voca",
+          "quote": "parameters, and runs on a CPU or in the browser."
+        },
+        {
+          "url": "https://github.com/n4ze3m/tiny-voca",
+          "quote": "Small : 4,537,291 parameters, 18 MB, waveform generator included."
+        },
+        {
+          "url": "https://github.com/n4ze3m/tiny-voca",
+          "quote": "Fast : about 70x real time on four CPU threads."
+        },
+        {
+          "url": "https://github.com/n4ze3m/tiny-voca",
+          "quote": "Two voices : F2 (female) and M2 (male), American English, 24 kHz."
+        },
+        {
+          "url": "https://github.com/n4ze3m/tiny-voca",
+          "quote": "Runs anywhere : PyTorch, ONNX Runtime, and ONNX Runtime Web."
+        },
+        {
+          "url": "https://github.com/n4ze3m/tiny-voca",
+          "quote": "Open : code, weights, training recipe and dataset."
+        },
+        {
+          "url": "https://github.com/n4ze3m/tiny-voca",
+          "quote": "Trained from scratch."
+        },
+        {
+          "url": "https://github.com/n4ze3m/tiny-voca",
+          "quote": "The released weights took 7.7 hours on one RTX 4090."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "APEX 用条件偏移实现少步流式视频生成",
+      "summary": "清华大学团队提出 APEX，把 DMD 中独立的 fake-score network 换成生成器内部的条件偏移估计，用同一套参数分别做生成与伪分数估计。论文在 180 秒视频上报告，相比 S2-Avatar 指令遵循得分 3.856 对 3.831、视觉美学 0.641898 对 0.632606，相比 DMD 每 GPU 峰值显存低 4.4%、平均迭代时间短 9.2%。",
+      "tags": [
+        "论文",
+        "视频"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_04dc57421a",
+          "url": "https://huggingface.co/papers/2611.14033"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.14033",
+          "quote": "Papers arxiv:2611.14033 Copy markdown Few-Step Streaming Video Generation via Condition Shifting Published on Nov 10 · Submitted by Deyuan Liu on Nov 11 #1 Paper of the day · Tsinghua University Upvote 88 +80 Authors: Deyuan Liu , Jungang Li , Kaiwen Zheng , Kai Jiang , Jintao Chen , Yaole Wang , Mi"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.14033",
+          "quote": "ng Lin , Tao Lin , Jianfei Chen , Jun Zhu , Jintao Zhang Abstract APEX extends a streaming video generation method by replacing a separate fake-score network with condition shifting to estimate the generated distribution’s velocity field, improving instruction following and visual aesthetics while r"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.14033",
+          "quote": "Distribution Matching Distillation ( DMD ) supervises few-step generators with a separate fake-score network , which adds training memory and computation and must track the evolving generator."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.14033",
+          "quote": "We extend APEX to streaming video by using condition shifting to estimate the velocity field of the generated distribution within the generator."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.14033",
+          "quote": "The original text condition selects generation, while a shifted condition selects fake estimation using the same parameters."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.14033",
+          "quote": "This removes the independent fake network while retaining S2-Avatar 's frozen reference teacher , Self-Replay Forcing , and perceptual regularization ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.14033",
+          "quote": "We evaluate APEX on 180-second videos using three backbone evaluations per block and a one-step spatial Refiner , with a 70-case human study and a 320-case StreamAV-Bench comparison."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.14033",
+          "quote": "Compared with S2-Avatar , APEX achieves higher video instruction fulfillment on the Progressive track (3.856 versus 3.831) and higher visual aesthetics across both tracks (0.641898 versus 0.632606)."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.14033",
+          "quote": "Separate measurements under matched training settings show 4.4% lower peak allocated GPU memory per GPU and 9.2% shorter mean iteration time than DMD ."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "SparseRead：给 Agent 加一层稀疏阅读控制",
+      "summary": "SparseRead 是可复用的阅读控制层，无需改动 Agent 模型即可管控内容准入，包含 Read Intent Protocol、Adaptive Reader Backends 和带完整视图回退的 Budgeted Read Gate。论文称在六个模型和五种场景下最多减少 92.9% token 与 89.0% 墙钟时间，97% 的设置下任务质量持平或更好，Web 深度搜索任务 token 减少 31.0--43.0%。",
+      "tags": [
+        "论文",
+        "Agent"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_786f6d7094",
+          "url": "https://arxiv.org/abs/2608.22237"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2608.22237",
+          "quote": "Computer Science > Artificial Intelligence"
+        },
+        {
+          "url": "https://arxiv.org/abs/2608.22237",
+          "quote": "arXiv:2608.22237 (cs)"
+        },
+        {
+          "url": "https://arxiv.org/abs/2608.22237",
+          "quote": "Title: Read Less, Solve More: Token-Efficient Sparse Reading of External Content for AI Agents"
+        },
+        {
+          "url": "https://arxiv.org/abs/2608.22237",
+          "quote": "Authors: Zedong Liu , Jiaan Wu , Xinyang Ma , Le Xu , Kai Wang , Yuanchao Hu , Dingwen Tao , Guangming Tan View a PDF of the paper titled Read Less, Solve More: Token-Efficient Sparse Reading of External Content for AI Agents, by Zedong Liu and 7 other authors"
+        },
+        {
+          "url": "https://arxiv.org/abs/2608.22237",
+          "quote": "Abstract: Web-facing AI agents repeatedly access webpages, documents, repositories, and tool responses, yet reading interfaces often expose entire objects when only sparse evidence is needed."
+        },
+        {
+          "url": "https://arxiv.org/abs/2608.22237",
+          "quote": "We present SparseRead, a reusable reading control layer that governs content admission without modifying the agent model."
+        },
+        {
+          "url": "https://arxiv.org/abs/2608.22237",
+          "quote": "Its Read Intent Protocol tracks evolving needs and source coverage; Adaptive Reader Backends select how evidence is located and exposed; and the Budgeted Read Gate bounds cumulative raw exposure per episode with faithful full-view fallback."
+        },
+        {
+          "url": "https://arxiv.org/abs/2608.22237",
+          "quote": "Across six models, including Claude Opus 5, and five scenarios, SparseRead reduces total tokens by up to 92.9% and wall time by up to 89.0%, preserving or improving task quality in 97% settings."
+        },
+        {
+          "url": "https://arxiv.org/abs/2608.22237",
+          "quote": "On Web deep-search tasks, it reduces tokens by 31.0--43.0% and task completion time by 23.0--37.0%."
+        },
+        {
+          "url": "https://arxiv.org/abs/2608.22237",
+          "quote": "Ablations validate the three designs, while integration with three agent frameworks demonstrates portability."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Sage-Taiyi：用元认知架构做科学发现",
+      "summary": "上海人工智能实验室等提出 Sage-Taiyi，一个受元认知启发的架构，通过显式监控与控制修订对证据、假设和未解问题的理解，再据此调整研究目标与选择可复用的推理方法。在 Taiyi-Bench 的 265 个任务上，八项指标均排名第一，Overall 得分为 54.0，强于最强基线 AI Scientist-v2 的 47.9。",
+      "tags": [
+        "论文",
+        "Agent",
+        "推理"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_6249004e85",
+          "url": "https://huggingface.co/papers/2611.12762"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.12762",
+          "quote": "Papers arxiv:2611.12762 Copy markdown Sage-Taiyi: A Metacognitive Architecture for Scientific Discovery Published on Nov 9 · Submitted by Weida Wang on Nov 10 #3 Paper of the day · Shanghai AI Laboratory Upvote 58 +50 Authors: Weida Wang , Benteng Chen , Yigeng Jiang , Shuchen Pu , Weiping Shen , Zi"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.12762",
+          "quote": "n - i n s p i r e d a r c h i t e c t u r e t h a t u s e s a c c u m u l a t e d s c i e n t i f i c u n d e r s t a n d i n g t o g u i d e w h a t t o i n v e s t i g a t e n e x t a n d h o w t o i n v e s t i g a t e i t ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.12762",
+          "quote": "T h r o u g h e x p l i c i t m o n i t o r i n g a n d c o n t r o l , t h e s y s t e m r e v i s e s i t s u n d e r s t a n d i n g o f e v i d e n c e , a s s u m p t i o n s , a n d u n r e s o l v e d q u e s t i o n s , t h e n u s e s t h e s e a s s e s s m e n t s t o a d a p t r e s e a"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.12762",
+          "quote": "r c h t a r g e t s a n d s e l e c t r e u s a b l e r e a s o n i n g m e t h o d s ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.12762",
+          "quote": "O n T a i y i - B e n c h , a n A I c o - s c i e n t i s t i d e a t i o n b e n c h m a r k c o m p r i s i n g 2 6 5 t a s k s f r o m 5 0 p a p e r s a c r o s s t e n d i s c i p l i n e s , S a g e - T a i y i r a n k s f i r s t o n a l l e i g h t m e t r i c s o f h i s t o r i c a l r e d"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.12762",
+          "quote": "i s c o v e r y a n d o p e n - e n d e d i d e a t i o n , a c h i e v i n g a n O v e r a l l s c o r e o f 5 4 ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.12762",
+          "quote": "9 f o r t h e s t r o n g e s t b a s e l i n e , A I S c i e n t i s t - v 2 ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.12762",
+          "quote": "On Taiyi-Bench, an AI co-scientist ideation benchmark comprising 265 tasks from 50 papers across ten disciplines, Sage-Taiyi ranks first on all eight metrics of historical rediscovery and open-ended ideation, achieving an Overall score of 54.0 compared with 47.9 for the strongest baseline, AI Scient"
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "WorldFoundry：统一生成式世界模型的基础设施",
+      "summary": "WorldFoundry 是面向生成式世界模型的开源基础设施，覆盖视频、3D 和 4D、具身动作与交互式系统的可复现推理与评测。项目把模型与基准发现、运行时与资产准备、执行编排、产物管理和交互式可视化统一起来，并以显式清单和可追溯的评分卡区分执行就绪与评测结论。",
+      "tags": [
+        "论文",
+        "开源",
+        "工具"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_43430aa80d",
+          "url": "https://huggingface.co/papers/2611.10771"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.10771",
+          "quote": "Papers arxiv:2611.10771 Copy markdown WorldFoundry: Towards Unified Infrastructure for World Intelligence Published on Nov 7 · Submitted by Juanxi Tian on Nov 10 #2 Paper of the day · OpenEnvision Upvote 58 +50 Authors: Juanxi Tian , Jiadong Hou , Baiang Li , Xin Lin , Zhengbo Jiao , Weijia Zhang ,"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.10771",
+          "quote": "Yeying Jin , Truong Nguyen , Haitian Zheng , Zhifei Zhang , Jianfei Yang , Ming-Hsuan Yang , Felix Heide , Wei Xiong , Enze Xie , Wanhua Li Abstract WorldFoundry offers open-source infrastructure for reproducible inference and evaluation of generative world models across video, 3D/4D, embodied actio"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.10771",
+          "quote": "n, and interactive systems, with traceable evidence and benchmarks."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.10771",
+          "quote": "We present WorldFoundry, open-source infrastructure for reproducible inference and evaluation across video , 3D and 4D , embodied action , and interactive world systems ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.10771",
+          "quote": "WorldFoundry unifies model and benchmark discovery, runtime and asset preparation, execution orchestration , artifact management , and interactive visualization , while modality-specific adapters preserve native inputs, execution semantics, output representations, and evaluation protocols."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.10771",
+          "quote": "Explicit manifests, durable artifact contracts, and evidence-aware scorecards separate execution readiness from evaluative claims, making each claim traceable to its supporting artifacts."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.10771",
+          "quote": "The current catalog contains 270 model entries, 74 benchmarks, and 62 registered metric entries, with integration readiness and execution evidence recorded separately for each entry."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "SplatAnything：跨场景的前馈 3DGS 归一化方法",
+      "summary": "浙江大学团队提出 SplatAnything，用 Gaussian Spacing Normalization（GSNorm）把场景级高斯间距归一化，为高斯预测提供更一致的空间参照，缓解原有前馈 3DGS 中径向归一化与真实间距不匹配导致的监督歧义。论文同时建立了覆盖多数据集、输入稀疏度与外推视角的基准。",
+      "tags": [
+        "论文",
+        "图像"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_ddb900b266",
+          "url": "https://huggingface.co/papers/2611.08264"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.08264",
+          "quote": "Papers arxiv:2611.08264 Copy markdown SplatAnything: Gaussian Spacing Normalization for Feed-forward 3DGS across Arbitrary Scenes Published on Nov 5 · Submitted by hao yu on Nov 9 #3 Paper of the day · Zhejiang University Upvote 69 +61 Authors: Hao Yu , Zhenwei Wang , Yongzhen Hu , Yuning Gong , Jun"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.08264",
+          "quote": "ta Wu , Xiaowei Zhou , Hujun Bao , Tengfei Wang , Chunchao Guo , Sida Peng Abstract SplatAnything applies Gaussian Spacing Normalization to canonicalize scene-level Gaussian spacing, yielding more consistent supervision and improved feed-forward 3D Gaussian Splatting under varying scene scales and v"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.08264",
+          "quote": "Generated by deepseek-ai/DeepSeek-V4.1-Flash We identify a key limitation of existing feed-forward 3DGS methods: Gaussian attributes are typically predicted in a radial-distance-normalized space that canonicalizes a global radial statistic of the reconstructed geometry, while the spacing between nei"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.08264",
+          "quote": "ghboring Gaussian centers can still vary substantially across scene scale s and camera configurations ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.08264",
+          "quote": "This mismatch induces systematic shifts in Gaussian-scale targets , leading to ambiguous supervision."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.08264",
+          "quote": "To address this, we propose SplatAnything with Gaussian Spacing Normalization ( GSNorm ), which canonicalizes a robust scene-level statistic of Gaussian spacing to provide a more consistent spatial reference for Gaussian prediction."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.08264",
+          "quote": "To rigorously assess our method, we further establish a systematic benchmark spanning diverse datasets, input sparsity levels , and challenging extrapolated viewpoints ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.08264",
+          "quote": "SplatAnything is v3 of the InfiniSplat series ."
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Chrome DevTools MCP：给编码 Agent 的浏览器调试",
+      "summary": "ChromeDevTools 的 chrome-devtools-mcp 让编码 Agent（如 Claude、Cursor、Copilot）控制和检查运行中的 Chrome，既提供 MCP server 也提供 CLI。README 列出的能力包括记录性能 trace、分析网络请求与控制台消息、截图，以及用 Puppeteer 做可靠自动化。",
+      "tags": [
+        "工具",
+        "开源",
+        "Agent"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_1dd761cb69",
+          "url": "https://github.com/ChromeDevTools/chrome-devtools-mcp"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/ChromeDevTools/chrome-devtools-mcp",
+          "quote": "Chrome DevTools for agents ( chrome-devtools-mcp ) lets your coding agent (such as Antigravity, Claude, Cursor or Copilot)"
+        },
+        {
+          "url": "https://github.com/ChromeDevTools/chrome-devtools-mcp",
+          "quote": "control and inspect a live Chrome browser."
+        },
+        {
+          "url": "https://github.com/ChromeDevTools/chrome-devtools-mcp",
+          "quote": "Model-Context-Protocol (MCP) server and as a CLI ."
+        },
+        {
+          "url": "https://github.com/ChromeDevTools/chrome-devtools-mcp",
+          "quote": "Both give your AI"
+        },
+        {
+          "url": "https://github.com/ChromeDevTools/chrome-devtools-mcp",
+          "quote": "coding assistant access to the full power of Chrome DevTools for reliable"
+        },
+        {
+          "url": "https://github.com/ChromeDevTools/chrome-devtools-mcp",
+          "quote": "automation, in-depth debugging, and performance analysis."
+        },
+        {
+          "url": "https://github.com/ChromeDevTools/chrome-devtools-mcp",
+          "quote": "Get performance insights : Uses Chrome"
+        },
+        {
+          "url": "https://github.com/ChromeDevTools/chrome-devtools-mcp",
+          "quote": "DevTools to record"
+        },
+        {
+          "url": "https://github.com/ChromeDevTools/chrome-devtools-mcp",
+          "quote": "traces and extract actionable performance insights."
+        },
+        {
+          "url": "https://github.com/ChromeDevTools/chrome-devtools-mcp",
+          "quote": "Advanced browser debugging : Analyze network requests, take screenshots and"
+        },
+        {
+          "url": "https://github.com/ChromeDevTools/chrome-devtools-mcp",
+          "quote": "check browser console messages (with source-mapped stack traces)."
+        },
+        {
+          "url": "https://github.com/ChromeDevTools/chrome-devtools-mcp",
+          "quote": "Reliable automation ."
+        },
+        {
+          "url": "https://github.com/ChromeDevTools/chrome-devtools-mcp",
+          "quote": "puppeteer to automate actions in"
+        },
+        {
+          "url": "https://github.com/ChromeDevTools/chrome-devtools-mcp",
+          "quote": "Chrome and automatically wait for action results."
+        },
+        {
+          "url": "https://github.com/ChromeDevTools/chrome-devtools-mcp",
+          "quote": "npm i chrome-devtools-mcp@latest -g"
+        },
+        {
+          "url": "https://github.com/ChromeDevTools/chrome-devtools-mcp",
+          "quote": "chrome-devtools navigate_page 1 --url \" https://developers.chrome.com \""
+        },
+        {
+          "url": "https://github.com/ChromeDevTools/chrome-devtools-mcp",
+          "quote": "chrome-devtools take_screenshot 1 --filePath screenshot.png"
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Plannotator：面向编码 Agent 的本地审阅界面",
+      "summary": "Plannotator 是一个基于浏览器的本地审阅界面，让 Agent 把计划、规格、HTML 原型或代码评审推给开发者，开发者标注、评论后一键把反馈发回 Agent 会话。项目支持 Claude Code、Codex、Gemini CLI、OpenCode 等，可通过插件、hook 和命令接入，也可经 MCP 连接其他 Agent。",
+      "tags": [
+        "工具",
+        "开源",
+        "Agent"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_6797d826b5",
+          "url": "https://github.com/backnotprop/plannotator"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/backnotprop/plannotator",
+          "quote": "Everything you need to annotate and stay in the loop with your agents"
+        },
+        {
+          "url": "https://github.com/backnotprop/plannotator",
+          "quote": "Annotate plans, specs, markdown, HTML, and other interactive artifacts."
+        },
+        {
+          "url": "https://github.com/backnotprop/plannotator",
+          "quote": "Review diffs and PRs."
+        },
+        {
+          "url": "https://github.com/backnotprop/plannotator",
+          "quote": "Send feedback to your agent."
+        },
+        {
+          "url": "https://github.com/backnotprop/plannotator",
+          "quote": "⭐️ NEW: Plannotator Inbox is the missing review layer between you and multi-agent work."
+        },
+        {
+          "url": "https://github.com/backnotprop/plannotator",
+          "quote": "It surfaces decisions, prototypes, variations, plans, and everything you need to stay in the loop."
+        },
+        {
+          "url": "https://github.com/backnotprop/plannotator",
+          "quote": "Plannotator is a local, browser-based review surface for AI coding agents: Claude Code, Codex, Copilot CLI, Gemini CLI, OpenCode, Kiro, Droid, Amp, DeepSeek Harness, and Pi."
+        },
+        {
+          "url": "https://github.com/backnotprop/plannotator",
+          "quote": "It plugs directly into your agent through plugins, hooks and commands."
+        },
+        {
+          "url": "https://github.com/backnotprop/plannotator",
+          "quote": "When the agent proposes a decision, plan, html, or finishes working, the app opens in your browser and you mark it up, comment, and send feedback directly to the agent for it to act on it."
+        },
+        {
+          "url": "https://github.com/backnotprop/plannotator",
+          "quote": "The Plannotator Inbox is one local window where your agents leave you messages, questions, files, and guided reviews while they keep working."
+        },
+        {
+          "url": "https://github.com/backnotprop/plannotator",
+          "quote": "Nothing holds an agent session open while you do, and your reply goes back to the session that asked."
+        },
+        {
+          "url": "https://github.com/backnotprop/plannotator",
+          "quote": "Claude Code, Pi, and OpenCode connect through Plannotator's plugins, and your replies arrive as their next turn."
+        },
+        {
+          "url": "https://github.com/backnotprop/plannotator",
+          "quote": "Any other agent reaches it over MCP with plannotator inbox mcp , and plannotator inbox --help is the guide an agent reads."
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "ARC-1.0：跨云端与本地模型的路由决策模型",
+      "summary": "Rayline 发布 ARC-1.0，一个 0.6B 的决策模型：读取 Agent 对话，输出选择模型与推理强度的信号，由应用结合可用模型、价格和策略决定下一次请求怎么跑。它把预测与策略分开——预测任务成功率和 token 用量，应用自行提供价格与权衡；模型卡称混合配置在六个基准上保留 Opus 5.5 的 97.5% 质量、成本低 92.9%。",
+      "tags": [
+        "工具",
+        "模型",
+        "Agent"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_8271ac8521",
+          "url": "https://huggingface.co/rayline-ai/ARC-1.0"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/rayline-ai/ARC-1.0",
+          "quote": "A decision model for routing AI agents across cloud and local models."
+        },
+        {
+          "url": "https://huggingface.co/rayline-ai/ARC-1.0",
+          "quote": "ARC—the Adaptive Routing Controller—reads an agent’s conversation and produces signals for choosing a model and its reasoning effort."
+        },
+        {
+          "url": "https://huggingface.co/rayline-ai/ARC-1.0",
+          "quote": "Applications combine those signals with their available models, prices, and policies to decide how to handle the next request."
+        },
+        {
+          "url": "https://huggingface.co/rayline-ai/ARC-1.0",
+          "quote": "ARC separates predictions from policy."
+        },
+        {
+          "url": "https://huggingface.co/rayline-ai/ARC-1.0",
+          "quote": "It predicts success and token usage; the application supplies model prices and decides how to balance quality, cost, and local execution."
+        },
+        {
+          "url": "https://huggingface.co/rayline-ai/ARC-1.0",
+          "quote": "Updating prices does not require retraining those predictors when the model and serving configuration stay fixed."
+        },
+        {
+          "url": "https://huggingface.co/rayline-ai/ARC-1.0",
+          "quote": "Compare eligible models by their predicted probability of completing a task."
+        },
+        {
+          "url": "https://huggingface.co/rayline-ai/ARC-1.0",
+          "quote": "Estimate uncached input, cache reads, cache writes, and output; apply the prices relevant to your deployment."
+        },
+        {
+          "url": "https://huggingface.co/rayline-ai/ARC-1.0",
+          "quote": "Compare the expected benefit and cost of supported reasoning settings within a model."
+        },
+        {
+          "url": "https://huggingface.co/rayline-ai/ARC-1.0",
+          "quote": "Identify the presence and types of sensitive information in the supplied input."
+        },
+        {
+          "url": "https://huggingface.co/rayline-ai/ARC-1.0",
+          "quote": "Classify requested operations and domains, allowing multiple labels."
+        },
+        {
+          "url": "https://huggingface.co/rayline-ai/ARC-1.0",
+          "quote": "Choose a policy"
+        },
+        {
+          "url": "https://huggingface.co/rayline-ai/ARC-1.0",
+          "quote": "Sage and Swift are preset configurations of the same routing model."
+        },
+        {
+          "url": "https://huggingface.co/rayline-ai/ARC-1.0",
+          "quote": "Their utility policy chooses the eligible model with the highest predicted success value minus expected cost:"
+        },
+        {
+          "url": "https://huggingface.co/rayline-ai/ARC-1.0",
+          "quote": "Utility = V × predicted success − expected cost"
+        },
+        {
+          "url": "https://huggingface.co/rayline-ai/ARC-1.0",
+          "quote": "ARC Sage · V = 4.5"
+        },
+        {
+          "url": "https://huggingface.co/rayline-ai/ARC-1.0",
+          "quote": "ARC Swift · V = 0.1"
+        },
+        {
+          "url": "https://huggingface.co/rayline-ai/ARC-1.0",
+          "quote": "Uses an eligible local model when it clears a chosen predicted-success threshold; otherwise applies the configured fallback policy."
+        },
+        {
+          "url": "https://huggingface.co/rayline-ai/ARC-1.0",
+          "quote": "You can supply your own value of success, model prices, eligibility rules, and local threshold."
+        },
+        {
+          "url": "https://huggingface.co/rayline-ai/ARC-1.0",
+          "quote": "Across six benchmarks, the paper’s hybrid configuration retains 97.5% of Opus 5.5’s quality at 92.9% lower cost ."
+        },
+        {
+          "url": "https://huggingface.co/rayline-ai/ARC-1.0",
+          "quote": "This uses DeepSeek V4.1 Flash and a multiple-DGX-Spark deployment setup, with a 0.85 prefer-local threshold."
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Univer：构建自有 AI 办公套件的 Office SDK",
+      "summary": "Univer 是构建 Office 应用的 SDK，提供表格、文档、演示、关系表、画布和 PDF 的编辑、计算、协作与文件处理能力，可嵌入产品或供 Agent 使用。仓库以 Apache-2.0 开放 Web SDK 的核心架构与引擎实现，包括内容模型、命令系统、公式与渲染引擎、Facade APIs 以及 Sheets 与 Docs 编辑能力。",
+      "tags": [
+        "工具",
+        "开源",
+        "Agent"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_12221ab3bb",
+          "url": "https://github.com/dream-num/univer"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/dream-num/univer",
+          "quote": "univer Public Sponsor Notifications You must be signed in to change notification settings Fork 2.3k ( 2.3k ) Star 25k ( 25k ) You must be signed in to star a repository About Build your own AI office with Univer Office SDK."
+        },
+        {
+          "url": "https://github.com/dream-num/univer",
+          "quote": "Bring editing, calculation, collaboration, and file processing into your product for people and AI agents."
+        },
+        {
+          "url": "https://github.com/dream-num/univer",
+          "quote": "Built on an extensible open-source core."
+        },
+        {
+          "url": "https://github.com/dream-num/univer",
+          "quote": "Build your own AI office with Univer Office SDK."
+        },
+        {
+          "url": "https://github.com/dream-num/univer",
+          "quote": "Start with open-source Sheets and Docs, then connect your own application or agent."
+        },
+        {
+          "url": "https://github.com/dream-num/univer",
+          "quote": "Univer is an Office SDK for building Office applications inside your own product."
+        },
+        {
+          "url": "https://github.com/dream-num/univer",
+          "quote": "It provides Office editing, calculation, collaboration, and file processing for people and existing agents, using your data and permissions."
+        },
+        {
+          "url": "https://github.com/dream-num/univer",
+          "quote": "The product family covers spreadsheets, documents, presentations, relational tables, canvases, and PDFs."
+        },
+        {
+          "url": "https://github.com/dream-num/univer",
+          "quote": "Univer Office SDK has three parts:"
+        },
+        {
+          "url": "https://github.com/dream-num/univer",
+          "quote": "This repository provides the Web SDK's core architecture and engine implementations under Apache-2.0 : content models and snapshot formats, plugin and dependency management, the command system, formula and rendering engines, Facade APIs, UI foundation, and Sheets and Docs editing capabilities."
+        },
+        {
+          "url": "https://github.com/dream-num/univer",
+          "quote": "Agents can use the same open-source APIs; your application supplies the model and tool orchestration."
+        }
+      ]
+    }
+  ],
+  "research": [
+    {
+      "via": "webfetch",
+      "url": "https://github.com/ChromeDevTools/chrome-devtools-mcp"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://claude.com/resources/articles/building-always-on-agents"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/backnotprop/plannotator"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/datamllab/HarborRL"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://arxiv.org/abs/2603.11021"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/n4ze3m/tiny-voca"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.14033"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.12762"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.10771"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.08264"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://arxiv.org/abs/2608.22237"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/rayline-ai/ARC-1.0"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://cohere.com/blog/cohere-expands-its-sovereign-ai-platform-with-aisle-and-cubic"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://developer.nvidia.com/blog/when-one-gpu-isnt-enough-serving-glm-5-3-across-two-nvidia-dgx-stations-with-vllm/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/ewhacc/tandem.cpp"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/dream-num/univer"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/higurashi-ai/Haru-4B"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/Cactus-Compute/mirage"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/KittenML/kitten-tts-2-mini"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://maccus.fr/en/ibm-granite-prompt-injection/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/Viggle/Viggle-Remake"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/FusionCow/Sulphur-3"
+    }
+  ],
+  "validation": {
+    "validated_at": "2026-11-15T04:39:44+00:00",
+    "checked_links": true,
+    "dropped": [],
+    "warnings": [
+      "5 paper items (target 2-4)"
+    ]
+  }
+}
