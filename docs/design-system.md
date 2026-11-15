@@ -232,7 +232,7 @@ uv run --no-project --with fonttools --with brotli python docs/assets/readme/sou
 
 点开后，按钮左边滑出一条横向工具栏 `.tools`（向左滑入 8px，.25s，`--card` 底、`--shadow-pop`、`--r-pop`）。点外面或按 Esc 收起。工具栏只放图标，悬停时图标上方弹出名字，样式和左侧条的气泡一样；触屏上没有名字。
 
-- 生成过程：lucide `workflow` 图标，只在中文页、且这期有生成过程时出现。后面一条竖线分隔。在生成过程页上它是当前页，版本都不加底色。
+- 生成过程：lucide `workflow` 图标，这期有生成过程时出现（中英文页都有）。后面一条竖线分隔。在生成过程页上它是当前页，版本都不加底色。
 - 版本：这期有 Beta 版时列出全部版本，正式版排第一，都用厂商 logo（原色 16px，`.logo16`；正式版用 Claude）。当前版本加 `--line` 底色。logo 对应的网站在 `web/src/lib/models.ts` 的 `EDITION_HOSTS`，新加 Beta 版时补一行，没补的显示首字母。
 
 以后要加隐藏功能，就往这条工具栏里加图标。
