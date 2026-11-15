@@ -1,9 +1,6 @@
 // @ts-check
 import { defineConfig } from "astro/config"
 
-import react from "@astrojs/react"
-import tailwindcss from "@tailwindcss/vite"
-
 // Where the site is served. The Pages workflow passes the address configure-pages reports;
 // `daily export` (npm run data) reads it too, for the feed's links. For a local preview of the
 // build, use SITE_URL=http://localhost:8000/.
@@ -19,10 +16,5 @@ export default defineConfig({
     locales: ["zh", "en"],
     defaultLocale: "zh",
     routing: { prefixDefaultLocale: false },
-  },
-  integrations: [react()],
-
-  vite: {
-    plugins: [tailwindcss()],
   },
 })

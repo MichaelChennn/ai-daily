@@ -10,7 +10,6 @@ issue #43 重设计后的网页样式：每期页（含 beta 页）、归档页�
 - 卡片的动效只用整像素平移，不旋转，不缩放，不做 3D，否则文字会发虚。也不加高光。
 - 厂商 logo 一律用原色。正文不用浅灰色。
 - 交互连续点击时必须立即响应。不加加载进度条。
-- 新页面不要用 Tailwind：它的 preflight 会改默认样式。
 
 ## 品牌
 
@@ -306,7 +305,7 @@ uv run --no-project --with fonttools --with brotli python docs/assets/readme/sou
 
 ## 新页面接入清单
 
-1. 用 `PressLayout`。样式只用 `press.css`：通过 `import x from "…css?url"` 加手写 `<link>` 引入，不要在 JS 里直接 `import` CSS，否则会把旧页面的 Tailwind 一起带进来。
+1. 用 `PressLayout`。样式只用 `press.css`，由 `PressLayout` 通过 `import x from "…css?url"` 加手写 `<link>` 引入。
 2. 页面结构：`Wordmark` + 左侧条（`SectionRail`，或者不需要时只放 `RailIcons`）+ `main` + `PressFooter`。
 3. 颜色、字号、圆角、阴影都用 token。需要新的值时，先确认现有档位确实不够，再在 `:root` 里加 token，并更新这份文档。
 4. 卡片用 `.face`，标题用对应档位的宋体字号，日期和数字用 `--f-mono`。
