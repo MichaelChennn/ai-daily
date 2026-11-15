@@ -408,7 +408,8 @@ function checks(c: Channel, steps: Step[], start: number | null, nodes: FlowNode
           name: k.en.name,
           at,
           num: t.count(s.fed, kept, "i"),
-          rule: k.en.rule,
+          // only the main edition is published in English: say so on the other routes
+          rule: c.main ? k.en.rule : `${k.en.rule}<br>${k.en.notMain(!!c.adopt.find((a) => a.edition === "en")?.adopted)}`,
           cuts: d.length ? [{ label: k.en.cut(d.length), items: d }] : [],
           flat,
         })
@@ -567,6 +568,9 @@ const zh = {
       name: "写英文版",
       rule: "中文版通过后，照同一批原文另写英文版（不是翻译），再检查一次。<br>英文版删掉的不影响中文版。",
       cut: (n: number) => `${n} 条英文版删掉`,
+      /** On a route that did not end up the main edition; `first`: it went out first, then was replaced. */
+      notMain: (first: boolean) =>
+        `只有成为正式版时才会发布英文版，${first ? "这一版先发出过，正式版通过后被换掉。" : "这次没有用上。"}`,
     },
   },
   adopt: {
@@ -699,6 +703,8 @@ const en: Copy = {
       name: "Write the English edition",
       rule: "Once the Chinese edition passed, an English one was written from the same originals (not translated) and checked again.<br>What it removes doesn't change the Chinese edition.",
       cut: (n) => `${n} removed from the English edition`,
+      notMain: (first) =>
+        `Only the main edition is published in English; ${first ? "this one went out first and was replaced once the main edition passed." : "this one wasn't used."}`,
     },
   },
   adopt: {
