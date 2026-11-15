@@ -33,6 +33,8 @@ export type Step = {
   step: string
   label: string
   at: string | null
+  /** How many items the round was handed; null for the steps that do not check items. */
+  fed: number | null
   kept?: number | null
   /** The items that passed this round, with the candidates each was written from. */
   passed?: Passed[]
@@ -54,6 +56,8 @@ export type Channel = {
   main: boolean
   recorded: boolean
   scored: boolean
+  /** When the route's run began; null where it was not recorded. */
+  started_at: string | null
   failure: { step: string; label: string; error: string } | null
   funnel: { label: string; value: number }[]
   steps: Step[]
@@ -70,6 +74,8 @@ export type Process = {
     already_published: number | null
     candidates: number | null
   }
+  /** The candidates an earlier issue already had, with the issue that had them. */
+  already_published: { title: string; url: string; published_on: string }[]
   sources: {
     id: string
     name: string

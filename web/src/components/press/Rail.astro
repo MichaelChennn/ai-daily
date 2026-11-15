@@ -1,19 +1,23 @@
 ---
 import { type Lang, strings } from "@/lib/i18n"
 import { addDays, issueHref, issuesIn, pageHref } from "@/lib/issues"
+import { processes, processHref } from "@/lib/process"
 import RailIcons from "./RailIcons.astro"
 
 interface Props {
   /** The issue on this page. */
   date: string
   lang: Lang
+  /** On the issue's 生成过程 page: the ticks go to each issue's 生成过程 where it has one, and the
+   * arrow above them back to this issue. */
+  process?: boolean
 }
 
 // The timeline on the left, after Stripe Press's book rail: one tick per calendar day from the
 // newest issue at the top down to the first, 20 at a time (the page script slides the window). A
 // day without an issue keeps its tick but is not a link. Above it, the arrow up to the newest
-// issue; below, the archive and sources pages.
-const { date, lang } = Astro.props
+// issue (on a 生成过程 page, back to its issue); below, the archive and sources pages.
+const { date, lang, process = false } = Astro.props
 const t = strings[lang].press
 const issues = issuesIn(lang)
 const latest = issues[0].date
@@ -23,19 +27,22 @@ const days: string[] = []
 for (let d = latest; d >= issues.at(-1)!.date; d = addDays(d, -1)) days.push(d)
 const W = Math.min(20, days.length)
 const label = (d: string) => t.tickDay(new Date(`${d}T00:00:00Z`))
+const made = new Set(process ? processes.map((p) => p.date) : [])
+const tickHref = (d: string) => (made.has(d) ? processHref(d) : d === latest ? home : issueHref(d, lang))
+const ret = process ? { href: issueHref(date, lang), label: t.backIssue } : { href: home, label: t.latest }
 ---
 
-<nav class:list={["rail", { "off-latest": date !== latest }]} id="rail" aria-label={t.rail} style={`--W:${W}`} data-current={date} data-latest={latest}>
-  <a class="ret" id="ret" href={home} aria-label={t.latest} tabindex={date === latest ? -1 : undefined}>
+<nav class:list={["rail", { "off-latest": date !== latest, back: process }]} id="rail" aria-label={t.rail} style={`--W:${W}`} data-current={date} data-latest={latest}>
+  <a class="ret" id="ret" href={ret.href} aria-label={ret.label} tabindex={date === latest && !process ? -1 : undefined}>
     <svg width="18" height="18" viewBox="0 0 19 20" fill="none"><path d="M9.11 .89v16.89" stroke-width="3" stroke-miterlimit="10"></path><path d="M1.06 9.83l8.05 8.05 8.04-8.05" stroke-width="3" stroke-miterlimit="10"></path></svg>
-    <span class="il">{t.latest}</span>
+    <span class="il">{ret.label}</span>
   </a>
   <div class="ticks" id="ticks">
     <div class="ticks-inner" id="ticksInner">
       {
         days.map((d) =>
           headlines.has(d) ? (
-            <a class:list={["tick", { active: d === date }]} data-iso={d} href={d === latest ? home : issueHref(d, lang)} aria-label={d} aria-current={d === date ? "page" : undefined}>
+            <a class:list={["tick", { active: d === date }]} data-iso={d} href={tickHref(d)} aria-label={d} aria-current={d === date ? "page" : undefined}>
               <div class="fill"></div>
               <div class="label"><span class="d">{label(d)}</span><span class="t">{headlines.get(d)}</span></div>
             </a>

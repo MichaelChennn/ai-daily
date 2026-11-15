@@ -1,0 +1,73 @@
+---
+import type { Cut } from "@/lib/flow"
+
+interface Props {
+  cut: Cut
+}
+
+// 「N 条被过滤 ›」 on a 生成过程 step, and the list it opens. Up to FULL rows show in full; more
+// scroll in a box about five rows tall, and its 展开 button opens the whole list in the page's
+// dialog, with a search box (and chips by `groups`: 原因, 期号). Without items it is a plain pill.
+const FULL = 5
+const { cut } = Astro.props
+const items = cut.items ?? []
+const scroll = items.length > FULL
+const counts = new Map<string, number>()
+for (const i of items) counts.set(i.group ?? "", (counts.get(i.group ?? "") ?? 0) + 1)
+const chips = cut.groups && scroll ? [...counts].sort((a, b) => b[1] - a[1]) : []
+---
+
+{
+  items.length === 0 ? (
+    <p class="cut flat">{cut.label}</p>
+  ) : (
+    <>
+      <button class="cut" aria-expanded="false">
+        <span>{cut.label}</span>
+        <span class="chev" aria-hidden="true">›</span>
+      </button>
+      <div class="fold">
+        <div>
+          <div class:list={["bx", { scroll }]}>
+            {scroll && (
+              <>
+                <button class="bx-x" aria-haspopup="dialog" aria-label={`展开全部 ${items.length} 条`}>
+                  <span>展开</span>
+                  <svg viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><path d="M7 1h4v4M5 11H1V7M11 1 7.5 4.5M1 11l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                </button>
+                <div class="bx-h">
+                  <input class="bx-q" type="search" placeholder="搜索标题或信源" aria-label="搜索" />
+                  {chips.length > 0 && (
+                    <div class="chips" role="group" aria-label={`按${cut.groups}筛`}>
+                      <button class="g" aria-pressed="true" data-g="">全部 {items.length}</button>
+                      {chips.map(([g, n]) => (
+                        <button class="g" aria-pressed="false" data-g={g}>{g} {n}</button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </>
+            )}
+            {cut.note && <p class="bx-n">{cut.note}</p>}
+            <ul class="list">
+              {items.map((i) => (
+                <li data-g={i.group ?? ""}>
+                  {i.source && <span class="s">{i.source}</span>}
+                  <span class="t">{i.title}</span>
+                  {i.why && (i.href ? <a class="why" href={i.href}>{i.why}</a> : <span class="why">{i.why}</span>)}
+                </li>
+              ))}
+            </ul>
+            {scroll && <p class="bx-none" hidden>没有符合的条目</p>}
+            <div class="bx-f">
+              <button class="bx-up">
+                <span>收起</span>
+                <svg viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><path d="M2.5 7.5 6 4l3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" /></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  )
+}

@@ -9,13 +9,16 @@ false: the page marks the rest 当时未记录.
   main         the route whose digest is the main issue (daily.routes.key): "claude", "api.<slug>",
                or "fallback"
   funnel       filtered (null: not recorded), raw, after_url_merge, already_published, candidates
+  already_published[]
+               title, url, published_on: the candidates an earlier issue already had
   sources[]    id, name, status, count, error, filtered {reason: count} or null
   filtered[]   source, name, items[] {title, url, reason, value}: the fetchers' 过滤, by source;
                null when not recorded
   channels[]   id ("claude", "api.<slug>"), label, model, main, recorded, scored,
-               failure {step, label, error} or null,
+               started_at (null: not recorded), failure {step, label, error} or null,
                funnel[] {label, value}, adopt[],
-               steps[] {step, label, at, kept, passed[], dropped[], highlights[], errors[]}
+               steps[] {step, label, at, fed, kept, passed[], dropped[], highlights[], errors[]}
+    fed        how many items the round was handed; null for the steps that do not check items
     passed[]   title, candidates[]
     dropped[]  title, candidates[], reasons[]
     highlights[]
@@ -87,6 +90,10 @@ def issue_process(
             "already_published": stats.get("dropped_already_published"),
             "candidates": stats.get("candidates"),
         },
+        "already_published": [
+            {"title": d.get("title"), "url": d.get("url"), "published_on": d.get("published_on")}
+            for d in candidates.get("dropped") or []
+        ],
         "sources": [
             {
                 "id": s["id"],
@@ -149,6 +156,7 @@ def _channel(
         "main": _main_id(main) == cid,
         "recorded": record is not None,
         "scored": bool(record and record.get("scores")),
+        "started_at": (record or {}).get("started_at"),
         "failure": {**failure, "label": STEP_LABELS.get(failure.get("step"), failure.get("step"))}
         if failure
         else None,
@@ -210,12 +218,18 @@ def visible_steps(steps: list[dict[str, Any]]) -> list[dict[str, Any]]:
 
 def _step(s: dict[str, Any], highlights: list[str]) -> dict[str, Any]:
     name = s.get("step")
-    result: dict[str, Any] = {"step": name, "label": STEP_LABELS.get(name, name), "at": s.get("at")}
+    result: dict[str, Any] = {
+        "step": name,
+        "label": STEP_LABELS.get(name, name),
+        "at": s.get("at"),
+        "fed": None,
+    }
     if "items" in s and name == "self_check":
         result.update(kept=None, dropped=[{**i, "reasons": [i.get("reason")]} for i in s["items"]])
     elif "items" in s:
         items = s["items"]
         result.update(
+            fed=len(items),
             kept=sum(1 for i in items if not i.get("reasons")),
             passed=[
                 {"title": i.get("title"), "candidates": i.get("candidates") or []}

@@ -208,3 +208,36 @@ def test_process_data_puts_each_highlight_error_under_its_highlight(issue_dir):
     assert step["highlights"] == [{"text": data["highlights"][1], "missing": ["Qwen9", "40", "9"]}]
     assert [p["title"] for p in step["passed"]] == [item["title"] for item in data["items"]]
     assert all(p["candidates"] for p in step["passed"])
+
+
+def test_process_data_has_what_the_flow_chart_counts(issue_dir):
+    """The page's flow chart: what was already published, when each route started, and how many
+    items each check round was handed."""
+    published = {"id": "c_old", "title": "旧闻", "url": "https://old.example", "published_on": "2026-10-18"}
+    candidates = json.loads((issue_dir / "candidates.json").read_text())
+    _write(issue_dir / "candidates.json", {**candidates, "dropped": [published]})
+    folder = IssueDir(issue_dir)
+    trace.record_scores(folder, "claude", CANDIDATES, {})
+    dropped = [{"candidates": ["c_hn"], "title": "有人在生产环境用 MCP 吗", "reason": "只是提问"}]
+    trace.record_self_check(folder, "claude", CANDIDATES, dropped)
+    data = _digest()
+    data["items"][1]["summary"] = "新版本速度提升 40%。"
+    _write(issue_dir / "digest.json", data)
+    _cli(issue_dir, "validate", "--drop-invalid")
+    api = _digest(channel="api", model=MODEL)
+    _write(
+        issue_dir / "digest.api.deepseek.json",
+        digest.apply_report(api, digest.validate(api, CANDIDATES), True),
+    )
+
+    result = _process(issue_dir)
+    assert result["already_published"] == [
+        {"title": "旧闻", "url": "https://old.example", "published_on": "2026-10-18"}
+    ]
+    claude, deepseek = result["channels"]
+    assert claude["started_at"] == _trace(issue_dir)["started_at"] and claude["started_at"]
+    assert deepseek["started_at"] is None  # no trace
+    self_check, final = claude["steps"]
+    assert self_check["fed"] is None  # its items are the ones it dropped
+    assert final["fed"] == len(data["items"])
+    assert deepseek["steps"][0]["fed"] == len(api["items"])  # from its digest's validation

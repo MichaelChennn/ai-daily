@@ -18,9 +18,10 @@ const { title, description, canonical = Astro.url.pathname } = Astro.props
 const lang = langOf(Astro.currentLocale)
 const t = strings[lang]
 // The same page in both languages, for search engines and for the redirect below. Not on a beta
-// page (the English site has none) nor on the 404 page, which stands in for any missing path.
+// page (the English site has none), nor yet on a 生成过程 page (#63), nor on the 404 page, which
+// stands in for any missing path.
 const page = pagePath(Astro.url.pathname, lang)
-const bilingual = canonical !== null && !/\/beta\//.test(page)
+const bilingual = canonical !== null && !/\/(beta|process)\//.test(page)
 const alternates = bilingual
   ? [
       { hreflang: "zh-CN", href: pageHref(page) },

@@ -23,6 +23,8 @@
   const DAYS = ticks.map((t) => t.dataset.iso)
   const current = rail.dataset.current
   const latest = rail.dataset.latest
+  // on a 生成过程 page the arrow goes back to its issue, not to the newest one
+  const back = rail.classList.contains("back")
   const W = Math.min(20, DAYS.length) // visible ticks, fixed like Stripe's book count
   const EDGE = 4 // clicking one of the 4 ticks nearest an edge scrolls the window
   const LAND = 7 // ...so that tick lands 7 from that edge
@@ -90,7 +92,7 @@
   // Go to an issue: the same one scrolls back to the top, another is a page load that carries
   // the window over.
   function go(link, to) {
-    if (link.dataset.iso === current || (link === ret && current === latest)) {
+    if (link.dataset.iso === current || (link === ret && current === latest && !back)) {
       window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" })
       if (to !== start) {
         start = to
@@ -132,14 +134,15 @@
   // Stripe: returnButton mouseenter -> handleMouseEnterIndicator(-1), docked just above the first tick
   ret.addEventListener("mouseenter", () => dock(start - 1))
   ret.addEventListener("mouseleave", undock)
-  // back to the newest issue, with the window scrolled back to the top
+  // back to the newest issue, with the window scrolled back to the top; on a 生成过程 page, back
+  // to its issue with the window where it is
   const goLatest = (e) => {
     if (!plainClick(e)) return
     e.preventDefault()
-    go(ret, 0)
+    go(ret, back ? start : 0)
   }
   ret.addEventListener("click", goLatest)
-  $("#logo").addEventListener("click", goLatest)
+  if (!back) $("#logo").addEventListener("click", goLatest)
 
   // wheel over the rail scrolls the window a day at a time
   let wheelAcc = 0
