@@ -2,116 +2,105 @@
 
 ## 今日要点
 
-- Claude 官方梳理了常驻 Agent 的五个核心构件：事件收件箱、定时器、记忆、权限和发件箱，为自建长时运行 Agent 提供了架构参考。
-- IBM Granite 团队开源了带 LLMON 标注格式的预览模型 granite-4.1-3b-llmon-preview 与 granite-4.1-8b-llmon-preview，用于抵抗文档中的间接提示注入。
-- 开源推理侧，tandem.cpp 为 llama.cpp 提供 MoE 卸载补丁并新增 AMD ROCm 支持，HarborRL 则更新了弹性网关与免 SSH 集群部署。
+- IBM 发布 Granite 4.1 LLMON 预览模型，用标记语言区分指令和数据来防御提示注入。
+- 小型开源语音模型扎堆：Kitten TTS 2、全双工对话模型 Haru-4B 和 4.5M 参数的 tiny-voca。
+- NVIDIA 演示两台 DGX Station 用 vLLM 服务 GLM-5.3，峰值吞吐 607.8 tok/s。
 
 ## 🔥 头条
 
-### Claude 官方详解常驻 Agent 的五个核心构件
+### IBM 发布 Granite 4.1 LLMON 预览模型，专防提示注入
 
-Claude 博客把常驻 Agent 的实现拆成五个核心构件：事件收件箱、定时器、记忆、权限和发件箱，并说明它们如何组合成跨会话、有状态的主动型 Agent。文中称新模型判断力更好、推理成本下降，Opus 5.5 在某长程编码基准上每个已解任务成本比 Opus 5 低 78%。这套划分可直接作为自建常驻 Agent 的架构参考。
+IBM Granite 团队发布 granite-4.1-3b-LLMON-preview 和 granite-4.1-8b-LLMON-preview 两个实验性预览模型，用一种叫 LLMON（LLM Object Notation）的标记语言把用户指令和模型读取的数据分开标注。IBM 称在 OPI 基准上 LLMON 几乎消除了这类注入问题，比测试过的最佳前沿模型多挡住 47% 的攻击，通用能力与 Granite 4.1 Instruct 持平。做 RAG 和工具调用 Agent 的开发者可以拿它评估“文档里藏指令”的风险，但官方明确说只适合探索和评估，不要用于生产。
+
+来源：[Hugging Face Blog: LLMON](https://huggingface.co/blog/ibm-granite/llmon-an-llm-native-markup-language-now-in-granite) · [maccus.fr](https://maccus.fr/en/ibm-granite-prompt-injection/)　`模型` `安全` `开源`
+
+### KittenML 发布 Kitten TTS 2 系列小型语音合成模型
+
+Kitten TTS 2 分 Mini、Nano、Pico 三个规格：Mini 有 82M 参数，支持 16 种语言、118 种音色和 24 kHz 输出，int8 的 ONNX 权重只有 82.7 MB，在 CPU 上运行且不需要 PyTorch；Nano 和 Pico 每个语言模型分别是 17M 和 7.2M 参数。模型、音色包和 G2P 文件都采用 Apache-2.0，pip install kittenml 即可调用，适合要在端侧或没有 GPU 的服务器上加语音输出的应用。
+
+来源：[Hugging Face](https://huggingface.co/KittenML/kitten-tts-2-mini)　`语音` `开源` `模型`
+
+### NVIDIA 教程：两台 DGX Station 用 vLLM 跑 GLM-5.3
+
+NVIDIA 开发者博客演示用两台 DGX Station 以张量并行（TP=2）提供 GLM-5.3 NVFP4 服务：约 464 GB 的检查点超过单块 GB300 的 252 GB HBM3e，两块 GPU 各存约一半权重，通过一个 OpenAI 兼容接口对外服务。在 SPEED-Bench Coding 上，并发 16 时总吞吐达到峰值 607.8 tok/s，并发 32 时回落到 385.0 tok/s、平均请求延迟 453.5 s。想在本地部署超大 MoE 模型的团队可以照这套双机配置做，也要注意并发数是主要的调优点。
+
+来源：[developer.nvidia.com](https://developer.nvidia.com/blog/when-one-gpu-isnt-enough-serving-glm-5-3-across-two-nvidia-dgx-stations-with-vllm/) · [HN 讨论](https://news.ycombinator.com/item?id=50497155)　`推理` `硬件` `开源`
+
+### Claude 博客发布常驻 Agent 构建指南
+
+指南把常驻（always-on）Agent 拆成事件收件箱、定时器、记忆、权限和发件箱五个基本组件：Agent 大部分时间在休眠，被收件箱里的事件唤醒后执行一次 run。文中给了不少可直接借鉴的设计原则，比如记忆只存 Agent 无法再查到的东西、需要审批时用延迟工具调用结束当前 run 并保存会话、推送消息先保持克制再逐步争取用户注意力。正在做后台 Agent 或定时任务型 Agent 的团队可以对照检查自己的架构。
 
 来源：[Claude Blog](https://claude.com/resources/articles/building-always-on-agents)　`Agent` `产品`
 
-### IBM 开源两款抵抗提示注入的 Granite 预览模型
-
-IBM Granite 团队发布 granite-4.1-3b-llmon-preview 和 granite-4.1-8b-llmon-preview，两个开放权重模型基于新的 LLMON 标注格式训练，让模型把文档、工具输出等素材当作内容而非指令。在 OPI 基准上攻击成功率从 100% 降至 0.1%（3B）、从 96.3% 降至 0.02%（8B）；IBM 将其限定为探索与评测用途。
-
-来源：[maccus.fr](https://maccus.fr/en/ibm-granite-prompt-injection/)　`安全` `模型` `开源`
-
-### tandem.cpp 让 llama.cpp 加速大 MoE 模型并支持 AMD
-
-tandem.cpp 是 llama.cpp 的补丁集，把常用专家留在 GPU、其余交给 CPU，面向装不进显存的 MoE 模型。项目 README 称其他难以装入显存的 MoE 模型通常能获得 1.4–2.1× 提速，本次更新改进了共享的 CUDA/HIP 内核，RX 7900 XTX 上 +2.5%、RTX 5070 Ti 上 +1.3%，补丁也可用 HIP 构建。
-
-来源：[GitHub](https://github.com/ewhacc/tandem.cpp)　`开源` `工具` `推理`
-
-### NVIDIA 教程：用两台 DGX Station 跑 GLM-5.3
-
-NVIDIA 开发者博客给出用 vLLM 在两台通过 ConnectX-8 RDMA 互联的 NVIDIA DGX Station 上服务 GLM-5.3 的教程，采用 TP=2 张量并行。文中称 GLM-5.3 NVFP4 是 753 billion 参数、每 token 激活 40 billion 的量化 MoE 模型，约 464 GB 权重超过单块 GB300 的 252 GB HBM3e。
-
-来源：[developer.nvidia.com](https://developer.nvidia.com/blog/when-one-gpu-isnt-enough-serving-glm-5-3-across-two-nvidia-dgx-stations-with-vllm/)　`工具` `硬件` `推理`
-
-### HarborRL 更新弹性网关与免 SSH 集群部署
-
-开源 Agentic RL 框架 HarborRL 的更新日志列出四项改动：带静态路由的弹性网关扩展、节点通过 HTTP 拉取任务的 Hub 部署模式、多算法统一到 Slime 训练管线，以及配置向导与沙箱 rollout 改进。项目 README 称其把模型服务、轨迹生成、工具执行、验证奖励和策略更新整合为一条可复现管线。
-
-来源：[GitHub](https://github.com/datamllab/HarborRL)　`开源` `Agent` `训练`
-
 ## 🧠 模型
 
-### Haru-4B：全双工语音对话基础模型
+### Haru-4B：边听边说的全双工语音对话基座模型
 
-higurashi-ai 发布 Haru-4B，一个低延迟、多语言的全双工连续语音对话基础模型，听与说同时进行，原生全双工频率为 7.5 Hz，每 133 ms 处理一帧用户音频并产出一帧自身音频和文本。模型卡说明它以 Qwen3.5-4B 为文本骨干、采用 VibeVoice 声学 tokenizer，权重以 Apache-2.0 发布。
+higurashi-ai 开源 Haru-4B，一个低延迟、多语言的全双工连续语音对话基座模型，基于 Qwen3.5-4B 文本骨干，每 133 ms 读入一帧用户音频，同时输出自己的一帧音频和文本。权重采用 Apache License 2.0，PyTorch 实现需要约 12 GB 显存的 NVIDIA GPU，另有 MLX 实现和 vLLM-Omni 插件。官方说明它是面向研究的预训练基座，不是可靠的事实来源，也不会像助手那样遵循指令。
 
-来源：[Hugging Face Trending Models](https://huggingface.co/higurashi-ai/Haru-4B)　`模型` `语音` `开源`
+来源：[Hugging Face Trending Models](https://huggingface.co/higurashi-ai/Haru-4B)　`语音` `开源` `模型`
 
-### Viggle-Remake：MiniMax-H3 的视频重拍 LoRA
+### Rayline 开源 0.6B 路由模型 ARC 1.0，帮 Agent 选模型
 
-Viggle 发布 Viggle-Remake，一组基于 MiniMax-H3 的 rank 256 LoRA，用于给视频换人换物、改背景天气与光线，也提供 MCP server 让编码 Agent 自行切窗口、画关键帧并渲染。项目说明提供 ComfyUI 节点包和 int8/GGUF 文件以适配 12–24 GB 显卡，代码以 Apache 2.0 发布，权重沿用 MiniMax H3 Community License。
+ARC 1.0 读取 Agent 的对话，输出任务成功率、token 用量、推理强度等信号，由应用结合自己的模型、价格和策略决定下一次请求交给云端还是本地模型；模型基于 Qwen3.5-0.8B，采用 Apache 2.0。模型卡称混合端云配置在六个基准上保留了 Opus 5.5 97.5% 的质量、成本低 92.9%，但公开的 vllm-arc 插件仍在开发中，原版 vLLM 加载不了这个架构。
 
-来源：[Hugging Face Trending Models](https://huggingface.co/Viggle/Viggle-Remake)　`模型` `视频` `开源`
+来源：[Hugging Face](https://huggingface.co/rayline-ai/ARC-1.0) · [Reddit 讨论](https://www.reddit.com/r/LocalLLaMA/comments/1xw29ic/arc_10_a_decision_model_for_routing_ai_agents/)　`模型` `Agent` `开源`
 
-### tiny-voca：4.5M 参数的全开放英文 TTS
+### tiny-voca：4.5M 参数、代码权重数据全开放的英文 TTS
 
-tiny-voca 是一个从零训练的小型英文 TTS 模型，含波形生成部分共 4,537,291 参数、18 MB，支持两个音色、24 kHz 采样率。README 称其在四线程 CPU 上约 70 倍实时运行，可用 PyTorch、ONNX Runtime 和 ONNX Runtime Web，代码、权重、训练配方与数据集全部开放。
+tiny-voca 是一个从头训练的英文语音合成模型，共 4,537,291 个参数、18 MB，提供两种 24 kHz 美式英语音色，在 4 个 CPU 线程上约为实时速度的 70x，可用 PyTorch、ONNX Runtime 或在浏览器里运行。代码和权重采用 Apache-2.0，数据集采用 CC BY 4.0，训练配方也一并公开，发布的权重在一块 RTX 4090 上训练了 7.7 小时，适合想复现或改造小型 TTS 的开发者。
 
-来源：[GitHub](https://github.com/n4ze3m/tiny-voca)　`模型` `语音` `开源`
+来源：[tiny-voca](https://github.com/n4ze3m/tiny-voca) · [Reddit 讨论](https://www.reddit.com/r/LocalLLaMA/comments/1xw7zrg/tinyvoca_a_fully_open_45mparameter_tts_code/)　`语音` `开源`
 
 ## 📄 论文
 
-### APEX 用条件偏移实现少步流式视频生成
+### WorldFoundry：统一世界模型推理与评测的开源基础设施
 
-清华大学团队提出 APEX，把 DMD 中独立的 fake-score network 换成生成器内部的条件偏移估计，用同一套参数分别做生成与伪分数估计。论文在 180 秒视频上报告，相比 S2-Avatar 指令遵循得分 3.856 对 3.831、视觉美学 0.641898 对 0.632606，相比 DMD 每 GPU 峰值显存低 4.4%、平均迭代时间短 9.2%。
+论文先把生成式世界模型定义为维护持久状态、能响应动作或干预并生成时间连贯轨迹的预测动力系统，再推出开源基础设施 WorldFoundry，覆盖视频、3D 和 4D、具身动作和交互式世界系统的推理与评测。目前目录收录 270 个模型条目、74 个基准和 62 个指标条目，并把“能跑通”和“评测结论”分开记录。做世界模型的研究者可以用它在同一套流程下可复现地比较不同模型。
 
-来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2611.14033)　`论文` `视频`
+来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2611.10771) · [WorldFoundry](https://github.com/OpenEnvision/WorldFoundry)　`论文` `视频` `开源`
 
-### SparseRead：给 Agent 加一层稀疏阅读控制
+### Sage-Taiyi：用元认知引导 AI 做科研构思
 
-SparseRead 是可复用的阅读控制层，无需改动 Agent 模型即可管控内容准入，包含 Read Intent Protocol、Adaptive Reader Backends 和带完整视图回退的 Budgeted Read Gate。论文称在六个模型和五种场景下最多减少 92.9% token 与 89.0% 墙钟时间，97% 的设置下任务质量持平或更好，Web 深度搜索任务 token 减少 31.0--43.0%。
+Sage-Taiyi 让系统在搜索过程中持续监控自己对证据、假设和未解问题的理解，并据此调整研究目标、选择推理方法。在包含 265 个任务（来自十个学科的 50 篇论文）的 AI 科研构思基准 Taiyi-Bench 上，它在全部八项指标上排第一，Overall 得分 54.0，最强基线 AI Scientist-v2 为 47.9；化学合作实验中，钴催化羰基化的产率从痕量提高到 84%。
 
-来源：[arXiv](https://arxiv.org/abs/2608.22237)　`论文` `Agent`
+来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2611.12762)　`论文` `Agent`
 
-### Sage-Taiyi：用元认知架构做科学发现
+### SplatAnything：归一化高斯间距，让前馈 3DGS 适应任意场景
 
-上海人工智能实验室等提出 Sage-Taiyi，一个受元认知启发的架构，通过显式监控与控制修订对证据、假设和未解问题的理解，再据此调整研究目标与选择可复用的推理方法。在 Taiyi-Bench 的 265 个任务上，八项指标均排名第一，Overall 得分为 54.0，强于最强基线 AI Scientist-v2 的 47.9。
+论文指出现有前馈 3DGS 方法在径向距离归一化的空间里预测高斯属性，但相邻高斯中心的间距仍会随场景尺度和相机配置大幅变化，导致高斯尺度的监督目标含糊。作者提出 GSNorm，对场景级的高斯间距统计量做归一化，并建立覆盖多种数据集、输入稀疏度和外推视角的评测；实验显示在场景尺度和视角变化大时提升尤其明显。
 
-来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2611.12762)　`论文` `Agent` `推理`
-
-### WorldFoundry：统一生成式世界模型的基础设施
-
-WorldFoundry 是面向生成式世界模型的开源基础设施，覆盖视频、3D 和 4D、具身动作与交互式系统的可复现推理与评测。项目把模型与基准发现、运行时与资产准备、执行编排、产物管理和交互式可视化统一起来，并以显式清单和可追溯的评分卡区分执行就绪与评测结论。
-
-来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2611.10771)　`论文` `开源` `工具`
-
-### SplatAnything：跨场景的前馈 3DGS 归一化方法
-
-浙江大学团队提出 SplatAnything，用 Gaussian Spacing Normalization（GSNorm）把场景级高斯间距归一化，为高斯预测提供更一致的空间参照，缓解原有前馈 3DGS 中径向归一化与真实间距不匹配导致的监督歧义。论文同时建立了覆盖多数据集、输入稀疏度与外推视角的基准。
-
-来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2611.08264)　`论文` `图像`
+来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2611.08264) · [SplatAnything](https://github.com/zju3dv/SplatAnything)　`论文` `图像`
 
 ## 🛠 开源与工具
 
-### Chrome DevTools MCP：给编码 Agent 的浏览器调试
+### tandem.cpp 更新：16 GB 显卡跑 DeepSeek-V4.1，并支持 ROCm
 
-ChromeDevTools 的 chrome-devtools-mcp 让编码 Agent（如 Claude、Cursor、Copilot）控制和检查运行中的 Chrome，既提供 MCP server 也提供 CLI。README 列出的能力包括记录性能 trace、分析网络请求与控制台消息、截图，以及用 Puppeteer 做可靠自动化。
+tandem.cpp 是 llama.cpp 的补丁集，把最常用的专家留在 GPU、其余交给 CPU 协助计算，让显存放不下的 MoE 模型跑得更快。作者实测在 RTX 5070 Ti 16 GB 加 64 GB 内存的 PC 上，DeepSeek-V4.1-Flash IQ2_XS 的解码速度从 llama.cpp 的 7.4 tok/s 提到 14.2 tok/s；补丁现在也能用 HIP 构建，跑在 AMD 显卡上。想在消费级硬件上跑大 MoE 模型的人可以直接试。
 
-来源：[GitHub Trending](https://github.com/ChromeDevTools/chrome-devtools-mcp)　`工具` `开源` `Agent`
+来源：[tandem.cpp](https://github.com/ewhacc/tandem.cpp) · [Reddit 讨论](https://www.reddit.com/r/LocalLLaMA/comments/1xwan2j/update_tandemcpp_deepseekv41_on_a_64_gb_pc_with_a/)　`推理` `开源` `工具`
 
-### Plannotator：面向编码 Agent 的本地审阅界面
+### LLVQ 的 Rust 实现：Qwen3 压到约 2.7 bit/参数
 
-Plannotator 是一个基于浏览器的本地审阅界面，让 Agent 把计划、规格、HTML 原型或代码评审推给开发者，开发者标注、评论后一键把反馈发回 Agent 会话。项目支持 Claude Code、Codex、Gemini CLI、OpenCode 等，可通过插件、hook 和命令接入，也可经 MCP 连接其他 Agent。
+这是 Qualcomm 的 Leech 格向量量化论文（LLVQ）的独立 Rust 实现，自带融合的 CUDA 和 Metal kernel，推理时直接读取 2-bit 码字、不构建稠密矩阵；作者已把 Qwen3 的 4B、8B、14B 压到约 2.7 bit/参数并放上 Hugging Face。README 称 4B 比 llama.cpp 的 IQ2_XXS 高 23.6 分、每参数只多 0.25 bit，但三个模型的 MMLU 分别比 4-bit AWQ 低 4.76、4.21 和 2.46 分，而且在 A100 上解码比 vLLM 的 FP16 还慢。
 
-来源：[GitHub Trending](https://github.com/backnotprop/plannotator)　`工具` `开源` `Agent`
+来源：[LLVQ in Rust](https://github.com/pjmalandrino/llvq) · [Reddit 讨论](https://www.reddit.com/r/LocalLLaMA/comments/1xwerbo/qwen3_4b_8b_14b_at_27_bits_per_weight_with_leech/)　`推理` `开源` `工具`
 
-### ARC-1.0：跨云端与本地模型的路由决策模型
+### Plannotator：在浏览器里审阅编码 Agent 的计划和代码
 
-Rayline 发布 ARC-1.0，一个 0.6B 的决策模型：读取 Agent 对话，输出选择模型与推理强度的信号，由应用结合可用模型、价格和策略决定下一次请求怎么跑。它把预测与策略分开——预测任务成功率和 token 用量，应用自行提供价格与权衡；模型卡称混合配置在六个基准上保留 Opus 5.5 的 97.5% 质量、成本低 92.9%。
+Plannotator 是本地运行、基于浏览器的审阅界面，支持 Claude Code、Codex、Copilot CLI、Gemini CLI、OpenCode 等编码 Agent：Agent 给出计划或改完代码后，可以在浏览器里批注、审阅 diff 和 PR，再把反馈一键发回 Agent。新推出的 Plannotator Inbox 把多个 Agent 的决策、原型和计划集中到一处；项目称不收集使用遥测，数据默认留在本地。
 
-来源：[Hugging Face](https://huggingface.co/rayline-ai/ARC-1.0)　`工具` `模型` `Agent`
+来源：[GitHub Trending](https://github.com/backnotprop/plannotator)　`工具` `Agent` `代码`
 
-### Univer：构建自有 AI 办公套件的 Office SDK
+### agweb：给编码 Agent 用、不抢焦点的 macOS 浏览器
 
-Univer 是构建 Office 应用的 SDK，提供表格、文档、演示、关系表、画布和 PDF 的编辑、计算、协作与文件处理能力，可嵌入产品或供 Agent 使用。仓库以 Apache-2.0 开放 Web SDK 的核心架构与引擎实现，包括内容模型、命令系统、公式与渲染引擎、Facade APIs 以及 Sheets 与 Docs 编辑能力。
+agweb 基于 WebKit，Agent 在 shell 里用类似 playwright-cli 的 agweb 命令操作它，窗口从不抢焦点，对话框、文件选择和下载都在代码里处理，用户可以实时查看所有 Agent 的页面。作者实测五个空闲页面占 590 MB 内存，Headless Chrome 为 730 MB；代价是只支持 WebKit，Playwright 和 Chrome 扩展都接不上，需要 macOS 26 或更高版本。
 
-来源：[GitHub Trending](https://github.com/dream-num/univer)　`工具` `开源` `Agent`
+来源：[GitHub](https://github.com/paul-nameless/agweb) · [HN 讨论](https://news.ycombinator.com/item?id=50497147)　`工具` `Agent`
+
+## ⚡ 快讯
+
+- **chrome-devtools-mcp v1.13.0 加入 logpoints 和网络 mock** chrome-devtools-mcp v1.13.0 新增基于 DevTools BreakpointManager 的 logpoints 和页面级网络 mock，编码 Agent 调试网页时可直接用。 [GitHub Trending](https://github.com/ChromeDevTools/chrome-devtools-mcp) · [chrome-devtools-mcp releases](https://github.com/ChromeDevTools/chrome-devtools-mcp/releases)
+- **Cohere 完成收购 AISLE，组建网络安全业务 Cohere Cyber** Cohere 完成对漏洞自动发现与修复公司 AISLE 的收购并以其为基础成立 Cohere Cyber，同时迎来 AI 代码审查平台 cubic 的团队。 [Cohere](https://cohere.com/blog/cohere-expands-its-sovereign-ai-platform-with-aisle-and-cubic)
+- **Interconnects：黄仁勋离任后，Nvidia 对开放模型的投入可能收缩** Interconnects 认为开放模型是 Jensen 更具雄心的创始人式押注，他离任后 Nvidia 以稳住局面为先，大笔投入很可能减少，Nemotron 也还谈不上大功告成。 [Interconnects](https://www.interconnects.ai/p/open-source-ai-without-jensen)
+- **190 行纯 JAX 实现 DeepSeek V3 架构** 有人用 190 行纯 JAX 实现了 DeepSeek V3 的 MLA、DeepSeekMoE、无辅助损失负载均衡和 MTP，并在 MacBook Air 上从头预训练了一个 36.2M 参数的小模型，作者说明这只是架构演示。 [GitHub](https://github.com/Vaibhaav-Tiwari/deepseek-v3-jax) · [HN 讨论](https://news.ycombinator.com/item?id=50497589)
