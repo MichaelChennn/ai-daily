@@ -1,0 +1,1062 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-16",
+  "mode": "full",
+  "generated_at": "2026-11-16T04:50:30+00:00",
+  "channel": "api",
+  "model": "nvidia:minimaxai/minimax-m3.1-flash",
+  "highlights": [
+    "Qwen4-Max 发布：2.4-trillion-parameter 骨干、原生视觉与 one-million-token 上下文，面向专业工具与长程任务。",
+    "腾讯 LoopForge 开源来自托管的编程 Agent 交付工作流，用 SOP 与人工审批关卡把 CodeBuddy、Codex、Claude Code 组织成团队流程。",
+    "NVIDIA SkillEvaluator 提供 Agent Skills 的分层评测框架，AG-UI、Univer 与 LongCat-Video-Avatar 1.6 分别在交互协议、AI 办公与数字人生成上推进。"
+  ],
+  "items": [
+    {
+      "section": "headline",
+      "title": "Qwen 发布 Qwen4-Max，主打长上下文与专业工具",
+      "summary": "Qwen 团队发布 Qwen4-Max，采用全新的 Qwen4 架构，骨干规模为 2.4-trillion-parameter，具备原生视觉能力和 one-million-token 上下文窗口。官方称其在专业工具使用、长程任务执行等方面有所增强，面向工作、创作与探索场景。",
+      "tags": [
+        "模型",
+        "多模态"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_cc9bba557c",
+          "url": "https://qwen.ai/blog?id=qwen4-max"
+        }
+      ],
+      "evidence": []
+    },
+    {
+      "section": "headline",
+      "title": "腾讯开源 LoopForge，用 SOP 编排编程 Agent 交付",
+      "summary": "LoopForge 是自托管的编程 Agent 交付工作台，可编排 CodeBuddy、Codex、Claude Code 等 CLI，并在 Docker 沙箱中按角色拆分计划、实现、评审与测试环节。它支持把成熟流程沉淀为 SOP，配合人工审批关卡、断点续跑和节点日志，在自有基础设施上产出 PR 或文档。",
+      "tags": [
+        "Agent",
+        "工具",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_c65fc7444d",
+          "url": "https://github.com/Tencent/LoopForge"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/Tencent/LoopForge",
+          "quote": "LoopForge Public Notifications You must be signed in to change notification settings Fork 294 ( 294 ) Star 1.7k ( 1.7k ) You must be signed in to star a repository About Self-hosted workflows for coding-agent delivery."
+        },
+        {
+          "url": "https://github.com/Tencent/LoopForge",
+          "quote": "LoopForge is a self-hosted workspace where your team ships software with coding agents."
+        },
+        {
+          "url": "https://github.com/Tencent/LoopForge",
+          "quote": "When a way of working proves itself, save it as an SOP (a standard workflow of agents, scripts and human gates) so the next requirement is delivered the same way, with review and approval built in."
+        },
+        {
+          "url": "https://github.com/Tencent/LoopForge",
+          "quote": "Coding-agent CLIs do the work: CodeBuddy, Codex, Claude Code, OpenCode, Cursor CLI, Antigravity, Kimi Code, Pi, DeepSeek Harness and ZCode."
+        },
+        {
+          "url": "https://github.com/Tencent/LoopForge",
+          "quote": "Main Bot opens a conversation workspace (a Docker sandbox with your repos) on demand and calls project roles as subagents"
+        },
+        {
+          "url": "https://github.com/Tencent/LoopForge",
+          "quote": "The engine runs Agent, Script, Human-gate and sub-SOP nodes in order, in their own sandbox"
+        },
+        {
+          "url": "https://github.com/Tencent/LoopForge",
+          "quote": "Human in the loop."
+        },
+        {
+          "url": "https://github.com/Tencent/LoopForge",
+          "quote": "Approval gates where they matter."
+        },
+        {
+          "url": "https://github.com/Tencent/LoopForge",
+          "quote": "Observable and resumable."
+        },
+        {
+          "url": "https://github.com/Tencent/LoopForge",
+          "quote": "Node status, tool traces, logs and artifacts in one place."
+        },
+        {
+          "url": "https://github.com/Tencent/LoopForge",
+          "quote": "Pause, retry a failed step, or rerun from any node."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "NVIDIA 推出 SkillEvaluator，评测 Agent Skills 质量",
+      "summary": "NVIDIA SkillEvaluator 是面向 Agent Skills 的分层评测框架，包含 Tier 1 校验、Tier 2 去重与 Tier 3 实时评测，可通过质量门禁、语义重叠检测和合成评测集生成衡量技能对 Agent 行为的影响。它提供 CLI、CI 集成与 Agent 侧接入，其中 Tier 1 静态检查无需 API key 即可运行。",
+      "tags": [
+        "Agent",
+        "工具",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_49e6434c81",
+          "url": "https://github.com/NVIDIA/SkillEvaluator"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/NVIDIA/SkillEvaluator",
+          "quote": "SkillEvaluator Public Notifications You must be signed in to change notification settings Fork 249 ( 249 ) Star 1.9k ( 1.9k ) You must be signed in to star a repository About Multi-tier framework for evaluating AI agent skills with quality gates, semantic overlap detection, synthetic evaluation data"
+        },
+        {
+          "url": "https://github.com/NVIDIA/SkillEvaluator",
+          "quote": "set generation, and live agent evaluation that measures how skills affect agent behavior."
+        },
+        {
+          "url": "https://github.com/NVIDIA/SkillEvaluator",
+          "quote": "SkillEvaluator checks AI agent skills and measures their effect on task results:"
+        },
+        {
+          "url": "https://github.com/NVIDIA/SkillEvaluator",
+          "quote": "start with quality checks, then compare runs with and without a skill."
+        },
+        {
+          "url": "https://github.com/NVIDIA/SkillEvaluator",
+          "quote": "Agent skills are folders of instructions and supporting files defined by the"
+        },
+        {
+          "url": "https://github.com/NVIDIA/SkillEvaluator",
+          "quote": "SkillEvaluator is part of"
+        },
+        {
+          "url": "https://github.com/NVIDIA/SkillEvaluator",
+          "quote": "Three ways in, one CLI, same results."
+        },
+        {
+          "url": "https://github.com/NVIDIA/SkillEvaluator",
+          "quote": "Run all Tier 1 checks, no API key:"
+        },
+        {
+          "url": "https://github.com/NVIDIA/SkillEvaluator",
+          "quote": "skillevaluator validate \\"
+        },
+        {
+          "url": "https://github.com/NVIDIA/SkillEvaluator",
+          "quote": "./my-skill --tiers 1"
+        },
+        {
+          "url": "https://github.com/NVIDIA/SkillEvaluator",
+          "quote": "skillevaluator ci init"
+        },
+        {
+          "url": "https://github.com/NVIDIA/SkillEvaluator",
+          "quote": "It opens a setup PR."
+        },
+        {
+          "url": "https://github.com/NVIDIA/SkillEvaluator",
+          "quote": "Run without an LLM"
+        },
+        {
+          "url": "https://github.com/NVIDIA/SkillEvaluator",
+          "quote": "A deterministic quality score and findings"
+        },
+        {
+          "url": "https://github.com/NVIDIA/SkillEvaluator",
+          "quote": "Tier 1: Validation"
+        },
+        {
+          "url": "https://github.com/NVIDIA/SkillEvaluator",
+          "quote": "Is the skill safe, well-formed and harness-compatible ?"
+        },
+        {
+          "url": "https://github.com/NVIDIA/SkillEvaluator",
+          "quote": "Tier 2: Deduplication"
+        },
+        {
+          "url": "https://github.com/NVIDIA/SkillEvaluator",
+          "quote": "Does guidance repeat or overlap?"
+        },
+        {
+          "url": "https://github.com/NVIDIA/SkillEvaluator",
+          "quote": "Tier 3: Live Evaluation"
+        },
+        {
+          "url": "https://github.com/NVIDIA/SkillEvaluator",
+          "quote": "Does the skill help the agent?"
+        },
+        {
+          "url": "https://github.com/NVIDIA/SkillEvaluator",
+          "quote": "uv run --extra tier3 skillevaluator tier3 ./my-skill"
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "LongCat-Video-Avatar 1.6 发布，支持超 10 分钟数字人视频",
+      "summary": "美团 LongCat 开源 LongCat-Video-Avatar 1.6，在 1.5 基础上改进口型与音频同步、面部和身体动作协调以及长视频一致性，并加入推理优化。模型可生成超过 10 分钟的视频，权重以 MIT 许可发布，支持 Diffusers 与 Transformers 加载。",
+      "tags": [
+        "视频",
+        "模型",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_d07f911507",
+          "url": "https://huggingface.co/meituan-longcat/LongCat-Video-Avatar-1.6"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/meituan-longcat/LongCat-Video-Avatar-1.6",
+          "quote": "meituan-longcat / LongCat-Video-Avatar-1.6 Like 21 Follow LongCat 5.54k ONNX Diffusers Safetensors Transformers English Chinese longcat-video-avatar-1.6 audio-text-to-video audio-image-text-to-video audio-driven-video-continuation avatar video-generation License: mit Model card Files Files and versi"
+        },
+        {
+          "url": "https://huggingface.co/meituan-longcat/LongCat-Video-Avatar-1.6",
+          "quote": "We are excited to announce the release of LongCat-Video-Avatar 1.6, the latest upgrade to our open-source framework for audio-driven human video generation."
+        },
+        {
+          "url": "https://huggingface.co/meituan-longcat/LongCat-Video-Avatar-1.6",
+          "quote": "Building upon LongCat-Video-Avatar 1.5, 1.6 improves expressive naturalness, lip–audio synchronization, coordinated facial and body motion, and visual consistency during long-form generation."
+        },
+        {
+          "url": "https://huggingface.co/meituan-longcat/LongCat-Video-Avatar-1.6",
+          "quote": "It also introduces comprehensive inference optimizations for faster and more efficient deployment."
+        },
+        {
+          "url": "https://huggingface.co/meituan-longcat/LongCat-Video-Avatar-1.6",
+          "quote": "🌟 More Natural and Stable Lip Animation: : Reduces exaggerated or strained mouth movements, overly red lip coloration, and temporal instability in the mouth region."
+        },
+        {
+          "url": "https://huggingface.co/meituan-longcat/LongCat-Video-Avatar-1.6",
+          "quote": "🌟 Stable Long-Video Generation : Mitigates error accumulation during autoregressive video continuation, enabling videos exceeding 10 minutes while preserving visual quality, identity consistency, and temporal coherence."
+        },
+        {
+          "url": "https://huggingface.co/meituan-longcat/LongCat-Video-Avatar-1.6",
+          "quote": "🌟 Faster End-to-End Inference : Accelerates video generation through end-to-end pipeline and model execution optimizations, enabling more efficient deployment and serving."
+        },
+        {
+          "url": "https://huggingface.co/meituan-longcat/LongCat-Video-Avatar-1.6",
+          "quote": "LongCat-Video-Avatar 1.6 delivers more natural lip movements and expressive motion while maintaining visual quality and temporal consistency in videos exceeding 10 minutes."
+        },
+        {
+          "url": "https://huggingface.co/meituan-longcat/LongCat-Video-Avatar-1.6",
+          "quote": "LongCat-Video-Avatar-1.6"
+        },
+        {
+          "url": "https://huggingface.co/meituan-longcat/LongCat-Video-Avatar-1.6",
+          "quote": "huggingface-cli download meituan-longcat/LongCat-Video-Avatar-1.6 --local-dir ./weights/LongCat-Video-Avatar-1.6"
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "AG-UI：连接 Agent 与前端应用的开放协议",
+      "summary": "AG-UI 是面向 Agent 与用户界面交互的轻量事件协议，规定了 Agent 后端与前端应用之间的消息与状态同步方式，支持流式对话、双向状态同步和生成式 UI。它提供参考 HTTP 实现与默认连接器，并已支持 OpenAI Agents SDK、Claude Agent SDK、AWS Strands Agents 等集成。",
+      "tags": [
+        "Agent",
+        "工具",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_62130df1ba",
+          "url": "https://github.com/ag-ui-protocol/ag-ui"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/ag-ui-protocol/ag-ui",
+          "quote": "AG-UI is an open, lightweight, event-based protocol that standardizes how AI agents connect to user-facing applications."
+        },
+        {
+          "url": "https://github.com/ag-ui-protocol/ag-ui",
+          "quote": "Built for simplicity and flexibility, it enables seamless integration between AI agents, real time user context, and user interfaces."
+        },
+        {
+          "url": "https://github.com/ag-ui-protocol/ag-ui",
+          "quote": "During agent executions, agent backends emit events compatible with one of AG-UI's ~16 standard event types"
+        },
+        {
+          "url": "https://github.com/ag-ui-protocol/ag-ui",
+          "quote": "Agent backends can accept one of a few simple AG-UI compatible inputs as arguments"
+        },
+        {
+          "url": "https://github.com/ag-ui-protocol/ag-ui",
+          "quote": "AG-UI includes a flexible middleware layer that ensures compatibility across diverse environments:"
+        },
+        {
+          "url": "https://github.com/ag-ui-protocol/ag-ui",
+          "quote": "Works with any event transport (SSE, WebSockets, webhooks, etc.)"
+        },
+        {
+          "url": "https://github.com/ag-ui-protocol/ag-ui",
+          "quote": "It also ships with a reference HTTP implementation and default connector to help teams get started fast."
+        },
+        {
+          "url": "https://github.com/ag-ui-protocol/ag-ui",
+          "quote": "AG-UI brings agents into user-facing applications"
+        },
+        {
+          "url": "https://github.com/ag-ui-protocol/ag-ui",
+          "quote": "💬 Real-time agentic chat with streaming"
+        },
+        {
+          "url": "https://github.com/ag-ui-protocol/ag-ui",
+          "quote": "🔄 Bi-directional state synchronization"
+        },
+        {
+          "url": "https://github.com/ag-ui-protocol/ag-ui",
+          "quote": "🧩 Generative UI and structured messages"
+        },
+        {
+          "url": "https://github.com/ag-ui-protocol/ag-ui",
+          "quote": "🧠 Real-time context enrichment"
+        },
+        {
+          "url": "https://github.com/ag-ui-protocol/ag-ui",
+          "quote": "🛠️ Frontend tool integration"
+        },
+        {
+          "url": "https://github.com/ag-ui-protocol/ag-ui",
+          "quote": "🧑‍💻 Human-in-the-loop collaboration"
+        },
+        {
+          "url": "https://github.com/ag-ui-protocol/ag-ui",
+          "quote": "OpenAI Agents SDK"
+        },
+        {
+          "url": "https://github.com/ag-ui-protocol/ag-ui",
+          "quote": "Cloudflare Agents"
+        },
+        {
+          "url": "https://github.com/ag-ui-protocol/ag-ui",
+          "quote": "AG-UI is open source software licensed as MIT ."
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Univer 开源 AI 办公 SDK，Agents 可直接操作表格与文档",
+      "summary": "Univer 是构建 Office 应用的 SDK，提供表格、文档、演示、PDF 等场景的编辑、计算、协作与文件处理能力，Web SDK 核心以 Apache-2.0 许可开源。开发者可嵌入 Sheets 或 Docs 编辑器，并通过 Facade API 让应用和 Agent 读写内容，AI SDK 则把 Office 能力接到现有 Agent 与工作流上。",
+      "tags": [
+        "工具",
+        "开源",
+        "Agent"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_12221ab3bb",
+          "url": "https://github.com/dream-num/univer"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/dream-num/univer",
+          "quote": "univer Public Sponsor Notifications You must be signed in to change notification settings Fork 2.4k ( 2.4k ) Star 26.5k ( 26.5k ) You must be signed in to star a repository About Build your own AI office with Univer Office SDK."
+        },
+        {
+          "url": "https://github.com/dream-num/univer",
+          "quote": "Bring editing, calculation, collaboration, and file processing into your product for people and AI agents."
+        },
+        {
+          "url": "https://github.com/dream-num/univer",
+          "quote": "Built on an extensible open-source core."
+        },
+        {
+          "url": "https://github.com/dream-num/univer",
+          "quote": "Build your own AI office with Univer Office SDK."
+        },
+        {
+          "url": "https://github.com/dream-num/univer",
+          "quote": "Start with open-source Sheets and Docs, then connect your own application or agent."
+        },
+        {
+          "url": "https://github.com/dream-num/univer",
+          "quote": "Connect applications and agents through Facade APIs and events"
+        },
+        {
+          "url": "https://github.com/dream-num/univer",
+          "quote": "Univer is an Office SDK for building Office applications inside your own product."
+        },
+        {
+          "url": "https://github.com/dream-num/univer",
+          "quote": "It provides Office editing, calculation, collaboration, and file processing for people and existing agents, using your data and permissions."
+        },
+        {
+          "url": "https://github.com/dream-num/univer",
+          "quote": "The product family covers spreadsheets, documents, presentations, relational tables, canvases, and PDFs."
+        },
+        {
+          "url": "https://github.com/dream-num/univer",
+          "quote": "Univer Office SDK has three parts:"
+        },
+        {
+          "url": "https://github.com/dream-num/univer",
+          "quote": "Web SDK is the foundation: content models, editing, rendering, formula calculation, and Facade APIs (application-facing APIs)."
+        },
+        {
+          "url": "https://github.com/dream-num/univer",
+          "quote": "Compose its plugins into an embedded editor or your own Office application, and reuse the content models, commands, and calculation for Headless processing without an interactive editor."
+        },
+        {
+          "url": "https://github.com/dream-num/univer",
+          "quote": "Server SDK adds backend services for real-time collaboration, edit history, and Office file import and export."
+        },
+        {
+          "url": "https://github.com/dream-num/univer",
+          "quote": "AI SDK connects Office capabilities to existing agents and workflows, with content tools, execution, and review integrations."
+        },
+        {
+          "url": "https://github.com/dream-num/univer",
+          "quote": "This repository provides the Web SDK's core architecture and engine implementations under Apache-2.0 : content models and snapshot formats, plugin and dependency management, the command system, formula and rendering engines, Facade APIs, UI foundation, and Sheets and Docs editing capabilities."
+        },
+        {
+          "url": "https://github.com/dream-num/univer",
+          "quote": "Commercial Web SDK plugins, Server SDK, and commercial AI SDK extensions are distributed and licensed separately."
+        },
+        {
+          "url": "https://github.com/dream-num/univer",
+          "quote": "Agents can use the same open-source APIs; your application supplies the model and tool orchestration."
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "X3Guard-150M：小尺寸提示词守卫模型",
+      "summary": "Axiomic Labs 发布的 X3Guard-150M 从 GPT-X3-150M 微调而来，一次输出有害性与对抗性两个独立分数，可同时标记越狱与提示词注入攻击。模型卡称其为 149M 参数，是其评测中能同时给出两类分类的最小且表现最好的模型，并提供 Strict、Balanced、Permissive 三档阈值。",
+      "tags": [
+        "安全",
+        "模型",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_7ce83ddfd7",
+          "url": "https://huggingface.co/AxiomicLabs/X3Guard-150M"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/AxiomicLabs/X3Guard-150M",
+          "quote": "AxiomicLabs / X3Guard-150M Like 12 Follow Axiomic Labs 171 Text Classification Transformers Safetensors 11 datasets English gptx3 guard safety moderation jailbreak-detection prompt-injection GPT-X3 X3Guard X3Guard-150M custom_code License: apache-2.0 Model card Files Files and versions xet Community"
+        },
+        {
+          "url": "https://huggingface.co/AxiomicLabs/X3Guard-150M",
+          "quote": "X3Guard-150M is Axiomic Labs' compact prompt guard, fine-tuned from GPT-X3-150M ."
+        },
+        {
+          "url": "https://huggingface.co/AxiomicLabs/X3Guard-150M",
+          "quote": "It reads a user prompt and returns two independent scores: how likely the prompt is to be harmful , and how likely it is to be adversarial (a jailbreak or prompt-injection attempt)."
+        },
+        {
+          "url": "https://huggingface.co/AxiomicLabs/X3Guard-150M",
+          "quote": "At 149M parameters it is both the smallest and best-performing model we evaluated that gives both classifications."
+        },
+        {
+          "url": "https://huggingface.co/AxiomicLabs/X3Guard-150M",
+          "quote": "Throughout this model card, all X3Guard figures are at the default \"Balanced\" setting unless stated otherwise."
+        },
+        {
+          "url": "https://huggingface.co/AxiomicLabs/X3Guard-150M",
+          "quote": "X3Guard 150M ships with three \"strictness\" settings."
+        },
+        {
+          "url": "https://huggingface.co/AxiomicLabs/X3Guard-150M",
+          "quote": "Each applies its own threshold to each output, and a prompt is flagged as harmful or adversarial when its score is at or above that threshold."
+        },
+        {
+          "url": "https://huggingface.co/AxiomicLabs/X3Guard-150M",
+          "quote": "Every figure outside this section uses Balanced."
+        },
+        {
+          "url": "https://huggingface.co/AxiomicLabs/X3Guard-150M",
+          "quote": "Our headline claims use Balanced (the standard 0.5 threshold)."
+        },
+        {
+          "url": "https://huggingface.co/AxiomicLabs/X3Guard-150M",
+          "quote": "X3Guard 150M was fine-tuned from GPT-X3-150M with a two-output classification head, on a curated mix of real user prompts, public safety and jailbreak datasets, synthetic prompts and AlignmentArena data."
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Villanova2 系列发布，覆盖多语 MoE 与稠密小模型",
+      "summary": "VillanovaAI 更新 Villanova2 模型合集，包含稀疏 MoE 的 Villanova2-15B-A3B-Base 及其指令微调、视觉语言版本，以及稠密的 Villanova2-2B-Base 及其指令微调、视觉语言版本。该系列面向英语、意大利语、德语、西班牙语和法语，GGUF 权重在同一个合集内提供。",
+      "tags": [
+        "模型",
+        "开源",
+        "多模态"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_80874028b3",
+          "url": "https://huggingface.co/collections/VillanovaAI/villanova2"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/collections/VillanovaAI/villanova2",
+          "quote": "VillanovaAI 's Collections Villanova2 Villanova 2603 Multi-PixMo Villanova 2512 Preview Time Series Datasets Multi-FLAN Villanova2 updated 3 days ago Collection of all models in the Villanova2 family."
+        },
+        {
+          "url": "https://huggingface.co/collections/VillanovaAI/villanova2",
+          "quote": "Collection VillanovaAI/Villanova2-15B-A3B Text Generation • 15B • Updated about 7 hours ago • 50 • 14 VillanovaAI/Villanova2-2B Text Generation • 2B • Updated about 7 hours ago • 62 • 8 VillanovaAI/Villanova2-15B-A3B-VL Image-Text-to-Text • 16B • Updated about 7 hours ago • 14 • 7 VillanovaAI/Villan"
+        },
+        {
+          "url": "https://huggingface.co/collections/VillanovaAI/villanova2",
+          "quote": "ova2-2B-VL Image-Text-to-Text • 3B • Updated about 7 hours ago • 10 • 5 VillanovaAI/Villanova2-15B-A3B-Base Text Generation • 15B • Updated about 7 hours ago • 21 • 4 VillanovaAI/Villanova2-2B-Base Text Generation • 2B • Updated about 7 hours ago • 13 • 4 VillanovaAI/Villanova2-15B-A3B-GGUF Text Gen"
+        },
+        {
+          "url": "https://huggingface.co/collections/VillanovaAI/villanova2",
+          "quote": "eration • 15B • Updated about 7 hours ago • 60 • 4 VillanovaAI/Villanova2-2B-GGUF Text Generation • 2B • Updated about 7 hours ago • 13 • 3 VillanovaAI/Villanova2-15B-A3B-VL-GGUF Image-Text-to-Text • 15B • Updated about 7 hours ago • 21 • 4 VillanovaAI/Villanova2-2B-VL-GGUF Image-Text-to-Text • 2B •"
+        },
+        {
+          "url": "https://huggingface.co/collections/VillanovaAI/villanova2",
+          "quote": "Updated about 7 hours ago • 8 • 3 Upvote 4 Sort:"
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "APEX 用条件偏移实现少步流式视频生成",
+      "summary": "清华大学团队提出 APEX，把 DMD 中独立的 fake-score 网络替换为生成器内部的条件偏移，用同一组参数同时完成生成与伪造分布估计。在 180 秒视频上，APEX 相对 S2-Avatar 的指令遵循人类净偏好为 +30.0%，并比 DMD 降低 4.4% 峰值 GPU 显存、缩短 9.2% 平均迭代时间。",
+      "tags": [
+        "论文",
+        "视频"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_04dc57421a",
+          "url": "https://huggingface.co/papers/2611.14033"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.14033",
+          "quote": "Papers arxiv:2611.14033 Copy markdown Few-Step Streaming Video Generation via Condition Shifting Published on Nov 10 · Submitted by Deyuan Liu on Nov 11 #1 Paper of the day · Tsinghua University Upvote 89 +81 Authors: Deyuan Liu , Jungang Li , Kaiwen Zheng , Kai Jiang , Jintao Chen , Yaole Wang , Mi"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.14033",
+          "quote": "ng Lin , Tao Lin , Jianfei Chen , Jun Zhu , Jintao Zhang Abstract APEX extends a streaming video generation method by replacing a separate fake-score network with condition shifting to estimate the generated distribution’s velocity field, improving instruction following and visual aesthetics while r"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.14033",
+          "quote": "Distribution Matching Distillation ( DMD ) supervises few-step generators with a separate fake-score network , which adds training memory and computation and must track the evolving generator."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.14033",
+          "quote": "We extend APEX to streaming video by using condition shifting to estimate the velocity field of the generated distribution within the generator."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.14033",
+          "quote": "The original text condition selects generation, while a shifted condition selects fake estimation using the same parameters."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.14033",
+          "quote": "This removes the independent fake network while retaining S2-Avatar 's frozen reference teacher , Self-Replay Forcing , and perceptual regularization ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.14033",
+          "quote": "We evaluate APEX on 180-second videos using three backbone evaluations per block and a one-step spatial Refiner , with a 70-case human study and a 320-case StreamAV-Bench comparison."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.14033",
+          "quote": "Human raters favor APEX most strongly on instruction following, with +30.0% net preference, followed by consistency and video quality at +4.3% each."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.14033",
+          "quote": "Separate measurements under matched training settings show 4.4% lower peak allocated GPU memory per GPU and 9.2% shorter mean iteration time than DMD ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.14033",
+          "quote": "On 180-second videos , APEX achieves +30.0% net human preference for instruction following over S2-Avatar."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.14033",
+          "quote": "Under matched training settings, it reduces peak GPU memory by 4.4% and average iteration time by 9.2% compared with DMD."
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Basalt 0.4.0 增加 Qwen3.8-27B 稠密模型支持",
+      "summary": "Basalt 是面向 NVIDIA Blackwell GPU 的本地推理引擎，0.4.0 版本新增首个稠密模型 Qwen3.8-27B NVFP4，并实现多模型与路由支持，可跑 Qwen3.8-Flash-Next 与 DeepSeek-V4.1-Flash。引擎对外提供 OpenAI 与 Anthropic 兼容接口，模型可读文本、PDF 与图片，其中 Flash-Next 和 27B 支持读取视频。",
+      "tags": [
+        "工具",
+        "开源",
+        "硬件"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_de6a5190c4",
+          "url": "https://github.com/jesdga95/basalt"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/jesdga95/basalt",
+          "quote": "basalt Public Sponsor Notifications You must be signed in to change notification settings Fork 153 ( 153 ) Star 1.1k ( 1.1k ) You must be signed in to star a repository About Local inference engine optimized for NVIDIA Blackwell basalt.jgulfo.com Resources Readme MIT license Contributing Contributin"
+        },
+        {
+          "url": "https://github.com/jesdga95/basalt",
+          "quote": "Basalt is a local inference engine for large language models: Qwen3.8-Flash-Next , DeepSeek-V4.1-Flash and Qwen3.8-27B ."
+        },
+        {
+          "url": "https://github.com/jesdga95/basalt",
+          "quote": "on an NVIDIA Blackwell GPU (sm_120) on Linux and Windows x64, with what does not fit in VRAM (the experts of a mixture-of-experts model)"
+        },
+        {
+          "url": "https://github.com/jesdga95/basalt",
+          "quote": "in system RAM, and optionally on more GPUs."
+        },
+        {
+          "url": "https://github.com/jesdga95/basalt",
+          "quote": "The server speaks the OpenAI and Anthropic APIs."
+        },
+        {
+          "url": "https://github.com/jesdga95/basalt",
+          "quote": "Qwen3.8-Flash-Next"
+        },
+        {
+          "url": "https://github.com/jesdga95/basalt",
+          "quote": "DeepSeek-V4.1-Flash"
+        },
+        {
+          "url": "https://github.com/jesdga95/basalt",
+          "quote": "default Qwen3.8-FN-NVFP4-DQ6_K , Hugging Face"
+        },
+        {
+          "url": "https://github.com/jesdga95/basalt",
+          "quote": "default DeepSeek-V4.1-Flash-1017-UD-IQ1_M , Hugging Face"
+        },
+        {
+          "url": "https://github.com/jesdga95/basalt",
+          "quote": "Qwen3.8-27B-QUASAR-NVFP4 , Hugging Face"
+        },
+        {
+          "url": "https://github.com/jesdga95/basalt",
+          "quote": "up to 262,144 (longer with YaRN)"
+        },
+        {
+          "url": "https://github.com/jesdga95/basalt",
+          "quote": "Documents (PDF, text)"
+        },
+        {
+          "url": "https://github.com/jesdga95/basalt",
+          "quote": "Qwen3.8-Flash-Next and Qwen3.8-27B read video; DeepSeek does not."
+        },
+        {
+          "url": "https://github.com/jesdga95/basalt",
+          "quote": "Flash-Next decodes frames on the GPU with NVDEC; the 27B decodes them on the CPU."
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "inside-llm 在浏览器里对比同一模型的不同量化",
+      "summary": "inside-llm 是基于 llama.cpp 的开源可视化工具，可加载一个或两个 GGUF 模型，在浏览器中展示每个 token 的概率、候选分布以及采样链（penalties、top-k、top-p、min-p、temperature、GBNF grammar）每一步的筛选效果。对比模式下还能标出两个模型分歧的位置，并支持 logit lens、分支回溯和录制的会话回放。",
+      "tags": [
+        "工具",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_9ba512c0c6",
+          "url": "https://github.com/manuelgscom/inside-llm"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/manuelgscom/inside-llm",
+          "quote": "inside-llm Public Notifications You must be signed in to change notification settings Fork 2 ( 2 ) Star 35 ( 35 ) You must be signed in to star a repository About See inside any GGUF: where two quantizations part ways, token by token, and what each sampler cuts."
+        },
+        {
+          "url": "https://github.com/manuelgscom/inside-llm",
+          "quote": "Live in your browser, powered by llama.cpp (CUDA or Vulkan)."
+        },
+        {
+          "url": "https://github.com/manuelgscom/inside-llm",
+          "quote": "See inside any GGUF: where two quantizations part ways, token by token, and what each sampler cuts."
+        },
+        {
+          "url": "https://github.com/manuelgscom/inside-llm",
+          "quote": "Live, in your browser."
+        },
+        {
+          "url": "https://github.com/manuelgscom/inside-llm",
+          "quote": "inside-llm loads one or two GGUF models with llama.cpp and shows in the browser what the model does while it generates: the probability of each token, the alternatives it discarded, what each sampler removes and, with two models (two quantizations, or a base model and its fine-tune), the divergence"
+        },
+        {
+          "url": "https://github.com/manuelgscom/inside-llm",
+          "quote": "at every position and the exact token where their texts split."
+        },
+        {
+          "url": "https://github.com/manuelgscom/inside-llm",
+          "quote": "It is a single native binary that serves its own web page."
+        },
+        {
+          "url": "https://github.com/manuelgscom/inside-llm",
+          "quote": "Everything runs on your machine: no accounts, no API keys, no telemetry."
+        },
+        {
+          "url": "https://github.com/manuelgscom/inside-llm",
+          "quote": "Brightness is the probability the model gave to each token; a magenta mark shows where A and B would pick differently."
+        },
+        {
+          "url": "https://github.com/manuelgscom/inside-llm",
+          "quote": "Two modes: Same text (lockstep: both models read the text written by the driver) and Each its own (free: each model follows its own picks until the texts split)."
+        },
+        {
+          "url": "https://github.com/manuelgscom/inside-llm",
+          "quote": "Candidates: the decision behind the selected token."
+        },
+        {
+          "url": "https://github.com/manuelgscom/inside-llm",
+          "quote": "Gates: the sampler chain of that decision (penalties, top-k, top-p, min-p, temperature and a GBNF grammar), with how many candidates survive each stage."
+        },
+        {
+          "url": "https://github.com/manuelgscom/inside-llm",
+          "quote": "Click a stage to see the distribution after it."
+        },
+        {
+          "url": "https://github.com/manuelgscom/inside-llm",
+          "quote": "Relief 3D and Layers: a surface whose height is a probability: the candidates at each position or, with --lens , what each layer would predict (logit lens), also as a 2D map."
+        },
+        {
+          "url": "https://github.com/manuelgscom/inside-llm",
+          "quote": "Nothing is lost: every branch stays in the tree and can be viewed or resumed, and the engine returns to any node exactly."
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "attest：Agent 测试的记录与回放框架",
+      "summary": "attest 是面向 AI Agent 的开源测试框架（Go 引擎，Python 与 TypeScript SDK），先录制一次真实运行作为 fixture，再让当前代码回放录制的模型回复，无需加载模型即可完成断言。它把断言分为六层，前四层覆盖 schema、约束、调用轨迹与内容匹配等确定性检查，后两层才需要评分模型，并提供 CI 策略与合并门禁。",
+      "tags": [
+        "工具",
+        "Agent",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_a7779bfb9d",
+          "url": "https://github.com/attest-framework/attest"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/attest-framework/attest",
+          "quote": "attest Public Notifications You must be signed in to change notification settings Fork 0 ( 0 ) Star 5 ( 5 ) You must be signed in to star a repository About Open-source testing framework for AI agents."
+        },
+        {
+          "url": "https://github.com/attest-framework/attest",
+          "quote": "Deterministic assertions first, LLM-as-judge last."
+        },
+        {
+          "url": "https://github.com/attest-framework/attest",
+          "quote": "Attest is an open-source testing framework purpose-built for AI agents and LLM-powered systems."
+        },
+        {
+          "url": "https://github.com/attest-framework/attest",
+          "quote": "It treats deterministic assertions as first-class citizens alongside probabilistic evaluation."
+        },
+        {
+          "url": "https://github.com/attest-framework/attest",
+          "quote": "Deterministic checks run first; model-scored checks run last."
+        },
+        {
+          "url": "https://github.com/attest-framework/attest",
+          "quote": "Status: v1.1.1 (documentation patch on 1.1.0 \"Hardened\") — capture real agent runs, replay the current code without model calls, and gate merges on evaluated assertions, behavior contracts and test outcomes in Python and TypeScript."
+        },
+        {
+          "url": "https://github.com/attest-framework/attest",
+          "quote": "Record a real run once as a fixture."
+        },
+        {
+          "url": "https://github.com/attest-framework/attest",
+          "quote": "In tests, run your agent's current code against the recorded model replies, then check its output, tool calls and side effects."
+        },
+        {
+          "url": "https://github.com/attest-framework/attest",
+          "quote": "A policy turns the test report into a merge decision; deterministic checks need no model or API key."
+        },
+        {
+          "url": "https://github.com/attest-framework/attest",
+          "quote": "Attest provides six evaluated layers plus plugins, ordered from free and deterministic (layers 1–4) to model-scored (layers 5–6, whose cost depends on the configured provider), and reaches for the cheapest valid assertion first."
+        },
+        {
+          "url": "https://github.com/attest-framework/attest",
+          "quote": "Six evaluated layers plus plugins — layers 1–4 are free and deterministic; layers 5–6 are model-scored and cost what their provider costs"
+        },
+        {
+          "url": "https://github.com/attest-framework/attest",
+          "quote": "Capture and real-code replay — turn a run or incident into a verified fixture and a regression test; attest capture --refresh shows semantic differences in prompts, tools, messages, results, model and parameters."
+        },
+        {
+          "url": "https://github.com/attest-framework/attest",
+          "quote": "Evaluated-chain enforcement — building expect() / attestExpect() is not enough: unevaluated chains fail tests, including fixture-built chains and concurrent Vitest test bodies."
+        },
+        {
+          "url": "https://github.com/attest-framework/attest",
+          "quote": "CI policy, baselines and reports — stable assertion IDs (scheme 2) track checks across runs; gate on assertion regressions, removed baseline assertions and failed native tests ( tests_failed , blocking by default); invalid report input exits 3."
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Berth：让本地 GPU 上的多个引擎排队接力",
+      "summary": "Berth 是用 Go 写的轻量 GPU 资源管理器，聊天模型、图像管线、语音引擎和游戏通过租约轮流使用显卡，避免互相抢显存导致 OOM。它按优先级排队并在作业边界卸载当前引擎，还支持按卡预约时段、训练任务独占，以及用 cuda-checkpoint 让引擎 park 后快速恢复。",
+      "tags": [
+        "工具",
+        "开源",
+        "硬件"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_d416a84e72",
+          "url": "https://github.com/T-Crypt/berth"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/T-Crypt/berth",
+          "quote": "berth Public Notifications You must be signed in to change notification settings Fork 31 ( 31 ) Star 298 ( 298 ) You must be signed in to star a repository About Berth is a lightweight GPU resource manager written in Go."
+        },
+        {
+          "url": "https://github.com/T-Crypt/berth",
+          "quote": "It controls which applications get access to your GPU, when they get it, and how that access is handed off."
+        },
+        {
+          "url": "https://github.com/T-Crypt/berth",
+          "quote": "Berth makes the programs on your PC take turns with the GPU's memory, so they stop crashing each"
+        },
+        {
+          "url": "https://github.com/T-Crypt/berth",
+          "quote": "other, and tells you who is holding it."
+        },
+        {
+          "url": "https://github.com/T-Crypt/berth",
+          "quote": "Chat models, image pipelines, voice engines, games and GPU apps"
+        },
+        {
+          "url": "https://github.com/T-Crypt/berth",
+          "quote": "lease the card instead of grabbing it, so two of them never load at once and crash each other"
+        },
+        {
+          "url": "https://github.com/T-Crypt/berth",
+          "quote": "One Go binary, no cloud account, nothing else to install."
+        },
+        {
+          "url": "https://github.com/T-Crypt/berth",
+          "quote": "Every engine asks berthd for the card: through berth run , the gateway, ComfyUI's API or a game"
+        },
+        {
+          "url": "https://github.com/T-Crypt/berth",
+          "quote": "queues the request by priority: hold , foreground , interactive , batch ;"
+        },
+        {
+          "url": "https://github.com/T-Crypt/berth",
+          "quote": "lets the holder finish its reply or image job, then unloads it;"
+        },
+        {
+          "url": "https://github.com/T-Crypt/berth",
+          "quote": "waits until the driver shows the memory free;"
+        },
+        {
+          "url": "https://github.com/T-Crypt/berth",
+          "quote": "grants the lease and starts the next engine, and the request that waited streams."
+        },
+        {
+          "url": "https://github.com/T-Crypt/berth",
+          "quote": "foreground , interactive , batch , and hold above them all."
+        },
+        {
+          "url": "https://github.com/T-Crypt/berth",
+          "quote": "request waits and gets a reason naming the holder, never an OOM crash."
+        },
+        {
+          "url": "https://github.com/T-Crypt/berth",
+          "quote": "An engine that can offload itself (ComfyUI, vLLM, SGLang, or any engine that"
+        },
+        {
+          "url": "https://github.com/T-Crypt/berth",
+          "quote": "llama.cpp or NInfer, parks through NVIDIA's cuda-checkpoint behind berth run --park checkpoint --front ."
+        },
+        {
+          "url": "https://github.com/T-Crypt/berth",
+          "quote": "A 23.1 GB NInfer comes back in 3.3 s where a reload takes 14 s."
+        },
+        {
+          "url": "https://github.com/T-Crypt/berth",
+          "quote": "berth train runs a training or fine-tune that nothing automated can interrupt, on one card or several."
+        },
+        {
+          "url": "https://github.com/T-Crypt/berth",
+          "quote": "It takes the whole of each card, and berthd refuses every other request on those cards until it exits, so"
+        },
+        {
+          "url": "https://github.com/T-Crypt/berth",
+          "quote": "berth schedule book gives an engine the card for set hours, changes its priority for"
+        },
+        {
+          "url": "https://github.com/T-Crypt/berth",
+          "quote": "them, or books downtime, up to 14 days ahead."
+        }
+      ]
+    }
+  ],
+  "research": [
+    {
+      "via": "webfetch",
+      "url": "https://qwen.ai/blog?id=qwen4-max"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://openai.com/index/step-toward-defining-the-standard-model"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/ag-ui-protocol/ag-ui"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/dream-num/univer"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.14033"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://magazine.sebastianraschka.com/p/understanding-positional-embeddings"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/langchain-ai/langchain/releases/tag/langchain-core%3D%3D1.8.1"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/AxiomicLabs/X3Guard-150M"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/nextgen-user/think-graft"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/NVIDIA/SkillEvaluator"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/attest-framework/attest"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/manuelgscom/inside-llm"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/nazeshinjite/Qwen3.8-Flash-Next-Abliterated-LoRA"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/meituan-longcat/LongCat-Video-Avatar-1.6"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/collections/Vimoo-AI/vimoo-10"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/GAIR-NLP/801-30B"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/Tencent/LoopForge"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/google-labs-code/stitch-skills"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/elementalsouls/Claude-BugHunter"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/jesdga95/basalt"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/collections/VillanovaAI/villanova2"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/T-Crypt/berth"
+    }
+  ],
+  "validation": {
+    "validated_at": "2026-11-16T04:50:30+00:00",
+    "checked_links": true,
+    "dropped": [
+      {
+        "title": "think-graft：改一行权重让推理模型少想",
+        "section": "brief",
+        "candidates": [
+          "c_e186072756"
+        ],
+        "reasons": [
+          "summary longer than 120 characters"
+        ]
+      },
+      {
+        "title": "LangChain 多个集成包转向 LangSmith 网关",
+        "section": "brief",
+        "candidates": [
+          "c_6f408e1a9e",
+          "c_e2e687d2c8",
+          "c_cb2f902e5d",
+          "c_bfabd1bfac",
+          "c_2b62315796"
+        ],
+        "reasons": [
+          "summary longer than 120 characters"
+        ]
+      },
+      {
+        "title": "Google Stitch 推出 Agent Skills 技能库",
+        "section": "brief",
+        "candidates": [
+          "c_828729b7e7"
+        ],
+        "reasons": [
+          "summary longer than 120 characters"
+        ]
+      },
+      {
+        "title": "Claude-BugHunter 发布漏洞挖掘技能包",
+        "section": "brief",
+        "candidates": [
+          "c_5e5b7a5173"
+        ],
+        "reasons": [
+          "summary longer than 120 characters"
+        ]
+      },
+      {
+        "title": "Vimoo 1.0 开源视频生成模型发布",
+        "section": "brief",
+        "candidates": [
+          "c_4a4bb33656"
+        ],
+        "reasons": [
+          "summary longer than 120 characters"
+        ]
+      }
+    ],
+    "warnings": [
+      "1 paper items (target 2-4)"
+    ]
+  }
+}
