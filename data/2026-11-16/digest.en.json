@@ -1,0 +1,570 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-16",
+  "mode": "full",
+  "channel": "claude",
+  "generated_at": "2026-11-16T04:44:54+00:00",
+  "model": "claude-opus-5-5",
+  "highlights": [
+    "Qwen introduced Qwen4-Max on the new Qwen4 architecture, with a 2.4-trillion-parameter backbone and a one-million-token context window.",
+    "OpenAI launched a science blog; physicist Nathaniel Craig describes working with GPT-6 Astra on a candidate lattice definition of the Standard Model.",
+    "A paper open-sources 801-30B-A3B-Base, a 30B-A3B MoE base model built by applying RSI to a full pre-training run."
+  ],
+  "items": [
+    {
+      "section": "headline",
+      "title": "Qwen introduces Qwen4-Max, built on the new Qwen4 architecture",
+      "summary": "Qwen introduced Qwen4-Max, built on the new Qwen4 architecture with a 2.4-trillion-parameter backbone, native vision capabilities and a one-million-token context window; Qwen says it is more proficient with professional tools and stronger at long-horizon task execution. Earlier coverage was of a preview. For developers it is Qwen's new flagship and worth re-benchmarking for long-context, multimodal and agent workloads.",
+      "sources": [
+        {
+          "candidate_id": "c_cc9bba557c",
+          "url": "https://qwen.ai/blog?id=qwen4-max"
+        }
+      ],
+      "evidence": [],
+      "tags": [
+        "模型",
+        "多模态",
+        "Agent"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Physicist uses GPT-6 Astra to build a candidate lattice definition of the Standard Model",
+      "summary": "In the first guest post on OpenAI's new science blog, physicist Nathaniel Craig of UC Santa Barbara describes working with GPT-6 Astra on a candidate nonperturbative lattice definition of the Standard Model; Astra turned his strategy into a construction and took the lead on the detailed proof, which lattice field theorists then reviewed. Craig stresses that expert dialogue is still needed to decide whether the prescription has all the desired properties. It is a concrete case of a frontier model doing construction and proof work while human experts review it.",
+      "sources": [
+        {
+          "candidate_id": "c_a0bfa3d070",
+          "url": "https://openai.com/index/step-toward-defining-the-standard-model"
+        },
+        {
+          "candidate_id": "c_8110ba6428",
+          "url": "https://openai.com/index/our-new-blog-for-science"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://openai.com/index/step-toward-defining-the-standard-model",
+          "quote": "In the first guest post on our science blog , physicist Nathaniel Craig, a visiting scientist at OpenAI, describes how he worked with GPT‑6 Astra on a candidate lattice definition of the Standard Model."
+        },
+        {
+          "url": "https://openai.com/index/step-toward-defining-the-standard-model",
+          "quote": "Craig leads the particle theory group at the University of California, Santa Barbara, and is a permanent member of its Kavli Institute for Theoretical Physics."
+        },
+        {
+          "url": "https://openai.com/index/step-toward-defining-the-standard-model",
+          "quote": "Astra helped turn that strategy into a construction and took the lead in developing the detailed proof."
+        },
+        {
+          "url": "https://openai.com/index/step-toward-defining-the-standard-model",
+          "quote": "lattice field theorists Maarten Golterman, Andreas Kronfeld, and Yigal Shamir graciously spent time looking over Astra’s proof"
+        },
+        {
+          "url": "https://openai.com/index/step-toward-defining-the-standard-model",
+          "quote": "Scientific dialogue among experts is required to decide if this prescription has all the properties we desire."
+        },
+        {
+          "url": "https://openai.com/index/our-new-blog-for-science",
+          "quote": "We’re starting the OpenAI science blog to give scientists and academic researchers a place to share what they’re discovering with AI and how they’re doing the work."
+        }
+      ],
+      "tags": [
+        "推理",
+        "行业"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Tencent open-sources LoopForge, self-hosted workflows for coding agents",
+      "summary": "Tencent's LoopForge is a self-hosted workspace that orchestrates coding agents such as CodeBuddy, Codex and Claude Code with scripts and human approval gates: describe a task in chat and it opens a Docker sandbox, checks out your repositories and delegates to project roles. LoopForge Local brings the built-in workflows into the coding assistant you already use, with no server. Teams wanting multi-agent coding with human sign-off on their own infrastructure get a ready-made option.",
+      "sources": [
+        {
+          "candidate_id": "c_c65fc7444d",
+          "url": "https://github.com/Tencent/LoopForge"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/Tencent/LoopForge",
+          "quote": "LoopForge is a self-hosted workspace where your team ships software with coding agents. Describe what you need to Main Bot in chat: it opens"
+        },
+        {
+          "url": "https://github.com/Tencent/LoopForge",
+          "quote": "Orchestrate CodeBuddy, Codex and Claude Code with scripts and human approval gates."
+        },
+        {
+          "url": "https://github.com/Tencent/LoopForge",
+          "quote": "LoopForge Local brings the built-in delivery workflows straight into the coding assistant you already use"
+        }
+      ],
+      "tags": [
+        "开源",
+        "Agent",
+        "代码"
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Meituan releases LongCat-Video-Avatar 1.6 for audio-driven human video",
+      "summary": "Meituan LongCat released LongCat-Video-Avatar 1.6, an upgrade to its open-source framework for audio-driven human video generation, with more natural lip animation, less error accumulation during autoregressive continuation for videos exceeding 10 minutes, and faster end-to-end inference. The weights are under the MIT License. Developers building talking-head or long-form presenter videos can try it directly.",
+      "sources": [
+        {
+          "candidate_id": "c_d07f911507",
+          "url": "https://huggingface.co/meituan-longcat/LongCat-Video-Avatar-1.6"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/meituan-longcat/LongCat-Video-Avatar-1.6",
+          "quote": "We are excited to announce the release of LongCat-Video-Avatar 1.6, the latest upgrade to our open-source framework for audio-driven human video generation."
+        },
+        {
+          "url": "https://huggingface.co/meituan-longcat/LongCat-Video-Avatar-1.6",
+          "quote": "Mitigates error accumulation during autoregressive video continuation, enabling videos exceeding 10 minutes while preserving visual quality, identity consistency, and temporal coherence."
+        },
+        {
+          "url": "https://huggingface.co/meituan-longcat/LongCat-Video-Avatar-1.6",
+          "quote": "The model weights are released under the MIT License ."
+        }
+      ],
+      "tags": [
+        "开源",
+        "视频",
+        "模型"
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Villanova2: open-weight, open-data models for five European languages",
+      "summary": "VillanovaAI released the Villanova2 family for English, Italian, German, Spanish and French, including Villanova2-15B-A3B (15.5B total / 3.9B active MoE), a VL variant and a dense 2.4B model, under Apache-2.0. The base was pre-trained from scratch on 4.7T tokens, with training data documented source by source, and GGUFs are in the same collection. It is a candidate where European languages and fully open weights and data matter.",
+      "sources": [
+        {
+          "candidate_id": "c_80874028b3",
+          "url": "https://huggingface.co/collections/VillanovaAI/villanova2"
+        },
+        {
+          "candidate_id": "c_80874028b3",
+          "url": "https://huggingface.co/VillanovaAI/Villanova2-15B-A3B"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/VillanovaAI/Villanova2-15B-A3B",
+          "quote": "Villanova2-15B-A3B 15.5B total parameters · 3.9B active · 131,072-token context · five European languages · open weight & data"
+        },
+        {
+          "url": "https://huggingface.co/VillanovaAI/Villanova2-15B-A3B",
+          "quote": "Base model Villanova2-15B-A3B-Base , pre-trained from scratch on 4.7T tokens"
+        },
+        {
+          "url": "https://huggingface.co/VillanovaAI/Villanova2-15B-A3B",
+          "quote": "Openness open weight & data: model weights under Apache 2.0; training data documented source by source, each dataset under its own terms"
+        }
+      ],
+      "tags": [
+        "模型",
+        "开源"
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Vimoo 1.0 open-sources text-to-video and image-to-video models",
+      "summary": "Vimoo-AI open-sourced Vimoo 1.0, with a separate ≈11.7B model each for text-to-video (T2V) and image-to-video (I2V), plus a lighter Vimoo 1.0 - Lite, under the Apache License 2.0; the examples output 1280 × 720, 121 frames at 24 fps. It ships Diffusers, ComfyUI and MLX (Apple Silicon) paths, so local video-generation users can compare it against their current stack.",
+      "sources": [
+        {
+          "candidate_id": "c_4a4bb33656",
+          "url": "https://huggingface.co/collections/Vimoo-AI/vimoo-10"
+        },
+        {
+          "candidate_id": "c_4a4bb33656",
+          "url": "https://huggingface.co/Vimoo-AI/Vimoo-1.0"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/Vimoo-AI/Vimoo-1.0",
+          "quote": "with a separate ≈11.7B model for each task. It is the highest-quality model in the Vimoo 1.0 family."
+        },
+        {
+          "url": "https://huggingface.co/Vimoo-AI/Vimoo-1.0",
+          "quote": "Vimoo-authored code and Vimoo model weights in this repository are provided under the Apache License 2.0 ."
+        },
+        {
+          "url": "https://huggingface.co/Vimoo-AI/Vimoo-1.0",
+          "quote": "The examples output 1280 × 720, 121 frames at 24 fps."
+        },
+        {
+          "url": "https://huggingface.co/Vimoo-AI/Vimoo-1.0",
+          "quote": "Vimoo 1.0 comes in two models, Vimoo 1.0 and Vimoo 1.0 - Lite."
+        }
+      ],
+      "tags": [
+        "开源",
+        "视频",
+        "模型"
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Axiomic Labs releases X3Guard, a 150M-parameter prompt guard",
+      "summary": "Axiomic Labs released X3Guard-150M, which returns two independent scores per user prompt, harmful and adversarial (jailbreak or prompt injection); the team says at 149M parameters it is the smallest and best-performing model they evaluated that gives both classifications. It checks prompts only, not model responses, and is Apache-2.0. Its size suits a first input filter at a gateway or on device.",
+      "sources": [
+        {
+          "candidate_id": "c_7ce83ddfd7",
+          "url": "https://huggingface.co/AxiomicLabs/X3Guard-150M"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/AxiomicLabs/X3Guard-150M",
+          "quote": "It reads a user prompt and returns two independent scores: how likely the prompt is to be harmful , and how likely it is to be adversarial (a jailbreak or prompt-injection attempt)."
+        },
+        {
+          "url": "https://huggingface.co/AxiomicLabs/X3Guard-150M",
+          "quote": "At 149M parameters it is both the smallest and best-performing model we evaluated that gives both classifications."
+        },
+        {
+          "url": "https://huggingface.co/AxiomicLabs/X3Guard-150M",
+          "quote": "X3-Guard checks prompts only. It does not assess model responses"
+        },
+        {
+          "url": "https://huggingface.co/AxiomicLabs/X3Guard-150M",
+          "quote": "Axiomic Labs is not responsible for incorrect outputs of this model. See Apache-2.0"
+        }
+      ],
+      "tags": [
+        "安全",
+        "模型",
+        "开源"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "801-30B-A3B-Base: recursive self-improvement applied to a full pre-training run",
+      "summary": "The paper No Second Run applies recursive self-improvement (RSI) to a frontier pre-training run from scratch, decomposing the unrepeatable run into smaller loops that can close; the result is 801-30B-A3B-Base, a 30B-A3B MoE trained on 11.8T tokens in three months. As a base model it outperforms Qwen3-30B-A3B and Nemotron-3.5-Lightning-30B-A3B, trailing only the larger Qwen3.5-35B-A3B, and with lightweight SFT alone (6B tokens, no RL) it achieves the highest average on four agentic benchmarks. The base model and SFT data are open-sourced for teams doing their own post-training at this scale.",
+      "sources": [
+        {
+          "candidate_id": "c_53979cedb1",
+          "url": "https://arxiv.org/abs/2611.10719"
+        },
+        {
+          "candidate_id": "c_53979cedb1",
+          "url": "https://www.reddit.com/gallery/1xwt3ri"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2611.10719",
+          "quote": "The result is 801-30B-A3B-Base, a 30B-A3B MoE trained from scratch on 11.8T tokens in three months by a newly formed team."
+        },
+        {
+          "url": "https://arxiv.org/abs/2611.10719",
+          "quote": "As a base model, 801-30B-A3B outperforms Qwen3-30B-A3B and Nemotron-3.5-Lightning-30B-A3B, trailing only the larger Qwen3.5-35B-A3B"
+        },
+        {
+          "url": "https://arxiv.org/abs/2611.10719",
+          "quote": "with lightweight SFT alone, it achieves the highest average on four agentic benchmarks against fully post-trained models, including Qwen3.6-35B-A3B."
+        },
+        {
+          "url": "https://arxiv.org/abs/2611.10719",
+          "quote": "We open-source 801-30B-A3B-Base and the lightweight SFT data"
+        },
+        {
+          "url": "https://arxiv.org/abs/2611.10719",
+          "quote": "the lightweight SFT reported here (6B tokens, no RL) only probes post-training headroom."
+        }
+      ],
+      "tags": [
+        "论文",
+        "训练",
+        "开源"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "APEX brings condition shifting to few-step streaming video generation",
+      "summary": "The paper extends APEX to streaming video, using condition shifting to estimate the generated distribution's velocity field inside the generator and removing the independent fake-score network that DMD needs. On 180-second videos APEX achieves +30.0% net human preference for instruction following over S2-Avatar, and under matched training settings it uses 4.4% less peak GPU memory and 9.2% shorter mean iteration time than DMD. It is a way to cut training overhead for few-step distillation.",
+      "sources": [
+        {
+          "candidate_id": "c_04dc57421a",
+          "url": "https://huggingface.co/papers/2611.14033"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.14033",
+          "quote": "This removes the independent fake network while retaining S2-Avatar 's frozen reference teacher , Self-Replay Forcing , and perceptual regularization ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.14033",
+          "quote": "Separate measurements under matched training settings show 4.4% lower peak allocated GPU memory per GPU and 9.2% shorter mean iteration time than DMD ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.14033",
+          "quote": "On 180-second videos , APEX achieves +30.0% net human preference for instruction following over S2-Avatar."
+        }
+      ],
+      "tags": [
+        "论文",
+        "视频"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Univer: an open-source Office SDK for products and AI agents",
+      "summary": "Univer is an Office SDK that brings editing, calculation, collaboration and file processing into your own product; its AI SDK connects these capabilities to existing agents and workflows, and agents can use the same open-source APIs. The open-source core is Apache-2.0, while the Server SDK and commercial AI SDK extensions are licensed separately. It is a reference point for products that need agents to read and write spreadsheets and documents, and it topped GitHub Trending today.",
+      "sources": [
+        {
+          "candidate_id": "c_12221ab3bb",
+          "url": "https://github.com/dream-num/univer"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/dream-num/univer",
+          "quote": "AI SDK connects Office capabilities to existing agents and workflows, with content tools, execution, and review integrations."
+        },
+        {
+          "url": "https://github.com/dream-num/univer",
+          "quote": "Agents can use the same open-source APIs; your application supplies the model and tool orchestration."
+        },
+        {
+          "url": "https://github.com/dream-num/univer",
+          "quote": "Commercial Web SDK plugins, Server SDK, and commercial AI SDK extensions are distributed and licensed separately."
+        },
+        {
+          "url": "https://github.com/dream-num/univer",
+          "quote": "Readme Apache-2.0 license"
+        }
+      ],
+      "tags": [
+        "开源",
+        "工具",
+        "Agent"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "AG-UI: an event-based protocol for connecting agents to frontends",
+      "summary": "AG-UI is an open, lightweight, event-based protocol that standardizes how AI agents connect to user-facing applications: agent backends emit events from ~16 standard event types, and community integrations include the Claude Agent SDK. Developers building agent frontends can adopt it instead of a custom streaming protocol.",
+      "sources": [
+        {
+          "candidate_id": "c_62130df1ba",
+          "url": "https://github.com/ag-ui-protocol/ag-ui"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/ag-ui-protocol/ag-ui",
+          "quote": "AG-UI is an open, lightweight, event-based protocol that standardizes how AI agents connect to user-facing applications."
+        },
+        {
+          "url": "https://github.com/ag-ui-protocol/ag-ui",
+          "quote": "agent backends emit events compatible with one of AG-UI's ~16 standard event types"
+        },
+        {
+          "url": "https://github.com/ag-ui-protocol/ag-ui",
+          "quote": "Claude Agent SDK ✅ Supported"
+        }
+      ],
+      "tags": [
+        "开源",
+        "Agent",
+        "工具"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "google-labs-code publishes Agent Skills for the Stitch MCP server",
+      "summary": "google-labs-code/stitch-skills is a library of Agent Skills for the Stitch MCP server that follows the Agent Skills open standard and works with Antigravity, Gemini CLI, Claude Code and Cursor; Claude Code users install it with one npx command. The repo notes it is not an officially supported Google product. Stitch users can use it to link UI design and code generation.",
+      "sources": [
+        {
+          "candidate_id": "c_828729b7e7",
+          "url": "https://github.com/google-labs-code/stitch-skills"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/google-labs-code/stitch-skills",
+          "quote": "A library of Agent Skills designed to work with the Stitch MCP server. Each skill follows the Agent Skills open standard, for compatibility with coding agents such as Antigravity, Gemini CLI, Claude Code, Cursor."
+        },
+        {
+          "url": "https://github.com/google-labs-code/stitch-skills",
+          "quote": "npx plugins add google-labs-code/stitch-skills --scope project --target claude-code"
+        },
+        {
+          "url": "https://github.com/google-labs-code/stitch-skills",
+          "quote": "This is not an officially supported Google product."
+        }
+      ],
+      "tags": [
+        "工具",
+        "Agent",
+        "代码"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "NVIDIA open-sources SkillEvaluator for testing agent skills",
+      "summary": "NVIDIA's SkillEvaluator evaluates agent skills in tiers: validation, deduplication of repeated or overlapping guidance, and live evaluation of whether the skill helps the agent; after pip install, Tier 1 checks run with no API key. It is part of the NVIDIA Verified Skills pipeline, and teams maintaining skill libraries can use it as a quality gate.",
+      "sources": [
+        {
+          "candidate_id": "c_49e6434c81",
+          "url": "https://github.com/NVIDIA/SkillEvaluator"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/NVIDIA/SkillEvaluator",
+          "quote": "Tier 2: Deduplication Does guidance repeat or overlap? uv run --extra tier2 skillevaluator tier2 ./my-skill Embeddings and chat; add --catalog ./skill-catalog.json for inter-skill comparison Tier 3: Live Evaluation Does the skill help the agent?"
+        },
+        {
+          "url": "https://github.com/NVIDIA/SkillEvaluator",
+          "quote": "pip install skillevaluator Run all Tier 1 checks, no API key: skillevaluator validate \\ ./my-skill --tiers 1"
+        },
+        {
+          "url": "https://github.com/NVIDIA/SkillEvaluator",
+          "quote": "of the NVIDIA Verified Skills pipeline"
+        }
+      ],
+      "tags": [
+        "开源",
+        "Agent",
+        "工具"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "Domyn runs training trials for EU open model EUROPA on JUPITER",
+      "summary": "MACCUS reports that Domyn has run training trials for EUROPA, the EU's open AI model, on the JUPITER supercomputer, with a 951.9 billion-parameter MoE test setup that activates 32.8 billion parameters per token.",
+      "sources": [
+        {
+          "candidate_id": "c_3998f3e768",
+          "url": "https://maccus.fr/en/eu-open-ai-model-europa/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://maccus.fr/en/eu-open-ai-model-europa/",
+          "quote": "The Italian company Domyn has run training trials for EUROPA, the European Union’s open AI model, on a public supercomputer."
+        },
+        {
+          "url": "https://maccus.fr/en/eu-open-ai-model-europa/",
+          "quote": "In its test setup, EUROPA has 951.9 billion of them. The supercomputer, JUPITER, is in Jülich, Germany"
+        },
+        {
+          "url": "https://maccus.fr/en/eu-open-ai-model-europa/",
+          "quote": "Only 8 of the 384 experts work on any given token. As a result, only 32.8 billion of the 951.9 billion parameters are active for each token."
+        }
+      ],
+      "tags": [
+        "模型",
+        "行业"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "Sebastian Raschka explains positional embeddings in modern LLMs",
+      "summary": "Sebastian Raschka's long article walks through positional encoding methods such as RoPE with visuals, a little math and a small PyTorch implementation, and how modern architectures adapt or omit explicit positional encodings.",
+      "sources": [
+        {
+          "candidate_id": "c_e047ece727",
+          "url": "https://magazine.sebastianraschka.com/p/understanding-positional-embeddings"
+        },
+        {
+          "candidate_id": "c_e047ece727",
+          "url": "https://news.ycombinator.com/item?id=50506376"
+        }
+      ],
+      "evidence": [],
+      "tags": [
+        "训练"
+      ]
+    }
+  ],
+  "research": [
+    {
+      "via": "webfetch",
+      "url": "https://qwen.ai/blog?id=qwen4-max"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://openai.com/index/step-toward-defining-the-standard-model"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://arxiv.org/abs/2611.10719"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.14033"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/meituan-longcat/LongCat-Video-Avatar-1.6"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/Tencent/LoopForge"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/Vimoo-AI/Vimoo-1.0"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/VillanovaAI/Villanova2-15B-A3B"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/AxiomicLabs/X3Guard-150M"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/dream-num/univer"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/ag-ui-protocol/ag-ui"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/NVIDIA/SkillEvaluator"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/google-labs-code/stitch-skills"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://geoffstearns.com/blog/your-agent-will-pick-the-hackable-one/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://maccus.fr/en/eu-open-ai-model-europa/"
+    },
+    {
+      "via": "websearch",
+      "query": "Unbundling Multimodal Vision Encoding arXiv Meta FAIR NYU encoder pretraining optional"
+    },
+    {
+      "via": "websearch",
+      "query": "Thinking Machines Lab announcement November 2026"
+    },
+    {
+      "via": "websearch",
+      "query": "Baidu ERNIE release November 2026"
+    },
+    {
+      "via": "websearch",
+      "query": "\"Unbundling\" vision encoding MLLM \"vision-only parameters\" 2026 arxiv"
+    }
+  ],
+  "lang": "en",
+  "validation": {
+    "validated_at": "2026-11-16T04:44:54+00:00",
+    "checked_links": false,
+    "dropped": [],
+    "warnings": []
+  }
+}

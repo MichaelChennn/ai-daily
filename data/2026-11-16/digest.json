@@ -1,0 +1,584 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-16",
+  "mode": "full",
+  "channel": "claude",
+  "generated_at": "2026-11-16T04:44:15+00:00",
+  "model": "claude-opus-5-5",
+  "highlights": [
+    "Qwen 发布基于新 Qwen4 架构的 Qwen4-Max，主干 2.4-trillion 参数、上下文窗口 one-million-token。",
+    "OpenAI 开设科学博客，物理学家 Nathaniel Craig 介绍与 GPT-6 Astra 合作给出标准模型的候选格点定义。",
+    "论文开源 30B-A3B MoE 基座 801-30B-A3B-Base，把递归自我改进用到整次预训练。"
+  ],
+  "items": [
+    {
+      "section": "headline",
+      "title": "Qwen 发布 Qwen4-Max，基于新的 Qwen4 架构",
+      "summary": "Qwen 发布 Qwen4-Max，基于新的 Qwen4 架构，采用 2.4-trillion 参数主干，原生支持视觉，上下文窗口为 one-million-token；官方称它更熟练地使用专业工具、更擅长执行长程任务。此前上线的只是预览版，这次是正式介绍。对开发者来说，这是 Qwen 新一代旗舰，做长上下文、多模态和 Agent 类任务的模型选型时值得重新评测。",
+      "sources": [
+        {
+          "candidate_id": "c_cc9bba557c",
+          "url": "https://qwen.ai/blog?id=qwen4-max"
+        }
+      ],
+      "evidence": [],
+      "tags": [
+        "模型",
+        "多模态",
+        "Agent"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "物理学家借 GPT-6 Astra 构造标准模型的格点定义候选",
+      "summary": "OpenAI 新开的科学博客发布首篇客座文章：加州大学圣塔芭芭拉分校物理学家 Nathaniel Craig 介绍他与 GPT-6 Astra 合作，给出标准模型的一个候选非微扰格点定义；Astra 把他的思路变成具体构造，并主导了详细证明，格点场论专家审阅了证明。作者强调还需要专家讨论来判断这个方案是否具备所需的全部性质。对开发者来说，这是前沿模型参与理论物理证明的一个具体案例：模型负责构造和推导，人类专家负责审阅把关。",
+      "sources": [
+        {
+          "candidate_id": "c_a0bfa3d070",
+          "url": "https://openai.com/index/step-toward-defining-the-standard-model"
+        },
+        {
+          "candidate_id": "c_8110ba6428",
+          "url": "https://openai.com/index/our-new-blog-for-science"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://openai.com/index/step-toward-defining-the-standard-model",
+          "quote": "In the first guest post on our science blog , physicist Nathaniel Craig, a visiting scientist at OpenAI, describes how he worked with GPT‑6 Astra on a candidate lattice definition of the Standard Model."
+        },
+        {
+          "url": "https://openai.com/index/step-toward-defining-the-standard-model",
+          "quote": "Craig leads the particle theory group at the University of California, Santa Barbara, and is a permanent member of its Kavli Institute for Theoretical Physics."
+        },
+        {
+          "url": "https://openai.com/index/step-toward-defining-the-standard-model",
+          "quote": "Astra helped turn that strategy into a construction and took the lead in developing the detailed proof."
+        },
+        {
+          "url": "https://openai.com/index/step-toward-defining-the-standard-model",
+          "quote": "lattice field theorists Maarten Golterman, Andreas Kronfeld, and Yigal Shamir graciously spent time looking over Astra’s proof"
+        },
+        {
+          "url": "https://openai.com/index/step-toward-defining-the-standard-model",
+          "quote": "Scientific dialogue among experts is required to decide if this prescription has all the properties we desire."
+        },
+        {
+          "url": "https://openai.com/index/our-new-blog-for-science",
+          "quote": "We’re starting the OpenAI science blog to give scientists and academic researchers a place to share what they’re discovering with AI and how they’re doing the work."
+        }
+      ],
+      "tags": [
+        "推理",
+        "行业"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "腾讯开源 LoopForge：自托管的编码 Agent 交付工作流",
+      "summary": "腾讯开源 LoopForge，一个自托管的工作空间，用脚本和人工审批关卡编排 CodeBuddy、Codex 和 Claude Code 等编码 Agent：在聊天里描述需求，它会开 Docker 沙箱、检出仓库并分派给项目角色；不想跑服务器的话，LoopForge Local 可以把内置工作流直接装进现有的编码助手。对团队来说，这是把“多个编码 Agent + 人工把关”落到自己基础设施上的现成方案。",
+      "sources": [
+        {
+          "candidate_id": "c_c65fc7444d",
+          "url": "https://github.com/Tencent/LoopForge"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/Tencent/LoopForge",
+          "quote": "LoopForge is a self-hosted workspace where your team ships software with coding agents. Describe what you need to Main Bot in chat: it opens"
+        },
+        {
+          "url": "https://github.com/Tencent/LoopForge",
+          "quote": "Orchestrate CodeBuddy, Codex and Claude Code with scripts and human approval gates."
+        },
+        {
+          "url": "https://github.com/Tencent/LoopForge",
+          "quote": "LoopForge Local brings the built-in delivery workflows straight into the coding assistant you already use"
+        }
+      ],
+      "tags": [
+        "开源",
+        "Agent",
+        "代码"
+      ]
+    },
+    {
+      "section": "model",
+      "title": "美团开源 LongCat-Video-Avatar 1.6，音频驱动数字人视频",
+      "summary": "美团 LongCat 发布 LongCat-Video-Avatar 1.6，是其开源音频驱动人物视频生成框架的升级版：口型更自然、更稳定，减少自回归续写中的误差累积，可生成超过 10 分钟的视频，并做了端到端推理优化；权重采用 MIT License。需要做数字人播报、长视频口播的开发者可以直接拿来试。",
+      "sources": [
+        {
+          "candidate_id": "c_d07f911507",
+          "url": "https://huggingface.co/meituan-longcat/LongCat-Video-Avatar-1.6"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/meituan-longcat/LongCat-Video-Avatar-1.6",
+          "quote": "We are excited to announce the release of LongCat-Video-Avatar 1.6, the latest upgrade to our open-source framework for audio-driven human video generation."
+        },
+        {
+          "url": "https://huggingface.co/meituan-longcat/LongCat-Video-Avatar-1.6",
+          "quote": "Mitigates error accumulation during autoregressive video continuation, enabling videos exceeding 10 minutes while preserving visual quality, identity consistency, and temporal coherence."
+        },
+        {
+          "url": "https://huggingface.co/meituan-longcat/LongCat-Video-Avatar-1.6",
+          "quote": "The model weights are released under the MIT License ."
+        }
+      ],
+      "tags": [
+        "开源",
+        "视频",
+        "模型"
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Villanova2：欧洲五语种开放权重与数据模型家族",
+      "summary": "VillanovaAI 发布 Villanova2 家族，面向英语、意大利语、德语、西班牙语和法语，包括 15.5B 总参数 / 3.9B 激活的 MoE 模型 Villanova2-15B-A3B 及其 VL 版本，以及 2.4B 的稠密小模型，均为 Apache-2.0；基座从零在 4.7T tokens 上预训练，训练数据逐项公开来源。需要欧洲语言、又看重权重和数据都开放的场景，可以把它放进候选；同一合集里有 GGUF。",
+      "sources": [
+        {
+          "candidate_id": "c_80874028b3",
+          "url": "https://huggingface.co/collections/VillanovaAI/villanova2"
+        },
+        {
+          "candidate_id": "c_80874028b3",
+          "url": "https://huggingface.co/VillanovaAI/Villanova2-15B-A3B"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/VillanovaAI/Villanova2-15B-A3B",
+          "quote": "Villanova2-15B-A3B 15.5B total parameters · 3.9B active · 131,072-token context · five European languages · open weight & data"
+        },
+        {
+          "url": "https://huggingface.co/VillanovaAI/Villanova2-15B-A3B",
+          "quote": "Base model Villanova2-15B-A3B-Base , pre-trained from scratch on 4.7T tokens"
+        },
+        {
+          "url": "https://huggingface.co/VillanovaAI/Villanova2-15B-A3B",
+          "quote": "Openness open weight & data: model weights under Apache 2.0; training data documented source by source, each dataset under its own terms"
+        }
+      ],
+      "tags": [
+        "模型",
+        "开源"
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Vimoo 1.0 开源文生视频与图生视频模型",
+      "summary": "Vimoo-AI 开源 Vimoo 1.0 视频生成模型，文生视频（T2V）和图生视频（I2V）各用一个约 11.7B 的模型，另有更轻的 Vimoo 1.0 - Lite；代码和权重采用 Apache License 2.0，示例输出 1280 × 720、121 帧、24 fps。它同时提供 Diffusers、ComfyUI 和 MLX（Apple Silicon）的用法，本地跑视频生成的开发者可以对比试用。",
+      "sources": [
+        {
+          "candidate_id": "c_4a4bb33656",
+          "url": "https://huggingface.co/collections/Vimoo-AI/vimoo-10"
+        },
+        {
+          "candidate_id": "c_4a4bb33656",
+          "url": "https://huggingface.co/Vimoo-AI/Vimoo-1.0"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/Vimoo-AI/Vimoo-1.0",
+          "quote": "with a separate ≈11.7B model for each task. It is the highest-quality model in the Vimoo 1.0 family."
+        },
+        {
+          "url": "https://huggingface.co/Vimoo-AI/Vimoo-1.0",
+          "quote": "Vimoo-authored code and Vimoo model weights in this repository are provided under the Apache License 2.0 ."
+        },
+        {
+          "url": "https://huggingface.co/Vimoo-AI/Vimoo-1.0",
+          "quote": "The examples output 1280 × 720, 121 frames at 24 fps."
+        },
+        {
+          "url": "https://huggingface.co/Vimoo-AI/Vimoo-1.0",
+          "quote": "Vimoo 1.0 comes in two models, Vimoo 1.0 and Vimoo 1.0 - Lite."
+        }
+      ],
+      "tags": [
+        "开源",
+        "视频",
+        "模型"
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Axiomic Labs 发布 150M 参数提示词护栏模型 X3Guard",
+      "summary": "Axiomic Labs 发布 X3Guard-150M，对每条用户提示同时给出“有害”和“对抗”（越狱或提示注入）两个独立分数，团队称在他们评测的能同时给出两类判断的模型中，它最小且表现最好；它只检查提示词，不评估模型回复，许可为 Apache-2.0。体量小，适合放在网关或端侧做第一道输入过滤，但阈值应在自己的流量上验证。",
+      "sources": [
+        {
+          "candidate_id": "c_7ce83ddfd7",
+          "url": "https://huggingface.co/AxiomicLabs/X3Guard-150M"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/AxiomicLabs/X3Guard-150M",
+          "quote": "It reads a user prompt and returns two independent scores: how likely the prompt is to be harmful , and how likely it is to be adversarial (a jailbreak or prompt-injection attempt)."
+        },
+        {
+          "url": "https://huggingface.co/AxiomicLabs/X3Guard-150M",
+          "quote": "At 149M parameters it is both the smallest and best-performing model we evaluated that gives both classifications."
+        },
+        {
+          "url": "https://huggingface.co/AxiomicLabs/X3Guard-150M",
+          "quote": "X3-Guard checks prompts only. It does not assess model responses"
+        },
+        {
+          "url": "https://huggingface.co/AxiomicLabs/X3Guard-150M",
+          "quote": "Axiomic Labs is not responsible for incorrect outputs of this model. See Apache-2.0"
+        }
+      ],
+      "tags": [
+        "安全",
+        "模型",
+        "开源"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "801-30B-A3B-Base：把递归自我改进用到整个预训练",
+      "summary": "论文《No Second Run》把递归自我改进（RSI）应用到一次从零开始的前沿预训练上，把无法重跑的整次训练拆成多个可以闭环的小循环，结果是 801-30B-A3B-Base：一个在 11.8T tokens 上训练三个月的 30B-A3B MoE。作为基座，它超过 Qwen3-30B-A3B 和 Nemotron-3.5-Lightning-30B-A3B，只落后于更大的 Qwen3.5-35B-A3B；只做轻量 SFT（6B tokens，无 RL）就在四个 Agent 基准上取得最高平均分。基座和 SFT 数据都已开源，适合想在 30B-A3B 量级上自己做后训练的团队。",
+      "sources": [
+        {
+          "candidate_id": "c_53979cedb1",
+          "url": "https://arxiv.org/abs/2611.10719"
+        },
+        {
+          "candidate_id": "c_53979cedb1",
+          "url": "https://www.reddit.com/gallery/1xwt3ri"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2611.10719",
+          "quote": "The result is 801-30B-A3B-Base, a 30B-A3B MoE trained from scratch on 11.8T tokens in three months by a newly formed team."
+        },
+        {
+          "url": "https://arxiv.org/abs/2611.10719",
+          "quote": "As a base model, 801-30B-A3B outperforms Qwen3-30B-A3B and Nemotron-3.5-Lightning-30B-A3B, trailing only the larger Qwen3.5-35B-A3B"
+        },
+        {
+          "url": "https://arxiv.org/abs/2611.10719",
+          "quote": "with lightweight SFT alone, it achieves the highest average on four agentic benchmarks against fully post-trained models, including Qwen3.6-35B-A3B."
+        },
+        {
+          "url": "https://arxiv.org/abs/2611.10719",
+          "quote": "We open-source 801-30B-A3B-Base and the lightweight SFT data"
+        },
+        {
+          "url": "https://arxiv.org/abs/2611.10719",
+          "quote": "the lightweight SFT reported here (6B tokens, no RL) only probes post-training headroom."
+        }
+      ],
+      "tags": [
+        "论文",
+        "训练",
+        "开源"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "APEX：用条件偏移做少步流式视频生成",
+      "summary": "论文把 APEX 扩展到流式视频生成：用条件偏移在生成器内部估计生成分布的速度场，去掉了 DMD 需要的独立 fake-score 网络。在 180 秒视频上，APEX 在指令遵循上相对 S2-Avatar 获得 +30.0% 的净人类偏好；同等训练设置下，峰值显存比 DMD 低 4.4%，平均迭代时间短 9.2%。对做少步蒸馏的团队，这是一种省掉额外网络、降低训练开销的做法。",
+      "sources": [
+        {
+          "candidate_id": "c_04dc57421a",
+          "url": "https://huggingface.co/papers/2611.14033"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.14033",
+          "quote": "This removes the independent fake network while retaining S2-Avatar 's frozen reference teacher , Self-Replay Forcing , and perceptual regularization ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.14033",
+          "quote": "Separate measurements under matched training settings show 4.4% lower peak allocated GPU memory per GPU and 9.2% shorter mean iteration time than DMD ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.14033",
+          "quote": "On 180-second videos , APEX achieves +30.0% net human preference for instruction following over S2-Avatar."
+        }
+      ],
+      "tags": [
+        "论文",
+        "视频"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Univer：给产品和 Agent 用的开源 Office SDK",
+      "summary": "Univer 是一套嵌入式 Office SDK，把表格、文档的编辑、计算、协作和文件处理带进自己的产品；AI SDK 把这些能力接到现有的 Agent 和工作流里，Agent 可以直接调用同一套开源 API。开源核心为 Apache-2.0，Server SDK 和商业 AI SDK 扩展单独授权。需要让 Agent 读写表格和文档的产品可以参考，今天登上 GitHub Trending 榜首。",
+      "sources": [
+        {
+          "candidate_id": "c_12221ab3bb",
+          "url": "https://github.com/dream-num/univer"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/dream-num/univer",
+          "quote": "AI SDK connects Office capabilities to existing agents and workflows, with content tools, execution, and review integrations."
+        },
+        {
+          "url": "https://github.com/dream-num/univer",
+          "quote": "Agents can use the same open-source APIs; your application supplies the model and tool orchestration."
+        },
+        {
+          "url": "https://github.com/dream-num/univer",
+          "quote": "Commercial Web SDK plugins, Server SDK, and commercial AI SDK extensions are distributed and licensed separately."
+        },
+        {
+          "url": "https://github.com/dream-num/univer",
+          "quote": "Readme Apache-2.0 license"
+        }
+      ],
+      "tags": [
+        "开源",
+        "工具",
+        "Agent"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "AG-UI：把 Agent 接进前端的事件协议",
+      "summary": "AG-UI 是一个开放、轻量、基于事件的协议，规范 AI Agent 与用户界面应用之间的连接：Agent 后端在运行中发出约 16 种标准事件，前端据此渲染；社区集成里已支持 Claude Agent SDK 等框架。做 Agent 产品前端的开发者可以用它代替自定义的流式协议。",
+      "sources": [
+        {
+          "candidate_id": "c_62130df1ba",
+          "url": "https://github.com/ag-ui-protocol/ag-ui"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/ag-ui-protocol/ag-ui",
+          "quote": "AG-UI is an open, lightweight, event-based protocol that standardizes how AI agents connect to user-facing applications."
+        },
+        {
+          "url": "https://github.com/ag-ui-protocol/ag-ui",
+          "quote": "agent backends emit events compatible with one of AG-UI's ~16 standard event types"
+        },
+        {
+          "url": "https://github.com/ag-ui-protocol/ag-ui",
+          "quote": "Claude Agent SDK ✅ Supported"
+        }
+      ],
+      "tags": [
+        "开源",
+        "Agent",
+        "工具"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "google-labs-code 发布 Stitch 设计工具的 Agent Skills 库",
+      "summary": "google-labs-code/stitch-skills 是一组配合 Stitch MCP 服务器使用的 Agent Skills，遵循 Agent Skills 开放标准，可用于 Antigravity、Gemini CLI、Claude Code、Cursor 等编码 Agent，Claude Code 一条 npx 命令即可装进项目。注意项目声明它不是 Google 官方支持的产品。用 Stitch 做 UI 设计的开发者可以借它把设计和代码生成串起来。",
+      "sources": [
+        {
+          "candidate_id": "c_828729b7e7",
+          "url": "https://github.com/google-labs-code/stitch-skills"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/google-labs-code/stitch-skills",
+          "quote": "A library of Agent Skills designed to work with the Stitch MCP server. Each skill follows the Agent Skills open standard, for compatibility with coding agents such as Antigravity, Gemini CLI, Claude Code, Cursor."
+        },
+        {
+          "url": "https://github.com/google-labs-code/stitch-skills",
+          "quote": "npx plugins add google-labs-code/stitch-skills --scope project --target claude-code"
+        },
+        {
+          "url": "https://github.com/google-labs-code/stitch-skills",
+          "quote": "This is not an officially supported Google product."
+        }
+      ],
+      "tags": [
+        "工具",
+        "Agent",
+        "代码"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "NVIDIA 开源 SkillEvaluator，评估 Agent Skills 的质量和效果",
+      "summary": "NVIDIA 开源 SkillEvaluator，按三层评估 Agent Skills：校验格式与安全、检测重复或重叠的指导、在沙箱里对比用和不用这个 skill 时 Agent 的表现；pip 安装后，第一层检查无需 API key 即可运行。它是 NVIDIA Verified Skills 流程的一部分，维护 skill 库的团队可以用它给 skill 做质量门禁。",
+      "sources": [
+        {
+          "candidate_id": "c_49e6434c81",
+          "url": "https://github.com/NVIDIA/SkillEvaluator"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/NVIDIA/SkillEvaluator",
+          "quote": "Tier 2: Deduplication Does guidance repeat or overlap? uv run --extra tier2 skillevaluator tier2 ./my-skill Embeddings and chat; add --catalog ./skill-catalog.json for inter-skill comparison Tier 3: Live Evaluation Does the skill help the agent?"
+        },
+        {
+          "url": "https://github.com/NVIDIA/SkillEvaluator",
+          "quote": "pip install skillevaluator Run all Tier 1 checks, no API key: skillevaluator validate \\ ./my-skill --tiers 1"
+        },
+        {
+          "url": "https://github.com/NVIDIA/SkillEvaluator",
+          "quote": "of the NVIDIA Verified Skills pipeline"
+        }
+      ],
+      "tags": [
+        "开源",
+        "Agent",
+        "工具"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "Domyn 在 JUPITER 超算上试训欧盟开放模型 EUROPA",
+      "summary": "据 MACCUS 报道，Domyn 在公共超算 JUPITER 上试训欧盟开放模型 EUROPA，测试配置为 951.9 billion 参数的 MoE，每个 token 只激活 32.8 billion。",
+      "sources": [
+        {
+          "candidate_id": "c_3998f3e768",
+          "url": "https://maccus.fr/en/eu-open-ai-model-europa/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://maccus.fr/en/eu-open-ai-model-europa/",
+          "quote": "The Italian company Domyn has run training trials for EUROPA, the European Union’s open AI model, on a public supercomputer."
+        },
+        {
+          "url": "https://maccus.fr/en/eu-open-ai-model-europa/",
+          "quote": "In its test setup, EUROPA has 951.9 billion of them. The supercomputer, JUPITER, is in Jülich, Germany"
+        },
+        {
+          "url": "https://maccus.fr/en/eu-open-ai-model-europa/",
+          "quote": "Only 8 of the 384 experts work on any given token. As a result, only 32.8 billion of the 951.9 billion parameters are active for each token."
+        }
+      ],
+      "tags": [
+        "模型",
+        "行业"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "Sebastian Raschka 长文讲解现代 LLM 的位置编码",
+      "summary": "Sebastian Raschka 发表长文，用图示、少量数学和一个小型 PyTorch 实现讲解 RoPE 等位置编码方法，以及现代架构如何调整或省略显式位置编码。",
+      "sources": [
+        {
+          "candidate_id": "c_e047ece727",
+          "url": "https://magazine.sebastianraschka.com/p/understanding-positional-embeddings"
+        },
+        {
+          "candidate_id": "c_e047ece727",
+          "url": "https://news.ycombinator.com/item?id=50506376"
+        }
+      ],
+      "evidence": [],
+      "tags": [
+        "训练"
+      ]
+    }
+  ],
+  "research": [
+    {
+      "via": "webfetch",
+      "url": "https://qwen.ai/blog?id=qwen4-max"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://openai.com/index/step-toward-defining-the-standard-model"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://arxiv.org/abs/2611.10719"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.14033"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/meituan-longcat/LongCat-Video-Avatar-1.6"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/Tencent/LoopForge"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/Vimoo-AI/Vimoo-1.0"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/VillanovaAI/Villanova2-15B-A3B"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/AxiomicLabs/X3Guard-150M"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/dream-num/univer"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/ag-ui-protocol/ag-ui"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/NVIDIA/SkillEvaluator"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/google-labs-code/stitch-skills"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://geoffstearns.com/blog/your-agent-will-pick-the-hackable-one/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://maccus.fr/en/eu-open-ai-model-europa/"
+    },
+    {
+      "via": "websearch",
+      "query": "Unbundling Multimodal Vision Encoding arXiv Meta FAIR NYU encoder pretraining optional"
+    },
+    {
+      "via": "websearch",
+      "query": "Thinking Machines Lab announcement November 2026"
+    },
+    {
+      "via": "websearch",
+      "query": "Baidu ERNIE release November 2026"
+    },
+    {
+      "via": "websearch",
+      "query": "\"Unbundling\" vision encoding MLLM \"vision-only parameters\" 2026 arxiv"
+    }
+  ],
+  "validation": {
+    "validated_at": "2026-11-16T04:44:27+00:00",
+    "checked_links": true,
+    "dropped": [
+      {
+        "title": "LangChain 的 xAI、DeepSeek 集成可经 LangSmith gateway 路由",
+        "section": "brief",
+        "candidates": [
+          "c_bfabd1bfac",
+          "c_2b62315796",
+          "c_6f408e1a9e"
+        ],
+        "reasons": [
+          "summary longer than 120 characters"
+        ]
+      }
+    ],
+    "warnings": [
+      "801-30B-A3B-Base：把递归自我改进用到整个预训练: could not check https://www.reddit.com/gallery/1xwt3ri (403)"
+    ]
+  }
+}
