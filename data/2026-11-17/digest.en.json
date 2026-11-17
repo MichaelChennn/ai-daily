@@ -2,24 +2,19 @@
   "schema_version": 1,
   "date": "2026-11-17",
   "mode": "full",
-  "generated_at": "2026-11-17T04:44:03+00:00",
-  "channel": "api",
-  "model": "nvidia:minimaxai/minimax-m3.1-flash",
+  "channel": "claude",
+  "generated_at": "2026-11-17T04:45:45+00:00",
+  "model": "claude-opus-5-5",
   "highlights": [
-    "Hugging Face moved language model traffic on Inference Providers to OpenRouter, which now selects a provider per call and retries on failure.",
-    "vLLM v0.34.0 turns on extensible KV cache by default, removes Model Runner V1, and raises the default block size to 64.",
-    "TokenEconomizer, an open-source plugin from UC Berkeley, Microsoft Research, and Microsoft Security, cut coding agent costs by 18.4–30.9% across 277 bug-fixing tasks."
+    "Hugging Face now routes Inference Providers language-model requests through OpenRouter; code stays the same, but custom provider API keys no longer work for these models.",
+    "vLLM v0.34.0 turns on the extensible KV cache by default and removes Model Runner V1, with several breaking changes to check before upgrading.",
+    "Anthropic shortens its vulnerability disclosure window from 90 days to 30 days for high- and critical-severity issues and 45 days for the rest, starting January 1, 2027."
   ],
   "items": [
     {
       "section": "headline",
-      "title": "Hugging Face routes language model inference through OpenRouter",
-      "summary": "Hugging Face switched Inference Providers from its own router to OpenRouter for language model requests, while image, video, and audio generation keep using the existing Hugging Face path. OpenRouter picks a provider per call based on live price, speed and reliability, and retries on another provider if the first one fails, and existing Hugging Face tokens still work. Language model requests are now billed to the Hugging Face account or organization, so custom provider API keys no longer work for them.",
-      "tags": [
-        "工具",
-        "产品",
-        "推理"
-      ],
+      "title": "Hugging Face routes language-model inference through OpenRouter",
+      "summary": "Language-model requests on Hugging Face Inference Providers now go through OpenRouter, which routes each request across 80+ providers based on live measurements and retries a failed try on the next best provider inside the same call; Hugging Face adds no markup. You can still pin a policy or provider with a suffix such as :fastest or :cheapest, but you can no longer use your own provider API key for these models, while image, video, and audio generation work as before. Code calling open-weight models with an HF token keeps working; teams relying on their own provider keys should review their setup.",
       "sources": [
         {
           "candidate_id": "c_ac2621c1ce",
@@ -27,142 +22,191 @@
         },
         {
           "candidate_id": "c_1c1c2ced7c",
-          "url": "https://huggingface.co/blog/openrouter"
+          "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xy9o6j/hugging_face_switched_its_language_model/"
         }
       ],
       "evidence": [
         {
           "url": "https://huggingface.co/blog/openrouter",
-          "quote": "Hugging Face and OpenRouter are teaming up to make open-weight models easy to run."
+          "quote": "OpenRouter serves those models at scale, routing each request across 80+ providers based on live measurements of each one."
         },
         {
           "url": "https://huggingface.co/blog/openrouter",
-          "quote": "Today, we are switching Inference Providers from our own custom router to OpenRouter's."
+          "quote": "a failed try is retried on the next best provider inside the same call."
         },
         {
           "url": "https://huggingface.co/blog/openrouter",
-          "quote": "Requests made to language models now go through OpenRouter, which picks the best provider for each call based on live price, speed and reliability, and retries on another provider if the first one fails."
+          "quote": "Hugging Face doesn't add a markup on top of it."
         },
         {
           "url": "https://huggingface.co/blog/openrouter",
-          "quote": "The router supports OpenAI's Chat Completions and Responses APIs and Anthropic's Messages API for every chat model, whatever the provider behind it."
+          "quote": "You can still choose a policy or a provider with a suffix on the model id: zai-org/GLM-5.3 # default: best mix of price, speed and reliability zai-org/GLM-5.3:fastest # highest throughput zai-org/GLM-5.3:cheapest # lowest price"
+        },
+        {
+          "url": "https://huggingface.co/blog/openrouter",
+          "quote": "so you can no longer use your own API key for a provider with these models."
         },
         {
           "url": "https://huggingface.co/blog/openrouter",
           "quote": "Image, video, and audio generation continue to work exactly as before, directly through Hugging Face Inference Providers without going through OpenRouter."
-        },
-        {
-          "url": "https://huggingface.co/blog/openrouter",
-          "quote": "Requests to language models now go through OpenRouter and are billed to your Hugging Face account or organization, so you can no longer use your own API key for a provider with these models."
-        },
-        {
-          "url": "https://huggingface.co/blog/openrouter",
-          "quote": "You can still pick a provider with a suffix on the model id ( model:provider ) or turn providers off in your settings, and your code stays the same."
         }
+      ],
+      "tags": [
+        "产品",
+        "推理",
+        "开源"
       ]
     },
     {
       "section": "headline",
-      "title": "vLLM v0.34.0 enables extensible KV cache by default",
-      "summary": "vLLM v0.34.0 sizes the KV cache from memory actually free after warmup, so most models get a bigger cache and more throughput, and Model Runner V1 is removed so V2 is the only GPU runner. The release reports up to 1.95× decode on Blackwell and MI355X and 1.24–1.40× faster long-prompt TTFT. Upgrades need attention: the default block size is now 64, ROCm 7.2 images are gone, and huggingface_hub >= 2.0.0 is required.",
-      "tags": [
-        "开源",
-        "工具",
-        "推理"
-      ],
+      "title": "vLLM v0.34.0 enables the extensible KV cache by default and drops Model Runner V1",
+      "summary": "vLLM v0.34.0 adds 10 new models (including Mistral Large 4, MiniMax-M3.1-Flash and Nemotron-3.5-Transcribe), sizes the KV cache from memory actually free after warmup by default, and makes Model Runner V2 the only GPU runner, with up to 1.95× decode on Blackwell and MI355X. Breaking changes include a default --block-size of 64 (was 16), gpu memory utilization defaulting to 1.0, dropped ROCm 7.2 images, and a huggingface hub 2.0.0 requirement. Production deployments should go through the upgrade table before bumping the version.",
       "sources": [
         {
           "candidate_id": "c_55c9424bdd",
           "url": "https://github.com/vllm-project/vllm/releases/tag/v0.34.0"
         }
       ],
-      "evidence": [
-        {
-          "url": "https://github.com/vllm-project/vllm/releases/tag/v0.34.0",
-          "quote": "Extensible KV cache is on by default: vLLM sizes the KV cache from memory actually free after warmup, so most models get a bigger cache and more throughput."
-        },
-        {
-          "url": "https://github.com/vllm-project/vllm/releases/tag/v0.34.0",
-          "quote": "Model Runner V1 is gone."
-        },
-        {
-          "url": "https://github.com/vllm-project/vllm/releases/tag/v0.34.0",
-          "quote": "Big speedups on Blackwell and MI355X: up to 1.95× decode (Step5 on GB200), 1.6× throughput (GLM-5.3-Flash), 1.24–1.40× faster long-prompt TTFT (GLM-5.3)."
-        },
-        {
-          "url": "https://github.com/vllm-project/vllm/releases/tag/v0.34.0",
-          "quote": "Upgrade check: default block size is now 64, ROCm 7.2 images are gone, and huggingface_hub >= 2.0.0 is required."
-        },
-        {
-          "url": "https://github.com/vllm-project/vllm/releases/tag/v0.34.0",
-          "quote": "Default --block-size is 64 (was 16)"
-        },
-        {
-          "url": "https://github.com/vllm-project/vllm/releases/tag/v0.34.0",
-          "quote": "ROCm 7.2 artifacts dropped"
-        },
-        {
-          "url": "https://github.com/vllm-project/vllm/releases/tag/v0.34.0",
-          "quote": "huggingface_hub >= 2.0.0 required"
-        }
+      "evidence": [],
+      "tags": [
+        "开源",
+        "推理"
       ]
     },
     {
       "section": "headline",
-      "title": "TokenEconomizer cuts repeated work in AI coding agents",
-      "summary": "TokenEconomizer is an open-source plugin from UC Berkeley, Microsoft Research, and Microsoft Security that learns from an agent's past sessions in a repository without modifying the agent or its underlying model. Across 277 SWE-Bench tasks from six repositories, it reduced costs by 18.4–30.9% across multiple AI coding agent and model combinations, while task success rates stayed broadly stable. It runs alongside existing agents, requires no API key of its own, and keeps what it learns on the developer's machine.",
-      "tags": [
-        "Agent",
-        "开源",
-        "工具"
-      ],
+      "title": "Anthropic cuts its vulnerability disclosure window from 90 days to 30 and 45",
+      "summary": "Anthropic's coordinated vulnerability disclosure policy moves from 90 days to 30 days for high- and critical-severity issues and 45 days for all others, for vulnerabilities reported on or after January 1, 2027; it will also escalate to an external coordinator after 15 days instead of 30 without a maintainer response, and share full technical details 30 days instead of 45 after a patch. Anthropic says existing norms were developed before AI could discover vulnerabilities and assumed fixes moved at human speed. Vendors and maintainers receiving its reports should plan for faster fixes.",
       "sources": [
         {
-          "candidate_id": "c_209164698d",
-          "url": "https://www.microsoft.com/en-us/research/blog/tokeneconomizer-learning-from-experience-to-make-ai-coding-agents-more-efficient/"
+          "candidate_id": "c_dd11dbeb3b",
+          "url": "https://www.anthropic.com/research/coordinated-vulnerability-disclosure-timelines"
         }
       ],
       "evidence": [
         {
-          "url": "https://www.microsoft.com/en-us/research/blog/tokeneconomizer-learning-from-experience-to-make-ai-coding-agents-more-efficient/",
-          "quote": "Developers use AI coding agents in the same codebases day after day, yet agents often start each session from scratch: rediscovering familiar facts, loading unused tools, and repeating unsuccessful approaches."
+          "url": "https://www.anthropic.com/research/coordinated-vulnerability-disclosure-timelines",
+          "quote": "in our coordinated vulnerability disclosure (CVD) policy from 90 days to 30 days for high- and critical-severity issues, and to 45 days for all other issues. The new timelines apply to vulnerabilities reported to vendors and maintainers on or after January 1, 2027."
         },
         {
-          "url": "https://www.microsoft.com/en-us/research/blog/tokeneconomizer-learning-from-experience-to-make-ai-coding-agents-more-efficient/",
-          "quote": "TokenEconomizer is an open-source plugin that learns from an agent’s past sessions in a repository to reduce waste in future sessions, without modifying the agent or its underlying model."
+          "url": "https://www.anthropic.com/research/coordinated-vulnerability-disclosure-timelines",
+          "quote": "First, we will aim to escalate to an external vulnerability coordinator after 15 days instead of 30 if a maintainer does not respond to our initial vulnerability report. Second, we will wait 30 days instead of 45 after a patch is available before sharing full technical details."
         },
         {
-          "url": "https://www.microsoft.com/en-us/research/blog/tokeneconomizer-learning-from-experience-to-make-ai-coding-agents-more-efficient/",
-          "quote": "Across 277 real bug-fixing tasks, TokenEconomizer reduced costs by 18.4–30.9% across multiple AI coding agents."
-        },
-        {
-          "url": "https://www.microsoft.com/en-us/research/blog/tokeneconomizer-learning-from-experience-to-make-ai-coding-agents-more-efficient/",
-          "quote": "Costs fell in every repository tested, while task success rates remained broadly stable."
-        },
-        {
-          "url": "https://www.microsoft.com/en-us/research/blog/tokeneconomizer-learning-from-experience-to-make-ai-coding-agents-more-efficient/",
-          "quote": "We evaluated TokenEconomizer on 277 SWE-Bench tasks from six repositories, using five different AI coding agent and model combinations."
-        },
-        {
-          "url": "https://www.microsoft.com/en-us/research/blog/tokeneconomizer-learning-from-experience-to-make-ai-coding-agents-more-efficient/",
-          "quote": "TokenEconomizer lowered the average cost by 18.4–30.9%, as shown in Figure 3, and saved the most in all 30 repository-combination pairs without performance loss."
-        },
-        {
-          "url": "https://www.microsoft.com/en-us/research/blog/tokeneconomizer-learning-from-experience-to-make-ai-coding-agents-more-efficient/",
-          "quote": "It is designed to run alongside existing AI coding agents without modifying their underlying models, requires no API key of its own, and keeps what it learns on the developer’s machine."
+          "url": "https://www.anthropic.com/research/coordinated-vulnerability-disclosure-timelines",
+          "quote": "Many coordinated disclosure norms, including those found in our own policy, were developed well before AI could discover vulnerabilities. These policies assumed that fixes moved at human speed"
         }
+      ],
+      "tags": [
+        "安全",
+        "行业"
       ]
     },
     {
-      "section": "headline",
-      "title": "miHoYo introduces Gamer for long-horizon game interaction",
-      "summary": "The miHoYo Honkai AI R&D team presents Gamer, a generalist Vision-Language-Action foundation model that acts in games through screenshots, keyboard, and mouse. It uses 10K+ hours of gameplay trajectories for continual pre-training and a streaming KV-cache reuse inference engine that the team reports cuts inference latency by over 20× in their benchmark setup. Across multiple main storylines in Honkai: Star Rail, Gamer successfully handles over 95% of the challenges.",
+      "section": "model",
+      "title": "NVIDIA releases Nemotron-Labs-Sigma 8B/3B continuous diffusion language models",
+      "summary": "Nemotron-Labs-Sigma-8B-instruct is an 8-billion-parameter continuous diffusion language model that denoises Gaussian noise in a 16-D continuous token-embedding space instead of generating one token at a time; a 3B variant is also listed. NVIDIA measures roughly 120-140 tokens/s for 256 generated tokens on a single H100 with the DDPM sampler at 32 denoising steps per 64-token block; context is limited to 8,192 tokens, English only, under the NVIDIA Nemotron Open Model License. It is a ready-made testbed for anyone exploring parallel diffusion decoding.",
+      "sources": [
+        {
+          "url": "https://huggingface.co/nvidia/Nemotron-Labs-Sigma-8B-instruct",
+          "title": "nvidia/Nemotron-Labs-Sigma-8B-instruct"
+        },
+        {
+          "candidate_id": "c_4e7f264b26",
+          "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xxwg6w/nvidianemotronlabssigma_8b3b/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/nvidia/Nemotron-Labs-Sigma-8B-instruct",
+          "quote": "Nemotron-Labs-Sigma-8B-instruct is a 8-billion-parameter continuous diffusion language model. Instead of generating text one token at a time, it denoises Gaussian noise in a low-dimensional (16-D) continuous token-embedding space"
+        },
+        {
+          "url": "https://huggingface.co/nvidia/Nemotron-Labs-Sigma-8B-instruct",
+          "quote": "Measured generation throughput: roughly 120-140 tokens/s for 256 generated tokens with the DDPM sampler at 32 denoising steps per 64-token block on a single NVIDIA Hopper H100 (bfloat16)."
+        },
+        {
+          "url": "https://huggingface.co/nvidia/Nemotron-Labs-Sigma-8B-instruct",
+          "quote": "Maximum context length of 8,192 tokens (prompt plus generated tokens). Conversations should be formatted with the bundled chat template (chat_template.jinja). Supported language: English."
+        },
+        {
+          "url": "https://huggingface.co/nvidia/Nemotron-Labs-Sigma-8B-instruct",
+          "quote": "Use of this model is governed by the NVIDIA Nemotron Open Model License"
+        }
+      ],
       "tags": [
         "模型",
-        "Agent",
-        "开源",
-        "视频"
+        "开源"
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Shanghai AI Laboratory releases Sage S2.1 Flash scientific multimodal model",
+      "summary": "Sage S2.1 Flash from Shanghai Artificial Intelligence Laboratory targets multi-round scientific research tasks, combining scientific data understanding with retrieval, programming and tool use, and accepts more than ten scientific input types such as molecular graphs, crystal structures and protein structures. The 321B-parameter model ships its code and weights under the MIT License and scores 90.3 on MLE-bench Lite, ahead of DeepSeek-V4.1-Flash-1017 at 89.2. Teams building research or ML-engineering agents get another self-hostable open-weight option.",
+      "sources": [
+        {
+          "candidate_id": "c_6c10e044ee",
+          "url": "https://huggingface.co/internlm/Sage-S2.1-Flash"
+        }
       ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/internlm/Sage-S2.1-Flash",
+          "quote": "The code and model weights in this repository are released under the MIT License"
+        },
+        {
+          "url": "https://huggingface.co/internlm/Sage-S2.1-Flash",
+          "quote": "Model size 321B params"
+        },
+        {
+          "url": "https://huggingface.co/internlm/Sage-S2.1-Flash",
+          "quote": "Sage S2.1 Flash placed first on MLE-bench Lite with 90.3, ahead of DeepSeek-V4.1-Flash-1017 at 89.2."
+        }
+      ],
+      "tags": [
+        "模型",
+        "开源",
+        "多模态"
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Liquid AI launches d1.2 and d1.2-ultra decision models with audio input",
+      "summary": "Liquid AI's d1.2 and d1.2-ultra decision models add audio input and five new tasks, such as reading a value from the input, and d1.2-ultra scores 75 on the Artificial Analysis Decision Index v2.1, two points ahead of the previous best decision model. Both are available on the Liquid API and bill input tokens only, at $0.02 for d1.2 and $0.042 per million input tokens for d1.2-ultra. Developers running classification or extraction calls that need calibrated probabilities can compare them against general-purpose LLMs on cost.",
+      "sources": [
+        {
+          "candidate_id": "c_a33d3e2b67",
+          "url": "https://www.liquid.ai/blog/d1-2"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://www.liquid.ai/blog/d1-2",
+          "quote": "Today, we release d1.2 and d1.2-ultra, the new versions of our decision models, now supporting audio input and five new tasks. In addition, d1.2-ultra ranks first among decision models on the Artificial Analysis Decision Index v2.1."
+        },
+        {
+          "url": "https://www.liquid.ai/blog/d1-2",
+          "quote": "Both models are available today on the Liquid API , at $0.02 for d1.2 and $0.042 per million input tokens for d1.2-ultra. d1.2 and d1.2-ultra add five new tasks to the API: Read a value from the input (text, number or date)."
+        },
+        {
+          "url": "https://www.liquid.ai/blog/d1-2",
+          "quote": "d1.2-ultra scores 75, the highest on the index and two points ahead of the previous best decision model."
+        },
+        {
+          "url": "https://www.liquid.ai/blog/d1-2",
+          "quote": "Both models bill input tokens only."
+        }
+      ],
+      "tags": [
+        "模型",
+        "多模态",
+        "语音"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "miHoYo introduces Gamer, a generalist game-playing VLA model",
+      "summary": "Gamer, from the miHoYo Honkai AI R&D team, is a Vision-Language-Action foundation model for long-horizon, real-time game interaction, continually pre-trained on tens of thousands of hours of device-level keyboard and mouse interaction, then trained with sparse-thinking instruction tuning and multi-turn reinforcement learning, and served by the Streaming-vLLM inference engine. The paper reports operational efficiency comparable to skilled players across multiple 3D open-world games and competitive results on 2D game benchmarks. It is a useful reference for anyone scaling GUI or game agents on raw input trajectories.",
       "sources": [
         {
           "candidate_id": "c_e8789b7765",
@@ -170,7 +214,7 @@
         },
         {
           "candidate_id": "c_c624db3345",
-          "url": "https://arxiv.org/abs/2611.18397"
+          "url": "https://i.redd.it/iyknzc0chy1i1.png"
         },
         {
           "candidate_id": "c_1452f81e0b",
@@ -180,50 +224,35 @@
       "evidence": [
         {
           "url": "https://huggingface.co/papers/2611.18397",
-          "quote": "Generated by deepseek-ai/DeepSeek-V4.1-Flash We introduce Gamer, a generalist agent framework built for long-horizon tasks in complex interactive environments."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.18397",
           "quote": "We first continue pre-training on a dataset constructed from tens of thousands of hours of device-level keyboard and mouse interaction."
         },
         {
           "url": "https://huggingface.co/papers/2611.18397",
-          "quote": "For real-time interaction, a cloud-edge inference engine serves numerous simulated game environments concurrently, supports unbounded-context execution , and keeps online inference latency low."
+          "quote": "trained through continued pre-training, sparse-thinking instruction tuning, and multi-turn reinforcement learning to interact efficiently in 2D and 3D environments."
         },
         {
           "url": "https://huggingface.co/papers/2611.18397",
-          "quote": "We’re excited to introduce Gamer , a generalist Vision-Language-Action foundation model for long-horizon, real-time game interaction, developed by the miHoYo Honkai AI R&D team !"
+          "quote": "Across multiple challenging 3D open-world games, Gamer demonstrates solid generalization and operational efficiency comparable to skilled players. It also achieves competitive results on a range of conventional 2D game benchmarks."
         },
         {
           "url": "https://huggingface.co/papers/2611.18397",
-          "quote": "Unlike game-specific agents, Gamer interacts with the world through the same interface humans use: screenshots, keyboard, and mouse ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.18397",
-          "quote": "We leverage 10K+ hours of gameplay trajectories for continual pre-training (CPT) and systematically study scaling laws across model sizes and data mixtures, exploring how generalizable game-playing abilities emerge through scaling."
+          "quote": "a generalist Vision-Language-Action foundation model for long-horizon, real-time game interaction, developed by the miHoYo Honkai AI R&D team"
         },
         {
           "url": "https://huggingface.co/papers/2611.18397",
           "quote": "We develop Streaming-vLLM , a high-concurrency inference engine optimized for continuous game interaction."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.18397",
-          "quote": "Through streaming KV-cache reuse, speculative decoding, and system-level optimizations, we achieve over 20× lower inference latency in our benchmark setup, enabling real-time keyboard and mouse control."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.18397",
-          "quote": "Across multiple main storylines in Honkai: Star Rail , Gamer successfully handles over 95% of the challenges !"
         }
+      ],
+      "tags": [
+        "论文",
+        "Agent",
+        "多模态"
       ]
     },
     {
-      "section": "model",
-      "title": "MIRIX-2.0 proposes a multi-agent memory system",
-      "summary": "MIRIX-2.0 is a multi-agent memory system for LLM agents that keeps complete records through six typed memory agents and indexes episodic and semantic records with a provenance hypergraph. It reaches 91.4% on LoCoMo and 72.6% on LongMemEval-S, leading the strongest baseline by 14.3 points on the latter. It needs no fine-tuning, runs with closed and open models, and its code is public.",
-      "tags": [
-        "论文",
-        "Agent"
-      ],
+      "section": "paper",
+      "title": "MIRIX-2.0 multi-agent memory system leads LongMemEval-S by 14.3 points",
+      "summary": "MIRIX-2.0 is a multi-agent memory system for LLM agents that is the most accurate of the compared systems on four of five QA benchmarks, reaching 91.4% on LoCoMo and 72.6% on LongMemEval-S, 14.3 points above the strongest baseline. It needs no fine-tuning, runs with closed and open models, and its code is public. Worth adding to the shortlist if you are giving agents long-term memory.",
       "sources": [
         {
           "candidate_id": "c_af4aa36438",
@@ -233,214 +262,23 @@
       "evidence": [
         {
           "url": "https://huggingface.co/papers/2611.12068",
-          "quote": "Papers arxiv:2611.12068 Copy markdown MIRIX-2.0: Multi-Agent Memory System Published on Nov 9 · Submitted by Weizhi Zhang on Nov 16 Upvote 47 +39 Authors: Wei-Chieh Huang , Weizhi Zhang , Jiayan Nan , Peng Xia , Yu Wang Abstract MIRIX-2.0 is a multi-agent memory system for LLM agents that achieves h"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.12068",
-          "quote": "We present MIRIX-2.0, a multi-agent memory system designed to be practical, accurate, and efficient at once."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.12068",
-          "quote": "It reaches 91.4% on LoCoMo and 72.6% on LongMemEval-S, where it leads the strongest baseline by 14.3 points, and with AutoDream disabled it gains 31.0 and 22.0 points over HyperMem on single-hop and multi-hop document QA ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.12068",
-          "quote": "Six typed memory agents keep complete records as the system of record, and a provenance hypergraph indexes episodic and semantic records with n-ary frames that cite their rows."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.12068",
-          "quote": "Retrieval runs under explicit budgets, so the evidence a question inspects does not grow with the history."
+          "quote": "It is the most accurate of the compared systems on four of five QA benchmarks. It reaches 91.4% on LoCoMo and 72.6% on LongMemEval-S, where it leads the strongest baseline by 14.3 points"
         },
         {
           "url": "https://huggingface.co/papers/2611.12068",
           "quote": "It needs no fine-tuning , runs with closed and open models , and its code is public."
         }
-      ]
-    },
-    {
-      "section": "model",
-      "title": "V-JEPA-LM reads dynamics from a frozen video encoder",
-      "summary": "V-JEPA-LM joins a frozen V-JEPA world-model encoder to Qwen3 and Llama models, and is trained in a single stage on 4.53M public samples with 32 visual tokens per frame. The resulting 1B to 8B models lead every size class in average score across eleven video benchmarks, and the 4B model scores 72.1 against 61.1 for the best open 4B model. All 6 checkpoints, code and a live demo are open.",
-      "tags": [
-        "论文",
-        "模型",
-        "视频",
-        "多模态"
       ],
-      "sources": [
-        {
-          "candidate_id": "c_64ab4fc5df",
-          "url": "https://huggingface.co/papers/2611.17831"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2611.17831",
-          "quote": "We then build counterfactual supervision that makes the language model read it: pixel transformations turn public videos into answer-balanced variants whose answers are set by the transformation and differ only in the change."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.17831",
-          "quote": "Trained in a single stage on 4.53M public samples with 32 visual tokens per frame , where open video LLMs use several stages, 9M to 172M samples and 64 to 256 tokens per frame on average, the resulting V-JEPA-LM models (1B to 8B, Qwen3 and Llama ) lead every size class in average score across eleven"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.17831",
-          "quote": "video benchmarks; our 4B model scores 72.1, against 61.1 for the best open 4B and 64.8 for the best open 8B model."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.17831",
-          "quote": "View arXiv page View PDF Project page GitHub 3 Add to collection Community kkt94 Paper author Paper submitter about 19 hours ago We release Llama-V-JEPA-LM, open video-language models that join a frozen V-JEPA 2.1 world-model encoder to Qwen3 / Llama (1B–8B), trained in a single stage with counterfa"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.17831",
-          "quote": "4.53M public samples, 32 visual tokens per frame, one training stage"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.17831",
-          "quote": "All 6 checkpoints, code and a live demo are open."
-        }
-      ]
-    },
-    {
-      "section": "model",
-      "title": "Bonbon shows zero-shot capabilities for molecular interactions",
-      "summary": "Bonbon is a foundation model for molecular interactions trained on approximately 3.2 trillion tokens of paired protein-ligand sequences, without task-specific supervision or structural coordinates. From one representation space it shows zero-shot functional, residue and bond capabilities that generalize to out-of-distribution complexes, and scaling experiments across six model scales from 42M to 1.6B parameters show sharp jumps in every capability at the largest scale. The same frozen representations also achieve state-of-the-art binding and affinity prediction at five orders of magnitude greater speed than co-folding methods.",
-      "tags": [
-        "论文",
-        "模型",
-        "训练"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_b40c386686",
-          "url": "https://huggingface.co/papers/2611.14504"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2611.14504",
-          "quote": "W e e x t e n d t h i s p a r a d i g m t o m u l t i m o d a l b i o l o g y w i t h B o n b o n , a f o u n d a t i o n m o d e l f o r m o l e c u l a r i n t e r a c t i o n s t r a i n e d o n a p p r o x i m a t e l y 3 ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.14504",
-          "quote": "2 t r i l l i o n t o k e n s o f p a i r e d p r o t e i n - l i g a n d s e q u e n c e s ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.14504",
-          "quote": "F r o m a s i n g l e r e p r e s e n t a t i o n s p a c e , B o n b o n e x h i b i t s t h r e e z e r o - s h o t e m e r g e n t c a p a b i l i t i e s a t h i e r a r c h i c a l l e v e l s o f r e s o l u t i o n : f u n c t i o n a l ( m e c h a n i s m o f a c t i o n ) , r e s i d u e ("
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.14504",
-          "quote": "B o n b o n w a s t r a i n e d o n p r o t e i n - l i g a n d s e q u e n c e s a l o n e , w i t h o u t a n y t a s k - s p e c i f i c s u p e r v i s i o n a n d w i t h o u t s t r u c t u r a l c o o r d i n a t e s ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.14504",
-          "quote": "W e c o n d u c t e d c o n t r o l l e d s c a l i n g e x p e r i m e n t s a c r o s s s i x m o d e l s c a l e s f r o m 4 2 M t o 1 ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.14504",
-          "quote": "6 B p a r a m e t e r s ; e v e r y c a p a b i l i t y e v a l u a t e d s h o w s a s h a r p j u m p a t t h e l a r g e s t s c a l e o n c o n t i n u o u s m e t r i c s , e v e n a s p r e t r a i n i n g l o s s d e c r e a s e s s m o o t h l y ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.14504",
-          "quote": "T h i s d e m o n s t r a t e s t h a t l o s s - b a s e d s c a l i n g l a w s a l o n e a r e i n s u f f i c i e n t t o p r e d i c t w h e n z e r o - s h o t e m e r g e n t c a p a b i l i t i e s b e c o m e a v a i l a b l e ."
-        }
-      ]
-    },
-    {
-      "section": "paper",
-      "title": "Researchers frame agentic robotics and propose an evaluation framework",
-      "summary": "The paper argues that an Embodied System 2, formed by a foundation model together with an embodied harness, is the decision-making core of agentic robotics, where an agent observes, reasons, invokes skills and tools, verifies outcomes and adapts. It proposes an evaluation framework that measures both model capabilities and closed-loop system performance, and envisions a research roadmap toward sustained autonomy. The authors note the community has yet to converge on a shared definition, a reliable evaluation framework, or a research roadmap.",
       "tags": [
         "论文",
         "Agent",
-        "行业"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_51a89fc6c0",
-          "url": "https://huggingface.co/papers/2611.18359"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2611.18359",
-          "quote": "g , Xinchao Wang , Ming Yang , Zhiqin Yang , Zuhao Yang , Tao Yu Abstract Agentic robotics, centered on an Embodied System 2 formed by a foundation model and embodied harness, requires a shared evaluation framework and research roadmap to achieve reliable physical autonomy."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.18359",
-          "quote": "Instead of training a dedicated policy for each family of tasks, an agentic robotic system applies a foundation model to open-world embodied tasks ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.18359",
-          "quote": "It operates in a closed loop: observing the environment, interpreting user intent, reasoning about the task, invoking skills and tools, verifying outcomes, and adapting its strategy."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.18359",
-          "quote": "Despite these advances, the community has yet to converge on a shared definition, a reliable evaluation framework, or a research roadmap."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.18359",
-          "quote": "We argue that Embodied System 2 , realized by a foundation model together with an embodied harness , forms the decision-making core of agentic robotics ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.18359",
-          "quote": "Motivated by this perspective, we propose an evaluation framework that measures both model capabilities and closed-loop system performance."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.18359",
-          "quote": "On top of the Embodied System 2 and the evaluation framework, we envision a research roadmap toward sustained autonomy : the ability to perform work safely and reliably with progressively broader responsibility, from executing individual primitives to fulfilling standing roles."
-        }
+        "开源"
       ]
     },
     {
       "section": "paper",
-      "title": "VibePrevisBench tests agents on 4D scene reconstruction in Blender",
-      "summary": "VibePrevisBench is a benchmark in which an agent turns a brief into an executable 4D scene in Blender and renders a proxy video, covering 242 tasks across four input kinds. Rule-based Scene Check re-runs the code and compares the exported scene with hidden ground truth facts, while VLM-based Screen Check asks a VLM judge whether those facts are recognizable in the proxy video. Analysis of 11 frontier coding agents found that they inspect their own renders but fail to correct their errors, so item-by-item verification against the brief is still missing.",
-      "tags": [
-        "论文",
-        "Agent",
-        "代码",
-        "视频"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_d55822e050",
-          "url": "https://huggingface.co/papers/2611.15789"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2611.15789",
-          "quote": "W e i n t r o d u c e V i b e P r e v i s B e n c h , a b e n c h m a r k f o r 4 D s c e n e r e c o n s t r u c t i o n : a n a g e n t t u r n s a b r i e f i n t o a n e x e c u t a b l e 4 D s c e n e a n d r e n d e r s i t s p r o x y v i d e o ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.15789",
-          "quote": "I t s 2 4 2 t a s k s s p a n f o u r i n p u t k i n d s , i n c l u d i n g s c r i p t s , p h o t o s , c o n t i n u a t i o n s , a n d r e f e r e n c e v i d e o s ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.15789",
-          "quote": "R u l e - b a s e d S c e n e C h e c k r e - r u n s t h e c o d e a n d c o m p a r e s t h e e x p o r t e d 4 D s c e n e w i t h h i d d e n g r o u n d t r u t h f a c t s i n n i n e d i m e n s i o n s ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.15789",
-          "quote": "V L M - b a s e d S c r e e n C h e c k a s k s a V L M j u d g e w h e t h e r t h e f a c t s t h a t p a s s c a n b e r e c o g n i z e d i n t h e p r o x y v i d e o ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.15789",
-          "quote": "W e a n a l y z e t h e e v a l u a t i o n r e s u l t s a n d t r a j e c t o r i e s o f 1 1 f r o n t i e r c o d i n g a g e n t s a n d i d e n t i f y t h r e e k e y o b s e r v a t i o n s ."
-        }
-      ]
-    },
-    {
-      "section": "paper",
-      "title": "MMFlash speeds up speculative decoding for vision-language models",
-      "summary": "MMFlash adaptively upweights visually dependent tokens that the drafter predicts poorly, and uses sparse attention for long video inputs to reduce redundant computation and improve drafting quality. The paper measures token-level visual dependence through the KL divergence between next-token distributions with and without visual input, and finds acceptance rates fall from 46% in the lowest visual-dependence quartile to 22% in the highest. Across various multimodal benchmarks, MMFlash achieves lossless decoding speedups of up to 3.58× and outperforms EAGLE-3 and DFlash by up to 195.4% and 17.1%.",
-      "tags": [
-        "论文",
-        "推理",
-        "多模态",
-        "视频"
-      ],
+      "title": "MMFlash speeds up vision-language model decoding by up to 3.58×",
+      "summary": "The authors find drafter acceptance rates fall from 46% in the lowest visual-dependence quartile to 22% in the highest, so MMFlash upweights visually dependent tokens during training and uses sparse attention for long video. Across multimodal benchmarks it reaches lossless decoding speedups of up to 3.58×, outperforming EAGLE-3 and DFlash by up to 195.4% and 17.1%. Teams serving vision-language models should watch drafters built specifically for multimodal inputs.",
       "sources": [
         {
           "candidate_id": "c_5d4f5872a7",
@@ -448,41 +286,33 @@
         },
         {
           "candidate_id": "c_7a332c60d0",
-          "url": "https://arxiv.org/abs/2611.18482"
+          "url": "https://i.redd.it/hiysxawefy1i1.gif"
         }
       ],
       "evidence": [
         {
           "url": "https://huggingface.co/papers/2611.18482",
-          "quote": "To study this setting, we first introduce a metric of token-level visual dependence based on the KL divergence between next-token distributions with and without visual input ."
+          "quote": "We find that acceptance rates decrease from 46% in the lowest visual-dependence quartile to 22% in the highest, with this disparity persisting after multimodal training."
         },
         {
           "url": "https://huggingface.co/papers/2611.18482",
-          "quote": "We find that acceptance rates decrease from 46% in the lowest visual-dependence quartile to 22% in the highest, with this disparity persisting after multimodal training ."
+          "quote": "MMFlash improves multimodal speculative decoding by adaptively upweighting visually dependent tokens and using sparse attention for long video, yielding up to 3.58× lossless speedup."
         },
         {
           "url": "https://huggingface.co/papers/2611.18482",
-          "quote": "Motivated by this observation, we propose MMFlash , a simple and effective framework that adaptively upweights visually dependent tokens that the drafter predicts poorly."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.18482",
-          "quote": "For long video inputs , MMFlash further employs sparse attention to reduce redundant attention computation and improve drafting quality ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.18482",
-          "quote": "Across various multimodal benchmarks , MMFlash achieves lossless decoding speedups of up to 3.58times, outperforming EAGLE-3 and DFlash by up to 195.4% and 17.1%, respectively."
+          "quote": "MMFlash achieves lossless decoding speedups of up to 3.58times, outperforming EAGLE-3 and DFlash by up to 195.4% and 17.1%, respectively."
         }
+      ],
+      "tags": [
+        "论文",
+        "推理",
+        "多模态"
       ]
     },
     {
       "section": "paper",
-      "title": "WebArena-Pro evaluates web agents on self-hosted applications",
-      "summary": "WebArena-Pro is a benchmark of 300 tasks across 20 self-hosted web applications in six domain categories, covering different interface conventions, workflows and data models. The best evaluated results come from Codex with GPT 6.1 Sol and Claude Code with Claude Opus 5.5 at 62.3%, followed by OpenCode with Kimi 3.1 Pro at 60.7%. Audio and video are treated as core observations alongside text and vision, with dedicated actions for extracting information from each.",
-      "tags": [
-        "论文",
-        "Agent",
-        "评测"
-      ],
+      "title": "WebArena-Pro benchmarks web agents on audio and video tasks",
+      "summary": "WebArena-Pro covers 20 self-hosted applications across six domains with 300 human-validated tasks spanning text, vision, audio, and video, and isolates each task for reproducible, parallel evaluation. It supports harness integrations including BrowserGym and Harbor for running MCP and coding agents. Browser-agent builders get a way to test tasks that involve embedded media.",
       "sources": [
         {
           "candidate_id": "c_f4142384bc",
@@ -492,133 +322,227 @@
       "evidence": [
         {
           "url": "https://huggingface.co/papers/2611.17955",
-          "quote": "T o a d d r e s s t h e s e g a p s , w e i n t r o d u c e W e b A r e n a - P r o , a b e n c h m a r k c o m p r i s i n g 3 0 0 t a s k s a c r o s s 2 0 s e l f - h o s t e d w e b a p p l i c a t i o n s i n s i x d o m a i n c a t e g o r i e s , s p a n n i n g d i s t i n c t i n t e r f a"
+          "quote": "We're releasing WebArena-Pro, a benchmark for web agents covering 20 self-hosted applications across six domains, with 300 human-validated tasks spanning text, vision, audio, and video, and isolated task execution for reproducible, parallel evaluation."
         },
         {
           "url": "https://huggingface.co/papers/2611.17955",
-          "quote": "c e c o n v e n t i o n s , w o r k f l o w s , a n d d a t a m o d e l s ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.17955",
-          "quote": "A c r o s s t h e e v a l u a t e d a g e n t s , t h e b e s t p e r f o r m a n c e i s a c h i e v e d b y b o t h C o d e x w i t h G P T 6 ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.17955",
-          "quote": "1 S o l a n d C l a u d e C o d e w i t h C l a u d e O p u s 5 ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.17955",
-          "quote": "3 % , f o l l o w e d b y O p e n C o d e w i t h K i m i 3 ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.17955",
-          "quote": "1 P r o a t 6 0 ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.17955",
-          "quote": "A m o n g r e p r o d u c i b l e , h u m a n - c u r a t e d w e b a g e n t b e n c h m a r k s , W e b A r e n a - P r o p r o v i d e s t h e b r o a d e s t a p p l i c a t i o n c o v e r a g e a n d t h e m o s t c o m p r e h e n s i v e m u l t i m o d a l s u p p o r t t o d a t e ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.17955",
-          "quote": "T h e b e n c h m a r k t r e a t s a u d i o a n d v i d e o a s c o r e o b s e r v a t i o n s a l o n g s i d e t e x t a n d v i s i o n , w i t h d e d i c a t e d a c t i o n s f o r e x t r a c t i n g i n f o r m a t i o n f r o m e a c h ."
+          "quote": "The benchmark supports multiple harness integrations, including BrowserGym and Harbor for running MCP and coding agents."
         }
+      ],
+      "tags": [
+        "论文",
+        "Agent",
+        "多模态"
       ]
     },
     {
       "section": "tool",
-      "title": "Claude Code v2.1.326 adds Code Mode support for agent teams",
-      "summary": "Claude Code v2.1.326 supports turning on Code Mode while agent teams are enabled, so sessions with teams on now start in Code Mode. The release also fixes background sessions losing the LLM gateway exported by the shell, which now stop before any model request, and corrects a misleading \"Dangerous rm operation\" warning on commands with no rm. It also adds Ctrl+O for hidden startup notices and fixes /rewind restoring only some files after running /branch twice.",
+      "title": "Microsoft Research open-sources TokenEconomizer to cut coding-agent costs",
+      "summary": "TokenEconomizer, an open-source plugin from UC Berkeley, Microsoft Research, and Microsoft Security, learns from past sessions in a repository without changing the agent or model, using one-line micro-skills, tool pruning and failure-loop intervention. On SWE-Bench it lowered mean cost per task by 18.4–30.9% across five agent–model combinations, while Pass@1 rose in four of them. Developers who run agents like Claude Code in the same codebase every day can try it as a drop-in.",
+      "sources": [
+        {
+          "candidate_id": "c_209164698d",
+          "url": "https://www.microsoft.com/en-us/research/blog/tokeneconomizer-learning-from-experience-to-make-ai-coding-agents-more-efficient/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://www.microsoft.com/en-us/research/blog/tokeneconomizer-learning-from-experience-to-make-ai-coding-agents-more-efficient/",
+          "quote": "TokenEconomizer, an open-source plugin from UC Berkeley, Microsoft Research, and Microsoft Security, turns completed sessions into guidance for subsequent ones."
+        },
+        {
+          "url": "https://www.microsoft.com/en-us/research/blog/tokeneconomizer-learning-from-experience-to-make-ai-coding-agents-more-efficient/",
+          "quote": "Micro-skills capture repository-specific knowledge in one-line notes."
+        },
+        {
+          "url": "https://www.microsoft.com/en-us/research/blog/tokeneconomizer-learning-from-experience-to-make-ai-coding-agents-more-efficient/",
+          "quote": "Micro-skills add learned facts, tool pruning trims the loaded tools, and failure-loop intervention redirects stuck work."
+        },
+        {
+          "url": "https://www.microsoft.com/en-us/research/blog/tokeneconomizer-learning-from-experience-to-make-ai-coding-agents-more-efficient/",
+          "quote": "On SWE-Bench, TokenEconomizer lowered mean cost per task by 18.4–30.9% across five agent–model combinations (left), while Pass@1 rose in four of them (right)."
+        },
+        {
+          "url": "https://www.microsoft.com/en-us/research/blog/tokeneconomizer-learning-from-experience-to-make-ai-coding-agents-more-efficient/",
+          "quote": "We first profiled Claude Code on 60 tasks from SWE-Bench"
+        }
+      ],
       "tags": [
         "工具",
         "Agent",
         "代码"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Coral is an open-source gateway where agents write TypeScript to call tools",
+      "summary": "Coral is an open-source, self-hosted gateway between agents and the systems they work on: agents call tools by writing short TypeScript programs, each run in a fresh V8 isolate with no network access, credentials or imports, and Coral checks every tool call against workspace policy before adding credentials. Programs that work can be saved as custom tools to reuse, and the core is under the Apache License 2.0. Teams connecting agents to internal systems with tight permissions should take a look.",
+      "sources": [
+        {
+          "candidate_id": "c_662fa48198",
+          "url": "https://github.com/withcoral/coral"
+        }
       ],
+      "evidence": [
+        {
+          "url": "https://github.com/withcoral/coral",
+          "quote": "Coral is an open-source, self-hosted gateway that sits between your agents and the systems they work on. Agents call tools by writing short TypeScript programs, and save the ones that work as custom tools to reuse."
+        },
+        {
+          "url": "https://github.com/withcoral/coral",
+          "quote": "Each program runs in a fresh V8 isolate with no network access, no credentials, and no imports. Coral checks every tool call against your workspace policy, then adds the credentials and forwards the call to the provider."
+        },
+        {
+          "url": "https://github.com/withcoral/coral",
+          "quote": "Coral is licensed under the Apache License 2.0."
+        }
+      ],
+      "tags": [
+        "工具",
+        "Agent",
+        "安全"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "Tencent announces Hy4 flash with 224B total and 12B active parameters",
+      "summary": "Tencent calls Hy4 flash its most cost-effective Hy model to date, with 224B total parameters (including 64B Engram parameters), 12B active per token, native multimodality, a 1M-token context window and significantly lower API pricing.",
+      "sources": [
+        {
+          "candidate_id": "c_aca90783d4",
+          "url": "https://hy.tencent.ai/research/hy4-flash"
+        }
+      ],
+      "evidence": [],
+      "tags": [
+        "模型",
+        "多模态"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "Claude Code v2.1.326 allows Code Mode with agent teams enabled",
+      "summary": "Claude Code v2.1.326 lets you turn on Code Mode while agent teams are enabled and warns at startup when an --allowedTools, --disallowedTools or --tools entry doesn't look like a complete rule.",
       "sources": [
         {
           "candidate_id": "c_9cc929d488",
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.326"
         }
       ],
-      "evidence": [
-        {
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.326",
-          "quote": "Added support for turning on Code Mode while agent teams are enabled; if you already turned it on, sessions with teams on now start in Code Mode"
-        },
-        {
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.326",
-          "quote": "Fixed a misleading \"Dangerous rm operation\" warning in the Bash permission prompt on some commands with no rm that Claude Code can't read reliably"
-        },
-        {
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.326",
-          "quote": "Fixed background sessions losing the LLM gateway your shell exported after a crash, after a reopen from another folder, or when the background service lacks it: they now stop before any model request"
-        },
-        {
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.326",
-          "quote": "Fixed /rewind restoring only some files after running /branch twice while a slow backup copy was still running"
-        },
-        {
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.326",
-          "quote": "Fixed /rewind saying \"No code changes\" when a shell command changed files it can't restore; a turn whose changes weren't tracked now reads \"Code changes unknown\""
-        }
-      ]
-    },
-    {
-      "section": "tool",
-      "title": "MEM-SQL reuses historical SQL for text-to-SQL queries",
-      "summary": "MEM-SQL (Memory-EMpowered Text-to-SQL) stores whole-query templates, reusable SQL blocks, and mappings from domain concepts to schema elements, using a layer only when every requirement assigned to it has a match above that layer's threshold. On HARE, a benchmark of 1,600 requests built from 823 verified queries across four datasets, mean execution accuracy across six language models rises from 37.1% for Direct Generation without history to 50.0%. It also uses 76.6% fewer input tokens and 68.8% lower latency on average.",
+      "evidence": [],
       "tags": [
-        "论文",
         "工具",
-        "Agent"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_436293772c",
-          "url": "https://huggingface.co/papers/2611.18338"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2611.18338",
-          "quote": "We introduce HARE (History-AwaRe Text-to-SQL BEnchmark) to measure the accuracy and cost of adapting historical SQL."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.18338",
-          "quote": "HARE comprises 1,600 requests derived from a fixed pool of 823 verified queries across four datasets."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.18338",
-          "quote": "Our method, MEM-SQL ( Memory-EMpowered Text-to-SQL ), stores whole-query templates , reusable SQL blocks , and mappings from domain concepts to schema elements."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.18338",
-          "quote": "MEM-SQL uses a layer only if every requirement assigned to it has a match above that layer's threshold."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.18338",
-          "quote": "With On-demand Schema Linking (OSL), MEM-SQL consults the schema only when no layer qualifies or the generator judges retrieved evidence insufficient."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.18338",
-          "quote": "Across six language models on HARE , mean execution accuracy rises from 37.1% for Direct Generation without history to 50.0% for MEM-SQL , with 76.6% fewer input tokens and 68.8% lower latency on average."
-        }
+        "代码"
       ]
     },
     {
       "section": "brief",
-      "title": "OpenAI begins embedded assessments with external evaluators",
-      "summary": "OpenAI begins embedded assessments with Apollo Research, METR, Transluce, and Goodfire. The external partners will independently evaluate model alignment, safeguards, and monitoring systems.",
-      "tags": [
-        "安全",
-        "行业"
-      ],
+      "title": "OpenAI begins its first phase of embedded safety assessments",
+      "summary": "OpenAI signed agreements with Apollo Research, METR, Transluce, and Goodfire to give independent experts deep, extended access to its internal models and systems to assess alignment and the effectiveness of safeguards.",
       "sources": [
         {
           "candidate_id": "c_b49c86c1e7",
           "url": "https://openai.com/index/our-first-phase-of-embedded-assessments"
         }
       ],
-      "evidence": []
+      "evidence": [
+        {
+          "url": "https://openai.com/index/our-first-phase-of-embedded-assessments",
+          "quote": "We have signed agreements with four independent assessors—Apollo Research, METR, Transluce, and Goodfire—for our first phase of embedded assessments."
+        },
+        {
+          "url": "https://openai.com/index/our-first-phase-of-embedded-assessments",
+          "quote": "Embedded assessments give independent experts deep access to a lab’s internal models and systems to assess model alignment and the effectiveness of safeguards over an extended period of time"
+        }
+      ],
+      "tags": [
+        "安全",
+        "行业"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "Cohere adds Video Intelligence to Compass",
+      "summary": "Cohere's Video Intelligence in Compass searches what's said and shown in video libraries, returns timestamped clips with transcripts and visual descriptions, connects to agents via the Compass MCP server, and is recruiting design partners.",
+      "sources": [
+        {
+          "candidate_id": "c_d2431a554a",
+          "url": "https://cohere.com/blog/video-intelligence-preview"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://cohere.com/blog/video-intelligence-preview",
+          "quote": "Compass understands both what's said and what's shown on screen. Instead of returning an hour-long recording, it retrieves the exact moment that answers a question, with a timestamped clip, transcript and visual description. We're now recruiting design partners."
+        },
+        {
+          "url": "https://cohere.com/blog/video-intelligence-preview",
+          "quote": "Connect your agent to the Compass MCP server so it can reason over what's shown on screen"
+        }
+      ],
+      "tags": [
+        "产品",
+        "视频",
+        "Agent"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "Analysis finds Windows 11 records which coding agents you use",
+      "summary": "A reverse-engineering write-up found MissionControlAggregator.dll on the author's Windows 11 machine recording which coding agents and developer tools were used, queued for upload to Microsoft when optional diagnostic data is allowed.",
+      "sources": [
+        {
+          "candidate_id": "c_9af8c07a16",
+          "url": "https://xusheng.dev/posts/windows-coding-agent-telemetry/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://xusheng.dev/posts/windows-coding-agent-telemetry/",
+          "quote": "I checked my Parallels Windows 11 ARM64 VM, build 26200.9974 . Its MissionControlAggregator.dll was version 10.0.26100.9818 , and CLICodingAgentUsage was already enabled as a service experiment."
+        },
+        {
+          "url": "https://xusheng.dev/posts/windows-coding-agent-telemetry/",
+          "quote": "When optional diagnostic data is allowed (enabled by default in the US setup I tested), Windows queues the coding-agent usage report for upload to Microsoft."
+        },
+        {
+          "url": "https://xusheng.dev/posts/windows-coding-agent-telemetry/",
+          "quote": "a running Windows component that records which coding agents and"
+        }
+      ],
+      "tags": [
+        "安全",
+        "代码"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "Gemma 4 tokenizer patch fixes 219 glitch tokens",
+      "summary": "google/gemma-4-E4B-it merged a tokenizer-only patch that remediates 219 glitch tokens causing unpredictable model behavior, with no weights modified; a community post says E2B and 12B got the same fix.",
+      "sources": [
+        {
+          "candidate_id": "c_5099ffe8e4",
+          "url": "https://huggingface.co/google/gemma-4-E4B-it/discussions/50"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/google/gemma-4-E4B-it/discussions/50",
+          "quote": "This PR patches tokenizer.json to remediate 219 glitch tokens identified by embedding vector analysis. Glitch tokens are vocabulary entries whose embeddings have collapsed to near-identical representations, causing unpredictable model behavior when they appear in input. No model weights are modified"
+        },
+        {
+          "url": "https://huggingface.co/google/gemma-4-E4B-it/discussions/50",
+          "quote": "dougreid changed pull request status to merged"
+        },
+        {
+          "url": "https://huggingface.co/google/gemma-4-E4B-it/discussions/50",
+          "quote": "google/gemma-4-E4B-it · fix: Remediate 219 glitch tokens in tokenizer.json"
+        }
+      ],
+      "tags": [
+        "模型",
+        "开源"
+      ]
     }
   ],
   "research": [
@@ -628,7 +552,11 @@
     },
     {
       "via": "webfetch",
-      "url": "https://github.com/vllm-project/vllm/releases/tag/v0.34.0"
+      "url": "https://hy.tencent.ai/research/hy4-flash"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://www.anthropic.com/research/coordinated-vulnerability-disclosure-timelines"
     },
     {
       "via": "webfetch",
@@ -636,19 +564,15 @@
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.12068"
-    },
-    {
-      "via": "webfetch",
       "url": "https://www.liquid.ai/blog/d1-2"
     },
     {
       "via": "webfetch",
-      "url": "https://openai.com/index/our-first-phase-of-embedded-assessments"
+      "url": "https://huggingface.co/nvidia/Nemotron-Labs-Sigma-8B-instruct"
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.18359"
+      "url": "https://huggingface.co/internlm/Sage-S2.1-Flash"
     },
     {
       "via": "webfetch",
@@ -656,23 +580,11 @@
     },
     {
       "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.12068"
+    },
+    {
+      "via": "webfetch",
       "url": "https://huggingface.co/papers/2611.18482"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.15789"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.17831"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.18338"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.18549"
     },
     {
       "via": "webfetch",
@@ -680,59 +592,34 @@
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.18529"
+      "url": "https://github.com/withcoral/coral"
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.17811"
+      "url": "https://openai.com/index/our-first-phase-of-embedded-assessments"
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.16378"
+      "url": "https://cohere.com/blog/video-intelligence-preview"
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.14505"
+      "url": "https://xusheng.dev/posts/windows-coding-agent-telemetry/"
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.13509"
+      "url": "https://huggingface.co/google/gemma-4-E4B-it/discussions/50"
     },
     {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.14504"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.326"
+      "via": "websearch",
+      "query": "Tencent Hy4 flash 224B 12B active"
     }
   ],
   "lang": "en",
   "validation": {
-    "validated_at": "2026-11-17T04:44:03+00:00",
+    "validated_at": "2026-11-17T04:46:16+00:00",
     "checked_links": false,
-    "dropped": [
-      {
-        "title": "Mobile AI Factory tunes quantized models for each phone",
-        "section": "model",
-        "candidates": [
-          "c_6a34d147d0"
-        ],
-        "reasons": [
-          "title / summary must not contain URLs (links go in sources)"
-        ]
-      },
-      {
-        "title": "Continual-ARC measures skill acquisition over a working lifetime",
-        "section": "brief",
-        "candidates": [
-          "c_cf5d517070"
-        ],
-        "reasons": [
-          "summary longer than 250 characters"
-        ]
-      }
-    ],
+    "dropped": [],
     "warnings": []
   }
 }
