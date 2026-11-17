@@ -1,0 +1,802 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "mode": "full",
+  "generated_at": "2026-11-17T04:42:08+00:00",
+  "channel": "api",
+  "model": "nvidia:minimaxai/minimax-m3.1-flash",
+  "highlights": [
+    "Hugging Face 语言模型推理改由 OpenRouter 路由",
+    "vLLM v0.34.0 默认启用可扩展 KV cache",
+    "TokenEconomizer 用历史会话给编码 Agent 降本"
+  ],
+  "items": [
+    {
+      "section": "headline",
+      "title": "Hugging Face 语言模型推理改由 OpenRouter 路由",
+      "summary": "Hugging Face 把 Inference Providers 从自建路由切换到 OpenRouter：每次请求按实时价格、速度和可靠性挑选供应商，失败时在同一次调用内重试，代码和 Hugging Face token 不变。需要注意，语言模型请求不再支持自定义供应商 API key，改为记在 Hugging Face 账户上；图像、视频和音频生成仍走原有路径。",
+      "tags": [
+        "工具",
+        "产品",
+        "推理"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_ac2621c1ce",
+          "url": "https://huggingface.co/blog/openrouter"
+        },
+        {
+          "candidate_id": "c_1c1c2ced7c",
+          "url": "https://huggingface.co/blog/openrouter"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/blog/openrouter",
+          "quote": "Hugging Face and OpenRouter are teaming up to make open-weight models easy to run."
+        },
+        {
+          "url": "https://huggingface.co/blog/openrouter",
+          "quote": "Today, we are switching Inference Providers from our own custom router to OpenRouter's."
+        },
+        {
+          "url": "https://huggingface.co/blog/openrouter",
+          "quote": "Requests made to language models now go through OpenRouter, which picks the best provider for each call based on live price, speed and reliability, and retries on another provider if the first one fails."
+        },
+        {
+          "url": "https://huggingface.co/blog/openrouter",
+          "quote": "The router supports OpenAI's Chat Completions and Responses APIs and Anthropic's Messages API for every chat model, whatever the provider behind it."
+        },
+        {
+          "url": "https://huggingface.co/blog/openrouter",
+          "quote": "Image, video, and audio generation continue to work exactly as before, directly through Hugging Face Inference Providers without going through OpenRouter."
+        },
+        {
+          "url": "https://huggingface.co/blog/openrouter",
+          "quote": "Requests to language models now go through OpenRouter and are billed to your Hugging Face account or organization, so you can no longer use your own API key for a provider with these models."
+        },
+        {
+          "url": "https://huggingface.co/blog/openrouter",
+          "quote": "You can still pick a provider with a suffix on the model id ( model:provider ) or turn providers off in your settings, and your code stays the same."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "vLLM v0.34.0 默认启用可扩展 KV cache",
+      "summary": "vLLM v0.34.0 把可扩展 KV cache 设为默认，按预热后实际空闲显存来定 cache 大小，并在 Blackwell 与 MI355X 上带来最高 1.95× 的解码提升和 1.6× 的吞吐提升。升级前需注意 Model Runner V1 已移除、默认 --block-size 改为 64、ROCm 7.2 镜像下线，并要求 huggingface_hub >= 2.0.0。",
+      "tags": [
+        "开源",
+        "工具",
+        "推理"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_55c9424bdd",
+          "url": "https://github.com/vllm-project/vllm/releases/tag/v0.34.0"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/vllm-project/vllm/releases/tag/v0.34.0",
+          "quote": "Extensible KV cache is on by default: vLLM sizes the KV cache from memory actually free after warmup, so most models get a bigger cache and more throughput."
+        },
+        {
+          "url": "https://github.com/vllm-project/vllm/releases/tag/v0.34.0",
+          "quote": "Model Runner V1 is gone."
+        },
+        {
+          "url": "https://github.com/vllm-project/vllm/releases/tag/v0.34.0",
+          "quote": "Big speedups on Blackwell and MI355X: up to 1.95× decode (Step5 on GB200), 1.6× throughput (GLM-5.3-Flash), 1.24–1.40× faster long-prompt TTFT (GLM-5.3)."
+        },
+        {
+          "url": "https://github.com/vllm-project/vllm/releases/tag/v0.34.0",
+          "quote": "Upgrade check: default block size is now 64, ROCm 7.2 images are gone, and huggingface_hub >= 2.0.0 is required."
+        },
+        {
+          "url": "https://github.com/vllm-project/vllm/releases/tag/v0.34.0",
+          "quote": "Default --block-size is 64 (was 16)"
+        },
+        {
+          "url": "https://github.com/vllm-project/vllm/releases/tag/v0.34.0",
+          "quote": "ROCm 7.2 artifacts dropped"
+        },
+        {
+          "url": "https://github.com/vllm-project/vllm/releases/tag/v0.34.0",
+          "quote": "huggingface_hub >= 2.0.0 required"
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "TokenEconomizer 用历史会话给编码 Agent 降本",
+      "summary": "UC Berkeley、Microsoft Research 与 Microsoft Security 推出开源插件 TokenEconomizer，它从仓库的历史会话中提炼微技能、裁剪无用工具并介入失败循环，无需修改 Agent 或底层模型。在 277 个真实修复任务上，它把成本降低 18.4–30.9%，且各测试仓库的成本都有下降、成功率基本稳定。",
+      "tags": [
+        "Agent",
+        "开源",
+        "工具"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_209164698d",
+          "url": "https://www.microsoft.com/en-us/research/blog/tokeneconomizer-learning-from-experience-to-make-ai-coding-agents-more-efficient/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://www.microsoft.com/en-us/research/blog/tokeneconomizer-learning-from-experience-to-make-ai-coding-agents-more-efficient/",
+          "quote": "Developers use AI coding agents in the same codebases day after day, yet agents often start each session from scratch: rediscovering familiar facts, loading unused tools, and repeating unsuccessful approaches."
+        },
+        {
+          "url": "https://www.microsoft.com/en-us/research/blog/tokeneconomizer-learning-from-experience-to-make-ai-coding-agents-more-efficient/",
+          "quote": "TokenEconomizer is an open-source plugin that learns from an agent’s past sessions in a repository to reduce waste in future sessions, without modifying the agent or its underlying model."
+        },
+        {
+          "url": "https://www.microsoft.com/en-us/research/blog/tokeneconomizer-learning-from-experience-to-make-ai-coding-agents-more-efficient/",
+          "quote": "Across 277 real bug-fixing tasks, TokenEconomizer reduced costs by 18.4–30.9% across multiple AI coding agents."
+        },
+        {
+          "url": "https://www.microsoft.com/en-us/research/blog/tokeneconomizer-learning-from-experience-to-make-ai-coding-agents-more-efficient/",
+          "quote": "Costs fell in every repository tested, while task success rates remained broadly stable."
+        },
+        {
+          "url": "https://www.microsoft.com/en-us/research/blog/tokeneconomizer-learning-from-experience-to-make-ai-coding-agents-more-efficient/",
+          "quote": "We evaluated TokenEconomizer on 277 SWE-Bench tasks from six repositories, using five different AI coding agent and model combinations."
+        },
+        {
+          "url": "https://www.microsoft.com/en-us/research/blog/tokeneconomizer-learning-from-experience-to-make-ai-coding-agents-more-efficient/",
+          "quote": "TokenEconomizer lowered the average cost by 18.4–30.9%, as shown in Figure 3, and saved the most in all 30 repository-combination pairs without performance loss."
+        },
+        {
+          "url": "https://www.microsoft.com/en-us/research/blog/tokeneconomizer-learning-from-experience-to-make-ai-coding-agents-more-efficient/",
+          "quote": "It is designed to run alongside existing AI coding agents without modifying their underlying models, requires no API key of its own, and keeps what it learns on the developer’s machine."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "miHoYo 团队开源 Gamer 游戏智能体模型",
+      "summary": "miHoYo 崩坏：星穹铁道 AI 团队推出通用视觉-语言-动作模型 Gamer，只通过截图、键盘和鼠标与 2D、3D 环境交互，不需要特权状态或游戏专用 API。项目用 10K+ 小时轨迹做持续预训练，配套 Streaming-vLLM 推理引擎在基准设置下把推理延迟降低 20× 以上，并在《崩坏：星穹铁道》主线挑战中处理超过 95% 的关卡。",
+      "tags": [
+        "模型",
+        "Agent",
+        "开源",
+        "视频"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_e8789b7765",
+          "url": "https://huggingface.co/papers/2611.18397"
+        },
+        {
+          "candidate_id": "c_c624db3345",
+          "url": "https://arxiv.org/abs/2611.18397"
+        },
+        {
+          "candidate_id": "c_1452f81e0b",
+          "url": "https://mihoyo-gamer.github.io/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.18397",
+          "quote": "Generated by deepseek-ai/DeepSeek-V4.1-Flash We introduce Gamer, a generalist agent framework built for long-horizon tasks in complex interactive environments."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.18397",
+          "quote": "We first continue pre-training on a dataset constructed from tens of thousands of hours of device-level keyboard and mouse interaction."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.18397",
+          "quote": "For real-time interaction, a cloud-edge inference engine serves numerous simulated game environments concurrently, supports unbounded-context execution , and keeps online inference latency low."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.18397",
+          "quote": "We’re excited to introduce Gamer , a generalist Vision-Language-Action foundation model for long-horizon, real-time game interaction, developed by the miHoYo Honkai AI R&D team !"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.18397",
+          "quote": "Unlike game-specific agents, Gamer interacts with the world through the same interface humans use: screenshots, keyboard, and mouse ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.18397",
+          "quote": "We leverage 10K+ hours of gameplay trajectories for continual pre-training (CPT) and systematically study scaling laws across model sizes and data mixtures, exploring how generalizable game-playing abilities emerge through scaling."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.18397",
+          "quote": "We develop Streaming-vLLM , a high-concurrency inference engine optimized for continuous game interaction."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.18397",
+          "quote": "Through streaming KV-cache reuse, speculative decoding, and system-level optimizations, we achieve over 20× lower inference latency in our benchmark setup, enabling real-time keyboard and mouse control."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.18397",
+          "quote": "Across multiple main storylines in Honkai: Star Rail , Gamer successfully handles over 95% of the challenges !"
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "MIRIX-2.0：六类记忆 Agent 的多智能体记忆系统",
+      "summary": "MIRIX-2.0 用六个分类型的记忆 Agent 保留完整记录，并用溯源超图索引情景与语义记忆，检索在明确预算下进行，因此证据量不随历史增长。它在 LoCoMo 上达到 91.4%、在 LongMemEval-S 上达到 72.6%，领先最强基线 14.3 分，且无需微调、代码公开。",
+      "tags": [
+        "论文",
+        "Agent"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_af4aa36438",
+          "url": "https://huggingface.co/papers/2611.12068"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.12068",
+          "quote": "Papers arxiv:2611.12068 Copy markdown MIRIX-2.0: Multi-Agent Memory System Published on Nov 9 · Submitted by Weizhi Zhang on Nov 16 Upvote 47 +39 Authors: Wei-Chieh Huang , Weizhi Zhang , Jiayan Nan , Peng Xia , Yu Wang Abstract MIRIX-2.0 is a multi-agent memory system for LLM agents that achieves h"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.12068",
+          "quote": "We present MIRIX-2.0, a multi-agent memory system designed to be practical, accurate, and efficient at once."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.12068",
+          "quote": "It reaches 91.4% on LoCoMo and 72.6% on LongMemEval-S, where it leads the strongest baseline by 14.3 points, and with AutoDream disabled it gains 31.0 and 22.0 points over HyperMem on single-hop and multi-hop document QA ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.12068",
+          "quote": "Six typed memory agents keep complete records as the system of record, and a provenance hypergraph indexes episodic and semantic records with n-ary frames that cite their rows."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.12068",
+          "quote": "Retrieval runs under explicit budgets, so the evidence a question inspects does not grow with the history."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.12068",
+          "quote": "It needs no fine-tuning , runs with closed and open models , and its code is public."
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "V-JEPA-LM 读懂视频动态而非静态画面",
+      "summary": "V-JEPA-LM 把冻结的 V-JEPA 世界模型编码器接到 Qwen3 与 Llama（1B–8B）上，用反事实监督让语言模型去读像素变换带来的动态信息。作者报告其在十一个视频基准的各尺寸档位平均分领先，4B 模型得分 72.1，对比最佳开源 4B 的 61.1 和最佳开源 8B 的 64.8，代码与全部 6 个 checkpoint 已开放。",
+      "tags": [
+        "论文",
+        "模型",
+        "视频",
+        "多模态"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_64ab4fc5df",
+          "url": "https://huggingface.co/papers/2611.17831"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.17831",
+          "quote": "We then build counterfactual supervision that makes the language model read it: pixel transformations turn public videos into answer-balanced variants whose answers are set by the transformation and differ only in the change."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.17831",
+          "quote": "Trained in a single stage on 4.53M public samples with 32 visual tokens per frame , where open video LLMs use several stages, 9M to 172M samples and 64 to 256 tokens per frame on average, the resulting V-JEPA-LM models (1B to 8B, Qwen3 and Llama ) lead every size class in average score across eleven"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.17831",
+          "quote": "video benchmarks; our 4B model scores 72.1, against 61.1 for the best open 4B and 64.8 for the best open 8B model."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.17831",
+          "quote": "View arXiv page View PDF Project page GitHub 3 Add to collection Community kkt94 Paper author Paper submitter about 19 hours ago We release Llama-V-JEPA-LM, open video-language models that join a frozen V-JEPA 2.1 world-model encoder to Qwen3 / Llama (1B–8B), trained in a single stage with counterfa"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.17831",
+          "quote": "4.53M public samples, 32 visual tokens per frame, one training stage"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.17831",
+          "quote": "All 6 checkpoints, code and a live demo are open."
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Bonbon：仅用序列训练的分子交互基础模型",
+      "summary": "Output Labs 的 Bonbon 在约 3.2 万亿 token 的蛋白-配体序列对上训练，不含结构坐标和任务监督，却涌现出功能、结合位点和成键方式三类零样本能力。作者在 42M 到 1.6B 参数的六个规模上观察到能力在最大规模上出现跳变，而预训练损失是平滑下降的。",
+      "tags": [
+        "论文",
+        "模型",
+        "训练"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_b40c386686",
+          "url": "https://huggingface.co/papers/2611.14504"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.14504",
+          "quote": "W e e x t e n d t h i s p a r a d i g m t o m u l t i m o d a l b i o l o g y w i t h B o n b o n , a f o u n d a t i o n m o d e l f o r m o l e c u l a r i n t e r a c t i o n s t r a i n e d o n a p p r o x i m a t e l y 3 ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.14504",
+          "quote": "2 t r i l l i o n t o k e n s o f p a i r e d p r o t e i n - l i g a n d s e q u e n c e s ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.14504",
+          "quote": "F r o m a s i n g l e r e p r e s e n t a t i o n s p a c e , B o n b o n e x h i b i t s t h r e e z e r o - s h o t e m e r g e n t c a p a b i l i t i e s a t h i e r a r c h i c a l l e v e l s o f r e s o l u t i o n : f u n c t i o n a l ( m e c h a n i s m o f a c t i o n ) , r e s i d u e ("
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.14504",
+          "quote": "B o n b o n w a s t r a i n e d o n p r o t e i n - l i g a n d s e q u e n c e s a l o n e , w i t h o u t a n y t a s k - s p e c i f i c s u p e r v i s i o n a n d w i t h o u t s t r u c t u r a l c o o r d i n a t e s ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.14504",
+          "quote": "W e c o n d u c t e d c o n t r o l l e d s c a l i n g e x p e r i m e n t s a c r o s s s i x m o d e l s c a l e s f r o m 4 2 M t o 1 ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.14504",
+          "quote": "6 B p a r a m e t e r s ; e v e r y c a p a b i l i t y e v a l u a t e d s h o w s a s h a r p j u m p a t t h e l a r g e s t s c a l e o n c o n t i n u o u s m e t r i c s , e v e n a s p r e t r a i n i n g l o s s d e c r e a s e s s m o o t h l y ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.14504",
+          "quote": "T h i s d e m o n s t r a t e s t h a t l o s s - b a s e d s c a l i n g l a w s a l o n e a r e i n s u f f i c i e n t t o p r e d i c t w h e n z e r o - s h o t e m e r g e n t c a p a b i l i t i e s b e c o m e a v a i l a b l e ."
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Mobile AI Factory 自动为手机构建专用小模型",
+      "summary": "Mobile AI Factory 是一个智能体系统，给定任务和目标手机后，它自动微调并量化小模型，用真实设备测量来选择模型、精度、推理引擎和后端。作者在十项任务和四台 Android 手机上评测，端侧模型在五项任务上超过两个五-shot 前沿模型、另三项打平，最优配置也会随手机而变，代码已开放。",
+      "tags": [
+        "论文",
+        "模型",
+        "硬件",
+        "Agent"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_6a34d147d0",
+          "url": "https://huggingface.co/papers/2611.13509"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.13509",
+          "quote": "We present {\\it Mobile AI Factory}, an agentic system that builds a fine-tuned, quantized SLM for a given task and phone."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.13509",
+          "quote": "Given a task specification and a target phone, an orchestrator LLM chooses whether to tune hyperparameters, mine real data, or generate synthetic examples, while fixed rules roll back changes that hurt accuracy."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.13509",
+          "quote": "The factory searches from small to large models across base models and quantization s, adapts its accuracy goal as it searches, and uses real measurements of the target phone across inference engines and backends ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.13509",
+          "quote": "We evaluate Mobile AI Factory on ten tasks and four Android phones."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.13509",
+          "quote": "On an unseen testset, its on-device models outperform two five-shot frontier models on five tasks, by up to 0.34, and match them on three more."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.13509",
+          "quote": "Phone measurements also matter: the best configuration changes across phones."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.13509",
+          "quote": "Code is available at: https://github.com/evanly-gh/SLM_Factory."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Agentic Robotics：具身智能体评测框架与路线图",
+      "summary": "这篇论文提出以「Embodied System 2」（基础模型加具身 harness）作为 agentic robotics 的决策核心，并给出同时衡量模型能力与闭环系统表现的评测框架。作者认为社区尚缺统一定义、可靠评测和研究路线图，并梳理了通向持续自主的路线。",
+      "tags": [
+        "论文",
+        "Agent",
+        "行业"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_51a89fc6c0",
+          "url": "https://huggingface.co/papers/2611.18359"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.18359",
+          "quote": "g , Xinchao Wang , Ming Yang , Zhiqin Yang , Zuhao Yang , Tao Yu Abstract Agentic robotics, centered on an Embodied System 2 formed by a foundation model and embodied harness, requires a shared evaluation framework and research roadmap to achieve reliable physical autonomy."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.18359",
+          "quote": "Instead of training a dedicated policy for each family of tasks, an agentic robotic system applies a foundation model to open-world embodied tasks ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.18359",
+          "quote": "It operates in a closed loop: observing the environment, interpreting user intent, reasoning about the task, invoking skills and tools, verifying outcomes, and adapting its strategy."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.18359",
+          "quote": "Despite these advances, the community has yet to converge on a shared definition, a reliable evaluation framework, or a research roadmap."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.18359",
+          "quote": "We argue that Embodied System 2 , realized by a foundation model together with an embodied harness , forms the decision-making core of agentic robotics ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.18359",
+          "quote": "Motivated by this perspective, we propose an evaluation framework that measures both model capabilities and closed-loop system performance."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.18359",
+          "quote": "On top of the Embodied System 2 and the evaluation framework, we envision a research roadmap toward sustained autonomy : the ability to perform work safely and reliably with progressively broader responsibility, from executing individual primitives to fulfilling standing roles."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "VibePrevisBench：Blender 4D 场景生成的编码 Agent 基准",
+      "summary": "Kling-Keye 推出 VibePrevisBench，要求 Agent 把一句需求变成可执行的 4D 场景并渲染出代理视频，共 242 个任务、覆盖四类输入。评测分两层：规则式 Scene Check 重跑代码并按九个维度对照隐藏事实，VLM 式 Screen Check 判断通过的���实能否在代理视频中被识别。",
+      "tags": [
+        "论文",
+        "Agent",
+        "代码",
+        "视频"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_d55822e050",
+          "url": "https://huggingface.co/papers/2611.15789"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.15789",
+          "quote": "W e i n t r o d u c e V i b e P r e v i s B e n c h , a b e n c h m a r k f o r 4 D s c e n e r e c o n s t r u c t i o n : a n a g e n t t u r n s a b r i e f i n t o a n e x e c u t a b l e 4 D s c e n e a n d r e n d e r s i t s p r o x y v i d e o ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.15789",
+          "quote": "I t s 2 4 2 t a s k s s p a n f o u r i n p u t k i n d s , i n c l u d i n g s c r i p t s , p h o t o s , c o n t i n u a t i o n s , a n d r e f e r e n c e v i d e o s ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.15789",
+          "quote": "R u l e - b a s e d S c e n e C h e c k r e - r u n s t h e c o d e a n d c o m p a r e s t h e e x p o r t e d 4 D s c e n e w i t h h i d d e n g r o u n d t r u t h f a c t s i n n i n e d i m e n s i o n s ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.15789",
+          "quote": "V L M - b a s e d S c r e e n C h e c k a s k s a V L M j u d g e w h e t h e r t h e f a c t s t h a t p a s s c a n b e r e c o g n i z e d i n t h e p r o x y v i d e o ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.15789",
+          "quote": "W e a n a l y z e t h e e v a l u a t i o n r e s u l t s a n d t r a j e c t o r i e s o f 1 1 f r o n t i e r c o d i n g a g e n t s a n d i d e n t i f y t h r e e k e y o b s e r v a t i o n s ."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "MMFlash：面向视觉语言模型的推测解码加速",
+      "summary": "MMFlash 先用 KL 散度定义 token 级视觉依赖度，发现接受率会从最低依赖四分位的 46% 降到最高四分位的 22%，据此自适应上调视觉相关 token 的权重，并在长视频上用稀疏注意力降低冗余计算。作者报告在多个多模态基准上取得最高 3.58× 的无损解码加速。",
+      "tags": [
+        "论文",
+        "推理",
+        "多模态",
+        "视频"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_5d4f5872a7",
+          "url": "https://huggingface.co/papers/2611.18482"
+        },
+        {
+          "candidate_id": "c_7a332c60d0",
+          "url": "https://arxiv.org/abs/2611.18482"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.18482",
+          "quote": "To study this setting, we first introduce a metric of token-level visual dependence based on the KL divergence between next-token distributions with and without visual input ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.18482",
+          "quote": "We find that acceptance rates decrease from 46% in the lowest visual-dependence quartile to 22% in the highest, with this disparity persisting after multimodal training ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.18482",
+          "quote": "Motivated by this observation, we propose MMFlash , a simple and effective framework that adaptively upweights visually dependent tokens that the drafter predicts poorly."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.18482",
+          "quote": "For long video inputs , MMFlash further employs sparse attention to reduce redundant attention computation and improve drafting quality ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.18482",
+          "quote": "Across various multimodal benchmarks , MMFlash achieves lossless decoding speedups of up to 3.58times, outperforming EAGLE-3 and DFlash by up to 195.4% and 17.1%, respectively."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "WebArena-Pro：支持音视频的可复现 Web Agent 基准",
+      "summary": "WebArena-Pro 包含 300 个任务和 20 个自托管 Web 应用，覆盖六个领域类别，并把音频和视频与文本、视觉一起作为核心观测对象。最佳成绩由 Codex 搭配 GPT 6.1 Sol、Claude Code 搭配 Claude Opus 5.5 取得，均为 62.3%，OpenCode 搭配 Kimi 3.1 Pro 为 60.7%。",
+      "tags": [
+        "论文",
+        "Agent",
+        "评测"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_f4142384bc",
+          "url": "https://huggingface.co/papers/2611.17955"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.17955",
+          "quote": "T o a d d r e s s t h e s e g a p s , w e i n t r o d u c e W e b A r e n a - P r o , a b e n c h m a r k c o m p r i s i n g 3 0 0 t a s k s a c r o s s 2 0 s e l f - h o s t e d w e b a p p l i c a t i o n s i n s i x d o m a i n c a t e g o r i e s , s p a n n i n g d i s t i n c t i n t e r f a"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.17955",
+          "quote": "c e c o n v e n t i o n s , w o r k f l o w s , a n d d a t a m o d e l s ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.17955",
+          "quote": "A c r o s s t h e e v a l u a t e d a g e n t s , t h e b e s t p e r f o r m a n c e i s a c h i e v e d b y b o t h C o d e x w i t h G P T 6 ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.17955",
+          "quote": "1 S o l a n d C l a u d e C o d e w i t h C l a u d e O p u s 5 ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.17955",
+          "quote": "3 % , f o l l o w e d b y O p e n C o d e w i t h K i m i 3 ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.17955",
+          "quote": "1 P r o a t 6 0 ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.17955",
+          "quote": "A m o n g r e p r o d u c i b l e , h u m a n - c u r a t e d w e b a g e n t b e n c h m a r k s , W e b A r e n a - P r o p r o v i d e s t h e b r o a d e s t a p p l i c a t i o n c o v e r a g e a n d t h e m o s t c o m p r e h e n s i v e m u l t i m o d a l s u p p o r t t o d a t e ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.17955",
+          "quote": "T h e b e n c h m a r k t r e a t s a u d i o a n d v i d e o a s c o r e o b s e r v a t i o n s a l o n g s i d e t e x t a n d v i s i o n , w i t h d e d i c a t e d a c t i o n s f o r e x t r a c t i n g i n f o r m a t i o n f r o m e a c h ."
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Claude Code v2.1.326 支持团队模式下的 Code Mode",
+      "summary": "Claude Code v2.1.326 允许在启用 agent teams 时开启 Code Mode，已开启时带团队的会话会直接以 Code Mode 启动。该版本还修复了后台会话丢失 LLM gateway、误报「Dangerous rm operation」、/rewind 恢复不完整等问题。",
+      "tags": [
+        "工具",
+        "Agent",
+        "代码"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_9cc929d488",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.326"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.326",
+          "quote": "Added support for turning on Code Mode while agent teams are enabled; if you already turned it on, sessions with teams on now start in Code Mode"
+        },
+        {
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.326",
+          "quote": "Fixed a misleading \"Dangerous rm operation\" warning in the Bash permission prompt on some commands with no rm that Claude Code can't read reliably"
+        },
+        {
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.326",
+          "quote": "Fixed background sessions losing the LLM gateway your shell exported after a crash, after a reopen from another folder, or when the background service lacks it: they now stop before any model request"
+        },
+        {
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.326",
+          "quote": "Fixed /rewind restoring only some files after running /branch twice while a slow backup copy was still running"
+        },
+        {
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.326",
+          "quote": "Fixed /rewind saying \"No code changes\" when a shell command changed files it can't restore; a turn whose changes weren't tracked now reads \"Code changes unknown\""
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "MEM-SQL：用已验证 SQL 历史改进 Text-to-SQL",
+      "summary": "MEM-SQL 存储整条查询模板、可复用 SQL 片段和领域概念到 schema 元素的映射，只有当某层的所有要求都超过阈值时才启用，并在没有可用层时才按需查询 schema。作者在自建的 HARE 基准上用六个语言模型评测，平均执行准确率从直接生成的 37.1% 升到 50.0%，平均输入 token 减少 76.6%、延迟降低 68.8%。",
+      "tags": [
+        "论文",
+        "工具",
+        "Agent"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_436293772c",
+          "url": "https://huggingface.co/papers/2611.18338"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.18338",
+          "quote": "We introduce HARE (History-AwaRe Text-to-SQL BEnchmark) to measure the accuracy and cost of adapting historical SQL."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.18338",
+          "quote": "HARE comprises 1,600 requests derived from a fixed pool of 823 verified queries across four datasets."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.18338",
+          "quote": "Our method, MEM-SQL ( Memory-EMpowered Text-to-SQL ), stores whole-query templates , reusable SQL blocks , and mappings from domain concepts to schema elements."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.18338",
+          "quote": "MEM-SQL uses a layer only if every requirement assigned to it has a match above that layer's threshold."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.18338",
+          "quote": "With On-demand Schema Linking (OSL), MEM-SQL consults the schema only when no layer qualifies or the generator judges retrieved evidence insufficient."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.18338",
+          "quote": "Across six language models on HARE , mean execution accuracy rises from 37.1% for Direct Generation without history to 50.0% for MEM-SQL , with 76.6% fewer input tokens and 68.8% lower latency on average."
+        }
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "OpenAI 启动第三方嵌入式对齐评估",
+      "summary": "OpenAI 宣布第一阶段嵌入式评估，与 Apollo Research、METR、Transluce 和 Goodfire 合作，由外部机构独立评估模型对齐、安全护栏与监控系统。",
+      "tags": [
+        "安全",
+        "行业"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_b49c86c1e7",
+          "url": "https://openai.com/index/our-first-phase-of-embedded-assessments"
+        }
+      ],
+      "evidence": []
+    },
+    {
+      "section": "brief",
+      "title": "Continual-ARC：harness 持久化很少换来记忆能力",
+      "summary": "Continual-ARC 用 ARC-AGI 任务构造终身任务流，在相同预算下比较记忆式与权重式持续学习。作者报告多数 harness 方法不如单纯缓存示例的基线，也未在未见任务上带来提升，而权重式学习在泛化上表现更好。",
+      "tags": [
+        "论文",
+        "Agent"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_cf5d517070",
+          "url": "https://huggingface.co/papers/2611.14505"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.14505",
+          "quote": "We propose Continual-ARC , a lifelong stream built from the three ARC-AGI editions, whose tasks need no domain knowledge."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.14505",
+          "quote": "After the stream, the learner is frozen and tested on fresh instances of the tasks it met, which measures memorization , and on unseen tasks, which measures generalization ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.14505",
+          "quote": "Persistence in the harness generally does not improve memorization unless provided with explicit expert guidance."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.14505",
+          "quote": "Most harness-based methods still learn less than a floor that simply caches each task's demonstrations, across all models we tested."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.14505",
+          "quote": "No harness-based method gains on unseen tasks, whereas weight-based learning shows substantial gains."
+        }
+      ]
+    }
+  ],
+  "research": [
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/blog/openrouter"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/vllm-project/vllm/releases/tag/v0.34.0"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://www.microsoft.com/en-us/research/blog/tokeneconomizer-learning-from-experience-to-make-ai-coding-agents-more-efficient/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.12068"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://www.liquid.ai/blog/d1-2"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://openai.com/index/our-first-phase-of-embedded-assessments"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.18359"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.18397"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.18482"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.15789"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.17831"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.18338"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.18549"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.17955"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.18529"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.17811"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.16378"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.14505"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.13509"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.14504"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.326"
+    }
+  ],
+  "validation": {
+    "validated_at": "2026-11-17T04:42:08+00:00",
+    "checked_links": true,
+    "dropped": [],
+    "warnings": [
+      "OpenAI 启动第三方嵌入式对齐评估: could not check https://openai.com/index/our-first-phase-of-embedded-assessments (403)"
+    ]
+  }
+}
