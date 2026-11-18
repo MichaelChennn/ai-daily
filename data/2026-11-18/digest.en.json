@@ -2,40 +2,69 @@
   "schema_version": 1,
   "date": "2026-11-18",
   "mode": "full",
-  "generated_at": "2026-11-18T04:44:33+00:00",
-  "channel": "api",
-  "model": "nvidia:minimaxai/minimax-m3.1-flash",
+  "channel": "claude",
+  "generated_at": "2026-11-18T04:46:40+00:00",
+  "model": "claude-opus-5-5",
   "highlights": [
-    "OpenAI introduced GPT-6.2 Astra and Sol with better professional outputs, coding, computer use, and lower cost across ChatGPT Work, Codex, and the API.",
-    "The K2-Horizon paper presents six fully open language models spanning a 0.9B dense model to a 375B-A23B MoE, released with training history, data, and code.",
-    "Google is rolling out Tasks in Gemini free of charge in six countries, with new features starting in the U.S. and deeper Google Workspace integration."
+    "OpenAI released GPT-6.2 Astra and Sol across ChatGPT Work, Codex and the API; starting with GPT-6.2, the Responses API drops reasoning items after prefix edits, so integrations need a review.",
+    "On the open-model side, K2-Horizon ships six fully open models from 0.9B to 375B-A23B, alongside the SenseNova-Loop-9B release and NVIDIA's Nemotron-3.5-Bolt-E4B for local voice assistants.",
+    "The Claude Code team, where ~90% of code is written and reviewed by Claude, described how it verifies changes with end-to-end runs, a verify skill and a diff-triggered checklist."
   ],
   "items": [
     {
       "section": "headline",
-      "title": "OpenAI introduces GPT-6.2 Astra and Sol",
-      "summary": "OpenAI introduced GPT-6.2 Astra and Sol with better professional outputs, coding, computer use, and efficiency at lower cost across ChatGPT Work, Codex, and the API. Developers can use the new models through ChatGPT Work, Codex, and the API.",
-      "tags": [
-        "模型",
-        "产品"
-      ],
+      "title": "OpenAI launches GPT-6.2 Astra and Sol",
+      "summary": "OpenAI introduced GPT-6.2 Astra and Sol, promising better professional outputs, coding, computer use and efficiency at lower cost across ChatGPT Work, Codex and the API. The developer docs position Astra for the most demanding tasks and Sol for complex work at lower cost, and flag two behavior changes: the Responses API now drops reasoning items after prefix edits, and top-level instructions are appended after input. To keep reasoning and prompt caching intact, keep the prefix unchanged and move reusable instructions into a developer message as the first input item.",
       "sources": [
         {
           "candidate_id": "c_9235aaac89",
           "url": "https://openai.com/index/introducing-gpt-6-2-astra-sol"
+        },
+        {
+          "url": "https://developers.openai.com/api/docs/guides/latest-model.md",
+          "title": "Using GPT-6.2 – OpenAI API docs"
+        },
+        {
+          "candidate_id": "c_9235aaac89",
+          "url": "https://news.ycombinator.com/item?id=50535230"
         }
       ],
-      "evidence": []
+      "evidence": [
+        {
+          "url": "https://developers.openai.com/api/docs/guides/latest-model.md",
+          "quote": "The examples address behaviors we’ve seen when working with GPT-6.2 Astra and Sol."
+        },
+        {
+          "url": "https://developers.openai.com/api/docs/guides/latest-model.md",
+          "quote": "Starting with GPT-6.2, the Responses API drops reasoning items after mid-conversation edits to the conversation history (prefix edits), certain model changes (including downgrades), or changes to the end user or organization."
+        },
+        {
+          "url": "https://developers.openai.com/api/docs/guides/latest-model.md",
+          "quote": "Models starting with GPT-6.2 append top-level `instructions` after `input` in the Responses API. To make reusable instructions eligible for prompt caching, put them in a `developer` message as the first item in `input`."
+        },
+        {
+          "url": "https://developers.openai.com/api/docs/guides/latest-model.md",
+          "quote": "Use [GPT-6.2 Astra](https://developers.openai.com/api/docs/models/gpt-6.2-astra) for the most demanding tasks or [GPT-6.2 Sol](https://developers.openai.com/api/docs/models/gpt-6.2-sol) for complex work at lower cost."
+        },
+        {
+          "url": "https://developers.openai.com/api/docs/guides/latest-model.md",
+          "quote": "When the model loses access to reasoning items, answer quality can decline and the model may use more tokens to repeat earlier work."
+        },
+        {
+          "url": "https://developers.openai.com/api/docs/guides/latest-model.md",
+          "quote": "To preserve reasoning and keep earlier input eligible for [prompt caching](https://developers.openai.com/api/docs/guides/prompt-caching), [keep the prefix unchanged]"
+        }
+      ],
+      "tags": [
+        "模型",
+        "产品",
+        "代码"
+      ]
     },
     {
       "section": "headline",
-      "title": "K2-Horizon ships six fully open language models",
-      "summary": "K2-Horizon is a fleet of six fully open language models, from a 0.9B dense model to a 375B-A23B MoE, built for general-purpose reasoning and agentic work. The release includes Mixture-of-Value Attention (MoVA), softplus attention gating, Uno diffusion adapters that speed up decoding by up to 2.2x, and the full development history, data, and code needed for transparency and reproducibility.",
-      "tags": [
-        "模型",
-        "开源",
-        "推理"
-      ],
+      "title": "K2-Horizon releases six fully open language models",
+      "summary": "K2-Horizon is a fleet of six fully open language models, from a 0.9B dense model to a 375B-A23B MoE, built for reasoning and agentic work; the authors say they lead or are competitive with open models of their size on agentic and coding benchmarks. It introduces Mixture-of-Value Attention (MoVA) and softplus attention gating, with the 36B-A4B model nearly matching a 32B dense model at one-seventh the active parameters, plus Uno diffusion adapters that speed up decoding by up to 2.2x without a draft model. Following the LLM360 definition, the release includes intermediate checkpoints from every stage, pre-training data, training logs and code, which makes the full pipeline reproducible.",
       "sources": [
         {
           "candidate_id": "c_ece0545583",
@@ -45,106 +74,73 @@
       "evidence": [
         {
           "url": "https://huggingface.co/papers/2611.21003",
-          "quote": "ct W e p r e s e n t K 2 - H o r i z o n , a f l e e t o f s i x f u l l y o p e n l a n g u a g e m o d e l s , f r o m a 0 ."
+          "quote": "We present K2-Horizon, a fleet of six fully open language models, from a 0.9B dense model to a 375B-A23B MoE, built for general-purpose reasoning and agentic work"
         },
         {
           "url": "https://huggingface.co/papers/2611.21003",
-          "quote": "9 B d e n s e m o d e l t o a 3 7 5 B - A 2 3 B M o E , b u i l t f o r g e n e r a l - p u r p o s e r e a s o n i n g a n d a g e n t i c w o r k a c r o s s m a t h a n d s c i e n c e , s o f t w a r e e n g i n e e r i n g , d e e p r e s e a r c h , o f f i c e a u t o m a t i o n , a n d b e"
+          "quote": "Our 36B-A4B model uses both and nearly matches a 32B dense model trained on the same data, with one-seventh the active parameters. We also introduce Uno, lossless diffusion adapters that speed up decoding by up to 2.2x without a separate draft model."
         },
         {
           "url": "https://huggingface.co/papers/2611.21003",
-          "quote": "T h e m o d e l s l e a d o r a r e c o m p e t i t i v e w i t h s t r o n g o p e n m o d e l s o f t h e i r s i z e o n a g e n t i c a n d c o d i n g b e n c h m a r k s ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21003",
-          "quote": "O n t h e m o d e l i n g s i d e , t o s t r e n g t h e n r e a s o n i n g , w e i n t r o d u c e M i x t u r e - o f - V a l u e A t t e n t i o n ( M o V A ) , a p p l y i n g M o E t o a t t e n t i o n v a l u e p r o j e c t i o n s , a n d s o f t p l u s a t t e n t i o n g a t i n g , a"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21003",
-          "quote": "m o r e f l e x i b l e , t h e o r e t i c a l l y m o t i v a t e d g a t e ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21003",
-          "quote": "O u r 3 6 B - A 4 B m o d e l u s e s b o t h a n d n e a r l y m a t c h e s a 3 2 B d e n s e m o d e l t r a i n e d o n t h e s a m e d a t a , w i t h o n e - s e v e n t h t h e a c t i v e p a r a m e t e r s ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21003",
-          "quote": "W e a l s o i n t r o d u c e U n o , l o s s l e s s d i f f u s i o n a d a p t e r s t h a t s p e e d u p d e c o d i n g b y u p t o 2 ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21003",
-          "quote": "2 x w i t h o u t a s e p a r a t e d r a f t m o d e l ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21003",
-          "quote": "O u r r e l e a s e f o l l o w s t h e L L M 3 6 0 d e f i n i t i o n o f o p e n s o u r c e f o r t r a n s p a r e n c y a n d r e p r o d u c i b i l i t y : t h e f u l l d e v e l o p m e n t h i s t o r y , i n c l u d i n g i n t e r m e d i a t e c h e c k p o i n t s f r o m e v e r y t"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21003",
-          "quote": "r a i n i n g s t a g e , p r e - t r a i n i n g d a t a , t r a i n i n g l o g s , a n d a l l t r a i n i n g , e v a l u a t i o n , a n d i n f r a s t r u c t u r e c o d e , n o t a b l y o u r p r o d u c t i o n - s c a l e x L L M f r a m e w o r k f o r d e n s e a n d M o E t r a i n i"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21003",
-          "quote": "n g a n d t h e R L 3 6 0 r e i n f o r c e m e n t - l e a r n i n g s t a c k ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21003",
-          "quote": "B e y o n d t h e d a t a i t s e l f , w e r e l e a s e a n d d o c u m e n t i n d e t a i l e v e r y p i p e l i n e t h a t b u i l t i t , t h e p a r t o f m o d e l d e v e l o p m e n t t h a t o p e n r e l e a s e s m o s t r a r e l y d i s c l o s e ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21003",
-          "quote": "a i / k 2 / View arXiv page View PDF Project page Add to collection Community ztwang Paper author Paper submitter about 22 hours ago We present K2-Horizon, a fleet of six fully open language models, from a 0.9B dense model to a 375B-A23B MoE, built for general-purpose reasoning and agentic work acro"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21003",
-          "quote": "ss math and science, software engineering, deep research, office automation, and beyond."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21003",
-          "quote": "The models lead or are competitive with strong open models of their size on agentic and coding benchmarks."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21003",
-          "quote": "On the modeling side, to strengthen reasoning, we introduce Mixture-of-Value Attention (MoVA), applying MoE to attention value projections, and softplus attention gating, a more flexible, theoretically motivated gate."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21003",
-          "quote": "Our 36B-A4B model uses both and nearly matches a 32B dense model trained on the same data, with one-seventh the active parameters."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21003",
-          "quote": "We also introduce Uno, lossless diffusion adapters that speed up decoding by up to 2.2× without a separate draft model."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21003",
-          "quote": "Our release follows the LLM360 definition of open source for transparency and reproducibility: the full development history, including intermediate checkpoints from every training stage, pre-training data, training logs, and all training, evaluation, and infrastructure code, notably our production-s"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21003",
-          "quote": "cale xLLM framework for dense and MoE training and the RL360 reinforcement-learning stack."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21003",
-          "quote": "Beyond the data itself, we release and document in detail every pipeline that built it, the part of model development that open releases most rarely disclose."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21003",
-          "quote": "These pipelines produced roughly 10T synthetic pre-training tokens, showing that synthetic data can be a major ingredient of pre-training at scale."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21003",
-          "quote": "Four of the models share one 22T-token pre-training corpus and recipe, revealing consistent scaling behavior and enabling controlled studies of scale and sparsity."
+          "quote": "the full development history, including intermediate checkpoints from every training stage, pre-training data, training logs, and all training, evaluation, and infrastructure code"
         }
+      ],
+      "tags": [
+        "开源",
+        "模型",
+        "论文"
       ]
     },
     {
       "section": "headline",
-      "title": "Google rolls out Tasks in Gemini for free in six countries",
-      "summary": "Google is updating Gemini to handle complex tasks like scheduling appointments, managing bills, and shopping for groceries, rolling this out free of charge across the U.S., Japan, Korea, Canada, Australia, and India using the Gemini 4 Hydrogen model. Gemini connects with more than 60 popular apps, and developers can apply to join the Connected Apps Platform.",
+      "title": "Claude Code team explains how its agents verify their own work",
+      "summary": "On the Claude Code team, ~90% of code is written and reviewed by Claude, so the team leans on end-to-end, property and differential tests, and codifies how to run the app in a verify skill under .claude/skills/ that Claude uses before committing. If a check still fails after three rounds, Claude stops and brings in a human, and a 39-item reliability checklist is matched against each diff so only relevant items are checked. Teams running many coding agents in parallel can borrow this verification loop directly.",
+      "sources": [
+        {
+          "candidate_id": "c_9906b3971e",
+          "url": "https://claude.dev/blog/how-the-claude-code-team-thinks-about-verification/"
+        },
+        {
+          "candidate_id": "c_9906b3971e",
+          "url": "https://news.ycombinator.com/item?id=50529612"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://claude.dev/blog/how-the-claude-code-team-thinks-about-verification/",
+          "quote": "On the Claude Code team, the vast majority of our code (~90%) is written and reviewed by Claude"
+        },
+        {
+          "url": "https://claude.dev/blog/how-the-claude-code-team-thinks-about-verification/",
+          "quote": "To codify how to start the simulator or run your app, create a skill called verify. Put it in a .claude/skills/ folder in your repo"
+        },
+        {
+          "url": "https://claude.dev/blog/how-the-claude-code-team-thinks-about-verification/",
+          "quote": "If a check is still failing after three rounds, Claude stops and brings in a human."
+        },
+        {
+          "url": "https://claude.dev/blog/how-the-claude-code-team-thinks-about-verification/",
+          "quote": "We maintain a reliability checklist with 39 items, each with a trigger that can be read from a diff, a check, and the incidents or PRs behind it."
+        },
+        {
+          "url": "https://claude.dev/blog/how-the-claude-code-team-thinks-about-verification/",
+          "quote": "Claude knows to use the verify skill before committing changes."
+        },
+        {
+          "url": "https://claude.dev/blog/how-the-claude-code-team-thinks-about-verification/",
+          "quote": "Claude reads the diff and checks only the items whose trigger matches"
+        }
+      ],
       "tags": [
         "Agent",
-        "产品"
-      ],
+        "代码",
+        "工具"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Gemini Tasks goes free, handling calls, bills and errands",
+      "summary": "Google's Gemini can now take on multi-step tasks such as booking appointments, analyzing bills and shopping, using connected email, calendar and payment methods inside hardware-isolated virtual machines. The update runs on the new Gemini 4 Hydrogen model and is rolling out free in the U.S., Japan, Korea, Canada, Australia and India, with advanced features starting in the U.S. Teams building consumer agents that act on real accounts should watch how it handles permissions and isolation.",
       "sources": [
         {
           "candidate_id": "c_ec2fa1f895",
@@ -154,147 +150,127 @@
       "evidence": [
         {
           "url": "https://blog.google/innovation-and-ai/products/gemini-app/tasks-in-gemini-free-new-features/",
-          "quote": "We’re updating Gemini to handle complex tasks like scheduling appointments, managing bills, and shopping for groceries."
-        },
-        {
-          "url": "https://blog.google/innovation-and-ai/products/gemini-app/tasks-in-gemini-free-new-features/",
-          "quote": "By connecting to your emails, calendar, and payment methods, Gemini saves you time while keeping your data secure in isolated environments."
-        },
-        {
-          "url": "https://blog.google/innovation-and-ai/products/gemini-app/tasks-in-gemini-free-new-features/",
-          "quote": "You can try these new capabilities today by switching the toggle from Chat to Task in the Gemini app, texting us on Android or iOS, or forwarding emails to gemini@google.com."
-        },
-        {
-          "url": "https://blog.google/innovation-and-ai/products/gemini-app/tasks-in-gemini-free-new-features/",
           "quote": "Starting now, this update is rolling out free of charge for hundreds of millions of people across the U.S., Japan, Korea, Canada, Australia, and India, using our new Gemini 4 Hydrogen model."
         },
         {
           "url": "https://blog.google/innovation-and-ai/products/gemini-app/tasks-in-gemini-free-new-features/",
-          "quote": "We’re also rolling out a set of advanced features, starting in the U.S."
-        },
-        {
-          "url": "https://blog.google/innovation-and-ai/products/gemini-app/tasks-in-gemini-free-new-features/",
-          "quote": "I gave Gemini permission to access our utility portal with the new Google Password Manager integration and asked for it to analyze our past billing statements in my email."
-        },
-        {
-          "url": "https://blog.google/innovation-and-ai/products/gemini-app/tasks-in-gemini-free-new-features/",
-          "quote": "Gemini quickly compared chargers thanks to Google’s Shopping Graph, asked me follow-up questions about the wattage and color, and then helped me check out using the new Google Pay integration."
-        },
-        {
-          "url": "https://blog.google/innovation-and-ai/products/gemini-app/tasks-in-gemini-free-new-features/",
-          "quote": "Gemini now uses the Agent Payments Protocol (AP2) to make purchases like this."
-        },
-        {
-          "url": "https://blog.google/innovation-and-ai/products/gemini-app/tasks-in-gemini-free-new-features/",
-          "quote": "We’re working with American Express (coming soon), Mastercard, and Visa to keep your purchases secure with digital tokens on supported cards."
-        },
-        {
-          "url": "https://blog.google/innovation-and-ai/products/gemini-app/tasks-in-gemini-free-new-features/",
-          "quote": ": “Add lasagna, strawberries, cucumbers, and vanilla ice cream to our Instacart order.” On the walk out, I saw an empty Cheerios box in the pantry, so I snapped a photo and sent a quick follow-up: “Add this too.” Gemini added it, and then handed me off to Instacart to complete the order."
-        },
-        {
-          "url": "https://blog.google/innovation-and-ai/products/gemini-app/tasks-in-gemini-free-new-features/",
-          "quote": "Today, Gemini connects with more than 60 popular apps and, as a developer, you can apply to join our Connected Apps Platform ."
-        },
-        {
-          "url": "https://blog.google/innovation-and-ai/products/gemini-app/tasks-in-gemini-free-new-features/",
-          "quote": "When you assign Gemini a task, it uses Google Cloud’s Agent Compute Engine to work in a hardware-isolated virtual machine that’s dedicated to your account and never shared with other users."
-        },
-        {
-          "url": "https://blog.google/innovation-and-ai/products/gemini-app/tasks-in-gemini-free-new-features/",
-          "quote": "Each virtual machine is sandboxed, so Gemini works in a separate, isolated environment that’s regularly tested by our security red teams."
-        },
-        {
-          "url": "https://blog.google/innovation-and-ai/products/gemini-app/tasks-in-gemini-free-new-features/",
-          "quote": "For example, Gemini is designed to ask for your confirmation or pre-approval before clicking \"Buy,\" and will ask clarifying questions if an instruction is ambiguous."
+          "quote": "Gemini operates within secure, hardware-isolated virtual machines to protect your private data and account information."
         }
-      ]
-    },
-    {
-      "section": "headline",
-      "title": "Meta brings the Muse personal AI agent to Australia",
-      "summary": "Muse is a personal AI agent that takes tasks and projects off users' plate and turns long-term goals into action plans, and it is now available in Australia on iOS, Android, and muse.ai. Local connector partners include Canva, Domain, Kogan, MECCA, Officeworks, realestate.com.au, SWEAT, ShopBack, and Ticketek, with features rolling out progressively.",
+      ],
       "tags": [
-        "Agent",
-        "产品"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_6599f156b3",
-          "url": "https://about.fb.com/news/2026/11/muse-is-now-available-in-australia/"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://about.fb.com/news/2026/11/muse-is-now-available-in-australia/",
-          "quote": "Muse is a personal AI agent."
-        },
-        {
-          "url": "https://about.fb.com/news/2026/11/muse-is-now-available-in-australia/",
-          "quote": "It doesn’t just answer questions, it actually does the work."
-        },
-        {
-          "url": "https://about.fb.com/news/2026/11/muse-is-now-available-in-australia/",
-          "quote": "It helps people stay on top of things, takes tasks and projects off their plate, and turns long-term goals into action plans."
-        },
-        {
-          "url": "https://about.fb.com/news/2026/11/muse-is-now-available-in-australia/",
-          "quote": "Muse is available in Australia from today, with local connector experiences across creativity, shopping, property, fitness and entertainment rolling out progressively."
-        },
-        {
-          "url": "https://about.fb.com/news/2026/11/muse-is-now-available-in-australia/",
-          "quote": "Connectors are a big reason Muse can do so much."
-        },
-        {
-          "url": "https://about.fb.com/news/2026/11/muse-is-now-available-in-australia/",
-          "quote": "People in Australia can connect their Muse to apps and services they already use, such as Gmail, Google Calendar, Instagram and OpenTable, so it can help them manage emails, coordinate schedules, draw on saved content and make a restaurant reservation—all part of getting everyday tasks done."
-        },
-        {
-          "url": "https://about.fb.com/news/2026/11/muse-is-now-available-in-australia/",
-          "quote": "Early local connector partners in Australia include Canva, Domain, Kogan, MECCA, Officeworks, realestate.com.au, SWEAT, ShopBack, and Ticketek."
-        },
-        {
-          "url": "https://about.fb.com/news/2026/11/muse-is-now-available-in-australia/",
-          "quote": "Connector features will roll out progressively, with some experiences becoming available after launch."
-        },
-        {
-          "url": "https://about.fb.com/news/2026/11/muse-is-now-available-in-australia/",
-          "quote": "Canva, the global all-in-one visual communication platform that empowers anyone to design, is also available as a connector for Muse users around the world."
-        },
-        {
-          "url": "https://about.fb.com/news/2026/11/muse-is-now-available-in-australia/",
-          "quote": "Real time conversations with your Muse are now possible on mobile, web or Mac."
-        },
-        {
-          "url": "https://about.fb.com/news/2026/11/muse-is-now-available-in-australia/",
-          "quote": "Spaces , a custom experience you create inside Muse by describing your idea, is now also available."
-        },
-        {
-          "url": "https://about.fb.com/news/2026/11/muse-is-now-available-in-australia/",
-          "quote": "Spaces can help you get things done, have a little fun, or give your creative projects a home, whether it’s a shopping hub, school dashboard, wedding planner, or trip planner to name a few ideas."
-        },
-        {
-          "url": "https://about.fb.com/news/2026/11/muse-is-now-available-in-australia/",
-          "quote": "Muse runs on Muse Secure VM , a dedicated computer in the cloud that securely stores the data and credentials for the services you connect, while keeping passwords and payment methods out of the agent’s view."
-        },
-        {
-          "url": "https://about.fb.com/news/2026/11/muse-is-now-available-in-australia/",
-          "quote": "You choose what your Muse can access, and it checks with you before sensitive actions such as sending an email or making a purchase."
-        },
-        {
-          "url": "https://about.fb.com/news/2026/11/muse-is-now-available-in-australia/",
-          "quote": "Muse is available in Australia on iOS, Android, and muse.ai , a Mac app, and coming soon to AI glasses."
-        }
+        "产品",
+        "Agent"
       ]
     },
     {
       "section": "model",
-      "title": "Maxwell-V1-Flash pairs MoE sparsity with 256K context",
-      "summary": "Maxwell-V1.0-Flash is a Mixture-of-Experts (MoE) language model developed by the Maxwell Team, with 35B total parameters, 3B active parameters per token, and support for context lengths up to 256K tokens. Its Maxwell Block Sparse Attention (MBSA) kernel is 6.7x faster than dense GQA at 256K, and the model ships with a vLLM OpenAI-compatible server image under the Apache License 2.0.",
+      "title": "SenseNova-Loop-9B moves from preview to full release",
+      "summary": "SenseNova released SenseNova-Loop-9B under Apache-2.0, a model that repeatedly executes shared middle layers to turn 32 physical decoder layers into 56 layer executions and accepts text and images. The team says the release beats the Preview on all seven benchmarks shown and is competitive with Qwen3.8-27B on agentic and data-analysis evaluations; with 4-bit weights and an 8-bit KV cache, 256K-context multimodal inference needs about 15 GiB of GPU memory. It is worth a try for long-context multimodal agents on limited GPU memory.",
+      "sources": [
+        {
+          "candidate_id": "c_5f75f602fe",
+          "url": "https://huggingface.co/sensenova/SenseNova-Loop-9B"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/sensenova/SenseNova-Loop-9B",
+          "quote": "2026-11-17: We release SenseNova-Loop-9B, with model weights and code available to the community."
+        },
+        {
+          "url": "https://huggingface.co/sensenova/SenseNova-Loop-9B",
+          "quote": "By repeatedly executing shared middle layers, it extends 32 physical decoder layers into 56 layer executions. The model accepts text and images and generates text"
+        },
+        {
+          "url": "https://huggingface.co/sensenova/SenseNova-Loop-9B",
+          "quote": "In agentic and data analysis evaluations, the model is competitive with Qwen3.8-27B"
+        },
+        {
+          "url": "https://huggingface.co/sensenova/SenseNova-Loop-9B",
+          "quote": "With 4-bit weights and an 8-bit KV cache, multimodal inference at a 256K context length requires approximately 15 GiB of GPU memory."
+        },
+        {
+          "url": "https://huggingface.co/sensenova/SenseNova-Loop-9B",
+          "quote": "The release outperforms the Preview on all seven benchmarks shown."
+        }
+      ],
+      "tags": [
+        "开源",
+        "多模态",
+        "模型"
+      ]
+    },
+    {
+      "section": "model",
+      "title": "NVIDIA releases Nemotron-3.5-Bolt-E4B for local assistants",
+      "summary": "NVIDIA-Nemotron-3.5-Bolt-E4B-4GB is a small language model post-trained from Gemma-4-E4B-it, with 8B total parameters (4B effective) at Q4_K_M precision, tuned for multi-turn tool use, instruction following and input grounding in local voice and device assistants. It pairs with a companion DFlash drafter for speculative decoding and is licensed under OpenMDW-1.1. It is a candidate base for on-device agents that need low memory and fast first tokens.",
+      "sources": [
+        {
+          "candidate_id": "c_3db2e91a96",
+          "url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-E4B-4GB"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-E4B-4GB",
+          "quote": "NVIDIA-Nemotron-3.5-Bolt-E4B-4GB is a small language model (SLM) further post-trained from Gemma-4-E4B-it by NVIDIA."
+        },
+        {
+          "url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-E4B-4GB",
+          "quote": "Nemotron-3.5-Bolt-E4B carries forward Gemma’s strong conversational capabilities and further improves multi-turn tool use, instruction following, and input grounding for fast local voice/device assistants"
+        },
+        {
+          "url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-E4B-4GB",
+          "quote": "Total Parameters 8B (4B effective) Architecture Gemma-4-E4B Precision Q4_K_M"
+        },
+        {
+          "url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-E4B-4GB",
+          "quote": "For speculative decoding, use the companion DFlash drafter"
+        },
+        {
+          "url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-E4B-4GB",
+          "quote": "License OpenMDW-1.1"
+        }
+      ],
       "tags": [
         "模型",
-        "开源"
+        "语音",
+        "推理"
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Apple releases FastFrames for interactive-latency video generation",
+      "summary": "Apple released FastFrames-S (1.3B) and FastFrames-L (14B), autoregressive two-step video diffusion models that generate 480p video at interactive latency; FastFrames-L is trained from Wan2.1-14B and the weights use the apple-amlr license. It also ships an optimized LingBot 1.3B that is 16x faster than the official model with camera-conditioned control. Developers working on real-time, interactive video generation have a new reference point.",
+      "sources": [
+        {
+          "candidate_id": "c_9ae7b7e299",
+          "url": "https://huggingface.co/apple/FastFrames-L"
+        }
       ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/apple/FastFrames-L",
+          "quote": "We release FastFrames-S (1.3B) and FastFrames-L (14B). Both are autoregressive, two-step video diffusion models that generate 480p video at interactive latency."
+        },
+        {
+          "url": "https://huggingface.co/apple/FastFrames-L",
+          "quote": "We also release an optimized version of LingBot 1.3B that is 16x faster than the official model and allows fluid camera-conditioned control."
+        },
+        {
+          "url": "https://huggingface.co/apple/FastFrames-L",
+          "quote": "Wan2.1-14B -> FastFrames-L"
+        }
+      ],
+      "tags": [
+        "视频",
+        "模型"
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Maxwell-V1-Flash: a 35B MoE with 3B active parameters",
+      "summary": "The Maxwell Team released Maxwell-V1.0-Flash under Apache-2.0, a Mixture-of-Experts model with 35B total and 3B active parameters per token and up to 256K context, aimed at reasoning, agentic and long-context work. It uses Maxwell Block Sparse Attention (MBSA), whose kernel the team says is 6.7x faster than dense GQA at 256K. It is worth shortlisting if you want a long-context model with a small active footprint.",
       "sources": [
         {
           "candidate_id": "c_fcbf5f38f4",
@@ -304,19 +280,7 @@
       "evidence": [
         {
           "url": "https://huggingface.co/maxwell-model/Maxwell-V1-Flash",
-          "quote": "Maxwell-V1.0-Flash is a next-generation, high-performance Mixture-of-Experts"
-        },
-        {
-          "url": "https://huggingface.co/maxwell-model/Maxwell-V1-Flash",
-          "quote": "(MoE) language model developed by the Maxwell Team, with 35B total"
-        },
-        {
-          "url": "https://huggingface.co/maxwell-model/Maxwell-V1-Flash",
-          "quote": "parameters and 3B active parameters per token (both excluding embeddings)"
-        },
-        {
-          "url": "https://huggingface.co/maxwell-model/Maxwell-V1-Flash",
-          "quote": "and support for context lengths up to 256K tokens."
+          "quote": "Maxwell-V1.0-Flash is a next-generation, high-performance Mixture-of-Experts (MoE) language model developed by the Maxwell Team, with 35B total parameters and 3B active parameters per token (both excluding embeddings) and support for context lengths up to 256K tokens."
         },
         {
           "url": "https://huggingface.co/maxwell-model/Maxwell-V1-Flash",
@@ -324,125 +288,18 @@
         },
         {
           "url": "https://huggingface.co/maxwell-model/Maxwell-V1-Flash",
-          "quote": "Each KV group keeps fixed coverage"
-        },
-        {
-          "url": "https://huggingface.co/maxwell-model/Maxwell-V1-Flash",
-          "quote": "of 8 prefix and 8 local 128-token blocks and adds up to 16 remote blocks"
-        },
-        {
-          "url": "https://huggingface.co/maxwell-model/Maxwell-V1-Flash",
-          "quote": "chosen by a learned indexer, bounding main attention at 4,096 tokens per KV"
-        },
-        {
-          "url": "https://huggingface.co/maxwell-model/Maxwell-V1-Flash",
-          "quote": "group while the full-history KV cache stays available."
-        },
-        {
-          "url": "https://huggingface.co/maxwell-model/Maxwell-V1-Flash",
-          "quote": "The MBSA kernel is"
-        },
-        {
-          "url": "https://huggingface.co/maxwell-model/Maxwell-V1-Flash",
-          "quote": "6.7x faster than dense GQA at 256K."
-        },
-        {
-          "url": "https://huggingface.co/maxwell-model/Maxwell-V1-Flash",
-          "quote": "Start the vLLM OpenAI-compatible server:"
-        },
-        {
-          "url": "https://huggingface.co/maxwell-model/Maxwell-V1-Flash",
-          "quote": "maxwellmodel/vllm-openai:v0.30.0 \\"
-        },
-        {
-          "url": "https://huggingface.co/maxwell-model/Maxwell-V1-Flash",
-          "quote": "Maxwell-V1.0-Flash is released under the Apache License 2.0 ."
+          "quote": "The MBSA kernel is 6.7x faster than dense GQA at 256K."
         }
-      ]
-    },
-    {
-      "section": "model",
-      "title": "MiniMind trains a 64M-parameter LLM from scratch in 2h",
-      "summary": "MiniMind is an open-source project that trains a roughly 64M-parameter ultra-small language model from scratch with about 3 yuan of cost and 2 hours of training time, reproducible on a single 3090. It covers the full training chain including MoE, Pretrain, SFT, LoRA, RLHF (DPO), RLAIF (PPO / GRPO / CISPO), Tool Use, Agentic RL, adaptive thinking, and distillation, with core algorithms implemented natively in PyTorch.",
+      ],
       "tags": [
-        "模型",
         "开源",
-        "训练"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_3b240d3ecb",
-          "url": "https://github.com/jingyaogong/minimind"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://github.com/jingyaogong/minimind",
-          "quote": "此开源项目旨在完全从 0 开始，仅用 3 块钱成本与 2 小时训练时间，即可训练出规模约为 64M 的超小语言模型 MiniMind。"
-        },
-        {
-          "url": "https://github.com/jingyaogong/minimind",
-          "quote": "MiniMind 系列极其轻量，主线最小版本体积约为 GPT-3 的 $\\frac{1}{2700}$ ，力求让普通个人 GPU 也能快速完成训练与复现。"
-        },
-        {
-          "url": "https://github.com/jingyaogong/minimind",
-          "quote": "项目同时开源了大模型的极简结构与完整训练链路，覆盖 MoE、数据清洗、预训练（Pretrain）、监督微调（SFT）、LoRA、RLHF（DPO）、RLAIF（PPO / GRPO / CISPO）、Tool Use、Agentic RL、自适应思考与模型蒸馏等全过程代码。"
-        },
-        {
-          "url": "https://github.com/jingyaogong/minimind",
-          "quote": "MiniMind 同时拓展了视觉模态模型 MiniMind-V 、多模态 Omni 模型 MiniMind-O 、扩散语言模型（MiniMind-dLM）、线性模型（MiniMind-Linear），详见 Discussion 。"
-        },
-        {
-          "url": "https://github.com/jingyaogong/minimind",
-          "quote": "项目所有核心算法代码均从 0 使用 PyTorch 原生实现，不依赖第三方库提供的高层抽象接口。"
-        },
-        {
-          "url": "https://github.com/jingyaogong/minimind",
-          "quote": "提供完整的 MiniMind-LLM 结构代码（Dense + MoE），当前主线结构对齐 Qwen3 / Qwen3-MoE 生态。"
-        },
-        {
-          "url": "https://github.com/jingyaogong/minimind",
-          "quote": "覆盖 Pretrain、SFT、LoRA、RLHF-DPO、RLAIF（PPO / GRPO / CISPO）、Tool Use、Agentic RL、自适应思考与模型蒸馏等完整训练流程。"
-        },
-        {
-          "url": "https://github.com/jingyaogong/minimind",
-          "quote": "发布 minimind-3 / minimind-3-moe ：结构、Tokenizer、训练链路、推理接口与默认配置全面更新"
-        },
-        {
-          "url": "https://github.com/jingyaogong/minimind",
-          "quote": "结构主线对齐 Qwen3 / Qwen3-MoE 生态：Dense 约 64M ，MoE 约 198M-A64M ，并移除了 shared expert 设计"
-        },
-        {
-          "url": "https://github.com/jingyaogong/minimind",
-          "quote": "默认训练数据切换为 pretrain_t2t(_mini).jsonl 、 sft_t2t(_mini).jsonl 、 rlaif.jsonl 、 agent_rl.jsonl 与 agent_rl_math.jsonl"
-        },
-        {
-          "url": "https://github.com/jingyaogong/minimind",
-          "quote": "新增原生 Agentic RL 训练脚本 train_agent.py ，支持多轮 Tool-Use 场景下的 GRPO / CISPO"
-        },
-        {
-          "url": "https://github.com/jingyaogong/minimind",
-          "quote": "🔥支持llama.cpp、vllm、ollama等热门三方生态。"
-        },
-        {
-          "url": "https://github.com/jingyaogong/minimind",
-          "quote": "精简预训练数据集，并大幅提升预训练数据质量，大幅缩短个人快速训练所需时间，单卡3090即可2小时复现！"
-        },
-        {
-          "url": "https://github.com/jingyaogong/minimind",
-          "quote": "更新：LoRA微调脱离peft包装，从0实现LoRA过程；DPO算法从0使用PyTorch原生实现；模型白盒蒸馏原生实现。"
-        }
+        "模型"
       ]
     },
     {
       "section": "paper",
-      "title": "SWE-CoWork benchmarks coding agents as digital employees",
-      "summary": "SWE-CoWork is a benchmark of 101 development assignments across 101 real repositories, 11 programming languages, and 12 application domains, where agents work in a simulated engineering organization with 26 colleagues. The two leading models satisfy approximately 63% of fail-to-pass (F2P) tests but complete fewer than 8% of assignments, showing that partial implementation and complete task delivery remain far apart.",
-      "tags": [
-        "论文",
-        "Agent",
-        "代码"
-      ],
+      "title": "SWE-CoWork drops coding agents into a simulated company",
+      "summary": "SWE-CoWork has 101 development assignments across 101 real repositories and 11 programming languages, each placing an agent in a simulated organization with 26 colleagues from whom it must recover requirements. The two leading models pass about 63% of fail-to-pass tests but complete fewer than 8% of assignments, and 31% of requirements reported as completed fail their tests. The takeaway for agent workflow design: the bottleneck is tracking requirements from clarification through handoff.",
       "sources": [
         {
           "candidate_id": "c_ff9c5718ce",
@@ -452,19 +309,7 @@
       "evidence": [
         {
           "url": "https://huggingface.co/papers/2611.20218",
-          "quote": "We introduce SWE-CoWork, a benchmark comprising 101 development assignments across 101 real repositories, 11 programming languages, and 12 application domains."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.20218",
-          "quote": "Each assignment places an agent in a simulated engineering organization with 26 colleagues who have distinct responsibilities, bounded knowledge, and controlled collaboration behavior."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.20218",
-          "quote": "Starting from a brief handoff, agents must recover requirements distributed across colleagues and workplace records, reconcile conflicting evidence, and implement changes evaluated by private executable tests."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.20218",
-          "quote": "We evaluate eleven models and find a substantial gap between partial implementation and complete task delivery."
+          "quote": "We introduce SWE-CoWork, a benchmark comprising 101 development assignments across 101 real repositories, 11 programming languages, and 12 application domains. Each assignment places an agent in a simulated engineering organization with 26 colleagues"
         },
         {
           "url": "https://huggingface.co/papers/2611.20218",
@@ -472,63 +317,19 @@
         },
         {
           "url": "https://huggingface.co/papers/2611.20218",
-          "quote": "Providing complete requirements upfront improves F2P by approximately 16 percentage points for Seed Evolving and GPT-6 Astra, yet leaves complete task success unchanged."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.20218",
-          "quote": "Requirement-level trajectory analysis reveals failures throughout the delivery process: Claude-Opus-5.5 directs a mean of 93% of first questions about queried cards to their accountable owners across runs but obtains only 64% of colleague-held requirements."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.20218",
-          "quote": "Deferred questions go unfollowed, implementations remain incomplete even after requirements are acquired, and 31% of requirements reported as completed fail their tests."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.20218",
-          "quote": "These findings highlight sustained requirement tracking , from clarification through implementation, verification, and handoff, as a key challenge for reliable autonomous software engineering ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.20218",
-          "quote": "We introduce SWE-CoWork, a benchmark comprising 101 development assignments across 101 real repositories, 11 programming languages, and 12 application domains."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.20218",
-          "quote": "Each assignment places an agent in a simulated engineering organization with 26 colleagues who have distinct responsibilities, bounded knowledge, and controlled collaboration behavior."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.20218",
-          "quote": "Starting from a brief handoff, agents must recover requirements distributed across colleagues and workplace records, reconcile conflicting evidence, and implement changes evaluated by private executable tests."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.20218",
-          "quote": "We evaluate eleven models and find a substantial gap between partial implementation and complete task delivery."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.20218",
-          "quote": "The two leading models satisfy approximately 63% of fail-to-pass (F2P) tests but complete fewer than 8% of assignments."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.20218",
-          "quote": "Providing complete requirements upfront improves F2P by approximately 16 percentage points for Seed Evolving and GPT-6 Astra, yet leaves complete task success unchanged."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.20218",
-          "quote": "Requirement-level trajectory analysis reveals failures throughout the delivery process: Claude-Opus-5.5 directs a mean of 93% of first questions about queried cards to their accountable owners across runs but obtains only 64% of colleague-held requirements."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.20218",
-          "quote": "Deferred questions go unfollowed, implementations remain incomplete even after requirements are acquired, and 31% of requirements reported as completed fail their tests."
+          "quote": "31% of requirements reported as completed fail their tests."
         }
+      ],
+      "tags": [
+        "论文",
+        "Agent",
+        "代码"
       ]
     },
     {
       "section": "paper",
-      "title": "SPILLWAY separates target admission from sanitization for agents",
-      "summary": "SPILLWAY defends tool-using agents against prompt injection by checking whether a call's target value came from a typed field returned by a read-only tool or a fixed delegation rule, without a per-task plan or model call. A deterministic sanitizer strips instruction-like regions before the model reads them, and across three backbones no standard templated injection redirected an action to an attacker's target under SPILLWAY.",
-      "tags": [
-        "论文",
-        "Agent",
-        "安全"
-      ],
+      "title": "SPILLWAY defends tool-using agents without a model in the loop",
+      "summary": "SPILLWAY targets prompt injection in tool-using agents by noting that targets like an email's sender or a payment's account arrive in typed fields, while injected instructions arrive as free text, and turns that into a deterministic check with no per-task plan. A call is admitted only when every target value seen in tool output but not in the user's task came from a read-only tool's typed field or a fixed delegation rule; across three backbones, no standard templated injection redirected an action to an attacker's target. It is a practical pattern for guarding agents that send email or move money.",
       "sources": [
         {
           "candidate_id": "c_6c090610c5",
@@ -538,91 +339,27 @@
       "evidence": [
         {
           "url": "https://huggingface.co/papers/2611.07222",
-          "quote": "g e n t s a c t o n e m a i l , f i l e s , a n d p a y m e n t s , s o a n i n s t r u c t i o n h i d d e n i n a w e b p a g e o r a s h a r e d d o c u m e n t c a n m a k e a n a g e n t s e n d d a t a o r m o n e y t o a n a t t a c k e r ."
+          "quote": "an email's sender or a payment's account arrives in a typed field, while injected instructions arrive as free text. SPILLWAY turns this observation into a deterministic floor with no per-task plan."
         },
         {
           "url": "https://huggingface.co/papers/2611.07222",
-          "quote": "M a n y r u n t i m e d e f e n s e s p u t a l a n g u a g e m o d e l o n t h e d e c i s i o n t h a t l e t s a n a c t i o n t h r o u g h , s o t h e d e c i s i o n d e p e n d s o n a m o d e l t h a t m a y r e a d t h e a t t a c k e r ' s t e x t a n d a d d s m o d e l c a l l s t o e v"
+          "quote": "The check admits a call when each target value that appears in tool output but not in the user's task was returned by a read-only tool in a typed field or is covered by a fixed delegation rule."
         },
         {
           "url": "https://huggingface.co/papers/2611.07222",
-          "quote": "e r y s t e p ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.07222",
-          "quote": "P r o v e n a n c e d e f e n s e s k e e p t h e m o d e l o f f t h e f i n a l c h e c k b u t n e e d a m o d e l t o p l a n o r r o u t e e a c h t a s k f i r s t ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.07222",
-          "quote": "W h e r e a n a c t i o n g o e s c a n i n s t e a d b e r e a d f r o m t h e t o o l s ' t y p e d r e t u r n s : a n e m a i l ' s s e n d e r o r a p a y m e n t ' s a c c o u n t a r r i v e s i n a t y p e d f i e l d , w h i l e i n j e c t e d i n s t r u c t i o n s a r r i v e a s f r e"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.07222",
-          "quote": "S P I L L W A Y t u r n s t h i s o b s e r v a t i o n i n t o a d e t e r m i n i s t i c f l o o r w i t h n o p e r - t a s k p l a n ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.07222",
-          "quote": "T h e c h e c k a d m i t s a c a l l w h e n e a c h t a r g e t v a l u e t h a t a p p e a r s i n t o o l o u t p u t b u t n o t i n t h e u s e r ' s t a s k w a s r e t u r n e d b y a r e a d - o n l y t o o l i n a t y p e d f i e l d o r i s c o v e r e d b y a f i x e d d e l e g a t i o"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.07222",
-          "quote": "A d e t e r m i n i s t i c s a n i t i z e r r e m o v e s i n s t r u c t i o n - l i k e r e g i o n s i t s f i x e d r u l e s m a t c h b e f o r e t h e m o d e l r e a d s t h e m a n d r e t a i n s t h e r e m o v e d s p a n s a s e v i d e n c e , a n d a l o c a l j u d g e m a y r e s"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.07222",
-          "quote": "t o r e a r e f u s e d c a l l , n e v e r o n e w h o s e t a r g e t l i e s i n t h e r e m o v e d t e x t ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.07222",
-          "quote": "A c r o s s t h r e e b a c k b o n e s , a n d s e v e n t a s k s u i t e s o n o n e o f t h e m , n o s t a n d a r d t e m p l a t e d i n j e c t i o n r e d i r e c t s a n a c t i o n t o a n a t t a c k e r ' s t a r g e t u n d e r S P I L L W A Y , a t t h e h i g h e s t o b s e r v e d"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.07222",
-          "quote": "m e a n u t i l i t y a n d c o m p o s i t e s c o r e s ( N R P , E R S ) o f t h e d e f e n s e s w e r u n u n d e r t h a t a t t a c k ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.07222",
-          "quote": "A f o r g e d c h a t t e m p l a t e a l s o p r o d u c e s a r a w z e r o , a n d m e a n i n - s c o p e a t t a c k s u c c e s s u n d e r a r e l e a s e d r e i n f o r c e m e n t - l e a r n i n g a t t a c k e r i s ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.07222",
-          "quote": "S P I L L W A Y r e a c h e s t h i s f l o o r w i t h n o d e f e n s e - t r i g g e r e d b a c k b o n e r e - r u n a n d a l m o s t n o a d d e d m o d e l c a l l ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.07222",
-          "quote": "A s p e r s o n a l A I a g e n t s a c t o n u s e r s ' e m a i l , f i l e s , a n d p a y m e n t s , S P I L L W A Y g i v e s t h e m a n a u d i t a b l e r e f u s a l f l o o r o n w h e r e t h e i r a c t i o n s g o t h a t k e e p s t h e m u s e f u l a n d h o l d s a c r o s s b a c"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.07222",
-          "quote": "SPILLWAY admits an action's recipient, account or URL when it appears in the user's request or in a typed field that a read-only tool returned, such as an email's sender."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.07222",
-          "quote": "An address found only in free text, such as an email body, is refused unless the request delegates it."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.07222",
-          "quote": "This check is a set lookup with no model call."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.07222",
-          "quote": "An optional local judge may restore a refused call, never one whose target came from injected text the sanitizer removed."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.07222",
-          "quote": "The repository has recipes for LangChain and LangGraph, the OpenAI Agents SDK, any MCP host and Claude Code hooks."
+          "quote": "Across three backbones, and seven task suites on one of them, no standard templated injection redirects an action to an attacker's target under SPILLWAY"
         }
+      ],
+      "tags": [
+        "论文",
+        "安全",
+        "Agent"
       ]
     },
     {
       "section": "paper",
-      "title": "ScaleVLA scales vision-language-action models to 552B parameters",
-      "summary": "ScaleVLA connects a 552B DeepSeek-V4.1-Flash backbone to a trainable action DiT and compares VLMs from 2B to 552B under a shared training setup. Ten demonstrations outperform a 2B backbone trained with 50 (87.8% vs. 85.6%), LIBERO-PRO success reaches 45.1%, real-world charger insertion improves from 4/10 to 9/10, and median latency per action chunk is 216 ms.",
-      "tags": [
-        "论文",
-        "多模态",
-        "模型"
-      ],
+      "title": "ScaleVLA uses a 552B model as a robot policy backbone",
+      "summary": "ScaleVLA connects a 552B DeepSeek-V4.1-Flash backbone to a trainable action DiT and compares VLMs from 2B to 552B under one training setup. Just 10 demonstrations beat a 2B backbone trained with 50 (87.8% vs. 85.6%), LIBERO-PRO success reaches 45.1% versus at most 31.3% for smaller backbones, and real-world charger insertion improves from 4/10 to 9/10, at 216 ms median latency per action chunk. The authors argue frontier VLMs can serve as representational foundations for efficient, generalizable robot policies.",
       "sources": [
         {
           "candidate_id": "c_7f83304252",
@@ -632,710 +369,56 @@
       "evidence": [
         {
           "url": "https://huggingface.co/papers/2611.21607",
-          "quote": "Sikai Liang , Ke Fan , He Wang , Li Yi Abstract F r o n t i e r V i s i o n - L a n g u a g e M o d e l s ( V L M s ) s u c h a s G P T - 6 A s t r a h a v e d e m o n s t r a t e d r e m a r k a b l e c a p a b i l i t i e s i n r o b o t c o n t r o l , s u g g e s t i n g t h a t b r o a d p r e"
+          "quote": "We introduce ScaleVLA, which connects a 552B DeepSeek-V4.1-Flash backbone to a trainable action DiT, and systematically compare VLMs from 2B to 552B under a shared training setup."
         },
         {
           "url": "https://huggingface.co/papers/2611.21607",
-          "quote": "t r a i n i n g p r o v i d e s k n o w l e d g e v a l u a b l e f o r p h y s i c a l a c t i o n ."
+          "quote": "In sample efficiency, just 10 demonstrations outperform a 2B backbone trained with 50 (87.8% vs. 85.6%). In generalization, LIBERO-PRO success reaches 45.1%, compared with at most 31.3% for smaller backbones."
         },
         {
           "url": "https://huggingface.co/papers/2611.21607",
-          "quote": "Y e t m o s t V i s i o n - L a n g u a g e - A c t i o n ( V L A ) p o l i c i e s s t i l l r e l y o n m u c h s m a l l e r V L M b a c k b o n e s , l e a v i n g t h i s p o t e n t i a l l a r g e l y u n t a p p e d ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21607",
-          "quote": "W e a s k w h e t h e r f r o n t i e r - s c a l e r e p r e s e n t a t i o n s c a n p r o v i d e a s t r o n g e r f o u n d a t i o n f o r r o b o t l e a r n i n g ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21607",
-          "quote": "W e i n t r o d u c e S c a l e V L A , w h i c h c o n n e c t s a 5 5 2 B D e e p S e e k - V 4 ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21607",
-          "quote": "1 - F l a s h b a c k b o n e t o a t r a i n a b l e a c t i o n D i T , a n d s y s t e m a t i c a l l y c o m p a r e V L M s f r o m 2 B t o 5 5 2 B u n d e r a s h a r e d t r a i n i n g s e t u p ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21607",
-          "quote": "W e e v a l u a t e t h r e e f u n d a m e n t a l c a p a b i l i t i e s o f r o b o t f o u n d a t i o n m o d e l s ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21607",
-          "quote": "I n s a m p l e e f f i c i e n c y , j u s t 1 0 d e m o n s t r a t i o n s o u t p e r f o r m a 2 B b a c k b o n e t r a i n e d w i t h 5 0 ( 8 7 ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21607",
-          "quote": "I n g e n e r a l i z a t i o n , L I B E R O - P R O s u c c e s s r e a c h e s 4 5 ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21607",
-          "quote": "1 % , c o m p a r e d w i t h a t m o s t 3 1 ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21607",
-          "quote": "3 % f o r s m a l l e r b a c k b o n e s ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21607",
-          "quote": "I n p r e c i s e m a n i p u l a t i o n , r e a l - w o r l d c h a r g e r i n s e r t i o n i m p r o v e s f r o m 4 / 1 0 t o 9 / 1 0 s u c c e s s e s , w i t h g a i n s c o n c e n t r a t e d i n c o n t a c t - s e n s i t i v e a l i g n m e n t ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21607",
-          "quote": "D e s p i t e i t s s c a l e , S c a l e V L A a c h i e v e s 2 1 6 m s m e d i a n l a t e n c y p e r a c t i o n c h u n k ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21607",
-          "quote": "O u r f i n d i n g s s u g g e s t t h a t f r o n t i e r V L M s c a n s e r v e n o t o n l y a s r e a s o n i n g a g e n t s , b u t a l s o a s p o w e r f u l r e p r e s e n t a t i o n a l f o u n d a t i o n s f o r e f f i c i e n t a n d g e n e r a l i z a b l e r o b o t p o l i c i"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21607",
-          "quote": "View arXiv page View PDF Project page Add to collection Community qizekun Paper author Paper submitter about 22 hours ago ScaleVLA: Scaling Vision-Language-Action Models to 552 Billion Parameters"
+          "quote": "real-world charger insertion improves from 4/10 to 9/10 successes, with gains concentrated in contact-sensitive alignment. Despite its scale, ScaleVLA achieves 216 ms median latency per action chunk."
         }
+      ],
+      "tags": [
+        "论文",
+        "多模态"
       ]
     },
     {
       "section": "paper",
-      "title": "VoxMel generates speech without an acoustic tokenizer",
-      "summary": "VoxMel is a tokenizer-free autoregressive TTS framework that uses a fixed, exactly invertible two-axis Haar transform to decompose mel spectrograms into Coarse-Mel and residual tiers. Trained on 100K hours of Emilia, the supervised 0.6B model reaches 1.51% WER and 0.738 SIM on test-en and 1.29% CER and 0.755 SIM on test-zh, with GRPO improving these to 1.15% WER / 0.753 SIM and 1.17% CER / 0.776 SIM.",
+      "title": "Accelerate Bench tests agents on whole-program optimization",
+      "summary": "Accelerate Bench has 32 CPU optimization tasks from scientific applications and supercomputing competitions, each with a working program, workload and correctness requirements, leaving agents to choose where and how to optimize. On version 1.1, 16 coding agents score between 25.5% and 67.4% Score@1; most programs are correct, and speedup size separates them. Identical source code runs between 0.29x and 2.12x depending only on build and runtime settings, so agent-driven tuning should not stop at code edits.",
+      "sources": [
+        {
+          "candidate_id": "c_51bab1455c",
+          "url": "https://huggingface.co/papers/2611.20882"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.20882",
+          "quote": "We introduce Accelerate Bench, a benchmark of 32 CPU optimization tasks adapted from scientific applications and supercomputing competitions."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.20882",
+          "quote": "On benchmark version 1.1, we evaluate 16 coding agents, each pairing a model with a harness. Their Score@1 ranges from 25.5% to 67.4%. Most of their programs are correct, and the size of the speedup separates them"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.20882",
+          "quote": "identical source code runs between 0.29x and 2.12x depending only on build and runtime settings"
+        }
+      ],
       "tags": [
         "论文",
-        "语音"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_cd91450b6c",
-          "url": "https://huggingface.co/papers/2611.20254"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2611.20254",
-          "quote": "Papers arxiv:2611.20254 Copy markdown VoxMel TTS Technical Report Published on Nov 15 · Submitted by SII-Guan Wenhao on Nov 17 · VoxDance-Lab Upvote 22 +14 Authors: Wenhao Guan , Jiaxin Ye , Haitao Li , Yifan Duan , Junxi Liu , Wangjin Zhou , Lin Li , Qingyang Hong , Xie Chen Abstract VoxMel is a to"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.20254",
-          "quote": "kenizer-free autoregressive TTS framework that uses an invertible two-axis Haar transform to decompose mel spectrograms into Coarse-Mel and residual tiers, enabling stable high-fidelity generation with strong recognition and speaker-similarity results."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.20254",
-          "quote": "In this work, we propose VoxMel, a tokenizer-free framework for autoregressive TTS that makes stable mel modeling tractable through a fixed, exactly invertible two-axis Haar transform ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.20254",
-          "quote": "The transform first decomposes each mel spectrogram along frequency into local averages and a frequency residual , then splits the averaged component along time into Coarse-Mel and a temporal residual ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.20254",
-          "quote": "A language-model backbone with a flow-matching head autoregressively generates Coarse-Mel ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.20254",
-          "quote": "Non-autoregressive residual tiers then predict the temporal residual from Coarse-Mel , followed by the frequency residual conditioned on the reconstructed Frequency-Averaged Mel ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.20254",
-          "quote": "Neither residual is fed back into the autoregressive history ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.20254",
-          "quote": "Trained on 100K hours of Emilia, the supervised 0.6B model obtains 1.51\\% WER and 0.738 speaker similarity (SIM) on test-en, and 1.29\\% CER and 0.755 SIM on test-zh."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.20254",
-          "quote": "GRPO improves these results to 1.15\\% WER / 0.753 SIM and 1.17\\% CER / 0.776 SIM, respectively."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.20254",
-          "quote": "We also distill the guided flow head into two- and four-step student s, requiring 2 or 4 head evaluations per coarse frame."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.20254",
-          "quote": "The four-step student retains competitive SIM and nearly matches the supervised model in WER/CER."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.20254",
-          "quote": "View arXiv page View PDF Project page GitHub 92 Add to collection Community guanwenhao Paper submitter about 22 hours ago VoxMel explores a different path for autoregressive TTS: generating directly in the continuous Mel spectrogram space, without relying on learned acoustic tokenizers."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.20254",
-          "quote": "The key idea is to use wavelet decomposition to model acoustic information at different scales."
-        }
-      ]
-    },
-    {
-      "section": "paper",
-      "title": "MovieRoll rolls out long-form streaming video generation",
-      "summary": "MovieRoll is a base-to-distilled framework that connects streaming fine-tuning, long-rollout distillation, and long-horizon inference, using Window-wise Teacher Forcing (WinTF), hierarchical KV-cache compression (HieraKV), and cumulative long tuning with distribution matching distillation (CuLT-DMD). HieraKV reduces cache memory by up to 78% while improving generation quality, and on HeliosBench MovieRoll-Base stays competitive at 30s while MovieRoll-Distilled scores highest among compared methods up to 60s.",
-      "tags": [
-        "论文",
-        "视频"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_71c39453c7",
-          "url": "https://huggingface.co/papers/2611.21339"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2611.21339",
-          "quote": "Papers arxiv:2611.21339 Copy markdown MovieRoll: A Systematic Framework for Rolling Out Long-Form Videos Published on Nov 16 · Submitted by yunyangge on Nov 17 Upvote 12 +4 Authors: Yunyang Ge , Weijie Kong , Ryan Xu , Yue Wu , Qi Tian , Jiangfeng Xiong , Bin Lin , Mingzhe Zheng , Shenghai Yuan , Zh"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21339",
-          "quote": "eyuan Liu , Jianwei Zhang , Li Yuan Abstract S t r e a m i n g v i d e o g e n e r a t i o n m u s t s u s t a i n q u a l i t y b e y o n d t h e t r a i n i n g h o r i z o n w h i l e h a n d l i n g s e l f - g e n e r a t e d h i s t o r y a n d g r o w i n g c a c h e c o s t s ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21339",
-          "quote": "T o a d d r e s s t h e s e c h a l l e n g e s , w e p r e s e n t M o v i e R o l l , a b a s e - t o - d i s t i l l e d f r a m e w o r k t h a t c o n n e c t s s t r e a m i n g f i n e - t u n i n g , l o n g - r o l l o u t d i s t i l l a t i o n , a n d l o n g - h o r i z o n i n f e r e"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21339",
-          "quote": "W e f i r s t e s t a b l i s h a r o b u s t m u l t i - s t e p b a s e t h r o u g h W i n d o w - w i s e T e a c h e r F o r c i n g ( W i n T F ) , w h i c h j o i n t l y d e n o i s e s c h u n k s a t p r o g r e s s i v e n o i s e l e v e l s w i t h b i d i r e c t i o n a l a t t e n t"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21339",
-          "quote": "i o n w i t h i n e a c h w i n d o w a n d c a u s a l a c c e s s t o p r e c e d i n g h i s t o r y ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21339",
-          "quote": "T o r e t a i n h i s t o r i c a l c o n t e x t e f f i c i e n t l y , h i e r a r c h i c a l K V - c a c h e c o m p r e s s i o n ( H i e r a K V ) e x p l o i t s l a y e r - w i s e a t t e n t i o n p a t t e r n s , r e t a i n i n g f u l l h i s t o r y i n s h a l l o w l a y e r s a n"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21339",
-          "quote": "d s i n k - - r e c e n t h i s t o r y i n d e e p e r l a y e r s ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21339",
-          "quote": "T h i s r e d u c e s c a c h e m e m o r y b y u p t o 7 8 % w h i l e i m p r o v i n g g e n e r a t i o n q u a l i t y ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21339",
-          "quote": "B u i l d i n g o n t h i s b a s e , c u m u l a t i v e l o n g t u n i n g w i t h d i s t r i b u t i o n m a t c h i n g d i s t i l l a t i o n ( C u L T - D M D ) h o l d s p a r a m e t e r s f i x e d t h r o u g h o u t e a c h l o n g s e l f - r o l l o u t a n d a v e r a g e s l o c a"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21339",
-          "quote": "l g r a d i e n t s b e f o r e u p d a t i n g ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21339",
-          "quote": "E a c h u p d a t e t h e r e f o r e c o m b i n e s s u p e r v i s i o n a c r o s s t e m p o r a l p o s i t i o n s w h i l e r e t a i n i n g o n l y o n e l o c a l c o m p u t a t i o n g r a p h , e n a b l i n g e f f i c i e n t l o n g - r o l l o u t t r a i n i n g o f a f e w - s t"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21339",
-          "quote": "e p g e n e r a t o r ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21339",
-          "quote": "T o e x t e n d g e n e r a t i o n b e y o n d t h e t r a i n i n g h o r i z o n , K V r e c o m p u t a t i o n b o u n d s c o n t e x t f o r b o t h m o d e l s , w h i l e g u i d a n c e a n n e a l i n g ( A n n e a l C F G ) r e d u c e s g u i d a n c e t o w a r d t h e c l e a n e n d"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21339",
-          "quote": "p o i n t t o s t a b i l i z e M o v i e R o l l - B a s e ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21339",
-          "quote": "C o m p l e m e n t i n g t h e s e m o d e l i n g a d v a n c e s , F B C A a t t e n t i o n a n d P S - V A E d e c o d i n g s u p p o r t e f f i c i e n t t r a i n i n g a n d s t r e a m i n g o u t p u t ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21339",
-          "quote": "O n H e l i o s B e n c h , M o v i e R o l l - B a s e r e m a i n s c o m p e t i t i v e a t 3 0 s a f t e r t r a i n i n g o n v i d e o s o f u p t o 1 5 s , a n d M o v i e R o l l - D i s t i l l e d a c h i e v e s t h e h i g h e s t t o t a l s c o r e s a m o n g t h e c o m p a r e d m"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21339",
-          "quote": "e t h o d s a c r o s s s i n g l e - a n d m u l t i - e v e n t e v a l u a t i o n s u p t o 6 0 s , c o m b i n i n g s u s t a i n e d n a t u r a l n e s s w i t h a c t i v e m o t i o n ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21339",
-          "quote": "View arXiv page View PDF Project page GitHub 53 Add to collection Community yunyangge Paper submitter about 22 hours ago Streaming video generation must sustain quality beyond the training horizon while handling self-generated history and growing cache costs."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21339",
-          "quote": "To address these challenges, we present MovieRoll, a base-to-distilled framework that connects streaming fine-tuning, long-rollout distillation, and long-horizon inference."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21339",
-          "quote": "We first establish a robust multi-step base through Window-wise Teacher Forcing (WinTF), which jointly denoises chunks at progressive noise levels with bidirectional attention within each window and causal access to preceding history."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21339",
-          "quote": "To retain historical context efficiently, hierarchical KV-cache compression (HieraKV) exploits layer-wise attention patterns, retaining full history in shallow layers and sink--recent history in deeper layers."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21339",
-          "quote": "This reduces cache memory by up to 78% while improving generation quality."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21339",
-          "quote": "Building on this base, cumulative long tuning with distribution matching distillation (CuLT-DMD) holds parameters fixed throughout each long self-rollout and averages local gradients before updating."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21339",
-          "quote": "Each update therefore combines supervision across temporal positions while retaining only one local computation graph, enabling efficient long-rollout training of a few-step generator."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21339",
-          "quote": "To extend generation beyond the training horizon, KV recomputation bounds context for both models, while guidance annealing (AnnealCFG) reduces guidance toward the clean endpoint to stabilize MovieRoll-Base."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21339",
-          "quote": "Complementing these modeling advances, FBCA attention and PS-VAE decoding support efficient training and streaming output."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21339",
-          "quote": "On HeliosBench, MovieRoll-Base remains competitive at 30s after training on videos of up to 15s, and MovieRoll-Distilled achieves the highest total scores among the compared methods across single- and multi-event evaluations up to 60s, combining sustained naturalness with active motion."
-        }
-      ]
-    },
-    {
-      "section": "paper",
-      "title": "InclusionMed benchmarks medical AI across roles and capabilities",
-      "summary": "InclusionMed is an open medical AI evaluation initiative whose Atlas organizes benchmarks across three healthcare roles and three AI capabilities, with five benchmarks covering three of its nine role-capability cells. Frontier models scored from 17.5 to 49.1 out of 100 on the InclusionMed Index, and the ten highest-ranked models all scored higher on patient communication than on clinical decision-making.",
-      "tags": [
-        "论文",
-        "评测"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_2d3dd15956",
-          "url": "https://huggingface.co/papers/2611.21218"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2611.21218",
-          "quote": "Papers arxiv:2611.21218 Copy markdown InclusionMed: Benchmarking AI for Inclusive Healthcare Published on Nov 16 · Submitted by Yifan Zhou on Nov 17 #2 Paper of the day Upvote 75 +67 Authors: The InclusionMed Collaboration Abstract InclusionMed is an open medical AI evaluation initiative that audits"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21218",
-          "quote": "and reproduces benchmarks across healthcare roles and capabilities, revealing that model rankings and inference costs vary by context and motivating broader, context-specific evaluation."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21218",
-          "quote": "Generated by deepseek-ai/DeepSeek-V4.1-Flash Advancing medical AI for inclusive healthcare requires evaluation across diverse healthcare roles, tasks, and care settings, but benchmark coverage remains uneven."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21218",
-          "quote": "We introduce InclusionMed, an open medical AI evaluation initiative for inclusive healthcare."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21218",
-          "quote": "The InclusionMed Atlas organizes benchmarks across three healthcare roles and three AI capabilities."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21218",
-          "quote": "For the first release, we selected four public benchmarks from 388 candidates through structured audits and independent reproduction."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21218",
-          "quote": "With InclusionMed-DxFiles , our private diagnostic reasoning benchmark , the Atlas contains five benchmarks covering three of its nine role--capability cells."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21218",
-          "quote": "We evaluated frontier large language models on the Atlas and aggregated their results into the InclusionMed Index , with overall scores ranging from 17.5 to 49.1 out of 100."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21218",
-          "quote": "The Index also reports scores by healthcare role and AI capability, showing that a model's rank varied with the role or capability considered."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21218",
-          "quote": "A within-benchmark analysis using task-level tags showed that the ten highest-ranked models in the Index all scored higher on patient communication than on clinical decision-making."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21218",
-          "quote": "Models with similar Index scores also differed substantially in estimated inference cost ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21218",
-          "quote": "These findings highlight the need for evaluation covering more diverse healthcare needs and for context-specific model selection."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21218",
-          "quote": "Through open collaboration and community contributions, InclusionMed seeks to ensure that diverse healthcare needs worldwide shape how medical AI progress is defined and measured."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21218",
-          "quote": "View arXiv page View PDF Project page GitHub 38 Add to collection Community yingmanji Paper submitter about 21 hours ago InclusionMed is an open evaluation initiative for inclusive healthcare."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21218",
-          "quote": "Through successive releases of the Atlas and Index, this open collaboration aims to ensure that the diverse healthcare needs of people worldwide guide how progress in medical AI is defined and measured."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21218",
-          "quote": "The InclusionMed Atlas organizes benchmarks along two axes: healthcare role and AI capability."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21218",
-          "quote": "The role axis distinguishes patients and the public, healthcare professionals, and healthcare administration professionals; the capability axis distinguishes knowledge, reasoning, and agency."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21218",
-          "quote": "The Atlas design makes clear which healthcare needs are represented by the included benchmarks and where coverage remains limited."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21218",
-          "quote": "The InclusionMed Index aggregates model results across the benchmarks included in the Atlas."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21218",
-          "quote": "In the initial release, each model's Index score is the equally weighted mean of its five benchmark scores."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21218",
-          "quote": "The Index also reports scores by healthcare role and AI capability, revealing differences in both model rankings and score levels."
-        }
-      ]
-    },
-    {
-      "section": "tool",
-      "title": "Claude Platform adds linked billing in beta",
-      "summary": "Linked billing lets third-party platforms let end customers pay for Claude API usage without sharing an API key, with usage billed directly to the customer's Claude Platform organization. Customers approve each platform, set monthly spend limits, and can unlink at any time, while platforms can view per-customer request counts, token usage, and models used in Console or via the Usage and Cost Analytics API (beta).",
-      "tags": [
-        "工具",
-        "产品"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_b29de30dad",
-          "url": "https://claude.com/resources/articles/linked-billing-on-claude-platform"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://claude.com/resources/articles/linked-billing-on-claude-platform",
-          "quote": "Linked billing on the Claude Platform Category Product updates Product Claude Platform Date November 17, 2026 Reading time 4 min Share Copy link Contents A more secure alternative to sharing API keys Platforms can offer Claude to customers without building the billing Customers get more visibility a"
-        },
-        {
-          "url": "https://claude.com/resources/articles/linked-billing-on-claude-platform",
-          "quote": "nd control Getting started Today we're introducing linked billing on the Claude Platform in beta."
-        },
-        {
-          "url": "https://claude.com/resources/articles/linked-billing-on-claude-platform",
-          "quote": "Third-party platforms, such as coding agents and workflow automation tools, can let their end customers pay for Claude API usage without sharing an API key."
-        },
-        {
-          "url": "https://claude.com/resources/articles/linked-billing-on-claude-platform",
-          "quote": "End customers keep their existing Anthropic billing and set their own spend limits, and platforms get a simpler, more secure way to offer Claude."
-        },
-        {
-          "url": "https://claude.com/resources/articles/linked-billing-on-claude-platform",
-          "quote": "A more secure alternative to sharing API keys Paying for Claude API usage on a third-party platform usually means sharing an API key, which works like a password: anyone who has the key can make requests billed to the customer, so the platform has to keep it safe."
-        },
-        {
-          "url": "https://claude.com/resources/articles/linked-billing-on-claude-platform",
-          "quote": "With linked billing, customers link their Claude Platform organization instead, and usage is billed directly to it."
-        },
-        {
-          "url": "https://claude.com/resources/articles/linked-billing-on-claude-platform",
-          "quote": "No API key changes hands, so platforms have no customer keys to store, encrypt or rotate, and customers’ API keys never leave their organization."
-        },
-        {
-          "url": "https://claude.com/resources/articles/linked-billing-on-claude-platform",
-          "quote": "Platforms can see usage for each linked customer."
-        },
-        {
-          "url": "https://claude.com/resources/articles/linked-billing-on-claude-platform",
-          "quote": "Customers approve each linked platform, set a spend limit, and can unlink at any time."
-        },
-        {
-          "url": "https://claude.com/resources/articles/linked-billing-on-claude-platform",
-          "quote": "Linked billing on the Claude Platform Platforms can offer Claude to customers without building the billing Linked billing gives platforms a new way to offer Claude to their customers."
-        },
-        {
-          "url": "https://claude.com/resources/articles/linked-billing-on-claude-platform",
-          "quote": "Platforms send requests, and Anthropic bills the end customers directly."
-        },
-        {
-          "url": "https://claude.com/resources/articles/linked-billing-on-claude-platform",
-          "quote": "With linked billing, platforms can: Launch faster."
-        },
-        {
-          "url": "https://claude.com/resources/articles/linked-billing-on-claude-platform",
-          "quote": "Anthropic hosts the approval flow and the billing, so there’s no metering or invoicing to build."
-        },
-        {
-          "url": "https://claude.com/resources/articles/linked-billing-on-claude-platform",
-          "quote": "Understand usage by customer."
-        },
-        {
-          "url": "https://claude.com/resources/articles/linked-billing-on-claude-platform",
-          "quote": "Get each linked customer’s request count, token usage and models used in Console, or programmatically with the Usage and Cost Analytics API (beta)."
-        },
-        {
-          "url": "https://claude.com/resources/articles/linked-billing-on-claude-platform",
-          "quote": "Choose who pays."
-        },
-        {
-          "url": "https://claude.com/resources/articles/linked-billing-on-claude-platform",
-          "quote": "Decide on each request whether the platform or the end customer pays, so platforms can pass Claude API costs to customers or cover some features themselves by product or instance."
-        },
-        {
-          "url": "https://claude.com/resources/articles/linked-billing-on-claude-platform",
-          "quote": "Customers get more visibility and control Customers can easily link to platforms using Anthropic’s hosted flow."
-        },
-        {
-          "url": "https://claude.com/resources/articles/linked-billing-on-claude-platform",
-          "quote": "They can then draw down from their existing Anthropic commitment, or pay as they go."
-        },
-        {
-          "url": "https://claude.com/resources/articles/linked-billing-on-claude-platform",
-          "quote": "With linked billing, customers can also: Link once for the whole organization."
-        },
-        {
-          "url": "https://claude.com/resources/articles/linked-billing-on-claude-platform",
-          "quote": "A Console user with an Owner, Admin, or Billing role approves the link, so it works the same for individual developers and large teams."
-        },
-        {
-          "url": "https://claude.com/resources/articles/linked-billing-on-claude-platform",
-          "quote": "Set limits for each platform."
-        },
-        {
-          "url": "https://claude.com/resources/articles/linked-billing-on-claude-platform",
-          "quote": "Customers can set a monthly spend limit for each platform, or a default that applies to each one."
-        },
-        {
-          "url": "https://claude.com/resources/articles/linked-billing-on-claude-platform",
-          "quote": "See where API spend goes."
-        },
-        {
-          "url": "https://claude.com/resources/articles/linked-billing-on-claude-platform",
-          "quote": "Console shows spend for each linked platform."
-        },
-        {
-          "url": "https://claude.com/resources/articles/linked-billing-on-claude-platform",
-          "quote": "Unlink at any time."
-        },
-        {
-          "url": "https://claude.com/resources/articles/linked-billing-on-claude-platform",
-          "quote": "Customers can unlink directly from Console."
-        },
-        {
-          "url": "https://claude.com/resources/articles/linked-billing-on-claude-platform",
-          "quote": "Requests run in the platform’s organization, so settings in the customer’s organization, such as IP allowlists, encryption keys, and data retention, don’t apply."
-        },
-        {
-          "url": "https://claude.com/resources/articles/linked-billing-on-claude-platform",
-          "quote": "Platforms that support linked billing today include Asana, ClickHouse, Factory, Gumloop, Harness, Higgsfield AI, Kilo Code, Linear, Major, Mintlify, Omni, OpenArt, Niteshift, Railway, Ramp, Runlayer, Tessera, Tines, and Warp."
-        },
-        {
-          "url": "https://claude.com/resources/articles/linked-billing-on-claude-platform",
-          "quote": "Getting started Linked billing is available today in beta on the Claude Platform."
-        },
-        {
-          "url": "https://claude.com/resources/articles/linked-billing-on-claude-platform",
-          "quote": "Third-party platforms can add support by creating an app in Console and following the steps in the docs ."
-        }
-      ]
-    },
-    {
-      "section": "tool",
-      "title": "openai-agents-python v0.25.0 adds session adapter utilities",
-      "summary": "The 0.25.0 release exposes utilities for third-party session adapters, allows concurrent Streamable HTTP requests on MCP v2, and adds opt-in handoff error recovery. It also preserves nested ToolContext approval decisions across resume, defaults GPT-6 Chat Completions tool requests to non-reasoning, and uses gpt-6-luna for session compaction by default.",
-      "tags": [
-        "工具",
+        "代码",
         "Agent"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_4283f0fcf8",
-          "url": "https://github.com/openai/openai-agents-python/releases/tag/v0.25.0"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://github.com/openai/openai-agents-python/releases/tag/v0.25.0",
-          "quote": "0.25.0 (2026-11-17)"
-        },
-        {
-          "url": "https://github.com/openai/openai-agents-python/releases/tag/v0.25.0",
-          "quote": "expose utilities for third-party session adapters ( #5428 ) ( 16fdb20 )"
-        },
-        {
-          "url": "https://github.com/openai/openai-agents-python/releases/tag/v0.25.0",
-          "quote": "sandbox: remove Runloop provider ( #5369 ) ( 12ce34d )"
-        },
-        {
-          "url": "https://github.com/openai/openai-agents-python/releases/tag/v0.25.0",
-          "quote": "avoid loading workspace startup files during internal sandbox operations ( #5406 ) ( 841dfdd )"
-        },
-        {
-          "url": "https://github.com/openai/openai-agents-python/releases/tag/v0.25.0",
-          "quote": "preserve nested ToolContext approval decisions across resume ( #5633 ) ( c200ae8 )"
-        },
-        {
-          "url": "https://github.com/openai/openai-agents-python/releases/tag/v0.25.0",
-          "quote": "avoid repeatedly fingerprinting completed tool calls ( #5421 ) ( dda19f9 )"
-        },
-        {
-          "url": "https://github.com/openai/openai-agents-python/releases/tag/v0.25.0",
-          "quote": "add opt-in handoff error recovery ( #5418 ) ( a6ed84f )"
-        },
-        {
-          "url": "https://github.com/openai/openai-agents-python/releases/tag/v0.25.0",
-          "quote": "align implicit settings with provider-selected models ( #5425 ) ( a88d291 )"
-        },
-        {
-          "url": "https://github.com/openai/openai-agents-python/releases/tag/v0.25.0",
-          "quote": "align model defaults with TS SDK ( #6064 ) ( d5287b7 )"
-        },
-        {
-          "url": "https://github.com/openai/openai-agents-python/releases/tag/v0.25.0",
-          "quote": "allow concurrent Streamable HTTP requests on MCP v2 ( #5641 ) ( 2b90566 )"
-        },
-        {
-          "url": "https://github.com/openai/openai-agents-python/releases/tag/v0.25.0",
-          "quote": "default GPT-6 Chat Completions tool requests to non-reasoning ( #5420 ) ( 3396dca )"
-        },
-        {
-          "url": "https://github.com/openai/openai-agents-python/releases/tag/v0.25.0",
-          "quote": "raise MCP minimum to 1.21.2 for Pydantic and OAuth compatibility ( #5384 ) ( 970db99 )"
-        },
-        {
-          "url": "https://github.com/openai/openai-agents-python/releases/tag/v0.25.0",
-          "quote": "use gpt-6-luna for session compaction by default ( #5646 ) ( 1fc77bb )"
-        }
       ]
     },
     {
       "section": "tool",
-      "title": "Claude Code v2.1.327 adds MCP JSON input and status diagnostics",
-      "summary": "Claude Code v2.1.327 adds claude mcp add-json <name> to read a server's JSON from stdin, so tokens can stay off the command line, plus a confirmation before /install-github-app changes a repository. The /status command now lists broken agent, skill, command and output style files, keybinding errors, an unavailable sandbox, ignored permission settings, and hook matchers that never match.",
-      "tags": [
-        "工具",
-        "代码"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_7f21678dc7",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.327"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.327",
-          "quote": "Added a confirmation before /install-github-app changes a repository"
-        },
-        {
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.327",
-          "quote": "Added claude mcp add-json <name> - to read the server's JSON from stdin, so tokens can stay off the command line; not available inside a Claude Code session"
-        },
-        {
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.327",
-          "quote": "Added a line when a resumed session's earlier messages can't be loaded"
-        },
-        {
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.327",
-          "quote": "Added a list in /status of broken agent, skill, command and output style files, keybinding errors, an unavailable sandbox, ignored permission settings and hook matchers that never match"
-        },
-        {
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.327",
-          "quote": "Added a note in /config when other settings override a row"
-        },
-        {
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.327",
-          "quote": "Fixed headless sessions losing stored messages on resume when a message was sent again with the same UUID after the process was killed"
-        },
-        {
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.327",
-          "quote": "Fixed cases where a session resumed after an empty reply or a killed command lost an answer, or brought back a rewound prompt, after another crash or a move to the background"
-        },
-        {
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.327",
-          "quote": "Fixed a remote session forgetting messages sent after Stop was pressed during a restart, if Claude Code then crashed"
-        },
-        {
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.327",
-          "quote": "Fixed tasks created after /clear being lost, and cleared tasks coming back, when a cloud or self-hosted runner session with no feature flags loaded resumed later"
-        },
-        {
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.327",
-          "quote": "Fixed remote MCP servers staying disconnected after a longer outage such as a VPN drop: most servers on other machines reached by hostname over https are now retried in the background for about a day"
-        },
-        {
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.327",
-          "quote": "Fixed in-process agent teammates on a different model from the lead compacting at the lead's context limit and on the wrong model; they now use their own limit and model, at that model's rate"
-        },
-        {
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.327",
-          "quote": "Fixed a finished subagent resuming on the model and effort of a sibling subagent that messaged it"
-        },
-        {
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.327",
-          "quote": "Fixed the main conversation not being told a background agent had finished when the subagent that started it ended by itself without reading the result, outside auto mode"
-        },
-        {
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.327",
-          "quote": "Fixed Claude reporting a background agent as still running when it had waited 30 seconds or more on a permission prompt in the desktop app, on the web and in the SDK"
-        }
-      ]
-    },
-    {
-      "section": "tool",
-      "title": "Codex 0.170.0 adds WebRTC voice calls in the TUI",
-      "summary": "Codex 0.170.0 adds WebRTC negotiation for realtime voice calls in the TUI and automatically refreshed authentication headers for OpenTelemetry HTTP exporters. It also adds experimental support for identically named MCP servers across environments, falls back to HTTP for oversized WebSocket requests, and fixes MCP OAuth credential races during cancellation, login, and logout.",
-      "tags": [
-        "工具",
-        "代码"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_e57cb4bac5",
-          "url": "https://github.com/openai/codex/releases/tag/rust-v0.170.0"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://github.com/openai/codex/releases/tag/rust-v0.170.0",
-          "quote": "Added WebRTC negotiation for realtime voice calls in the TUI."
-        },
-        {
-          "url": "https://github.com/openai/codex/releases/tag/rust-v0.170.0",
-          "quote": "Added automatically refreshed authentication headers for OpenTelemetry HTTP exporters."
-        },
-        {
-          "url": "https://github.com/openai/codex/releases/tag/rust-v0.170.0",
-          "quote": "Added experimental support for using identically named MCP servers across environments."
-        },
-        {
-          "url": "https://github.com/openai/codex/releases/tag/rust-v0.170.0",
-          "quote": "Oversized WebSocket requests now fall back to HTTP without unnecessary retries."
-        },
-        {
-          "url": "https://github.com/openai/codex/releases/tag/rust-v0.170.0",
-          "quote": "Fixed MCP OAuth credential races during cancellation, login, and logout."
-        },
-        {
-          "url": "https://github.com/openai/codex/releases/tag/rust-v0.170.0",
-          "quote": "Improved automatic reconnection for Cloud conversations and preserved active recovery turns when clients reconnect."
-        },
-        {
-          "url": "https://github.com/openai/codex/releases/tag/rust-v0.170.0",
-          "quote": "Fixed Windows file replacement, sandbox permission preservation, and runtime registration recovery."
-        },
-        {
-          "url": "https://github.com/openai/codex/releases/tag/rust-v0.170.0",
-          "quote": "Fixed permission updates and child threads losing existing sandbox restrictions."
-        },
-        {
-          "url": "https://github.com/openai/codex/releases/tag/rust-v0.170.0",
-          "quote": "Removed duplicate file search results and fixed thread search snippets for queries containing whitespace."
-        },
-        {
-          "url": "https://github.com/openai/codex/releases/tag/rust-v0.170.0",
-          "quote": "Updated sandbox documentation to explain permission profiles and filesystem rules."
-        }
-      ]
-    },
-    {
-      "section": "tool",
-      "title": "PaperOrchestra automates research paper writing with agents",
-      "summary": "PaperOrchestra is a multi-agent framework from Google Cloud AI Research that turns ideas and experimental logs into submission-ready LaTeX manuscripts, covering outline generation, literature review, section writing, content refinement, and plotting. It also produces generated visuals such as plots and conceptual diagrams, adheres to target conference templates, and ships an interactive Streamlit demo.",
-      "tags": [
-        "工具",
-        "Agent",
-        "开源"
-      ],
+      "title": "Google Research open-sources PaperOrchestra for multi-agent paper writing",
+      "summary": "PaperOrchestra, from Google Cloud AI Research under Apache-2.0, uses specialized Outline, Literature Review, Section Writing, Content Refinement and Plotting agents to turn ideas and experiment logs into submission-ready LaTeX manuscripts. It works with Gemini or OpenAI models. Its division of labor is a useful template for multi-agent long-document pipelines.",
       "sources": [
         {
           "candidate_id": "c_8f6c4b21b6",
@@ -1345,88 +428,124 @@
       "evidence": [
         {
           "url": "https://github.com/google-research/paper-orchestra",
-          "quote": "s 🎻 PaperOrchestra: A Multi-Agent Framework for Automated AI Research Paper Writing"
+          "quote": "Google Cloud AI Research PaperOrchestra is a multi-agent framework for automated AI research paper writing. It flexibly transforms unconstrained pre-writing materials (ideas and experimental logs) into submission-ready LaTeX manuscripts"
         },
         {
           "url": "https://github.com/google-research/paper-orchestra",
-          "quote": "Yiwen Song 1 , Yale Song 1 , Tomas Pfister 1 , and Jinsung Yoon 1"
+          "quote": "Orchestrates specialized agents (Outline, Literature Review, Section Writing, Content Refinement, Plotting) for end-to-end paper generation."
         },
         {
           "url": "https://github.com/google-research/paper-orchestra",
-          "quote": "1 Google Cloud AI Research"
+          "quote": "Apache-2.0 license"
         },
         {
           "url": "https://github.com/google-research/paper-orchestra",
-          "quote": "PaperOrchestra is a multi-agent framework for automated AI research paper writing."
-        },
-        {
-          "url": "https://github.com/google-research/paper-orchestra",
-          "quote": "It flexibly transforms unconstrained pre-writing materials (ideas and experimental logs) into submission-ready LaTeX manuscripts, including comprehensive literature synthesis and generated visuals, such as plots and conceptual diagrams."
-        },
-        {
-          "url": "https://github.com/google-research/paper-orchestra",
-          "quote": "Acting like an orchestrated team of specialized agents, it handles outline generation, literature review, section writing, content refinement, and plotting to close the gap between raw research materials and submission ready papers."
-        },
-        {
-          "url": "https://github.com/google-research/paper-orchestra",
-          "quote": "Multi-Agent Pipeline : Orchestrates specialized agents (Outline, Literature Review, Section Writing, Content Refinement, Plotting) for end-to-end paper generation."
-        },
-        {
-          "url": "https://github.com/google-research/paper-orchestra",
-          "quote": "Comprehensive Literature Synthesis : Automatically searches, prioritizes, and integrates relevant literature into the manuscript."
-        },
-        {
-          "url": "https://github.com/google-research/paper-orchestra",
-          "quote": "Visuals Generation : Generates plots and supports the inclusion of conceptual diagrams."
-        },
-        {
-          "url": "https://github.com/google-research/paper-orchestra",
-          "quote": "LaTeX Automation : Produces submission-ready LaTeX manuscripts adhering to target conference templates."
-        },
-        {
-          "url": "https://github.com/google-research/paper-orchestra",
-          "quote": "Environment Setup : The project relies on a Conda environment named paper_orchestra ."
-        },
-        {
-          "url": "https://github.com/google-research/paper-orchestra",
-          "quote": "You can set up a similar environment with Python 3.11 and install the required dependencies."
-        },
-        {
-          "url": "https://github.com/google-research/paper-orchestra",
-          "quote": "Interactive Demo"
-        },
-        {
-          "url": "https://github.com/google-research/paper-orchestra",
-          "quote": "We provide an interactive Streamlit demo for the paper generation pipeline."
-        },
-        {
-          "url": "https://github.com/google-research/paper-orchestra",
-          "quote": "For instructions on how to run and use it, please refer to the README.md in the frontend directory."
-        },
-        {
-          "url": "https://github.com/google-research/paper-orchestra",
-          "quote": "Project Structure"
-        },
-        {
-          "url": "https://github.com/google-research/paper-orchestra",
-          "quote": "autoraters/ : Contains scripts for automated evaluation."
-        },
-        {
-          "url": "https://github.com/google-research/paper-orchestra",
-          "quote": "methods/ : Core logic for agents and pipeline execution."
-        },
-        {
-          "url": "https://github.com/google-research/paper-orchestra",
-          "quote": "templates/ : LaTeX templates for target conferences, you can add your own template by creating a new subfolder under this directory."
-        },
-        {
-          "url": "https://github.com/google-research/paper-orchestra",
-          "quote": "utils/ : Utility functions for API calls, PDF handling, etc."
-        },
-        {
-          "url": "https://github.com/google-research/paper-orchestra",
-          "quote": "This is not an officially supported Google product."
+          "quote": "if you want to use Gemini models, you need to specify either VERTEX_AI_PROJECT and VERTEX_AI_LOCATION, or GEMINI_API_KEY # If you want to use OpenAI models, you need to specify OPENAI_API_KEY"
         }
+      ],
+      "tags": [
+        "开源",
+        "Agent",
+        "工具"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Claude-BugHunter packages bug-hunting skills for Claude Code",
+      "summary": "Claude-BugHunter is a Claude Code skill bundle for bug bounty and external red-team work, with hunt-* skills curated from 681 disclosed HackerOne reports covering detection patterns, payloads and chain templates, plus Burp MCP integration. It installs as a Claude Code plugin and loads skills automatically by topic. Security teams doing authorized testing can use it to round out their methodology.",
+      "sources": [
+        {
+          "candidate_id": "c_5e5b7a5173",
+          "url": "https://github.com/elementalsouls/Claude-BugHunter"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/elementalsouls/Claude-BugHunter",
+          "quote": "58 hunt-* skills curated from 681 disclosed HackerOne reports: per-class detection patterns, payloads, bypass tables, and chain templates."
+        },
+        {
+          "url": "https://github.com/elementalsouls/Claude-BugHunter",
+          "quote": "Burp MCP integration"
+        },
+        {
+          "url": "https://github.com/elementalsouls/Claude-BugHunter",
+          "quote": "Option A — install as a Claude Code plugin (recommended)."
+        }
+      ],
+      "tags": [
+        "安全",
+        "工具",
+        "Agent"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "Claude Platform adds linked billing in beta",
+      "summary": "Third-party platforms can let end customers pay for Claude API usage through their own Anthropic billing, with their own spend limits, without sharing an API key.",
+      "sources": [
+        {
+          "candidate_id": "c_b29de30dad",
+          "url": "https://claude.com/resources/articles/linked-billing-on-claude-platform"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://claude.com/resources/articles/linked-billing-on-claude-platform",
+          "quote": "Today we're introducing linked billing on the Claude Platform in beta. Third-party platforms, such as coding agents and workflow automation tools, can let their end customers pay for Claude API usage without sharing an API key."
+        },
+        {
+          "url": "https://claude.com/resources/articles/linked-billing-on-claude-platform",
+          "quote": "End customers keep their existing Anthropic billing and set their own spend limits"
+        }
+      ],
+      "tags": [
+        "产品"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "Claude Code v2.1.327 released",
+      "summary": "Adds claude mcp add-json to read server JSON from stdin so tokens stay off the command line, and /status now lists broken agent, skill and other config files.",
+      "sources": [
+        {
+          "candidate_id": "c_7f21678dc7",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.327"
+        }
+      ],
+      "tags": [
+        "工具",
+        "代码"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "OpenAI Codex 0.170.0 released",
+      "summary": "Adds WebRTC negotiation for realtime voice calls in the TUI, experimental support for identically named MCP servers across environments, and fixes MCP OAuth credential races.",
+      "sources": [
+        {
+          "candidate_id": "c_e57cb4bac5",
+          "url": "https://github.com/openai/codex/releases/tag/rust-v0.170.0"
+        }
+      ],
+      "tags": [
+        "工具",
+        "代码"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "Simon Willison rewrites Datasette Lite with service workers",
+      "summary": "Datasette Lite now runs the full server-side Datasette app in the browser via service workers and Pyodide, loading SQLite, CSV or JSON and installing plugins from PyPI.",
+      "sources": [
+        {
+          "candidate_id": "c_2954a75ce1",
+          "url": "https://simonwillison.net/2026/Nov/17/datasette-lite/"
+        }
+      ],
+      "tags": [
+        "工具",
+        "开源"
       ]
     }
   ],
@@ -1436,28 +555,20 @@
       "url": "https://openai.com/index/introducing-gpt-6-2-astra-sol"
     },
     {
+      "via": "websearch",
+      "query": "GPT-6.2 Astra Sol API docs model"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://developers.openai.com/api/docs/guides/latest-model.md"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://claude.dev/blog/how-the-claude-code-team-thinks-about-verification/"
+    },
+    {
       "via": "webfetch",
       "url": "https://huggingface.co/papers/2611.21003"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.07222"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://github.com/openai/codex/releases/tag/rust-v0.170.0"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://blog.google/innovation-and-ai/products/gemini-app/tasks-in-gemini-free-new-features/"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://about.fb.com/news/2026/11/muse-is-now-available-in-australia/"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://machinelearning.apple.com/research/split-scale-latent-3d"
     },
     {
       "via": "webfetch",
@@ -1465,15 +576,7 @@
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.21339"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.20254"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://github.com/openai/openai-agents-python/releases/tag/v0.25.0"
+      "url": "https://huggingface.co/papers/2611.07222"
     },
     {
       "via": "webfetch",
@@ -1481,35 +584,19 @@
     },
     {
       "via": "webfetch",
-      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.327"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://github.com/langchain-ai/langchain/releases/tag/langchain-core%3D%3D1.8.2"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.21218"
-    },
-    {
-      "via": "webfetch",
       "url": "https://huggingface.co/papers/2611.20882"
     },
     {
       "via": "webfetch",
-      "url": "https://claude.com/resources/articles/linked-billing-on-claude-platform"
+      "url": "https://huggingface.co/sensenova/SenseNova-Loop-9B"
     },
     {
       "via": "webfetch",
-      "url": "https://simonwillison.net/2026/Nov/17/datasette-lite/"
+      "url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-E4B-4GB"
     },
     {
       "via": "webfetch",
-      "url": "https://github.com/google-research/paper-orchestra"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://github.com/jingyaogong/minimind"
+      "url": "https://huggingface.co/apple/FastFrames-L"
     },
     {
       "via": "webfetch",
@@ -1517,16 +604,22 @@
     },
     {
       "via": "webfetch",
-      "url": "https://revscope.co/blog/search-seo-geo-2026/"
+      "url": "https://blog.google/innovation-and-ai/products/gemini-app/tasks-in-gemini-free-new-features/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/elementalsouls/Claude-BugHunter"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/google-research/paper-orchestra"
     }
   ],
   "lang": "en",
   "validation": {
-    "validated_at": "2026-11-18T04:44:33+00:00",
+    "validated_at": "2026-11-18T04:47:10+00:00",
     "checked_links": false,
     "dropped": [],
-    "warnings": [
-      "6 paper items (target 2-4)"
-    ]
+    "warnings": []
   }
 }
