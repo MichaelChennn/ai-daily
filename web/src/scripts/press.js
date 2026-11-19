@@ -373,22 +373,56 @@
   }
 
   /* ---------- source stack popover ---------- */
+  /* The popover sits in the top layer (popover="manual"), so the card's overflow:hidden does not
+     clip it and it can open beside the card instead of over its text (#71). When there is room it
+     goes to the right of the card (or the brief's row), level with the stack; otherwise below the
+     stack, right-aligned, as before. */
+  const topLayer = typeof HTMLElement.prototype.showPopover === "function"
+  const POP_GAP = 12
+  const POP_MARGIN = 8
+  function placePop(b, pop) {
+    if (!topLayer) return
+    const box = (b.closest(".face") || b.closest("li") || b).getBoundingClientRect()
+    const s = b.getBoundingClientRect()
+    const w = pop.offsetWidth
+    const h = pop.offsetHeight
+    let left, top
+    if (box.right + POP_GAP + w <= innerWidth - POP_MARGIN) {
+      left = box.right + POP_GAP
+      top = s.top - 6
+    } else {
+      left = s.right + 8 - w
+      top = s.bottom + 8
+    }
+    left = Math.max(POP_MARGIN, Math.min(left, innerWidth - POP_MARGIN - w))
+    top = Math.max(POP_MARGIN, Math.min(top, innerHeight - POP_MARGIN - h))
+    pop.style.left = `${left}px`
+    pop.style.top = `${top}px`
+  }
+  function hidePop(p) {
+    p.classList.remove("open")
+    if (topLayer && p.matches(":popover-open")) p.hidePopover()
+    p.closest(".srcs")?.querySelector("button")?.setAttribute("aria-expanded", "false")
+  }
   function setupSources() {
     document.querySelectorAll(".srcs").forEach((b) => {
       const pop = b.querySelector(".pop")
       const button = b.querySelector("button")
+      if (topLayer) pop.setAttribute("popover", "manual")
       let timer
       const open = () => {
         clearTimeout(timer)
-        document.querySelectorAll(".pop.open").forEach((p) => p !== pop && p.classList.remove("open"))
-        pop.classList.add("open")
+        document.querySelectorAll(".pop.open").forEach((p) => p !== pop && hidePop(p))
+        if (!pop.classList.contains("open")) {
+          if (topLayer) pop.showPopover()
+          pop.classList.add("open")
+        }
+        placePop(b, pop)
         button.setAttribute("aria-expanded", "true")
       }
+      // long enough to cross the card's padding to a popover that opened beside it
       const close = () => {
-        timer = setTimeout(() => {
-          pop.classList.remove("open")
-          button.setAttribute("aria-expanded", "false")
-        }, 120)
+        timer = setTimeout(() => hidePop(pop), 250)
       }
       if (finePointer) {
         b.addEventListener("mouseenter", open)
@@ -402,11 +436,16 @@
       })
     })
   }
+  // the popover is fixed to the viewport, so it follows its stack as the page scrolls or resizes
+  const follow = () =>
+    document.querySelectorAll(".pop.open").forEach((p) => placePop(p.closest(".srcs"), p))
+  addEventListener("scroll", follow, { passive: true })
+  addEventListener("resize", follow)
   document.addEventListener("click", (e) => {
-    if (!e.target.closest(".srcs")) document.querySelectorAll(".pop.open").forEach((p) => p.classList.remove("open"))
+    if (!e.target.closest(".srcs")) document.querySelectorAll(".pop.open").forEach(hidePop)
   })
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") document.querySelectorAll(".pop.open").forEach((p) => p.classList.remove("open"))
+    if (e.key === "Escape") document.querySelectorAll(".pop.open").forEach(hidePop)
   })
 
   /* ---------- boot ---------- */
