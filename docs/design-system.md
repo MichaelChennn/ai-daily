@@ -191,6 +191,8 @@ uv run --no-project --with fonttools --with brotli python docs/assets/readme/sou
 - 原文标 `↗`，讨论标 `💬`。
 - 只有一个来源时，弹层只写「出版方 · 日期」。
 
+新闻卡和快讯上的弹层放在顶层（`popover`），不受卡片 `overflow:hidden` 裁切：右边放得下时开在卡片（或快讯这一行）右侧 12px，与来源堆齐平，不挡正文；放不下（窄屏）时退回来源堆下方、右对齐。滚动时跟着来源堆走。
+
 信源页的 GitHub Releases 卡复用这个组件：右上角显示仓库 owner 的头像，弹层顶部写「14 个仓库」。
 
 ### 快讯 `.briefs`

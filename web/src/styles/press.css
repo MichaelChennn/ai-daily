@@ -183,6 +183,9 @@ h3{font-family:var(--f-title);font-weight:700;font-size:var(--fs-l);line-height:
 .pop{position:absolute;right:-8px;top:calc(100% + 8px);z-index:20;min-width:240px;max-width:320px;background:var(--card);border:1px solid var(--line);border-radius:var(--r-pop);box-shadow:var(--shadow-pop);padding:6px;display:none;cursor:default;text-align:left}
 .pop.open{display:block;animation:popIn .16s ease}
 @keyframes popIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+/* on issue pages press.js puts it in the top layer and sets left/top itself (beside the card, #71) */
+.pop[popover]{position:fixed;inset:auto;margin:0;color:inherit}
+.pop[popover]:not(:popover-open){display:none}
 .pop a{display:flex;align-items:center;gap:9px;padding:7px 8px;border-radius:var(--r-row);color:var(--ink);font-size:var(--fs-s)}
 .pop a:hover{background:var(--line)}
 .pop a img{width:14px;height:14px;border-radius:var(--r-logo);flex:none}
