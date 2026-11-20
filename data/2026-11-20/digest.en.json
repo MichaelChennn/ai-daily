@@ -1,0 +1,447 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-20",
+  "mode": "full",
+  "channel": "claude",
+  "generated_at": "2026-11-20T04:46:13+00:00",
+  "model": "claude-opus-5-5",
+  "highlights": [
+    "Google previews Tool Retrieval in the Gemini API, loading tool parameter schemas on demand for Gemini 3.6 and later models.",
+    "Microsoft releases Aion 1.0 Instruct, a small on-device model for Windows; OpenAI describes Performance Factory, where Codex agents investigate and fix performance regressions.",
+    "The Resolution Hypothesis paper argues agent evolution stalls because noisy evaluations cannot tell better candidates apart."
+  ],
+  "items": [
+    {
+      "section": "headline",
+      "title": "Gemini API previews Tool Retrieval for on-demand tool schemas",
+      "summary": "Tool Retrieval, now in preview in the Gemini Interactions API, adds a tool_search tool: tools marked defer_loading show the model only their name and description, and the parameter schema is loaded when the model asks for it by name. Setting defer_loading on an mcp_server tool loads that remote MCP server's tools on demand, there is no separate charge, and it works with Gemini 3.6 and later models. Agents with large tool libraries can cut input tokens while keeping the cached prompt prefix stable.",
+      "sources": [
+        {
+          "candidate_id": "c_278dc93a73",
+          "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-api-tool-retrieval/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-api-tool-retrieval/",
+          "quote": "To turn on Tool Retrieval, add a tool_search tool to your request and set defer_loading: true on the tools you want to hold back. The model still sees the name and description of every deferred tool, so it knows what's available, but the parameter schemas stay out of context."
+        },
+        {
+          "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-api-tool-retrieval/",
+          "quote": "Set defer_loading: true on an mcp_server tool and every tool that server exposes is loaded on demand"
+        },
+        {
+          "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-api-tool-retrieval/",
+          "quote": "Tool Retrieval has no separate charge. Input and output tokens are billed at the standard rates for the model you call."
+        },
+        {
+          "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-api-tool-retrieval/",
+          "quote": "Tool Retrieval works with Gemini 3.6 and later models"
+        },
+        {
+          "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-api-tool-retrieval/",
+          "quote": "the schemas the model loads are added later in the conversation, so the cached prefix stays the same from turn to turn"
+        }
+      ],
+      "tags": [
+        "Agent",
+        "工具",
+        "产品"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Microsoft releases Aion 1.0 Instruct, a 2.3B on-device model for Windows",
+      "summary": "Microsoft's Windows Applied Sciences Group published Aion 1.0 Instruct on Hugging Face, a 2.3B-parameter model it calls the foundational small language model (SLM) of the Windows ecosystem, with a 32,768-token context and an MIT license. A further optimized version, paired with Microsoft's content moderation model, is slated to become the Windows OS SLM by the end of January 2027, and quantized versions will follow. Developers building on-device Windows features can start evaluating it now.",
+      "sources": [
+        {
+          "candidate_id": "c_178b148e12",
+          "url": "https://huggingface.co/microsoft/Aion-1.0-Instruct-2.3B"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/microsoft/Aion-1.0-Instruct-2.3B",
+          "quote": "Aion Instruct serves as the foundational Small Language Model (SLM) in the Windows ecosystem, specifically optimized for on-device AI, text and operating system use cases. This 2.3B parameters base model"
+        },
+        {
+          "url": "https://huggingface.co/microsoft/Aion-1.0-Instruct-2.3B",
+          "quote": "A further optimized version of Aion Instruct, coupled with Microsoft’s content moderation model, will become the Windows OS SLM by the end of January 2027."
+        },
+        {
+          "url": "https://huggingface.co/microsoft/Aion-1.0-Instruct-2.3B",
+          "quote": "We are publishing the unquantized model first, to be followed by quantized versions."
+        },
+        {
+          "url": "https://huggingface.co/microsoft/Aion-1.0-Instruct-2.3B",
+          "quote": "Context length 32,768 tokens"
+        },
+        {
+          "url": "https://huggingface.co/microsoft/Aion-1.0-Instruct-2.3B",
+          "quote": "Aion 1.0 Instruct Microsoft Windows Applied Sciences Group"
+        },
+        {
+          "url": "https://huggingface.co/microsoft/Aion-1.0-Instruct-2.3B",
+          "quote": "This model is released under the MIT License"
+        }
+      ],
+      "tags": [
+        "模型",
+        "开源",
+        "产品"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "OpenAI's Performance Factory uses Codex agents to fix regressions",
+      "summary": "In OpenAI's Performance Factory, engineers define workflows for recurring jobs: when a performance alert fires, a Codex agent investigates the regression, a separate Codex session tries to disprove the diagnosis, and Codex then implements a fix and opens a pull request for an engineer to review. In a manual review of 100 root cause suggestions, 70% were graded accurate. Teams applying coding agents to production operations get a concrete pattern of focused turns, adversarial review and a human merge gate.",
+      "sources": [
+        {
+          "candidate_id": "c_6321c7fbb2",
+          "url": "https://openai.com/index/how-openai-performance-factory-keeps-chatgpt-fast"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://openai.com/index/how-openai-performance-factory-keeps-chatgpt-fast",
+          "quote": "In the Performance Factory, our engineers define workflows for recurring jobs and write instructions for the Codex agents that carry them out. In particular, the Regression Workflow opens a task when a performance alert fires."
+        },
+        {
+          "url": "https://openai.com/index/how-openai-performance-factory-keeps-chatgpt-fast",
+          "quote": "we added an adversarial review: a separate Codex session that tries to disprove the proposed diagnosis."
+        },
+        {
+          "url": "https://openai.com/index/how-openai-performance-factory-keeps-chatgpt-fast",
+          "quote": "In a manual review of 100 root cause suggestions, we graded 70% as accurate, with 30% needing further refinement or not fully establishing causality."
+        },
+        {
+          "url": "https://openai.com/index/how-openai-performance-factory-keeps-chatgpt-fast",
+          "quote": "Once the diagnosis passes adversarial review, the workflow asks Codex to implement a fix and open a pull request. An engineer reviews the PR and decides whether to merge it."
+        }
+      ],
+      "tags": [
+        "Agent",
+        "代码",
+        "工具"
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Cloudflare releases Clairic, a 27B model for structured extraction",
+      "summary": "Clairic, built on Qwen3.8-27B, takes a text or JSON state, optional images and a set of typed field specifications, and returns typed values, lists, nulls, estimates and forecast paths with extraction confidence and null probabilities. It is released under the Apache-2.0 license. Developers extracting fields from documents or images can use the per-field confidence to decide what needs human review.",
+      "sources": [
+        {
+          "candidate_id": "c_b59ed2a45f",
+          "url": "https://huggingface.co/Cloudflare/clairic"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/Cloudflare/clairic",
+          "quote": "Clairic is a 27B multimodal model that turns a state and a schema of typed fields into structured answers. It supports text and image inputs, extraction, numerical estimation, and forecasting."
+        },
+        {
+          "url": "https://huggingface.co/Cloudflare/clairic",
+          "quote": "Base model: Qwen3.8-27B . Inputs: a text or JSON state, optional images, and a mapping of field names to specifications. Outputs: typed values, lists, nulls, estimates, and forecast paths. Scoring: extraction confidence and null probabilities"
+        },
+        {
+          "url": "https://huggingface.co/Cloudflare/clairic",
+          "quote": "Released under the Apache-2.0 license."
+        }
+      ],
+      "tags": [
+        "模型",
+        "开源",
+        "多模态"
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Inworld open-sources Voice Isolator for 48 kHz speech",
+      "summary": "Inworld Voice Isolator v1 ships as an offline model and a realtime model that keep the foreground voice and remove what surrounds it; the realtime model has 58.2M parameters and an algorithmic latency of 63 ms at 20 ms of look-ahead, suited to live calls and streams. It is Apache-2.0 licensed, and version 1 only denoises, with restoration planned for version 2. Builders of voice agents and audio pipelines can use it as a speech cleanup step.",
+      "sources": [
+        {
+          "candidate_id": "c_283df06e9f",
+          "url": "https://huggingface.co/inworld/voice-isolator"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/inworld/voice-isolator",
+          "quote": "Open-license (Apache-2.0) 48 kHz voice isolation for noisy speech recordings and live audio. TL;DR Inworld Voice Isolator v1 ships as two models that share one architecture"
+        },
+        {
+          "url": "https://huggingface.co/inworld/voice-isolator",
+          "quote": "The realtime model has 58.2M; its blocks are causal and it carries a look-ahead embedding."
+        },
+        {
+          "url": "https://huggingface.co/inworld/voice-isolator",
+          "quote": "its algorithmic latency is 63 ms at 20 ms of look-ahead. Both keep the foreground voice"
+        },
+        {
+          "url": "https://huggingface.co/inworld/voice-isolator",
+          "quote": "version 1 does denoising (noise suppression): it removes what surrounds the voice and restores nothing the recording lost, such as missing bandwidth; restoration comes with version 2."
+        },
+        {
+          "url": "https://huggingface.co/inworld/voice-isolator",
+          "quote": "With the realtime model, use them for live calls and streams."
+        }
+      ],
+      "tags": [
+        "语音",
+        "开源",
+        "模型"
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Bria releases RMBG 3.0, an 8B generative background remover",
+      "summary": "RMBG 3.0 is Bria's third-generation background removal model and the first built on a generative foundation: Fibo 2.0, fine-tuned and distilled to produce an alpha matte in 4 steps. In Bria's own comparison on 234 hard images it has an average rank of 1.51 and is preferred 60.9% of the time over RMBG-2.0. Weights are CC BY-NC 4.0, so commercial use needs a separate agreement or the Bria API; teams handling hair, motion blur and similar hard cases can evaluate it first.",
+      "sources": [
+        {
+          "candidate_id": "c_1ba7b9d21a",
+          "url": "https://huggingface.co/briaai/RMBG-3.0"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/briaai/RMBG-3.0",
+          "quote": "RMBG 3.0 is the third generation of Bria's background removal models, and the first one built on a generative foundation. It is Fibo 2.0 , fine-tuned and distilled to do one thing very well: turn any photo into a clean, soft alpha matte in just 4 steps"
+        },
+        {
+          "url": "https://huggingface.co/briaai/RMBG-3.0",
+          "quote": "Foundation: Fibo 2.0 , an 8B-parameter flow-matching DiT"
+        },
+        {
+          "url": "https://huggingface.co/briaai/RMBG-3.0",
+          "quote": "Average rank 1.51 across 234 hard images, best or tied-best on 185 of them (79%)."
+        },
+        {
+          "url": "https://huggingface.co/briaai/RMBG-3.0",
+          "quote": "Preferred 55.1% vs Photoroom, 59.4% vs remove.bg (Canva), 60.9% vs RMBG-2.0"
+        },
+        {
+          "url": "https://huggingface.co/briaai/RMBG-3.0",
+          "quote": "#1 on motion blur, multiple subjects, holes & mesh, shadows & reflections, hair & fur"
+        },
+        {
+          "url": "https://huggingface.co/briaai/RMBG-3.0",
+          "quote": "Weights are released under Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0), the same terms as the Fibo 2.0 family."
+        },
+        {
+          "url": "https://huggingface.co/briaai/RMBG-3.0",
+          "quote": "Commercial use requires a separate agreement with Bria AI. Get a license here , or use the commercially licensed Bria API and fal endpoint"
+        }
+      ],
+      "tags": [
+        "图像",
+        "模型"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "The Resolution Hypothesis: agent evolution stalls on noisy evaluation",
+      "summary": "This ShanghaiTech University paper argues that agent evolution, which proposes candidate prompts, skills and memories and keeps the higher-scoring ones, stalls not because better candidates are missing but because noisy evaluations cannot identify them. Across seven evolution methods and six models (over 10M LLM calls), candidate selection was no better than random, and typical method margins of a few percentage points were smaller than the gap between two runs of the same method. Teams auto-optimizing prompts or skills should check that a gain exceeds run-to-run variance before trusting it.",
+      "sources": [
+        {
+          "candidate_id": "c_1490b11b6c",
+          "url": "https://huggingface.co/papers/2611.23068"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.23068",
+          "quote": "#3 Paper of the day · ShanghaiTech University"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.23068",
+          "quote": "At the candidate level (choosing artifacts), helpful candidate artifacts exist, but selection is no better than random at telling them from harmful ones, so errors accumulate across rounds."
+        }
+      ],
+      "tags": [
+        "论文",
+        "Agent"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "AnyS1 hands routine agent decisions to a 4B System-1 model",
+      "summary": "AnyS1 mines enumerable decision points from over 1,000 public skills, gathers real execution states in isolated containers, and trains a single calibrated 4B pointer System-1; at run time routine choices take one forward pass and fall back to the large System-2 model below a confidence threshold. On three unseen benchmarks it preserves task reliability while cutting episode cost by 75-91% and model-call time by 63-92% versus an uncompiled System-2 agent. Skill-based agents can offload much of their routing to a small model this way.",
+      "sources": [
+        {
+          "candidate_id": "c_5338508548",
+          "url": "https://huggingface.co/papers/2611.23751"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.23751",
+          "quote": "AnyS1 mines grounded enumerable decisions across over 1,000 public skills, gathers execution-grounded trajectory states inside isolated containers"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.23751",
+          "quote": "trains a single calibrated 4B pointer System-1 with label smoothing"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.23751",
+          "quote": "cutting episode cost by 75-91% and model-call time by 63-92% relative to an uncompiled System-2 agent"
+        }
+      ],
+      "tags": [
+        "论文",
+        "Agent",
+        "推理"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Jeveration generates a 512x512 image in 78 ms in one pass",
+      "summary": "Jeveration applies System One-style parallel prediction to image generation: built on a frozen vision-language model, it produces a whole image in a single forward pass, conditioning all positions on a shared random state to keep the result coherent. One checkpoint covers text-to-image, image-to-image and dense prediction, and a 512x512 image takes 78 ms, up to 122x faster than existing unified models. It points to a single-pass route for latency-sensitive image generation.",
+      "sources": [
+        {
+          "candidate_id": "c_217c28d75b",
+          "url": "https://huggingface.co/papers/2611.24738"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.24738",
+          "quote": "so that one checkpoint supports all three tasks, each in one forward pass. Experiments show that Jeveration generates a 512x512 image in 78 ms, up to 122x faster than existing unified models, while maintaining competitive image quality and dense prediction performance."
+        }
+      ],
+      "tags": [
+        "论文",
+        "图像",
+        "多模态"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Game2Player co-develops web games and agents to collect gameplay data",
+      "summary": "In Game2Player, a Builder agent adapts web games, exposes their internal state and defines verifiable tasks, while a Coding Player and a VLM Player attempt them and report problems back for repair. The loop yielded 568 games, 3,436 tasks and 307 hours of gameplay, and training on these trajectories raised a 9B model's progress on held-out PlayerBench games from 14.3% to 31.2%. Visual agent teams get a template for producing verified training data at scale.",
+      "sources": [
+        {
+          "candidate_id": "c_8f48e1c27f",
+          "url": "https://huggingface.co/papers/2611.24154"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.24154",
+          "quote": "yielding 568 games, 3,436 tasks, and 307 hours of gameplay. Training on these trajectories raises a 9B model’s progress from 14.3% to 31.2% on held-out PlayerBench games, with gains that transfer to GameWorld."
+        }
+      ],
+      "tags": [
+        "论文",
+        "Agent",
+        "多模态"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Codex 0.171.0 adds GPT-6.2 Sol and Astra, enables TUI workspace",
+      "summary": "OpenAI Codex 0.171.0 adds GPT-6.2 Sol and Astra to the model catalogs with Sol as the default, and enables the TUI workspace by default with document previews, image previews and subagent transcripts next to the main conversation. It also adds codex exec --remote to start or resume noninteractive sessions on an existing app server, plus /rc and /remote for remote control.",
+      "sources": [
+        {
+          "candidate_id": "c_65de769214",
+          "url": "https://github.com/openai/codex/releases/tag/rust-v0.171.0"
+        }
+      ],
+      "evidence": [],
+      "tags": [
+        "工具",
+        "代码",
+        "Agent"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "Claude Code v2.1.329 adds scheduled tasks and forks to /tasks",
+      "summary": "The release shows where a folder's hooks are declared in the trust dialog, adds scheduled tasks, /loop wakeups and forks to /tasks, and fixes ~/.claude.json sometimes being reset to defaults.",
+      "sources": [
+        {
+          "candidate_id": "c_a97e29fcf9",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.329"
+        }
+      ],
+      "evidence": [],
+      "tags": [
+        "工具",
+        "代码"
+      ]
+    }
+  ],
+  "research": [
+    {
+      "via": "webfetch",
+      "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-api-tool-retrieval/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/microsoft/Aion-1.0-Instruct-2.3B"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/Cloudflare/clairic"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://openai.com/index/performance-factory/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://openai.com/index/how-openai-performance-factory-keeps-chatgpt-fast"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://www.reuters.com/business/finance/anthropics-historic-debut-put-ais-promise-peril-wall-st-test-2026-11-19/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/inworld/voice-isolator"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/briaai/RMBG-3.0"
+    },
+    {
+      "via": "websearch",
+      "query": "Anthropic Nasdaq debut first day trading shares open ANTH November 19 2026"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.24738"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.23068"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.23751"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.24154"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.24651"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://openai.com/business/learn/deploying-daybreak-red"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://moq.dev/blog/webrtc-is-still-the-problem/"
+    }
+  ],
+  "lang": "en",
+  "validation": {
+    "validated_at": "2026-11-20T04:46:36+00:00",
+    "checked_links": false,
+    "dropped": [],
+    "warnings": []
+  }
+}
