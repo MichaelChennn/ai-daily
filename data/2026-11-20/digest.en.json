@@ -1,0 +1,685 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-20",
+  "mode": "full",
+  "generated_at": "2026-11-20T04:38:59+00:00",
+  "channel": "api",
+  "model": "nvidia:minimaxai/minimax-m3.1-flash",
+  "highlights": [
+    "Google launched Tool Retrieval in preview in the Gemini API, letting agents keep a full tool library on standby and load parameter schemas only when a task needs them.",
+    "The openai/codex 0.171.0 release added GPT-6.2 Sol and Astra to the model catalogs and enabled the TUI workspace by default.",
+    "The AnyS1 paper reports that a calibrated 4B System-1 model can cut agent episode cost by 75-91% and model-call time by 63-92% relative to an uncompiled System-2 agent."
+  ],
+  "items": [
+    {
+      "section": "headline",
+      "title": "Google adds Tool Retrieval to the Gemini API",
+      "summary": "Tool Retrieval is now in preview in the Gemini Interactions API, letting agents keep a full tool library on standby and load parameter schemas only when the current task needs them. Developers enable it by adding a tool_search tool and setting defer_loading: true, and it also works with remote MCP servers.",
+      "tags": [
+        "Agent",
+        "工具",
+        "产品"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_278dc93a73",
+          "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-api-tool-retrieval/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-api-tool-retrieval/",
+          "quote": "Tool Retrieval is now in preview in the Gemini Interactions API."
+        },
+        {
+          "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-api-tool-retrieval/",
+          "quote": "Today we're launching Tool Retrieval in the Gemini API, available in preview in the Interactions API ."
+        },
+        {
+          "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-api-tool-retrieval/",
+          "quote": "Tool Retrieval lets your agent keep its full tool library on standby and load parameter schemas only when the current task needs them."
+        },
+        {
+          "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-api-tool-retrieval/",
+          "quote": "How it works To turn on Tool Retrieval, add a tool_search tool to your request and set defer_loading: true on the tools you want to hold back."
+        },
+        {
+          "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-api-tool-retrieval/",
+          "quote": "When the model needs a tool, it asks for it by name, the API loads the full schema, and the model calls the function, all inside the same request."
+        },
+        {
+          "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-api-tool-retrieval/",
+          "quote": "Gemini runs the search on the server, so the only changes to your code are the new tool and a flag on the tools you want to defer."
+        },
+        {
+          "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-api-tool-retrieval/",
+          "quote": "Tool Retrieval also works with remote MCP servers in the Gemini API ."
+        },
+        {
+          "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-api-tool-retrieval/",
+          "quote": "Set defer_loading: true on an mcp_server tool and every tool that server exposes is loaded on demand, so you can connect a large server without listing its tools one by one."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "openai/codex 0.171.0 adds GPT-6.2 Sol and a default TUI workspace",
+      "summary": "The openai/codex 0.171.0 release added GPT-6.2 Sol and Astra to the model catalogs, with Sol as the default catalog selection, and enabled the TUI workspace by default with searchable document previews, image previews, and subagent transcripts. It also added codex exec --remote to start or resume noninteractive sessions on an existing app server, plus /rc and /remote to manage local remote control and display device pairing codes from the TUI.",
+      "tags": [
+        "工具",
+        "代码"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_65de769214",
+          "url": "https://github.com/openai/codex/releases/tag/rust-v0.171.0"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/openai/codex/releases/tag/rust-v0.171.0",
+          "quote": "Added GPT-6.2 Sol and Astra to model catalogs, with Sol as the default catalog selection."
+        },
+        {
+          "url": "https://github.com/openai/codex/releases/tag/rust-v0.171.0",
+          "quote": "Enabled the TUI workspace by default, with searchable document previews, image previews, and subagent transcripts alongside the main conversation."
+        },
+        {
+          "url": "https://github.com/openai/codex/releases/tag/rust-v0.171.0",
+          "quote": "Added codex exec --remote <ADDR> to start or resume noninteractive sessions on an existing app server."
+        },
+        {
+          "url": "https://github.com/openai/codex/releases/tag/rust-v0.171.0",
+          "quote": "Added /rc and /remote to manage local remote control and display device pairing codes from the TUI."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Claude Code v2.1.329 adds session task management and MCP error details",
+      "summary": "The anthropics/claude-code v2.1.329 release added this session's scheduled tasks, /loop wakeups, the goal and this conversation's forks to /tasks, with x stopping one after asking, and added a \"Server message\" row that shows the JSON-RPC error message of a remote HTTP MCP server that refuses the connection. It also added support for turning on Code Mode while OpenTelemetry events and metrics are enabled, so each tool call the code makes sends its events.",
+      "tags": [
+        "工具",
+        "代码"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_a97e29fcf9",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.329"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.329",
+          "quote": "Added this session's scheduled tasks, /loop wakeups, the goal and this conversation's forks to /tasks ; x stops one after asking"
+        },
+        {
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.329",
+          "quote": "Added a \"Server message\" row to a server's page in /mcp that shows the JSON-RPC error message of a remote HTTP MCP server that refuses the connection"
+        },
+        {
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.329",
+          "quote": "Added support for turning on Code Mode while OpenTelemetry events and metrics are enabled; each tool call the code makes sends its events; tracing still keeps it off"
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Jeveration generates images in a single forward pass",
+      "summary": "The Jeveration paper shows that the parallel prediction paradigm used by System One models can also generate high-quality images in a single forward pass, building on a frozen vision-language model repurposed for holistic image generation. Experiments show that Jeveration generates a 512x512 image in 78 ms, up to 122x faster than existing unified models, while maintaining competitive image quality and dense prediction performance.",
+      "tags": [
+        "论文",
+        "图像",
+        "多模态"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_217c28d75b",
+          "url": "https://huggingface.co/papers/2611.24738"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.24738",
+          "quote": "In this paper, we introduce Jeveration, showing that the same decision paradigm can also generate high-quality images in a single forward pass ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.24738",
+          "quote": "Jeveration builds on a frozen vision-language model , repurposing its visual-semantic knowledge for holistic image generation ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.24738",
+          "quote": "We therefore condition all positions on a shared random state to coordinate parallel prediction s, so that each draw yields a different but coherent image."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.24738",
+          "quote": "Since the model tends to ignore this state under direct image supervision , we first learn a distribution over discrete image codes to guide single-pass generation ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.24738",
+          "quote": "Beyond text-to-image generation , we further unify image-to-image generation and dense prediction within the same architecture, so that one checkpoint supports all three tasks, each in one forward pass."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.24738",
+          "quote": "Experiments show that Jeveration generates a 512x512 image in 78 ms, up to 122x faster than existing unified models , while maintaining competitive image quality and dense prediction performance."
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Piccolo coevolves decision models and training data through RSI",
+      "summary": "Piccolo is a family of multimodal decision models that coevolves model capabilities and training data via Agentic Data Engineering and recursive self-improvement (RSI), predicting probabilities over candidate answers for text and visual judgments, agent harnesses, data workflows, and interactive games. Piccolo-27B tops the Decision Index Vision Full leaderboard with a score of 75.59, and the released weights and tools from the Data-Juicer and AgentScope systems provide a blueprint for building frontier decision models.",
+      "tags": [
+        "模型",
+        "Agent",
+        "训练"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_4bfbccd793",
+          "url": "https://huggingface.co/papers/2611.24651"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.24651",
+          "quote": "8 B t o 2 7 B ) t h a t c o e v o l v e s m o d e l c a p a b i l i t i e s a n d t r a i n i n g d a t a v i a A g e n t i c D a t a E n g i n e e r i n g a n d r e c u r s i v e s e l f - i m p r o v e m e n t ( R S I ) ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.24651",
+          "quote": "T h e m o d e l s p r e d i c t p r o b a b i l i t i e s o v e r c a n d i d a t e a n s w e r s f o r g e n e r a l - p u r p o s e t e x t a n d v i s u a l j u d g m e n t s , a g e n t h a r n e s s e s , d a t a w o r k f l o w s , a n d i n t e r a c t i v e g a m e s ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.24651",
+          "quote": "5 9 , w h i l e P i c c o l o - 9 B a n d P i c c o l o - 4 B a c h i e v e 6 8 ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.24651",
+          "quote": "A l l t h r e e r a n k f i r s t o n t h e P r i v a t e b e n c h m a r k i n t h e i r r e s p e c t i v e m o d e l - s i z e c a t e g o r i e s ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.24651",
+          "quote": "T o g e t h e r w i t h t h e r e l e a s e d w e i g h t s a n d t o o l s f r o m t h e D a t a - J u i c e r a n d A g e n t S c o p e e c o s y s t e m s , P i c c o l o p r o v i d e s a n a c t i o n a b l e b l u e p r i n t f o r b u i l d i n g f r o n t i e r d e c i s i o n m o d e l s a"
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Microsoft releases Aion-1.0-Instruct-2.3B for on-device use",
+      "summary": "Aion Instruct serves as the foundational Small Language Model (SLM) in the Windows ecosystem, optimized for on-device AI, text and operating system use cases. The 2.3B parameters base model offers enterprise-grade language understanding and generation at the edge, with a context window extending to 32K tokens for processing multi-page documents, lengthy email threads, and complex technical specifications entirely on-device.",
+      "tags": [
+        "模型",
+        "开源",
+        "行业"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_178b148e12",
+          "url": "https://huggingface.co/microsoft/Aion-1.0-Instruct-2.3B"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/microsoft/Aion-1.0-Instruct-2.3B",
+          "quote": "Aion Instruct serves as the foundational Small Language Model (SLM) in the Windows ecosystem, specifically optimized for on-device AI, text and operating system use cases."
+        },
+        {
+          "url": "https://huggingface.co/microsoft/Aion-1.0-Instruct-2.3B",
+          "quote": "This 2.3B parameters base model delivers enterprise-grade language understanding and generation capabilities directly at the edge, enabling responsive, private, and cost-effective AI-powered scenarios without requiring constant cloud connectivity."
+        },
+        {
+          "url": "https://huggingface.co/microsoft/Aion-1.0-Instruct-2.3B",
+          "quote": "We are publishing the unquantized model first, to be followed by quantized versions."
+        },
+        {
+          "url": "https://huggingface.co/microsoft/Aion-1.0-Instruct-2.3B",
+          "quote": "Languages: English, German, Spanish, Portuguese, Italian, French, Chinese, Japanese"
+        },
+        {
+          "url": "https://huggingface.co/microsoft/Aion-1.0-Instruct-2.3B",
+          "quote": "With context window extending to 32K tokens, it can process multi-page documents, lengthy email threads, and complex technical specifications entirely on-device, ensuring user data remains private."
+        },
+        {
+          "url": "https://huggingface.co/microsoft/Aion-1.0-Instruct-2.3B",
+          "quote": "Automated decision-making in critical contexts like medical diagnoses or legal judgments."
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Inworld releases voice-isolator under Apache-2.0",
+      "summary": "Inworld Voice Isolator v1 ships as two models, voice-isolator-v1 and voice-isolator-v1-realtime, that share one architecture for 48 kHz voice isolation in noisy speech recordings and live audio. The realtime model is causal with a trained look-ahead of 0, 20 or 40 ms, and its algorithmic latency is 63 ms at 20 ms of look-ahead; code and weights are Apache-2.0.",
+      "tags": [
+        "模型",
+        "语音",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_283df06e9f",
+          "url": "https://huggingface.co/inworld/voice-isolator"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/inworld/voice-isolator",
+          "quote": "Open-license (Apache-2.0) 48 kHz voice isolation for noisy speech recordings and live audio."
+        },
+        {
+          "url": "https://huggingface.co/inworld/voice-isolator",
+          "quote": "Inworld Voice Isolator v1 ships as two models that share one architecture:"
+        },
+        {
+          "url": "https://huggingface.co/inworld/voice-isolator",
+          "quote": "voice-isolator-v1"
+        },
+        {
+          "url": "https://huggingface.co/inworld/voice-isolator",
+          "quote": "voice-isolator-v1-realtime"
+        },
+        {
+          "url": "https://huggingface.co/inworld/voice-isolator",
+          "quote": "The offline model, voice-isolator-v1 , is two-sided: every frame sees its whole 8 s chunk, and long inputs render in 8 s chunks overlapping by 2 s."
+        },
+        {
+          "url": "https://huggingface.co/inworld/voice-isolator",
+          "quote": "The realtime model, voice-isolator-v1-realtime , is causal, with a trained look-ahead of 0, 20 or 40 ms; its algorithmic latency is 63 ms at 20 ms of look-ahead."
+        },
+        {
+          "url": "https://huggingface.co/inworld/voice-isolator",
+          "quote": "Inworld Voice Isolator v1 was trained on approximately 10,000 hours of unique audio."
+        },
+        {
+          "url": "https://huggingface.co/inworld/voice-isolator",
+          "quote": "Code and weights are Apache-2.0 ( LICENSE )."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "AnyS1 compiles agent workflows into shared decision points",
+      "summary": "AnyS1 turns human-authored procedural skills into a shared, domain-general source of decision points, mines grounded enumerable decisions across over 1,000 public skills, and trains a single calibrated 4B pointer System-1 with label smoothing. At run time, compiled workflows resolve routine decisions in one forward pass and fall back to System-2 when confidence falls below a calibrated threshold, cutting episode cost by 75-91% and model-call time by 63-92% relative to an uncompiled System-2 agent.",
+      "tags": [
+        "论文",
+        "Agent",
+        "推理"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_5338508548",
+          "url": "https://huggingface.co/papers/2611.23751"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.23751",
+          "quote": "We present AnyS1, a framework that turns human-authored procedural skills , whose instructions naturally specify where choices arise and which options apply, into a shared, domain-general source of decision points ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.23751",
+          "quote": "Offline, AnyS1 mines grounded enumerable decisions across over 1,000 public skills, gathers execution-grounded trajectory states inside isolated containers to construct Any-DP , and trains a single calibrated 4B pointer System-1 with label smoothing ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.23751",
+          "quote": "At run time, compiled workflows resolve routine decisions in one forward pass and fall back to System-2 when confidence falls below a calibrated threshold ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.23751",
+          "quote": "Across three unseen benchmarks and distinct System-2 model families, AnyS1 preserves task reliability while cutting episode cost by 75-91% and model-call time by 63-92% relative to an uncompiled System-2 agent, and maintains performance under zero-shot threshold transfer ."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "The Resolution Hypothesis points to noisy evaluation in agent evolution",
+      "summary": "The Resolution Hypothesis argues that agent evolution stalls not because methods fail to propose better artifacts, but because noisy evaluations cannot reliably identify them. Across seven evolution methods and six models (over 10M LLM calls), the study finds that candidate selection is no better than random at separating helpful artifacts from harmful ones, and that typical method margins are smaller than the difference between two independent runs of the same method.",
+      "tags": [
+        "论文",
+        "Agent",
+        "推理"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_1490b11b6c",
+          "url": "https://huggingface.co/papers/2611.23068"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.23068",
+          "quote": "We trace this puzzle to the Resolution Hypothesis : agent evolution stalls not because methods fail to propose better artifacts, but because noisy evaluations cannot reliably identify them."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.23068",
+          "quote": "Across seven evolution methods and six models (over 10M LLM calls ), we find support for the hypothesis at both levels where evaluation scores are used."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.23068",
+          "quote": "At the candidate level (choosing artifacts), helpful candidate artifacts exist, but selection is no better than random at telling them from harmful ones, so errors accumulate across rounds."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.23068",
+          "quote": "At the method level (ranking methods), typical margins of a few percentage points are smaller than the difference between two independent runs of the same method, so published rankings often rest on luck."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "ALIVE adds proactive monitoring to streaming video models",
+      "summary": "ALIVE is an interactive streaming video model supporting proactive monitoring, streaming task coordination, and feedback-seeking interaction. It is trained in two stages with ALIVE-SFT-288K and ALIVE-RL-3K, using contrastive supervised fine-tuning plus reinforcement learning with Behavior-Aligned Credit Assignment (BACA), and the authors also introduce FSI-Bench to evaluate feedback seeking and subsequent task completion.",
+      "tags": [
+        "论文",
+        "视频",
+        "多模态"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_996d09f592",
+          "url": "https://huggingface.co/papers/2611.21366"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.21366",
+          "quote": "W e i n t r o d u c e A L I V E , a n i n t e r a c t i v e s t r e a m i n g v i d e o m o d e l s u p p o r t i n g p r o a c t i v e m o n i t o r i n g , s t r e a m i n g t a s k c o o r d i n a t i o n , a n d f e e d b a c k - s e e k i n g i n t e r a c t i o n ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.21366",
+          "quote": "W e c o n s t r u c t A L I V E - S F T - 2 8 8 K a n d A L I V E - R L - 3 K f o r t w o - s t a g e t r a i n i n g ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.21366",
+          "quote": "C o n t r a s t i v e s u p e r v i s e d f i n e - t u n i n g t e a c h e s w h e n a n d h o w t o r e s p o n d , w h i l e r e i n f o r c e m e n t l e a r n i n g w i t h B e h a v i o r - A l i g n e d C r e d i t A s s i g n m e n t ( B A C A ) c o m b i n e s t r a j e c t o r y - l e v e"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.21366",
+          "quote": "l a n d l o c a l a d v a n t a g e s t o r e f i n e d e c i s i o n s , r e s p o n s e s , a n d s i l e n c e a c r o s s m u l t i - t u r n i n t e r a c t i o n s ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.21366",
+          "quote": "W e a l s o i n t r o d u c e F S I - B e n c h t o e v a l u a t e f e e d b a c k s e e k i n g a n d s u b s e q u e n t t a s k c o m p l e t i o n ."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "CurvDelta adapts LLMs in a low-curvature preservation space",
+      "summary": "CurvDelta is a framework that incorporates the preservation constraint into the parameterization of the model update, constructing a low-curvature space in which parameter updates leave the preservation loss nearly invariant. It becomes practical for LLMs through Kronecker-factored approximate curvature (K-FAC) and a factorized projection, and the paper also introduces CurvLoRA, a low-rank variant within the same preservation geometry for capability learning and selective unlearning.",
+      "tags": [
+        "论文",
+        "训练",
+        "安全"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_39e0f46731",
+          "url": "https://huggingface.co/papers/2611.24654"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.24654",
+          "quote": "We introduce CurvDelta , a scalable framework that incorporates the preservation constraint into the parameterization of the model update."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.24654",
+          "quote": "By analyzing the local geometry of the preservation constraint around the pre-adaptation model, CurvDelta constructs a low-curvature space in which parameter updates leave the preservation loss nearly invariant."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.24654",
+          "quote": "We make its construction practical for LLMs through Kronecker-factored approximate curvature ( K-FAC ) and a factorized projection ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.24654",
+          "quote": "We also introduce CurvLoRA , a low-rank variant within the same preservation geometry , designed for more efficient adaptation."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.24654",
+          "quote": "Both methods apply to preservation-constrained adaptation tasks such as capability learning and selective unlearning ."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Invoker-Render pairs creation and streaming models for Code World Model 2.0",
+      "summary": "Invoker-Render pairs a bidirectional creation model with a causal four-step streaming model under a shared conditioning interface over structural proxies, an appearance reference, and language, and is the video renderer behind Code World Model 2.0. Progressive Forcing (ProForcing) distills the causal renderer to four denoising steps per chunk before training it on its own generated history to reduce drift, keeping the car and scene visually consistent in a continuous 30-minute racing demo.",
+      "tags": [
+        "论文",
+        "视频",
+        "多模态"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_c35402a17e",
+          "url": "https://huggingface.co/papers/2611.22925"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.22925",
+          "quote": "W e p r e s e n t I n v o k e r - R e n d e r , p a i r i n g a b i d i r e c t i o n a l c r e a t i o n m o d e l w i t h a c a u s a l f o u r - s t e p s t r e a m i n g m o d e l u n d e r a s h a r e d c o n d i t i o n i n g i n t e r f a c e o v e r s t r u c t u r a l p r o x i e s , a n a"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.22925",
+          "quote": "T o b r i d g e b i d i r e c t i o n a l c r e a t i o n a n d r e a l - t i m e s t r e a m i n g w i t h o u t c o m p o u n d i n g s t e p c o m p r e s s i o n a n d r o l l o u t d r i f t , w e i n t r o d u c e P r o g r e s s i v e F o r c i n g ( P r o F o r c i n g ) ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.22925",
+          "quote": "P r o F o r c i n g f i r s t t r a i n s a c a u s a l p r e d i c t o r a n d d i s t i l l s i t i n t o a f o u r - s t e p r e n d e r e r u s i n g h i s t o r i e s d e r i v e d f r o m t r a i n i n g v i d e o s ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.22925",
+          "quote": "T r a i n i n g t h e n s h i f t s t o c o n t i n u o u s s e l f - g e n e r a t e d r o l l o u t s ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.22925",
+          "quote": "We’re sharing Invoker-Render, the video renderer behind Code World Model 2.0."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.22925",
+          "quote": "For streaming, we use Progressive Forcing to distill the causal renderer to four denoising steps per chunk, then train it on its own generated history to reduce drift."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.22925",
+          "quote": "In our continuous 30-minute racing demo, the renderer follows the input trajectory while keeping the car and scene visually consistent."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "LogT builds logic-guided SFT data for visual search",
+      "summary": "LogT (short for Logically Think with Images) is a fully automated SFT data engine that explicitly enforces logic-chain-guided reasoning, generating challenging, visually grounded questions and structured tool-use traces with human-like logic. Fine-tuning Qwen2.5-VL-7B and InternVL3.5-8B on the dataset shows that LogT-SFT based on Qwen2.5-VL-7B outperforms the state of the art with 3.1times less data and 120times fewer GPU hours.",
+      "tags": [
+        "论文",
+        "多模态",
+        "Agent"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_c9274d30bc",
+          "url": "https://huggingface.co/papers/2611.19200"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.19200",
+          "quote": "W e t h e n p r o p o s e L o g T ( s h o r t f o r L o g i c a l l y T h i n k w i t h I m a g e s ) , a f u l l y a u t o m a t e d S F T d a t a e n g i n e t h a t e x p l i c i t l y e n f o r c e s l o g i c - c h a i n - g u i d e d r e a s o n i n g ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.19200",
+          "quote": "L o g T g e n e r a t e s a n S F T d a t a s e t f e a t u r i n g c h a l l e n g i n g , v i s u a l l y g r o u n d e d q u e s t i o n s a n d s t r u c t u r e d t o o l - u s e t r a c e s w i t h h u m a n - l i k e l o g i c ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.19200",
+          "quote": "W e s h o w t h a t L o g T - S F T b a s e d o n Q w e n 2 ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.19200",
+          "quote": "1 t i m e s l e s s d a t a a n d > 1 2 0 t i m e s f e w e r G P U h o u r s ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.19200",
+          "quote": "This work was accepted at NeurIPS 2026."
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Ai2 launches Theorizer in Asta and open-sources the code",
+      "summary": "Ai2 is launching Theorizer in Asta, its platform of AI agents for scientific research, and open-sourcing the code so researchers can examine how it generates theories and adapt the methods to their own work. Theorizer links each of its proposed explanations to evidence from published studies and describes where they might apply, though a search can miss earlier work and the model can misjudge originality.",
+      "tags": [
+        "工具",
+        "论文",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_b40a43ba52",
+          "url": "https://allenai.org/blog/theorizer-in-asta"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://allenai.org/blog/theorizer-in-asta",
+          "quote": "Theorizer comes to Asta November 19, 2026 Ai2 Share Try Theorizer in Asta Open-source release Dr."
+        },
+        {
+          "url": "https://allenai.org/blog/theorizer-in-asta",
+          "quote": "And it took me 15 years to think like this.” Today, we’re launching Theorizer in Asta , our platform of AI agents for scientific research, and open-sourcing the code so researchers can examine how it generates theories and adapt the methods to their own work."
+        },
+        {
+          "url": "https://allenai.org/blog/theorizer-in-asta",
+          "quote": "Through Asta’s web interface, we cover token costs up to a limit; those who prefer to work on their own machines can run our open library and pay for tokens as needed."
+        },
+        {
+          "url": "https://allenai.org/blog/theorizer-in-asta",
+          "quote": "Theorizer links each of its proposed explanations to evidence from published studies and describes where they might apply."
+        },
+        {
+          "url": "https://allenai.org/blog/theorizer-in-asta",
+          "quote": "The tool also flags claims it considers new, but a search can miss earlier work and the model can misjudge originality; researchers still need to check a claim against the wider literature."
+        }
+      ]
+    }
+  ],
+  "research": [
+    {
+      "via": "webfetch",
+      "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-api-tool-retrieval/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.171.0"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.24738"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.23751"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.21366"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.22925"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.24651"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.24654"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.23068"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.24154"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.24789"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.24869"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.24408"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.19200"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://allenai.org/blog/theorizer-in-asta"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/inworld/voice-isolator"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/thejagstudio/tessera-small"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.17600"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.11318"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.329"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/KORMo-VL/KORMo-Web-11B"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/microsoft/Aion-1.0-Instruct-2.3B"
+    }
+  ],
+  "lang": "en",
+  "validation": {
+    "validated_at": "2026-11-20T04:38:59+00:00",
+    "checked_links": false,
+    "dropped": [
+      {
+        "title": "WorldRuler runs rule graphs inside video generation loops",
+        "section": "brief",
+        "candidates": [
+          "c_17182edc48"
+        ],
+        "reasons": [
+          "summary longer than 250 characters"
+        ]
+      },
+      {
+        "title": "StrideWorld benchmarks scene rigidity and action consistency",
+        "section": "brief",
+        "candidates": [
+          "c_8184e88af8"
+        ],
+        "reasons": [
+          "summary longer than 250 characters"
+        ]
+      }
+    ],
+    "warnings": [
+      "6 paper items (target 2-4)"
+    ]
+  }
+}
