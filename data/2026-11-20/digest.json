@@ -2,24 +2,19 @@
   "schema_version": 1,
   "date": "2026-11-20",
   "mode": "full",
-  "generated_at": "2026-11-20T04:38:12+00:00",
-  "channel": "api",
-  "model": "nvidia:minimaxai/minimax-m3.1-flash",
+  "channel": "claude",
+  "generated_at": "2026-11-20T04:43:13+00:00",
+  "model": "claude-opus-5-5",
   "highlights": [
-    "Google 在 Gemini API 预览 Tool Retrieval，让 Agent 按需加载工具参数 schema，减少大工具库的输入 token 与延迟。",
-    "Codex 0.171.0 与 Claude Code v2.1.329 同期更新，前者加入 GPT-6.2 Sol/Astra 模型目录与远程会话，后者补上 Code Mode 的 OpenTelemetry 支持。",
-    "论文方面，Jeveration 用单次前向生成 512x512 图像，Piccolo 家族用递归自我改进训练多模态决策模型，AnyS1 用小模型接管 Agent 的常规决策点以降低成本与延迟。"
+    "Gemini API 预览 Tool Retrieval：工具参数 schema 按需加载，支持 Gemini 3.6 及之后的模型。",
+    "微软发布 Windows 端侧小模型 Aion 1.0 Instruct；OpenAI 公开用 Codex Agent 自动排查性能回归的 Performance Factory。",
+    "论文 Resolution Hypothesis 指出，Agent 自我进化的瓶颈在于噪声评估分辨不出更好的候选。"
   ],
   "items": [
     {
       "section": "headline",
-      "title": "Gemini API 预览 Tool Retrieval，按需加载工具 schema",
-      "summary": "Google 在 Gemini API 的 Interactions API 中推出预览版 Tool Retrieval：Agent 保留完整工具库，只在需要时由模型按名请求、API 再加载对应参数 schema，搜索过程在服务端完成。开发者可在请求中加入 tool_search 并对要延后加载的工具设置 defer_loading: true，从而减少输入 token 与延迟，也兼容远程 MCP 服务器。",
-      "tags": [
-        "Agent",
-        "工具",
-        "产品"
-      ],
+      "title": "Gemini API 预览 Tool Retrieval：按需加载工具 schema",
+      "summary": "Google 在 Gemini Interactions API 中预览 Tool Retrieval：请求里加入 tool_search 工具、给工具设置 defer_loading 后，模型只看到工具的名称和描述，需要时再按名字加载参数 schema；对 mcp_server 工具设置 defer_loading，整个远程 MCP 服务器的工具也会按需加载。功能不单独收费，支持 Gemini 3.6 及之后的模型。工具库很大的 Agent 可以借此减少输入 token，而且已加载的 schema 追加在对话后部，提示前缀保持不变，便于缓存。",
       "sources": [
         {
           "candidate_id": "c_278dc93a73",
@@ -29,189 +24,35 @@
       "evidence": [
         {
           "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-api-tool-retrieval/",
-          "quote": "Tool Retrieval is now in preview in the Gemini Interactions API."
+          "quote": "To turn on Tool Retrieval, add a tool_search tool to your request and set defer_loading: true on the tools you want to hold back. The model still sees the name and description of every deferred tool, so it knows what's available, but the parameter schemas stay out of context."
         },
         {
           "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-api-tool-retrieval/",
-          "quote": "Today we're launching Tool Retrieval in the Gemini API, available in preview in the Interactions API ."
+          "quote": "Set defer_loading: true on an mcp_server tool and every tool that server exposes is loaded on demand"
         },
         {
           "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-api-tool-retrieval/",
-          "quote": "Tool Retrieval lets your agent keep its full tool library on standby and load parameter schemas only when the current task needs them."
+          "quote": "Tool Retrieval has no separate charge. Input and output tokens are billed at the standard rates for the model you call."
         },
         {
           "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-api-tool-retrieval/",
-          "quote": "How it works To turn on Tool Retrieval, add a tool_search tool to your request and set defer_loading: true on the tools you want to hold back."
+          "quote": "Tool Retrieval works with Gemini 3.6 and later models"
         },
         {
           "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-api-tool-retrieval/",
-          "quote": "When the model needs a tool, it asks for it by name, the API loads the full schema, and the model calls the function, all inside the same request."
-        },
-        {
-          "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-api-tool-retrieval/",
-          "quote": "Gemini runs the search on the server, so the only changes to your code are the new tool and a flag on the tools you want to defer."
-        },
-        {
-          "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-api-tool-retrieval/",
-          "quote": "Tool Retrieval also works with remote MCP servers in the Gemini API ."
-        },
-        {
-          "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-api-tool-retrieval/",
-          "quote": "Set defer_loading: true on an mcp_server tool and every tool that server exposes is loaded on demand, so you can connect a large server without listing its tools one by one."
+          "quote": "the schemas the model loads are added later in the conversation, so the cached prefix stays the same from turn to turn"
         }
-      ]
-    },
-    {
-      "section": "headline",
-      "title": "Codex 0.171.0 加入 GPT-6.2 Sol 与 Astra 模型",
-      "summary": "openai/codex 0.171.0 把 GPT-6.2 Sol 和 Astra 加入模型目录，其中 Sol 为默认目录选项，TUI 工作区也默认开启，可搜索文档预览、查看图片预览和 subagent 转写。新增 codex exec --remote 与 /rc、/remote 命令，用于在已有 app server 上启动或恢复非交互会话、管理本地远程控制。",
+      ],
       "tags": [
-        "工具",
-        "代码"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_65de769214",
-          "url": "https://github.com/openai/codex/releases/tag/rust-v0.171.0"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://github.com/openai/codex/releases/tag/rust-v0.171.0",
-          "quote": "Added GPT-6.2 Sol and Astra to model catalogs, with Sol as the default catalog selection."
-        },
-        {
-          "url": "https://github.com/openai/codex/releases/tag/rust-v0.171.0",
-          "quote": "Enabled the TUI workspace by default, with searchable document previews, image previews, and subagent transcripts alongside the main conversation."
-        },
-        {
-          "url": "https://github.com/openai/codex/releases/tag/rust-v0.171.0",
-          "quote": "Added codex exec --remote <ADDR> to start or resume noninteractive sessions on an existing app server."
-        },
-        {
-          "url": "https://github.com/openai/codex/releases/tag/rust-v0.171.0",
-          "quote": "Added /rc and /remote to manage local remote control and display device pairing codes from the TUI."
-        }
-      ]
-    },
-    {
-      "section": "headline",
-      "title": "Claude Code v2.1.329 支持 Code Mode 接入 OpenTelemetry",
-      "summary": "anthropics/claude-code v2.1.329 允许在启用 OpenTelemetry 事件与指标时同时打开 Code Mode，代码每次发起的工具调用都会发送对应事件，而 tracing 仍保持关闭。新版本还把本次会话的定时任务、/loop 唤醒、goal 和会话分支并入 /tasks，并在 /mcp 中为拒绝连接的远程 HTTP MCP 服务器增加 Server message 一行。",
-      "tags": [
-        "工具",
-        "代码"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_a97e29fcf9",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.329"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.329",
-          "quote": "Added this session's scheduled tasks, /loop wakeups, the goal and this conversation's forks to /tasks ; x stops one after asking"
-        },
-        {
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.329",
-          "quote": "Added a \"Server message\" row to a server's page in /mcp that shows the JSON-RPC error message of a remote HTTP MCP server that refuses the connection"
-        },
-        {
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.329",
-          "quote": "Added support for turning on Code Mode while OpenTelemetry events and metrics are enabled; each tool call the code makes sends its events; tracing still keeps it off"
-        }
-      ]
-    },
-    {
-      "section": "headline",
-      "title": "Jeveration：单次前向生成 512x512 图像",
-      "summary": "Jeveration 复用冻结的视觉语言模型，把 System One 的并行决策范式用于图像生成：所有位置以共享随机状态为条件以保证整体一致性，并先学习离散图像码分布来引导单次前向生成。论文报告 512x512 图像生成耗时 78 ms，最快比已有统一模型快 122x，同一 checkpoint 还支持图生图与稠密预测。",
-      "tags": [
-        "论文",
-        "图像",
-        "多模态"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_217c28d75b",
-          "url": "https://huggingface.co/papers/2611.24738"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2611.24738",
-          "quote": "In this paper, we introduce Jeveration, showing that the same decision paradigm can also generate high-quality images in a single forward pass ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.24738",
-          "quote": "Jeveration builds on a frozen vision-language model , repurposing its visual-semantic knowledge for holistic image generation ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.24738",
-          "quote": "We therefore condition all positions on a shared random state to coordinate parallel prediction s, so that each draw yields a different but coherent image."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.24738",
-          "quote": "Since the model tends to ignore this state under direct image supervision , we first learn a distribution over discrete image codes to guide single-pass generation ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.24738",
-          "quote": "Beyond text-to-image generation , we further unify image-to-image generation and dense prediction within the same architecture, so that one checkpoint supports all three tasks, each in one forward pass."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.24738",
-          "quote": "Experiments show that Jeveration generates a 512x512 image in 78 ms, up to 122x faster than existing unified models , while maintaining competitive image quality and dense prediction performance."
-        }
-      ]
-    },
-    {
-      "section": "model",
-      "title": "Piccolo：用递归自我改进训练多模态决策模型",
-      "summary": "Piccolo 是一族 0.8B 到 27B 的多模态决策模型，通过 Agentic Data Engineering 与递归自我改进（RSI）让模型与训练数据协同演进，输出候选答案的概率。Piccolo-27B 在 Decision Index Vision Full 榜单以 75.59 分居首，Piccolo-9B 与 Piccolo-4B 分别取得 68.35 和 67.46，权重与 Data-Juicer、AgentScope 工具一并发布。",
-      "tags": [
-        "模型",
         "Agent",
-        "训练"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_4bfbccd793",
-          "url": "https://huggingface.co/papers/2611.24651"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2611.24651",
-          "quote": "8 B t o 2 7 B ) t h a t c o e v o l v e s m o d e l c a p a b i l i t i e s a n d t r a i n i n g d a t a v i a A g e n t i c D a t a E n g i n e e r i n g a n d r e c u r s i v e s e l f - i m p r o v e m e n t ( R S I ) ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.24651",
-          "quote": "T h e m o d e l s p r e d i c t p r o b a b i l i t i e s o v e r c a n d i d a t e a n s w e r s f o r g e n e r a l - p u r p o s e t e x t a n d v i s u a l j u d g m e n t s , a g e n t h a r n e s s e s , d a t a w o r k f l o w s , a n d i n t e r a c t i v e g a m e s ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.24651",
-          "quote": "5 9 , w h i l e P i c c o l o - 9 B a n d P i c c o l o - 4 B a c h i e v e 6 8 ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.24651",
-          "quote": "A l l t h r e e r a n k f i r s t o n t h e P r i v a t e b e n c h m a r k i n t h e i r r e s p e c t i v e m o d e l - s i z e c a t e g o r i e s ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.24651",
-          "quote": "T o g e t h e r w i t h t h e r e l e a s e d w e i g h t s a n d t o o l s f r o m t h e D a t a - J u i c e r a n d A g e n t S c o p e e c o s y s t e m s , P i c c o l o p r o v i d e s a n a c t i o n a b l e b l u e p r i n t f o r b u i l d i n g f r o n t i e r d e c i s i o n m o d e l s a"
-        }
+        "工具",
+        "产品"
       ]
     },
     {
-      "section": "model",
-      "title": "Microsoft 开源 Aion-1.0-Instruct-2.3B 端侧小模型",
-      "summary": "microsoft/Aion-1.0-Instruct-2.3B 是 Microsoft Windows Applied Sciences Group 面向端侧场景的 2.3B 参数小模型，采用 MIT 许可发布，支持英语、德语、西班牙语等语言，上下文窗口 32K tokens。模型卡称其未被训练以精通世界知识，也不适合高风险决策场景，量化版本将在未量化权重之后发布。",
-      "tags": [
-        "模型",
-        "开源",
-        "行业"
-      ],
+      "section": "headline",
+      "title": "微软发布 Windows 端侧小模型 Aion 1.0 Instruct",
+      "summary": "微软 Windows Applied Sciences Group 在 Hugging Face 发布 2.3B 参数的 Aion 1.0 Instruct，定位为 Windows 生态的基础小语言模型（SLM），针对端侧 AI、文本和操作系统场景优化，上下文 32,768 tokens，MIT 许可。模型卡称，进一步优化的版本将配合微软的内容审核模型，于 2027 年一月底前成为 Windows 系统的 SLM；目前先发布未量化版本，量化版随后推出。为 Windows 做端侧功能的开发者可以提前用它评估效果。",
       "sources": [
         {
           "candidate_id": "c_178b148e12",
@@ -221,11 +62,11 @@
       "evidence": [
         {
           "url": "https://huggingface.co/microsoft/Aion-1.0-Instruct-2.3B",
-          "quote": "Aion Instruct serves as the foundational Small Language Model (SLM) in the Windows ecosystem, specifically optimized for on-device AI, text and operating system use cases."
+          "quote": "Aion Instruct serves as the foundational Small Language Model (SLM) in the Windows ecosystem, specifically optimized for on-device AI, text and operating system use cases. This 2.3B parameters base model"
         },
         {
           "url": "https://huggingface.co/microsoft/Aion-1.0-Instruct-2.3B",
-          "quote": "This 2.3B parameters base model delivers enterprise-grade language understanding and generation capabilities directly at the edge, enabling responsive, private, and cost-effective AI-powered scenarios without requiring constant cloud connectivity."
+          "quote": "A further optimized version of Aion Instruct, coupled with Microsoft’s content moderation model, will become the Windows OS SLM by the end of January 2027."
         },
         {
           "url": "https://huggingface.co/microsoft/Aion-1.0-Instruct-2.3B",
@@ -233,27 +74,91 @@
         },
         {
           "url": "https://huggingface.co/microsoft/Aion-1.0-Instruct-2.3B",
-          "quote": "Languages: English, German, Spanish, Portuguese, Italian, French, Chinese, Japanese"
+          "quote": "Context length 32,768 tokens"
         },
         {
           "url": "https://huggingface.co/microsoft/Aion-1.0-Instruct-2.3B",
-          "quote": "With context window extending to 32K tokens, it can process multi-page documents, lengthy email threads, and complex technical specifications entirely on-device, ensuring user data remains private."
+          "quote": "Aion 1.0 Instruct Microsoft Windows Applied Sciences Group"
         },
         {
           "url": "https://huggingface.co/microsoft/Aion-1.0-Instruct-2.3B",
-          "quote": "Automated decision-making in critical contexts like medical diagnoses or legal judgments."
+          "quote": "This model is released under the MIT License"
         }
+      ],
+      "tags": [
+        "模型",
+        "开源",
+        "产品"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "OpenAI 公开 Performance Factory：用 Codex Agent 排查性能回归",
+      "summary": "OpenAI 介绍了内部的 Performance Factory：工程师为重复性工作定义 workflow，性能告警触发后由云端的 Codex Agent 调查回归、找出根因，另一个 Codex 会话做对抗式审查、尝试推翻诊断；通过后由 Codex 实现修复并开 PR，工程师审阅后决定是否合并。人工复核 100 条根因建议，70% 被评为准确。想把编码 Agent 用到线上运维的团队，可以参考它拆分任务、加入对抗式审查和人工把关的做法。",
+      "sources": [
+        {
+          "candidate_id": "c_6321c7fbb2",
+          "url": "https://openai.com/index/how-openai-performance-factory-keeps-chatgpt-fast"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://openai.com/index/how-openai-performance-factory-keeps-chatgpt-fast",
+          "quote": "In the Performance Factory, our engineers define workflows for recurring jobs and write instructions for the Codex agents that carry them out. In particular, the Regression Workflow opens a task when a performance alert fires."
+        },
+        {
+          "url": "https://openai.com/index/how-openai-performance-factory-keeps-chatgpt-fast",
+          "quote": "we added an adversarial review: a separate Codex session that tries to disprove the proposed diagnosis."
+        },
+        {
+          "url": "https://openai.com/index/how-openai-performance-factory-keeps-chatgpt-fast",
+          "quote": "In a manual review of 100 root cause suggestions, we graded 70% as accurate, with 30% needing further refinement or not fully establishing causality."
+        },
+        {
+          "url": "https://openai.com/index/how-openai-performance-factory-keeps-chatgpt-fast",
+          "quote": "Once the diagnosis passes adversarial review, the workflow asks Codex to implement a fix and open a pull request. An engineer reviews the PR and decides whether to merge it."
+        }
+      ],
+      "tags": [
+        "Agent",
+        "代码",
+        "工具"
       ]
     },
     {
       "section": "model",
-      "title": "Inworld 开源 48 kHz 人声分离模型",
-      "summary": "Inworld 发布 voice-isolator v1，采用 Apache-2.0 许可，包含离线与实时两个 checkpoint：离线模型每帧可见完整 8 s 区块，实时模型是因果流式、带 20 ms 前瞻，在 20 ms 前瞻下算法延迟为 63 ms。它用于从含噪录音或实时音频中分离人声并保留说话人身份，可配合 pip install inworld-voice-isolation 在本地运行。",
+      "title": "Cloudflare 发布 27B 多模态结构化抽取模型 Clairic",
+      "summary": "Clairic 基于 Qwen3.8-27B，输入文本或 JSON 状态（可附图片）和一组字段定义，输出带类型的值、列表、空值、估计值和预测路径，并给出抽取置信度和空值概率，以 Apache-2.0 许可发布。需要从文档或图片中抽取结构化字段的开发者，可以按每个字段的置信度决定哪些结果要人工复核。",
+      "sources": [
+        {
+          "candidate_id": "c_b59ed2a45f",
+          "url": "https://huggingface.co/Cloudflare/clairic"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/Cloudflare/clairic",
+          "quote": "Clairic is a 27B multimodal model that turns a state and a schema of typed fields into structured answers. It supports text and image inputs, extraction, numerical estimation, and forecasting."
+        },
+        {
+          "url": "https://huggingface.co/Cloudflare/clairic",
+          "quote": "Base model: Qwen3.8-27B . Inputs: a text or JSON state, optional images, and a mapping of field names to specifications. Outputs: typed values, lists, nulls, estimates, and forecast paths. Scoring: extraction confidence and null probabilities"
+        },
+        {
+          "url": "https://huggingface.co/Cloudflare/clairic",
+          "quote": "Released under the Apache-2.0 license."
+        }
+      ],
       "tags": [
         "模型",
-        "语音",
-        "开源"
-      ],
+        "开源",
+        "多模态"
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Inworld 开源 48 kHz 人声分离模型 Voice Isolator",
+      "summary": "Inworld Voice Isolator v1 包含离线和实时两个模型，去除人声周围的噪声、只保留前景人声；实时版 58.2M 参数，在 20 ms look-ahead 下算法延迟为 63 ms，可用于通话和直播。模型以 Apache-2.0 许可发布，第一版只做降噪，不修复录音丢失的内容，修复计划在 version 2 推出。做语音 Agent 或音频处理管线的开发者可以把它用作人声前处理。",
       "sources": [
         {
           "candidate_id": "c_283df06e9f",
@@ -263,81 +168,80 @@
       "evidence": [
         {
           "url": "https://huggingface.co/inworld/voice-isolator",
-          "quote": "Open-license (Apache-2.0) 48 kHz voice isolation for noisy speech recordings and live audio."
+          "quote": "Open-license (Apache-2.0) 48 kHz voice isolation for noisy speech recordings and live audio. TL;DR Inworld Voice Isolator v1 ships as two models that share one architecture"
         },
         {
           "url": "https://huggingface.co/inworld/voice-isolator",
-          "quote": "Inworld Voice Isolator v1 ships as two models that share one architecture:"
+          "quote": "The realtime model has 58.2M; its blocks are causal and it carries a look-ahead embedding."
         },
         {
           "url": "https://huggingface.co/inworld/voice-isolator",
-          "quote": "voice-isolator-v1"
+          "quote": "its algorithmic latency is 63 ms at 20 ms of look-ahead. Both keep the foreground voice"
         },
         {
           "url": "https://huggingface.co/inworld/voice-isolator",
-          "quote": "voice-isolator-v1-realtime"
+          "quote": "version 1 does denoising (noise suppression): it removes what surrounds the voice and restores nothing the recording lost, such as missing bandwidth; restoration comes with version 2."
         },
         {
           "url": "https://huggingface.co/inworld/voice-isolator",
-          "quote": "The offline model, voice-isolator-v1 , is two-sided: every frame sees its whole 8 s chunk, and long inputs render in 8 s chunks overlapping by 2 s."
-        },
-        {
-          "url": "https://huggingface.co/inworld/voice-isolator",
-          "quote": "The realtime model, voice-isolator-v1-realtime , is causal, with a trained look-ahead of 0, 20 or 40 ms; its algorithmic latency is 63 ms at 20 ms of look-ahead."
-        },
-        {
-          "url": "https://huggingface.co/inworld/voice-isolator",
-          "quote": "Inworld Voice Isolator v1 was trained on approximately 10,000 hours of unique audio."
-        },
-        {
-          "url": "https://huggingface.co/inworld/voice-isolator",
-          "quote": "Code and weights are Apache-2.0 ( LICENSE )."
+          "quote": "With the realtime model, use them for live calls and streams."
         }
+      ],
+      "tags": [
+        "语音",
+        "开源",
+        "模型"
       ]
     },
     {
-      "section": "paper",
-      "title": "AnyS1：用 4B 小模型接管 Agent 的常规决策点",
-      "summary": "AnyS1 把人写的流程技能文档转成通用的决策点来源，离线阶段挖掘超过 1,000 个公开技能中的可枚举决策并训练一个校准过的 4B 指针式 System-1 模型。运行时常规决策由该模型一次前向解决，置信度低于校准阈值时回退到 System-2，在三个未见过基准上相对未编译的 System-2 Agent 将回合成本降低 75-91%、模型调用时间降低 63-92%。",
-      "tags": [
-        "论文",
-        "Agent",
-        "推理"
-      ],
+      "section": "model",
+      "title": "Bria 发布 RMBG 3.0：用 8B 生成模型做背景移除",
+      "summary": "RMBG 3.0 是 Bria 第三代背景移除模型，也是第一个基于生成式基础模型的版本：在 Fibo 2.0 上微调并蒸馏，4 步生成 alpha matte。在 Bria 自己对 234 张困难图片的对比中，它平均排名 1.51，相对 RMBG-2.0 的偏好率为 60.9%。权重采用 CC BY-NC 4.0 非商用许可，商用需另签协议或改用 Bria API；处理毛发、运动模糊等难例的开发者可以先用它评估效果。",
       "sources": [
         {
-          "candidate_id": "c_5338508548",
-          "url": "https://huggingface.co/papers/2611.23751"
+          "candidate_id": "c_1ba7b9d21a",
+          "url": "https://huggingface.co/briaai/RMBG-3.0"
         }
       ],
       "evidence": [
         {
-          "url": "https://huggingface.co/papers/2611.23751",
-          "quote": "We present AnyS1, a framework that turns human-authored procedural skills , whose instructions naturally specify where choices arise and which options apply, into a shared, domain-general source of decision points ."
+          "url": "https://huggingface.co/briaai/RMBG-3.0",
+          "quote": "RMBG 3.0 is the third generation of Bria's background removal models, and the first one built on a generative foundation. It is Fibo 2.0 , fine-tuned and distilled to do one thing very well: turn any photo into a clean, soft alpha matte in just 4 steps"
         },
         {
-          "url": "https://huggingface.co/papers/2611.23751",
-          "quote": "Offline, AnyS1 mines grounded enumerable decisions across over 1,000 public skills, gathers execution-grounded trajectory states inside isolated containers to construct Any-DP , and trains a single calibrated 4B pointer System-1 with label smoothing ."
+          "url": "https://huggingface.co/briaai/RMBG-3.0",
+          "quote": "Foundation: Fibo 2.0 , an 8B-parameter flow-matching DiT"
         },
         {
-          "url": "https://huggingface.co/papers/2611.23751",
-          "quote": "At run time, compiled workflows resolve routine decisions in one forward pass and fall back to System-2 when confidence falls below a calibrated threshold ."
+          "url": "https://huggingface.co/briaai/RMBG-3.0",
+          "quote": "Average rank 1.51 across 234 hard images, best or tied-best on 185 of them (79%)."
         },
         {
-          "url": "https://huggingface.co/papers/2611.23751",
-          "quote": "Across three unseen benchmarks and distinct System-2 model families, AnyS1 preserves task reliability while cutting episode cost by 75-91% and model-call time by 63-92% relative to an uncompiled System-2 agent, and maintains performance under zero-shot threshold transfer ."
+          "url": "https://huggingface.co/briaai/RMBG-3.0",
+          "quote": "Preferred 55.1% vs Photoroom, 59.4% vs remove.bg (Canva), 60.9% vs RMBG-2.0"
+        },
+        {
+          "url": "https://huggingface.co/briaai/RMBG-3.0",
+          "quote": "#1 on motion blur, multiple subjects, holes & mesh, shadows & reflections, hair & fur"
+        },
+        {
+          "url": "https://huggingface.co/briaai/RMBG-3.0",
+          "quote": "Weights are released under Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0), the same terms as the Fibo 2.0 family."
+        },
+        {
+          "url": "https://huggingface.co/briaai/RMBG-3.0",
+          "quote": "Commercial use requires a separate agreement with Bria AI. Get a license here , or use the commercially licensed Bria API and fal endpoint"
         }
+      ],
+      "tags": [
+        "图像",
+        "模型"
       ]
     },
     {
       "section": "paper",
-      "title": "分辨率假说：Agent 演化的瓶颈在识别改进",
-      "summary": "论文提出 Resolution Hypothesis：Agent 演化停滞并非因为无法提出更好的产物，而是噪声过大的评测无法可靠识别改进。在七种演化方法、六个模型和超过 10M 次 LLM 调用中，候选层面挑选好产物的能力并不优于随机，方法层面几个百分点的差距小于同一方法两次独立运行的差距。",
-      "tags": [
-        "论文",
-        "Agent",
-        "推理"
-      ],
+      "title": "Resolution Hypothesis：Agent 自我进化卡在分不清哪个更好",
+      "summary": "上海科技大学的论文提出 Resolution Hypothesis：Agent 进化（提出候选的提示词、skill、记忆并择优保留）停滞，往往不是因为提不出更好的候选，而是噪声评估分辨不出来。在七种进化方法、六个模型、超过 10M 次 LLM 调用的实验中，候选层面的选择不比随机好；方法层面几个百分点的领先，小于同一方法两次独立运行之间的差距。做提示词或 skill 自动优化的团队，在相信小幅提升之前应先确认它超过了运行间的波动。",
       "sources": [
         {
           "candidate_id": "c_1490b11b6c",
@@ -347,278 +251,123 @@
       "evidence": [
         {
           "url": "https://huggingface.co/papers/2611.23068",
-          "quote": "We trace this puzzle to the Resolution Hypothesis : agent evolution stalls not because methods fail to propose better artifacts, but because noisy evaluations cannot reliably identify them."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.23068",
-          "quote": "Across seven evolution methods and six models (over 10M LLM calls ), we find support for the hypothesis at both levels where evaluation scores are used."
+          "quote": "#3 Paper of the day · ShanghaiTech University"
         },
         {
           "url": "https://huggingface.co/papers/2611.23068",
           "quote": "At the candidate level (choosing artifacts), helpful candidate artifacts exist, but selection is no better than random at telling them from harmful ones, so errors accumulate across rounds."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.23068",
-          "quote": "At the method level (ranking methods), typical margins of a few percentage points are smaller than the difference between two independent runs of the same method, so published rankings often rest on luck."
         }
-      ]
-    },
-    {
-      "section": "paper",
-      "title": "ALIVE：让流式视频模型具备主动交互能力",
-      "summary": "ALIVE 是交互式流式视频模型，支持主动监控、流式任务协调与主动追问三类能力。作者构建 ALIVE-SFT-288K 与 ALIVE-RL-3K 做两阶段训练，用 Behavior-Aligned Credit Assignment（BACA）结合轨迹级与局部优势来优化多轮交互中的决策、回复与沉默，并提出 FSI-Bench 评估追问行为。",
+      ],
       "tags": [
         "论文",
-        "视频",
-        "多模态"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_996d09f592",
-          "url": "https://huggingface.co/papers/2611.21366"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2611.21366",
-          "quote": "W e i n t r o d u c e A L I V E , a n i n t e r a c t i v e s t r e a m i n g v i d e o m o d e l s u p p o r t i n g p r o a c t i v e m o n i t o r i n g , s t r e a m i n g t a s k c o o r d i n a t i o n , a n d f e e d b a c k - s e e k i n g i n t e r a c t i o n ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21366",
-          "quote": "W e c o n s t r u c t A L I V E - S F T - 2 8 8 K a n d A L I V E - R L - 3 K f o r t w o - s t a g e t r a i n i n g ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21366",
-          "quote": "C o n t r a s t i v e s u p e r v i s e d f i n e - t u n i n g t e a c h e s w h e n a n d h o w t o r e s p o n d , w h i l e r e i n f o r c e m e n t l e a r n i n g w i t h B e h a v i o r - A l i g n e d C r e d i t A s s i g n m e n t ( B A C A ) c o m b i n e s t r a j e c t o r y - l e v e"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21366",
-          "quote": "l a n d l o c a l a d v a n t a g e s t o r e f i n e d e c i s i o n s , r e s p o n s e s , a n d s i l e n c e a c r o s s m u l t i - t u r n i n t e r a c t i o n s ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21366",
-          "quote": "W e a l s o i n t r o d u c e F S I - B e n c h t o e v a l u a t e f e e d b a c k s e e k i n g a n d s u b s e q u e n t t a s k c o m p l e t i o n ."
-        }
-      ]
-    },
-    {
-      "section": "paper",
-      "title": "CurvDelta：在低曲率空间做能力学习与遗忘",
-      "summary": "CurvDelta 把能力保持约束直接写进模型更新的参数化，通过分析保持约束在预适配模型附近的局部几何，构建参数更新几乎不改变保持损失的低曲率空间。它借助 Kronecker-factored approximate curvature（K-FAC）与因子化投影落地到 LLM，并给出同几何下的低秩变体 CurvLoRA，用于数学推理、代码生成与知识遗忘等任务。",
-      "tags": [
-        "论文",
-        "训练",
-        "安全"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_39e0f46731",
-          "url": "https://huggingface.co/papers/2611.24654"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2611.24654",
-          "quote": "We introduce CurvDelta , a scalable framework that incorporates the preservation constraint into the parameterization of the model update."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.24654",
-          "quote": "By analyzing the local geometry of the preservation constraint around the pre-adaptation model, CurvDelta constructs a low-curvature space in which parameter updates leave the preservation loss nearly invariant."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.24654",
-          "quote": "We make its construction practical for LLMs through Kronecker-factored approximate curvature ( K-FAC ) and a factorized projection ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.24654",
-          "quote": "We also introduce CurvLoRA , a low-rank variant within the same preservation geometry , designed for more efficient adaptation."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.24654",
-          "quote": "Both methods apply to preservation-constrained adaptation tasks such as capability learning and selective unlearning ."
-        }
-      ]
-    },
-    {
-      "section": "paper",
-      "title": "Code World Model 2.0：四步流式可控视频生成",
-      "summary": "Invoker-Render 是 Code World Model 2.0 背后的视频渲染器，把双向创作模型与因果四步流式模型配对，共享结构代理、外观参考与语言的条件接口。训练先用 Progressive Forcing 将因果预测器蒸馏为四步渲染器，再转向连续自生成 rollout 以减少漂移，论文报告稳定 30 分钟的赛车演示中场景与车辆保持一致。",
-      "tags": [
-        "论文",
-        "视频",
-        "多模态"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_c35402a17e",
-          "url": "https://huggingface.co/papers/2611.22925"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2611.22925",
-          "quote": "W e p r e s e n t I n v o k e r - R e n d e r , p a i r i n g a b i d i r e c t i o n a l c r e a t i o n m o d e l w i t h a c a u s a l f o u r - s t e p s t r e a m i n g m o d e l u n d e r a s h a r e d c o n d i t i o n i n g i n t e r f a c e o v e r s t r u c t u r a l p r o x i e s , a n a"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.22925",
-          "quote": "T o b r i d g e b i d i r e c t i o n a l c r e a t i o n a n d r e a l - t i m e s t r e a m i n g w i t h o u t c o m p o u n d i n g s t e p c o m p r e s s i o n a n d r o l l o u t d r i f t , w e i n t r o d u c e P r o g r e s s i v e F o r c i n g ( P r o F o r c i n g ) ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.22925",
-          "quote": "P r o F o r c i n g f i r s t t r a i n s a c a u s a l p r e d i c t o r a n d d i s t i l l s i t i n t o a f o u r - s t e p r e n d e r e r u s i n g h i s t o r i e s d e r i v e d f r o m t r a i n i n g v i d e o s ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.22925",
-          "quote": "T r a i n i n g t h e n s h i f t s t o c o n t i n u o u s s e l f - g e n e r a t e d r o l l o u t s ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.22925",
-          "quote": "We’re sharing Invoker-Render, the video renderer behind Code World Model 2.0."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.22925",
-          "quote": "For streaming, we use Progressive Forcing to distill the causal renderer to four denoising steps per chunk, then train it on its own generated history to reduce drift."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.22925",
-          "quote": "In our continuous 30-minute racing demo, the renderer follows the input trajectory while keeping the car and scene visually consistent."
-        }
-      ]
-    },
-    {
-      "section": "paper",
-      "title": "LogT：用自动 SFT 数据引擎训练图像缩放推理",
-      "summary": "LogT 是自动化的 SFT 数据引擎，生成带逻辑链引导的难题、结构化工具使用轨迹，目标是让视觉语言模型在放大细节时兼顾逻辑推理与工具效率。作者用 LogT-SFT 微调 Qwen2.5-VL-7B，报告其表现超过同时用 SFT 与 RL 训练的现有方法，数据量少 3.1 倍、GPU 小时少 120 倍；该工作被 NeurIPS 2026 接收。",
-      "tags": [
-        "论文",
-        "多模态",
         "Agent"
-      ],
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "AnyS1：用 4B 小模型替大模型做 Agent 流程里的选择",
+      "summary": "AnyS1 从超过 1,000 个公开 skill 中挖掘可枚举的决策点，在隔离容器里收集真实执行状态，训练一个 4B 的 pointer System-1 模型；运行时常规选择一次前向完成，置信度低于校准阈值时再交给大模型（System-2）。在三个未见过的基准上，它保持任务可靠性，同时比未编译的 System-2 Agent 降低 75-91% 的 episode 成本和 63-92% 的模型调用时间。按 skill 组织流程的 Agent 可以借此把大量常规决策下放给小模型。",
       "sources": [
         {
-          "candidate_id": "c_c9274d30bc",
-          "url": "https://huggingface.co/papers/2611.19200"
+          "candidate_id": "c_5338508548",
+          "url": "https://huggingface.co/papers/2611.23751"
         }
       ],
       "evidence": [
         {
-          "url": "https://huggingface.co/papers/2611.19200",
-          "quote": "W e t h e n p r o p o s e L o g T ( s h o r t f o r L o g i c a l l y T h i n k w i t h I m a g e s ) , a f u l l y a u t o m a t e d S F T d a t a e n g i n e t h a t e x p l i c i t l y e n f o r c e s l o g i c - c h a i n - g u i d e d r e a s o n i n g ."
+          "url": "https://huggingface.co/papers/2611.23751",
+          "quote": "AnyS1 mines grounded enumerable decisions across over 1,000 public skills, gathers execution-grounded trajectory states inside isolated containers"
         },
         {
-          "url": "https://huggingface.co/papers/2611.19200",
-          "quote": "L o g T g e n e r a t e s a n S F T d a t a s e t f e a t u r i n g c h a l l e n g i n g , v i s u a l l y g r o u n d e d q u e s t i o n s a n d s t r u c t u r e d t o o l - u s e t r a c e s w i t h h u m a n - l i k e l o g i c ."
+          "url": "https://huggingface.co/papers/2611.23751",
+          "quote": "trains a single calibrated 4B pointer System-1 with label smoothing"
         },
         {
-          "url": "https://huggingface.co/papers/2611.19200",
-          "quote": "W e s h o w t h a t L o g T - S F T b a s e d o n Q w e n 2 ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.19200",
-          "quote": "1 t i m e s l e s s d a t a a n d > 1 2 0 t i m e s f e w e r G P U h o u r s ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.19200",
-          "quote": "This work was accepted at NeurIPS 2026."
+          "url": "https://huggingface.co/papers/2611.23751",
+          "quote": "cutting episode cost by 75-91% and model-call time by 63-92% relative to an uncompiled System-2 agent"
         }
+      ],
+      "tags": [
+        "论文",
+        "Agent",
+        "推理"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Jeveration：单次前向生成 512x512 图像只需 78 ms",
+      "summary": "论文把 System One 式的并行预测用于图像生成：基于冻结的视觉语言模型，一次前向传播生成整张图，并让所有位置共享一个随机状态来协调并行预测、保证整体一致。同一个 checkpoint 支持文生图、图生图和稠密预测，生成 512x512 图像用时 78 ms，比现有统一模型最多快 122x。对需要低延迟出图的应用，这是一条单步生成的思路。",
+      "sources": [
+        {
+          "candidate_id": "c_217c28d75b",
+          "url": "https://huggingface.co/papers/2611.24738"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.24738",
+          "quote": "so that one checkpoint supports all three tasks, each in one forward pass. Experiments show that Jeveration generates a 512x512 image in 78 ms, up to 122x faster than existing unified models, while maintaining competitive image quality and dense prediction performance."
+        }
+      ],
+      "tags": [
+        "论文",
+        "图像",
+        "多模态"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Game2Player：让 Agent 自己搭游戏环境、收集训练数据",
+      "summary": "Game2Player 由 Builder Agent 改造现有网页游戏、暴露内部状态并定义带进度度量和成功检查的任务，Coding Player 和 VLM Player 尝试完成任务、把问题反馈给 Builder 修复。由此得到 568 个网页游戏、3,436 个任务和 307 小时游戏经验；用这些轨迹训练后，9B 模型在留出的 PlayerBench 游戏上的进度从 14.3% 提升到 31.2%。做视觉 Agent 的团队可以参考这种环境与玩家共同迭代的数据生产方式。",
+      "sources": [
+        {
+          "candidate_id": "c_8f48e1c27f",
+          "url": "https://huggingface.co/papers/2611.24154"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.24154",
+          "quote": "yielding 568 games, 3,436 tasks, and 307 hours of gameplay. Training on these trajectories raises a 9B model’s progress from 14.3% to 31.2% on held-out PlayerBench games, with gains that transfer to GameWorld."
+        }
+      ],
+      "tags": [
+        "论文",
+        "Agent",
+        "多模态"
       ]
     },
     {
       "section": "tool",
-      "title": "Thorizer 进入 Asta 并开放源码",
-      "summary": "Ai2 在 Asta 平台推出 Theorizer 并开源其代码，该 Agent 检索科研文献、抽取证据并生成待检验的解释，每个解释都关联到已发表研究的证据并说明适用范围。研究者既可通过 Asta 网页界面使用，也可在本地运行其开源库并自行承担 token 费用，Ai2 同时提醒搜索可能遗漏早期工作、模型也可能误判原创性。",
+      "title": "Codex 0.171.0：加入 GPT-6.2 Sol 和 Astra，默认开启 TUI 工作区",
+      "summary": "OpenAI Codex 0.171.0 把 GPT-6.2 Sol 和 Astra 加入模型目录，并把 Sol 设为默认选择；TUI 工作区默认开启，可在主对话旁查看文档预览、图片预览和 subagent 记录。新版还加入 codex exec --remote，可在已有 app server 上启动或恢复非交互会话，并新增 /rc 和 /remote 管理远程控制。",
+      "sources": [
+        {
+          "candidate_id": "c_65de769214",
+          "url": "https://github.com/openai/codex/releases/tag/rust-v0.171.0"
+        }
+      ],
+      "evidence": [],
       "tags": [
         "工具",
-        "论文",
-        "开源"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_b40a43ba52",
-          "url": "https://allenai.org/blog/theorizer-in-asta"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://allenai.org/blog/theorizer-in-asta",
-          "quote": "Theorizer comes to Asta November 19, 2026 Ai2 Share Try Theorizer in Asta Open-source release Dr."
-        },
-        {
-          "url": "https://allenai.org/blog/theorizer-in-asta",
-          "quote": "And it took me 15 years to think like this.” Today, we’re launching Theorizer in Asta , our platform of AI agents for scientific research, and open-sourcing the code so researchers can examine how it generates theories and adapt the methods to their own work."
-        },
-        {
-          "url": "https://allenai.org/blog/theorizer-in-asta",
-          "quote": "Through Asta’s web interface, we cover token costs up to a limit; those who prefer to work on their own machines can run our open library and pay for tokens as needed."
-        },
-        {
-          "url": "https://allenai.org/blog/theorizer-in-asta",
-          "quote": "Theorizer links each of its proposed explanations to evidence from published studies and describes where they might apply."
-        },
-        {
-          "url": "https://allenai.org/blog/theorizer-in-asta",
-          "quote": "The tool also flags claims it considers new, but a search can miss earlier work and the model can misjudge originality; researchers still need to check a claim against the wider literature."
-        }
+        "代码",
+        "Agent"
       ]
     },
     {
       "section": "brief",
-      "title": "WorldRuler：可配置规则驱动的交互式世界模型",
-      "summary": "WorldRuler 把规则定义、依赖关系与物体状态组织成可执行的 3D 规则图，把规则执行、视频生成与感知反馈连成闭环，支持规则与世界状态的联合存取与恢复，并用 RuleVerse 数据集覆盖规则先于受影响物体出现的情况。",
-      "tags": [
-        "论文",
-        "视频",
-        "多模态"
-      ],
+      "title": "Claude Code v2.1.329：/tasks 可管理定时任务和 fork",
+      "summary": "新版在信任对话框中提示文件夹的 hooks 在哪里声明，/tasks 加入本会话的定时任务、/loop 唤醒和 fork，并修复 ~/.claude.json 偶尔被重置为默认值的问题。",
       "sources": [
         {
-          "candidate_id": "c_17182edc48",
-          "url": "https://huggingface.co/papers/2611.24869"
+          "candidate_id": "c_a97e29fcf9",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.329"
         }
       ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2611.24869",
-          "quote": "In this paper, we propose WorldRuler, which organizes rule definitions, dependencies, and object states in an executable 3D rule graph and connects rule execution, video generation , and perceptual feedback in a closed loop."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.24869",
-          "quote": "The graph supports joint saving and restoration of rules and world states, while dynamic object binding grounds rule-specified entities in visual instances and uses stored states to constrain generation from their first appearance."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.24869",
-          "quote": "We develop an automated data collection and annotation pipeline using GTA-V and Habitat to construct RuleVerse, a dataset of rule-driven interactions with detailed state and event annotations , including cases where rules take effect before affected objects become visible."
-        }
-      ]
-    },
-    {
-      "section": "brief",
-      "title": "StrideWorld：交互式视频世界模型的刚性与动作一致性基准",
-      "summary": "StrideWorld 在运动开始前固定评测参考，用起始视角的真值几何衡量场景刚性，用每个动作自身的步长衡量动作一致性，其测量在已知相机运动的渲染视频上验证并与人类判断一致。",
+      "evidence": [],
       "tags": [
-        "论文",
-        "视频",
-        "多模态"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_8184e88af8",
-          "url": "https://huggingface.co/papers/2611.24408"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2611.24408",
-          "quote": "We therefore introduce StrideWorld, a benchmark whose references are fixed before the motion they judge."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.24408",
-          "quote": "It evaluates scene rigidity against the ground-truth geometry of the start view, and action consistency against the stride of each action, the camera motion of one command."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.24408",
-          "quote": "Its measurements are validated on rendered videos with known camera motion, and its scores agree with human judgments."
-        }
+        "工具",
+        "代码"
       ]
     }
   ],
@@ -629,59 +378,23 @@
     },
     {
       "via": "webfetch",
-      "url": "https://github.com/openai/codex/releases/tag/rust-v0.171.0"
+      "url": "https://huggingface.co/microsoft/Aion-1.0-Instruct-2.3B"
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.24738"
+      "url": "https://huggingface.co/Cloudflare/clairic"
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.23751"
+      "url": "https://openai.com/index/performance-factory/"
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.21366"
+      "url": "https://openai.com/index/how-openai-performance-factory-keeps-chatgpt-fast"
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.22925"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.24651"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.24654"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.23068"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.24154"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.24789"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.24869"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.24408"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.19200"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://allenai.org/blog/theorizer-in-asta"
+      "url": "https://www.reuters.com/business/finance/anthropics-historic-debut-put-ais-promise-peril-wall-st-test-2026-11-19/"
     },
     {
       "via": "webfetch",
@@ -689,67 +402,45 @@
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/thejagstudio/tessera-small"
+      "url": "https://huggingface.co/briaai/RMBG-3.0"
+    },
+    {
+      "via": "websearch",
+      "query": "Anthropic Nasdaq debut first day trading shares open ANTH November 19 2026"
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.17600"
+      "url": "https://huggingface.co/papers/2611.24738"
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.11318"
+      "url": "https://huggingface.co/papers/2611.23068"
     },
     {
       "via": "webfetch",
-      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.329"
+      "url": "https://huggingface.co/papers/2611.23751"
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/KORMo-VL/KORMo-Web-11B"
+      "url": "https://huggingface.co/papers/2611.24154"
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/microsoft/Aion-1.0-Instruct-2.3B"
+      "url": "https://huggingface.co/papers/2611.24651"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://openai.com/business/learn/deploying-daybreak-red"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://moq.dev/blog/webrtc-is-still-the-problem/"
     }
   ],
   "validation": {
-    "validated_at": "2026-11-20T04:38:12+00:00",
+    "validated_at": "2026-11-20T04:46:10+00:00",
     "checked_links": true,
-    "dropped": [
-      {
-        "title": "KORMo-Web-11B：韩英双语通用网页 Agent 模型",
-        "section": "model",
-        "candidates": [
-          "c_b1b11fb204"
-        ],
-        "reasons": [
-          "'Online-Mind2Web' does not appear in the cited material",
-          "number 2 does not appear in the cited material"
-        ]
-      },
-      {
-        "title": "Game2Player：环境与玩家共进化收集游戏经验",
-        "section": "brief",
-        "candidates": [
-          "c_8f48e1c27f"
-        ],
-        "reasons": [
-          "summary longer than 120 characters"
-        ]
-      },
-      {
-        "title": "Tessera-small：16×16 像素画的扩散语言模型",
-        "section": "brief",
-        "candidates": [
-          "c_197cd24380"
-        ],
-        "reasons": [
-          "summary longer than 120 characters"
-        ]
-      }
-    ],
-    "warnings": [
-      "6 paper items (target 2-4)"
-    ]
+    "dropped": [],
+    "warnings": []
   }
 }
