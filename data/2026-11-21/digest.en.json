@@ -2,24 +2,19 @@
   "schema_version": 1,
   "date": "2026-11-21",
   "mode": "full",
-  "generated_at": "2026-11-21T04:39:13+00:00",
-  "channel": "api",
-  "model": "nvidia:minimaxai/minimax-m3.1-flash",
+  "channel": "claude",
+  "generated_at": "2026-11-21T04:45:18+00:00",
+  "model": "claude-opus-5-5",
   "highlights": [
-    "Thinking Machines Lab released Inkling 2 Mini, a multimodal Mixture-of-Experts model with ~26B total and 3B active parameters per token, a 1M-token context size, and image and text inputs.",
-    "Apple's Depth Pro 2 estimates dense metric depth at native resolution for images and video, releasing a model family plus code and weights.",
-    "WeMM-Video is a family of Chinese-English bilingual omni-modal foundation models spanning 2B, 4B, 9B, and 35B-A3B variants, with the WeMM-Video family publicly released."
+    "Thinking Machines released Inkling 2 Mini under Apache 2.0: 26.4B total and 3.4B active parameters, in a checkpoint of about 20GB that runs locally.",
+    "OpenAI detailed its defenses against adversarial distillation, cutting the average reasoning-extraction attack success rate from 54.0% to 0.2%; Hugging Face's RL-trained harness adapters lift Qwen3.8-27B on Terminal-Bench 2.1 under pi from 39% to 55%.",
+    "Signal is blocking built-in AI on iOS 27 and Android from capturing its screens."
   ],
   "items": [
     {
       "section": "headline",
-      "title": "Thinking Machines Lab releases Inkling 2 Mini multimodal model",
-      "summary": "Inkling 2 Mini is a new looped transformer model and a multimodal Mixture-of-Experts with ~26B physical total and 3B active parameters per token, supporting a 1M-token context size with image and text inputs. Thinking Machines Lab ships it in a mixed-precision format with NVFP4 and MXFP8 expert weights, alongside transformers, Llama App (llama.cpp), and MLX support, with day-zero SGLang inference support for datacenter hardware.",
-      "tags": [
-        "模型",
-        "多模态",
-        "开源"
-      ],
+      "title": "Thinking Machines releases Inkling 2 Mini weights: 26.4B total, 3.4B active",
+      "summary": "Inkling 2 Mini is a multimodal Mixture-of-Experts model from Thinking Machines Lab with a looped design: some layers are visited three times to add capacity, and the model card lists 26.4B total and 3.4B active parameters, a 1M-token context, image and text inputs, and an Apache 2.0 license. The checkpoint is about 20GB in mixed NVFP4 and MXFP8 precision, officially supported on one NVIDIA DGX Spark or Apple silicon with 32GB or more memory, with IQ4_NL and Q8_0 GGUF quants for llama.cpp. Developers who want a long-context multimodal model on local hardware can download it today.",
       "sources": [
         {
           "candidate_id": "c_a4f31a72ec",
@@ -33,106 +28,39 @@
       "evidence": [
         {
           "url": "https://huggingface.co/blog/inkling2mini",
-          "quote": "TLDR; Inkling 2 Mini is a new looped transformer model."
-        },
-        {
-          "url": "https://huggingface.co/blog/inkling2mini",
           "quote": "It’s a multimodal Mixture-of-Experts with ~26B physical total and 3B active parameters per token."
         },
         {
           "url": "https://huggingface.co/blog/inkling2mini",
-          "quote": "It uses a neat trick to increase capacity: some layers are visited in a loop that repeats three times, which makes it work like it had more parameters."
+          "quote": "It uses a neat trick to increase capacity: some layers are visited in a loop that repeats three times, which makes it work like it had more parameters. It supports a 1M-token context size, accepts images and text inputs."
+        },
+        {
+          "url": "https://huggingface.co/thinkingmachines/Inkling-2-Mini",
+          "quote": "Parameters 26.4B, 3.4B active"
+        },
+        {
+          "url": "https://huggingface.co/thinkingmachines/Inkling-2-Mini",
+          "quote": "Date of release: November 20, 2026 License: Apache 2.0"
+        },
+        {
+          "url": "https://huggingface.co/thinkingmachines/Inkling-2-Mini",
+          "quote": "The model is distributed as a single checkpoint of about 20GB, in mixed NVFP4 and MXFP8 precisions. Given its small size, it is possible to run this checkpoint on local AI compute for inference. We support: 1x NVIDIA DGX Spark Apple silicon devices with 32GB or more memory"
         },
         {
           "url": "https://huggingface.co/blog/inkling2mini",
-          "quote": "It supports a 1M-token context size, accepts images and text inputs."
-        },
-        {
-          "url": "https://huggingface.co/blog/inkling2mini",
-          "quote": "Thinking Machines Lab ships the model in a mixed-precision format, with NVFP4 and MXFP8 expert weights."
-        },
-        {
-          "url": "https://huggingface.co/blog/inkling2mini",
-          "quote": "We ship transformers, Llama App (llama.cpp), and MLX support."
-        },
-        {
-          "url": "https://huggingface.co/blog/inkling2mini",
-          "quote": "SGLang also provides day-zero inference support for production deployments on datacenter hardware."
-        }
-      ]
-    },
-    {
-      "section": "headline",
-      "title": "Apple presents Depth Pro 2 for metric monocular depth",
-      "summary": "Depth Pro 2 is an approach to estimating dense metric depth for images and video at full resolution, using a single scalable network that handles both and predicts depth maps at native resolution. It produces depth maps that are metrically accurate, sharp, and temporally consistent at once, and Apple releases a family of models plus code and weights.",
-      "tags": [
-        "论文",
-        "多模态",
-        "图像",
-        "开源"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_2e19ab5231",
-          "url": "https://machinelearning.apple.com/research/depth-pro-2-monocular"
-        },
-        {
-          "candidate_id": "c_9d57ae937b",
-          "url": "https://huggingface.co/papers/2611.26603"
-        },
-        {
-          "candidate_id": "c_eef5dc3779",
-          "url": "https://huggingface.co/apple/DepthPro2"
+          "quote": "For the Inkling 2 Mini release we provide GGUF 4-bit ( IQ4_NL) and 8-bit ( Q8_0 ) quants for both models."
         }
       ],
-      "evidence": [
-        {
-          "url": "https://machinelearning.apple.com/research/depth-pro-2-monocular",
-          "quote": "Richter, Vladlen Koltun View publication View source code (GitHub) Copy Bibtex We present Depth Pro 2, an approach to estimating dense metric depth for images and video at full resolution."
-        },
-        {
-          "url": "https://machinelearning.apple.com/research/depth-pro-2-monocular",
-          "quote": "By analyzing prior methods for monocular depth estimation, we find that they commonly trade off temporal consistency and boundary sharpness: multi-frame methods favor consistency, single-frame methods favor sharpness."
-        },
-        {
-          "url": "https://machinelearning.apple.com/research/depth-pro-2-monocular",
-          "quote": "To overcome this trade-off, we train a single, scalable network that processes both images and video and predicts depth maps at native resolution."
-        },
-        {
-          "url": "https://machinelearning.apple.com/research/depth-pro-2-monocular",
-          "quote": "Depth Pro 2 produces depth maps that are metrically accurate, sharp, and temporally consistent all at once, outperforming prior work in all of these dimensions."
-        },
-        {
-          "url": "https://machinelearning.apple.com/research/depth-pro-2-monocular",
-          "quote": "We release a family of models that define a new Pareto frontier in terms of metric accuracy, sharpness, temporal consistency, and runtime."
-        },
-        {
-          "url": "https://machinelearning.apple.com/research/depth-pro-2-monocular",
-          "quote": "We release code and weights here ."
-        },
-        {
-          "url": "https://machinelearning.apple.com/research/depth-pro-2-monocular",
-          "quote": "Depth Pro 2 estimates the depth of every pixel, in meters, from images taken with an ordinary camera."
-        },
-        {
-          "url": "https://machinelearning.apple.com/research/depth-pro-2-monocular",
-          "quote": "One network handles a single photo, a whole video, or a live camera feed, at the input’s full resolution."
-        },
-        {
-          "url": "https://machinelearning.apple.com/research/depth-pro-2-monocular",
-          "quote": "Its depth is sharp at object edges and steady from frame to frame."
-        }
-      ]
-    },
-    {
-      "section": "headline",
-      "title": "OpenAI details a layered defense against adversarial distillation",
-      "summary": "OpenAI's approach combines adversarial testing, model training, classifiers, and API-level protections with investigations into coordinated attempts to extract model capabilities. In an internal adaptive evaluation, the average attack success rate fell from 54.0% against GPT‑6 Astra with its original safeguards to 0.2% against GPT‑6.2 Astra with its updated safeguards.",
       "tags": [
-        "安全",
         "模型",
-        "行业"
-      ],
+        "开源",
+        "多模态"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "OpenAI details adversarial distillation defenses, extraction success down to 0.2%",
+      "summary": "OpenAI described how it fights adversarial distillation, combining adversarial testing, model training, classifiers and API-level protections with investigations into coordinated extraction campaigns; for GPT‑6.2 Astra and Sol, protected reasoning is tied to the conversation history that produced it, and rewriting an earlier message makes the API drop the reasoning that followed. In automated red-teaming, the average success rate of recovering reasoning from an earlier prompt fell from 54.0% against GPT‑6 Astra with its original safeguards to 0.2% against GPT‑6.2 Astra. API apps that rewrite conversation history should expect that reasoning to be discarded; OpenAI also attributed a core part of one campaign to individuals associated with Moonshot AI.",
       "sources": [
         {
           "candidate_id": "c_bab9b9b98c",
@@ -142,19 +70,11 @@
       "evidence": [
         {
           "url": "https://openai.com/index/combatting-adversarial-distillation",
-          "quote": "Adversarial distillation creates a path for bad actors to reproduce these capabilities without appropriate safeguards."
-        },
-        {
-          "url": "https://openai.com/index/combatting-adversarial-distillation",
           "quote": "Our approach to adversarial distillation combines adversarial testing, model training, classifiers, and API-level protections with investigations into coordinated attempts to extract model capabilities."
         },
         {
           "url": "https://openai.com/index/combatting-adversarial-distillation",
-          "quote": "We place particular emphasis on preventing attackers from extracting our models’ protected reasoning: the intermediate steps a model generates internally while working toward an answer, known as its chain-of-thought."
-        },
-        {
-          "url": "https://openai.com/index/combatting-adversarial-distillation",
-          "quote": "In an internal adaptive evaluation using strong automated red-teaming , we tested whether attackers could recover protected reasoning the model had generated while answering an earlier prompt."
+          "quote": "a and GPT‑6.2 Sol, we tie a model’s protected reasoning to the conversation history that produced it. As new messages are added, the model can build on its earlier reasoning. If an earlier message is rewritten, our API drops the reasoning that followed it"
         },
         {
           "url": "https://openai.com/index/combatting-adversarial-distillation",
@@ -162,28 +82,147 @@
         },
         {
           "url": "https://openai.com/index/combatting-adversarial-distillation",
-          "quote": "Defenses that reinforce one another We defend against adversarial distillation at two complementary levels of our safeguard stack."
-        },
-        {
-          "url": "https://openai.com/index/combatting-adversarial-distillation",
-          "quote": "Our defenses against adversarial distillation combine safeguards for individual requests with campaign detection and enforcement."
-        },
-        {
-          "url": "https://openai.com/index/combatting-adversarial-distillation",
-          "quote": "Classifier safeguards We use input classifiers to detect attempts to extract protected reasoning, and output classifiers to detect leaks of protected reasoning in assistant messages and tool-call arguments."
+          "quote": "attributed a core part of that activity to individuals associated with Moonshot AI, the developer of Kimi."
         }
+      ],
+      "tags": [
+        "安全",
+        "模型",
+        "行业"
       ]
     },
     {
       "section": "headline",
-      "title": "WeMM-Video open-sources bilingual omni-modal video models",
-      "summary": "WeMM-Video is a family of Chinese-English bilingual omni-modal foundation models spanning 2B, 4B, 9B, and 35B-A3B variants, trained on a large-scale multimodal corpus of approximately 1.2 trillion tokens with both instruct and thinking modes. Evaluated across more than 120 benchmarks, the flagship WeMM-Video-35B-A3B substantially outperforms proprietary models such as Qwen3.5-Omni-Flash and Seed2.0-Mini-0428, and the family is publicly released with its evaluation and reproduction pipeline.",
-      "tags": [
-        "模型",
-        "多模态",
-        "视频",
-        "开源"
+      "title": "MiniMax's internal model MIM breaks several NIST candidate schemes",
+      "summary": "MiniMax researchers used an internal-only model, MIM, for automated cryptanalysis: it built the first practical collision attack on the NIST SHA-3 candidate Waterfall-256 and, on the TII McEliece Challenges, recovered secret keys for 94 instances, including 55 previously unsolved ones. MiniMax says the work targets academic designs, past competition candidates and public challenge parameters, does not affect deployed cryptographic standards, and was shared with the scheme authors in advance. MIM is not public, but qualified researchers and developers can apply for access.",
+      "sources": [
+        {
+          "candidate_id": "c_9e3e131d9a",
+          "url": "https://www.minimax.io/blog/practical-cryptanalysis-with-minimaxs-latest-internal-model"
+        }
       ],
+      "evidence": [
+        {
+          "url": "https://www.minimax.io/blog/practical-cryptanalysis-with-minimaxs-latest-internal-model",
+          "quote": "Our research team used an internal-only research model that we will call MiniMax's Internal Model (MIM) to conduct automated cryptanalysis across modern cryptographic schemes."
+        },
+        {
+          "url": "https://www.minimax.io/blog/practical-cryptanalysis-with-minimaxs-latest-internal-model",
+          "quote": "compromise several NIST candidates. Examples include: Waterfall-256 (NIST SHA-3 candidate): Prior work was purely theoretical, with no colliding message pairs constructed. In a blind run, MIM built the first practical collision attack"
+        },
+        {
+          "url": "https://www.minimax.io/blog/practical-cryptanalysis-with-minimaxs-latest-internal-model",
+          "quote": "TII McEliece Challenges: This benchmark tests concrete security using challenge instances based on the McEliece cryptosystem"
+        },
+        {
+          "url": "https://www.minimax.io/blog/practical-cryptanalysis-with-minimaxs-latest-internal-model",
+          "quote": "it recovered secret keys for 94 instances, including 55 previously unsolved hard instances."
+        },
+        {
+          "url": "https://www.minimax.io/blog/practical-cryptanalysis-with-minimaxs-latest-internal-model",
+          "quote": "This work focuses on academic designs, past competition candidates, and public challenge parameters, and does not affect deployed cryptographic standards. Following the principles of responsible research and disclosure, we shared our findings with the authors of the respective schemes in advance."
+        },
+        {
+          "url": "https://www.minimax.io/blog/practical-cryptanalysis-with-minimaxs-latest-internal-model",
+          "quote": "We will provide access to qualified researchers and developers."
+        }
+      ],
+      "tags": [
+        "安全",
+        "模型"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Architect Labs unveils Frostbite, a new-ISA CPU designed by AI",
+      "summary": "Architect Labs introduced Frostbite, a general-purpose CPU with a new instruction set built on interaction nets, saying its AI systems autonomously iterated over the compiler, ISA, architecture, microarchitecture, RTL, verification and final GDS. On a 7 nm process, one Frostbite quad with four L3 nodes is 0.792 mm², and against an undisclosed traditional CPU (TCPU) it averages 8.77x performance-per-area and a 4.59x geometric mean in performance-per-watt across 25 workloads. The comparison CPU is not named and the RTL and ISA are not yet released, so the self-reported numbers can't be checked independently, but it is a concrete case of AI systems running a full chip design flow.",
+      "sources": [
+        {
+          "candidate_id": "c_c68595a7da",
+          "url": "https://architectlabs.com/blog/frostbite"
+        },
+        {
+          "candidate_id": "c_c68595a7da",
+          "url": "https://news.ycombinator.com/item?id=50572503"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://architectlabs.com/blog/frostbite",
+          "quote": "Today, we're introducing Frostbite, a general-purpose CPU with a new instruction set built from the ground up. Frostbite exploits the properties of interaction nets"
+        },
+        {
+          "url": "https://architectlabs.com/blog/frostbite",
+          "quote": "Our AI systems autonomously iterated over the compiler, ISA, architecture, microarchitecture, RTL, verification, and final GDS."
+        },
+        {
+          "url": "https://architectlabs.com/blog/frostbite",
+          "quote": "We synthesized Frostbite on a 7 nm process, reaching 800 MHz timing at synthesis and 500 MHz in the final GDS. Each Frostbite quad (a two-by-two grid of tiles) paired with four L3 nodes is 0.792 mm²."
+        },
+        {
+          "url": "https://architectlabs.com/blog/frostbite",
+          "quote": "Across all the workloads, we average an 8.77x performance-per-area, and across all 25 workloads, search set and held out together, Frostbite reaches a geometric mean of 4.59x the TCPU's performance-per-watt"
+        },
+        {
+          "url": "https://architectlabs.com/blog/frostbite",
+          "quote": "Release the RTL and ISA for Frostbite. We are having a lot of fun! Notes † For legal reasons, we cannot disclose the exact CPU."
+        }
+      ],
+      "tags": [
+        "硬件",
+        "Agent"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Signal blocks built-in AI on iOS 27 and Android from reading its screen",
+      "summary": "Signal is preventing screenshots in its app on iOS 27 and automatically enabling Screen security on Android versions where it detects an AI assistant trying to read the screen, similar to how it blocked Microsoft's Recall on Windows 11; users can turn the protection off in settings. Signal also asks platform makers for an easy, well-documented way for developers to opt their apps out of AI data access and processing. Mobile developers building privacy-sensitive apps now have to think about OS-level agents reading their screens.",
+      "sources": [
+        {
+          "candidate_id": "c_9a5c17e015",
+          "url": "https://signal.org/blog/protecting-your-privacy/"
+        },
+        {
+          "candidate_id": "c_9a5c17e015",
+          "url": "https://news.ycombinator.com/item?id=50572348"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://signal.org/blog/protecting-your-privacy/",
+          "quote": "We will now be taking similar measures to restrict agentic systems built into iOS 27 and on Android versions where we can detect an AI assistant attempting to read your Signal screen."
+        },
+        {
+          "url": "https://signal.org/blog/protecting-your-privacy/",
+          "quote": "So, we are blocking such capture by preventing screenshots in the app on iOS 27 and when AI assistants attempt to capture screen data on Android."
+        },
+        {
+          "url": "https://signal.org/blog/protecting-your-privacy/",
+          "quote": "We automatically enable the “Screen security” setting in Signal Android when this type of access is detected."
+        },
+        {
+          "url": "https://signal.org/blog/protecting-your-privacy/",
+          "quote": "Last year, we used screenshot blocking to prevent Microsoft’s Recall AI from taking and storing screenshots of your Signal messages on Windows 11 operating systems by default."
+        },
+        {
+          "url": "https://signal.org/blog/protecting-your-privacy/",
+          "quote": "People who want the ability to take screenshots can disable this protection within the Signal app’s settings."
+        },
+        {
+          "url": "https://signal.org/blog/protecting-your-privacy/",
+          "quote": "Developers should have an easy and well-documented way to opt their app out of AI data access and processing"
+        }
+      ],
+      "tags": [
+        "安全",
+        "Agent",
+        "产品"
+      ]
+    },
+    {
+      "section": "model",
+      "title": "WeMM-Video: open omni-modal video models from 2B to 35B-A3B",
+      "summary": "WeMM-Video is a Chinese-English bilingual family of omni-modal models in 2B, 4B, 9B and 35B-A3B sizes that handle text, image, audio and video, with both a non-thinking and a thinking mode, trained on approximately 1.2 trillion tokens. The report says WeMM-Video-35B-A3B sets a new open-source state of the art on omni-modal video evaluations and WeMM-Video-9B beats the larger Qwen3-Omni-30B-A3B-Instruct; the models ship with the evaluation and reproduction pipeline. Apps that need to understand video frames and audio together can try it.",
       "sources": [
         {
           "candidate_id": "c_1e04576ead",
@@ -193,165 +232,41 @@
       "evidence": [
         {
           "url": "https://huggingface.co/papers/2611.26409",
-          "quote": "In this report, we introduce WeMM-Video, a family of Chinese-English bilingual omni-modal foundation models spanning 2B, 4B, 9B, and 35B-A3B variants."
+          "quote": "our flagship WeMM-Video-35B-A3B establishes a new open-source state of the art"
         },
         {
           "url": "https://huggingface.co/papers/2611.26409",
-          "quote": "Centering on joint audio-visual perception and reasoning, WeMM-Video unifies text, image, audio, and video processing within a hybrid-thinking paradigm , seamlessly supporting both a non-thinking instruct mode for fast, direct responses and a thinking mode for explicit step-by-step reasoning ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.26409",
-          "quote": "The models are trained on a large-scale multimodal corpus of approximately 1.2 trillion tokens through progressive pre-training and a multi-stage post-training pipeline incorporating multi-teacher OPD , anti-repetition MrDPO , and specialist RL ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.26409",
-          "quote": "Evaluated across more than 120 benchmarks, WeMM-Video demonstrates superior performance in omni-modal video understanding and reasoning, while maintaining highly competitive capabilities across general audio, silent video, image, and text tasks."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.26409",
-          "quote": "Specifically, in omni-modal video evaluations, our flagship WeMM-Video-35B-A3B establishes a new open-source state of the art, substantially outperforming proprietary models such as Qwen3.5-Omni-Flash and Seed2.0-Mini-0428 while narrowing the gap with the strong Gemini-3.0-Flash, and our compact WeM"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.26409",
-          "quote": "M-Video-9B surpasses the larger open-source Qwen3-Omni-30B-A3B-Instruct."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.26409",
-          "quote": "We publicly release the WeMM-Video family along with our evaluation and reproduction pipeline to foster further research and development in the open-source community."
+          "quote": "our compact WeMM-Video-9B surpasses the larger open-source Qwen3-Omni-30B-A3B-Instruct. We publicly release the WeMM-Video family along with our evaluation and reproduction pipeline to foster further research and development in the open-source community."
         }
-      ]
-    },
-    {
-      "section": "model",
-      "title": "Anthropic closes its initial public offering",
-      "summary": "Anthropic, PBC announced the closing of its initial public offering of an aggregate of 1,127,000,000 shares of its Class A common stock at a public offering price of $83.00 per share, including the full exercise by the underwriters of their option to purchase an additional 147,000,000 shares. Anthropic's Class A common stock began trading on the Nasdaq Global Select Market on November 19, 2026 under the symbol “ANT.”",
+      ],
       "tags": [
-        "行业",
-        "产品"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_0f26b1017f",
-          "url": "https://www.anthropic.com/news/ipo-close"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://www.anthropic.com/news/ipo-close",
-          "quote": "hropic raises $65B in Series H funding at $965B post-money valuation View more Today Anthropic, PBC announced the closing of its initial public offering of an aggregate of 1,127,000,000 shares of its Class A common stock at a public offering price of $83.00 per share, including the full exercise by"
-        },
-        {
-          "url": "https://www.anthropic.com/news/ipo-close",
-          "quote": "the underwriters of their option to purchase an additional 147,000,000 shares of Class A common stock from Anthropic at the initial public offering price."
-        },
-        {
-          "url": "https://www.anthropic.com/news/ipo-close",
-          "quote": "The aggregate gross proceeds from the offering, before deducting underwriting discounts and commissions and other offering expenses, were approximately $93.5 billion, of which approximately $91.6 billion was received by Anthropic."
-        },
-        {
-          "url": "https://www.anthropic.com/news/ipo-close",
-          "quote": "Anthropic’s Class A common stock began trading on the Nasdaq Global Select Market on November 19, 2026 under the symbol “ANT.” In addition to the shares of Class A common stock sold in the initial public offering, Anthropic closed the concurrent sale of an aggregate of 313,253,007 shares of Class N"
-        },
-        {
-          "url": "https://www.anthropic.com/news/ipo-close",
-          "quote": "common stock to Advanced Micro Devices, Inc., Broadcom Inc., Google LLC, Micron Technology, Inc., Microsoft Corporation, NVIDIA Corporation, and TSMC Partners, Ltd."
-        },
-        {
-          "url": "https://www.anthropic.com/news/ipo-close",
-          "quote": "at the public offering price of $83.00 per share, in a private placement for an aggregate purchase price of approximately $26.0 billion."
-        },
-        {
-          "url": "https://www.anthropic.com/news/ipo-close",
-          "quote": "Aggregate gross proceeds from the initial public offering, including the shares sold by the selling stockholders, and the concurrent private placement were approximately $119.5 billion, before deducting underwriting discounts and commissions and other offering expenses."
-        }
+        "模型",
+        "开源",
+        "多模态"
       ]
     },
     {
       "section": "tool",
-      "title": "Claude Code v2.1.330 adds org sign-in and easel charts",
-      "summary": "The release adds sign-in to organizations managed in Anthropic's Enterprise Admin Console, so after claude auth login, Claude Code applies the organization's settings and uses its cloud provider or gateway. It also adds easel, a built-in mod that draws charts when asked and under MCP metrics results on Pro, Max and, where available, Team and Enterprise on macOS and Linux, and fixes several freezes, including one after compacting a very long conversation.",
-      "tags": [
-        "工具",
-        "Agent",
-        "代码"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_6338b9792f",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.330"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.330",
-          "quote": "Added sign-in to organizations managed in Anthropic's Enterprise Admin Console: after claude auth login , Claude Code applies the organization's settings and uses its cloud provider or gateway"
-        },
-        {
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.330",
-          "quote": "Added easel, a built-in mod that draws charts when asked and under MCP metrics results, on Pro, Max and, where available, Team and Enterprise on macOS and Linux; turn automatic charts off in /config"
-        },
-        {
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.330",
-          "quote": "Fixed Claude Code freezing for up to several minutes right after compacting a very long conversation"
-        },
-        {
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.330",
-          "quote": "Fixed WebFetch freezing the session for minutes on some pages, and returning an empty result for some others"
-        },
-        {
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.330",
-          "quote": "Fixed changes to user settings being lost when several Claude Code processes saved them at the same time"
-        },
-        {
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.330",
-          "quote": "Fixed turns failing with \"JSON schema is invalid\", and session files growing by many megabytes, when many MCP tools have an input schema that the API refuses"
-        }
-      ]
-    },
-    {
-      "section": "tool",
-      "title": "Hugging Face trains per-harness LoRA adapters for Qwen3.8-27B",
-      "summary": "The team trained one LoRA adapter for Qwen3.8-27B per agent harness (pi, Hermes Agent, OpenCode), with RL inside the harness itself, and merged the three LoRAs into a single super adapter that runs unchanged under pi, Hermes Agent and OpenCode. Each harness adapter beats the base model under its own harness on both performance and efficiency, and all artifacts, including adapters, GGUFs, RL tasks, and the safeagents plugin, can be browsed through a Hugging Face collection.",
-      "tags": [
-        "工具",
-        "Agent",
-        "训练",
-        "开源"
-      ],
+      "title": "Hugging Face introduces harness adapters: per-harness LoRAs trained with RL",
+      "summary": "Hugging Face trained one RL LoRA adapter for Qwen3.8-27B inside each of three agent harnesses (pi, Hermes Agent, OpenCode) and merged them into a single super adapter that runs under all three, publishing the adapters, GGUFs, RL tasks and recipe on the Hub. Under pi, Terminal-Bench 2.1 rises from 39% to 55% pass@1 while average tokens per task drop from 2.9K to 1.5K, and on SWE-bench Pro (hard 51) pi goes from 39.2% to 64.7%. Teams running coding agents on open models can follow the recipe to train an adapter for their own harness and gain both accuracy and token savings.",
       "sources": [
         {
           "candidate_id": "c_daa5ed95b3",
           "url": "https://huggingface.co/blog/harness-adapters-at-scale"
         },
         {
-          "candidate_id": "c_3076d62d44",
-          "url": "https://huggingface.co/harness-hub/Qwen3.8-27B-opencode-adapted"
-        },
-        {
           "candidate_id": "c_6be73df178",
           "url": "https://huggingface.co/harness-hub/Qwen3.8-27B-pi-adapted"
+        },
+        {
+          "candidate_id": "c_3076d62d44",
+          "url": "https://huggingface.co/harness-hub/Qwen3.8-27B-opencode-adapted"
         }
       ],
       "evidence": [
         {
           "url": "https://huggingface.co/blog/harness-adapters-at-scale",
-          "quote": "Combining RL on a custom task distribution with your favorite agent harness yields more accurate and efficient models for that target harness and task distribution."
-        },
-        {
-          "url": "https://huggingface.co/blog/harness-adapters-at-scale",
-          "quote": "Take Qwen3.8-27B, its Terminal-Bench 2.1 score with the pi harness is 39% which uses on average 2.9K tokens per task."
-        },
-        {
-          "url": "https://huggingface.co/blog/harness-adapters-at-scale",
-          "quote": "If we freeze those weights and add a custom RL-trained LoRA adapter we can get 55% pass@1, with average token usage of 1.5K."
-        },
-        {
-          "url": "https://huggingface.co/blog/harness-adapters-at-scale",
-          "quote": "Most of this is down to the model reasoning less, calling less tools, and performing better first time."
-        },
-        {
-          "url": "https://huggingface.co/blog/harness-adapters-at-scale",
-          "quote": "Here we wanted to push this further by exploring whether the result holds at 27B, on harder real-world software engineering tasks, across three harnesses: Pi, OpenCode and Hermes Agent."
+          "quote": "Take Qwen3.8-27B, its Terminal-Bench 2.1 score with the pi harness is 39% which uses on average 2.9K tokens per task. If we freeze those weights and add a custom RL-trained LoRA adapter we can get 55% pass@1, with average token usage of 1.5K."
         },
         {
           "url": "https://huggingface.co/blog/harness-adapters-at-scale",
@@ -359,550 +274,40 @@
         },
         {
           "url": "https://huggingface.co/blog/harness-adapters-at-scale",
-          "quote": "Datasets, training and agent rollouts all happen on the Hub in Jobs using TRL's AsyncGRPOTrainer , OpenEnv and harbor."
+          "quote": "The three LoRAs are also merged into a single super adapter that runs unchanged under pi, Hermes Agent and OpenCode. All artifacts (adapters, GGUFs, RL tasks, safeagents plugin) can be browsed through this Hugging"
         },
         {
           "url": "https://huggingface.co/blog/harness-adapters-at-scale",
-          "quote": "Each harness adapter beats the base model under its own harness on both benchmarks, for both performance and efficiency."
-        },
-        {
-          "url": "https://huggingface.co/blog/harness-adapters-at-scale",
-          "quote": "The three LoRAs are also merged into a single super adapter that runs unchanged under pi, Hermes Agent and OpenCode."
-        },
-        {
-          "url": "https://huggingface.co/blog/harness-adapters-at-scale",
-          "quote": "All artifacts (adapters, GGUFs, RL tasks, safeagents plugin) can be browsed through this Hugging Face collection ."
+          "quote": "On SWE-bench Pro (hard 51), pi goes from 39.2% to 64.7%"
         }
+      ],
+      "tags": [
+        "工具",
+        "Agent",
+        "训练"
       ]
     },
     {
       "section": "tool",
-      "title": "obra/superpowers adds a skills-based agent development methodology",
-      "summary": "Superpowers is a software development methodology for coding agents built on composable skills and instructions that trigger automatically from the moment the agent starts a build. It guides the agent through a spec, an implementation plan, red/green TDD, and subagent-driven development, and it is available through the official Claude plugin marketplace and the official Codex plugin marketplace.",
+      "title": "Claude Code v2.1.330 adds Enterprise Admin Console sign-in and the easel chart mod",
+      "summary": "Claude Code v2.1.330 can sign in to organizations managed in Anthropic's Enterprise Admin Console, applying the organization's settings and its cloud provider or gateway after claude auth login, and adds easel, a built-in mod that draws charts when asked and under MCP metrics results (automatic charts can be turned off in /config). The self-hosted runner gains --start-dir so Claude can start work in a folder of a repository. Teams on the enterprise console or self-hosted runners should upgrade.",
+      "sources": [
+        {
+          "candidate_id": "c_6338b9792f",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.330"
+        }
+      ],
+      "evidence": [],
       "tags": [
         "工具",
-        "Agent",
         "代码",
-        "开源"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_cfd2851c47",
-          "url": "https://github.com/obra/superpowers"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://github.com/obra/superpowers",
-          "quote": "Superpowers is a complete software development methodology for your coding agents, built on top of a set of composable skills and some initial instructions that make sure your agent uses them."
-        },
-        {
-          "url": "https://github.com/obra/superpowers",
-          "quote": "It starts from the moment you fire up your coding agent."
-        },
-        {
-          "url": "https://github.com/obra/superpowers",
-          "quote": "As soon as it sees that you're building something, it doesn't just jump into trying to write code."
-        },
-        {
-          "url": "https://github.com/obra/superpowers",
-          "quote": "Once it's teased a spec out of the conversation, it shows it to you in chunks short enough to actually read and digest."
-        },
-        {
-          "url": "https://github.com/obra/superpowers",
-          "quote": "After you've signed off on the design, your agent puts together an implementation plan that's clear enough for an enthusiastic junior engineer with poor taste, no judgement, no project context, and an aversion to testing to follow."
-        },
-        {
-          "url": "https://github.com/obra/superpowers",
-          "quote": "It emphasizes true red/green TDD, YAGNI (You Aren't Gonna Need It), and DRY."
-        },
-        {
-          "url": "https://github.com/obra/superpowers",
-          "quote": "Next up, once you say \"go\", it launches a subagent-driven-development process, having agents work through each engineering task, inspecting and reviewing their work, and continuing forward."
-        },
-        {
-          "url": "https://github.com/obra/superpowers",
-          "quote": "It's not uncommon for your agent to work autonomously for a couple hours at a time without deviating from the plan you put together."
-        },
-        {
-          "url": "https://github.com/obra/superpowers",
-          "quote": "And because the skills trigger automatically, you don't need to do anything special."
-        },
-        {
-          "url": "https://github.com/obra/superpowers",
-          "quote": "Installation differs by harness."
-        },
-        {
-          "url": "https://github.com/obra/superpowers",
-          "quote": "Superpowers is available via the official Claude plugin marketplace"
-        },
-        {
-          "url": "https://github.com/obra/superpowers",
-          "quote": "Install the plugin from Anthropic's official marketplace:"
-        },
-        {
-          "url": "https://github.com/obra/superpowers",
-          "quote": "Superpowers is available via the official Codex plugin marketplace ."
-        },
-        {
-          "url": "https://github.com/obra/superpowers",
-          "quote": "In Cursor Agent chat, install from marketplace:"
-        },
-        {
-          "url": "https://github.com/obra/superpowers",
-          "quote": "gemini extensions install https://github.com/obra/superpowers"
-        },
-        {
-          "url": "https://github.com/obra/superpowers",
-          "quote": "Qwen Code installs plugins from Claude Code marketplaces directly."
-        },
-        {
-          "url": "https://github.com/obra/superpowers",
-          "quote": "Install Superpowers as a Hermes plugin from this repository:"
-        }
-      ]
-    },
-    {
-      "section": "tool",
-      "title": "HKUDS/CLI-Anything makes software agent-native",
-      "summary": "CLI-Anything is a hub for making software agent-ready, with one command line covering Pi, OpenClaw, nanobot, Cursor, Claude Code, and others. Developers can browse, install, and manage community-built CLIs with pip install cli-anything-hub then cli-hub install <name>, and the project is available under an Apache-2.0 license.",
-      "tags": [
-        "工具",
-        "Agent",
-        "开源"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_740be60563",
-          "url": "https://github.com/HKUDS/CLI-Anything"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://github.com/HKUDS/CLI-Anything",
-          "quote": "CLI-Anything Public Notifications You must be signed in to change notification settings Fork 5.6k ( 5.6k ) Star 61.5k ( 61.5k ) You must be signed in to star a repository About \"CLI-Anything: Making ALL Software Agent-Native\" -- CLI-Hub: https://clianything.cc/ clianything.cc/ Resources Readme Apach"
-        },
-        {
-          "url": "https://github.com/HKUDS/CLI-Anything",
-          "quote": "DME Contributing Apache-2.0 license Security More items CLI-Anything: Making ALL Software Agent-Native"
-        },
-        {
-          "url": "https://github.com/HKUDS/CLI-Anything",
-          "quote": "CLI-Anything: Bridging the Gap Between AI Agents and the World's Software"
-        },
-        {
-          "url": "https://github.com/HKUDS/CLI-Anything",
-          "quote": "🌐 CLI-Hub : pip install cli-anything-hub then cli-hub install <name> — browse, install, and manage all community-built CLIs."
-        },
-        {
-          "url": "https://github.com/HKUDS/CLI-Anything",
-          "quote": "Want to add your own?"
-        },
-        {
-          "url": "https://github.com/HKUDS/CLI-Anything",
-          "quote": "One Command Line : Make any software agent-ready for Pi, OpenClaw, nanobot, Cursor, Claude Code, etc."
-        },
-        {
-          "url": "https://github.com/HKUDS/CLI-Anything",
-          "quote": "Wish CLI-Anything supported a specific software or service?"
-        },
-        {
-          "url": "https://github.com/HKUDS/CLI-Anything",
-          "quote": "中文文档 | 日本語ドキュメント | Deutsch"
-        }
-      ]
-    },
-    {
-      "section": "tool",
-      "title": "Firecrawl adds a local binary and MCP server for agents",
-      "summary": "Firecrawl Local runs on your own machine as one binary that turns websites into clean markdown, plugs into your AI agent as an MCP server, and serves the Firecrawl API on localhost. It serves the Firecrawl v2 API on port 3002 so existing code runs against it unchanged, and the hosted service adds search and the 550+ data providers in Firecrawl Alexandria.",
-      "tags": [
-        "工具",
-        "Agent",
-        "开源"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_3517f80a1e",
-          "url": "https://github.com/firecrawl/firecrawl"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://github.com/firecrawl/firecrawl",
-          "quote": "firecrawl Public Notifications You must be signed in to change notification settings Fork 10.7k ( 10.7k ) Star 205k ( 205k ) You must be signed in to star a repository About Knowledge infrastructure to make your agents smarter."
-        },
-        {
-          "url": "https://github.com/firecrawl/firecrawl",
-          "quote": "Search, scrape and access 550+ data providers through one API."
-        },
-        {
-          "url": "https://github.com/firecrawl/firecrawl",
-          "quote": "Knowledge infrastructure to make your agents smarter."
-        },
-        {
-          "url": "https://github.com/firecrawl/firecrawl",
-          "quote": "Firecrawl Local ."
-        },
-        {
-          "url": "https://github.com/firecrawl/firecrawl",
-          "quote": "Run Firecrawl on your own machine as one binary that turns websites into clean markdown, plugs into your AI agent as an MCP server and serves the Firecrawl API on localhost."
-        },
-        {
-          "url": "https://github.com/firecrawl/firecrawl",
-          "quote": "Firecrawl Cloud ."
-        },
-        {
-          "url": "https://github.com/firecrawl/firecrawl",
-          "quote": "Use the hosted service at firecrawl.dev for everything Local does at scale with nothing to run, plus search and the 550+ data providers in Firecrawl Alexandria for far more knowledge than scraping alone."
-        },
-        {
-          "url": "https://github.com/firecrawl/firecrawl",
-          "quote": "Firecrawl Local scrapes, crawls and maps from your own machine without a database, queue or container, and it reaches Firecrawl Cloud when your AI agents need search or Alexandria."
-        },
-        {
-          "url": "https://github.com/firecrawl/firecrawl",
-          "quote": "It installs from crates.io."
-        },
-        {
-          "url": "https://github.com/firecrawl/firecrawl",
-          "quote": "init finds Claude Code, Claude Desktop, Cursor, Windsurf, Gemini CLI and Codex on your machine and adds Firecrawl Local to each one as an MCP server."
-        },
-        {
-          "url": "https://github.com/firecrawl/firecrawl",
-          "quote": "serve answers the Firecrawl v2 API on port 3002, so code written for Firecrawl runs against it unchanged and local routes need no API key."
-        },
-        {
-          "url": "https://github.com/firecrawl/firecrawl",
-          "quote": "Move to Firecrawl Cloud when you need structured JSON, Interact, the Agent or scale beyond one machine."
-        },
-        {
-          "url": "https://github.com/firecrawl/firecrawl",
-          "quote": "Firecrawl Keyless gives you 1,000 free credits a month with no API key or signup across MCP, the CLI and the API."
-        }
-      ]
-    },
-    {
-      "section": "tool",
-      "title": "OpenSRE is an open-source agent for CI/CD reliability",
-      "summary": "OpenSRE is a CLI agent that reads a failed CI run, traces the cause, and pushes a fix for you to review, separating CI-caused failures from code-caused ones. It is self-hosted and can run with your own models, posts summaries to Slack, PagerDuty, or Telegram, and is currently in public Alpha with core workflows usable but not yet fully stable.",
-      "tags": [
-        "工具",
-        "Agent",
-        "开源"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_f6df913aa0",
-          "url": "https://github.com/Tracer-Cloud/opensre"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://github.com/Tracer-Cloud/opensre",
-          "quote": "opensre Public Notifications You must be signed in to change notification settings Fork 1.9k ( 1.9k ) Star 13.7k ( 13.7k ) You must be signed in to star a repository About The open-source agent for CI/CD reliability."
-        },
-        {
-          "url": "https://github.com/Tracer-Cloud/opensre",
-          "quote": "OpenSRE: The open-source agent for CI/CD reliability"
-        },
-        {
-          "url": "https://github.com/Tracer-Cloud/opensre",
-          "quote": "Your CI tells you it broke, but not why or how to fix it."
-        },
-        {
-          "url": "https://github.com/Tracer-Cloud/opensre",
-          "quote": "OpenSRE is a CLI agent that reads the failed run, traces the cause and pushes a fix for you to review."
-        },
-        {
-          "url": "https://github.com/Tracer-Cloud/opensre",
-          "quote": "Self-hosted, with your own models."
-        },
-        {
-          "url": "https://github.com/Tracer-Cloud/opensre",
-          "quote": "🚧 Public Alpha: Core workflows are usable for early exploration, though not yet fully stable."
-        },
-        {
-          "url": "https://github.com/Tracer-Cloud/opensre",
-          "quote": "OpenSRE is an open-source CI/CD reliability agent that does that investigation for you, built to run on your own infrastructure with your own models:"
-        },
-        {
-          "url": "https://github.com/Tracer-Cloud/opensre",
-          "quote": "Recover from red builds faster: it investigates the moment a run fails, reading logs, testing hypotheses and pushing a fix for you to review"
-        },
-        {
-          "url": "https://github.com/Tracer-Cloud/opensre",
-          "quote": "Fix the cause, not just the rerun: it separates CI-caused failures from code-caused ones, so you fix the right thing"
-        },
-        {
-          "url": "https://github.com/Tracer-Cloud/opensre",
-          "quote": "Posts a summary directly to Slack, PagerDuty, or Telegram — no context switching needed"
-        }
-      ]
-    },
-    {
-      "section": "tool",
-      "title": "AutoClip turns long videos into short clips on your desktop",
-      "summary": "AutoClip is an open-source AI video clipping and content repurposing desktop tool that takes a link and generates video, cover art, and publishing copy for platforms including Douyin, TikTok, Reels, and YouTube Shorts. Clipping, framing, and rendering run locally, subtitles can come from author tracks, local Whisper / SenseVoice, or configured cloud transcription, and the same one-click pipeline is shared by the CLI and MCP.",
-      "tags": [
-        "工具",
-        "视频",
-        "多模态",
-        "开源"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_d941cdc9a6",
-          "url": "https://github.com/zhouxiaoka/autoclip"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://github.com/zhouxiaoka/autoclip",
-          "quote": "autoclip Public Notifications You must be signed in to change notification settings Fork 2k ( 2k ) Star 12.3k ( 12.3k ) You must be signed in to star a repository About AutoClip｜一个链接，一键出片。开源 AI 视频剪辑桌面工具，将播客、访谈、课程等长视频自动剪成短视频，生成字幕、封面和发布文案，适配抖音、小红书、TikTok、Reels 与 YouTube Shorts。Open-source AI video cli"
-        },
-        {
-          "url": "https://github.com/zhouxiaoka/autoclip",
-          "quote": "pping & content repurposing."
-        },
-        {
-          "url": "https://github.com/zhouxiaoka/autoclip",
-          "quote": "开源，在你的电脑上剪辑与渲染。贴一个链接，选好平台，生成 视频、封面和发布文案 ，"
-        },
-        {
-          "url": "https://github.com/zhouxiaoka/autoclip",
-          "quote": "适配抖音、小红书、TikTok、Reels、YouTube Shorts、B 站与 YouTube。"
-        },
-        {
-          "url": "https://github.com/zhouxiaoka/autoclip",
-          "quote": "剪辑、取景与渲染在本机完成。分析模型自选，字幕可用作者字幕、本地 Whisper / SenseVoice 或已配置的云端转写。CLI / MCP 与桌面共用同一条一键出片链路。"
-        },
-        {
-          "url": "https://github.com/zhouxiaoka/autoclip",
-          "quote": "Docker 与 Compose v2"
-        },
-        {
-          "url": "https://github.com/zhouxiaoka/autoclip",
-          "quote": "批量处理 / 接入 Agent"
-        },
-        {
-          "url": "https://github.com/zhouxiaoka/autoclip",
-          "quote": "Python 3.10+（建议 3.11）与 FFmpeg"
-        },
-        {
-          "url": "https://github.com/zhouxiaoka/autoclip",
-          "quote": "下载安装 ：在 Releases 下载。macOS Apple Silicon 选 .dmg ，Windows 10 / 11 x64 选 -setup.exe 。安装包自带 Python 和 FFmpeg。macOS 15 及以上首次打开：双击一次，若被拦截则到「系统设置 → 隐私与安全性 → 仍要打开」（ Apple 说明 ）。较旧的 macOS 可右键应用 →「打开」。Windows 若出现 SmartScreen，点「更多信息 → 仍要运行」。"
-        },
-        {
-          "url": "https://github.com/zhouxiaoka/autoclip",
-          "quote": "先看示例，再贴自己的视频 ：首页还没有项目时，点「用示例项目看看效果」，不需要 API Key，示例在安装包内。之后用自己的访谈或播客，可选择竖版版式。没有字幕、本地 Whisper 装不上或太慢时，打开「设置 → 默认模型 → 语音转字幕」，改用百炼云端转写（ qwen-audio-3.1-asr-flash ，大约 0.1 元/小时音频，具体以阿里云账单为准）。音频会上传到云端。导入被拦住时，点「改用云端转写」。若安装本地转写，第一次要下载约 220 MB，国内网络约 15 分钟。"
-        },
-        {
-          "url": "https://github.com/zhouxiaoka/autoclip",
-          "quote": "autoclip produce talk.mp4 --srt talk.srt --platform douyin --portrait-style podcast --json"
-        },
-        {
-          "url": "https://github.com/zhouxiaoka/autoclip",
-          "quote": "MCP 服务由客户端启动。需要单独调试时，在另一个终端运行 autoclip mcp ；使用 OpenCode 可执行 autoclip mcp install opencode 写入客户端配置。"
-        }
-      ]
-    },
-    {
-      "section": "paper",
-      "title": "WeVisForensics detects AI-generated video with self-evolving agents",
-      "summary": "WeVisForensics is an agentic framework in which a main investigator agent coordinates a self-evolving library of forensic inspector sub-agents spanning visual and audio cues, with DTPO using fast reinforcement learning for the investigator and slower refinement for the inspectors. It averages 95.2% detection accuracy across in-domain, out-of-domain and agentic benchmarks, 9.0% above the strongest prior detector, and the team curates ForenCue-30K for training and evaluation.",
-      "tags": [
-        "论文",
-        "Agent",
-        "视频",
-        "安全"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_044cbece4c",
-          "url": "https://huggingface.co/papers/2611.21373"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2611.21373",
-          "quote": "We introduce WeVisForensics, an agentic framework in which a main investigator agent coordinates a self-evolving library of forensic inspector sub-agents spanning visual and audio cues ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21373",
-          "quote": "The investigator learns which artifact type to examine, over which window, and when to conclude, and these interactions provide shared feedback for both levels of agents."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21373",
-          "quote": "Our dual-timescale policy optimization strategy, DTPO , closes this loop through fast reinforcement learning of the investigator and slower refinement of the inspectors, guided by annotated artifact intervals , to report subtle artifacts they once dismissed."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21373",
-          "quote": "Furthermore, we curate ForenCue-30K , combining role-specific forensic annotations and interaction trajectories to supervise individual inspections and their coordination, with an accompanying reinforcement-learning pool ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21373",
-          "quote": "Experiments show that WeVisForensics averages 95.2% detection accuracy across in-domain, out-of-domain and agentic benchmarks, 9.0% above the strongest prior detector, while grounding its verdicts in localized evidence."
-        }
-      ]
-    },
-    {
-      "section": "paper",
-      "title": "Mind2Act World diagnoses embodied reasoning and execution failures",
-      "summary": "Mind2Act World is a diagnostic benchmark of 30 simulated manipulation tasks from five real-world application domains, with three difficulty levels and two scene settings (Clean and Random), yielding 180 configurations. Its Mind, Act, and Mind2Act views separate reasoning, execution, and their composition, and the strongest agent succeeds in 52.7% of Mind and 39.0% of Act episodes but in only 12.0% of Mind2Act episodes.",
-      "tags": [
-        "论文",
-        "Agent",
-        "多模态"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_676167064a",
-          "url": "https://huggingface.co/papers/2611.26444"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2611.26444",
-          "quote": "We introduce Mind2Act World, a diagnostic benchmark of 30 simulated manipulation tasks from five real-world application domains."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.26444",
-          "quote": "Each task has three difficulty levels and two scene settings (Clean and Random), yielding 180 configurations."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.26444",
-          "quote": "The tasks form three views: Mind tests decisions based on past observations, Act tests precise and timely execution, and Mind2Act combines both in closed-loop tasks where action outcomes guide later decisions."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.26444",
-          "quote": "Comparing the three views shows whether a system lacks a capability or fails to compose capabilities it already has."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.26444",
-          "quote": "A diagnosis harness further attributes the failed episodes of three representative systems to Mind, Act, or their composition and summarizes each system in a profile card."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.26444",
-          "quote": "Our evaluation of multimodal agents , vision-language-action models (VLAs) , and world-action models (WAMs) shows that competence in a single view does not carry over to Mind2Act tasks."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.26444",
-          "quote": "Even the strongest agent succeeds in 52.7% of Mind and 39.0% of Act episodes but in only 12.0% of Mind2Act episodes."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.26444",
-          "quote": "The strongest agent retains task state but struggles with sustained contact, whereas end-to-end policies execute practiced motions but retain little task state ."
-        }
-      ]
-    },
-    {
-      "section": "paper",
-      "title": "Posterior Matching Distillation targets mode-covering diffusion sampling",
-      "summary": "Posterior Matching Distillation (PMD) combines mode-covering posterior sampling with any-step generation, and its stochastic student supports any-step sampling budgets within the trained timestep grid without further training. Experiments on SDXL and FLUX.2 [klein] 4B show that PMD achieves the best FID among 4-step methods on both models while maintaining competitive or leading prompt-alignment and perceptual-quality performance.",
-      "tags": [
-        "论文",
-        "图像",
-        "视频",
-        "训练"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_6d3ad2f199",
-          "url": "https://huggingface.co/papers/2611.26629"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2611.26629",
-          "quote": "We introduce Posterior Matching Distillation (PMD) , a new member of the distribution-based distillation family that combines mode-covering posterior sampling with any-step generation ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.26629",
-          "quote": "At zero population loss , PMD recovers the teacher's full posterior of clean images at each trained noise level ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.26629",
-          "quote": "Its stochastic student supports any-step sampling budgets within the trained timestep grid without further training."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.26629",
-          "quote": "To learn these posteriors, PMD matches exponentially reweighted averages of student samples conditioned on a fixed noisy state to corresponding teacher posterior means ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.26629",
-          "quote": "We prove that, matching tilted means over an open neighborhood uniquely identifies the full posterior."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.26629",
-          "quote": "PMD thus supervises the entire conditional distribution through a family of mean constraints , without any auxiliary student-score network ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.26629",
-          "quote": "Experiments on SDXL and FLUX.2 [klein] 4B demonstrate that PMD achieves the best FID among 4-step methods on both models, while maintaining competitive or leading performance across prompt-alignment and perceptual-quality metrics ."
-        }
-      ]
-    },
-    {
-      "section": "paper",
-      "title": "Coda-DaVinci makes Code2Video generation task-adaptive",
-      "summary": "Coda-DaVinci is a task-adaptive agentic framework for Code2Video generation that selects between proxy-guided and direct generation, adapts modeling granularity to each entity, and coordinates simulation with proxy-grounded prompting. Its multi-agent harness preserves scene assets and guides repairs through visual inspection and independent review, with experiments showing leading instruction following on VTR, scene consistency on R2M, and higher visual realism than the compared Code2Video baselines.",
-      "tags": [
-        "论文",
-        "视频",
         "Agent"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_522114c3a4",
-          "url": "https://huggingface.co/papers/2611.26595"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2611.26595",
-          "quote": "Generated by deepseek-ai/DeepSeek-V4.1-Flash Code2Video uses agent-authored 3D proxies to guide video generation, enabling explicit control over structure and dynamics."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.26595",
-          "quote": "Through controlled experiments and blinded human evaluation, we study proxy granularity , physics simulation , and prompting."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.26595",
-          "quote": "The results reveal task-dependent trade-offs: coarse proxies favor natural motion, while medium-grained proxies favor consistency."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.26595",
-          "quote": "Physics simulation and proxy-aligned prompting further improve average quality."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.26595",
-          "quote": "Guided by these findings, we introduce Coda-DaVinci , a task-adaptive agentic framework for Code2Video generation that selects between proxy-guided and direct generation, adapts modeling granularity to each entity, and coordinates simulation with proxy-grounded prompting."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.26595",
-          "quote": "Its multi-agent harness preserves scene assets and guides repairs through visual inspection and independent review."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.26595",
-          "quote": "Experiments demonstrate leading instruction following on VTR and scene consistency on R2M, improved physical plausibility over direct generation, and higher visual realism than the compared Code2Video baselines."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.26595",
-          "quote": "Long-video evaluations further show gains in event structure and consistency across successive interactions, while revealing limitations in transition stability and adherence to scene settings."
-        }
       ]
     },
     {
       "section": "paper",
-      "title": "Steering vectors recover most RL gains in diffusion transformers",
-      "summary": "The authors probe RL-tuned diffusion transformers with fixed steering vectors added to the block outputs of the frozen base model, finding that on SD3.5-M these vectors hold 65x fewer parameters than the RL-tuned LoRA (0.29M against 18.8M). Identical across every prompt, token, and sampling seed, they recover 90.0-96.3% of the reward gains of six RL-tuned image models, and 89.8% and 111.9% on two RL-tuned video models, suggesting a constant shift explains most of the gain from policy-gradient RL post-training.",
-      "tags": [
-        "论文",
-        "图像",
-        "视频",
-        "训练"
-      ],
+      "title": "RL post-training of diffusion transformers is mostly a fixed activation shift",
+      "summary": "The authors add a fixed set of steering vectors, identical for every prompt, token and seed, to the block outputs of a frozen base model and fit them to an RL-tuned model's velocity predictions with no reward in the objective, recovering 90.0-96.3% of the reward gains of six RL-tuned image models with 65x fewer parameters than the RL-tuned LoRA on SD3.5-M. Trained from zero with online RL, the vectors alone beat weight-based RL on text rendering (OCR) and PickScore. Teams doing RL alignment of diffusion models can try this much cheaper steering first.",
       "sources": [
         {
           "candidate_id": "c_10599b9777",
@@ -912,137 +317,157 @@
       "evidence": [
         {
           "url": "https://huggingface.co/papers/2611.26627",
-          "quote": "To isolate how much of these gains an input-independent shift explains, we probe each RL-tuned model with a deliberately simple parameterization: a fixed set of steering vectors added to the block outputs of the frozen base model ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.26627",
-          "quote": "On SD3.5-M , these vectors hold 65x fewer parameters than the RL-tuned LoRA (0.29M against 18.8M)."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.26627",
-          "quote": "We fit them to match the velocity predictions of public RL-tuned checkpoints , with no reward in the objective."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.26627",
-          "quote": "Although the vectors are identical for every prompt, token, and sampling seed , they recover 90.0-96.3% of the reward gains of six RL-tuned image models , and 89.8% and 111.9% on two RL-tuned video models ."
+          "quote": "t them to match the velocity predictions of public RL-tuned checkpoints , with no reward in the objective. Although the vectors are identical for every prompt, token, and sampling seed , they recover 90.0-96.3% of the reward gains of six RL-tuned image models"
         },
         {
           "url": "https://huggingface.co/papers/2611.26627",
           "quote": "Initialized at zero and trained with online RL , the vectors alone exceed the reward gains of weight-based RL on text rendering ( OCR ) and human preference ( PickScore ) on SD3.5-M ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.26627",
-          "quote": "A constant shift thus suffices for most of the gain of policy-gradient RL post-training: without new input-dependent transformations , it steers the pretrained generator toward what it can already compute."
         }
+      ],
+      "tags": [
+        "论文",
+        "训练",
+        "图像"
       ]
     },
     {
       "section": "paper",
-      "title": "HiUni shares one backbone for visual understanding and generation",
-      "summary": "HiUni reuses the same language-aligned ViT and dense Transformer backbone for both visual understanding and generation, confining task-specific computation to the output side. It adds a Pixel Diffusion Head for direct pixel-space optimization and a lightweight HiGate pathway for fine-grained spatial details, achieving a similar average understanding score to the pretrained VLM with competitive image generation and editing performance.",
-      "tags": [
-        "论文",
-        "多模态",
-        "图像",
-        "开源"
-      ],
+      "title": "LightningMoBA speeds up MoBA sparse attention by 1.20 to 1.60x end to end",
+      "summary": "LightningMoBA co-designs block selection and execution for Mixture of Block Attention: threshold-based dynamic routing replaces a fixed Top-k budget, KV-centric ownership reuses loaded K/V tiles, and on Hopper GPUs pipelining overlaps data movement with Tensor Core computation. At matched Top-16 retention across five checkpoints it speeds up end-to-end generation by 1.20 to 1.60x while mean RULER rises from 74.42 to 75.28. Teams optimizing long-context inference can study it.",
       "sources": [
         {
-          "candidate_id": "c_bf2ef9379d",
-          "url": "https://huggingface.co/papers/2611.26107"
+          "candidate_id": "c_72fe1bbb71",
+          "url": "https://huggingface.co/papers/2611.26268"
         }
       ],
       "evidence": [
         {
-          "url": "https://huggingface.co/papers/2611.26107",
-          "quote": "I n t h i s p a p e r , w e p r e s e n t H i U n i , w h i c h r e v i s i t s t h i s d e s i g n c h o i c e a n d e x p l o r e s w h e t h e r a p r e t r a i n e d v i s i o n l a n g u a g e m o d e l c a n b e d i r e c t l y e x t e n d e d i n t o a u n i f i e d m o d e l w i t h e x t e"
+          "url": "https://huggingface.co/papers/2611.26268",
+          "quote": "On Hopper , pipelining overlaps regular K/V transfers and irregular query gathers with Tensor Core computation ."
         },
         {
-          "url": "https://huggingface.co/papers/2611.26107",
-          "quote": "S p e c i f i c a l l y , H i U n i r e u s e s t h e s a m e l a n g u a g e - a l i g n e d V i T a n d d e n s e T r a n s f o r m e r b a c k b o n e f o r b o t h c a p a b i l i t i e s , w h i l e c o n f i n i n g t a s k - s p e c i f i c c o m p u t a t i o n t o t h e o u t p u t s i d e"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.26107",
-          "quote": "Y e t s u c h a d e s i g n i n t r o d u c e s t w o k e y c h a l l e n g e s ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.26107",
-          "quote": "T o a d d r e s s t h e s e c h a l l e n g e s , H i U n i i n t r o d u c e s a P i x e l D i f f u s i o n H e a d t a i l o r e d t o d i r e c t p i x e l - s p a c e o p t i m i z a t i o n a n d a l i g h t w e i g h t H i G a t e p a t h w a y t h a t p r o v i d e s f i n e - g r a i n e d"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.26107",
-          "quote": "E x t e n s i v e e x p e r i m e n t s s h o w t h a t H i U n i a c h i e v e s a s i m i l a r a v e r a g e u n d e r s t a n d i n g s c o r e t o t h e p r e t r a i n e d V L M w h i l e a t t a i n i n g c o m p e t i t i v e p e r f o r m a n c e o n i m a g e g e n e r a t i o n a n d e d"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.26107",
-          "quote": "C o n t r o l l e d c o m p a r i s o n s a n d a n a l y s e s f u r t h e r d e m o n s t r a t e t h a t a s i n g l e d e n s e b a c k b o n e c a n e f f e c t i v e l y s u p p o r t b o t h c a p a b i l i t i e s w i t h o u t t a s k - s p e c i f i c b a c k b o n e c o m p u t a t i o n"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.26107",
-          "quote": "View arXiv page View PDF Project page GitHub 12 Add to collection Community max-zhenyu-zhang Paper submitter about 20 hours ago HiUni shares the same visual encoder and dense backbone across understanding, generation, and editing."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.26107",
-          "quote": "Language understanding is handled by a language modeling head, while image synthesis is performed by a Pixel Diffusion Head."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.26107",
-          "quote": "To bridge semantic representations and pixel-level details, HiGate provides a lightweight residual pathway that supplies local spatial cues weakened by visual compression."
+          "url": "https://huggingface.co/papers/2611.26268",
+          "quote": "At matched Top-16 retention across five checkpoints, Lightning MoBA accelerates end-to-end generation by 1.20 to 1.60x while raising mean RULER score from 74.42 to 75.28."
         }
+      ],
+      "tags": [
+        "论文",
+        "推理"
       ]
     },
     {
       "section": "paper",
-      "title": "AltRA-Test checks LLM judges without shared annotators",
-      "summary": "AltRA-Test is a statistical test for replacing human annotators with LLM judges when items are annotated by different subsets of annotators, using a bootstrap that resamples items and substitutes one of k human annotations with an LLM annotation. Across tests of 18 LLMs and 5 prompting techniques on 20 datasets spanning text, image, audio, and video, about 100 items often suffice, and LLMs pass in about half of the real-world setups.",
-      "tags": [
-        "论文",
-        "评测",
-        "工具"
-      ],
+      "title": "AutoMaster lets an LLM agent design teacher interventions for post-training",
+      "summary": "AutoMaster is an autonomous post-training system in which an LLM agent analyzes trajectories, designs natural-language skills (Skill-FT) that suppress bad habits in teacher rollouts and elicit missing effective behaviors, then selects data to fine-tune a target model. Across Terminal, Search and SWE benchmarks with 4B and 9B models, it beats vanilla SFT by 1.42–8.99 percentage points with the teacher, task pool, training set size and SFT recipe held fixed. Teams distilling agents can borrow the idea of shaping demonstrations with skills rather than only filtering by task success.",
       "sources": [
         {
-          "candidate_id": "c_a0ee72af36",
-          "url": "https://huggingface.co/papers/2611.26073"
+          "candidate_id": "c_ea25ed415f",
+          "url": "https://huggingface.co/papers/2611.26510"
         }
       ],
       "evidence": [
         {
-          "url": "https://huggingface.co/papers/2611.26073",
-          "quote": "We therefore propose the Alternative Annotator Test with Resampled Annotations (AltRA-Test) , a statistical test that does not require that all items are annotated by the same annotators."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.26073",
-          "quote": "AltRA-Test uses a bootstrap that resamples items, draws k human annotations for each item, and substitutes one of them with an LLM annotation."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.26073",
-          "quote": "This produces paired all-human and mixed human-LLM panels ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.26073",
-          "quote": "A replacement is supported when the inter-annotator agreement (IAA) of the mixed panel is statistically non-inferior to the IAA of the all-human panel, i.e., when the LLM preserves the signal that the human annotators share."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.26073",
-          "quote": "We establish that AltRA-Test is a consistent test of asymptotic level alpha ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.26073",
-          "quote": "We then evaluate it through simulations and real-world experiments in which we test 18 LLMs and 5 prompting techniques on 20 datasets across text, image, audio, and video."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.26073",
-          "quote": "Across these evaluations, about 100 items often suffice for the test."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.26073",
-          "quote": "In real-world data experiments, LLMs pass the test in about half of the setups, depending mainly on the task."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.26073",
-          "quote": "Since replacement is not always justified, we encourage researchers to test it for their task."
+          "url": "https://huggingface.co/papers/2611.26510",
+          "quote": "Across Terminal, Search, and SWE benchmarks with 4B and 9B models, AutoMaster outperforms Vanilla SFT by 1.42–8.99 percentage points , with the teacher, task pool, training set size, and SFT recipe held fixed."
         }
+      ],
+      "tags": [
+        "论文",
+        "Agent",
+        "训练"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "OpenAI releases MedChemBench, a medicinal chemistry benchmark",
+      "summary": "MedChemBench has 99 problems drawn from published research; at the xhigh reasoning setting GPT‑6.2 Astra earned 84.5% of the available credit versus 58.2% for GPT‑5.6 Sol.",
+      "sources": [
+        {
+          "candidate_id": "c_8a4cf7fa5e",
+          "url": "https://openai.com/index/introducing-medchembench"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://openai.com/index/introducing-medchembench",
+          "quote": "MedChemBench measures these abilities through 99 problems drawn from published research. At the xhigh reasoning setting, GPT‑6.2 Astra earned 84.5% of the available credit, compared with 83.3% for GPT‑6 Astra, 82.0% for GPT‑6.1 Sol, and 58.2% for GPT‑5.6 Sol."
+        }
+      ],
+      "tags": [
+        "模型",
+        "论文"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "Google brings Duplex to Tasks in Gemini to call businesses for you",
+      "summary": "Tasks in Gemini App can now use Duplex to call businesses and handle requests for users; every call discloses it is an AI agent, and merchants can opt out.",
+      "sources": [
+        {
+          "candidate_id": "c_63b8e3d4c8",
+          "url": "https://research.google/blog/how-google-duplex-evolved-to-also-call-businesses-for-you-in-gemini/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://research.google/blog/how-google-duplex-evolved-to-also-call-businesses-for-you-in-gemini/",
+          "quote": "This week, we launched Duplex in Tasks in Gemini App , a personal AI collaborator that can help coordinate real-world chores, like calling businesses for you and handling real-world requests on behalf of the user."
+        },
+        {
+          "url": "https://research.google/blog/how-google-duplex-evolved-to-also-call-businesses-for-you-in-gemini/",
+          "quote": "Every call opens by clearly disclosing that it’s an AI agent"
+        },
+        {
+          "url": "https://research.google/blog/how-google-duplex-evolved-to-also-call-businesses-for-you-in-gemini/",
+          "quote": "Merchants can opt out of automated calls in their Google Business Profile settings"
+        }
+      ],
+      "tags": [
+        "产品",
+        "语音",
+        "Agent"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "A developer vibe-codes an FPGA into running a ternary-weight LLM on AWS F2",
+      "summary": "Using Codex and other coding agents on an AWS F2 FPGA, the author reached 213.13 tok/s (33.13× baseline) for a ternary-weight LLM after spending about $10,000 in tokens, 1.65× faster than a similarly priced CPU instance.",
+      "sources": [
+        {
+          "candidate_id": "c_d4285062bd",
+          "url": "https://ankitg.me/blog/vibecoding-inference-chip/"
+        },
+        {
+          "candidate_id": "c_d4285062bd",
+          "url": "https://news.ycombinator.com/item?id=50579297"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://ankitg.me/blog/vibecoding-inference-chip/",
+          "quote": "AWS has F2 instances with FPGA hardware, and that seemed easier than going and buying physical hardware, so I asked Codex to spin up a reservation and got cooking."
+        },
+        {
+          "url": "https://ankitg.me/blog/vibecoding-inference-chip/",
+          "quote": "Parallel head loader 213.13 Step 14 · 33.13× baseline"
+        },
+        {
+          "url": "https://ankitg.me/blog/vibecoding-inference-chip/",
+          "quote": "burning only $10,000 in Claude and OpenAI tokens to run hundreds of experiments"
+        },
+        {
+          "url": "https://ankitg.me/blog/vibecoding-inference-chip/",
+          "quote": "F2 FPGA, r9 (final image) f2.6xlarge $1.98 213.13 24/24 — Exact CPU twin, 32 threads m8a.8xlarge (32 Zen 5 cores) $1.95 129.5 24/24 1.65×"
+        },
+        {
+          "url": "https://ankitg.me/blog/vibecoding-inference-chip/",
+          "quote": "the DeepGrove founders who were discussing their new ternary weight architecture"
+        }
+      ],
+      "tags": [
+        "硬件",
+        "代码",
+        "Agent"
       ]
     }
   ],
@@ -1053,19 +478,7 @@
     },
     {
       "via": "webfetch",
-      "url": "https://machinelearning.apple.com/research/depth-pro-2-monocular"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.330"
-    },
-    {
-      "via": "webfetch",
       "url": "https://huggingface.co/blog/harness-adapters-at-scale"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://www.anthropic.com/news/ipo-close"
     },
     {
       "via": "webfetch",
@@ -1073,59 +486,47 @@
     },
     {
       "via": "webfetch",
+      "url": "https://openai.com/index/introducing-medchembench"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://www.minimax.io/blog/practical-cryptanalysis-with-minimaxs-latest-internal-model"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://research.google/blog/how-google-duplex-evolved-to-also-call-businesses-for-you-in-gemini/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://architectlabs.com/blog/frostbite"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://signal.org/blog/protecting-your-privacy/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://machinelearning.apple.com/research/depth-pro-2"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/tencent/Hy4"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://ankitg.me/blog/vibecoding-inference-chip/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://spectrum.ieee.org/epic-games-unreal-engine-ai"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.26603"
+    },
+    {
+      "via": "webfetch",
       "url": "https://huggingface.co/papers/2611.26409"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.21373"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://github.com/obra/superpowers"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://github.com/HKUDS/CLI-Anything"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://github.com/firecrawl/firecrawl"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://github.com/Tracer-Cloud/opensre"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://github.com/zhouxiaoka/autoclip"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.26444"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.26590"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.26629"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.26595"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.26107"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.26073"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.26414"
     },
     {
       "via": "webfetch",
@@ -1133,38 +534,26 @@
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.26408"
+      "url": "https://huggingface.co/papers/2611.26268"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.26510"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/thinkingmachines/Inkling-2-Mini"
+    },
+    {
+      "via": "websearch",
+      "query": "Baidu ERNIE release November 2026"
     }
   ],
   "lang": "en",
   "validation": {
-    "validated_at": "2026-11-21T04:39:13+00:00",
+    "validated_at": "2026-11-21T04:45:50+00:00",
     "checked_links": false,
-    "dropped": [
-      {
-        "title": "ZeroVLN navigates without fine-tuning the VLM brain",
-        "section": "brief",
-        "candidates": [
-          "c_6610b8f995"
-        ],
-        "reasons": [
-          "summary longer than 250 characters"
-        ]
-      },
-      {
-        "title": "Edit-Ready Training prepares vision models for LLM weight edits",
-        "section": "brief",
-        "candidates": [
-          "c_3240d4c7a0"
-        ],
-        "reasons": [
-          "summary longer than 250 characters"
-        ]
-      }
-    ],
-    "warnings": [
-      "19 items, more than 18 (expected about 15)",
-      "7 paper items (target 2-4)"
-    ]
+    "dropped": [],
+    "warnings": []
   }
 }

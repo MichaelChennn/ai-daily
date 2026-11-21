@@ -2,133 +2,86 @@
 
 ## 今日要点
 
-- Thinking Machines Lab 发布 Inkling 2 Mini：约 26B 物理参数、每 token 激活 3B 参数的多模态 MoE 模型，支持 1M-token 上下文，已提供 transformers、llama.cpp、MLX 与 SGLang 推理支持。
-- Apple 发布 Depth Pro 2 并公开代码与权重，单一网络同时处理图片与视频，在原生分辨率输出兼具度量精度、边界锐利与时间一致性的深度图。
-- OpenAI 公布对抗性蒸馏防护进展：内部自适应评估中，针对受保护推理链的提取攻击成功率从 54.0% 降至 0.2%。
+- Thinking Machines 以 Apache 2.0 开放 Inkling 2 Mini 权重：26.4B 总参数、3.4B 激活，约 20GB 的检查点可以在本地运行。
+- OpenAI 公布对抗性蒸馏防护，推理提取的平均攻击成功率从 54.0% 降到 0.2%；Hugging Face 用 RL 给 Qwen3.8-27B 训练 harness 适配器，pi 下 Terminal-Bench 2.1 从 39% 升到 55%。
+- Signal 开始阻止 iOS 27 和 Android 上的系统级 AI 读取聊天屏幕。
 
 ## 🔥 头条
 
-### Thinking Machines Lab 发布 Inkling 2 Mini 本地多模态模型
+### Thinking Machines 开放 Inkling 2 Mini 权重：26.4B 总参数、3.4B 激活
 
-Inkling 2 Mini 是新的循环式 Transformer 模型，约 26B 物理总参数、每个 token 激活 3B 参数，是多模态 Mixture-of-Experts，支持 1M-token 上下文并接受图像与文本输入。Thinking Machines Lab 以 NVFP4 和 MXFP8 专家权重混合精度发布，并提供 transformers、llama.cpp、MLX 与 SGLang 的推理支持，适合本地部署。
+Inkling 2 Mini 是 Thinking Machines Lab 的多模态 MoE 模型，用循环 Transformer 结构：部分层循环三遍以增加容量，模型卡给出 26.4B 总参数、3.4B 激活，支持 1M token 上下文和图文输入，许可证为 Apache 2.0。检查点约 20GB（NVFP4 与 MXFP8 混合精度），官方支持单台 DGX Spark 和 32GB 以上内存的 Apple silicon 设备，llama.cpp 侧提供 IQ4_NL 和 Q8_0 的 GGUF。想在本地跑长上下文多模态模型的开发者今天就能下载试用。
 
-来源：[Hugging Face Blog](https://huggingface.co/blog/inkling2mini) · [Hugging Face Trending Models](https://huggingface.co/thinkingmachines/Inkling-2-Mini)　`模型` `多模态` `开源`
+来源：[Hugging Face Blog](https://huggingface.co/blog/inkling2mini) · [Hugging Face Trending Models](https://huggingface.co/thinkingmachines/Inkling-2-Mini)　`模型` `开源` `多模态`
 
-### Apple 发布 Depth Pro 2 单目深度估计模型
+### OpenAI 公布对抗性蒸馏防护：推理提取成功率降到 0.2%
 
-Depth Pro 2 用一个可扩展网络同时处理图片和视频，在原生分辨率预测稠密度量深度，输出既在物体边缘锐利、又在帧间保持稳定。官方同时开放了代码与权重，该模型家族在度量精度、锐度、时间一致性和运行时间上构成新的 Pareto 前沿。
-
-来源：[Apple Machine Learning Research](https://machinelearning.apple.com/research/depth-pro-2-monocular) · [Hugging Face Daily Papers](https://huggingface.co/papers/2611.26603) · [Hugging Face Trending Models](https://huggingface.co/apple/DepthPro2)　`论文` `多模态` `图像` `开源`
-
-### OpenAI 公布对抗性蒸馏防护与推理链提取防御
-
-OpenAI 说明其对抗性蒸馏防护体系，结合对抗测试、模型训练、分类器、API 级保护以及对协同提取活动的调查。在内部自适应评估中，针对受保护推理链的提取攻击成功率从原有防护下的 54.0% 降至更新防护后的 0.2%。
+OpenAI 介绍了防范对抗性蒸馏的做法：结合对抗测试、模型训练、分类器和 API 层防护，并调查有组织的提取活动；API 会把 GPT‑6.2 Astra 和 Sol 的受保护推理绑定到产生它的对话历史，改写前面的消息就会丢弃其后的推理。在自动化红队测试中，提取早先请求推理的平均攻击成功率从 GPT‑6 Astra 原有防护下的 54.0% 降到 GPT‑6.2 Astra 的 0.2%。会改写对话历史的 API 应用要留意推理被丢弃带来的行为变化；OpenAI 还称一次提取活动的核心部分与 Moonshot AI 相关人员有关。
 
 来源：[OpenAI News](https://openai.com/index/combatting-adversarial-distillation)　`安全` `模型` `行业`
 
-### 腾讯开源 WeMM-Video 全模态视频理解模型家族
+### MiniMax 用内部模型 MIM 做自动密码分析，攻破多个 NIST 候选方案
 
-WeMM-Video 是中英双语的全模态基础模型家族，包含 2B、4B、9B 和 35B-A3B 变体，统一处理文本、图像、音频和视频，并同时提供非思考的 instruct 模式与显式逐步推理的 thinking 模式。团队公开了模型、评测与复现流水线，其中 WeMM-Video-35B-A3B 在全模态视频评测中确立开源最优表现，WeMM-Video-9B 超过更大的开源 Qwen3-Omni-30B-A3B-Instruct。
+MiniMax 研究团队用内部研究模型 MIM 对现代密码方案做自动化密码分析，例如为 NIST SHA-3 候选 Waterfall-256 构造出首个实际可行的碰撞攻击，并在 TII McEliece 挑战中恢复了 94 个实例的密钥，其中 55 个此前未被解出。MiniMax 称这些工作针对学术设计、往届竞赛候选和公开挑战参数，不影响已部署的密码标准，结果已提前告知方案作者。MIM 不公开发布，做密码实现审计的研究者和开发者可以申请测试权限。
 
-来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2611.26409)　`模型` `多模态` `视频` `开源`
+来源：[MiniMax Blog](https://www.minimax.io/blog/practical-cryptanalysis-with-minimaxs-latest-internal-model)　`安全` `模型`
+
+### Architect Labs 发布由 AI 设计的新指令集 CPU Frostbite
+
+Architect Labs 推出 Frostbite：一款从零设计新指令集的通用 CPU，基于交互网（interaction nets），其 AI 系统自主迭代了编译器、ISA、架构、微架构、RTL、验证直到最终 GDS。在 7 nm 工艺上，一个 Frostbite quad 加四个 L3 节点面积 0.792 mm²，对比一款未公开型号的传统 CPU（TCPU），平均每面积性能 8.77x，25 个负载上每瓦性能几何平均 4.59x。对比对象未公开，RTL 和 ISA 也还没发布（列在后续计划里），这些自报数字暂时无法独立核对，但它是 AI 系统参与芯片全流程设计的一个具体案例。
+
+来源：[architectlabs.com](https://architectlabs.com/blog/frostbite) · [HN 讨论](https://news.ycombinator.com/item?id=50572503)　`硬件` `Agent`
+
+### Signal 阻止 iOS 27 和 Android 的系统级 AI 读取聊天屏幕
+
+Signal 宣布在 iOS 27 上禁止应用内截屏，在能检测到 AI 助手读取屏幕的 Android 版本上自动开启 “Screen security”，以阻止系统内置的 Agent 捕获聊天内容，做法和此前在 Windows 11 上屏蔽 Microsoft Recall 类似；用户可以在设置里关闭这项保护。Signal 同时呼吁平台方给开发者一个简单、有文档的方式，让应用退出 AI 数据访问和处理。做隐私敏感应用的移动开发者，需要开始考虑系统级 Agent 读屏的问题。
+
+来源：[signal.org](https://signal.org/blog/protecting-your-privacy/) · [HN 讨论](https://news.ycombinator.com/item?id=50572348)　`安全` `Agent` `产品`
 
 ## 🧠 模型
 
-### Anthropic 完成 IPO，募资总额约 119.5 亿美元
+### 腾讯开源全模态视频理解模型 WeMM-Video
 
-Anthropic 宣布完成首次公开发行，合计 1,127,000,000 股 A 类普通股，公开发行价 $83.00 每股，承销商全额行使了额外购买 147,000,000 股的选择权。发行总毛收入约 $93.5 billion，其中约 $91.6 billion 由 Anthropic 获得；连同向 AMD、Broadcom、Google、Micron、Microsoft、NVIDIA 和 TSMC Partners 私募发行 Class N 普通股，合计约 $119.5 billion。A 类普通股于 11 月 19 日开始在 Nasdaq 交易，代码为 “ANT”。
+WeMM-Video 是中英双语全模态模型家族，有 2B、4B、9B 和 35B-A3B 四个规格，统一处理文本、图像、音频和视频，支持非思考和思考两种模式，训练语料约 1.2 trillion tokens。论文称旗舰 WeMM-Video-35B-A3B 在全模态视频评测上达到开源模型中的最好水平，WeMM-Video-9B 超过更大的 Qwen3-Omni-30B-A3B-Instruct，模型和评测、复现流程一并公开。需要同时理解视频画面和音频的应用可以拿来试。
 
-来源：[Anthropic News](https://www.anthropic.com/news/ipo-close)　`行业` `产品`
+来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2611.26409)　`模型` `开源` `多模态`
 
 ## 📄 论文
 
-### WeVisForensics：自进化 Agent 检测 AI 生成视频
+### 论文：扩散 Transformer 的 RL 后训练，多半只是固定的激活偏移
 
-WeVisForensics 是一个 Agent 框架，由主调查 Agent 协调覆盖视觉与音频线索的自进化取证子 Agent，负责决定检查哪类伪影、检查哪个时间窗口以及何时下结论。配合双时间尺度强化学习策略 DTPO 和新标注数据集 ForenCue-30K，该方法在域内、域外与 Agent 基准上平均检测准确率达到 95.2%，比最强已有检测器高 9.0%，并能给出局部化的证据。
+作者在冻结的基础模型各 block 输出上加一组对所有提示、token 和随机种子都相同的 steering vector，只拟合 RL 调优模型的速度预测、目标里不含奖励，就找回了六个 RL 调优图像模型 90.0-96.3% 的奖励提升；在 SD3.5-M 上参数比 RL 调优的 LoRA 少 65x。从零开始用在线 RL 训练这些向量，在文字渲染（OCR）和 PickScore 上甚至超过基于权重的 RL。给扩散模型做 RL 对齐时，可以先试成本低得多的激活引导。
 
-来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2611.21373)　`论文` `Agent` `视频` `安全`
+来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2611.26627)　`论文` `训练` `图像`
 
-### Mind2Act World：分离推理与执行的具身诊断基准
+### LightningMoBA：MoBA 稀疏注意力端到端提速 1.20 到 1.60x
 
-Mind2Act World 包含 30 个来自五个真实应用领域的仿真操作任务，每个任务设三个难度等级和 Clean、Random 两种场景设置，共 180 种配置，分为 Mind、Act 与 Mind2Act 三个视图，用于判断系统是缺少某种能力还是无法把已有能力组合起来。评测显示最强的 Agent 在 Mind 上成功率为 52.7%、Act 上为 39.0%，但在需要闭环组合的 Mind2Act 上只有 12.0%。
+LightningMoBA 把 Mixture of Block Attention 的块选择和执行放在一起设计：用阈值动态路由替代固定 Top-k，按 KV 块组织任务以复用已加载的 KV，并在 Hopper 上让数据搬运与 Tensor Core 计算重叠。在五个 checkpoint 上、相同的 Top-16 保留率下，端到端生成提速 1.20 到 1.60x，平均 RULER 分从 74.42 升到 75.28。做长上下文推理优化的团队可以参考，代码在 GitHub 上。
 
-来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2611.26444)　`论文` `Agent` `多模态`
+来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2611.26268)　`论文` `推理`
 
-### NVIDIA 提出 Posterior Matching Distillation 扩散蒸馏方法
+### AutoMaster：让 LLM Agent 自己设计后训练的教师干预
 
-Posterior Matching Distillation（PMD）通过匹配指数重加权的学生样本均值与教师后验均值，在不依赖额外学生打分网络的前提下监督整个条件分布，并支持在训练时间步网格内任意步数采样，无需额外训练。在 SDXL 和 FLUX.2 [klein] 4B 上，PMD 在两个模型上都取得了 4-step 方法中最好的 FID，同时在提示词对齐与感知质量指标上保持有竞争力或领先的表现。
+AutoMaster 是一个自主后训练系统：LLM Agent 分析轨迹、设计自然语言技能（Skill-FT），在教师采样时抑制不良习惯、引出缺少的有效行为，再筛选数据微调目标模型。在 Terminal、Search 和 SWE 类基准上用 4B 和 9B 模型测试，在教师、任务池、训练集规模和 SFT 配方都不变的情况下，比普通 SFT 高 1.42–8.99 个百分点。做 Agent 蒸馏的团队可以借鉴：用技能提示改善示范轨迹，而不只按任务成功筛数据。
 
-来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2611.26629)　`论文` `图像` `视频` `训练`
-
-### Coda-DaVinci：用 Code2Video 与 3D 代理控制视频生成
-
-Coda-DaVinci 是一个面向 Code2Video 的任务自适应 Agent 框架，在代理引导生成与直接生成之间切换，按实体调整建模粒度，并协调物理模拟与基于代理的提示词。它的多 Agent harness 会保留场景资产，并通过视觉检查和独立评审指导修复；实验显示其在 VTR 指令遵循和 R2M 场景一致性上领先，物理合理性优于直接生成，视觉真实感高于所对比的 Code2Video 基线。
-
-来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2611.26595)　`论文` `视频` `Agent`
-
-### RL 后训练对扩散 Transformer 相当于激活引导
-
-这项工作用一组固定的 steering vectors 加到冻结基座模型的 block 输出上，探究扩散 Transformer 的 RL 后训练收益有多少能被与输入无关的常量偏移解释。在 SD3.5-M 上这些向量参数量比 RL 微调的 LoRA 少 65 倍（0.29M 对 18.8M），却能恢复六个 RL 图像模型 90.0-96.3% 的奖励增益，并在两个 RL 视频模型上恢复 89.8% 和 111.9%。
-
-来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2611.26627)　`论文` `图像` `视频` `训练`
-
-### HiUni 用共享骨干统一视觉理解与生成
-
-HiUni 探索能否把预训练视觉语言模型直接扩展为统一模型，让理解与生成共用同一个语言对齐的 ViT 和 dense Transformer 骨干，只把任务相关计算限制在输出侧。为此它引入 Pixel Diffusion Head 面向像素空间优化，并设计轻量的 HiGate 通路补回视觉压缩丢失的细粒度空间细节；实验显示其平均理解得分与预训练 VLM 相近，同时在图像生成与编辑上具备有竞争力的表现。
-
-来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2611.26107)　`论文` `多模态` `图像` `开源`
-
-### AltRA-Test：判断 LLM 评委能否替代人类标注者
-
-AltRA-Test 是一种不要求所有条目由同一批标注者标注的统计检验，它通过 bootstrap 重采样条目、为每条抽取 k 个人工标注并把其中一个替换为 LLM 标注，构成全人工与人类-LLM 混合配对面板。当混合面板的标注者一致性在统计上不劣于全人工面板时，才支持替换。作者在文本、图像、音频和视频的 20 个数据集上测试了 18 个 LLM 和 5 种提示技巧，评估显示约 100 个条目往往就足够完成检验。
-
-来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2611.26073)　`论文` `评测` `工具`
+来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2611.26510)　`论文` `Agent` `训练`
 
 ## 🛠 开源与工具
 
-### Claude Code v2.1.330 新增组织登录与内置图表功能
+### Hugging Face 推出 harness adapters：为每个 Agent 框架训练专属 LoRA
 
-Claude Code v2.1.330 支持登录 Anthropic Enterprise Admin Console 管理的组织，登录后自动套用组织设置并使用其云服务商或网关；同时加入内置模组 easel，可在被要求时以及 MCP metrics 结果下绘制图表，可用 /config 关闭。版本还修复了长对话压缩后卡顿、WebFetch 冻结会话、并发保存用户设置丢失以及 MCP 工具 input schema 不合法导致会话文件膨胀等问题。
+Hugging Face 为 Qwen3.8-27B 在 pi、Hermes Agent、OpenCode 三个 harness 里分别用 RL 训练 LoRA 适配器，再合并成一个三者通用的 super adapter，适配器、GGUF、RL 任务和完整配方都在 Hub 上公开。在 pi 下，Terminal-Bench 2.1 从 39% 升到 55% pass@1，平均每个任务的 token 从 2.9K 降到 1.5K；SWE-bench Pro（hard 51）上 pi 从 39.2% 升到 64.7%。用开源模型跑编码 Agent 的团队，可以照这套配方给自己的 harness 训练适配器，同时提分和省 token。
 
-来源：[GitHub Releases](https://github.com/anthropics/claude-code/releases/tag/v2.1.330)　`工具` `Agent` `代码`
+来源：[Hugging Face Blog](https://huggingface.co/blog/harness-adapters-at-scale) · [harness-hub/Qwen3.8-27B-pi-adapted](https://huggingface.co/harness-hub/Qwen3.8-27B-pi-adapted) · [harness-hub/Qwen3.8-27B-opencode-adapted](https://huggingface.co/harness-hub/Qwen3.8-27B-opencode-adapted)　`工具` `Agent` `训练`
 
-### Hugging Face 用 RL 训练 harness 适配器提升 Agent 表现
+### Claude Code v2.1.330：支持企业组织登录，新增画图 mod easel
 
-Hugging Face 为 Qwen3.8-27B 分别在 pi、Hermes Agent、OpenCode 三种 Agent harness 内训练 LoRA 适配器，训练数据、rollout 全部在 Hugging Face Jobs 上通过 TRL 的 AsyncGRPOTrainer、OpenEnv 和 harbor 完成。以 pi 为例，模型在 Terminal-Bench 2.1 上的 pass@1 从 39% 提升到 55%，平均每个任务 token 用量从 2.9K 降到 1.5K；三个 LoRA 还可合并成通用于三种 harness 的 super adapter，相关适配器、GGUF、RL 任务和 safeagents 插件均已开放浏览。
+Claude Code v2.1.330 支持登录由 Anthropic Enterprise Admin Console 管理的组织，claude auth login 之后会应用组织设置，并使用组织的云服务商或网关；新增内置 mod easel，按需画图表，也会在 MCP 指标结果下自动画图，可在 /config 关闭自动图表。自托管 runner 新增 --start-dir，可以让 Claude 从仓库里的某个子目录开始工作。用企业管理后台或自建 runner 的团队值得升级。
 
-来源：[Hugging Face Blog](https://huggingface.co/blog/harness-adapters-at-scale) · [harness-hub/Qwen3.8-27B-opencode-adapted](https://huggingface.co/harness-hub/Qwen3.8-27B-opencode-adapted) · [harness-hub/Qwen3.8-27B-pi-adapted](https://huggingface.co/harness-hub/Qwen3.8-27B-pi-adapted)　`工具` `Agent` `训练` `开源`
-
-### obra/superpowers：面向编码 Agent 的软件开发方法论
-
-Superpowers 是构建在可组合技能之上的完整软件开发方法论：Agent 先通过对话澄清需求并分段展示设计，确认后再给出实现计划，然后进入子 Agent 驱动的开发流程，逐个任务实现、检查与评审。技能会自动触发，可通过 Claude Code 官方插件市场、Codex、Cursor、Gemini、Pi、Qwen Code、Hermes 等多种方式安装。
-
-来源：[GitHub Trending](https://github.com/obra/superpowers)　`工具` `Agent` `代码` `开源`
-
-### CLI-Anything 把常用软件变成 Agent 可用的 CLI
-
-CLI-Anything 的目标是让任意软件都具备 Agent 原生能力，配套 CLI-Hub 可以用 pip install cli-anything-hub 后通过 cli-hub install <name> 浏览并安装社区构建的 CLI。仓库中已包含 Blender、GIMP、Krita、FreeCAD、Audacity、Obsidian、LibreOffice、Ollama 等大量软件的 agent-harness 适配目录，并可通过一条命令接入 Pi、OpenClaw、nanobot、Cursor、Claude Code 等 harness。
-
-来源：[GitHub Trending](https://github.com/HKUDS/CLI-Anything)　`工具` `Agent` `开源`
-
-### Firecrawl 推出可本地运行的 Firecrawl Local
-
-Firecrawl Local 以单一二进制在本机完成网页转 Markdown、爬取与站点地图，无需数据库、队列或容器，并可作为 MCP 服务器接入 Claude Code、Claude Desktop、Cursor、Windsurf、Gemini CLI 与 Codex。它的 serve 命令在端口 3002 上提供 Firecrawl v2 API，本地路由无需 API key；需要搜索或 Alexandria 的 550+ 数据源时可切到 Firecrawl Cloud。
-
-来源：[GitHub Trending](https://github.com/firecrawl/firecrawl)　`工具` `Agent` `开源`
-
-### OpenSRE：可自托管的 CI/CD 可靠性 Agent
-
-OpenSRE 是一个 CLI Agent，读取失败的 CI 运行记录、追踪原因并推送待你审核的修复，可自托管并使用自己的模型。它会区分 CI 导致的失败与代码导致的失败，在工具调用循环中跨多个系统验证假设，并可把摘要直接发到 Slack、PagerDuty 或 Telegram。项目目前处于 Public Alpha，核心流程可用但尚不完全稳定。
-
-来源：[GitHub Trending](https://github.com/Tracer-Cloud/opensre)　`工具` `Agent` `开源`
-
-### AutoClip：链接转短视频的开源桌面剪辑工具
-
-AutoClip 是一个开源 AI 视频剪辑桌面工具，贴一个链接即可把播客、访谈、课程等长视频自动剪成短视频，并生成字幕、封面和发布文案，适配抖音、小红书、TikTok、Reels、YouTube Shorts 等平台。剪辑、取景与渲染在本机完成，字幕可选作者字幕、本地 Whisper / SenseVoice 或云端转写，桌面、CLI 与 MCP 共用同一条一键出片链路。
-
-来源：[GitHub Trending](https://github.com/zhouxiaoka/autoclip)　`工具` `视频` `多模态` `开源`
+来源：[GitHub Releases](https://github.com/anthropics/claude-code/releases/tag/v2.1.330)　`工具` `代码` `Agent`
 
 ## ⚡ 快讯
 
-- **ZeroVLN：不做导航域 SFT 的慢-快导航框架** ZeroVLN 用语义工具调用接口把移动决策以自然语言传给 action expert，再通过闭环 RL 联合优化两者，在 VLN-CE 基准上超过基于 SFT 的分层方法，同时只让 VLM 权重发生 0.01497% 的相对位移。 [Hugging Face Daily Papers](https://huggingface.co/papers/2611.26414)
-- **为 LLM 权重编程准备视觉模型** 该基准让五个 LLM 直接编辑视觉模型完成重标注与纠错任务，报告超过 2,600 次编辑过程；Edit-Ready Training 预先演练闭式权重编辑，在 GPT-6 Astra 和 Claude Opus 5.5 上取得最高平均分。 [Hugging Face Daily Papers](https://huggingface.co/papers/2611.26408)
+- **OpenAI 发布药物化学基准 MedChemBench** MedChemBench 含 99 道取自已发表研究的题目，xhigh 推理设置下 GPT‑6.2 Astra 拿到 84.5% 的分数，GPT‑5.6 Sol 为 58.2%。 [OpenAI News](https://openai.com/index/introducing-medchembench)
+- **Google 把 Duplex 接入 Tasks in Gemini，替用户给商家打电话** Gemini App 的 Tasks in Gemini 现在可以用 Duplex 给商家打电话预约、办事，每通电话开头都会说明是 AI，商家可以选择退出。 [Google Research](https://research.google/blog/how-google-duplex-evolved-to-also-call-businesses-for-you-in-gemini/)
+- **开发者让编码 Agent 在 AWS F2 FPGA 上跑通三值权重 LLM** 作者用 Codex 等编码 Agent 在 AWS F2 FPGA 上实现三值权重 LLM 推理，吞吐达 213.13 tok/s（基线的 33.13×），约 $10,000 token 花费，比价格相近的 CPU 实例快 1.65×。 [ankitg.me](https://ankitg.me/blog/vibecoding-inference-chip/) · [HN 讨论](https://news.ycombinator.com/item?id=50579297)
