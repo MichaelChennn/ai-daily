@@ -1,0 +1,558 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-21",
+  "mode": "full",
+  "channel": "claude",
+  "generated_at": "2026-11-21T04:42:01+00:00",
+  "model": "claude-opus-5-5",
+  "highlights": [
+    "Thinking Machines 以 Apache 2.0 开放 Inkling 2 Mini 权重：26.4B 总参数、3.4B 激活，约 20GB 的检查点可以在本地运行。",
+    "OpenAI 公布对抗性蒸馏防护，推理提取的平均攻击成功率从 54.0% 降到 0.2%；Hugging Face 用 RL 给 Qwen3.8-27B 训练 harness 适配器，pi 下 Terminal-Bench 2.1 从 39% 升到 55%。",
+    "Signal 开始阻止 iOS 27 和 Android 上的系统级 AI 读取聊天屏幕。"
+  ],
+  "items": [
+    {
+      "section": "headline",
+      "title": "Thinking Machines 开放 Inkling 2 Mini 权重：26.4B 总参数、3.4B 激活",
+      "summary": "Inkling 2 Mini 是 Thinking Machines Lab 的多模态 MoE 模型，用循环 Transformer 结构：部分层循环三遍以增加容量，模型卡给出 26.4B 总参数、3.4B 激活，支持 1M token 上下文和图文输入，许可证为 Apache 2.0。检查点约 20GB（NVFP4 与 MXFP8 混合精度），官方支持单台 DGX Spark 和 32GB 以上内存的 Apple silicon 设备，llama.cpp 侧提供 IQ4_NL 和 Q8_0 的 GGUF。想在本地跑长上下文多模态模型的开发者今天就能下载试用。",
+      "sources": [
+        {
+          "candidate_id": "c_a4f31a72ec",
+          "url": "https://huggingface.co/blog/inkling2mini"
+        },
+        {
+          "candidate_id": "c_271b21f503",
+          "url": "https://huggingface.co/thinkingmachines/Inkling-2-Mini"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/blog/inkling2mini",
+          "quote": "It’s a multimodal Mixture-of-Experts with ~26B physical total and 3B active parameters per token."
+        },
+        {
+          "url": "https://huggingface.co/blog/inkling2mini",
+          "quote": "It uses a neat trick to increase capacity: some layers are visited in a loop that repeats three times, which makes it work like it had more parameters. It supports a 1M-token context size, accepts images and text inputs."
+        },
+        {
+          "url": "https://huggingface.co/thinkingmachines/Inkling-2-Mini",
+          "quote": "Parameters 26.4B, 3.4B active"
+        },
+        {
+          "url": "https://huggingface.co/thinkingmachines/Inkling-2-Mini",
+          "quote": "Date of release: November 20, 2026 License: Apache 2.0"
+        },
+        {
+          "url": "https://huggingface.co/thinkingmachines/Inkling-2-Mini",
+          "quote": "The model is distributed as a single checkpoint of about 20GB, in mixed NVFP4 and MXFP8 precisions. Given its small size, it is possible to run this checkpoint on local AI compute for inference. We support: 1x NVIDIA DGX Spark Apple silicon devices with 32GB or more memory"
+        },
+        {
+          "url": "https://huggingface.co/blog/inkling2mini",
+          "quote": "For the Inkling 2 Mini release we provide GGUF 4-bit ( IQ4_NL) and 8-bit ( Q8_0 ) quants for both models."
+        }
+      ],
+      "tags": [
+        "模型",
+        "开源",
+        "多模态"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "OpenAI 公布对抗性蒸馏防护：推理提取成功率降到 0.2%",
+      "summary": "OpenAI 介绍了防范对抗性蒸馏的做法：结合对抗测试、模型训练、分类器和 API 层防护，并调查有组织的提取活动；API 会把 GPT‑6.2 Astra 和 Sol 的受保护推理绑定到产生它的对话历史，改写前面的消息就会丢弃其后的推理。在自动化红队测试中，提取早先请求推理的平均攻击成功率从 GPT‑6 Astra 原有防护下的 54.0% 降到 GPT‑6.2 Astra 的 0.2%。会改写对话历史的 API 应用要留意推理被丢弃带来的行为变化；OpenAI 还称一次提取活动的核心部分与 Moonshot AI 相关人员有关。",
+      "sources": [
+        {
+          "candidate_id": "c_bab9b9b98c",
+          "url": "https://openai.com/index/combatting-adversarial-distillation"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://openai.com/index/combatting-adversarial-distillation",
+          "quote": "Our approach to adversarial distillation combines adversarial testing, model training, classifiers, and API-level protections with investigations into coordinated attempts to extract model capabilities."
+        },
+        {
+          "url": "https://openai.com/index/combatting-adversarial-distillation",
+          "quote": "a and GPT‑6.2 Sol, we tie a model’s protected reasoning to the conversation history that produced it. As new messages are added, the model can build on its earlier reasoning. If an earlier message is rewritten, our API drops the reasoning that followed it"
+        },
+        {
+          "url": "https://openai.com/index/combatting-adversarial-distillation",
+          "quote": "The average attack success rate fell from 54.0% against GPT‑6 Astra with its original safeguards to 0.2% against GPT‑6.2 Astra with its updated safeguards."
+        },
+        {
+          "url": "https://openai.com/index/combatting-adversarial-distillation",
+          "quote": "attributed a core part of that activity to individuals associated with Moonshot AI, the developer of Kimi."
+        }
+      ],
+      "tags": [
+        "安全",
+        "模型",
+        "行业"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "MiniMax 用内部模型 MIM 做自动密码分析，攻破多个 NIST 候选方案",
+      "summary": "MiniMax 研究团队用内部研究模型 MIM 对现代密码方案做自动化密码分析，例如为 NIST SHA-3 候选 Waterfall-256 构造出首个实际可行的碰撞攻击，并在 TII McEliece 挑战中恢复了 94 个实例的密钥，其中 55 个此前未被解出。MiniMax 称这些工作针对学术设计、往届竞赛候选和公开挑战参数，不影响已部署的密码标准，结果已提前告知方案作者。MIM 不公开发布，做密码实现审计的研究者和开发者可以申请测试权限。",
+      "sources": [
+        {
+          "candidate_id": "c_9e3e131d9a",
+          "url": "https://www.minimax.io/blog/practical-cryptanalysis-with-minimaxs-latest-internal-model"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://www.minimax.io/blog/practical-cryptanalysis-with-minimaxs-latest-internal-model",
+          "quote": "Our research team used an internal-only research model that we will call MiniMax's Internal Model (MIM) to conduct automated cryptanalysis across modern cryptographic schemes."
+        },
+        {
+          "url": "https://www.minimax.io/blog/practical-cryptanalysis-with-minimaxs-latest-internal-model",
+          "quote": "compromise several NIST candidates. Examples include: Waterfall-256 (NIST SHA-3 candidate): Prior work was purely theoretical, with no colliding message pairs constructed. In a blind run, MIM built the first practical collision attack"
+        },
+        {
+          "url": "https://www.minimax.io/blog/practical-cryptanalysis-with-minimaxs-latest-internal-model",
+          "quote": "TII McEliece Challenges: This benchmark tests concrete security using challenge instances based on the McEliece cryptosystem"
+        },
+        {
+          "url": "https://www.minimax.io/blog/practical-cryptanalysis-with-minimaxs-latest-internal-model",
+          "quote": "it recovered secret keys for 94 instances, including 55 previously unsolved hard instances."
+        },
+        {
+          "url": "https://www.minimax.io/blog/practical-cryptanalysis-with-minimaxs-latest-internal-model",
+          "quote": "This work focuses on academic designs, past competition candidates, and public challenge parameters, and does not affect deployed cryptographic standards. Following the principles of responsible research and disclosure, we shared our findings with the authors of the respective schemes in advance."
+        },
+        {
+          "url": "https://www.minimax.io/blog/practical-cryptanalysis-with-minimaxs-latest-internal-model",
+          "quote": "We will provide access to qualified researchers and developers."
+        }
+      ],
+      "tags": [
+        "安全",
+        "模型"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Architect Labs 发布由 AI 设计的新指令集 CPU Frostbite",
+      "summary": "Architect Labs 推出 Frostbite：一款从零设计新指令集的通用 CPU，基于交互网（interaction nets），其 AI 系统自主迭代了编译器、ISA、架构、微架构、RTL、验证直到最终 GDS。在 7 nm 工艺上，一个 Frostbite quad 加四个 L3 节点面积 0.792 mm²，对比一款未公开型号的传统 CPU（TCPU），平均每面积性能 8.77x，25 个负载上每瓦性能几何平均 4.59x。对比对象未公开，RTL 和 ISA 也还没发布（列在后续计划里），这些自报数字暂时无法独立核对，但它是 AI 系统参与芯片全流程设计的一个具体案例。",
+      "sources": [
+        {
+          "candidate_id": "c_c68595a7da",
+          "url": "https://architectlabs.com/blog/frostbite"
+        },
+        {
+          "candidate_id": "c_c68595a7da",
+          "url": "https://news.ycombinator.com/item?id=50572503"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://architectlabs.com/blog/frostbite",
+          "quote": "Today, we're introducing Frostbite, a general-purpose CPU with a new instruction set built from the ground up. Frostbite exploits the properties of interaction nets"
+        },
+        {
+          "url": "https://architectlabs.com/blog/frostbite",
+          "quote": "Our AI systems autonomously iterated over the compiler, ISA, architecture, microarchitecture, RTL, verification, and final GDS."
+        },
+        {
+          "url": "https://architectlabs.com/blog/frostbite",
+          "quote": "We synthesized Frostbite on a 7 nm process, reaching 800 MHz timing at synthesis and 500 MHz in the final GDS. Each Frostbite quad (a two-by-two grid of tiles) paired with four L3 nodes is 0.792 mm²."
+        },
+        {
+          "url": "https://architectlabs.com/blog/frostbite",
+          "quote": "Across all the workloads, we average an 8.77x performance-per-area, and across all 25 workloads, search set and held out together, Frostbite reaches a geometric mean of 4.59x the TCPU's performance-per-watt"
+        },
+        {
+          "url": "https://architectlabs.com/blog/frostbite",
+          "quote": "Release the RTL and ISA for Frostbite. We are having a lot of fun! Notes † For legal reasons, we cannot disclose the exact CPU."
+        }
+      ],
+      "tags": [
+        "硬件",
+        "Agent"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Signal 阻止 iOS 27 和 Android 的系统级 AI 读取聊天屏幕",
+      "summary": "Signal 宣布在 iOS 27 上禁止应用内截屏，在能检测到 AI 助手读取屏幕的 Android 版本上自动开启 “Screen security”，以阻止系统内置的 Agent 捕获聊天内容，做法和此前在 Windows 11 上屏蔽 Microsoft Recall 类似；用户可以在设置里关闭这项保护。Signal 同时呼吁平台方给开发者一个简单、有文档的方式，让应用退出 AI 数据访问和处理。做隐私敏感应用的移动开发者，需要开始考虑系统级 Agent 读屏的问题。",
+      "sources": [
+        {
+          "candidate_id": "c_9a5c17e015",
+          "url": "https://signal.org/blog/protecting-your-privacy/"
+        },
+        {
+          "candidate_id": "c_9a5c17e015",
+          "url": "https://news.ycombinator.com/item?id=50572348"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://signal.org/blog/protecting-your-privacy/",
+          "quote": "We will now be taking similar measures to restrict agentic systems built into iOS 27 and on Android versions where we can detect an AI assistant attempting to read your Signal screen."
+        },
+        {
+          "url": "https://signal.org/blog/protecting-your-privacy/",
+          "quote": "So, we are blocking such capture by preventing screenshots in the app on iOS 27 and when AI assistants attempt to capture screen data on Android."
+        },
+        {
+          "url": "https://signal.org/blog/protecting-your-privacy/",
+          "quote": "We automatically enable the “Screen security” setting in Signal Android when this type of access is detected."
+        },
+        {
+          "url": "https://signal.org/blog/protecting-your-privacy/",
+          "quote": "Last year, we used screenshot blocking to prevent Microsoft’s Recall AI from taking and storing screenshots of your Signal messages on Windows 11 operating systems by default."
+        },
+        {
+          "url": "https://signal.org/blog/protecting-your-privacy/",
+          "quote": "People who want the ability to take screenshots can disable this protection within the Signal app’s settings."
+        },
+        {
+          "url": "https://signal.org/blog/protecting-your-privacy/",
+          "quote": "Developers should have an easy and well-documented way to opt their app out of AI data access and processing"
+        }
+      ],
+      "tags": [
+        "安全",
+        "Agent",
+        "产品"
+      ]
+    },
+    {
+      "section": "model",
+      "title": "腾讯开源全模态视频理解模型 WeMM-Video",
+      "summary": "WeMM-Video 是中英双语全模态模型家族，有 2B、4B、9B 和 35B-A3B 四个规格，统一处理文本、图像、音频和视频，支持非思考和思考两种模式，训练语料约 1.2 trillion tokens。论文称旗舰 WeMM-Video-35B-A3B 在全模态视频评测上达到开源模型中的最好水平，WeMM-Video-9B 超过更大的 Qwen3-Omni-30B-A3B-Instruct，模型和评测、复现流程一并公开。需要同时理解视频画面和音频的应用可以拿来试。",
+      "sources": [
+        {
+          "candidate_id": "c_1e04576ead",
+          "url": "https://huggingface.co/papers/2611.26409"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.26409",
+          "quote": "our flagship WeMM-Video-35B-A3B establishes a new open-source state of the art"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.26409",
+          "quote": "our compact WeMM-Video-9B surpasses the larger open-source Qwen3-Omni-30B-A3B-Instruct. We publicly release the WeMM-Video family along with our evaluation and reproduction pipeline to foster further research and development in the open-source community."
+        }
+      ],
+      "tags": [
+        "模型",
+        "开源",
+        "多模态"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Hugging Face 推出 harness adapters：为每个 Agent 框架训练专属 LoRA",
+      "summary": "Hugging Face 为 Qwen3.8-27B 在 pi、Hermes Agent、OpenCode 三个 harness 里分别用 RL 训练 LoRA 适配器，再合并成一个三者通用的 super adapter，适配器、GGUF、RL 任务和完整配方都在 Hub 上公开。在 pi 下，Terminal-Bench 2.1 从 39% 升到 55% pass@1，平均每个任务的 token 从 2.9K 降到 1.5K；SWE-bench Pro（hard 51）上 pi 从 39.2% 升到 64.7%。用开源模型跑编码 Agent 的团队，可以照这套配方给自己的 harness 训练适配器，同时提分和省 token。",
+      "sources": [
+        {
+          "candidate_id": "c_daa5ed95b3",
+          "url": "https://huggingface.co/blog/harness-adapters-at-scale"
+        },
+        {
+          "candidate_id": "c_6be73df178",
+          "url": "https://huggingface.co/harness-hub/Qwen3.8-27B-pi-adapted"
+        },
+        {
+          "candidate_id": "c_3076d62d44",
+          "url": "https://huggingface.co/harness-hub/Qwen3.8-27B-opencode-adapted"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/blog/harness-adapters-at-scale",
+          "quote": "Take Qwen3.8-27B, its Terminal-Bench 2.1 score with the pi harness is 39% which uses on average 2.9K tokens per task. If we freeze those weights and add a custom RL-trained LoRA adapter we can get 55% pass@1, with average token usage of 1.5K."
+        },
+        {
+          "url": "https://huggingface.co/blog/harness-adapters-at-scale",
+          "quote": "We trained one LoRA adapter for Qwen3.8-27B per agent harness (pi, Hermes Agent, OpenCode), with RL inside the harness itself."
+        },
+        {
+          "url": "https://huggingface.co/blog/harness-adapters-at-scale",
+          "quote": "The three LoRAs are also merged into a single super adapter that runs unchanged under pi, Hermes Agent and OpenCode. All artifacts (adapters, GGUFs, RL tasks, safeagents plugin) can be browsed through this Hugging"
+        },
+        {
+          "url": "https://huggingface.co/blog/harness-adapters-at-scale",
+          "quote": "On SWE-bench Pro (hard 51), pi goes from 39.2% to 64.7%"
+        }
+      ],
+      "tags": [
+        "工具",
+        "Agent",
+        "训练"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Claude Code v2.1.330：支持企业组织登录，新增画图 mod easel",
+      "summary": "Claude Code v2.1.330 支持登录由 Anthropic Enterprise Admin Console 管理的组织，claude auth login 之后会应用组织设置，并使用组织的云服务商或网关；新增内置 mod easel，按需画图表，也会在 MCP 指标结果下自动画图，可在 /config 关闭自动图表。自托管 runner 新增 --start-dir，可以让 Claude 从仓库里的某个子目录开始工作。用企业管理后台或自建 runner 的团队值得升级。",
+      "sources": [
+        {
+          "candidate_id": "c_6338b9792f",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.330"
+        }
+      ],
+      "evidence": [],
+      "tags": [
+        "工具",
+        "代码",
+        "Agent"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "论文：扩散 Transformer 的 RL 后训练，多半只是固定的激活偏移",
+      "summary": "作者在冻结的基础模型各 block 输出上加一组对所有提示、token 和随机种子都相同的 steering vector，只拟合 RL 调优模型的速度预测、目标里不含奖励，就找回了六个 RL 调优图像模型 90.0-96.3% 的奖励提升；在 SD3.5-M 上参数比 RL 调优的 LoRA 少 65x。从零开始用在线 RL 训练这些向量，在文字渲染（OCR）和 PickScore 上甚至超过基于权重的 RL。给扩散模型做 RL 对齐时，可以先试成本低得多的激活引导。",
+      "sources": [
+        {
+          "candidate_id": "c_10599b9777",
+          "url": "https://huggingface.co/papers/2611.26627"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.26627",
+          "quote": "t them to match the velocity predictions of public RL-tuned checkpoints , with no reward in the objective. Although the vectors are identical for every prompt, token, and sampling seed , they recover 90.0-96.3% of the reward gains of six RL-tuned image models"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.26627",
+          "quote": "Initialized at zero and trained with online RL , the vectors alone exceed the reward gains of weight-based RL on text rendering ( OCR ) and human preference ( PickScore ) on SD3.5-M ."
+        }
+      ],
+      "tags": [
+        "论文",
+        "训练",
+        "图像"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "LightningMoBA：MoBA 稀疏注意力端到端提速 1.20 到 1.60x",
+      "summary": "LightningMoBA 把 Mixture of Block Attention 的块选择和执行放在一起设计：用阈值动态路由替代固定 Top-k，按 KV 块组织任务以复用已加载的 KV，并在 Hopper 上让数据搬运与 Tensor Core 计算重叠。在五个 checkpoint 上、相同的 Top-16 保留率下，端到端生成提速 1.20 到 1.60x，平均 RULER 分从 74.42 升到 75.28。做长上下文推理优化的团队可以参考，代码在 GitHub 上。",
+      "sources": [
+        {
+          "candidate_id": "c_72fe1bbb71",
+          "url": "https://huggingface.co/papers/2611.26268"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.26268",
+          "quote": "On Hopper , pipelining overlaps regular K/V transfers and irregular query gathers with Tensor Core computation ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.26268",
+          "quote": "At matched Top-16 retention across five checkpoints, Lightning MoBA accelerates end-to-end generation by 1.20 to 1.60x while raising mean RULER score from 74.42 to 75.28."
+        }
+      ],
+      "tags": [
+        "论文",
+        "推理"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "AutoMaster：让 LLM Agent 自己设计后训练的教师干预",
+      "summary": "AutoMaster 是一个自主后训练系统：LLM Agent 分析轨迹、设计自然语言技能（Skill-FT），在教师采样时抑制不良习惯、引出缺少的有效行为，再筛选数据微调目标模型。在 Terminal、Search 和 SWE 类基准上用 4B 和 9B 模型测试，在教师、任务池、训练集规模和 SFT 配方都不变的情况下，比普通 SFT 高 1.42–8.99 个百分点。做 Agent 蒸馏的团队可以借鉴：用技能提示改善示范轨迹，而不只按任务成功筛数据。",
+      "sources": [
+        {
+          "candidate_id": "c_ea25ed415f",
+          "url": "https://huggingface.co/papers/2611.26510"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.26510",
+          "quote": "Across Terminal, Search, and SWE benchmarks with 4B and 9B models, AutoMaster outperforms Vanilla SFT by 1.42–8.99 percentage points , with the teacher, task pool, training set size, and SFT recipe held fixed."
+        }
+      ],
+      "tags": [
+        "论文",
+        "Agent",
+        "训练"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "OpenAI 发布药物化学基准 MedChemBench",
+      "summary": "MedChemBench 含 99 道取自已发表研究的题目，xhigh 推理设置下 GPT‑6.2 Astra 拿到 84.5% 的分数，GPT‑5.6 Sol 为 58.2%。",
+      "sources": [
+        {
+          "candidate_id": "c_8a4cf7fa5e",
+          "url": "https://openai.com/index/introducing-medchembench"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://openai.com/index/introducing-medchembench",
+          "quote": "MedChemBench measures these abilities through 99 problems drawn from published research. At the xhigh reasoning setting, GPT‑6.2 Astra earned 84.5% of the available credit, compared with 83.3% for GPT‑6 Astra, 82.0% for GPT‑6.1 Sol, and 58.2% for GPT‑5.6 Sol."
+        }
+      ],
+      "tags": [
+        "模型",
+        "论文"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "Google 把 Duplex 接入 Tasks in Gemini，替用户给商家打电话",
+      "summary": "Gemini App 的 Tasks in Gemini 现在可以用 Duplex 给商家打电话预约、办事，每通电话开头都会说明是 AI，商家可以选择退出。",
+      "sources": [
+        {
+          "candidate_id": "c_63b8e3d4c8",
+          "url": "https://research.google/blog/how-google-duplex-evolved-to-also-call-businesses-for-you-in-gemini/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://research.google/blog/how-google-duplex-evolved-to-also-call-businesses-for-you-in-gemini/",
+          "quote": "This week, we launched Duplex in Tasks in Gemini App , a personal AI collaborator that can help coordinate real-world chores, like calling businesses for you and handling real-world requests on behalf of the user."
+        },
+        {
+          "url": "https://research.google/blog/how-google-duplex-evolved-to-also-call-businesses-for-you-in-gemini/",
+          "quote": "Every call opens by clearly disclosing that it’s an AI agent"
+        },
+        {
+          "url": "https://research.google/blog/how-google-duplex-evolved-to-also-call-businesses-for-you-in-gemini/",
+          "quote": "Merchants can opt out of automated calls in their Google Business Profile settings"
+        }
+      ],
+      "tags": [
+        "产品",
+        "语音",
+        "Agent"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "开发者让编码 Agent 在 AWS F2 FPGA 上跑通三值权重 LLM",
+      "summary": "作者用 Codex 等编码 Agent 在 AWS F2 FPGA 上实现三值权重 LLM 推理，吞吐达 213.13 tok/s（基线的 33.13×），约 $10,000 token 花费，比价格相近的 CPU 实例快 1.65×。",
+      "sources": [
+        {
+          "candidate_id": "c_d4285062bd",
+          "url": "https://ankitg.me/blog/vibecoding-inference-chip/"
+        },
+        {
+          "candidate_id": "c_d4285062bd",
+          "url": "https://news.ycombinator.com/item?id=50579297"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://ankitg.me/blog/vibecoding-inference-chip/",
+          "quote": "AWS has F2 instances with FPGA hardware, and that seemed easier than going and buying physical hardware, so I asked Codex to spin up a reservation and got cooking."
+        },
+        {
+          "url": "https://ankitg.me/blog/vibecoding-inference-chip/",
+          "quote": "Parallel head loader 213.13 Step 14 · 33.13× baseline"
+        },
+        {
+          "url": "https://ankitg.me/blog/vibecoding-inference-chip/",
+          "quote": "burning only $10,000 in Claude and OpenAI tokens to run hundreds of experiments"
+        },
+        {
+          "url": "https://ankitg.me/blog/vibecoding-inference-chip/",
+          "quote": "F2 FPGA, r9 (final image) f2.6xlarge $1.98 213.13 24/24 — Exact CPU twin, 32 threads m8a.8xlarge (32 Zen 5 cores) $1.95 129.5 24/24 1.65×"
+        },
+        {
+          "url": "https://ankitg.me/blog/vibecoding-inference-chip/",
+          "quote": "the DeepGrove founders who were discussing their new ternary weight architecture"
+        }
+      ],
+      "tags": [
+        "硬件",
+        "代码",
+        "Agent"
+      ]
+    }
+  ],
+  "research": [
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/blog/inkling2mini"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/blog/harness-adapters-at-scale"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://openai.com/index/combatting-adversarial-distillation"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://openai.com/index/introducing-medchembench"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://www.minimax.io/blog/practical-cryptanalysis-with-minimaxs-latest-internal-model"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://research.google/blog/how-google-duplex-evolved-to-also-call-businesses-for-you-in-gemini/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://architectlabs.com/blog/frostbite"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://signal.org/blog/protecting-your-privacy/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://machinelearning.apple.com/research/depth-pro-2"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/tencent/Hy4"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://ankitg.me/blog/vibecoding-inference-chip/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://spectrum.ieee.org/epic-games-unreal-engine-ai"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.26603"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.26409"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.26627"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.26268"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.26510"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/thinkingmachines/Inkling-2-Mini"
+    },
+    {
+      "via": "websearch",
+      "query": "Baidu ERNIE release November 2026"
+    }
+  ],
+  "validation": {
+    "validated_at": "2026-11-21T04:45:14+00:00",
+    "checked_links": true,
+    "dropped": [],
+    "warnings": []
+  }
+}

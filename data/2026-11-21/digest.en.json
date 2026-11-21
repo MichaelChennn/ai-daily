@@ -1,0 +1,559 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-21",
+  "mode": "full",
+  "channel": "claude",
+  "generated_at": "2026-11-21T04:45:18+00:00",
+  "model": "claude-opus-5-5",
+  "highlights": [
+    "Thinking Machines released Inkling 2 Mini under Apache 2.0: 26.4B total and 3.4B active parameters, in a checkpoint of about 20GB that runs locally.",
+    "OpenAI detailed its defenses against adversarial distillation, cutting the average reasoning-extraction attack success rate from 54.0% to 0.2%; Hugging Face's RL-trained harness adapters lift Qwen3.8-27B on Terminal-Bench 2.1 under pi from 39% to 55%.",
+    "Signal is blocking built-in AI on iOS 27 and Android from capturing its screens."
+  ],
+  "items": [
+    {
+      "section": "headline",
+      "title": "Thinking Machines releases Inkling 2 Mini weights: 26.4B total, 3.4B active",
+      "summary": "Inkling 2 Mini is a multimodal Mixture-of-Experts model from Thinking Machines Lab with a looped design: some layers are visited three times to add capacity, and the model card lists 26.4B total and 3.4B active parameters, a 1M-token context, image and text inputs, and an Apache 2.0 license. The checkpoint is about 20GB in mixed NVFP4 and MXFP8 precision, officially supported on one NVIDIA DGX Spark or Apple silicon with 32GB or more memory, with IQ4_NL and Q8_0 GGUF quants for llama.cpp. Developers who want a long-context multimodal model on local hardware can download it today.",
+      "sources": [
+        {
+          "candidate_id": "c_a4f31a72ec",
+          "url": "https://huggingface.co/blog/inkling2mini"
+        },
+        {
+          "candidate_id": "c_271b21f503",
+          "url": "https://huggingface.co/thinkingmachines/Inkling-2-Mini"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/blog/inkling2mini",
+          "quote": "It’s a multimodal Mixture-of-Experts with ~26B physical total and 3B active parameters per token."
+        },
+        {
+          "url": "https://huggingface.co/blog/inkling2mini",
+          "quote": "It uses a neat trick to increase capacity: some layers are visited in a loop that repeats three times, which makes it work like it had more parameters. It supports a 1M-token context size, accepts images and text inputs."
+        },
+        {
+          "url": "https://huggingface.co/thinkingmachines/Inkling-2-Mini",
+          "quote": "Parameters 26.4B, 3.4B active"
+        },
+        {
+          "url": "https://huggingface.co/thinkingmachines/Inkling-2-Mini",
+          "quote": "Date of release: November 20, 2026 License: Apache 2.0"
+        },
+        {
+          "url": "https://huggingface.co/thinkingmachines/Inkling-2-Mini",
+          "quote": "The model is distributed as a single checkpoint of about 20GB, in mixed NVFP4 and MXFP8 precisions. Given its small size, it is possible to run this checkpoint on local AI compute for inference. We support: 1x NVIDIA DGX Spark Apple silicon devices with 32GB or more memory"
+        },
+        {
+          "url": "https://huggingface.co/blog/inkling2mini",
+          "quote": "For the Inkling 2 Mini release we provide GGUF 4-bit ( IQ4_NL) and 8-bit ( Q8_0 ) quants for both models."
+        }
+      ],
+      "tags": [
+        "模型",
+        "开源",
+        "多模态"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "OpenAI details adversarial distillation defenses, extraction success down to 0.2%",
+      "summary": "OpenAI described how it fights adversarial distillation, combining adversarial testing, model training, classifiers and API-level protections with investigations into coordinated extraction campaigns; for GPT‑6.2 Astra and Sol, protected reasoning is tied to the conversation history that produced it, and rewriting an earlier message makes the API drop the reasoning that followed. In automated red-teaming, the average success rate of recovering reasoning from an earlier prompt fell from 54.0% against GPT‑6 Astra with its original safeguards to 0.2% against GPT‑6.2 Astra. API apps that rewrite conversation history should expect that reasoning to be discarded; OpenAI also attributed a core part of one campaign to individuals associated with Moonshot AI.",
+      "sources": [
+        {
+          "candidate_id": "c_bab9b9b98c",
+          "url": "https://openai.com/index/combatting-adversarial-distillation"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://openai.com/index/combatting-adversarial-distillation",
+          "quote": "Our approach to adversarial distillation combines adversarial testing, model training, classifiers, and API-level protections with investigations into coordinated attempts to extract model capabilities."
+        },
+        {
+          "url": "https://openai.com/index/combatting-adversarial-distillation",
+          "quote": "a and GPT‑6.2 Sol, we tie a model’s protected reasoning to the conversation history that produced it. As new messages are added, the model can build on its earlier reasoning. If an earlier message is rewritten, our API drops the reasoning that followed it"
+        },
+        {
+          "url": "https://openai.com/index/combatting-adversarial-distillation",
+          "quote": "The average attack success rate fell from 54.0% against GPT‑6 Astra with its original safeguards to 0.2% against GPT‑6.2 Astra with its updated safeguards."
+        },
+        {
+          "url": "https://openai.com/index/combatting-adversarial-distillation",
+          "quote": "attributed a core part of that activity to individuals associated with Moonshot AI, the developer of Kimi."
+        }
+      ],
+      "tags": [
+        "安全",
+        "模型",
+        "行业"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "MiniMax's internal model MIM breaks several NIST candidate schemes",
+      "summary": "MiniMax researchers used an internal-only model, MIM, for automated cryptanalysis: it built the first practical collision attack on the NIST SHA-3 candidate Waterfall-256 and, on the TII McEliece Challenges, recovered secret keys for 94 instances, including 55 previously unsolved ones. MiniMax says the work targets academic designs, past competition candidates and public challenge parameters, does not affect deployed cryptographic standards, and was shared with the scheme authors in advance. MIM is not public, but qualified researchers and developers can apply for access.",
+      "sources": [
+        {
+          "candidate_id": "c_9e3e131d9a",
+          "url": "https://www.minimax.io/blog/practical-cryptanalysis-with-minimaxs-latest-internal-model"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://www.minimax.io/blog/practical-cryptanalysis-with-minimaxs-latest-internal-model",
+          "quote": "Our research team used an internal-only research model that we will call MiniMax's Internal Model (MIM) to conduct automated cryptanalysis across modern cryptographic schemes."
+        },
+        {
+          "url": "https://www.minimax.io/blog/practical-cryptanalysis-with-minimaxs-latest-internal-model",
+          "quote": "compromise several NIST candidates. Examples include: Waterfall-256 (NIST SHA-3 candidate): Prior work was purely theoretical, with no colliding message pairs constructed. In a blind run, MIM built the first practical collision attack"
+        },
+        {
+          "url": "https://www.minimax.io/blog/practical-cryptanalysis-with-minimaxs-latest-internal-model",
+          "quote": "TII McEliece Challenges: This benchmark tests concrete security using challenge instances based on the McEliece cryptosystem"
+        },
+        {
+          "url": "https://www.minimax.io/blog/practical-cryptanalysis-with-minimaxs-latest-internal-model",
+          "quote": "it recovered secret keys for 94 instances, including 55 previously unsolved hard instances."
+        },
+        {
+          "url": "https://www.minimax.io/blog/practical-cryptanalysis-with-minimaxs-latest-internal-model",
+          "quote": "This work focuses on academic designs, past competition candidates, and public challenge parameters, and does not affect deployed cryptographic standards. Following the principles of responsible research and disclosure, we shared our findings with the authors of the respective schemes in advance."
+        },
+        {
+          "url": "https://www.minimax.io/blog/practical-cryptanalysis-with-minimaxs-latest-internal-model",
+          "quote": "We will provide access to qualified researchers and developers."
+        }
+      ],
+      "tags": [
+        "安全",
+        "模型"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Architect Labs unveils Frostbite, a new-ISA CPU designed by AI",
+      "summary": "Architect Labs introduced Frostbite, a general-purpose CPU with a new instruction set built on interaction nets, saying its AI systems autonomously iterated over the compiler, ISA, architecture, microarchitecture, RTL, verification and final GDS. On a 7 nm process, one Frostbite quad with four L3 nodes is 0.792 mm², and against an undisclosed traditional CPU (TCPU) it averages 8.77x performance-per-area and a 4.59x geometric mean in performance-per-watt across 25 workloads. The comparison CPU is not named and the RTL and ISA are not yet released, so the self-reported numbers can't be checked independently, but it is a concrete case of AI systems running a full chip design flow.",
+      "sources": [
+        {
+          "candidate_id": "c_c68595a7da",
+          "url": "https://architectlabs.com/blog/frostbite"
+        },
+        {
+          "candidate_id": "c_c68595a7da",
+          "url": "https://news.ycombinator.com/item?id=50572503"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://architectlabs.com/blog/frostbite",
+          "quote": "Today, we're introducing Frostbite, a general-purpose CPU with a new instruction set built from the ground up. Frostbite exploits the properties of interaction nets"
+        },
+        {
+          "url": "https://architectlabs.com/blog/frostbite",
+          "quote": "Our AI systems autonomously iterated over the compiler, ISA, architecture, microarchitecture, RTL, verification, and final GDS."
+        },
+        {
+          "url": "https://architectlabs.com/blog/frostbite",
+          "quote": "We synthesized Frostbite on a 7 nm process, reaching 800 MHz timing at synthesis and 500 MHz in the final GDS. Each Frostbite quad (a two-by-two grid of tiles) paired with four L3 nodes is 0.792 mm²."
+        },
+        {
+          "url": "https://architectlabs.com/blog/frostbite",
+          "quote": "Across all the workloads, we average an 8.77x performance-per-area, and across all 25 workloads, search set and held out together, Frostbite reaches a geometric mean of 4.59x the TCPU's performance-per-watt"
+        },
+        {
+          "url": "https://architectlabs.com/blog/frostbite",
+          "quote": "Release the RTL and ISA for Frostbite. We are having a lot of fun! Notes † For legal reasons, we cannot disclose the exact CPU."
+        }
+      ],
+      "tags": [
+        "硬件",
+        "Agent"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Signal blocks built-in AI on iOS 27 and Android from reading its screen",
+      "summary": "Signal is preventing screenshots in its app on iOS 27 and automatically enabling Screen security on Android versions where it detects an AI assistant trying to read the screen, similar to how it blocked Microsoft's Recall on Windows 11; users can turn the protection off in settings. Signal also asks platform makers for an easy, well-documented way for developers to opt their apps out of AI data access and processing. Mobile developers building privacy-sensitive apps now have to think about OS-level agents reading their screens.",
+      "sources": [
+        {
+          "candidate_id": "c_9a5c17e015",
+          "url": "https://signal.org/blog/protecting-your-privacy/"
+        },
+        {
+          "candidate_id": "c_9a5c17e015",
+          "url": "https://news.ycombinator.com/item?id=50572348"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://signal.org/blog/protecting-your-privacy/",
+          "quote": "We will now be taking similar measures to restrict agentic systems built into iOS 27 and on Android versions where we can detect an AI assistant attempting to read your Signal screen."
+        },
+        {
+          "url": "https://signal.org/blog/protecting-your-privacy/",
+          "quote": "So, we are blocking such capture by preventing screenshots in the app on iOS 27 and when AI assistants attempt to capture screen data on Android."
+        },
+        {
+          "url": "https://signal.org/blog/protecting-your-privacy/",
+          "quote": "We automatically enable the “Screen security” setting in Signal Android when this type of access is detected."
+        },
+        {
+          "url": "https://signal.org/blog/protecting-your-privacy/",
+          "quote": "Last year, we used screenshot blocking to prevent Microsoft’s Recall AI from taking and storing screenshots of your Signal messages on Windows 11 operating systems by default."
+        },
+        {
+          "url": "https://signal.org/blog/protecting-your-privacy/",
+          "quote": "People who want the ability to take screenshots can disable this protection within the Signal app’s settings."
+        },
+        {
+          "url": "https://signal.org/blog/protecting-your-privacy/",
+          "quote": "Developers should have an easy and well-documented way to opt their app out of AI data access and processing"
+        }
+      ],
+      "tags": [
+        "安全",
+        "Agent",
+        "产品"
+      ]
+    },
+    {
+      "section": "model",
+      "title": "WeMM-Video: open omni-modal video models from 2B to 35B-A3B",
+      "summary": "WeMM-Video is a Chinese-English bilingual family of omni-modal models in 2B, 4B, 9B and 35B-A3B sizes that handle text, image, audio and video, with both a non-thinking and a thinking mode, trained on approximately 1.2 trillion tokens. The report says WeMM-Video-35B-A3B sets a new open-source state of the art on omni-modal video evaluations and WeMM-Video-9B beats the larger Qwen3-Omni-30B-A3B-Instruct; the models ship with the evaluation and reproduction pipeline. Apps that need to understand video frames and audio together can try it.",
+      "sources": [
+        {
+          "candidate_id": "c_1e04576ead",
+          "url": "https://huggingface.co/papers/2611.26409"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.26409",
+          "quote": "our flagship WeMM-Video-35B-A3B establishes a new open-source state of the art"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.26409",
+          "quote": "our compact WeMM-Video-9B surpasses the larger open-source Qwen3-Omni-30B-A3B-Instruct. We publicly release the WeMM-Video family along with our evaluation and reproduction pipeline to foster further research and development in the open-source community."
+        }
+      ],
+      "tags": [
+        "模型",
+        "开源",
+        "多模态"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Hugging Face introduces harness adapters: per-harness LoRAs trained with RL",
+      "summary": "Hugging Face trained one RL LoRA adapter for Qwen3.8-27B inside each of three agent harnesses (pi, Hermes Agent, OpenCode) and merged them into a single super adapter that runs under all three, publishing the adapters, GGUFs, RL tasks and recipe on the Hub. Under pi, Terminal-Bench 2.1 rises from 39% to 55% pass@1 while average tokens per task drop from 2.9K to 1.5K, and on SWE-bench Pro (hard 51) pi goes from 39.2% to 64.7%. Teams running coding agents on open models can follow the recipe to train an adapter for their own harness and gain both accuracy and token savings.",
+      "sources": [
+        {
+          "candidate_id": "c_daa5ed95b3",
+          "url": "https://huggingface.co/blog/harness-adapters-at-scale"
+        },
+        {
+          "candidate_id": "c_6be73df178",
+          "url": "https://huggingface.co/harness-hub/Qwen3.8-27B-pi-adapted"
+        },
+        {
+          "candidate_id": "c_3076d62d44",
+          "url": "https://huggingface.co/harness-hub/Qwen3.8-27B-opencode-adapted"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/blog/harness-adapters-at-scale",
+          "quote": "Take Qwen3.8-27B, its Terminal-Bench 2.1 score with the pi harness is 39% which uses on average 2.9K tokens per task. If we freeze those weights and add a custom RL-trained LoRA adapter we can get 55% pass@1, with average token usage of 1.5K."
+        },
+        {
+          "url": "https://huggingface.co/blog/harness-adapters-at-scale",
+          "quote": "We trained one LoRA adapter for Qwen3.8-27B per agent harness (pi, Hermes Agent, OpenCode), with RL inside the harness itself."
+        },
+        {
+          "url": "https://huggingface.co/blog/harness-adapters-at-scale",
+          "quote": "The three LoRAs are also merged into a single super adapter that runs unchanged under pi, Hermes Agent and OpenCode. All artifacts (adapters, GGUFs, RL tasks, safeagents plugin) can be browsed through this Hugging"
+        },
+        {
+          "url": "https://huggingface.co/blog/harness-adapters-at-scale",
+          "quote": "On SWE-bench Pro (hard 51), pi goes from 39.2% to 64.7%"
+        }
+      ],
+      "tags": [
+        "工具",
+        "Agent",
+        "训练"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Claude Code v2.1.330 adds Enterprise Admin Console sign-in and the easel chart mod",
+      "summary": "Claude Code v2.1.330 can sign in to organizations managed in Anthropic's Enterprise Admin Console, applying the organization's settings and its cloud provider or gateway after claude auth login, and adds easel, a built-in mod that draws charts when asked and under MCP metrics results (automatic charts can be turned off in /config). The self-hosted runner gains --start-dir so Claude can start work in a folder of a repository. Teams on the enterprise console or self-hosted runners should upgrade.",
+      "sources": [
+        {
+          "candidate_id": "c_6338b9792f",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.330"
+        }
+      ],
+      "evidence": [],
+      "tags": [
+        "工具",
+        "代码",
+        "Agent"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "RL post-training of diffusion transformers is mostly a fixed activation shift",
+      "summary": "The authors add a fixed set of steering vectors, identical for every prompt, token and seed, to the block outputs of a frozen base model and fit them to an RL-tuned model's velocity predictions with no reward in the objective, recovering 90.0-96.3% of the reward gains of six RL-tuned image models with 65x fewer parameters than the RL-tuned LoRA on SD3.5-M. Trained from zero with online RL, the vectors alone beat weight-based RL on text rendering (OCR) and PickScore. Teams doing RL alignment of diffusion models can try this much cheaper steering first.",
+      "sources": [
+        {
+          "candidate_id": "c_10599b9777",
+          "url": "https://huggingface.co/papers/2611.26627"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.26627",
+          "quote": "t them to match the velocity predictions of public RL-tuned checkpoints , with no reward in the objective. Although the vectors are identical for every prompt, token, and sampling seed , they recover 90.0-96.3% of the reward gains of six RL-tuned image models"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.26627",
+          "quote": "Initialized at zero and trained with online RL , the vectors alone exceed the reward gains of weight-based RL on text rendering ( OCR ) and human preference ( PickScore ) on SD3.5-M ."
+        }
+      ],
+      "tags": [
+        "论文",
+        "训练",
+        "图像"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "LightningMoBA speeds up MoBA sparse attention by 1.20 to 1.60x end to end",
+      "summary": "LightningMoBA co-designs block selection and execution for Mixture of Block Attention: threshold-based dynamic routing replaces a fixed Top-k budget, KV-centric ownership reuses loaded K/V tiles, and on Hopper GPUs pipelining overlaps data movement with Tensor Core computation. At matched Top-16 retention across five checkpoints it speeds up end-to-end generation by 1.20 to 1.60x while mean RULER rises from 74.42 to 75.28. Teams optimizing long-context inference can study it.",
+      "sources": [
+        {
+          "candidate_id": "c_72fe1bbb71",
+          "url": "https://huggingface.co/papers/2611.26268"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.26268",
+          "quote": "On Hopper , pipelining overlaps regular K/V transfers and irregular query gathers with Tensor Core computation ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.26268",
+          "quote": "At matched Top-16 retention across five checkpoints, Lightning MoBA accelerates end-to-end generation by 1.20 to 1.60x while raising mean RULER score from 74.42 to 75.28."
+        }
+      ],
+      "tags": [
+        "论文",
+        "推理"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "AutoMaster lets an LLM agent design teacher interventions for post-training",
+      "summary": "AutoMaster is an autonomous post-training system in which an LLM agent analyzes trajectories, designs natural-language skills (Skill-FT) that suppress bad habits in teacher rollouts and elicit missing effective behaviors, then selects data to fine-tune a target model. Across Terminal, Search and SWE benchmarks with 4B and 9B models, it beats vanilla SFT by 1.42–8.99 percentage points with the teacher, task pool, training set size and SFT recipe held fixed. Teams distilling agents can borrow the idea of shaping demonstrations with skills rather than only filtering by task success.",
+      "sources": [
+        {
+          "candidate_id": "c_ea25ed415f",
+          "url": "https://huggingface.co/papers/2611.26510"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.26510",
+          "quote": "Across Terminal, Search, and SWE benchmarks with 4B and 9B models, AutoMaster outperforms Vanilla SFT by 1.42–8.99 percentage points , with the teacher, task pool, training set size, and SFT recipe held fixed."
+        }
+      ],
+      "tags": [
+        "论文",
+        "Agent",
+        "训练"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "OpenAI releases MedChemBench, a medicinal chemistry benchmark",
+      "summary": "MedChemBench has 99 problems drawn from published research; at the xhigh reasoning setting GPT‑6.2 Astra earned 84.5% of the available credit versus 58.2% for GPT‑5.6 Sol.",
+      "sources": [
+        {
+          "candidate_id": "c_8a4cf7fa5e",
+          "url": "https://openai.com/index/introducing-medchembench"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://openai.com/index/introducing-medchembench",
+          "quote": "MedChemBench measures these abilities through 99 problems drawn from published research. At the xhigh reasoning setting, GPT‑6.2 Astra earned 84.5% of the available credit, compared with 83.3% for GPT‑6 Astra, 82.0% for GPT‑6.1 Sol, and 58.2% for GPT‑5.6 Sol."
+        }
+      ],
+      "tags": [
+        "模型",
+        "论文"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "Google brings Duplex to Tasks in Gemini to call businesses for you",
+      "summary": "Tasks in Gemini App can now use Duplex to call businesses and handle requests for users; every call discloses it is an AI agent, and merchants can opt out.",
+      "sources": [
+        {
+          "candidate_id": "c_63b8e3d4c8",
+          "url": "https://research.google/blog/how-google-duplex-evolved-to-also-call-businesses-for-you-in-gemini/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://research.google/blog/how-google-duplex-evolved-to-also-call-businesses-for-you-in-gemini/",
+          "quote": "This week, we launched Duplex in Tasks in Gemini App , a personal AI collaborator that can help coordinate real-world chores, like calling businesses for you and handling real-world requests on behalf of the user."
+        },
+        {
+          "url": "https://research.google/blog/how-google-duplex-evolved-to-also-call-businesses-for-you-in-gemini/",
+          "quote": "Every call opens by clearly disclosing that it’s an AI agent"
+        },
+        {
+          "url": "https://research.google/blog/how-google-duplex-evolved-to-also-call-businesses-for-you-in-gemini/",
+          "quote": "Merchants can opt out of automated calls in their Google Business Profile settings"
+        }
+      ],
+      "tags": [
+        "产品",
+        "语音",
+        "Agent"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "A developer vibe-codes an FPGA into running a ternary-weight LLM on AWS F2",
+      "summary": "Using Codex and other coding agents on an AWS F2 FPGA, the author reached 213.13 tok/s (33.13× baseline) for a ternary-weight LLM after spending about $10,000 in tokens, 1.65× faster than a similarly priced CPU instance.",
+      "sources": [
+        {
+          "candidate_id": "c_d4285062bd",
+          "url": "https://ankitg.me/blog/vibecoding-inference-chip/"
+        },
+        {
+          "candidate_id": "c_d4285062bd",
+          "url": "https://news.ycombinator.com/item?id=50579297"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://ankitg.me/blog/vibecoding-inference-chip/",
+          "quote": "AWS has F2 instances with FPGA hardware, and that seemed easier than going and buying physical hardware, so I asked Codex to spin up a reservation and got cooking."
+        },
+        {
+          "url": "https://ankitg.me/blog/vibecoding-inference-chip/",
+          "quote": "Parallel head loader 213.13 Step 14 · 33.13× baseline"
+        },
+        {
+          "url": "https://ankitg.me/blog/vibecoding-inference-chip/",
+          "quote": "burning only $10,000 in Claude and OpenAI tokens to run hundreds of experiments"
+        },
+        {
+          "url": "https://ankitg.me/blog/vibecoding-inference-chip/",
+          "quote": "F2 FPGA, r9 (final image) f2.6xlarge $1.98 213.13 24/24 — Exact CPU twin, 32 threads m8a.8xlarge (32 Zen 5 cores) $1.95 129.5 24/24 1.65×"
+        },
+        {
+          "url": "https://ankitg.me/blog/vibecoding-inference-chip/",
+          "quote": "the DeepGrove founders who were discussing their new ternary weight architecture"
+        }
+      ],
+      "tags": [
+        "硬件",
+        "代码",
+        "Agent"
+      ]
+    }
+  ],
+  "research": [
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/blog/inkling2mini"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/blog/harness-adapters-at-scale"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://openai.com/index/combatting-adversarial-distillation"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://openai.com/index/introducing-medchembench"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://www.minimax.io/blog/practical-cryptanalysis-with-minimaxs-latest-internal-model"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://research.google/blog/how-google-duplex-evolved-to-also-call-businesses-for-you-in-gemini/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://architectlabs.com/blog/frostbite"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://signal.org/blog/protecting-your-privacy/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://machinelearning.apple.com/research/depth-pro-2"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/tencent/Hy4"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://ankitg.me/blog/vibecoding-inference-chip/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://spectrum.ieee.org/epic-games-unreal-engine-ai"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.26603"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.26409"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.26627"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.26268"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.26510"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/thinkingmachines/Inkling-2-Mini"
+    },
+    {
+      "via": "websearch",
+      "query": "Baidu ERNIE release November 2026"
+    }
+  ],
+  "lang": "en",
+  "validation": {
+    "validated_at": "2026-11-21T04:45:50+00:00",
+    "checked_links": false,
+    "dropped": [],
+    "warnings": []
+  }
+}
