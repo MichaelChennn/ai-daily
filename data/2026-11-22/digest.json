@@ -2,53 +2,61 @@
   "schema_version": 1,
   "date": "2026-11-22",
   "mode": "full",
-  "generated_at": "2026-11-22T04:40:32+00:00",
-  "channel": "api",
-  "model": "nvidia:minimaxai/minimax-m3.1-flash",
+  "channel": "claude",
+  "generated_at": "2026-11-22T04:43:05+00:00",
+  "model": "claude-opus-5-5",
   "highlights": [
-    "Anthropic 完成 IPO，发行价 $83.00，合计募资约 $93.5 billion，Class A 股票已在 Nasdaq 以 \"ANT\" 交易。",
-    "OpenAI 客户案例显示 GPT-6 Astra 在金融研究中的引用覆盖与演示稿质量测试表现，Hebbia 称其为同时在两项指标上排名第一的模型。",
-    "Hugging Face transformers 发布 v5.24.0，加入 Inkling 2 Mini、Apertus 1.5、Omnilingual ASR 等新模型支持，并统一缓存接口命名。"
+    "腾讯开源 Hy4 旗舰模型：770B 总参数、每 token 激活 49B，上下文长度 1M。",
+    "Apple 发布 Depth Pro 2，开放代码和多个尺寸的权重，仅限非商业研究。",
+    "Transformers v5.24.0 加入 Inkling 2 Mini、Apertus 1.5 和 NVIDIA 的 Dory。"
   ],
   "items": [
     {
       "section": "headline",
-      "title": "Anthropic 完成 IPO，发行价 $83.00",
-      "summary": "Anthropic, PBC 宣布首次公开发行完成，共发行 1,127,000,000 股 Class A 普通股，发行价为每股 $83.00，含承销商全额行使超额配售权。发行总毛收入约 $93.5 billion，其中约 $91.6 billion 由 Anthropic 获得；Class A 股票已于 November 19, 2026 在 Nasdaq Global Select Market 以 \"ANT\" 为代码开始交易。",
-      "tags": [
-        "行业",
-        "产品"
-      ],
+      "title": "腾讯开源 Hy4：770B 总参数、每 token 激活 49B",
+      "summary": "腾讯 Hy 团队开放了新一代 MoE 旗舰模型 Hy4 的权重，同时提供 Hy4-FP8 和预训练 base 模型，支持文本、图像和视频理解，上下文长度 1M。模型卡称它在 579 个真实金融任务上排在开放权重模型第一，但也承认与顶级闭源模型仍有明显差距。许可是 Tencent Hy License，商用前要先读条款；需要自部署长上下文大模型的团队多了一个开放权重选项。",
       "sources": [
         {
-          "candidate_id": "c_0f26b1017f",
-          "url": "https://www.anthropic.com/news/ipo-close"
+          "candidate_id": "c_cf0b6cc4cc",
+          "url": "https://huggingface.co/tencent/Hy4"
         }
       ],
       "evidence": [
         {
-          "url": "https://www.anthropic.com/news/ipo-close",
-          "quote": "hropic raises $65B in Series H funding at $965B post-money valuation View more Today Anthropic, PBC announced the closing of its initial public offering of an aggregate of 1,127,000,000 shares of its Class A common stock at a public offering price of $83.00 per share, including the full exercise by"
+          "url": "https://huggingface.co/tencent/Hy4",
+          "quote": "Hy4 is a new-generation Mixture-of-Experts (MoE) flagship model developed by the Tencent Hy Team, supporting text, image, and video understanding. The language backbone comprises 770B total parameters, of which 49B are activated per token."
         },
         {
-          "url": "https://www.anthropic.com/news/ipo-close",
-          "quote": "The aggregate gross proceeds from the offering, before deducting underwriting discounts and commissions and other offering expenses, were approximately $93.5 billion, of which approximately $91.6 billion was received by Anthropic."
+          "url": "https://huggingface.co/tencent/Hy4",
+          "quote": "Context Length 1M (1,048,576 tokens)"
         },
         {
-          "url": "https://www.anthropic.com/news/ipo-close",
-          "quote": "Anthropic’s Class A common stock began trading on the Nasdaq Global Select Market on November 19, 2026 under the symbol “ANT.” In addition to the shares of Class A common stock sold in the initial public offering, Anthropic closed the concurrent sale of an aggregate of 313,253,007 shares of Class N"
+          "url": "https://huggingface.co/tencent/Hy4",
+          "quote": "Across 579 real-world financial tasks, Hy4 ranks first among open-weight models"
+        },
+        {
+          "url": "https://huggingface.co/tencent/Hy4",
+          "quote": "a notable gap remains between it and top proprietary models"
+        },
+        {
+          "url": "https://huggingface.co/tencent/Hy4",
+          "quote": "We open-source Hy4 , Hy4-FP8 , and the pre-trained Hy4 base model weights on Hugging Face"
+        },
+        {
+          "url": "https://huggingface.co/tencent/Hy4",
+          "quote": "Hy4 is released under the Tencent Hy License"
         }
+      ],
+      "tags": [
+        "模型",
+        "开源",
+        "多模态"
       ]
     },
     {
       "section": "headline",
-      "title": "Apple 发布 Depth Pro 2 单目深度估计",
-      "summary": "Apple Machine Learning Research 发布 Depth Pro 2，用单一可扩展网络处理图像和视频，在输入原生分辨率上预测稠密度量深度图。作者称其同时具备度量准确、边缘锐利和跨帧时间一致，并称代码与权重已开放。",
-      "tags": [
-        "论文",
-        "多模态",
-        "图像"
-      ],
+      "title": "Apple 发布 Depth Pro 2：一个网络同时做图片和视频的度量深度",
+      "summary": "Apple 机器学习研究团队发布 Depth Pro 2，从普通相机拍摄的照片、视频或实时画面逐像素估计以米为单位的深度，按输入的完整分辨率输出。作者指出以往方法要在时间一致性和边缘锐利度之间取舍，Depth Pro 2 用单个网络同时做到度量准确、锐利和时间一致，并开放代码和从 24M 到 872M 参数的多个尺寸权重。权重采用 Apple Machine Learning Research Model license，仅限非商业研究；需要视频深度的研究项目可以按速度和质量在几个尺寸里选。",
       "sources": [
         {
           "candidate_id": "c_2e19ab5231",
@@ -62,11 +70,11 @@
       "evidence": [
         {
           "url": "https://machinelearning.apple.com/research/depth-pro-2-monocular",
-          "quote": "Richter, Vladlen Koltun View publication View source code (GitHub) Copy Bibtex We present Depth Pro 2, an approach to estimating dense metric depth for images and video at full resolution."
+          "quote": "Depth Pro 2 estimates the depth of every pixel, in meters, from images taken with an ordinary camera."
         },
         {
           "url": "https://machinelearning.apple.com/research/depth-pro-2-monocular",
-          "quote": "To overcome this trade-off, we train a single, scalable network that processes both images and video and predicts depth maps at native resolution."
+          "quote": "multi-frame methods favor consistency, single-frame methods favor sharpness"
         },
         {
           "url": "https://machinelearning.apple.com/research/depth-pro-2-monocular",
@@ -74,157 +82,27 @@
         },
         {
           "url": "https://machinelearning.apple.com/research/depth-pro-2-monocular",
-          "quote": "We release code and weights here ."
+          "quote": "We release code and weights here"
         },
         {
-          "url": "https://machinelearning.apple.com/research/depth-pro-2-monocular",
-          "quote": "Depth Pro 2 estimates the depth of every pixel, in meters, from images taken with an ordinary camera."
-        }
-      ]
-    },
-    {
-      "section": "headline",
-      "title": "transformers v5.24.0 加入多款新模型支持",
-      "summary": "Hugging Face transformers 发布 v5.24.0，新增多模型支持，包括 Thinking Machines Lab 的多模态模型 Inkling 2 Mini、Swiss AI Initiative 的多模态模型 Apertus 1.5、Meta FAIR 的 Omnilingual ASR 以及 NVIDIA 的 Dory。该版本还把 past_key_values / cache_params 统一改名为 cache，旧名仍可用但会有一次性弃用警告。",
-      "tags": [
-        "工具",
-        "模型",
-        "开源"
-      ],
-      "sources": [
+          "url": "https://huggingface.co/apple/DepthPro2",
+          "quote": "S apple/DepthPro2-S 24M 97 MB B apple/DepthPro2-B 97M 386 MB L apple/DepthPro2-L 334M 1.3 GB H+ apple/DepthPro2-H 872M 3.5 GB"
+        },
         {
-          "candidate_id": "c_76c545905d",
-          "url": "https://github.com/huggingface/transformers/releases/tag/v5.24.0"
+          "url": "https://huggingface.co/apple/DepthPro2",
+          "quote": "The weights are released under the Apple Machine Learning Research Model license , for research use only: non-commercial scientific research and academic development."
         }
       ],
-      "evidence": [
-        {
-          "url": "https://github.com/huggingface/transformers/releases/tag/v5.24.0",
-          "quote": "Inkling 2 Mini is a multimodal model from Thinking Machines Lab that accepts text and image inputs and generates text outputs."
-        },
-        {
-          "url": "https://github.com/huggingface/transformers/releases/tag/v5.24.0",
-          "quote": "Apertus 1.5 is a multimodal model from the Swiss AI Initiative that accepts text, images and audio and generates text."
-        },
-        {
-          "url": "https://github.com/huggingface/transformers/releases/tag/v5.24.0",
-          "quote": "Omnilingual ASR is a suite of multilingual speech-recognition models from Meta FAIR that covers more than 1,600 languages."
-        },
-        {
-          "url": "https://github.com/huggingface/transformers/releases/tag/v5.24.0",
-          "quote": "Cache renaming: past_key_values / cache_params → cache ( #50585 , #50730 )"
-        },
-        {
-          "url": "https://github.com/huggingface/transformers/releases/tag/v5.24.0",
-          "quote": "The old names still work with a deprecation warning; see the dedicated section below."
-        },
-        {
-          "url": "https://github.com/huggingface/transformers/releases/tag/v5.24.0",
-          "quote": "Fully backward compatible for now : past_key_values= / cache_params= are renamed to cache automatically, with a one-time deprecation warning."
-        }
-      ]
-    },
-    {
-      "section": "headline",
-      "title": "Sage S1.5 Flash：320B 混合专家科学推理模型",
-      "summary": "Intern Large Models 发布 Sage S1.5 Flash 技术报告，介绍一个 320-billion-parameter 通用混合专家模型，用专门编码器处理分子图、生物序列与光谱等科学数据，并通过可验证环境训练工具调用、搜索与编码能力。报告在七个领域 33 个基准上评测，与五个基线对比时在 OfficeQA Pro、MLE-bench Lite、Harvey LAB 和 SpreadsheetBench 上排名第一。",
       "tags": [
         "模型",
-        "论文",
-        "Agent"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_d7c6ad7aa1",
-          "url": "https://huggingface.co/papers/2611.21072"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2611.21072",
-          "quote": "5 F l a s h , a 3 2 0 - b i l l i o n - p a r a m e t e r g e n e r a l - p u r p o s e m i x t u r e - o f - e x p e r t s m o d e l d e s i g n e d t o r e a s o n o v e r s c i e n t i f i c e v i d e n c e a n d a c t i n i n t e r a c t i v e e n v i r o n m e n t s ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21072",
-          "quote": "S a g e S c i - P e r c e p t i o n u s e s d e d i c a t e d e n c o d e r s f o r m o l e c u l a r g r a p h s a n d b i o l o g i c a l s e q u e n c e s a n d r e p r e s e n t s s p e c t r a a s o r d e r e d p a t c h e s o f m e a s u r e m e n t s ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21072",
-          "quote": "T o d e v e l o p t h e m o d e l ' s a g e n t c a p a b i l i t i e s , w e c o n s t r u c t v e r i f i a b l e e n v i r o n m e n t s f o r t o o l u s e , s e a r c h , a n d c o d i n g , a s w e l l a s s p e c i a l i z e d w o r k f l o w s i n v o l v i n g m a c h i n e l e a r n i n g"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21072",
-          "quote": "5 F l a s h o n 3 3 b e n c h m a r k s a c r o s s s e v e n d o m a i n s ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21072",
-          "quote": "I n t h e p r i m a r y c o m p a r i s o n a g a i n s t f i v e b a s e l i n e s , i t r a n k s f i r s t o n O f f i c e Q A P r o ( 7 2 ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21072",
-          "quote": "2 ) , M L E - b e n c h L i t e ( 9 0 ."
-        }
+        "图像",
+        "视频"
       ]
     },
     {
       "section": "model",
-      "title": "OVH 发布 Olala-v1.0-mini-7A1B 推理模型",
-      "summary": "OVHai LLM 开放了 Olala-v1.0-mini-7A1B 权重，模型为 6.8B 总参数、每 token 约 1B 激活参数的混合 Mamba-3 / 注意力混合专家架构，支持 32K tokens 输入输出、推理与工具调用。官方提供 Transformers 与 vLLM 加载方式，并说明 llama.cpp、vLLM、ollama、mlx-lm 等默认尚不能直接加载该模型。",
-      "tags": [
-        "模型",
-        "开源",
-        "推理"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_0eb157e01b",
-          "url": "https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B",
-          "quote": "Olala-v1.0-mini-7A1B is a small reasoning model for chat, instruction following and tool use , built on our hybrid"
-        },
-        {
-          "url": "https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B",
-          "quote": "Mamba-3 / attention mixture-of-experts architecture."
-        },
-        {
-          "url": "https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B",
-          "quote": "Efficient: about 1B active parameters per token, and only 7 of its 36 layers keep a KV cache."
-        },
-        {
-          "url": "https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B",
-          "quote": "Reasoning and agentic: it thinks before it answers, with four reasoning-effort levels, and was trained with"
-        },
-        {
-          "url": "https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B",
-          "quote": "6.8B total, about 1B active per token"
-        },
-        {
-          "url": "https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B",
-          "quote": "36 layers: 29 Mamba-3 and 7 attention layers (one in five), each followed by a mixture-of-experts block with 256 routed experts (6 active) and 1 shared expert"
-        },
-        {
-          "url": "https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B",
-          "quote": "32K tokens (input + output) A 128K-context version is coming soon."
-        },
-        {
-          "url": "https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B",
-          "quote": "Ollama, LM Studio and the official llama.cpp, vLLM and mlx-lm cannot load Olala 1.0 mini yet: each option below"
-        }
-      ]
-    },
-    {
-      "section": "model",
-      "title": "pi-H3 用 2–4 步生成 MiniMax H3 视频",
-      "summary": "Lakonik/pi-H3 提供 MiniMax H3 的 2 步与 4 步适配器，结合 pi-Flow v2 少步蒸馏与 DWD（Decoding Without a Decoder），在最后一步直接预测视频帧以跳过 VAE 解码，并生成同步音频。适配器支持文本、首帧和尾帧条件，提供 INT8 ConvRot 版本，但官方推荐使用 DWD 适配器。",
-      "tags": [
-        "模型",
-        "视频",
-        "开源"
-      ],
+      "title": "pi-H3：MiniMax H3 音视频生成只要 2 到 4 步",
+      "summary": "斯坦福等作者在 Hugging Face 发布 pi-H3，为 MiniMax H3 提供 2 步和 4 步适配器，结合 pi-Flow v2 少步蒸馏和 DWD（Decoding Without a Decoder），在最后一步直接预测视频帧，跳过 VAE 解码器。作者称这是生成带同步音频的 MiniMax H3 视频最快的方式；适配器支持文本、首帧和尾帧条件，另有 ComfyUI 用的 INT8 版本，使用受 MiniMax H3 Community License Agreement 约束。",
       "sources": [
         {
           "candidate_id": "c_3768b1edee",
@@ -234,38 +112,30 @@
       "evidence": [
         {
           "url": "https://huggingface.co/Lakonik/pi-H3",
-          "quote": "image = pipe(prompt).images[0] Notebooks Google Colab Kaggle pi-H3: Video Generation in 2–4 Steps Without a VAE Decoder Models Usage Diffusers ComfyUI License Citation"
+          "quote": "2-step and 4-step adapters of MiniMax H3 , the fastest way to generate MiniMax H3 videos with synchronized audio. pi-H3 combines pi-Flow v2 few-step distillation with DWD (Decoding Without a Decoder), which predicts the video frames directly at the last step, so the video skips the VAE decoder."
         },
         {
           "url": "https://huggingface.co/Lakonik/pi-H3",
-          "quote": "2-step and 4-step adapters of MiniMax H3 , the fastest way to generate MiniMax H3 videos with synchronized audio."
+          "quote": "All adapters support text, first-frame, and last-frame conditioning. We recommend the DWD adapters. The INT8 ConvRot versions are for ComfyUI only."
         },
         {
           "url": "https://huggingface.co/Lakonik/pi-H3",
-          "quote": "pi-H3 combines pi-Flow v2 few-step distillation with DWD (Decoding Without a Decoder), which predicts the video frames directly at the last step, so the video skips the VAE decoder."
+          "quote": "The pi-H3 adapters are Model Derivatives of MiniMax H3 and are distributed under the MiniMax H3 Community License Agreement"
         },
         {
           "url": "https://huggingface.co/Lakonik/pi-H3",
-          "quote": "All adapters support text, first-frame, and last-frame conditioning."
-        },
-        {
-          "url": "https://huggingface.co/Lakonik/pi-H3",
-          "quote": "We recommend the DWD adapters."
-        },
-        {
-          "url": "https://huggingface.co/Lakonik/pi-H3",
-          "quote": "The INT8 ConvRot versions are for ComfyUI only."
+          "quote": "1 Stanford University"
         }
+      ],
+      "tags": [
+        "视频",
+        "开源"
       ]
     },
     {
       "section": "paper",
-      "title": "InclusionMed：包容性医疗 AI 评测基准",
-      "summary": "InclusionMed Collaboration 提出面向包容性医疗的开放评测计划，用 Atlas 按医疗角色与 AI 能力组织基准，并发布汇总前沿模型结果的 InclusionMed Index。首版从 388 个候选中审计并复现 4 个公开基准，加上私有诊断推理基准共 5 个，覆盖九个角色—能力组合中的三个，模型总分区间为 17.5 至 49.1（满分 100）。",
-      "tags": [
-        "论文",
-        "评测"
-      ],
+      "title": "InclusionMed：按医疗角色和能力评测，前沿模型总分 17.5 到 49.1",
+      "summary": "InclusionMed 是一个开放的医疗 AI 评测项目，按三种医疗角色和三种 AI 能力组织基准；首版从 388 个候选里筛出四个公开基准，加上私有诊断推理基准 InclusionMed-DxFiles，覆盖九个格子中的三个。前沿 LLM 总分在 17.5 到 49.1（满分 100）之间，排名随角色和能力变化，排名前十的模型在患者沟通上的得分都高于临床决策。做医疗应用的开发者应按具体场景选模型，分数相近的模型推理成本也可能差很多。",
       "sources": [
         {
           "candidate_id": "c_2d3dd15956",
@@ -275,35 +145,55 @@
       "evidence": [
         {
           "url": "https://huggingface.co/papers/2611.21218",
-          "quote": "We introduce InclusionMed, an open medical AI evaluation initiative for inclusive healthcare."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21218",
-          "quote": "The InclusionMed Atlas organizes benchmarks across three healthcare roles and three AI capabilities."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21218",
           "quote": "For the first release, we selected four public benchmarks from 388 candidates through structured audits and independent reproduction."
         },
         {
           "url": "https://huggingface.co/papers/2611.21218",
-          "quote": "With InclusionMed-DxFiles , our private diagnostic reasoning benchmark , the Atlas contains five benchmarks covering three of its nine role--capability cells."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21218",
-          "quote": "We evaluated frontier large language models on the Atlas and aggregated their results into the InclusionMed Index , with overall scores ranging from 17.5 to 49.1 out of 100."
+          "quote": "with overall scores ranging from 17.5 to 49.1 out of 100"
         }
+      ],
+      "tags": [
+        "论文"
       ]
     },
     {
       "section": "paper",
-      "title": "AscendGYM：面向真实负载的算子优化基准",
-      "summary": "AI Training Platform Team 等提出 AscendGYM，用于评估在 Ascend NPU 上优化已有算子的能力，初始套件包含三个难度等级的 48 个算子，测试用例的数据类型与张量形状采自真实训练与推理任务。基准提供 model evaluation 与 model-harness evaluation 两种模式，并提出兼顾加速比与 token 成本的 Speedup-Token Score（STS）。",
+      "title": "VibePrevisBench：评测编码 Agent 在 Blender 里搭 4D 场景",
+      "summary": "VibePrevisBench 让 Agent 根据需求在 Blender 中写出可执行的 4D 场景并渲染代理视频，共 242 个任务，输入包括脚本、照片、续写和参考视频；评分分为重跑代码、对照隐藏事实的 Scene Check 和由 VLM 判断的 Screen Check。作者分析了 11 个前沿编码 Agent，发现多模态理解（尤其是空间和镜头运动）拉开差距，Agent 会检查自己的渲染却改不掉错误。做创意工具类 Agent 时，逐项对照需求核验渲染结果是目前的短板。",
+      "sources": [
+        {
+          "candidate_id": "c_d55822e050",
+          "url": "https://huggingface.co/papers/2611.15789"
+        },
+        {
+          "url": "https://arxiv.org/abs/2611.15789",
+          "title": "arXiv"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2611.15789",
+          "quote": "Its 242 tasks span four input kinds, including scripts, photos, continuations, and reference videos."
+        },
+        {
+          "url": "https://arxiv.org/abs/2611.15789",
+          "quote": "We analyze the evaluation results and trajectories of 11 frontier coding agents and identify three key observations."
+        },
+        {
+          "url": "https://arxiv.org/abs/2611.15789",
+          "quote": "Third, agents inspect their own renders but fail to correct their errors."
+        }
+      ],
       "tags": [
         "论文",
         "Agent",
-        "硬件"
-      ],
+        "代码"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "AscendGYM：评测 Agent 在昇腾 NPU 上优化 kernel",
+      "summary": "AscendGYM 是面向 Ascend NPU 的 kernel 优化基准，首批 48 个 kernel 分三个难度，测试用例的数据类型和张量形状取自真实训练和推理任务；支持只评模型和评“模型加 harness”两种模式。论文还提出 Speedup-Token Score（STS），把加速幅度和 token 成本放在一起算。在昇腾上做训练或推理优化的团队，可以用它衡量编码 Agent 在预算内的实际优化能力。",
       "sources": [
         {
           "candidate_id": "c_ac082902b2",
@@ -313,392 +203,70 @@
       "evidence": [
         {
           "url": "https://huggingface.co/papers/2611.17621",
-          "quote": "Generated by deepseek-ai/DeepSeek-V4.1-Flash Kernel optimization is essential for efficient large language model (LLM) training and inference on Ascend NPUs ."
+          "quote": "we introduce AscendGYM, a benchmark whose initial suite comprises 48 kernels across three difficulty levels. Each kernel is paired with test cases whose data types and tensor shapes are collected from real-world training and inference tasks."
         },
         {
           "url": "https://huggingface.co/papers/2611.17621",
-          "quote": "To address this requirement, we introduce AscendGYM, a benchmark whose initial suite comprises 48 kernels across three difficulty levels."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.17621",
-          "quote": "Each kernel is paired with test cases whose data types and tensor shapes are collected from real-world training and inference tasks."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.17621",
-          "quote": "In terms of usability, two evaluation modes are supported in AscendGYM: model evaluation and model-harness evaluation ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.17621",
-          "quote": "Finally, we propose a new metric, the Speedup-Token Score (STS) , which quantifies performance gains relative to token cost ."
-        }
-      ]
-    },
-    {
-      "section": "paper",
-      "title": "VibePrevisBench：Blender 4D 场景生成的 Agent 编码评测",
-      "summary": "Kling-Keye 发布 VibePrevisBench，评测编码 Agent 能否把一段需求变成可执行的 4D 场景并渲染代理视频，242 个任务覆盖脚本、照片、续写和参考视频四类输入。评测分两层：Rule-based Scene Check 重新运行代码并与隐藏真值在九个维度比对，VLM-based Screen Check 判断通过的事实能否在代理视频中被识别；对 11 个前沿编码 Agent 的分析显示，多模态理解尤其是空间与相机运动理解是主要差距。",
-      "tags": [
-        "论文",
-        "Agent",
-        "代码"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_d55822e050",
-          "url": "https://huggingface.co/papers/2611.15789"
+          "quote": "we propose a new metric, the Speedup-Token Score (STS) , which quantifies performance gains relative to token cost"
         }
       ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2611.15789",
-          "quote": "W e i n t r o d u c e V i b e P r e v i s B e n c h , a b e n c h m a r k f o r 4 D s c e n e r e c o n s t r u c t i o n : a n a g e n t t u r n s a b r i e f i n t o a n e x e c u t a b l e 4 D s c e n e a n d r e n d e r s i t s p r o x y v i d e o ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.15789",
-          "quote": "I t s 2 4 2 t a s k s s p a n f o u r i n p u t k i n d s , i n c l u d i n g s c r i p t s , p h o t o s , c o n t i n u a t i o n s , a n d r e f e r e n c e v i d e o s ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.15789",
-          "quote": "R u l e - b a s e d S c e n e C h e c k r e - r u n s t h e c o d e a n d c o m p a r e s t h e e x p o r t e d 4 D s c e n e w i t h h i d d e n g r o u n d t r u t h f a c t s i n n i n e d i m e n s i o n s ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.15789",
-          "quote": "V L M - b a s e d S c r e e n C h e c k a s k s a V L M j u d g e w h e t h e r t h e f a c t s t h a t p a s s c a n b e r e c o g n i z e d i n t h e p r o x y v i d e o ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.15789",
-          "quote": "W e a n a l y z e t h e e v a l u a t i o n r e s u l t s a n d t r a j e c t o r i e s o f 1 1 f r o n t i e r c o d i n g a g e n t s a n d i d e n t i f y t h r e e k e y o b s e r v a t i o n s ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.15789",
-          "quote": "F i r s t , m u l t i m o d a l u n d e r s t a n d i n g s e p a r a t e s t h e a g e n t s , e s p e c i a l l y i n u n d e r s t a n d i n g s p a c e a n d c a m e r a m o t i o n ."
-        }
-      ]
-    },
-    {
-      "section": "paper",
-      "title": "Agentic Robotics：具身智能体评测框架与路线图",
-      "summary": "Grid Robotics 等提出 agentic robotics 视角，主张由基础模型与 embodied harness 组成的 Embodied System 2 是其决策核心，并提出同时衡量模型能力与闭环系统表现的评测框架。作者指出 GPT-6 Astra 发布后数周内，带 agentic harness 的前沿模型已在多个具身基准上追平或超过任务专用策略，但社区仍缺少统一定义与可靠评测。",
       "tags": [
         "论文",
+        "硬件",
         "Agent"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_51a89fc6c0",
-          "url": "https://huggingface.co/papers/2611.18359"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2611.18359",
-          "quote": "Generated by deepseek-ai/DeepSeek-V4.1-Flash The release of GPT-6 Astra marks the emergence of a new paradigm in robotics: agentic robotics ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.18359",
-          "quote": "Within weeks, frontier models with agentic harnesses matched or exceeded task-specific policies on many embodied benchmarks ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.18359",
-          "quote": "Despite these advances, the community has yet to converge on a shared definition, a reliable evaluation framework, or a research roadmap."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.18359",
-          "quote": "We argue that Embodied System 2 , realized by a foundation model together with an embodied harness , forms the decision-making core of agentic robotics ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.18359",
-          "quote": "Motivated by this perspective, we propose an evaluation framework that measures both model capabilities and closed-loop system performance."
-        }
       ]
     },
     {
       "section": "tool",
-      "title": "CLI-Anything：让任意软件接入 Agent",
-      "summary": "HKUDS/CLI-Anything 通过为各类软件生成命令行 harness，让 Pi、OpenClaw、nanobot、Cursor、Claude Code 等 Agent 可以调用它们，仓库内已包含 Blender、GIMP、LibreOffice、Obsidian、Godot 等软件的 agent-harness 目录。项目提供 CLI-Hub，可通过 pip install cli-anything-hub 后用 cli-hub install <name> 浏览并安装社区构建的 CLI。",
-      "tags": [
-        "工具",
-        "Agent",
-        "开源"
-      ],
+      "title": "Transformers v5.24.0 加入 Inkling 2 Mini、Apertus 1.5 和 Dory",
+      "summary": "Hugging Face Transformers v5.24.0 新增一批模型：Thinking Machines Lab 的 Inkling 2 Mini（第 6 到 17 层循环运行三次）、Swiss AI Initiative 的多模态模型 Apertus 1.5 及其音频分词器 WavTokenizer、NVIDIA 的循环语言模型 Dory，以及 HY4-VL 和 Meta FAIR 覆盖 1,600 多种语言的 Omnilingual ASR。Dory 可以在同一个 checkpoint 上于推理时调整循环次数、用速度换质量；升级后即可直接用 Transformers 加载这些模型。",
       "sources": [
         {
-          "candidate_id": "c_740be60563",
-          "url": "https://github.com/HKUDS/CLI-Anything"
+          "candidate_id": "c_76c545905d",
+          "url": "https://github.com/huggingface/transformers/releases/tag/v5.24.0"
         }
       ],
       "evidence": [
         {
-          "url": "https://github.com/HKUDS/CLI-Anything",
-          "quote": "CLI-Anything: Bridging the Gap Between AI Agents and the World's Software"
+          "url": "https://github.com/huggingface/transformers/releases/tag/v5.24.0",
+          "quote": "Apertus 1.5 is a multimodal model from the Swiss AI Initiative that accepts text, images and audio and generates text."
         },
         {
-          "url": "https://github.com/HKUDS/CLI-Anything",
-          "quote": "🌐 CLI-Hub : pip install cli-anything-hub then cli-hub install <name> — browse, install, and manage all community-built CLIs."
+          "url": "https://github.com/huggingface/transformers/releases/tag/v5.24.0",
+          "quote": "Dory is a looped (latent-recurrent) language model from NVIDIA."
         },
         {
-          "url": "https://github.com/HKUDS/CLI-Anything",
-          "quote": "One Command Line : Make any software agent-ready for Pi, OpenClaw, nanobot, Cursor, Claude Code, etc."
+          "url": "https://github.com/huggingface/transformers/releases/tag/v5.24.0",
+          "quote": "The loop count can be changed at inference time on the same checkpoint to trade speed against quality."
+        },
+        {
+          "url": "https://github.com/huggingface/transformers/releases/tag/v5.24.0",
+          "quote": "HY4-VL (Hunyuan V4 Vision-Language) combines the HYV4 mixture-of-experts text backbone with a vision encoder for image-text and video-text generation."
+        },
+        {
+          "url": "https://github.com/huggingface/transformers/releases/tag/v5.24.0",
+          "quote": "Omnilingual ASR is a suite of multilingual speech-recognition models from Meta FAIR that covers more than 1,600 languages."
+        },
+        {
+          "url": "https://github.com/huggingface/transformers/releases/tag/v5.24.0",
+          "quote": "The 40-token-per-second variant is the audio tokenizer of Apertus 1.5."
         }
-      ]
-    },
-    {
-      "section": "tool",
-      "title": "superpowers：编码 Agent 的开发方法论框架",
-      "summary": "obra/superpowers 是一套构建在可组合技能之上的编码 Agent 开发方法论：Agent 先澄清目标并给出分段 spec，经确认后制定实现计划，再以 subagent-driven-development 流程逐任务实现并检查结果。该方法强调 red/green TDD、YAGNI 与 DRY，技能可自动触发，并提供 Claude Code、Codex、Cursor、Gemini CLI 等多种 harness 的安装方式。",
+      ],
       "tags": [
         "工具",
-        "Agent",
-        "代码"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_cfd2851c47",
-          "url": "https://github.com/obra/superpowers"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://github.com/obra/superpowers",
-          "quote": "Superpowers is a complete software development methodology for your coding agents, built on top of a set of composable skills and some initial instructions that make sure your agent uses them."
-        },
-        {
-          "url": "https://github.com/obra/superpowers",
-          "quote": "Instead, it steps back and asks you what you're really trying to do."
-        },
-        {
-          "url": "https://github.com/obra/superpowers",
-          "quote": "After you've signed off on the design, your agent puts together an implementation plan that's clear enough for an enthusiastic junior engineer with poor taste, no judgement, no project context, and an aversion to testing to follow."
-        },
-        {
-          "url": "https://github.com/obra/superpowers",
-          "quote": "It emphasizes true red/green TDD, YAGNI (You Aren't Gonna Need It), and DRY."
-        },
-        {
-          "url": "https://github.com/obra/superpowers",
-          "quote": "Next up, once you say \"go\", it launches a subagent-driven-development process, having agents work through each engineering task, inspecting and reviewing their work, and continuing forward."
-        },
-        {
-          "url": "https://github.com/obra/superpowers",
-          "quote": "And because the skills trigger automatically, you don't need to do anything special."
-        }
-      ]
-    },
-    {
-      "section": "tool",
-      "title": "Firecrawl Local：本地运行的抓取与 Agent 上下文服务",
-      "summary": "firecrawl/firecrawl 仓库包含 Firecrawl Local 与自托管服务端代码，可在本地把网站转成干净 markdown，并作为 MCP 服务器接入 AI Agent；serve 命令在 3002 端口提供 Firecrawl v2 API，本地路由无需 API key。需要搜索、结构化 JSON、截图等能力时会转向 Firecrawl Cloud 的 search 与 Alexandria 服务。",
-      "tags": [
-        "工具",
-        "Agent",
-        "开源"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_3517f80a1e",
-          "url": "https://github.com/firecrawl/firecrawl"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://github.com/firecrawl/firecrawl",
-          "quote": "This repo holds the code for Firecrawl Local and the self-hosted server, along with SDKs that work with all three."
-        },
-        {
-          "url": "https://github.com/firecrawl/firecrawl",
-          "quote": "Run Firecrawl on your own machine as one binary that turns websites into clean markdown, plugs into your AI agent as an MCP server and serves the Firecrawl API on localhost."
-        },
-        {
-          "url": "https://github.com/firecrawl/firecrawl",
-          "quote": "Use the hosted service at firecrawl.dev for everything Local does at scale with nothing to run, plus search and the 550+ data providers in Firecrawl Alexandria for far more knowledge than scraping alone."
-        },
-        {
-          "url": "https://github.com/firecrawl/firecrawl",
-          "quote": "Run the Firecrawl API on localhost"
-        },
-        {
-          "url": "https://github.com/firecrawl/firecrawl",
-          "quote": "serve answers the Firecrawl v2 API on port 3002, so code written for Firecrawl runs against it unchanged and local routes need no API key."
-        }
-      ]
-    },
-    {
-      "section": "tool",
-      "title": "ClawDOS：在 DOS 上运行的 Claude 编码 Agent",
-      "summary": "ClawDOS 是一个在 IBM PC XT（8088 at 4.77 MHz、640K RAM、CGA）上运行的 AI 编码 Agent，harness 直接讲 Claude Messages API，在 DOS 下读写文件、用 Turbo C 编译并运行程序、读取屏幕截图和保存对话记忆。TLS 由另一台“bridge” PC 承担，仓库含约 13,000 行 C 与 C++ 代码、HARNESS.EXE 启动镜像以及 DOS 环境下的测试。",
-      "tags": [
-        "工具",
-        "Agent",
-        "代码"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_4a9964f51f",
-          "url": "http://ricapar.net/ClawDOS/"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "http://ricapar.net/ClawDOS/",
-          "quote": "It runs on an IBM PC XT: an 8088 at 4.77 MHz, 640K of RAM, a CGA card."
-        },
-        {
-          "url": "http://ricapar.net/ClawDOS/",
-          "quote": "As explained in more detail below, the harness runs on the native OS and hardware and relies on a “bridge” PC in order to handle TLS, which would’ve been more than what an 8088 could handle."
-        },
-        {
-          "url": "http://ricapar.net/ClawDOS/",
-          "quote": "It reads and edits the"
-        },
-        {
-          "url": "http://ricapar.net/ClawDOS/",
-          "quote": "looks at what they draw on the screen."
-        },
-        {
-          "url": "http://ricapar.net/ClawDOS/",
-          "quote": "HARNESS.EXE is a 176 KB DOS program that"
-        },
-        {
-          "url": "http://ricapar.net/ClawDOS/",
-          "quote": "13,000 lines of C and C++, built with Open Watcom for the 8086 instruction set"
-        }
-      ]
-    },
-    {
-      "section": "brief",
-      "title": "AutoClip：长视频一键剪成短视频",
-      "summary": "zhouxiaoka/autoclip 是开源的 AI 视频剪辑桌面工具，贴一个链接即可把长视频剪成适配抖音、小红书、TikTok、Reels 与 YouTube Shorts 的短视频，并生成字幕、封面和发布文案。",
-      "tags": [
-        "工具",
-        "视频",
-        "开源"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_d941cdc9a6",
-          "url": "https://github.com/zhouxiaoka/autoclip"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://github.com/zhouxiaoka/autoclip",
-          "quote": "autoclip Public Notifications You must be signed in to change notification settings Fork 2.1k ( 2.1k ) Star 13k ( 13k ) You must be signed in to star a repository About AutoClip｜一个链接，一键出片。开源 AI 视频剪辑桌面工具，将播客、访谈、课程等长视频自动剪成短视频，生成字幕、封面和发布文案，适配抖音、小红书、TikTok、Reels 与 YouTube Shorts。Open-source AI video cli"
-        },
-        {
-          "url": "https://github.com/zhouxiaoka/autoclip",
-          "quote": "开源，在你的电脑上剪辑与渲染。贴一个链接，选好平台，生成 视频、封面和发布文案 ，"
-        },
-        {
-          "url": "https://github.com/zhouxiaoka/autoclip",
-          "quote": "适配抖音、小红书、TikTok、Reels、YouTube Shorts、B 站与 YouTube。"
-        },
-        {
-          "url": "https://github.com/zhouxiaoka/autoclip",
-          "quote": "软件免费，云端模型按量计费；需要调整时可进入编辑器。"
-        }
-      ]
-    },
-    {
-      "section": "brief",
-      "title": "OpenSRE：面向 CI/CD 可靠性的开源 Agent",
-      "summary": "Tracer-Cloud/opensre 是自托管 CLI Agent，可读取失败的 CI 运行记录、追踪原因并推送待审阅的修复，同时统计失败率与 main 分支变红时长等可靠性指标。",
-      "tags": [
-        "工具",
-        "Agent",
-        "开源"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_f6df913aa0",
-          "url": "https://github.com/Tracer-Cloud/opensre"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://github.com/Tracer-Cloud/opensre",
-          "quote": "OpenSRE: The open-source agent for CI/CD reliability"
-        },
-        {
-          "url": "https://github.com/Tracer-Cloud/opensre",
-          "quote": "OpenSRE is a CLI agent that reads the failed run, traces the cause and pushes a fix for you to review."
-        },
-        {
-          "url": "https://github.com/Tracer-Cloud/opensre",
-          "quote": "Self-hosted, with your own models."
-        },
-        {
-          "url": "https://github.com/Tracer-Cloud/opensre",
-          "quote": "OpenSRE is an open-source CI/CD reliability agent that does that investigation for you, built to run on your own infrastructure with your own models:"
-        },
-        {
-          "url": "https://github.com/Tracer-Cloud/opensre",
-          "quote": "Know what CI is costing you: failure rate, developer hours lost to unreliable CI, and how long main stays red"
-        }
-      ]
-    },
-    {
-      "section": "brief",
-      "title": "last30days-skill：聚合社交平台的 Agent 调研技能",
-      "summary": "mvanhorn/last30days-skill 让 Agent 并行检索 Reddit、X、YouTube、HN、Polymarket 与网页，按点赞、播放与真实资金赔率等信号排序，再由 AI judge 合成简报。",
-      "tags": [
-        "工具",
-        "Agent",
-        "开源"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_768cda9a02",
-          "url": "https://github.com/mvanhorn/last30days-skill"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://github.com/mvanhorn/last30days-skill",
-          "quote": "last30days-skill Public Notifications You must be signed in to change notification settings Fork 6.4k ( 6.4k ) Star 72.1k ( 72.1k ) You must be signed in to star a repository About AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymarket, and the web - then synthesizes a gr"
-        },
-        {
-          "url": "https://github.com/mvanhorn/last30days-skill",
-          "quote": "Reddit upvotes."
-        },
-        {
-          "url": "https://github.com/mvanhorn/last30days-skill",
-          "quote": "Polymarket odds backed by real money and insider information."
-        },
-        {
-          "url": "https://github.com/mvanhorn/last30days-skill",
-          "quote": "/last30days searches all of it in parallel, scores it by what real people actually engage with, and an AI agent judge synthesizes it into one brief."
-        }
+        "开源",
+        "模型"
       ]
     }
   ],
   "research": [
     {
       "via": "webfetch",
-      "url": "https://github.com/huggingface/transformers/releases/tag/v5.24.0"
-    },
-    {
-      "via": "webfetch",
       "url": "https://machinelearning.apple.com/research/depth-pro-2-monocular"
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.21218"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.17621"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.15789"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.18359"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.19937"
+      "url": "https://huggingface.co/apple/DepthPro2"
     },
     {
       "via": "webfetch",
@@ -706,79 +274,44 @@
     },
     {
       "via": "webfetch",
+      "url": "https://huggingface.co/tencent/Hy4"
+    },
+    {
+      "via": "webfetch",
       "url": "https://huggingface.co/Lakonik/pi-H3"
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://www.anthropic.com/news/ipo-close"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.21072"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://openai.com/business/customer-stories/hebbia"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://github.com/obra/superpowers"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://github.com/HKUDS/CLI-Anything"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://github.com/jingyaogong/minimind"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://github.com/firecrawl/firecrawl"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://github.com/mvanhorn/last30days-skill"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://github.com/zhouxiaoka/autoclip"
-    },
-    {
-      "via": "webfetch",
       "url": "https://github.com/Tracer-Cloud/opensre"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://arxiv.org/abs/2611.21218"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://arxiv.org/abs/2611.17621"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://arxiv.org/abs/2611.15789"
+    },
+    {
+      "via": "websearch",
+      "query": "Baidu ERNIE new model release November 2026"
+    },
+    {
+      "via": "websearch",
+      "query": "AI model release November 21 2026 Qwen OR xAI OR Grok OR Mistral"
     }
   ],
   "validation": {
-    "validated_at": "2026-11-22T04:40:32+00:00",
+    "validated_at": "2026-11-22T04:43:20+00:00",
     "checked_links": true,
-    "dropped": [
-      {
-        "title": "Hebbia 测试 GPT-6 Astra 提升金融研究质量",
-        "section": "headline",
-        "candidates": [
-          "c_e4a4e3aa32"
-        ],
-        "reasons": [
-          "number 8 does not appear in the cited material",
-          "number 9 does not appear in the cited material"
-        ]
-      },
-      {
-        "title": "MiniMind：两小时从 0 训出 64M 小模型",
-        "section": "brief",
-        "candidates": [
-          "c_3b240d3ecb"
-        ],
-        "reasons": [
-          "summary longer than 120 characters"
-        ]
-      }
-    ],
-    "warnings": []
+    "dropped": [],
+    "warnings": [
+      "7 items, fewer than 8: 这一期可能有信源漏抓了",
+      "2 headline items (target 3-5)"
+    ]
   }
 }
