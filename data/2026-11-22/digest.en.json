@@ -1,0 +1,688 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-22",
+  "mode": "full",
+  "generated_at": "2026-11-22T04:41:47+00:00",
+  "channel": "api",
+  "model": "nvidia:minimaxai/minimax-m3.1-flash",
+  "highlights": [
+    "Anthropic closed its initial public offering of 1,127,000,000 Class A shares at $83.00 per share, with the shares now trading on Nasdaq under the symbol \"ANT.\"",
+    "Apple's Depth Pro 2 estimates dense metric depth for images and video at full resolution with a single network, and the code and weights have been released.",
+    "Transformers v5.24.0 adds Inkling 2 Mini, Apertus 1.5, and Meta's Omnilingual ASR models covering more than 1,600 languages, and renames cache arguments to cache."
+  ],
+  "items": [
+    {
+      "section": "headline",
+      "title": "Anthropic closes IPO of 1,127,000,000 Class A shares at $83.00",
+      "summary": "Anthropic announced the closing of its initial public offering of an aggregate of 1,127,000,000 shares of Class A common stock at a public offering price of $83.00 per share, including the full exercise of the underwriters' option to purchase an additional 147,000,000 shares. The Class A common stock began trading on the Nasdaq Global Select Market on November 19, 2026 under the symbol \"ANT.\"",
+      "tags": [
+        "行业",
+        "产品"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_0f26b1017f",
+          "url": "https://www.anthropic.com/news/ipo-close"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://www.anthropic.com/news/ipo-close",
+          "quote": "hropic raises $65B in Series H funding at $965B post-money valuation View more Today Anthropic, PBC announced the closing of its initial public offering of an aggregate of 1,127,000,000 shares of its Class A common stock at a public offering price of $83.00 per share, including the full exercise by"
+        },
+        {
+          "url": "https://www.anthropic.com/news/ipo-close",
+          "quote": "The aggregate gross proceeds from the offering, before deducting underwriting discounts and commissions and other offering expenses, were approximately $93.5 billion, of which approximately $91.6 billion was received by Anthropic."
+        },
+        {
+          "url": "https://www.anthropic.com/news/ipo-close",
+          "quote": "Anthropic’s Class A common stock began trading on the Nasdaq Global Select Market on November 19, 2026 under the symbol “ANT.” In addition to the shares of Class A common stock sold in the initial public offering, Anthropic closed the concurrent sale of an aggregate of 313,253,007 shares of Class N"
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Apple releases Depth Pro 2 for sharp, temporally consistent depth",
+      "summary": "Depth Pro 2 is an approach to estimating dense metric depth for images and video at full resolution, using a single, scalable network that processes both images and video and predicts depth maps at native resolution. The authors report that it produces depth maps that are metrically accurate, sharp, and temporally consistent at once, and they release code and weights.",
+      "tags": [
+        "论文",
+        "多模态",
+        "图像"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_2e19ab5231",
+          "url": "https://machinelearning.apple.com/research/depth-pro-2-monocular"
+        },
+        {
+          "candidate_id": "c_eef5dc3779",
+          "url": "https://huggingface.co/apple/DepthPro2"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://machinelearning.apple.com/research/depth-pro-2-monocular",
+          "quote": "Richter, Vladlen Koltun View publication View source code (GitHub) Copy Bibtex We present Depth Pro 2, an approach to estimating dense metric depth for images and video at full resolution."
+        },
+        {
+          "url": "https://machinelearning.apple.com/research/depth-pro-2-monocular",
+          "quote": "To overcome this trade-off, we train a single, scalable network that processes both images and video and predicts depth maps at native resolution."
+        },
+        {
+          "url": "https://machinelearning.apple.com/research/depth-pro-2-monocular",
+          "quote": "Depth Pro 2 produces depth maps that are metrically accurate, sharp, and temporally consistent all at once, outperforming prior work in all of these dimensions."
+        },
+        {
+          "url": "https://machinelearning.apple.com/research/depth-pro-2-monocular",
+          "quote": "We release code and weights here ."
+        },
+        {
+          "url": "https://machinelearning.apple.com/research/depth-pro-2-monocular",
+          "quote": "Depth Pro 2 estimates the depth of every pixel, in meters, from images taken with an ordinary camera."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Transformers v5.24.0 adds Inkling 2 Mini, Apertus 1.5, and Omnilingual ASR",
+      "summary": "The v5.24.0 release adds Inkling 2 Mini, a multimodal model from Thinking Machines Lab that accepts text and image inputs and generates text outputs, and Apertus 1.5, a multimodal model from the Swiss AI Initiative that accepts text, images and audio. It also adds Omnilingual ASR, a suite of multilingual speech-recognition models from Meta FAIR covering more than 1,600 languages, and renames past_key_values and cache_params to cache while keeping the old names working with a deprecation warning.",
+      "tags": [
+        "工具",
+        "模型",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_76c545905d",
+          "url": "https://github.com/huggingface/transformers/releases/tag/v5.24.0"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/huggingface/transformers/releases/tag/v5.24.0",
+          "quote": "Inkling 2 Mini is a multimodal model from Thinking Machines Lab that accepts text and image inputs and generates text outputs."
+        },
+        {
+          "url": "https://github.com/huggingface/transformers/releases/tag/v5.24.0",
+          "quote": "Apertus 1.5 is a multimodal model from the Swiss AI Initiative that accepts text, images and audio and generates text."
+        },
+        {
+          "url": "https://github.com/huggingface/transformers/releases/tag/v5.24.0",
+          "quote": "Omnilingual ASR is a suite of multilingual speech-recognition models from Meta FAIR that covers more than 1,600 languages."
+        },
+        {
+          "url": "https://github.com/huggingface/transformers/releases/tag/v5.24.0",
+          "quote": "Cache renaming: past_key_values / cache_params → cache ( #50585 , #50730 )"
+        },
+        {
+          "url": "https://github.com/huggingface/transformers/releases/tag/v5.24.0",
+          "quote": "The old names still work with a deprecation warning; see the dedicated section below."
+        },
+        {
+          "url": "https://github.com/huggingface/transformers/releases/tag/v5.24.0",
+          "quote": "Fully backward compatible for now : past_key_values= / cache_params= are renamed to cache automatically, with a one-time deprecation warning."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Sage S2.1 Flash report: 320-billion-parameter mixture-of-experts model",
+      "summary": "The report introduces Sage S1.5 Flash, a 320-billion-parameter general-purpose mixture-of-experts model designed to reason over scientific evidence and act in interactive environments, with dedicated encoders for molecular graphs and biological sequences. It is evaluated on 33 benchmarks across seven domains, ranking first on OfficeQA Pro (72.2), MLE-bench Lite (90.3 HumanRank), Harvey LAB, and SpreadsheetBench~2 in the primary comparison against five baselines.",
+      "tags": [
+        "模型",
+        "论文",
+        "Agent"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_d7c6ad7aa1",
+          "url": "https://huggingface.co/papers/2611.21072"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.21072",
+          "quote": "5 F l a s h , a 3 2 0 - b i l l i o n - p a r a m e t e r g e n e r a l - p u r p o s e m i x t u r e - o f - e x p e r t s m o d e l d e s i g n e d t o r e a s o n o v e r s c i e n t i f i c e v i d e n c e a n d a c t i n i n t e r a c t i v e e n v i r o n m e n t s ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.21072",
+          "quote": "S a g e S c i - P e r c e p t i o n u s e s d e d i c a t e d e n c o d e r s f o r m o l e c u l a r g r a p h s a n d b i o l o g i c a l s e q u e n c e s a n d r e p r e s e n t s s p e c t r a a s o r d e r e d p a t c h e s o f m e a s u r e m e n t s ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.21072",
+          "quote": "T o d e v e l o p t h e m o d e l ' s a g e n t c a p a b i l i t i e s , w e c o n s t r u c t v e r i f i a b l e e n v i r o n m e n t s f o r t o o l u s e , s e a r c h , a n d c o d i n g , a s w e l l a s s p e c i a l i z e d w o r k f l o w s i n v o l v i n g m a c h i n e l e a r n i n g"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.21072",
+          "quote": "5 F l a s h o n 3 3 b e n c h m a r k s a c r o s s s e v e n d o m a i n s ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.21072",
+          "quote": "I n t h e p r i m a r y c o m p a r i s o n a g a i n s t f i v e b a s e l i n e s , i t r a n k s f i r s t o n O f f i c e Q A P r o ( 7 2 ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.21072",
+          "quote": "2 ) , M L E - b e n c h L i t e ( 9 0 ."
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Olala-v1.0-mini-7A1B: a small reasoning model with 1B active parameters",
+      "summary": "Olala-v1.0-mini-7A1B is a small reasoning model for chat, instruction following and tool use, built on a hybrid Mamba-3 / attention mixture-of-experts architecture with 6.8B total parameters and about 1B active per token. It offers four reasoning-effort levels and a 32K token (input + output) context, with a 128K-context version coming soon, though Ollama, LM Studio and the official llama.cpp, vLLM and mlx-lm cannot load it yet.",
+      "tags": [
+        "模型",
+        "开源",
+        "推理"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_0eb157e01b",
+          "url": "https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B",
+          "quote": "Olala-v1.0-mini-7A1B is a small reasoning model for chat, instruction following and tool use , built on our hybrid"
+        },
+        {
+          "url": "https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B",
+          "quote": "Mamba-3 / attention mixture-of-experts architecture."
+        },
+        {
+          "url": "https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B",
+          "quote": "Efficient: about 1B active parameters per token, and only 7 of its 36 layers keep a KV cache."
+        },
+        {
+          "url": "https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B",
+          "quote": "Reasoning and agentic: it thinks before it answers, with four reasoning-effort levels, and was trained with"
+        },
+        {
+          "url": "https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B",
+          "quote": "6.8B total, about 1B active per token"
+        },
+        {
+          "url": "https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B",
+          "quote": "36 layers: 29 Mamba-3 and 7 attention layers (one in five), each followed by a mixture-of-experts block with 256 routed experts (6 active) and 1 shared expert"
+        },
+        {
+          "url": "https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B",
+          "quote": "32K tokens (input + output) A 128K-context version is coming soon."
+        },
+        {
+          "url": "https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B",
+          "quote": "Ollama, LM Studio and the official llama.cpp, vLLM and mlx-lm cannot load Olala 1.0 mini yet: each option below"
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "pi-H3 generates MiniMax H3 videos in 2–4 steps without a VAE decoder",
+      "summary": "pi-H3 provides 2-step and 4-step adapters of MiniMax H3 for generating videos with synchronized audio, combining pi-Flow v2 few-step distillation with DWD (Decoding Without a Decoder), which predicts video frames directly at the last step. All adapters support text, first-frame, and last-frame conditioning, and the INT8 ConvRot versions are for ComfyUI only.",
+      "tags": [
+        "模型",
+        "视频",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_3768b1edee",
+          "url": "https://huggingface.co/Lakonik/pi-H3"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/Lakonik/pi-H3",
+          "quote": "image = pipe(prompt).images[0] Notebooks Google Colab Kaggle pi-H3: Video Generation in 2–4 Steps Without a VAE Decoder Models Usage Diffusers ComfyUI License Citation"
+        },
+        {
+          "url": "https://huggingface.co/Lakonik/pi-H3",
+          "quote": "2-step and 4-step adapters of MiniMax H3 , the fastest way to generate MiniMax H3 videos with synchronized audio."
+        },
+        {
+          "url": "https://huggingface.co/Lakonik/pi-H3",
+          "quote": "pi-H3 combines pi-Flow v2 few-step distillation with DWD (Decoding Without a Decoder), which predicts the video frames directly at the last step, so the video skips the VAE decoder."
+        },
+        {
+          "url": "https://huggingface.co/Lakonik/pi-H3",
+          "quote": "All adapters support text, first-frame, and last-frame conditioning."
+        },
+        {
+          "url": "https://huggingface.co/Lakonik/pi-H3",
+          "quote": "We recommend the DWD adapters."
+        },
+        {
+          "url": "https://huggingface.co/Lakonik/pi-H3",
+          "quote": "The INT8 ConvRot versions are for ComfyUI only."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "InclusionMed benchmarks frontier models for inclusive healthcare",
+      "summary": "InclusionMed is an open medical AI evaluation initiative whose Atlas organizes benchmarks across three healthcare roles and three AI capabilities, with four public benchmarks selected from 388 candidates and a private diagnostic reasoning benchmark bringing the total to five. Frontier large language models scored from 17.5 to 49.1 out of 100 on the InclusionMed Index, and the ten highest-ranked models all scored higher on patient communication than on clinical decision-making.",
+      "tags": [
+        "论文",
+        "评测"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_2d3dd15956",
+          "url": "https://huggingface.co/papers/2611.21218"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.21218",
+          "quote": "We introduce InclusionMed, an open medical AI evaluation initiative for inclusive healthcare."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.21218",
+          "quote": "The InclusionMed Atlas organizes benchmarks across three healthcare roles and three AI capabilities."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.21218",
+          "quote": "For the first release, we selected four public benchmarks from 388 candidates through structured audits and independent reproduction."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.21218",
+          "quote": "With InclusionMed-DxFiles , our private diagnostic reasoning benchmark , the Atlas contains five benchmarks covering three of its nine role--capability cells."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.21218",
+          "quote": "We evaluated frontier large language models on the Atlas and aggregated their results into the InclusionMed Index , with overall scores ranging from 17.5 to 49.1 out of 100."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "AscendGYM benchmarks cost-aware Ascend NPU kernel optimization",
+      "summary": "AscendGYM is a benchmark whose initial suite comprises 48 kernels across three difficulty levels, each paired with test cases whose data types and tensor shapes are collected from real-world training and inference tasks. It supports model evaluation and model-harness evaluation, and introduces the Speedup-Token Score (STS), which quantifies performance gains relative to token cost.",
+      "tags": [
+        "论文",
+        "Agent",
+        "硬件"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_ac082902b2",
+          "url": "https://huggingface.co/papers/2611.17621"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.17621",
+          "quote": "Generated by deepseek-ai/DeepSeek-V4.1-Flash Kernel optimization is essential for efficient large language model (LLM) training and inference on Ascend NPUs ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.17621",
+          "quote": "To address this requirement, we introduce AscendGYM, a benchmark whose initial suite comprises 48 kernels across three difficulty levels."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.17621",
+          "quote": "Each kernel is paired with test cases whose data types and tensor shapes are collected from real-world training and inference tasks."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.17621",
+          "quote": "In terms of usability, two evaluation modes are supported in AscendGYM: model evaluation and model-harness evaluation ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.17621",
+          "quote": "Finally, we propose a new metric, the Speedup-Token Score (STS) , which quantifies performance gains relative to token cost ."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "VibePrevisBench tests agentic 4D scene generation in Blender",
+      "summary": "VibePrevisBench is a benchmark for 4D scene reconstruction in which an agent turns a brief into an executable 4D scene and renders its proxy video, spanning 242 tasks across four input kinds. It scores deliveries with a rule-based Scene Check that compares the exported scene against hidden ground truth facts in nine dimensions and a VLM-based Screen Check, and the authors analyze the results and trajectories of 11 frontier coding agents.",
+      "tags": [
+        "论文",
+        "Agent",
+        "代码"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_d55822e050",
+          "url": "https://huggingface.co/papers/2611.15789"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.15789",
+          "quote": "W e i n t r o d u c e V i b e P r e v i s B e n c h , a b e n c h m a r k f o r 4 D s c e n e r e c o n s t r u c t i o n : a n a g e n t t u r n s a b r i e f i n t o a n e x e c u t a b l e 4 D s c e n e a n d r e n d e r s i t s p r o x y v i d e o ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.15789",
+          "quote": "I t s 2 4 2 t a s k s s p a n f o u r i n p u t k i n d s , i n c l u d i n g s c r i p t s , p h o t o s , c o n t i n u a t i o n s , a n d r e f e r e n c e v i d e o s ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.15789",
+          "quote": "R u l e - b a s e d S c e n e C h e c k r e - r u n s t h e c o d e a n d c o m p a r e s t h e e x p o r t e d 4 D s c e n e w i t h h i d d e n g r o u n d t r u t h f a c t s i n n i n e d i m e n s i o n s ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.15789",
+          "quote": "V L M - b a s e d S c r e e n C h e c k a s k s a V L M j u d g e w h e t h e r t h e f a c t s t h a t p a s s c a n b e r e c o g n i z e d i n t h e p r o x y v i d e o ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.15789",
+          "quote": "W e a n a l y z e t h e e v a l u a t i o n r e s u l t s a n d t r a j e c t o r i e s o f 1 1 f r o n t i e r c o d i n g a g e n t s a n d i d e n t i f y t h r e e k e y o b s e r v a t i o n s ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.15789",
+          "quote": "F i r s t , m u l t i m o d a l u n d e r s t a n d i n g s e p a r a t e s t h e a g e n t s , e s p e c i a l l y i n u n d e r s t a n d i n g s p a c e a n d c a m e r a m o t i o n ."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Researchers propose agentic robotics framework and evaluation approach",
+      "summary": "The paper argues that Embodied System 2, realized by a foundation model together with an embodied harness, forms the decision-making core of agentic robotics, where an agent observes, reasons, invokes skills and tools, verifies outcomes, and adapts its strategy. Motivated by this perspective, the authors propose an evaluation framework measuring both model capabilities and closed-loop system performance, along with a research roadmap for reliable physical autonomy.",
+      "tags": [
+        "论文",
+        "Agent"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_51a89fc6c0",
+          "url": "https://huggingface.co/papers/2611.18359"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.18359",
+          "quote": "Generated by deepseek-ai/DeepSeek-V4.1-Flash The release of GPT-6 Astra marks the emergence of a new paradigm in robotics: agentic robotics ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.18359",
+          "quote": "Within weeks, frontier models with agentic harnesses matched or exceeded task-specific policies on many embodied benchmarks ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.18359",
+          "quote": "Despite these advances, the community has yet to converge on a shared definition, a reliable evaluation framework, or a research roadmap."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.18359",
+          "quote": "We argue that Embodied System 2 , realized by a foundation model together with an embodied harness , forms the decision-making core of agentic robotics ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.18359",
+          "quote": "Motivated by this perspective, we propose an evaluation framework that measures both model capabilities and closed-loop system performance."
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "CLI-Anything makes software agent-native through a CLI hub",
+      "summary": "CLI-Anything bridges the gap between AI agents and the world's software by making any program agent-ready through one command line, for tools such as Pi, OpenClaw, nanobot, Cursor, and Claude Code. Its CLI-Hub can be installed with pip install cli-anything-hub, then cli-hub install <name>, to browse, install, and manage community-built CLIs.",
+      "tags": [
+        "工具",
+        "Agent",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_740be60563",
+          "url": "https://github.com/HKUDS/CLI-Anything"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/HKUDS/CLI-Anything",
+          "quote": "CLI-Anything: Bridging the Gap Between AI Agents and the World's Software"
+        },
+        {
+          "url": "https://github.com/HKUDS/CLI-Anything",
+          "quote": "🌐 CLI-Hub : pip install cli-anything-hub then cli-hub install <name> — browse, install, and manage all community-built CLIs."
+        },
+        {
+          "url": "https://github.com/HKUDS/CLI-Anything",
+          "quote": "One Command Line : Make any software agent-ready for Pi, OpenClaw, nanobot, Cursor, Claude Code, etc."
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Superpowers gives coding agents a composable skills methodology",
+      "summary": "Superpowers is a software development methodology for coding agents built on composable skills and initial instructions that ensure the agent uses them, covering design sign-off, implementation planning, and subagent-driven development with inspection and review. It emphasizes true red/green TDD, YAGNI (You Aren't Gonna Need It), and DRY, and its skills trigger automatically.",
+      "tags": [
+        "工具",
+        "Agent",
+        "代码"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_cfd2851c47",
+          "url": "https://github.com/obra/superpowers"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/obra/superpowers",
+          "quote": "Superpowers is a complete software development methodology for your coding agents, built on top of a set of composable skills and some initial instructions that make sure your agent uses them."
+        },
+        {
+          "url": "https://github.com/obra/superpowers",
+          "quote": "Instead, it steps back and asks you what you're really trying to do."
+        },
+        {
+          "url": "https://github.com/obra/superpowers",
+          "quote": "After you've signed off on the design, your agent puts together an implementation plan that's clear enough for an enthusiastic junior engineer with poor taste, no judgement, no project context, and an aversion to testing to follow."
+        },
+        {
+          "url": "https://github.com/obra/superpowers",
+          "quote": "It emphasizes true red/green TDD, YAGNI (You Aren't Gonna Need It), and DRY."
+        },
+        {
+          "url": "https://github.com/obra/superpowers",
+          "quote": "Next up, once you say \"go\", it launches a subagent-driven-development process, having agents work through each engineering task, inspecting and reviewing their work, and continuing forward."
+        },
+        {
+          "url": "https://github.com/obra/superpowers",
+          "quote": "And because the skills trigger automatically, you don't need to do anything special."
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Firecrawl runs locally as a self-hosted scraping and search API",
+      "summary": "The Firecrawl repository holds the code for Firecrawl Local and the self-hosted server along with SDKs, letting users run Firecrawl on their own machine as one binary that turns websites into clean markdown and plugs into an AI agent as an MCP server. It serves the Firecrawl v2 API on port 3002 so existing code runs against it unchanged and local routes need no API key, while the hosted service adds search and the 550+ data providers in Firecrawl Alexandria.",
+      "tags": [
+        "工具",
+        "Agent",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_3517f80a1e",
+          "url": "https://github.com/firecrawl/firecrawl"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/firecrawl/firecrawl",
+          "quote": "This repo holds the code for Firecrawl Local and the self-hosted server, along with SDKs that work with all three."
+        },
+        {
+          "url": "https://github.com/firecrawl/firecrawl",
+          "quote": "Run Firecrawl on your own machine as one binary that turns websites into clean markdown, plugs into your AI agent as an MCP server and serves the Firecrawl API on localhost."
+        },
+        {
+          "url": "https://github.com/firecrawl/firecrawl",
+          "quote": "Use the hosted service at firecrawl.dev for everything Local does at scale with nothing to run, plus search and the 550+ data providers in Firecrawl Alexandria for far more knowledge than scraping alone."
+        },
+        {
+          "url": "https://github.com/firecrawl/firecrawl",
+          "quote": "Run the Firecrawl API on localhost"
+        },
+        {
+          "url": "https://github.com/firecrawl/firecrawl",
+          "quote": "serve answers the Firecrawl v2 API on port 3002, so code written for Firecrawl runs against it unchanged and local routes need no API key."
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "ClawDOS runs an AI coding agent on an IBM PC XT",
+      "summary": "ClawDOS is an AI coding agent that runs on an IBM PC XT with an 8088 at 4.77 MHz, 640K of RAM, and a CGA card. The harness runs on the native OS and hardware and relies on a \"bridge\" PC to handle TLS, while HARNESS.EXE is a 176 KB DOS program built from 13,000 lines of C and C++ with Open Watcom for the 8086 instruction set.",
+      "tags": [
+        "工具",
+        "Agent",
+        "代码"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_4a9964f51f",
+          "url": "http://ricapar.net/ClawDOS/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "http://ricapar.net/ClawDOS/",
+          "quote": "It runs on an IBM PC XT: an 8088 at 4.77 MHz, 640K of RAM, a CGA card."
+        },
+        {
+          "url": "http://ricapar.net/ClawDOS/",
+          "quote": "As explained in more detail below, the harness runs on the native OS and hardware and relies on a “bridge” PC in order to handle TLS, which would’ve been more than what an 8088 could handle."
+        },
+        {
+          "url": "http://ricapar.net/ClawDOS/",
+          "quote": "It reads and edits the"
+        },
+        {
+          "url": "http://ricapar.net/ClawDOS/",
+          "quote": "looks at what they draw on the screen."
+        },
+        {
+          "url": "http://ricapar.net/ClawDOS/",
+          "quote": "HARNESS.EXE is a 176 KB DOS program that"
+        },
+        {
+          "url": "http://ricapar.net/ClawDOS/",
+          "quote": "13,000 lines of C and C++, built with Open Watcom for the 8086 instruction set"
+        }
+      ]
+    }
+  ],
+  "research": [
+    {
+      "via": "webfetch",
+      "url": "https://github.com/huggingface/transformers/releases/tag/v5.24.0"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://machinelearning.apple.com/research/depth-pro-2-monocular"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.21218"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.17621"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.15789"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.18359"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.19937"
+    },
+    {
+      "via": "webfetch",
+      "url": "http://ricapar.net/ClawDOS/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/Lakonik/pi-H3"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://www.anthropic.com/news/ipo-close"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.21072"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://openai.com/business/customer-stories/hebbia"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/obra/superpowers"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/HKUDS/CLI-Anything"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/jingyaogong/minimind"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/firecrawl/firecrawl"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/mvanhorn/last30days-skill"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/zhouxiaoka/autoclip"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/Tracer-Cloud/opensre"
+    }
+  ],
+  "lang": "en",
+  "validation": {
+    "validated_at": "2026-11-22T04:41:47+00:00",
+    "checked_links": false,
+    "dropped": [
+      {
+        "title": "AutoClip turns long videos into short clips with an open-source desktop tool",
+        "section": "brief",
+        "candidates": [
+          "c_d941cdc9a6"
+        ],
+        "reasons": [
+          "summary longer than 250 characters"
+        ]
+      },
+      {
+        "title": "OpenSRE is an open-source CLI agent for CI/CD reliability",
+        "section": "brief",
+        "candidates": [
+          "c_f6df913aa0"
+        ],
+        "reasons": [
+          "summary longer than 250 characters"
+        ]
+      },
+      {
+        "title": "last30days-skill researches a topic across Reddit, X, YouTube, and HN",
+        "section": "brief",
+        "candidates": [
+          "c_768cda9a02"
+        ],
+        "reasons": [
+          "summary longer than 250 characters"
+        ]
+      }
+    ],
+    "warnings": []
+  }
+}
