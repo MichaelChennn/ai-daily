@@ -2,24 +2,19 @@
   "schema_version": 1,
   "date": "2026-11-23",
   "mode": "full",
-  "generated_at": "2026-11-23T04:40:11+00:00",
-  "channel": "api",
-  "model": "nvidia:minimaxai/minimax-m3.1-flash",
+  "channel": "claude",
+  "generated_at": "2026-11-23T04:41:48+00:00",
+  "model": "claude-opus-5-5",
   "highlights": [
-    "OpenAI 首席科学家 Jakub Pachocki 公开内部困惑度（perplexity）数据，主张用这一指标建立跨实验室的安全与评测标准。",
-    "开源侧今天被 Agent 工具链刷屏：superpowers、CLI-Anything、Firecrawl Local、OpenSRE 都提供了可直接接入编码 Agent 的工作流。",
-    "模型方面，InternLM 的 Sage S2.1 Flash 技术报告、OVHcloud 的 Olala-v1.0-mini-7A1B 与 LingSante-3.1-flash 分别覆盖推理 Agent、多语言小模型和医疗长上下文。"
+    "OpenAI 首席科学家 Jakub Pachocki 提议把 perplexity 作为各家模型开发方之间的比较指标和共同安全标准的依据，并公开了 OpenAI 内部的预训练测量。",
+    "Dragos 用近两百万条带 canary token 的提示发现，至少三家 AI 服务商的数据遭窃，Zero Data Retention 标记也常被无视。",
+    "开放模型方面，inclusionAI 发布 560B 总参数的医疗模型 LingSante-3.1-flash，OVHcloud 发布可在笔记本上运行的 Olala-v1.0-mini-7A1B。"
   ],
   "items": [
     {
       "section": "headline",
-      "title": "OpenAI 公开困惑度数据，主张用它统一模型评测与安全标准",
-      "summary": "OpenAI 首席科学家 Jakub Pachocki 在博客中公开了从 GPT‑3.5 起的内部困惑度（perplexity）测量，低于 0.8 的损失区间催生了网络安全与数学等方向的 transformative capabilities。他主张用困惑度（或等价地 cross-entropy loss）作为跨实验室可比的共同基准，并提出在模型能力被充分理解前设定各方共同承诺不逾越的开发上限。",
-      "tags": [
-        "安全",
-        "行业",
-        "推理"
-      ],
+      "title": "OpenAI 首席科学家提议用 perplexity 统一衡量 AI 进展",
+      "summary": "OpenAI 首席科学家 Jakub Pachocki 发文，主张把 perplexity（即 cross-entropy loss）作为各家模型开发方之间的比较指标和共同安全标准的依据，并公开了 OpenAI 内部的预训练 perplexity 测量；文中称 log-perplexity 降到约 0.76 的模型开始在数学开放问题上给出突破性结果。他还提议设定基于 perplexity 等指标的共同上限，在理解和监控 AI 行为的能力达到具体里程碑之前不越过。文章也承认 chain-of-thought 推理带来的能力提升不会体现在 perplexity 上，所以对开发者来说，它更适合当作预训练进展的标尺，而不是替代任务评测。",
       "sources": [
         {
           "candidate_id": "c_bd545a438b",
@@ -29,353 +24,76 @@
       "evidence": [
         {
           "url": "https://openai.com/index/perplexity-and-intelligence",
-          "quote": "OpenAI November 22, 2026 Research Safety Perplexity and Intelligence By Jakub Pachocki, Chief Scientist at OpenAI Share From afar, it might seem like modern AI is built similarly to how software has been built in previous decades: with a diverse set of techniques targeting specific capabilities."
+          "quote": "By Jakub Pachocki, Chief Scientist at OpenAI"
         },
         {
           "url": "https://openai.com/index/perplexity-and-intelligence",
-          "quote": "In this post, I argue for establishing perplexity (or, equivalently, cross-entropy loss) as a metric to compare between model developers and inform shared safety standards."
+          "quote": "I argue for establishing perplexity (or, equivalently, cross-entropy loss) as a metric to compare between model developers and inform shared safety standards. As a first step, I provide more transparency into pretraining progress at OpenAI."
         },
         {
           "url": "https://openai.com/index/perplexity-and-intelligence",
-          "quote": "As a first step, I provide more transparency into pretraining progress at OpenAI."
+          "quote": "Once we upgraded to a model of log-perplexity ~0.76, it started producing groundbreaking results."
         },
         {
           "url": "https://openai.com/index/perplexity-and-intelligence",
-          "quote": "2 , 3 Perplexity measures how well a model predicts the next token on average; lower perplexity means better predictions."
+          "quote": "I further propose common limits , based on perplexity and other measurements, that developers are committed to not crossing until our ability to understand and monitor AI behavior achieves a certain concrete milestone"
         },
         {
           "url": "https://openai.com/index/perplexity-and-intelligence",
-          "quote": "The plot opening this blog post shows how this metric evolved for our models starting with GPT‑3.5."
-        },
-        {
-          "url": "https://openai.com/index/perplexity-and-intelligence",
-          "quote": "Now, as we have reached losses below 0.8, we have seen the emergence of transformative capabilities in fields like cybersecurity and mathematics."
-        },
-        {
-          "url": "https://openai.com/index/perplexity-and-intelligence",
-          "quote": "Given that the main way new surprising capabilities emerge is by progress on compression, a measure rooted in perplexity could give us a shared benchmark for general intelligence, regardless of the degree of automation of the development process."
-        },
-        {
-          "url": "https://openai.com/index/perplexity-and-intelligence",
-          "quote": "I believe frontier model developers should jointly endeavour to establish shared norms for how to evaluate such models and red-team safety cases for them by the time they are first used, including shared transparency standards."
-        },
-        {
-          "url": "https://openai.com/index/perplexity-and-intelligence",
-          "quote": "I further propose common limits , based on perplexity and other measurements, that developers are committed to not crossing until our ability to understand and monitor AI behavior achieves a certain concrete milestone (such as the development of a successor to CoT monitors)."
+          "quote": "chain-of-thought reasoning does not reduce perplexity achieved by the model, even though it leads to a drastic increase in capabilities."
         }
+      ],
+      "tags": [
+        "安全",
+        "训练",
+        "行业"
       ]
     },
     {
       "section": "headline",
-      "title": "Sage S2.1 Flash：320B 混合专家模型面向科学与交互式任务",
-      "summary": "InternLM 团队发布 Sage S2.1 Flash 技术报告，提出 320-billion-parameter 的通用 mixture-of-experts 模型，用于科学证据推理与交互式环境中的行动。Sage Sci-Perception 用专门编码器处理分子图、生物序列与光谱，再由模态专用 projector 映射到共享骨干的输入空间。在 33 个基准的评测中，它在 OfficeQA Pro（72.2）、MLE-bench Lite（90.3 HumanRank）等项目排名第一，在 OSWorld-Verified（85.2）等项目排名第二。",
-      "tags": [
-        "模型",
-        "多模态",
-        "Agent"
-      ],
+      "title": "Dragos 用 canary token 追踪提示泄露：多家 AI 服务商遭入侵",
+      "summary": "Dragos 在五个月里向常用 AI 服务提交了近两百万条带唯一 URL 和 canary 凭证的提示，发现至少三家服务商的数据被盗，且在 Dragos 通知之前都没有察觉；推理市场上的多个转售商能用普通日志功能查看并保留客户提示。一家中国 AI 实验室抓取了发给其模型的提示中过半的秘密链接，其中包括约三分之二标记了 Zero Data Retention 的请求。对开发者来说，经路由或转售商调用模型时，提示里的密钥和内部链接都应视为可能外泄，ZDR 标记不能当作保证。",
       "sources": [
         {
-          "candidate_id": "c_d7c6ad7aa1",
-          "url": "https://huggingface.co/papers/2611.21072"
+          "candidate_id": "c_92c84415df",
+          "url": "https://www.dragos.com/blog/ai-supply-chain-security-canary-tokens"
+        },
+        {
+          "candidate_id": "c_92c84415df",
+          "url": "https://news.ycombinator.com/item?id=50596511"
         }
       ],
       "evidence": [
         {
-          "url": "https://huggingface.co/papers/2611.21072",
-          "quote": "Papers arxiv:2611.21072 Copy markdown Sage S2.1 Flash Technical Report Published on Nov 16 · Submitted by Honglin Guo on Nov 17 #2 Paper of the day · Intern Large Models Upvote 101 +93 Authors: Kun Cai , Haodong Chen , Guangran Cheng , Qingxiu Cheng , Xu Dai , Guanting Dong , Qiming Ge , Lixin Gu ,"
+          "url": "https://www.dragos.com/blog/ai-supply-chain-security-canary-tokens",
+          "quote": "we submitted approximately two million prompts containing unique URLs and canary token credentials to widely used AI services and monitored what happened after inference."
         },
         {
-          "url": "https://huggingface.co/papers/2611.21072",
-          "quote": "5 F l a s h , a 3 2 0 - b i l l i o n - p a r a m e t e r g e n e r a l - p u r p o s e m i x t u r e - o f - e x p e r t s m o d e l d e s i g n e d t o r e a s o n o v e r s c i e n t i f i c e v i d e n c e a n d a c t i n i n t e r a c t i v e e n v i r o n m e n t s ."
+          "url": "https://www.dragos.com/blog/ai-supply-chain-security-canary-tokens",
+          "quote": "We observed activity indicating that data from at least three AI providers was exposed."
         },
         {
-          "url": "https://huggingface.co/papers/2611.21072",
-          "quote": "S a g e S c i - P e r c e p t i o n u s e s d e d i c a t e d e n c o d e r s f o r m o l e c u l a r g r a p h s a n d b i o l o g i c a l s e q u e n c e s a n d r e p r e s e n t s s p e c t r a a s o r d e r e d p a t c h e s o f m e a s u r e m e n t s ."
+          "url": "https://www.dragos.com/blog/ai-supply-chain-security-canary-tokens",
+          "quote": "The earliest incident dates back to the middle of July, and none of the three providers knew about their breach until we notified them."
         },
         {
-          "url": "https://huggingface.co/papers/2611.21072",
-          "quote": "M o d a l i t y - s p e c i f i c p r o j e c t o r s m a p t h e s e r e p r e s e n t a t i o n s i n t o t h e i n p u t s p a c e o f a s h a r e d b a c k b o n e , w h i c h p r o c e s s e s t h e m a l o n g s i d e t e x t a n d i m a g e s ."
+          "url": "https://www.dragos.com/blog/ai-supply-chain-security-canary-tokens",
+          "quote": "Multiple resellers operating through an AI inference marketplace were able to view and retain customer prompts using standard logging capabilities, without exploiting a vulnerability or bypassing platform controls."
         },
         {
-          "url": "https://huggingface.co/papers/2611.21072",
-          "quote": "W e e v a l u a t e S a g e S 1 ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21072",
-          "quote": "5 F l a s h o n 3 3 b e n c h m a r k s a c r o s s s e v e n d o m a i n s ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21072",
-          "quote": "I n t h e p r i m a r y c o m p a r i s o n a g a i n s t f i v e b a s e l i n e s , i t r a n k s f i r s t o n O f f i c e Q A P r o ( 7 2 ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21072",
-          "quote": "2 ) , M L E - b e n c h L i t e ( 9 0 ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21072",
-          "quote": "3 H u m a n R a n k ) , H a r v e y L A B , a n d S p r e a d s h e e t B e n c h ~ 2 , a n d s e c o n d o n O S W o r l d - V e r i f i e d ( 8 5 ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21072",
-          "quote": "2 ) , W e b A r e n a - V e r i f i e d ( 6 7 ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.21072",
-          "quote": "6 ) , a n d D e e p R e s e a r c h B e n c h ~ I I ( 5 4 ."
+          "url": "https://www.dragos.com/blog/ai-supply-chain-security-canary-tokens",
+          "quote": "fetched the secret URLs from more than half of the prompts that we sent to its models between July and October, including roughly two-thirds of the requests marked as “no data collection” or Zero Data Retention."
         }
+      ],
+      "tags": [
+        "安全",
+        "行业"
       ]
     },
     {
       "section": "headline",
-      "title": "CLI-Anything 把桌面软件变成 Agent 可调用的 CLI",
-      "summary": "HKUDS 的 CLI-Anything 项目通过为各类软件生成 CLI harness，让 Agent 以命令行方式操作图形软件，官方称目标是让所有软件都变成 agent-ready。社区已为 Blender、GIMP、LibreOffice、Obsidian、Chrome 等大量软件贡献 harness，并通过 CLI-Hub 统一安装与管理。开发者可用 pip install cli-anything-hub 后用 cli-hub install <name> 获取社区构建的 CLI。",
-      "tags": [
-        "Agent",
-        "开源",
-        "工具"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_740be60563",
-          "url": "https://github.com/HKUDS/CLI-Anything"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://github.com/HKUDS/CLI-Anything",
-          "quote": "CLI-Anything Public Notifications You must be signed in to change notification settings Fork 5.7k ( 5.7k ) Star 62.9k ( 62.9k ) You must be signed in to star a repository About \"CLI-Anything: Making ALL Software Agent-Native\" -- CLI-Hub: https://clianything.cc/ clianything.cc/ Resources Readme Apach"
-        },
-        {
-          "url": "https://github.com/HKUDS/CLI-Anything",
-          "quote": "CLI-Anything: Bridging the Gap Between AI Agents and the World's Software"
-        },
-        {
-          "url": "https://github.com/HKUDS/CLI-Anything",
-          "quote": "🌐 CLI-Hub : pip install cli-anything-hub then cli-hub install <name> — browse, install, and manage all community-built CLIs."
-        },
-        {
-          "url": "https://github.com/HKUDS/CLI-Anything",
-          "quote": "One Command Line : Make any software agent-ready for Pi, OpenClaw, nanobot, Cursor, Claude Code, etc."
-        },
-        {
-          "url": "https://github.com/HKUDS/CLI-Anything",
-          "quote": "olders and files Name Name Last commit message Last commit date .claude-plugin .claude-plugin .cursor-plugin .cursor-plugin .github .github .pi-extension/ cli-anything .pi-extension/ cli-anything 3MF/ agent-harness 3MF/ agent-harness QGIS/ agent-harness QGIS/ agent-harness adguardhome/ agent-harness"
-        },
-        {
-          "url": "https://github.com/HKUDS/CLI-Anything",
-          "quote": "harness codex-skill codex-skill comfyui/ agent-harness comfyui/ agent-harness cursor-plugin cursor-plugin dify-workflow/ agent-harness dify-workflow/ agent-harness docs docs drawio/ agent-harness drawio/ agent-harness eez-studio/ agent-harness eez-studio/ agent-harness eth2-quickstart/ agent-harness"
-        },
-        {
-          "url": "https://github.com/HKUDS/CLI-Anything",
-          "quote": "eth2-quickstart/ agent-harness exa/ agent-harness exa/ agent-harness firefly-iii/ agent-harness firefly-iii/ agent-harness freecad/ agent-harness freecad/ agent-harness gimp/ agent-harness gimp/ agent-harness godot/ agent-harness godot/ agent-harness hermes-skill hermes-skill inkscape/ agent-harnes"
-        },
-        {
-          "url": "https://github.com/HKUDS/CLI-Anything",
-          "quote": "harness libreoffice/ agent-harness libreoffice/ agent-harness live2d/ agent-harness live2d/ agent-harness lldb/ agent-harness lldb/ agent-harness macrocli macrocli mailchimp/ agent-harness mailchimp/ agent-harness mermaid/ agent-harness mermaid/ agent-harness minimax/ agent-harness minimax/ agent-ha"
-        }
-      ]
-    },
-    {
-      "section": "headline",
-      "title": "superpowers：面向编码 Agent 的软件开发方法论",
-      "summary": "obra 的 superpowers 提供一套完整的编码 Agent 开发方法论，先让 Agent 澄清需求并给出可读的设计，再产出实现计划，然后进入 subagent-driven-development 流程，由多个 Agent 逐任务执行并检查。技能可自动触发，无需额外配置，并提供 Claude Code、Codex、Cursor、Gemini CLI 等多种 harness 的安装方式。",
-      "tags": [
-        "Agent",
-        "工具",
-        "代码"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_cfd2851c47",
-          "url": "https://github.com/obra/superpowers"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://github.com/obra/superpowers",
-          "quote": "Superpowers is a complete software development methodology for your coding agents, built on top of a set of composable skills and some initial instructions that make sure your agent uses them."
-        },
-        {
-          "url": "https://github.com/obra/superpowers",
-          "quote": "It starts from the moment you fire up your coding agent."
-        },
-        {
-          "url": "https://github.com/obra/superpowers",
-          "quote": "Once it's teased a spec out of the conversation, it shows it to you in chunks short enough to actually read and digest."
-        },
-        {
-          "url": "https://github.com/obra/superpowers",
-          "quote": "After you've signed off on the design, your agent puts together an implementation plan that's clear enough for an enthusiastic junior engineer with poor taste, no judgement, no project context, and an aversion to testing to follow."
-        },
-        {
-          "url": "https://github.com/obra/superpowers",
-          "quote": "Next up, once you say \"go\", it launches a subagent-driven-development process, having agents work through each engineering task, inspecting and reviewing their work, and continuing forward."
-        },
-        {
-          "url": "https://github.com/obra/superpowers",
-          "quote": "It's not uncommon for your agent to work autonomously for a couple hours at a time without deviating from the plan you put together."
-        },
-        {
-          "url": "https://github.com/obra/superpowers",
-          "quote": "And because the skills trigger automatically, you don't need to do anything special."
-        },
-        {
-          "url": "https://github.com/obra/superpowers",
-          "quote": "Superpowers is available via the official Claude plugin marketplace"
-        },
-        {
-          "url": "https://github.com/obra/superpowers",
-          "quote": "Superpowers is available via the official Codex plugin marketplace ."
-        },
-        {
-          "url": "https://github.com/obra/superpowers",
-          "quote": "gemini extensions install https://github.com/obra/superpowers"
-        }
-      ]
-    },
-    {
-      "section": "headline",
-      "title": "Firecrawl Local：单二进制把网页转 Markdown 并接入 Agent",
-      "summary": "Firecrawl 的新形态是 Firecrawl Local，可在本机以单个二进制运行，把网站转为干净 Markdown，同时作为 MCP server 接入 AI Agent，并在 localhost 上提供 Firecrawl API。它支持 scrape、crawl、map 与 batch scrape，并可在本地解析 PDF 与 Office 文档；需要搜索或云端能力时再回落到 Firecrawl Cloud 的 550+ 数据提供商。",
-      "tags": [
-        "工具",
-        "Agent",
-        "开源"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_3517f80a1e",
-          "url": "https://github.com/firecrawl/firecrawl"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://github.com/firecrawl/firecrawl",
-          "quote": "Knowledge infrastructure to make your agents smarter."
-        },
-        {
-          "url": "https://github.com/firecrawl/firecrawl",
-          "quote": "Run Firecrawl on your own machine as one binary that turns websites into clean markdown, plugs into your AI agent as an MCP server and serves the Firecrawl API on localhost."
-        },
-        {
-          "url": "https://github.com/firecrawl/firecrawl",
-          "quote": "Use the hosted service at firecrawl.dev for everything Local does at scale with nothing to run, plus search and the 550+ data providers in Firecrawl Alexandria for far more knowledge than scraping alone."
-        },
-        {
-          "url": "https://github.com/firecrawl/firecrawl",
-          "quote": "Firecrawl Local scrapes, crawls and maps from your own machine without a database, queue or container, and it reaches Firecrawl Cloud when your AI agents need search or Alexandria."
-        },
-        {
-          "url": "https://github.com/firecrawl/firecrawl",
-          "quote": "It installs from crates.io."
-        },
-        {
-          "url": "https://github.com/firecrawl/firecrawl",
-          "quote": "cargo install firecrawl-local"
-        },
-        {
-          "url": "https://github.com/firecrawl/firecrawl",
-          "quote": "Pages that need JavaScript render in the Chrome or Chromium already on your machine, and PDFs and Office documents are parsed locally too."
-        },
-        {
-          "url": "https://github.com/firecrawl/firecrawl",
-          "quote": "init finds Claude Code, Claude Desktop, Cursor, Windsurf, Gemini CLI and Codex on your machine and adds Firecrawl Local to each one as an MCP server."
-        },
-        {
-          "url": "https://github.com/firecrawl/firecrawl",
-          "quote": "serve answers the Firecrawl v2 API on port 3002, so code written for Firecrawl runs against it unchanged and local routes need no API key."
-        },
-        {
-          "url": "https://github.com/firecrawl/firecrawl",
-          "quote": "Firecrawl Cloud runs everything Firecrawl Local does at scale, with no browser or machine of your own to look after."
-        },
-        {
-          "url": "https://github.com/firecrawl/firecrawl",
-          "quote": "It also gives your AI agents access to far more knowledge than scraping alone, with search, Alexandria, Interact and Agent all through a single API."
-        }
-      ]
-    },
-    {
-      "section": "model",
-      "title": "Olala-v1.0-mini-7A1B：OVHcloud 开源 7A1B 多语言推理模型",
-      "summary": "OVHcloud 旗下 OVHai LLM 发布 Olala-v1.0-mini-7A1B，这是一个基于 hybrid Mamba-3 / attention mixture-of-experts 架构的小型推理模型，面向对话、指令遵循与工具调用。模型总参数 6.8B、每 token 约 1B 激活，在 JUPITER、Jean Zay 和 MeluXina 三台欧洲超算上用 12.8T tokens 训练，权重以 apache-2.0 开放。当前官方 llama.cpp、vLLM 与 mlx-lm 尚不能直接加载，需要使用其 fork。",
-      "tags": [
-        "模型",
-        "开源",
-        "推理"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_0eb157e01b",
-          "url": "https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B",
-          "quote": "Olala-v1.0-mini-7A1B is a small reasoning model for chat, instruction following and tool use , built on our hybrid"
-        },
-        {
-          "url": "https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B",
-          "quote": "Mamba-3 / attention mixture-of-experts architecture."
-        },
-        {
-          "url": "https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B",
-          "quote": "Made in Europe, open by design: designed in France by OVHai LLM (OVHcloud group), trained on three"
-        },
-        {
-          "url": "https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B",
-          "quote": "European supercomputers (JUPITER, Jean Zay and MeluXina) on 12.8T tokens of public datasets and our own synthetic data, and released with open weights under"
-        },
-        {
-          "url": "https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B",
-          "quote": "Efficient: about 1B active parameters per token, and only 7 of its 36 layers keep a KV cache."
-        },
-        {
-          "url": "https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B",
-          "quote": "Reasoning and agentic: it thinks before it answers, with four reasoning-effort levels, and was trained with"
-        },
-        {
-          "url": "https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B",
-          "quote": "6.8B total, about 1B active per token"
-        },
-        {
-          "url": "https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B",
-          "quote": "36 layers: 29 Mamba-3 and 7 attention layers (one in five), each followed by a mixture-of-experts block with 256 routed experts (6 active) and 1 shared expert"
-        },
-        {
-          "url": "https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B",
-          "quote": "32K tokens (input + output) A 128K-context version is coming soon."
-        },
-        {
-          "url": "https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B",
-          "quote": "12.8T tokens: public datasets and our own synthetic data"
-        },
-        {
-          "url": "https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B",
-          "quote": "Ollama, LM Studio and the official llama.cpp, vLLM and mlx-lm cannot load Olala 1.0 mini yet: each option below"
-        },
-        {
-          "url": "https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B",
-          "quote": "llama.cpp (GGUF), 6 to 14 GB"
-        },
-        {
-          "url": "https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B",
-          "quote": "vLLM (Linux, NVIDIA GPU with 24 GB or more, Python 3.12; tested on L4 and L40S):"
-        }
-      ]
-    },
-    {
-      "section": "model",
-      "title": "LingSante-3.1-flash：面向医疗长任务的开源混合专家模型",
-      "summary": "inclusionAI 发布基于 Ling-3.1-flash 的开源权重模型 LingSante-3.1-flash，总参数 560 billion、每 token 激活 25 billion，支持 1-million-token 上下文。它通过医疗混合预训练、中训练、任务级强化学习与多教师 on-policy 蒸馏，训练模型在证据核验、复杂医疗推理与长流程医疗任务上的表现。模型卡说明它仅供研究与评测，不能作为独立诊断、处方或治疗依据。",
-      "tags": [
-        "模型",
-        "开源",
-        "安全"
-      ],
+      "title": "inclusionAI 发布医疗模型 LingSante-3.1-flash：560B 总参数、激活 25B",
+      "summary": "inclusionAI 发布开放权重的医疗 MoE 模型 LingSante-3.1-flash，基于 Ling-3.1-flash，560B 总参数、每 token 激活 25B，支持 1M token 上下文，面向复杂医学推理、医疗沟通、循证研究和长流程医疗任务；模型卡称它在医疗专业行为基准上总排名第二，仅次于 GPT-6 Astra。模型以 MIT 许可发布，附 vLLM 和 SGLang 部署说明；模型卡同时写明它只用于研究和评测，不是医疗器械，不能单独作为诊断、处方或治疗的依据。",
       "sources": [
         {
           "candidate_id": "c_695b11fd51",
@@ -385,43 +103,71 @@
       "evidence": [
         {
           "url": "https://huggingface.co/inclusionAI/LingSante-3.1-flash",
-          "quote": "LingSante-3.1-flash is an open-weight Mixture-of-Experts model that combines complex medical reasoning, professional healthcare communication, evidence-based deep research, and long-horizon medical tasks."
-        },
-        {
-          "url": "https://huggingface.co/inclusionAI/LingSante-3.1-flash",
           "quote": "Built on Ling-3.1-flash , it has 560 billion total parameters , activates 25 billion parameters per token , and supports a 1-million-token context window ."
         },
         {
           "url": "https://huggingface.co/inclusionAI/LingSante-3.1-flash",
-          "quote": "To address these demands, LingSante-3.1-flash is trained to unify medical reasoning and workflow execution through native medical-mixed pretraining, mid-training, supervised fine-tuning, task-specific reinforcement learning, and multi-teacher on-policy distillation."
-        },
-        {
-          "url": "https://huggingface.co/inclusionAI/LingSante-3.1-flash",
-          "quote": "The model can verify evidence across scenarios, deliver professional judgments, and independently complete multi-stage workflows."
-        },
-        {
-          "url": "https://huggingface.co/inclusionAI/LingSante-3.1-flash",
-          "quote": "LingSante-3.1-flash is intended for research and evaluation."
-        },
-        {
-          "url": "https://huggingface.co/inclusionAI/LingSante-3.1-flash",
-          "quote": "It is not a medical device and must not be used as an independent basis for diagnosis, prescriptions, or treatment."
+          "quote": "Architecture Hybrid-linear MoE Total parameters 560B Activated parameters per token 25B Context window 1M tokens"
         },
         {
           "url": "https://huggingface.co/inclusionAI/LingSante-3.1-flash",
           "quote": "LingSante-3.1-flash demonstrates strong performance on benchmarks for medical professional behavior, ranking second overall behind only GPT-6 Astra."
+        },
+        {
+          "url": "https://huggingface.co/inclusionAI/LingSante-3.1-flash",
+          "quote": "LingSante-3.1-flash is intended for research and evaluation. It is not a medical device and must not be used as an independent basis for diagnosis, prescriptions, or treatment."
         }
+      ],
+      "tags": [
+        "模型",
+        "开源"
       ]
     },
     {
       "section": "model",
-      "title": "KORMo-Web-11B：KAIST 出品的韩英双语 GUI Agent 模型",
-      "summary": "KAIST MLP Lab 基于自研基础模型扩展出 KORMo-Web-11B，把 LLM 推理、VLM 图像理解与 GUI 浏览器操作合到一个模型中。训练使用 10M+ 原子级网页预训练样本与 100K+ 双语浏览器操作轨迹，权重以 Apache-2.0 开放。在 Online-Mind2Web 的 612 个真实网站任务上，其韩语任务成功率为 33.7%，比最强非 KORMo 开源权重基线高 13.5 个百分点。",
+      "title": "OVHcloud 开源小模型 Olala-v1.0-mini-7A1B：6.8B 总参数、约 1B 激活",
+      "summary": "OVHcloud 旗下的 OVHai LLM 发布 Olala-v1.0-mini-7A1B，一个面向聊天、指令遵循和工具调用的小型推理模型，采用 Mamba-3 / attention 混合的 MoE 架构，6.8B 总参数、每 token 约 1B 激活，36 层中只有 7 层保留 KV cache，上下文 32K。模型在三台欧洲超算上用 12.8T token 训练，以 Apache 2.0 开放权重。对开发者来说，这是一个能在笔记本上跑、可商用的小模型，也可以直接走 OVHcloud AI Endpoints 的 OpenAI 兼容 API。",
+      "sources": [
+        {
+          "candidate_id": "c_0eb157e01b",
+          "url": "https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B",
+          "quote": "is a small reasoning model for chat, instruction following and tool use , built on our hybrid Mamba-3 / attention mixture-of-experts architecture."
+        },
+        {
+          "url": "https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B",
+          "quote": "designed in France by OVHai LLM (OVHcloud group), trained on three European supercomputers (JUPITER, Jean Zay and MeluXina) on 12.8T tokens of public datasets and our own synthetic data, and released with open weights under Apache 2.0."
+        },
+        {
+          "url": "https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B",
+          "quote": "Efficient: about 1B active parameters per token, and only 7 of its 36 layers keep a KV cache. It runs on a laptop."
+        },
+        {
+          "url": "https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B",
+          "quote": "Parameters 6.8B total, about 1B active per token"
+        },
+        {
+          "url": "https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B",
+          "quote": "Context length 32K tokens (input + output)"
+        },
+        {
+          "url": "https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B",
+          "quote": "OVHcloud AI Endpoints A production API, OpenAI-compatible, hosted in Europe"
+        }
+      ],
       "tags": [
         "模型",
-        "多模态",
-        "Agent"
-      ],
+        "开源"
+      ]
+    },
+    {
+      "section": "model",
+      "title": "KAIST 发布 KORMo-Web-11B：韩英双语、看截图操作网页",
+      "summary": "KAIST MLP Lab 发布 KORMo-Web-11B，它基于从零训练的 KORMo-10B 语言模型，经 KORMo-VL 扩展成网页 Agent，同时保留原有的 LLM 和 VLM 能力，主要通过截图操作浏览器，不依赖完整 DOM。在 Online-Mind2Web 上，它的英文成功率 31.3%、韩文 33.7%，韩文成绩比表中最强的非 KORMo 开放权重基线高 13.5 个百分点，英文略低于 OpenWebRL-4B 的 32.7。权重以 Apache-2.0 发布，附 vLLM 推理路径和浏览器 harness，适合需要韩语网页自动化的场景。",
       "sources": [
         {
           "candidate_id": "c_b1b11fb204",
@@ -431,35 +177,11 @@
       "evidence": [
         {
           "url": "https://huggingface.co/KORMo-VL/KORMo-Web-11B",
-          "quote": "KORMo-Web-11B is a general-purpose bilingual AI model built on the KORMo foundation model family , developed by KAIST MLP Lab starting from a language model trained entirely from scratch."
+          "quote": "Developed from the KORMo-10B language model, trained from scratch by KAIST MLP Lab, and extended through KORMo-VL into a web agent."
         },
         {
           "url": "https://huggingface.co/KORMo-VL/KORMo-Web-11B",
-          "quote": "Unlike our Qwen-based KORMo-Web-4B and 9B models, which focus on maximizing web task performance, KORMo-Web-11B is designed to preserve its original LLM and VLM capabilities while learning to act as a GUI agent."
-        },
-        {
-          "url": "https://huggingface.co/KORMo-VL/KORMo-Web-11B",
-          "quote": "It can understand Korean and English text, interpret images, and complete real browser tasks by visually navigating webpages— all within a single model."
-        },
-        {
-          "url": "https://huggingface.co/KORMo-VL/KORMo-Web-11B",
-          "quote": "10M+ Atomic-Level Web Pretraining Samples: Large-scale Korean and English web understanding training, covering individual UI elements, their locations, layouts, functions, and states."
-        },
-        {
-          "url": "https://huggingface.co/KORMo-VL/KORMo-Web-11B",
-          "quote": "100K+ Web Interaction Trajectories: Bilingual browser demonstrations for learning real-world, multi-step web tasks."
-        },
-        {
-          "url": "https://huggingface.co/KORMo-VL/KORMo-Web-11B",
-          "quote": "Open and Commercially Usable: Model weights and supporting resources are openly released under Apache-2.0 , allowing commercial use, modification, and redistribution subject to the license terms."
-        },
-        {
-          "url": "https://huggingface.co/KORMo-VL/KORMo-Web-11B",
-          "quote": "We evaluated KORMo-Web-11B on 612 live-website tasks (300 English, 312 Korean) from Online-Mind2Web, using the same LLM judge across all evaluated models."
-        },
-        {
-          "url": "https://huggingface.co/KORMo-VL/KORMo-Web-11B",
-          "quote": "KORMo-Web-11B achieves 33.7% Korean task success , exceeding the strongest non-KORMo open-weight baseline listed above by 13.5 percentage points ."
+          "quote": "KORMo-Web-11B is designed to preserve its original LLM and VLM capabilities while learning to act as a GUI agent."
         },
         {
           "url": "https://huggingface.co/KORMo-VL/KORMo-Web-11B",
@@ -467,19 +189,31 @@
         },
         {
           "url": "https://huggingface.co/KORMo-VL/KORMo-Web-11B",
-          "quote": "Think, Then Act: Generates an inspectable reasoning step before executing browser actions."
+          "quote": "OpenWebRL-4B 4B 32.7 15.4 KORMo-Web-11B (ours) 11B 31.3 33.7"
+        },
+        {
+          "url": "https://huggingface.co/KORMo-VL/KORMo-Web-11B",
+          "quote": "KORMo-Web-11B achieves 33.7% Korean task success , exceeding the strongest non-KORMo open-weight baseline listed above by 13.5 percentage points ."
+        },
+        {
+          "url": "https://huggingface.co/KORMo-VL/KORMo-Web-11B",
+          "quote": "Includes model weights, Transformers 5 support, a vLLM inference path, browser harness, and reference inference settings."
+        },
+        {
+          "url": "https://huggingface.co/KORMo-VL/KORMo-Web-11B",
+          "quote": "Built on KORMo-VL and KORMo-10B by KAIST MLP Lab. Evaluated on Online-Mind2Web and its Korean counterpart."
         }
+      ],
+      "tags": [
+        "模型",
+        "Agent",
+        "多模态"
       ]
     },
     {
       "section": "model",
-      "title": "tiny-voca：4.5M 参数的英文 TTS 模型，可跑在手机与浏览器",
-      "summary": "n4ze3m 发布 tiny-voca，一个带两个音色的英文小模型，完整模型含波形生成器共 4.5M 参数，用约 18 小时的合成语音从零训练。它在四个 CPU 线程上约比实时快 70x，提供 PyTorch 权重与 ONNX 导出，权重和代码以 Apache-2.0 发布。模型卡也坦承其局限：声音偏合成感、语速略快、外来名易读错。",
-      "tags": [
-        "模型",
-        "语音",
-        "开源"
-      ],
+      "title": "tiny-voca：4.5M 参数的英文 TTS，CPU 上约 70x 实时",
+      "summary": "开发者 n4ze3m 发布英文语音合成模型 tiny-voca，连同波形生成器在内只有 4.5M 参数，用约 18 小时合成语音从零训练，提供 F2（女声）和 M2（男声）两个音色，输出 24 kHz 单声道音频。模型卡称它在四个 CPU 线程上约比实时快 70x，提供 PyTorch 权重和 ONNX 导出，Apache-2.0 许可。需要在端侧或无 GPU 环境做英文 TTS 的开发者可以试试。",
       "sources": [
         {
           "candidate_id": "c_82214f9798",
@@ -489,51 +223,26 @@
       "evidence": [
         {
           "url": "https://huggingface.co/n4ze3m/tiny-voca",
-          "quote": "tiny-voca is a small English text-to-speech model with two voices, F2 (female)"
+          "quote": "tiny-voca is a small English text-to-speech model with two voices, F2 (female) and M2 (male). The complete model, including the waveform generator, has 4.5M parameters and was trained from scratch on about 18 hours of synthetic speech. It runs about 70x faster than real time on four CPU threads."
         },
         {
           "url": "https://huggingface.co/n4ze3m/tiny-voca",
-          "quote": "The complete model, including the waveform generator, has 4.5M"
+          "quote": "Voices F2, M2 (American English) Output 24 kHz mono"
         },
         {
           "url": "https://huggingface.co/n4ze3m/tiny-voca",
-          "quote": "parameters and was trained from scratch on about 18 hours of synthetic speech."
-        },
-        {
-          "url": "https://huggingface.co/n4ze3m/tiny-voca",
-          "quote": "It runs about 70x faster than real time on four CPU threads."
-        },
-        {
-          "url": "https://huggingface.co/n4ze3m/tiny-voca",
-          "quote": "This is tiny voca, a small text to speech model that runs on a phone or in a browser."
-        },
-        {
-          "url": "https://huggingface.co/n4ze3m/tiny-voca",
-          "quote": "The weights and code are released under Apache-2.0."
-        },
-        {
-          "url": "https://huggingface.co/n4ze3m/tiny-voca",
-          "quote": "The voice is clear but can sound slightly synthetic."
-        },
-        {
-          "url": "https://huggingface.co/n4ze3m/tiny-voca",
-          "quote": "Foreign names and unusual spellings are often mispronounced."
-        },
-        {
-          "url": "https://huggingface.co/n4ze3m/tiny-voca",
-          "quote": "The training data is itself synthetic, so the model cannot be more natural"
+          "quote": "onnx/model.onnx 21.4 MB ONNX export, float32, opset 17"
         }
+      ],
+      "tags": [
+        "语音",
+        "开源"
       ]
     },
     {
       "section": "paper",
-      "title": "论文：Agentic Robotics 提出 Embodied System 2 与评测框架",
-      "summary": "Grid Robotics 等作者的论文主张以 foundation model 与 embodied harness 组成的 Embodied System 2 作为 agentic robotics 的决策核心，并指出社区尚无统一评测框架与研究路线图。其闭环流程为观察环境、理解意图、推理任务、调用技能与工具、验证结果并调整策略，核心难点是在反应时间、机械限制与不可逆后果等物理约束下把通用推理转化为可验证行动。论文同时提出一套同时衡量模型能力与闭环系统表现的评测框架。",
-      "tags": [
-        "论文",
-        "Agent",
-        "行业"
-      ],
+      "title": "论文：Grid Robotics 提出 agentic robotics 的评测框架与路线图",
+      "summary": "Grid Robotics 等作者的立场论文认为，GPT-6 Astra 的发布标志着 agentic robotics 这一新范式出现：由基础模型加 embodied harness 构成的 Embodied System 2 是决策核心，难点在于在有限反应时间、机械限制和不可逆后果等物理约束下，把通用推理变成可验证的动作。论文提出同时衡量模型能力和闭环系统表现的评测框架，并给出走向 sustained autonomy 的研究路线图。对做具身 Agent 的开发者，它提供了一套可以对齐的定义和评测维度。",
       "sources": [
         {
           "candidate_id": "c_51a89fc6c0",
@@ -543,407 +252,56 @@
       "evidence": [
         {
           "url": "https://huggingface.co/papers/2611.18359",
-          "quote": "Qi , Shizun Wang , Xinchao Wang , Ming Yang , Zhiqin Yang , Zuhao Yang , Tao Yu Abstract Agentic robotics, centered on an Embodied System 2 formed by a foundation model and embodied harness, requires a shared evaluation framework and research roadmap to achieve reliable physical autonomy."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.18359",
-          "quote": "Instead of training a dedicated policy for each family of tasks, an agentic robotic system applies a foundation model to open-world embodied tasks ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.18359",
-          "quote": "It operates in a closed loop: observing the environment, interpreting user intent, reasoning about the task, invoking skills and tools, verifying outcomes, and adapting its strategy."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.18359",
-          "quote": "Despite these advances, the community has yet to converge on a shared definition, a reliable evaluation framework, or a research roadmap."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.18359",
           "quote": "We argue that Embodied System 2 , realized by a foundation model together with an embodied harness , forms the decision-making core of agentic robotics ."
         },
         {
           "url": "https://huggingface.co/papers/2611.18359",
-          "quote": "Its central challenge is to translate general-purpose reasoning into effective and verifiable actions under physical constraints such as limited reaction time, mechanical limits, unpredictable environment changes, and irreversible consequences."
+          "quote": "we propose an evaluation framework that measures both model capabilities and closed-loop system performance."
         },
         {
           "url": "https://huggingface.co/papers/2611.18359",
-          "quote": "Motivated by this perspective, we propose an evaluation framework that measures both model capabilities and closed-loop system performance."
+          "quote": "we envision a research roadmap toward sustained autonomy : the ability to perform work safely and reliably with progressively broader responsibility, from executing individual primitives to fulfilling standing roles."
         }
-      ]
-    },
-    {
-      "section": "paper",
-      "title": "论文：AllocFlow 端到端生成加密货币永续合约组合",
-      "summary": "南洋理工大学的 AllocFlow 用端到端 flow-matching 框架，直接从原始多资产市场历史生成联合组合配置，由 cross-asset flow Transformer 统一输出各品种的连续带符号仓位权重。训练分两阶段：先做策略监督模仿形成候选组合分布，再用 group-relative RL 结合组合层面的财务奖励与冻结参考策略微调。在小时级加密货币永续合约上，RL 把模仿策略的年化净收益从 27.79% 提升到 51.38%，Calmar ratio 从 0.955 提升到 4.043。",
+      ],
       "tags": [
         "论文",
-        "训练",
-        "推理"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_fdbd81232d",
-          "url": "https://huggingface.co/papers/2611.19937"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2611.19937",
-          "quote": "Xin Li , Tianyi Wei , Weisi Lin Abstract An end-to-end flow-matching framework generates joint portfolio allocations from raw multi-asset market histories via a cross-asset flow Transformer and a two-stage imitation and group-relative reinforcement learning procedure, improving risk-adjusted returns"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.19937",
-          "quote": "We present AllocFlow, an end-to-end flow-matching framework that directly generates joint portfolio allocations from raw multi-asset market histories."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.19937",
-          "quote": "To capture dependencies among portfolio positions, AllocFlow employs a cross-asset flow Transformer conditioned on temporal market representations to generate continuous, signed position weights across all instruments jointly."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.19937",
-          "quote": "To address the sample inefficiency and instability of learning continuous allocation policies from scratch, we establish a two-stage training scheme : strategy-supervised imitation shapes a structured distribution of candidate portfolios, followed by group-relative reinforcement learning (RL) that r"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.19937",
-          "quote": "efines joint decisions using portfolio-level financial rewards and a frozen policy reference ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.19937",
-          "quote": "On hourly cryptocurrency perpetual futures, RL refinement raises the annualized net return of the imitation policy from 27.79% to 51.38% and its Calmar ratio from 0.955 to 4.043, surpassing the teacher strategy on every metric, and AllocFlow reaches a Calmar ratio of 4.90 on six further months of un"
-        }
+        "Agent"
       ]
     },
     {
       "section": "tool",
-      "title": "OpenSRE：可自托管的 CI/CD 可靠性 Agent",
-      "summary": "Tracer-Cloud 的 OpenSRE 是一个 CLI Agent，在 CI 失败时读取失败日志、追查原因并推送修复供人评审，同时区分 CI 引起的失败与代码引起的失败。它可连接 EKS、EC2、CloudWatch、Kubernetes、Grafana、Datadog、Slack 和 GitHub 等系统排查线上事故，并提供交互式 shell、无头 CLI 与 Python API 三种接入方式。项目目前处于 Public Alpha 阶段，API 与集成仍在演进。",
-      "tags": [
-        "Agent",
-        "工具",
-        "开源"
-      ],
+      "title": "mod_wsgi 作者推出 AI 辅助开发的 Rust Python 服务器 Muru",
+      "summary": "mod_wsgi 的作者 Graham Dumpleton 发布 Muru，一个借助 AI 编写的 Rust 服务器，用来在开发和生产环境中运行 ASGI 与 WSGI 的 Python 应用，并在开发过程中持续发文详细记录。他说 AI 表面上承担了大量工作，但判断哪里还不够好仍要靠他自己。对 Python Web 开发者，这是一个值得关注的新部署选项，也是一份资深开发者用 AI 写基础设施的实录。",
       "sources": [
         {
-          "candidate_id": "c_f6df913aa0",
-          "url": "https://github.com/Tracer-Cloud/opensre"
+          "candidate_id": "c_bfd1a10b08",
+          "url": "https://simonwillison.net/2026/Nov/21/muru/"
+        },
+        {
+          "candidate_id": "c_bfd1a10b08",
+          "url": "https://news.ycombinator.com/item?id=50597959"
         }
       ],
       "evidence": [
         {
-          "url": "https://github.com/Tracer-Cloud/opensre",
-          "quote": "OpenSRE: The open-source agent for CI/CD reliability"
+          "url": "https://simonwillison.net/2026/Nov/21/muru/",
+          "quote": "Muru is his new, AI-assisted Rust server that aims to provide the best possible tools for running ASGI and WSGI Python apps both in development and production."
         },
         {
-          "url": "https://github.com/Tracer-Cloud/opensre",
-          "quote": "OpenSRE is a CLI agent that reads the failed run, traces the cause and pushes a fix for you to review."
-        },
-        {
-          "url": "https://github.com/Tracer-Cloud/opensre",
-          "quote": "Self-hosted, with your own models."
-        },
-        {
-          "url": "https://github.com/Tracer-Cloud/opensre",
-          "quote": "🚧 Public Alpha: Core workflows are usable for early exploration, though not yet fully stable."
-        },
-        {
-          "url": "https://github.com/Tracer-Cloud/opensre",
-          "quote": "OpenSRE is an open-source CI/CD reliability agent that does that investigation for you, built to run on your own infrastructure with your own models:"
-        },
-        {
-          "url": "https://github.com/Tracer-Cloud/opensre",
-          "quote": "Recover from red builds faster: it investigates the moment a run fails, reading logs, testing hypotheses and pushing a fix for you to review"
-        },
-        {
-          "url": "https://github.com/Tracer-Cloud/opensre",
-          "quote": "Fix the cause, not just the rerun: it separates CI-caused failures from code-caused ones, so you fix the right thing"
-        },
-        {
-          "url": "https://github.com/Tracer-Cloud/opensre",
-          "quote": "Start with the CI/CD overview : analyze a repository's CI reliability, fix failing checks on a PR, or set up an agent that keeps CI green."
-        },
-        {
-          "url": "https://github.com/Tracer-Cloud/opensre",
-          "quote": "Connect the integrations you run, such as EKS, EC2, CloudWatch, Kubernetes, Grafana (Loki, Mimir/PromQL, Tempo), Alertmanager, Datadog, Slack, and GitHub."
-        },
-        {
-          "url": "https://github.com/Tracer-Cloud/opensre",
-          "quote": "Headless CLI — run one agent turn non-interactively from a terminal, script, or CI job:"
-        },
-        {
-          "url": "https://github.com/Tracer-Cloud/opensre",
-          "quote": "From Python — drive the agent in-process from your own code (source checkout required):"
+          "url": "https://simonwillison.net/2026/Nov/21/muru/",
+          "quote": "The AI may be doing a lot of the work on the surface, but deciding what isn't good enough yet is still down to me"
         }
-      ]
-    },
-    {
-      "section": "tool",
-      "title": "AutoClip：链接进、长视频自动剪成短视频",
-      "summary": "zhouxiaoka 的 AutoClip 是开源的 AI 视频剪辑桌面工具，贴一个链接即可把播客、访谈、课程等长视频自动剪成适配抖音、小红书、TikTok、Reels、YouTube Shorts 等平台的短视频，并生成字幕、封面与发布文案。剪辑、取景与渲染在本机完成，字幕可用作者字幕、本地 Whisper / SenseVoice 或云端转写，CLI / MCP 与桌面共用同一条一键出片链路。软件本身免费、MIT 开源，云端模型按量计费。",
+      ],
       "tags": [
         "工具",
-        "视频",
-        "开源"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_d941cdc9a6",
-          "url": "https://github.com/zhouxiaoka/autoclip"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://github.com/zhouxiaoka/autoclip",
-          "quote": "autoclip Public Notifications You must be signed in to change notification settings Fork 2.2k ( 2.2k ) Star 13.7k ( 13.7k ) You must be signed in to star a repository About AutoClip｜一个链接，一键出片。开源 AI 视频剪辑桌面工具，将播客、访谈、课程等长视频自动剪成短视频，生成字幕、封面和发布文案，适配抖音、小红书、TikTok、Reels 与 YouTube Shorts。Open-source AI video"
-        },
-        {
-          "url": "https://github.com/zhouxiaoka/autoclip",
-          "quote": "开源，在你的电脑上剪辑与渲染。贴一个链接，选好平台，生成 视频、封面和发布文案 ，"
-        },
-        {
-          "url": "https://github.com/zhouxiaoka/autoclip",
-          "quote": "适配抖音、小红书、TikTok、Reels、YouTube Shorts、B 站与 YouTube。"
-        },
-        {
-          "url": "https://github.com/zhouxiaoka/autoclip",
-          "quote": "选好平台，按平台的画幅与时长要求自动生成。每个平台按评分自动生成至多 10 条合格片段，其余列为备选，点「生成这条」再制作。每条都带封面、标题、简介、话题和 ZIP 发布包。"
-        },
-        {
-          "url": "https://github.com/zhouxiaoka/autoclip",
-          "quote": "抖音 / 小红书默认访谈式，TikTok / Reels / Shorts 默认满屏播客式；竖版也可自行选择两种版式。字幕和文案语言仍按平台，B 站 / YouTube 为横版。画面跟随说话人，无人镜头保留完整画面。自动品牌片尾默认开启，可在设置中关闭；复制发布文案不附 AutoClip 署名。"
-        },
-        {
-          "url": "https://github.com/zhouxiaoka/autoclip",
-          "quote": "剪辑、取景与渲染在本机完成。分析模型自选，字幕可用作者字幕、本地 Whisper / SenseVoice 或已配置的云端转写。CLI / MCP 与桌面共用同一条一键出片链路。"
-        },
-        {
-          "url": "https://github.com/zhouxiaoka/autoclip",
-          "quote": "软件免费、MIT 开源。云端分析、转写与 AI 生图按所选服务商计费，需自己的凭据；自动设计封面默认不调用付费生图。Ollama / LM Studio 本地分析不需要云端 Key，但需相应硬件。直接投稿还需自己的 B 站或 Upload-Post 账号。"
-        }
-      ]
-    },
-    {
-      "section": "tool",
-      "title": "diagram-design：让编码 Agent 输出单文件 HTML + SVG 图表",
-      "summary": "cathrynlavery 的 diagram-design 是一个 Agent Skill，能把架构图、象限图、时序图等图表输出为一个自包含的 HTML + SVG 文件，并支持从站点提取配色与字体以匹配品牌。它可安装到 Cursor、Claude Code、Codex、Qoder、GitHub Copilot、Gemini CLI 等多种 Agent Skills 宿主，README 中给出的图表类型数量在不同位置分别写作 45 与 52。",
-      "tags": [
-        "工具",
-        "代码",
-        "开源"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_a85ad9dc3c",
-          "url": "https://github.com/cathrynlavery/diagram-design"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://github.com/cathrynlavery/diagram-design",
-          "quote": "diagram-design Public Sponsor Notifications You must be signed in to change notification settings Fork 4.7k ( 4.7k ) Star 70.4k ( 70.4k ) You must be signed in to star a repository About Editorial diagram design for Claude Code, Codex, GitHub Copilot, Cursor, Factory Droid, Qoder, and Pi."
-        },
-        {
-          "url": "https://github.com/cathrynlavery/diagram-design",
-          "quote": "45 diagram types."
-        },
-        {
-          "url": "https://github.com/cathrynlavery/diagram-design",
-          "quote": "Self-contained HTML + SVG."
-        },
-        {
-          "url": "https://github.com/cathrynlavery/diagram-design",
-          "quote": "An agent skill that draws diagrams as one self-contained HTML + SVG file, in your brand."
-        },
-        {
-          "url": "https://github.com/cathrynlavery/diagram-design",
-          "quote": "52 diagram types."
-        },
-        {
-          "url": "https://github.com/cathrynlavery/diagram-design",
-          "quote": "No Mermaid slop."
-        },
-        {
-          "url": "https://github.com/cathrynlavery/diagram-design",
-          "quote": "The agent picks the type, states its plan, and writes one .html file you can open by double-clicking."
-        },
-        {
-          "url": "https://github.com/cathrynlavery/diagram-design",
-          "quote": "Works with any host that reads Agent Skills, including Cursor, Claude Code, Codex, Qoder, GitHub Copilot, Gemini CLI, Cline, Windsurf and Amp:"
-        }
-      ]
-    },
-    {
-      "section": "tool",
-      "title": "last30days-skill：跨 Reddit、X、YouTube 的 Agent 调研技能",
-      "summary": "mvanhorn 的 last30days-skill 是一个 Agent Skill，可并行检索 Reddit、X、YouTube、HN、Polymarket 等来源，按点赞、收藏与真实资金赔率打分，再由 AI agent 汇总成一份简报。Reddit、HN、Polymarket 与 GitHub 无需配置即可使用，安装后约 30 秒即可解锁 X、YouTube、TikTok、arXiv、Techmeme 等数据源。",
-      "tags": [
-        "工具",
-        "Agent",
-        "开源"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_768cda9a02",
-          "url": "https://github.com/mvanhorn/last30days-skill"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://github.com/mvanhorn/last30days-skill",
-          "quote": "last30days-skill Public Notifications You must be signed in to change notification settings Fork 6.4k ( 6.4k ) Star 72.9k ( 72.9k ) You must be signed in to star a repository About AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymarket, and the web - then synthesizes a gr"
-        },
-        {
-          "url": "https://github.com/mvanhorn/last30days-skill",
-          "quote": "An AI agent-led search engine scored by upvotes, likes, and real money - not editors."
-        },
-        {
-          "url": "https://github.com/mvanhorn/last30days-skill",
-          "quote": "Reddit, HN, Polymarket, and GitHub work immediately, and so do patent filings and careers pages when your topic is a company."
-        },
-        {
-          "url": "https://github.com/mvanhorn/last30days-skill",
-          "quote": "Run it once and the setup wizard unlocks X, YouTube, TikTok, arXiv, Techmeme, and more in 30 seconds."
-        },
-        {
-          "url": "https://github.com/mvanhorn/last30days-skill",
-          "quote": "/last30days searches all of it in parallel, scores it by what real people actually engage with, and an AI agent judge synthesizes it into one brief."
-        },
-        {
-          "url": "https://github.com/mvanhorn/last30days-skill",
-          "quote": "But you can bring your own keys and browser sessions, and suddenly an AI agent can search all of them at once, score them against each other, and tell you what actually matters."
-        }
-      ]
-    },
-    {
-      "section": "tool",
-      "title": "app-store-compliance：提交前扫描 iOS 与 Android 拒审风险",
-      "summary": "mjmirza 的 app-store-compliance 提供开放的 App Store 与 Google Play 拒审手册，以及一个提交前检查脚本，覆盖隐私清单、Data safety 等检查点。它整理了 124 种拒审模式与对应修复方案，并跟踪 112 项合规截止日期（含 EU AI Act、DSA、COPPA 等），可安装为 Claude Code、Codex、Cursor 等编码工具的 hook。仓库也明确说明扫描结果不等于通过审核。",
-      "tags": [
-        "工具",
-        "代码",
-        "安全"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_420e52b47a",
-          "url": "https://github.com/mjmirza/app-store-compliance"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://github.com/mjmirza/app-store-compliance",
-          "quote": "app-store-compliance Public Notifications You must be signed in to change notification settings Fork 248 ( 248 ) Star 4.1k ( 4.1k ) You must be signed in to star a repository About Avoid common App Store and Google Play rejections."
-        },
-        {
-          "url": "https://github.com/mjmirza/app-store-compliance",
-          "quote": "Open playbook and pre-submission guard with 124 documented rejection patterns and fixes, privacy manifest and Data safety checks, 112 tracked deadlines (EU AI Act, DSA, COPPA, age laws), and a skill for AI coding agents."
-        },
-        {
-          "url": "https://github.com/mjmirza/app-store-compliance",
-          "quote": "A reference and a pre-submission guard for iOS and Android apps that is plain about what a scan can prove and what still needs a person."
-        },
-        {
-          "url": "https://github.com/mjmirza/app-store-compliance",
-          "quote": "It does not guarantee approval."
-        },
-        {
-          "url": "https://github.com/mjmirza/app-store-compliance",
-          "quote": "git clone https://github.com/mjmirza/app-store-compliance ~/repositories/app-store-compliance"
-        },
-        {
-          "url": "https://github.com/mjmirza/app-store-compliance",
-          "quote": "bash ~/repositories/app-store-compliance/agent-os/hooks/app-store-compliance-guard.sh \"/path/to/your/app\""
-        },
-        {
-          "url": "https://github.com/mjmirza/app-store-compliance",
-          "quote": "A small project scans in about a second, a large one can take up to a minute, and the guard prints the time it took."
-        },
-        {
-          "url": "https://github.com/mjmirza/app-store-compliance",
-          "quote": "Not an approval, the reviewer still checks what a scan cannot see"
-        }
+        "代码"
       ]
     }
   ],
   "research": [
     {
       "via": "webfetch",
-      "url": "https://openai.com/index/perplexity-and-intelligence"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://github.com/obra/superpowers"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://github.com/HKUDS/CLI-Anything"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://github.com/jingyaogong/minimind"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://github.com/zhouxiaoka/autoclip"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://github.com/firecrawl/firecrawl"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://github.com/Tracer-Cloud/opensre"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://github.com/cathrynlavery/diagram-design"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://github.com/mvanhorn/last30days-skill"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://github.com/openvinotoolkit/openvino"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.21072"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://kexue.fm/archives/12014"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://www.gpupartner.com/blog/beginners-guide-local-ai-inkling-qwen-unsloth"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://simonwillison.net/2026/Nov/21/muru/"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://github.com/mjmirza/app-store-compliance"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.18359"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.19937"
-    },
-    {
-      "via": "webfetch",
       "url": "https://huggingface.co/inclusionAI/LingSante-3.1-flash"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/n4ze3m/tiny-voca"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/KORMo-VL/KORMo-Web-11B"
     },
     {
       "via": "webfetch",
@@ -952,33 +310,54 @@
     {
       "via": "webfetch",
       "url": "https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/n4ze3m/tiny-voca"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://openai.com/index/perplexity-and-intelligence"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/KORMo-VL/KORMo-Web-11B"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://simonwillison.net/2026/Nov/21/muru/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://www.dragos.com/blog/ai-supply-chain-security-canary-tokens"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://arxiv.org/abs/2606.14068"
+    },
+    {
+      "via": "websearch",
+      "query": "Baidu ERNIE release November 2026"
+    },
+    {
+      "via": "websearch",
+      "query": "Thinking Machines Lab announcement November 22 2026"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://betterdatacenterproject.com/2026/11/16/how-ai-is-powered-a-breakdown-of-byop-and-grid-power/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.18359"
     }
   ],
   "validation": {
-    "validated_at": "2026-11-23T04:40:11+00:00",
+    "validated_at": "2026-11-23T04:43:32+00:00",
     "checked_links": true,
-    "dropped": [
-      {
-        "title": "本地 AI 入门：Unsloth 跑 Qwen 与 Inkling 2",
-        "section": "brief",
-        "candidates": [
-          "c_e22242af68"
-        ],
-        "reasons": [
-          "summary longer than 120 characters"
-        ]
-      },
-      {
-        "title": "Muru：mod_wsgi 作者的 AI 辅助 Rust 服务器",
-        "section": "brief",
-        "candidates": [
-          "c_bfd1a10b08"
-        ],
-        "reasons": [
-          "summary longer than 120 characters"
-        ]
-      }
-    ],
-    "warnings": []
+    "dropped": [],
+    "warnings": [
+      "1 paper items (target 2-4)"
+    ]
   }
 }
