@@ -1,0 +1,964 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-23",
+  "mode": "full",
+  "generated_at": "2026-11-23T04:41:02+00:00",
+  "channel": "api",
+  "model": "nvidia:minimaxai/minimax-m3.1-flash",
+  "highlights": [
+    "OpenAI's chief scientist argues for perplexity as a shared metric for comparing models and setting safety standards, and reports pretraining losses below 0.8 alongside the emergence of transformative capabilities in cybersecurity and mathematics.",
+    "The Sage S2.1 Flash Technical Report introduces a 320-billion-parameter mixture-of-experts model for scientific reasoning and interactive environments, with Sage Sci-Perception handling molecular graphs, biological sequences, and spectra.",
+    "Several open-source agent tools are trending, including CLI-Anything, Firecrawl, OpenSRE, and the Superpowers skills framework."
+  ],
+  "items": [
+    {
+      "section": "headline",
+      "title": "OpenAI's chief scientist proposes perplexity as a shared AI metric",
+      "summary": "Jakub Pachocki argues for establishing perplexity, or equivalently cross-entropy loss, as a metric that model developers can use to compare progress and shape shared safety standards. He reports that OpenAI has reached losses below 0.8, alongside the emergence of transformative capabilities in fields like cybersecurity and mathematics, and proposes common limits tied to perplexity until AI behavior can be understood and monitored.",
+      "tags": [
+        "安全",
+        "行业",
+        "推理"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_bd545a438b",
+          "url": "https://openai.com/index/perplexity-and-intelligence"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://openai.com/index/perplexity-and-intelligence",
+          "quote": "OpenAI November 22, 2026 Research Safety Perplexity and Intelligence By Jakub Pachocki, Chief Scientist at OpenAI Share From afar, it might seem like modern AI is built similarly to how software has been built in previous decades: with a diverse set of techniques targeting specific capabilities."
+        },
+        {
+          "url": "https://openai.com/index/perplexity-and-intelligence",
+          "quote": "In this post, I argue for establishing perplexity (or, equivalently, cross-entropy loss) as a metric to compare between model developers and inform shared safety standards."
+        },
+        {
+          "url": "https://openai.com/index/perplexity-and-intelligence",
+          "quote": "As a first step, I provide more transparency into pretraining progress at OpenAI."
+        },
+        {
+          "url": "https://openai.com/index/perplexity-and-intelligence",
+          "quote": "2 , 3 Perplexity measures how well a model predicts the next token on average; lower perplexity means better predictions."
+        },
+        {
+          "url": "https://openai.com/index/perplexity-and-intelligence",
+          "quote": "The plot opening this blog post shows how this metric evolved for our models starting with GPT‑3.5."
+        },
+        {
+          "url": "https://openai.com/index/perplexity-and-intelligence",
+          "quote": "Now, as we have reached losses below 0.8, we have seen the emergence of transformative capabilities in fields like cybersecurity and mathematics."
+        },
+        {
+          "url": "https://openai.com/index/perplexity-and-intelligence",
+          "quote": "Given that the main way new surprising capabilities emerge is by progress on compression, a measure rooted in perplexity could give us a shared benchmark for general intelligence, regardless of the degree of automation of the development process."
+        },
+        {
+          "url": "https://openai.com/index/perplexity-and-intelligence",
+          "quote": "I believe frontier model developers should jointly endeavour to establish shared norms for how to evaluate such models and red-team safety cases for them by the time they are first used, including shared transparency standards."
+        },
+        {
+          "url": "https://openai.com/index/perplexity-and-intelligence",
+          "quote": "I further propose common limits , based on perplexity and other measurements, that developers are committed to not crossing until our ability to understand and monitor AI behavior achieves a certain concrete milestone (such as the development of a successor to CoT monitors)."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Sage S2.1 Flash Technical Report details a 320-billion-parameter MoE model",
+      "summary": "The report introduces Sage S1.5 Flash, a 320-billion-parameter general-purpose mixture-of-experts model for reasoning over scientific evidence and acting in interactive environments, with Sage Sci-Perception encoding molecular graphs, biological sequences, and spectra. It is evaluated on 33 benchmarks across seven domains, ranking first on OfficeQA Pro (72.2), MLE-bench Lite (90.3 HumanRank), Harvey LAB, and SpreadsheetBench~2.",
+      "tags": [
+        "模型",
+        "多模态",
+        "Agent"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_d7c6ad7aa1",
+          "url": "https://huggingface.co/papers/2611.21072"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.21072",
+          "quote": "Papers arxiv:2611.21072 Copy markdown Sage S2.1 Flash Technical Report Published on Nov 16 · Submitted by Honglin Guo on Nov 17 #2 Paper of the day · Intern Large Models Upvote 101 +93 Authors: Kun Cai , Haodong Chen , Guangran Cheng , Qingxiu Cheng , Xu Dai , Guanting Dong , Qiming Ge , Lixin Gu ,"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.21072",
+          "quote": "5 F l a s h , a 3 2 0 - b i l l i o n - p a r a m e t e r g e n e r a l - p u r p o s e m i x t u r e - o f - e x p e r t s m o d e l d e s i g n e d t o r e a s o n o v e r s c i e n t i f i c e v i d e n c e a n d a c t i n i n t e r a c t i v e e n v i r o n m e n t s ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.21072",
+          "quote": "S a g e S c i - P e r c e p t i o n u s e s d e d i c a t e d e n c o d e r s f o r m o l e c u l a r g r a p h s a n d b i o l o g i c a l s e q u e n c e s a n d r e p r e s e n t s s p e c t r a a s o r d e r e d p a t c h e s o f m e a s u r e m e n t s ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.21072",
+          "quote": "M o d a l i t y - s p e c i f i c p r o j e c t o r s m a p t h e s e r e p r e s e n t a t i o n s i n t o t h e i n p u t s p a c e o f a s h a r e d b a c k b o n e , w h i c h p r o c e s s e s t h e m a l o n g s i d e t e x t a n d i m a g e s ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.21072",
+          "quote": "W e e v a l u a t e S a g e S 1 ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.21072",
+          "quote": "5 F l a s h o n 3 3 b e n c h m a r k s a c r o s s s e v e n d o m a i n s ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.21072",
+          "quote": "I n t h e p r i m a r y c o m p a r i s o n a g a i n s t f i v e b a s e l i n e s , i t r a n k s f i r s t o n O f f i c e Q A P r o ( 7 2 ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.21072",
+          "quote": "2 ) , M L E - b e n c h L i t e ( 9 0 ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.21072",
+          "quote": "3 H u m a n R a n k ) , H a r v e y L A B , a n d S p r e a d s h e e t B e n c h ~ 2 , a n d s e c o n d o n O S W o r l d - V e r i f i e d ( 8 5 ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.21072",
+          "quote": "2 ) , W e b A r e n a - V e r i f i e d ( 6 7 ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.21072",
+          "quote": "6 ) , a n d D e e p R e s e a r c h B e n c h ~ I I ( 5 4 ."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "CLI-Anything makes software agent-native through a CLI hub",
+      "summary": "The CLI-Anything project describes itself as \"CLI-Anything: Making ALL Software Agent-Native\" and provides a CLI-Hub that can be installed with pip to browse, install, and manage community-built CLIs. It aims to make any software agent-ready for tools including Pi, OpenClaw, nanobot, Cursor, and Claude Code.",
+      "tags": [
+        "Agent",
+        "开源",
+        "工具"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_740be60563",
+          "url": "https://github.com/HKUDS/CLI-Anything"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/HKUDS/CLI-Anything",
+          "quote": "CLI-Anything Public Notifications You must be signed in to change notification settings Fork 5.7k ( 5.7k ) Star 62.9k ( 62.9k ) You must be signed in to star a repository About \"CLI-Anything: Making ALL Software Agent-Native\" -- CLI-Hub: https://clianything.cc/ clianything.cc/ Resources Readme Apach"
+        },
+        {
+          "url": "https://github.com/HKUDS/CLI-Anything",
+          "quote": "CLI-Anything: Bridging the Gap Between AI Agents and the World's Software"
+        },
+        {
+          "url": "https://github.com/HKUDS/CLI-Anything",
+          "quote": "🌐 CLI-Hub : pip install cli-anything-hub then cli-hub install <name> — browse, install, and manage all community-built CLIs."
+        },
+        {
+          "url": "https://github.com/HKUDS/CLI-Anything",
+          "quote": "One Command Line : Make any software agent-ready for Pi, OpenClaw, nanobot, Cursor, Claude Code, etc."
+        },
+        {
+          "url": "https://github.com/HKUDS/CLI-Anything",
+          "quote": "olders and files Name Name Last commit message Last commit date .claude-plugin .claude-plugin .cursor-plugin .cursor-plugin .github .github .pi-extension/ cli-anything .pi-extension/ cli-anything 3MF/ agent-harness 3MF/ agent-harness QGIS/ agent-harness QGIS/ agent-harness adguardhome/ agent-harness"
+        },
+        {
+          "url": "https://github.com/HKUDS/CLI-Anything",
+          "quote": "harness codex-skill codex-skill comfyui/ agent-harness comfyui/ agent-harness cursor-plugin cursor-plugin dify-workflow/ agent-harness dify-workflow/ agent-harness docs docs drawio/ agent-harness drawio/ agent-harness eez-studio/ agent-harness eez-studio/ agent-harness eth2-quickstart/ agent-harness"
+        },
+        {
+          "url": "https://github.com/HKUDS/CLI-Anything",
+          "quote": "eth2-quickstart/ agent-harness exa/ agent-harness exa/ agent-harness firefly-iii/ agent-harness firefly-iii/ agent-harness freecad/ agent-harness freecad/ agent-harness gimp/ agent-harness gimp/ agent-harness godot/ agent-harness godot/ agent-harness hermes-skill hermes-skill inkscape/ agent-harnes"
+        },
+        {
+          "url": "https://github.com/HKUDS/CLI-Anything",
+          "quote": "harness libreoffice/ agent-harness libreoffice/ agent-harness live2d/ agent-harness live2d/ agent-harness lldb/ agent-harness lldb/ agent-harness macrocli macrocli mailchimp/ agent-harness mailchimp/ agent-harness mermaid/ agent-harness mermaid/ agent-harness minimax/ agent-harness minimax/ agent-ha"
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Superpowers packages a software development methodology for coding agents",
+      "summary": "Superpowers is described as an agentic skills framework and software development methodology that works, built on composable skills and initial instructions. The agent works from a spec through an implementation plan and a subagent-driven development process, and the skills are said to trigger automatically; it is available through the official Claude plugin marketplace and the official Codex plugin marketplace.",
+      "tags": [
+        "Agent",
+        "工具",
+        "代码"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_cfd2851c47",
+          "url": "https://github.com/obra/superpowers"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/obra/superpowers",
+          "quote": "Superpowers is a complete software development methodology for your coding agents, built on top of a set of composable skills and some initial instructions that make sure your agent uses them."
+        },
+        {
+          "url": "https://github.com/obra/superpowers",
+          "quote": "It starts from the moment you fire up your coding agent."
+        },
+        {
+          "url": "https://github.com/obra/superpowers",
+          "quote": "Once it's teased a spec out of the conversation, it shows it to you in chunks short enough to actually read and digest."
+        },
+        {
+          "url": "https://github.com/obra/superpowers",
+          "quote": "After you've signed off on the design, your agent puts together an implementation plan that's clear enough for an enthusiastic junior engineer with poor taste, no judgement, no project context, and an aversion to testing to follow."
+        },
+        {
+          "url": "https://github.com/obra/superpowers",
+          "quote": "Next up, once you say \"go\", it launches a subagent-driven-development process, having agents work through each engineering task, inspecting and reviewing their work, and continuing forward."
+        },
+        {
+          "url": "https://github.com/obra/superpowers",
+          "quote": "It's not uncommon for your agent to work autonomously for a couple hours at a time without deviating from the plan you put together."
+        },
+        {
+          "url": "https://github.com/obra/superpowers",
+          "quote": "And because the skills trigger automatically, you don't need to do anything special."
+        },
+        {
+          "url": "https://github.com/obra/superpowers",
+          "quote": "Superpowers is available via the official Claude plugin marketplace"
+        },
+        {
+          "url": "https://github.com/obra/superpowers",
+          "quote": "Superpowers is available via the official Codex plugin marketplace ."
+        },
+        {
+          "url": "https://github.com/obra/superpowers",
+          "quote": "gemini extensions install https://github.com/obra/superpowers"
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Firecrawl offers local and hosted knowledge infrastructure for agents",
+      "summary": "Firecrawl provides knowledge infrastructure for agents, with a local binary that turns websites into clean markdown, plugs into an AI agent as an MCP server, and serves the Firecrawl API on localhost. The hosted service adds search and the 550+ data providers in Firecrawl Alexandria, while local routes need no API key and JavaScript-rendered pages, PDFs, and Office documents are handled on the machine.",
+      "tags": [
+        "工具",
+        "Agent",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_3517f80a1e",
+          "url": "https://github.com/firecrawl/firecrawl"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/firecrawl/firecrawl",
+          "quote": "Knowledge infrastructure to make your agents smarter."
+        },
+        {
+          "url": "https://github.com/firecrawl/firecrawl",
+          "quote": "Run Firecrawl on your own machine as one binary that turns websites into clean markdown, plugs into your AI agent as an MCP server and serves the Firecrawl API on localhost."
+        },
+        {
+          "url": "https://github.com/firecrawl/firecrawl",
+          "quote": "Use the hosted service at firecrawl.dev for everything Local does at scale with nothing to run, plus search and the 550+ data providers in Firecrawl Alexandria for far more knowledge than scraping alone."
+        },
+        {
+          "url": "https://github.com/firecrawl/firecrawl",
+          "quote": "Firecrawl Local scrapes, crawls and maps from your own machine without a database, queue or container, and it reaches Firecrawl Cloud when your AI agents need search or Alexandria."
+        },
+        {
+          "url": "https://github.com/firecrawl/firecrawl",
+          "quote": "It installs from crates.io."
+        },
+        {
+          "url": "https://github.com/firecrawl/firecrawl",
+          "quote": "cargo install firecrawl-local"
+        },
+        {
+          "url": "https://github.com/firecrawl/firecrawl",
+          "quote": "Pages that need JavaScript render in the Chrome or Chromium already on your machine, and PDFs and Office documents are parsed locally too."
+        },
+        {
+          "url": "https://github.com/firecrawl/firecrawl",
+          "quote": "init finds Claude Code, Claude Desktop, Cursor, Windsurf, Gemini CLI and Codex on your machine and adds Firecrawl Local to each one as an MCP server."
+        },
+        {
+          "url": "https://github.com/firecrawl/firecrawl",
+          "quote": "serve answers the Firecrawl v2 API on port 3002, so code written for Firecrawl runs against it unchanged and local routes need no API key."
+        },
+        {
+          "url": "https://github.com/firecrawl/firecrawl",
+          "quote": "Firecrawl Cloud runs everything Firecrawl Local does at scale, with no browser or machine of your own to look after."
+        },
+        {
+          "url": "https://github.com/firecrawl/firecrawl",
+          "quote": "It also gives your AI agents access to far more knowledge than scraping alone, with search, Alexandria, Interact and Agent all through a single API."
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Olala-v1.0-mini-7A1B is a small open reasoning model from OVHai LLM",
+      "summary": "Olala-v1.0-mini-7A1B is described as a small reasoning model for chat, instruction following, and tool use, built on a hybrid Mamba-3 / attention mixture-of-experts architecture with 6.8B total parameters, about 1B active per token, and 36 layers. It was trained on 12.8T tokens of public datasets and synthetic data on three European supercomputers and released with open weights under Apache-2.0, though Ollama, LM Studio, llama.cpp, vLLM, and mlx-lm cannot load it yet.",
+      "tags": [
+        "模型",
+        "开源",
+        "推理"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_0eb157e01b",
+          "url": "https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B",
+          "quote": "Olala-v1.0-mini-7A1B is a small reasoning model for chat, instruction following and tool use , built on our hybrid"
+        },
+        {
+          "url": "https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B",
+          "quote": "Mamba-3 / attention mixture-of-experts architecture."
+        },
+        {
+          "url": "https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B",
+          "quote": "Made in Europe, open by design: designed in France by OVHai LLM (OVHcloud group), trained on three"
+        },
+        {
+          "url": "https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B",
+          "quote": "European supercomputers (JUPITER, Jean Zay and MeluXina) on 12.8T tokens of public datasets and our own synthetic data, and released with open weights under"
+        },
+        {
+          "url": "https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B",
+          "quote": "Efficient: about 1B active parameters per token, and only 7 of its 36 layers keep a KV cache."
+        },
+        {
+          "url": "https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B",
+          "quote": "Reasoning and agentic: it thinks before it answers, with four reasoning-effort levels, and was trained with"
+        },
+        {
+          "url": "https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B",
+          "quote": "6.8B total, about 1B active per token"
+        },
+        {
+          "url": "https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B",
+          "quote": "36 layers: 29 Mamba-3 and 7 attention layers (one in five), each followed by a mixture-of-experts block with 256 routed experts (6 active) and 1 shared expert"
+        },
+        {
+          "url": "https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B",
+          "quote": "32K tokens (input + output) A 128K-context version is coming soon."
+        },
+        {
+          "url": "https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B",
+          "quote": "12.8T tokens: public datasets and our own synthetic data"
+        },
+        {
+          "url": "https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B",
+          "quote": "Ollama, LM Studio and the official llama.cpp, vLLM and mlx-lm cannot load Olala 1.0 mini yet: each option below"
+        },
+        {
+          "url": "https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B",
+          "quote": "llama.cpp (GGUF), 6 to 14 GB"
+        },
+        {
+          "url": "https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B",
+          "quote": "vLLM (Linux, NVIDIA GPU with 24 GB or more, Python 3.12; tested on L4 and L40S):"
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "LingSante-3.1-flash targets medical reasoning with a 1-million-token context",
+      "summary": "LingSante-3.1-flash is an open-weight Mixture-of-Experts model built on Ling-3.1-flash with 560 billion total parameters, 25 billion activated per token, and a 1-million-token context window. It is trained to unify medical reasoning and workflow execution through native medical-mixed pretraining, mid-training, supervised fine-tuning, task-specific reinforcement learning, and multi-teacher on-policy distillation, and is intended for research and evaluation rather than as a medical device.",
+      "tags": [
+        "模型",
+        "开源",
+        "安全"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_695b11fd51",
+          "url": "https://huggingface.co/inclusionAI/LingSante-3.1-flash"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/inclusionAI/LingSante-3.1-flash",
+          "quote": "LingSante-3.1-flash is an open-weight Mixture-of-Experts model that combines complex medical reasoning, professional healthcare communication, evidence-based deep research, and long-horizon medical tasks."
+        },
+        {
+          "url": "https://huggingface.co/inclusionAI/LingSante-3.1-flash",
+          "quote": "Built on Ling-3.1-flash , it has 560 billion total parameters , activates 25 billion parameters per token , and supports a 1-million-token context window ."
+        },
+        {
+          "url": "https://huggingface.co/inclusionAI/LingSante-3.1-flash",
+          "quote": "To address these demands, LingSante-3.1-flash is trained to unify medical reasoning and workflow execution through native medical-mixed pretraining, mid-training, supervised fine-tuning, task-specific reinforcement learning, and multi-teacher on-policy distillation."
+        },
+        {
+          "url": "https://huggingface.co/inclusionAI/LingSante-3.1-flash",
+          "quote": "The model can verify evidence across scenarios, deliver professional judgments, and independently complete multi-stage workflows."
+        },
+        {
+          "url": "https://huggingface.co/inclusionAI/LingSante-3.1-flash",
+          "quote": "LingSante-3.1-flash is intended for research and evaluation."
+        },
+        {
+          "url": "https://huggingface.co/inclusionAI/LingSante-3.1-flash",
+          "quote": "It is not a medical device and must not be used as an independent basis for diagnosis, prescriptions, or treatment."
+        },
+        {
+          "url": "https://huggingface.co/inclusionAI/LingSante-3.1-flash",
+          "quote": "LingSante-3.1-flash demonstrates strong performance on benchmarks for medical professional behavior, ranking second overall behind only GPT-6 Astra."
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "KORMo-Web-11B is a bilingual GUI agent model from KAIST MLP Lab",
+      "summary": "KORMo-Web-11B is a general-purpose bilingual model built on the KORMo foundation model family by KAIST MLP Lab, designed to preserve its original LLM and VLM capabilities while acting as a GUI agent in Korean and English browser tasks. It uses screenshots without requiring full DOM or accessibility trees, generates an inspectable reasoning step before acting, and its weights and supporting resources are openly released under Apache-2.0.",
+      "tags": [
+        "模型",
+        "多模态",
+        "Agent"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_b1b11fb204",
+          "url": "https://huggingface.co/KORMo-VL/KORMo-Web-11B"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/KORMo-VL/KORMo-Web-11B",
+          "quote": "KORMo-Web-11B is a general-purpose bilingual AI model built on the KORMo foundation model family , developed by KAIST MLP Lab starting from a language model trained entirely from scratch."
+        },
+        {
+          "url": "https://huggingface.co/KORMo-VL/KORMo-Web-11B",
+          "quote": "Unlike our Qwen-based KORMo-Web-4B and 9B models, which focus on maximizing web task performance, KORMo-Web-11B is designed to preserve its original LLM and VLM capabilities while learning to act as a GUI agent."
+        },
+        {
+          "url": "https://huggingface.co/KORMo-VL/KORMo-Web-11B",
+          "quote": "It can understand Korean and English text, interpret images, and complete real browser tasks by visually navigating webpages— all within a single model."
+        },
+        {
+          "url": "https://huggingface.co/KORMo-VL/KORMo-Web-11B",
+          "quote": "10M+ Atomic-Level Web Pretraining Samples: Large-scale Korean and English web understanding training, covering individual UI elements, their locations, layouts, functions, and states."
+        },
+        {
+          "url": "https://huggingface.co/KORMo-VL/KORMo-Web-11B",
+          "quote": "100K+ Web Interaction Trajectories: Bilingual browser demonstrations for learning real-world, multi-step web tasks."
+        },
+        {
+          "url": "https://huggingface.co/KORMo-VL/KORMo-Web-11B",
+          "quote": "Open and Commercially Usable: Model weights and supporting resources are openly released under Apache-2.0 , allowing commercial use, modification, and redistribution subject to the license terms."
+        },
+        {
+          "url": "https://huggingface.co/KORMo-VL/KORMo-Web-11B",
+          "quote": "We evaluated KORMo-Web-11B on 612 live-website tasks (300 English, 312 Korean) from Online-Mind2Web, using the same LLM judge across all evaluated models."
+        },
+        {
+          "url": "https://huggingface.co/KORMo-VL/KORMo-Web-11B",
+          "quote": "KORMo-Web-11B achieves 33.7% Korean task success , exceeding the strongest non-KORMo open-weight baseline listed above by 13.5 percentage points ."
+        },
+        {
+          "url": "https://huggingface.co/KORMo-VL/KORMo-Web-11B",
+          "quote": "Visual-First Web Interaction: Operates primarily through screenshots without requiring full DOM or accessibility trees."
+        },
+        {
+          "url": "https://huggingface.co/KORMo-VL/KORMo-Web-11B",
+          "quote": "Think, Then Act: Generates an inspectable reasoning step before executing browser actions."
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "tiny-voca is a small English text-to-speech model with two voices",
+      "summary": "tiny-voca is described as a small English text-to-speech model with two voices, F2 (female) among them, with the complete model including the waveform generator at 4.5M parameters. It was trained from scratch on about 18 hours of synthetic speech, runs about 70x faster than real time on four CPU threads, and releases its weights and code under Apache-2.0, though the voice can sound slightly synthetic and mispronounce foreign names.",
+      "tags": [
+        "模型",
+        "语音",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_82214f9798",
+          "url": "https://huggingface.co/n4ze3m/tiny-voca"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/n4ze3m/tiny-voca",
+          "quote": "tiny-voca is a small English text-to-speech model with two voices, F2 (female)"
+        },
+        {
+          "url": "https://huggingface.co/n4ze3m/tiny-voca",
+          "quote": "The complete model, including the waveform generator, has 4.5M"
+        },
+        {
+          "url": "https://huggingface.co/n4ze3m/tiny-voca",
+          "quote": "parameters and was trained from scratch on about 18 hours of synthetic speech."
+        },
+        {
+          "url": "https://huggingface.co/n4ze3m/tiny-voca",
+          "quote": "It runs about 70x faster than real time on four CPU threads."
+        },
+        {
+          "url": "https://huggingface.co/n4ze3m/tiny-voca",
+          "quote": "This is tiny voca, a small text to speech model that runs on a phone or in a browser."
+        },
+        {
+          "url": "https://huggingface.co/n4ze3m/tiny-voca",
+          "quote": "The weights and code are released under Apache-2.0."
+        },
+        {
+          "url": "https://huggingface.co/n4ze3m/tiny-voca",
+          "quote": "The voice is clear but can sound slightly synthetic."
+        },
+        {
+          "url": "https://huggingface.co/n4ze3m/tiny-voca",
+          "quote": "Foreign names and unusual spellings are often mispronounced."
+        },
+        {
+          "url": "https://huggingface.co/n4ze3m/tiny-voca",
+          "quote": "The training data is itself synthetic, so the model cannot be more natural"
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "A paper proposes an evaluation framework for agentic robotics",
+      "summary": "The paper argues that an Embodied System 2, formed by a foundation model together with an embodied harness, is the decision-making core of agentic robotics, where an agent observes, interprets intent, reasons, invokes skills and tools, verifies outcomes, and adapts. It proposes an evaluation framework measuring both model capabilities and closed-loop system performance, and notes that the community has yet to converge on a shared definition, evaluation framework, or research roadmap.",
+      "tags": [
+        "论文",
+        "Agent",
+        "行业"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_51a89fc6c0",
+          "url": "https://huggingface.co/papers/2611.18359"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.18359",
+          "quote": "Qi , Shizun Wang , Xinchao Wang , Ming Yang , Zhiqin Yang , Zuhao Yang , Tao Yu Abstract Agentic robotics, centered on an Embodied System 2 formed by a foundation model and embodied harness, requires a shared evaluation framework and research roadmap to achieve reliable physical autonomy."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.18359",
+          "quote": "Instead of training a dedicated policy for each family of tasks, an agentic robotic system applies a foundation model to open-world embodied tasks ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.18359",
+          "quote": "It operates in a closed loop: observing the environment, interpreting user intent, reasoning about the task, invoking skills and tools, verifying outcomes, and adapting its strategy."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.18359",
+          "quote": "Despite these advances, the community has yet to converge on a shared definition, a reliable evaluation framework, or a research roadmap."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.18359",
+          "quote": "We argue that Embodied System 2 , realized by a foundation model together with an embodied harness , forms the decision-making core of agentic robotics ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.18359",
+          "quote": "Its central challenge is to translate general-purpose reasoning into effective and verifiable actions under physical constraints such as limited reaction time, mechanical limits, unpredictable environment changes, and irreversible consequences."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.18359",
+          "quote": "Motivated by this perspective, we propose an evaluation framework that measures both model capabilities and closed-loop system performance."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "AllocFlow generates joint portfolio allocations from raw market data",
+      "summary": "AllocFlow is an end-to-end flow-matching framework that generates joint portfolio allocations from raw multi-asset market histories using a cross-asset flow Transformer, followed by strategy-supervised imitation and group-relative reinforcement learning. On hourly cryptocurrency perpetual futures, RL refinement raises the annualized net return of the imitation policy from 27.79% to 51.38% and its Calmar ratio from 0.955 to 4.043, and AllocFlow reaches a Calmar ratio of 4.90 on six further months.",
+      "tags": [
+        "论文",
+        "训练",
+        "推理"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_fdbd81232d",
+          "url": "https://huggingface.co/papers/2611.19937"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.19937",
+          "quote": "Xin Li , Tianyi Wei , Weisi Lin Abstract An end-to-end flow-matching framework generates joint portfolio allocations from raw multi-asset market histories via a cross-asset flow Transformer and a two-stage imitation and group-relative reinforcement learning procedure, improving risk-adjusted returns"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.19937",
+          "quote": "We present AllocFlow, an end-to-end flow-matching framework that directly generates joint portfolio allocations from raw multi-asset market histories."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.19937",
+          "quote": "To capture dependencies among portfolio positions, AllocFlow employs a cross-asset flow Transformer conditioned on temporal market representations to generate continuous, signed position weights across all instruments jointly."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.19937",
+          "quote": "To address the sample inefficiency and instability of learning continuous allocation policies from scratch, we establish a two-stage training scheme : strategy-supervised imitation shapes a structured distribution of candidate portfolios, followed by group-relative reinforcement learning (RL) that r"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.19937",
+          "quote": "efines joint decisions using portfolio-level financial rewards and a frozen policy reference ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.19937",
+          "quote": "On hourly cryptocurrency perpetual futures, RL refinement raises the annualized net return of the imitation policy from 27.79% to 51.38% and its Calmar ratio from 0.955 to 4.043, surpassing the teacher strategy on every metric, and AllocFlow reaches a Calmar ratio of 4.90 on six further months of un"
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "OpenSRE is an open-source CLI agent for CI/CD reliability",
+      "summary": "OpenSRE is described as an open-source agent for CI/CD reliability that runs on your own infrastructure with your own models, reading a failed run, tracing the cause, and pushing a fix for review. It separates CI-caused failures from code-caused ones, supports repository CI overviews, fixing failing checks on a PR, and integrations such as EKS, EC2, CloudWatch, Kubernetes, Grafana, Datadog, Slack, and GitHub, and is currently in public alpha with core workflows usable but not yet fully stable.",
+      "tags": [
+        "Agent",
+        "工具",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_f6df913aa0",
+          "url": "https://github.com/Tracer-Cloud/opensre"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/Tracer-Cloud/opensre",
+          "quote": "OpenSRE: The open-source agent for CI/CD reliability"
+        },
+        {
+          "url": "https://github.com/Tracer-Cloud/opensre",
+          "quote": "OpenSRE is a CLI agent that reads the failed run, traces the cause and pushes a fix for you to review."
+        },
+        {
+          "url": "https://github.com/Tracer-Cloud/opensre",
+          "quote": "Self-hosted, with your own models."
+        },
+        {
+          "url": "https://github.com/Tracer-Cloud/opensre",
+          "quote": "🚧 Public Alpha: Core workflows are usable for early exploration, though not yet fully stable."
+        },
+        {
+          "url": "https://github.com/Tracer-Cloud/opensre",
+          "quote": "OpenSRE is an open-source CI/CD reliability agent that does that investigation for you, built to run on your own infrastructure with your own models:"
+        },
+        {
+          "url": "https://github.com/Tracer-Cloud/opensre",
+          "quote": "Recover from red builds faster: it investigates the moment a run fails, reading logs, testing hypotheses and pushing a fix for you to review"
+        },
+        {
+          "url": "https://github.com/Tracer-Cloud/opensre",
+          "quote": "Fix the cause, not just the rerun: it separates CI-caused failures from code-caused ones, so you fix the right thing"
+        },
+        {
+          "url": "https://github.com/Tracer-Cloud/opensre",
+          "quote": "Start with the CI/CD overview : analyze a repository's CI reliability, fix failing checks on a PR, or set up an agent that keeps CI green."
+        },
+        {
+          "url": "https://github.com/Tracer-Cloud/opensre",
+          "quote": "Connect the integrations you run, such as EKS, EC2, CloudWatch, Kubernetes, Grafana (Loki, Mimir/PromQL, Tempo), Alertmanager, Datadog, Slack, and GitHub."
+        },
+        {
+          "url": "https://github.com/Tracer-Cloud/opensre",
+          "quote": "Headless CLI — run one agent turn non-interactively from a terminal, script, or CI job:"
+        },
+        {
+          "url": "https://github.com/Tracer-Cloud/opensre",
+          "quote": "From Python — drive the agent in-process from your own code (source checkout required):"
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "AutoClip turns long videos into short clips with an open-source desktop tool",
+      "summary": "AutoClip is an open-source AI video clipping and content repurposing desktop tool that takes a link and automatically cuts long podcasts, interviews, and courses into short videos, generating subtitles, covers, and publishing copy for Douyin, Xiaohongshu, TikTok, Reels, YouTube Shorts, Bilibili, and YouTube. Editing, framing, and rendering run locally, the analysis model is user-selected, and subtitles can use author subtitles, local Whisper / SenseVoice, or configured cloud transcription, while the software is free and MIT open source.",
+      "tags": [
+        "工具",
+        "视频",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_d941cdc9a6",
+          "url": "https://github.com/zhouxiaoka/autoclip"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/zhouxiaoka/autoclip",
+          "quote": "autoclip Public Notifications You must be signed in to change notification settings Fork 2.2k ( 2.2k ) Star 13.7k ( 13.7k ) You must be signed in to star a repository About AutoClip｜一个链接，一键出片。开源 AI 视频剪辑桌面工具，将播客、访谈、课程等长视频自动剪成短视频，生成字幕、封面和发布文案，适配抖音、小红书、TikTok、Reels 与 YouTube Shorts。Open-source AI video"
+        },
+        {
+          "url": "https://github.com/zhouxiaoka/autoclip",
+          "quote": "开源，在你的电脑上剪辑与渲染。贴一个链接，选好平台，生成 视频、封面和发布文案 ，"
+        },
+        {
+          "url": "https://github.com/zhouxiaoka/autoclip",
+          "quote": "适配抖音、小红书、TikTok、Reels、YouTube Shorts、B 站与 YouTube。"
+        },
+        {
+          "url": "https://github.com/zhouxiaoka/autoclip",
+          "quote": "选好平台，按平台的画幅与时长要求自动生成。每个平台按评分自动生成至多 10 条合格片段，其余列为备选，点「生成这条」再制作。每条都带封面、标题、简介、话题和 ZIP 发布包。"
+        },
+        {
+          "url": "https://github.com/zhouxiaoka/autoclip",
+          "quote": "抖音 / 小红书默认访谈式，TikTok / Reels / Shorts 默认满屏播客式；竖版也可自行选择两种版式。字幕和文案语言仍按平台，B 站 / YouTube 为横版。画面跟随说话人，无人镜头保留完整画面。自动品牌片尾默认开启，可在设置中关闭；复制发布文案不附 AutoClip 署名。"
+        },
+        {
+          "url": "https://github.com/zhouxiaoka/autoclip",
+          "quote": "剪辑、取景与渲染在本机完成。分析模型自选，字幕可用作者字幕、本地 Whisper / SenseVoice 或已配置的云端转写。CLI / MCP 与桌面共用同一条一键出片链路。"
+        },
+        {
+          "url": "https://github.com/zhouxiaoka/autoclip",
+          "quote": "软件免费、MIT 开源。云端分析、转写与 AI 生图按所选服务商计费，需自己的凭据；自动设计封面默认不调用付费生图。Ollama / LM Studio 本地分析不需要云端 Key，但需相应硬件。直接投稿还需自己的 B 站或 Upload-Post 账号。"
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "diagram-design draws editorial diagrams as HTML + SVG agent skills",
+      "summary": "diagram-design is an agent skill for editorial diagram design that works with Claude Code, Codex, GitHub Copilot, Cursor, Factory Droid, Qoder, and Pi. The agent picks the diagram type, states its plan, and writes one self-contained HTML + SVG file you can open by double-clicking, and it works with any host that reads Agent Skills.",
+      "tags": [
+        "工具",
+        "代码",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_a85ad9dc3c",
+          "url": "https://github.com/cathrynlavery/diagram-design"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/cathrynlavery/diagram-design",
+          "quote": "diagram-design Public Sponsor Notifications You must be signed in to change notification settings Fork 4.7k ( 4.7k ) Star 70.4k ( 70.4k ) You must be signed in to star a repository About Editorial diagram design for Claude Code, Codex, GitHub Copilot, Cursor, Factory Droid, Qoder, and Pi."
+        },
+        {
+          "url": "https://github.com/cathrynlavery/diagram-design",
+          "quote": "45 diagram types."
+        },
+        {
+          "url": "https://github.com/cathrynlavery/diagram-design",
+          "quote": "Self-contained HTML + SVG."
+        },
+        {
+          "url": "https://github.com/cathrynlavery/diagram-design",
+          "quote": "An agent skill that draws diagrams as one self-contained HTML + SVG file, in your brand."
+        },
+        {
+          "url": "https://github.com/cathrynlavery/diagram-design",
+          "quote": "52 diagram types."
+        },
+        {
+          "url": "https://github.com/cathrynlavery/diagram-design",
+          "quote": "No Mermaid slop."
+        },
+        {
+          "url": "https://github.com/cathrynlavery/diagram-design",
+          "quote": "The agent picks the type, states its plan, and writes one .html file you can open by double-clicking."
+        },
+        {
+          "url": "https://github.com/cathrynlavery/diagram-design",
+          "quote": "Works with any host that reads Agent Skills, including Cursor, Claude Code, Codex, Qoder, GitHub Copilot, Gemini CLI, Cline, Windsurf and Amp:"
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "last30days-skill researches a topic across social and web sources",
+      "summary": "last30days-skill is an AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymarket, and the web, then synthesizes a grounded summary. Its search engine is scored by upvotes, likes, and real money rather than editors, Reddit, HN, Polymarket, and GitHub work immediately, and the setup wizard unlocks X, YouTube, TikTok, arXiv, and Techmeme in 30 seconds, with users able to bring their own keys and browser sessions.",
+      "tags": [
+        "工具",
+        "Agent",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_768cda9a02",
+          "url": "https://github.com/mvanhorn/last30days-skill"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/mvanhorn/last30days-skill",
+          "quote": "last30days-skill Public Notifications You must be signed in to change notification settings Fork 6.4k ( 6.4k ) Star 72.9k ( 72.9k ) You must be signed in to star a repository About AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymarket, and the web - then synthesizes a gr"
+        },
+        {
+          "url": "https://github.com/mvanhorn/last30days-skill",
+          "quote": "An AI agent-led search engine scored by upvotes, likes, and real money - not editors."
+        },
+        {
+          "url": "https://github.com/mvanhorn/last30days-skill",
+          "quote": "Reddit, HN, Polymarket, and GitHub work immediately, and so do patent filings and careers pages when your topic is a company."
+        },
+        {
+          "url": "https://github.com/mvanhorn/last30days-skill",
+          "quote": "Run it once and the setup wizard unlocks X, YouTube, TikTok, arXiv, Techmeme, and more in 30 seconds."
+        },
+        {
+          "url": "https://github.com/mvanhorn/last30days-skill",
+          "quote": "/last30days searches all of it in parallel, scores it by what real people actually engage with, and an AI agent judge synthesizes it into one brief."
+        },
+        {
+          "url": "https://github.com/mvanhorn/last30days-skill",
+          "quote": "But you can bring your own keys and browser sessions, and suddenly an AI agent can search all of them at once, score them against each other, and tell you what actually matters."
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "app-store-compliance flags App Store and Google Play rejection risks",
+      "summary": "app-store-compliance provides an open playbook and pre-submission guard for iOS and Android apps, with 124 documented rejection patterns and fixes, privacy manifest and Data safety checks, 112 tracked deadlines including EU AI Act, DSA, COPPA, and age laws, and a skill for AI coding agents. A small project scans in about a second and a large one can take up to a minute, and the project is explicit that it does not guarantee approval.",
+      "tags": [
+        "工具",
+        "代码",
+        "安全"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_420e52b47a",
+          "url": "https://github.com/mjmirza/app-store-compliance"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/mjmirza/app-store-compliance",
+          "quote": "app-store-compliance Public Notifications You must be signed in to change notification settings Fork 248 ( 248 ) Star 4.1k ( 4.1k ) You must be signed in to star a repository About Avoid common App Store and Google Play rejections."
+        },
+        {
+          "url": "https://github.com/mjmirza/app-store-compliance",
+          "quote": "Open playbook and pre-submission guard with 124 documented rejection patterns and fixes, privacy manifest and Data safety checks, 112 tracked deadlines (EU AI Act, DSA, COPPA, age laws), and a skill for AI coding agents."
+        },
+        {
+          "url": "https://github.com/mjmirza/app-store-compliance",
+          "quote": "A reference and a pre-submission guard for iOS and Android apps that is plain about what a scan can prove and what still needs a person."
+        },
+        {
+          "url": "https://github.com/mjmirza/app-store-compliance",
+          "quote": "It does not guarantee approval."
+        },
+        {
+          "url": "https://github.com/mjmirza/app-store-compliance",
+          "quote": "git clone https://github.com/mjmirza/app-store-compliance ~/repositories/app-store-compliance"
+        },
+        {
+          "url": "https://github.com/mjmirza/app-store-compliance",
+          "quote": "bash ~/repositories/app-store-compliance/agent-os/hooks/app-store-compliance-guard.sh \"/path/to/your/app\""
+        },
+        {
+          "url": "https://github.com/mjmirza/app-store-compliance",
+          "quote": "A small project scans in about a second, a large one can take up to a minute, and the guard prints the time it took."
+        },
+        {
+          "url": "https://github.com/mjmirza/app-store-compliance",
+          "quote": "Not an approval, the reviewer still checks what a scan cannot see"
+        }
+      ]
+    }
+  ],
+  "research": [
+    {
+      "via": "webfetch",
+      "url": "https://openai.com/index/perplexity-and-intelligence"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/obra/superpowers"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/HKUDS/CLI-Anything"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/jingyaogong/minimind"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/zhouxiaoka/autoclip"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/firecrawl/firecrawl"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/Tracer-Cloud/opensre"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/cathrynlavery/diagram-design"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/mvanhorn/last30days-skill"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/openvinotoolkit/openvino"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.21072"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://kexue.fm/archives/12014"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://www.gpupartner.com/blog/beginners-guide-local-ai-inkling-qwen-unsloth"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://simonwillison.net/2026/Nov/21/muru/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/mjmirza/app-store-compliance"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.18359"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.19937"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/inclusionAI/LingSante-3.1-flash"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/n4ze3m/tiny-voca"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/KORMo-VL/KORMo-Web-11B"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/SulphurAI/Sulphur-3"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B"
+    }
+  ],
+  "lang": "en",
+  "validation": {
+    "validated_at": "2026-11-23T04:41:02+00:00",
+    "checked_links": false,
+    "dropped": [],
+    "warnings": []
+  }
+}

@@ -1,0 +1,998 @@
+{
+ "schema_version": 1,
+ "date": "2026-11-23",
+ "channel": "api",
+ "model": "nvidia:minimaxai/minimax-m3.1-flash",
+ "started_at": "2026-11-23T04:38:18+00:00",
+ "scores": {
+  "c_bd545a438b": [
+   2,
+   2,
+   2
+  ],
+  "c_d7c6ad7aa1": [
+   2,
+   2,
+   1
+  ],
+  "c_fdbd81232d": [
+   1,
+   1,
+   2
+  ],
+  "c_51a89fc6c0": [
+   1,
+   1,
+   2
+  ],
+  "c_cfd2851c47": [
+   2,
+   2,
+   2
+  ],
+  "c_740be60563": [
+   2,
+   2,
+   2
+  ],
+  "c_3b240d3ecb": [
+   2,
+   2,
+   2
+  ],
+  "c_3517f80a1e": [
+   2,
+   2,
+   2
+  ],
+  "c_d96d67a492": [
+   1,
+   2,
+   2
+  ],
+  "c_a85ad9dc3c": [
+   1,
+   2,
+   2
+  ],
+  "c_768cda9a02": [
+   1,
+   2,
+   2
+  ],
+  "c_420e52b47a": [
+   1,
+   1,
+   2
+  ],
+  "c_f6df913aa0": [
+   1,
+   2,
+   2
+  ],
+  "c_d941cdc9a6": [
+   2,
+   2,
+   2
+  ],
+  "c_695b11fd51": [
+   1,
+   1,
+   2
+  ],
+  "c_ce99ea3833": [
+   1,
+   1,
+   0
+  ],
+  "c_82214f9798": [
+   1,
+   1,
+   2
+  ],
+  "c_b1b11fb204": [
+   1,
+   1,
+   2
+  ],
+  "c_53b3b546ce": [
+   1,
+   1,
+   0
+  ],
+  "c_30fdfa7f28": [
+   1,
+   1,
+   0
+  ],
+  "c_424f74445e": [
+   1,
+   1,
+   0
+  ],
+  "c_46a9ff30f5": [
+   1,
+   1,
+   0
+  ],
+  "c_398ce84e27": [
+   1,
+   1,
+   0
+  ],
+  "c_78565272a9": [
+   1,
+   1,
+   2
+  ],
+  "c_0eb157e01b": [
+   1,
+   1,
+   2
+  ],
+  "c_8b553ca25e": [
+   1,
+   1,
+   0
+  ],
+  "c_6ecc1d71a5": [
+   1,
+   1,
+   0
+  ],
+  "c_ff2805b0dc": [
+   1,
+   2,
+   2
+  ],
+  "c_1c7efa634e": [
+   1,
+   1,
+   2
+  ],
+  "c_e22242af68": [
+   1,
+   2,
+   2
+  ],
+  "c_3924aa5a43": [
+   1,
+   1,
+   2
+  ],
+  "c_61f5e6c643": [
+   1,
+   1,
+   2
+  ],
+  "c_4c39dda34d": [
+   0,
+   1,
+   2
+  ],
+  "c_bfd1a10b08": [
+   1,
+   2,
+   2
+  ],
+  "c_1005bc8b78": [
+   1,
+   1,
+   2
+  ],
+  "c_eb5095b136": [
+   1,
+   1,
+   2
+  ],
+  "c_92c84415df": [
+   1,
+   1,
+   2
+  ]
+ },
+ "steps": [
+  {
+   "step": "no_first_hand",
+   "at": "2026-11-23T04:38:18+00:00",
+   "candidates": []
+  },
+  {
+   "step": "pick",
+   "at": "2026-11-23T04:38:28+00:00",
+   "groups": [
+    [
+     "c_bd545a438b"
+    ],
+    [
+     "c_cfd2851c47"
+    ],
+    [
+     "c_740be60563"
+    ],
+    [
+     "c_3b240d3ecb"
+    ],
+    [
+     "c_d941cdc9a6"
+    ],
+    [
+     "c_3517f80a1e"
+    ],
+    [
+     "c_f6df913aa0"
+    ],
+    [
+     "c_a85ad9dc3c"
+    ],
+    [
+     "c_768cda9a02"
+    ],
+    [
+     "c_d96d67a492"
+    ],
+    [
+     "c_d7c6ad7aa1"
+    ],
+    [
+     "c_ff2805b0dc"
+    ],
+    [
+     "c_e22242af68"
+    ],
+    [
+     "c_bfd1a10b08"
+    ],
+    [
+     "c_420e52b47a"
+    ],
+    [
+     "c_51a89fc6c0"
+    ],
+    [
+     "c_fdbd81232d"
+    ],
+    [
+     "c_695b11fd51"
+    ],
+    [
+     "c_82214f9798"
+    ],
+    [
+     "c_b1b11fb204"
+    ],
+    [
+     "c_78565272a9"
+    ],
+    [
+     "c_0eb157e01b"
+    ]
+   ]
+  },
+  {
+   "step": "read",
+   "at": "2026-11-23T04:38:29+00:00",
+   "pages": [
+    {
+     "candidate": "c_bd545a438b",
+     "url": "https://openai.com/index/perplexity-and-intelligence",
+     "state": "ok",
+     "status": 200,
+     "error": null,
+     "passages": 51
+    },
+    {
+     "candidate": "c_cfd2851c47",
+     "url": "https://github.com/obra/superpowers",
+     "state": "ok",
+     "status": 200,
+     "error": null,
+     "passages": 116
+    },
+    {
+     "candidate": "c_740be60563",
+     "url": "https://github.com/HKUDS/CLI-Anything",
+     "state": "ok",
+     "status": 200,
+     "error": null,
+     "passages": 46
+    },
+    {
+     "candidate": "c_3b240d3ecb",
+     "url": "https://github.com/jingyaogong/minimind",
+     "state": "ok",
+     "status": 200,
+     "error": null,
+     "passages": 132
+    },
+    {
+     "candidate": "c_d941cdc9a6",
+     "url": "https://github.com/zhouxiaoka/autoclip",
+     "state": "ok",
+     "status": 200,
+     "error": null,
+     "passages": 98
+    },
+    {
+     "candidate": "c_3517f80a1e",
+     "url": "https://github.com/firecrawl/firecrawl",
+     "state": "ok",
+     "status": 200,
+     "error": null,
+     "passages": 123
+    },
+    {
+     "candidate": "c_f6df913aa0",
+     "url": "https://github.com/Tracer-Cloud/opensre",
+     "state": "ok",
+     "status": 200,
+     "error": null,
+     "passages": 92
+    },
+    {
+     "candidate": "c_a85ad9dc3c",
+     "url": "https://github.com/cathrynlavery/diagram-design",
+     "state": "ok",
+     "status": 200,
+     "error": null,
+     "passages": 85
+    },
+    {
+     "candidate": "c_768cda9a02",
+     "url": "https://github.com/mvanhorn/last30days-skill",
+     "state": "ok",
+     "status": 200,
+     "error": null,
+     "passages": 110
+    },
+    {
+     "candidate": "c_d96d67a492",
+     "url": "https://github.com/openvinotoolkit/openvino",
+     "state": "ok",
+     "status": 200,
+     "error": null,
+     "passages": 99
+    },
+    {
+     "candidate": "c_d7c6ad7aa1",
+     "url": "https://huggingface.co/papers/2611.21072",
+     "state": "ok",
+     "status": 200,
+     "error": null,
+     "passages": 41
+    },
+    {
+     "candidate": "c_ff2805b0dc",
+     "url": "https://kexue.fm/archives/12014",
+     "state": "failed",
+     "status": 403,
+     "error": null,
+     "passages": 0
+    },
+    {
+     "candidate": "c_e22242af68",
+     "url": "https://www.gpupartner.com/blog/beginners-guide-local-ai-inkling-qwen-unsloth",
+     "state": "ok",
+     "status": 200,
+     "error": null,
+     "passages": 79
+    },
+    {
+     "candidate": "c_bfd1a10b08",
+     "url": "https://simonwillison.net/2026/Nov/21/muru/",
+     "state": "ok",
+     "status": 200,
+     "error": null,
+     "passages": 43
+    },
+    {
+     "candidate": "c_420e52b47a",
+     "url": "https://github.com/mjmirza/app-store-compliance",
+     "state": "ok",
+     "status": 200,
+     "error": null,
+     "passages": 123
+    },
+    {
+     "candidate": "c_51a89fc6c0",
+     "url": "https://huggingface.co/papers/2611.18359",
+     "state": "ok",
+     "status": 200,
+     "error": null,
+     "passages": 39
+    },
+    {
+     "candidate": "c_fdbd81232d",
+     "url": "https://huggingface.co/papers/2611.19937",
+     "state": "ok",
+     "status": 200,
+     "error": null,
+     "passages": 34
+    },
+    {
+     "candidate": "c_695b11fd51",
+     "url": "https://huggingface.co/inclusionAI/LingSante-3.1-flash",
+     "state": "ok",
+     "status": 200,
+     "error": null,
+     "passages": 94
+    },
+    {
+     "candidate": "c_82214f9798",
+     "url": "https://huggingface.co/n4ze3m/tiny-voca",
+     "state": "ok",
+     "status": 200,
+     "error": null,
+     "passages": 155
+    },
+    {
+     "candidate": "c_b1b11fb204",
+     "url": "https://huggingface.co/KORMo-VL/KORMo-Web-11B",
+     "state": "ok",
+     "status": 200,
+     "error": null,
+     "passages": 101
+    },
+    {
+     "candidate": "c_78565272a9",
+     "url": "https://huggingface.co/SulphurAI/Sulphur-3",
+     "state": "ok",
+     "status": 200,
+     "error": null,
+     "passages": 30
+    },
+    {
+     "candidate": "c_0eb157e01b",
+     "url": "https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B",
+     "state": "ok",
+     "status": 200,
+     "error": null,
+     "passages": 130
+    }
+   ]
+  },
+  {
+   "step": "draft",
+   "at": "2026-11-23T04:39:41+00:00",
+   "checked_links": true,
+   "errors": [],
+   "warnings": [],
+   "highlights": [
+    "OpenAI 首席科学家 Jakub Pachocki 公开内部困惑度（perplexity）数据，主张用这一指标建立跨实验室的安全与评测标准。",
+    "开源侧今天被 Agent 工具链刷屏：superpowers、CLI-Anything、Firecrawl Local、OpenSRE 都提供了可直接接入编码 Agent 的工作流。",
+    "模型方面，InternLM 的 Sage S2.1 Flash 技术报告、OVHcloud 的 Olala-v1.0-mini-7A1B 与 LingSante-3.1-flash 分别覆盖推理 Agent、多语言小模型和医疗长上下文。"
+   ],
+   "items": [
+    {
+     "title": "OpenAI 公开困惑度数据，主张用它统一模型评测与安全标准",
+     "section": "headline",
+     "candidates": [
+      "c_bd545a438b"
+     ],
+     "reasons": []
+    },
+    {
+     "title": "Sage S2.1 Flash：320B 混合专家模型面向科学与交互式任务",
+     "section": "headline",
+     "candidates": [
+      "c_d7c6ad7aa1"
+     ],
+     "reasons": []
+    },
+    {
+     "title": "CLI-Anything 把桌面软件变成 Agent 可调用的 CLI",
+     "section": "headline",
+     "candidates": [
+      "c_740be60563"
+     ],
+     "reasons": []
+    },
+    {
+     "title": "superpowers：面向编码 Agent 的软件开发方法论",
+     "section": "headline",
+     "candidates": [
+      "c_cfd2851c47"
+     ],
+     "reasons": []
+    },
+    {
+     "title": "Firecrawl Local：单二进制把网页转 Markdown 并接入 Agent",
+     "section": "headline",
+     "candidates": [
+      "c_3517f80a1e"
+     ],
+     "reasons": []
+    },
+    {
+     "title": "Olala-v1.0-mini-7A1B：OVHcloud 开源 7A1B 多语言推理模型",
+     "section": "model",
+     "candidates": [
+      "c_0eb157e01b"
+     ],
+     "reasons": []
+    },
+    {
+     "title": "LingSante-3.1-flash：面向医疗长任务的开源混合专家模型",
+     "section": "model",
+     "candidates": [
+      "c_695b11fd51"
+     ],
+     "reasons": []
+    },
+    {
+     "title": "KORMo-Web-11B：KAIST 出品的韩英双语 GUI Agent 模型",
+     "section": "model",
+     "candidates": [
+      "c_b1b11fb204"
+     ],
+     "reasons": [
+      "'KORMo-10B' does not appear in the cited material"
+     ]
+    },
+    {
+     "title": "tiny-voca：4.5M 参数的英文 TTS 模型，可跑在手机与浏览器",
+     "section": "model",
+     "candidates": [
+      "c_82214f9798"
+     ],
+     "reasons": [
+      "'M2' does not appear in the cited material"
+     ]
+    },
+    {
+     "title": "论文：Agentic Robotics 提出 Embodied System 2 与评测框架",
+     "section": "paper",
+     "candidates": [
+      "c_51a89fc6c0"
+     ],
+     "reasons": []
+    },
+    {
+     "title": "论文：AllocFlow 端到端生成加密货币永续合约组合",
+     "section": "paper",
+     "candidates": [
+      "c_fdbd81232d"
+     ],
+     "reasons": []
+    },
+    {
+     "title": "OpenSRE：可自托管的 CI/CD 可靠性 Agent",
+     "section": "tool",
+     "candidates": [
+      "c_f6df913aa0"
+     ],
+     "reasons": []
+    },
+    {
+     "title": "AutoClip：链接进、长视频自动剪成短视频",
+     "section": "tool",
+     "candidates": [
+      "c_d941cdc9a6"
+     ],
+     "reasons": []
+    },
+    {
+     "title": "diagram-design：让编码 Agent 输出单文件 HTML + SVG 图表",
+     "section": "tool",
+     "candidates": [
+      "c_a85ad9dc3c"
+     ],
+     "reasons": []
+    },
+    {
+     "title": "last30days-skill：跨 Reddit、X、YouTube 的 Agent 调研技能",
+     "section": "tool",
+     "candidates": [
+      "c_768cda9a02"
+     ],
+     "reasons": []
+    },
+    {
+     "title": "app-store-compliance：提交前扫描 iOS 与 Android 拒审风险",
+     "section": "tool",
+     "candidates": [
+      "c_420e52b47a"
+     ],
+     "reasons": []
+    },
+    {
+     "title": "本地 AI 入门：Unsloth 跑 Qwen 与 Inkling 2",
+     "section": "brief",
+     "candidates": [
+      "c_e22242af68"
+     ],
+     "reasons": [
+      "summary longer than 120 characters"
+     ]
+    },
+    {
+     "title": "Muru：mod_wsgi 作者的 AI 辅助 Rust 服务器",
+     "section": "brief",
+     "candidates": [
+      "c_bfd1a10b08"
+     ],
+     "reasons": [
+      "summary longer than 120 characters"
+     ]
+    }
+   ]
+  },
+  {
+   "step": "skipped",
+   "at": "2026-11-23T04:39:41+00:00",
+   "round": "draft",
+   "skipped": [
+    {
+     "group": 10,
+     "candidates": [
+      "c_d96d67a492"
+     ],
+     "reason": "OpenVINO 仅为仓库通用介绍，没有新的版本发布或明确进展可写。"
+    },
+    {
+     "group": 12,
+     "candidates": [
+      "c_ff2805b0dc"
+     ],
+     "reason": "原文 403 打不开，摘要只给出论文标题与粗略脉络，缺少可支撑具体结论的事实。"
+    },
+    {
+     "group": 21,
+     "candidates": [
+      "c_78565272a9"
+     ],
+     "reason": "Sulphur-3 是 MiniMax H3 的 uncensored 衍生权重，按衍生版本规则不入选。"
+    }
+   ]
+  },
+  {
+   "step": "skipped",
+   "at": "2026-11-23T04:40:11+00:00",
+   "round": "fix",
+   "skipped": [
+    {
+     "group": 10,
+     "candidates": [
+      "c_d96d67a492"
+     ],
+     "reason": "OpenVINO 仅为仓库通用介绍，没有新的版本发布或明确进展可写。"
+    },
+    {
+     "group": 12,
+     "candidates": [
+      "c_ff2805b0dc"
+     ],
+     "reason": "原文 403 打不开，摘要只给出论文标题与粗略脉络，缺少可支撑具体结论的事实。"
+    },
+    {
+     "group": 21,
+     "candidates": [
+      "c_78565272a9"
+     ],
+     "reason": "Sulphur-3 是 MiniMax H3 的 uncensored 衍生权重，按衍生版本规则不入选。"
+    }
+   ]
+  },
+  {
+   "step": "fix",
+   "at": "2026-11-23T04:40:11+00:00",
+   "checked_links": true,
+   "errors": [],
+   "warnings": [],
+   "highlights": [
+    "OpenAI 首席科学家 Jakub Pachocki 公开内部困惑度（perplexity）数据，主张用这一指标建立跨实验室的安全与评测标准。",
+    "开源侧今天被 Agent 工具链刷屏：superpowers、CLI-Anything、Firecrawl Local、OpenSRE 都提供了可直接接入编码 Agent 的工作流。",
+    "模型方面，InternLM 的 Sage S2.1 Flash 技术报告、OVHcloud 的 Olala-v1.0-mini-7A1B 与 LingSante-3.1-flash 分别覆盖推理 Agent、多语言小模型和医疗长上下文。"
+   ],
+   "items": [
+    {
+     "title": "OpenAI 公开困惑度数据，主张用它统一模型评测与安全标准",
+     "section": "headline",
+     "candidates": [
+      "c_bd545a438b"
+     ],
+     "reasons": []
+    },
+    {
+     "title": "Sage S2.1 Flash：320B 混合专家模型面向科学与交互式任务",
+     "section": "headline",
+     "candidates": [
+      "c_d7c6ad7aa1"
+     ],
+     "reasons": []
+    },
+    {
+     "title": "CLI-Anything 把桌面软件变成 Agent 可调用的 CLI",
+     "section": "headline",
+     "candidates": [
+      "c_740be60563"
+     ],
+     "reasons": []
+    },
+    {
+     "title": "superpowers：面向编码 Agent 的软件开发方法论",
+     "section": "headline",
+     "candidates": [
+      "c_cfd2851c47"
+     ],
+     "reasons": []
+    },
+    {
+     "title": "Firecrawl Local：单二进制把网页转 Markdown 并接入 Agent",
+     "section": "headline",
+     "candidates": [
+      "c_3517f80a1e"
+     ],
+     "reasons": []
+    },
+    {
+     "title": "Olala-v1.0-mini-7A1B：OVHcloud 开源 7A1B 多语言推理模型",
+     "section": "model",
+     "candidates": [
+      "c_0eb157e01b"
+     ],
+     "reasons": []
+    },
+    {
+     "title": "LingSante-3.1-flash：面向医疗长任务的开源混合专家模型",
+     "section": "model",
+     "candidates": [
+      "c_695b11fd51"
+     ],
+     "reasons": []
+    },
+    {
+     "title": "KORMo-Web-11B：KAIST 出品的韩英双语 GUI Agent 模型",
+     "section": "model",
+     "candidates": [
+      "c_b1b11fb204"
+     ],
+     "reasons": []
+    },
+    {
+     "title": "tiny-voca：4.5M 参数的英文 TTS 模型，可跑在手机与浏览器",
+     "section": "model",
+     "candidates": [
+      "c_82214f9798"
+     ],
+     "reasons": []
+    },
+    {
+     "title": "论文：Agentic Robotics 提出 Embodied System 2 与评测框架",
+     "section": "paper",
+     "candidates": [
+      "c_51a89fc6c0"
+     ],
+     "reasons": []
+    },
+    {
+     "title": "论文：AllocFlow 端到端生成加密货币永续合约组合",
+     "section": "paper",
+     "candidates": [
+      "c_fdbd81232d"
+     ],
+     "reasons": []
+    },
+    {
+     "title": "OpenSRE：可自托管的 CI/CD 可靠性 Agent",
+     "section": "tool",
+     "candidates": [
+      "c_f6df913aa0"
+     ],
+     "reasons": []
+    },
+    {
+     "title": "AutoClip：链接进、长视频自动剪成短视频",
+     "section": "tool",
+     "candidates": [
+      "c_d941cdc9a6"
+     ],
+     "reasons": []
+    },
+    {
+     "title": "diagram-design：让编码 Agent 输出单文件 HTML + SVG 图表",
+     "section": "tool",
+     "candidates": [
+      "c_a85ad9dc3c"
+     ],
+     "reasons": []
+    },
+    {
+     "title": "last30days-skill：跨 Reddit、X、YouTube 的 Agent 调研技能",
+     "section": "tool",
+     "candidates": [
+      "c_768cda9a02"
+     ],
+     "reasons": []
+    },
+    {
+     "title": "app-store-compliance：提交前扫描 iOS 与 Android 拒审风险",
+     "section": "tool",
+     "candidates": [
+      "c_420e52b47a"
+     ],
+     "reasons": []
+    },
+    {
+     "title": "本地 AI 入门：Unsloth 跑 Qwen 与 Inkling 2",
+     "section": "brief",
+     "candidates": [
+      "c_e22242af68"
+     ],
+     "reasons": [
+      "summary longer than 120 characters"
+     ]
+    },
+    {
+     "title": "Muru：mod_wsgi 作者的 AI 辅助 Rust 服务器",
+     "section": "brief",
+     "candidates": [
+      "c_bfd1a10b08"
+     ],
+     "reasons": [
+      "summary longer than 120 characters"
+     ]
+    }
+   ]
+  },
+  {
+   "step": "en",
+   "at": "2026-11-23T04:41:02+00:00",
+   "checked_links": false,
+   "errors": [],
+   "warnings": [],
+   "highlights": [
+    "OpenAI's chief scientist argues for perplexity as a shared metric for comparing models and setting safety standards, and reports pretraining losses below 0.8 alongside the emergence of transformative capabilities in cybersecurity and mathematics.",
+    "The Sage S2.1 Flash Technical Report introduces a 320-billion-parameter mixture-of-experts model for scientific reasoning and interactive environments, with Sage Sci-Perception handling molecular graphs, biological sequences, and spectra.",
+    "Several open-source agent tools are trending, including CLI-Anything, Firecrawl, OpenSRE, and the Superpowers skills framework."
+   ],
+   "items": [
+    {
+     "title": "OpenAI's chief scientist proposes perplexity as a shared AI metric",
+     "section": "headline",
+     "candidates": [
+      "c_bd545a438b"
+     ],
+     "reasons": []
+    },
+    {
+     "title": "Sage S2.1 Flash Technical Report details a 320-billion-parameter MoE model",
+     "section": "headline",
+     "candidates": [
+      "c_d7c6ad7aa1"
+     ],
+     "reasons": []
+    },
+    {
+     "title": "CLI-Anything makes software agent-native through a CLI hub",
+     "section": "headline",
+     "candidates": [
+      "c_740be60563"
+     ],
+     "reasons": []
+    },
+    {
+     "title": "Superpowers packages a software development methodology for coding agents",
+     "section": "headline",
+     "candidates": [
+      "c_cfd2851c47"
+     ],
+     "reasons": []
+    },
+    {
+     "title": "Firecrawl offers local and hosted knowledge infrastructure for agents",
+     "section": "headline",
+     "candidates": [
+      "c_3517f80a1e"
+     ],
+     "reasons": []
+    },
+    {
+     "title": "Olala-v1.0-mini-7A1B is a small open reasoning model from OVHai LLM",
+     "section": "model",
+     "candidates": [
+      "c_0eb157e01b"
+     ],
+     "reasons": []
+    },
+    {
+     "title": "LingSante-3.1-flash targets medical reasoning with a 1-million-token context",
+     "section": "model",
+     "candidates": [
+      "c_695b11fd51"
+     ],
+     "reasons": []
+    },
+    {
+     "title": "KORMo-Web-11B is a bilingual GUI agent model from KAIST MLP Lab",
+     "section": "model",
+     "candidates": [
+      "c_b1b11fb204"
+     ],
+     "reasons": []
+    },
+    {
+     "title": "tiny-voca is a small English text-to-speech model with two voices",
+     "section": "model",
+     "candidates": [
+      "c_82214f9798"
+     ],
+     "reasons": []
+    },
+    {
+     "title": "A paper proposes an evaluation framework for agentic robotics",
+     "section": "paper",
+     "candidates": [
+      "c_51a89fc6c0"
+     ],
+     "reasons": []
+    },
+    {
+     "title": "AllocFlow generates joint portfolio allocations from raw market data",
+     "section": "paper",
+     "candidates": [
+      "c_fdbd81232d"
+     ],
+     "reasons": []
+    },
+    {
+     "title": "OpenSRE is an open-source CLI agent for CI/CD reliability",
+     "section": "tool",
+     "candidates": [
+      "c_f6df913aa0"
+     ],
+     "reasons": []
+    },
+    {
+     "title": "AutoClip turns long videos into short clips with an open-source desktop tool",
+     "section": "tool",
+     "candidates": [
+      "c_d941cdc9a6"
+     ],
+     "reasons": []
+    },
+    {
+     "title": "diagram-design draws editorial diagrams as HTML + SVG agent skills",
+     "section": "tool",
+     "candidates": [
+      "c_a85ad9dc3c"
+     ],
+     "reasons": []
+    },
+    {
+     "title": "last30days-skill researches a topic across social and web sources",
+     "section": "tool",
+     "candidates": [
+      "c_768cda9a02"
+     ],
+     "reasons": []
+    },
+    {
+     "title": "app-store-compliance flags App Store and Google Play rejection risks",
+     "section": "tool",
+     "candidates": [
+      "c_420e52b47a"
+     ],
+     "reasons": []
+    }
+   ]
+  }
+ ],
+ "failure": null,
+ "adopt": [
+  {
+   "at": "2026-11-23T04:41:19+00:00",
+   "edition": "zh",
+   "run": "2026-11-23T04:40:11+00:00",
+   "adopted": true,
+   "reason": "no valid digest yet"
+  },
+  {
+   "at": "2026-11-23T04:41:19+00:00",
+   "edition": "en",
+   "run": "2026-11-23T04:41:02+00:00",
+   "adopted": true,
+   "reason": "English edition of the main issue"
+  }
+ ]
+}
