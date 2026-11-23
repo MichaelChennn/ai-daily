@@ -1,0 +1,2091 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-23",
+  "generated_at": "2026-11-23T04:18:15+00:00",
+  "window": {
+    "start": "2026-11-22T03:00:00+00:00",
+    "end": "2026-11-23T04:18:11.456437+00:00"
+  },
+  "stats": {
+    "filtered": 54,
+    "raw": 63,
+    "after_url_merge": 63,
+    "dropped_already_published": 26,
+    "candidates": 37,
+    "clusters": 0,
+    "seen_before": 24,
+    "reported_before": 7
+  },
+  "sources": [
+    {
+      "id": "openai-news",
+      "status": "ok",
+      "count": 1,
+      "seconds": 0.576425111999999,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "anthropic-news",
+      "status": "ok",
+      "count": 0,
+      "seconds": 0.2783484250000008,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "anthropic-research",
+      "status": "ok",
+      "count": 0,
+      "seconds": 0.2992768350000006,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "deepmind-blog",
+      "status": "ok",
+      "count": 0,
+      "seconds": 0.2621761389999975,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "google-ai-blog",
+      "status": "ok",
+      "count": 0,
+      "seconds": 0.2862049789999972,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "mistral-news",
+      "status": "ok",
+      "count": 0,
+      "seconds": 1.8492605079999969,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "huggingface-blog",
+      "status": "ok",
+      "count": 0,
+      "seconds": 0.23520107799999934,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "meta-ai-news",
+      "status": "ok",
+      "count": 0,
+      "seconds": 0.6462038200000002,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "minimax-blog",
+      "status": "ok",
+      "count": 0,
+      "seconds": 1.9448941300000016,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "kimi-blog",
+      "status": "ok",
+      "count": 0,
+      "seconds": 1.2670697980000014,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "deepseek-news",
+      "status": "ok",
+      "count": 0,
+      "seconds": 1.3032111379999982,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "deepseek-website",
+      "status": "ok",
+      "count": 0,
+      "seconds": 0.6506524549999995,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "qwen-blog",
+      "status": "ok",
+      "count": 0,
+      "seconds": 2.183407539000001,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "seed-blog",
+      "status": "ok",
+      "count": 0,
+      "seconds": 2.4969342889999986,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "google-research",
+      "status": "ok",
+      "count": 0,
+      "seconds": 1.3353461210000006,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "microsoft-research",
+      "status": "ok",
+      "count": 0,
+      "seconds": 2.066506211,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "apple-ml-research",
+      "status": "ok",
+      "count": 0,
+      "seconds": 0.6533156949999999,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "ai2-blog",
+      "status": "ok",
+      "count": 0,
+      "seconds": 1.2729146789999994,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "thinking-machines",
+      "status": "error",
+      "count": 0,
+      "seconds": 0.7966281330000022,
+      "error": "HTTPStatusError: Client error '404 Not Found' for url 'https://thinkingmachines.ai/blog/index.xml'",
+      "filtered": {}
+    },
+    {
+      "id": "stability-news",
+      "status": "ok",
+      "count": 0,
+      "seconds": 1.9102904159999987,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "baidu-ernie",
+      "status": "error",
+      "count": 0,
+      "seconds": 2.7829356270000005,
+      "error": "HTTPStatusError: Client error '404 Not Found' for url 'https://ernie.baidu.com/blog/index.xml'",
+      "filtered": {}
+    },
+    {
+      "id": "xai-news",
+      "status": "ok",
+      "count": 0,
+      "seconds": 0.813501844000001,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "claude-blog",
+      "status": "ok",
+      "count": 0,
+      "seconds": 1.3497916510000003,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "black-forest-labs",
+      "status": "ok",
+      "count": 0,
+      "seconds": 1.2574670789999978,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "liquid-ai",
+      "status": "ok",
+      "count": 0,
+      "seconds": 1.3647113760000025,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "cohere-blog",
+      "status": "ok",
+      "count": 0,
+      "seconds": 2.110908605999999,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "cursor-blog",
+      "status": "ok",
+      "count": 0,
+      "seconds": 1.2892599830000009,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "hf-daily-papers",
+      "status": "ok",
+      "count": 10,
+      "seconds": 2.516590015000002,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "github-releases",
+      "status": "ok",
+      "count": 2,
+      "seconds": 4.079547788999999,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "github-trending",
+      "status": "ok",
+      "count": 12,
+      "seconds": 1.2507925350000022,
+      "error": null,
+      "filtered": {
+        "not_ai": 4
+      }
+    },
+    {
+      "id": "hf-trending-models",
+      "status": "ok",
+      "count": 30,
+      "seconds": 0.6998923220000002,
+      "error": null,
+      "filtered": {
+        "noisy_model": 8,
+        "max_age_days": 12
+      }
+    },
+    {
+      "id": "simon-willison",
+      "status": "ok",
+      "count": 0,
+      "seconds": 0.7921712670000005,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "interconnects",
+      "status": "ok",
+      "count": 0,
+      "seconds": 1.0272824360000001,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "import-ai",
+      "status": "disabled",
+      "count": 0,
+      "seconds": 0.0,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "latent-space",
+      "status": "ok",
+      "count": 0,
+      "seconds": 2.484468502000002,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "sebastian-raschka",
+      "status": "ok",
+      "count": 0,
+      "seconds": 1.757179967999999,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "karpathy",
+      "status": "ok",
+      "count": 0,
+      "seconds": 0.6711388170000028,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "lilian-weng",
+      "status": "ok",
+      "count": 0,
+      "seconds": 0.5974504150000008,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "answer-ai",
+      "status": "ok",
+      "count": 0,
+      "seconds": 1.2371594819999991,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "sam-altman",
+      "status": "ok",
+      "count": 0,
+      "seconds": 1.979081205,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "ethan-mollick",
+      "status": "ok",
+      "count": 0,
+      "seconds": 0.9349851630000003,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "kexue-fm",
+      "status": "ok",
+      "count": 1,
+      "seconds": 2.7004228159999997,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "recode-china-ai",
+      "status": "disabled",
+      "count": 0,
+      "seconds": 0.0,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "chinai",
+      "status": "disabled",
+      "count": 0,
+      "seconds": 0.0,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "hackernews",
+      "status": "ok",
+      "count": 9,
+      "seconds": 1.2551856960000016,
+      "error": null,
+      "filtered": {
+        "not_ai": 30
+      }
+    },
+    {
+      "id": "reddit-ai",
+      "status": "error",
+      "count": 0,
+      "seconds": 0.7916555289999998,
+      "error": "HTTPStatusError: Client error '404 Not Found' for url 'https://www.reddit.com/r/LocalLLaMA+MachineLearning/top/.rss?t=day&limit=50'",
+      "filtered": {}
+    }
+  ],
+  "clusters": [],
+  "filtered": [
+    {
+      "source": "github-trending",
+      "title": "cursor/plugins",
+      "url": "https://github.com/cursor/plugins",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "github-trending",
+      "title": "nginx/nginx",
+      "url": "https://github.com/nginx/nginx",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "github-trending",
+      "title": "toeverything/AFFiNE",
+      "url": "https://github.com/toeverything/AFFiNE",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "github-trending",
+      "title": "XiaoYouChR/Ghost-Downloader-3",
+      "url": "https://github.com/XiaoYouChR/Ghost-Downloader-3",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "unsloth/Inkling-2-Mini-GGUF",
+      "url": "https://huggingface.co/unsloth/Inkling-2-Mini-GGUF",
+      "reason": "noisy_model",
+      "value": "repo id contains gguf"
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "AtomicChat/Inkling-2-Mini-Uncensored-GGUF",
+      "url": "https://huggingface.co/AtomicChat/Inkling-2-Mini-Uncensored-GGUF",
+      "reason": "noisy_model",
+      "value": "repo id contains gguf"
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "Qwen/Qwen3.8-27B",
+      "url": "https://huggingface.co/Qwen/Qwen3.8-27B",
+      "reason": "max_age_days",
+      "value": "109 days old > 45"
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5",
+      "reason": "max_age_days",
+      "value": "122 days old > 45"
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "chatrlabs/Qwen-Image-2.1-Uncensored-Omni-Quantized",
+      "url": "https://huggingface.co/chatrlabs/Qwen-Image-2.1-Uncensored-Omni-Quantized",
+      "reason": "noisy_model",
+      "value": "repo id contains quantized"
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "DavidAU/Qwen3.8-27B-TURBO-Fable-Cold-Fusion-735-882-Heretic-Uncensored-NEO-CODER-MAX-MTP-GGUF",
+      "url": "https://huggingface.co/DavidAU/Qwen3.8-27B-TURBO-Fable-Cold-Fusion-735-882-Heretic-Uncensored-NEO-CODER-MAX-MTP-GGUF",
+      "reason": "noisy_model",
+      "value": "repo id contains gguf"
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "facebook/sam-3d-body-dinov3",
+      "url": "https://huggingface.co/facebook/sam-3d-body-dinov3",
+      "reason": "max_age_days",
+      "value": "370 days old > 45"
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "Sentinel7/h3",
+      "url": "https://huggingface.co/Sentinel7/h3",
+      "reason": "max_age_days",
+      "value": "109 days old > 45"
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "facebook/sam3",
+      "url": "https://huggingface.co/facebook/sam3",
+      "reason": "max_age_days",
+      "value": "380 days old > 45"
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "unsloth/Qwen3.8-27B-GGUF",
+      "url": "https://huggingface.co/unsloth/Qwen3.8-27B-GGUF",
+      "reason": "noisy_model",
+      "value": "repo id contains gguf"
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "nvidia/NVIDIA-Nemotron-3.5-Bolt-E4B-4GB",
+      "url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-E4B-4GB",
+      "reason": "max_age_days",
+      "value": "48 days old > 45"
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "DavidAU/Qwen3.5-9B-The-Defiant-Fable-Uncensored-Heretic-NEO-IMATRIX-MAX-MTP-GGUF",
+      "url": "https://huggingface.co/DavidAU/Qwen3.5-9B-The-Defiant-Fable-Uncensored-Heretic-NEO-IMATRIX-MAX-MTP-GGUF",
+      "reason": "noisy_model",
+      "value": "repo id contains gguf"
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "huihui-ai/Huihui-Qwen3.8-27B-abliterated-GGUF",
+      "url": "https://huggingface.co/huihui-ai/Huihui-Qwen3.8-27B-abliterated-GGUF",
+      "reason": "noisy_model",
+      "value": "repo id contains gguf"
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "HuggingFaceTB/SmolVLM2-256M-Video-Instruct",
+      "url": "https://huggingface.co/HuggingFaceTB/SmolVLM2-256M-Video-Instruct",
+      "reason": "max_age_days",
+      "value": "649 days old > 45"
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "OpenUncensored/Inkling-2-Mini-Uncensored",
+      "url": "https://huggingface.co/OpenUncensored/Inkling-2-Mini-Uncensored",
+      "reason": "noisy_model",
+      "value": "repo id contains uncensored"
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "TenStrip/10Eros-Max",
+      "url": "https://huggingface.co/TenStrip/10Eros-Max",
+      "reason": "max_age_days",
+      "value": "111 days old > 45"
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "pyannote/speaker-diarization-community-1",
+      "url": "https://huggingface.co/pyannote/speaker-diarization-community-1",
+      "reason": "max_age_days",
+      "value": "586 days old > 45"
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "meta-llama/Meta-Llama-3-8B-Instruct",
+      "url": "https://huggingface.co/meta-llama/Meta-Llama-3-8B-Instruct",
+      "reason": "max_age_days",
+      "value": "949 days old > 45"
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "Qwen/Qwen3.8-Flash-Next",
+      "url": "https://huggingface.co/Qwen/Qwen3.8-Flash-Next",
+      "reason": "max_age_days",
+      "value": "90 days old > 45"
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "MiniMaxAI/MiniMax-H3",
+      "url": "https://huggingface.co/MiniMaxAI/MiniMax-H3",
+      "reason": "max_age_days",
+      "value": "117 days old > 45"
+    },
+    {
+      "source": "hackernews",
+      "title": "Free alternative TV network built from the Internet Archive's forgotten videos",
+      "url": "https://spelunkr.tv",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "Nespresso's project to reduce grams of coffee per capsule",
+      "url": "https://alvinbunk.wordpress.com/2026/11/01/nespresso-project-olympus/",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "Progress map for the Lean formalization of Alessandro Masullo's manuscript",
+      "url": "https://claude.ai/artifact/CtQyX8qfYAF822bgHJHHE3",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "GL.iNet Security Notice 2026-11-20",
+      "url": "https://www.gl-inet.com/en-us/blogs/blog/glinet-security-notice-2026-11-20",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "The Usefulness of Useless Knowledge [pdf] (1939)",
+      "url": "https://www.ias.edu/sites/default/files/library/UsefulnessHarpers.pdf",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "The struggle for freedom: How BSD escaped AT&T licensing",
+      "url": "https://fosscomics.com/posts/16.%20BSD%20Unix%20Part%206%20-%20The%20Struggle%20for%20Freedom/",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "AWS got hit by an outage too. You didn't hear about it",
+      "url": "https://www.theregister.com/columnists/2026/11/21/aws-got-hit-by-an-outage-too-heres-why-you-didnt-hear-about-it/5311511",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "A miniature San Francisco with live buses, planes and boats",
+      "url": "https://smallsf.com/",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "Nyx, the Oldest Internet Service Provider",
+      "url": "https://nyx.net/",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "All Delta Flights Through Atlanta Delayed as Automated System Falters",
+      "url": "https://www.nytimes.com/2026/11/22/us/delta-flight-delays-system-outage.html",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "Assume People Are Not Interested in Your Blog Post",
+      "url": "https://danielsada.tech/blog/assume-people-are-not-interested-in-your-blog-post/",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "What Happened to Silicon Valley?",
+      "url": "https://www.oreilly.com/radar/what-happened-to-silicon-valley/",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "Canada recommits to federal funding for news",
+      "url": "https://www.niemanlab.org/2026/11/a-government-that-gets-it-canada-recommits-to-federal-funding-for-news/",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "The Birds of GTA 6: A Field Guide to Vice City and Leonida's Wildlife",
+      "url": "https://www.audubon.org/magazine/birds-of-gta-6-field-guide-vice-city-wildlife",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "Was software just always too complex for humans?",
+      "url": "https://anil.recoil.org/notes/software-too-complex-for-humans",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "Perplexity and Intelligence",
+      "url": "https://openai.com/index/perplexity-and-intelligence/",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "C++26 is done (again): November 2026 ISO C++ meeting trip report",
+      "url": "https://herbsutter.com/2026/11/21/c26-is-done-again-trip-report-november-2026-iso-c-standards-meeting-buzios-brazil/",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "Norway to extend proposed under-16 social media ban to games and messaging apps",
+      "url": "https://www.euronews.com/2026/10/19/norway-to-extend-proposed-under-16-social-media-ban-to-online-games-and-messaging-apps",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "Europe weakens chemical rules as science links them to 'lifestyle diseases'",
+      "url": "https://www.lemonde.fr/en/opinion/article/2026/11/22/as-science-increasingly-shows-the-role-chemical-substances-play-in-lifestyle-diseases-europe-weakens-its-regulations_6786595_23.html",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "I joined the NTP Pool, but not with my Stratum 1 Pi",
+      "url": "https://www.jeffgeerling.com/blog/2026/i-joined-the-ntp-pool/",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "Fascism and Monopoly (2020)",
+      "url": "https://repository.law.umich.edu/mlr/vol118/iss7/2/",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "Open Social Web Alliance",
+      "url": "https://osw-alliance.net/en/",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "Backblaze customers worried of personal data sale/sharing after policy update",
+      "url": "https://www.neowin.net/news/backblaze-customers-worried-of-personal-data-salesharing-after-policy-update/",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "U.N. Climate Talks Collapse in a Bitter Clash over Fossil Fuels",
+      "url": "https://www.nytimes.com/2026/11/22/climate/cop31-climate-summit-ends-climate.html",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "Testing Terraform with AWS Emulator",
+      "url": "https://notes.hatedabamboo.me/terraform-tests-with-aws-emulator/",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "Masullo on the Riemann Hypothesis",
+      "url": "https://johncarlosbaez.wordpress.com/2026/11/22/masullo-on-the-riemann-hypothesis/",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "Notes on the discrete Fourier transform (DFT)",
+      "url": "https://eli.thegreenplace.net/2026/notes-on-the-discrete-fourier-transform-dft/",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "Show HN: The Riemann Proof Handbook",
+      "url": "https://github.com/tamnd/riemann-handbook",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "Fast-Anything: Don't rewrite it in Rust. Rewrite the 5% that's slow",
+      "url": "https://github.com/EL4CTEO/fast-anything",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "Toyota, Nissan, and Honda to standardize parts to lower costs",
+      "url": "https://www.caranddriver.com/news/a74490092/toyota-nissan-honda-standardize-parts-lower-costs/",
+      "reason": "not_ai",
+      "value": null
+    }
+  ],
+  "dropped": [
+    {
+      "id": "c_42b8e18147",
+      "title": "TeleChat to Xing4: Advancing Frontier Agentic Models on Domestic Chips and Frameworks",
+      "url": "https://huggingface.co/papers/2611.22115",
+      "published_on": "2026-11-19"
+    },
+    {
+      "id": "c_e8789b7765",
+      "title": "Gamer: A Generalist Vision-Language-Action Foundation Model for Long-Horizon Real-Time Game Agent",
+      "url": "https://huggingface.co/papers/2611.18397",
+      "published_on": "2026-11-17"
+    },
+    {
+      "id": "c_217c28d75b",
+      "title": "Jeveration: System One Models Now Generate",
+      "url": "https://huggingface.co/papers/2611.24738",
+      "published_on": "2026-11-20"
+    },
+    {
+      "id": "c_2d3dd15956",
+      "title": "InclusionMed: Benchmarking AI for Inclusive Healthcare",
+      "url": "https://huggingface.co/papers/2611.21218",
+      "published_on": "2026-11-22"
+    },
+    {
+      "id": "c_ac082902b2",
+      "title": "AscendGYM: A Cost-Aware Kernel Optimization Benchmark for Real-World Workloads on Ascend NPUs",
+      "url": "https://huggingface.co/papers/2611.17621",
+      "published_on": "2026-11-22"
+    },
+    {
+      "id": "c_ece0545583",
+      "title": "K2-Horizon: A Frontier Fleet of Open Source Language Models",
+      "url": "https://huggingface.co/papers/2611.21003",
+      "published_on": "2026-11-18"
+    },
+    {
+      "id": "c_d55822e050",
+      "title": "VibePrevisBench: Evaluating Agentic Coding for 4D Scene Generation in Blender",
+      "url": "https://huggingface.co/papers/2611.15789",
+      "published_on": "2026-11-22"
+    },
+    {
+      "id": "c_5e5b7a5173",
+      "title": "elementalsouls/Claude-BugHunter",
+      "url": "https://github.com/elementalsouls/Claude-BugHunter",
+      "published_on": "2026-11-18"
+    },
+    {
+      "id": "c_828729b7e7",
+      "title": "google-labs-code/stitch-skills",
+      "url": "https://github.com/google-labs-code/stitch-skills",
+      "published_on": "2026-11-16"
+    },
+    {
+      "id": "c_271b21f503",
+      "title": "thinkingmachines/Inkling-2-Mini",
+      "url": "https://huggingface.co/thinkingmachines/Inkling-2-Mini",
+      "published_on": "2026-11-21"
+    },
+    {
+      "id": "c_283df06e9f",
+      "title": "inworld/voice-isolator",
+      "url": "https://huggingface.co/inworld/voice-isolator",
+      "published_on": "2026-11-20"
+    },
+    {
+      "id": "c_6be73df178",
+      "title": "harness-hub/Qwen3.8-27B-pi-adapted",
+      "url": "https://huggingface.co/harness-hub/Qwen3.8-27B-pi-adapted",
+      "published_on": "2026-11-21"
+    },
+    {
+      "id": "c_eef5dc3779",
+      "title": "apple/DepthPro2",
+      "url": "https://huggingface.co/apple/DepthPro2",
+      "published_on": "2026-11-22"
+    },
+    {
+      "id": "c_5f75f602fe",
+      "title": "sensenova/SenseNova-Loop-9B",
+      "url": "https://huggingface.co/sensenova/SenseNova-Loop-9B",
+      "published_on": "2026-11-18"
+    },
+    {
+      "id": "c_9ae7b7e299",
+      "title": "apple/FastFrames-L",
+      "url": "https://huggingface.co/apple/FastFrames-L",
+      "published_on": "2026-11-18"
+    },
+    {
+      "id": "c_d07f911507",
+      "title": "meituan-longcat/LongCat-Video-Avatar-1.6",
+      "url": "https://huggingface.co/meituan-longcat/LongCat-Video-Avatar-1.6",
+      "published_on": "2026-11-16"
+    },
+    {
+      "id": "c_fcbf5f38f4",
+      "title": "maxwell-model/Maxwell-V1-Flash",
+      "url": "https://huggingface.co/maxwell-model/Maxwell-V1-Flash",
+      "published_on": "2026-11-18"
+    },
+    {
+      "id": "c_9d222aeef0",
+      "title": "RadixArk/DaisyRose-27B",
+      "url": "https://huggingface.co/RadixArk/DaisyRose-27B",
+      "published_on": "2026-11-19"
+    },
+    {
+      "id": "c_1ba7b9d21a",
+      "title": "briaai/RMBG-3.0",
+      "url": "https://huggingface.co/briaai/RMBG-3.0",
+      "published_on": "2026-11-20"
+    },
+    {
+      "id": "c_8125f7193e",
+      "title": "Reson8/Rumble-2-Flash",
+      "url": "https://huggingface.co/Reson8/Rumble-2-Flash",
+      "published_on": "2026-11-19"
+    },
+    {
+      "id": "c_6c10e044ee",
+      "title": "internlm/Sage-S2.1-Flash",
+      "url": "https://huggingface.co/internlm/Sage-S2.1-Flash",
+      "published_on": "2026-11-17"
+    },
+    {
+      "id": "c_b59ed2a45f",
+      "title": "Cloudflare/clairic",
+      "url": "https://huggingface.co/Cloudflare/clairic",
+      "published_on": "2026-11-20"
+    },
+    {
+      "id": "c_cf0b6cc4cc",
+      "title": "tencent/Hy4",
+      "url": "https://huggingface.co/tencent/Hy4",
+      "published_on": "2026-11-22"
+    },
+    {
+      "id": "c_3768b1edee",
+      "title": "Lakonik/pi-H3",
+      "url": "https://huggingface.co/Lakonik/pi-H3",
+      "published_on": "2026-11-22"
+    },
+    {
+      "id": "c_3076d62d44",
+      "title": "harness-hub/Qwen3.8-27B-opencode-adapted",
+      "url": "https://huggingface.co/harness-hub/Qwen3.8-27B-opencode-adapted",
+      "published_on": "2026-11-21"
+    },
+    {
+      "id": "c_178b148e12",
+      "title": "microsoft/Aion-1.0-Instruct-2.3B",
+      "url": "https://huggingface.co/microsoft/Aion-1.0-Instruct-2.3B",
+      "published_on": "2026-11-20"
+    }
+  ],
+  "candidates": [
+    {
+      "source": "openai-news",
+      "source_name": "OpenAI News",
+      "tier": 1,
+      "kind": "blog",
+      "title": "Perplexity and Intelligence",
+      "url": "https://openai.com/index/perplexity-and-intelligence",
+      "summary": "How perplexity measures progress in AI models, and why it could help developers establish a shared approach to evaluating emerging capabilities.",
+      "published_at": "2026-11-22T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {},
+      "tags": [
+        "Research"
+      ],
+      "links": [],
+      "id": "c_bd545a438b",
+      "key": "openai.com/index/perplexity-and-intelligence",
+      "cluster_id": "k_bd545a438b",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "Sage S2.1 Flash Technical Report",
+      "url": "https://huggingface.co/papers/2611.21072",
+      "summary": "We introduce Sage S1.5 Flash, a 320-billion-parameter general-purpose mixture-of-experts model designed to reason over scientific evidence and act in interactive environments. Sage Sci-Perception uses dedicated encoders for molecular graphs and biological sequences and represents spectra as ordered patches of measurements. Modality-specific projectors map these representations into the input space of a shared backbone, which processes them alongside text and images. To develop the model's agent capabilities, we construct verifiable environments for tool use, search, and coding, as well as specialized workflows involving machine learning experiments and scientific software. Task completion is checked against execution results, changes in environment state, or submitted artifacts. We evaluate Sage S1.5 Flash on 33 benchmarks across seven domains. In the primary comparison against five baselines, it ranks first on OfficeQA Pro (72.2), MLE-bench Lite (90.3 HumanRank), Harvey LAB, and SpreadsheetBench~2, and second on OSWorld-Verified (85.2), WebArena-Verified (67.6), and DeepResearch Bench~II (54.2). These results show particular strengths in using documentary evidence, producing verifiable workbooks, and carrying out machine learning tasks, alongside competitive performance in desktop and browser workflows that require the model to act on visual feedback.",
+      "published_at": "2026-11-16T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 101,
+        "comments": 5,
+        "week": "2026-W47",
+        "github_repo": "https://github.com/InternLM/Sage-S2.1-Flash",
+        "github_stars": 36,
+        "organization": "Intern Large Models"
+      },
+      "tags": [],
+      "links": [],
+      "id": "c_d7c6ad7aa1",
+      "key": "arxiv:2611.21072",
+      "cluster_id": "k_d7c6ad7aa1",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-18",
+        "2026-11-22"
+      ],
+      "reported_on": [
+        {
+          "date": "2026-11-17",
+          "title": "上海人工智能实验室开源科学多模态模型 Sage S2.1 Flash"
+        }
+      ]
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "AllocFlow: End-to-End Portfolio Trading Action Generation from Raw Market Data",
+      "url": "https://huggingface.co/papers/2611.19937",
+      "summary": "Real-world portfolio management requires converting noisy market observations into coordinated, simultaneous allocations across multiple assets under shared capital constraints. Advances in forecasting models and alpha discovery help identify opportunities. However, traditional pipelines often decouple signal forecasting from portfolio construction, potentially misaligning learning with allocation and execution objectives. We present AllocFlow, an end-to-end flow-matching framework that directly generates joint portfolio allocations from raw multi-asset market histories. To capture dependencies among portfolio positions, AllocFlow employs a cross-asset flow Transformer conditioned on temporal market representations to generate continuous, signed position weights across all instruments jointly. To address the sample inefficiency and instability of learning continuous allocation policies from scratch, we establish a two-stage training scheme: strategy-supervised imitation shapes a structured distribution of candidate portfolios, followed by group-relative reinforcement learning (RL) that refines joint decisions using portfolio-level financial rewards and a frozen policy reference. On hourly cryptocurrency perpetual futures, RL refinement raises the annualized net return of the imitation policy from 27.79% to 51.38% and its Calmar ratio from 0.955 to 4.043, surpassing the teacher strategy on every metric, and AllocFlow reaches a Calmar ratio of 4.90 on six further months of...",
+      "published_at": "2026-11-15T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 77,
+        "comments": 4,
+        "week": "2026-W47",
+        "github_repo": "https://github.com/allocflow/AllocFlow",
+        "github_stars": 38,
+        "organization": "Nanyang Technological University"
+      },
+      "tags": [
+        "flow-matching framework",
+        "cross-asset flow Transformer",
+        "temporal market representations",
+        "continuous signed position weights",
+        "two-stage training scheme",
+        "strategy-supervised imitation",
+        "group-relative reinforcement learning",
+        "frozen policy reference"
+      ],
+      "links": [],
+      "id": "c_fdbd81232d",
+      "key": "arxiv:2611.19937",
+      "cluster_id": "k_fdbd81232d",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-18",
+        "2026-11-22"
+      ],
+      "reported_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "Envisioning Agentic Robotics: A New Era of Robotic Systems",
+      "url": "https://huggingface.co/papers/2611.18359",
+      "summary": "The release of GPT-6 Astra marks the emergence of a new paradigm in robotics: agentic robotics. Within weeks, frontier models with agentic harnesses matched or exceeded task-specific policies on many embodied benchmarks. Instead of training a dedicated policy for each family of tasks, an agentic robotic system applies a foundation model to open-world embodied tasks. It operates in a closed loop: observing the environment, interpreting user intent, reasoning about the task, invoking skills and tools, verifying outcomes, and adapting its strategy. Despite these advances, the community has yet to converge on a shared definition, a reliable evaluation framework, or a research roadmap. We argue that Embodied System 2, realized by a foundation model together with an embodied harness, forms the decision-making core of agentic robotics. Its central challenge is to translate general-purpose reasoning into effective and verifiable actions under physical constraints such as limited reaction time, mechanical limits, unpredictable environment changes, and irreversible consequences. Motivated by this perspective, we propose an evaluation framework that measures both model capabilities and closed-loop system performance. Furthermore, we identify the principles that carry over from digital to physical agents and the challenges that must be addressed to achieve reliable physical autonomy. On top of the Embodied System 2 and the evaluation framework, we envision a research roadmap toward...",
+      "published_at": "2026-11-13T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 139,
+        "comments": 5,
+        "week": "2026-W47",
+        "organization": "Grid Robotics"
+      },
+      "tags": [
+        "agentic robotics",
+        "foundation model",
+        "agentic harnesses",
+        "task-specific policies",
+        "embodied benchmarks",
+        "closed-loop system",
+        "Embodied System 2",
+        "embodied harness"
+      ],
+      "links": [],
+      "id": "c_51a89fc6c0",
+      "key": "arxiv:2611.18359",
+      "cluster_id": "k_51a89fc6c0",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-17",
+        "2026-11-22"
+      ],
+      "reported_on": []
+    },
+    {
+      "source": "github-trending",
+      "source_name": "GitHub Trending",
+      "tier": 1,
+      "kind": "repo",
+      "title": "obra/superpowers",
+      "url": "https://github.com/obra/superpowers",
+      "summary": "An agentic skills framework & software development methodology that works.",
+      "published_at": null,
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 2,
+        "stars_today": 788,
+        "stars": 324287
+      },
+      "tags": [
+        "Shell"
+      ],
+      "links": [],
+      "id": "c_cfd2851c47",
+      "key": "github.com/obra/superpowers",
+      "cluster_id": "k_cfd2851c47",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-18",
+        "2026-11-19",
+        "2026-11-20",
+        "2026-11-21",
+        "2026-11-22"
+      ],
+      "reported_on": []
+    },
+    {
+      "source": "github-trending",
+      "source_name": "GitHub Trending",
+      "tier": 1,
+      "kind": "repo",
+      "title": "HKUDS/CLI-Anything",
+      "url": "https://github.com/HKUDS/CLI-Anything",
+      "summary": "\"CLI-Anything: Making ALL Software Agent-Native\" -- CLI-Hub:",
+      "published_at": null,
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 3,
+        "stars_today": 699,
+        "stars": 62909
+      },
+      "tags": [
+        "Python"
+      ],
+      "links": [],
+      "id": "c_740be60563",
+      "key": "github.com/hkuds/cli-anything",
+      "cluster_id": "k_740be60563",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-19",
+        "2026-11-20",
+        "2026-11-21",
+        "2026-11-22"
+      ],
+      "reported_on": []
+    },
+    {
+      "source": "github-trending",
+      "source_name": "GitHub Trending",
+      "tier": 1,
+      "kind": "repo",
+      "title": "jingyaogong/minimind",
+      "url": "https://github.com/jingyaogong/minimind",
+      "summary": "🧠 两小时从 0 训出你的 64M 大模型。Train your own 64M LLM from scratch in 2 hours.",
+      "published_at": null,
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 4,
+        "stars_today": 473,
+        "stars": 68854
+      },
+      "tags": [
+        "Python"
+      ],
+      "links": [],
+      "id": "c_3b240d3ecb",
+      "key": "github.com/jingyaogong/minimind",
+      "cluster_id": "k_3b240d3ecb",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-18",
+        "2026-11-20",
+        "2026-11-21",
+        "2026-11-22"
+      ],
+      "reported_on": []
+    },
+    {
+      "source": "github-trending",
+      "source_name": "GitHub Trending",
+      "tier": 1,
+      "kind": "repo",
+      "title": "firecrawl/firecrawl",
+      "url": "https://github.com/firecrawl/firecrawl",
+      "summary": "Knowledge infrastructure to make your agents smarter. Search, scrape and access 550+ data providers through one API.",
+      "published_at": null,
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 6,
+        "stars_today": 915,
+        "stars": 207160
+      },
+      "tags": [
+        "TypeScript"
+      ],
+      "links": [],
+      "id": "c_3517f80a1e",
+      "key": "github.com/firecrawl/firecrawl",
+      "cluster_id": "k_3517f80a1e",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-20",
+        "2026-11-21",
+        "2026-11-22"
+      ],
+      "reported_on": []
+    },
+    {
+      "source": "github-trending",
+      "source_name": "GitHub Trending",
+      "tier": 1,
+      "kind": "repo",
+      "title": "openvinotoolkit/openvino",
+      "url": "https://github.com/openvinotoolkit/openvino",
+      "summary": "OpenVINO™ is an open source toolkit for optimizing and deploying AI inference",
+      "published_at": null,
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 8,
+        "stars_today": 158,
+        "stars": 12121
+      },
+      "tags": [
+        "C++"
+      ],
+      "links": [],
+      "id": "c_d96d67a492",
+      "key": "github.com/openvinotoolkit/openvino",
+      "cluster_id": "k_d96d67a492",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-20",
+        "2026-11-21",
+        "2026-11-22"
+      ],
+      "reported_on": []
+    },
+    {
+      "source": "github-trending",
+      "source_name": "GitHub Trending",
+      "tier": 1,
+      "kind": "repo",
+      "title": "cathrynlavery/diagram-design",
+      "url": "https://github.com/cathrynlavery/diagram-design",
+      "summary": "Editorial diagram design for Claude Code, Codex, GitHub Copilot, Cursor, Factory Droid, Qoder, and Pi. 45 diagram types. Self-contained HTML + SVG. No shadows. No Mermaid slop.",
+      "published_at": null,
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 9,
+        "stars_today": 518,
+        "stars": 70420
+      },
+      "tags": [
+        "HTML"
+      ],
+      "links": [],
+      "id": "c_a85ad9dc3c",
+      "key": "github.com/cathrynlavery/diagram-design",
+      "cluster_id": "k_a85ad9dc3c",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-20",
+        "2026-11-21",
+        "2026-11-22"
+      ],
+      "reported_on": []
+    },
+    {
+      "source": "github-trending",
+      "source_name": "GitHub Trending",
+      "tier": 1,
+      "kind": "repo",
+      "title": "mvanhorn/last30days-skill",
+      "url": "https://github.com/mvanhorn/last30days-skill",
+      "summary": "AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymarket, and the web then synthesizes a grounded summary",
+      "published_at": null,
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 10,
+        "stars_today": 668,
+        "stars": 72865
+      },
+      "tags": [
+        "Python"
+      ],
+      "links": [],
+      "id": "c_768cda9a02",
+      "key": "github.com/mvanhorn/last30days-skill",
+      "cluster_id": "k_768cda9a02",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-17",
+        "2026-11-18",
+        "2026-11-19",
+        "2026-11-20",
+        "2026-11-21",
+        "2026-11-22"
+      ],
+      "reported_on": []
+    },
+    {
+      "source": "github-trending",
+      "source_name": "GitHub Trending",
+      "tier": 1,
+      "kind": "repo",
+      "title": "mjmirza/app-store-compliance",
+      "url": "https://github.com/mjmirza/app-store-compliance",
+      "summary": "Avoid common App Store and Google Play rejections. Open playbook and pre-submission guard with 124 documented rejection patterns and fixes, privacy manifest and Data safety checks, 112 tracked deadlines (EU AI Act, DSA, COPPA, age laws), and a skill for AI coding agents.",
+      "published_at": null,
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 12,
+        "stars_today": 621,
+        "stars": 4120
+      },
+      "tags": [
+        "Shell"
+      ],
+      "links": [],
+      "id": "c_420e52b47a",
+      "key": "github.com/mjmirza/app-store-compliance",
+      "cluster_id": "k_420e52b47a",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-20",
+        "2026-11-21",
+        "2026-11-22"
+      ],
+      "reported_on": []
+    },
+    {
+      "source": "github-trending",
+      "source_name": "GitHub Trending",
+      "tier": 1,
+      "kind": "repo",
+      "title": "Tracer-Cloud/opensre",
+      "url": "https://github.com/Tracer-Cloud/opensre",
+      "summary": "The open-source agent for CI/CD reliability.",
+      "published_at": null,
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 13,
+        "stars_today": 399,
+        "stars": 14481
+      },
+      "tags": [
+        "Python"
+      ],
+      "links": [],
+      "id": "c_f6df913aa0",
+      "key": "github.com/tracer-cloud/opensre",
+      "cluster_id": "k_f6df913aa0",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-21",
+        "2026-11-22"
+      ],
+      "reported_on": []
+    },
+    {
+      "source": "github-trending",
+      "source_name": "GitHub Trending",
+      "tier": 1,
+      "kind": "repo",
+      "title": "zhouxiaoka/autoclip",
+      "url": "https://github.com/zhouxiaoka/autoclip",
+      "summary": "AutoClip｜一个链接，一键出片。开源 AI 视频剪辑桌面工具，将播客、访谈、课程等长视频自动剪成短视频，生成字幕、封面和发布文案，适配抖音、小红书、TikTok、Reels 与 YouTube Shorts。Open-source AI video clipping & content repurposing.",
+      "published_at": null,
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 16,
+        "stars_today": 641,
+        "stars": 13645
+      },
+      "tags": [
+        "Python"
+      ],
+      "links": [],
+      "id": "c_d941cdc9a6",
+      "key": "github.com/zhouxiaoka/autoclip",
+      "cluster_id": "k_d941cdc9a6",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-20",
+        "2026-11-21",
+        "2026-11-22"
+      ],
+      "reported_on": []
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "inclusionAI/LingSante-3.1-flash",
+      "url": "https://huggingface.co/inclusionAI/LingSante-3.1-flash",
+      "summary": "text-generation, license:mit",
+      "published_at": "2026-11-19T04:30:30+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 42,
+        "trending_score": 56,
+        "likes": 59,
+        "downloads": 0
+      },
+      "tags": [
+        "inclusionAI"
+      ],
+      "links": [],
+      "id": "c_695b11fd51",
+      "key": "huggingface.co/inclusionai/lingsante-3.1-flash",
+      "cluster_id": "k_695b11fd51",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "tencent/Hy4-flash",
+      "url": "https://huggingface.co/tencent/Hy4-flash",
+      "summary": "image-text-to-text, transformers, license:other",
+      "published_at": "2026-11-17T03:44:46+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 4,
+        "trending_score": 425,
+        "likes": 624,
+        "downloads": 6617
+      },
+      "tags": [
+        "tencent"
+      ],
+      "links": [],
+      "id": "c_ce99ea3833",
+      "key": "huggingface.co/tencent/hy4-flash",
+      "cluster_id": "k_ce99ea3833",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-19",
+        "2026-11-20",
+        "2026-11-21",
+        "2026-11-22"
+      ],
+      "reported_on": [
+        {
+          "date": "2026-11-17",
+          "title": "腾讯发布 Hy4 flash：224B 总参数、每 token 激活 12B"
+        }
+      ]
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "n4ze3m/tiny-voca",
+      "url": "https://huggingface.co/n4ze3m/tiny-voca",
+      "summary": "text-to-speech, license:apache-2.0",
+      "published_at": "2026-11-14T15:46:27+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 22,
+        "trending_score": 91,
+        "likes": 425,
+        "downloads": 10768
+      },
+      "tags": [
+        "n4ze3m"
+      ],
+      "links": [],
+      "id": "c_82214f9798",
+      "key": "huggingface.co/n4ze3m/tiny-voca",
+      "cluster_id": "k_82214f9798",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-17",
+        "2026-11-18",
+        "2026-11-19",
+        "2026-11-20",
+        "2026-11-21",
+        "2026-11-22"
+      ],
+      "reported_on": []
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "KORMo-VL/KORMo-Web-11B",
+      "url": "https://huggingface.co/KORMo-VL/KORMo-Web-11B",
+      "summary": "image-text-to-text, transformers, license:apache-2.0",
+      "published_at": "2026-11-14T11:23:13+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 48,
+        "trending_score": 49.5,
+        "likes": 270,
+        "downloads": 1103
+      },
+      "tags": [
+        "KORMo-VL"
+      ],
+      "links": [],
+      "id": "c_b1b11fb204",
+      "key": "huggingface.co/kormo-vl/kormo-web-11b",
+      "cluster_id": "k_b1b11fb204",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-18",
+        "2026-11-19",
+        "2026-11-20",
+        "2026-11-21",
+        "2026-11-22"
+      ],
+      "reported_on": []
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "higurashi-ai/Haru-4B",
+      "url": "https://huggingface.co/higurashi-ai/Haru-4B",
+      "summary": "audio-to-audio, license:apache-2.0",
+      "published_at": "2026-11-12T11:05:59+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 7,
+        "trending_score": 276,
+        "likes": 897,
+        "downloads": 8608
+      },
+      "tags": [
+        "higurashi-ai"
+      ],
+      "links": [],
+      "id": "c_53b3b546ce",
+      "key": "huggingface.co/higurashi-ai/haru-4b",
+      "cluster_id": "k_53b3b546ce",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": [
+        {
+          "date": "2026-11-15",
+          "title": "Haru-4B：边听边说的全双工语音对话基座模型"
+        }
+      ]
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "Zyphra/ZONOS3-Mini",
+      "url": "https://huggingface.co/Zyphra/ZONOS3-Mini",
+      "summary": "text-to-speech, zonos3, license:apache-2.0",
+      "published_at": "2026-11-09T05:03:57+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 44,
+        "trending_score": 53.5,
+        "likes": 637,
+        "downloads": 164668
+      },
+      "tags": [
+        "Zyphra"
+      ],
+      "links": [],
+      "id": "c_30fdfa7f28",
+      "key": "huggingface.co/zyphra/zonos3-mini",
+      "cluster_id": "k_30fdfa7f28",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-20",
+        "2026-11-21",
+        "2026-11-22"
+      ],
+      "reported_on": [
+        {
+          "date": "2026-11-12",
+          "title": "Zyphra 开源 TTS 模型 ZONOS3-Mini，激活参数约 100M"
+        }
+      ]
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "thinkingmachines/Inkling-2-Small",
+      "url": "https://huggingface.co/thinkingmachines/Inkling-2-Small",
+      "summary": "image-text-to-text, transformers, license:apache-2.0",
+      "published_at": "2026-11-04T19:51:05+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 26,
+        "trending_score": 87,
+        "likes": 746,
+        "downloads": 48974
+      },
+      "tags": [
+        "thinkingmachines"
+      ],
+      "links": [],
+      "id": "c_424f74445e",
+      "key": "huggingface.co/thinkingmachines/inkling-2-small",
+      "cluster_id": "k_424f74445e",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-21",
+        "2026-11-22"
+      ],
+      "reported_on": [
+        {
+          "date": "2026-11-06",
+          "title": "Thinking Machines 发布 Inkling 2 Small，权重拟下周开放"
+        },
+        {
+          "date": "2026-11-13",
+          "title": "Thinking Machines 开放 Inkling 2 Small 权重"
+        },
+        {
+          "date": "2026-11-14",
+          "title": "Transformers v5.23.0 支持 Inkling 2 Small 和决策头 JEV"
+        }
+      ]
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "MiniMaxAI/MiniMax-H3-Image",
+      "url": "https://huggingface.co/MiniMaxAI/MiniMax-H3-Image",
+      "summary": "text-to-image, minimax-h3, license:other",
+      "published_at": "2026-11-03T06:34:36+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 16,
+        "trending_score": 127.5,
+        "likes": 1789,
+        "downloads": 952024
+      },
+      "tags": [
+        "MiniMaxAI"
+      ],
+      "links": [],
+      "id": "c_46a9ff30f5",
+      "key": "huggingface.co/minimaxai/minimax-h3-image",
+      "cluster_id": "k_46a9ff30f5",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-19",
+        "2026-11-20",
+        "2026-11-21",
+        "2026-11-22"
+      ],
+      "reported_on": [
+        {
+          "date": "2026-11-11",
+          "title": "MiniMax 发布开放权重图像模型 H3-Image，10 秒内出 4K 图"
+        }
+      ]
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "moonshotai/Kimi-K3.1-Pro",
+      "url": "https://huggingface.co/moonshotai/Kimi-K3.1-Pro",
+      "summary": "image-text-to-text, transformers, license:other",
+      "published_at": "2026-11-02T04:13:51+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 47,
+        "trending_score": 51,
+        "likes": 2426,
+        "downloads": 70495
+      },
+      "tags": [
+        "moonshotai"
+      ],
+      "links": [],
+      "id": "c_398ce84e27",
+      "key": "huggingface.co/moonshotai/kimi-k3.1-pro",
+      "cluster_id": "k_398ce84e27",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-16",
+        "2026-11-17",
+        "2026-11-18",
+        "2026-11-19",
+        "2026-11-20",
+        "2026-11-21",
+        "2026-11-22"
+      ],
+      "reported_on": [
+        {
+          "date": "2026-11-05",
+          "title": "Moonshot AI 开放 Kimi K3.1 Pro 权重"
+        },
+        {
+          "date": "2026-11-07",
+          "title": "llama.cpp 合并 Kimi-K3.1-Pro 文本模型支持"
+        }
+      ]
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "SulphurAI/Sulphur-3",
+      "url": "https://huggingface.co/SulphurAI/Sulphur-3",
+      "summary": "minimax-h3, license:other",
+      "published_at": "2026-10-31T20:31:01+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 12,
+        "trending_score": 175,
+        "likes": 800,
+        "downloads": 78931
+      },
+      "tags": [
+        "SulphurAI"
+      ],
+      "links": [],
+      "id": "c_78565272a9",
+      "key": "huggingface.co/sulphurai/sulphur-3",
+      "cluster_id": "k_78565272a9",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-22"
+      ],
+      "reported_on": []
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "OVHaiLLM/Olala-v1.0-mini-7A1B",
+      "url": "https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B",
+      "summary": "text-generation, transformers, license:apache-2.0",
+      "published_at": "2026-10-30T10:35:01+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 46,
+        "trending_score": 51,
+        "likes": 277,
+        "downloads": 62806
+      },
+      "tags": [
+        "OVHaiLLM"
+      ],
+      "links": [],
+      "id": "c_0eb157e01b",
+      "key": "huggingface.co/ovhaillm/olala-v1.0-mini-7a1b",
+      "cluster_id": "k_0eb157e01b",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-22"
+      ],
+      "reported_on": []
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+      "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+      "summary": "image-text-to-text, transformers, license:mit",
+      "published_at": "2026-10-17T02:40:38+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 25,
+        "trending_score": 87.5,
+        "likes": 5922,
+        "downloads": 515306
+      },
+      "tags": [
+        "deepseek-ai"
+      ],
+      "links": [],
+      "id": "c_8b553ca25e",
+      "key": "huggingface.co/deepseek-ai/deepseek-v4.1-flash-1017",
+      "cluster_id": "k_8b553ca25e",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-16",
+        "2026-11-17",
+        "2026-11-18",
+        "2026-11-19",
+        "2026-11-20",
+        "2026-11-21",
+        "2026-11-22"
+      ],
+      "reported_on": []
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "black-forest-labs/flux-3-image-klein-comfy",
+      "url": "https://huggingface.co/black-forest-labs/flux-3-image-klein-comfy",
+      "summary": "image-to-image, diffusion-single-file, license:other",
+      "published_at": "2026-10-14T12:00:13+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 27,
+        "trending_score": 79.5,
+        "likes": 3752,
+        "downloads": 950169
+      },
+      "tags": [
+        "black-forest-labs"
+      ],
+      "links": [],
+      "id": "c_6ecc1d71a5",
+      "key": "huggingface.co/black-forest-labs/flux-3-image-klein-comfy",
+      "cluster_id": "k_6ecc1d71a5",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-16",
+        "2026-11-17",
+        "2026-11-18",
+        "2026-11-19",
+        "2026-11-20",
+        "2026-11-21",
+        "2026-11-22"
+      ],
+      "reported_on": []
+    },
+    {
+      "source": "kexue-fm",
+      "source_name": "科学空间",
+      "tier": 2,
+      "kind": "commentary",
+      "title": "Muon背后的优化理论：1. 全量、随机与动量",
+      "url": "https://kexue.fm/archives/12014",
+      "summary": "关于优化器，我们可以找到很多经典的收敛结论，比如\" 炼丹 \"系列文章介绍的基于凸假设和遗憾界的一系列结果。除此之外，还有很多从不同角度切入、基于不同假设的分析，这些假设有强有弱，所得结论适用范围也有所不同，如何平衡理论推导所需要的简洁性与实际训练时的复杂性，是这个领域最艰难的问题之一。 本系列文章围绕Muon优化器介绍另一条分析路线，主要内容是来自论文 《Understanding Gradient Orthogonalization for Deep Learning via Non-Euclidean Trust-Region Optimization》 的一系列分析方法和结论，并补充自己的一些思考。 背景介绍 这篇文章主要关注的是LMO（Linear Minimization Oracle）类优化器，它的特点是：先选定一种范数，再在单位球内寻找与梯度内积最大的方向，并沿该方向的反方向更新参数。SignSGD、Muon等优化器都可以纳入这个框架，区别在于参数类型和所选范数的不同。 [...]",
+      "published_at": "2026-11-23T03:02:00+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {},
+      "tags": [],
+      "links": [],
+      "id": "c_ff2805b0dc",
+      "key": "kexue.fm/archives/12014",
+      "cluster_id": "k_ff2805b0dc",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "hackernews",
+      "source_name": "Hacker News",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "Agent swarm trying to solve P vs. NP",
+      "url": "https://pequalnp.com/",
+      "summary": "",
+      "published_at": "2026-11-22T21:53:45+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://news.ycombinator.com/item?id=50604314",
+      "signals": {
+        "hn_points": 130,
+        "hn_comments": 109
+      },
+      "tags": [],
+      "links": [],
+      "id": "c_1c7efa634e",
+      "key": "pequalnp.com/",
+      "cluster_id": "k_1c7efa634e",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "hackernews",
+      "source_name": "Hacker News",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "A Beginner's Guide to Local AI with Inkling, Qwen, and Unsloth",
+      "url": "https://www.gpupartner.com/blog/beginners-guide-local-ai-inkling-qwen-unsloth",
+      "summary": "",
+      "published_at": "2026-11-22T21:01:16+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://news.ycombinator.com/item?id=50603845",
+      "signals": {
+        "hn_points": 330,
+        "hn_comments": 140
+      },
+      "tags": [],
+      "links": [],
+      "id": "c_e22242af68",
+      "key": "gpupartner.com/blog/beginners-guide-local-ai-inkling-qwen-unsloth",
+      "cluster_id": "k_e22242af68",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "hackernews",
+      "source_name": "Hacker News",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "Harvard CS 2881R AI Safety",
+      "url": "https://boazbk.github.io/mltheoryseminar/",
+      "summary": "",
+      "published_at": "2026-11-22T18:01:54+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://news.ycombinator.com/item?id=50602153",
+      "signals": {
+        "hn_points": 55,
+        "hn_comments": 7
+      },
+      "tags": [],
+      "links": [],
+      "id": "c_3924aa5a43",
+      "key": "boazbk.github.io/mltheoryseminar",
+      "cluster_id": "k_3924aa5a43",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "hackernews",
+      "source_name": "Hacker News",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "Show HN: I built a game where you are an LLM's subagent",
+      "url": "https://github.com/gulivan/worker755",
+      "summary": "",
+      "published_at": "2026-11-22T13:56:58+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://news.ycombinator.com/item?id=50599762",
+      "signals": {
+        "hn_points": 287,
+        "hn_comments": 69
+      },
+      "tags": [],
+      "links": [],
+      "id": "c_61f5e6c643",
+      "key": "github.com/gulivan/worker755",
+      "cluster_id": "k_61f5e6c643",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "hackernews",
+      "source_name": "Hacker News",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "AI is becoming a disaster for the climate",
+      "url": "https://www.bloodinthemachine.com/p/ai-is-becoming-a-disaster-for-the",
+      "summary": "",
+      "published_at": "2026-11-22T12:19:46+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://news.ycombinator.com/item?id=50598961",
+      "signals": {
+        "hn_points": 110,
+        "hn_comments": 47
+      },
+      "tags": [],
+      "links": [],
+      "id": "c_4c39dda34d",
+      "key": "bloodinthemachine.com/p/ai-is-becoming-a-disaster-for-the",
+      "cluster_id": "k_4c39dda34d",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "hackernews",
+      "source_name": "Hacker News",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "Muru - AI-assisted Rust server for Python apps by mod_WSGI's creator",
+      "url": "https://simonwillison.net/2026/Nov/21/muru/",
+      "summary": "",
+      "published_at": "2026-11-22T09:57:01+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://news.ycombinator.com/item?id=50597959",
+      "signals": {
+        "hn_points": 73,
+        "hn_comments": 11
+      },
+      "tags": [],
+      "links": [],
+      "id": "c_bfd1a10b08",
+      "key": "simonwillison.net/2026/Nov/21/muru",
+      "cluster_id": "k_bfd1a10b08",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "hackernews",
+      "source_name": "Hacker News",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "Harsher on Male? Evaluating LLMs on Gender-Asymmetric Moral Framing in Conflicts",
+      "url": "https://arxiv.org/abs/2606.14068",
+      "summary": "",
+      "published_at": "2026-11-22T09:18:36+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://news.ycombinator.com/item?id=50597743",
+      "signals": {
+        "hn_points": 92,
+        "hn_comments": 78
+      },
+      "tags": [],
+      "links": [],
+      "id": "c_1005bc8b78",
+      "key": "arxiv:2606.14068",
+      "cluster_id": "k_1005bc8b78",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "hackernews",
+      "source_name": "Hacker News",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "87% of the Anthropic power will come from gas and 11% from coal in 2028",
+      "url": "https://betterdatacenterproject.com/2026/11/16/how-ai-is-powered-a-breakdown-of-byop-and-grid-power/",
+      "summary": "",
+      "published_at": "2026-11-22T08:57:34+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://news.ycombinator.com/item?id=50597612",
+      "signals": {
+        "hn_points": 919,
+        "hn_comments": 919
+      },
+      "tags": [],
+      "links": [],
+      "id": "c_eb5095b136",
+      "key": "betterdatacenterproject.com/2026/11/16/how-ai-is-powered-a-breakdown-of-byop-and-grid-power",
+      "cluster_id": "k_eb5095b136",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "hackernews",
+      "source_name": "Hacker News",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "AI Supply Chain Security: What Canary Tokens Found",
+      "url": "https://www.dragos.com/blog/ai-supply-chain-security-canary-tokens",
+      "summary": "",
+      "published_at": "2026-11-22T05:11:43+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://news.ycombinator.com/item?id=50596511",
+      "signals": {
+        "hn_points": 103,
+        "hn_comments": 22
+      },
+      "tags": [],
+      "links": [],
+      "id": "c_92c84415df",
+      "key": "dragos.com/blog/ai-supply-chain-security-canary-tokens",
+      "cluster_id": "k_92c84415df",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    }
+  ]
+}
