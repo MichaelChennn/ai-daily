@@ -1,0 +1,942 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-24",
+  "mode": "full",
+  "generated_at": "2026-11-24T04:42:25+00:00",
+  "channel": "api",
+  "model": "nvidia:minimaxai/minimax-m3.1-flash",
+  "highlights": [
+    "Claude 推出 Claude Ship 自动处理 PR 审查与批准",
+    "OpenAI 与 Cisco 开源 eBPF 安全运行时 Shirudo",
+    "DeepMind 用 Gemini 4 agent 团队优化量子算法并形式化验证"
+  ],
+  "items": [
+    {
+      "section": "headline",
+      "title": "Claude 推出 Claude Ship 自动处理 PR 审查与批准",
+      "summary": "Anthropic 发布 Claude Ship beta，由已正式可用的 Code Review 和两个 beta agent 组成，可审查 PR、修复问题并按团队策略决定是否批准合并。开发者可在 Claude Code 用 /ship 命令触发，管理员可按仓库配置审查级别、运行时机与消费上限。",
+      "tags": [
+        "工具",
+        "Agent",
+        "代码"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_a55680e1cb",
+          "url": "https://claude.com/resources/articles/introducing-claude-ship"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://claude.com/resources/articles/introducing-claude-ship",
+          "quote": "Claude can now review pull requests, fix them, and approve the ones that a team's policy allows."
+        },
+        {
+          "url": "https://claude.com/resources/articles/introducing-claude-ship",
+          "quote": "That's why we built Claude Ship , available today in beta."
+        },
+        {
+          "url": "https://claude.com/resources/articles/introducing-claude-ship",
+          "quote": "It can review PRs, fix them, and decide what's ready to merge based on policies each team sets."
+        },
+        {
+          "url": "https://claude.com/resources/articles/introducing-claude-ship",
+          "quote": "How Claude Ship works: review, fix, and approve Claude Ship is made up of Code Review , which is already generally available, and two new agents in beta: PR Steward and Claude Approvals."
+        },
+        {
+          "url": "https://claude.com/resources/articles/introducing-claude-ship",
+          "quote": "Code Review gives teams fast reviews, clear findings, and a choice of Quick, Standard, or Deep review levels for each repository."
+        },
+        {
+          "url": "https://claude.com/resources/articles/introducing-claude-ship",
+          "quote": "Two ways to get started For developers: /ship it from Claude Code Developers can try Claude Ship on their own pull requests with the new /ship command in Claude Code."
+        },
+        {
+          "url": "https://claude.com/resources/articles/introducing-claude-ship",
+          "quote": "Admins choose the review level (Quick, Standard, or Deep), choose when reviews run, and configure spend limits."
+        },
+        {
+          "url": "https://claude.com/resources/articles/introducing-claude-ship",
+          "quote": "Code Review is generally available , and PR Steward and Claude Approvals are in beta."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "OpenAI 与 Cisco 开源 eBPF 安全运行时 Shirudo",
+      "summary": "Shirudo 是面向 Linux 的开源运行时，用 eBPF shield 在补丁部署期间拦截漏洞利用路径而无需重启服务，shield 加载前会被加密签名和校验。在一项受控测试中，团队用 Codex 生成的 shield 挡住了针对运行中 Elasticsearch 服务的 Java4Shell 攻击。",
+      "tags": [
+        "安全",
+        "开源",
+        "工具"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_60167006a5",
+          "url": "https://openai.com/index/introducing-shirudo"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://openai.com/index/introducing-shirudo",
+          "quote": "Rethinking infrastructure Building in the open OpenAI and Cisco are launching Shirudo, an open-source runtime that helps teams protect Linux systems while they roll out patches."
+        },
+        {
+          "url": "https://openai.com/index/introducing-shirudo",
+          "quote": "In a controlled test ⁠ (opens in a new window) , a Codex-generated shield blocked a Java4Shell exploit attempt against a running Elasticsearch service without requiring a restart."
+        },
+        {
+          "url": "https://openai.com/index/introducing-shirudo",
+          "quote": "” Greg Brockman, President and Co-founder of OpenAI How Shirudo works Shirudo uses eBPF, a Linux technology that allows small programs to run at specific points inside the operating system."
+        },
+        {
+          "url": "https://openai.com/index/introducing-shirudo",
+          "quote": "OpenAI and Cisco are designing Shirudo around four core capabilities: Live protection: eBPF shields can block vulnerable code paths without restarting the system."
+        },
+        {
+          "url": "https://openai.com/index/introducing-shirudo",
+          "quote": "Trusted deployment: Shields are cryptographically signed and verified before loading."
+        },
+        {
+          "url": "https://openai.com/index/introducing-shirudo",
+          "quote": "Using OpenAI's Codex, the team generated a shield that added an input check to Java's Base64 decoder and attached it directly to a running Elasticsearch process."
+        },
+        {
+          "url": "https://openai.com/index/introducing-shirudo",
+          "quote": "When attempting to exploit the vulnerability, the shield rejected the malicious input, blocking the attack while Elasticsearch continued running."
+        },
+        {
+          "url": "https://openai.com/index/introducing-shirudo",
+          "quote": "Building in the open OpenAI and Cisco are open-sourcing Shirudo ⁠ (opens in a new window) so developers, security researchers, and infrastructure operators can inspect the code, test protections, and contribute to its development."
+        },
+        {
+          "url": "https://openai.com/index/introducing-shirudo",
+          "quote": "Shirudo is licensed under BSD 2-Clause, with its BPF programs dual-licensed under BSD and GPL."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "DeepMind 用 Gemini 4 agent 团队优化量子算法并形式化验证",
+      "summary": "Google DeepMind 在新论文中用 Gemini 4 agent 团队改进量子算法，并用 Lean 形式化定理证明器逐一验证结果。agent 团队把惯性约束聚变的计算成本降低 11.8×，所需纠错量子比特从 5,650 降到 4,338，团队同时开源了 Lean 库、问题规格和已验证解法。",
+      "tags": [
+        "论文",
+        "Agent",
+        "推理"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_875060338f",
+          "url": "https://deepmind.google/blog/finding-faster-quantum-algorithms-with-agents-and-formal-verification/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://deepmind.google/blog/finding-faster-quantum-algorithms-with-agents-and-formal-verification/",
+          "quote": "In a new paper , we used teams of Gemini 4 agents to improve well-known quantum algorithms, creating highly efficient quantum circuits."
+        },
+        {
+          "url": "https://deepmind.google/blog/finding-faster-quantum-algorithms-with-agents-and-formal-verification/",
+          "quote": "To help the community build on this work, we are open-sourcing our Lean library , problem specifications, and verified solutions on GitHub."
+        },
+        {
+          "url": "https://deepmind.google/blog/finding-faster-quantum-algorithms-with-agents-and-formal-verification/",
+          "quote": "Our agent teams proved each result using Lean, a formal theorem prover."
+        },
+        {
+          "url": "https://deepmind.google/blog/finding-faster-quantum-algorithms-with-agents-and-formal-verification/",
+          "quote": "Our agent teams cut the required computing cost (a metric that combines required qubits and operations) by 11.8×, and lowered required memory from 5,650 to 4,338 error-corrected qubits ."
+        },
+        {
+          "url": "https://deepmind.google/blog/finding-faster-quantum-algorithms-with-agents-and-formal-verification/",
+          "quote": "We built a new, open-source library , in Lean for quantum algorithms which could be used by teams of collaborating agents, so their ideas were backed by mathematical correctness guarantees."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "阿里开源 Ling-3.2-air 多模态 MoE 模型",
+      "summary": "inclusionAI 发布 Ling-3.2-air，沿用 Ling-3.0-flash-VL 的原生多模态架构，总参数 124B、激活 5.5B。其 Terminal-Bench 4.0 通过率从 0% 提升到 27%，AA-Briefcase v1.1 的 Elo 从 987 升至 1340。",
+      "tags": [
+        "模型",
+        "开源",
+        "多模态"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_3af54407b5",
+          "url": "https://huggingface.co/inclusionAI/Ling-3.2-air"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/inclusionAI/Ling-3.2-air",
+          "quote": "We introduce Ling-3.2-air , an open-weight model that shares the same native multimodal architecture as Ling-3.0-flash-VL ."
+        },
+        {
+          "url": "https://huggingface.co/inclusionAI/Ling-3.2-air",
+          "quote": "Its AutomationBench-AA score rises from 15.7% to 61% , while its GDP.pdf all-pass rate increases from 8.4% to 16% ."
+        },
+        {
+          "url": "https://huggingface.co/inclusionAI/Ling-3.2-air",
+          "quote": "On AA-Briefcase v1.1 , its Elo rating rises from 987 to 1340 , a gain of 353 points ."
+        },
+        {
+          "url": "https://huggingface.co/inclusionAI/Ling-3.2-air",
+          "quote": "On Terminal-Bench 4.0 , its pass rate on terminal-based tasks rises from 0% to 27% ."
+        },
+        {
+          "url": "https://huggingface.co/inclusionAI/Ling-3.2-air",
+          "quote": "Parameter Scale Total 124B, Activated 5.5B"
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Google 提出 DeepCrossAttention 改造残差连接",
+      "summary": "Google Research 的 DeepCrossAttention（DCA）用可学习权重和深度方向的交叉注意力动态组合前序层输出，避免深层网络中的信息稀释。DCA 增加的参数量不到模型总大小的 0.2%，在 LM1B 上达到同等困惑度所需层数从 42 层降到 30 层，并可加载到已预训练模型上继续训练。",
+      "tags": [
+        "训练",
+        "推理"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_c8be8459a2",
+          "url": "https://research.google/blog/supercharging-transformer-residual-connections/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://research.google/blog/supercharging-transformer-residual-connections/",
+          "quote": "We present DeepCrossAttention (DCA), an architecture that enhances transformer networks by using learnable weights and depth-wise cross-attention to dynamically combine outputs from previous layers, preventing the information dilution seen in traditional residual connections."
+        },
+        {
+          "url": "https://research.google/blog/supercharging-transformer-residual-connections/",
+          "quote": "In our ICML 2025 paper, \"DeepCrossAttention: Supercharging Transformer Residual Connections ,\" we studied the shortcomings of the traditional residual architecture and introduced DeepCrossAttention (DCA), which generalizes residual connections by allowing each layer to dynamically select and route f"
+        },
+        {
+          "url": "https://research.google/blog/supercharging-transformer-residual-connections/",
+          "quote": "By allowing the model to dynamically choose which previous layers are most important at any given moment, DCA achieves comparable or improved learning, while reducing the number of parameters needed by up to 30-40%."
+        },
+        {
+          "url": "https://research.google/blog/supercharging-transformer-residual-connections/",
+          "quote": "To achieve a perplexity of <14 on LM1B, a standard transformer with fixed width required 42 layers, whereas the DCA model achieved a lower perplexity with only 30 layers — a 29% reduction in depth and parameter count."
+        },
+        {
+          "url": "https://research.google/blog/supercharging-transformer-residual-connections/",
+          "quote": "DCA adds a tiny number of parameters — less than 0.2% of the total model size — making it negligible in terms of compute and memory footprint, while increasing memory bandwidth, as representations from different layers are presented intact rather than blended together."
+        },
+        {
+          "url": "https://research.google/blog/supercharging-transformer-residual-connections/",
+          "quote": "Interestingly, because DCA can be initialized to behave identically to a standard residual network, it doesn’t require training from scratch: retrofitting DCA onto an already pre-trained transformer and briefly continuing training reduced perplexity by 0.19 on LM1B, compared to just 0.02 for continu"
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "MemOnce 用可扩展记忆架构压缩长上下文 KV 缓存",
+      "summary": "南京大学团队提出 MemOnce，通过记忆编码器-解码器只缓存少量末层隐藏状态并动态解码回各层 KV 缓存，再用记忆稀疏注意力按需检索。改造 Qwen3.5-4B 后，记忆状态缓存减少 1313 倍，1M 上下文下预填充延迟降低，吞吐提升 3.5 倍。",
+      "tags": [
+        "论文",
+        "推理",
+        "训练"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_641ce0342f",
+          "url": "https://huggingface.co/papers/2611.27973"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.27973",
+          "quote": "W e i n t r o d u c e M e m O n c e , a f o u n d a t i o n a r c h i t e c t u r e t h a t l e a r n s s c a l a b l e m e m o r y s t a t e s f o r l a n g u a g e m o d e l s ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.27973",
+          "quote": "M e m O n c e i s b a s e d o n t w o c o r e d e s i g n s : ( a ) M e m o r y e n c o d e r - d e c o d e r : i t c a c h e s o n l y a s m a l l s u b s e t o f f i n a l - l a y e r h i d d e n s t a t e s a s c o m p a c t m e m o r y r e p r e s e n t a t i o n s a n d d y n a m i c a l l y d"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.27973",
+          "quote": "e c o d e s t h e m b a c k i n t o K V c a c h e s f o r a t t e n t i o n l a y e r s ; ( b ) M e m o r y s p a r s e a t t e n t i o n : f o r e a c h c o n t i n u a l i n p u t , M e m O n c e a d a p t i v e l y r e t r i e v e s r e l e v a n t m e m o r y r e p r e s e n t a t i o n s , w i"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.27973",
+          "quote": "C o u p l i n g t h e s e t w o d e s i g n s e n a b l e s e f f i c i e n t o n - t h e - f l y m e m o r y l o a d i n g a n d K V c a c h e d e c o d i n g , d r a s t i c a l l y r e d u c i n g t h e G P U m e m o r y f o o t p r i n t a n d a c h i e v i n g l i n e a r - t i m e c o m p l e"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.27973",
+          "quote": "I n p a r t i c u l a r , a d a p t i n g Q w e n 3 ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.27973",
+          "quote": "5 - 4 B w i t h M e m O n c e r e d u c e s m e m o r y s t a t e c a c h e b y 1 3 1 3 t i m e s a n d p r e f i l l l a t e n c y b y 6 ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.27973",
+          "quote": "9 t i m e s a t 1 M c o n t e x t , a n d i m p r o v e s t h r o u g h p u t b y 3 ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.27973",
+          "quote": "5 t i m e s a n d o v e r a l l m e m o r y p e r f o r m a n c e b y + 5 ."
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Duopra 让全双工语音模型具备任务执行能力",
+      "summary": "Duopra 是一种全双工交互模型，在学习对话控制的同时学习任务执行，把后端当作工具来调用，并用协议 SFT、全双工 RL 和投影器修复三阶段训练。搭配同一后端时 Pass@1 从 4.7% 升至 44.7%，直接调用工具达到 47.7%，接 DeepSeek 后端时为 49.3%。",
+      "tags": [
+        "论文",
+        "语音",
+        "Agent"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_8c574d457a",
+          "url": "https://huggingface.co/papers/2611.25773"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.25773",
+          "quote": "W e i n t r o d u c e D u o p r a , a f u l l - d u p l e x i n t e r a c t i o n m o d e l t h a t l e a r n s t a s k e x e c u t i o n a l o n g s i d e c o n v e r s a t i o n a l c o n t r o l ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.25773",
+          "quote": "D u o p r a t r e a t s t h e b a c k e n d a s a t o o l , a c c e p t i n g a s e l f - c o n t a i n e d n a t u r a l - l a n g u a g e r e q u e s t ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.25773",
+          "quote": "I t s t h r e e - s t a g e t r a i n i n g c o m b i n e s p r o t o c o l S F T , f u l l - d u p l e x R L r e w a r d i n g t i m e l y a n d c o m p l e t e e x e c u t i o n , a n d p r o j e c t o r - o n l y r e p a i r o f t a l k e r c o n d i t i o n i n g a f t e r t h i n k e r u p d a"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.25773",
+          "quote": "W i t h t h e s a m e b a c k e n d , P a s s @ 1 r i s e s f r o m 4 ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.25773",
+          "quote": "7 % ; D u o p r a a c h i e v e s 4 7 ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.25773",
+          "quote": "7 % c a l l i n g t o o l s d i r e c t l y ( 2 6 ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.25773",
+          "quote": "0 % a f t e r S F T ) a n d 4 9 ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.25773",
+          "quote": "On Full-Duplex-Bench v3, Duopra achieves 47.7% Pass@1 with direct tool execution and 49.3% with a DeepSeek backend, demonstrating that conversational agency and task agency can coexist."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "cmHC 用几何收缩平衡超连接的残差流混合",
+      "summary": "cmHC 指出流混合存在权衡：混合不足会让超连接退化成彼此独立的流，混合过度则让各流难以区分。作者提出把双随机矩阵约束的 Birkhoff 多面体向内部做几何收缩的方法，不引入新参数化，并在昇腾 NPU 上开发融合算子，使超连接执行延迟最多降低 44.8%。",
+      "tags": [
+        "论文",
+        "训练"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_7749c14ba2",
+          "url": "https://huggingface.co/papers/2611.27193"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.27193",
+          "quote": "Generated by deepseek-ai/DeepSeek-V4.1-Flash Manifold-constrained Hyper-Connections (mHC) extends residual connections to multiple streams and stabilizes residual propagation by constraining stream-mixing residual matrices to the Birkhoff polytope , the set of doubly stochastic matrices ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.27193",
+          "quote": "We reveal a mixing trade-off: when under-mixed residual matrices stay close to the vertices of the Birkhoff polytope , hyper-connections will degenerate into a set of nearly independent streams; when over-mixed residual matrices are concentrated around the uniform barycenter of the polytope, streams"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.27193",
+          "quote": "Motivated by these findings, we propose Contraction for Manifold-Constrained Hyper-Connections ( cmHC ), an exact doubly stochastic method which geometrically contracts the Birkhoff polytope toward its interior."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.27193",
+          "quote": "This contraction mitigates under-mixing by forcing the residual matrices to explore deeper into the polytope, with a provable stream mixing bound and no new parameterization ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.27193",
+          "quote": "We also develop fused operators for cmHC on Ascend NPUs , reducing hyper-connection execution latency by up to 44.8%."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.27193",
+          "quote": "We also develop fused operators for cmHC on Ascend NPUs, reducing hyper-connection execution latency by up to 44.8%."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "NoPeWorld 让视频世界模型不再穿墙",
+      "summary": "NoPeWorld 利用冻结扩散 Transformer（DiT）隐藏状态中已编码的碰撞信息，训练一个小预测头判断候选动作是否安全，再把不安全动作替换为保留原意的安全动作。在六个视频世界模型上平均，物理违规率从 74% 降到 16%，并能零样本泛化到开放域图像、第三人称视角和移动障碍物。",
+      "tags": [
+        "论文",
+        "视频",
+        "推理"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_9f665292d9",
+          "url": "https://huggingface.co/papers/2611.27963"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.27963",
+          "quote": "To understand how existing models handle this, we introduce NoPeBench , a benchmark that evaluates how world models respond to physical obstacles."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.27963",
+          "quote": "We find that the hidden states of diffusion transformers (DiTs) can predict whether a candidate action will penetrate an obstacle."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.27963",
+          "quote": "Building on this, we introduce NoPeWorld , a lightweight framework that detects and prevents penetration."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.27963",
+          "quote": "Specifically, we train a small prediction head on top of a frozen DiT 's hidden states to read out if a candidate action is safe or not."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.27963",
+          "quote": "Unsafe actions are then replaced with safe ones that best preserve the original intent."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.27963",
+          "quote": "Despite its simplicity, NoPeWorld substantially reduces the physical violation rate , averaged over six video world models, from 74% to 16%."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.27963",
+          "quote": "Remarkably, our method shows zero-shot generalization to open-domain imagery, third-person viewpoints, and moving obstacles."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Future-OPSD 用无标注视频自蒸馏训练前瞻推理",
+      "summary": "Future-OPSD 把过去与未来的视频对转为自监督信号，无需标注或外部大模型监督，并用前瞻分数导出的对比特权优势让模型聚焦决策相关片段、压制无关上下文。在开放式预测和闭环规划任务上，基座模型分别最多提升 14.2 和 15.9 分，且不损害通用视频理解。",
+      "tags": [
+        "论文",
+        "多模态",
+        "视频"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_21e2c3b882",
+          "url": "https://huggingface.co/papers/2611.26954"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.26954",
+          "quote": "We address this with an on-policy self-distillation framework that turns past-future video pairs into a natural self-supervised signal without extra annotations or LLM supervision ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.26954",
+          "quote": "We address this by defining a foresight score , from which we obtain a contrastive privilege advantage that drives the model to learn the most valuable future information."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.26954",
+          "quote": "We call the resulting framework Future-OPSD ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.26954",
+          "quote": "On open-ended prediction and closed-ended planning , Future-OPSD improves base models by up to 14.2 and 15.9 points without compromising general video understanding ."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "TAISR 文字超分需要推理而非只看局部像素",
+      "summary": "论文提出 ReasonText 人工标注基准和 GTTCA 指标，评测十二个近期超分模型后发现在需要推理的文字上存在系统性短板。作者提出无需训练的 RTC 插件，用外部多模态大模型推断模糊文字并写入 caption 喂给文字条件超分模型，在评测的六个文字条件模型上均带来提升。",
+      "tags": [
+        "论文",
+        "图像",
+        "多模态"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_47c4ff3462",
+          "url": "https://huggingface.co/papers/2611.15449"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.15449",
+          "quote": "T h e f i r s t , R e a s o n T e x t , i s a h u m a n - c u r a t e d b e n c h m a r k t h a t s e p a r a t e s r e a s o n i n g - r e q u i r e d t e x t f r o m l o c a l l y r e c o v e r a b l e t e x t ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.15449",
+          "quote": "T h e s e c o n d , G r o u n d - T r u t h T e x t - C r o p A c c u r a c y ( G T T C A ) , i s a r e c o g n i t i o n - b a s e d m e t r i c t h a t m e a s u r e s t e x t r e s t o r a t i o n q u a l i t y w i t h o u t t e x t d e t e c t i o n e r r o r s ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.15449",
+          "quote": "E v a l u a t i n g t w e l v e r e c e n t s u p e r - r e s o l u t i o n ( S R ) m o d e l s , w e f i n d a c o n s i s t e n t a n d s u b s t a n t i a l p e r f o r m a n c e d r o p o n r e a s o n i n g - r e q u i r e d t e x t , r e v e a l i n g a s y s t e m a t i c b l i n d s p o t ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.15449",
+          "quote": "W e t h e r e f o r e p r o p o s e R e a s o n i n g T r a n s f e r v i a C a p t i o n i n g ( R T C ) , a t r a i n i n g - f r e e p l u g - i n t h a t u s e s a n e x t e r n a l M L L M t o i n f e r t h e d e g r a d e d t e x t a n d f e e d s t h e r e s u l t i n g c a p t i o n t o a t"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.15449",
+          "quote": "e x t - c o n d i t i o n e d S R m o d e l ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.15449",
+          "quote": "R T C c o n s i s t e n t l y i m p r o v e s a l l s i x t e x t - c o n d i t i o n e d S R m o d e l s w e e v a l u a t e , e s p e c i a l l y o n r e a s o n i n g - r e q u i r e d t e x t ."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "ReSpaceBench 评测智能体跨重访的持久空间记忆",
+      "summary": "ReSpaceBench 包含 590 个合成与真实家居场景中的 3,244 个问题、9 类任务，刻意加入同类型房间干扰与跨会话物品变化。32 个模型和 3 个智能体视频理解框架的评测显示，最强零样本模型总体准确率 50.5%，低于人工标注者的 90.1%，而智能体框架相比同基座模型直接推理没有整体提升。",
+      "tags": [
+        "论文",
+        "Agent",
+        "多模态"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_1b26fd3d09",
+          "url": "https://huggingface.co/papers/2611.21485"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.21485",
+          "quote": "W e i n t r o d u c e R e S p a c e B e n c h , a b e n c h m a r k c o m p r i s i n g 3 , 2 4 4 q u e s t i o n s a c r o s s 5 9 0 s y n t h e t i c a n d r e a l - h o m e s c e n e s , o r g a n i z e d i n t o 9 t a s k s s p a n n i n g r o o m a s s o c i a t i o n , p e r s i s t e n t s t"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.21485",
+          "quote": "a t e t r a c k i n g , a n d d o w n s t r e a m r e a s o n i n g ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.21485",
+          "quote": "C o n t r o l l e d w a l k t h r o u g h s d e f i n e v i s i t s b y p h y s i c a l r o o m e n t r y a n d d e l i b e r a t e l y i n c l u d e s a m e - t y p e r o o m d i s t r a c t o r s a n d c r o s s - s e s s i o n o b j e c t c h a n g e s ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.21485",
+          "quote": "O u r e v a l u a t i o n o f 3 2 m o d e l s a n d 3 a g e n t i c v i d e o - u n d e r s t a n d i n g f r a m e w o r k s r e v e a l s s u b s t a n t i a l l i m i t a t i o n s : t h e s t r o n g e s t e v a l u a t e d z e r o - s h o t m o d e l a c h i e v e s 5 0 ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.21485",
+          "quote": "5 % o v e r a l l a c c u r a c y a n d 5 2 ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.21485",
+          "quote": "2 % o n a 4 5 0 - q u e s t i o n s u b s e t , c o m p a r e d w i t h 9 0 ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.21485",
+          "quote": "1 % f o r h u m a n a n n o t a t o r s ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.21485",
+          "quote": "T h e e v a l u a t e d a g e n t i c f r a m e w o r k s o f f e r n o o v e r a l l i m p r o v e m e n t o v e r d i r e c t i n f e r e n c e w i t h t h e s a m e b a s e m o d e l ."
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "RoboTrack 发布机器人点跟踪基准与模型",
+      "summary": "RoboTrack-Bench 收录 307 个人工标注视频和 2,522 条人工校验点轨迹，覆盖杂乱场景与第一、第三人称视角；评测显示现有跟踪器在该基准上的 AJ 比 RoboTAP 低 3.0 到 6.6。项目同时发布合成训练集 RoboTrack-15M 以及两个模型 RoboTracker 和 RoboTracker-Warp。",
+      "tags": [
+        "工具",
+        "开源",
+        "论文"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_cc43133d3e",
+          "url": "https://huggingface.co/blog/allenai/robotrack"
+        },
+        {
+          "candidate_id": "c_021e9bbb01",
+          "url": "https://allenai.org/blog/robotrack"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/blog/allenai/robotrack",
+          "quote": "RoboTrack-Bench contains 307 human-annotated videos from DROID, Ego-Exo4D, MolmoAct 2 , and EgoVerse, covering different robots and human hands, cluttered scenes, and first- and third-person viewpoints."
+        },
+        {
+          "url": "https://huggingface.co/blog/allenai/robotrack",
+          "quote": "This pipeline produces RoboTrack-15M , a new synthetic training dataset targeted toward robotic manipulation."
+        },
+        {
+          "url": "https://huggingface.co/blog/allenai/robotrack",
+          "quote": "Today, we’re releasing both RoboTrack components and two new point tracking models: RoboTracker and RoboTracker-Warp ."
+        },
+        {
+          "url": "https://huggingface.co/blog/allenai/robotrack",
+          "quote": "Both models improve average AJ across the three robotics benchmarks compared with their respective released baselines, and RoboTracker-Warp achieves state-of-the-art performance on four out of the five benchmarks we evaluated."
+        },
+        {
+          "url": "https://huggingface.co/blog/allenai/robotrack",
+          "quote": "It contains 307 videos from DROID, Ego-Exo4D, MolmoAct 2, and EgoVerse, annotated with a total of 2,522 point tracks."
+        },
+        {
+          "url": "https://huggingface.co/blog/allenai/robotrack",
+          "quote": "Their score drops by 3.0 to 6.6 AJ."
+        },
+        {
+          "url": "https://huggingface.co/blog/allenai/robotrack",
+          "quote": "Even the strongest off-the-shelf tracker, CoWTracker, drops from 70.5 AJ on RoboTAP to 63.9 on RoboTrack-Bench."
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Hugging Face 详解如何构建与维护 agentic 评测",
+      "summary": "Hugging Face 的指南以一个物理实验室 agent 评测为例，梳理从定义主张、复用任务、校验、读 trace 到报告分数和比较模型的八步流程，并讨论基准错误、污染与饱和问题。文中指出，在 Terminal-Bench 的审计中只更换 agent harness 就让准确率波动最多 29.9 个百分点，说明评测外围软件同样会左右成绩。",
+      "tags": [
+        "工具",
+        "Agent"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_d9fba9acb3",
+          "url": "https://huggingface.co/blog/agentic-evals"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/blog/agentic-evals",
+          "quote": "AI evaluations help shape which systems people build, adopt, and trust."
+        },
+        {
+          "url": "https://huggingface.co/blog/agentic-evals",
+          "quote": "Building and maintaining a useful evaluation therefore takes real work: defining tasks that reflect domain expertise, scoring them reliably, and checking that the results support the claims made."
+        },
+        {
+          "url": "https://huggingface.co/blog/agentic-evals",
+          "quote": "For instance, in an audit of Terminal-Bench , researchers kept the model fixed and changed the agent harness."
+        },
+        {
+          "url": "https://huggingface.co/blog/agentic-evals",
+          "quote": "Accuracy varied by up to 29.9 percentage points."
+        },
+        {
+          "url": "https://huggingface.co/blog/agentic-evals",
+          "quote": "We work through eight steps: define the claim , find a task , run it unchanged , adapt it , check the evaluation , read the traces , report the score , and compare models ."
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Anthropic 企业版 EFS 支持零数据保留",
+      "summary": "Anthropic 把 Enterprise Frontier Safeguards（EFS）开放公测，在不存储客户数据的前提下提供跨请求的自动化安全监控，可捕捉单条请求看似无害的复合攻击。EFS 兼容零数据保留（ZDR），输入输出写入客户自有存储并由客户自行控制访问策略、审计日志与加密密钥，Anthropic 不用这些数据做训练。",
+      "tags": [
+        "安全",
+        "产品",
+        "行业"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_f4c9a77625",
+          "url": "https://claude.com/resources/articles/zero-data-retention-with-enterprise-frontier-safeguards"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://claude.com/resources/articles/zero-data-retention-with-enterprise-frontier-safeguards",
+          "quote": "EFS provides state-of-the-art detection of sophisticated misuse, while remaining compatible with zero data retention (ZDR): neither Anthropic nor any cloud providers retain enterprises' data."
+        },
+        {
+          "url": "https://claude.com/resources/articles/zero-data-retention-with-enterprise-frontier-safeguards",
+          "quote": "Enterprise Frontier Safeguards delivers just that.” Noopur Davis, EVP, Chief Information Security and Product Privacy Officer 1 / 5 Now, we're opening up EFS in public beta."
+        },
+        {
+          "url": "https://claude.com/resources/articles/zero-data-retention-with-enterprise-frontier-safeguards",
+          "quote": "To catch attacks like these, we use a second defensive layer, known as automated safety monitoring."
+        },
+        {
+          "url": "https://claude.com/resources/articles/zero-data-retention-with-enterprise-frontier-safeguards",
+          "quote": "This layer looks for patterns of misuse across many requests."
+        },
+        {
+          "url": "https://claude.com/resources/articles/zero-data-retention-with-enterprise-frontier-safeguards",
+          "quote": "Through EFS, Anthropic can provide automated safety monitoring without storing any customer data."
+        },
+        {
+          "url": "https://claude.com/resources/articles/zero-data-retention-with-enterprise-frontier-safeguards",
+          "quote": "Instead, our automated safety monitoring system analyzes data stored entirely on infrastructure controlled by our customers."
+        },
+        {
+          "url": "https://claude.com/resources/articles/zero-data-retention-with-enterprise-frontier-safeguards",
+          "quote": "These cases can be read from your cloud storage or through an API, and can be integrated with security information and event management systems."
+        },
+        {
+          "url": "https://claude.com/resources/articles/zero-data-retention-with-enterprise-frontier-safeguards",
+          "quote": "This provides you the following guarantees: Zero data retention ."
+        },
+        {
+          "url": "https://claude.com/resources/articles/zero-data-retention-with-enterprise-frontier-safeguards",
+          "quote": "Neither Anthropic nor your cloud provider retains your data."
+        },
+        {
+          "url": "https://claude.com/resources/articles/zero-data-retention-with-enterprise-frontier-safeguards",
+          "quote": "You configure your own access policies and audit logging, and encrypt safety data with your own keys."
+        },
+        {
+          "url": "https://claude.com/resources/articles/zero-data-retention-with-enterprise-frontier-safeguards",
+          "quote": "We never train on your data."
+        },
+        {
+          "url": "https://claude.com/resources/articles/zero-data-retention-with-enterprise-frontier-safeguards",
+          "quote": "Inputs and outputs are used only for automated safety monitoring, never for model or classifier training."
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "obra/superpowers 用技能与子 agent 驱动编码流程",
+      "summary": "Superpowers 是面向编码智能体的开发方法论与技能框架，流程从先厘清需求、分段确认设计、产出实施计划，再进入子 agent 驱动的开发与审查，技能会自动触发。仓库同时提供 Claude Code、Codex、Cursor、Gemini CLI 等多种 harness 的安装方式，采用 MIT 协议。",
+      "tags": [
+        "工具",
+        "开源",
+        "Agent"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_cfd2851c47",
+          "url": "https://github.com/obra/superpowers"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/obra/superpowers",
+          "quote": "superpowers Public Sponsor Notifications You must be signed in to change notification settings Fork 28.8k ( 28.8k ) Star 325k ( 325k ) You must be signed in to star a repository About An agentic skills framework & software development methodology that works."
+        },
+        {
+          "url": "https://github.com/obra/superpowers",
+          "quote": "Superpowers is a complete software development methodology for your coding agents, built on top of a set of composable skills and some initial instructions that make sure your agent uses them."
+        },
+        {
+          "url": "https://github.com/obra/superpowers",
+          "quote": "It starts from the moment you fire up your coding agent."
+        },
+        {
+          "url": "https://github.com/obra/superpowers",
+          "quote": "After you've signed off on the design, your agent puts together an implementation plan that's clear enough for an enthusiastic junior engineer with poor taste, no judgement, no project context, and an aversion to testing to follow."
+        },
+        {
+          "url": "https://github.com/obra/superpowers",
+          "quote": "Next up, once you say \"go\", it launches a subagent-driven-development process, having agents work through each engineering task, inspecting and reviewing their work, and continuing forward."
+        },
+        {
+          "url": "https://github.com/obra/superpowers",
+          "quote": "And because the skills trigger automatically, you don't need to do anything special."
+        },
+        {
+          "url": "https://github.com/obra/superpowers",
+          "quote": "Superpowers is available via the official Claude plugin marketplace"
+        },
+        {
+          "url": "https://github.com/obra/superpowers",
+          "quote": "/plugin install superpowers@claude-plugins-official"
+        },
+        {
+          "url": "https://github.com/obra/superpowers",
+          "quote": "Superpowers is available via the official Codex plugin marketplace ."
+        },
+        {
+          "url": "https://github.com/obra/superpowers",
+          "quote": "Search for Superpowers:"
+        }
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "CLI-Anything 把各类软件包装成 agent 可用的 CLI",
+      "summary": "CLI-Anything 通过 CLI-Hub 安装社区构建的 CLI，仓库内已为 Blender、GIMP、LibreOffice、Obsidian 等软件提供 agent-harness 适配，采用 Apache-2.0 协议。",
+      "tags": [
+        "工具",
+        "开源",
+        "Agent"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_740be60563",
+          "url": "https://github.com/HKUDS/CLI-Anything"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/HKUDS/CLI-Anything",
+          "quote": "CLI-Anything Public Notifications You must be signed in to change notification settings Fork 5.8k ( 5.8k ) Star 63.9k ( 63.9k ) You must be signed in to star a repository About \"CLI-Anything: Making ALL Software Agent-Native\" -- CLI-Hub: https://clianything.cc/ clianything.cc/ Resources Readme Apach"
+        },
+        {
+          "url": "https://github.com/HKUDS/CLI-Anything",
+          "quote": "DME Contributing Apache-2.0 license Security More items CLI-Anything: Making ALL Software Agent-Native"
+        },
+        {
+          "url": "https://github.com/HKUDS/CLI-Anything",
+          "quote": "CLI-Anything: Bridging the Gap Between AI Agents and the World's Software"
+        },
+        {
+          "url": "https://github.com/HKUDS/CLI-Anything",
+          "quote": "🌐 CLI-Hub : pip install cli-anything-hub then cli-hub install <name> — browse, install, and manage all community-built CLIs."
+        },
+        {
+          "url": "https://github.com/HKUDS/CLI-Anything",
+          "quote": "One Command Line : Make any software agent-ready for Pi, OpenClaw, nanobot, Cursor, Claude Code, etc."
+        }
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "MiniMind 主线结构对齐 Qwen3 并支持 Agentic RL",
+      "summary": "MiniMind 开源约 64M 的超小语言模型完整训练链路，核心算法用 PyTorch 原生实现，覆盖 Pretrain、SFT、LoRA、DPO 以及 GRPO、CISPO 等 Agentic RL 训练。",
+      "tags": [
+        "开源",
+        "训练",
+        "工具"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_3b240d3ecb",
+          "url": "https://github.com/jingyaogong/minimind"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/jingyaogong/minimind",
+          "quote": "minimind Public Notifications You must be signed in to change notification settings Fork 9.1k ( 9.1k ) Star 69.6k ( 69.6k ) You must be signed in to star a repository About 🧠 两小时从 0 训出你的 64M 大模型。Train your own 64M LLM from scratch in 2 hours."
+        },
+        {
+          "url": "https://github.com/jingyaogong/minimind",
+          "quote": "此开源项目旨在完全从 0 开始，仅用 3 块钱成本与 2 小时训练时间，即可训练出规模约为 64M 的超小语言模型 MiniMind。"
+        },
+        {
+          "url": "https://github.com/jingyaogong/minimind",
+          "quote": "项目同时开源了大模型的极简结构与完整训练链路，覆盖 MoE、数据清洗、预训练（Pretrain）、监督微调（SFT）、LoRA、RLHF（DPO）、RLAIF（PPO / GRPO / CISPO）、Tool Use、Agentic RL、自适应思考与模型蒸馏等全过程代码。"
+        },
+        {
+          "url": "https://github.com/jingyaogong/minimind",
+          "quote": "项目所有核心算法代码均从 0 使用 PyTorch 原生实现，不依赖第三方库提供的高层抽象接口。"
+        },
+        {
+          "url": "https://github.com/jingyaogong/minimind",
+          "quote": "提供完整的 MiniMind-LLM 结构代码（Dense + MoE），当前主线结构对齐 Qwen3 / Qwen3-MoE 生态。"
+        },
+        {
+          "url": "https://github.com/jingyaogong/minimind",
+          "quote": "结构主线对齐 Qwen3 / Qwen3-MoE 生态：Dense 约 64M ，MoE 约 198M-A64M ，并移除了 shared expert 设计"
+        },
+        {
+          "url": "https://github.com/jingyaogong/minimind",
+          "quote": "新增原生 Agentic RL 训练脚本 train_agent.py ，支持多轮 Tool-Use 场景下的 GRPO / CISPO"
+        }
+      ]
+    }
+  ],
+  "research": [
+    {
+      "via": "webfetch",
+      "url": "https://claude.com/resources/articles/introducing-claude-ship"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://openai.com/index/introducing-shirudo"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://deepmind.google/blog/finding-faster-quantum-algorithms-with-agents-and-formal-verification/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/blog/allenai/robotrack"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://research.google/blog/supercharging-transformer-residual-connections/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/blog/agentic-evals"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://claude.com/resources/articles/zero-data-retention-with-enterprise-frontier-safeguards"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/inclusionAI/Ling-3.2-air"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.27193"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.27963"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.26954"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.27973"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.25773"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.15449"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.21485"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/openai/openai-agents-python/releases/tag/v0.26.0"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.172.0"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.331"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://z.ai/blog/glm-5.4"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/obra/superpowers"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/HKUDS/CLI-Anything"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/jingyaogong/minimind"
+    }
+  ],
+  "validation": {
+    "validated_at": "2026-11-24T04:42:25+00:00",
+    "checked_links": true,
+    "dropped": [],
+    "warnings": [
+      "5 paper items (target 2-4)"
+    ]
+  }
+}
