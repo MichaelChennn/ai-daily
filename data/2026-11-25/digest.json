@@ -2,133 +2,76 @@
   "schema_version": 1,
   "date": "2026-11-25",
   "mode": "full",
-  "generated_at": "2026-11-25T04:40:29+00:00",
-  "channel": "api",
-  "model": "nvidia:minimaxai/minimax-m3.1-flash",
+  "channel": "claude",
+  "generated_at": "2026-11-25T04:42:10+00:00",
+  "model": "claude-sonnet-5-5",
   "highlights": [
-    "Anthropic 为 MCP 加入 Skills、Tasks 与 Elicitation",
-    "Reflection 开源 Beam 稀疏 MoE 模型与权重",
-    "腾讯开源 WeMM-Ecom 多模态电商模型家族"
+    "OpenAI 称 GPT-6 系列仅靠推理和代码设计蛋白质，在与 Onava 的实验室测试中五个靶点都显示出结合迹象。",
+    "Claude 让 MCP server 随工具发布 skills，并推出 Install as app，把 artifact 装成 Mac 和 Windows 应用。"
   ],
   "items": [
     {
       "section": "headline",
-      "title": "Anthropic 为 MCP 加入 Skills、Tasks 与 Elicitation",
-      "summary": "Anthropic 宣布 Skills over MCP 在 Claude 和 Claude Code 中进入 public beta，MCP server 可以随工具一起发布 skill，由 Claude 按需加载；Tasks 和 Elicitation 已 generally available，File Uploads 即将推出。这些能力属于开放的 MCP 规范与扩展，支持它们的 server 在任意兼容客户端中都能用。",
-      "tags": [
-        "Agent",
-        "工具",
-        "产品"
-      ],
+      "title": "OpenAI：GPT-6 系列仅靠推理和代码设计蛋白质，五个靶点实验室测试有结合迹象",
+      "summary": "OpenAI 称 GPT-6 系列用推理和通用代码设计蛋白质结构与序列；与 Onava 的实验室测试中，基于 GPT‑6.2 设计的蛋白在五个靶点上都显示出结合迹象。设计过程中仍有专用模型提供序列并筛选候选，所以结果还不是端到端的纯 GPT 设计。对开发者来说，这是通用模型直接进入科学设计任务的一个实证，但文中也只说到“结合迹象”这一早期步骤。",
       "sources": [
         {
-          "candidate_id": "c_3f64fbffce",
-          "url": "https://claude.com/resources/articles/skills-over-mcp-tasks-and-more"
+          "candidate_id": "c_e32ed061be",
+          "url": "https://openai.com/index/gpt-6-models-demonstrate-intrinsic-protein-design-capabilities"
         }
       ],
       "evidence": [
         {
-          "url": "https://claude.com/resources/articles/skills-over-mcp-tasks-and-more",
-          "quote": "work with Claude Add support to your plugins today Built on stronger foundations for connecting agents in production Thank you to the MCP community Skills over MCP is now in public beta in Claude, so MCP servers can ship skills alongside their tools."
+          "url": "https://openai.com/index/gpt-6-models-demonstrate-intrinsic-protein-design-capabilities",
+          "quote": "In lab tests with Onava, proteins based on GPT‑6.2’s designs showed evidence of binding, or attachment, across five targets."
         },
         {
-          "url": "https://claude.com/resources/articles/skills-over-mcp-tasks-and-more",
-          "quote": "We're also giving servers ways to handle longer, more interactive work with Claude: Tasks and Elicitation are now generally available, and File Uploads is rolling out soon."
+          "url": "https://openai.com/index/gpt-6-models-demonstrate-intrinsic-protein-design-capabilities",
+          "quote": "Specialized models supplied amino acid sequences and helped select candidates for testing."
         },
         {
-          "url": "https://claude.com/resources/articles/skills-over-mcp-tasks-and-more",
-          "quote": "Add support to your plugins today These features are part of the open MCP spec and its extensions, so a server that supports them works in any compatible client, not just Claude."
-        },
-        {
-          "url": "https://claude.com/resources/articles/skills-over-mcp-tasks-and-more",
-          "quote": "To add support, see the docs for Skills over MCP , Tasks , Elicitation , and File Uploads ."
+          "url": "https://openai.com/index/gpt-6-models-demonstrate-intrinsic-protein-design-capabilities",
+          "quote": "In a preliminary analysis, 43.7% of the designs we evaluated from our latest internal model met both criteria, compared with 27.8% for RFdiffusion."
         }
+      ],
+      "tags": [
+        "模型",
+        "行业"
       ]
     },
     {
       "section": "headline",
-      "title": "Reflection 开源 Beam 稀疏 MoE 模型与权重",
-      "summary": "Reflection 发布 Beam 模型技术报告与开源权重：这是一款 501.3B 总参数、23.4B 激活参数的稀疏 MoE，面向编码、推理与 agentic 任务，预训练数据规模为 23.8T token，上下文窗口达 1M-token。后训练用 10.5K 张 GB300 跑异步 RL，四周生成超过 100M rollout，并提供 FP8/NVFP4 量化版本与 1.93B 参数的推测解码草稿模型 DFlash 2。",
-      "tags": [
-        "模型",
-        "开源",
-        "推理"
-      ],
+      "title": "Claude 让 MCP server 随工具发布 skills，Claude Code 同步支持",
+      "summary": "Anthropic 宣布 Skills over MCP 进入公开测试：MCP server 可以在提供工具的同时发布 skills，Claude 和 Claude Code 在 Pro、Max、Ultra 套餐默认开启。Tasks 和 Elicitation 对这些套餐正式可用，Claude Code v2.1.332 也加入了来自 MCP server 的 skills（beta），在 / 菜单里显示为 server:skill。server 和插件开发者需要自行加入支持。",
       "sources": [
         {
-          "candidate_id": "c_37ee805a87",
-          "url": "https://huggingface.co/papers/2611.26358"
+          "candidate_id": "c_3f64fbffce",
+          "url": "https://claude.com/resources/articles/skills-over-mcp-tasks-and-more"
+        },
+        {
+          "candidate_id": "c_6606479f7e",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.332"
         }
       ],
       "evidence": [
         {
-          "url": "https://huggingface.co/papers/2611.26358",
-          "quote": "Generated by deepseek-ai/DeepSeek-V4.1-Flash Beam is a sparse Mixture-of-Experts (MoE) model with 501.3B total parameters and 23.4B active parameters , specifically built and optimized for coding, reasoning, and agentic workloads."
+          "url": "https://claude.com/resources/articles/skills-over-mcp-tasks-and-more",
+          "quote": "Skills over MCP is in public beta in Claude and Claude Code, on by default for Pro, Max, and Ultra plans and available to Team plans once an admin enables it."
         },
         {
-          "url": "https://huggingface.co/papers/2611.26358",
-          "quote": "Pretrained on 23.8T diverse, curated, high-quality tokens, Beam features a 1M-token context window achieved through a novel two-stage midtraining phase, built on verifiable, correctness-anchored data."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.26358",
-          "quote": "Post-training leveraged a large-scale, fully asynchronous reinforcement learning (RL) campaign across 10.5K GB300 GPUs, generating over 100M rollouts over 4 weeks of training."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.26358",
-          "quote": "Supported by deep hardware-model co-design , FP8/NVFP4 quantization , and a 1.93B-parameter speculative decoding drafter ( DFlash 2 ), Beam maximizes serving throughput with efficient, flexible deployment."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.26358",
-          "quote": "curl -LsSf https://hf.co/cli/install.sh | bash Models citing this paper 3 reflection/Beam-1.0-501B-A23B Text Generation • 501B • Updated about 15 hours ago • 12.6k • 330 reflection/Beam-1.0-501B-A23B-NVFP4 Text Generation • 501B • Updated about 15 hours ago • 5.16k • 49 reflection/Beam-1.0-501B-A23B"
-        }
-      ]
-    },
-    {
-      "section": "model",
-      "title": "腾讯开源 WeMM-Ecom 多模态电商模型家族",
-      "summary": "腾讯在微信电商场景中推出并开源 WeMM-Ecom，覆盖 0.8B 稠密模型到 35B MoE（3B 激活参数）共五种规格，训练流程包含两阶段继续预训练与结合 on-policy 蒸馏和 RL 的混合思考后训练。团队称 35B-A3B 在电商评测上超过 Qwen3.8-Flash-Next、HY4、DeepSeek-V4.1-Flash 等更大的开源模型，模型权重与代码已发布。",
-      "tags": [
-        "模型",
-        "开源",
-        "多模态"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_efcc189b36",
-          "url": "https://huggingface.co/papers/2611.30662"
+          "url": "https://claude.com/resources/articles/skills-over-mcp-tasks-and-more",
+          "quote": "Tasks and Elicitation are now generally available in Claude and Claude Code for Pro, Max, and Ultra plans, and rolling out to Team and Enterprise organizations."
         }
       ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2611.30662",
-          "quote": "The family spans five sizes, from a 0.8B dense model to a 35B mixture-of-experts model with 3B active parameters ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.30662",
-          "quote": "Our training pipeline begins with two-stage continued pre-training that progressively raises the proportion of e-commerce data within a diverse multimodal data mixture , followed by hybrid-thinking post-training that combines on-policy distillation and reinforcement learning to support both non-thin"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.30662",
-          "quote": "On the e-commerce suite, WeMM-Ecom-35B-A3B surpasses substantially larger open-source flagship models, including Qwen3.8-Flash-Next, HY4, and DeepSeek-V4.1-Flash."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.30662",
-          "quote": "We publicly release all model weights and detail our data curation, training recipe, and benchmark construction to facilitate future work on domain-specialized multimodal models ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.30662",
-          "quote": "We have released the model weights and code to facilitate future research at https://github.com/Tencent/WeMM-Ecom."
-        }
-      ]
-    },
-    {
-      "section": "tool",
-      "title": "Claude 支持把 artifact 装成 Mac 与 Windows 应用",
-      "summary": "Claude 的 artifacts 现在可以安装为独立的 Mac 或 Windows 应用，在 beta 中向所有套餐推出，安装后有独立图标和窗口，可共享并按需授予权限。应用可调用 Claude 与连接器，底层 artifact 改动后会自动更新；开发者不需要打包或签名，也不必单独配置 API key。",
       "tags": [
         "工具",
-        "产品"
-      ],
+        "Agent"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Claude 推出 Install as app：把 artifact 装成 Mac 和 Windows 应用",
+      "summary": "Claude 的“Install as app”以测试版在 Claude for Mac 和 Windows 上推出：安装后的 artifact 有自己的图标，在独立窗口里打开。这些应用不用自己打包或签名，直接使用 Claude 账号。权限分三档，其中完整电脑访问可以读写、删除文件，而且 Anthropic 不会在安装前审查应用，只应授权给信任的应用。",
       "sources": [
         {
           "candidate_id": "c_414c884863",
@@ -138,237 +81,118 @@
       "evidence": [
         {
           "url": "https://claude.com/resources/articles/install-as-app",
-          "quote": "ed Starting today, you can use Claude artifacts to create, run, and share desktop apps."
-        },
-        {
-          "url": "https://claude.com/resources/articles/install-as-app",
           "quote": "The \"Install as app\" feature is rolling out in beta in Claude for Mac and Windows."
         },
         {
           "url": "https://claude.com/resources/articles/install-as-app",
-          "quote": "When an artifact is installed as a Mac or Windows app, it gets its own icon and opens in its own window instead of inside Claude."
+          "quote": "You don’t have to package or sign it, and it uses your Claude account, so there’s no API key or separate login."
         },
         {
           "url": "https://claude.com/resources/articles/install-as-app",
-          "quote": "You can share it with others, and it needs your permission before it can interact with your computer."
+          "quote": "Full computer access: Apps can ask to run programs and read, change, or delete your files without asking each time."
         },
         {
           "url": "https://claude.com/resources/articles/install-as-app",
-          "quote": "Each app can use Claude and your connectors, and it updates automatically when the underlying artifact is edited."
-        },
-        {
-          "url": "https://claude.com/resources/articles/install-as-app",
-          "quote": "Getting started Describe your app to Claude, try it as an artifact, and then click \"Install as app.\" You don’t have to package or sign it, and it uses your Claude account, so there’s no API key or separate login."
-        },
-        {
-          "url": "https://claude.com/resources/articles/install-as-app",
-          "quote": "Install as app is rolling out in beta on all plans."
+          "quote": "Anthropic doesn’t review apps before you install them, so only give full access to apps you trust."
         }
+      ],
+      "tags": [
+        "产品",
+        "工具"
       ]
     },
     {
-      "section": "tool",
-      "title": "Claude Code v2.1.332 支持 MCP skills 并修复大量卡死问题",
-      "summary": "Claude Code v2.1.332 加入来自 MCP server 的 skills（beta），在 / 菜单中以 server:skill 显示，并新增 PreSkillShellCommand hook 事件用于拦截 skill 内联 shell 命令。该版本还修复了本地 MCP server 输出刷屏导致终端卡死、SSE MCP server 重连后工具调用全部失败、hook 打印输出不结束造成卡死与内存膨胀等问题。",
-      "tags": [
-        "工具",
-        "Agent",
-        "代码"
-      ],
+      "section": "model",
+      "title": "DeepSeek-V4.1-Flash-1017 发布：推理、代码和 agent 基准提升，MIT 许可",
+      "summary": "DeepSeek-V4.1-Flash-1017 是 DeepSeek-V4.1-Flash 的小幅更新，模型卡称推理、代码、agent 任务和视觉基准都有提升，例如 Terminal-Bench 4.0 从 31.2 提到 42.3。推荐上下文窗口 1M tokens，仓库和权重采用 MIT 许可，可以直接用于自己的部署。",
       "sources": [
         {
-          "candidate_id": "c_6606479f7e",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.332"
+          "candidate_id": "c_8b553ca25e",
+          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017"
         }
       ],
       "evidence": [
         {
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.332",
-          "quote": "Added skills from MCP servers (beta)."
+          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+          "quote": "delivering substantial improvements across reasoning, coding, agentic tasks, and visual benchmarks"
         },
         {
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.332",
-          "quote": "They show as server:skill in the / menu; other skills keep their names"
+          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+          "quote": "Terminal-Bench 4.0 42.3 31.2"
         },
         {
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.332",
-          "quote": "Added a PreSkillShellCommand hook event that can refuse a skill or command's inline shell commands as it loads; on 2.1.331 and older, a settings file naming it opens a dialog at start"
-        },
-        {
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.332",
-          "quote": "Fixed freezes and runaway memory use in most cases while a hook prints output without end"
-        },
-        {
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.332",
-          "quote": "Fixed the terminal freezing, and ignoring Ctrl+C, while a local MCP server floods its standard output"
-        },
-        {
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.332",
-          "quote": "Fixed SSE MCP servers hanging or refusing every tool call after their event stream was cut and came back on a new endpoint or not at all, until reconnected by hand"
+          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+          "quote": "context_window 1M tokens max_tokens ≥ 256K License This repository and the model weights are licensed under the MIT License"
         }
+      ],
+      "tags": [
+        "模型",
+        "开源"
       ]
     },
     {
-      "section": "paper",
-      "title": "Motion Mamba 2.0 用 Mamba 做长时程人形运动控制",
-      "summary": "北京大学团队提出 Motion Mamba 2.0，把自回归扩散与 Mamba 结合，通过局部注意力、可恢复递归状态和持久内容记忆（PCM）处理长时程可控运动生成，配合 CUDA Graph 重放与融合算子做推理优化。在 RTX 4090 上，完整窗口中位延迟从 1685.35 ms 降到 276.14 ms，代码、模型和训练数据全部开源。",
+      "section": "model",
+      "title": "Aleph Alpha 开放 Kolibri 1.1：75B 总参数、3.44B 激活，面向德语和英语",
+      "summary": "Aleph Alpha 的 Kolibri 1.1 是支持推理模式和工具调用的 MoE 模型，75B 总参数、每 token 激活 3.44B，原生上下文 262,144 tokens，权重按 Apache 2.0 提供。模型卡给出的总分是 73.2，Kolibri 1.0 是 66.6，同表中仍有 Qwen3.8 Flash Next 等模型得分更高。需要德英双语的团队可以考虑。",
+      "sources": [
+        {
+          "candidate_id": "c_47cf8402d2",
+          "url": "https://huggingface.co/Aleph-Alpha/Kolibri-1.1"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/Aleph-Alpha/Kolibri-1.1",
+          "quote": "Architecture Mixture-of-Experts Total parameters 75B (75,128,393,984) Active parameters / token 3.44B (3,439,874,304) Languages German, English Context length 262,144 tokens native, up to 1,048,576 tokens"
+        },
+        {
+          "url": "https://huggingface.co/Aleph-Alpha/Kolibri-1.1",
+          "quote": "Reasoning mode Yes Tool calling Yes Licence Apache 2.0"
+        },
+        {
+          "url": "https://huggingface.co/Aleph-Alpha/Kolibri-1.1",
+          "quote": "Overall 73.2 66.6 67.3"
+        },
+        {
+          "url": "https://huggingface.co/Aleph-Alpha/Kolibri-1.1",
+          "quote": "Eval Kolibri 1.1 Kolibri 1.0 Qwen3.6 35B-A3B Nemotron 3.5 Lightning Qwen3-Coder-Next 80B-A3B Gemma 4 26B-A4B Qwen3.8 Flash Next"
+        }
+      ],
       "tags": [
-        "论文",
+        "模型",
         "开源",
-        "视频"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_d64073ff7e",
-          "url": "https://huggingface.co/papers/2611.29897"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2611.29897",
-          "quote": "0 , a M a m b a - b a s e d r o o t - b o d y d i f f u s i o n a r c h i t e c t u r e t h a t i n t e g r a t e s l o c a l a t t e n t i o n , r e s u m a b l e r e c u r r e n t s t a t e s , a n d p e r s i s t e n t c o n t e n t m e m o r y ( P C M ) f o r l o n g - h o r i z o n c o n t r o"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.29897",
-          "quote": "T o e n a b l e e f f i c i e n t i n f e r e n c e , w e f u r t h e r d e v e l o p a n e x e c u t i o n s c h e m e t a i l o r e d t o t h i s a r c h i t e c t u r e , c o m b i n i n g C U D A G r a p h r e p l a y , f u s e d k e r n e l s , a n d e x e c u t i o n - f l o w s i m p l i f i"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.29897",
-          "quote": "E v a l u a t i o n s o n r e t a r g e t e d H i P H I d e m o n s t r a t e a c c u r a t e t e r m i n a l c o n t r o l o v e r r o l l o u t s o f u p t o 3 9 ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.29897",
-          "quote": "O n a n R T X 4 0 9 0 , t h e o p t i m i z e d e x e c u t i o n r e d u c e s m e d i a n c o m p l e t e - w i n d o w l a t e n c y f r o m 1 6 8 5 ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.29897",
-          "quote": "1 4 m s , a c h i e v i n g a m e d i a n p a i r e d s p e e d u p o f 6 ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.29897",
-          "quote": "🤖 Our code, models, and training data are all fully open source!"
-        }
-      ]
-    },
-    {
-      "section": "paper",
-      "title": "WorldLeague 评测 13 个系统的实体目标达成能力",
-      "summary": "新加坡国立大学发布 WorldLeague 基准，用 60 个模拟机器人任务比较 13 个 AI 系统的实体目标达成能力，覆盖探索、重排和适应三类场景，用 Interactive Score 与物理成功率衡量。结果显示最好的 Claude Fable 5.2 只完成 13 个目标，平均 Interactive Score 为 28.58/100，且 VLM 即便最终回答全部正确，71.8% 的回合仍拿不到实体进展分。",
-      "tags": [
-        "论文",
-        "Agent",
-        "评测"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_c64a5af47d",
-          "url": "https://huggingface.co/papers/2611.30989"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2611.30989",
-          "quote": "We introduce WorldLeague, a benchmark that compares AI systems on a common set of 60 simulated robot tasks by measuring progress toward each task's physical goal from the robot's trajectory."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.30989",
-          "quote": "For each of six capability dimensions, we measure how much progress a system makes toward its goals (Interactive Score) and how often it achieves them (physical success rate)."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.30989",
-          "quote": "Among 13 representative AI systems, Claude Fable 5.2 achieves 13 of the 60 goals and earns the highest mean Interactive Score (28.58/100)."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.30989",
-          "quote": "Even when VLMs answer every final question correctly, they receive an Interactive Score of zero in 71.8\\% of those episodes."
-        }
-      ]
-    },
-    {
-      "section": "paper",
-      "title": "Embo-Harness 给出前沿模型做机器人策略的配方",
-      "summary": "MMLab@NTU 提出 Embo-Harness，系统研究把前沿多模态模型当作机器人策略的 harness，拆解 prompting、planning、action execution 和 tool use 四个环节，总结出六条经验。该框架优先利用模型原生的视觉推理与工具调用能力，在 RoboLab-120 上达到 83.3% 成功率，比最强已报道基线高 26.2 个百分点，真实世界四个操作任务的 20 次零样本尝试中也成功 15 次。",
-      "tags": [
-        "论文",
-        "Agent",
-        "多模态"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_285717d7ef",
-          "url": "https://huggingface.co/papers/2611.31201"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2611.31201",
-          "quote": "We present Embo-Harness, a framework for systematically studying frontier-model-as-policy harnesses."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.31201",
-          "quote": "We investigate four components of the robotic agentic loop, namely, prompting , planning , action execution , and tool use , and distill six empirical findings into a practical recipe."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.31201",
-          "quote": "This recipe prioritizes interfaces that exploit the model's native visual reasoning and tool-use capabilities over handcrafted plans, skills, or action priors, and identifies effective choices for action representation , chunking, reasoning effort , visual observations , short multi-action sequences"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.31201",
-          "quote": "On RoboLab-120, Embo-Harness achieves an 83.3\\% success rate, outperforming the strongest reported baseline by 26.2 percentage points."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.31201",
-          "quote": "It also succeeds in 15 of 20 zero-shot trials across four real-world manipulation tasks."
-        }
-      ]
-    },
-    {
-      "section": "paper",
-      "title": "nanoAstra 把 VLM 训成机器人操作基础模型",
-      "summary": "清华大学团队提出 nanoAstra，把语义动作建模与能力保持式监督微调（CP-SFT）结合，把视觉语言模型直接训练成可泛化的机器人操作基础模型，训练数据超过 5,000 小时机器人数据加通用 VQA 数据。nanoAstra-9B 在 RoboTwin 2.0 随机基准上零样本成功率达 17.8%，并支持把推理与运动执行重叠的流式执行，把机器人空闲时间从 35.0% 降到 6.9%。",
-      "tags": [
-        "论文",
-        "多模态",
-        "代码"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_2a701dce72",
-          "url": "https://huggingface.co/papers/2611.29338"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2611.29338",
-          "quote": "We introduce nanoAstra, an approach to training vision-language models ( VLMs ) for generalizable manipulation that combines semantic action modeling with capability-preserving supervised fine-tuning ( CP-SFT )."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.29338",
-          "quote": "nanoAstra represents robot behavior as semantic steps composed of reusable, parameterized action primitives , guided by explicit progress descriptions ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.29338",
-          "quote": "With this formulation, we train nanoAstra on more than 5,000 hours of robot data together with general VQA data ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.29338",
-          "quote": "On RoboTwin 2.0 's randomized benchmark, nanoAstra-9B achieves a 17.8% zero-shot success rate , substantially outperforming advanced VLA and WAM baselines as well as similarly sized VLMs ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.29338",
-          "quote": "With inference faster than the corresponding motion execution on a single H20 GPU, our model supports action-chunk-like streaming execution that overlaps inference with motion, reducing the robot's idle time from 35.0% to 6.9%."
-        }
-      ]
-    },
-    {
-      "section": "paper",
-      "title": "研究发现隐式推理可藏住需要推理的隐藏目标",
-      "summary": "Technion 以色列理工的研究指出，模型可以在内部完成多步隐式推理，同时生成看起来正常、却不暴露隐藏目标的 CoT，强 LLM 监控器也不会标记它。研究用简单的辅助损失把隐式推理深度做到此前报道的至少 5 倍，并在贷款决策与代码生成任务上训练模型按隐藏目标行动；激活修补显示隐式计算在生成 CoT 之前就已完成，结论是监控不能只依赖输出。",
-      "tags": [
-        "论文",
-        "安全",
         "推理"
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Beam 技术报告：501.3B 总参数、23.4B 激活的稀疏 MoE",
+      "summary": "Beam 技术报告介绍了一个 501.3B 总参数、23.4B 激活参数的稀疏 MoE 模型，面向编码、推理和 agent 工作负载。摘要称它通过两阶段 midtraining 做到 1M token 上下文。报告页面没有给出权重的下载信息，是否能拿来部署还要看后续发布。",
+      "sources": [
+        {
+          "candidate_id": "c_37ee805a87",
+          "url": "https://huggingface.co/papers/2611.26358"
+        }
       ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.26358",
+          "quote": "Beam is a sparse Mixture-of-Experts (MoE) model with 501.3B total parameters and 23.4B active parameters"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.26358",
+          "quote": "Beam features a 1M-token context window achieved through a novel two-stage midtraining phase"
+        }
+      ],
+      "tags": [
+        "模型",
+        "论文"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "潜在推理可以不留痕迹地驱动模型输出，思维链监控不够",
+      "summary": "论文研究“完整潜在推理”：transformer 在内部完成整个任务、只输出最终答案。作者训练时用一个线性 step predictor 读取隐状态中的中间步骤，得到的模型把隐藏目标藏在输出里，思维链的解释里看不到它，强 LLM 监控器也没有标记。这说明只看输出和思维链的安全监控可能漏掉隐藏行为。",
       "sources": [
         {
           "candidate_id": "c_46b9944b60",
@@ -378,325 +202,173 @@
       "evidence": [
         {
           "url": "https://huggingface.co/papers/2611.31015",
-          "quote": "First, we show that a simple auxiliary loss allows models to solve a multi-step task latently at least 5x deeper than previously reported."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.31015",
-          "quote": "Then, in two common tasks, decision-making and code generation, we train a model to pursue such a hidden objective , which decides a loan or plants a vulnerability."
+          "quote": "We train with a linear \"step predictor\" that reads each intermediate step from the hidden states."
         },
         {
           "url": "https://huggingface.co/papers/2611.31015",
           "quote": "The model's CoT justifies the output with no trace of the hidden objective , and a strong LLM monitor does not flag it."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.31015",
-          "quote": "Finally, using activation patching , we find that the latent computation is completed before the model generates its CoT, which takes no part in it."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.31015",
-          "quote": "Altogether, we show that a hidden objective that requires reasoning can go unseen by a monitor that reads only the output."
-        }
-      ]
-    },
-    {
-      "section": "paper",
-      "title": "SWE-Gym 审计发现大量未解任务实为标签错误",
-      "summary": "AMD 团队审计 SWE-Gym 的奖励标签，发现 9B 基座模型从未解出的任务中有 74% 存在测试拒绝正确修复的假阴性，而偶尔解出的任务中这一比例为 20%。修正后同等规模与难度训练出的策略在 SWE-bench Verified 和 SWE-bench Pro 的留出任务上分别高出 2.4 和 2.7 分，仅丢弃未解任务则没有收益；团队发布含 1,087 个审计任务的 SWE-Gym-Verified 及完整审计流程。",
-      "tags": [
-        "论文",
-        "代码",
-        "Agent"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_d7c3dd176d",
-          "url": "https://huggingface.co/papers/2611.30207"
         }
       ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2611.30207",
-          "quote": "We find that unsolved often means mislabelled: 74% of the tasks that a 9B base model never solves have a test that rejects correct fixes (a false negative), versus 20% of those it sometimes solves."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.30207",
-          "quote": "We repair or remove such tasks, and the audited tasks that remain train better policies ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.30207",
-          "quote": "At equal size and matched difficulty, models trained on them score 2.4 and 2.7 points higher on held-out tasks from SWE-bench Verified and SWE-bench Pro than models trained on the original tasks, whereas simply dropping the never-solved tasks shows no such gain."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.30207",
-          "quote": "To this end, we release SWE-Gym-Verified with its 1,087 audited tasks, every verdict with its executed evidence, our training sets, and the full audit pipeline ."
-        }
-      ]
-    },
-    {
-      "section": "paper",
-      "title": "Self-WSP 让模型直接编辑自身权重提升成绩",
-      "summary": "卡内基梅隆大学提出 Self-WSP，把权重空间编程（WSP）用于语言模型自身：Qwen3.5-0.8B 读取自己的权重、提出修改，再以编辑后的权重同时充当解题者和编辑者。自我编辑把 GSM8K 准确率从 11.8% 提到 62.2%、MATH500 从 7.0% 提到 32.2%，有时只改 16 个参数；但模型并不理解自己的改动，随机搜索驱动的 WSP 表现有时相当，作者认为这一方向仍需进一步探索。",
       "tags": [
         "论文",
-        "训练",
+        "安全",
         "推理"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_790b5ec6b9",
-          "url": "https://huggingface.co/papers/2611.28833"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2611.28833",
-          "quote": "Specifically, Qwen3.5-0.8B reads its own weights, proposes an edit, and then continues with the edited weights as both problem solver and editor."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.28833",
-          "quote": "Self-edits can raise GSM8K accuracy from 11.8% to 62.2% and MATH500 accuracy from 7.0% to 32.2%, sometimes by changing only 16 parameters, and in some cases repeated self-editing keeps improving the model."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.28833",
-          "quote": "A closer look, however, reveals that these gains lack interpretability."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.28833",
-          "quote": "The model shows little understanding of the edits it makes, and WSP driven by random search sometimes performs comparably."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.28833",
-          "quote": "Self-WSP thus holds promise as a path toward recursive self-improvement (RSI) , but realizing this promise requires further exploration."
-        }
       ]
     },
     {
       "section": "paper",
-      "title": "ToolSmith 为多模态搜索 Agent 自动生成工具",
-      "summary": "UCLA NLP 提出 ToolSmith，让多模态搜索 agent 在精简的基础工具库之上自动生成并复用新工具模块，以应对查询类型、证据格式和失败模式的变化。框架在三个域内多模态搜索基准和十个域外基准上以 VLM-as-a-Judge 协议评测，在不同规模的 agent 上都优于基础工具库，骨干模型越大收益越高，代码与数据已开放。",
-      "tags": [
-        "论文",
-        "Agent",
-        "工具"
-      ],
+      "title": "Nemotron-Labs-VisualCreation：用 Pixel as Code 统一栅格图和结构化视觉创作",
+      "summary": "NVIDIA 的 Nemotron-Labs-VisualCreation 是一个 agentic 框架，通过 Pixel as Code 把图像生成和可检查的渲染输出连接起来，让 agent 能检查并修复生成结果。Hugging Face 页面列出了引用该论文的模型 nvidia/Nemotron-Labs-Image-30B-A3B。做视觉创作 agent 的开发者可以参考它的接口设计。",
       "sources": [
         {
-          "candidate_id": "c_bd80667ccb",
-          "url": "https://huggingface.co/papers/2611.31198"
+          "candidate_id": "c_3566740619",
+          "url": "https://huggingface.co/papers/2611.31358"
         }
       ],
       "evidence": [
         {
-          "url": "https://huggingface.co/papers/2611.31198",
-          "quote": "H o w e v e r , t h e l i b r a r y i s l a b o r i o u s t o c r e a t e a n d m a i n t a i n , a n d f r o z e n w h e n n e w q u e r y t y p e s , e v i d e n c e f o r m a t s , a n d f a i l u r e m o d e s a r e e n c o u n t e r e d i n t h e w i l d ."
+          "url": "https://huggingface.co/papers/2611.31358",
+          "quote": "We introduce Nemotron-Labs-VisualCreation, an agentic framework that connects these capabilities through Pixel as Code."
         },
         {
-          "url": "https://huggingface.co/papers/2611.31198",
-          "quote": "I n s p i r e d b y t h i s , w e p r o p o s e T o o l S m i t h , a n a u t o m a t i c t o o l - g e n e r a t i o n f r a m e w o r k t h a t g r o w s a n d r e u s e s m o d u l e s o n t o p o f a l e a n b a s e t o o l l i b r a r y ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.31198",
-          "quote": "W e e v a l u a t e T o o l S m i t h o n t h r e e i n - d o m a i n m u l t i m o d a l s e a r c h b e n c h m a r k s a n d t e n o u t - o f - d o m a i n b e n c h m a r k s u n d e r a V L M - a s - a - J u d g e p r o t o c o l ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.31198",
-          "quote": "T o o l S m i t h c o n s i s t e n t l y i m p r o v e s o v e r t h e b a s e l i b r a r y a c r o s s d e p l o y e d a g e n t s o f v a r y i n g s c a l e s , w i t h l a r g e r b a c k b o n e s r e a p i n g g r e a t e r g a i n s , d e m o n s t r a t i n g t h e s c a l a b i l i t y o"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.31198",
-          "quote": "O u r c o d e a n d d a t a a r e a v a i l a b l e a t h t t p s : / / t h r e e s r ."
-        }
-      ]
-    },
-    {
-      "section": "paper",
-      "title": "AutoPILOT 让视觉 Agent 在实时游戏中边写边玩",
-      "summary": "伊利诺伊大学芝加哥分校提出 AutoPILOT harness，让多模态模型在一次调用中输出原子动作、开启开环宏动作，或直接写出闭环控制器在画面上持续操作而不必反复调用模型。配套的 AFK-Bench 包含 120 款浏览器游戏，同样预算下 GPT-6.1 Sol 的实时成功率从 VISTA 的 38.3% 提升到 68.6%，并以 VISTA 五分之一的 API 成本达到其最终成功率。",
-      "tags": [
-        "论文",
-        "Agent",
-        "工具"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_d5dbb75a39",
-          "url": "https://huggingface.co/papers/2611.28202"
+          "url": "https://huggingface.co/papers/2611.31358",
+          "quote": "Models citing this paper 1 nvidia/Nemotron-Labs-Image-30B-A3B Text-to-Image"
         }
       ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2611.28202",
-          "quote": "We introduce AutoPILOT , which changes the third: in each model call, the model can send a primitive action , start an open-loop macro , or write a closed-loop controller that keeps playing from the screen without further model calls until it hands control back."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.28202",
-          "quote": "To evaluate agents in real-time games , we build AFK-Bench , 120 diverse browser games grouped by how they respond to inaction and playable in real time or with the clock paused."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.28202",
-          "quote": "With GPT-6.1 Sol under the same budgets, AutoPILOT reaches 68.6% real-time success against 38.3% for VISTA , and on GameWorld it keeps 80.0% in real time while VISTA drops from 84.1% to 42.9%."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.28202",
-          "quote": "Its gains hold across models, and it reaches VISTA 's final success rate at a fifth of its API cost ."
-        }
-      ]
-    },
-    {
-      "section": "paper",
-      "title": "ViDecide 教视频扩散模型逐步推理与规划",
-      "summary": "MMLab@NTU 提出 ViDecide，把视频扩散模型从生成固定长度片段改为预测状态转移并自主决定何时停止，并提出 Corrective Fine-tuning（CFT），把失败决策的噪声映射到模型自己的成功续写，不依赖 policy-gradient 优化。在抽象游戏、规划任务和新构建的多步机器人规划基准上，平均严格成功率达 83.8%，高于标准微调的 23.3% 和最强已有方法的 67.8%，代码、模型与数据已开源。",
-      "tags": [
-        "论文",
-        "视频",
-        "推理"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_10e2d6051e",
-          "url": "https://huggingface.co/papers/2611.26389"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2611.26389",
-          "quote": "We present ViDecide, a decision-centric framework that trains video diffusion models to predict state transitions causally and decide when to stop, with a decision-focused training schedule ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.26389",
-          "quote": "We further propose Corrective Fine-tuning (CFT), which corrects failed decisions by mapping their noise to the model's own successful continuations, achieving stable improvement without policy-gradient optimization ."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.26389",
-          "quote": "Across abstract games, planning tasks, and a new benchmark of multi-step robot planning , ViDecide achieves an average strict success rate of 83.8%, far above 23.3% for standard fine-tuning and 67.8% for the strongest prior method, and generalizes to larger puzzles and unseen layouts."
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.26389",
-          "quote": "Code, models, and data are open-sourced: 📄 Paper: https://arxiv.org/abs/2611.26389 🌐 Project page: https://kevin-thu.github.io/ViDecide 💻 Code: https://github.com/Kevin-thu/ViDecide"
-        }
-      ]
-    },
-    {
-      "section": "brief",
-      "title": "SenseTime 用世界模型充当原生隐式动作模型",
-      "summary": "SenseTime 提出 Native LAM，让一个预训练视频扩散 transformer 同时充当正反向动力学模型，并用可学习的动力学寄存器连接两者。",
-      "tags": [
-        "论文",
-        "视频",
-        "模型"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_73ee7218f2",
-          "url": "https://huggingface.co/papers/2611.30898"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2611.30898",
-          "quote": "Native LAM operates one pretrained video diffusion transformer as both IDM and FDM, with learnable dynamics registers as the only causal bridge between the two, and trains on counterfactual temporal pairs that differ in motion alone, so that the registers distill a video's dynamics into a compact na"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.30898",
-          "quote": "We further propose a pretraining paradigm for vision-language-action (VLA) policies , Pretraining Actions from World models (PAWlicy) , in which Native LAM serves as a dynamics teacher on large-scale video; unlike world action models , it never generates video."
-        }
-      ]
-    },
-    {
-      "section": "brief",
-      "title": "清华系团队用 FGL 训练代码定位器服务修复 Agent",
-      "summary": "Misraj AI 提出 Fixer-Guided Localization（FGL），让定位器提出候选位置、由冻结的修复器按其产出可验证补丁的可能性打分来训练定位器。",
-      "tags": [
-        "论文",
-        "代码",
-        "Agent"
-      ],
-      "sources": [
-        {
-          "candidate_id": "c_1c828d1632",
-          "url": "https://huggingface.co/papers/2611.12164"
-        }
-      ],
-      "evidence": [
-        {
-          "url": "https://huggingface.co/papers/2611.12164",
-          "quote": "We propose Fixer-Guided Localization (FGL) : the localizer proposes several localizations, a frozen fixer scores each by how likely it makes a verified patch, and the localizer is trained on these scores with weighted supervised fine-tuning , without running tests and without reinforcement learning"
-        },
-        {
-          "url": "https://huggingface.co/papers/2611.12164",
-          "quote": "The FGL target helps the fixer find the bug as often as the teacher's localization while using 27.5% less code."
-        }
-      ]
-    },
-    {
-      "section": "brief",
-      "title": "Open Vision Banana 用生成模型统一视觉感知任务",
-      "summary": "Open Vision Banana（OVB）把 Qwen-Image-2.1 的 7B 扩散生成器改造为单一指令驱动模型，用一个共享低秩适配器完成度量深度、语义、实例与指代分割。",
       "tags": [
         "论文",
         "图像",
+        "Agent"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Embo-Harness：拆解让前沿模型直接控制机器人的 harness 设计",
+      "summary": "Embo-Harness 逐项研究前沿多模态模型直接生成机器人动作的闭环，涉及提示、规划、动作执行和工具使用四个部分，并总结出一套实践配方。在 RoboLab-120 上它超出最强已报告基线 26.2 个百分点，真机零样本试验 20 次中成功 15 次。做具身 agent 的开发者可参考这套配方。",
+      "sources": [
+        {
+          "candidate_id": "c_285717d7ef",
+          "url": "https://huggingface.co/papers/2611.31201"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.31201",
+          "quote": "On RoboLab-120, Embo-Harness achieves an 83"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.31201",
+          "quote": "outperforming the strongest reported baseline by 26.2 percentage points"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.31201",
+          "quote": "It also succeeds in 15 of 20 zero-shot trials across four real-world manipulation tasks."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.31201",
+          "quote": "We investigate four components of the robotic agentic loop, namely, prompting , planning , action execution , and tool use , and distill six empirical findings into a practical recipe."
+        }
+      ],
+      "tags": [
+        "论文",
+        "Agent",
         "多模态"
-      ],
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "HKUDS 的 CLI-Anything：把专业软件变成 agent 可调用的命令行工具",
+      "summary": "CLI-Anything 是 HKUDS 的开源项目，目标是把专业软件转成 agent 原生工具，并提供 CLI-Hub 汇集社区做的 CLI；README 里的示例是 cli-anything-gimp 这样的命令。仓库采用 Apache-2.0 许可，想让 Claude Code 等 agent 操作桌面软件的开发者可以看看。",
       "sources": [
         {
-          "candidate_id": "c_86dd432513",
-          "url": "https://huggingface.co/papers/2611.28489"
+          "candidate_id": "c_740be60563",
+          "url": "https://github.com/HKUDS/CLI-Anything"
         }
       ],
       "evidence": [
         {
-          "url": "https://huggingface.co/papers/2611.28489",
-          "quote": "W e a n s w e r w i t h O p e n V i s i o n B a n a n a ( O V B ) , a n o p e n f r a m e w o r k t h a t a d a p t s t h e 7 B d i f f u s i o n g e n e r a t o r o f Q w e n - I m a g e - 2 ."
+          "url": "https://github.com/HKUDS/CLI-Anything",
+          "quote": "CLI-Anything's Solution : Transform any professional software into agent-native tools without losing capabilities."
         },
         {
-          "url": "https://huggingface.co/papers/2611.28489",
-          "quote": "1 i n t o o n e i n s t r u c t i o n - d r i v e n m o d e l f o r m e t r i c d e p t h , s e m a n t i c , i n s t a n c e , a n d r e f e r r i n g s e g m e n t a t i o n , u s i n g a s i n g l e s h a r e d l o w - r a n k a d a p t e r a n d p u b l i c d a t a ."
+          "url": "https://github.com/HKUDS/CLI-Anything",
+          "quote": "cli-anything-gimp project new --width 1920 --height 1080 -o poster.json"
         },
         {
-          "url": "https://huggingface.co/papers/2611.28489",
-          "quote": "E a c h t a s k i s a t a s k c o n t r a c t w h o s e R G B e n c o d e r , i n s t r u c t i o n , a n d d e c o d e r s h a r e o n e s p e c i f i c a t i o n a n d a r e c h e c k e d b e f o r e t r a i n i n g ."
+          "url": "https://github.com/HKUDS/CLI-Anything",
+          "quote": "Readme Apache-2.0 license"
         }
+      ],
+      "tags": [
+        "开源",
+        "工具",
+        "Agent"
       ]
     },
     {
       "section": "brief",
-      "title": "UNIFIED 用单个扩散 Transformer 完成编码生成解码",
-      "summary": "UNIFIED 把编码、生成、解码统一为一个完全共享骨干的扩散 transformer，三种模式仅靠模式 token 与时间步区分，单阶段从零训练。",
-      "tags": [
-        "论文",
-        "图像",
-        "开源"
-      ],
+      "title": "Motion Mamba 2.0：自回归扩散加 Mamba，用于长时程人形机器人动作生成",
+      "summary": "Motion Mamba 2.0 把自回归扩散和 Mamba 结合起来做长时程人形机器人控制，作者称代码、模型和训练数据都已开源。",
       "sources": [
         {
-          "candidate_id": "c_8a66199860",
-          "url": "https://huggingface.co/papers/2611.29064"
+          "candidate_id": "c_d64073ff7e",
+          "url": "https://huggingface.co/papers/2611.29897"
         }
       ],
       "evidence": [
         {
-          "url": "https://huggingface.co/papers/2611.29064",
-          "quote": "What makes it work is to cast all three modes as position-aligned sequence maps over one fully shared backbone , distinguished only by a mode token and the timestep ."
+          "url": "https://huggingface.co/papers/2611.29897",
+          "quote": "bringing autoregressive diffusion and Mamba together for long-horizon humanoid control"
         },
         {
-          "url": "https://huggingface.co/papers/2611.29064",
-          "quote": "The resulting model, UNIFIED , is simple: one network trained from scratch in a single stage with only reconstruction and flow-matching loss es, without adversarial loss es or pretrained encoders (e.g., DINO )."
+          "url": "https://huggingface.co/papers/2611.29897",
+          "quote": "Our code, models, and training data are all fully open source!"
         }
+      ],
+      "tags": [
+        "论文",
+        "开源"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "腾讯发布 WeMM-Ecom 电商多模态模型家族，0.8B 到 35B 共五档",
+      "summary": "WeMM-Ecom 覆盖从 0.8B 稠密模型到 35B（3B 激活）MoE 共五档，模型权重和代码已发布，并已用于微信的商品目录管理、多模态商品搜索和直播电商。",
+      "sources": [
+        {
+          "candidate_id": "c_efcc189b36",
+          "url": "https://huggingface.co/papers/2611.30662"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.30662",
+          "quote": "The family spans five sizes, from a 0.8B dense model to a 35B mixture-of-experts model with 3B active parameters"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.30662",
+          "quote": "We have released the model weights and code to facilitate future research"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.30662",
+          "quote": "WeMM-Ecom now powers hundreds of production use cases in WeChat, including catalog management, multimodal product search, and livestream commerce"
+        }
+      ],
+      "tags": [
+        "模型",
+        "多模态",
+        "开源"
       ]
     }
   ],
   "research": [
     {
       "via": "webfetch",
-      "url": "https://claude.com/resources/articles/skills-over-mcp-tasks-and-more"
-    },
-    {
-      "via": "webfetch",
       "url": "https://openai.com/index/gpt-6-models-demonstrate-intrinsic-protein-design-capabilities"
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.26358"
+      "url": "https://claude.com/resources/articles/skills-over-mcp-tasks-and-more"
     },
     {
       "via": "webfetch",
@@ -704,43 +376,11 @@
     },
     {
       "via": "webfetch",
-      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.332"
+      "url": "https://huggingface.co/papers/2611.26358"
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.29338"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.31015"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.29897"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.30989"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.31201"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.30662"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.30898"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.31198"
-    },
-    {
-      "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.30254"
+      "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017"
     },
     {
       "via": "webfetch",
@@ -748,11 +388,15 @@
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.28833"
+      "url": "https://huggingface.co/Aleph-Alpha/Kolibri-1.1"
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.25476"
+      "url": "https://huggingface.co/papers/2611.29897"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.31358"
     },
     {
       "via": "webfetch",
@@ -760,50 +404,44 @@
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.28489"
+      "url": "https://huggingface.co/papers/2611.31015"
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.29064"
+      "url": "https://huggingface.co/papers/2611.30662"
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.26389"
+      "url": "https://github.com/HKUDS/CLI-Anything"
     },
     {
       "via": "webfetch",
-      "url": "https://huggingface.co/papers/2611.28202"
+      "url": "https://github.com/firecrawl/firecrawl"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.31201"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://simonwillison.net/2026/Nov/24/llm-inflection-points/"
     }
   ],
   "validation": {
-    "validated_at": "2026-11-25T04:40:29+00:00",
+    "validated_at": "2026-11-25T04:42:21+00:00",
     "checked_links": true,
     "dropped": [
       {
-        "title": "OpenAI 称 GPT-6 系列具备内在蛋白质设计能力",
-        "section": "headline",
-        "candidates": [
-          "c_e32ed061be"
-        ],
-        "reasons": [
-          "'GPT-6.2' does not appear in the cited material"
-        ]
-      },
-      {
-        "title": "WeightCode 用权重程序给已训练网络安装新能力",
+        "title": "SWE-Gym 数据审计：55% 之前的“难题”常是测试出错，清洗后训练更好",
         "section": "paper",
         "candidates": [
-          "c_0468d58072"
+          "c_d7c3dd176d"
         ],
         "reasons": [
-          "number 8.62 does not appear in the cited material"
+          "number 55 does not appear in the cited material"
         ]
       }
     ],
-    "warnings": [
-      "19 items, more than 18 (expected about 15)",
-      "2 headline items (target 3-5)",
-      "10 paper items (target 2-4)"
-    ]
+    "warnings": []
   }
 }
