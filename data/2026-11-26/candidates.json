@@ -1,0 +1,3274 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-26",
+  "generated_at": "2026-11-26T04:16:18+00:00",
+  "window": {
+    "start": "2026-11-25T03:00:00+00:00",
+    "end": "2026-11-26T04:16:13.599947+00:00"
+  },
+  "stats": {
+    "filtered": 98,
+    "raw": 88,
+    "after_url_merge": 88,
+    "dropped_already_published": 19,
+    "candidates": 69,
+    "clusters": 2,
+    "seen_before": 24,
+    "reported_before": 12
+  },
+  "sources": [
+    {
+      "id": "openai-news",
+      "status": "ok",
+      "count": 3,
+      "seconds": 0.5502995979999952,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "anthropic-news",
+      "status": "ok",
+      "count": 0,
+      "seconds": 0.19140887100000725,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "anthropic-research",
+      "status": "ok",
+      "count": 1,
+      "seconds": 0.530808148999995,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "deepmind-blog",
+      "status": "ok",
+      "count": 0,
+      "seconds": 0.5114726029999872,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "google-ai-blog",
+      "status": "ok",
+      "count": 0,
+      "seconds": 0.5197464929999995,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "mistral-news",
+      "status": "ok",
+      "count": 0,
+      "seconds": 1.6108951890000043,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "huggingface-blog",
+      "status": "ok",
+      "count": 3,
+      "seconds": 0.27405172199999583,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "meta-ai-news",
+      "status": "ok",
+      "count": 0,
+      "seconds": 0.16118753499999627,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "minimax-blog",
+      "status": "ok",
+      "count": 0,
+      "seconds": 1.4503931739999985,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "kimi-blog",
+      "status": "ok",
+      "count": 0,
+      "seconds": 0.8467928629999903,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "deepseek-news",
+      "status": "ok",
+      "count": 0,
+      "seconds": 2.185917817999993,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "deepseek-website",
+      "status": "ok",
+      "count": 0,
+      "seconds": 0.7008980699999938,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "qwen-blog",
+      "status": "ok",
+      "count": 0,
+      "seconds": 2.321042976000001,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "seed-blog",
+      "status": "ok",
+      "count": 0,
+      "seconds": 2.0204779339999988,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "google-research",
+      "status": "ok",
+      "count": 1,
+      "seconds": 1.4686762160000058,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "microsoft-research",
+      "status": "ok",
+      "count": 0,
+      "seconds": 0.6849967720000052,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "apple-ml-research",
+      "status": "ok",
+      "count": 0,
+      "seconds": 0.7432262829999985,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "ai2-blog",
+      "status": "ok",
+      "count": 1,
+      "seconds": 1.3392090420000073,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "thinking-machines",
+      "status": "error",
+      "count": 0,
+      "seconds": 0.839501951999992,
+      "error": "HTTPStatusError: Client error '404 Not Found' for url 'https://thinkingmachines.ai/blog/index.xml'",
+      "filtered": {}
+    },
+    {
+      "id": "stability-news",
+      "status": "ok",
+      "count": 0,
+      "seconds": 1.5203096709999926,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "baidu-ernie",
+      "status": "error",
+      "count": 0,
+      "seconds": 2.8541632320000048,
+      "error": "HTTPStatusError: Client error '404 Not Found' for url 'https://ernie.baidu.com/blog/index.xml'",
+      "filtered": {}
+    },
+    {
+      "id": "xai-news",
+      "status": "ok",
+      "count": 0,
+      "seconds": 0.8569501970000033,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "claude-blog",
+      "status": "ok",
+      "count": 2,
+      "seconds": 1.401644791999999,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "black-forest-labs",
+      "status": "ok",
+      "count": 0,
+      "seconds": 1.3140062479999983,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "liquid-ai",
+      "status": "ok",
+      "count": 0,
+      "seconds": 1.4108232819999955,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "cohere-blog",
+      "status": "ok",
+      "count": 0,
+      "seconds": 2.0767404449999987,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "cursor-blog",
+      "status": "ok",
+      "count": 0,
+      "seconds": 1.3303525139999977,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "hf-daily-papers",
+      "status": "ok",
+      "count": 24,
+      "seconds": 0.8701002350000095,
+      "error": null,
+      "filtered": {
+        "min_upvotes": 35
+      }
+    },
+    {
+      "id": "github-releases",
+      "status": "ok",
+      "count": 20,
+      "seconds": 4.350335215000001,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "github-trending",
+      "status": "ok",
+      "count": 12,
+      "seconds": 2.030854177000009,
+      "error": null,
+      "filtered": {
+        "not_ai": 4
+      }
+    },
+    {
+      "id": "hf-trending-models",
+      "status": "ok",
+      "count": 30,
+      "seconds": 0.7412158570000003,
+      "error": null,
+      "filtered": {
+        "noisy_model": 12,
+        "max_age_days": 8
+      }
+    },
+    {
+      "id": "simon-willison",
+      "status": "ok",
+      "count": 0,
+      "seconds": 0.8142278210000029,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "interconnects",
+      "status": "ok",
+      "count": 0,
+      "seconds": 0.9521361479999939,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "import-ai",
+      "status": "disabled",
+      "count": 0,
+      "seconds": 0.0,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "latent-space",
+      "status": "ok",
+      "count": 1,
+      "seconds": 2.558660267999997,
+      "error": null,
+      "filtered": {
+        "exclude_title": 2
+      }
+    },
+    {
+      "id": "sebastian-raschka",
+      "status": "ok",
+      "count": 0,
+      "seconds": 2.0035390449999966,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "karpathy",
+      "status": "ok",
+      "count": 0,
+      "seconds": 0.7226386439999999,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "lilian-weng",
+      "status": "ok",
+      "count": 0,
+      "seconds": 0.8357995109999905,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "answer-ai",
+      "status": "ok",
+      "count": 0,
+      "seconds": 1.176241348000005,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "sam-altman",
+      "status": "ok",
+      "count": 0,
+      "seconds": 1.439561986000001,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "ethan-mollick",
+      "status": "ok",
+      "count": 0,
+      "seconds": 1.2973938499999917,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "kexue-fm",
+      "status": "ok",
+      "count": 0,
+      "seconds": 2.828940469999992,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "recode-china-ai",
+      "status": "disabled",
+      "count": 0,
+      "seconds": 0.0,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "chinai",
+      "status": "disabled",
+      "count": 0,
+      "seconds": 0.0,
+      "error": null,
+      "filtered": {}
+    },
+    {
+      "id": "hackernews",
+      "status": "ok",
+      "count": 7,
+      "seconds": 1.3803728620000015,
+      "error": null,
+      "filtered": {
+        "not_ai": 37
+      }
+    },
+    {
+      "id": "reddit-ai",
+      "status": "error",
+      "count": 0,
+      "seconds": 0.6951914519999889,
+      "error": "HTTPStatusError: Client error '404 Not Found' for url 'https://www.reddit.com/r/LocalLLaMA+MachineLearning/top/.rss?t=day&limit=50'",
+      "filtered": {}
+    }
+  ],
+  "clusters": [
+    {
+      "id": "k_e75e0ef680",
+      "title": "Where scientists draw the line on AI agents",
+      "candidate_ids": [
+        "c_e75e0ef680",
+        "c_c8885e1f0a"
+      ]
+    },
+    {
+      "id": "k_f30cab37fe",
+      "title": "Hill-climbing Inkling 2 Mini inference on one RTX PRO 6000",
+      "candidate_ids": [
+        "c_f30cab37fe",
+        "c_aa6da6d21c"
+      ]
+    }
+  ],
+  "filtered": [
+    {
+      "source": "hf-daily-papers",
+      "title": "VenusOCR2.0: Towards Efficient and Effective Document Parsing",
+      "url": "https://huggingface.co/papers/2611.32617",
+      "reason": "min_upvotes",
+      "value": "upvotes 9 < 10"
+    },
+    {
+      "source": "hf-daily-papers",
+      "title": "LoopDVR: Looped Transformer for Efficient Dense Visual Recognition",
+      "url": "https://huggingface.co/papers/2611.32067",
+      "reason": "min_upvotes",
+      "value": "upvotes 9 < 10"
+    },
+    {
+      "source": "hf-daily-papers",
+      "title": "Residual Guidance for Real-Time Interactive Video Generation",
+      "url": "https://huggingface.co/papers/2611.32820",
+      "reason": "min_upvotes",
+      "value": "upvotes 8 < 10"
+    },
+    {
+      "source": "hf-daily-papers",
+      "title": "Mega-MMDF and DeepfakeBench-MM: Benchmarking Multimodal Deepfake Detection Across Diverse Forgery Pipelines",
+      "url": "https://huggingface.co/papers/2510.22622",
+      "reason": "min_upvotes",
+      "value": "upvotes 7 < 10"
+    },
+    {
+      "source": "hf-daily-papers",
+      "title": "Measuring Layer-wise Intrinsic Dimensionality of FFNs in LLMs via PCA",
+      "url": "https://huggingface.co/papers/2611.32782",
+      "reason": "min_upvotes",
+      "value": "upvotes 7 < 10"
+    },
+    {
+      "source": "hf-daily-papers",
+      "title": "PINE: Point, Instance and Normal Estimation in One-Step Diffusion Model",
+      "url": "https://huggingface.co/papers/2611.29389",
+      "reason": "min_upvotes",
+      "value": "upvotes 7 < 10"
+    },
+    {
+      "source": "hf-daily-papers",
+      "title": "Steerable by Design: Conditional Pretraining for Robust Control of Language Models",
+      "url": "https://huggingface.co/papers/2611.32199",
+      "reason": "min_upvotes",
+      "value": "upvotes 5 < 10"
+    },
+    {
+      "source": "hf-daily-papers",
+      "title": "Separating Measurement Failures from Defence Failures in Split Language-Model Privacy",
+      "url": "https://huggingface.co/papers/2611.31752",
+      "reason": "min_upvotes",
+      "value": "upvotes 5 < 10"
+    },
+    {
+      "source": "hf-daily-papers",
+      "title": "Distill to Loop: Turning Pretrained Diffusion Transformers into Looped Models with Adjustable Depth",
+      "url": "https://huggingface.co/papers/2611.31977",
+      "reason": "min_upvotes",
+      "value": "upvotes 4 < 10"
+    },
+    {
+      "source": "hf-daily-papers",
+      "title": "GRAPE-Bench: When Vision Degrades, Does Video Reasoning Hold?",
+      "url": "https://huggingface.co/papers/2611.33020",
+      "reason": "min_upvotes",
+      "value": "upvotes 4 < 10"
+    },
+    {
+      "source": "hf-daily-papers",
+      "title": "AdProducer: Towards Agentic Advertising Video Generation",
+      "url": "https://huggingface.co/papers/2611.31466",
+      "reason": "min_upvotes",
+      "value": "upvotes 4 < 10"
+    },
+    {
+      "source": "hf-daily-papers",
+      "title": "Do learned image captioning metrics generalize? Auditing duplicated samples in human-judgment benchmarks",
+      "url": "https://huggingface.co/papers/2611.30488",
+      "reason": "min_upvotes",
+      "value": "upvotes 4 < 10"
+    },
+    {
+      "source": "hf-daily-papers",
+      "title": "Clinical3D-Bench: Evaluating and Improving Spatial Intelligence of Multimodal LLMs in Hospital Environments",
+      "url": "https://huggingface.co/papers/2611.32094",
+      "reason": "min_upvotes",
+      "value": "upvotes 4 < 10"
+    },
+    {
+      "source": "hf-daily-papers",
+      "title": "LoopedWAM: Looped World Action Models for Elastic Inference",
+      "url": "https://huggingface.co/papers/2611.25595",
+      "reason": "min_upvotes",
+      "value": "upvotes 4 < 10"
+    },
+    {
+      "source": "hf-daily-papers",
+      "title": "InstructReplay: Replaying Assistant Turns to Preserve General Behavior During Factual Fine-Tuning",
+      "url": "https://huggingface.co/papers/2611.32918",
+      "reason": "min_upvotes",
+      "value": "upvotes 3 < 10"
+    },
+    {
+      "source": "hf-daily-papers",
+      "title": "Align the Pair, Not the Sample: Representation Alignment for Faster and Better One-Step Generato",
+      "url": "https://huggingface.co/papers/2611.29547",
+      "reason": "min_upvotes",
+      "value": "upvotes 3 < 10"
+    },
+    {
+      "source": "hf-daily-papers",
+      "title": "Interpretable Prototype-Conditioned Adaptation for Weather Forecasting",
+      "url": "https://huggingface.co/papers/2611.25848",
+      "reason": "min_upvotes",
+      "value": "upvotes 3 < 10"
+    },
+    {
+      "source": "hf-daily-papers",
+      "title": "Can an Agent Trust Its Own Zoom? Cross-Magnification Provenance Verification for Whole-Slide Images",
+      "url": "https://huggingface.co/papers/2611.29150",
+      "reason": "min_upvotes",
+      "value": "upvotes 3 < 10"
+    },
+    {
+      "source": "hf-daily-papers",
+      "title": "SpatialArena: Where Do Geometric Foundation Models Stand?",
+      "url": "https://huggingface.co/papers/2611.32816",
+      "reason": "min_upvotes",
+      "value": "upvotes 2 < 10"
+    },
+    {
+      "source": "hf-daily-papers",
+      "title": "Factorized Context Attention: From Emulated to Native Grid Probing",
+      "url": "https://huggingface.co/papers/2611.32423",
+      "reason": "min_upvotes",
+      "value": "upvotes 2 < 10"
+    },
+    {
+      "source": "hf-daily-papers",
+      "title": "Escriba-OCR: A 1B Vision-Language Model for Error-Preserving Transcription of Handwritten Portuguese Essays",
+      "url": "https://huggingface.co/papers/2611.29874",
+      "reason": "min_upvotes",
+      "value": "upvotes 2 < 10"
+    },
+    {
+      "source": "hf-daily-papers",
+      "title": "Model Carving: Training Transformers That Optimize Their Own Topology",
+      "url": "https://huggingface.co/papers/2611.27962",
+      "reason": "min_upvotes",
+      "value": "upvotes 1 < 10"
+    },
+    {
+      "source": "hf-daily-papers",
+      "title": "Seeing Is Locating: Spatial Awareness and Geographic Bias in Decision Language Models",
+      "url": "https://huggingface.co/papers/2611.30564",
+      "reason": "min_upvotes",
+      "value": "upvotes 1 < 10"
+    },
+    {
+      "source": "hf-daily-papers",
+      "title": "OWE-Bench: A long-horizon benchmark for measuring real-world engineering",
+      "url": "https://huggingface.co/papers/2611.30017",
+      "reason": "min_upvotes",
+      "value": "upvotes 1 < 10"
+    },
+    {
+      "source": "hf-daily-papers",
+      "title": "FATCAT: Fault Injection Attacks Targeting Chip-level Alignment",
+      "url": "https://huggingface.co/papers/2611.31129",
+      "reason": "min_upvotes",
+      "value": "upvotes 1 < 10"
+    },
+    {
+      "source": "hf-daily-papers",
+      "title": "RECAP: Training Long-horizon LLM Agents with Context Compaction",
+      "url": "https://huggingface.co/papers/2611.31258",
+      "reason": "min_upvotes",
+      "value": "upvotes 1 < 10"
+    },
+    {
+      "source": "hf-daily-papers",
+      "title": "Foresight Forcing: Learning Spatial Foresight for Robotic Manipulation",
+      "url": "https://huggingface.co/papers/2611.30963",
+      "reason": "min_upvotes",
+      "value": "upvotes 1 < 10"
+    },
+    {
+      "source": "hf-daily-papers",
+      "title": "Small Learned Projections for Semantic-Reversal-Aware Retrieval with Spectral Acceleration: A Four-Domain Empirical Study",
+      "url": "https://huggingface.co/papers/2611.31442",
+      "reason": "min_upvotes",
+      "value": "upvotes 1 < 10"
+    },
+    {
+      "source": "hf-daily-papers",
+      "title": "ReFocus: Progress-Guided Adaptive Practice for Long-Horizon Robotic Manipulation Reinforcement Learning",
+      "url": "https://huggingface.co/papers/2611.32639",
+      "reason": "min_upvotes",
+      "value": "upvotes 1 < 10"
+    },
+    {
+      "source": "hf-daily-papers",
+      "title": "RoMo Hands: A Large Scale Richly Organized Text to Hand Motion Dataset",
+      "url": "https://huggingface.co/papers/2611.31766",
+      "reason": "min_upvotes",
+      "value": "upvotes 1 < 10"
+    },
+    {
+      "source": "hf-daily-papers",
+      "title": "EEGJev: A System One Decision Model and Benchmark for Multi-Task EEG Question Answering",
+      "url": "https://huggingface.co/papers/2611.32100",
+      "reason": "min_upvotes",
+      "value": "upvotes 1 < 10"
+    },
+    {
+      "source": "hf-daily-papers",
+      "title": "LookAnything: A Foundation Model for Holistic Gaze Following",
+      "url": "https://huggingface.co/papers/2611.32351",
+      "reason": "min_upvotes",
+      "value": "upvotes 0 < 10"
+    },
+    {
+      "source": "hf-daily-papers",
+      "title": "Fractal Neural Synthesis: Constant-Storage Procedural Weight Derivation via Complex Quadratic Boundary Dynamics",
+      "url": "https://huggingface.co/papers/2611.32393",
+      "reason": "min_upvotes",
+      "value": "upvotes 0 < 10"
+    },
+    {
+      "source": "hf-daily-papers",
+      "title": "Point Dynamics as Proxy for Robotic World Models",
+      "url": "https://huggingface.co/papers/2611.25946",
+      "reason": "min_upvotes",
+      "value": "upvotes 0 < 10"
+    },
+    {
+      "source": "hf-daily-papers",
+      "title": "Degradation of Language Models under Controlled Load: Synchronization, Rule Execution and Misfires on the Background",
+      "url": "https://huggingface.co/papers/2611.27404",
+      "reason": "min_upvotes",
+      "value": "upvotes 0 < 10"
+    },
+    {
+      "source": "github-trending",
+      "title": "cursor/plugins",
+      "url": "https://github.com/cursor/plugins",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "github-trending",
+      "title": "nginx/nginx",
+      "url": "https://github.com/nginx/nginx",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "github-trending",
+      "title": "toeverything/AFFiNE",
+      "url": "https://github.com/toeverything/AFFiNE",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "github-trending",
+      "title": "XiaoYouChR/Ghost-Downloader-3",
+      "url": "https://github.com/XiaoYouChR/Ghost-Downloader-3",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "unsloth/Inkling-2-Mini-GGUF",
+      "url": "https://huggingface.co/unsloth/Inkling-2-Mini-GGUF",
+      "reason": "noisy_model",
+      "value": "repo id contains gguf"
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "AtomicChat/Inkling-2-Mini-Uncensored-GGUF",
+      "url": "https://huggingface.co/AtomicChat/Inkling-2-Mini-Uncensored-GGUF",
+      "reason": "noisy_model",
+      "value": "repo id contains gguf"
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "prism-ml/Ternary-Bonsai-2.5-27B-GGUF",
+      "url": "https://huggingface.co/prism-ml/Ternary-Bonsai-2.5-27B-GGUF",
+      "reason": "noisy_model",
+      "value": "repo id contains gguf"
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "Lightricks/LTX-2.5",
+      "url": "https://huggingface.co/Lightricks/LTX-2.5",
+      "reason": "max_age_days",
+      "value": "125 days old > 45"
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "nvidia/Nemotron-Labs-Image-30B-A3B",
+      "url": "https://huggingface.co/nvidia/Nemotron-Labs-Image-30B-A3B",
+      "reason": "max_age_days",
+      "value": "62 days old > 45"
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "Qwen/Qwen3.8-27B",
+      "url": "https://huggingface.co/Qwen/Qwen3.8-27B",
+      "reason": "max_age_days",
+      "value": "112 days old > 45"
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "Sentinel7/h3",
+      "url": "https://huggingface.co/Sentinel7/h3",
+      "reason": "max_age_days",
+      "value": "112 days old > 45"
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "nari-labs/Qwen3.8-27B-NariQ-GGUF",
+      "url": "https://huggingface.co/nari-labs/Qwen3.8-27B-NariQ-GGUF",
+      "reason": "noisy_model",
+      "value": "repo id contains gguf"
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "facebook/sam-3d-body-dinov3",
+      "url": "https://huggingface.co/facebook/sam-3d-body-dinov3",
+      "reason": "max_age_days",
+      "value": "373 days old > 45"
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "orcarouter/Inkling-2-Mini-abliterated-GGUF",
+      "url": "https://huggingface.co/orcarouter/Inkling-2-Mini-abliterated-GGUF",
+      "reason": "noisy_model",
+      "value": "repo id contains gguf"
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "DavidAU/Qwen3.8-27B-TURBO-Fable-Cold-Fusion-735-882-Heretic-Uncensored-NEO-CODER-MAX-MTP-GGUF",
+      "url": "https://huggingface.co/DavidAU/Qwen3.8-27B-TURBO-Fable-Cold-Fusion-735-882-Heretic-Uncensored-NEO-CODER-MAX-MTP-GGUF",
+      "reason": "noisy_model",
+      "value": "repo id contains gguf"
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "chatrlabs/Qwen-Image-2.1-Uncensored-Omni-Quantized",
+      "url": "https://huggingface.co/chatrlabs/Qwen-Image-2.1-Uncensored-Omni-Quantized",
+      "reason": "noisy_model",
+      "value": "repo id contains quantized"
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "facebook/sam3",
+      "url": "https://huggingface.co/facebook/sam3",
+      "reason": "max_age_days",
+      "value": "383 days old > 45"
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "sand-ai/MAGI-2-preview",
+      "url": "https://huggingface.co/sand-ai/MAGI-2-preview",
+      "reason": "max_age_days",
+      "value": "114 days old > 45"
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "OpenUncensored/Inkling-2-Mini-Uncensored",
+      "url": "https://huggingface.co/OpenUncensored/Inkling-2-Mini-Uncensored",
+      "reason": "noisy_model",
+      "value": "repo id contains uncensored"
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "huihui-ai/Huihui-Qwen3.8-27B-abliterated-GGUF",
+      "url": "https://huggingface.co/huihui-ai/Huihui-Qwen3.8-27B-abliterated-GGUF",
+      "reason": "noisy_model",
+      "value": "repo id contains gguf"
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "DavidAU/Qwen3.5-9B-The-Defiant-Fable-Uncensored-Heretic-NEO-IMATRIX-MAX-MTP-GGUF",
+      "url": "https://huggingface.co/DavidAU/Qwen3.5-9B-The-Defiant-Fable-Uncensored-Heretic-NEO-IMATRIX-MAX-MTP-GGUF",
+      "reason": "noisy_model",
+      "value": "repo id contains gguf"
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "mlx-community/Inkling-2-Mini-oQ4e-mtp",
+      "url": "https://huggingface.co/mlx-community/Inkling-2-Mini-oQ4e-mtp",
+      "reason": "noisy_model",
+      "value": "repo id contains mlx"
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "unsloth/Qwen3.8-27B-GGUF",
+      "url": "https://huggingface.co/unsloth/Qwen3.8-27B-GGUF",
+      "reason": "noisy_model",
+      "value": "repo id contains gguf"
+    },
+    {
+      "source": "hf-trending-models",
+      "title": "MiniMaxAI/MiniMax-H3",
+      "url": "https://huggingface.co/MiniMaxAI/MiniMax-H3",
+      "reason": "max_age_days",
+      "value": "120 days old > 45"
+    },
+    {
+      "source": "latent-space",
+      "title": "[AINews] Math Proofs Are Landing Faster Than We Can Read Them",
+      "url": "https://latent.space/p/ainews-math-proofs-are-landing-faster-than-we-can-read-them/",
+      "reason": "exclude_title",
+      "value": "title matches ^\\[AINews\\]"
+    },
+    {
+      "source": "latent-space",
+      "title": "[AINews] Gemini 4 Neon marks GDM's full return as a Frontier Lab",
+      "url": "https://latent.space/p/ainews-gemini-4-neon-marks-gdm-s-full-return-as-a-frontier-lab/",
+      "reason": "exclude_title",
+      "value": "title matches ^\\[AINews\\]"
+    },
+    {
+      "source": "hackernews",
+      "title": "Tell HN: Lots of Ask HNs again",
+      "url": "https://news.ycombinator.com/item?id=50649864",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "Jev is probably Qwen3.5-35B-A3B",
+      "url": "https://modaic.dev/blog/latency-doesnt-lie",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "Deploying a payphone on a tiny Pacific Island for fun and zero profit",
+      "url": "https://nickvsnetworking.com/deploying-a-payphone-on-a-tiny-pacific-island-for-fun-and-zero-profit/",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "Defang Security Incident",
+      "url": "https://defang.io/blog/post/security-incident-november-2026/",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "Prof. Sam Lawler: FUCK FUCK FUCK FUCK FUCK FUCK FUCK",
+      "url": "https://mastodon.social/@sundogplanets/117678381079935502",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "Slow Ubuntu security response times",
+      "url": "https://www.openwall.com/lists/oss-security/2026/11/25/9",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "Nfs2root: A 12-year-old pre-auth remote root in the Linux kernel's NFS server",
+      "url": "https://opensec.in/blog/nfs2root-cve-2026-99362",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "72-hour fasting can reset your immune system, USC study shows",
+      "url": "https://scienceinhand.com/72-hour-fasting-can-reset-your-entire-immune-system-usc-study-shows/",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "Spending 35B Opus 5.5 Tokens to Write a Symphony",
+      "url": "https://danprice.ai/blog/opus-symphony",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "Holy shit holy shit holy shit holy shit: The magnitude of what's now happening",
+      "url": "https://scottaaronson.blog/?p=10379",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "SpaceX wins FCC approval to deploy 1M orbital data center satellites",
+      "url": "https://www.cnbc.com/2026/11/25/spacex-fcc-satellite-approval.html",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "Multiagent coding is the future",
+      "url": "https://www.kalzumeus.com/2026/11/25/multiagent-coding-is-the-future/",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "Britain's ghost stations",
+      "url": "https://spectator.com/article/britains-ghost-stations-are-fascinating/",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "Why aren't we working 2-days a week?",
+      "url": "https://anihil.com/why-arent-we-working-2-days-a-week",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "The polynomial Hirsch conjecture is false [pdf]",
+      "url": "https://github.com/openai/math/blob/main/preprints/Superpolynomial-graph-diameter-of-simple-polytopes-November-24-2026/paper.pdf",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "1Password Security Incident",
+      "url": "https://1password.com/blog/update-on-nov-2026-security-incident",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "Deriving Black-Scholes",
+      "url": "https://david.alvarezrosa.com/posts/deriving-black-scholes/",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "Investigating degraded experiences across GitHub products",
+      "url": "https://www.githubstatus.com/incidents/qn8mfv6q5hlx",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "In C++, = default and {} are not the same constructor",
+      "url": "https://lemire.me/blog/2026/11/02/default-and-braces-are-not-the-same-constructor/",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "A few questions for the guy who went snorkeling in a Home Depot retention pond",
+      "url": "https://www.vox.com/down-to-earth/511999/home-depot-retention-pond-snorkel-joseph-ricketts",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "Rumors swirling that labs might have cracked Factoring in P",
+      "url": "https://www.reddit.com/r/singularity/comments/1y59ef1/rumor_that_openai_or_anthropic_found_a_way_to/",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "I checked Clojure's core with Lean and found unreported bugs",
+      "url": "https://s.conao3.com/blog/2026/e4f733",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "The year the web industry gave up",
+      "url": "https://dbushell.com/2026/11/25/web-industry/",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "U.S. jury convicts Huawei of fraud, Iran sanctions violations",
+      "url": "https://www.upi.com/Top_News/US/2026/11/25/jury-convicts-Huawei/3151795587204/",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "Google releases Cogentic papers on integer factorization, discrete logs and more",
+      "url": "https://github.com/google-research/google-research/tree/master/cogentic_research_papers",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "Windows Loudness Equalization, reverse-engineered and ported to PipeWire",
+      "url": "https://github.com/xoxorwr/pw-loudness-eq",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "The industrialization of noise: Automated proof-solving is the same old dead end [pdf]",
+      "url": "https://arxiv.org/abs/2611.31286",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "Smart people who give a shit use tools",
+      "url": "https://www.iankduncan.com/engineering/2026-11-19-smart-people-who-give-a-shit-use-tools",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "Treasury CIO is too busy vibecoding instead of doing his job #147",
+      "url": "https://github.com/samcorcos/legatum/issues/147",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "Show HN: Old Nvidia and ATI tech demos, running again in the browser",
+      "url": "https://gpu-demo-gallery.pages.dev/",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "Taking over US Treasury subdomains for $3 each",
+      "url": "https://www.intruder.io/research/taking-over-us-treasury-subdomains-for-3-each",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "A faster algorithm for extracting hexadecimal digits of π",
+      "url": "https://www.stylewarning.com/posts/faster-digit-extraction/",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "Button Sounds - collection of professionally-recorded button clicks and presses",
+      "url": "https://buttons.joshwcomeau.com/",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "Macrohistory in Six Facts",
+      "url": "https://basilhalperin.com/essays/macrohistory.html",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "Bypassing iOS Safari's 60 FPS Limit to Build Web Applications That Feel Native",
+      "url": "https://rida.dev/blog/bypassing-ios-safari-60-fps-limit",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "Lua for data representation (2025)",
+      "url": "https://citrons.xyz/journal/2025-07-23",
+      "reason": "not_ai",
+      "value": null
+    },
+    {
+      "source": "hackernews",
+      "title": "I've been drinking wine in my kitchen",
+      "url": "https://scottaaronson.blog/?p=10362",
+      "reason": "not_ai",
+      "value": null
+    }
+  ],
+  "dropped": [
+    {
+      "id": "c_414c884863",
+      "title": "Turn artifacts into Mac and Windows apps",
+      "url": "https://claude.com/resources/articles/install-as-app",
+      "published_on": "2026-11-25"
+    },
+    {
+      "id": "c_3f64fbffce",
+      "title": "MCP servers can now ship skills, run tasks, and more with Claude",
+      "url": "https://claude.com/resources/articles/skills-over-mcp-tasks-and-more",
+      "published_on": "2026-11-25"
+    },
+    {
+      "id": "c_3566740619",
+      "title": "Nemotron-Labs-VisualCreation: Pixel as Code for Agentic Visual Creation",
+      "url": "https://huggingface.co/papers/2611.31358",
+      "published_on": "2026-11-25"
+    },
+    {
+      "id": "c_740be60563",
+      "title": "HKUDS/CLI-Anything",
+      "url": "https://github.com/HKUDS/CLI-Anything",
+      "published_on": "2026-11-25"
+    },
+    {
+      "id": "c_271b21f503",
+      "title": "thinkingmachines/Inkling-2-Mini",
+      "url": "https://huggingface.co/thinkingmachines/Inkling-2-Mini",
+      "published_on": "2026-11-21"
+    },
+    {
+      "id": "c_283df06e9f",
+      "title": "inworld/voice-isolator",
+      "url": "https://huggingface.co/inworld/voice-isolator",
+      "published_on": "2026-11-20"
+    },
+    {
+      "id": "c_eef5dc3779",
+      "title": "apple/DepthPro2",
+      "url": "https://huggingface.co/apple/DepthPro2",
+      "published_on": "2026-11-22"
+    },
+    {
+      "id": "c_3af54407b5",
+      "title": "inclusionAI/Ling-3.2-air",
+      "url": "https://huggingface.co/inclusionAI/Ling-3.2-air",
+      "published_on": "2026-11-24"
+    },
+    {
+      "id": "c_6be73df178",
+      "title": "harness-hub/Qwen3.8-27B-pi-adapted",
+      "url": "https://huggingface.co/harness-hub/Qwen3.8-27B-pi-adapted",
+      "published_on": "2026-11-21"
+    },
+    {
+      "id": "c_695b11fd51",
+      "title": "inclusionAI/LingSante-3.1-flash",
+      "url": "https://huggingface.co/inclusionAI/LingSante-3.1-flash",
+      "published_on": "2026-11-23"
+    },
+    {
+      "id": "c_47cf8402d2",
+      "title": "Aleph-Alpha/Kolibri-1.1",
+      "url": "https://huggingface.co/Aleph-Alpha/Kolibri-1.1",
+      "published_on": "2026-11-25"
+    },
+    {
+      "id": "c_3768b1edee",
+      "title": "Lakonik/pi-H3",
+      "url": "https://huggingface.co/Lakonik/pi-H3",
+      "published_on": "2026-11-22"
+    },
+    {
+      "id": "c_9d222aeef0",
+      "title": "RadixArk/DaisyRose-27B",
+      "url": "https://huggingface.co/RadixArk/DaisyRose-27B",
+      "published_on": "2026-11-19"
+    },
+    {
+      "id": "c_8b553ca25e",
+      "title": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+      "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+      "published_on": "2026-11-25"
+    },
+    {
+      "id": "c_cf0b6cc4cc",
+      "title": "tencent/Hy4",
+      "url": "https://huggingface.co/tencent/Hy4",
+      "published_on": "2026-11-22"
+    },
+    {
+      "id": "c_b59ed2a45f",
+      "title": "Cloudflare/clairic",
+      "url": "https://huggingface.co/Cloudflare/clairic",
+      "published_on": "2026-11-20"
+    },
+    {
+      "id": "c_0eb157e01b",
+      "title": "OVHaiLLM/Olala-v1.0-mini-7A1B",
+      "url": "https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B",
+      "published_on": "2026-11-23"
+    },
+    {
+      "id": "c_178b148e12",
+      "title": "microsoft/Aion-1.0-Instruct-2.3B",
+      "url": "https://huggingface.co/microsoft/Aion-1.0-Instruct-2.3B",
+      "published_on": "2026-11-20"
+    },
+    {
+      "id": "c_3076d62d44",
+      "title": "harness-hub/Qwen3.8-27B-opencode-adapted",
+      "url": "https://huggingface.co/harness-hub/Qwen3.8-27B-opencode-adapted",
+      "published_on": "2026-11-21"
+    }
+  ],
+  "candidates": [
+    {
+      "source": "openai-news",
+      "source_name": "OpenAI News",
+      "tier": 1,
+      "kind": "blog",
+      "title": "How Intentful uses dots to make more time for growth",
+      "url": "https://openai.com/business/customer-stories/intentful-dots",
+      "summary": "Marina Petrova's dot Aria helps research websites and build proposals, while proactively flagging messages and resolving issues.",
+      "published_at": "2026-11-24T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {},
+      "tags": [],
+      "links": [],
+      "id": "c_ec576a8acb",
+      "key": "openai.com/business/customer-stories/intentful-dots",
+      "cluster_id": "k_ec576a8acb",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-25"
+      ],
+      "reported_on": []
+    },
+    {
+      "source": "openai-news",
+      "source_name": "OpenAI News",
+      "tier": 1,
+      "kind": "blog",
+      "title": "How iFood scales coding agents across 15,000 repositories",
+      "url": "https://openai.com/business/customer-stories/ifood",
+      "summary": "",
+      "published_at": "2026-11-24T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {},
+      "tags": [],
+      "links": [],
+      "id": "c_fda9037a84",
+      "key": "openai.com/business/customer-stories/ifood",
+      "cluster_id": "k_fda9037a84",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-25"
+      ],
+      "reported_on": []
+    },
+    {
+      "source": "openai-news",
+      "source_name": "OpenAI News",
+      "tier": 1,
+      "kind": "blog",
+      "title": "Clay helps sales teams win with Codex and ChatGPT",
+      "url": "https://openai.com/business/customer-stories/clay-plugins-openai",
+      "summary": "ChatGPT and Codex integrations help Clay's users research deals and turn data into go-to-market plays, with GPT-6 models handling the reasoning.",
+      "published_at": "2026-11-24T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {},
+      "tags": [],
+      "links": [],
+      "id": "c_18e073d130",
+      "key": "openai.com/business/customer-stories/clay-plugins-openai",
+      "cluster_id": "k_18e073d130",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-25"
+      ],
+      "reported_on": []
+    },
+    {
+      "source": "anthropic-research",
+      "source_name": "Anthropic Research",
+      "tier": 1,
+      "kind": "blog",
+      "title": "Migrating our Messages API to Rust",
+      "url": "https://www.anthropic.com/research/migrating-api-to-rust",
+      "summary": "How we migrated our Messages API from Python to Rust.",
+      "published_at": "2026-11-25T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {},
+      "tags": [],
+      "links": [],
+      "id": "c_3d7a5c0812",
+      "key": "anthropic.com/research/migrating-api-to-rust",
+      "cluster_id": "k_3d7a5c0812",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "huggingface-blog",
+      "source_name": "Hugging Face Blog",
+      "tier": 1,
+      "kind": "blog",
+      "title": "Where scientists draw the line on AI agents",
+      "url": "https://huggingface.co/blog/allenai/where-scientists-draw-the-line-on-ai-agents",
+      "summary": "",
+      "published_at": "2026-11-25T18:52:55+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {},
+      "tags": [],
+      "links": [],
+      "id": "c_e75e0ef680",
+      "key": "huggingface.co/blog/allenai/where-scientists-draw-the-line-on-ai-agents",
+      "cluster_id": "k_e75e0ef680",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "huggingface-blog",
+      "source_name": "Hugging Face Blog",
+      "tier": 1,
+      "kind": "blog",
+      "title": "An Indic Voice Agent with CUGA",
+      "url": "https://huggingface.co/blog/ibm-research/an-indic-voice-agent-with-cuga",
+      "summary": "",
+      "published_at": "2026-11-25T10:22:09+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {},
+      "tags": [],
+      "links": [],
+      "id": "c_18ed269c80",
+      "key": "huggingface.co/blog/ibm-research/an-indic-voice-agent-with-cuga",
+      "cluster_id": "k_18ed269c80",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "huggingface-blog",
+      "source_name": "Hugging Face Blog",
+      "tier": 1,
+      "kind": "blog",
+      "title": "Hill-climbing Inkling 2 Mini inference on one RTX PRO 6000",
+      "url": "https://huggingface.co/blog/inkling-2-mini-inference-hillclimb",
+      "summary": "",
+      "published_at": "2026-11-25T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {},
+      "tags": [],
+      "links": [],
+      "id": "c_f30cab37fe",
+      "key": "huggingface.co/blog/inkling-2-mini-inference-hillclimb",
+      "cluster_id": "k_f30cab37fe",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "google-research",
+      "source_name": "Google Research",
+      "tier": 1,
+      "kind": "blog",
+      "title": "Verifiable Social Reasoning for LLM Assistants",
+      "url": "https://research.google/blog/verifiable-social-reasoning-for-llm-assistants/",
+      "summary": "Generative AI",
+      "published_at": "2026-11-25T17:10:27+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {},
+      "tags": [
+        "Generative AI",
+        "Human-Computer Interaction and Visualization",
+        "Machine Intelligence",
+        "Natural Language Processing"
+      ],
+      "links": [],
+      "id": "c_2ca9ef982a",
+      "key": "research.google/blog/verifiable-social-reasoning-for-llm-assistants",
+      "cluster_id": "k_2ca9ef982a",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "ai2-blog",
+      "source_name": "Ai2",
+      "tier": 1,
+      "kind": "blog",
+      "title": "Where scientists draw the line on AI agents",
+      "url": "https://allenai.org/blog/where-scientists-draw-the-line-on-ai-agents",
+      "summary": "Interviews with 17 scientists reveal what they want to verify, safeguard, and keep under human control when using AI agents in research.",
+      "published_at": "2026-11-25T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {},
+      "tags": [],
+      "links": [],
+      "id": "c_c8885e1f0a",
+      "key": "allenai.org/blog/where-scientists-draw-the-line-on-ai-agents",
+      "cluster_id": "k_e75e0ef680",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "Lazy Agents Answer Against Their Own Beliefs: Reinforcement Learning with Verifiable Beliefs Teaches Them to Act on What They Believe",
+      "url": "https://huggingface.co/papers/2611.32884",
+      "summary": "AI agents working on long tasks often commit to an answer before they have enough evidence, a behavior called laziness. In our evaluations, they frequently commit even while their stated belief still names several possible answers. An outcome reward at the end of the episode scores only the final answer, so it cannot teach the agent when to commit, because a lucky guess receives the same reward as an answer backed by evidence. During training, however, the simulator can compute the exact posterior over the answer at every step and tell whether the evidence is already enough. We propose Reinforcement Learning with Verifiable Beliefs (RLVB), which rewards the agent for taking further steps while this posterior still allows several answers and for committing once the evidence is sufficient. The reward needs no judge, critic or reward model, and it never reads the belief line the agent writes before each action. We also introduce Pro Worlds, a benchmark of visual puzzles where the agent views a large world through a small window. We evaluate three vision-language models on three benchmarks, two of which are never seen in training. RLVB improves the base model in all nine settings, by 17.1% on average. Under the outcome reward, GRPO and PPO fall below the base model on average. RLVB also outperforms PPO with a process reward from an LLM judge by 9.3% on average while using 1.6 times fewer GPU-hours. The trained agent answers with sufficient evidence in 51%, 12% and 74% of the...",
+      "published_at": "2026-11-24T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 97,
+        "comments": 6,
+        "github_repo": "https://github.com/declare-lab/RLVB",
+        "github_stars": 26,
+        "organization": "Nanyang Technological University"
+      },
+      "tags": [
+        "Reinforcement Learning with Verifiable Beliefs (RLVB)",
+        "outcome reward",
+        "process reward",
+        "reward model",
+        "critic",
+        "LLM judge",
+        "GRPO",
+        "PPO"
+      ],
+      "links": [],
+      "id": "c_acda2684c9",
+      "key": "arxiv:2611.32884",
+      "cluster_id": "k_acda2684c9",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "PartAgent: Agentic 3D Part Segmentation via Expert Integration and Closed-Loop Refinement",
+      "url": "https://huggingface.co/papers/2611.32554",
+      "summary": "Segmenting a 3D object into semantically meaningful parts requires joint reasoning about geometric structure and semantic context. Pretrained 3D experts provide spatially grounded region proposals, while 2D experts provide semantic cues for identifying object parts. The challenge is to integrate these complementary capabilities into a framework that can both produce meaningful part segmentations and progressively refine them. We present PartAgent, a training-free agentic framework for 3D part segmentation built upon two complementary modules: (i) Structural-Semantic Expert Integration combines regions predicted by the 3D expert with multiview semantic evidence from the 2D expert through image-to-surface correspondences, constructing compositional part partitions at multiple granularities. (ii) Observation-Driven Closed-Loop Partition Refinement observes the current partition and its supporting evidence to select targeted inspection, evidence repair, composition, or reselection actions. It verifies proposed changes and uses the updated state and action outcomes to guide subsequent decisions. On PartObjaverse-Tiny-WT, PartAgent achieves 68.41 mIoU, outperforming the strongest competing method by 8.53 points. Across 3DCoMPaT200, PartNeXt, PartNetE, and PartObjaverse-Tiny, PartAgent achieves the highest mIoU on each dataset, averaging 69.36 across the four datasets, 7.28 points above the highest mean among competing methods.",
+      "published_at": "2026-11-24T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 33,
+        "comments": 3,
+        "github_repo": "https://github.com/yangcaoai/PartAgent_Agent_for_3D_Part_Seg",
+        "github_stars": 31,
+        "organization": "The Hong Kong University of Science and Technology"
+      },
+      "tags": [
+        "3D part segmentation",
+        "pretrained 3D experts",
+        "2D experts",
+        "region proposals",
+        "semantic cues",
+        "image-to-surface correspondences",
+        "multiview semantic evidence",
+        "compositional part partitions"
+      ],
+      "links": [],
+      "id": "c_3b96ce3a2f",
+      "key": "arxiv:2611.32554",
+      "cluster_id": "k_3b96ce3a2f",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "Embodied AI Fails the Mirror Test: How a Simple Mirror Breaks Robot Policies",
+      "url": "https://huggingface.co/papers/2611.33010",
+      "summary": "Can a simple mirror expose the limitations of today's robotic manipulation policies? Inspired by the mirror self-recognition test in animal cognition, we investigate whether robot policies can reliably manipulate physical objects in scenes containing their reflections. We introduce RoboDojo-Mirror, a benchmark built on RoboDojo that preserves task objectives, success criteria, and policy checkpoints while comparing a mirror-free baseline with single-mirror, dual-mirror, and mirrored-tabletop conditions. Across five policies spanning Vision-Language-Action models, World Action Models, and agentic policies, every mirror condition reduces aggregate success rates: averaged over the three conditions, the drop ranges from 10.8 to 56.7 percentage points across policies, and it reaches 62.5 points on the mirrored tabletop. Because a mirror is also a physical obstacle, we compare it against geometrically matched non-reflective panels; 50--88\\% of mirror-specific failures occur without recorded robot--panel contact, so direct collisions alone do not explain the degradation. Trajectory and contact analyses instead reveal recurring behaviors consistent with phantom targeting of reflected objects and spatial mislocalization of real ones. Targeted diagnostics further characterize grasping near reflections, policy-dependent pushing progress, and physical-target interaction under main-camera occlusion. Real-robot experiments with π {0.5} and FastWAM also show lower overall success rates...",
+      "published_at": "2026-11-24T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 27,
+        "comments": 2,
+        "github_repo": "https://github.com/iPPLab/robodojo-mirror",
+        "github_stars": 8,
+        "organization": "intelligence++"
+      },
+      "tags": [
+        "Vision-Language-Action models",
+        "World Action Models",
+        "agentic policies",
+        "policy checkpoints",
+        "π_{0.5}",
+        "FastWAM"
+      ],
+      "links": [],
+      "id": "c_3447ddd410",
+      "key": "arxiv:2611.33010",
+      "cluster_id": "k_3447ddd410",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "ThinkMorph-SSL: Scaling Interleaved Multimodal Reasoning with Pretext Tasks",
+      "url": "https://huggingface.co/papers/2611.32183",
+      "summary": "People reason with pictures as well as words. Interleaved multimodal reasoning gives models a similar way to solve problems by creating intermediate images and using them to guide further reasoning. Training models with this ability usually relies on task-specific demonstrations, which are difficult to collect. We introduce ThinkMorph-SSL, a two-stage training recipe that uses images themselves as a source of supervision. The first stage, pretext reasoning, converts visual pretext tasks, such as image colorization and denoising, into instruction-free interleaved traces. Models describe a corrupted or transformed image, generate a restored or canonical image, and interpret the result. The second stage uses automatically constructed demonstrations for question-driven instruction tuning. At the same instruction-tuning budget, models trained with pretext reasoning outperform those trained with instruction tuning alone. The full recipe improves over the base model by an average of 11.33 accuracy points across twelve benchmarks. These results show that supervision derived from images can build the visual skills needed for interleaved reasoning and improve learning from task-specific demonstrations.",
+      "published_at": "2026-11-24T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 21,
+        "comments": 2,
+        "github_repo": "https://github.com/ThinkMorph/ThinkMorph-SSL",
+        "github_stars": 12
+      },
+      "tags": [
+        "ThinkMorph-SSL",
+        "interleaved multimodal reasoning",
+        "intermediate images",
+        "task-specific demonstrations",
+        "two-stage training recipe",
+        "pretext reasoning",
+        "visual pretext tasks",
+        "image colorization"
+      ],
+      "links": [],
+      "id": "c_7eaad7b9d5",
+      "key": "arxiv:2611.32183",
+      "cluster_id": "k_7eaad7b9d5",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "Qwen-Image-HD: Autoregressive Diffusion for High Definition Image Generation",
+      "url": "https://huggingface.co/papers/2611.32736",
+      "summary": "Fine-tuning a generator on a complete high-resolution canvas requires long image sequences and substantial computation, yet local regions can still exhibit unnatural repetitive stripes when training resources are limited. We introduce Qwen-Image-HD, which adapts Qwen-Image 2.0 to high-resolution synthesis through local training and blockwise autoregressive generation. Each prediction covers a target tile at 1K scale, conditioned on high-resolution upper and left neighbors and a compressed historical thumbnail. These conditions provide adjacent fine-scale structures and an overview of the scene generated so far. To integrate these complementary cues, we map both forms of history and the target to a shared canvas coordinate system to express their spatial relationships and scale differences. On Qwen-Image-Bench at 4K, Qwen-Image-HD achieves stronger overall evaluation performance than direct 4K generation with FLUX-3-Image-Klein. Compared with full-image 4K supervised fine-tuning of the same backbone, it achieves better generation quality with lower training compute and higher inference efficiency, while exhibiting fewer unnatural repetitive stripes in original-resolution comparisons. We further introduce a Wavefront-AutoRegressive inference schedule that generates tiles on the same anti-diagonal concurrently across GPUs to reduce single-image latency.",
+      "published_at": "2026-11-24T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 21,
+        "comments": 1
+      },
+      "tags": [],
+      "links": [],
+      "id": "c_3ca9d3d640",
+      "key": "arxiv:2611.32736",
+      "cluster_id": "k_3ca9d3d640",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "ICLWorld: Benchmarking In-Context Learning of Agents from Digital to Physical Worlds",
+      "url": "https://huggingface.co/papers/2611.32649",
+      "summary": "In-context learning (ICL) lets agents acquire new rules from context and adapt to user-specific requirements at inference time. The same frontier agents now operate both computers and robots, yet their ICL remains insufficiently assessed: existing benchmarks are largely offline, rely on text or static images, and risk training-data contamination, while robot evaluations are limited to method-level ablations. We present ICLWorld, an online benchmark that evaluates the ICL of agents from digital to physical worlds, covering computer use and robot use, together with UIverse, a unified harness that turns every environment into a user interface. We build 30 environments, record 630 demonstration videos (10+ hours), and design 160 tasks with customized, often counter-intuitive rules that cannot be satisfied without learning from the context. Each task comes with three rule versions, given as text or video, and we test generalization at three levels, from replaying the demonstration to new instances and unseen environments. Across six frontier models, the strongest agents, Claude Opus 5.5 and GPT-6 Astra, succeed on 82% and 76% of computer-use runs but only 27% and 26% of robot-use runs, and a no-rule control reduces success to at most 8%. GPT-6 Astra succeeds under all three rule versions on only 38% of computer-use tasks, half its rate under a single rule, and answers 98% of robot rule questions correctly yet completes only 20% of these tasks. Frontier agents learn rules...",
+      "published_at": "2026-11-24T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 18,
+        "comments": 2,
+        "github_repo": "https://github.com/ICLWorld/ICLWorld",
+        "github_stars": 12
+      },
+      "tags": [
+        "in-context learning",
+        "agents",
+        "inference time",
+        "training-data contamination",
+        "method-level ablations",
+        "online benchmark",
+        "generalization",
+        "frontier models"
+      ],
+      "links": [],
+      "id": "c_36c271fa87",
+      "key": "arxiv:2611.32649",
+      "cluster_id": "k_36c271fa87",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "CoT-Proxy: Cross-Format Transfer for Distilling Long-Horizon Policies",
+      "url": "https://huggingface.co/papers/2611.33148",
+      "summary": "Reasoning models become long-horizon agents through reinforcement learning or, more cheaply, through fine-tuning on a stronger teacher's trajectories, which contain the teacher's chain-of-thought as well as its actions. The standard fine-tuning approach imitates both, yet the strongest teachers are closed models whose chain-of-thought is hidden behind an API. We show that the chain-of-thought can be left out altogether and that the long-horizon policy can be distilled from the teacher's actions alone. The student is trained on these trajectories with its reasoning block left empty, while a KL loss on a replay buffer of its own generations limits drift from its initial model. Surprisingly, the policy learned from these trajectories with an empty reasoning block carries over to inference with thinking enabled, where the student reasons in its own style while acting like the teacher, an effect we call cross-format transfer. Distilling the actions of Qwen3.6-27B raises the task success of Qwen3-4B on AppWorld from 7% to 18% and that of Qwen3-32B from 12% to 25%. We further introduce CoT-proxies, short summaries of the teacher's reasoning placed after the empty reasoning block, which raise Qwen3-4B further, to 35%. Since neither actions nor CoT-proxies need the hidden chain-of-thought, the recipe applies unchanged to closed teachers. Distilling GPT-5.6 Luna from its visible outputs and the reasoning summaries its API returns raises Qwen3-4B from 7% to 48% on AppWorld and from 3%...",
+      "published_at": "2026-11-24T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 14,
+        "comments": 2
+      },
+      "tags": [],
+      "links": [],
+      "id": "c_f864c3accd",
+      "key": "arxiv:2611.33148",
+      "cluster_id": "k_f864c3accd",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "Reinforcing Diffusion Models by Instantaneous Trajectory Distribution Matching",
+      "url": "https://huggingface.co/papers/2611.30986",
+      "summary": "Forward diffusion reinforcement learning (RL)---enabling deterministic ODE sampling without trajectory backpropagation---has grown increasingly popular for efficiently aligning diffusion models. However, we reveal that existing methods essentially rely on signed reward-weighted regression (RWR), regressing the trainable policy velocity onto rollouts from a behavior distribution. Unbiased baseline subtraction implicitly assumes that the policy velocity equals the behavior marginal velocity---an idealized assumption violated under classifier-free guidance (CFG) rollouts, offline/off-policy updates, and imperfect online self-consistency. This behavior--policy mismatch breaks baseline invariance and injects baseline-induced gradient drift, destabilizing training. To resolve this issue, we propose Instantaneous Trajectory Distribution Matching (iTDM), taking the infinitesimal limit of Trajectory Distribution Matching toward a time-local reward-guided target via the posterior-score identity to yield a sample-level gradient anchored at the behavior velocity without learning an additional reward-tilted target score. Tracking this velocity with an online auxiliary denoiser guarantees exact baseline invariance at the auxiliary optimum, effectively suppressing baseline drift across both online and offline RL. Extensive experiments across compositional generation, text rendering, and preference alignment show that iTDM achieves state-of-the-art in-domain and out-of-domain performance...",
+      "published_at": "2026-11-24T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 14,
+        "comments": 2,
+        "github_repo": "https://github.com/Luo-Yihong/iTDM",
+        "github_stars": 12,
+        "organization": "HKUST"
+      },
+      "tags": [],
+      "links": [],
+      "id": "c_6fa0a3609b",
+      "key": "arxiv:2611.30986",
+      "cluster_id": "k_6fa0a3609b",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "MAGPIE: Agentic Multi-Reference Image Generation via Executable Scene Construction",
+      "url": "https://huggingface.co/papers/2611.32462",
+      "summary": "Multi-reference image generation requires a model to preserve the appearance of selected subjects while arranging them according to an instruction. Despite recent progress in reference-based generation and compositional control, reliably organizing selected subjects into the intended scene remains challenging. Although existing methods provide various forms of compositional guidance, the planned relationships are not always explicitly instantiated for inspection and refinement before image synthesis. To address this limitation, we introduce MAGPIE, which represents the intended composition as a simplified 3D scene defined by an executable Blender program. A coding agent links each scene instance to its reference, checks the geometry and rendered view against the instruction, and revises the program to correct discrepancies. The final proxy rendering serves as a visual plan for the image generator. Using MAGPIE-Instruct-3K, we train the generator to follow this plan while drawing each subject's appearance from its reference. MAGPIE improves both Qwen and FLUX on DreamOmni2 and SconeEval. With FLUX, it improves overall success on DreamOmni2 by 28.21 percentage points over the original backbone and achieves the highest overall score among the models evaluated on SconeEval.",
+      "published_at": "2026-11-24T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 13,
+        "comments": 2,
+        "organization": "KlingAI Research"
+      },
+      "tags": [],
+      "links": [],
+      "id": "c_5163c8e488",
+      "key": "arxiv:2611.32462",
+      "cluster_id": "k_5163c8e488",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "SpecEngineeringBench: Evaluating Coding Agents as Autonomous Specification Engineers",
+      "url": "https://huggingface.co/papers/2611.32973",
+      "summary": "Autonomous specification engineering requires coding agents to translate functional requirements into executable tests and use the results to discover and validate defects. However, existing benchmarks evaluate coding agents on explicitly specified test generation tasks, commonly providing an issue description, a designated test entry point, or files to inspect, leaving the ability to determine what to test and where to investigate insufficiently evaluated. Relying on such clues bypasses the challenge of mapping requirements to implementations and proactively uncovering unknown defects. We propose SpecEngineeringBench, comprising 100 instances from 78 open-source Python repositories across 16 application categories, with multiple recorded defects in each instance. Two independent tasks evaluate complementary capabilities: generating test suites and discovering defects through execution analysis. The evaluation combines test validity, defect detection, and coverage with localization precision and recall. Across seven frontier coding agents, results reveal that test validity and coverage decouple from defect exposure: agents achieve a 91.47% Head Pass Rate and 80.48% Change-focused Coverage alongside a 26.36% Fail-to-Pass Rate, while localization recall drops from 78.11% at the file level to 51.29% at the function level. Autonomous test generation improves file, function, and hunk localization recall by 4.99, 2.77, and 2.69 percentage points over relying solely on existing...",
+      "published_at": "2026-11-24T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 12,
+        "comments": 4,
+        "github_repo": "https://github.com/TokenWave-AI/SpecEngineeringBench",
+        "github_stars": 0,
+        "organization": "Tokenwave.AI"
+      },
+      "tags": [],
+      "links": [],
+      "id": "c_8d1c5565c0",
+      "key": "arxiv:2611.32973",
+      "cluster_id": "k_8d1c5565c0",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "Coding4Games: Can Modern Coding Agents Play Modern Video Games?",
+      "url": "https://huggingface.co/papers/2611.31974",
+      "summary": "Games, especially modern AAA games, challenge language models to perceive complex scenes, control actions, and make decisions over long horizons. Existing game benchmarks primarily test language models as computer-use agents that query a language model throughout play, incurring repeated inference cost and, in real-time games, acting while the environment continues to evolve. We ask whether coding agents can learn from game interaction to develop standalone game-playing programs that run without language model inference. We thus introduce Coding4Games, a benchmark for evaluating whether coding agents can develop standalone programs that play modern games through visual observations and standard game inputs. Coding4Games has three defining features: 1) Diverse Modern Games, covering 15 games with diverse visual, strategic, and control demands; 2) Development-Test Separation, in which a coding agent uses a sandbox and the standard player interface to iteratively develop a program, after which the selected program is frozen and independently tested without language-model inference; and 3) Outcome and Process Evaluation, which measures not only game performance and reliability but also how agents use feedback, revise programs, and resolve problems during development. Across 15 games, the best program per game outscores the strongest GUI baseline on 13 and ties it on one. The human player outscores all agents on 10 games. We additionally examine the effects of development...",
+      "published_at": "2026-11-24T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 12,
+        "comments": 2,
+        "github_repo": "https://github.com/GVCLab/Coding4Games",
+        "github_stars": 16,
+        "organization": "ARC Lab, Tencent"
+      },
+      "tags": [],
+      "links": [],
+      "id": "c_01a7910d9c",
+      "key": "arxiv:2611.31974",
+      "cluster_id": "k_01a7910d9c",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "Rewirable Circuits in Transformers with Loom Attention",
+      "url": "https://huggingface.co/papers/2611.30634",
+      "summary": "We propose loom attention, which allows a Transformer to dynamically rewire its circuits at every token by interweaving a head's vertical attention over the outputs of earlier heads (to obtain its query, key and value) with its horizontal attention over tokens. We instantiate vertical attention efficiently with normalized and gated linear attention over a per-token matrix memory, which stores the compressed head outputs and serves as a second residual stream. This yields LoomFormer, a dual-stream architecture that splits control and content between the vector and matrix streams. Across model sizes and training token budgets in language modeling and downstream tasks, LoomFormer matches Transformers trained with over 3x compute and recent residual-stream baselines (HC/mHC, MUDDFormer, AttnRes) trained with ~1.7-2.8x. For example, trained on the same 300B tokens with only 2% extra FLOPs, LoomPythia-2.8B achieves ~1.6x the average downstream gain of mHC-Pythia-2.8B over Pythia-2.8B, and matches (0-shot) or surpasses (5-shot) Pythia-12B. Code is available at",
+      "published_at": "2026-11-23T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 87,
+        "comments": 3,
+        "github_repo": "https://github.com/Caiyun-AI/LoomFormer",
+        "github_stars": 10
+      },
+      "tags": [],
+      "links": [],
+      "id": "c_9c0fa0d320",
+      "key": "arxiv:2611.30634",
+      "cluster_id": "k_9c0fa0d320",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "ACAP: Asynchronous Coding Agents for Efficient Robot Control",
+      "url": "https://huggingface.co/papers/2611.31205",
+      "summary": "Coding agents can construct and revise robot behavior during execution, but using one agent for the whole robot can delay otherwise independent work. We introduce Asynchronous Coding Agents as Policy (ACAP), an asynchronous framework that organizes one robot as a team of persistent agents. Each member reasons and acts for a configurable control group, such as an arm with its gripper or the torso and chassis, enabling asynchronous reasoning and execution. However, different robot components often have physical dependencies that require coordination. To address this challenge, ACAP introduces a hyper-agent that assigns tasks, coordinates dependencies, and dynamically allocates control between the lead and member agents. This allows independent work to progress concurrently while supporting tightly coupled manipulation when necessary. Across 72 real-world rollouts covering 25 task/platform settings, ACAP reduces task-balanced time cost by 28.2% compared with a single-agent Direct Policy, with improvements across Fully Parallel, Parallel-Sequential, and Collaborative tasks. Across all eight Collaborative settings, ACAP also achieves lower mean time cost than Fixed Delegation, where only member agents can control their assigned groups. An additional 90-rollout study shows lower mean 30-minute-capped time cost than Direct on all six tasks. We further demonstrate mobile manipulation using the same member interface for chassis and torso control. We present the framework and a...",
+      "published_at": "2026-11-23T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 62,
+        "comments": 3,
+        "organization": "MMLab@NTU"
+      },
+      "tags": [],
+      "links": [],
+      "id": "c_d22f2972ac",
+      "key": "arxiv:2611.31205",
+      "cluster_id": "k_d22f2972ac",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "Self-Evolving Evaluation Environments for Computer-Use Agents",
+      "url": "https://huggingface.co/papers/2611.30962",
+      "summary": "Computer-use agents (CUAs) are rapidly improving, yet their evaluation remains largely static. Existing benchmarks provide a strong foundation, but fixed difficulty ceilings, limited feature coverage, and coarse aggregate scores progressively weaken their discriminative and diagnostic value. We introduce CUA-SEE, a closed-loop evaluation environment that co-evolves tasks and executable verifiers from rollout evidence. It disentangles three objectives: benchmark evolution expands evaluation scope through cohort-calibrated difficulty and coverage growth; diagnostic evolution increases resolution through agent-conditional capability-boundary probes; and verifier evolution improves precision by translating changing requirements into state-grounded checkpoints with adversarial validation. Across multiple agents, applications, and rounds, CUA-SEE generates challenging, measurable tasks while preserving process-level evidence. Our results position adaptive evaluation as a scalable counterpart to self-evolving agents, continuously tracking what agents can do, where their boundaries lie, and how reliably progress is measured.",
+      "published_at": "2026-11-23T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 48,
+        "comments": 2,
+        "organization": "Tongyi-MAI"
+      },
+      "tags": [
+        "computer-use agents",
+        "closed-loop evaluation environment",
+        "executable verifiers",
+        "rollout evidence",
+        "benchmark evolution",
+        "cohort-calibrated difficulty",
+        "coverage growth",
+        "diagnostic evolution"
+      ],
+      "links": [],
+      "id": "c_4d1421a85b",
+      "key": "arxiv:2611.30962",
+      "cluster_id": "k_4d1421a85b",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "On-Policy Codec Distillation for Efficient All-in-One Video Generation",
+      "url": "https://huggingface.co/papers/2611.31184",
+      "summary": "Modern visual generative models operate on tokens, and every visual asset they receive, whether an identity, a scribble, a depth map, or a motion video, is tokenized and appended to the input token sequence. Consequently, conditioning quickly dominates the computation cost. Yet most of these tokens carry redundant spatiotemporal information. Our key insight is that identifying what is genuinely new is exactly the problem that classical video codecs have long solved. Thus, we first introduce a codec-based token pruning method that discards redundant tokens. Then, we propose an on-policy self-distillation (OPSD) strategy to train a DiT adapter capable of learning the codec pruning pattern well without quality degradation. Together, they form On-Policy Codec Distillation (CodecOPSD). We scale CodecOPSD to 16 condition modalities on our own video diffusion model, where it prunes 66% of the condition tokens on average with almost no quality drop. Therefore, denoising becomes 2x faster, and the cache memory shrinks by up to 73% in KV cache mode. CodecOPSD also extends to other state-of-the-art pretrained image and video generative models, where its benefit grows further with more conditions, longer frames, and higher resolution.",
+      "published_at": "2026-11-23T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 12,
+        "comments": 2,
+        "github_repo": "https://github.com/Kiteretsu77/CodecOPSD",
+        "github_stars": 20
+      },
+      "tags": [],
+      "links": [],
+      "id": "c_1e4f6fbce8",
+      "key": "arxiv:2611.31184",
+      "cluster_id": "k_1e4f6fbce8",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "LeadVLA: Learning Follower-Aware Route Execution for Robot Leading",
+      "url": "https://huggingface.co/papers/2611.30149",
+      "summary": "Robot leading requires executing a route while continuously adapting to a designated follower. Existing robot-leading systems often mediate follower understanding and physical route execution through explicit states, planners, or modular interfaces; directly learning this coupling through end-to-end trajectory prediction can instead entangle route execution with follower response. We introduce LeadVLA, a structured multimodal policy that preserves the route as an explicit Path reference while learning a Pace for route progress and a Residual for local follower- and scene-conditioned adaptation. To make this problem trainable and measurable, we develop LeadInfra, a configurable Unreal Engine-based closed-loop data-generation infrastructure from which we instantiate an approximately 4M-sample training corpus, and LeadBench, a standardized benchmark with 108 fully held-out closed-loop episodes. LeadVLA achieves the highest task success (39.6%) among evaluated robot policies on LeadBench while maintaining strong route fidelity and follower responsiveness, and transfers to unseen real-world environments without real-world policy fine-tuning. Project Page:",
+      "published_at": "2026-11-23T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 12,
+        "comments": 2
+      },
+      "tags": [
+        "structured multimodal policy",
+        "end-to-end trajectory prediction",
+        "Path reference",
+        "Pace",
+        "Residual",
+        "closed-loop data-generation infrastructure",
+        "closed-loop episodes",
+        "robot policies"
+      ],
+      "links": [],
+      "id": "c_cdb9715a4e",
+      "key": "arxiv:2611.30149",
+      "cluster_id": "k_cdb9715a4e",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "RoomTokens: Masked Diffusion over Structured Tokens for Indoor Scene Synthesis",
+      "url": "https://huggingface.co/papers/2611.30219",
+      "summary": "Generating 3D indoor scenes requires a representation that captures object semantics, instance identity, height structure, and orientation while respecting room geometry. Methods that model scenes as sequences of object vectors learn spatial constraints implicitly, leaving collisions and boundary violations to losses or post-processing; semantic-map methods make occupancy explicit, but collapse instance and directional structure. We introduce RoomTokens, a sliced structured-token representation in which each token stores semantic class, instance-color identity, and facing field. This representation allows a scene to be generated as a discrete grid while preserving cues for instance grouping, orientation estimation, and 3D extent prediction. To learn the RoomToken distribution, we propose MDIRT (Masked Diffusion over RoomTokens), a masked discrete diffusion model that denoises semantic/instance-color/facing channels jointly with a shared cross-slice backbone. Architectural tokens are clamped as explicit floor- plan constraints, so the model samples furniture layouts that respect room geometry while retaining instance and object-attribute structure. Experiments on 3D-FRONT show that RoomTokens with MDIRT improve layout fidelity and physical consistency over sequence/vector- and map-based methods, suggesting structured spatial tokens as a practical choice for discrete 3D scene synthesis.",
+      "published_at": "2026-11-23T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 11,
+        "comments": 2,
+        "github_repo": "https://github.com/3dlg-hcvc/RoomToken",
+        "github_stars": 1,
+        "organization": "3D Language & Generation Research Group"
+      },
+      "tags": [],
+      "links": [],
+      "id": "c_7a3d1e38c2",
+      "key": "arxiv:2611.30219",
+      "cluster_id": "k_7a3d1e38c2",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "PhyCoVE: Benchmarking Physical Counterfactual Video Editing across Diverse Material Dynamics",
+      "url": "https://huggingface.co/papers/2611.29184",
+      "summary": "Physical counterfactual video editing turns a source video and a language-specified physical edit at a given execution frame into a counterfactual video that shows how the scene would evolve after the edit. Existing evaluations with counterfactual target videos mainly cover object removal or specific rigid-body motions, although real scenes also involve elastic deformation, fluid flow, and interactions among rigid bodies, elastic solids, and fluids. We introduce PhyCoVE, a benchmark of 533 cases on 110 source videos that covers rigid, elastic, and fluid dynamics in five interaction patterns, with edits that remove an object, change a physical quantity, or insert a new object. For the simulated cases, a language model proposes scene designs, coding agents build them with solvers suited to each material and physically based rendering and then simulate each edit from the source scene state, and humans check every stage. For the real cases, we record continuously from one camera position before and after each edit. We also propose counterfactual fidelity, a metric that applies across materials and their interactions and measures how much of the physical change from the source video to the target video a generated video reproduces. We evaluate seven open-source and commercial video editing models and find that counterfactual fidelity ranks them nearly as human preference does, but even the best model reproduces only about one seventh of the physical change. The models change how...",
+      "published_at": "2026-11-22T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 15,
+        "comments": 2,
+        "github_repo": "https://github.com/Hammour-steak/PhyCoVE",
+        "github_stars": 8,
+        "organization": "Fudan University"
+      },
+      "tags": [
+        "physical counterfactual video editing",
+        "counterfactual fidelity",
+        "video editing models",
+        "language model",
+        "coding agents",
+        "physically based rendering",
+        "rigid-body motions",
+        "elastic deformation"
+      ],
+      "links": [],
+      "id": "c_2fd28aeb23",
+      "key": "arxiv:2611.29184",
+      "cluster_id": "k_2fd28aeb23",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "Don't Sleep, Keep Watch: Proactive Perception for Computer-Use Agents",
+      "url": "https://huggingface.co/papers/2611.28947",
+      "summary": "Computer-use agents (CUAs) built on vision-language models are increasingly entrusted with long-horizon tasks in live desktop, web, and mobile environments, where the screen keeps changing on its own. However, current CUAs lack real-time situational awareness: they perceive the environment through discrete snapshots, and the substantial inference latency of VLMs, compounded by highly dynamic interfaces, opens a perception-action gap in which the observed state frequently becomes stale before the corresponding action is executed. To bridge this gap, we present NightWatch, a plug-and-play framework that endows any CUA with continuous, temporally grounded perception without changing the agent's model, prompt, or action space. NightWatch couples the VLM agent with NightWatch-0.8B, a lightweight System-1 model that performs streaming monitoring of the interface state and keeps the agent synchronized with the evolving environment at low computational cost and latency, thereby grounding each decision in the current state rather than an outdated snapshot and reducing both stale actions and idle waiting while preserving task success. Experiments on desktop and dynamic web environments (OSWorld-Verified and DynaCU-Bench) show that NightWatch, driven by a watcher of only 0.8B parameters, reduces non-reasoning wall-clock time by 33% and wasted time by 53% on OSWorld while keeping task success on par, raises success on DynaCU-Bench from 39.5% to 44.2% with the large VLM agent, and is...",
+      "published_at": "2026-11-21T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 97,
+        "comments": 2,
+        "github_repo": "https://github.com/SuJQ0722/NightWatch",
+        "github_stars": 3
+      },
+      "tags": [
+        "vision-language models",
+        "computer-use agents",
+        "inference latency",
+        "perception-action gap",
+        "System-1 model",
+        "streaming monitoring",
+        "temporally grounded perception",
+        "NightWatch-0.8B"
+      ],
+      "links": [],
+      "id": "c_d25c0b9974",
+      "key": "arxiv:2611.28947",
+      "cluster_id": "k_d25c0b9974",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "S-Mind: Internalizing Multi-View Geometry for Spatial Intelligence",
+      "url": "https://huggingface.co/papers/2611.28649",
+      "summary": "Spatial intelligence, the ability to reason about 3D space from visual observations, becomes essential as multimodal large language models (MLLMs) move into the physical world. Beyond perceiving each view, it rests on two cornerstones of human cognition: fusing multiple views into one coherent 3D scene and mentally transforming that scene to new viewpoints as reasoning unfolds. Yet our spatial probes reveal that MLLMs largely lack both capabilities, even after spatial fine-tuning. We therefore present S-Mind, which internalizes multi-view geometry within the MLLM through a compact set of spatial tokens. It supervises these tokens to hold the fused 3D scene and re-emits them to re-express this scene from every viewpoint the reasoning adopts. Across four spatial benchmarks, S-Mind improves its Qwen3.5 backbones by up to 22.26 points and surpasses frontier general models such as GPT-6-Astra (+0.45), Kimi-K3.1-Pro (+1.97), and GLM-5.3-Flash (+7.80) in average accuracy. Moreover, the same probes confirm that it acquires both capabilities, reaching fusion and transformation accuracies of 65.11% and 82.17%, against at most 16.02% and 37.28% for the baselines. At inference, S-Mind also runs about 100x faster than a tool-based agent on the same backbone. Instilled through these spatial tokens during training, spatial capability becomes intrinsic to the backbone and persists even when the tokens are withheld, offering a promising path toward spatial intelligence in MLLMs.",
+      "published_at": "2026-11-21T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 41,
+        "comments": 3,
+        "github_repo": "https://github.com/KANABOON1/S-Mind",
+        "github_stars": 13,
+        "organization": "Nanyang Technological University"
+      },
+      "tags": [],
+      "links": [],
+      "id": "c_64155af01c",
+      "key": "arxiv:2611.28649",
+      "cluster_id": "k_64155af01c",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "KMed-31B Technical Report",
+      "url": "https://huggingface.co/papers/2611.28719",
+      "summary": "We present KMed-31B, a medical large language model post-trained from an open-weight model for on-premises deployment with limited hardware. Post-training a model for diverse medical tasks remains difficult, because improving one kind of task can lower performance on another. We attribute this to differences between tasks in expected output and available feedback. Medical question answering and diagnosis prediction have reference answers, whereas clinical inquiry has no single correct response and is judged with rubrics. We therefore divide medical training tasks into four categories by these two properties, train one specialist per category with a reward that its feedback supports, and integrate the specialists into a single student with Multi-teacher On-policy Delta Distillation (MOPD^2). For clinical inquiry, we build Synthetic Health Dialogue, a simulated corpus of consultations with lay users and clinicians whose patient cases span common clinical presentations in primary care. Relative to its base model, KMed-31B raises HealthBench Hard from 22.95 to 41.87 and HealthBench Professional from 37.92 to 50.20 in non-thinking mode, and from 23.80 to 51.48 and from 41.97 to 59.18 in thinking mode, while its scores on four multiple-choice medical benchmarks are maintained or slightly improved. KMed-31B has the highest unadjusted HealthBench Hard score among the compared models, including proprietary ones, and scores higher on HealthBench Professional than every open-weight...",
+      "published_at": "2026-11-21T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 20,
+        "comments": 2,
+        "organization": "NAVER"
+      },
+      "tags": [],
+      "links": [],
+      "id": "c_767fdf3060",
+      "key": "arxiv:2611.28719",
+      "cluster_id": "k_767fdf3060",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "Antom 3-in-1 Transformer: A Payment Foundation Model",
+      "url": "https://huggingface.co/papers/2611.25403",
+      "summary": "We report the development of Antom 3-in-1 Transformer, a payment foundation model that integrates sequence, tabular, and graph representations for payment risk detection. The model contains approximately 7B parameters, with approximately 1.7B activated per task route. Antom 3-in-1 Transformer is pretrained to learn reusable behavioral and relational representations, primarily on Ant International's internal payment data. In a cross-business transfer experiment, pretraining improves the target business metric by 34.5% over the same architecture trained from scratch. With only 25% of the training labels, the pretrained model outperforms the full-label scratch baseline in Average Precision (AP) and Recall@0.5% on different merchant domains. In a four-month online experiment on Ant International's billion-scale payment platform, the model reduced the overall loss rate by 37.88% relative to XGB-Online.",
+      "published_at": "2026-11-19T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 104,
+        "comments": 3,
+        "organization": "ant-international"
+      },
+      "tags": [],
+      "links": [],
+      "id": "c_7cc1e2b30a",
+      "key": "arxiv:2611.25403",
+      "cluster_id": "k_7cc1e2b30a",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "hf-daily-papers",
+      "source_name": "Hugging Face Daily Papers",
+      "tier": 1,
+      "kind": "paper",
+      "title": "LingSante MedGuard Technical Report",
+      "url": "https://huggingface.co/papers/2611.25509",
+      "summary": "As medical AI is increasingly used for patient consultation and clinical decision support, identifying harmful, non-compliant, or ethically problematic responses is essential for responsible deployment. Assessing these risks requires checking clinical claims against relevant evidence, verifying calculations, and applying medical requirements under their intended conditions. We introduce LingSante MedGuard, a capability-enhanced guardrail that integrates supervision from a medical guardrail teacher model and six specialized medical capability experts into a unified model. The guardrail teacher supervises risk decisions and explanations across medical safety, compliance, and ethics, while the capability experts support medical rule understanding, numerical reasoning, multimodal hallucination detection, agentic safety verification, risk localization, and multimodal entity understanding. We consolidate these sources of supervision through offline supervised fine-tuning on teacher-generated demonstrations, followed by multi-teacher on-policy distillation using feedback on student-generated responses. We further introduce LingSante MedGuardBench, a benchmark comprising 11 risk-detection subsets spanning medical safety, compliance, and ethics. At 4B, 9B, and 27B scales, LingSante MedGuard achieves mean benchmark F1 scores of 82.3%, 82.4%, and 87.4%, respectively. The 4B model also achieves 73.9% mean accuracy across MedHallu and MedHALT-NOTA under retrieval-enabled evaluation....",
+      "published_at": "2026-11-19T00:00:00+00:00",
+      "published_precision": "day",
+      "discussion_url": null,
+      "signals": {
+        "upvotes": 30,
+        "comments": 2,
+        "github_repo": "https://github.com/inclusionAI/LingSante-MedGuard",
+        "github_stars": 12,
+        "organization": "inclusionAI"
+      },
+      "tags": [],
+      "links": [],
+      "id": "c_957c0fa493",
+      "key": "arxiv:2611.25509",
+      "cluster_id": "k_957c0fa493",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "github-releases",
+      "source_name": "GitHub Releases",
+      "tier": 1,
+      "kind": "release",
+      "title": "langchain-ai/langchain langchain-core==1.8.5",
+      "url": "https://github.com/langchain-ai/langchain/releases/tag/langchain-core%3D%3D1.8.5",
+      "summary": "Changes since langchain-core==1.8.4 release(core): 1.8.5 ( 42103) fix(core): reuse provider message id on later stream chunks ( 42050) docs(core): clarify v3 runtime warning behavior ( 42040) docs(core): clarify supported streaming event APIs ( 42038) release(standard-tests): 1.2.0 ( 41996) release(text-splitters): 1.2.0 ( 41998) chore(deps): bump mistune from 3.3.3 to 3.3.4 in /libs/core ( 41968)",
+      "published_at": "2026-11-25T21:52:39+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {},
+      "tags": [
+        "langchain-ai/langchain"
+      ],
+      "links": [],
+      "id": "c_f7dbd659df",
+      "key": "github.com/langchain-ai/langchain/releases/tag/langchain-core%3d%3d1.8.5",
+      "cluster_id": "k_f7dbd659df",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "github-releases",
+      "source_name": "GitHub Releases",
+      "tier": 1,
+      "kind": "release",
+      "title": "langchain-ai/langchain langchain-anthropic==1.7.13",
+      "url": "https://github.com/langchain-ai/langchain/releases/tag/langchain-anthropic%3D%3D1.7.13",
+      "summary": "Changes since langchain-anthropic==1.7.12 release(anthropic): 1.7.13 ( 42102) feat(anthropic): accept custom HTTP and SDK clients ( 42101) chore(model-profiles): refresh model profile data ( 42085) chore(model-profiles): refresh model profile data ( 42062) release(standard-tests): 1.2.0 ( 41996)",
+      "published_at": "2026-11-25T21:41:59+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {},
+      "tags": [
+        "langchain-ai/langchain"
+      ],
+      "links": [],
+      "id": "c_e827931f42",
+      "key": "github.com/langchain-ai/langchain/releases/tag/langchain-anthropic%3d%3d1.7.13",
+      "cluster_id": "k_e827931f42",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "github-releases",
+      "source_name": "GitHub Releases",
+      "tier": 1,
+      "kind": "release",
+      "title": "langchain-ai/langgraph langgraph-cli==0.4.44",
+      "url": "https://github.com/langchain-ai/langgraph/releases/tag/cli%3D%3D0.4.44",
+      "summary": "Changes since cli==0.4.43 feat(cli): add url to deploy list --json ( 9793) release(cli): 0.4.44 ( 9794) fix(cli): omit an empty secrets list when updating a deployment ( 9737) chore(deps): bump opentelemetry-api from 1.45.1 to 1.45.2 in /libs/cli ( 9695) feat(cli): deploy to BYOC data planes with only an API key ( 9692)",
+      "published_at": "2026-11-25T20:52:34+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {},
+      "tags": [
+        "langchain-ai/langgraph"
+      ],
+      "links": [],
+      "id": "c_4a29244a56",
+      "key": "github.com/langchain-ai/langgraph/releases/tag/cli%3d%3d0.4.44",
+      "cluster_id": "k_4a29244a56",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "github-trending",
+      "source_name": "GitHub Trending",
+      "tier": 1,
+      "kind": "repo",
+      "title": "elementalsouls/Claude-BugHunter",
+      "url": "https://github.com/elementalsouls/Claude-BugHunter",
+      "summary": "A Claude Code skill bundle for bug hunting and external red-team work 85 skills, 16 slash commands, 681 disclosed-report patterns curated across 24 core vulnerability classes, plus enterprise identity + infrastructure attack matrices.",
+      "published_at": null,
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 1,
+        "stars_today": 1652,
+        "stars": 23224
+      },
+      "tags": [
+        "Python"
+      ],
+      "links": [],
+      "id": "c_5e5b7a5173",
+      "key": "github.com/elementalsouls/claude-bughunter",
+      "cluster_id": "k_5e5b7a5173",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": [
+        {
+          "date": "2026-11-18",
+          "title": "Claude-BugHunter：漏洞挖掘用的 Claude Code skill 包"
+        }
+      ]
+    },
+    {
+      "source": "github-trending",
+      "source_name": "GitHub Trending",
+      "tier": 1,
+      "kind": "repo",
+      "title": "obra/superpowers",
+      "url": "https://github.com/obra/superpowers",
+      "summary": "An agentic skills framework & software development methodology that works.",
+      "published_at": null,
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 2,
+        "stars_today": 903,
+        "stars": 326743
+      },
+      "tags": [
+        "Shell"
+      ],
+      "links": [],
+      "id": "c_cfd2851c47",
+      "key": "github.com/obra/superpowers",
+      "cluster_id": "k_cfd2851c47",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-19",
+        "2026-11-20",
+        "2026-11-21",
+        "2026-11-22",
+        "2026-11-23",
+        "2026-11-24",
+        "2026-11-25"
+      ],
+      "reported_on": []
+    },
+    {
+      "source": "github-trending",
+      "source_name": "GitHub Trending",
+      "tier": 1,
+      "kind": "repo",
+      "title": "jingyaogong/minimind",
+      "url": "https://github.com/jingyaogong/minimind",
+      "summary": "🧠 两小时从 0 训出你的 64M 大模型。Train your own 64M LLM from scratch in 2 hours.",
+      "published_at": null,
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 4,
+        "stars_today": 826,
+        "stars": 71124
+      },
+      "tags": [
+        "Python"
+      ],
+      "links": [],
+      "id": "c_3b240d3ecb",
+      "key": "github.com/jingyaogong/minimind",
+      "cluster_id": "k_3b240d3ecb",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-20",
+        "2026-11-21",
+        "2026-11-22",
+        "2026-11-23",
+        "2026-11-24",
+        "2026-11-25"
+      ],
+      "reported_on": []
+    },
+    {
+      "source": "github-trending",
+      "source_name": "GitHub Trending",
+      "tier": 1,
+      "kind": "repo",
+      "title": "firecrawl/firecrawl",
+      "url": "https://github.com/firecrawl/firecrawl",
+      "summary": "Knowledge infrastructure to make your agents smarter. Search, scrape and access 550+ data providers through one API.",
+      "published_at": null,
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 6,
+        "stars_today": 1135,
+        "stars": 210193
+      },
+      "tags": [
+        "TypeScript"
+      ],
+      "links": [],
+      "id": "c_3517f80a1e",
+      "key": "github.com/firecrawl/firecrawl",
+      "cluster_id": "k_3517f80a1e",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-20",
+        "2026-11-21",
+        "2026-11-22",
+        "2026-11-23",
+        "2026-11-24",
+        "2026-11-25"
+      ],
+      "reported_on": []
+    },
+    {
+      "source": "github-trending",
+      "source_name": "GitHub Trending",
+      "tier": 1,
+      "kind": "repo",
+      "title": "openvinotoolkit/openvino",
+      "url": "https://github.com/openvinotoolkit/openvino",
+      "summary": "OpenVINO™ is an open source toolkit for optimizing and deploying AI inference",
+      "published_at": null,
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 8,
+        "stars_today": 191,
+        "stars": 12680
+      },
+      "tags": [
+        "C++"
+      ],
+      "links": [],
+      "id": "c_d96d67a492",
+      "key": "github.com/openvinotoolkit/openvino",
+      "cluster_id": "k_d96d67a492",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-20",
+        "2026-11-21",
+        "2026-11-22",
+        "2026-11-23",
+        "2026-11-24",
+        "2026-11-25"
+      ],
+      "reported_on": []
+    },
+    {
+      "source": "github-trending",
+      "source_name": "GitHub Trending",
+      "tier": 1,
+      "kind": "repo",
+      "title": "cathrynlavery/diagram-design",
+      "url": "https://github.com/cathrynlavery/diagram-design",
+      "summary": "Editorial diagram design for Claude Code, Codex, GitHub Copilot, Cursor, Factory Droid, Qoder, and Pi. 52 diagram types. Self-contained HTML + SVG. No shadows. No Mermaid slop.",
+      "published_at": null,
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 9,
+        "stars_today": 1141,
+        "stars": 73187
+      },
+      "tags": [
+        "HTML"
+      ],
+      "links": [],
+      "id": "c_a85ad9dc3c",
+      "key": "github.com/cathrynlavery/diagram-design",
+      "cluster_id": "k_a85ad9dc3c",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-20",
+        "2026-11-21",
+        "2026-11-22",
+        "2026-11-23",
+        "2026-11-24",
+        "2026-11-25"
+      ],
+      "reported_on": []
+    },
+    {
+      "source": "github-trending",
+      "source_name": "GitHub Trending",
+      "tier": 1,
+      "kind": "repo",
+      "title": "mvanhorn/last30days-skill",
+      "url": "https://github.com/mvanhorn/last30days-skill",
+      "summary": "AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymarket, and the web then synthesizes a grounded summary",
+      "published_at": null,
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 10,
+        "stars_today": 945,
+        "stars": 75216
+      },
+      "tags": [
+        "Python"
+      ],
+      "links": [],
+      "id": "c_768cda9a02",
+      "key": "github.com/mvanhorn/last30days-skill",
+      "cluster_id": "k_768cda9a02",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-19",
+        "2026-11-20",
+        "2026-11-21",
+        "2026-11-22",
+        "2026-11-23",
+        "2026-11-24",
+        "2026-11-25"
+      ],
+      "reported_on": []
+    },
+    {
+      "source": "github-trending",
+      "source_name": "GitHub Trending",
+      "tier": 1,
+      "kind": "repo",
+      "title": "google-labs-code/stitch-skills",
+      "url": "https://github.com/google-labs-code/stitch-skills",
+      "summary": "A library of Agent Skills designed to work with the Stitch MCP server. Each skill follows the Agent Skills open standard, for compatibility with coding agents such as Antigravity, Gemini CLI, Claude Code, Cursor.",
+      "published_at": null,
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 11,
+        "stars_today": 355,
+        "stars": 13029
+      },
+      "tags": [
+        "TypeScript"
+      ],
+      "links": [],
+      "id": "c_828729b7e7",
+      "key": "github.com/google-labs-code/stitch-skills",
+      "cluster_id": "k_828729b7e7",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-24",
+        "2026-11-25"
+      ],
+      "reported_on": [
+        {
+          "date": "2026-11-16",
+          "title": "google-labs-code 发布 Stitch 设计工具的 Agent Skills 库"
+        }
+      ]
+    },
+    {
+      "source": "github-trending",
+      "source_name": "GitHub Trending",
+      "tier": 1,
+      "kind": "repo",
+      "title": "mjmirza/app-store-compliance",
+      "url": "https://github.com/mjmirza/app-store-compliance",
+      "summary": "Avoid common App Store and Google Play rejections. Open playbook and pre-submission guard with 124 documented rejection patterns and fixes, privacy manifest and Data safety checks, 114 tracked deadlines (EU AI Act, DSA, COPPA, age laws), and a skill for AI coding agents.",
+      "published_at": null,
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 12,
+        "stars_today": 858,
+        "stars": 6576
+      },
+      "tags": [
+        "Shell"
+      ],
+      "links": [],
+      "id": "c_420e52b47a",
+      "key": "github.com/mjmirza/app-store-compliance",
+      "cluster_id": "k_420e52b47a",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-20",
+        "2026-11-21",
+        "2026-11-22",
+        "2026-11-23",
+        "2026-11-24",
+        "2026-11-25"
+      ],
+      "reported_on": []
+    },
+    {
+      "source": "github-trending",
+      "source_name": "GitHub Trending",
+      "tier": 1,
+      "kind": "repo",
+      "title": "Tracer-Cloud/opensre",
+      "url": "https://github.com/Tracer-Cloud/opensre",
+      "summary": "The open-source agent for CI/CD reliability.",
+      "published_at": null,
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 13,
+        "stars_today": 348,
+        "stars": 15572
+      },
+      "tags": [
+        "Python"
+      ],
+      "links": [],
+      "id": "c_f6df913aa0",
+      "key": "github.com/tracer-cloud/opensre",
+      "cluster_id": "k_f6df913aa0",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-21",
+        "2026-11-22",
+        "2026-11-23",
+        "2026-11-24",
+        "2026-11-25"
+      ],
+      "reported_on": []
+    },
+    {
+      "source": "github-trending",
+      "source_name": "GitHub Trending",
+      "tier": 1,
+      "kind": "repo",
+      "title": "zhouxiaoka/autoclip",
+      "url": "https://github.com/zhouxiaoka/autoclip",
+      "summary": "AutoClip｜一个链接，一键出片。开源 AI 视频剪辑桌面工具，将播客、访谈、课程等长视频自动剪成短视频，生成字幕、封面和发布文案，适配抖音、小红书、TikTok、Reels 与 YouTube Shorts。Open-source AI video clipping & content repurposing.",
+      "published_at": null,
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 16,
+        "stars_today": 880,
+        "stars": 16315
+      },
+      "tags": [
+        "Python"
+      ],
+      "links": [],
+      "id": "c_d941cdc9a6",
+      "key": "github.com/zhouxiaoka/autoclip",
+      "cluster_id": "k_d941cdc9a6",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-20",
+        "2026-11-21",
+        "2026-11-22",
+        "2026-11-23",
+        "2026-11-24",
+        "2026-11-25"
+      ],
+      "reported_on": []
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "KRAFTON/Raon-1-mini",
+      "url": "https://huggingface.co/KRAFTON/Raon-1-mini",
+      "summary": "text-generation, transformers, license:apache-2.0",
+      "published_at": "2026-11-24T13:17:11+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 25,
+        "trending_score": 97,
+        "likes": 118,
+        "downloads": 264
+      },
+      "tags": [
+        "KRAFTON"
+      ],
+      "links": [],
+      "id": "c_464f8ce8dd",
+      "key": "huggingface.co/krafton/raon-1-mini",
+      "cluster_id": "k_464f8ce8dd",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": [
+        {
+          "date": "2026-11-12",
+          "title": "KRAFTON 开源韩英双语小模型 Raon-1 nano"
+        }
+      ]
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "baidu/ERNIE-5.5-Flash-Preview",
+      "url": "https://huggingface.co/baidu/ERNIE-5.5-Flash-Preview",
+      "summary": "text-generation, transformers, license:apache-2.0",
+      "published_at": "2026-11-23T09:00:29+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 23,
+        "trending_score": 98,
+        "likes": 309,
+        "downloads": 1193
+      },
+      "tags": [
+        "baidu"
+      ],
+      "links": [],
+      "id": "c_122d1e69c8",
+      "key": "huggingface.co/baidu/ernie-5.5-flash-preview",
+      "cluster_id": "k_122d1e69c8",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-25"
+      ],
+      "reported_on": [
+        {
+          "date": "2026-11-06",
+          "title": "百度开放 ERNIE-5.5-Flash-Base 基座模型权重"
+        }
+      ]
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "strata-engine/Inkling-2-Mini-Strata",
+      "url": "https://huggingface.co/strata-engine/Inkling-2-Mini-Strata",
+      "summary": "image-text-to-text, license:apache-2.0",
+      "published_at": "2026-11-21T18:46:06+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 20,
+        "trending_score": 121,
+        "likes": 162,
+        "downloads": 2965
+      },
+      "tags": [
+        "strata-engine"
+      ],
+      "links": [],
+      "id": "c_aa6da6d21c",
+      "key": "huggingface.co/strata-engine/inkling-2-mini-strata",
+      "cluster_id": "k_f30cab37fe",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-24",
+        "2026-11-25"
+      ],
+      "reported_on": [
+        {
+          "date": "2026-11-21",
+          "title": "Thinking Machines 开放 Inkling 2 Mini 权重：26.4B 总参数、3.4B 激活"
+        },
+        {
+          "date": "2026-11-22",
+          "title": "Transformers v5.24.0 加入 Inkling 2 Mini、Apertus 1.5 和 Dory"
+        }
+      ]
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "MemTensor/MemT-1.0-Pro",
+      "url": "https://huggingface.co/MemTensor/MemT-1.0-Pro",
+      "summary": "text-generation, transformers, license:other",
+      "published_at": "2026-11-20T13:14:57+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 26,
+        "trending_score": 93,
+        "likes": 130,
+        "downloads": 806
+      },
+      "tags": [
+        "MemTensor"
+      ],
+      "links": [],
+      "id": "c_a6a511d58c",
+      "key": "huggingface.co/memtensor/memt-1.0-pro",
+      "cluster_id": "k_a6a511d58c",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-24",
+        "2026-11-25"
+      ],
+      "reported_on": []
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "sensenova/SenseNova-Loop-9B",
+      "url": "https://huggingface.co/sensenova/SenseNova-Loop-9B",
+      "summary": "image-text-to-text, transformers, license:apache-2.0",
+      "published_at": "2026-11-17T10:16:41+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 31,
+        "trending_score": 87,
+        "likes": 745,
+        "downloads": 3268
+      },
+      "tags": [
+        "sensenova"
+      ],
+      "links": [],
+      "id": "c_5f75f602fe",
+      "key": "huggingface.co/sensenova/sensenova-loop-9b",
+      "cluster_id": "k_5f75f602fe",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": [
+        {
+          "date": "2026-10-31",
+          "title": "SenseNova 开源循环解码多模态模型 SenseNova-Loop-9B-Preview"
+        },
+        {
+          "date": "2026-11-18",
+          "title": "SenseNova-Loop-9B 正式版发布"
+        }
+      ]
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "tencent/Hy4-flash",
+      "url": "https://huggingface.co/tencent/Hy4-flash",
+      "summary": "image-text-to-text, transformers, license:other",
+      "published_at": "2026-11-17T03:44:46+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 18,
+        "trending_score": 125,
+        "likes": 713,
+        "downloads": 10479
+      },
+      "tags": [
+        "tencent"
+      ],
+      "links": [],
+      "id": "c_ce99ea3833",
+      "key": "huggingface.co/tencent/hy4-flash",
+      "cluster_id": "k_ce99ea3833",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-19",
+        "2026-11-20",
+        "2026-11-21",
+        "2026-11-22",
+        "2026-11-23",
+        "2026-11-24",
+        "2026-11-25"
+      ],
+      "reported_on": [
+        {
+          "date": "2026-11-17",
+          "title": "腾讯发布 Hy4 flash：224B 总参数、每 token 激活 12B"
+        }
+      ]
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "apple/FastFrames-L",
+      "url": "https://huggingface.co/apple/FastFrames-L",
+      "summary": "text-to-video, license:apple-amlr",
+      "published_at": "2026-11-16T17:21:04+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 24,
+        "trending_score": 97,
+        "likes": 631,
+        "downloads": 0
+      },
+      "tags": [
+        "apple"
+      ],
+      "links": [],
+      "id": "c_9ae7b7e299",
+      "key": "huggingface.co/apple/fastframes-l",
+      "cluster_id": "k_9ae7b7e299",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": [
+        {
+          "date": "2026-11-18",
+          "title": "Apple 发布交互级延迟视频生成模型 FastFrames"
+        },
+        {
+          "date": "2026-11-19",
+          "title": "FastFrames 把自回归视频生成做到交互级延迟"
+        }
+      ]
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "llamaindex/OCRia-1",
+      "url": "https://huggingface.co/llamaindex/OCRia-1",
+      "summary": "image-text-to-text, transformers, license:other",
+      "published_at": "2026-11-13T21:52:49+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 36,
+        "trending_score": 77,
+        "likes": 102,
+        "downloads": 419
+      },
+      "tags": [
+        "llamaindex"
+      ],
+      "links": [],
+      "id": "c_399886405b",
+      "key": "huggingface.co/llamaindex/ocria-1",
+      "cluster_id": "k_399886405b",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "meituan-longcat/LongCat-Video-Avatar-1.6",
+      "url": "https://huggingface.co/meituan-longcat/LongCat-Video-Avatar-1.6",
+      "summary": "longcat-video-avatar-1.6, license:mit",
+      "published_at": "2026-11-13T02:45:33+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 41,
+        "trending_score": 69.5,
+        "likes": 531,
+        "downloads": 5135
+      },
+      "tags": [
+        "meituan-longcat"
+      ],
+      "links": [],
+      "id": "c_d07f911507",
+      "key": "huggingface.co/meituan-longcat/longcat-video-avatar-1.6",
+      "cluster_id": "k_d07f911507",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-24",
+        "2026-11-25"
+      ],
+      "reported_on": [
+        {
+          "date": "2026-11-16",
+          "title": "美团开源 LongCat-Video-Avatar 1.6，音频驱动数字人视频"
+        }
+      ]
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "higurashi-ai/Haru-4B",
+      "url": "https://huggingface.co/higurashi-ai/Haru-4B",
+      "summary": "audio-to-audio, license:apache-2.0",
+      "published_at": "2026-11-12T11:05:59+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 12,
+        "trending_score": 156.5,
+        "likes": 1028,
+        "downloads": 10026
+      },
+      "tags": [
+        "higurashi-ai"
+      ],
+      "links": [],
+      "id": "c_53b3b546ce",
+      "key": "huggingface.co/higurashi-ai/haru-4b",
+      "cluster_id": "k_53b3b546ce",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-23",
+        "2026-11-24",
+        "2026-11-25"
+      ],
+      "reported_on": [
+        {
+          "date": "2026-11-15",
+          "title": "Haru-4B：边听边说的全双工语音对话基座模型"
+        }
+      ]
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "thinkingmachines/Inkling-2-Small",
+      "url": "https://huggingface.co/thinkingmachines/Inkling-2-Small",
+      "summary": "image-text-to-text, transformers, license:apache-2.0",
+      "published_at": "2026-11-04T19:51:05+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 33,
+        "trending_score": 79,
+        "likes": 1503,
+        "downloads": 78274
+      },
+      "tags": [
+        "thinkingmachines"
+      ],
+      "links": [],
+      "id": "c_424f74445e",
+      "key": "huggingface.co/thinkingmachines/inkling-2-small",
+      "cluster_id": "k_424f74445e",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-21",
+        "2026-11-22",
+        "2026-11-23",
+        "2026-11-24",
+        "2026-11-25"
+      ],
+      "reported_on": [
+        {
+          "date": "2026-11-06",
+          "title": "Thinking Machines 发布 Inkling 2 Small，权重拟下周开放"
+        },
+        {
+          "date": "2026-11-13",
+          "title": "Thinking Machines 开放 Inkling 2 Small 权重"
+        },
+        {
+          "date": "2026-11-14",
+          "title": "Transformers v5.23.0 支持 Inkling 2 Small 和决策头 JEV"
+        }
+      ]
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "llamaindex/OCRia-nano-1",
+      "url": "https://huggingface.co/llamaindex/OCRia-nano-1",
+      "summary": "image-to-text, liteparse, license:other",
+      "published_at": "2026-11-03T21:44:40+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 8,
+        "trending_score": 193,
+        "likes": 235,
+        "downloads": 126
+      },
+      "tags": [
+        "llamaindex"
+      ],
+      "links": [],
+      "id": "c_d6386c3f1d",
+      "key": "huggingface.co/llamaindex/ocria-nano-1",
+      "cluster_id": "k_d6386c3f1d",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-25"
+      ],
+      "reported_on": []
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "MiniMaxAI/MiniMax-H3-Image",
+      "url": "https://huggingface.co/MiniMaxAI/MiniMax-H3-Image",
+      "summary": "text-to-image, minimax-h3, license:other",
+      "published_at": "2026-11-03T06:34:36+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 49,
+        "trending_score": 54,
+        "likes": 2563,
+        "downloads": 1036133
+      },
+      "tags": [
+        "MiniMaxAI"
+      ],
+      "links": [],
+      "id": "c_46a9ff30f5",
+      "key": "huggingface.co/minimaxai/minimax-h3-image",
+      "cluster_id": "k_46a9ff30f5",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-19",
+        "2026-11-20",
+        "2026-11-21",
+        "2026-11-22",
+        "2026-11-23",
+        "2026-11-24",
+        "2026-11-25"
+      ],
+      "reported_on": [
+        {
+          "date": "2026-11-11",
+          "title": "MiniMax 发布开放权重图像模型 H3-Image，10 秒内出 4K 图"
+        }
+      ]
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "SulphurAI/Sulphur-3",
+      "url": "https://huggingface.co/SulphurAI/Sulphur-3",
+      "summary": "minimax-h3, license:other",
+      "published_at": "2026-10-31T20:31:01+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 5,
+        "trending_score": 398,
+        "likes": 1102,
+        "downloads": 189735
+      },
+      "tags": [
+        "SulphurAI"
+      ],
+      "links": [],
+      "id": "c_78565272a9",
+      "key": "huggingface.co/sulphurai/sulphur-3",
+      "cluster_id": "k_78565272a9",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-22",
+        "2026-11-23",
+        "2026-11-24",
+        "2026-11-25"
+      ],
+      "reported_on": []
+    },
+    {
+      "source": "hf-trending-models",
+      "source_name": "Hugging Face Trending Models",
+      "tier": 1,
+      "kind": "model",
+      "title": "black-forest-labs/flux-3-image-klein-comfy",
+      "url": "https://huggingface.co/black-forest-labs/flux-3-image-klein-comfy",
+      "summary": "image-to-image, diffusion-single-file, license:other",
+      "published_at": "2026-10-14T12:00:13+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {
+        "trending_rank": 34,
+        "trending_score": 78,
+        "likes": 4624,
+        "downloads": 860476
+      },
+      "tags": [
+        "black-forest-labs"
+      ],
+      "links": [],
+      "id": "c_6ecc1d71a5",
+      "key": "huggingface.co/black-forest-labs/flux-3-image-klein-comfy",
+      "cluster_id": "k_6ecc1d71a5",
+      "also_from": [],
+      "seen_on": [
+        "2026-11-19",
+        "2026-11-20",
+        "2026-11-21",
+        "2026-11-22",
+        "2026-11-23",
+        "2026-11-24",
+        "2026-11-25"
+      ],
+      "reported_on": []
+    },
+    {
+      "source": "latent-space",
+      "source_name": "Latent Space",
+      "tier": 2,
+      "kind": "commentary",
+      "title": "The Revolution vs The Renaissance - Thariq Shihipar, OpenAI",
+      "url": "https://latent.space/p/the_revolution_vs_the_renaissance_thariq_shihipar_openai/",
+      "summary": "AI can make software cheap enough to produce by the thousand and still give you more time to make one thing feel right. At AI Engineer CODE, Thariq Shihipar shows how those two futures can coexist. In his fighting game, he edits the size of a rock in the /human folder and immediately tries the throw. He also built a Mac Dock that switched modes, used it, and realized he cared more about noticing when he got distracted. We get into what Thariq changed his mind about with coding agents, how a decision model can choose from actions a designer defines, and who gets to decide which experiments deserve the compute. Thariq announced his move to OpenAI after we recorded. Sponsored by Jira by Atlassian. Learn more at jira.dev . Show notes Thariq's CODE keynote and reading edition The live /human rock-throw demo The original Dock demo and why he stopped using it Thariq's earlier Latent Space interview on Claude Code Thariq's OpenAI announcement Chapters 00:00 Cold open 00:23 Intro and Thariq's move to OpenAI 03:03 Sponsor - Jira by Atlassian 03:22 Where agents surprised Thariq 06:47 The /human folder 09:07 Software as craft 11:11 Game balance 15:07 Ambition 19:06 Decision models 26:34 The land/water test 30:25 Personal software 37:46 Adoption 42:24 Autoresearch 48:29 Work people can see",
+      "published_at": "2026-11-25T22:28:01+00:00",
+      "published_precision": "second",
+      "discussion_url": null,
+      "signals": {},
+      "tags": [],
+      "links": [],
+      "id": "c_f113b3a5d2",
+      "key": "latent.space/p/the_revolution_vs_the_renaissance_thariq_shihipar_openai",
+      "cluster_id": "k_f113b3a5d2",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "hackernews",
+      "source_name": "Hacker News",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "Bare Metal Qwen",
+      "url": "https://github.com/alesha-pro/llm.asm/tree/main/02-baremetal-os",
+      "summary": "",
+      "published_at": "2026-11-25T22:15:34+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://news.ycombinator.com/item?id=50648365",
+      "signals": {
+        "hn_points": 88,
+        "hn_comments": 17
+      },
+      "tags": [],
+      "links": [],
+      "id": "c_a2c06ade94",
+      "key": "github.com/alesha-pro/llm.asm/tree/main/02-baremetal-os",
+      "cluster_id": "k_a2c06ade94",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "hackernews",
+      "source_name": "Hacker News",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "Much shorter version of GRH Lean verification from Anthropic",
+      "url": "https://github.com/lsernau/grh-lean",
+      "summary": "",
+      "published_at": "2026-11-25T21:48:10+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://news.ycombinator.com/item?id=50648050",
+      "signals": {
+        "hn_points": 337,
+        "hn_comments": 170
+      },
+      "tags": [],
+      "links": [],
+      "id": "c_e1359e2868",
+      "key": "github.com/lsernau/grh-lean",
+      "cluster_id": "k_e1359e2868",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "hackernews",
+      "source_name": "Hacker News",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "The New York Times warns photographers not to update Photoshop over AI features",
+      "url": "https://www.theverge.com/ai-artificial-intelligence/1041227/the-new-york-times-warns-photographers-not-to-update-photoshop-over-ai-features",
+      "summary": "",
+      "published_at": "2026-11-25T21:18:02+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://news.ycombinator.com/item?id=50647673",
+      "signals": {
+        "hn_points": 259,
+        "hn_comments": 207
+      },
+      "tags": [],
+      "links": [],
+      "id": "c_0411445572",
+      "key": "theverge.com/ai-artificial-intelligence/1041227/the-new-york-times-warns-photographers-not-to-update-photoshop-over-ai-features",
+      "cluster_id": "k_0411445572",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "hackernews",
+      "source_name": "Hacker News",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "Gemini refused to give me the lyrics to Twinkle Twinkle Little Star",
+      "url": "https://www.comentr.com/technology/01M88DWQ0R4NCMYR17AFEWRG1F",
+      "summary": "",
+      "published_at": "2026-11-25T04:03:33+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://news.ycombinator.com/item?id=50638320",
+      "signals": {
+        "hn_points": 215,
+        "hn_comments": 170
+      },
+      "tags": [],
+      "links": [],
+      "id": "c_8bb963ef86",
+      "key": "comentr.com/technology/01M88DWQ0R4NCMYR17AFEWRG1F",
+      "cluster_id": "k_8bb963ef86",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "hackernews",
+      "source_name": "Hacker News",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "Marginalia Search, Money, C++, Rust, AI, Stuff",
+      "url": "https://www.marginalia.nu/log/a_141_marginalia_update/",
+      "summary": "",
+      "published_at": "2026-11-25T03:47:42+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://news.ycombinator.com/item?id=50638220",
+      "signals": {
+        "hn_points": 219,
+        "hn_comments": 83
+      },
+      "tags": [],
+      "links": [],
+      "id": "c_c9d3bd8cd2",
+      "key": "marginalia.nu/log/a_141_marginalia_update",
+      "cluster_id": "k_c9d3bd8cd2",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "hackernews",
+      "source_name": "Hacker News",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "Serving Qwen via AWS Lambdas for fun and 80x negative profit",
+      "url": "https://noahbuilt.it/writing/qwen-on-5600-lambdas",
+      "summary": "",
+      "published_at": "2026-11-25T03:28:06+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://news.ycombinator.com/item?id=50638070",
+      "signals": {
+        "hn_points": 132,
+        "hn_comments": 20
+      },
+      "tags": [],
+      "links": [],
+      "id": "c_357242f1cc",
+      "key": "noahbuilt.it/writing/qwen-on-5600-lambdas",
+      "cluster_id": "k_357242f1cc",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    },
+    {
+      "source": "hackernews",
+      "source_name": "Hacker News",
+      "tier": 2,
+      "kind": "discussion",
+      "title": "Top open problems in mathematics ranked by LLM-assessed importance",
+      "url": "https://www.proofatlas.ai/open-problems/",
+      "summary": "",
+      "published_at": "2026-11-25T03:01:36+00:00",
+      "published_precision": "second",
+      "discussion_url": "https://news.ycombinator.com/item?id=50637871",
+      "signals": {
+        "hn_points": 103,
+        "hn_comments": 52
+      },
+      "tags": [],
+      "links": [],
+      "id": "c_3c13a63051",
+      "key": "proofatlas.ai/open-problems",
+      "cluster_id": "k_3c13a63051",
+      "also_from": [],
+      "seen_on": [],
+      "reported_on": []
+    }
+  ]
+}
