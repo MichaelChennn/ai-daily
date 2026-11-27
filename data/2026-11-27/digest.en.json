@@ -1,0 +1,750 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-27",
+  "mode": "full",
+  "generated_at": "2026-11-27T04:40:56+00:00",
+  "channel": "api",
+  "model": "nvidia:minimaxai/minimax-m3.1-flash",
+  "highlights": [
+    "llama.cpp v1.1.0 adds the Inkling 2 family, a large set of TTS and audio models, per-tensor quantization targeting a bpw or size budget, and a redesigned Llama Chat web UI.",
+    "TT-RSI improves average accuracy by +13.89% over the base model and outperforms the strongest self-consistency-based method by +4.79% under the same test-time scaling budget.",
+    "The NVIDIA Nemotron 3.5 Parse follow-up releases three synthetic training datasets, a fine-tuning recipe, and a DFlash2 speculator."
+  ],
+  "items": [
+    {
+      "section": "headline",
+      "title": "llama.cpp v1.1.0 adds Inkling 2 models and new audio support",
+      "summary": "llama.cpp v1.1.0 adds the Inkling 2 family, splits DFlash speculative decoding into separate draft methods, and deprecates the old llama_batch API in favour of llama_batch_ext. It also brings a large set of TTS and audio models such as Kokoro, Zonos3-Mini, VoxCPM2, MiniMax-Music3, YuE2, Fish S2, and VibeVoice-ASR, plus automatic per-tensor quantization targeting a bpw or size budget and a redesigned Llama Chat web UI.",
+      "tags": [
+        "工具",
+        "开源",
+        "推理"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_133023c922",
+          "url": "https://github.com/ggml-org/llama.cpp/releases/tag/v1.1.0"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/releases/tag/v1.1.0",
+          "quote": "llama.cpp v1.1.0 adds the Inkling 2 family (base, Mini and DSpark), Domyn Edge 4B, Zaya1 8B, RAON-1-mini and Hy4 flash, splits DFlash speculative decoding into separate draft methods, and deprecates the old llama_batch API in favour of llama_batch_ext ."
+        },
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/releases/tag/v1.1.0",
+          "quote": "It brings a large set of TTS and audio models (Kokoro, Zonos3-Mini, tiny-voca, VoxCPM2, MiniMax-Music3, YuE2, Fish S2, Higgs v3/VibeVoice-ASR and Kyutai Hibiki), token-aware chat parsing, named tool choice, automatic per-tensor quantization targeting a bpw or size budget, a slot-scheduling refactor"
+        },
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/releases/tag/v1.1.0",
+          "quote": "in llama-server , a redesigned Llama Chat web UI with voice messages and agent traces, and updates ggml to v1.1.1."
+        },
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/releases/tag/v1.1.0",
+          "quote": "llama.h: deprecate the old llama_batch API in favour of llama_batch_ext and llama_process ( #32306 , #32356 )"
+        },
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/releases/tag/v1.1.0",
+          "quote": "server: accept OpenAI named tool_choice and add GET /models/sse in single-model mode ( #31564 , #32398 )"
+        },
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/releases/tag/v1.1.0",
+          "quote": "split DFlash speculative decoding into draft-dflash , draft-dflash2 , draft-dspark and draft-lilicorr ( #32016 )"
+        },
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/releases/tag/v1.1.0",
+          "quote": "add --target-bpw / --target-size per-tensor quant selection with a resumable state file ( #15550 )"
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Agentic LongLive adds asynchronous memory for long video generation",
+      "summary": "Agentic LongLive is an asynchronous agentic memory for long video generation in which a memory agent on separate GPUs reads only revealed prompts, never the generated video, and tracks entities through text state and evolving images. On LongStory-Online, it improves persistent-state accuracy of LongLive-2.0 by 26.3 points, protagonist identity by 44.9, and revisited-place consistency by 40.4, at about 1% extra generation time on H100.",
+      "tags": [
+        "视频",
+        "Agent",
+        "模型"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_91c0348f3b",
+          "url": "https://huggingface.co/papers/2611.34907"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.34907",
+          "quote": "W e p r e s e n t A g e n t i c L o n g L i v e , a n a s y n c h r o n o u s a g e n t i c m e m o r y f o r l o n g v i d e o g e n e r a t i o n ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34907",
+          "quote": "A m e m o r y a g e n t o n s e p a r a t e G P U s r e a d s o n l y t h e p r o m p t s r e v e a l e d s o f a r , n e v e r t h e g e n e r a t e d v i d e o , a n d k e e p s a t e x t s t a t e a n d e v o l v i n g i m a g e s f o r e v e r y p e r s o n , o b j e c t , a n d s c e n e ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34907",
+          "quote": "F r o m t h i s e n t i t y m e m o r y i t c o m p o s e s a g l o b a l i m a g e a n d a p e r - s h o t m e m o r y i m a g e , w h i c h a n a u x i l i a r y G P U p r e f i l l s i n t o t h e g e n e r a t o r ' s a t t e n t i o n s i n k b e f o r e t h e n e x t s h o t s t a r t s , a n"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34907",
+          "quote": "O n L o n g S t o r y - O n l i n e , a n e w b e n c h m a r k o f 2 5 s t o r i e s ( 8 5 7 s h o t s ) r e v e a l e d o n e s h o t a t a t i m e , A g e n t i c L o n g L i v e i m p r o v e s p e r s i s t e n t - s t a t e a c c u r a c y o f L o n g L i v e - 2 ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34907",
+          "quote": "0 , i t s b a s e g e n e r a t o r , b y 2 6 ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34907",
+          "quote": "3 p o i n t s , p r o t a g o n i s t i d e n t i t y b y 4 4 ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34907",
+          "quote": "9 , a n d r e v i s i t e d - p l a c e c o n s i s t e n c y b y 4 0 ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34907",
+          "quote": "4 , a t a b o u t 1 % e x t r a g e n e r a t i o n t i m e o n H 1 0 0 ."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Sage-Med-Preview scales medical multimodal intelligence",
+      "summary": "Sage-Med-Preview is a 35B-parameter medical multimodal model with 3B activated parameters, trained on 322.7 million candidate records through medical pretraining, staged supervised fine-tuning, and adaptive reinforcement learning. It achieves an average score of 58.26% on the 31 public multimodal benchmarks, outperforming Hulu-Med-235B-A22B at 50.99% and Intern-S2-Preview at 52.24%.",
+      "tags": [
+        "模型",
+        "多模态",
+        "论文"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_4764e04832",
+          "url": "https://huggingface.co/papers/2611.34575"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.34575",
+          "quote": "T o i n v e s t i g a t e h o w m e d i c a l m u l t i m o d a l i n t e l l i g e n c e s c a l e s i n p r a c t i c e , w e i n t r o d u c e S a g e - M e d - P r e v i e w , a 3 5 B - p a r a m e t e r m e d i c a l m u l t i m o d a l m o d e l w i t h 3 B a c t i v a t e d p a r a m e t e r"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34575",
+          "quote": "s , b u i l t b y c o m b i n i n g s t a g e - s p e c i f i c c u r a t i o n o v e r 3 2 2 ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34575",
+          "quote": "7 m i l l i o n c a n d i d a t e r e c o r d s w i t h a p r o g r e s s i v e t r a i n i n g c u r r i c u l u m s p a n n i n g m e d i c a l p r e t r a i n i n g , s t a g e d s u p e r v i s e d f i n e - t u n i n g , a n d a d a p t i v e r e i n f o r c e m e n t l e a r n i n g ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34575",
+          "quote": "e s a n a v e r a g e s c o r e o f 5 8 ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34575",
+          "quote": "2 6 % o n t h e 3 1 p u b l i c m u l t i m o d a l b e n c h m a r k s ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34575",
+          "quote": "I t o u t p e r f o r m s t h e s t a t e - o f - t h e - a r t o p e n - s o u r c e m e d i c a l m o d e l H u l u - M e d - 2 3 5 B - A 2 2 B a t 5 0 ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34575",
+          "quote": "9 9 % a n d t h e g e n e r a l s c i e n t i f i c m o d e l I n t e r n - S 2 - P r e v i e w a t 5 2 ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34575",
+          "quote": "Existing medical MLLMs still trail general-purpose MLLMs on 29 of 31 public multimodal benchmarks."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34575",
+          "quote": "Parameter scaling within a model family mainly improves text ( +9.90% text-only understanding, +12.37% text-only reasoning), while yielding much smaller gains on multimodal understanding ( +4.34% )."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "NVIDIA shares Parse 3.5 datasets, fine-tuning recipe, and DFlash2 speculator",
+      "summary": "NVIDIA is building on Nemotron 3.5 Parse, a compact document model that turns page images into structured data for retrieval-augmented generation (RAG) and agents, with synthetic training datasets, a fine-tuning recipe, and a DFlash2 speculator for faster inference. It is open-sourcing three training datasets: Synthetic Charts V1 with 9.98M examples, Synthetic Tables V1 with 1M examples, and OCR Synthetic Multilingual v2 with 7.9M examples.",
+      "tags": [
+        "模型",
+        "开源",
+        "训练"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_5905285b7b",
+          "url": "https://huggingface.co/blog/nvidia/building-on-nemotron-35-parse-open-data-fine-tunin"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/blog/nvidia/building-on-nemotron-35-parse-open-data-fine-tunin",
+          "quote": "We recently released NVIDIA Nemotron 3.5 Parse , a compact document model that turns page images into structured data for retrieval-augmented generation (RAG) and agents."
+        },
+        {
+          "url": "https://huggingface.co/blog/nvidia/building-on-nemotron-35-parse-open-data-fine-tunin",
+          "quote": "Now we’re building on that release with synthetic training datasets, a fine-tuning recipe, and a DFlash2 speculator for faster inference ."
+        },
+        {
+          "url": "https://huggingface.co/blog/nvidia/building-on-nemotron-35-parse-open-data-fine-tunin",
+          "quote": "We’re also sharing how we trained Parse 3.5: first teaching document understanding through supervised fine-tuning, then using reinforcement learning to improve accuracy, consistency, and reliable completion."
+        },
+        {
+          "url": "https://huggingface.co/blog/nvidia/building-on-nemotron-35-parse-open-data-fine-tunin",
+          "quote": "Parse extracts content from pages of documents into reading order, assigns content classes such as headings, paragraphs, tables, and charts, and returns bounding boxes that locate the content."
+        },
+        {
+          "url": "https://huggingface.co/blog/nvidia/building-on-nemotron-35-parse-open-data-fine-tunin",
+          "quote": "We are open-sourcing three datasets used in the Parse 3.5 training :"
+        },
+        {
+          "url": "https://huggingface.co/blog/nvidia/building-on-nemotron-35-parse-open-data-fine-tunin",
+          "quote": "Synthetic Charts V1 — 9.98M examples : rendered charts and structured annotations for learning categories, series, and numerical values."
+        },
+        {
+          "url": "https://huggingface.co/blog/nvidia/building-on-nemotron-35-parse-open-data-fine-tunin",
+          "quote": "Synthetic Tables V1 — 1M examples : rendered HTML tables with targets that preserve rows, columns, headers, and cell relationships."
+        },
+        {
+          "url": "https://huggingface.co/blog/nvidia/building-on-nemotron-35-parse-open-data-fine-tunin",
+          "quote": "OCR Synthetic Multilingual v2 — 7.9M examples : synthetic document pages with Parse-format targets across varied fonts and layouts, for multilingual OCR and structured page reading."
+        },
+        {
+          "url": "https://huggingface.co/blog/nvidia/building-on-nemotron-35-parse-open-data-fine-tunin",
+          "quote": "We trained Parse 3.5 with two phases of training."
+        },
+        {
+          "url": "https://huggingface.co/blog/nvidia/building-on-nemotron-35-parse-open-data-fine-tunin",
+          "quote": "We then continued with reinforcement learning with verifiable rewards (RLVR) , using Group Relative Policy Optimization (GRPO) ."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Mixture-of-Loops Transformer reuses KV memory across loops",
+      "summary": "Mixture-of-Loops Transformer (MoLT) uses a Mixture-of-Loops Attention that treats keys and values (KV) as memory for selective reuse across depths and loops, with U-shaped MoLT (U-MoLT) skipping unused decoder traversals. In 400B-token pretraining, U-MoLT achieves 1.7x validation cross-entropy (CE) token efficiency at 700M and improves 3B MoE 10-domain perplexity by 0.75 and 10-task accuracy by 2.1 percentage points over OLMo3.",
+      "tags": [
+        "论文",
+        "训练",
+        "推理"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_ed63df2f97",
+          "url": "https://huggingface.co/papers/2611.34923"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.34923",
+          "quote": "We introduce Mixture-of-Loops Transformer (MoLT) , whose Mixture-of-Loops Attention (MoLA) uses keys and values (KV) as memory for selective reuse across depths and loops."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34923",
+          "quote": "To balance efficiency and quality, we introduce U-shaped MoLT (U-MoLT) , which separates memory construction from prediction readout and skips unused decoder traversals without changing predictions."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34923",
+          "quote": "In 400B-token pretraining, U-MoLT outperforms OLMo3 across 700M/1.5B dense and 3B MoE models, achieving 1.7x validation cross-entropy (CE) token efficiency at 700M while improving 3B MoE 10-domain perplexity by 0.75 and 10-task accuracy by 2.1 percentage points."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34923",
+          "quote": "Code is available at https://github.com/hustvl/MoLT View arXiv page View PDF Project page GitHub 69 Add to collection Community LianghuiZhu Paper submitter about 21 hours ago Looped Transformers boost expressivity by reusing shared layers across loops, yet at the cost of efficiency."
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "DyLoMo-DiT reuses parameters with looped MoE diffusion transformers",
+      "summary": "Dynamic Looped MoE DiT (DyLoMo-DiT) repeatedly applies weight-shared middle layers while sparse experts allocate capacity across tokens, varying the number of passes across noise levels. On ImageNet 256times256, it reduces FID by 11-24% relative to DiT and 36-56% relative to DiT-MoE at matched parameter and compute budgets, and a scaled version scores 0.714 on GenEval against FLUX.1 at 0.673.",
+      "tags": [
+        "论文",
+        "图像"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_4f1599d5df",
+          "url": "https://huggingface.co/papers/2611.30844"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.30844",
+          "quote": "In this paper, we propose Dynamic Looped MoE DiT ( DyLoMo-DiT ), which reuses parameters rather than adding them: a weight-shared loop repeatedly applies the middle layers, while sparse experts allocate parameter capacity across tokens."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.30844",
+          "quote": "It also allocates compute dynamically, varying the number of passes across noise levels ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.30844",
+          "quote": "On ImageNet 256times256, DyLoMo-DiT reduces FID by 11-24% relative to DiT and 36-56% relative to DiT-MoE at matched parameter and compute budgets."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.30844",
+          "quote": "For text-to-image generation , a scaled DyLoMo-DiT achieves a higher GenEval score than FLUX.1 (0.714 vs."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.30844",
+          "quote": "0.673), with less than one tenth of its active parameters (1.05B vs."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.30844",
+          "quote": "A 15.48B text-to-image model with 1.05B active parameters per image token scores 0.714 on GenEval (FLUX.1: 0.673)."
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Integral shares visual representations between understanding and generation",
+      "summary": "Integral converts a pretrained vision-language model into a unified multimodal model by constructing a shared visual representation space across understanding and generation. Abstraction Fusion builds shared visual tokens from the frozen vision encoder, while Block-wise MoT adds a lightweight generative stream that interacts with the model only at block boundaries, and controlled comparisons show shared representations improve generative learning.",
+      "tags": [
+        "论文",
+        "多模态",
+        "图像"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_1134e58908",
+          "url": "https://huggingface.co/papers/2611.31237"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.31237",
+          "quote": "To address this challenge, we introduce Integral, which converts a pretrained vision-language model into a unified multimodal model by constructing a shared visual representation space across the two capabilities."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.31237",
+          "quote": "Abstraction Fusion constructs shared visual tokens by aggregating hierarchical representations from the frozen vision encoder , while Block-wise MoT introduces a lightweight generative stream that interacts with the vision-language model only at block boundaries ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.31237",
+          "quote": "Controlled comparisons further demonstrate that sharing visual representations between understanding and generation substantially improves generative learning compared with using a separate visual representation space, despite comparable reconstruction fidelity ."
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Hugging Face adds a llama.cpp benchmark dashboard for AMD hardware",
+      "summary": "The llama.cpp × AMD Benchmark dashboard is available on Hugging Face, tracking prompt processing and text generation across llama.cpp builds, models, and quantizations for AMD Ryzen and Radeon hardware. Its current hardware choices are Radeon 8060S (gfx1151) and Radeon AI Pro R9700S (gfx1201), and the benchmark workflow and underlying results are public.",
+      "tags": [
+        "工具",
+        "硬件"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_49da203591",
+          "url": "https://huggingface.co/blog/ggml-org/llamacpp-amd-bench"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/blog/ggml-org/llamacpp-amd-bench",
+          "quote": "The llama.cpp × AMD Benchmark dashboard is available on Hugging Face."
+        },
+        {
+          "url": "https://huggingface.co/blog/ggml-org/llamacpp-amd-bench",
+          "quote": "It lets you track prompt processing and text generation performance across llama.cpp builds, models, and quantizations, so you can explore how local inference performs on AMD Ryzen and Radeon hardware."
+        },
+        {
+          "url": "https://huggingface.co/blog/ggml-org/llamacpp-amd-bench",
+          "quote": "The benchmark workflow and underlying results are public, so you can also inspect how we benchmark inference performance."
+        },
+        {
+          "url": "https://huggingface.co/blog/ggml-org/llamacpp-amd-bench",
+          "quote": "The current hardware choices are Radeon 8060S (gfx1151) and Radeon AI Pro R9700S (gfx1201)."
+        },
+        {
+          "url": "https://huggingface.co/blog/ggml-org/llamacpp-amd-bench",
+          "quote": "In the Overview tab, compare quantizations for one hardware, model, and build."
+        },
+        {
+          "url": "https://huggingface.co/blog/ggml-org/llamacpp-amd-bench",
+          "quote": "In the Build history tab, track PP512 and TG128 across all recorded builds for the selected hardware, model, and quantization."
+        },
+        {
+          "url": "https://huggingface.co/blog/ggml-org/llamacpp-amd-bench",
+          "quote": "The explorer reads directly from the public ggml-org/install.sh-benches-data Storage Bucket on Hugging Face."
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Hugging Face guide covers training multi-agent systems with swarms",
+      "summary": "This post walks through building, training, and evaluating multi-agent systems using centralized training with decentralized execution, following the information-aggregation task in s³: Simple Scaling of Swarms via Cooperative Multi-agent RL. The example defines a four-agent system sharing one Qwen3-0.6B policy, with separate contexts and private inputs, and takes about five hours on two H200s, which costs roughly $50.",
+      "tags": [
+        "Agent",
+        "训练",
+        "工具"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_f3901ac520",
+          "url": "https://huggingface.co/blog/training-swarms"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/blog/training-swarms",
+          "quote": "This post's example takes about five hours on two H200s, which costs roughly $50."
+        },
+        {
+          "url": "https://huggingface.co/blog/training-swarms",
+          "quote": "Multi-Agent Systems are hard to get working."
+        },
+        {
+          "url": "https://huggingface.co/blog/training-swarms",
+          "quote": "Mixing agents' context together through communication is not an inherent performance boost compared to a single agent."
+        },
+        {
+          "url": "https://huggingface.co/blog/training-swarms",
+          "quote": "This series keeps asking one question: when agents communicate, does it actually help, or are we just spending more compute?"
+        },
+        {
+          "url": "https://huggingface.co/blog/training-swarms",
+          "quote": "A common solution is centralized training with decentralized execution: training uses information from the whole team, but each agent acts only on its own observations."
+        },
+        {
+          "url": "https://huggingface.co/blog/training-swarms",
+          "quote": "This is the setup we'll use here, following the information-aggregation task in s³: Simple Scaling of Swarms via Cooperative Multi-agent RL ."
+        },
+        {
+          "url": "https://huggingface.co/blog/training-swarms",
+          "quote": "Four agents share a small language model and learn to pool what each of them knows."
+        },
+        {
+          "url": "https://huggingface.co/blog/training-swarms",
+          "quote": "The main communication tools are message(to, text) , read_messages() , and check_notifications() ."
+        },
+        {
+          "url": "https://huggingface.co/blog/training-swarms",
+          "quote": "We defined a four-agent system using one shared Qwen3-0.6B policy , with separate contexts and private inputs."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Real2SimLab unifies real-to-simulation transfer evaluation",
+      "summary": "Real2SimLab evaluates a real-to-simulation method by running its written program and scoring the output simulation with the original scorer of each benchmark, and it also provides a pipeline for training data and reward annotations that filters out benchmark video recordings to avoid contamination. It currently supports 47 coding agents and 5 non-agent methods on 6 benchmarks, and both the platform and the Awesome-Real2Sim map of nearly 300 papers are open source.",
+      "tags": [
+        "论文",
+        "Agent",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_2866b2c5b9",
+          "url": "https://huggingface.co/papers/2611.34849"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.34849",
+          "quote": "T o t h i s e n d , w e p r e s e n t R e a l 2 S i m L a b , a u n i f i e d p l a t f o r m f o r r e a l - t o - s i m u l a t i o n t r a n s f e r ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34849",
+          "quote": "I t e v a l u a t e s a m e t h o d b y r u n n i n g i t s w r i t t e n p r o g r a m a n d s c o r i n g t h e o u t p u t s i m u l a t i o n w i t h t h e o r i g i n a l s c o r e r o f e a c h b e n c h m a r k ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34849",
+          "quote": "M o r e o v e r , R e a l 2 S i m L a b p r o v i d e s a p i p e l i n e t o c r e a t e t r a i n i n g d a t a a n d r e w a r d a n n o t a t i o n s f o r r e a l - t o - s i m u l a t i o n m e t h o d s ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34849",
+          "quote": "O u r p i p e l i n e c a r e f u l l y a v o i d s d a t a c o n t a m i n a t i o n b y f i l t e r i n g o u t t h e v i d e o r e c o r d i n g s t h a t e x i s t i n b e n c h m a r k s ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34849",
+          "quote": "S o f a r , i t s u p p o r t s 4 7 c o d i n g a g e n t s a n d 5 n o n - a g e n t m e t h o d s o n 6 b e n c h m a r k s ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34849",
+          "quote": "B o t h t h e p l a t f o r m a n d A w e s o m e - R e a l 2 S i m , o u r r e s e a r c h m a p o f n e a r l y 3 0 0 r e a l - t o - s i m u l a t i o n p a p e r s , a r e o p e n s o u r c e , a n d w e i n v i t e t h e R e a l 2 S i m H u b c o m m u n i t y t o b u i l d t h e m t o g e t h"
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "PyRUA-Dex learns robotic manipulation policies with coding agents",
+      "summary": "PyRUA-Dex lets coding agents develop dexterous manipulation through programmatic policy without demonstrations, with parallel exploration agents distilling successes into a task library and a refinement stage improving the program under randomized layouts. It achieves SOTA on Bench2Dex with a score of 72.9 and reaches 81.0% success on DexJoCo, and on a bimanual platform with two 22-DoF hands it learns a new piece from sheet music in as little as 30 minutes.",
+      "tags": [
+        "论文",
+        "Agent",
+        "训练"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_8b0762d9c5",
+          "url": "https://huggingface.co/papers/2611.33144"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.33144",
+          "quote": "We present PyRUA-Dex, a framework that enables coding agents to develop dexterous manipulation through programmatic policy , without the need of demonstrations."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.33144",
+          "quote": "The programmatic policy is developed in two stages: during exploration , multiple agents explore in parallel for task skills and ways to compose them, and a distilling agent condenses the successful attempts into a task library and one program."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.33144",
+          "quote": "During refinement , this program is improved through randomized layouts for enhanced robustness and execution efficiency."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.33144",
+          "quote": "In simulated environments, PyRUA-Dex achieves SOTA on Bench2Dex with a score of 72.9 and reaches 81.0% success on DexJoCo under full randomization, ahead of every trained policy on both benchmarks."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.33144",
+          "quote": "In real world experiments on a bimanual platform with two 22-DoF hands , PyRUA-Dex learns to play piano, write calligraphy, and other tasks efficiently: learning a new piece from sheet music takes as little as 30 minutes."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Image-to-Video Transfer upgrades video editors without paired videos",
+      "summary": "Image-to-Video Transfer (I2VT) improves pretrained video editors and expands them to new tasks by having the video editor edit an image as a one-frame video while an image editor guides its predictions at each denoising step, with no architectural changes and no new videos. The paper also introduces OpenVE++, an extension of OpenVE-Bench adding four editing tasks, and reports state-of-the-art (SOTA) performance on both OpenVE-Bench and OpenVE++.",
+      "tags": [
+        "论文",
+        "视频"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_0c8b7225ce",
+          "url": "https://huggingface.co/papers/2611.34941"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.34941",
+          "quote": "We introduce Image-to-Video Transfer (I2VT) , which improves pretrained video editors and expands them to new editing tasks using an image editor ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34941",
+          "quote": "It enables efficient post-training with no architectural changes and no new videos, using only individual images."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34941",
+          "quote": "Our key idea is to let the video editor role-play as an image editor : it edits an image as a one-frame video , with the image editor guiding the video editor's predictions at each denoising step ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34941",
+          "quote": "Although the video editor sees only single images during training, at test time it applies the improved and expanded capabilities to whole video clips while preserving temporal consistency ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34941",
+          "quote": "To push the boundaries of video editing, we introduce OpenVE++ , an extension of OpenVE-Bench that adds four new editing tasks useful for video production, including action changes , expression changes , body movements , and scene relighting ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34941",
+          "quote": "Our experiments across three different video editors show that I2VT improves existing editing capabilities and expands them to new tasks, and our models achieve state-of-the-art (SOTA) performance on both OpenVE-Bench and OpenVE++ ."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "TT-RSI improves language models recursively at test time",
+      "summary": "Test-Time Recursive Self-Improvement (TT-RSI) is a label-free framework combining In-Context RSI, which re-solves questions using the full previous solution as a reference, with In-Weight RSI, which distills successive refinements into the model weights. Extensive experiments show that TT-RSI improves average accuracy by +13.89% over the base model and outperforms the strongest self-consistency-based method by +4.79% under the same test-time scaling budget.",
+      "tags": [
+        "论文",
+        "推理",
+        "训练"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_54b5f6bc38",
+          "url": "https://huggingface.co/papers/2611.30965"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.30965",
+          "quote": "Following this principle, we propose Test-Time Recursive Self-Improvement (TT-RSI) , a label-free framework for improving LLMs at test time through two mutually reinforcing components: (1) In-Context RSI repeatedly re-solves each question using the full previous solution as a reference, letting the"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.30965",
+          "quote": "(2) In-Weight RSI distills successive refinements into the model's weights, enabling progress beyond an initially wrong majority and theoretically bringing the first attempt toward the model's infinite-step refinement limit ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.30965",
+          "quote": "Extensive experiments show that TT-RSI improves average accuracy by +13.89% over the base model and outperforms the strongest self-consistency -based method by +4.79% under the same test-time scaling budget ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.30965",
+          "quote": "To answer directly: our current label-free method has no correctness-aware rejection rule and adaptation stops at a fixed training budge."
+        }
+      ]
+    }
+  ],
+  "research": [
+    {
+      "via": "webfetch",
+      "url": "https://github.com/ggml-org/llama.cpp/releases/tag/v1.1.0"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.34849"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.34575"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.34923"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.34237"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.34941"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.34420"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.28732"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.34811"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.34466"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.34907"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.34347"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.33925"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.33144"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.30844"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.31237"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.30965"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/blog/ggml-org/llamacpp-amd-bench"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/blog/nvidia/building-on-nemotron-35-parse-open-data-fine-tunin"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/blog/training-swarms"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.33915"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.28010"
+    }
+  ],
+  "lang": "en",
+  "validation": {
+    "validated_at": "2026-11-27T04:40:56+00:00",
+    "checked_links": false,
+    "dropped": [
+      {
+        "title": "VibeVideoAgent lets coding agents inspect drafts during production",
+        "section": "paper",
+        "candidates": [
+          "c_5bf4463d10"
+        ],
+        "reasons": [
+          "number 98.35 does not appear in the cited material"
+        ]
+      },
+      {
+        "title": "EgoUseBench tests computer-use agents under first-person context",
+        "section": "brief",
+        "candidates": [
+          "c_c8cbdf1c26"
+        ],
+        "reasons": [
+          "summary longer than 250 characters"
+        ]
+      },
+      {
+        "title": "AIRIS benchmarks social embodied intelligence in streaming video",
+        "section": "brief",
+        "candidates": [
+          "c_dcf710b861"
+        ],
+        "reasons": [
+          "summary longer than 250 characters"
+        ]
+      },
+      {
+        "title": "DocSEAM adds cross-page context to document vision-language models",
+        "section": "brief",
+        "candidates": [
+          "c_933ce93c95"
+        ],
+        "reasons": [
+          "summary longer than 250 characters"
+        ]
+      },
+      {
+        "title": "Entangle scales human-video in-context robot control",
+        "section": "brief",
+        "candidates": [
+          "c_cdb0d4e1b3"
+        ],
+        "reasons": [
+          "summary longer than 250 characters"
+        ]
+      },
+      {
+        "title": "WorldReforge trains robot world models on simulated failures",
+        "section": "brief",
+        "candidates": [
+          "c_ead8adba58"
+        ],
+        "reasons": [
+          "summary longer than 250 characters"
+        ]
+      },
+      {
+        "title": "SEEK retains execution knowledge across robot attempts",
+        "section": "brief",
+        "candidates": [
+          "c_5d1844dfb6"
+        ],
+        "reasons": [
+          "summary longer than 250 characters"
+        ]
+      }
+    ],
+    "warnings": []
+  }
+}

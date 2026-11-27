@@ -1,0 +1,937 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-27",
+  "mode": "full",
+  "generated_at": "2026-11-27T04:39:55+00:00",
+  "channel": "api",
+  "model": "nvidia:minimaxai/minimax-m3.1-flash",
+  "highlights": [
+    "llama.cpp v1.1.0 发布：新增 Inkling 2 系列模型支持、大批 TTS 与音频模型、DFlash 推测解码拆分，并弃用旧 llama batch API。",
+    "NVIDIA 发布 Agentic LongLive，用异步 Agent 记忆维持长视频流中的人物与场景一致性，在 H100 上仅增加约 1% 生成时间。",
+    "Sage-Med-Preview 以 35B 总参数、3B 激活的医疗多模态模型，在 31 个公开多模态基准上取得 58.26% 平均分。"
+  ],
+  "items": [
+    {
+      "section": "headline",
+      "title": "llama.cpp v1.1.0 发布，扩音频与推测解码",
+      "summary": "llama.cpp v1.1.0 加入 Inkling 2 家族、Domyn Edge 4B、Zaya1 8B 等模型支持，并带来 Kokoro、Zonos3-Mini、MiniMax-Music3、YuE2 等 TTS 与音频模型。旧 llama batch API 被弃用，DFlash 推测解码拆分为多种 draft 方法，服务器端还新增 named tool_choice 与按 bpw 或体积预算的自动量化。对本地推理开发者来说，这个版本同时带来更广的模型覆盖与一批 API 迁移改动。",
+      "tags": [
+        "工具",
+        "开源",
+        "推理"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_133023c922",
+          "url": "https://github.com/ggml-org/llama.cpp/releases/tag/v1.1.0"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/releases/tag/v1.1.0",
+          "quote": "llama.cpp v1.1.0 adds the Inkling 2 family (base, Mini and DSpark), Domyn Edge 4B, Zaya1 8B, RAON-1-mini and Hy4 flash, splits DFlash speculative decoding into separate draft methods, and deprecates the old llama_batch API in favour of llama_batch_ext ."
+        },
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/releases/tag/v1.1.0",
+          "quote": "It brings a large set of TTS and audio models (Kokoro, Zonos3-Mini, tiny-voca, VoxCPM2, MiniMax-Music3, YuE2, Fish S2, Higgs v3/VibeVoice-ASR and Kyutai Hibiki), token-aware chat parsing, named tool choice, automatic per-tensor quantization targeting a bpw or size budget, a slot-scheduling refactor"
+        },
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/releases/tag/v1.1.0",
+          "quote": "in llama-server , a redesigned Llama Chat web UI with voice messages and agent traces, and updates ggml to v1.1.1."
+        },
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/releases/tag/v1.1.0",
+          "quote": "llama.h: deprecate the old llama_batch API in favour of llama_batch_ext and llama_process ( #32306 , #32356 )"
+        },
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/releases/tag/v1.1.0",
+          "quote": "server: accept OpenAI named tool_choice and add GET /models/sse in single-model mode ( #31564 , #32398 )"
+        },
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/releases/tag/v1.1.0",
+          "quote": "split DFlash speculative decoding into draft-dflash , draft-dflash2 , draft-dspark and draft-lilicorr ( #32016 )"
+        },
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/releases/tag/v1.1.0",
+          "quote": "add --target-bpw / --target-size per-tensor quant selection with a resumable state file ( #15550 )"
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "NVIDIA 用 Agent 记忆延长长视频流一致性",
+      "summary": "NVIDIA 提出 Agentic LongLive，为实时自回归视频生成加入异步 Agent 记忆：记忆 Agent 只读取已披露的提示词，为人物、物体和场景维护文本状态与演化图像，并在下一镜头开始前预填生成器的 attention sink。在新基准 LongStory-Online 上，它相对基座生成器 LongLive-2.0 把持久状态准确率提升 26.3 分、主角身份提升 44.9、重访地点一致性提升 40.4，H100 上仅增加约 1% 生成时间。",
+      "tags": [
+        "视频",
+        "Agent",
+        "模型"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_91c0348f3b",
+          "url": "https://huggingface.co/papers/2611.34907"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.34907",
+          "quote": "W e p r e s e n t A g e n t i c L o n g L i v e , a n a s y n c h r o n o u s a g e n t i c m e m o r y f o r l o n g v i d e o g e n e r a t i o n ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34907",
+          "quote": "A m e m o r y a g e n t o n s e p a r a t e G P U s r e a d s o n l y t h e p r o m p t s r e v e a l e d s o f a r , n e v e r t h e g e n e r a t e d v i d e o , a n d k e e p s a t e x t s t a t e a n d e v o l v i n g i m a g e s f o r e v e r y p e r s o n , o b j e c t , a n d s c e n e ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34907",
+          "quote": "F r o m t h i s e n t i t y m e m o r y i t c o m p o s e s a g l o b a l i m a g e a n d a p e r - s h o t m e m o r y i m a g e , w h i c h a n a u x i l i a r y G P U p r e f i l l s i n t o t h e g e n e r a t o r ' s a t t e n t i o n s i n k b e f o r e t h e n e x t s h o t s t a r t s , a n"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34907",
+          "quote": "O n L o n g S t o r y - O n l i n e , a n e w b e n c h m a r k o f 2 5 s t o r i e s ( 8 5 7 s h o t s ) r e v e a l e d o n e s h o t a t a t i m e , A g e n t i c L o n g L i v e i m p r o v e s p e r s i s t e n t - s t a t e a c c u r a c y o f L o n g L i v e - 2 ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34907",
+          "quote": "0 , i t s b a s e g e n e r a t o r , b y 2 6 ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34907",
+          "quote": "3 p o i n t s , p r o t a g o n i s t i d e n t i t y b y 4 4 ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34907",
+          "quote": "9 , a n d r e v i s i t e d - p l a c e c o n s i s t e n c y b y 4 0 ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34907",
+          "quote": "4 , a t a b o u t 1 % e x t r a g e n e r a t i o n t i m e o n H 1 0 0 ."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Sage-Med-Preview 探索医疗多模态的缩放规律",
+      "summary": "上海 AI Laboratory 等团队提出 Sage-Med-Preview，一个 35B 参数、3B 激活的医疗多模态模型，训练数据来自 322.7 million 条候选记录的阶段化筛选，并结合医学预训练、分阶段监督微调与自适应强化学习。作者的评测显示，模型在 31 个公开多模态基准上平均分为 58.26%，高于 Hulu-Med-235B-A22B 的 50.99% 和 Intern-S2-Preview 的 52.24%。论文同时指出，单纯放大参数主要提升文本能力，视觉感知提升有限，推理模式也难以弥合视觉差距。",
+      "tags": [
+        "模型",
+        "多模态",
+        "论文"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_4764e04832",
+          "url": "https://huggingface.co/papers/2611.34575"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.34575",
+          "quote": "T o i n v e s t i g a t e h o w m e d i c a l m u l t i m o d a l i n t e l l i g e n c e s c a l e s i n p r a c t i c e , w e i n t r o d u c e S a g e - M e d - P r e v i e w , a 3 5 B - p a r a m e t e r m e d i c a l m u l t i m o d a l m o d e l w i t h 3 B a c t i v a t e d p a r a m e t e r"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34575",
+          "quote": "s , b u i l t b y c o m b i n i n g s t a g e - s p e c i f i c c u r a t i o n o v e r 3 2 2 ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34575",
+          "quote": "7 m i l l i o n c a n d i d a t e r e c o r d s w i t h a p r o g r e s s i v e t r a i n i n g c u r r i c u l u m s p a n n i n g m e d i c a l p r e t r a i n i n g , s t a g e d s u p e r v i s e d f i n e - t u n i n g , a n d a d a p t i v e r e i n f o r c e m e n t l e a r n i n g ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34575",
+          "quote": "e s a n a v e r a g e s c o r e o f 5 8 ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34575",
+          "quote": "2 6 % o n t h e 3 1 p u b l i c m u l t i m o d a l b e n c h m a r k s ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34575",
+          "quote": "I t o u t p e r f o r m s t h e s t a t e - o f - t h e - a r t o p e n - s o u r c e m e d i c a l m o d e l H u l u - M e d - 2 3 5 B - A 2 2 B a t 5 0 ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34575",
+          "quote": "9 9 % a n d t h e g e n e r a l s c i e n t i f i c m o d e l I n t e r n - S 2 - P r e v i e w a t 5 2 ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34575",
+          "quote": "Existing medical MLLMs still trail general-purpose MLLMs on 29 of 31 public multimodal benchmarks."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34575",
+          "quote": "Parameter scaling within a model family mainly improves text ( +9.90% text-only understanding, +12.37% text-only reasoning), while yielding much smaller gains on multimodal understanding ( +4.34% )."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "NVIDIA 开源 Nemotron 3.5 Parse 训练数据与配方",
+      "summary": "NVIDIA 公布 Nemotron 3.5 Parse 的合成训练数据集、微调配方与 DFlash2 推测解码方案。该文档模型把页面图像转成带阅读顺序、内容类别和边界框的结构化数据，可用于 RAG 与 Agent。三个开源数据集分别包含 Synthetic Charts V1 的 9.98M 条样本、Synthetic Tables V1 的 1M 条样本和 OCR Synthetic Multilingual v2 的 7.9M 条样本，训练流程先用 SFT 建立能力，再用 GRPO 形式的 RLVR 提升一致性与完成度。",
+      "tags": [
+        "模型",
+        "开源",
+        "训练"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_5905285b7b",
+          "url": "https://huggingface.co/blog/nvidia/building-on-nemotron-35-parse-open-data-fine-tunin"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/blog/nvidia/building-on-nemotron-35-parse-open-data-fine-tunin",
+          "quote": "We recently released NVIDIA Nemotron 3.5 Parse , a compact document model that turns page images into structured data for retrieval-augmented generation (RAG) and agents."
+        },
+        {
+          "url": "https://huggingface.co/blog/nvidia/building-on-nemotron-35-parse-open-data-fine-tunin",
+          "quote": "Now we’re building on that release with synthetic training datasets, a fine-tuning recipe, and a DFlash2 speculator for faster inference ."
+        },
+        {
+          "url": "https://huggingface.co/blog/nvidia/building-on-nemotron-35-parse-open-data-fine-tunin",
+          "quote": "We’re also sharing how we trained Parse 3.5: first teaching document understanding through supervised fine-tuning, then using reinforcement learning to improve accuracy, consistency, and reliable completion."
+        },
+        {
+          "url": "https://huggingface.co/blog/nvidia/building-on-nemotron-35-parse-open-data-fine-tunin",
+          "quote": "Parse extracts content from pages of documents into reading order, assigns content classes such as headings, paragraphs, tables, and charts, and returns bounding boxes that locate the content."
+        },
+        {
+          "url": "https://huggingface.co/blog/nvidia/building-on-nemotron-35-parse-open-data-fine-tunin",
+          "quote": "We are open-sourcing three datasets used in the Parse 3.5 training :"
+        },
+        {
+          "url": "https://huggingface.co/blog/nvidia/building-on-nemotron-35-parse-open-data-fine-tunin",
+          "quote": "Synthetic Charts V1 — 9.98M examples : rendered charts and structured annotations for learning categories, series, and numerical values."
+        },
+        {
+          "url": "https://huggingface.co/blog/nvidia/building-on-nemotron-35-parse-open-data-fine-tunin",
+          "quote": "Synthetic Tables V1 — 1M examples : rendered HTML tables with targets that preserve rows, columns, headers, and cell relationships."
+        },
+        {
+          "url": "https://huggingface.co/blog/nvidia/building-on-nemotron-35-parse-open-data-fine-tunin",
+          "quote": "OCR Synthetic Multilingual v2 — 7.9M examples : synthetic document pages with Parse-format targets across varied fonts and layouts, for multilingual OCR and structured page reading."
+        },
+        {
+          "url": "https://huggingface.co/blog/nvidia/building-on-nemotron-35-parse-open-data-fine-tunin",
+          "quote": "We trained Parse 3.5 with two phases of training."
+        },
+        {
+          "url": "https://huggingface.co/blog/nvidia/building-on-nemotron-35-parse-open-data-fine-tunin",
+          "quote": "We then continued with reinforcement learning with verifiable rewards (RLVR) , using Group Relative Policy Optimization (GRPO) ."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Mixture-of-Loops Transformer 复用 KV 记忆",
+      "summary": "字节跳动 Seed 提出 Mixture-of-Loops Transformer（MoLT），其 Mixture-of-Loops Attention 用 keys 和 values 作为跨层、跨循环的记忆。其中 U-shaped MoLT 把记忆构建与预测读出分离，可跳过未使用的解码遍历而不改变预测结果。在 400B-token 预训练中，U-MoLT 相对 OLMo3 在 700M 模型上取得 1.7x 验证交叉熵 token 效率，并在 3B MoE 上把 10-task 准确率提升 2.1 个百分点。",
+      "tags": [
+        "论文",
+        "训练",
+        "推理"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_ed63df2f97",
+          "url": "https://huggingface.co/papers/2611.34923"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.34923",
+          "quote": "We introduce Mixture-of-Loops Transformer (MoLT) , whose Mixture-of-Loops Attention (MoLA) uses keys and values (KV) as memory for selective reuse across depths and loops."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34923",
+          "quote": "To balance efficiency and quality, we introduce U-shaped MoLT (U-MoLT) , which separates memory construction from prediction readout and skips unused decoder traversals without changing predictions."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34923",
+          "quote": "In 400B-token pretraining, U-MoLT outperforms OLMo3 across 700M/1.5B dense and 3B MoE models, achieving 1.7x validation cross-entropy (CE) token efficiency at 700M while improving 3B MoE 10-domain perplexity by 0.75 and 10-task accuracy by 2.1 percentage points."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34923",
+          "quote": "Code is available at https://github.com/hustvl/MoLT View arXiv page View PDF Project page GitHub 69 Add to collection Community LianghuiZhu Paper submitter about 21 hours ago Looped Transformers boost expressivity by reusing shared layers across loops, yet at the cost of efficiency."
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "DyLoMo-DiT 用循环复用扩散 Transformer 参数",
+      "summary": "DyLoMo-DiT 把扩散 Transformer 的深度、参数与算力拆开处理：权重共享的循环反复应用中间层，稀疏专家按 token 分配参数，并按噪声水平动态改变循环次数。在 ImageNet 256times256 上，它相对 DiT 将 FID 降低 11-24%；放大后的文本到图像模型 GenEval 得分为 0.714，高于 FLUX.1 的 0.673，而每 token 激活参数为 1.05B，低于 12B。",
+      "tags": [
+        "论文",
+        "图像"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_4f1599d5df",
+          "url": "https://huggingface.co/papers/2611.30844"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.30844",
+          "quote": "In this paper, we propose Dynamic Looped MoE DiT ( DyLoMo-DiT ), which reuses parameters rather than adding them: a weight-shared loop repeatedly applies the middle layers, while sparse experts allocate parameter capacity across tokens."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.30844",
+          "quote": "It also allocates compute dynamically, varying the number of passes across noise levels ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.30844",
+          "quote": "On ImageNet 256times256, DyLoMo-DiT reduces FID by 11-24% relative to DiT and 36-56% relative to DiT-MoE at matched parameter and compute budgets."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.30844",
+          "quote": "For text-to-image generation , a scaled DyLoMo-DiT achieves a higher GenEval score than FLUX.1 (0.714 vs."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.30844",
+          "quote": "0.673), with less than one tenth of its active parameters (1.05B vs."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.30844",
+          "quote": "A 15.48B text-to-image model with 1.05B active parameters per image token scores 0.714 on GenEval (FLUX.1: 0.673)."
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Integral 让 VLM 在共享表征空间里生成图像",
+      "summary": "KAIST AI 提出 Integral，把预训练视觉语言模型改造为统一多模态模型，核心是让理解与生成共用视觉表征空间。其 Abstraction Fusion 从冻结的视觉编码器聚合分层表征构造共享视觉 token，Block-wise MoT 则引入只在 block 边界与视觉语言模型交互的轻量生成流。作者的对照实验显示，相比使用独立视觉表征空间，共享表征能显著改善生成学习效果。",
+      "tags": [
+        "论文",
+        "多模态",
+        "图像"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_1134e58908",
+          "url": "https://huggingface.co/papers/2611.31237"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.31237",
+          "quote": "To address this challenge, we introduce Integral, which converts a pretrained vision-language model into a unified multimodal model by constructing a shared visual representation space across the two capabilities."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.31237",
+          "quote": "Abstraction Fusion constructs shared visual tokens by aggregating hierarchical representations from the frozen vision encoder , while Block-wise MoT introduces a lightweight generative stream that interacts with the vision-language model only at block boundaries ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.31237",
+          "quote": "Controlled comparisons further demonstrate that sharing visual representations between understanding and generation substantially improves generative learning compared with using a separate visual representation space, despite comparable reconstruction fidelity ."
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "llama.cpp 推出 AMD 平台基准看板",
+      "summary": "ggml-org 在 Hugging Face 上线 llama.cpp × AMD Benchmark 看板，可按硬件、模型和 llama.cpp 构建版本对比不同量化下的提示处理与文本生成性能。看板当前收录 Radeon 8060S（gfx1151）和 Radeon AI Pro R9700S（gfx1201），提供 Overview、Build history 与 Context scaling 三个视图，并直接读取公开的存储桶数据，便于 AMD 开发者复用结果做自己的图表或与本地运行对比。",
+      "tags": [
+        "工具",
+        "硬件"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_49da203591",
+          "url": "https://huggingface.co/blog/ggml-org/llamacpp-amd-bench"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/blog/ggml-org/llamacpp-amd-bench",
+          "quote": "The llama.cpp × AMD Benchmark dashboard is available on Hugging Face."
+        },
+        {
+          "url": "https://huggingface.co/blog/ggml-org/llamacpp-amd-bench",
+          "quote": "It lets you track prompt processing and text generation performance across llama.cpp builds, models, and quantizations, so you can explore how local inference performs on AMD Ryzen and Radeon hardware."
+        },
+        {
+          "url": "https://huggingface.co/blog/ggml-org/llamacpp-amd-bench",
+          "quote": "The benchmark workflow and underlying results are public, so you can also inspect how we benchmark inference performance."
+        },
+        {
+          "url": "https://huggingface.co/blog/ggml-org/llamacpp-amd-bench",
+          "quote": "The current hardware choices are Radeon 8060S (gfx1151) and Radeon AI Pro R9700S (gfx1201)."
+        },
+        {
+          "url": "https://huggingface.co/blog/ggml-org/llamacpp-amd-bench",
+          "quote": "In the Overview tab, compare quantizations for one hardware, model, and build."
+        },
+        {
+          "url": "https://huggingface.co/blog/ggml-org/llamacpp-amd-bench",
+          "quote": "In the Build history tab, track PP512 and TG128 across all recorded builds for the selected hardware, model, and quantization."
+        },
+        {
+          "url": "https://huggingface.co/blog/ggml-org/llamacpp-amd-bench",
+          "quote": "The explorer reads directly from the public ggml-org/install.sh-benches-data Storage Bucket on Hugging Face."
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "HF 博客教程：训练与评估多智能体集群",
+      "summary": "Hugging Face 博客推出多智能体系统系列教程，核心问题是通信是否真的带来收益，还是只是多花了算力。首个示例用四个共享 Qwen3-0.6B 策略的智能体协作排序数字，通信工具包括 message(to, text)、read_messages() 和 check_notifications()，并通过共享团队奖励的集中式训练与去中心化执行来训练协作，配套示例可在 Hugging Face Jobs 上复现。",
+      "tags": [
+        "Agent",
+        "训练",
+        "工具"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_f3901ac520",
+          "url": "https://huggingface.co/blog/training-swarms"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/blog/training-swarms",
+          "quote": "This post's example takes about five hours on two H200s, which costs roughly $50."
+        },
+        {
+          "url": "https://huggingface.co/blog/training-swarms",
+          "quote": "Multi-Agent Systems are hard to get working."
+        },
+        {
+          "url": "https://huggingface.co/blog/training-swarms",
+          "quote": "Mixing agents' context together through communication is not an inherent performance boost compared to a single agent."
+        },
+        {
+          "url": "https://huggingface.co/blog/training-swarms",
+          "quote": "This series keeps asking one question: when agents communicate, does it actually help, or are we just spending more compute?"
+        },
+        {
+          "url": "https://huggingface.co/blog/training-swarms",
+          "quote": "A common solution is centralized training with decentralized execution: training uses information from the whole team, but each agent acts only on its own observations."
+        },
+        {
+          "url": "https://huggingface.co/blog/training-swarms",
+          "quote": "This is the setup we'll use here, following the information-aggregation task in s³: Simple Scaling of Swarms via Cooperative Multi-agent RL ."
+        },
+        {
+          "url": "https://huggingface.co/blog/training-swarms",
+          "quote": "Four agents share a small language model and learn to pool what each of them knows."
+        },
+        {
+          "url": "https://huggingface.co/blog/training-swarms",
+          "quote": "The main communication tools are message(to, text) , read_messages() , and check_notifications() ."
+        },
+        {
+          "url": "https://huggingface.co/blog/training-swarms",
+          "quote": "We defined a four-agent system using one shared Qwen3-0.6B policy , with separate contexts and private inputs."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Real2SimLab 统一真实到仿真评测平台",
+      "summary": "北京大学 PKU-VaLuE-Lab 提出 Real2SimLab，用统一平台评测从真实观测构建仿真的方法：运行方法写出的程序，再用各基准原始 scorer 给输出仿真打分，避免为每个方法与基准做重复集成。平台还提供训练数据与奖励标注流水线，并通过过滤已存在于基准中的视频记录来避免数据污染。目前支持 47 个 coding agents、5 个非 agent 方法和 6 个基准，平台与收录近 300 篇论文的 Awesome-Real2Sim 均开源。",
+      "tags": [
+        "论文",
+        "Agent",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_2866b2c5b9",
+          "url": "https://huggingface.co/papers/2611.34849"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.34849",
+          "quote": "T o t h i s e n d , w e p r e s e n t R e a l 2 S i m L a b , a u n i f i e d p l a t f o r m f o r r e a l - t o - s i m u l a t i o n t r a n s f e r ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34849",
+          "quote": "I t e v a l u a t e s a m e t h o d b y r u n n i n g i t s w r i t t e n p r o g r a m a n d s c o r i n g t h e o u t p u t s i m u l a t i o n w i t h t h e o r i g i n a l s c o r e r o f e a c h b e n c h m a r k ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34849",
+          "quote": "M o r e o v e r , R e a l 2 S i m L a b p r o v i d e s a p i p e l i n e t o c r e a t e t r a i n i n g d a t a a n d r e w a r d a n n o t a t i o n s f o r r e a l - t o - s i m u l a t i o n m e t h o d s ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34849",
+          "quote": "O u r p i p e l i n e c a r e f u l l y a v o i d s d a t a c o n t a m i n a t i o n b y f i l t e r i n g o u t t h e v i d e o r e c o r d i n g s t h a t e x i s t i n b e n c h m a r k s ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34849",
+          "quote": "S o f a r , i t s u p p o r t s 4 7 c o d i n g a g e n t s a n d 5 n o n - a g e n t m e t h o d s o n 6 b e n c h m a r k s ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34849",
+          "quote": "B o t h t h e p l a t f o r m a n d A w e s o m e - R e a l 2 S i m , o u r r e s e a r c h m a p o f n e a r l y 3 0 0 r e a l - t o - s i m u l a t i o n p a p e r s , a r e o p e n s o u r c e , a n d w e i n v i t e t h e R e a l 2 S i m H u b c o m m u n i t y t o b u i l d t h e m t o g e t h"
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "VibeVideoAgent 为代码生成视频补上感知回路",
+      "summary": "可灵 Kling-Keye 提出 VibeVideoAgent，这是一个无需训练的框架，让 coding agent 在制作过程中持续检查自己的草稿。多模态感知运行在与编码器分离的短生命周期上下文中，返回紧凑且有依据的 Findings，七个原语可以在统一的多时钟资产表示上从粗到细查看素材、核对需求并比对不同版本。在 239 个 VibeVideoBench 任务上，固定感知模型并匹配运行时后，Claude Opus 5.5 的整体视听质量（L3）从 4.03 提升到 4.43。",
+      "tags": [
+        "论文",
+        "Agent",
+        "视频"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_5bf4463d10",
+          "url": "https://huggingface.co/papers/2611.34237"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.34237",
+          "quote": "W e i n t r o d u c e V i b e V i d e o A g e n t , a t r a i n i n g - f r e e f r a m e w o r k t h a t l e t s c o d i n g a g e n t s i n s p e c t t h e i r d r a f t s t h r o u g h o u t p r o d u c t i o n ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34237",
+          "quote": "M u l t i m o d a l p e r c e p t i o n r u n s i n s h o r t - l i v e d c o n t e x t s k e p t a p a r t f r o m t h e c o d e r a n d r e t u r n s c o m p a c t , g r o u n d e d F i n d i n g s ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34237",
+          "quote": "S e v e n p r i m i t i v e s o p e r a t e o n a u n i f i e d m u l t i - c l o c k r e p r e s e n t a t i o n o f a s s e t s a n d d r a f t s : t h e y e x p l o r e m e d i a f r o m c o a r s e t o f i n e , v e r i f y q u o t e d r e q u i r e m e n t s w i t h e v i d e n c e f r o m e v"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34237",
+          "quote": "O n a l l 2 3 9 V i b e V i d e o B e n c h t a s k s , w i t h m a t c h e d a g e n t r u n t i m e s a n d a f i x e d p e r c e p t i o n m o d e l , V i b e V i d e o A g e n t i m p r o v e s h o l i s t i c a u d i o v i s u a l q u a l i t y ( L 3 ) f o r C l a u d e O p u s 5 ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34237",
+          "quote": "4 3 , w h i l e L 2 r u b r i c c o m p l i a n c e r i s e s f r o m 9 8 ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34237",
+          "quote": "3 5 % ) , G P T - 6 A s t r a ( 4 ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34237",
+          "quote": "2 7 ) , a n d C l a u d e S o n n e t 5 ."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "PyRUA-Dex 用编码 Agent 开发灵巧手策略",
+      "summary": "北京大学 DAGroup 提出 PyRUA-Dex，让编码 Agent 通过程序化策略学习灵巧操作，从而摆脱对高质量示教数据的依赖。流程分两阶段：多个 Agent 并行探索任务技能并组合，一个蒸馏 Agent 把成功尝试凝练成任务库与一份程序；随后在随机化布局下改进这份程序以增强鲁棒性。模拟环境中它取得 Bench2Dex 72.9 分和 DexJoCo 全随机化下 81.0% 成功率，真实平台上用两只 22-DoF 手弹钢琴、写书法，学习新曲谱最快只需 30 分钟。",
+      "tags": [
+        "论文",
+        "Agent",
+        "训练"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_8b0762d9c5",
+          "url": "https://huggingface.co/papers/2611.33144"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.33144",
+          "quote": "We present PyRUA-Dex, a framework that enables coding agents to develop dexterous manipulation through programmatic policy , without the need of demonstrations."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.33144",
+          "quote": "The programmatic policy is developed in two stages: during exploration , multiple agents explore in parallel for task skills and ways to compose them, and a distilling agent condenses the successful attempts into a task library and one program."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.33144",
+          "quote": "During refinement , this program is improved through randomized layouts for enhanced robustness and execution efficiency."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.33144",
+          "quote": "In simulated environments, PyRUA-Dex achieves SOTA on Bench2Dex with a score of 72.9 and reaches 81.0% success on DexJoCo under full randomization, ahead of every trained policy on both benchmarks."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.33144",
+          "quote": "In real world experiments on a bimanual platform with two 22-DoF hands , PyRUA-Dex learns to play piano, write calligraphy, and other tasks efficiently: learning a new piece from sheet music takes as little as 30 minutes."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "I2VT 把图像编辑能力迁移给视频编辑器",
+      "summary": "卡内基梅隆大学提出 Image-to-Video Transfer（I2VT），让视频编辑器把单张图像当作一帧视频来扮演图像编辑器，由图像编辑器在每个去噪步引导视频编辑器的预测。训练只需单张图像，不改架构也不需要新的成对视频，测试时则把增强后的能力应用到整段视频并保持时间一致性。作者同时扩展出 OpenVE++，加入动作变化、表情变化、身体动作与场景重光照四类任务，在三个视频编辑器上均取得 OpenVE-Bench 与 OpenVE++ 的 SOTA 结果。",
+      "tags": [
+        "论文",
+        "视频"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_0c8b7225ce",
+          "url": "https://huggingface.co/papers/2611.34941"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.34941",
+          "quote": "We introduce Image-to-Video Transfer (I2VT) , which improves pretrained video editors and expands them to new editing tasks using an image editor ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34941",
+          "quote": "It enables efficient post-training with no architectural changes and no new videos, using only individual images."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34941",
+          "quote": "Our key idea is to let the video editor role-play as an image editor : it edits an image as a one-frame video , with the image editor guiding the video editor's predictions at each denoising step ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34941",
+          "quote": "Although the video editor sees only single images during training, at test time it applies the improved and expanded capabilities to whole video clips while preserving temporal consistency ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34941",
+          "quote": "To push the boundaries of video editing, we introduce OpenVE++ , an extension of OpenVE-Bench that adds four new editing tasks useful for video production, including action changes , expression changes , body movements , and scene relighting ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34941",
+          "quote": "Our experiments across three different video editors show that I2VT improves existing editing capabilities and expands them to new tasks, and our models achieve state-of-the-art (SOTA) performance on both OpenVE-Bench and OpenVE++ ."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "TT-RSI 在测试时递归自我改进",
+      "summary": "上海 AI Laboratory 提出 TT-RSI，一个无标签的测试时改进框架，由两部分互相支撑：In-Context RSI 反复带上完整的上一次解答重做题目，让模型自己决定如何利用旧推理；In-Weight RSI 则把连续改进蒸馏进模型权重，从而越过一开始就出错的多数答案。实验显示 TT-RSI 相对基座模型平均准确率提升 +13.89%，在相同测试时扩展预算下比最强的自一致性方法高出 +4.79%。作者也承认当前方法没有正确性感知的拒绝规则，持续错误的问题仍待解决。",
+      "tags": [
+        "论文",
+        "推理",
+        "训练"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_54b5f6bc38",
+          "url": "https://huggingface.co/papers/2611.30965"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.30965",
+          "quote": "Following this principle, we propose Test-Time Recursive Self-Improvement (TT-RSI) , a label-free framework for improving LLMs at test time through two mutually reinforcing components: (1) In-Context RSI repeatedly re-solves each question using the full previous solution as a reference, letting the"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.30965",
+          "quote": "(2) In-Weight RSI distills successive refinements into the model's weights, enabling progress beyond an initially wrong majority and theoretically bringing the first attempt toward the model's infinite-step refinement limit ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.30965",
+          "quote": "Extensive experiments show that TT-RSI improves average accuracy by +13.89% over the base model and outperforms the strongest self-consistency -based method by +4.79% under the same test-time scaling budget ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.30965",
+          "quote": "To answer directly: our current label-free method has no correctness-aware rejection rule and adaptation stops at a fixed training budge."
+        }
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "EgoUseBench 评测随身设备上下文下的电脑操作",
+      "summary": "浙江大学提出 EgoUseBench，含 693 个任务，评测 Agent 在三种第一人称上下文设定下的表现。",
+      "tags": [
+        "论文",
+        "Agent",
+        "多模态"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_c8cbdf1c26",
+          "url": "https://huggingface.co/papers/2611.34466"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.34466",
+          "quote": "W e i n t r o d u c e E g o U s e B e n c h , a b e n c h m a r k f o r e v a l u a t i n g E g o U s e a c r o s s t h r e e i n t e r a c t i o n s e t t i n g s w i t h d i f f e r e n t l e v e l s o f f i r s t - p e r s o n c o n t e x t ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34466",
+          "quote": "C o m p u t e r - U s e r e l i e s o n e x p l i c i t i n s t r u c t i o n s , O f f l i n e E g o U s e p r o v i d e s p r e r e c o r d e d f i r s t - p e r s o n c o n t e x t b e f o r e e x e c u t i o n , a n d O n l i n e E g o U s e p r o v i d e s c o n t i n u o u s o b s e r v a t i"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34466",
+          "quote": "B a s e d o n o v e r 7 4 h o u r s o f r e a l - w o r l d f i r s t - p e r s o n r e c o r d i n g s , w e c o n s t r u c t 6 9 3 t a s k s a c r o s s t h e t h r e e i n t e r a c t i o n s e t t i n g s ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34466",
+          "quote": "We evaluate several advanced models and find that average success rates in Online Ego Use are 26.3% lower than in Computer-Use."
+        }
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "AIRIS 评测流式视频中的社交具身智能",
+      "summary": "腾讯提出 AIRIS 流式基准，含 8,000 条专家问题、357 段第一人称片段与 36 个能力维度。",
+      "tags": [
+        "论文",
+        "多模态",
+        "Agent"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_dcf710b861",
+          "url": "https://huggingface.co/papers/2611.34347"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.34347",
+          "quote": "W e i n t r o d u c e A I R I S , a c a u s a l s t r e a m i n g b e n c h m a r k t h a t f o r m u l a t e s s o c i a l e m b o d i e d i n t e l l i g e n c e a s a t i m e - a n c h o r e d c h a i n o f A t t e n t i o n , I n t e n t i o n , R e a c t i o n , a n d I n t e r a c t i o n ( A"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34347",
+          "quote": "A I R I S c o n t a i n s 8 , 0 0 0 e x p e r t - c u r a t e d q u e s t i o n s g r o u n d e d i n 3 5 7 e g o c e n t r i c c l i p s a c r o s s 1 1 c o n t e x t c a t e g o r i e s a n d 3 6 c a p a b i l i t y d i m e n s i o n s ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34347",
+          "quote": "A t e a c h q u e r y , m o d e l s r e c e i v e o n l y t h e o b s e r v a t i o n p r e f i x a v a i l a b l e a t t h a t t i m e ; d e c i s i o n - a w a r e m e t r i c s r e w a r d c a l i b r a t e d w a i t i n g a n d c o m p l e t e r e a c t i o n s w h i l e p e n a l i z i n g p r"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34347",
+          "quote": "E v a l u a t i n g 4 5 p r o p r i e t a r y a n d o p e n - s o u r c e g e n e r a l - p u r p o s e , e m b o d i e d , s t r e a m i n g - v i d e o , a n d o m n i - m o d a l m o d e l s r e v e a l s f r a g m e n t e d a n d t e m p o r a l l y m i s c a l i b r a t e d c o m p e t e n c e"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34347",
+          "quote": "o d e l s f r e q u e n t l y g u e s s i n t e n t s b e f o r e s u f f i c i e n t e v i d e n c e e m e r g e s a n d f a i l t o j o i n t l y a l i g n i n t e r v e n t i o n t i m i n g , a c t i o n d o m a i n , a n d c o n c r e t e e x e c u t i o n w i t h i n t h e s a m e e p i s o d"
+        }
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "DocSEAM 为多页文档注入跨页上下文",
+      "summary": "MMLab@NTU 提出 DocSEAM，用中心锚定掩码自注意力融合邻页信息且不改变视觉 token 数量。",
+      "tags": [
+        "论文",
+        "多模态",
+        "图像"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_933ce93c95",
+          "url": "https://huggingface.co/papers/2611.34420"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.34420",
+          "quote": "We introduce DocSEAM (Document Selective Enrichment via Anchored Masking), a lightweight module inserted between a pretrained vision encoder and the language model that injects the inductive bias of local cross-page context into visual representations ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34420",
+          "quote": "For each page, DocSEAM forms a local triplet with its two neighbors, applies center-anchored masked self-attention with directional salience gates to fuse information from neighbor pages, and returns only the enriched center-page tokens , leaving the visual token count unchanged."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34420",
+          "quote": "After a supervised cross-page warm-up and multi-page fine-tuning with DocSEAM frozen, our 9B-parameter model achieves state-of-the-art results among the evaluated open-weight models of up to 10B parameters on five multi-page document VQA benchmarks."
+        }
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "Entangle 用人类视频做机器人上下文学习",
+      "summary": "Entangle 把单个人类视频与机器人观测映射为未来视觉状态和可执行动作，在 Astribot S1 上取得 83.5/100。",
+      "tags": [
+        "论文",
+        "多模态",
+        "训练"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_cdb0d4e1b3",
+          "url": "https://huggingface.co/papers/2611.28732"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.28732",
+          "quote": "W e p r e s e n t E n t a n g l e , a n i n - c o n t e x t w o r l d - a c t i o n m o d e l t h a t m a p s a s i n g l e h u m a n v i d e o a n d c u r r e n t r o b o t o b s e r v a t i o n s t o f u t u r e v i s u a l s t a t e s a n d e x e c u t a b l e a c t i o n s ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.28732",
+          "quote": "T o s c a l e t e m p o r a l l y a l i g n e d t r a i n i n g d a t a , w e c o n v e r t r e c o r d e d r o b o t v i d e o s i n t o m a t c h e d h u m a n c o n t e x t s v i a v i d e o - t o - v i d e o g e n e r a t i o n , s u p p l e m e n t e d b y r e a l p a i r e d r e c o r d i n g"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.28732",
+          "quote": "F o r m o d e l t r a i n i n g , w e c o m b i n e v a r i a b l e - l e n g t h v i d e o w i n d o w s w i t h a n i n t r a - t a s k c o n t r a s t i v e o b j e c t i v e t h a t d i s t i n g u i s h e s t h e p a i r e d a c t i o n t r a j e c t o r y f r o m o t h e r e x e c u t i o n s"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.28732",
+          "quote": "W i t h o u t t a s k - s p e c i f i c f i n e - t u n i n g , E n t a n g l e i m p r o v e s s t e a d i l y a s a l i g n e d t r a i n i n g d a t a s c a l e s , r e a c h i n g a n a v e r a g e s c o r e o f 8 3 ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.28732",
+          "quote": "5 / 1 0 0 a c r o s s s i x u n s e e n t a s k s o n a n A s t r i b o t S 1 r o b o t , a n d a c h i e v e s a 6 9 ."
+        }
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "WorldReforge 用仿真失败轨迹训练世界模型",
+      "summary": "浙江大学提出 WorldReforge，构建 62k 条仿真轨迹，在 Cosmos3 Nano 上把物体轨迹误差整体降低 28.2%。",
+      "tags": [
+        "论文",
+        "训练"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_ead8adba58",
+          "url": "https://huggingface.co/papers/2611.33925"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.33925",
+          "quote": "We present WorldReforge, which teaches world models what happens when manipulation goes wrong."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.33925",
+          "quote": "We construct the Reforge dataset of 62k simulated trajectories by perturbing reference grasps in position, orientation, and closure timing, recording each resulting push, slip, or failed pickup with ground-truth object pose , contact , and surface points ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.33925",
+          "quote": "WorldReforge turns this ground truth into two training signals without additional inference cost."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.33925",
+          "quote": "Interaction Alignment focuses reconstruction on the small object and contact regions that a global loss underweights, and Surface Correspondence trains backbone features to follow the same physical surface points across frames."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.33925",
+          "quote": "On Cosmos3 Nano , WorldReforge reduces object trajectory error by 28.2% overall and by 35.0% on unseen objects, and it lowers the error in predicting how two actions' outcomes diverge by 43.3%."
+        }
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "SEEK 让机器人跨次尝试积累执行知识",
+      "summary": "南洋理工大学提出 SEEK，用程序化策略与动作效果库积累知识，RoboDojo 成功率从 19.7% 升到 48.0%。",
+      "tags": [
+        "论文",
+        "Agent"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_5d1844dfb6",
+          "url": "https://huggingface.co/papers/2611.33915"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.33915",
+          "quote": "To adapt retained knowledge to the current scene, SEEK adopts a Self-Evolving Programmatic Policy (SEPP) that encodes manipulation as executable procedures and determines each action from current observations."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.33915",
+          "quote": "As the robot executes these procedures, SEEK records the measured effects of its actions, including those from failed attempts, in a Persistent Action-Effect Bank (PAEB)."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.33915",
+          "quote": "Where a retained procedure applies, it acts without a model request; where it meets a condition it does not cover, this evidence guides its revision."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.33915",
+          "quote": "On RoboDojo , knowledge retained over ten attempts raises SEEK's average task score from 27.0 to 54.4 and its success rate from 19.7% to 48.0% across all 42 tasks."
+        }
+      ]
+    }
+  ],
+  "research": [
+    {
+      "via": "webfetch",
+      "url": "https://github.com/ggml-org/llama.cpp/releases/tag/v1.1.0"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.34849"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.34575"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.34923"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.34237"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.34941"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.34420"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.28732"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.34811"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.34466"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.34907"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.34347"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.33925"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.33144"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.30844"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.31237"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.30965"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/blog/ggml-org/llamacpp-amd-bench"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/blog/nvidia/building-on-nemotron-35-parse-open-data-fine-tunin"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/blog/training-swarms"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.33915"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.28010"
+    }
+  ],
+  "validation": {
+    "validated_at": "2026-11-27T04:39:55+00:00",
+    "checked_links": true,
+    "dropped": [],
+    "warnings": [
+      "20 items, more than 18 (expected about 15)",
+      "5 paper items (target 2-4)"
+    ]
+  }
+}
