@@ -2,107 +2,84 @@
 
 ## 今日要点
 
-- llama.cpp v1.1.0 发布：新增 Inkling 2 系列模型支持、大批 TTS 与音频模型、DFlash 推测解码拆分，并弃用旧 llama batch API。
-- NVIDIA 发布 Agentic LongLive，用异步 Agent 记忆维持长视频流中的人物与场景一致性，在 H100 上仅增加约 1% 生成时间。
-- Sage-Med-Preview 以 35B 总参数、3B 激活的医疗多模态模型，在 31 个公开多模态基准上取得 58.26% 平均分。
+- Google 的 Workspace MCP 服务器正式可用，并要求 AI agent 改用 MCP 服务器或 Workspace CLI 访问 Workspace，而不是现有 REST API。
+- llama.cpp v1.1.0 加入 Inkling 2 系列、Hy4 flash 和一批 TTS 与音频模型。
 
 ## 🔥 头条
 
-### llama.cpp v1.1.0 发布，扩音频与推测解码
+### Google 要求 AI agent 改用 Workspace MCP 服务器访问数据
 
-llama.cpp v1.1.0 加入 Inkling 2 家族、Domyn Edge 4B、Zaya1 8B 等模型支持，并带来 Kokoro、Zonos3-Mini、MiniMax-Music3、YuE2 等 TTS 与音频模型。旧 llama batch API 被弃用，DFlash 推测解码拆分为多种 draft 方法，服务器端还新增 named tool_choice 与按 bpw 或体积预算的自动量化。对本地推理开发者来说，这个版本同时带来更广的模型覆盖与一批 API 迁移改动。
+Google 宣布 Gmail、Google Drive、Docs、Sheets、Slides、Calendar、Chat 和 Tasks 的 Workspace MCP 服务器正式可用；按新的 Workspace AI Tools Addendum，AI agent 必须使用 Workspace MCP 服务器或 Workspace CLI，而不是现有 REST API，技术上的强制执行从 2027 年 2 月 1 日开始。第三方文章指出，公开的 Gmail MCP 服务器不能发送、回复或转发邮件，这些工具需要合作伙伴权限。直接调用 Gmail、Drive REST API 的 agent 产品需要在期限前评估迁移，并核对缺失的操作和配额。
 
-来源：[GitHub Releases](https://github.com/ggml-org/llama.cpp/releases/tag/v1.1.0)　`工具` `开源` `推理`
+来源：[Google Cloud Blog](https://cloud.google.com/blog/products/identity-security/deploying-agents-safely-in-your-enterprise) · [Workspace AI Tools Addendum](https://workspace.google.com/terms/ai-tools) · [techstackups.com](https://techstackups.com/articles/google-workspace-ai-agents-mcp/)　`Agent` `工具` `行业`
 
-### NVIDIA 用 Agent 记忆延长长视频流一致性
+### llama.cpp v1.1.0：加入 Inkling 2 系列和一批音频模型
 
-NVIDIA 提出 Agentic LongLive，为实时自回归视频生成加入异步 Agent 记忆：记忆 Agent 只读取已披露的提示词，为人物、物体和场景维护文本状态与演化图像，并在下一镜头开始前预填生成器的 attention sink。在新基准 LongStory-Online 上，它相对基座生成器 LongLive-2.0 把持久状态准确率提升 26.3 分、主角身份提升 44.9、重访地点一致性提升 40.4，H100 上仅增加约 1% 生成时间。
+llama.cpp v1.1.0 加入 Inkling 2 系列（base、Mini 和 DSpark）、Domyn Edge 4B、Zaya1 8B、RAON-1-mini 和 Hy4 flash，并带来 Kokoro、VoxCPM2、Fish S2 等 TTS 与音频模型。这一版还支持按 bpw 或体积预算自动逐张量量化，llama-server 接受 OpenAI 的 named tool choice，并弃用旧的 llama batch API。本地部署的开发者可以直接用上新模型和量化方式，调用旧 batch API 的代码需要迁移。
 
-来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2611.34907)　`视频` `Agent` `模型`
-
-### Sage-Med-Preview 探索医疗多模态的缩放规律
-
-上海 AI Laboratory 等团队提出 Sage-Med-Preview，一个 35B 参数、3B 激活的医疗多模态模型，训练数据来自 322.7 million 条候选记录的阶段化筛选，并结合医学预训练、分阶段监督微调与自适应强化学习。作者的评测显示，模型在 31 个公开多模态基准上平均分为 58.26%，高于 Hulu-Med-235B-A22B 的 50.99% 和 Intern-S2-Preview 的 52.24%。论文同时指出，单纯放大参数主要提升文本能力，视觉感知提升有限，推理模式也难以弥合视觉差距。
-
-来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2611.34575)　`模型` `多模态` `论文`
-
-### NVIDIA 开源 Nemotron 3.5 Parse 训练数据与配方
-
-NVIDIA 公布 Nemotron 3.5 Parse 的合成训练数据集、微调配方与 DFlash2 推测解码方案。该文档模型把页面图像转成带阅读顺序、内容类别和边界框的结构化数据，可用于 RAG 与 Agent。三个开源数据集分别包含 Synthetic Charts V1 的 9.98M 条样本、Synthetic Tables V1 的 1M 条样本和 OCR Synthetic Multilingual v2 的 7.9M 条样本，训练流程先用 SFT 建立能力，再用 GRPO 形式的 RLVR 提升一致性与完成度。
-
-来源：[Hugging Face Blog](https://huggingface.co/blog/nvidia/building-on-nemotron-35-parse-open-data-fine-tunin)　`模型` `开源` `训练`
-
-### Mixture-of-Loops Transformer 复用 KV 记忆
-
-字节跳动 Seed 提出 Mixture-of-Loops Transformer（MoLT），其 Mixture-of-Loops Attention 用 keys 和 values 作为跨层、跨循环的记忆。其中 U-shaped MoLT 把记忆构建与预测读出分离，可跳过未使用的解码遍历而不改变预测结果。在 400B-token 预训练中，U-MoLT 相对 OLMo3 在 700M 模型上取得 1.7x 验证交叉熵 token 效率，并在 3B MoE 上把 10-task 准确率提升 2.1 个百分点。
-
-来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2611.34923)　`论文` `训练` `推理`
+来源：[GitHub Releases](https://github.com/ggml-org/llama.cpp/releases/tag/v1.1.0)　`开源` `推理` `工具`
 
 ## 🧠 模型
 
-### DyLoMo-DiT 用循环复用扩散 Transformer 参数
+### Kandinsky Lab 发布图像超分模型 Kandinsky ImageSR 2.0
 
-DyLoMo-DiT 把扩散 Transformer 的深度、参数与算力拆开处理：权重共享的循环反复应用中间层，稀疏专家按 token 分配参数，并按噪声水平动态改变循环次数。在 ImageNet 256times256 上，它相对 DiT 将 FID 降低 11-24%；放大后的文本到图像模型 GenEval 得分为 0.714，高于 FLUX.1 的 0.673，而每 token 激活参数为 1.05B，低于 12B。
+Kandinsky ImageSR 2.0 是一个 5B 参数的图像超分模型，以 Diffusers 管线发布，同一套 transformer 权重同时支持 x2 和 x4 放大。模型卡给出的数据是在 H100 上把 1K 图放大到 4K 约 7.80 s，代码以 MIT License 发布。需要开源超分的图像工作流可以直接通过 Diffusers 接入。
 
-来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2611.30844)　`论文` `图像`
+来源：[Hugging Face Trending Models](https://huggingface.co/kandinskylab/Kandinsky-ImageSR-2.0)　`模型` `图像` `开源`
 
-### Integral 让 VLM 在共享表征空间里生成图像
+### MiniMax 公布 H3 家族：开源 100 天衍生出 1,472 个模型
 
-KAIST AI 提出 Integral，把预训练视觉语言模型改造为统一多模态模型，核心是让理解与生成共用视觉表征空间。其 Abstraction Fusion 从冻结的视觉编码器聚合分层表征构造共享视觉 token，Block-wise MoT 则引入只在 block 边界与视觉语言模型交互的轻量生成流。作者的对照实验显示，相比使用独立视觉表征空间，共享表征能显著改善生成学习效果。
+MiniMax 介绍 H3 家族的 H3-Highspeed、H3-Lite 等型号，其中 H3-Lite 输出 768P 或 480P，起价 $0.025 每秒。MiniMax 说开源 MiniMax H3 的 100 天里，开发者做出了 1,472 个衍生模型，总下载量超过 148 million 次。做视频生成的开发者可以按画质和成本在几个档位之间选择，也可以基于 H3 自己做衍生模型。
 
-来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2611.31237)　`论文` `多模态` `图像`
+来源：[MiniMax Blog](https://www.minimax.io/blog/minimax-h3-family)　`模型` `视频` `开源`
 
 ## 📄 论文
 
-### Real2SimLab 统一真实到仿真评测平台
+### Mixture-of-Loops Transformer：用 KV 记忆改进循环 Transformer
 
-北京大学 PKU-VaLuE-Lab 提出 Real2SimLab，用统一平台评测从真实观测构建仿真的方法：运行方法写出的程序，再用各基准原始 scorer 给输出仿真打分，避免为每个方法与基准做重复集成。平台还提供训练数据与奖励标注流水线，并通过过滤已存在于基准中的视频记录来避免数据污染。目前支持 47 个 coding agents、5 个非 agent 方法和 6 个基准，平台与收录近 300 篇论文的 Awesome-Real2Sim 均开源。
+论文提出 MoLT，用 Mixture-of-Loops Attention 把 KV 作为跨层、跨循环复用的记忆。在 400B token 预训练中，U-MoLT 在 700M/1.5B dense 和 3B MoE 上都超过 OLMo3，700M 上验证交叉熵的 token 效率达到 1.7x，代码已开源。想用循环结构换取参数效率的团队可以参考它的设计。
 
-来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2611.34849)　`论文` `Agent` `开源`
+来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2611.34923)　`论文` `训练`
 
-### VibeVideoAgent 为代码生成视频补上感知回路
+### Agentic LongLive：给实时长视频生成加上 agent 记忆
 
-可灵 Kling-Keye 提出 VibeVideoAgent，这是一个无需训练的框架，让 coding agent 在制作过程中持续检查自己的草稿。多模态感知运行在与编码器分离的短生命周期上下文中，返回紧凑且有依据的 Findings，七个原语可以在统一的多时钟资产表示上从粗到细查看素材、核对需求并比对不同版本。在 239 个 VibeVideoBench 任务上，固定感知模型并匹配运行时后，Claude Opus 5.5 的整体视听质量（L3）从 4.03 提升到 4.43。
+Agentic LongLive 让一个记忆 agent 在单独的 GPU 上只读已给出的提示词，为每个人物、物体和场景维护文本状态和图像，再注入生成器的 attention sink。在 LongStory-Online 上，它把 LongLive-2.0 的持久状态准确率提高 26.3 分、主角身份一致性提高 44.9，生成时间只增加约 1%。做交互式长视频的团队可以借鉴这种异步记忆设计。
 
-来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2611.34237)　`论文` `Agent` `视频`
+来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2611.34907)　`论文` `视频` `Agent`
 
-### PyRUA-Dex 用编码 Agent 开发灵巧手策略
+### Sage-Med-Preview：35B 参数、3B 激活的医疗多模态模型
 
-北京大学 DAGroup 提出 PyRUA-Dex，让编码 Agent 通过程序化策略学习灵巧操作，从而摆脱对高质量示教数据的依赖。流程分两阶段：多个 Agent 并行探索任务技能并组合，一个蒸馏 Agent 把成功尝试凝练成任务库与一份程序；随后在随机化布局下改进这份程序以增强鲁棒性。模拟环境中它取得 Bench2Dex 72.9 分和 DexJoCo 全随机化下 81.0% 成功率，真实平台上用两只 22-DoF 手弹钢琴、写书法，学习新曲谱最快只需 30 分钟。
+论文介绍 Sage-Med-Preview，一个 35B 参数、3B 激活参数的医疗多模态模型，经过医疗预训练、分阶段 SFT 和自适应强化学习训练。它在 31 个公开多模态基准上平均 58.26%，高于 Hulu-Med-235B-A22B 的 50.99%。论文同时给出了医疗 MLLM 扩展规律的系统评测，对做垂直领域多模态模型的团队有参考价值。
 
-来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2611.33144)　`论文` `Agent` `训练`
+来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2611.34575)　`论文` `多模态` `模型`
 
-### I2VT 把图像编辑能力迁移给视频编辑器
+### Real2SimLab：统一评测“从真实视频生成仿真”的平台
 
-卡内基梅隆大学提出 Image-to-Video Transfer（I2VT），让视频编辑器把单张图像当作一帧视频来扮演图像编辑器，由图像编辑器在每个去噪步引导视频编辑器的预测。训练只需单张图像，不改架构也不需要新的成对视频，测试时则把增强后的能力应用到整段视频并保持时间一致性。作者同时扩展出 OpenVE++，加入动作变化、表情变化、身体动作与场景重光照四类任务，在三个视频编辑器上均取得 OpenVE-Bench 与 OpenVE++ 的 SOTA 结果。
+Real2SimLab 让各方法交付可运行的程序，再用每个基准原有的评分器给生成的仿真打分，免去每对方法和基准单独对接；它还提供避开数据污染的训练数据与奖励标注流水线。目前支持 47 个编码 agent 和 5 个非 agent 方法、6 个基准，平台已开源。研究编码 agent 生成仿真程序的团队可以直接用它做横向比较。
 
-来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2611.34941)　`论文` `视频`
-
-### TT-RSI 在测试时递归自我改进
-
-上海 AI Laboratory 提出 TT-RSI，一个无标签的测试时改进框架，由两部分互相支撑：In-Context RSI 反复带上完整的上一次解答重做题目，让模型自己决定如何利用旧推理；In-Weight RSI 则把连续改进蒸馏进模型权重，从而越过一开始就出错的多数答案。实验显示 TT-RSI 相对基座模型平均准确率提升 +13.89%，在相同测试时扩展预算下比最强的自一致性方法高出 +4.79%。作者也承认当前方法没有正确性感知的拒绝规则，持续错误的问题仍待解决。
-
-来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2611.30965)　`论文` `推理` `训练`
+来源：[Hugging Face Daily Papers](https://huggingface.co/papers/2611.34849)　`论文` `Agent` `代码`
 
 ## 🛠 开源与工具
 
-### llama.cpp 推出 AMD 平台基准看板
+### NVIDIA 开源 Nemotron 3.5 Parse 训练数据和微调配方
 
-ggml-org 在 Hugging Face 上线 llama.cpp × AMD Benchmark 看板，可按硬件、模型和 llama.cpp 构建版本对比不同量化下的提示处理与文本生成性能。看板当前收录 Radeon 8060S（gfx1151）和 Radeon AI Pro R9700S（gfx1201），提供 Overview、Build history 与 Context scaling 三个视图，并直接读取公开的存储桶数据，便于 AMD 开发者复用结果做自己的图表或与本地运行对比。
+NVIDIA 开源了 Parse 3.5 训练用的三个合成数据集：Synthetic Charts V1（9.98M 条）、Synthetic Tables V1（1M 条）和 OCR Synthetic Multilingual v2（7.9M 条），并给出基于 NeMo Automodel SFT 和 NeMo RL GRPO 的微调配方。文章称在单张 H200 上用 BF16，DFlash2 让吞吐在并发 1 时提升 7.62×。需要把文档解析模型适配到自家表单的团队，可以照这套 SFT 加 RLVR 流程来做。
 
-来源：[Hugging Face Blog](https://huggingface.co/blog/ggml-org/llamacpp-amd-bench)　`工具` `硬件`
+来源：[Hugging Face Blog](https://huggingface.co/blog/nvidia/building-on-nemotron-35-parse-open-data-fine-tunin)　`开源` `训练` `多模态`
 
-### HF 博客教程：训练与评估多智能体集群
+### Hugging Face 用 TRL 训练四个 agent 协作的多智能体系统
 
-Hugging Face 博客推出多智能体系统系列教程，核心问题是通信是否真的带来收益，还是只是多花了算力。首个示例用四个共享 Qwen3-0.6B 策略的智能体协作排序数字，通信工具包括 message(to, text)、read_messages() 和 check_notifications()，并通过共享团队奖励的集中式训练与去中心化执行来训练协作，配套示例可在 Hugging Face Jobs 上复现。
+Hugging Face 的文章用 TRL 的示例训练一个共享 Qwen3-0.6B 策略的四 agent 团队，agent 之间通过消息工具交换信息；75 步训练里成功率从 6.6% 升到 82.3%。示例可以在 Hugging Face Jobs 上复现，在两张 H200 上约五小时、花费大约 $50。想低成本试验多 agent 强化学习的开发者可以从这个示例起步。
 
 来源：[Hugging Face Blog](https://huggingface.co/blog/training-swarms)　`Agent` `训练` `工具`
 
+### llama.cpp 推出 AMD Ryzen 和 Radeon 性能看板
+
+ggml-org 在 Hugging Face 上推出 llama.cpp × AMD Benchmark 看板，按 llama.cpp 版本、模型和量化追踪提示处理和文本生成速度，目前覆盖 Radeon 8060S（gfx1151）和 Radeon AI Pro R9700S（gfx1201）。测试每周运行一次，用 llama-bench 分别开关 Flash Attention。在 AMD 硬件上做本地推理选型时，可以先查这里的数据。
+
+来源：[Hugging Face Blog](https://huggingface.co/blog/ggml-org/llamacpp-amd-bench)　`工具` `推理` `硬件`
+
 ## ⚡ 快讯
 
-- **EgoUseBench 评测随身设备上下文下的电脑操作** 浙江大学提出 EgoUseBench，含 693 个任务，评测 Agent 在三种第一人称上下文设定下的表现。 [Hugging Face Daily Papers](https://huggingface.co/papers/2611.34466)
-- **AIRIS 评测流式视频中的社交具身智能** 腾讯提出 AIRIS 流式基准，含 8,000 条专家问题、357 段第一人称片段与 36 个能力维度。 [Hugging Face Daily Papers](https://huggingface.co/papers/2611.34347)
-- **DocSEAM 为多页文档注入跨页上下文** MMLab@NTU 提出 DocSEAM，用中心锚定掩码自注意力融合邻页信息且不改变视觉 token 数量。 [Hugging Face Daily Papers](https://huggingface.co/papers/2611.34420)
-- **Entangle 用人类视频做机器人上下文学习** Entangle 把单个人类视频与机器人观测映射为未来视觉状态和可执行动作，在 Astribot S1 上取得 83.5/100。 [Hugging Face Daily Papers](https://huggingface.co/papers/2611.28732)
-- **WorldReforge 用仿真失败轨迹训练世界模型** 浙江大学提出 WorldReforge，构建 62k 条仿真轨迹，在 Cosmos3 Nano 上把物体轨迹误差整体降低 28.2%。 [Hugging Face Daily Papers](https://huggingface.co/papers/2611.33925)
-- **SEEK 让机器人跨次尝试积累执行知识** 南洋理工大学提出 SEEK，用程序化策略与动作效果库积累知识，RoboDojo 成功率从 19.7% 升到 48.0%。 [Hugging Face Daily Papers](https://huggingface.co/papers/2611.33915)
+- **社区补丁集 llama-cpp-rdna-boosts 提升 AMD 显卡推理速度** 一位开发者推荐 llama-cpp-rdna-boosts 补丁集，称在自己的 AMD 显卡上把 token 生成从 35 提到 55 tokens/second，prefill 从 700 提到 1300。 [devnull.land](https://devnull.land/amd-specific-llama-cpp)
+- **VibeVideoAgent：让编码 agent 在制作中检查视频草稿** VibeVideoAgent 是免训练框架，让编码 agent 在代码驱动的视频生成过程中用独立的多模态感知检查草稿，在 239 个 VibeVideoBench 任务上提升了多个模型的整体音视频质量。 [Hugging Face Daily Papers](https://huggingface.co/papers/2611.34237)
