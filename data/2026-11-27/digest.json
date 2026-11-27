@@ -1,0 +1,465 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-27",
+  "mode": "full",
+  "channel": "claude",
+  "generated_at": "2026-11-27T04:42:18+00:00",
+  "model": "claude-opus-5-5",
+  "highlights": [
+    "Google 的 Workspace MCP 服务器正式可用，并要求 AI agent 改用 MCP 服务器或 Workspace CLI 访问 Workspace，而不是现有 REST API。",
+    "llama.cpp v1.1.0 加入 Inkling 2 系列、Hy4 flash 和一批 TTS 与音频模型。"
+  ],
+  "items": [
+    {
+      "section": "headline",
+      "title": "Google 要求 AI agent 改用 Workspace MCP 服务器访问数据",
+      "summary": "Google 宣布 Gmail、Google Drive、Docs、Sheets、Slides、Calendar、Chat 和 Tasks 的 Workspace MCP 服务器正式可用；按新的 Workspace AI Tools Addendum，AI agent 必须使用 Workspace MCP 服务器或 Workspace CLI，而不是现有 REST API，技术上的强制执行从 2027 年 2 月 1 日开始。第三方文章指出，公开的 Gmail MCP 服务器不能发送、回复或转发邮件，这些工具需要合作伙伴权限。直接调用 Gmail、Drive REST API 的 agent 产品需要在期限前评估迁移，并核对缺失的操作和配额。",
+      "sources": [
+        {
+          "url": "https://cloud.google.com/blog/products/identity-security/deploying-agents-safely-in-your-enterprise",
+          "title": "Google Cloud Blog"
+        },
+        {
+          "url": "https://workspace.google.com/terms/ai-tools",
+          "title": "Workspace AI Tools Addendum"
+        },
+        {
+          "candidate_id": "c_dadebd14f2",
+          "url": "https://techstackups.com/articles/google-workspace-ai-agents-mcp/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://cloud.google.com/blog/products/identity-security/deploying-agents-safely-in-your-enterprise",
+          "quote": "Workspace MCP servers : Now generally available, dedicated remote servers for Gmail, Google Drive, Docs, Sheets, Slides, Calendar, Chat, and Tasks."
+        },
+        {
+          "url": "https://cloud.google.com/blog/products/identity-security/deploying-agents-safely-in-your-enterprise",
+          "quote": "Under our new Workspace AI Tools Addendum , AI agents must use Workspace MCP servers or the Workspace CLI rather than existing REST APIs. Technical enforcement begins on February 1, 2027, giving builders time to transition."
+        },
+        {
+          "url": "https://techstackups.com/articles/google-workspace-ai-agents-mcp/",
+          "quote": "It can't send a message, reply, forward, or change a draft after creating it. Those tools exist, but Google's quota page says they \"require partner access and aren't generally available\"."
+        },
+        {
+          "url": "https://techstackups.com/articles/google-workspace-ai-agents-mcp/",
+          "quote": "If you've built an email assistant on the Gmail API, or you run a coding agent with a Google Workspace plugin, you have about two months to work out which side of the"
+        }
+      ],
+      "tags": [
+        "Agent",
+        "工具",
+        "行业"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "llama.cpp v1.1.0：加入 Inkling 2 系列和一批音频模型",
+      "summary": "llama.cpp v1.1.0 加入 Inkling 2 系列（base、Mini 和 DSpark）、Domyn Edge 4B、Zaya1 8B、RAON-1-mini 和 Hy4 flash，并带来 Kokoro、VoxCPM2、Fish S2 等 TTS 与音频模型。这一版还支持按 bpw 或体积预算自动逐张量量化，llama-server 接受 OpenAI 的 named tool choice，并弃用旧的 llama batch API。本地部署的开发者可以直接用上新模型和量化方式，调用旧 batch API 的代码需要迁移。",
+      "sources": [
+        {
+          "candidate_id": "c_133023c922",
+          "url": "https://github.com/ggml-org/llama.cpp/releases/tag/v1.1.0"
+        }
+      ],
+      "evidence": [],
+      "tags": [
+        "开源",
+        "推理",
+        "工具"
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Kandinsky Lab 发布图像超分模型 Kandinsky ImageSR 2.0",
+      "summary": "Kandinsky ImageSR 2.0 是一个 5B 参数的图像超分模型，以 Diffusers 管线发布，同一套 transformer 权重同时支持 x2 和 x4 放大。模型卡给出的数据是在 H100 上把 1K 图放大到 4K 约 7.80 s，代码以 MIT License 发布。需要开源超分的图像工作流可以直接通过 Diffusers 接入。",
+      "sources": [
+        {
+          "candidate_id": "c_fce97ed330",
+          "url": "https://huggingface.co/kandinskylab/Kandinsky-ImageSR-2.0"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/kandinskylab/Kandinsky-ImageSR-2.0",
+          "quote": "Kandinsky Image Super-Resolution 2.0 as a Diffusers bundle. A single set of transformer weights serves both x2 and x4 ."
+        },
+        {
+          "url": "https://huggingface.co/kandinskylab/Kandinsky-ImageSR-2.0",
+          "quote": "1K (1024 × 1024) ×4 4K (4096 × 4096) 5 × 5 7.80 s"
+        },
+        {
+          "url": "https://huggingface.co/kandinskylab/Kandinsky-ImageSR-2.0",
+          "quote": "The transformer and pipeline code are released under the MIT License, consistently with Kandinsky 5."
+        },
+        {
+          "url": "https://huggingface.co/kandinskylab/Kandinsky-ImageSR-2.0",
+          "quote": "Model size 5B params"
+        },
+        {
+          "url": "https://huggingface.co/kandinskylab/Kandinsky-ImageSR-2.0",
+          "quote": "Inference time Measured on an NVIDIA H100 80GB (SXM) with square images"
+        }
+      ],
+      "tags": [
+        "模型",
+        "图像",
+        "开源"
+      ]
+    },
+    {
+      "section": "model",
+      "title": "MiniMax 公布 H3 家族：开源 100 天衍生出 1,472 个模型",
+      "summary": "MiniMax 介绍 H3 家族的 H3-Highspeed、H3-Lite 等型号，其中 H3-Lite 输出 768P 或 480P，起价 $0.025 每秒。MiniMax 说开源 MiniMax H3 的 100 天里，开发者做出了 1,472 个衍生模型，总下载量超过 148 million 次。做视频生成的开发者可以按画质和成本在几个档位之间选择，也可以基于 H3 自己做衍生模型。",
+      "sources": [
+        {
+          "candidate_id": "c_4a96c805c8",
+          "url": "https://www.minimax.io/blog/minimax-h3-family"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://www.minimax.io/blog/minimax-h3-family",
+          "quote": "In the 100 days since we open-sourced MiniMax H3, developers have turned one H3 into 1,472 derivative models for 1,472 distinct needs and uses. Together, these models have been downloaded more than 148 million times"
+        },
+        {
+          "url": "https://www.minimax.io/blog/minimax-h3-family",
+          "quote": "MiniMax H3-Lite A lower-cost way to try out ideas 768P or 480P output, starting at $0.025 per second"
+        },
+        {
+          "url": "https://www.minimax.io/blog/minimax-h3-family",
+          "quote": "MiniMax H3-Highspeed A first choice for everyday commercial work and large-scale production 768P or 480P output, starting at $0.04 per second"
+        }
+      ],
+      "tags": [
+        "模型",
+        "视频",
+        "开源"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Mixture-of-Loops Transformer：用 KV 记忆改进循环 Transformer",
+      "summary": "论文提出 MoLT，用 Mixture-of-Loops Attention 把 KV 作为跨层、跨循环复用的记忆。在 400B token 预训练中，U-MoLT 在 700M/1.5B dense 和 3B MoE 上都超过 OLMo3，700M 上验证交叉熵的 token 效率达到 1.7x，代码已开源。想用循环结构换取参数效率的团队可以参考它的设计。",
+      "sources": [
+        {
+          "candidate_id": "c_ed63df2f97",
+          "url": "https://huggingface.co/papers/2611.34923"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.34923",
+          "quote": "In 400B-token pretraining, U-MoLT outperforms OLMo3 across 700M/1.5B dense and 3B MoE models, achieving 1.7x validation cross-entropy (CE) token efficiency at 700M"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34923",
+          "quote": "Code is available at https://github.com/hustvl/MoLT"
+        }
+      ],
+      "tags": [
+        "论文",
+        "训练"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Agentic LongLive：给实时长视频生成加上 agent 记忆",
+      "summary": "Agentic LongLive 让一个记忆 agent 在单独的 GPU 上只读已给出的提示词，为每个人物、物体和场景维护文本状态和图像，再注入生成器的 attention sink。在 LongStory-Online 上，它把 LongLive-2.0 的持久状态准确率提高 26.3 分、主角身份一致性提高 44.9，生成时间只增加约 1%。做交互式长视频的团队可以借鉴这种异步记忆设计。",
+      "sources": [
+        {
+          "candidate_id": "c_91c0348f3b",
+          "url": "https://huggingface.co/papers/2611.34907"
+        }
+      ],
+      "evidence": [],
+      "tags": [
+        "论文",
+        "视频",
+        "Agent"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Sage-Med-Preview：35B 参数、3B 激活的医疗多模态模型",
+      "summary": "论文介绍 Sage-Med-Preview，一个 35B 参数、3B 激活参数的医疗多模态模型，经过医疗预训练、分阶段 SFT 和自适应强化学习训练。它在 31 个公开多模态基准上平均 58.26%，高于 Hulu-Med-235B-A22B 的 50.99%。论文同时给出了医疗 MLLM 扩展规律的系统评测，对做垂直领域多模态模型的团队有参考价值。",
+      "sources": [
+        {
+          "candidate_id": "c_4764e04832",
+          "url": "https://huggingface.co/papers/2611.34575"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.34575",
+          "quote": "Achieves 58.26% across 31 public multimodal benchmarks (vs. 50.99% for Hulu-Med-235B-A22B and 52.24% for Intern-S2-Preview)"
+        }
+      ],
+      "tags": [
+        "论文",
+        "多模态",
+        "模型"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Real2SimLab：统一评测“从真实视频生成仿真”的平台",
+      "summary": "Real2SimLab 让各方法交付可运行的程序，再用每个基准原有的评分器给生成的仿真打分，免去每对方法和基准单独对接；它还提供避开数据污染的训练数据与奖励标注流水线。目前支持 47 个编码 agent 和 5 个非 agent 方法、6 个基准，平台已开源。研究编码 agent 生成仿真程序的团队可以直接用它做横向比较。",
+      "sources": [
+        {
+          "candidate_id": "c_2866b2c5b9",
+          "url": "https://huggingface.co/papers/2611.34849"
+        }
+      ],
+      "evidence": [],
+      "tags": [
+        "论文",
+        "Agent",
+        "代码"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "NVIDIA 开源 Nemotron 3.5 Parse 训练数据和微调配方",
+      "summary": "NVIDIA 开源了 Parse 3.5 训练用的三个合成数据集：Synthetic Charts V1（9.98M 条）、Synthetic Tables V1（1M 条）和 OCR Synthetic Multilingual v2（7.9M 条），并给出基于 NeMo Automodel SFT 和 NeMo RL GRPO 的微调配方。文章称在单张 H200 上用 BF16，DFlash2 让吞吐在并发 1 时提升 7.62×。需要把文档解析模型适配到自家表单的团队，可以照这套 SFT 加 RLVR 流程来做。",
+      "sources": [
+        {
+          "candidate_id": "c_5905285b7b",
+          "url": "https://huggingface.co/blog/nvidia/building-on-nemotron-35-parse-open-data-fine-tunin"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/blog/nvidia/building-on-nemotron-35-parse-open-data-fine-tunin",
+          "quote": "We are open-sourcing three datasets used in the Parse 3.5 training : Synthetic Charts V1 — 9.98M examples : rendered charts and structured annotations for learning categories, series, and numerical values. Synthetic Tables V1 — 1M examples"
+        },
+        {
+          "url": "https://huggingface.co/blog/nvidia/building-on-nemotron-35-parse-open-data-fine-tunin",
+          "quote": "OCR Synthetic Multilingual v2 — 7.9M examples"
+        },
+        {
+          "url": "https://huggingface.co/blog/nvidia/building-on-nemotron-35-parse-open-data-fine-tunin",
+          "quote": "We are sharing a Parse fine-tuning recipe that takes developers through paired data generation, NeMo Automodel SFT , and NeMo RL GRPO , using vLLM to generate candidate answers."
+        },
+        {
+          "url": "https://huggingface.co/blog/nvidia/building-on-nemotron-35-parse-open-data-fine-tunin",
+          "quote": "In the native single-pass benchmark on one H200 in BF16, DFlash2 increased throughput 7.62× at concurrency 1 and 1.52× at concurrency 512"
+        }
+      ],
+      "tags": [
+        "开源",
+        "训练",
+        "多模态"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Hugging Face 用 TRL 训练四个 agent 协作的多智能体系统",
+      "summary": "Hugging Face 的文章用 TRL 的示例训练一个共享 Qwen3-0.6B 策略的四 agent 团队，agent 之间通过消息工具交换信息；75 步训练里成功率从 6.6% 升到 82.3%。示例可以在 Hugging Face Jobs 上复现，在两张 H200 上约五小时、花费大约 $50。想低成本试验多 agent 强化学习的开发者可以从这个示例起步。",
+      "sources": [
+        {
+          "candidate_id": "c_f3901ac520",
+          "url": "https://huggingface.co/blog/training-swarms"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/blog/training-swarms",
+          "quote": "We defined a four-agent system using one shared Qwen3-0.6B policy , with separate contexts and private inputs. We are not training four different models."
+        },
+        {
+          "url": "https://huggingface.co/blog/training-swarms",
+          "quote": "Over 75 steps, training success rose from 6.6% to 82.3%"
+        },
+        {
+          "url": "https://huggingface.co/blog/training-swarms",
+          "quote": "This post's example takes about five hours on two H200s, which costs roughly $50."
+        }
+      ],
+      "tags": [
+        "Agent",
+        "训练",
+        "工具"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "llama.cpp 推出 AMD Ryzen 和 Radeon 性能看板",
+      "summary": "ggml-org 在 Hugging Face 上推出 llama.cpp × AMD Benchmark 看板，按 llama.cpp 版本、模型和量化追踪提示处理和文本生成速度，目前覆盖 Radeon 8060S（gfx1151）和 Radeon AI Pro R9700S（gfx1201）。测试每周运行一次，用 llama-bench 分别开关 Flash Attention。在 AMD 硬件上做本地推理选型时，可以先查这里的数据。",
+      "sources": [
+        {
+          "candidate_id": "c_49da203591",
+          "url": "https://huggingface.co/blog/ggml-org/llamacpp-amd-bench"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/blog/ggml-org/llamacpp-amd-bench",
+          "quote": "It lets you track prompt processing and text generation performance across llama.cpp builds, models, and quantizations, so you can explore how local inference performs on AMD Ryzen and Radeon hardware."
+        },
+        {
+          "url": "https://huggingface.co/blog/ggml-org/llamacpp-amd-bench",
+          "quote": "The current hardware choices are Radeon 8060S (gfx1151) and Radeon AI Pro R9700S (gfx1201)."
+        },
+        {
+          "url": "https://huggingface.co/blog/ggml-org/llamacpp-amd-bench",
+          "quote": "The public gfx1151 and gfx1201 workflows are scheduled weekly and run the standard benchmarks using the llama-bench tool with Flash Attention on and off"
+        }
+      ],
+      "tags": [
+        "工具",
+        "推理",
+        "硬件"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "社区补丁集 llama-cpp-rdna-boosts 提升 AMD 显卡推理速度",
+      "summary": "一位开发者推荐 llama-cpp-rdna-boosts 补丁集，称在自己的 AMD 显卡上把 token 生成从 35 提到 55 tokens/second，prefill 从 700 提到 1300。",
+      "sources": [
+        {
+          "candidate_id": "c_a1d60a2f72",
+          "url": "https://devnull.land/amd-specific-llama-cpp"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://devnull.land/amd-specific-llama-cpp",
+          "quote": "I recommend using llama-cpp-rdna-boosts if you have an AMD graphics card. It’s lean, and increased my token generation from 35 to 55 tokens/second, and my prefill from 700 to 1300 tokens per second. YMMV."
+        }
+      ],
+      "tags": [
+        "开源",
+        "推理",
+        "硬件"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "VibeVideoAgent：让编码 agent 在制作中检查视频草稿",
+      "summary": "VibeVideoAgent 是免训练框架，让编码 agent 在代码驱动的视频生成过程中用独立的多模态感知检查草稿，在 239 个 VibeVideoBench 任务上提升了多个模型的整体音视频质量。",
+      "sources": [
+        {
+          "candidate_id": "c_5bf4463d10",
+          "url": "https://huggingface.co/papers/2611.34237"
+        }
+      ],
+      "evidence": [],
+      "tags": [
+        "论文",
+        "Agent",
+        "视频"
+      ]
+    }
+  ],
+  "research": [
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/blog/ggml-org/llamacpp-amd-bench"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/blog/nvidia/building-on-nemotron-35-parse-open-data-fine-tunin"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/blog/training-swarms"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://www.minimax.io/blog/minimax-h3-family"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://devnull.land/amd-specific-llama-cpp"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://techstackups.com/articles/google-workspace-ai-agents-mcp/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://micjm.com/blog/openai-is-in-cost-control-mode/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://cloud.google.com/blog/products/identity-security/deploying-agents-safely-in-your-enterprise"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://workspace.google.com/terms/ai-tools"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.34923"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.34849"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.34907"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.34575"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://twitter.com/thsottiaux/status/2125784147889393806"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/kandinskylab/Kandinsky-ImageSR-2.0"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.34237"
+    },
+    {
+      "via": "websearch",
+      "query": "OpenAI GPT-6.2 Astra Sol billing mistake usage limits 40% faster"
+    }
+  ],
+  "validation": {
+    "validated_at": "2026-11-27T04:44:23+00:00",
+    "checked_links": true,
+    "dropped": [
+      {
+        "title": "OpenAI 修正计费错误，GPT-6.2 Astra 和 Sol 额度消耗加快",
+        "section": "headline",
+        "candidates": [
+          "c_42cfffd5a5"
+        ],
+        "reasons": [
+          "needs a first-hand source, not only a discussion thread"
+        ]
+      },
+      {
+        "title": "Ai2 采访 17 位科学家：研究中哪些事不交给 AI agent",
+        "section": "brief",
+        "candidates": [
+          "c_c8885e1f0a"
+        ],
+        "reasons": [
+          "'Ai2' does not appear in the cited material",
+          "number 2 does not appear in the cited material"
+        ]
+      },
+      {
+        "title": "Latent Space 访谈 Clay：自家 agent 和外部 harness 用量约各占一半",
+        "section": "brief",
+        "candidates": [
+          "c_24af5b9f57"
+        ],
+        "reasons": [
+          "summary longer than 120 characters"
+        ]
+      }
+    ],
+    "warnings": [
+      "2 headline items (target 3-5)"
+    ]
+  }
+}

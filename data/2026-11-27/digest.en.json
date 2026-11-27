@@ -1,0 +1,407 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-27",
+  "mode": "full",
+  "channel": "claude",
+  "generated_at": "2026-11-27T04:44:26+00:00",
+  "model": "claude-opus-5-5",
+  "highlights": [
+    "Google made its Workspace MCP servers generally available and says AI agents must use them or the Workspace CLI instead of existing REST APIs.",
+    "llama.cpp v1.1.0 adds the Inkling 2 family, Hy4 flash and a large set of TTS and audio models."
+  ],
+  "items": [
+    {
+      "section": "headline",
+      "title": "Google requires AI agents to reach Workspace through its MCP servers",
+      "summary": "Google made dedicated remote MCP servers for Gmail, Google Drive, Docs, Sheets, Slides, Calendar, Chat and Tasks generally available. Under the new Workspace AI Tools Addendum, AI agents must use these servers or the Workspace CLI rather than existing REST APIs, with technical enforcement beginning on February 1, 2027. A third-party analysis notes the public Gmail server can't send, reply or forward, since those tools require partner access, so agent products built on the REST APIs should audit missing operations now.",
+      "sources": [
+        {
+          "url": "https://cloud.google.com/blog/products/identity-security/deploying-agents-safely-in-your-enterprise",
+          "title": "Google Cloud Blog"
+        },
+        {
+          "url": "https://workspace.google.com/terms/ai-tools",
+          "title": "Workspace AI Tools Addendum"
+        },
+        {
+          "candidate_id": "c_dadebd14f2",
+          "url": "https://techstackups.com/articles/google-workspace-ai-agents-mcp/"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://cloud.google.com/blog/products/identity-security/deploying-agents-safely-in-your-enterprise",
+          "quote": "Workspace MCP servers : Now generally available, dedicated remote servers for Gmail, Google Drive, Docs, Sheets, Slides, Calendar, Chat, and Tasks."
+        },
+        {
+          "url": "https://cloud.google.com/blog/products/identity-security/deploying-agents-safely-in-your-enterprise",
+          "quote": "Under our new Workspace AI Tools Addendum , AI agents must use Workspace MCP servers or the Workspace CLI rather than existing REST APIs. Technical enforcement begins on February 1, 2027, giving builders time to transition."
+        },
+        {
+          "url": "https://techstackups.com/articles/google-workspace-ai-agents-mcp/",
+          "quote": "It can't send a message, reply, forward, or change a draft after creating it. Those tools exist, but Google's quota page says they \"require partner access and aren't generally available\"."
+        },
+        {
+          "url": "https://techstackups.com/articles/google-workspace-ai-agents-mcp/",
+          "quote": "If you've built an email assistant on the Gmail API, or you run a coding agent with a Google Workspace plugin, you have about two months to work out which side of the"
+        }
+      ],
+      "tags": [
+        "Agent",
+        "工具",
+        "行业"
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "llama.cpp v1.1.0 adds Inkling 2, Hy4 flash and many audio models",
+      "summary": "llama.cpp v1.1.0 adds the Inkling 2 family (base, Mini and DSpark), Domyn Edge 4B, Zaya1 8B, RAON-1-mini and Hy4 flash, plus TTS and audio models such as Kokoro, VoxCPM2 and Fish S2. It also brings automatic per-tensor quantization targeting a bpw or size budget, OpenAI named tool choice in llama-server, and deprecates the old llama batch API. Local deployments get new models right away, while code on the old batch API needs to migrate.",
+      "sources": [
+        {
+          "candidate_id": "c_133023c922",
+          "url": "https://github.com/ggml-org/llama.cpp/releases/tag/v1.1.0"
+        }
+      ],
+      "evidence": [],
+      "tags": [
+        "开源",
+        "推理",
+        "工具"
+      ]
+    },
+    {
+      "section": "model",
+      "title": "MiniMax outlines the H3 family as derivatives reach 1,472 models",
+      "summary": "MiniMax described its H3 lineup, including H3-Highspeed and H3-Lite, the latter producing 768P or 480P output starting at $0.025 per second. It says that in the 100 days since MiniMax H3 was open-sourced, developers built 1,472 derivative models downloaded more than 148 million times. Video developers can pick a tier by quality and cost, or build their own derivatives on H3.",
+      "sources": [
+        {
+          "candidate_id": "c_4a96c805c8",
+          "url": "https://www.minimax.io/blog/minimax-h3-family"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://www.minimax.io/blog/minimax-h3-family",
+          "quote": "In the 100 days since we open-sourced MiniMax H3, developers have turned one H3 into 1,472 derivative models for 1,472 distinct needs and uses. Together, these models have been downloaded more than 148 million times"
+        },
+        {
+          "url": "https://www.minimax.io/blog/minimax-h3-family",
+          "quote": "MiniMax H3-Lite A lower-cost way to try out ideas 768P or 480P output, starting at $0.025 per second"
+        },
+        {
+          "url": "https://www.minimax.io/blog/minimax-h3-family",
+          "quote": "MiniMax H3-Highspeed A first choice for everyday commercial work and large-scale production 768P or 480P output, starting at $0.04 per second"
+        }
+      ],
+      "tags": [
+        "模型",
+        "视频",
+        "开源"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Mixture-of-Loops Transformer reuses KV as memory across loops",
+      "summary": "MoLT's Mixture-of-Loops Attention uses keys and values as memory for selective reuse across depths and loops. In 400B-token pretraining, U-MoLT outperforms OLMo3 across 700M/1.5B dense and 3B MoE models, reaching 1.7x validation cross-entropy token efficiency at 700M, and the code is open source. Teams exploring looped architectures for parameter efficiency get a concrete design to study.",
+      "sources": [
+        {
+          "candidate_id": "c_ed63df2f97",
+          "url": "https://huggingface.co/papers/2611.34923"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.34923",
+          "quote": "In 400B-token pretraining, U-MoLT outperforms OLMo3 across 700M/1.5B dense and 3B MoE models, achieving 1.7x validation cross-entropy (CE) token efficiency at 700M"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34923",
+          "quote": "Code is available at https://github.com/hustvl/MoLT"
+        }
+      ],
+      "tags": [
+        "论文",
+        "训练"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Agentic LongLive adds agent-kept memory to real-time long video",
+      "summary": "A memory agent on separate GPUs reads only the prompts revealed so far, keeps text and images for every person, object and scene, and prefills them into the generator's attention sink. On LongStory-Online it improves LongLive-2.0's persistent-state accuracy by 26.3 points and protagonist identity by 44.9, at about 1% extra generation time on H100. It is a useful pattern for interactive long-form video generation.",
+      "sources": [
+        {
+          "candidate_id": "c_91c0348f3b",
+          "url": "https://huggingface.co/papers/2611.34907"
+        }
+      ],
+      "evidence": [],
+      "tags": [
+        "论文",
+        "视频",
+        "Agent"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Sage-Med-Preview: a 35B medical multimodal model with 3B active",
+      "summary": "Sage-Med-Preview is a 35B-parameter medical multimodal model with 3B activated parameters, trained through medical pretraining, staged supervised fine-tuning and adaptive reinforcement learning. It averages 58.26% on 31 public multimodal benchmarks, ahead of Hulu-Med-235B-A22B at 50.99%. The paper's systematic evaluation of how medical MLLMs scale is useful for teams building domain-specific multimodal models.",
+      "sources": [
+        {
+          "candidate_id": "c_4764e04832",
+          "url": "https://huggingface.co/papers/2611.34575"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.34575",
+          "quote": "Achieves 58.26% across 31 public multimodal benchmarks (vs. 50.99% for Hulu-Med-235B-A22B and 52.24% for Intern-S2-Preview)"
+        }
+      ],
+      "tags": [
+        "论文",
+        "多模态",
+        "模型"
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Real2SimLab unifies evaluation of real-to-simulation methods",
+      "summary": "Real2SimLab runs each method's written program and scores the output simulation with each benchmark's original scorer, avoiding a separate integration per method-benchmark pair, and adds a contamination-aware pipeline for training data and rewards. It currently supports 47 coding agents and 5 non-agent methods on 6 benchmarks, and the platform is open source. Researchers comparing coding agents that build simulations from video can use it directly.",
+      "sources": [
+        {
+          "candidate_id": "c_2866b2c5b9",
+          "url": "https://huggingface.co/papers/2611.34849"
+        }
+      ],
+      "evidence": [],
+      "tags": [
+        "论文",
+        "Agent",
+        "代码"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "NVIDIA open-sources Nemotron 3.5 Parse data and a fine-tuning recipe",
+      "summary": "NVIDIA is open-sourcing three datasets used in Parse 3.5 training: Synthetic Charts V1 (9.98M examples), Synthetic Tables V1 (1M) and OCR Synthetic Multilingual v2 (7.9M), along with a recipe covering NeMo Automodel SFT and NeMo RL GRPO. On one H200 in BF16, DFlash2 raised throughput 7.62× at concurrency 1. Teams adapting document parsing to their own forms can follow the same SFT plus RLVR flow.",
+      "sources": [
+        {
+          "candidate_id": "c_5905285b7b",
+          "url": "https://huggingface.co/blog/nvidia/building-on-nemotron-35-parse-open-data-fine-tunin"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/blog/nvidia/building-on-nemotron-35-parse-open-data-fine-tunin",
+          "quote": "We are open-sourcing three datasets used in the Parse 3.5 training : Synthetic Charts V1 — 9.98M examples : rendered charts and structured annotations for learning categories, series, and numerical values. Synthetic Tables V1 — 1M examples"
+        },
+        {
+          "url": "https://huggingface.co/blog/nvidia/building-on-nemotron-35-parse-open-data-fine-tunin",
+          "quote": "OCR Synthetic Multilingual v2 — 7.9M examples"
+        },
+        {
+          "url": "https://huggingface.co/blog/nvidia/building-on-nemotron-35-parse-open-data-fine-tunin",
+          "quote": "We are sharing a Parse fine-tuning recipe that takes developers through paired data generation, NeMo Automodel SFT , and NeMo RL GRPO , using vLLM to generate candidate answers."
+        },
+        {
+          "url": "https://huggingface.co/blog/nvidia/building-on-nemotron-35-parse-open-data-fine-tunin",
+          "quote": "In the native single-pass benchmark on one H200 in BF16, DFlash2 increased throughput 7.62× at concurrency 1 and 1.52× at concurrency 512"
+        }
+      ],
+      "tags": [
+        "开源",
+        "训练",
+        "多模态"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Hugging Face trains a four-agent team with TRL",
+      "summary": "Hugging Face's walkthrough trains a four-agent system sharing one Qwen3-0.6B policy that communicates through messaging tools; over 75 steps, training success rose from 6.6% to 82.3%. The example runs on Hugging Face Jobs in about five hours on two H200s for roughly $50. It is an affordable starting point for multi-agent reinforcement learning experiments.",
+      "sources": [
+        {
+          "candidate_id": "c_f3901ac520",
+          "url": "https://huggingface.co/blog/training-swarms"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/blog/training-swarms",
+          "quote": "We defined a four-agent system using one shared Qwen3-0.6B policy , with separate contexts and private inputs. We are not training four different models."
+        },
+        {
+          "url": "https://huggingface.co/blog/training-swarms",
+          "quote": "Over 75 steps, training success rose from 6.6% to 82.3%"
+        },
+        {
+          "url": "https://huggingface.co/blog/training-swarms",
+          "quote": "This post's example takes about five hours on two H200s, which costs roughly $50."
+        }
+      ],
+      "tags": [
+        "Agent",
+        "训练",
+        "工具"
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "ggml-org launches a llama.cpp benchmark dashboard for AMD hardware",
+      "summary": "The llama.cpp × AMD Benchmark dashboard on Hugging Face tracks prompt processing and text generation performance across llama.cpp builds, models and quantizations, currently on Radeon 8060S (gfx1151) and Radeon AI Pro R9700S (gfx1201). Benchmarks run weekly with llama-bench, with Flash Attention on and off. Check it before choosing a local inference setup on AMD.",
+      "sources": [
+        {
+          "candidate_id": "c_49da203591",
+          "url": "https://huggingface.co/blog/ggml-org/llamacpp-amd-bench"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/blog/ggml-org/llamacpp-amd-bench",
+          "quote": "It lets you track prompt processing and text generation performance across llama.cpp builds, models, and quantizations, so you can explore how local inference performs on AMD Ryzen and Radeon hardware."
+        },
+        {
+          "url": "https://huggingface.co/blog/ggml-org/llamacpp-amd-bench",
+          "quote": "The current hardware choices are Radeon 8060S (gfx1151) and Radeon AI Pro R9700S (gfx1201)."
+        },
+        {
+          "url": "https://huggingface.co/blog/ggml-org/llamacpp-amd-bench",
+          "quote": "The public gfx1151 and gfx1201 workflows are scheduled weekly and run the standard benchmarks using the llama-bench tool with Flash Attention on and off"
+        }
+      ],
+      "tags": [
+        "工具",
+        "推理",
+        "硬件"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "llama-cpp-rdna-boosts patch set speeds up llama.cpp on AMD GPUs",
+      "summary": "A developer recommends the llama-cpp-rdna-boosts patch set, reporting token generation rising from 35 to 55 tokens/second and prefill from 700 to 1300 tokens per second on their AMD card.",
+      "sources": [
+        {
+          "candidate_id": "c_a1d60a2f72",
+          "url": "https://devnull.land/amd-specific-llama-cpp"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://devnull.land/amd-specific-llama-cpp",
+          "quote": "I recommend using llama-cpp-rdna-boosts if you have an AMD graphics card. It’s lean, and increased my token generation from 35 to 55 tokens/second, and my prefill from 700 to 1300 tokens per second. YMMV."
+        }
+      ],
+      "tags": [
+        "开源",
+        "推理",
+        "硬件"
+      ]
+    },
+    {
+      "section": "brief",
+      "title": "VibeVideoAgent lets coding agents inspect video drafts during production",
+      "summary": "VibeVideoAgent is a training-free framework that lets coding agents check their drafts with separate multimodal perception during code-driven video generation, improving holistic audiovisual quality for several models on 239 VibeVideoBench tasks.",
+      "sources": [
+        {
+          "candidate_id": "c_5bf4463d10",
+          "url": "https://huggingface.co/papers/2611.34237"
+        }
+      ],
+      "evidence": [],
+      "tags": [
+        "论文",
+        "Agent",
+        "视频"
+      ]
+    }
+  ],
+  "research": [
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/blog/ggml-org/llamacpp-amd-bench"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/blog/nvidia/building-on-nemotron-35-parse-open-data-fine-tunin"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/blog/training-swarms"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://www.minimax.io/blog/minimax-h3-family"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://devnull.land/amd-specific-llama-cpp"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://techstackups.com/articles/google-workspace-ai-agents-mcp/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://micjm.com/blog/openai-is-in-cost-control-mode/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://cloud.google.com/blog/products/identity-security/deploying-agents-safely-in-your-enterprise"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://workspace.google.com/terms/ai-tools"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.34923"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.34849"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.34907"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.34575"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://twitter.com/thsottiaux/status/2125784147889393806"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/kandinskylab/Kandinsky-ImageSR-2.0"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.34237"
+    },
+    {
+      "via": "websearch",
+      "query": "OpenAI GPT-6.2 Astra Sol billing mistake usage limits 40% faster"
+    }
+  ],
+  "lang": "en",
+  "validation": {
+    "validated_at": "2026-11-27T04:44:49+00:00",
+    "checked_links": false,
+    "dropped": [
+      {
+        "title": "Kandinsky Lab releases Kandinsky ImageSR 2.0 super-resolution model",
+        "section": "model",
+        "candidates": [
+          "c_fce97ed330"
+        ],
+        "reasons": [
+          "'1K-to-4K' does not appear in the cited material"
+        ]
+      }
+    ],
+    "warnings": [
+      "2 headline items (target 3-5)"
+    ]
+  }
+}
