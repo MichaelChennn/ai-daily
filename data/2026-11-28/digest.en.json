@@ -1,0 +1,837 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-28",
+  "mode": "full",
+  "generated_at": "2026-11-28T04:39:15+00:00",
+  "channel": "api",
+  "model": "nvidia:minimaxai/minimax-m3.1-flash",
+  "highlights": [
+    "Ant Group's healthcare team open-sourced LingSante-3.1-air-VL, a 124B-parameter MoE model with 5.5B active parameters per token and a 256K-token context window.",
+    "The OS-Omni benchmark tests computer-using agents across Windows, Ubuntu, macOS, iOS, Android, and Web, and Claude Opus 5.5 reaches 68.5% average success on v1.",
+    "A paper comparing coding agents with video models on VBVR-Pro-Bench reports that Codex with gpt-6-astra, Claude Code with Fable 5.1, and Gemini CLI with Gemini 3.1 Pro each score more than 0.22 above the strongest video model."
+  ],
+  "items": [
+    {
+      "section": "headline",
+      "title": "FLUX 3 Image Klein offers 5.6B open-weight image editing",
+      "summary": "FLUX 3 Image Klein is a 5.6B open-weights model for image editing that also generates images from text, combines up to 10 references, and accepts bounding boxes for layout guidance. Its ComfyUI package includes BF16, int8 and NVFP4 transformers plus a Qwen3-VL-4B-Instruct text encoder, with int8 files running on 8 GB GPUs such as the RTX 3070.",
+      "tags": [
+        "图像",
+        "开源",
+        "工具"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_6ecc1d71a5",
+          "url": "https://huggingface.co/black-forest-labs/flux-3-image-klein-comfy"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/black-forest-labs/flux-3-image-klein-comfy",
+          "quote": "FLUX 3 Image Klein is a 5.6B open weights model designed for image editing."
+        },
+        {
+          "url": "https://huggingface.co/black-forest-labs/flux-3-image-klein-comfy",
+          "quote": "Edit from an instruction, generate images from text, combine up to 10 references, or guide layouts with bounding boxes."
+        },
+        {
+          "url": "https://huggingface.co/black-forest-labs/flux-3-image-klein-comfy",
+          "quote": "Editing, text-to-image and multi-reference compositions run through the same model, with Qwen3-VL-4B-Instruct as the text encoder."
+        },
+        {
+          "url": "https://huggingface.co/black-forest-labs/flux-3-image-klein-comfy",
+          "quote": "The 5.6B parameter label refers to the image transformer; the text encoder is separate."
+        },
+        {
+          "url": "https://huggingface.co/black-forest-labs/flux-3-image-klein-comfy",
+          "quote": "This repository holds the model files repackaged for ComfyUI : the distilled and base transformers in BF16, int8 and NVFP4, the text encoder in BF16 and int8, the prompt upsampler in BF16, int8 and w4a8, and the image autoencoder."
+        },
+        {
+          "url": "https://huggingface.co/black-forest-labs/flux-3-image-klein-comfy",
+          "quote": "The int8 files run on 8 GB GPUs such as the RTX 3070, and on GPUs without FP8 support (RTX 30 series and older)."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "MemTensor releases the 565B MemT-1.0-Pro memory model",
+      "summary": "MemT-1.0-Pro is a new generation of memory foundation models that integrates dynamic local memory and trainable hyper memory to retain historical information without accessing original context at inference. Its persistent state stays constant in size, cutting storage by approximately 66× versus a full-context KV cache at 128K history length.",
+      "tags": [
+        "模型",
+        "推理",
+        "Agent"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_a6a511d58c",
+          "url": "https://huggingface.co/MemTensor/MemT-1.0-Pro"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/MemTensor/MemT-1.0-Pro",
+          "quote": "🚀🚀 We are happy to announce the release of MemT-1.0-Pro [MemT × NVIDIA]!"
+        },
+        {
+          "url": "https://huggingface.co/MemTensor/MemT-1.0-Pro",
+          "quote": "MemT-1.0 is a new generation of memory foundation models that makes persistent, dynamically evolving memory an intrinsic part of model computation."
+        },
+        {
+          "url": "https://huggingface.co/MemTensor/MemT-1.0-Pro",
+          "quote": "MemT-1.0 integrates dynamic local memory and trainable hyper memory to retain and leverage historical information without accessing original context at inference."
+        },
+        {
+          "url": "https://huggingface.co/MemTensor/MemT-1.0-Pro",
+          "quote": "Its persistent state remains constant in size, reducing storage by approximately 66× versus full-context KV cache at 128K history length."
+        },
+        {
+          "url": "https://huggingface.co/MemTensor/MemT-1.0-Pro",
+          "quote": "Introduce MemT-1.0 with improved memory storage and utilization, and Mixture-of-Storage (MoS) for scalable memory capacity."
+        },
+        {
+          "url": "https://huggingface.co/MemTensor/MemT-1.0-Pro",
+          "quote": "Safetensors Model size 565B params Tensor type BF16 · F32 · Chat template Files info Inference Providers NEW Text Generation This model isn't deployed by any Inference Provider."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "Ant Group open-sources LingSante-3.1-air-VL for healthcare",
+      "summary": "LingSante-3.1-air-VL is a lightweight, natively multimodal MoE model for real-world healthcare, built on Ling-3.0-flash-VL with 124B parameters, 5.5B active parameters per token, and a 256K-token context window. It is the first large multimodal medical model released as open source by Ant Group's healthcare team and targets medical imaging reports, health assessment, medical search and evidence synthesis, and medical GUI agents.",
+      "tags": [
+        "模型",
+        "多模态",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_5edbe8879c",
+          "url": "https://huggingface.co/inclusionAI/LingSante-3.1-air-VL"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/inclusionAI/LingSante-3.1-air-VL",
+          "quote": "LingSante-3.1-air-VL is a lightweight, natively multimodal mixture-of-experts (MoE) model for real-world healthcare."
+        },
+        {
+          "url": "https://huggingface.co/inclusionAI/LingSante-3.1-air-VL",
+          "quote": "Built on Ling-3.0-flash-VL , it has 124B parameters and 5.5B active parameters per token ."
+        },
+        {
+          "url": "https://huggingface.co/inclusionAI/LingSante-3.1-air-VL",
+          "quote": "It accepts text and images and supports 256K-token context window ."
+        },
+        {
+          "url": "https://huggingface.co/inclusionAI/LingSante-3.1-air-VL",
+          "quote": "It is the first large multimodal medical model that Ant Group's healthcare team has released as open source."
+        },
+        {
+          "url": "https://huggingface.co/inclusionAI/LingSante-3.1-air-VL",
+          "quote": "The model's four clinical focus areas are medical imaging reports , multimodal health assessment (skin disease recognition, dietary and nutritional analysis, and medical report interpretation), medical search and evidence synthesis , and medical GUI agents ."
+        },
+        {
+          "url": "https://huggingface.co/inclusionAI/LingSante-3.1-air-VL",
+          "quote": "LingSante-3.1-air-VL is a research model and is not a medical device."
+        },
+        {
+          "url": "https://huggingface.co/inclusionAI/LingSante-3.1-air-VL",
+          "quote": "The LingSante-3.1-air-VL runtime includes native multimodal support, MTP (NEXTN) speculative decoding, and long-context optimizations."
+        }
+      ]
+    },
+    {
+      "section": "headline",
+      "title": "GigaChat 4 37B-A4B combines MoE with DSA and GDN",
+      "summary": "GigaChat 4 37B-A4B is a compact hybrid model with 37B total parameters and 4B active parameters per token, combining MoE architecture with DeepSeek Sparse Attention and Gated DeltaNet. It supports multilingual conversation, agentic tasks, tool calling, structured outputs, coding, and a one-million-token context window, with instant and reasoning modes selectable per request in a single model.",
+      "tags": [
+        "模型",
+        "推理",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_ba37b8ea61",
+          "url": "https://huggingface.co/ai-sage/GigaChat4-37B-A4B"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/ai-sage/GigaChat4-37B-A4B",
+          "quote": "GigaChat 4 37B-A4B is a compact hybrid model in the GigaChat 4 family."
+        },
+        {
+          "url": "https://huggingface.co/ai-sage/GigaChat4-37B-A4B",
+          "quote": "It combines a Mixture-of-Experts (MoE) architecture with DeepSeek Sparse Attention (DSA) and Gated DeltaNet (GDN) with 37B total parameters and 4B active parameters per token."
+        },
+        {
+          "url": "https://huggingface.co/ai-sage/GigaChat4-37B-A4B",
+          "quote": "The model supports multilingual conversation, multi-step agentic tasks, tool calling, structured outputs, mathematical reasoning, coding, and question answering over long documents."
+        },
+        {
+          "url": "https://huggingface.co/ai-sage/GigaChat4-37B-A4B",
+          "quote": "Unlike GigaChat 3.5, which offered separate instant and reasoning checkpoints, GigaChat 4 supports both modes within a single model, selectable per request."
+        },
+        {
+          "url": "https://huggingface.co/ai-sage/GigaChat4-37B-A4B",
+          "quote": "It features a one-million-token context window and supports speculative decoding with either a recurrent MTP drafter or a separate DFlash2 drafter."
+        },
+        {
+          "url": "https://huggingface.co/ai-sage/GigaChat4-37B-A4B",
+          "quote": "1,048,576 tokens"
+        },
+        {
+          "url": "https://huggingface.co/ai-sage/GigaChat4-37B-A4B",
+          "quote": "GigaChat 4 is natively supported in SGLang , including recurrent MTP and DFlash2 speculative decoding, per-request instant/reasoning mode selection, and tool calling."
+        },
+        {
+          "url": "https://huggingface.co/ai-sage/GigaChat4-37B-A4B",
+          "quote": "The FP8 model can be deployed on a single H100 80GB GPU (TP1)."
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Ming-Image-0.2-Design is upgraded and open-sourced",
+      "summary": "This release upgrades and open-sources Ming-Image-0.2-Design, improving complex composition, lighting, and text rendering. The model can create e-commerce hero images, UI design drafts, and spatial renderings, and its decomposition refines down to character parts to provide assets for downstream use.",
+      "tags": [
+        "图像",
+        "开源",
+        "多模态"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_1c8b73d03e",
+          "url": "https://huggingface.co/inclusionAI/Ming-Image-0.2-Design"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/inclusionAI/Ming-Image-0.2-Design",
+          "quote": "This release upgrades and open-sources Ming-Image-0.2-Design."
+        },
+        {
+          "url": "https://huggingface.co/inclusionAI/Ming-Image-0.2-Design",
+          "quote": "improves complex composition, lighting, and text rendering, and can be used to"
+        },
+        {
+          "url": "https://huggingface.co/inclusionAI/Ming-Image-0.2-Design",
+          "quote": "create e-commerce hero images, UI design drafts, and spatial renderings."
+        },
+        {
+          "url": "https://huggingface.co/inclusionAI/Ming-Image-0.2-Design",
+          "quote": "This upgrade further"
+        },
+        {
+          "url": "https://huggingface.co/inclusionAI/Ming-Image-0.2-Design",
+          "quote": "refines decomposition down to character parts, providing assets for downstream"
+        },
+        {
+          "url": "https://huggingface.co/inclusionAI/Ming-Image-0.2-Design",
+          "quote": "For better results, we recommend a Figma-style structured prompt and its"
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Haru-4B enables full-duplex spoken dialogue at 7.5 Hz",
+      "summary": "Haru-4B is a low-latency, multilingual full-duplex continuous spoken dialogue foundation model that listens and speaks at the same time. Every 133 ms it takes one frame of user audio and produces one frame of its own audio and text, with continuous audio generated in one sampling step as a 64-dimensional latent per frame, and it uses a Qwen3.5-4B text backbone.",
+      "tags": [
+        "语音",
+        "开源",
+        "多模态"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_53b3b546ce",
+          "url": "https://huggingface.co/higurashi-ai/Haru-4B"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/higurashi-ai/Haru-4B",
+          "quote": "Haru-4B is a low-latency and multilingual full-duplex continuous spoken dialogue foundation"
+        },
+        {
+          "url": "https://huggingface.co/higurashi-ai/Haru-4B",
+          "quote": "model: it listens and speaks at the same time, the way people do on a phone call."
+        },
+        {
+          "url": "https://huggingface.co/higurashi-ai/Haru-4B",
+          "quote": "Native full-duplex at 7.5 Hz."
+        },
+        {
+          "url": "https://huggingface.co/higurashi-ai/Haru-4B",
+          "quote": "Every 133 ms the model takes one frame of the user's audio"
+        },
+        {
+          "url": "https://huggingface.co/higurashi-ai/Haru-4B",
+          "quote": "and produces one frame of its own audio and text."
+        },
+        {
+          "url": "https://huggingface.co/higurashi-ai/Haru-4B",
+          "quote": "Continuous audio, one sampling step."
+        },
+        {
+          "url": "https://huggingface.co/higurashi-ai/Haru-4B",
+          "quote": "Audio is a 64-dimensional latent per frame."
+        },
+        {
+          "url": "https://huggingface.co/higurashi-ai/Haru-4B",
+          "quote": "With an NVIDIA GPU (about 12 GB of memory):"
+        },
+        {
+          "url": "https://huggingface.co/higurashi-ai/Haru-4B",
+          "quote": "Qwen3.5-4B text backbone, 32 layers, hidden size 2560"
+        }
+      ]
+    },
+    {
+      "section": "model",
+      "title": "Inworld releases an Apache-2.0 voice isolator",
+      "summary": "Inworld Voice Isolator v1 provides 48 kHz voice isolation for noisy speech recordings and live audio, shipped as two models that share one architecture. The realtime model, voice-isolator-v1-realtime, is causal with a trained look-ahead of 0, 20 or 40 ms and an algorithmic latency of 63 ms at 20 ms of look-ahead, and the tool can extract background noise or a backing-track residual.",
+      "tags": [
+        "语音",
+        "开源",
+        "工具"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_283df06e9f",
+          "url": "https://huggingface.co/inworld/voice-isolator"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/inworld/voice-isolator",
+          "quote": "Open-license (Apache-2.0) 48 kHz voice isolation for noisy speech recordings and live audio."
+        },
+        {
+          "url": "https://huggingface.co/inworld/voice-isolator",
+          "quote": "Inworld Voice Isolator v1 ships as two models that share one architecture:"
+        },
+        {
+          "url": "https://huggingface.co/inworld/voice-isolator",
+          "quote": "offline: every frame sees its whole 8 s chunk"
+        },
+        {
+          "url": "https://huggingface.co/inworld/voice-isolator",
+          "quote": "a causal stream with 20 ms of look-ahead"
+        },
+        {
+          "url": "https://huggingface.co/inworld/voice-isolator",
+          "quote": "Subtract the isolated voice from the input to extract background noise or a backing-track residual for vocals/music separation."
+        },
+        {
+          "url": "https://huggingface.co/inworld/voice-isolator",
+          "quote": "They are not a speaker selector or a restoration model."
+        },
+        {
+          "url": "https://huggingface.co/inworld/voice-isolator",
+          "quote": "The realtime model, voice-isolator-v1-realtime , is causal, with a trained look-ahead of 0, 20 or 40 ms; its algorithmic latency is 63 ms at 20 ms of look-ahead."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Stable Gated DeltaNet-2 fixes recurrent state instability",
+      "summary": "Stable GDN-2 addresses training failures in Gated DeltaNet-2 caused by exponential state growth, using symmetric erasure and decay-regulated residual writing to keep state propagation non-expansive while preserving writing flexibility. Experiments on ~1.6B parameter models show stable training and improved long-context retrieval, including a 6.80-point gain in the 128K average RULER score over GDN-2 in the recurrent setting.",
+      "tags": [
+        "论文",
+        "训练",
+        "推理"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_2280d2fec3",
+          "url": "https://huggingface.co/papers/2611.34051"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.34051",
+          "quote": "Gated DeltaNet-2 (GDN-2) introduces independent channel-wise control over erasure and writing, enhancing state-update expressiveness and in-context retrieval, yet it suffers from training failures during long-context training."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34051",
+          "quote": "We trace these failures to the asymmetry between reading and modification directions during erasure, which yields non-normal erase operators whose directional gains accumulate across tokens, triggering exponential state growth even without new writes."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34051",
+          "quote": "To resolve this, we propose Stable GDN-2, employing symmetric erasure to ensure non-expansive state propagation and decay-regulated residual writing to preserve writing flexibility."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34051",
+          "quote": "T h e o r e t i c a l l y , w e e s t a b l i s h a n O ( T ) u p p e r b o u n d o n r e c u r r e n t s t a t e g r o w t h w h i l e r e t a i n i n g c h u n k w i s e p a r a l l e l c o m p u t a t i o n ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34051",
+          "quote": "Experiments on ~1.6B parameter models show that Stable GDN-2 achieves stable training alongside improved long-context retrieval."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34051",
+          "quote": "Compared to GDN-2, it boosts the 128K average RULER score by 6.80 points in the recurrent setting and average accuracy across nine downstream tasks by 0.62 points in the hybrid setting."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "OS-Omni benchmarks agents across six platforms",
+      "summary": "OS-Omni is a live cross-platform benchmark and execution environment for computer-using agents across Windows, Ubuntu, macOS, iOS, Android, and Web, with reproducible initialization, platform-specific adapters, trajectory logging, and executable final-state evaluators. Its v1 release contains 48 tasks per platform and 12 cross-platform workflows, and the strongest evaluated agent, Claude Opus 5.5, reaches 68.5% average success against a 77.3% human reference.",
+      "tags": [
+        "论文",
+        "Agent",
+        "评测"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_199bf6c0cd",
+          "url": "https://huggingface.co/papers/2611.34232"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.34232",
+          "quote": "We introduce OS-Omni, a live cross-platform benchmark and execution environment for evaluating computer-using agents across Windows, Ubuntu, macOS, iOS, Android, and Web environments."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34232",
+          "quote": "OS-Omni is released in versioned waves of 300 tasks each; this paper focuses on the first release, v1, which contains 48 tasks per platform and 12 cross-platform workflows that pair a desktop with an Android phone."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34232",
+          "quote": "OS-Omni provides reproducible initialization, platform-specific adapters , trajectory logging , and executable final-state evaluators , and includes controlled service-backed applications for workflows involving account, cart, budget, calendar, message, and other persistent state ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34232",
+          "quote": "Human studies show that OS-Omni tasks require 67.54 interaction steps, substantially exceeding OSWorld references of 15.0 steps."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34232",
+          "quote": "On v1, the strongest evaluated agent, Claude Opus 5.5, reaches 68.5% average success, trailing the 77.3% human reference by 8.8 points; the gap is uneven across platforms, with frontier models exceeding humans on Linux but trailing them by more than 25 points on iOS and macOS."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Coding agents beat video models on visual reasoning tasks",
+      "summary": "On VBVR-Pro-Bench, a 500-instance suite with symbolic ground truth, coding agents that render answer videos score 0.923, 0.894 and 0.893 for Codex with gpt-6-astra, Claude Code with Fable 5.1 and Gemini CLI with Gemini 3.1 Pro, each more than 0.22 above the strongest video model. Among 23 runnable open-weight models, the best, GLM-5, reaches 0.572, above all video models except the RL-trained one.",
+      "tags": [
+        "论文",
+        "Agent",
+        "视频",
+        "评测"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_f665daa521",
+          "url": "https://huggingface.co/papers/2611.34813"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.34813",
+          "quote": "W e t h e r e f o r e p o s e t h e s a m e t a s k s , w i t h i d e n t i c a l i n p u t s , o u t p u t s p e c i f i c a t i o n a n d e v a l u a t o r , t o b o t h m e d i a : r a t h e r t h a n d e n o i s i n g p i x e l s , a c o d i n g a g e n t w r i t e s a p r o g r a m t h a t r e"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34813",
+          "quote": "n d e r s t h e a n s w e r v i d e o , w h i c h a n u n m o d i f i e d r u l e - b a s e d e v a l u a t o r s c o r e s ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34813",
+          "quote": "O n V B V R - P r o - B e n c h ( X u e t a l ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34813",
+          "quote": ", 2 0 2 6 ) , a 5 0 0 - i n s t a n c e s u i t e s p a n n i n g f i v e c o g n i t i v e c a t e g o r i e s w i t h s y m b o l i c g r o u n d t r u t h , t h e a g e n t r e c e i v e s t h e s a m e f i r s t f r a m e a n d p r o m p t a s t h e v i d e o m o d e l , w i t h n o a c c e s s"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34813",
+          "quote": "T h r e e c l o s e d - m o d e l a g e n t s ( C o d e x w i t h g p t - 6 - a s t r a , C l a u d e C o d e w i t h F a b l e 5 ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34813",
+          "quote": "1 a n d G e m i n i C L I w i t h G e m i n i 3 ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34813",
+          "quote": "1 P r o ) s c o r e 0 ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34813",
+          "quote": "8 9 4 a n d 0 ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34813",
+          "quote": "8 9 3 , e a c h m o r e t h a n 0 ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34813",
+          "quote": "A m o n g 2 3 r u n n a b l e o p e n - w e i g h t m o d e l s , t h e b e s t , G L M - 5 , r e a c h e s 0 ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34813",
+          "quote": "5 7 2 , a b o v e a l l v i d e o m o d e l s e x c e p t t h e R L - t r a i n e d o n e ."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "ShowNow streams speculative futures for responsive world models",
+      "summary": "ShowNow is a fine-grained speculative streaming framework that uses computation available during playback to prepare action-conditioned futures before user input arrives, with single-latent commitment and preparation covering one to eight actions. On a single H100, its 5B model sustains 480p generation at 16 fps with eight prepared futures, and in ViZDoom the deployment cuts median input-to-display latency from 620 to 208 ms relative to the native-block SolarWM-FT deployment.",
+      "tags": [
+        "论文",
+        "视频",
+        "开源"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_7740d9e5a6",
+          "url": "https://huggingface.co/papers/2611.34693"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.34693",
+          "quote": "We introduce ShowNow, a fine-grained speculative streaming framework that uses computation available during playback to prepare action-conditioned futures before input arrives."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34693",
+          "quote": "Single-latent commitment enables frequent decisions, while configurable preparation covers one to eight actions."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34693",
+          "quote": "On a single H100, our 5B model sustains 480p generation at 16 fps with eight prepared futures."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34693",
+          "quote": "In ViZDoom, the complete ShowNow deployment reduces median input-to-display latency from 620 to 208 ms relative to the native-block SolarWM-FT deployment."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34693",
+          "quote": "Matched-policy experiments reduce restart empty ticks from 1.56% to 0.09% (94%) and improve on-time responses to action changes."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34693",
+          "quote": "Everything is open-sourced under Apache 2.0:"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34693",
+          "quote": "Model (ShowNow-5B-8F): https://huggingface.co/songyiren/ShowNow-5B-8F"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34693",
+          "quote": "Dataset (ShowNow-MultiFuture, 21,964 8-future forks): https://huggingface.co/datasets/songyiren/ShowNow-MultiFuture"
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "DRBench Pro scores knowledge coverage for research agents",
+      "summary": "DRBench Pro is a benchmark that makes structured knowledge coverage the primary evaluation target for deep research agents, building local knowledge trees from Wikipedia and generating evidence-grounded rubrics from sampled subgraphs. It includes 144 cases across 24 domains and 44,102 rubrics, and among 16 evaluated deep research agents the best reaches 57.04% overall coverage.",
+      "tags": [
+        "论文",
+        "Agent",
+        "评测"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_2a02bc1022",
+          "url": "https://huggingface.co/papers/2611.34852"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.34852",
+          "quote": "W e i n t r o d u c e D R B e n c h P r o , a b e n c h m a r k t h a t m a k e s s t r u c t u r e d k n o w l e d g e c o v e r a g e t h e p r i m a r y e v a l u a t i o n t a r g e t ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34852",
+          "quote": "O u r a u t o m a t e d p i p e l i n e b u i l d s l o c a l k n o w l e d g e t r e e s f r o m W i k i p e d i a a n d u s e s s a m p l e d s u b g r a p h s t o g e n e r a t e r e s e a r c h q u e r i e s a n d e v i d e n c e - g r o u n d e d r u b r i c s ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34852",
+          "quote": "E a c h r u b r i c c o r r e s p o n d s t o a r e l a t i o n i n t h e t r e e , p r e s e r v i n g t h e s t r u c t u r e o f t h e k n o w l e d g e b e i n g e v a l u a t e d ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34852",
+          "quote": "T h i s s t r u c t u r e a l l o w s u s t o m e a s u r e b r e a d t h a c r o s s m a j o r r e s e a r c h d i r e c t i o n s a n d d e p t h a l o n g r e l a t e d k n o w l e d g e c h a i n s , w i t h t h e i r g e o m e t r i c m e a n g i v i n g o v e r a l l c o v e r a g e ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34852",
+          "quote": "T h e b e n c h m a r k i n c l u d e s 1 4 4 c a s e s a c r o s s 2 4 d o m a i n s a n d 4 4 , 1 0 2 r u b r i c s ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34852",
+          "quote": "E v a l u a t i n g 1 6 d e e p r e s e a r c h a g e n t s r e v e a l s d i f f e r e n t s t r e n g t h s i n b r e a d t h a n d d e p t h , w i t h t h e b e s t - p e r f o r m i n g a g e n t r e a c h i n g 5 7 ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34852",
+          "quote": "0 4 % o v e r a l l c o v e r a g e ."
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "Vernier measures what a time-series leaderboard can resolve",
+      "summary": "Vernier is a tool that computes the resolution of a forecasting leaderboard from the files it already publishes, reporting which entries cannot be separated from the leader and whether ordering changes with unrelated submissions. It finds that GIFT-Eval resolves 6.8 rank places, while across four boards, rules that rank against the pool reversed 43 top-ten pairs without rerunning either entry.",
+      "tags": [
+        "论文",
+        "工具",
+        "评测"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_f73251ffb3",
+          "url": "https://huggingface.co/papers/2611.31619"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.31619",
+          "quote": "We call that quantity the resolution of a board and introduce Vernier , a tool that computes it from the files a board already publishes."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.31619",
+          "quote": "Vernier also reports which entries a board cannot separate from its leader and whether its order changes when unrelated parties submit."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.31619",
+          "quote": "GIFT-Eval resolves 6.8 rank places , and its displayed neighbours sit 0.91 apart."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.31619",
+          "quote": "The ten places of its top ten hold fewer than two resolvable steps."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.31619",
+          "quote": "Below the resolution the order depends on who else submitted: across four boards, rules that rank against the pool reversed 43 top-ten pairs with neither entry rerun, in one update in seven."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.31619",
+          "quote": "We release Vernier , which runs this report with one command on any leaderboard that publishes per-dataset scores : https://github.com/therealram18/ vernier View arXiv page View PDF GitHub 10 Add to collection Community Skider Paper author Paper submitter about 22 hours ago A foundation model for ti"
+        }
+      ]
+    },
+    {
+      "section": "paper",
+      "title": "ProxyGenBench tests proxy-guided video generation",
+      "summary": "ProxyGenBench studies proxy-guided video generation, where structural proxies such as animated 3D blockouts specify scene layout, motion, camera behavior, and event order, with 312 evaluation cases from 60 scenes across three scene tasks. Evaluating five video generators with verified, case-specific checklists shows that proxies improve spatiotemporal control, but greater proxy detail can coincide with poorer completion and strong structural adherence does not ensure correct binding.",
+      "tags": [
+        "论文",
+        "视频",
+        "评测"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_c9b0891323",
+          "url": "https://huggingface.co/papers/2611.34457"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/papers/2611.34457",
+          "quote": "Structural proxies , such as animated 3D blockouts , guide generation by specifying scene layout, motion, camera behavior, and event order."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34457",
+          "quote": "Successful proxy-guided generation must therefore Preserve intended structure, Complete missing content and correct proxy artifacts, and Bind text, image, and audio conditions to the right entities and events."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34457",
+          "quote": "We introduce ProxyGenBench to study these interacting requirements, with 312 evaluation cases from 60 scenes across three scene tasks and controlled variations in proxy fidelity , text detail, and multimodal inputs ."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34457",
+          "quote": "We evaluate five video generators using verified, case-specific checklists."
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.34457",
+          "quote": "Experiments show that proxies improve spatiotemporal control , but greater proxy detail can coincide with poorer completion, while strong structural adherence does not ensure correct binding."
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "LTX-2.5 video and sound generation runs on Trainium3",
+      "summary": "A blog post describes running LTX-2.5 from Lightricks, which generates video and sound together, on Trainium3 cores. Once the models are loaded, a 10-second clip at 2048×1024 takes 22 to 23 s to generate on half of the machine, with the film pipeline handled by about 160 lines of Python on top and the code published in dacorvo/video-generation.",
+      "tags": [
+        "工具",
+        "视频",
+        "硬件"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_c1d113f52f",
+          "url": "https://huggingface.co/blog/video-trainium3"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://huggingface.co/blog/video-trainium3",
+          "quote": "I picked LTX-2.5 from Lightricks, which generates video and sound together."
+        },
+        {
+          "url": "https://huggingface.co/blog/video-trainium3",
+          "quote": "By the end, once the models were loaded, a 10-second clip with sound took 22 to 23 s to generate, on half of the machine."
+        },
+        {
+          "url": "https://huggingface.co/blog/video-trainium3",
+          "quote": "In the end, the setup matches it, and even beats it by about a second: 22 to 23 s for a 10-second clip at 2048×1024, once the models are loaded, on half of the machine."
+        },
+        {
+          "url": "https://huggingface.co/blog/video-trainium3",
+          "quote": "The film part is about 160 lines of Python on top: read the film file, order the shots so each keyframe exists before the shot that needs it, and cut the frames to hand over; then trim, caption, even out the sound and assemble the film."
+        },
+        {
+          "url": "https://huggingface.co/blog/video-trainium3",
+          "quote": "The code is in dacorvo/video-generation ."
+        },
+        {
+          "url": "https://huggingface.co/blog/video-trainium3",
+          "quote": "Getting there took three kinds of work: making the model run on the NeuronCores (requires tensor parallelism), splitting it over more of them (sequence parallelism), and making the host keep up with them."
+        },
+        {
+          "url": "https://huggingface.co/blog/video-trainium3",
+          "quote": "TP-4 × SP-8: 32 cores on one clip."
+        },
+        {
+          "url": "https://huggingface.co/blog/video-trainium3",
+          "quote": "Stage 2 runs on 4 × 8 = 32 cores, at 3.0 s a step"
+        }
+      ]
+    },
+    {
+      "section": "tool",
+      "title": "Ollama v0.40.19 speeds up inkling2 and trims mlxrunner buffers",
+      "summary": "Ollama v0.40.19 ships inkling2 changes for faster short histories, draft proposals and conv snapshots, along with compact Engram history buffers in mlxrunner. The release also bumps llama-server.",
+      "tags": [
+        "工具",
+        "推理"
+      ],
+      "sources": [
+        {
+          "candidate_id": "c_98b540a31e",
+          "url": "https://github.com/ollama/ollama/releases/tag/v0.40.19"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://github.com/ollama/ollama/releases/tag/v0.40.19",
+          "quote": "inkling2: faster short histories, draft proposals and conv snapshots by @dhiltgen in #19881"
+        },
+        {
+          "url": "https://github.com/ollama/ollama/releases/tag/v0.40.19",
+          "quote": "mlxrunner: compact Engram history buffers by @pdevine in #19913"
+        },
+        {
+          "url": "https://github.com/ollama/ollama/releases/tag/v0.40.19",
+          "quote": "bump llama-server by @pdevine in #19917"
+        }
+      ]
+    }
+  ],
+  "research": [
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/blog/video-trainium3"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/ai-sage/GigaChat4-37B-A4B"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.34051"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.34232"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.34813"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://github.com/ollama/ollama/releases/tag/v0.40.19"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.34852"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.34693"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.34457"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.34290"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/papers/2611.31619"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/Alissonerdx/TE-PK-Minimax-H3"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/inclusionAI/Ming-Image-0.2-Design"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://latent.space/p/inside_the_ai_training_data_market_gabe_greenberg_g2i/"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/MemTensor/MemT-1.0-Pro"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/inclusionAI/LingSante-3.1-air-VL"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/SulphurAI/Sulphur-3"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/black-forest-labs/flux-3-image-klein-comfy"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/inworld/voice-isolator"
+    },
+    {
+      "via": "webfetch",
+      "url": "https://huggingface.co/higurashi-ai/Haru-4B"
+    }
+  ],
+  "lang": "en",
+  "validation": {
+    "validated_at": "2026-11-28T04:39:15+00:00",
+    "checked_links": false,
+    "dropped": [
+      {
+        "title": "G2i founder on how frontier labs buy training data",
+        "section": "brief",
+        "candidates": [
+          "c_60496bd395"
+        ],
+        "reasons": [
+          "summary longer than 250 characters"
+        ]
+      }
+    ],
+    "warnings": [
+      "7 paper items (target 2-4)"
+    ]
+  }
+}
